@@ -1,5 +1,7 @@
 package com.hrms.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,17 +11,18 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="Myuser")
-public class UserEntity {
+public class UserEntity implements Serializable{
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -862375354973874455L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+//	@Id
+//	@GeneratedValue(strategy = GenerationType.IDENTITY)
+//	private long id;
 
+	@Id
 	@Column(name = "User_code")
 	private String userCode;
 
@@ -51,13 +54,7 @@ public class UserEntity {
 //		super();
 //	}
 
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
+	
 
 	public String getUserCode() {
 		return userCode;
