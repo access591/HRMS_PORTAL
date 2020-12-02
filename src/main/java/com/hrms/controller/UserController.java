@@ -27,10 +27,11 @@ public class UserController {
 		if (isUserExist) {
 			List<UserEntity> list = userService.getAllUsers();
 			model.addAttribute("users", list);
-			return "list-users";
+			return "dashboard";
 		} else {
 			return "sign-up";
 		}
 	}
+	
 
 }
