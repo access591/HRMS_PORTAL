@@ -36,6 +36,7 @@ public class UserController {
 	public String loginUser(@ModelAttribute("user") Login login, Model model,
 			@RequestParam(name = "g-recaptcha-response") String captcha) {
 		boolean isUserExist = userService.checkUserExists(login);
+
 		if (isUserExist /* && validator.validateCaptcha(captcha) */ ) {
 			List<Module> modules = moduleService.getAllModules();
 			model.addAttribute("modules", modules);
@@ -45,5 +46,6 @@ public class UserController {
 			return "sign-in";
 		}
 	}
+	
 
 }
