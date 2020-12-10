@@ -4,8 +4,6 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -17,10 +15,6 @@ public class UserEntity implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = -862375354973874455L;
-
-//	@Id
-//	@GeneratedValue(strategy = GenerationType.IDENTITY)
-//	private long id;
 
 	@Id
 	@Column(name = "User_code")
@@ -50,12 +44,6 @@ public class UserEntity implements Serializable{
 	@Column(name = "upd_date")
 	private String updDate;
 	
-//	public User() {
-//		super();
-//	}
-
-	
-
 	public String getUserCode() {
 		return userCode;
 	}
