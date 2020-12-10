@@ -1,7 +1,7 @@
 package com.hrms.model;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -32,22 +32,22 @@ public class Module implements Serializable {
 	private String insertedBy;
 
 	@Column(name = "INS_DATE")
-	private Date insertedDate;
+	private Date insertedDate = new Date();
 
 	@Column(name = "UPDATE_BY")
 	private String updateBy;
 
 	@Column(name = "UPDATE_DATE")
-	private String updateName;
+	private Date updatedDate = new Date();
 
 	@Column(name = "SEQ_NO")
 	private int seqNo;
 
-	@OneToMany(mappedBy = "moduleCode")
-	private List<SubModule> subModules;
-
-	@OneToMany(mappedBy = "pModuleCode")
-	private List<Program> modulePrograms;
+//	@OneToMany(mappedBy = "moduleCode")
+//	private List<SubModule> subModules;
+//
+//	@OneToMany(mappedBy = "pModuleCode")
+//	private List<Program> modulePrograms;
 
 	public String getModuleCode() {
 		return moduleCode;
@@ -97,14 +97,6 @@ public class Module implements Serializable {
 		this.updateBy = updateBy;
 	}
 
-	public String getUpdateName() {
-		return updateName;
-	}
-
-	public void setUpdateName(String updateName) {
-		this.updateName = updateName;
-	}
-
 	public int getSeqNo() {
 		return seqNo;
 	}
@@ -113,20 +105,28 @@ public class Module implements Serializable {
 		this.seqNo = seqNo;
 	}
 
-	public List<SubModule> getSubModules() {
-		return subModules;
+//	public List<SubModule> getSubModules() {
+//		return subModules;
+//	}
+//
+//	public void setSubModules(List<SubModule> subModules) {
+//		this.subModules = subModules;
+//	}
+//
+//	public List<Program> getModulePrograms() {
+//		return modulePrograms;
+//	}
+//
+//	public void setModulePrograms(List<Program> modulePrograms) {
+//		this.modulePrograms = modulePrograms;
+//	}
+
+	public Date getUpdatedDate() {
+		return updatedDate;
 	}
 
-	public void setSubModules(List<SubModule> subModules) {
-		this.subModules = subModules;
-	}
-
-	public List<Program> getModulePrograms() {
-		return modulePrograms;
-	}
-
-	public void setModulePrograms(List<Program> modulePrograms) {
-		this.modulePrograms = modulePrograms;
+	public void setUpdatedDate(Date updatedDate) {
+		this.updatedDate = updatedDate;
 	}
 
 }

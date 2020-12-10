@@ -2,16 +2,22 @@ package com.hrms.model;
 
 import java.io.Serializable;
 import java.util.Date;
-
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "M_SUB_MODULE")
-public class SubModule implements Serializable {
+public class SubModule1 implements Serializable {
 
+	/**
+	 * 
+	 */
 	private static final long serialVersionUID = -6851090654306622861L;
 
 	@Id
@@ -21,21 +27,21 @@ public class SubModule implements Serializable {
 	@Column(name = "SUB_MODULE_NAME")
 	private String subModuleName;
 
-	
-	@Column(name = "MODULE_CODE")
-	private String moduleCode;
+	@ManyToOne
+	@JoinColumn(name = "MODULE_CODE", nullable = false)
+	private Module moduleCode;
 
 	@Column(name = "INS_BY")
 	private String insertedBySubModule;
 
 	@Column(name = "INS_DATE")
-	private Date insertedDateSubModule =  new Date();
+	private Date insertedDateSubModule;
 
 	@Column(name = "UPDATE_BY")
 	private String updateBySubModule;
 
 	@Column(name = "UPDATE_DATE")
-	private Date updatedDateSubModule = new Date();
+	private Date updatedDateSubModule;
 
 	@Column(name = "ACTIVE_YN")
 	private String acitveSubModule;
@@ -43,7 +49,8 @@ public class SubModule implements Serializable {
 	@Column(name = "SEQ_NO")
 	private int seqNoSubModule;
 
-
+	@OneToMany(mappedBy = "subModuleCode")
+	private List<Program> subModulePrograms;
 
 	public String getSubModuleCode() {
 		return subModuleCode;
@@ -61,11 +68,11 @@ public class SubModule implements Serializable {
 		this.subModuleName = subModuleName;
 	}
 
-	public String getModuleCode() {
+	public Module getModuleCode() {
 		return moduleCode;
 	}
 
-	public void setModuleCode(String moduleCode) {
+	public void setModuleCode(Module moduleCode) {
 		this.moduleCode = moduleCode;
 	}
 
@@ -117,6 +124,12 @@ public class SubModule implements Serializable {
 		this.seqNoSubModule = seqNoSubModule;
 	}
 
-	
+	public List<Program> getSubModulePrograms() {
+		return subModulePrograms;
+	}
+
+	public void setSubModulePrograms(List<Program> subModulePrograms) {
+		this.subModulePrograms = subModulePrograms;
+	}
 
 }
