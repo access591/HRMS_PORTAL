@@ -24,6 +24,7 @@ public class ModuleDaoImpl implements ModuleDao {
 		Session session = sessionFactory.openSession();
 		Criteria criteria = session.createCriteria(Module.class);
 		List<Module> modules = (List<Module>) criteria.setFetchMode("M_MODULE", FetchMode.SELECT).list();
+		session.close();
 		return modules;
 	}
 
@@ -33,14 +34,22 @@ public class ModuleDaoImpl implements ModuleDao {
 		Transaction tx = session.beginTransaction();
 		session.persist(module);
 		tx.commit();
+		session.close();
 	}
 
 	@Override
 	public void update(Module module) {
 		Session session = sessionFactory.openSession();
 		Transaction tx = session.beginTransaction();
-		session.update(module);
+		Module updatedModule = ( Module ) session.load(Module.class, module.getModuleCode());
+		updatedModule.setModuleName(module.getModuleName());
+		updatedModule.setSeqNo(module.getSeqNo());
+		updatedModule.setActive(module.getActive());
+		updatedModule.setInsertedBy(module.getInsertedBy());
+		updatedModule.setInsertedDate(module.getInsertedDate());
+		session.update(updatedModule);
 		tx.commit();
+		session.close();
 	}
 
 	@Override
@@ -54,6 +63,7 @@ public class ModuleDaoImpl implements ModuleDao {
 		Criteria criteria = session.createCriteria(Module.class);
 		Module modules = (Module) criteria.setFetchMode("M_MODULE", FetchMode.SELECT)
 				.add(Restrictions.eq("moduleCode", id)).uniqueResult();
+		session.close();
 		return modules;
 	}
 

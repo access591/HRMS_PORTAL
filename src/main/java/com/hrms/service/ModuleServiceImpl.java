@@ -1,6 +1,7 @@
 package com.hrms.service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -82,11 +83,18 @@ public class ModuleServiceImpl implements ModuleService {
 
 	@Override
 	public void addModule(Module module) {
+		module.setInsertedDate(new Date());
 		moduleDao.addModule(module);
 	}
 
 	@Override
-	public void update(Module module) {
+	public void update(Map<String, String> map) {
+		Module module = new Module();
+		module.setModuleCode(map.get("updateModuleCode"));
+		module.setModuleName(map.get("updateModuleName"));
+		module.setSeqNo(Integer.parseInt(map.get("updateSequenceNo")));
+		module.setActive(map.get("updateStatusId"));
+		module.setUpdatedDate(new Date());
 		moduleDao.update(module);
 	}
 
