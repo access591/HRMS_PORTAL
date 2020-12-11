@@ -34,10 +34,10 @@ public class ModuleController {
 	}
 
 	@PostMapping("/addModule")
-	public String addModule(@ModelAttribute Module module, Model model, HttpSession session) {
-		moduleService.addModule(module);
+	public ResponseEntity<?> addModule(@RequestBody Map<String, String> map, Model model, HttpSession session) {
+		moduleService.addModule(map);
 		session.setAttribute("username", session.getAttribute("username"));
-		return "redirect:/module";
+		return new ResponseEntity<String>("success", HttpStatus.OK);
 	}
 
 	@PostMapping(value = { "/update_module" })
