@@ -21,6 +21,8 @@ body {
 	opacity: 0;
 }
 </style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
 <script src="js/settings.js"></script>
 <!-- END SETTINGS -->
 <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -101,8 +103,10 @@ body {
 
 									<li class="sidebar-item active"><a class="sidebar-link"
 										href="module.html">Module</a></li>
-									<li class="sidebar-item"><a class="sidebar-link" href="/submodulepage">SubModule</a></li></li>
-									<li class="sidebar-item" style="padding-left:25px"><a class="sidebar-link" href="/program">Program Master</a></li>
+									<li class="sidebar-item"><a class="sidebar-link"
+										href="/submodulepage">SubModule</a></li></li>
+							<li class="sidebar-item" style="padding-left: 25px"><a
+								class="sidebar-link" href="/program">Program Master</a></li>
 						</ul>
 					<li class="sidebar-item "><a href="#URmaster"
 						data-toggle="collapse" class="sidebar-link"> <span
@@ -111,10 +115,9 @@ body {
 					</a>
 						<ul id="URmaster" class="sidebar-dropdown list-unstyled collapse "
 							data-child="#sidebar">
-							
 
-				</ul>
 
+						</ul>
 				</ul>
 				</li>
 
@@ -258,8 +261,9 @@ body {
 										<div class="row">
 											<div class="col-12 col-lg-6">
 												<div class="form-group">
-													<label> Module Code </label> <input type="text" th:field="*{moduleCode}"
-														class="form-control" id="moduleCode" name="moduleCode">
+													<label> Module Code </label> <input type="text"
+														th:field="*{moduleCode}" class="form-control"
+														id="moduleCode" name="moduleCode">
 
 												</div>
 
@@ -281,8 +285,8 @@ body {
 											<div class="col-12 col-lg-6">
 												<div class="form-group">
 													<label style="color: red">*</label> <label>Module
-														Name</label> <input type="text" class="form-control" th:field="*{moduleName}"
-														id="moduleName" name="moduleName">
+														Name</label> <input type="text" class="form-control"
+														th:field="*{moduleName}" id="moduleName" name="moduleName">
 
 												</div>
 												<div class="form-group">
@@ -307,8 +311,8 @@ body {
 
 									<h6 class="card-subtitle text-muted">DataTables.</h6>
 								</div>
-								<div class="card-body">
-									<table id="datatables-buttons" class="table table-striped"
+								<div class="card-body" id="queryResult" style="overflow: auto;">
+									<!-- <table id="datatables-buttons" class="table table-striped"
 										style="width: 100%">
 
 
@@ -320,14 +324,14 @@ body {
 											<th>Operation</th>
 										</tr>
 										<tr th:each="module : ${modules}">
-											<td th:text="${module.moduleCode}"></td>
-											<td th:text="${module.moduleName}"></td>
-											<td th:text="${module.seqNo}"></td>
-											<td th:text="${module.active}"></td>
-											<td><a style="color: navy" title="Edit" 
-											th:href="@{/module/{moduleId}/edit(moduleId=${module.moduleCode})}"><i
-													class="fa fa-edit" style="color: navy; font-size: 16px">Edit</i></a>
-												|| <a style="color: red" title="Remove" ><i
+											<td id="module_code" th:text="${module.moduleCode}"></td>
+											<td id="module_name" th:text="${module.moduleName}"></td>
+											<td id="seq_no" th:text="${module.seqNo}"></td>
+											<td id="module_status" th:text="${module.active}"></td>
+											<td><a style="color: navy" title="Edit"
+												data-toggle="modal" href="#updateModuleDetailsModal"><i
+													class="fa fa-edit myclass"
+													style="color: navy; font-size: 16px">Edit</i></a> || <a style="color: red" title="Remove" ><i
 													class="fa fa-times  " style="color: red; font-size: 16px"></i>
 													Remove </a></td>
 										</tr>
@@ -335,7 +339,7 @@ body {
 
 
 
-									</table>
+									</table> -->
 								</div>
 							</div>
 						</div>
@@ -377,6 +381,99 @@ body {
 
 	</div>
 
+
+	<!-- **************************** Update Modal************************************************************************* -->
+
+	<div class="modal fade" id="updateModuleDetailsModal" tabindex="-1"
+		role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-header text-center" style="background: #e0e0e0;">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title w-100 font-weight-bold">Update Sub
+						Module</h4>
+				</div>
+				<div class="modal-body mx-3">
+					<form class="form-horizontal" id="updateRoleForm">
+						<input type="hidden" id="updateRoleId" name="updateRole">
+						<div class="row" style="margin-right: 25px; margin-top: 20px;">
+							<div class="col-md-6">
+								<div class="form-group required">
+									<label for="updateModuleCode"
+										class="col-sm-4 control-label required">Module Code :</label>
+									<div class="col-sm-8 ">
+										<input id="updateModuleCode" name="updateModuleCode"
+											disabled="disabled" class="form-control input-md" type="text">
+									</div>
+									<span id="errmsg" style="color: red"></span>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group required">
+									<label for="updateModuleName"
+										class="col-sm-4 control-label required">Module Name :</label>
+									<div class="col-sm-8 ">
+										<input id="updateModuleName" name="updateModuleName"
+											class="form-control input-md" type="text" required>
+									</div>
+									<span id="errmsg" style="color: red"></span>
+								</div>
+							</div>
+						</div>
+
+						<div class="row" style="margin-right: 25px; margin-top: 40px;">
+							<div class="col-md-6">
+								<div class="form-group required">
+									<label class="col-sm-4 control-label">Status :</label>
+									<div class="col-sm-8 ">
+										<select id="updateStatusId" name="updateStatusId"
+											class="form-control input-md ">
+											<option value="Y">Active</option>
+											<option value="N">Inactive</option>
+										</select>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group required">
+									<label for="updateSequenceNo"
+										class="col-sm-4 control-label required">Sequence No :</label>
+									<div class="col-sm-8 ">
+										<input id="updateSequenceNo" name="updateSequenceNo"
+											class="form-control input-md" type="text">
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="row form-group">
+							<div class="col-md-12"
+								style="text-align: right; margin-top: 30px;">
+								<div class="form-group">
+									<div class="col-sm-7">
+										<input id="moduleUpdateBtn" title="Update" value="Update"
+											type="button" class="btn btn-primary"
+											style="margin-right: 20px; width: 80px;">
+										<button type="button" class="btn btn-warning"
+											data-dismiss="modal" style="width: 80px;">Close</button>
+									</div>
+									<!-- <div class="col-sm-5">
+											<p class="alert-color">* All fields are mandatory .</p>
+										</div> -->
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+			<div class="loading" id="loadingUpdate"></div>
+			<div class="transparentCover" id="transUpdate"></div>
+		</div>
+	</div>
+
 	<svg width="0" height="0" style="position: absolute">
 		<defs>
 			<symbol viewBox="0 0 512 512" id="ion-ios-pulse-strong">
@@ -394,15 +491,195 @@ body {
 				responsive : true
 			});
 			// Datatables with Buttons
-			var datatablesButtons = $('#datatables-buttons').DataTable({
-				lengthChange : !1,
-				buttons : [ "copy", "print" ],
-				responsive : true
-			});
-			datatablesButtons.buttons().container().appendTo(
-					"#datatables-buttons_wrapper .col-md-6:eq(0)")
+			
+			$('#loadingUpdate').css('display', 'none');
+			$("#transUpdate").css('display', 'none');
+			$('.loading').css('display','none');
+			$(".transparentCover").css('display', 'none');
+			
+			getModuleList();
+
+			$("body").on("click", "#datatables-buttons tbody tr .myclass",
+					function(e) {
+
+						var par = $(this).parent().parent().parent();
+						var mouduleId = par.find("td").eq(1).html();
+						var moduleName = par.find("td").eq(2).html();
+						var status = par.find("td").eq(3).html();status
+						var seqNo = par.find("td").eq(4).html();
+
+						$("#updateModuleCode").val(mouduleId);
+						$("#updateModuleName").val(moduleName);
+						$("#updateSequenceNo").val(seqNo);
+						$("#updateStatusId").val(status);
+
+					});
+
 		});
+
+		$("#moduleUpdateBtn")
+				.click(
+						function() {
+
+							var moduleCodeValue = $("#updateModuleCode").val();
+							var moduleNameValue = $.trim($("#updateModuleName")
+									.val());
+							var moduleStatusValue = $("#updateStatusId").val();
+							var moduleSeqNoValue = $("#updateSequenceNo").val();
+
+							if (moduleNameValue === "") {
+								swal("Oops!", "Please Enter Module Name!",
+										"info");
+								return;
+							}
+
+							var moduleInfoObj = new Object();
+							moduleInfoObj["updateModuleCode"] = moduleCodeValue;
+							moduleInfoObj["updateModuleName"] = moduleNameValue;
+							moduleInfoObj["updateStatusId"] = moduleStatusValue;
+							moduleInfoObj["updateSequenceNo"] = moduleSeqNoValue;
+
+							$('#loadingUpdate').css('display', 'block');
+							$("#transUpdate").css('display', 'block');
+
+							$
+									.ajax({
+
+										type : "POST",
+										url : "update_module",
+										data : JSON.stringify(moduleInfoObj),
+										processData : false,
+										contentType : "application/json",
+										dataType : 'text',
+										cache : false,
+
+										success : function(result) {
+
+											$('#loadingUpdate').css('display',
+													'none');
+											$("#transUpdate").css('display',
+													'none');
+
+											$('#updateModuleDetailsModal')
+													.modal('toggle');
+											getModuleList();
+											swal(
+													"Success!",
+													"Module Information Successfully Saved !",
+													"success");
+										},
+										error : function(result) {
+											$('#loadingUpdate').css('display',
+													'none');
+											$("#transUpdate").css('display',
+													'none');
+											console.log(result.responseText);
+											if (result.status == 0) {
+
+											}
+											swal(
+													"Error!",
+													"Add Module Information Failed. Error occurred at server-side !",
+													"error");
+										}
+									});
+
+						});
+		
+		
+		
+		function getModuleList(){
+			
+			$("#queryResult").empty();
+			var obj = new Object();
+			
+			$('#queryResult').append('<table id="datatables-buttons" class="table table-striped display" style="width:100%"></table>');
+			$('#datatables-buttons').prepend('<thead></thead>');
+			$('#datatables-buttons').prepend('<tbody></tbody>');
+			
+			$('#loadingUpdate').css('display', 'block');
+			$("#transUpdate").css('display', 'block');
+			
+			$.ajax({
+				type : "GET",
+				url : "modules",
+				processData : false,
+				contentType : "application/json",
+				cache : false,
+				success : function(data) {
+					var tableData=[];
+					if (!(typeof data === 'undefined')) {
+							
+						if (data.length != 0) {
+
+						 	var row = '<tr><th>S.N.<th>Module Code</th><th>Module Name</th><th>Module Status</th><th>Seq No.</th><th>Action</th></tr>';
+							$('#datatables-buttons > thead').append(row); 
+							
+							$.each(data,function(i,item) {
+								
+								var rowData = [];
+								
+								rowData.push((i+1));
+								
+								for ( var key in item) {
+									rowData.push(item["moduleCode"]);
+									rowData.push(item["moduleName"]);
+									rowData.push(item["active"]);
+									rowData.push(item["seqNo"]);
+									rowData.push('<a style="color: navy" title="Edit" data-toggle="modal" href="#updateModuleDetailsModal"><i class="fa fa-edit myclass" style="color: navy; font-size: 16px">Edit</i></a>');
+									
+								}
+								
+								
+								tableData.push(rowData);
+								
+								var rowData = [];
+								
+								/* $("#module_code").val(item['moduleCode']);
+								$("#module_name").val(item['moduleName']);
+								$("#module_status").val(item['active']);
+								$("#seq_no").val(item['seqNo']); */
+								
+							});
+							
+							 resultDataTable = $('#datatables-buttons').DataTable({
+								//dom: 'Bfrtip',
+								destroy: true,
+								data:           tableData,
+					            deferRender:    true,
+					            scrollCollapse: true,
+					            scroller:       false,
+								lengthMenu : [[10,20,30,-1 ],['10 rows', '20 rows', '30 rows', 'Show all' ] ],
+								buttons : ['pageLength']
+							}); 
+							
+						}else {
+							//swal("Oops!", "No data found !", "info");
+						}
+
+					} else {
+						//swal("Oops!", "No data found !", "info");
+					}
+			
+					$('.loading').css('display','none');
+					$(".transparentCover").css('display', 'none');
+				},
+				error : function(result) {
+					$('.loading').css('display','none');
+					$(".transparentCover").css('display', 'none');
+					console.log(result.responseText);
+					if(result.status==0){
+						
+					}
+					swal("Error!", "Some error occurred at server-side !", "error");
+				}
+			});//ajax
+		}
+		
+		
 	</script>
+
+
 
 </body>
 

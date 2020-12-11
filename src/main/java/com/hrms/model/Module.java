@@ -32,13 +32,13 @@ public class Module implements Serializable {
 	private String insertedBy;
 
 	@Column(name = "INS_DATE")
-	private Date insertedDate = new Date();
+	private Date insertedDate;
 
 	@Column(name = "UPDATE_BY")
 	private String updateBy;
 
 	@Column(name = "UPDATE_DATE")
-	private Date updatedDate = new Date();
+	private Date updatedDate;
 
 	@Column(name = "SEQ_NO")
 	private int seqNo;
