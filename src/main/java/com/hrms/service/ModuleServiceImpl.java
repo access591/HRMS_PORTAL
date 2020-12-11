@@ -82,9 +82,14 @@ public class ModuleServiceImpl implements ModuleService {
 	}
 
 	@Override
-	public void addModule(Module module) {
-		module.setInsertedDate(new Date());
-		moduleDao.addModule(module);
+	public void addModule(Map<String, String> map) {
+		Module addModule = new Module();
+		addModule.setModuleCode(map.get("moduleCode"));
+		addModule.setModuleName(map.get("moduleName"));
+		addModule.setSeqNo(Integer.parseInt(map.get("seqNo")));
+		addModule.setActive(map.get("active"));
+		addModule.setInsertedDate(new Date());
+		moduleDao.addModule(addModule);
 	}
 
 	@Override

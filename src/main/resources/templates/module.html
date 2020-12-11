@@ -254,15 +254,14 @@ body {
 
 								</div>
 								<div class="card-body">
-									<form id="validation-form" action="#" th:action="@{/addModule}"
-										th:object="${module}" method="post">
+									<form id="validation-form">
 
 
 										<div class="row">
 											<div class="col-12 col-lg-6">
 												<div class="form-group">
 													<label> Module Code </label> <input type="text"
-														th:field="*{moduleCode}" class="form-control"
+														class="form-control"
 														id="moduleCode" name="moduleCode">
 
 												</div>
@@ -272,9 +271,9 @@ body {
 													<label class="form-label">Status</label>
 													<div class="custom-controls-stacked">
 
-														<label class="radio-inline"> <input type="radio"
+														<label class="radio-inline"> <input type="radio" id="active"
 															value="Y" name="active" checked> Active
-														</label> <label class="radio-inline"> <input type="radio"
+														</label> <label class="radio-inline"> <input type="radio" id="active"
 															value="N" name="active"> Inactive
 														</label>
 
@@ -286,7 +285,7 @@ body {
 												<div class="form-group">
 													<label style="color: red">*</label> <label>Module
 														Name</label> <input type="text" class="form-control"
-														th:field="*{moduleName}" id="moduleName" name="moduleName">
+														 id="moduleName" name="moduleName">
 
 												</div>
 												<div class="form-group">
@@ -298,7 +297,7 @@ body {
 											</div>
 
 										</div>
-										<button type="submit" class="btn btn-primary">Save</button>
+										<input id="moduleSaveBtn" title="Save" value="Save" type="button" class="btn btn-primary" style="margin-left: 20px; width: 80px;"> 
 
 									</form>
 								</div>
@@ -626,24 +625,14 @@ body {
 									rowData.push(item["moduleName"]);
 									rowData.push(item["active"]);
 									rowData.push(item["seqNo"]);
-									rowData.push('<a style="color: navy" title="Edit" data-toggle="modal" href="#updateModuleDetailsModal"><i class="fa fa-edit myclass" style="color: navy; font-size: 16px">Edit</i></a>');
+									rowData.push('<a style="color: navy" title="Edit" data-toggle="modal" href="#updateModuleDetailsModal"><i class="fa fa-edit myclass" style="color: navy; font-size: 16px">Edit</i></a> || <a style="color: red" title="Remove" ><i	class="fa fa-times  " style="color: red; font-size: 16px"></i> Remove </a>');
 									
 								}
-								
-								
 								tableData.push(rowData);
-								
 								var rowData = [];
-								
-								/* $("#module_code").val(item['moduleCode']);
-								$("#module_name").val(item['moduleName']);
-								$("#module_status").val(item['active']);
-								$("#seq_no").val(item['seqNo']); */
-								
 							});
 							
 							 resultDataTable = $('#datatables-buttons').DataTable({
-								//dom: 'Bfrtip',
 								destroy: true,
 								data:           tableData,
 					            deferRender:    true,
@@ -675,6 +664,67 @@ body {
 				}
 			});//ajax
 		}
+		
+		$("#moduleSaveBtn").click(function(){
+			
+			var moduleCode = $.trim($("#moduleCode").val());
+			var moduleName = $("#moduleName").val();
+			var seqNo = $("#seqNo").val();
+			var status = $("#active").val();
+			
+			if(moduleName === ""){
+				swal("Oops!",
+						"Please Enter Role Name!",
+						"info");
+				return;
+			}
+			
+			var moduleInfoObj = new Object();
+			moduleInfoObj["moduleCode"] = moduleCode;
+			moduleInfoObj["moduleName"] = moduleName;
+			moduleInfoObj["seqNo"] = seqNo;
+			moduleInfoObj["active"] = status;
+			
+			$('.loading').css('display','block');
+			$(".transparentCover").css('display', 'block');
+			
+			$.ajax({
+				
+				type : "POST",
+				url : "addModule",
+				data : JSON.stringify(moduleInfoObj),
+				processData : false,
+				contentType : "application/json",
+				dataType : 'text',
+				cache : false,
+				
+				success : function(result) {
+
+					getModuleList();
+					
+					$('.loading').css('display','none');
+					$(".transparentCover").css('display', 'none');
+					
+					swal(
+							"Success!",
+							"Module Information Successfully Saved !",
+							"success");
+				},
+				error : function(result) {
+					$('.loading').css('display','none');
+					$(".transparentCover").css('display', 'none');
+					console.log(result.responseText);
+					if(result.status==0){
+						
+					}
+					swal(
+							"Error!",
+							"Add Role Information Failed. Error occurred at server-side !",
+							"error");
+				}
+			});
+			
+		});
 		
 		
 	</script>

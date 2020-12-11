@@ -11,7 +11,7 @@ public interface ModuleService {
 	
 	List<Module> getModules();
 
-	void addModule(Module module);
+	void addModule(Map<String, String> map);
 
 	void update(Map<String, String> map);
 
