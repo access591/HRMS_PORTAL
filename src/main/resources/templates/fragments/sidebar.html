@@ -1,0 +1,101 @@
+<div layout:fragment="sidebar">
+   <!-- Start  SIDEBAR    -->
+	
+			<a class="sidebar-brand" href="dashboard.html">
+				<img src="img/avatars/logo1.png" class="img-fluid rounded-circle mb-2" alt="Linda Miller" />
+				HRMS
+			</a>
+			<div class="sidebar-content">
+				<div class="sidebar-user">
+					<img src="img/avatars/avatar.jpg" class="img-fluid rounded-circle mb-2" alt="Linda Miller" />
+					<div class="font-weight-bold"><span class="hidden-xs" th:text="${session.username}"></span></div>
+					<small>User Designation</small>
+				</div>
+
+				<ul class="sidebar-nav">
+				<li class="sidebar-item">
+						<a href="/"  class="sidebar-link">
+						<i class="align-middle mr-2 fas fa-fw fa-home"></i> <span class="align-middle">Home</span>
+						</a>
+					</li>
+					<li class="sidebar-item ">
+						<a href="#dashboards" data-toggle="collapse" class="sidebar-link">
+							<i class="align-middle mr-2 fas fa-fw fa-home"></i>
+							 <span class="align-middle">Master</span>
+						</a>
+						<ul id="dashboards" class="sidebar-dropdown list-unstyled collapse" data-parent="#sidebar">
+			
+						<li class="sidebar-item ">
+						<a href="#usermaster" data-toggle="collapse" class="sidebar-link">
+						 <span class="align-middle mr-2 fas fa-fw fa-check"> User Role Management </span>
+						</a>
+							<ul id="usermaster" class="sidebar-dropdown list-unstyled collapse " data-child="#sidebar">
+							<li class="sidebar-item"style="padding-left:25px"><a class="sidebar-link" href="/testpage">User Master</a></li>
+							<li class="sidebar-item"style="padding-left:25px"><a class="sidebar-link  " href="#">User Rights</a></li>
+							</ul>
+							</li>
+							
+							<li class="sidebar-item ">
+							<a href="#appmaster" data-toggle="collapse" class="sidebar-link">
+							<span class="align-middle mr-2 fas fa-fw fa-check">Application Masters</span>
+							</a>
+							<ul id="appmaster" class="sidebar-dropdown list-unstyled collapse " data-child="#sidebar">
+							<li class="sidebar-item" style="padding-left:25px"><a class="sidebar-link" href="/module">Module</a></li>
+							<li class="sidebar-item" style="padding-left:25px"><a class="sidebar-link" href="/submodulepage">Sub Module</a></li>
+							<li class="sidebar-item" style="padding-left:25px"><a class="sidebar-link" href="/programpage">Program Master</a></li>
+
+							</ul>
+							
+							
+							</li>
+				
+							
+							<li class="sidebar-item ">
+							<a href="#hrmsmaster" data-toggle="collapse" class="sidebar-link">
+							<span class="align-middle mr-2 fas fa-fw fa-check"> Hrms Master</span>
+							</a>
+							<ul id="hrmsmaster" class="sidebar-dropdown list-unstyled collapse " data-child="#sidebar">
+							<li class="sidebar-item" style="padding-left:25px"><a class="sidebar-link" href="departmentMaster.html">Department Master</a></li>
+							<li class="sidebar-item" style="padding-left:25px"><a class="sidebar-link" href="/designationMaster">Designation Master</a></li>
+							<li class="sidebar-item" style="padding-left:25px"><a class="sidebar-link" href="#">Bank Master</a></li>
+							<li class="sidebar-item" style="padding-left:25px"><a class="sidebar-link" href="#">Employee Information</a></li>
+							<li class="sidebar-item" style="padding-left:25px"><a class="sidebar-link" href="#">List of Holidays</a></li>
+							<li class="sidebar-item" style="padding-left:25px"><a class="sidebar-link" href="#">Leave Master</a></li>
+							<li class="sidebar-item" style="padding-left:25px"><a class="sidebar-link" href="#">List of Holidays</a></li>
+							<li class="sidebar-item" style="padding-left:25px"><a class="sidebar-link" href="#">Loan Master</a></li>
+							<li class="sidebar-item" style="padding-left:25px"><a class="sidebar-link" href="#">Misc Allowances & Deduction Master</a></li>
+							<li class="sidebar-item" style="padding-left:25px"><a class="sidebar-link" href="#">Actvities Master</a></li>
+							<li class="sidebar-item" style="padding-left:25px"><a class="sidebar-link" href="#">Income Tax Master</a></li>
+							
+							</ul>
+							
+							
+							</li>
+	
+						</ul>
+					</li>
+
+					<li class="sidebar-item">
+						<a href="#auth" data-toggle="collapse" class="sidebar-link collapsed">
+							<i class="align-middle mr-2 fas fa-fw fa-sign-in-alt"></i> <span class="align-middle">Auth</span>
+						</a>
+						<ul id="auth" class="sidebar-dropdown list-unstyled collapse " data-parent="#sidebar">
+							<li class="sidebar-item"><a class="sidebar-link" href="pages-sign-in.html">Sign
+									In</a></li>
+							<li class="sidebar-item"><a class="sidebar-link" href="pages-sign-up.html">Sign
+									Up</a></li>
+							<li class="sidebar-item"><a class="sidebar-link" href="pages-reset-password.html">Reset Password</a></li>
+							<li class="sidebar-item"><a class="sidebar-link" href="pages-404.html">404
+									Page</a></li>
+							<li class="sidebar-item"><a class="sidebar-link" href="pages-500.html">500
+									Page</a></li>
+						</ul>
+					</li>
+
+				
+				</ul>
+			</div>
+				
+		
+	<!-- End  SIDEBAR    -->
+</div>
