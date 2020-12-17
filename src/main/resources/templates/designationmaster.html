@@ -3,13 +3,11 @@
 <script src="js/settings.js"></script>
 <script src="js/app.js"></script>
 
-<script async
-	src="https://www.googletagmanager.com/gtag/js?id=UA-120946860-7"></script>
+<script  src="https://www.googletagmanager.com/gtag/js?id=UA-120946860-7"></script>
 <style>
 body {
 	opacity: 0;
 }
-
 .uppercase {
   text-transform: uppercase;
 }
@@ -19,7 +17,7 @@ body {
 	function gtag() {
 		dataLayer.push(arguments);
 	}
-	gtag('js', new Date());
+	 gtag('js', new Date());
 
 	gtag('config', 'UA-120946860-7');
 </script>
@@ -36,18 +34,16 @@ body {
 			<div th:replace="fragments/header ::div"></div>
 			<main class="content">
 				<div class="container-fluid">
-
 					<div class="header">
 						<h1 class="header-title"> Master</h1>
 						<nav aria-label="breadcrumb">
-							
 						</nav>
 					</div>
 					<div class="row">
 						<div class="col-12">
 							<div class="card">
 								<div class="card-header">
-									<h5 class="card-title">page name</h5>
+									<h5 class="card-title">Designation </h5>
 
 								</div>
 								<div class="card-body">
@@ -76,32 +72,21 @@ body {
 
 													</div>
 												</div>
-
-
 											</div>
 											<div class="col-12 col-lg-6">
-												
 											<div class="form-group">
-											
 											<label class="form-label">Name</label>
 											<label style="color: red">*</label>
 											 <input type="text" class="form-control uppercase" id="Desg_Name" name="Desg_Name"required aria-required="true">
-											
-										
 										</div>
-
 											</div>
-
-
 										</div>
 										<button type="submit" class="btn btn-primary">Save</button>
 								 <button type="reset"class="btn btn-primary" value="Reset">Reset</button>
-
 									</form>
 								</div>
 							</div>
 						</div>
-
 						<div class="col-12">
 							<div class="card">
 								<div class="card-header">
@@ -109,7 +94,7 @@ body {
 									<h6 class="card-subtitle text-muted">DataTables.</h6>
 								</div>
 								<div class="card-body">
-									<table id="datatables-buttons" class="table table-striped" style="width:100%">
+									<table id="datatables-buttons" class="table table-striped display" style="width:100%">
 										<thead>
 											<tr>
 												<th>Department code</th>
@@ -117,24 +102,18 @@ body {
 												<th>Status</th>
 												<th>Inserted Date</th>
 												<th>Action</th>
-												
-												
 											</tr>
 										</thead>
 										<tbody>
 											<tr  th:each="listdesignation : ${listDesignation}">
-												
 												<td th:text="${listdesignation.Desg_code}"></td>
 												<td th:text="${listdesignation.Desg_Name}"></td>
 												<td th:text="${listdesignation.active}"></td>
 												<td th:text="${listdesignation.ins_date}"></td>
 												<td><a th:href="@{/editDesignation/{id}(id=${listdesignation.Desg_code})}" class="btn btn-primary"><i class="fa fa-edit"></i></a>
-												<a th:href="@{/delete/{id}(id=${listdesignation.Desg_code})}" class="btn btn-primary"><i class="fa fa-times"></i></a>
+												<a th:href="@{/deleteDesignation/{id}(id=${listdesignation.Desg_code})}" class="btn btn-primary"onclick="return confirm('Are you sure?')"><i class="fa fa-times"></i></a>
 												</td>
 											</tr>
-											
-										
-											
 										</tbody>
 									
 									</table>
@@ -142,21 +121,17 @@ body {
 								
 							</div>
 						</div>
-
-
 					</div>
-
-
 				</div>
 
 			</main>
 
-			<footer class="footer">
-	         <div th:replace="fragments/footer :: div"></div>
-	         </footer>
+		<footer class="footer">
+		<div th:replace="fragments/footer :: div"></div>
+		</footer>
 		</div>
 		</div>
-			<script>
+	<script>
 		$(function() {
 			// Datatables basic
 			$('#datatables-basic').DataTable({
@@ -164,9 +139,12 @@ body {
 			});
 			// Datatables with Buttons
 			var datatablesButtons = $('#datatables-buttons').DataTable({
-				lengthChange: !1,
-				buttons: ["copy", "print"],
-				responsive: true
+				  deferRender:true,
+		            scrollCollapse: true,
+		            scroller: false,
+				   responsive: true,
+				   lengthMenu :[[10,20,30,-1 ],['10 rows', '20 rows', '30 rows', 'Show all' ] ],
+					buttons :['pageLength',"copy", "print"]
 			});
 			datatablesButtons.buttons().container().appendTo("#datatables-buttons_wrapper .col-md-6:eq(0)")
 		});
