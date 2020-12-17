@@ -19,36 +19,56 @@ public class DesignationDaoImpl implements DesignationDao {
 	SessionFactory sessionFactory;
 
 	@Override
-	public void addDesignation(Designation designation)
-	{
+	public void addDesignation(Designation designation) {
 		Session session = sessionFactory.openSession();
 		Transaction tx = session.beginTransaction();
 		session.persist(designation);
 		tx.commit();
 		session.close();
-		
+
 	}
 
 	@Override
 	public List<Designation> getAllDesignations() {
 		Session session = sessionFactory.openSession();
 		Criteria criteria = session.createCriteria(Designation.class);
-		 List<Designation> listDesignation=(List<Designation>)criteria.setFetchMode("M_DESIGNATION", FetchMode.SELECT).list();
-		 
+		List<Designation> listDesignation = (List<Designation>) criteria.setFetchMode("M_DESIGNATION", FetchMode.SELECT).list();
 		return listDesignation;
 	}
 
 	@Override
 	public Designation findDesignationById(String id) {
-		  Session session = sessionFactory.openSession();
-		   Criteria criteria = session.createCriteria(Designation.class);
-		   Designation designationEdit =(Designation) criteria.setFetchMode("M_DESIGNATION", FetchMode.SELECT).add(Restrictions.eq("Desg_code",id)).uniqueResult(); 
+		Session session = sessionFactory.openSession();
+		Criteria criteria = session.createCriteria(Designation.class);
+		Designation designationEdit = (Designation) criteria.setFetchMode("M_DESIGNATION", FetchMode.SELECT)
+				.add(Restrictions.eq("Desg_code", id)).uniqueResult();
 
-		   return designationEdit;
-		 
-	
+		return designationEdit;
+
 	}
-	
-	
+
+	@Override
+	public void updateDesignation(Designation d) {
+
+		Session session = this.sessionFactory.getCurrentSession();
+		Transaction tx = session.beginTransaction();
+		session.update(d);
+		tx.commit();
+		session.close();
+
+	}
+
+	@Override
+	public void removeDesignation(String id) {
+		Session session = this.sessionFactory.getCurrentSession();
+		Transaction tx = session.beginTransaction();
+		Designation p = (Designation) session.load(Designation.class, new String(id));
+		System.out.println("value of p " + p);
+
+		session.delete(p);
+		tx.commit();
+		session.close();
+
+	}
 
 }
