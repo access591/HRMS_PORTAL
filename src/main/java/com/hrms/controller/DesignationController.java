@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+
 import com.hrms.model.Designation;
 import com.hrms.service.DesignationService;
 
@@ -62,15 +63,23 @@ public String DesignationMaster(Model model,HttpSession session) {
          return "/editDesignation"; 
   }
   
-
+  @PostMapping("/updateDesignation")
+  public String updateDesignation(@ModelAttribute("desiupdate") Designation d, Model model) {
+ 
+	  this.designationService.updateDesignation(d);
+    	  
+	  return "redirect:/designationMaster";
+  }
   
-  @PostMapping("/updateDesignation/{id}")
-  public String updateDesignation(@PathVariable("id") String id, Designation designation,Model model) {
+  @GetMapping(value = {"/deleteDesignation/{id}"})
+  public String deletedesignation(@PathVariable("id")String id,  Model model,HttpSession session)
+   { 
+	
+	  
+	  this.designationService.removeDesignation(id);
 
-    	  designation.setDesg_code(id);
-    	
-    	  //designationService.updateDesignation(designation);
-    	  return "surendra";
+      session.setAttribute("username",session.getAttribute("username")); 
+      return "redirect:/designationMaster";
   }
 
 
