@@ -97,10 +97,9 @@ body {
 									<table id="datatables-buttons" class="table table-striped display" style="width:100%">
 										<thead>
 											<tr>
-												<th>Department code</th>
+												<th>Designation code</th>
 												<th>Designation </th>
 												<th>Status</th>
-												<th>Inserted Date</th>
 												<th>Action</th>
 											</tr>
 										</thead>
@@ -109,7 +108,6 @@ body {
 												<td th:text="${listdesignation.Desg_code}"></td>
 												<td th:text="${listdesignation.Desg_Name}"></td>
 												<td th:text="${listdesignation.active}"></td>
-												<td th:text="${listdesignation.ins_date}"></td>
 												<td><a th:href="@{/editDesignation/{id}(id=${listdesignation.Desg_code})}" class="btn btn-primary"><i class="fa fa-edit"></i></a>
 												<a th:href="@{/deleteDesignation/{id}(id=${listdesignation.Desg_code})}" class="btn btn-primary"onclick="return confirm('Are you sure?')"><i class="fa fa-times"></i></a>
 												</td>
@@ -144,7 +142,7 @@ body {
 		            scroller: false,
 				   responsive: true,
 				   lengthMenu :[[10,20,30,-1 ],['10 rows', '20 rows', '30 rows', 'Show all' ] ],
-					buttons :['pageLength',"copy", "print"]
+					buttons :[]
 			});
 			datatablesButtons.buttons().container().appendTo("#datatables-buttons_wrapper .col-md-6:eq(0)")
 		});

@@ -48,7 +48,7 @@ public class Grade implements Serializable
 			return Garde_Name;
 		}
 		public void setGarde_Name(String garde_Name) {
-			Garde_Name = garde_Name;
+			Garde_Name = garde_Name.toUpperCase();
 		}
 		public String getIns_by() {
 			return Ins_by;
