@@ -112,7 +112,7 @@ body {
 												<th>HOD Code</th>
 												<th>HOD Name</th>
 												<th>Status</th>
-												<th>Inserted Date</th>
+												
 												<th>Action</th>
 											</tr>
 										</thead>
@@ -123,7 +123,7 @@ body {
 												<td th:text="${listdepartment.Deph_code}"></td>
 												<td th:text="${listdepartment.Deph_Name}"></td>
 												<td th:text="${listdepartment.active}"></td>
-												<td th:text="${listdepartment.ins_date}"></td>
+												
 												<td><a th:href="@{/editDepartment/{id}(id=${listdepartment.Department_Code})}" class="btn btn-primary"><i class="fa fa-edit"></i></a>
 												<a th:href="@{/deleteDepartment/{id}(id=${listdepartment.Department_Code})}" class="btn btn-primary"onclick="return confirm('Are you sure?')"><i class="fa fa-times"></i></a>
 												</td>
