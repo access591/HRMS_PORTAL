@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 
 <html xmlns:th="http://www.thymeleaf.org">
-<html lang="en">
+
 <!-- Mirrored from spark.bootlab.io/dashboard-default.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 27 Nov 2020 05:26:47 GMT -->
 <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
 <head>
@@ -89,12 +89,12 @@
 							<span class="align-middle mr-2 fas fa-fw fa-check"> Hrms Master</span>
 							</a>
 							<ul id="hrmsmaster" class="sidebar-dropdown list-unstyled collapse " data-child="#sidebar">
-							<li class="sidebar-item" style="padding-left:25px"><a class="sidebar-link" href="#">Department Master</a></li>
+							<li class="sidebar-item" style="padding-left:25px"><a class="sidebar-link" th:href="@{/departmentMaster}">Department Master</a></li>
 							<li class="sidebar-item" style="padding-left:25px"><a class="sidebar-link" th:href="@{/designationMaster}">Designation Master</a></li>
 																					
 							<li class="sidebar-item" style="padding-left:25px"><a class="sidebar-link" href="#">Bank Master</a></li>
 							<li class="sidebar-item" style="padding-left:25px"><a class="sidebar-link" href="/gradeMaster">Grade Master</a></li>
-							<li class="sidebar-item" style="padding-left:25px"><a class="sidebar-link" href="#">Employee Information</a></li>
+							<li class="sidebar-item" style="padding-left:25px"><a class="sidebar-link" href="/empInfo">Employee Information</a></li>
 							<li class="sidebar-item" style="padding-left:25px"><a class="sidebar-link" href="#">List of Holidays</a></li>
 							<li class="sidebar-item" style="padding-left:25px"><a class="sidebar-link" href="#">Leave Master</a></li>
 							<li class="sidebar-item" style="padding-left:25px"><a class="sidebar-link" href="#">List of Holidays</a></li>
