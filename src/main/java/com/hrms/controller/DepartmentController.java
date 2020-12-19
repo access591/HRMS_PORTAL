@@ -37,7 +37,6 @@ public String DepartmentMaster(Model model,HttpSession session) {
 		return "departmentMaster";
 	}
 
-
 @PostMapping("/saveDepartment")
 	public String SaveDepartment(@ModelAttribute("department") Department department, Model model) {
 		if (department.getDepartment_Code() != "") {
@@ -49,9 +48,31 @@ public String DepartmentMaster(Model model,HttpSession session) {
 		return "redirect:/departmentMaster";
 
 	}	
+@GetMapping(value = {"/editDepartment/{id}"})
+public String editdepartment(@PathVariable("id")String id,  Model model,HttpSession session)
+ { 
+	  
+	Department departmentEdit = departmentService.findDepartmentById(id);
+	  model.addAttribute("departmentEdit", departmentEdit);
 
+    session.setAttribute("username",session.getAttribute("username")); 
+       return "/editDepartment"; 
+}
 
-	
+@PostMapping("/updateDepartment")
+public String updateDepartment(@ModelAttribute("deptupdate") Department d, Model model) {
 
+	  this.departmentService.updateDepartment(d);
+  	  
+	  return "redirect:/departmentMaster";
+}
+
+@GetMapping(value = {"/deleteDepartment/{id}"})
+public String deletedepartment(@PathVariable("id")String id,  Model model,HttpSession session)
+ { 
+	  this.departmentService.removeDepartment(id);
+    session.setAttribute("username",session.getAttribute("username")); 
+    return "redirect:/departmentMaster";
+}
 
 }
