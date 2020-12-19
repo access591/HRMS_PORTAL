@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<script type="text/javascript" th:src="@{/js/settings.js}"></script>
+<script type="text/javascript" th:src="@{/js/app.js}"></script>
+<link rel="stylesheet" type="text/css" th:href="@{/css/modern.css}" />
+<script  src="https://www.googletagmanager.com/gtag/js?id=UA-120946860-7"></script>
+<style>
+body {
+	opacity: 0;
+}
+.uppercase {
+  text-transform: uppercase;
+}
+</style>
+<script>
+	window.dataLayer = window.dataLayer || [];
+	function gtag() {
+		dataLayer.push(arguments);
+	}
+	 gtag('js', new Date());
+
+	gtag('config', 'UA-120946860-7');
+</script>
+<head>
+<meta charset="utf-8" />
+<title>HRMS</title>
+</head>
+<body>
+<div class="wrapper">
+<nav id="sidebar" class="sidebar">
+ <div th:replace="/fragments/sidebar :: div"></div>
+ </nav>
+		<div class="main">
+			<div th:replace="/fragments/header ::div"></div>
+		<main class="content">
+				<div class="container-fluid">
+
+					<div class="header">
+						<h1 class="header-title">
+							Employee Details
+						</h1>
+					
+					</div>
+					<div class="row">
+						<div class="col-12">
+							<form id="smartwizard-validation" class="wizard wizard-primary" action="javascript:void(0)">
+								<ul>
+									<li><a href="#validation-step-1">First Step<br /><small>Employee details</small></a></li>
+									<li><a href="#validation-step-2">Second Step<br /><small>Department Details </small></a></li>
+									<li><a href="#validation-step-3">Third Step<br /><small>Other Details1</small></a></li>
+									<li><a href="#validation-step-4">Fourth Step<br /><small>Other Details2</small></a></li>
+								</ul>
+								<div>
+								
+     <div id="validation-step-1">
+
+										<div class="row">
+											<div class="col-12 col-lg-6">
+
+												<div class="form-group">
+													<label class="form-label">Emp Code <span
+														class="text-danger">*</span>
+													</label> <input name="userName" type="text"
+														class="form-control required">
+												</div>
+												<div class="form-group">
+													<label class="form-label">Name <span
+														class="text-danger">*</span>
+													</label> <input name="name" type="text"
+														class="form-control required">
+												</div>
+												<div class="form-group">
+													<label class="form-label">Emp Active</label> <span
+														class="text-danger">*</span> <select
+														class="form-control required" name="eActive" id="eActive">
+														<option value="">Select Type</option>
+														<option value="Y">Yes</option>
+														<option value="N">No</option>
+													</select>
+												</div>
+												<div class="form-group ">
+													<label class="form-label">Company Code <span
+														class="text-danger">*</span>
+													</label> <input name="confirm" type="text"
+														class="form-control required">
+												</div>
+
+												<div class="form-group ">
+													<label class="form-label">Date Of Birth</label> <span
+														class="text-danger">*</span> <input
+														class="form-control required" type="text"
+														name="datesingle" />
+
+												</div>
+												<div class="form-group">
+													<label class="form-label">Birth State <span
+														class="text-danger">*</span>
+													</label> <input name="BirthState" type="text"
+														class="form-control required">
+												</div>
+											</div>
+
+
+											<div class="col-12 col-lg-6">
+												<div class="form-group">
+													<label class="form-label">Emp Ref No. <span
+														class="text-danger">*</span>
+													</label> <input name="userNamexx" type="text"
+														class="form-control required">
+												</div>
+												<div class="form-group">
+													<label class="form-label">Type</label> <span
+														class="text-danger">*</span> <select
+														class="form-control required" name="eType" id="eType">
+														<option value="">Select Type</option>
+														<option value="P">Permanent</option>
+														<option value="C">Casual</option>
+													</select>
+												</div>
+												<div class="form-group">
+													<label class="form-label">Location Type</label> <span
+														class="text-danger">*</span> <select
+														class="form-control required" name="LC" id="LC">
+														<option value="">Select Type</option>
+														<option value="C">Company</option>
+														<option value="G">Govt Office</option>
+													</select>
+												</div>
+
+												<div class="form-group ">
+													<label class="form-label">Weekly Working Days <span
+														class="text-danger">*</span>
+													</label> <input name="confirmxx" type="text"
+														class="form-control required">
+												</div>
+
+												<div class="form-group">
+													<label class="form-label">Birth Place <span
+														class="text-danger">*</span>
+													</label> <input name="bplace" type="text"
+														class="form-control required">
+												</div>
+
+												<div class="form-group">
+													<label class="form-label">Domicile <span
+														class="text-danger">*</span>
+													</label> <input name="domicile" type="text"
+														class="form-control required">
+												</div>
+
+											</div>
+										</div>
+									</div>
+									
+<div id="validation-step-2">
+									
+									
+									
+									
+									<div class="row">
+										<div class="col-12 col-lg-6">
+									
+										<div class="form-group">
+											<label class="form-label">Card No.    
+												<span class="text-danger">*</span>
+											</label>
+											<input name="cardNo" type="text" class="form-control required">
+										</div>
+										<div class="form-group">
+											<label class="form-label">Designation
+												<span class="text-danger">*</span>
+											</label>
+											<input name="designation" type="text" class="form-control required">
+										</div>
+										<div class="form-group">
+											<label class="form-label">Shift Code.
+												<span class="text-danger">*</span>
+											</label>
+											<input name="siftCode" type="text" class="form-control required">
+										</div>
+										
+										<div class="form-group ">
+											<label class="form-label">Passport No.
+												<span class="text-danger">*</span>
+											</label>
+											<input name="pasportNo" type="text" class="form-control required">
+										</div>
+										
+										
+										 <div class="form-group ">
+												<label class="form-label">LOI</label>
+												<span class="text-danger">*</span>
+												<input  type="text" id="loi" name="loidatesingle" class="form-control required">
+											
+										</div>
+								
+										 <div class="form-group ">
+												<label class="form-label"> Status Date</label>
+												<span class="text-danger">*</span>
+												<input  type="text" name="statusDate" class="form-control required">
+											
+										</div>
+										
+									<!-- 	<div class="form-group">
+											<label class="form-label">Reason 
+											
+												<span class="text-danger">*</span>
+											</label>
+											<input name="bplace" type="text" class="form-control required">
+										</div> -->
+										 <div class="form-group">
+										 <div class="card">
+								        <div class="card-header">
+									    <h5 class="card-title mb-0">Reason</h5>
+								           </div>
+								        <div class="card-body">
+									<textarea class="form-control required" rows="2"id="reason" name="reason" placeholder="Textarea"></textarea>
+								       </div>
+							           </div>
+							           </div>
+										
+										
+									
+										</div>
+										
+									
+									<div class="col-12 col-lg-6">
+											<div class="form-group">
+											<label class="form-label">Department Code.
+												<span class="text-danger">*</span>
+											</label>
+											<input name="deptCode" type="text" class="form-control required">
+										</div>
+										
+										
+										<div class="form-group">
+											<label class="form-label">Manager  Code.
+												<span class="text-danger">*</span>
+											</label>
+											<input name="userNamexx" type="text" class="form-control required">
+										</div>
+								
+								
+									<div class="form-group">
+											<label class="form-label">IT Pan No
+												<span class="text-danger">*</span>
+											</label>
+											<input name="itpanno" type="text" class="form-control required">
+										</div>
+								
+								
+									<div class="form-group">
+											<label class="form-label">UAN  No.
+												<span class="text-danger">*</span>
+											</label>
+											<input name="uanno" type="text" class="form-control required">
+										</div>
+								
+								 
+											
+									    <div class="form-group ">
+												<label class="form-label">Date Of Joining</label>
+												<span class="text-danger">*</span>
+												<input  type="text" name="dateofjoining" class="form-control required">
+											
+										</div>
+										
+										 <div class="form-group ">
+												<label class="form-label"> Leaving Date </label>
+												<span class="text-danger">*</span>
+												<input class="form-control required" type="text" name="leavingDate" />
+											
+										</div>
+										
+									
+										
+								</div>	
+						   </div>
+										
+										
+</div>
+
+
+
+						<div id="validation-step-3">
+
+											<div class="form-row">
+												<div class="form-group sm col-md-4">
+												<label for="inputSex">sex
+													<span class="text-danger">*</span>
+												</label>
+												<select id="inputSex" class="form-control required">
+													<option selected>Choose...Your Gender </option>
+													<option>Male</option>
+														<option>Female</option>
+												</select>
+											   </div>
+											<div class="form-group col-md-2">
+												<label for="inputHieght">Height
+												<span class="text-danger">*</span>
+												</label>
+												<input type="text" class="form-control required" id="inputHieght">
+											</div>
+											<div class="form-group col-md-2">
+												<label for="identiMark">identity Mark
+												<span class="text-danger">*</span>
+												</label>
+												<input type="text" class="form-control required" id="identiMark">
+											</div>
+											
+											<div class="form-group col-md-2">
+												<label for="bloodGroup">Blood Group
+												<span class="text-danger">*</span>
+												</label> <input
+													type="text" class="form-control required" id="bloodGroup">
+											</div>
+											<div class="form-group col-md-2">
+												<label for="maritalStatus:">Marital Status
+												<span class="text-danger">*</span>
+												</label> <select
+													id="maritalStatus" class="form-control required">
+													<option selected> Marital Status</option>
+													<option>Single</option>
+													<option>Married</option>
+												</select>
+											</div>
+											
+											
+										</div>
+										
+						<div class="form-row">
+											
+											   <div class="form-group col-md-4">
+												<label for="preDisease">Pre Disease
+												<span class="text-danger">*</span>
+												</label> <select
+													id="preDisease" class="form-control required">
+													<option selected>Choose..Your Disease</option>
+													<option>Yes</option>
+													<option>No</option>
+												</select>
+											</div>
+											
+											<div class="form-group col-md-2">
+											<label for="weddingDate">Wedding Date
+											<span class="text-danger">*</span>
+											</label>
+											<input type="text" class="form-control required"id="weddingDate" name="weddingDate">
+
+											</div>
+											
+											<div class="form-group col-md-2">
+												<label for="noChild">No. Child
+												<span class="text-danger">*</span>
+												</label>
+												
+												<input type="text" class="form-control required" id="noChild">
+											</div>
+											
+											<div class="form-group col-md-2">
+												<label for="caste">Caste
+												<span class="text-danger">*</span>
+												</label>
+												
+												<input type="text" class="form-control required" id="caste">
+											</div>
+												
+										 <div class="form-group col-md-2">
+												<label for="religion">Religion
+												<span class="text-danger">*</span>
+												</label>
+												
+												<input type="text" class="form-control required" id="religion">
+											</div>
+									
+
+							</div>
+							      
+							      
+							      <div class="form-row">
+							      <div class="form-group col-md-4">
+												<label for="nationality">Nationality
+												<span class="text-danger">*</span>
+												</label>
+												
+												<input type="text" class="form-control required" id="nationality">
+											</div>
+											
+											    <div class="form-group col-md-2">
+												<label for="companyCode">Company Code
+												<span class="text-danger">*</span>
+												</label>
+												
+												<input type="text" class="form-control required" id="companyCode">
+											</div>
+											
+							      <div class="form-group col-md-2">
+												<label for="mediclaim">Mediclaim
+												<span class="text-danger">*</span>
+												</label>
+												
+												<input type="text" class="form-control required" id="mediclaim">
+											</div>
+											<div class="form-group col-md-2">
+												<label for="gpa">GPA
+												<span class="text-danger">*</span>
+												</label>
+												
+												<input type="text" class="form-control required" id="gpa">
+											</div>
+								
+							      
+							      </div>
+							      
+							      
+							       <div class="form-row">
+							       
+							        <div class="form-group col-md-2">
+												<label for="Paddress">Address1<span class="text-danger">*</span></label>
+												
+												<input type="text" class="form-control required" id="Paddress1">
+											</div>
+											 <div class="form-group col-md-2">
+												<label for="pAddress2">Address2<span class="text-danger">*</span></label>
+												
+												<input type="text" class="form-control required" id="pAddress2">
+											</div>
+											 <div class="form-group col-md-2">
+												<label for="city">City<span class="text-danger">*</span></label>
+												
+												<input type="text" class="form-control required" id="city">
+											</div>
+											 <div class="form-group col-md-2">
+												<label for="state">State<span class="text-danger">*</span></label>
+												
+												<input type="text" class="form-control required" id="state">
+											</div>
+											 <div class="form-group col-md-2">
+												<label for="pinCode">PinCode<span class="text-danger">*</span></label>
+												
+												<input type="text" class="form-control required" id="pinCode">
+											</div>
+											 <div class="form-group col-md-2">
+												<label for="mobile">Mobile<span class="text-danger">*</span></label>
+												
+												<input type="text" class="form-control required" id="mobile">
+											</div>
+											
+							       
+							       </div>
+							  
+                            <div class="form-row">
+							       
+							        <div class="form-group col-md-2">
+												<label for="lAddress">Local Address1<span class="text-danger">*</span></label>
+												
+												<input type="text" class="form-control required" id="lAddress1">
+											</div>
+											 <div class="form-group col-md-2">
+												<label for="lAddress2">Local Address2<span class="text-danger">*</span></label>
+												
+												<input type="text" class="form-control required" id="LAddress2">
+											</div>
+											 <div class="form-group col-md-2">
+												<label for="lCity">City<span class="text-danger">*</span></label>
+												
+												<input type="text" class="form-control required" id="lCity">
+											</div>
+											 <div class="form-group col-md-2">
+												<label for="lState">State<span class="text-danger">*</span></label>
+												
+												<input type="text" class="form-control required" id="lState">
+											</div>
+											 <div class="form-group col-md-2">
+												<label for="lPinCode">PinCode<span class="text-danger">*</span></label>
+												
+												<input type="text" class="form-control required" id="lPinCode">
+											</div>
+											 <div class="form-group col-md-2">
+												<label for="lMobile">Mobile<span class="text-danger">*</span></label>
+												
+												<input type="text" class="form-control required" id="lMobile">
+											</div>
+							       </div>
+                     
+
+										
+ </div>
+                     
+                     <div id="validation-step-4">
+                     
+                         <div class="form-row">
+							       
+							        <div class="form-group col-md-4">
+												<label for="cMobileNo">Company Mobile No<span class="text-danger">*</span></label>
+												
+												<input type="text" class="form-control required" id="cMobileNo">
+											</div>
+											
+											 <div class="form-group col-md-4">
+												<label for="compnayEmail">Email<span class="text-danger">*</span></label>
+												
+												<input type="text" class="form-control required" id="compnayEmail">
+											</div>
+											
+											 <div class="form-group col-md-4">
+												<label for="profInst">Prof Inst<span class="text-danger">*</span></label>
+												
+												<input type="text" class="form-control required" id="profInst">
+											</div>
+									
+							       
+							       </div>
+                     
+                                         <div class="form-row">
+                                           <div class="form-group col-md-4">
+												<label for="rateTravelling">Local Travelling Rate Per KM
+												<span class="text-danger">*</span>
+												</label>
+												
+												<input type="text" class="form-control required" id="rateTravelling">
+											</div>
+											 <div class="form-group col-md-4">
+												<label for="hobbies">Hobbies<span class="text-danger">*</span></label>
+												
+												<input type="text" class="form-control required" id="hobbies">
+											</div>
+											 <div class="form-group col-md-4">
+												<label for="clubs">Clubs<span class="text-danger">*</span></label>
+												
+												<input type="text" class="form-control required" id="clubs">
+											</div>
+                     
+                                               </div>
+                     
+                     								  <div class="form-row">
+                                         			  <div class="form-group col-md-6">
+														<label for="regCode">Registration code
+														<span class="text-danger">*</span>
+														</label>
+												
+											<input type="text" class="form-control required" id="regCode">
+											</div>
+											 <div class="form-group col-md-6">
+												<label for="estf ">Estf 
+												<span class="text-danger">*</span>
+												</label>
+												<input type="text" class="form-control required" id="estf">
+											</div>
+                     
+                                               </div>
+                                               
+                                               		  <div class="form-row">
+                                               		  
+                                               		  <div class="form-group col-md-6">
+												    <label for="eEmp_Cat">eEmp_Cat<span class="text-danger">*</span></label> <select
+													id="eEmp_Cat" class="form-control required">
+													<option selected> Category</option>
+													<option>Permanent </option>
+													<option>Temporary </option>
+											     	</select>
+											    </div>
+                                               		  
+                                               	
+											 <div class="form-group col-md-6">
+												<label for="eCategory ">E-Category </label>
+												<input type="text" class="form-control required" id="eCategory">
+											</div>
+                     
+                                               </div>
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                                         <div class="form-group">
+											<label class="custom-control custom-checkbox">
+												<input type="checkbox" class="custom-control-input">
+												<span class="custom-control-label">I agree with the Terms and Conditions</span>
+											</label>
+										</div>
+										<button class="btn btn-submit btn-primary" type="button">Finish</button>
+                     
+                     </div>
+                     
+                     
+                     
+                     
+								</div>
+							</form>
+						</div>
+					</div>
+
+				</div>
+			</main>
+
+		<footer class="footer">
+		<div th:replace="/fragments/footer :: div"></div>
+		</footer>
+		</div>
+		</div>
+	<script>
+		$(function() {
+			
+			$("input[name=\"datesingle\"]").daterangepicker({
+				singleDatePicker: true,
+				showDropdowns: true
+			});
+			
+			
+			
+			$("input[name=\"weddingDate\"]").daterangepicker({
+				singleDatePicker: true,
+				showDropdowns: true
+			});
+			
+			
+			$("input[name=\"loidatesingle\"]").daterangepicker({
+				singleDatePicker: true,
+				showDropdowns: true
+			});
+			
+		
+			$("input[name=\"dateofjoining\"]").daterangepicker({
+				singleDatePicker: true,
+				showDropdowns: true
+			});
+			
+			$("input[name=\"statusDate\"]").daterangepicker({
+				singleDatePicker: true,
+				showDropdowns: true
+			});
+			
+			$("input[name=\"leavingDate\"]").daterangepicker({
+				singleDatePicker: true,
+				showDropdowns: true
+			});
+			
+	
+			
+			// Datatables basic
+			$('#datatables-basic').DataTable({
+				responsive: true
+			});
+			// Datatables with Buttons
+			var datatablesButtons = $('#datatables-buttons').DataTable({
+				  deferRender:true,
+		            scrollCollapse: true,
+		            scroller: false,
+				   responsive: true,
+				   lengthMenu :[[10,20,30,-1 ],['10 rows', '20 rows', '30 rows', 'Show all' ] ],
+					buttons :['pageLength',"copy", "print"]
+			});
+			datatablesButtons.buttons().container().appendTo("#datatables-buttons_wrapper .col-md-6:eq(0)")
+		});
+	</script>
+	
+		<script>
+		$(function() {
+			$("#smartwizard-default-primary").smartWizard({
+				theme: "default",
+				showStepURLhash: false
+			});
+
+			
+			// Validation
+			var $validationForm = $("#smartwizard-validation");
+			$validationForm.validate({
+				errorPlacement: function errorPlacement(error, element) {
+					$(element).parents(".form-group").append(
+						error.addClass("invalid-feedback small d-block")
+					)
+				},
+				highlight: function(element) {
+					$(element).addClass("is-invalid");
+				},
+				unhighlight: function(element) {
+					$(element).removeClass("is-invalid");
+				},
+				rules: {
+					"wizard-confirm": {
+						equalTo: "input[name=\"wizard-password\"]"
+					}
+				}
+			});
+			$validationForm.smartWizard({
+					autoAdjustHeight: false,
+					backButtonSupport: false,
+					useURLhash: false,
+					showStepURLhash: false,
+					
+				})
+				.on("leaveStep", function(e, anchorObject, stepNumber, stepDirection) {
+					if (stepDirection === "forward") {
+						return $validationForm.valid();
+					}
+					return true;
+				});
+			$validationForm.find(".btn-submit").on("click", function() {
+				if (!$validationForm.valid()) {
+					return;
+				}
+				alert("Great! The form is valid and ready to submit.");
+				return false;
+			});
+		});
+	</script>
+	
+</body>
+</html>
