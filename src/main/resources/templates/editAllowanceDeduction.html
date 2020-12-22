@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<script src="./js/settings.js"></script>
+<script src="./js/app.js"></script>
+<link rel="stylesheet" type="text/css" th:href="@{/css/modern.css}" />
+
+<script  src="https://www.googletagmanager.com/gtag/js?id=UA-120946860-7"></script>
+
+<style>
+body {
+	opacity: 0;
+}
+.uppercase {
+  text-transform: uppercase;
+}
+</style>
+<script>
+	window.dataLayer = window.dataLayer || [];
+	function gtag() {
+		dataLayer.push(arguments);
+	}
+	 gtag('js', new Date());
+
+	gtag('config', 'UA-120946860-7');
+</script>
+<head>
+<meta charset="utf-8" />
+<title>HRMS</title>
+</head>
+<body>
+<div class="wrapper">
+<nav id="sidebar" class="sidebar">
+ <div th:replace="fragments/sidebar :: div"></div>
+ </nav>
+		<div class="main">
+			<div th:replace="fragments/header ::div"></div>
+			<main class="content">
+				<div class="container-fluid">
+					<div class="header">
+						<h1 class="header-title">HRMS</h1>
+						<nav aria-label="breadcrumb">
+						</nav>
+					</div>
+					<div class="row">
+						<div class="col-12">
+							<div class="card">
+								<div class="card-header">
+									<h5 class="card-title">Misc Allowances & Deduction Master</h5>
+
+								</div>
+								<div class="card-body">
+									<form id="validation-form" action="#" th:action="@{/updateAllowanceDeduction}" th:object="${miscAllowanceUpdate}" method="post">
+										<div class="row">
+											<div class="col-12 col-lg-6">
+												<div class="form-group">
+											     <label> Code </label>
+											  	<label style="color: red">*</label>
+											   <input type="text" class="form-control" id="Allowance_Code" name="Allowance_Code" th:value="${editMiscAllowance.Allowance_Code}" readonly>
+												</div>
+												
+												<div class="form-group">
+											<label class="form-label">Head</label>
+											<label style="color: red">*</label>
+											 <input type="text" class="form-control uppercase" id="head" name="head" th:value="${editMiscAllowance.head}" required aria-required="true">
+										      </div>
+										      
+										      <div class="form-group">
+											     <label> Act Code </label>
+											  	<label style="color: red">*</label>
+											   <input type="text" class="form-control" id="Act_Code" name="Act_Code"  th:value="${editMiscAllowance.Act_Code}" required aria-required="true">
+												</div>
+												
+												
+												 <div class="form-group">
+											     <label> Sub Group Code </label>
+											  	<label style="color: red">*</label>
+											   <input type="text" class="form-control" id="Sub_Group_Code" name="Sub_Group_Code" th:value="${editMiscAllowance.Sub_Group_Code}" required aria-required="true">
+												</div>
+										      
+										      
+										      
+
+					                          <div class="form-group">
+													<label class="form-label">Status</label>
+													<div class="custom-controls-stacked">
+													
+														<label class="radio-inline">
+														<input type="radio" value="Y" name="active" th:checked="${editMiscAllowance.active}==Y "/>Active   
+															</label>
+														<label class="radio-inline">
+														<input type="radio" value="N" name="active" th:checked="${editMiscAllowance.active}==N"/>Inactive  
+															</label>
+													</div>
+												</div>
+											</div>
+											<div class="col-12 col-lg-6">
+											<div class="form-group">
+											<label class="form-label">Description</label>
+											<label style="color: red">*</label>
+											 <input type="text" class="form-control uppercase" id="description" name="description"  th:value="${editMiscAllowance.description}" required aria-required="true">
+										</div>
+										
+										
+										<div class="form-group">
+											<label class="form-label">Type</label>
+											<label style="color: red">*</label>
+											 <input type="text" class="form-control uppercase" id="type" name="type"  th:value="${editMiscAllowance.type}"  required aria-required="true">
+										</div>
+										
+										
+										
+										<div class="form-group">
+											<label class="form-label">Account Name </label>
+											<label style="color: red">*</label>
+											 <input type="text" class="form-control uppercase" id="Account_Name" name="Account_Name"  th:value="${editMiscAllowance.Account_Name}" required aria-required="true">
+										</div>
+										
+										 <div class="form-group">
+											     <label> Sub Group Name </label>
+											  	<label style="color: red">*</label>
+											   <input type="text" class="form-control" id="Sub_Group_Name" name="Sub_Group_Name"  th:value="${editMiscAllowance.Sub_Group_Name}" required aria-required="true">
+												</div>
+											</div>
+										</div>
+										<button type="submit" class="btn btn-primary">Save</button>
+								<button type="submit"class="btn btn-primary" value="cancel">Cancel</button>
+									</form>
+								</div>
+							</div>
+						</div>
+		
+						
+					</div>
+				</div>
+
+			</main>
+		<footer class="footer">
+		<div th:replace="fragments/footer :: div"></div>
+		</footer>
+		</div>
+		</div>
+
+		
+</body>
+</html>
