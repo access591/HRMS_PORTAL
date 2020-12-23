@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<script src="js/settings.js"></script>
+<script src="js/app.js"></script>
+
+<script  src="https://www.googletagmanager.com/gtag/js?id=UA-120946860-7"></script>
+<style>
+body {
+	opacity: 0;
+}
+.uppercase {
+  text-transform: uppercase;
+}
+</style>
+<script>
+	window.dataLayer = window.dataLayer || [];
+	function gtag() {
+		dataLayer.push(arguments);
+	}
+	 gtag('js', new Date());
+
+	gtag('config', 'UA-120946860-7');
+</script>
+<head>
+<meta charset="utf-8" />
+<title>HRMS</title>
+</head>
+<body>
+<div class="wrapper">
+<nav id="sidebar" class="sidebar">
+ <div th:replace="fragments/sidebar :: div"></div>
+ </nav>
+		<div class="main">
+			<div th:replace="fragments/header ::div"></div>
+			<main class="content">
+				<div class="container-fluid">
+					<div class="header">
+						<h1 class="header-title"> Master</h1>
+						<nav aria-label="breadcrumb">
+						</nav>
+					</div>
+					<div class="row">
+						<div class="col-12">
+							<div class="card">
+								<div class="card-header">
+									<h5 class="card-title">Leave Master </h5>
+
+								</div>
+								<div class="card-body">
+									<form id="validation-form" action="#" th:action="@{/saveLeave}" th:object="${leave}" method="post">
+										<div class="row">
+											<div class="col-12 col-lg-6">
+												<div class="form-group">
+										
+											  <label>Leave Code </label>
+											  <label style="color: red">*</label>
+											  	 
+											   <input
+												type="text" class="form-control" id="Lev_code" name="Lev_code" required aria-required="true">
+												</div>
+												<div class="form-group">
+											<label class="form-label">Total Leave</label>
+											<label style="color: red">*</label>
+											 <input type="text" class="form-control uppercase" id="total_lev" name="total_lev"required aria-required="true">
+										   </div>
+												
+
+												<div class="form-group">
+
+													<label class="form-label">Status</label>
+													<div class="custom-controls-stacked">
+
+														<label class="radio-inline"> <input type="radio"
+															value="Y" name="active" checked> Reset
+														</label> <label class="radio-inline"> <input type="radio"
+															value="N" name="active"> Cummulative
+														</label>
+
+													</div>
+												</div>
+											</div>
+											<div class="col-12 col-lg-6">
+											<div class="form-group">
+												 <label for="lev_type">Leave Type</label>
+												 <input
+												type="text" class="form-control" id="lev_type" name="lev_type" required aria-required="true">
+                                                 
+                                                   <div class="select">
+                                                   <select id="lev_type">
+                                                   <option value="Paternity">Paternity</option>
+                                                   <option value="Maternity">Maternity</option>
+                                                   <option value="Sick">Sick</option>
+                                                   <option value="Unpaid">Unpaid</option>
+                                                   <option value="PSI">PSI</option>
+                                                   <option value="Compensation">Compensation</option>
+                                                   <option value="Medical">Medical</option>
+                                                   <option value="Earned">Earned</option>
+                                                   <option value="Casual">Casual</option>
+                                                   </select>
+                                                   </div>
+                                               </div>
+											
+										   
+										      <div class="form-group">
+												 <label for="unpaid">Unpaid</label>
+                                                   <select name="unpaid" id="unpaid">
+                                                   <option value="Y">Yes</option>
+                                                   <option value="N">No</option>
+                                                  
+                                                   </select>
+                                               </div>
+										
+										
+											</div>
+											
+										</div>
+										<button type="submit" class="btn btn-primary">Save</button>
+								 <button type="reset"class="btn btn-primary" value="Reset">Reset</button>
+									</form>
+								</div>
+							</div>
+						</div>
+						<div class="col-12">
+							<div class="card">
+								<div class="card-header">
+
+									<h6 class="card-subtitle text-muted">DataTables.</h6>
+								</div>
+								<div class="card-body">
+									<table id="datatables-buttons" class="table table-striped display" style="width:100%">
+										<thead>
+											<tr>
+												<th>Leave code</th>
+												<th>Total Leave </th>
+												<th>Leave Type </th>
+												<th>Status</th>
+												<th>Action</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr  th:each="listleave : ${listLeave}">
+												<td th:text="${listleave.Lev_code}"></td>
+												<td th:text="${listleave.total_lev}"></td>
+												<td th:text="${listleave.lev_type}"></td>
+												<td th:text="${listleave.active}"></td>
+												<td><a th:href="@{/editLeave/{id}(id=${listleave.Lev_code})}" class="btn btn-primary"><i class="fa fa-edit"></i></a>
+												<a th:href="@{/deleteLeave/{id}(id=${listleave.Lev_code})}" class="btn btn-primary"onclick="return confirm('Are you sure?')"><i class="fa fa-times"></i></a>
+												</td>
+											</tr>
+										</tbody>
+									
+									</table>
+								</div>
+								
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</main>
+
+		<footer class="footer">
+		<div th:replace="fragments/footer :: div"></div>
+		</footer>
+		</div>
+		</div>
+	<script>
+		$(function() {
+			// Datatables basic
+			$('#datatables-basic').DataTable({
+				responsive: true
+			});
+			// Datatables with Buttons
+			var datatablesButtons = $('#datatables-buttons').DataTable({
+				  deferRender:true,
+		            scrollCollapse: true,
+		            scroller: false,
+				   responsive: true,
+				   lengthMenu :[[10,20,30,-1 ],['10 rows', '20 rows', '30 rows', 'Show all' ] ],
+					buttons :[]
+			});
+			datatablesButtons.buttons().container().appendTo("#datatables-buttons_wrapper .col-md-6:eq(0)")
+		});
+	</script>
+		
+		
+</body>
+</html>
