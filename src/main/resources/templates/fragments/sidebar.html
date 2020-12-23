@@ -7,12 +7,12 @@
    <!-- Start  SIDEBAR    -->
 	
 			<a class="sidebar-brand" href="dashboard.html">
-				<img src="../img/avatars/logo1.png" class="img-fluid rounded-circle mb-2" alt="Linda Miller" />
+				<img th:src="@{/img/avatars/logo1.png}" class="img-fluid rounded-circle mb-2"></img>
 				HRMS
 			</a>
 			<div class="sidebar-content">
 				<div class="sidebar-user">
-					<img src="../img/avatars/avatar.jpg" class="img-fluid rounded-circle mb-2" alt="Linda Miller" />
+					<img th:src="@{/img/avatars/avatar.jpg}" class="img-fluid rounded-circle mb-2"></img>
 					<div class="font-weight-bold"><span class="hidden-xs" th:text="${session.username}"></span></div>
 					<small>User Designation</small>
 				</div>
