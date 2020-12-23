@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<script src="js/settings.js"></script>
+<script src="js/app.js"></script>
+
+<script  src="https://www.googletagmanager.com/gtag/js?id=UA-120946860-7"></script>
+<style>
+body {
+	opacity: 0;
+}
+.uppercase {
+  text-transform: uppercase;
+}
+</style>
+<script>
+	window.dataLayer = window.dataLayer || [];
+	function gtag() {
+		dataLayer.push(arguments);
+	}
+	 gtag('js', new Date());
+
+	gtag('config', 'UA-120946860-7');
+</script>
+<head>
+<meta charset="utf-8" />
+<title>HRMS</title>
+</head>
+<body>
+<div class="wrapper">
+<nav id="sidebar" class="sidebar">
+ <div th:replace="fragments/sidebar :: div"></div>
+ </nav>
+		<div class="main">
+			<div th:replace="fragments/header ::div"></div>
+			<main class="content">
+				<div class="container-fluid">
+					<div class="header">
+						<h1 class="header-title"> Master</h1>
+						<nav aria-label="breadcrumb">
+						</nav>
+					</div>
+					<div class="row">
+						<div class="col-12">
+							<div class="card">
+								<div class="card-header">
+									<h5 class="card-title">Bank Master </h5>
+
+								</div>
+								<div class="card-body">
+									<form id="validation-form" action="#" th:action="@{/saveBank}" th:object="${bank}" method="post">
+										<div class="row">
+											<div class="col-12 col-lg-6">
+												<div class="form-group">
+										
+											  <label>Bank Code </label>
+											  <label style="color: red">*</label>
+											  	 
+											   <input
+												type="text" class="form-control" id="Bank_Code" name="Bank_Code" required aria-required="true">
+												</div>
+												<div class="form-group">
+											<label class="form-label">Bank Name</label>
+											<label style="color: red">*</label>
+											 <input type="text" class="form-control uppercase" id="bank_name" name="bank_name"required aria-required="true">
+										   </div>
+										   <div class="form-group">
+											<label class="form-label">Bank Address</label>
+											<label style="color: red">*</label>
+											 <input type="text" class="form-control uppercase" id="bank_add" name="bank_add"required aria-required="true">
+										   </div>
+										   <div class="form-group">
+											<label class="form-label">Bank Address 2</label>
+											<label style="color: red">*</label>
+											 <input type="text" class="form-control uppercase" id="bank_addr2" name="bank_addr2"required aria-required="true">
+										   </div>
+										   <div class="form-group">
+											<label class="form-label">City Code</label>
+											<label style="color: red">*</label>
+											 <input type="text" class="form-control uppercase" id="city_code" name="city_code"required aria-required="true">
+										   </div>
+										   <div class="form-group">
+											<label class="form-label">State Code</label>
+											<label style="color: red">*</label>
+											 <input type="text" class="form-control uppercase" id="state_code" name="state_code"required aria-required="true">
+										   </div>
+												
+
+												<div class="form-group">
+
+													<label class="form-label">Status</label>
+													<div class="custom-controls-stacked">
+
+														<label class="radio-inline"> <input type="radio"
+															value="Y" name="active" checked> Active
+														</label> <label class="radio-inline"> <input type="radio"
+															value="N" name="active">  Inactive
+														</label>
+
+													</div>
+												</div>
+											</div>
+											<div class="col-12 col-lg-6">
+											 <div class="form-group">
+											<label class="form-label">Country Code</label>
+											<label style="color: red">*</label>
+											 <input type="text" class="form-control uppercase" id="country_code" name="country_code"required aria-required="true">
+										   </div>
+										    <div class="form-group">
+											<label class="form-label">Account No</label>
+											<label style="color: red">*</label>
+											 <input type="text" class="form-control uppercase" id="account_no" name="account_no"required aria-required="true">
+										   </div>
+										    <div class="form-group">
+											<label class="form-label">IFSC Code</label>
+											<label style="color: red">*</label>
+											 <input type="text" class="form-control uppercase" id="ifsc_code" name="ifsc_code"required aria-required="true">
+										   </div>
+										    <div class="form-group">
+											<label class="form-label">Swift Code</label>
+											<label style="color: red">*</label>
+											 <input type="text" class="form-control uppercase" id="swift_code" name="swift_code"required aria-required="true">
+										   </div>
+										    <div class="form-group">
+											<label class="form-label">Telephone No</label>
+											<label style="color: red">*</label>
+											 <input type="text" class="form-control uppercase" id="telephone_no" name="telephone_no"required aria-required="true">
+										   </div>
+										    <div class="form-group">
+											<label class="form-label">Mobile No</label>
+											<label style="color: red">*</label>
+											 <input type="text" class="form-control uppercase" id="mobile_no" name="mobile_no"required aria-required="true">
+										   </div>									
+										
+											</div>
+											
+										</div>
+										<button type="submit" class="btn btn-primary">Save</button>
+								 <button type="reset"class="btn btn-primary" value="Reset">Reset</button>
+									</form>
+								</div>
+							</div>
+						</div>
+						<div class="col-12">
+							<div class="card">
+								<div class="card-header">
+
+									<h6 class="card-subtitle text-muted">DataTables.</h6>
+								</div>
+								<div class="card-body">
+									<table id="datatables-buttons" class="table table-striped display" style="width:100%">
+										<thead>
+											<tr>
+												<th>Bank code</th>
+												<th>Bank Name </th>
+												<th>Country Code </th>
+												<th>Account No </th>
+												<th>Mobile No </th>
+												<th>Status</th>
+												<th>Action</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr  th:each="listbank : ${listBank}">
+												<td th:text="${listbank.Bank_Code}"></td>
+												<td th:text="${listbank.bank_name}"></td>
+												<td th:text="${listbank.country_code}"></td>
+												<td th:text="${listbank.account_no}"></td>
+												<td th:text="${listbank.mobile_no}"></td>
+												<td th:text="${listbank.active}"></td>
+												<td><a th:href="@{/editBank/{id}(id=${listbank.Bank_Code})}" class="btn btn-primary"><i class="fa fa-edit"></i></a>
+												<a th:href="@{/deleteBank/{id}(id=${listbank.Bank_Code})}" class="btn btn-primary"onclick="return confirm('Are you sure?')"><i class="fa fa-times"></i></a>
+												</td>
+											</tr>
+										</tbody>
+									
+									</table>
+								</div>
+								
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</main>
+
+		<footer class="footer">
+		<div th:replace="fragments/footer :: div"></div>
+		</footer>
+		</div>
+		</div>
+	<script>
+		$(function() {
+			// Datatables basic
+			$('#datatables-basic').DataTable({
+				responsive: true
+			});
+			// Datatables with Buttons
+			var datatablesButtons = $('#datatables-buttons').DataTable({
+				  deferRender:true,
+		            scrollCollapse: true,
+		            scroller: false,
+				   responsive: true,
+				   lengthMenu :[[10,20,30,-1 ],['10 rows', '20 rows', '30 rows', 'Show all' ] ],
+					buttons :[]
+			});
+			datatablesButtons.buttons().container().appendTo("#datatables-buttons_wrapper .col-md-6:eq(0)")
+		});
+	</script>
+		
+		
+</body>
+</html>
