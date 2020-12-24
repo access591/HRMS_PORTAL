@@ -34,7 +34,7 @@ public String bankMaster(Model model,HttpSession session) {
 	List<Bank> listBank = bankService.getAllBanks();
 	model.addAttribute("listBank", listBank);
 	session.setAttribute("username",session.getAttribute("username"));
-		return "bankMaster";
+		return "BankMaster";
 	}
 
 
