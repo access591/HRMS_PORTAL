@@ -35,7 +35,7 @@ public String LeaveMaster(Model model,HttpSession session) {
 	List<Leave> listLeave = leaveService.getAllLeaves();
 	model.addAttribute("listLeave", listLeave);
 	session.setAttribute("username",session.getAttribute("username"));
-		return "leaveMaster";
+		return "LeaveMaster";
 	}
 
 
