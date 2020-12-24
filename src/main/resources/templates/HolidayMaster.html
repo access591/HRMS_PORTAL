@@ -2,7 +2,9 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <script src="js/settings.js"></script>
 <script src="js/app.js"></script>
-
+<link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/themes/base/jquery-ui.css" rel="stylesheet" />
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/jquery-ui.min.js"></script>
 <script  src="https://www.googletagmanager.com/gtag/js?id=UA-120946860-7"></script>
 <style>
 body {
@@ -86,7 +88,7 @@ body {
 											<div class="form-group">
 											<label class="form-label">Description </label>
 											<label style="color: red">*</label>
-											 <input type="text" class="form-control uppercase" id="description" name="description"required aria-required="true">
+											 <input type="text" class="form-control" id="description" name="description"required aria-required="true">
 										</div>
 										
 										
@@ -160,9 +162,8 @@ body {
 		$(function() {
 			// Datatables basic
 			
-				$("input[name=\"Date_Of_Holiday\"]").daterangepicker({
-				singleDatePicker: true,
-				showDropdowns: true
+				$("input[name=\"Date_Of_Holiday\"]").datepicker({
+				    dateFormat: 'yy-mm-dd'
 			});
 			
 			
