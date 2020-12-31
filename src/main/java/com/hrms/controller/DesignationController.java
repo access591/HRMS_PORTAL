@@ -17,33 +17,37 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-
 import com.hrms.model.Designation;
+import com.hrms.model.MenuModule;
 import com.hrms.service.DesignationService;
-
+import com.hrms.service.ModuleService;
 
 @Controller
 public class DesignationController {
 
 	@Autowired
 	DesignationService designationService;
-	
+	@Autowired
+	private ModuleService moduleService;
 	
 @GetMapping("/designationMaster")
 public String DesignationMaster(Model model,HttpSession session) {
 	
 	List<Designation> listDesignation = designationService.getAllDesignations();
 	model.addAttribute("listDesignation", listDesignation);
+	List<MenuModule> modules = moduleService.getAllModules();
+	if (modules != null) {
+		model.addAttribute("modules", modules);
+	}
+	
 	session.setAttribute("username",session.getAttribute("username"));
 		return "designationMaster";
 	}
-
 
 @PostMapping("/saveDesignation")
 	public String SaveDesignation(@ModelAttribute("designation") Designation designation, Model model) {
 		if (designation.getDesg_code() != "") {
 			designationService.addDesignation(designation);
-			
 			List<Designation> listDesignation = designationService.getAllDesignations();
 			model.addAttribute("listDesignation", listDesignation);
 		} 
