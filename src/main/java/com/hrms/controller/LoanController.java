@@ -14,18 +14,25 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 
 import com.hrms.model.Loan;
+import com.hrms.model.MenuModule;
 import com.hrms.service.LoanMaterService;
+import com.hrms.service.ModuleService;
 
 @Controller
 public class LoanController {
 	@Autowired
 	LoanMaterService loanMaterService;
-	
+	@Autowired
+	private ModuleService moduleService;
 	@GetMapping("/loanMaster")
 	public String LoanMaster(Model model,HttpSession session) {
 		
 	 List<Loan>listLoan = loanMaterService.getAllLoans();
        model.addAttribute("listLoan", listLoan); 
+   	List<MenuModule> modules = moduleService.getAllModules();
+   	if (modules != null) {
+   		model.addAttribute("modules", modules);
+   	}
 	  session.setAttribute("username",session.getAttribute("username"));
 			return "/loanMaster";
 		}

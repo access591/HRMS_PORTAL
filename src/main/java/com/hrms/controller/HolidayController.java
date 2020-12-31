@@ -14,18 +14,25 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.hrms.model.Grade;
 import com.hrms.model.Holiday;
+import com.hrms.model.MenuModule;
 import com.hrms.service.HolidayService;
+import com.hrms.service.ModuleService;
 
 @Controller
 public class HolidayController 
 {
 	@Autowired
 	HolidayService holidayService;
+	@Autowired
+	private ModuleService moduleService;
 	@GetMapping("/HolidayMaster")	
 	public String DepartmentMaster(Model model,HttpSession session) {
 		List<Holiday>listHoliday = holidayService.getAllHolidays();
 		model.addAttribute("listHoliday", listHoliday); 
-
+		List<MenuModule> modules = moduleService.getAllModules();
+		if (modules != null) {
+			model.addAttribute("modules", modules);
+		}
 		session.setAttribute("username",session.getAttribute("username"));
 			return "HolidayMaster";
 		}
