@@ -5,7 +5,26 @@
 
 <div layout:fragment="sidebar">
    <!-- Start  SIDEBAR    -->
+	<style>
+		body {
+			opacity: 0;
+		}
+				#treeview, #treeview ul
+{
+    list-style-type:none;
+}
+#treeview .open > ul
+{
+   display:none;
+   
+}
+
+#treeview .open, #treeview .closessss
+{
+  cursor:pointer;
+}
 	
+	</style>
 			<a class="sidebar-brand" href="dashboard.html">
 				<img th:src="@{/img/avatars/logo1.png}" class="img-fluid rounded-circle mb-2"></img>
 				HRMS
@@ -17,7 +36,36 @@
 					<small>User Designation</small>
 				</div>
 
-				<ul class="sidebar-nav">
+                   <ul id="treeview">
+
+					<li class="sidebar-item">
+					<li><a href="/loginUser" title="Menu"> <span
+							class="align-middle">Menu</span></a></li>
+					<li class="open" th:each="module: ${modules}">
+					<a class="align-middle mr-2 fas fa-fw fa-check"
+						title="${module.getModuleName()}"> 
+						</a> 
+						<span th:text="${module.getModuleName()}"></span>
+						<ul>
+							<li class=" open"
+								th:each="subModule: ${module.getSubModuleProgram()}"><a
+								class="align-middle mr-2 fas fa-fw fa-check"
+								title="${subModule.getSubModuleName()}"> <span
+									th:text="${subModule.getSubModuleName()}"></span></a>
+								<ul class="list-inline">
+									<li class="open" th:each="entry: ${subModule.getSubPrograms()}">
+										<!-- <span th:text="${entry.key}"></span> 
+										<a href="${entry.key}"title="${entry.value}"> </a> -->
+									 <a th:href="${entry.value}" title="${entry.key}" th:text="${entry.key}"></a>
+									</li>
+								</ul></li>
+						</ul>
+						</li>
+
+				</ul>
+
+
+				<!-- <ul class="sidebar-nav">
 				<li class="sidebar-item">
 						<a href="/"  class="sidebar-link">
 						<i class="align-middle mr-2 fas fa-fw fa-home"></i> <span class="align-middle">Home</span>
@@ -100,10 +148,26 @@
 					</li>
 
 				
-				</ul>
-			</div>
+				</ul> -->
 				
+				
+				
+			</div>
+				<script>
+
+$(document).ready(function()  
+{
+   $("#treeview .open").click(function(e)
+   {
+       e.stopPropagation();
+       $(this).toggleClass("closessss open");
+   
+    });
+});
+
+</script>
 		
 	<!-- End  SIDEBAR    -->
 </div>
+
 </html>

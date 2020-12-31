@@ -18,7 +18,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.hrms.model.Department;
+import com.hrms.model.MenuModule;
 import com.hrms.service.DepartmentService;
+import com.hrms.service.ModuleService;
 
 
 @Controller
@@ -26,13 +28,18 @@ public class DepartmentController {
 
 	@Autowired
 	DepartmentService departmentService;
-	
+	@Autowired
+	private ModuleService moduleService;
 	
 @GetMapping("/departmentMaster")
 public String DepartmentMaster(Model model,HttpSession session) {
 	
 	List<Department> listDepartment = departmentService.getAllDepartments();
 	model.addAttribute("listDepartment", listDepartment);
+	List<MenuModule> modules = moduleService.getAllModules();
+	if (modules != null) {
+		model.addAttribute("modules", modules);
+	}
 	session.setAttribute("username",session.getAttribute("username"));
 		return "departmentMaster";
 	}
