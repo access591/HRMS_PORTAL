@@ -48,6 +48,33 @@ public class Module implements Serializable {
 //
 //	@OneToMany(mappedBy = "pModuleCode")
 //	private List<Program> modulePrograms;
+	
+	@OneToMany(mappedBy = "moduleCode")
+	private List<SubModule> subModules;
+	@OneToMany(mappedBy = "pModuleCode")
+	private List<Program> modulePrograms;
+	
+	public List<SubModule> getSubModules() {
+		return subModules;
+	}
+
+	public void setSubModules(List<SubModule> subModules) {
+		this.subModules = subModules;
+	}
+
+	
+	public List<Program> getModulePrograms() {
+		return modulePrograms;
+	}
+
+	public void setModulePrograms(List<Program> modulePrograms) {
+		this.modulePrograms = modulePrograms;
+	}
+	
+	
+	
+	
+	
 
 	public String getModuleCode() {
 		return moduleCode;

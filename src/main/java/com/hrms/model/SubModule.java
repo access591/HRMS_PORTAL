@@ -2,10 +2,12 @@ package com.hrms.model;
 
 import java.io.Serializable;
 import java.util.Date;
-
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -42,7 +44,16 @@ public class SubModule implements Serializable {
 
 	@Column(name = "SEQ_NO")
 	private int seqNoSubModule;
+	@OneToMany(mappedBy = "subModuleCode")
+	private List<Program> subModulePrograms;
+	
+	public List<Program> getSubModulePrograms() {
+		return subModulePrograms;
+	}
 
+	public void setSubModulePrograms(List<Program> subModulePrograms) {
+		this.subModulePrograms = subModulePrograms;
+	}
 
 
 	public String getSubModuleCode() {

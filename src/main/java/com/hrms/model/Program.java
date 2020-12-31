@@ -8,7 +8,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
 @Entity
 @Table(name = "M_PROGRAM")
 public class Program implements Serializable {
@@ -25,8 +24,8 @@ public class Program implements Serializable {
 	@Column(name = "PRG_NAME")
 	private String programName;
 
-	@Column(name = "MODULE_CODE")
-	private String moduleCode;
+//	@Column(name = "MODULE_CODE")
+//	private String moduleCode;
 
 	@Column(name = "PRG_TYPE")
 	private String programType;
@@ -49,8 +48,13 @@ public class Program implements Serializable {
 	@Column(name = "UPDATE_DATE")
 	private String updatedDate;
 
-	@Column(name = "SUB_MODULE_CODE")
-	private String subModuleCode;
+	@ManyToOne
+	@JoinColumn(name = "SUB_MODULE_CODE", nullable = false)
+	private SubModule subModuleCode;
+
+	@ManyToOne
+	@JoinColumn(name = "MODULE_CODE", nullable = false)
+	private Module pModuleCode;
 
 	@Column(name = "SEQ_NO")
 	private String seqProgram;
@@ -70,6 +74,14 @@ public class Program implements Serializable {
 	public void setProgramName(String programName) {
 		this.programName = programName;
 	}
+
+//	public String getModuleCode() {
+//		return moduleCode;
+//	}
+//
+//	public void setModuleCode(String moduleCode) {
+//		this.moduleCode = moduleCode;
+//	}
 
 	public String getProgramType() {
 		return programType;
@@ -135,20 +147,20 @@ public class Program implements Serializable {
 		this.seqProgram = seqProgram;
 	}
 
-	public String getSubModuleCode() {
+	public SubModule getSubModuleCode() {
 		return subModuleCode;
 	}
 
-	public void setSubModuleCode(String subModuleCode) {
+	public void setSubModuleCode(SubModule subModuleCode) {
 		this.subModuleCode = subModuleCode;
 	}
 
-	public String getModuleCode() {
-		return moduleCode;
+	public Module getpModuleCode() {
+		return pModuleCode;
 	}
 
-	public void setModuleCode(String moduleCode) {
-		this.moduleCode = moduleCode;
+	public void setpModuleCode(Module pModuleCode) {
+		this.pModuleCode = pModuleCode;
 	}
 
 }
