@@ -18,7 +18,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.hrms.model.Bank;
+import com.hrms.model.MenuModule;
 import com.hrms.service.BankService;
+import com.hrms.service.ModuleService;
 
 
 @Controller
@@ -26,13 +28,18 @@ public class BankController {
 
 	@Autowired
 	BankService bankService;
-	
+	@Autowired
+	private ModuleService moduleService;
 	
 @GetMapping("/bankMaster")
 public String bankMaster(Model model,HttpSession session) {
 	
 	List<Bank> listBank = bankService.getAllBanks();
 	model.addAttribute("listBank", listBank);
+	List<MenuModule> modules = moduleService.getAllModules();
+	if (modules != null) {
+		model.addAttribute("modules", modules);
+	}
 	session.setAttribute("username",session.getAttribute("username"));
 		return "BankMaster";
 	}
