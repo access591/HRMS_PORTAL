@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
 @Entity
@@ -43,15 +44,12 @@ public class Module implements Serializable {
 	@Column(name = "SEQ_NO")
 	private int seqNo;
 
-//	@OneToMany(mappedBy = "moduleCode")
-//	private List<SubModule> subModules;
-//
-//	@OneToMany(mappedBy = "pModuleCode")
-//	private List<Program> modulePrograms;
 	
 	@OneToMany(mappedBy = "moduleCode")
+	@OrderBy("seqNoSubModule ASC")
 	private List<SubModule> subModules;
 	@OneToMany(mappedBy = "pModuleCode")
+	@OrderBy("seqProgram ASC")
 	private List<Program> modulePrograms;
 	
 	public List<SubModule> getSubModules() {
@@ -132,21 +130,6 @@ public class Module implements Serializable {
 		this.seqNo = seqNo;
 	}
 
-//	public List<SubModule> getSubModules() {
-//		return subModules;
-//	}
-//
-//	public void setSubModules(List<SubModule> subModules) {
-//		this.subModules = subModules;
-//	}
-//
-//	public List<Program> getModulePrograms() {
-//		return modulePrograms;
-//	}
-//
-//	public void setModulePrograms(List<Program> modulePrograms) {
-//		this.modulePrograms = modulePrograms;
-//	}
 
 	public Date getUpdatedDate() {
 		return updatedDate;
