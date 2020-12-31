@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import com.hrms.model.MenuModule;
 import com.hrms.model.Module;
 import com.hrms.model.Program;
+import com.hrms.model.SubModule;
 import com.hrms.model.SubModule1;
 import com.hrms.model.SubModuleProgram;
 import com.hrms.repository.ModuleDao;
@@ -46,31 +47,31 @@ public class ModuleServiceImpl implements ModuleService {
 	private List<SubModuleProgram> getSubModuleProgramsList(Module module) {
 		List<SubModuleProgram> liSubModulePrograms = new ArrayList<SubModuleProgram>();
 
-//		for (SubModule submodule : module.getSubModules()) {
-//			SubModuleProgram subModuleProgram = new SubModuleProgram();
-//			subModuleProgram.setModuleCode(module.getModuleCode());
-//			subModuleProgram.setModuleName(module.getModuleName());
-//			subModuleProgram.setSubModuleCode(submodule.getSubModuleCode());
-//			subModuleProgram.setSubModuleName(submodule.getSubModuleName());
-//			subModuleProgram.setSubPrograms(getSubModuleProgramMap(submodule));
-//			liSubModulePrograms.add(subModuleProgram);
-//		}
+		for (SubModule submodule : module.getSubModules()) {
+			SubModuleProgram subModuleProgram = new SubModuleProgram();
+			subModuleProgram.setModuleCode(module.getModuleCode());
+			subModuleProgram.setModuleName(module.getModuleName());
+			subModuleProgram.setSubModuleCode(submodule.getSubModuleCode());
+			subModuleProgram.setSubModuleName(submodule.getSubModuleName());
+			subModuleProgram.setSubPrograms(getSubModuleProgramMap(submodule));
+			liSubModulePrograms.add(subModuleProgram);
+		}
 		return liSubModulePrograms;
 
 	}
 
 	private Map<String, String> getModuleProgramMap(Module module) {
-	//	List<Program> programs = module.getModulePrograms();
+		List<Program> programs = module.getModulePrograms();
 		Map<String, String> programMap = new HashMap<String, String>();
-//		for (Program program : programs) {
-//			String name = program.getProgramName();
-//			String href = program.getProgramHrefName();
-//			programMap.put(name, href);
-//		}
+		for (Program program : programs) {
+			String name = program.getProgramName();
+			String href = program.getProgramHrefName();
+			programMap.put(name, href);
+		}
 		return programMap;
 	}
 
-	private Map<String, String> getSubModuleProgramMap(SubModule1 subModule) {
+	private Map<String, String> getSubModuleProgramMap(SubModule subModule) {
 		List<Program> programs = subModule.getSubModulePrograms();
 		Map<String, String> programMap = new HashMap<String, String>();
 		for (Program program : programs) {
@@ -80,6 +81,7 @@ public class ModuleServiceImpl implements ModuleService {
 		}
 		return programMap;
 	}
+
 
 	@Override
 	public void addModule(Map<String, String> map) {

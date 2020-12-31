@@ -16,6 +16,21 @@
 		body {
 			opacity: 0;
 		}
+				#treeview, #treeview ul
+{
+    list-style-type:none;
+}
+#treeview .open > ul
+{
+   display:none;
+   
+}
+
+#treeview .open, #treeview .closessss
+{
+  cursor:pointer;
+}
+	
 	</style>
 	<script src="js/settings.js"></script>
 	<!-- END SETTINGS -->
@@ -34,10 +49,11 @@
 	<div class="wrapper">
 	
 	<!-- Start  SIDEBAR    -->
-		<nav id="sidebar" class="sidebar">
-			<a class="sidebar-brand" href="dashboard.html">
-				<img src="img/avatars/logo1.png" class="img-fluid rounded-circle mb-2" alt="Linda Miller" />
-				HRMS
+		<!-- Start  SIDEBAR    -->
+			<nav id="sidebar" class="sidebar">
+			<a class="sidebar-brand" href="dashboard.html"> <img
+				src="img/avatars/logo1.png" class="img-fluid rounded-circle mb-2"
+				alt="Linda Miller" /> HRMS
 			</a>
 			<div class="sidebar-content">
 				<div class="sidebar-user">
@@ -46,92 +62,41 @@
 					<small>User Designation</small>
 				</div>
 
-				<ul class="sidebar-nav">
-				<li class="sidebar-item">
-						<a href="/"  class="sidebar-link">
-						<i class="align-middle mr-2 fas fa-fw fa-home"></i> <span class="align-middle">Home</span>
-						</a>
-					</li>
+
+
+
+
+				<ul id="treeview">
+
 					<li class="sidebar-item ">
-						<a href="#dashboards" data-toggle="collapse" class="sidebar-link">
-							<i class="align-middle mr-2 fas fa-fw fa-home"></i>
-							 <span class="align-middle">Master</span>
-						</a>
-						<ul id="dashboards" class="sidebar-dropdown list-unstyled collapse show" data-parent="#sidebar">
-			
-						<li class="sidebar-item ">
-						<a href="#usermaster" data-toggle="collapse" class="sidebar-link">
-						 <span class="align-middle mr-2 fas fa-fw fa-check"> User Role Management </span>
-						</a>
-							<ul id="usermaster" class="sidebar-dropdown list-unstyled collapse " data-child="#sidebar">
-							<li class="sidebar-item"style="padding-left:25px"><a class="sidebar-link" href="#">User Master</a></li>
-							<li class="sidebar-item"style="padding-left:25px"><a class="sidebar-link  " href="#">User Rights</a></li>
-							</ul>
-							</li>
-							
-							<li class="sidebar-item ">
-							<a href="#appmaster" data-toggle="collapse" class="sidebar-link">
-							<span class="align-middle mr-2 fas fa-fw fa-check">Application Masters</span>
-							</a>
-							<ul id="appmaster" class="sidebar-dropdown list-unstyled collapse " data-child="#sidebar">
-							<li class="sidebar-item" style="padding-left:25px"><a class="sidebar-link" th:href="@{/module}">Module</a></li>
-							<li class="sidebar-item" style="padding-left:25px"><a class="sidebar-link" th:href="@{/submodulepage}">Sub Module</a></li>
-							<li class="sidebar-item" style="padding-left:25px"><a class="sidebar-link" th:href="@{/programpage}">Program Master</a></li>
+					<li><a href="/loginUser" title="Menu"> <span
+							class="align-middle">Menu</span></a></li>
+					<li class="open" th:each="module: ${modules}">
+					<a class="align-middle mr-2 fas fa-fw fa-check"
+						title="${module.getModuleName()}"> 
+						</a> 
+						<span th:text="${module.getModuleName()}"></span>
+						<ul>
+							<li class=" open"
+								th:each="subModule: ${module.getSubModuleProgram()}"><a
+								class="align-middle mr-2 fas fa-fw fa-check"
+								title="${subModule.getSubModuleName()}"> <span
+									th:text="${subModule.getSubModuleName()}"></span></a>
+								<ul class="list-inline">
+									<li class="open" th:each="entry: ${subModule.getSubPrograms()}">
+										<!-- <span th:text="${entry.key}"></span> 
+										<a href="${entry.key}"title="${entry.value}"> </a> -->
+									 <a th:href="${entry.value}" title="${entry.key}" th:text="${entry.key}"></a>
+									</li>
+								</ul></li>
+						</ul></li>
 
-							</ul>
-							
-							
-							</li>
-				
-							
-							<li class="sidebar-item ">
-							<a href="#hrmsmaster" data-toggle="collapse" class="sidebar-link">
-							<span class="align-middle mr-2 fas fa-fw fa-check"> Hrms Master</span>
-							</a>
-							<ul id="hrmsmaster" class="sidebar-dropdown list-unstyled collapse " data-child="#sidebar">
-							<li class="sidebar-item" style="padding-left:25px"><a class="sidebar-link" th:href="@{/departmentMaster}">Department Master</a></li>
-							<li class="sidebar-item" style="padding-left:25px"><a class="sidebar-link" th:href="@{/designationMaster}">Designation Master</a></li>
-							<li class="sidebar-item" style="padding-left:25px"><a class="sidebar-link" th:href="@{/bankMaster}">Bank Master</a></li>
-							<li class="sidebar-item" style="padding-left:25px"><a class="sidebar-link" th:href="@{/gradeMaster}">Grade Master</a></li>
-							<li class="sidebar-item" style="padding-left:25px"><a class="sidebar-link" th:href="@{/sectionMaster}">Section Master</a></li>
-							<li class="sidebar-item" style="padding-left:25px"><a class="sidebar-link" href="/empInfo">Employee Information</a></li>
-							<li class="sidebar-item" style="padding-left:25px"><a class="sidebar-link" href="#">List of Holidays</a></li>
-							<li class="sidebar-item" style="padding-left:25px"><a class="sidebar-link" th:href="@{/leaveMaster}">Leave Master</a></li>
-							<li class="sidebar-item" style="padding-left:25px"><a class="sidebar-link" th:href="@{/HolidayMaster}">List of Holidays</a></li>
-							<li class="sidebar-item" style="padding-left:25px"><a class="sidebar-link" href="#">Loan Master</a></li>
-							<li class="sidebar-item" style="padding-left:25px"><a class="sidebar-link" th:href="@{/miscAllowances}">Misc Allowances  Deduction Master</a></li>
-							<li class="sidebar-item" style="padding-left:25px"><a class="sidebar-link" href="#">Actvities Master</a></li>
-							<li class="sidebar-item" style="padding-left:25px"><a class="sidebar-link" href="#">Income Tax Master</a></li>
-							
-							</ul>
-							
-							
-							</li>
-	
-						</ul>
-					</li>
-
-					<li class="sidebar-item">
-						<a href="#auth" data-toggle="collapse" class="sidebar-link collapsed">
-							<i class="align-middle mr-2 fas fa-fw fa-sign-in-alt"></i> <span class="align-middle">Auth</span>
-						</a>
-						<ul id="auth" class="sidebar-dropdown list-unstyled collapse " data-parent="#sidebar">
-							<li class="sidebar-item"><a class="sidebar-link" href="pages-sign-in.html">Sign
-									In</a></li>
-							<li class="sidebar-item"><a class="sidebar-link" href="pages-sign-up.html">Sign
-									Up</a></li>
-							<li class="sidebar-item"><a class="sidebar-link" href="pages-reset-password.html">Reset Password</a></li>
-							<li class="sidebar-item"><a class="sidebar-link" href="pages-404.html">404
-									Page</a></li>
-							<li class="sidebar-item"><a class="sidebar-link" href="pages-500.html">500
-									Page</a></li>
-						</ul>
-					</li>
-
-				
 				</ul>
+
 			</div>
 		</nav>
+		
+	<!--   SIDEBAR    -->
 	<!--   SIDEBAR    -->
 		
 		
@@ -776,6 +741,19 @@
 			});
 		});
 	</script>
+	<script>
+
+$(document).ready(function()  
+{
+   $("#treeview .open").click(function(e)
+   {
+       e.stopPropagation();
+       $(this).toggleClass("closessss open");
+   
+    });
+});
+
+</script>
 
 </body>
 

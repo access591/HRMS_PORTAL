@@ -24,8 +24,9 @@ public class ModuleDaoImpl implements ModuleDao {
 		Session session = sessionFactory.openSession();
 		Criteria criteria = session.createCriteria(Module.class);
 		List<Module> modules = (List<Module>) criteria.setFetchMode("M_MODULE", FetchMode.SELECT).list();
-		session.close();
+		
 		return modules;
+	
 	}
 
 	@Override
