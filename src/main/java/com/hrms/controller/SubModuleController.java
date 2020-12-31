@@ -18,19 +18,25 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-
+import com.hrms.model.MenuModule;
 import com.hrms.model.SubModule;
+import com.hrms.service.ModuleService;
 import com.hrms.service.SubModuleService;
 
 @Controller
 public class SubModuleController {
 	@Autowired
 	SubModuleService subModuleService;
-
+	@Autowired
+	private ModuleService moduleService;
 @GetMapping("/submodulepage")
 	public String SubmodulePage(Model model) {
 		List<SubModule> listSubModule = subModuleService.getAllSubModules();
 		model.addAttribute("listSubModule", listSubModule);
+		List<MenuModule> modules = moduleService.getAllModules();
+		if (modules != null) {
+			model.addAttribute("modules", modules);
+		}
 
 		return "subModule";
 	}
