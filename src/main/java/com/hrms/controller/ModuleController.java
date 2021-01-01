@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import com.hrms.model.Grade;
 import com.hrms.model.MenuModule;
 import com.hrms.model.Module;
 import com.hrms.service.ModuleService;
@@ -38,6 +39,17 @@ public class ModuleController {
 		return "module";
 	}
 
+	@PostMapping("/saveModule")
+	  public String SaveModule(@ModelAttribute("module") Module module, Model model,HttpSession session) {
+			if (module.getModuleCode() != "") {
+				moduleService.addModule(module); 
+				
+				session.setAttribute("username",session.getAttribute("username"));
+	 
+	  }
+		return"redirect:/module";
+	  
+	  }
 	
 
 
