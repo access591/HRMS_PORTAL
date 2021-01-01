@@ -8,7 +8,7 @@ import com.hrms.model.Module;
 
 public interface ModuleService {
 	List<MenuModule> getAllModules();
-	
+	boolean checkModuleExists(Module module);
 	List<Module> getModules();
 
 	void addModule(Module module);

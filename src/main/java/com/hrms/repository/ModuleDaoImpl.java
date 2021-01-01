@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.hrms.model.Module;
+import com.hrms.model.UserEntity;
 
 @Repository
 public class ModuleDaoImpl implements ModuleDao {
@@ -38,6 +39,16 @@ public class ModuleDaoImpl implements ModuleDao {
 		 session.persist(module);
 		 tx.commit();
 		  session.close();
+	}
+
+	@Override
+	public Module findModule(Module module) {
+		
+		Session session = sessionFactory.openSession();
+		Criteria criteria = session.createCriteria(Module.class);
+		Module mcode = (Module) criteria.setFetchMode("M_MODULE", FetchMode.SELECT)
+				.add(Restrictions.eq("moduleCode", module.getModuleCode())).uniqueResult();
+		return mcode;
 	}
 
 	
