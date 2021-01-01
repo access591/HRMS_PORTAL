@@ -84,6 +84,7 @@ body {
 					<div class="header">
 						<h1 class="header-title">Module Master</h1>
 						<nav aria-label="breadcrumb">
+						
 							<ol class="breadcrumb">
 								<li class="breadcrumb-item"><a
 									href="dashboard-default.html">Dashboard</a></li>
@@ -95,22 +96,30 @@ body {
 							</ol>
 						</nav>
 					</div>
-					<div class="row">
-						<div class="col-12">
+		               <div class="row">
+							<div class="col-12">
 							<div class="card">
 								<div class="card-header">
-									<h5 class="card-title">Module</h5>
+									<h5 class="card-title">Module Master </h5>
+									
+									<div class="alert-outline">
+											
+											<div th:if="${message}" th:text="${message}" th:class="${'far fa-fw fa-bell ' + alertClass}">
+											</div> 
+												
+											</div>
+									
+									
+									     
 
 								</div>
 								<div class="card-body">
-									<form id="validation-form"action="#" th:action="@{/saveModule}" th:object="${module}" method="post">
-
-
-										<div class="row">
+							<form id="validation-form" action="#" th:action="@{/saveModule}" th:object="${module}" method="post">
+								  <div class="row">
 											<div class="col-12 col-lg-6">
 												<div class="form-group">
 													<label> Module Code </label> <input type="text"
-														class="form-control"
+														class="form-control required"
 														id="moduleCode" name="moduleCode">
 
 												</div>
@@ -138,16 +147,17 @@ body {
 
 												</div>
 												<div class="form-group">
-													<label>Sequence No</label> <input type="text" value=""
-														class="form-control" id="seqNo" name="seqNo">
+													<label>Sequence No</label> <input type="text"
+														class="form-control required" id="seqNo" name="seqNo" pattern = "[0-9]">
 
 												</div>
 
 											</div>
-
-										</div>
+											</div>
+									
+										
 										<button type="submit" class="btn btn-primary">Save</button>
-								 <button type="reset"class="btn btn-primary" value="Reset">Reset</button>
+								      <button type="reset"class="btn btn-primary" value="Reset">Reset</button>
 									</form>
 								</div>
 							</div>
@@ -190,7 +200,7 @@ body {
 								
 							</div>
 						</div>
-					</div>
+				</div>
 				</div>
 
 			</main>

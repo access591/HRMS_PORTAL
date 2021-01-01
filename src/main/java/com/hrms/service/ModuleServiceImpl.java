@@ -13,7 +13,6 @@ import com.hrms.model.MenuModule;
 import com.hrms.model.Module;
 import com.hrms.model.Program;
 import com.hrms.model.SubModule;
-import com.hrms.model.SubModule1;
 import com.hrms.model.SubModuleProgram;
 import com.hrms.repository.ModuleDao;
 
@@ -97,6 +96,17 @@ public class ModuleServiceImpl implements ModuleService {
 	@Override
 	public List<Module> getModules() {
 		return moduleDao.getAllModules();
+	}
+
+	@Override
+	public boolean checkModuleExists(Module module) {
+		
+		Module e = moduleDao.findModule(module);
+		if (e != null) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	

@@ -9,7 +9,7 @@ public interface ModuleDao {
 	List<Module> getAllModules();
 
 	void addModule(Module module);
-
+	Module findModule(Module module);
 	
 
 }
