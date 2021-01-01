@@ -84,41 +84,21 @@ public class ModuleServiceImpl implements ModuleService {
 
 
 	@Override
-	public void addModule(Map<String, String> map) {
-		Module addModule = new Module();
-		addModule.setModuleCode(map.get("moduleCode"));
-		addModule.setModuleName(map.get("moduleName"));
-		addModule.setSeqNo(Integer.parseInt(map.get("seqNo")));
-		addModule.setActive(map.get("active"));
-		addModule.setInsertedDate(new Date());
-		moduleDao.addModule(addModule);
+	public void addModule(Module module) {
+		module.setInsertedDate(new Date());
+		
+		  this.moduleDao.addModule(module);
+		
 	}
 
-	@Override
-	public void update(Map<String, String> map) {
-		Module module = new Module();
-		module.setModuleCode(map.get("updateModuleCode"));
-		module.setModuleName(map.get("updateModuleName"));
-		module.setSeqNo(Integer.parseInt(map.get("updateSequenceNo")));
-		module.setActive(map.get("updateStatusId"));
-		module.setUpdatedDate(new Date());
-		moduleDao.update(module);
-	}
 
-	@Override
-	public int delete(Module module) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+
 
 	@Override
 	public List<Module> getModules() {
 		return moduleDao.getAllModules();
 	}
 
-	@Override
-	public Module findModuleById(String id) {
-		return moduleDao.findModuleById(id);
-	}
+	
 
 }

@@ -33,41 +33,13 @@ public class ModuleDaoImpl implements ModuleDao {
 
 	@Override
 	public void addModule(Module module) {
-		Session session = sessionFactory.openSession();
-		Transaction tx = session.beginTransaction();
-		session.persist(module);
-		tx.commit();
-		session.close();
+		 Session session = sessionFactory.openSession(); 
+		 Transaction tx = session.beginTransaction();
+		 session.persist(module);
+		 tx.commit();
+		  session.close();
 	}
 
-	@Override
-	public void update(Module module) {
-		Session session = sessionFactory.openSession();
-		Transaction tx = session.beginTransaction();
-		Module updatedModule = ( Module ) session.load(Module.class, module.getModuleCode());
-		updatedModule.setModuleName(module.getModuleName());
-		updatedModule.setSeqNo(module.getSeqNo());
-		updatedModule.setActive(module.getActive());
-		updatedModule.setInsertedBy(module.getInsertedBy());
-		updatedModule.setInsertedDate(module.getInsertedDate());
-		session.update(updatedModule);
-		tx.commit();
-		session.close();
-	}
-
-	@Override
-	public int delete(Module module) {
-		return 0;
-	}
-
-	@Override
-	public Module findModuleById(String id) {
-		Session session = sessionFactory.openSession();
-		Criteria criteria = session.createCriteria(Module.class);
-		Module modules = (Module) criteria.setFetchMode("M_MODULE", FetchMode.SELECT)
-				.add(Restrictions.eq("moduleCode", id)).uniqueResult();
-		session.close();
-		return modules;
-	}
+	
 
 }

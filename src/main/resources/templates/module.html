@@ -103,7 +103,7 @@ body {
 
 								</div>
 								<div class="card-body">
-									<form id="validation-form">
+									<form id="validation-form"action="#" th:action="@{/saveModule}" th:object="${module}" method="post">
 
 
 										<div class="row">
@@ -146,8 +146,8 @@ body {
 											</div>
 
 										</div>
-										<input id="moduleSaveBtn" title="Save" value="Save" type="button" class="btn btn-primary" style="margin-left: 20px; width: 80px;"> 
-
+										<button type="submit" class="btn btn-primary">Save</button>
+								 <button type="reset"class="btn btn-primary" value="Reset">Reset</button>
 									</form>
 								</div>
 							</div>
