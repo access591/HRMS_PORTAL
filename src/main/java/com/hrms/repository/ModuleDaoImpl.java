@@ -12,6 +12,7 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.hrms.model.Grade;
 import com.hrms.model.Module;
 import com.hrms.model.UserEntity;
 
@@ -46,9 +47,42 @@ public class ModuleDaoImpl implements ModuleDao {
 		
 		Session session = sessionFactory.openSession();
 		Criteria criteria = session.createCriteria(Module.class);
-		Module mcode = (Module) criteria.setFetchMode("M_MODULE", FetchMode.SELECT)
+		Module mcode = (Module) criteria.setFetchMode("M_MODULE",FetchMode.SELECT)
 				.add(Restrictions.eq("moduleCode", module.getModuleCode())).uniqueResult();
 		return mcode;
+	}
+
+	@Override
+	public Module findModuleById(String id) {
+		Session session = sessionFactory.openSession();
+		Criteria criteria = session.createCriteria(Module.class);
+		Module moduleEdit = (Module) criteria.setFetchMode("M_MODULE", FetchMode.SELECT)
+			.add(Restrictions.eq("moduleCode", id)).uniqueResult();
+
+		return moduleEdit;
+	}
+
+	@Override
+	public void updateModule(Module m) {
+		Session session = this.sessionFactory.getCurrentSession();
+		Transaction tx = session.beginTransaction();
+		session.update(m);
+		tx.commit();
+		session.close();	
+		
+	}
+
+	@Override
+	public void removeModule(String id) {
+		Session session = this.sessionFactory.getCurrentSession();
+		Transaction tx = session.beginTransaction();
+		Module m = (Module) session.load(Module.class, new String(id));
+		System.out.println("value of G " + m);
+
+		session.delete(m);
+		tx.commit();
+		session.close();	
+		
 	}
 
 	

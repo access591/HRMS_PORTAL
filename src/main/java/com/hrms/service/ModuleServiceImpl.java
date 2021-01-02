@@ -80,8 +80,6 @@ public class ModuleServiceImpl implements ModuleService {
 		}
 		return programMap;
 	}
-
-
 	@Override
 	public void addModule(Module module) {
 		module.setInsertedDate(new Date());
@@ -89,15 +87,10 @@ public class ModuleServiceImpl implements ModuleService {
 		  this.moduleDao.addModule(module);
 		
 	}
-
-
-
-
 	@Override
 	public List<Module> getModules() {
 		return moduleDao.getAllModules();
 	}
-
 	@Override
 	public boolean checkModuleExists(Module module) {
 		
@@ -107,6 +100,25 @@ public class ModuleServiceImpl implements ModuleService {
 		} else {
 			return false;
 		}
+	}
+
+	@Override
+	public Module findModuleById(String id) {
+		return moduleDao.findModuleById(id);
+	}
+
+	@Override
+	public void updateModule(Module m) {
+	m.setModuleName(m.getModuleName());
+	m.setActive(m.getActive());
+	m.setActive(m.getActive());
+	m.setUpdatedDate(m.getUpdatedDate());
+	this.moduleDao.updateModule(m);
+		
+	}
+	@Override
+	public void removeModule(String id) {
+		this.moduleDao.removeModule(id);
 	}
 
 	

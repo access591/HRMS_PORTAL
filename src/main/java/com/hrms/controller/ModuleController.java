@@ -10,10 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -61,6 +60,30 @@ public class ModuleController {
 		return"redirect:/module";
 	  
 	  }
+	
+	@GetMapping(value = {"/editModule/{id}"})
+	public String editModule(@PathVariable("id")String id,  Model model,HttpSession session)
+	 { 
+		Module moduleEdit = moduleService.findModuleById(id);
+		  model.addAttribute("moduleEdit", moduleEdit);
+
+	    session.setAttribute("username",session.getAttribute("username")); 
+	       return "/editModule"; 
+	}
+	@PostMapping("/updateModule")
+	public String updateModule(@ModelAttribute("moduleupdate") Module m, Model model) {
+
+		  this.moduleService.updateModule(m);
+	  	  
+		  return "redirect:/module";
+	}
+	@GetMapping(value = {"/deleteModule/{id}"})
+	public String deleteModule(@PathVariable("id")String id,  Model model,HttpSession session)
+	 { 
+		  this.moduleService.removeModule(id);
+	    session.setAttribute("username",session.getAttribute("username")); 
+	    return "redirect:/module";
+	}
 	
 
 
