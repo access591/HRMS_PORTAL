@@ -1,178 +1,118 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 
 <script type="text/javascript" th:src="@{/js/settings.js}"></script>
 <script type="text/javascript" th:src="@{/js/app.js}"></script>
 <link rel="stylesheet" type="text/css" th:href="@{/css/modern.css}" />
 <script  src="https://www.googletagmanager.com/gtag/js?id=UA-120946860-7"></script>
-
 <style>
 body {
 	opacity: 0;
 }
+.uppercase {
+  text-transform: uppercase;
+}
 </style>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
-<script src="js/settings.js"></script>
-<!-- END SETTINGS -->
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script 
-	src="https://www.googletagmanager.com/gtag/js?id=UA-120946860-7"></script>
 <script>
 	window.dataLayer = window.dataLayer || [];
 	function gtag() {
 		dataLayer.push(arguments);
 	}
-	gtag('js', new Date());
+	 gtag('js', new Date());
 
 	gtag('config', 'UA-120946860-7');
 </script>
+<head>
+<meta charset="utf-8" />
+<title>HRMS</title>
 </head>
-
 <body>
-
-	<div class="wrapper">
+<div class="wrapper">
 <nav id="sidebar" class="sidebar">
  <div th:replace="/fragments/sidebar :: div"></div>
  </nav>
-
 		<div class="main">
-			<nav class="navbar navbar-expand navbar-theme">
-				<a class="sidebar-toggle d-flex mr-2"> <i
-					class="hamburger align-self-center"></i>
-				</a>
-
-				<form class="form-inline d-none d-sm-inline-block">
-					<input class="form-control form-control-lite" type="text"
-						placeholder="Govt Of Haryana">
-				</form>
-
-				<div class="navbar-collapse collapse">
-					<ul class="navbar-nav ml-auto">
-
-
-
-
-
-
-						<li class="nav-item dropdown ml-lg-2"><a
-							class="nav-link dropdown-toggle position-relative" href="#"
-							id="userDropdown" data-toggle="dropdown"> <i
-								class="align-middle fas fa-cog"></i>
-						</a>
-							<div class="dropdown-menu dropdown-menu-right"
-								aria-labelledby="userDropdown">
-								<a class="dropdown-item" href="#"><i
-									class="align-middle mr-1 fas fa-fw fa-user"></i> View Profile</a>
-
-								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="#"><i
-									class="align-middle mr-1 fas fa-fw fa-arrow-alt-circle-right"></i>
-									Sign out</a>
-							</div></li>
-					</ul>
-				</div>
-
-			</nav>
-
-
-
-
+			<div th:replace="/fragments/header ::div"></div>
 			<main class="content">
 				<div class="container-fluid">
-
 					<div class="header">
-						<h1 class="header-title">Module Master</h1>
+					
 						<nav aria-label="breadcrumb">
-						
-							<ol class="breadcrumb">
-								<li class="breadcrumb-item"><a
-									href="dashboard-default.html">Dashboard</a></li>
-								<li class="breadcrumb-item"><a href="#">User Role
-										Managment</a></li>
-								<li class="breadcrumb-item"><a href="#">Program Master</a></li>
-								<li class="breadcrumb-item active" aria-current="page">Module
-									Master</li>
-							</ol>
 						</nav>
 					</div>
-		               <div class="row">
-							<div class="col-12">
+					<div class="row">
+						<div class="col-12">
 							<div class="card">
 								<div class="card-header">
-									<h5 class="card-title">Module Master </h5>
-									
+									<h5 class="card-title">MODULE MASTER </h5>
 									<div class="alert-outline">
-											
-											<div th:if="${message}" th:text="${message}" th:class="${'far fa-fw fa-bell ' + alertClass}">
-											</div> 
-												
-											</div>
-									
-									
-									     
+									<div th:if="${message}" th:text="${message}" style="color: red">
+									</div> 
+									</div>
 
 								</div>
 								<div class="card-body">
-							<form id="validation-form" action="#" th:action="@{/saveModule}" th:object="${module}" method="post">
-								  <div class="row">
+									<form id="validation-form" action="#" th:action="@{/saveModule}" th:object="${module}" method="post">
+										<div class="row">
 											<div class="col-12 col-lg-6">
-												<div class="form-group">
-													<label> Module Code </label> <input type="text"
-														class="form-control required"
-														id="moduleCode" name="moduleCode">
 
+												<div class="form-group">
+													<label> Grade Code </label> <label style="color: red">*</label>
+
+													<input type="text" class="form-control" id="moduleCode"
+														name="moduleCode" required aria-required="true">
 												</div>
 
-
 												<div class="form-group">
+
 													<label class="form-label">Status</label>
 													<div class="custom-controls-stacked">
 
-														<label class="radio-inline"> <input type="radio" id="active"
+														<label class="radio-inline"> <input type="radio"
 															value="Y" name="active" checked> Active
-														</label> <label class="radio-inline"> <input type="radio" id="active"
+														</label> <label class="radio-inline"> <input type="radio"
 															value="N" name="active"> Inactive
 														</label>
 
 													</div>
 												</div>
-
 											</div>
 											<div class="col-12 col-lg-6">
-												<div class="form-group">
-													<label style="color: red">*</label> <label>Module
-														Name</label> <input type="text" class="form-control"
-														 id="moduleName" name="moduleName">
 
+												<div class="form-group">
+													<label class="form-label"> Module Name</label> <label
+														style="color: red">*</label> <input type="text"
+														class="form-control uppercase"
+														onkeypress="return /[a-z]/i.test(event.key)"
+														id="moduleName" name="moduleName" required
+														aria-required="true">
 												</div>
+
 												<div class="form-group">
 													<label>Sequence No</label> <input type="text"
-														class="form-control required" id="seqNo" name="seqNo" pattern = "[0-9]">
+														class="form-control required" id="seqNo" name="seqNo"
+														pattern="[0-9]">
 
 												</div>
 
 											</div>
-											</div>
-									
-										
+										</div>
 										<button type="submit" class="btn btn-primary">Save</button>
-								      <button type="reset"class="btn btn-primary" value="Reset">Reset</button>
+								 <button type="reset"class="btn btn-primary" value="Reset">Reset</button>
 									</form>
 								</div>
 							</div>
 						</div>
-
-						 <div class="col-12">
+	      <div class="col-12">
 							<div class="card">
 								<div class="card-header">
 
 									<h6 class="card-subtitle text-muted">DataTables.</h6>
 								</div>
-								<div class="card-body" style="overflow: auto;">
+								<div class="card-body">
 								<table id="datatables-buttons" class="table table-striped display" style="width:100%">
-									<thead>
-										<tr>
+										<thead>
+											<tr>
 											<th>Module Code</th>
 											<th>Module Name</th>
 											<th>Seq No.</th>
@@ -181,51 +121,34 @@ body {
 										</tr>
 										</thead>
 										<tbody>
-										<tr th:each="module : ${modules1}">
+											<tr th:each="module : ${modules1}">
 											<td id="module_code" th:text="${module.moduleCode}"></td>
 											<td id="module_name" th:text="${module.moduleName}"></td>
 											<td id="seq_no" th:text="${module.seqNo}"></td>
 											<td id="module_status" th:text="${module.active}"></td>
-											<td><a th:href="@{/editGrade/{id}(id=${module.moduleCode})}" class="btn btn-primary"><i class="fa fa-edit"></i></a>
-												<a th:href="@{/deleteGarde/{id}(id=${module.moduleCode})}" class="btn btn-primary"onclick="return confirm('Are you sure?')"><i class="fa fa-times"></i></a>
+											<td><a th:href="@{/editModule/{id}(id=${module.moduleCode})}" class="btn btn-primary"><i class="fa fa-edit"></i></a>
+												<a th:href="@{/deleteModule/{id}(id=${module.moduleCode})}" class="btn btn-primary"onclick="return confirm('Are you sure?')"><i class="fa fa-times"></i></a>
 												</td>
 											
 										</tr>
-
-
-									</tbody>
+										</tbody>
 									
 									</table>
 								</div>
 								
 							</div>
 						</div>
-				</div>
+					</div>
 				</div>
 
 			</main>
-		
+
 		<footer class="footer">
 		<div th:replace="/fragments/footer :: div"></div>
 		</footer>
 		</div>
 		</div>
-
-
-	
-
-	<svg width="0" height="0" style="position: absolute">
-		<defs>
-			<symbol viewBox="0 0 512 512" id="ion-ios-pulse-strong">
-				<path
-			d="M448 273.001c-21.27 0-39.296 13.999-45.596 32.999h-38.857l-28.361-85.417a15.999 15.999 0 0 0-15.183-10.956c-.112 0-.224 0-.335.004a15.997 15.997 0 0 0-15.049 11.588l-44.484 155.262-52.353-314.108C206.535 54.893 200.333 48 192 48s-13.693 5.776-15.525 13.135L115.496 306H16v31.999h112c7.348 0 13.75-5.003 15.525-12.134l45.368-182.177 51.324 307.94c1.229 7.377 7.397 11.92 14.864 12.344.308.018.614.028.919.028 7.097 0 13.406-3.701 15.381-10.594l49.744-173.617 15.689 47.252A16.001 16.001 0 0 0 352 337.999h51.108C409.973 355.999 427.477 369 448 369c26.511 0 48-22.492 48-49 0-26.509-21.489-46.999-48-46.999z">
-				</path>
-			</symbol>
-		</defs>
-	</svg>
-	<script src="js/app.js"></script>
-
-<script>
+	<script>
 		$(function() {
 			// Datatables basic
 			$('#datatables-basic').DataTable({
@@ -243,9 +166,7 @@ body {
 			datatablesButtons.buttons().container().appendTo("#datatables-buttons_wrapper .col-md-6:eq(0)")
 		});
 	</script>
-
+		
+		
 </body>
-
-
-<!-- Mirrored from spark.bootlab.io/pages-blank.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 26 Nov 2020 06:10:10 GMT -->
 </html>

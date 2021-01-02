@@ -10,6 +10,9 @@ public interface ModuleDao {
 
 	void addModule(Module module);
 	Module findModule(Module module);
+	   Module findModuleById(String id);
+	   public void updateModule(Module m); 
+	   public void removeModule(String id);
 	
 
 }
