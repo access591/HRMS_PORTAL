@@ -121,6 +121,11 @@ public class ModuleServiceImpl implements ModuleService {
 		this.moduleDao.removeModule(id);
 	}
 
+	@Override
+	public List<Module> getActiveModules() {
+		return moduleDao.getActiveModules();
+	}
+
 	
 
 }
