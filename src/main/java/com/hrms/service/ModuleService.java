@@ -8,6 +8,7 @@ public interface ModuleService {
 	List<MenuModule> getAllModules();
 	boolean checkModuleExists(Module module);
 	List<Module> getModules();
+	List<Module>getActiveModules();
 	void addModule(Module module);
 	Module findModuleById(String id);
 	public void updateModule(Module m); 

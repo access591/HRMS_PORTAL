@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import com.hrms.model.MenuModule;
 import com.hrms.model.SubModule;
+import com.hrms.model.Module;
 import com.hrms.service.ModuleService;
 import com.hrms.service.SubModuleService;
 
@@ -33,6 +34,8 @@ public class SubModuleController {
 	public String SubmodulePage(Model model) {
 		List<SubModule> listSubModule = subModuleService.getAllSubModules();
 		model.addAttribute("listSubModule", listSubModule);
+		List<Module> modulesList = moduleService.getActiveModules();
+		model.addAttribute("modulesList", modulesList);
 		List<MenuModule> modules = moduleService.getAllModules();
 		if (modules != null) {
 			model.addAttribute("modules", modules);
@@ -64,31 +67,6 @@ public class SubModuleController {
 	 * 
 	 * 
 	 */
-@PostMapping(value = {"/updatesub_module"})
-public ResponseEntity<?> editSubModule(@RequestBody Map<String, String> map, Model model, HttpSession session) {
-	System.out.println("yes more==kk=============================================================================");
-	subModuleService.update(map);
-	session.setAttribute("username", session.getAttribute("username"));
-	return new ResponseEntity<String>("success", HttpStatus.OK);
-}
-
-
-  @GetMapping("/subModules") public ResponseEntity<?> modules(Model model, HttpSession session) 
-  {
-	  List<SubModule> modulesss = subModuleService.getAllSubModules();
-  model.addAttribute("modules", modulesss); session.setAttribute("username",
-  session.getAttribute("username")); return new
-  ResponseEntity<List<SubModule>>(modulesss, HttpStatus.OK); }
-  
- 
-  @PostMapping(value = {"/deteteSub_module"})
-  public ResponseEntity<?> SubModule(@RequestBody Map<String, String> map, Model model, HttpSession session) {
-  	System.out.println("yes more==kk===============================================xxxxxxxxx==============================");
-  	subModuleService.delete(map);
-  	session.setAttribute("username", session.getAttribute("username"));
-  	return new ResponseEntity<String>("success", HttpStatus.OK);
-  }
-
 
 
 }

@@ -13,6 +13,6 @@ public interface ModuleDao {
 	   Module findModuleById(String id);
 	   public void updateModule(Module m); 
 	   public void removeModule(String id);
-	
+	   List<Module>getActiveModules();
 
 }
