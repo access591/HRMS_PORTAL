@@ -29,7 +29,6 @@ public class ModuleController {
 	@GetMapping("/module")
 	public String module(@ModelAttribute Module module, Model model, HttpSession session) {
 		List<Module> modules1 = moduleService.getModules();
-	
 		model.addAttribute("modules1", modules1);
 		List<MenuModule> modules = moduleService.getAllModules();
 		if (modules != null) {
@@ -47,18 +46,16 @@ public class ModuleController {
 		if (isModuleExist) {
 			    redirectAttributes.addFlashAttribute("message", "Module Already exists !  ");
 			    redirectAttributes.addFlashAttribute("alertClass", "alert-success");
-			
 			return"redirect:/module";
 		}
 		else 
 		{
 			moduleService.addModule(module); 
-			
+			List<Module> modules1 = moduleService.getModules();
+			model.addAttribute("modules1", modules1);
 			session.setAttribute("username",session.getAttribute("username"));	
+			return"redirect:/module";
 		}
-		
-		return"redirect:/module";
-	  
 	  }
 	
 	@GetMapping(value = {"/editModule/{id}"})
