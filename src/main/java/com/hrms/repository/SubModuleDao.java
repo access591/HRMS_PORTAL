@@ -9,10 +9,10 @@ public interface SubModuleDao
 {
 	List<SubModule> getAllSubModules();
 	public void addSubModule(SubModule subModule);
-	public void updateSubModule(SubModule subModule);
 	SubModule findSubModuleById(String id);
-	void update(SubModule subModule);
-	void delete(SubModule subModule);
+	public void updateSubModule(SubModule subModule);
+	public void removeSubModule(String id);
+	
 	
 	
 }

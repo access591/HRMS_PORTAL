@@ -57,16 +57,37 @@ public class SubModuleController {
 		return "redirect:/submodulepage";
 
 	}
-	/*
-	 * @GetMapping(value = {"/subModule/{subModuleId}/edit"}) public String
-	 * editModule(@PathVariable String subModuleId, Model model,HttpSession session)
-	 * { SubModule subModuleEdit = subModuleService.findSubModuleById(subModuleId);
-	 * model.addAttribute("subModule", subModuleEdit);
-	 * session.setAttribute("username",session.getAttribute("username")); return
-	 * "subModule_edit"; }
-	 * 
-	 * 
-	 */
+ @GetMapping(value = {"/editSubModule/{id}"})
+	  public String editsubmodule(@PathVariable("id")String id,  Model model,HttpSession session)
+	   {       
+		  		SubModule subModuleEdit = subModuleService.findSubModuleById(id);
+	  	        model.addAttribute("subModuleEdit", subModuleEdit);
+	  	        
+	  	      List<Module> modulesList = moduleService.getActiveModules();
+	  		model.addAttribute("modulesList", modulesList);
+
+	        session.setAttribute("username",session.getAttribute("username")); 
+	         return "/editSubModule"; 
+	   			}
+	  
+	  
+	  @PostMapping("/updateSubModule")
+	  public String updatesubmodule(@ModelAttribute("submoduleupdate") SubModule subModule, Model model) {
+
+	  	  this.subModuleService.updateSubModule(subModule);
+	    	  
+	  	  return "redirect:/submodulepage";
+	  }
+	  @GetMapping(value = {"/deleteSubModule/{id}"})
+	  public String deletesubmodule(@PathVariable("id")String id,  Model model,HttpSession session)
+	   { 
+	  	  this.subModuleService.removeSubModule(id);
+	      session.setAttribute("username",session.getAttribute("username")); 
+	      return "redirect:/submodulepage";
+	  }  
+	  
+	  
+	 
 
 
 }
