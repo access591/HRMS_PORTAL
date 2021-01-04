@@ -44,11 +44,11 @@ body {
 						<div class="col-12">
 							<div class="card">
 								<div class="card-header">
-									<h5 class="card-title">SUB MODULE MASTER </h5>
+									<h5 class="card-title"> UPDATE SUB MODULE MASTER </h5>
 
 								</div>
 								<div class="card-body">
-									<form id="validation-form" action="#" th:action="@{/saveSubModule}" th:object="${submodule}" method="post">
+									<form id="validation-form" action="#" th:action="@{/updateSubModule}" th:object="${submoduleupdate}" method="post">
 										<div class="row">
 											<div class="col-12 col-lg-6">
 										
@@ -57,7 +57,7 @@ body {
 										    <div class="form-group">
 											  <label> Sub Module Code </label>
 											  	<label style="color: red">*</label>
-											   <input type="text" class="form-control" id="subModuleCode" name="subModuleCode" required aria-required="true">
+											   <input type="text" class="form-control" id="subModuleCode" name="subModuleCode" th:value="${subModuleEdit.subModuleCode}" readonly >
 												</div>
 												
 										<div class="form-group" >
@@ -65,23 +65,21 @@ body {
 											<label style="color: red">*</label>
 											<select class="form-control" name="moduleCode"id="moduleCode" required aria-required="true">
 												    <option value="">Select Module</option>
-													<option   th:each="module: ${modulesList}" th:value="${module.getModuleCode()}" th:text="${module.getModuleName()}"></option>
-													
-												
+													<option   th:each="module: ${modulesList}" th:value="${module.getModuleCode()}" th:text="${module.getModuleName()}" th:field="${subModuleEdit.moduleCode}"></option>
 											     </select>
 										   </div>
 												
 
-												<div class="form-group">
+										<div class="form-group">
 													<label class="form-label">Status</label>
 													<div class="custom-controls-stacked">
-
-														<label class="radio-inline"> <input type="radio"
-															value="Y" name="acitveSubModule" checked> Active
-														</label> <label class="radio-inline"> <input type="radio"
-															value="N" name="acitveSubModule"> Inactive
-														</label>
-
+													
+														<label class="radio-inline">
+														<input type="radio" value="Y" name="acitveSubModule" th:checked="${subModuleEdit.acitveSubModule}==Y "/>Active   
+															</label>
+														<label class="radio-inline">
+														<input type="radio" value="N" name="acitveSubModule" th:checked="${subModuleEdit.acitveSubModule}==N"/>Inactive  
+															</label>
 													</div>
 												</div>
 												
@@ -96,68 +94,26 @@ body {
 											<div class="form-group">
 											<label class="form-label"> Sub Module Name</label>
 											<label style="color: red">*</label>
-											 <input type="text" class="form-control uppercase" onkeypress="return /[a-z]/i.test(event.key)" id="subModuleName" name="subModuleName"required aria-required="true">
+											 <input type="text" class="form-control uppercase" onkeypress="return /[a-z]/i.test(event.key)" id="subModuleName" name="subModuleName"required aria-required="true" th:value="${subModuleEdit.subModuleName}">
 													</div>
 													
 											<div class="form-group">
 													<label>Sequence No</label> <input type="text"
-														class="form-control required" id="seqNoSubModule" name="seqNoSubModule"required aria-required="true"
+														class="form-control required" id="seqNoSubModule" name="seqNoSubModule"required aria-required="true"th:value="${subModuleEdit.seqNoSubModule}"
 														pattern="[0-9]">
 
 												</div>
 													
-													
-													
-													
-													
-													
 											</div>
 										</div>
-										<button type="submit" class="btn btn-primary">Save</button>
-								 <button type="reset"class="btn btn-primary" value="Reset">Reset</button>
+										
+										<button type="submit" class="btn btn-primary">Update</button>
+								        <button type="submit"class="btn btn-primary" value="cancel">Cancel</button>
 									</form>
 								</div>
 							</div>
 						</div>
-	      <div class="col-12">
-							<div class="card">
-								<div class="card-header">
-
-									<h6 class="card-subtitle text-muted">DataTables.</h6>
-								</div>
-								<div class="card-body">
-								<table id="datatables-buttons" class="table table-striped display" style="width:100%">
-										<thead>
-											<tr>
-												<th>Sub Module</th>
-												<th>Sub Module Name </th>
-												<th>Module</th>
-												<th>seqNo</th>
-												<th>Is Active</th>
-												<th>Action</th>
-											
-												
-											</tr>
-										</thead>
-										<tbody>
-										<tr th:each="listsubModule : ${listSubModule}">
-												<td th:text="${listsubModule.subModuleCode}"></td>
-												<td th:text="${listsubModule.subModuleName}"></td>
-												<td th:text="${listsubModule.moduleCode}"></td>
-												<td th:text="${listsubModule.seqNoSubModule}"></td>
-												<td th:text="${listsubModule.acitveSubModule}"></td>
-						                     	<td>
-						                     	<a th:href="@{/editSubModule/{id}(id=${listsubModule.subModuleCode})}" class="btn btn-primary"><i class="fa fa-edit"></i></a>
-												<a th:href="@{/deleteSubModule/{id}(id=${listsubModule.subModuleCode})}" class="btn btn-primary"onclick="return confirm('Are you sure?')"><i class="fa fa-times"></i></a>
-												</td>
-											</tr>
-										</tbody>
-									
-									</table>
-								</div>
-								
-							</div>
-						</div>
+	   
 					</div>
 				</div>
 
