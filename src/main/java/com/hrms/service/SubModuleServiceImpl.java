@@ -1,13 +1,9 @@
 package com.hrms.service;
-
-import java.util.Date;
 import java.util.List;
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.hrms.model.Module;
+
 import com.hrms.model.SubModule;
 import com.hrms.repository.SubModuleDao;
 
@@ -50,6 +46,16 @@ public class SubModuleServiceImpl  implements SubModuleService{
 	@Override
 	public void removeSubModule(String id) {
 		this.subModuleDao.removeSubModule(id);
+	}
+
+	@Override
+	public boolean checkSubModuleExists(SubModule subModule) {
+		 SubModule e = subModuleDao.checkSubModuleExists(subModule);
+			if (e != null) {
+				return true;
+			} else {
+				return false;
+			}
 	}
 
 
