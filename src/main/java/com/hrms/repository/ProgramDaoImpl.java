@@ -7,11 +7,11 @@ import org.hibernate.FetchMode;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
-import com.hrms.model.Module;
 import com.hrms.model.Program;
+
 
 @Repository
 public class ProgramDaoImpl implements ProgramDao {
@@ -31,8 +31,21 @@ public class ProgramDaoImpl implements ProgramDao {
 	public void addProgram(Program program) {
 		Session session = sessionFactory.openSession();
 		Transaction tx = session.beginTransaction();
+		Criteria criteria = session.createCriteria(Program.class);
+		
 		session.persist(program);
 		tx.commit();
 	}
+
+	@Override
+	public Program checkProgramExists(Program program) {
+		
+		Session session = sessionFactory.openSession();
+		Criteria criteria = session.createCriteria(Program.class);
+		Program pmcode = (Program) criteria.setFetchMode("M_PROGRAM",FetchMode.SELECT)
+				.add(Restrictions.eq("programCode", program.getProgramCode())).uniqueResult();
+		return pmcode;
+	}
+	
 
 }

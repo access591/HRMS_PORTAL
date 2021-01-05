@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hrms.model.Program;
+
 import com.hrms.repository.ProgramDao;
 
 @Service
@@ -15,7 +16,7 @@ public class ProgramServiceImpl implements ProgramService {
 	ProgramDao programDao;
 
 	@Override
-	public List<Program> getPrograms() {
+	public List<Program> getAllPrograms() {
 		return programDao.getPrograms();
 	}
 
@@ -23,5 +24,17 @@ public class ProgramServiceImpl implements ProgramService {
 	public void addProgram(Program program) {
 		programDao.addProgram(program);
 	}
+
+	@Override
+	public boolean checkProgramExists(Program program) {
+		
+		Program e = programDao.checkProgramExists(program);
+			if (e != null) {
+				return true;
+			} else {
+				return false;
+			}
+	}
+	
 
 }
