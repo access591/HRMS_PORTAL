@@ -58,5 +58,10 @@ public class SubModuleServiceImpl  implements SubModuleService{
 			}
 	}
 
+	@Override
+	public List<SubModule> getActiveSubModules() {
+		return subModuleDao.getActiveSubModules();
+	}
+
 
 }
