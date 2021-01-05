@@ -101,17 +101,15 @@ body {
 													<input type="text" class="form-control"name="programName"id="programName"required>
 
 												</div>
-												<div class="form-group">
-													<label class="form-label"> Sub Module</label>
-													<label style="color: red">*</label>
-													 <select
-														class="form-control" name="subModuleCode"id="subModuleCode">
-														<option value="">Select Sub Module</option>
-														<option value="ABC1002">A</option>
-														<option value="ABC1003">B</option>
-
-													</select>
-												</div>
+													<div class="form-group" >
+														<label class="form-label">Sub Module</label>
+															<label style="color: red">*</label>
+													   <select class="form-control" name="subModuleCode"id="subModuleCode" required aria-required="true">
+												    <option value="">Select Sub Module</option>
+								<option th:each="submodule: ${subModulesList}" th:value="${submodule.getSubModuleCode()}" th:text="${submodule.getSubModuleName()}"></option>
+											     	</select>
+										   			</div>
+							
 												
 												<div class="form-group">
 													<label style="color: red">*</label> 

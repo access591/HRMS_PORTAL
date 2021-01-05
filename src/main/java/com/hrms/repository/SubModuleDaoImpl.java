@@ -11,6 +11,7 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.hrms.model.Module;
 import com.hrms.model.SubModule;
 
 
@@ -81,6 +82,16 @@ public class SubModuleDaoImpl implements SubModuleDao {
 		SubModule smcode = (SubModule) criteria.setFetchMode("M_SUB_MODULE",FetchMode.SELECT)
 				.add(Restrictions.eq("subModuleCode", subModule.getSubModuleCode())).uniqueResult();
 		return smcode;
+	}
+
+	@Override
+	public List<SubModule> getActiveSubModules() {
+		
+		Session session = sessionFactory.openSession();
+		Criteria criteria = session.createCriteria(SubModule.class);
+		List<SubModule> subModulesList = (List<SubModule>) criteria.setFetchMode("M_SUB_MODULE", FetchMode.SELECT).list();
+		
+		return subModulesList;
 	}
 
 

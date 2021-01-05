@@ -7,6 +7,7 @@ import com.hrms.model.SubModule;
 
 public interface SubModuleService {
 	List<SubModule> getAllSubModules();
+	List<SubModule> getActiveSubModules();
 
 	boolean checkSubModuleExists(SubModule subModule);
 

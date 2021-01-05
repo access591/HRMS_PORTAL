@@ -8,6 +8,7 @@ import com.hrms.model.SubModule;
 public interface SubModuleDao
 {
 	List<SubModule> getAllSubModules();
+	List<SubModule> getActiveSubModules();
 
 	public void addSubModule(SubModule subModule);
 

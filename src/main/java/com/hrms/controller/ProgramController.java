@@ -18,6 +18,7 @@ import com.hrms.model.Program;
 import com.hrms.model.SubModule;
 import com.hrms.service.ModuleService;
 import com.hrms.service.ProgramService;
+import com.hrms.service.SubModuleService;
 
 @Controller
 public class ProgramController {
@@ -26,13 +27,17 @@ public class ProgramController {
 	ProgramService programService;
 	@Autowired
 	private ModuleService moduleService;
-
+	@Autowired
+	SubModuleService subModuleService;
 	@GetMapping("/program")
 	public String program(@ModelAttribute Module module, Model model, HttpSession session) {
 		List<Program> listpPrograms = programService.getAllPrograms();
 		model.addAttribute("listpPrograms", listpPrograms);
 		List<Module> modulesList = moduleService.getActiveModules();
 		model.addAttribute("modulesList", modulesList);
+		
+		List<SubModule>subModulesList=subModuleService.getActiveSubModules();
+		model.addAttribute("subModulesList", subModulesList);
 		
 		List<MenuModule> modules = moduleService.getAllModules();
 		if (modules != null) {
