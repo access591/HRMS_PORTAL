@@ -9,80 +9,35 @@
 body {
 	opacity: 0;
 }
+.uppercase {
+  text-transform: uppercase;
+}
 </style>
-<script src="js/settings.js"></script>
-<!-- END SETTINGS -->
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async
-	src="https://www.googletagmanager.com/gtag/js?id=UA-120946860-7"></script>
 <script>
 	window.dataLayer = window.dataLayer || [];
 	function gtag() {
 		dataLayer.push(arguments);
 	}
-	gtag('js', new Date());
+	 gtag('js', new Date());
 
 	gtag('config', 'UA-120946860-7');
 </script>
+<head>
+<meta charset="utf-8" />
+<title>HRMS</title>
 </head>
-
 <body>
 <div class="wrapper">
 <nav id="sidebar" class="sidebar">
  <div th:replace="/fragments/sidebar :: div"></div>
  </nav>
-
-		<div class="main">
-			<nav class="navbar navbar-expand navbar-theme">
-				<a class="sidebar-toggle d-flex mr-2"> <i
-					class="hamburger align-self-center"></i>
-				</a>
-
-				<form class="form-inline d-none d-sm-inline-block">
-					<input class="form-control form-control-lite" type="text"
-						placeholder="Govt Of Haryana">
-				</form>
-
-				<div class="navbar-collapse collapse">
-					<ul class="navbar-nav ml-auto">
-						<li class="nav-item dropdown ml-lg-2"><a
-							class="nav-link dropdown-toggle position-relative" href="#"
-							id="userDropdown" data-toggle="dropdown"> <i
-								class="align-middle fas fa-cog"></i>
-						</a>
-							<div class="dropdown-menu dropdown-menu-right"
-								aria-labelledby="userDropdown">
-								<a class="dropdown-item" href="#"><i
-									class="align-middle mr-1 fas fa-fw fa-user"></i> View Profile</a>
-
-								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="#"><i
-									class="align-middle mr-1 fas fa-fw fa-arrow-alt-circle-right"></i>
-									Sign out</a>
-							</div></li>
-					</ul>
-				</div>
-
-			</nav>
-
-
-
-
+<div class="main">
+			<div th:replace="/fragments/header ::div"></div>
 			<main class="content">
 				<div class="container-fluid">
-
 					<div class="header">
-						<h1 class="header-title">Program Master</h1>
+						<h1 class="header-title"> Master</h1>
 						<nav aria-label="breadcrumb">
-							<ol class="breadcrumb">
-								<li class="breadcrumb-item"><a
-									href="dashboard-default.html">Dashboard</a></li>
-								<li class="breadcrumb-item"><a href="#">User Role
-										Managment</a></li>
-								<li class="breadcrumb-item"><a href="#">Program Master</a></li>
-								<li class="breadcrumb-item active" aria-current="page">Program
-									Master</li>
-							</ol>
 						</nav>
 					</div>
 					<div class="row">
@@ -93,27 +48,30 @@ body {
 
 								</div>
 								<div class="card-body">
-									<form id="validation-form">
-										<div class="row">
+									<form id="validation-form" action="#" th:action="@{/saveProgram}" th:object="${program}" method="post">										<div class="row">
 											<div class="col-12 col-lg-6">
 												<div class="form-group">
-													<label> Program Code </label> <input type="text"
-														class="form-control" id="" name="">
+													<label> Program Code </label> 
+													<label style="color: red">*</label>
+													<input type="text" class="form-control" id="programCode" name="programCode"required>
 												</div>
-												<div class="form-group">
-													<label style="color: red">*</label> <label
-														class="form-label">Module</label> <select
-														class="form-control" name="validation-select">
-														<option value>Select Module</option>
-													</select>
-												</div>
+												<div class="form-group" >
+														<label class="form-label">Module</label>
+															<label style="color: red">*</label>
+													   <select class="form-control" name="moduleCode"id="moduleCode" required aria-required="true">
+												    <option value="">Select Module</option>
+													<option   th:each="module: ${modulesList}" th:value="${module.getModuleCode()}" th:text="${module.getModuleName()}"></option>
+											     	</select>
+										   			</div>
 
 
 												<div class="form-group">
 													<label style="color: red">*</label> <label
-														class="form-label">Program Type </label> <select
-														class="form-control" name="validation-select">
-														<option value>Select Type</option>
+														class="form-label">Program Type </label>
+														 <select class="form-control" name="programType" id="programType">
+														<option value="A">A</option>
+														<option value="B">B</option>
+														<option value="C">C</option>
 
 													</select>
 												</div>
@@ -125,10 +83,11 @@ body {
 													<label class="form-label">Status</label>
 													<div class="custom-controls-stacked">
 
-														<label class="radio-inline"> <input type="radio"
-															name="active" checked> Active
+														<label class="radio-inline"> 
+														<input type="radio"
+															name="activeYn" checked> Active
 														</label> <label class="radio-inline"> <input type="radio"
-															name="active"> Inactive
+															name="activeYn"> Inactive
 														</label>
 
 													</div>
@@ -137,34 +96,39 @@ body {
 											</div>
 											<div class="col-12 col-lg-6">
 												<div class="form-group">
-													<label style="color: red">*</label> <label>Program
-														Name</label> <input type="text" class="form-control">
+													<label style="color: red">*</label> 
+													<label>Program Name</label> 
+													<input type="text" class="form-control"name="programName"id="programName"required>
 
 												</div>
 												<div class="form-group">
-													<label class="form-label"> Sub Module</label> <select
-														class="form-control" name="validation-select">
-														<option value>Select Sub Module</option>
+													<label class="form-label"> Sub Module</label>
+													<label style="color: red">*</label>
+													 <select
+														class="form-control" name="subModuleCode"id="subModuleCode">
+														<option value="">Select Sub Module</option>
+														<option value="ABC1002">A</option>
+														<option value="ABC1003">B</option>
 
 													</select>
 												</div>
+												
 												<div class="form-group">
-													<label style="color: red">*</label> <label>Program
-														href</label> <input type="text" class="form-control">
-
+													<label style="color: red">*</label> 
+													<label>Program Href</label> 
+														<input type="text" class="form-control"id="programHrefName"name="programHrefName"required>
 												</div>
 
 												<div class="form-group">
-													<label>Sequence No</label> <input type="text"
-														class="form-control" id="" name="">
-
+													<label>Sequence No</label> 
+													<input type="text" class="form-control" id="seqProgram" name="seqProgram"required>
 												</div>
 
 											</div>
 
 										</div>
 										<button type="submit" class="btn btn-primary">Save</button>
-										<button type="cancel" class="btn btn-primary">cancel</button>
+									 <button type="reset"class="btn btn-primary" value="Reset">Reset</button>
 
 									</form>
 								</div>
@@ -178,8 +142,32 @@ body {
 									<h6 class="card-subtitle text-muted">DataTables.</h6>
 								</div>
 								<div class="card-body">
-									<table id="datatables-buttons" class="table table-striped"
-										style="width: 100%">
+								
+										<table id="datatables-buttons" class="table table-striped display" style="width:100%">
+										<thead>
+											<tr>
+												<th>Program code</th>
+												<th>Program Name </th>
+												<th>module Code </th>
+												<th>Sub module Code </th>
+												<th>Status</th>
+												<th>Action</th>
+												
+											</tr>
+										</thead>
+										<tbody>
+											<tr  th:each="listofgrade : ${listpPrograms}">
+												<td th:text="${listofgrade.programCode}"></td>
+												<td th:text="${listofgrade.programName}"></td>
+												<td th:text="${listofgrade.pModuleCode}"></td>
+												<td th:text="${listofgrade.subModuleCode}"></td>
+												<td th:text="${listofgrade.activeYn}"></td>
+												<td><a th:href="@{/editGrade/{id}(id=${listofgrade.programCode})}" class="btn btn-primary"><i class="fa fa-edit"></i></a>
+												<a th:href="@{/deleteGarde/{id}(id=${listofgrade.programCode})}" class="btn btn-primary"onclick="return confirm('Are you sure?')"><i class="fa fa-times"></i></a>
+												</td>
+											</tr>
+										</tbody>
+									
 									</table>
 								</div>
 							</div>
@@ -194,42 +182,31 @@ body {
 
 				</div>
 			</main>
+
 		<footer class="footer">
 		<div th:replace="/fragments/footer :: div"></div>
 		</footer>
 		</div>
-
-	</div>
-
-	<svg width="0" height="0" style="position: absolute">
-		<defs>
-			<symbol viewBox="0 0 512 512" id="ion-ios-pulse-strong">
-				<path
-			d="M448 273.001c-21.27 0-39.296 13.999-45.596 32.999h-38.857l-28.361-85.417a15.999 15.999 0 0 0-15.183-10.956c-.112 0-.224 0-.335.004a15.997 15.997 0 0 0-15.049 11.588l-44.484 155.262-52.353-314.108C206.535 54.893 200.333 48 192 48s-13.693 5.776-15.525 13.135L115.496 306H16v31.999h112c7.348 0 13.75-5.003 15.525-12.134l45.368-182.177 51.324 307.94c1.229 7.377 7.397 11.92 14.864 12.344.308.018.614.028.919.028 7.097 0 13.406-3.701 15.381-10.594l49.744-173.617 15.689 47.252A16.001 16.001 0 0 0 352 337.999h51.108C409.973 355.999 427.477 369 448 369c26.511 0 48-22.492 48-49 0-26.509-21.489-46.999-48-46.999z">
-				</path>
-			</symbol>
-		</defs>
-	</svg>
-	<script src="js/app.js"></script>
+		</div>
 	<script>
 		$(function() {
 			// Datatables basic
 			$('#datatables-basic').DataTable({
-				responsive : true
+				responsive: true
 			});
 			// Datatables with Buttons
 			var datatablesButtons = $('#datatables-buttons').DataTable({
-				lengthChange : !1,
-				buttons : [ "copy", "print" ],
-				responsive : true
+				  deferRender:true,
+		            scrollCollapse: true,
+		            scroller: false,
+				   responsive: true,
+				   lengthMenu :[[10,20,30,-1 ],['10 rows', '20 rows', '30 rows', 'Show all' ] ],
+					buttons :[]
 			});
-			datatablesButtons.buttons().container().appendTo(
-					"#datatables-buttons_wrapper .col-md-6:eq(0)")
+			datatablesButtons.buttons().container().appendTo("#datatables-buttons_wrapper .col-md-6:eq(0)")
 		});
 	</script>
-
+		
+		
 </body>
-
-
-<!-- Mirrored from spark.bootlab.io/pages-blank.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 26 Nov 2020 06:10:10 GMT -->
 </html>
