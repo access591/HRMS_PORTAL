@@ -56,7 +56,7 @@ body {
 									<div class="row">
 											<div class="col-12 col-lg-6">
 												<div class="form-group">
-											       <label> Code </label>
+											       <label> Department Code </label>
 											  		<label style="color: red">*</label>
 											  	 
 											   <input type="text"class="form-control" id="Department_Code" name="Department_Code" th:value="${departmentEdit.Department_Code}" readonly >
@@ -73,10 +73,11 @@ body {
 													<div class="custom-controls-stacked">
 													
 														<label class="radio-inline">
-														<input type="checkbox" value="Y" name="active" th:checked="${departmentEdit.active}==Y "/>Active   
+														<input type="radio" value="Y" name="active" th:checked="${departmentEdit.active}==Y "/>Active   
 															</label>
+															&nbsp;&nbsp;
 														<label class="radio-inline">
-														<input type="checkbox" value="N" name="active" th:checked="${departmentEdit.active}==N"/>Inactive  
+														<input type="radio" value="N" name="active" th:checked="${departmentEdit.active}==N"/>Inactive  
 															</label>
 													</div>
 												</div>
@@ -84,7 +85,7 @@ body {
 											<div class="col-12 col-lg-6">
 											<div class="form-group">
 											
-											<label class="form-label">Name</label>
+											<label class="form-label"> Department Name</label>
 											<label style="color: red">*</label>
 											 <input type="text" class="form-control uppercase" id="Dep_Name" name="Dep_Name"th:value="${departmentEdit.Dep_Name}" required aria-required="true">
 										   </div>
@@ -99,7 +100,7 @@ body {
 										</div>
 								
 										<button type="submit" class="btn btn-primary">Update</button>
-								        <button type="reset"class="btn btn-primary" value="Reset">Reset</button>
+								  <button type="submit"class="btn btn-primary" value="cancel">Cancel</button>
 
 									</form>
 								</div>

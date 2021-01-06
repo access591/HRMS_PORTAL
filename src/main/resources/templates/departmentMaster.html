@@ -43,7 +43,7 @@ body {
 						<div class="col-12">
 							<div class="card">
 								<div class="card-header">
-									<h5 class="card-title">Department Master</h5>
+									<h5 class="card-title">Create Department Master</h5>
 
 								</div>
 								<div class="card-body">
@@ -52,7 +52,7 @@ body {
 											<div class="col-12 col-lg-6">
 												<div class="form-group">
 										
-											  <label> Code </label>
+											  <label> Department  Code </label>
 											  		<label style="color: red">*</label>
 											  	 
 											   <input
@@ -71,7 +71,9 @@ body {
 
 														<label class="radio-inline"> <input type="radio"
 															value="Y" name="active" checked> Active
-														</label> <label class="radio-inline"> <input type="radio"
+														</label> &nbsp;&nbsp;
+														<label class="radio-inline">
+														 <input type="radio"
 															value="N" name="active"> Inactive
 														</label>
 
@@ -80,7 +82,7 @@ body {
 											</div>
 											<div class="col-12 col-lg-6">
 											<div class="form-group">
-											<label class="form-label">Name</label>
+											<label class="form-label"> Department Name</label>
 											<label style="color: red">*</label>
 											 <input type="text" class="form-control uppercase" id="Dep_Name" name="Dep_Name"required aria-required="true">
 										</div>
@@ -100,8 +102,6 @@ body {
 						<div class="col-12">
 							<div class="card">
 								<div class="card-header">
-
-									<h6 class="card-subtitle text-muted">DataTables.</h6>
 								</div>
 								<div class="card-body">
 									<table id="datatables-buttons" class="table table-striped display" style="width:100%">
@@ -158,7 +158,7 @@ body {
 		            scroller: false,
 				   responsive: true,
 				   lengthMenu :[[10,20,30,-1 ],['10 rows', '20 rows', '30 rows', 'Show all' ] ],
-					buttons :['pageLength',"copy", "print"]
+					buttons :[]
 			});
 			datatablesButtons.buttons().container().appendTo("#datatables-buttons_wrapper .col-md-6:eq(0)")
 		});
