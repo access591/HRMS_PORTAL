@@ -8,6 +8,7 @@ import com.hrms.model.Department;
 public interface DepartmentService 
 {
 	public void addDepartment(Department department);
+	boolean checkDepartmentExists(Department department);
 	List<Department>getAllDepartments();
 	Department findDepartmentById(String id);
 	public void updateDepartment(Department d);

@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.hrms.model.Department;
+import com.hrms.model.SubModule;
 
 
 @Repository
@@ -71,5 +72,12 @@ public class DepartmentDaoImpl implements DepartmentDao {
 
 	}
 
-	
+	@Override
+	public Department checkDepartmentExists(Department department) {
+		Session session = sessionFactory.openSession();
+		Criteria criteria = session.createCriteria(Department.class);
+		Department decode = (Department) criteria.setFetchMode("M_DEPARTMENT",FetchMode.SELECT)
+				.add(Restrictions.eq("Department_Code", department.getDepartment_Code())).uniqueResult();
+		return decode;
+	}
 }
