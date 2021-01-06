@@ -20,7 +20,7 @@ public class ProgramDaoImpl implements ProgramDao {
 	SessionFactory sessionFactory;
 
 	@Override
-	public List<Program> getPrograms() {
+	public List<Program> getAllPrograms() {
 		Session session = sessionFactory.openSession();
 		Criteria criteria = session.createCriteria(Program.class);
 		List<Program> programs = (List<Program>) criteria.setFetchMode("M_PROGRAM", FetchMode.SELECT).list();
