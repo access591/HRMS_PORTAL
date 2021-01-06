@@ -32,7 +32,8 @@ public class ProgramDaoImpl implements ProgramDao {
 		Session session = sessionFactory.openSession();
 		Transaction tx = session.beginTransaction();
 		Criteria criteria = session.createCriteria(Program.class);
-		
+		program.getpModuleCode().getModuleCode();
+		program.getSubModuleCode().getSubModuleCode();
 		session.persist(program);
 		tx.commit();
 	}

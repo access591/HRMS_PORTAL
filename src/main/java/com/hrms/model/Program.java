@@ -58,6 +58,28 @@ public class Program implements Serializable {
 
 	@Column(name = "SEQ_NO")
 	private String seqProgram;
+	
+	private String dmoduleCode;
+	private String dsubMouduleCode;
+	
+	
+	
+
+	public String getDmoduleCode() {
+		return dmoduleCode;
+	}
+
+	public void setDmoduleCode(String dmoduleCode) {
+		this.dmoduleCode = dmoduleCode;
+	}
+
+	public String getDsubMouduleCode() {
+		return dsubMouduleCode;
+	}
+
+	public void setDsubMouduleCode(String dsubMouduleCode) {
+		this.dsubMouduleCode = dsubMouduleCode;
+	}
 
 	public String getProgramCode() {
 		return programCode;
