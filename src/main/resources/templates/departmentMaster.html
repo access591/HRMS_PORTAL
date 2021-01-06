@@ -44,6 +44,10 @@ body {
 							<div class="card">
 								<div class="card-header">
 									<h5 class="card-title">Create Department Master</h5>
+									<div class="alert-outline">
+									<div th:if="${message}" th:text="${message}" style="color: red">
+									</div> 
+									</div>
 
 								</div>
 								<div class="card-body">
@@ -56,12 +60,12 @@ body {
 											  		<label style="color: red">*</label>
 											  	 
 											   <input
-														type="text" class="form-control" id="Department_Code" name="Department_Code" required aria-required="true">
+														type="text" class="form-control" id="Department_Code"maxlength="10" name="Department_Code" required aria-required="true">
 												</div>
 												<div class="form-group">
 											<label class="form-label">HOD Code</label>
 											<label style="color: red">*</label>
-											 <input type="text" class="form-control uppercase" id="Deph_code" name="Deph_code"required aria-required="true">
+											 <input type="text" class="form-control uppercase" id="Deph_code" maxlength="10"name="Deph_code"required aria-required="true">
 										</div>
 
 												<div class="form-group">
@@ -84,12 +88,12 @@ body {
 											<div class="form-group">
 											<label class="form-label"> Department Name</label>
 											<label style="color: red">*</label>
-											 <input type="text" class="form-control uppercase" id="Dep_Name" name="Dep_Name"required aria-required="true">
+											 <input type="text" class="form-control uppercase" id="Dep_Name"pattern="^[a-zA-Z\s]*$" name="Dep_Name"maxlength="30"required aria-required="true">
 										</div>
 										<div class="form-group">
 											<label class="form-label">HOD Name</label>
 											<label style="color: red">*</label>
-											 <input type="text" class="form-control uppercase" id="Deph_Name" name="Deph_Name"required aria-required="true">
+											 <input type="text" class="form-control uppercase"pattern="^[a-zA-Z\s]*$" id="Deph_Name" name="Deph_Name"maxlength="20"required aria-required="true">
 										</div>
 											</div>
 										</div>

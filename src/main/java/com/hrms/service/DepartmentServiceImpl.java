@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hrms.model.Department;
+import com.hrms.model.SubModule;
 import com.hrms.repository.DepartmentDao;
 @Service
 public class DepartmentServiceImpl implements DepartmentService {
@@ -42,6 +43,16 @@ public class DepartmentServiceImpl implements DepartmentService {
 	public void removeDepartment(String id) {
 		this.departmentDao.removeDepartment(id);
 
+	}
+
+	@Override
+	public boolean checkDepartmentExists(Department department) {
+		Department e = departmentDao.checkDepartmentExists(department);
+			if (e != null) {
+				return true;
+			} else {
+				return false;
+			}
 	}
 
 

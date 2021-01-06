@@ -16,9 +16,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hrms.model.Department;
 import com.hrms.model.MenuModule;
+import com.hrms.model.Module;
 import com.hrms.service.DepartmentService;
 import com.hrms.service.ModuleService;
 
@@ -45,16 +47,27 @@ public String DepartmentMaster(Model model,HttpSession session) {
 	}
 
 @PostMapping("/saveDepartment")
-	public String SaveDepartment(@ModelAttribute("department") Department department, Model model) {
-		if (department.getDepartment_Code() != "") {
-			departmentService.addDepartment(department);
-			
-			List<Department> listDepartment = departmentService.getAllDepartments();
-			model.addAttribute("listDepartment", listDepartment);
-		} 
-		return "redirect:/departmentMaster";
+	public String SaveDepartment(@ModelAttribute("department") Department department, Model model,RedirectAttributes redirectAttributes,HttpSession session) {
+	
+	boolean isModuleExist = departmentService.checkDepartmentExists(department);	
+	
+	
+	if (isModuleExist) {
+	    redirectAttributes.addFlashAttribute("message", "Department Code Already exists !  ");
+	    redirectAttributes.addFlashAttribute("alertClass", "alert-success");
+	    return "redirect:/departmentMaster";
 
-	}	
+}
+else 
+{
+	departmentService.addDepartment(department);
+	List<Department> listDepartment = departmentService.getAllDepartments();
+	model.addAttribute("listDepartment", listDepartment);
+	session.setAttribute("username",session.getAttribute("username"));	
+}
+	return "redirect:/departmentMaster";
+}	
+
 @GetMapping(value = {"/editDepartment/{id}"})
 public String editdepartment(@PathVariable("id")String id,  Model model,HttpSession session)
  { 
