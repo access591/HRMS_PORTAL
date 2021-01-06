@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hrms.model.Designation;
 import com.hrms.model.MenuModule;
@@ -39,14 +40,20 @@ public String DesignationMaster(Model model,HttpSession session) {
 	if (modules != null) {
 		model.addAttribute("modules", modules);
 	}
-	
 	session.setAttribute("username",session.getAttribute("username"));
 		return "designationMaster";
 	}
 
 @PostMapping("/saveDesignation")
-	public String SaveDesignation(@ModelAttribute("designation") Designation designation, Model model) {
-		if (designation.getDesg_code() != "") {
+	public String SaveDesignation(@ModelAttribute("designation") Designation designation, Model model,RedirectAttributes redirectAttributes) {
+	boolean isModuleExist = designationService.checkDesignationExists(designation);	
+	
+	if (isModuleExist) {
+		redirectAttributes.addFlashAttribute("message", "Designation Code Already exists !  ");
+	    redirectAttributes.addFlashAttribute("alertClass", "alert-success");
+	    return "redirect:/designationMaster";
+	}
+	else {
 			designationService.addDesignation(designation);
 			List<Designation> listDesignation = designationService.getAllDesignations();
 			model.addAttribute("listDesignation", listDesignation);
@@ -55,8 +62,7 @@ public String DesignationMaster(Model model,HttpSession session) {
 
 	}	
 
-
-  @GetMapping(value = {"/editDesignation/{id}"})
+@GetMapping(value = {"/editDesignation/{id}"})
   public String editdesignation(@PathVariable("id")String id,  Model model,HttpSession session)
    { 
 	  
