@@ -3,7 +3,6 @@ package com.hrms.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,7 +21,6 @@ import com.hrms.service.SubModuleService;
 
 @Controller
 public class ProgramController {
-
 	@Autowired
 	ProgramService programService;
 	@Autowired
@@ -47,25 +45,26 @@ public class ProgramController {
 		return "program";
 	}
 
-	
 	@PostMapping("/saveProgram")
-	public String SaveProgram(@ModelAttribute("program") Program program, Model model,
+	public String SaveProgram1(@ModelAttribute("program")Program program, Model model,
 			RedirectAttributes redirectAttributes, HttpSession session) {
-
+		//program.getDmoduleCode();
+		
+		//program.getDsubMouduleCode();
 		boolean isSubModuleExist = programService.checkProgramExists(program);
 		if (isSubModuleExist) {
-			redirectAttributes.addFlashAttribute("message", " Sub Module Already exists !  ");
+			redirectAttributes.addFlashAttribute("message", " Sub Module Already exists !");
 			redirectAttributes.addFlashAttribute("alertClass", "alert-success");
 			return "redirect:/program";
 		}
 
 		else {
+		
 			programService.addProgram(program);
 			List<Program> listpPrograms = programService.getAllPrograms();
 			model.addAttribute("listpPrograms", listpPrograms);
 			session.setAttribute("username", session.getAttribute("username"));
 		}
-
 		return "redirect:/program";
 
 	}
