@@ -10,7 +10,6 @@ import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
 import com.hrms.model.Designation;
 
 @Repository
@@ -69,6 +68,16 @@ public class DesignationDaoImpl implements DesignationDao {
 		tx.commit();
 		session.close();
 
+	}
+
+	@Override
+	public Designation checkDesignationExists(Designation designation) {
+		
+		Session session = sessionFactory.openSession();
+		Criteria criteria = session.createCriteria(Designation.class);
+		Designation decode = (Designation) criteria.setFetchMode("M_DESIGNATION",FetchMode.SELECT)
+				.add(Restrictions.eq("Desg_code", designation.getDesg_code())).uniqueResult();
+		return decode;
 	}
 
 }

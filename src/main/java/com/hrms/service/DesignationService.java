@@ -11,4 +11,5 @@ public interface DesignationService
 	Designation findDesignationById(String id);
 	public void updateDesignation(Designation d);
 	public void removeDesignation(String id);
+	boolean checkDesignationExists(Designation designation);
 }

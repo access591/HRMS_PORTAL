@@ -46,7 +46,7 @@ body {
 					
 					<div class="row">
 						<div class="col-12">
-							<div class="card">
+							<div class="card" style="border-radius:2.2rem">
 								<div class="card-header">
 									<h5 class="card-title"> Update Designation </h5>
 
@@ -56,7 +56,7 @@ body {
 									<div class="row">
 											<div class="col-12 col-lg-6">
 												<div class="form-group">
-											       <label> Code </label>
+											       <label> Designation Code </label>
 											  		<label style="color: red">*</label>
 											  	 
 											   <input type="text"class="form-control" id="Desg_code" name="Desg_code" th:value="${designationEdit.Desg_code}" readonly >
@@ -78,9 +78,9 @@ body {
 											<div class="col-12 col-lg-6">
 											<div class="form-group">
 											
-											<label class="form-label">Name</label>
+											<label class="form-label">Designation Name</label>
 											<label style="color: red">*</label>
-											 <input type="text" class="form-control uppercase" id="Desg_Name" name="Desg_Name"th:value="${designationEdit.Desg_Name}" required aria-required="true">
+											 <input type="text" class="form-control uppercase"  pattern="^[a-zA-Z\s]*$" maxlength="25" id="Desg_Name" name="Desg_Name"th:value="${designationEdit.Desg_Name}" required aria-required="true">
 										   </div>
 
 											</div>
@@ -97,7 +97,6 @@ body {
 					</div>
 				</div>
 			</main>
-
 			<footer class="footer">
 	         <div th:replace="./fragments/footer :: div"></div>
 	         </footer>

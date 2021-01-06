@@ -12,4 +12,5 @@ public interface DesignationDao
 	Designation findDesignationById(String id);
 	public void updateDesignation(Designation d);
 	public void removeDesignation(String id);
+	Designation checkDesignationExists(Designation designation);
 }
