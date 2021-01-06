@@ -6,7 +6,7 @@ import com.hrms.model.Program;
 
 public interface ProgramDao {
 
-	List<Program> getPrograms();
+	List<Program> getAllPrograms();
 	Program checkProgramExists(Program program);
 	void addProgram(Program program);
 }
