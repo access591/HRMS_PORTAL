@@ -48,9 +48,14 @@ public class ProgramController {
 	@PostMapping("/saveProgram")
 	public String SaveProgram1(@ModelAttribute("program")Program program, Model model,
 			RedirectAttributes redirectAttributes, HttpSession session) {
-		//program.getDmoduleCode();
+		Module m=new Module();
+		SubModule S=new SubModule();
+		m.setModuleCode(program.getDmoduleCode());
+		S.setSubModuleCode(program.getDsubMouduleCode());
+		program.setpModuleCode(m);
+		program.setSubModuleCode(S);
 		
-		//program.getDsubMouduleCode();
+	
 		boolean isSubModuleExist = programService.checkProgramExists(program);
 		if (isSubModuleExist) {
 			redirectAttributes.addFlashAttribute("message", " Sub Module Already exists !");
