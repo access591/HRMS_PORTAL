@@ -43,7 +43,7 @@ body {
 						<div class="col-12">
 							<div class="card">
 								<div class="card-header">
-									<h5 class="card-title">Bank Master </h5>
+									<h5 class="card-title"> Create Bank Master </h5>
 
 								</div>
 								<div class="card-body">
@@ -56,35 +56,33 @@ body {
 											  <label style="color: red">*</label>
 											  	 
 											   <input
-												type="text" class="form-control" id="Bank_Code" name="Bank_Code" required aria-required="true">
+												type="text" class="form-control" maxlength="9" id="Bank_Code" name="Bank_Code" required aria-required="true" pattern="\d{1,9}" title="Only digits"/>
 												</div>
 												<div class="form-group">
 											<label class="form-label">Bank Name</label>
 											<label style="color: red">*</label>
-											 <input type="text" class="form-control uppercase" id="bank_name" name="bank_name"required aria-required="true">
+											 <input type="text" class="form-control uppercase" maxlength="20" pattern="^[a-zA-Z\s]*$" id="bank_name" name="bank_name"required aria-required="true"title="Only text">
 										   </div>
 										   <div class="form-group">
 											<label class="form-label">Bank Address</label>
 											<label style="color: red">*</label>
-											 <input type="text" class="form-control uppercase" id="bank_add" name="bank_add"required aria-required="true">
+											 <input type="text" class="form-control uppercase"  maxlength="50"id="bank_add" name="bank_add"required aria-required="true">
 										   </div>
 										   <div class="form-group">
 											<label class="form-label">Bank Address 2</label>
 											<label style="color: red">*</label>
-											 <input type="text" class="form-control uppercase" id="bank_addr2" name="bank_addr2"required aria-required="true">
+											 <input type="text" class="form-control uppercase" maxlength="50" id="bank_addr2" name="bank_addr2"required aria-required="true">
 										   </div>
 										   <div class="form-group">
 											<label class="form-label">City Code</label>
 											<label style="color: red">*</label>
-											 <input type="text" class="form-control uppercase" id="city_code" name="city_code"required aria-required="true">
+											 <input type="text" class="form-control uppercase"  maxlength="10"id="city_code" name="city_code"required aria-required="true" pattern="\d{1,10}" title="Only digits"/>
 										   </div>
 										   <div class="form-group">
 											<label class="form-label">State Code</label>
 											<label style="color: red">*</label>
-											 <input type="text" class="form-control uppercase" id="state_code" name="state_code"required aria-required="true">
+											 <input type="text" class="form-control uppercase" maxlength="10" id="state_code" name="state_code"required aria-required="true"   pattern="\d{1,10}" title="Only digits"/>
 										   </div>
-												
-
 												<div class="form-group">
 
 													<label class="form-label">Status</label>
@@ -103,32 +101,32 @@ body {
 											 <div class="form-group">
 											<label class="form-label">Country Code</label>
 											<label style="color: red">*</label>
-											 <input type="text" class="form-control uppercase" id="country_code" name="country_code"required aria-required="true">
+											 <input type="text" class="form-control uppercase"maxlength="10"  id="country_code" name="country_code"required aria-required="true" pattern="\d{1,10}" title="Only digits"/>
 										   </div>
 										    <div class="form-group">
 											<label class="form-label">Account No</label>
 											<label style="color: red">*</label>
-											 <input type="text" class="form-control uppercase" id="account_no" name="account_no"required aria-required="true">
+											 <input type="text" class="form-control uppercase" maxlength="15" id="account_no" name="account_no"required aria-required="true" pattern="\d{1,15}" title="Only digits"/>
 										   </div>
 										    <div class="form-group">
 											<label class="form-label">IFSC Code</label>
 											<label style="color: red">*</label>
-											 <input type="text" class="form-control uppercase" id="ifsc_code" name="ifsc_code"required aria-required="true">
+											 <input type="text" class="form-control uppercase" maxlength="11"  id="ifsc_code" name="ifsc_code"required aria-required="true" pattern="\d{1,11}" title="Only digits"/>
 										   </div>
 										    <div class="form-group">
 											<label class="form-label">Swift Code</label>
 											<label style="color: red">*</label>
-											 <input type="text" class="form-control uppercase" id="swift_code" name="swift_code"required aria-required="true">
+											 <input type="text" class="form-control uppercase" maxlength="11"  id="swift_code" name="swift_code"required aria-required="true"pattern="\d{1,11}" title="Only digits"/>
 										   </div>
 										    <div class="form-group">
 											<label class="form-label">Telephone No</label>
 											<label style="color: red">*</label>
-											 <input type="text" class="form-control uppercase" id="telephone_no" name="telephone_no"required aria-required="true">
+											 <input type="text" class="form-control uppercase" maxlength="11" id="telephone_no" name="telephone_no"required aria-required="true"pattern="\d{1,11}" title="Only digits"/>
 										   </div>
 										    <div class="form-group">
 											<label class="form-label">Mobile No</label>
 											<label style="color: red">*</label>
-											 <input type="text" class="form-control uppercase" id="mobile_no" name="mobile_no"required aria-required="true">
+											 <input type="text" class="form-control uppercase" maxlength="11" id="mobile_no" name="mobile_no"required aria-required="true"pattern="\d{1,11}" title="Only digits"/>
 										   </div>									
 										
 											</div>
@@ -143,8 +141,6 @@ body {
 						<div class="col-12">
 							<div class="card">
 								<div class="card-header">
-
-									<h6 class="card-subtitle text-muted">DataTables.</h6>
 								</div>
 								<div class="card-body">
 									<table id="datatables-buttons" class="table table-striped display" style="width:100%">
