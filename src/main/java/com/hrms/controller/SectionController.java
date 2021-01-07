@@ -16,33 +16,46 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.hrms.model.MenuModule;
 import com.hrms.model.Section;
+import com.hrms.service.ModuleService;
 import com.hrms.service.SectionService;
-
-
 @Controller
 public class SectionController {
 
 	@Autowired
 	SectionService sectionService;
-	
+	@Autowired
+	private ModuleService moduleService;
 	
 @GetMapping("/sectionMaster")
 public String sectionMaster(Model model,HttpSession session) {
 	
 	List<Section> listSection = sectionService.getAllSections();
 	model.addAttribute("listSection", listSection);
+	List<MenuModule> modules = moduleService.getAllModules();
+   	if (modules != null) {
+   		model.addAttribute("modules", modules);
+   	}
 	session.setAttribute("username",session.getAttribute("username"));
 		return "sectionMaster";
 	}
 
 
 @PostMapping("/saveSection")
-	public String SaveSection(@ModelAttribute("section") Section section, Model model) {
-		if (section.getSect_Code() != "") {
+	public String SaveSection(@ModelAttribute("section") Section section, Model model,RedirectAttributes redirectAttributes) {
+	boolean isModuleExist = sectionService.checkSectionExists(section);	
+	
+	if (isModuleExist) {
+		redirectAttributes.addFlashAttribute("message", "Section Code Already exists !  ");
+	    redirectAttributes.addFlashAttribute("alertClass", "alert-success");
+	    return "redirect:/sectionMaster";
+	}
+	
+	else{
 			sectionService.addSection(section);
-			
 			List<Section> listSection = sectionService.getAllSections();
 			model.addAttribute("listSection", listSection);
 		} 
@@ -79,9 +92,6 @@ public String deletesection(@PathVariable("id")String id,  Model model,HttpSessi
     session.setAttribute("username",session.getAttribute("username")); 
     return "redirect:/sectionMaster";
 }
-
-
-	
 
 
 }

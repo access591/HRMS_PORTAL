@@ -41,10 +41,13 @@ body {
 					</div>
 					<div class="row">
 						<div class="col-12">
-							<div class="card">
+							<div class="card" style="border-radius:2.2rem">
 								<div class="card-header">
-									<h5 class="card-title">Section Master</h5>
-
+									<h5 class="card-title">Create  Section Master</h5>
+										<div class="alert-outline">
+									<div th:if="${message}" th:text="${message}" style="color: red">
+									</div> 
+									</div>
 								</div>
 								<div class="card-body">
 									<form id="validation-form" action="#" th:action="@{/saveSection}" th:object="${section}" method="post">
@@ -52,14 +55,11 @@ body {
 											<div class="col-12 col-lg-6">
 												<div class="form-group">
 										
-											  <label> Code </label>
+											  <label>Section Code </label>
 											  		<label style="color: red">*</label>
 											  	 
-											   <input
-														type="text" class="form-control" id="Sect_Code" name="Sect_Code" required aria-required="true">
+											   <input type="text" class="form-control" maxlength="10"id="Sect_Code" name="Sect_Code" required aria-required="true">
 												</div>
-												
-
 												<div class="form-group">
 
 													<label class="form-label">Status</label>
@@ -78,7 +78,7 @@ body {
 											<div class="form-group">
 											<label class="form-label">Amount limit</label>
 											<label style="color: red">*</label>
-											 <input type="text" class="form-control uppercase" id="Amt_lt" name="Amt_lt"required aria-required="true">
+											 <input type="text" class="form-control number"  maxlength="12" id="Amt_lt" name="Amt_lt" pattern="\d{1,12}" required >
 										</div>
 										
 											</div>
@@ -92,8 +92,6 @@ body {
 						<div class="col-12">
 							<div class="card">
 								<div class="card-header">
-
-									<h6 class="card-subtitle text-muted">DataTables.</h6>
 								</div>
 								<div class="card-body">
 									<table id="datatables-buttons" class="table table-striped display" style="width:100%">
@@ -148,7 +146,7 @@ body {
 		            scroller: false,
 				   responsive: true,
 				   lengthMenu :[[10,20,30,-1 ],['10 rows', '20 rows', '30 rows', 'Show all' ] ],
-					buttons :['pageLength',"copy", "print"]
+					buttons :[]
 			});
 			datatablesButtons.buttons().container().appendTo("#datatables-buttons_wrapper .col-md-6:eq(0)")
 		});
