@@ -56,10 +56,10 @@ body {
 									<div class="row">
 											<div class="col-12 col-lg-6">
 												<div class="form-group">
-											       <label> Code </label>
+											       <label>Section Code </label>
 											  		<label style="color: red">*</label>
 											  	 
-											   <input type="text"class="form-control" id="Sect_Code" name="Sect_Code" th:value="${sectionEdit.Sect_Code}" readonly >
+											   <input type="text"class="form-control" id="Sect_Code" maxlength="12"  name="Sect_Code" th:value="${sectionEdit.Sect_Code}" readonly >
 												</div>
 
 												<div class="form-group">
@@ -67,10 +67,10 @@ body {
 													<div class="custom-controls-stacked">
 													
 														<label class="radio-inline">
-														<input type="checkbox" value="Y" name="active" th:checked="${sectionEdit.active}==Y "/>Active   
+														<input type="radio" value="Y" name="active" th:checked="${sectionEdit.active}==Y "/>Active   
 															</label>
 														<label class="radio-inline">
-														<input type="checkbox" value="N" name="active" th:checked="${sectionEdit.active}==N"/>Inactive  
+														<input type="radio" value="N" name="active" th:checked="${sectionEdit.active}==N"/>Inactive  
 															</label>
 													</div>
 												</div>
@@ -80,14 +80,13 @@ body {
 											
 											<label class="form-label">Amount Limit</label>
 											<label style="color: red">*</label>
-											 <input type="text" class="form-control uppercase" id="Amt_lt" name="Amt_lt"th:value="${sectionEdit.Amt_lt}" required aria-required="true">
+											 <input type="text" class="form-control uppercase" maxlength="12"  pattern="\d{1,12}" id="Amt_lt" name="Amt_lt"th:value="${sectionEdit.Amt_lt}" required aria-required="true">
 										   </div>
 
 											</div>
 										</div>
-								
 										<button type="submit" class="btn btn-primary">Update</button>
-								        <button type="reset"class="btn btn-primary" value="Reset">Reset</button>
+								        <button type="submit"class="btn btn-primary" value="cancel">Cancel</button>
 
 									</form>
 								</div>

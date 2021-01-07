@@ -71,5 +71,15 @@ public class SectionDaoImpl implements SectionDao {
 
 	}
 
+	@Override
+	public Section checkSectionExists(Section section) {
+		
+		Session session = sessionFactory.openSession();
+		Criteria criteria = session.createCriteria(Section.class);
+		Section secode = (Section) criteria.setFetchMode("M_SECTION",FetchMode.SELECT)
+				.add(Restrictions.eq("Sect_Code", section.getSect_Code())).uniqueResult();
+		return secode;
+	}
+
 	
 }

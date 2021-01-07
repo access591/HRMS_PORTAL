@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.hrms.model.Section;
 import com.hrms.repository.SectionDao;
 @Service
@@ -44,5 +43,15 @@ public class SectionServiceImpl implements SectionService {
 
 	}
 
+	@Override
+	public boolean checkSectionExists(Section section) {
+		
+		Section e = sectionDao.checkSectionExists(section);
+		if (e != null) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 
 }
