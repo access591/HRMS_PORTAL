@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -31,6 +32,7 @@ public class ProgramController {
 	public String program(@ModelAttribute Module module, Model model, HttpSession session) {
 		List<Program> listpPrograms = programService.getAllPrograms();
 		model.addAttribute("listpPrograms", listpPrograms);
+		
 		List<Module> modulesList = moduleService.getActiveModules();
 		model.addAttribute("modulesList", modulesList);
 		
@@ -50,8 +52,10 @@ public class ProgramController {
 			RedirectAttributes redirectAttributes, HttpSession session) {
 		Module m=new Module();
 		SubModule S=new SubModule();
+		
 		m.setModuleCode(program.getDmoduleCode());
 		S.setSubModuleCode(program.getDsubMouduleCode());
+		
 		program.setpModuleCode(m);
 		program.setSubModuleCode(S);
 		
@@ -67,13 +71,37 @@ public class ProgramController {
 		
 			programService.addProgram(program);
 			List<Program> listpPrograms = programService.getAllPrograms();
+			
 			model.addAttribute("listpPrograms", listpPrograms);
 			session.setAttribute("username", session.getAttribute("username"));
 		}
 		return "redirect:/program";
 
 	}
+
+	@GetMapping(value = { "/editProgram/{id}" })
+	public String editProgramdata(@PathVariable("id") String id, Model model, HttpSession session) {
+		
+		
+		Program programEdit = programService.findProgramById(id);
+		model.addAttribute("programEdit", programEdit);
+		
+		List<Module> modulesList = moduleService.getActiveModules();
+		model.addAttribute("modulesList", modulesList);
+		
+		List<SubModule>subModulesList=subModuleService.getActiveSubModules();
+		model.addAttribute("subModulesList", subModulesList);
+
+		session.setAttribute("username", session.getAttribute("username"));
+		return "/editProgram";
+	}
 	
-	
+@PostMapping("/updateProgram")
+	public String updateProgram(@ModelAttribute("programupdate") Program p, Model model) {
+
+		  this.programService.updateProgram(p);
+	  	  
+		  return "redirect:/program";
+	}
 
 }

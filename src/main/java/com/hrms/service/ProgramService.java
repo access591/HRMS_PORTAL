@@ -10,5 +10,6 @@ public interface ProgramService {
 	List<Program> getAllPrograms();
 	void addProgram(Program program);
 	boolean checkProgramExists(Program program);
-
+	Program findProgramById(String id);
+	 public void updateProgram(Program p); 
 }

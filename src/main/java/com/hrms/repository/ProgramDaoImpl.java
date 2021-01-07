@@ -47,6 +47,26 @@ public class ProgramDaoImpl implements ProgramDao {
 				.add(Restrictions.eq("programCode", program.getProgramCode())).uniqueResult();
 		return pmcode;
 	}
+
+	@Override
+	public Program findProgramById(String id) {
+		Session session = sessionFactory.openSession();
+		Criteria criteria = session.createCriteria(Program.class);
+		Program programEdit = (Program) criteria.setFetchMode("M_PROGRAM", FetchMode.SELECT)
+			.add(Restrictions.eq("programCode", id)).uniqueResult();
+
+		return programEdit;
+	}
+
+	@Override
+	public void updateProgram(Program p) {
+		Session session = this.sessionFactory.getCurrentSession();
+		Transaction tx = session.beginTransaction();
+		session.update(p);
+		tx.commit();
+		session.close();	
+		
+	}
 	
 
 }
