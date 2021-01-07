@@ -9,4 +9,6 @@ public interface ProgramDao {
 	List<Program> getAllPrograms();
 	Program checkProgramExists(Program program);
 	void addProgram(Program program);
+	 Program findProgramById(String id);
+	  public void updateProgram(Program p); 
 }

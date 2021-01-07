@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<script src="./js/settings.js"></script>
+<script src="./js/app.js"></script>
+<link rel="stylesheet" type="text/css" th:href="@{/css/modern.css}" />
+
+<script  src="https://www.googletagmanager.com/gtag/js?id=UA-120946860-7"></script>
+<style>
+body {
+	opacity: 0;
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+</style>
+<script>
+	window.dataLayer = window.dataLayer || [];
+	function gtag() {
+		dataLayer.push(arguments);
+	}
+	gtag('js', new Date());
+
+	gtag('config', 'UA-120946860-7');
+</script>
+<head>
+<meta charset="utf-8" />
+<title>HRMS</title>
+</head>
+<body>
+<div class="wrapper">
+<nav id="sidebar" class="sidebar">
+ <div th:replace="fragments/sidebar :: div"></div>
+ </nav>
+<div class="main">
+<div th:replace="fragments/header ::div"></div>
+			<main class="content">
+				<div class="container-fluid">
+
+					<div class="header">
+						<h1 class="header-title"> Master</h1>
+						<nav aria-label="breadcrumb">
+						</nav>
+					</div>
+					
+					
+					<div class="row">
+						<div class="col-12">
+							<div class="card">
+								<div class="card-header">
+									<h5 class="card-title"> Update Program </h5>
+
+								</div>
+								<div class="card-body">
+									<form id="validation-form" action="#" th:action="@{/updateProgram}" th:object="${programupdate}" method="post">
+									
+									<div class="row">
+												<div class="col-12 col-lg-6">
+												<div class="form-group">
+													<label> Program Code </label> 
+													<label style="color: red">*</label>
+													<input type="text" class="form-control" id="programCode" name="programCode"  th:value="${programEdit.programCode}" readonly   required>
+												</div>
+												<div class="form-group" >
+														<label class="form-label">Module</label>
+															<label style="color: red">*</label>
+													   <select class="form-control" name="dmoduleCode"id="dmoduleCode" required aria-required="true">
+												    <option value="">Select Module</option>
+													<option   th:each="module: ${modulesList}" th:value="${module.getModuleCode()}" th:text="${module.getModuleName()}"th:field="${programEdit.dmoduleCode}"></option>
+											     	</select>
+										   			</div>
+
+
+												<div class="form-group">
+													<label style="color: red">*</label> <label
+														class="form-label">Program Type </label>
+														 <select class="form-control" name="programType" id="programType">
+														<option value="A" th:selected=${programEdit.programType}==A>A</option>
+														<option value="B" th:selected=${programEdit.programType}==B>B</option>
+														<option value="C" th:selected=${programEdit.programType}==C>C</option>
+
+													</select>
+												</div>
+
+													<div class="form-group">
+
+													<label class="form-label">Status</label>
+													<div class="custom-controls-stacked">
+														<label class="radio-inline"> 
+														<input type="radio" value="Y" name="activeYn" th:checked="${programEdit.activeYn}==Y "/> Active
+														</label> 
+														<label class="radio-inline"> 
+													<input type="radio" value="N" name="activeYn"th:checked="${programEdit.activeYn}==N "/>Inactive
+														</label>
+
+													</div>
+												</div>
+
+											</div>
+											<div class="col-12 col-lg-6">
+												<div class="form-group">
+													<label style="color: red">*</label> 
+													<label>Program Name</label> 
+													<input type="text" class="form-control"name="programName"id="programName" th:value="${programEdit.programName}" required>
+
+												</div>
+													<div class="form-group">
+														<label class="form-label">Sub Module</label>
+															<label style="color: red">*</label>
+													   <select class="form-control" name="dsubMouduleCode"id="dsubMouduleCode" required aria-required="true">
+												   				 <option value="">Select Sub Module</option>
+													<option th:each="submodule: ${subModulesList}" th:value="${submodule.getSubModuleCode()}" 
+														th:text="${submodule.getSubModuleName()}" th:field="${programEdit.dsubMouduleCode}"></option>
+											     	</select>
+										   			</div>
+							
+												
+												<div class="form-group">
+													<label style="color: red">*</label> 
+													<label>Program Href</label> 
+														<input type="text" class="form-control"id="programHrefName"name="programHrefName" th:value="${programEdit.programHrefName}" required>
+												</div>
+
+												<div class="form-group">
+													<label>Sequence No</label> 
+													<input type="text" class="form-control" th:value="${programEdit.seqProgram}" id="seqProgram" name="seqProgram"required>
+												</div>
+
+											</div>
+										</div>
+								
+								
+								
+										<button type="submit" class="btn btn-primary">Update</button>
+								        <button type="submit"class="btn btn-primary" value="cancel">Cancel</button>
+								
+									</form>
+								</div>
+							</div>
+						</div>
+
+					</div>
+					
+					
+				</div>
+				
+			</main>
+
+			<footer class="footer">
+	         <div th:replace="./fragments/footer :: div"></div>
+	         </footer>
+		</div>
+		</div>
+
+</body>
+</html>
