@@ -12,4 +12,5 @@ public interface ProgramService {
 	boolean checkProgramExists(Program program);
 	Program findProgramById(String id);
 	 public void updateProgram(Program p); 
+	  public void removeProgram(String id);
 }

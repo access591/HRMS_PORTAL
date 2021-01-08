@@ -103,5 +103,13 @@ public class ProgramController {
 	  	  
 		  return "redirect:/program";
 	}
+@GetMapping(value = {"/deleteProgram/{id}"})
+public String deleteprogram(@PathVariable("id")String id,  Model model,HttpSession session)
+{ 
+	  this.programService.removeProgram(id);
+   session.setAttribute("username",session.getAttribute("username")); 
+   return "redirect:/program";
+}
+
 
 }
