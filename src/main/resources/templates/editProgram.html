@@ -67,7 +67,7 @@ body {
 															<label style="color: red">*</label>
 													   <select class="form-control" name="dmoduleCode"id="dmoduleCode" required aria-required="true">
 												    <option value="">Select Module</option>
-													<option   th:each="module: ${modulesList}" th:value="${module.getModuleCode()}" th:text="${module.getModuleName()}"th:field="${programEdit.dmoduleCode}"></option>
+													<option   th:each="module: ${modulesList}" th:value="${module.getModuleCode()}" th:text="${module.getModuleName()}"th:field="${programEdit.pModuleCode.moduleCode}"></option>
 											     	</select>
 										   			</div>
 
@@ -111,7 +111,7 @@ body {
 													   <select class="form-control" name="dsubMouduleCode"id="dsubMouduleCode" required aria-required="true">
 												   				 <option value="">Select Sub Module</option>
 													<option th:each="submodule: ${subModulesList}" th:value="${submodule.getSubModuleCode()}" 
-														th:text="${submodule.getSubModuleName()}" th:field="${programEdit.dsubMouduleCode}"></option>
+														th:text="${submodule.getSubModuleName()}" th:field="${programEdit.subModuleCode.subModuleCode}"></option>
 											     	</select>
 										   			</div>
 							
