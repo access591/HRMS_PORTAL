@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import com.hrms.model.Grade;
 import com.hrms.model.MenuModule;
 import com.hrms.service.GradeMaterService;
@@ -38,8 +40,16 @@ public class GradeMaterController {
 		}
 	
 @PostMapping("/saveGrade")
-  public String SaveGrade(@ModelAttribute("grade") Grade grade, Model model,HttpSession session) {
-		if (grade.getGrade_Code() != "") {
+  public String SaveGrade(@ModelAttribute("grade") Grade grade, Model model,HttpSession session,RedirectAttributes redirectAttributes) {
+	boolean isGradeExist = gradeMaterService.checkGradeExists(grade);
+	
+	if (isGradeExist) {
+	    redirectAttributes.addFlashAttribute("message", "Grade Code Already exists !  ");
+	    redirectAttributes.addFlashAttribute("alertClass", "alert-success");
+	    return "redirect:/gradeMaster";
+	
+	}
+	    else {
 			gradeMaterService.addGrade(grade); 
 			List<Grade>listGrade = gradeMaterService.getAllGrades();
 			model.addAttribute("listGrade", listGrade); 

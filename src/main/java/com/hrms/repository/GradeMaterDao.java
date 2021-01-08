@@ -11,5 +11,5 @@ public interface GradeMaterDao {
 	  Grade findGradeById(String id);
 	   public void updateGrade(Grade d); 
 	   public void removeGrade(String id);
-	  
+	   Grade checkGradeExists(Grade grade);
 }

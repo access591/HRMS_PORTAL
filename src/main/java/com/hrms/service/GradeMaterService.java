@@ -12,7 +12,7 @@ public interface GradeMaterService {
 	   Grade findGradeById(String id);
 	   public void updateGrade(Grade d); 
 	   public void removeGrade(String id);
-	 
+	   boolean checkGradeExists(Grade grade);
 	
 	
 }
