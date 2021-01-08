@@ -11,7 +11,6 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-
 import com.hrms.model.Grade;
 
 @Repository
@@ -70,5 +69,12 @@ public class GradeMaterDaoImpl implements GradeMaterDao {
 		session.close();	
 		
 	}
+	@Override
+	public Grade checkGradeExists(Grade grade) {
+		Session session = sessionFactory.openSession();
+		Criteria criteria = session.createCriteria(Grade.class);
+		Grade gecode = (Grade) criteria.setFetchMode("M_Grade",FetchMode.SELECT)
+				.add(Restrictions.eq("Grade_Code", grade.getGrade_Code())).uniqueResult();
+		return gecode;	}
 
 }

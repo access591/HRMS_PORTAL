@@ -45,7 +45,10 @@ body {
 							<div class="card">
 								<div class="card-header">
 									<h5 class="card-title">GRADE MASTER </h5>
-
+								<div class="alert-outline">
+									<div th:if="${message}" th:text="${message}" style="color: red">
+									</div> 
+									</div>	
 								</div>
 								<div class="card-body">
 									<form id="validation-form" action="#" th:action="@{/saveGrade}" th:object="${grade}" method="post">
@@ -91,8 +94,6 @@ body {
 	      <div class="col-12">
 							<div class="card">
 								<div class="card-header">
-
-									<h6 class="card-subtitle text-muted">DataTables.</h6>
 								</div>
 								<div class="card-body">
 								<table id="datatables-buttons" class="table table-striped display" style="width:100%">
