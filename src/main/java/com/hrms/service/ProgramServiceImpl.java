@@ -60,6 +60,12 @@ public class ProgramServiceImpl implements ProgramService {
 		this.programDao.updateProgram(p);
 		
 	}
+
+	@Override
+	public void removeProgram(String id) {
+		this.programDao.removeProgram(id);
+		
+	}
 	
 
 }

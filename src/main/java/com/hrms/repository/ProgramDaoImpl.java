@@ -34,8 +34,6 @@ public class ProgramDaoImpl implements ProgramDao {
 		session.persist(program);
 		tx.commit();
 		session.close();
-		
-		
 	}
 
 	@Override
@@ -63,6 +61,16 @@ public class ProgramDaoImpl implements ProgramDao {
 		Session session = this.sessionFactory.getCurrentSession();
 		Transaction tx = session.beginTransaction();
 		session.update(p);
+		tx.commit();
+		session.close();	
+	}
+
+	@Override
+	public void removeProgram(String id) {
+		Session session = this.sessionFactory.getCurrentSession();
+		Transaction tx = session.beginTransaction();
+		Program p = (Program) session.load(Program.class, new String(id));
+		session.delete(p);
 		tx.commit();
 		session.close();	
 		
