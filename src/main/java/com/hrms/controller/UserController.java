@@ -19,6 +19,7 @@ import com.hrms.model.MenuModule;
 import com.hrms.model.Module;
 import com.hrms.model.Program;
 import com.hrms.model.SubModule1;
+import com.hrms.model.UserEntity;
 import com.hrms.service.ModuleService;
 import com.hrms.service.ReCaptchaValidationService;
 import com.hrms.service.SubModuleService;
@@ -53,7 +54,10 @@ public class UserController {
 			 //subModuleService.add(getSubModuleObject(),"1001");
 			List<MenuModule> modules = moduleService.getAllModules();
 			model.addAttribute("modules", modules);
-			session.setAttribute("username",login.getUserCode());
+			String id=login.getUserCode();
+			UserEntity userRecord = userService.findDataById(id);
+			session.setAttribute("uuuuu",userRecord.getUserName());
+		session.setAttribute("username",login.getUserCode());
 			return "dashboard";
 		} else {
 			model.addAttribute("message", "Please Verify Captcha");

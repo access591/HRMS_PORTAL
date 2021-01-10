@@ -9,5 +9,5 @@ public interface UserDao {
 	UserEntity findUser(Login login);
 	
 	List<UserEntity> getAllUsers();
-
+	UserEntity findDataById(String id);
 }

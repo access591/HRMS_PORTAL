@@ -29,4 +29,10 @@ public class UserServiceImpl implements UserService {
 		List<UserEntity> listUsers = userDao.getAllUsers();
 		return listUsers;
 	}
+
+	@Override
+	public UserEntity findDataById(String id) {
+		return userDao.findDataById(id);
+
+	}
 }
