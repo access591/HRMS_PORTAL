@@ -9,4 +9,5 @@ import com.hrms.model.UserEntity;
 public interface UserService {
 	boolean checkUserExists(Login login);
 	public List<UserEntity> getAllUsers();
+	UserEntity findDataById(String id);
 }

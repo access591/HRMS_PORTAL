@@ -38,4 +38,14 @@ public class UserDaoImpl implements UserDao {
 		return listUser;
 	}
 
+	@Override
+	public UserEntity findDataById(String id) {
+		Session session = sessionFactory.openSession();
+		Criteria criteria = session.createCriteria(UserEntity.class);
+		UserEntity userRecord = (UserEntity) criteria.setFetchMode("Myuser", FetchMode.SELECT)
+				.add(Restrictions.eq("userCode", id)).uniqueResult();
+
+		return userRecord;
+	}
+
 }
