@@ -9,9 +9,6 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
-
-import org.hibernate.annotations.ColumnTransformer;
-
 @Entity
 @Table(name = "M_MODULE")
 public class Module implements Serializable {
@@ -26,7 +23,7 @@ public class Module implements Serializable {
 	private String moduleCode;
 	
 	@Column(name = "MODULE_NAME")
-	@ColumnTransformer(read = "UPPER(MODULE_NAME)")
+	
 	private String moduleName;
 
 	@Column(name = "ACTIVE_YN")
