@@ -57,6 +57,7 @@ public class UserController {
 			String id=login.getUserCode();
 			UserEntity userRecord = userService.findDataById(id);
 			session.setAttribute("uuuuu",userRecord.getUserName());
+			session.setAttribute("user_desg",userRecord.getDesgName());
 		session.setAttribute("username",login.getUserCode());
 			return "dashboard";
 		} else {
