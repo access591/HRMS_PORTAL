@@ -59,7 +59,7 @@ body {
 												<div class="form-group">
 													<label> Module Code </label> <label style="color: red">*</label>
 
-												<input type="text" class="form-control" id="moduleCode"name="moduleCode" required aria-required="true">
+												<input type="text" class="form-control" id="moduleCode"name="moduleCode" title="Module Code !" required aria-required="true">
 												</div>
 
 												<div class="form-group">
@@ -83,13 +83,13 @@ body {
 														style="color: red">*</label> <input type="text"
 														class="form-control uppercase"
 														onkeypress="return /[a-z]/i.test(event.key)"
-														id="moduleName" name="moduleName" required
+														id="moduleName"   title="Module Name!"name="moduleName" required
 														aria-required="true">
 												</div>
 
 												<div class="form-group">
 													<label>Sequence No</label> <input type="text"
-														class="form-control required" id="seqNo" name="seqNo"
+														class="form-control required" id="seqNo" name="seqNo"title="Sequence No"
 														pattern="[0-9]">
 
 												</div>
