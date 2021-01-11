@@ -100,21 +100,14 @@ body {
 											<div class="form-group">
 											<label class="form-label"> Sub Module Name</label>
 											<label style="color: red">*</label>
-											 <input type="text" class="form-control uppercase" onkeypress="return /[a-z]/i.test(event.key)" id="subModuleName" name="subModuleName"required aria-required="true">
+											 <input type="text" class="form-control" pattern="^[a-zA-Z\s]*$" title="Sub Module Code"maxlength="40" id="subModuleName" name="subModuleName"required aria-required="true">
 													</div>
 													
 											<div class="form-group">
 													<label>Sequence No</label> <input type="text"
-														class="form-control required" id="seqNoSubModule" name="seqNoSubModule"required aria-required="true"
+														class="form-control required" id="seqNoSubModule" title="Sequence No" name="seqNoSubModule"required aria-required="true"
 														pattern="[0-9]">
-
 												</div>
-													
-													
-													
-													
-													
-													
 											</div>
 										</div>
 										<button type="submit" class="btn btn-primary">Save</button>

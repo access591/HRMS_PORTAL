@@ -57,13 +57,13 @@ body {
 										    <div class="form-group">
 											  <label> Sub Module Code </label>
 											  	<label style="color: red">*</label>
-											   <input type="text" class="form-control" id="subModuleCode" name="subModuleCode" th:value="${subModuleEdit.subModuleCode}" readonly >
+											   <input type="text" class="form-control" maxlength="40"  pattern="^[a-zA-Z\s]*$" title="Sub Module Code" id="subModuleCode" name="subModuleCode" th:value="${subModuleEdit.subModuleCode}" readonly >
 												</div>
 												
 										<div class="form-group" >
 											<label class="form-label">Module</label>
 											<label style="color: red">*</label>
-											<select class="form-control" name="moduleCode"id="moduleCode" required aria-required="true">
+											<select class="form-control" name="moduleCode"id="moduleCode"  title="Module Name" required aria-required="true">
 												    <option value="">Select Module</option>
 													<option   th:each="module: ${modulesList}" th:value="${module.getModuleCode()}" th:text="${module.getModuleName()}" th:field="${subModuleEdit.moduleCode}"></option>
 											     </select>
@@ -94,7 +94,7 @@ body {
 											<div class="form-group">
 											<label class="form-label"> Sub Module Name</label>
 											<label style="color: red">*</label>
-											 <input type="text" class="form-control uppercase" onkeypress="return /[a-z]/i.test(event.key)" id="subModuleName" name="subModuleName"required aria-required="true" th:value="${subModuleEdit.subModuleName}">
+											 <input type="text" class="form-control "pattern="^[a-zA-Z\s]*$"  id="subModuleName" name="subModuleName"required aria-required="true" th:value="${subModuleEdit.subModuleName}">
 													</div>
 													
 											<div class="form-group">
