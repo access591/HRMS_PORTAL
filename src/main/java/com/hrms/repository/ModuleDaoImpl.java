@@ -12,10 +12,7 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.hrms.model.Grade;
 import com.hrms.model.Module;
-import com.hrms.model.UserEntity;
-
 @Repository
 public class ModuleDaoImpl implements ModuleDao {
 
@@ -92,6 +89,17 @@ public class ModuleDaoImpl implements ModuleDao {
 		List<Module> modulesList = (List<Module>) criteria.setFetchMode("M_MODULE", FetchMode.SELECT).list();
 		
 		return modulesList;
+	}
+
+	@Override
+	public List<Module> getAllMenuModules() {
+		Session session = sessionFactory.openSession();
+		Criteria criteria = session.createCriteria(Module.class);
+		criteria.addOrder(Order.asc("seqNo"));
+		criteria.add(Restrictions.like("active", "%Y"));
+		List<Module> modules = (List<Module>) criteria.setFetchMode("M_MODULE", FetchMode.SELECT).list();
+		
+		return modules;
 	}
 
 	
