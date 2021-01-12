@@ -7,7 +7,7 @@ import com.hrms.model.Module;
 public interface ModuleDao {
 
 	List<Module> getAllModules();
-
+	List<Module> getAllMenuModules();
 	void addModule(Module module);
 	Module findModule(Module module);
 	   Module findModuleById(String id);

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.FetchMode;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -94,11 +95,24 @@ public class ModuleDaoImpl implements ModuleDao {
 	@Override
 	public List<Module> getAllMenuModules() {
 		Session session = sessionFactory.openSession();
-		Criteria criteria = session.createCriteria(Module.class);
-		criteria.addOrder(Order.asc("seqNo"));
-		criteria.add(Restrictions.like("active", "%Y"));
-		List<Module> modules = (List<Module>) criteria.setFetchMode("M_MODULE", FetchMode.SELECT).list();
+	
+		//String sql = "SELECT * FROM M_MODULE  ";
 		
+		
+		  String sql ="SELECT u.MODULE_CODE,m.MODULE_NAME,m.ACTIVE_YN,m.INS_BY,m.INS_DATE,m.UPDATE_BY,m.UPDATE_DATE,m.SEQ_NO FROM hrms.m_module m, hrms.m_urights u\r\n"
+		  + "where m.MODULE_CODE = u.MODULE_CODE\r\n" + "and u.USER_CODE ='101' ";
+		 
+		  System.out.println("Surendra Print Sql Query "+sql);
+		SQLQuery query = session.createSQLQuery(sql);
+		query.addEntity(Module.class);
+		List modules = query.list();
+		
+		/*
+		 * Criteria criteria = session.createCriteria(Module.class);
+		 * criteria.addOrder(Order.asc("seqNo"));
+		 * criteria.add(Restrictions.like("active", "%Y")); List<Module> modules =
+		 * (List<Module>) criteria.setFetchMode("M_MODULE", FetchMode.SELECT).list();
+		 */
 		return modules;
 	}
 
