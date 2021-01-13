@@ -29,16 +29,17 @@ public class SubModuleController {
 	@Autowired
 	private ModuleService moduleService;
 @GetMapping("/submodulepage")
-	public String SubmodulePage(Model model) {
+	public String SubmodulePage(Model model,HttpSession session) {
 		List<SubModule> listSubModule = subModuleService.getAllSubModules();
 		model.addAttribute("listSubModule", listSubModule);
 		List<Module> modulesList = moduleService.getActiveModules();
 		model.addAttribute("modulesList", modulesList);
-		List<MenuModule> modules = moduleService.getAllModules();
+		String userCode= (String)session.getAttribute("username");
+		List<MenuModule> modules = moduleService.getAllModulesss(userCode);
 		if (modules != null) {
 			model.addAttribute("modules", modules);
 		}
-
+		session.setAttribute("username", session.getAttribute("username"));
 		return "subModule";
 	}
 

@@ -52,13 +52,15 @@ public class UserController {
 			//moduleService.addModule(getModuleObject());
 			//moduleService.update(getModuleObject());
 			 //subModuleService.add(getSubModuleObject(),"1001");
-			List<MenuModule> modules = moduleService.getAllModules();
-			model.addAttribute("modules", modules);
+			
 			String id=login.getUserCode();
 			UserEntity userRecord = userService.findDataById(id);
 			session.setAttribute("uuuuu",userRecord.getUserName());
 			session.setAttribute("user_desg",userRecord.getDesgName());
 		session.setAttribute("username",login.getUserCode());
+		String userCode= (String)session.getAttribute("username");
+		List<MenuModule> modules = moduleService.getAllModulesss(userCode);
+		model.addAttribute("modules", modules);
 			return "dashboard";
 		} else {
 			model.addAttribute("message", "Please Verify Captcha");
@@ -66,21 +68,7 @@ public class UserController {
 		}
 	}
 
-//	private Module getModuleObject() {
-//		Module module = new Module();
-//		module.setModuleName("XYZ_updated");
-//		module.setModuleCode("XYZ_1001");
-//		module.setActive("Y");
-//		module.setInsertedBy("xyz");
-//		Date date = new Date();
-//		module.setInsertedDate(date);
-//		module.setModulePrograms(new ArrayList<Program>());
-//		module.setSeqNo(2);
-//		module.setSubModules(new ArrayList<SubModule>());
-//		module.setUpdateBy("xyz");
-//		module.setUpdatedDate(date);
-//		return module;
-//	}
+
 	
 	private SubModule1 getSubModuleObject() {
 
@@ -97,20 +85,10 @@ public class UserController {
 		subModule.setSubModuleName("Test_Sub_module");
 		subModule.setSubModuleCode("Test_Module");
 		subModule.setSubModulePrograms(new ArrayList<Program>());
-		subModule.setUpdateBySubModule("Hari");
+		subModule.setUpdateBySubModule("Surendra");
 		subModule.setUpdatedDateSubModule(date);
 
-//		module.setModuleName("XYZ_updated");
-//		module.setModuleCode("XYZ_1001");
-//		module.setActive("Y");
-//		module.setInsertedBy("xyz");
-//		Date date = new Date();
-//		module.setInsertedDate(date);
-//		module.setModulePrograms(new ArrayList<Program>());
-//		module.setSeqNo(2);
-//		module.setSubModules(new ArrayList<SubModule>());
-//		module.setUpdateBy("xyz");
-//		module.setUpdatedDate(date);
+
 		return subModule;
 	}
 
