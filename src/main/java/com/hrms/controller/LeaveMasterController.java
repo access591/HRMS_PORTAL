@@ -19,7 +19,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 
 import com.hrms.model.Leave;
+import com.hrms.model.MenuModule;
 import com.hrms.service.LeaveService;
+import com.hrms.service.ModuleService;
 
 
 @Controller
@@ -27,13 +29,19 @@ public class LeaveMasterController {
 
 	@Autowired
 	LeaveService leaveService;
-	
+	@Autowired
+	ModuleService moduleService;
 	
 @GetMapping("/leaveMaster")
 public String LeaveMaster(Model model,HttpSession session) {
 	
 	List<Leave> listLeave = leaveService.getAllLeaves();
 	model.addAttribute("listLeave", listLeave);
+	String userCode= (String)session.getAttribute("username");
+	List<MenuModule> modules = moduleService.getAllModulesList(userCode);
+	if (modules != null) {
+		model.addAttribute("modules", modules);
+	}
 	session.setAttribute("username",session.getAttribute("username"));
 		return "LeaveMaster";
 	}

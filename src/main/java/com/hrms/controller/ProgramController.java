@@ -39,7 +39,8 @@ public class ProgramController {
 		List<SubModule>subModulesList=subModuleService.getActiveSubModules();
 		model.addAttribute("subModulesList", subModulesList);
 		
-		List<MenuModule> modules = moduleService.getAllModules();
+		String userCode= (String)session.getAttribute("username");
+		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
 		if (modules != null) {
 			model.addAttribute("modules", modules);
 		}
