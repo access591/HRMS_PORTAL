@@ -15,7 +15,7 @@ public interface ModuleDao {
 	   public void updateModule(Module m); 
 	   public void removeModule(String id);
 	   List<Module>getActiveModules();
-	   List<Module> getAllModulesss(String userCode);
+	   List<Module> getAllModulesList(String userCode);
 	   
 
 }

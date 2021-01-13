@@ -92,7 +92,7 @@ public class ModuleDaoImpl implements ModuleDao {
 		return modulesList;
 	}
 	@Override
-	public List<Module> getAllModulesss(String userCode) {
+	public List<Module> getAllModulesList(String userCode) {
 		Session session = sessionFactory.openSession();
 		
 		//String sql = "SELECT * FROM M_MODULE  ";

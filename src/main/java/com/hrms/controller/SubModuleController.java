@@ -35,7 +35,7 @@ public class SubModuleController {
 		List<Module> modulesList = moduleService.getActiveModules();
 		model.addAttribute("modulesList", modulesList);
 		String userCode= (String)session.getAttribute("username");
-		List<MenuModule> modules = moduleService.getAllModulesss(userCode);
+		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
 		if (modules != null) {
 			model.addAttribute("modules", modules);
 		}
