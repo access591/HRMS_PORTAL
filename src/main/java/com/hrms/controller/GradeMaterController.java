@@ -30,7 +30,8 @@ public class GradeMaterController {
 		
 	 List<Grade>listGrade = gradeMaterService.getAllGrades();
 	  model.addAttribute("listGrade", listGrade); 
-	  List<MenuModule> modules = moduleService.getAllModules();
+		String userCode= (String)session.getAttribute("username");
+		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
 		if (modules != null) {
 			model.addAttribute("modules", modules);
 		}

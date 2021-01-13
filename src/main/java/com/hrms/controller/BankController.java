@@ -36,7 +36,8 @@ public String bankMaster(Model model,HttpSession session) {
 	
 	List<Bank> listBank = bankService.getAllBanks();
 	model.addAttribute("listBank", listBank);
-	List<MenuModule> modules = moduleService.getAllModules();
+	String userCode= (String)session.getAttribute("username");
+	List<MenuModule> modules = moduleService.getAllModulesList(userCode);
 	if (modules != null) {
 		model.addAttribute("modules", modules);
 	}
