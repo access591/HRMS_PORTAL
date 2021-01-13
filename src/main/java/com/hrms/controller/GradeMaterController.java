@@ -17,6 +17,7 @@ import com.hrms.model.Grade;
 import com.hrms.model.MenuModule;
 import com.hrms.service.GradeMaterService;
 import com.hrms.service.ModuleService;
+import com.hrms.service.PageMappingService;
 
 @Controller
 public class GradeMaterController {
@@ -24,10 +25,12 @@ public class GradeMaterController {
 	GradeMaterService gradeMaterService;
 	@Autowired
 	private ModuleService moduleService;
-	
+	@Autowired
+	PageMappingService pageMappingService;
 @GetMapping("/gradeMaster")
 	public String DesignationMaster(Model model,HttpSession session) {
-		
+	int pageno=1;
+	String reqPage="/gradeMaster";
 	 List<Grade>listGrade = gradeMaterService.getAllGrades();
 	  model.addAttribute("listGrade", listGrade); 
 		String userCode= (String)session.getAttribute("username");
@@ -37,7 +40,7 @@ public class GradeMaterController {
 		}
 	  
 	  session.setAttribute("username",session.getAttribute("username"));
-			return "/gradeMaster";
+	  return pageMappingService.PageRequestMapping(reqPage,pageno);
 		}
 	
 @PostMapping("/saveGrade")
