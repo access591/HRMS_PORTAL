@@ -30,7 +30,8 @@ public class ModuleController {
 	public String module(@ModelAttribute Module module, Model model, HttpSession session) {
 		List<Module> modules1 = moduleService.getModules();
 		model.addAttribute("modules1", modules1);
-		List<MenuModule> modules = moduleService.getAllModules();
+		String userCode= (String)session.getAttribute("username");
+		List<MenuModule> modules = moduleService.getAllModulesss(userCode);
 		if (modules != null) {
 			model.addAttribute("modules", modules);
 		}

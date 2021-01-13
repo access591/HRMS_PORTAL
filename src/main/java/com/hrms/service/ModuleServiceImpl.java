@@ -25,7 +25,7 @@ public class ModuleServiceImpl implements ModuleService {
 	@Override
 	public List<MenuModule> getAllModules() {
 
-		List<MenuModule> menuModulelist = processModules(moduleDao.getAllMenuModules());
+		List<MenuModule> menuModulelist = processModules(moduleDao.getAllModules());
 		return menuModulelist;
 	}
 
@@ -124,6 +124,12 @@ public class ModuleServiceImpl implements ModuleService {
 	@Override
 	public List<Module> getActiveModules() {
 		return moduleDao.getActiveModules();
+	}
+
+	@Override
+	public List<MenuModule> getAllModulesss(String userCode) {
+		List<MenuModule> menuModulelist = processModules(moduleDao.getAllModulesss(userCode));
+		return menuModulelist;
 	}
 
 	
