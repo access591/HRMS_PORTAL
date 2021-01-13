@@ -31,7 +31,7 @@ public class ModuleController {
 		List<Module> modules1 = moduleService.getModules();
 		model.addAttribute("modules1", modules1);
 		String userCode= (String)session.getAttribute("username");
-		List<MenuModule> modules = moduleService.getAllModulesss(userCode);
+		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
 		if (modules != null) {
 			model.addAttribute("modules", modules);
 		}

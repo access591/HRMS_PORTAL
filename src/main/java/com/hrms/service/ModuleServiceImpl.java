@@ -127,8 +127,8 @@ public class ModuleServiceImpl implements ModuleService {
 	}
 
 	@Override
-	public List<MenuModule> getAllModulesss(String userCode) {
-		List<MenuModule> menuModulelist = processModules(moduleDao.getAllModulesss(userCode));
+	public List<MenuModule> getAllModulesList(String userCode) {
+		List<MenuModule> menuModulelist = processModules(moduleDao.getAllModulesList(userCode));
 		return menuModulelist;
 	}
 

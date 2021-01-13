@@ -59,7 +59,7 @@ public class UserController {
 			session.setAttribute("user_desg",userRecord.getDesgName());
 		session.setAttribute("username",login.getUserCode());
 		String userCode= (String)session.getAttribute("username");
-		List<MenuModule> modules = moduleService.getAllModulesss(userCode);
+		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
 		model.addAttribute("modules", modules);
 			return "dashboard";
 		} else {
