@@ -91,28 +91,32 @@ public class ModuleDaoImpl implements ModuleDao {
 		
 		return modulesList;
 	}
-
 	@Override
-	public List<Module> getAllMenuModules() {
+	public List<Module> getAllModulesss(String userCode) {
 		Session session = sessionFactory.openSession();
-	
+		
 		//String sql = "SELECT * FROM M_MODULE  ";
+		/*
+		 * String
+		 * sql="  SELECT u.MODULE_CODE,m.MODULE_NAME,m.ACTIVE_YN,m.INS_BY,m.INS_DATE,m.UPDATE_BY,m.UPDATE_DATE,m.SEQ_NO FROM hrms.m_module m, hrms.m_urights u,hrms.m_sub_module sb ,hrms.m_program pr \r\n"
+		 * + "		      where m.MODULE_CODE = u.MODULE_CODE\r\n"
+		 * +"             and  m.ACTIVE_YN LIKE '%Y%'\r\n" +
+		 * "            and sb.SUB_MODULE_CODE=u.SUB_MODULE_CODE\r\n" +
+		 * "             and pr.PRG_CODE=u.PRG_CODE\r\n" +
+		 * "			  and u.USER_CODE ="+userCode;
+		 */
 		
+		String sql="  SELECT u.MODULE_CODE,m.MODULE_NAME,m.ACTIVE_YN,m.INS_BY,m.INS_DATE,m.UPDATE_BY,m.UPDATE_DATE,m.SEQ_NO FROM hrms.m_module m, hrms.m_urights u \r\n"
+				+ "		      where m.MODULE_CODE = u.MODULE_CODE\r\n"
+				+"             and  m.ACTIVE_YN LIKE '%Y%'\r\n"
+				+ "			  and u.USER_CODE ="+userCode;
 		
-		  String sql ="SELECT u.MODULE_CODE,m.MODULE_NAME,m.ACTIVE_YN,m.INS_BY,m.INS_DATE,m.UPDATE_BY,m.UPDATE_DATE,m.SEQ_NO FROM hrms.m_module m, hrms.m_urights u\r\n"
-		  + "where m.MODULE_CODE = u.MODULE_CODE\r\n" + "and u.USER_CODE ='101' ";
-		 
-		  System.out.println("Surendra Print Sql Query "+sql);
+		  System.out.println("Surendra Print Sql Query "+userCode);
 		SQLQuery query = session.createSQLQuery(sql);
 		query.addEntity(Module.class);
 		List modules = query.list();
 		
-		/*
-		 * Criteria criteria = session.createCriteria(Module.class);
-		 * criteria.addOrder(Order.asc("seqNo"));
-		 * criteria.add(Restrictions.like("active", "%Y")); List<Module> modules =
-		 * (List<Module>) criteria.setFetchMode("M_MODULE", FetchMode.SELECT).list();
-		 */
+		
 		return modules;
 	}
 

@@ -6,6 +6,7 @@ import com.hrms.model.Module;
 
 public interface ModuleService {
 	List<MenuModule> getAllModules();
+	List<MenuModule> getAllModulesss(String userCode);
 	boolean checkModuleExists(Module module);
 	List<Module> getModules();
 	List<Module>getActiveModules();
