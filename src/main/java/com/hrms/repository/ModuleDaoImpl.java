@@ -14,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.hrms.model.Module;
+import com.hrms.model.Program;
+import com.hrms.model.SubModule;
 @Repository
 public class ModuleDaoImpl implements ModuleDao {
 
@@ -95,25 +97,34 @@ public class ModuleDaoImpl implements ModuleDao {
 	public List<Module> getAllModulesList(String userCode) {
 		Session session = sessionFactory.openSession();
 		
-
+		String sql="SELECT u.MODULE_CODE,m.MODULE_NAME,m.ACTIVE_YN,m.INS_BY,m.INS_DATE,m.UPDATE_BY,m.UPDATE_DATE,m.SEQ_NO,sb.SUB_MODULE_CODE,sb.SUB_MODULE_NAME,sb.MODULE_CODE,sb.INS_BY,sb.INS_DATE,sb.UPDATE_BY,sb.UPDATE_DATE,sb.ACTIVE_YN,pr.PRG_CODE,pr.PRG_NAME,pr.PRG_TYPE,pr.PRG_HREF_NAME,pr.ACTIVE_YN,pr.INS_BY,pr.INS_DATE,pr.UPDATE_BY,pr.UPDATE_DATE,pr.SUB_MODULE_CODE,pr.MODULE_CODE FROM hrms.m_module m, hrms.m_urights u,hrms.m_sub_module sb ,hrms.m_program pr\r\n"
+				+ "where m.MODULE_CODE = u.MODULE_CODE\r\n"
+				+ "and  m.ACTIVE_YN LIKE '%Y%'\r\n"
+				+ "and sb.SUB_MODULE_CODE=u.SUB_MODULE_CODE\r\n"
+				+ "and pr.PRG_CODE=u.PRG_CODE\r\n"
+				+ "	and u.USER_CODE ="+userCode;
+		
+		 
 		/*
 		 * String
-		 * sql="  SELECT u.MODULE_CODE,m.MODULE_NAME,m.ACTIVE_YN,m.INS_BY,m.INS_DATE,m.UPDATE_BY,m.UPDATE_DATE,m.SEQ_NO FROM hrms.m_module m, hrms.m_urights u,hrms.m_sub_module sb ,hrms.m_program pr \r\n"
-		 * + "		      where m.MODULE_CODE = u.MODULE_CODE\r\n"
-		 * +"             and  m.ACTIVE_YN LIKE '%Y%'\r\n" +
-		 * "            and sb.SUB_MODULE_CODE=u.SUB_MODULE_CODE\r\n" +
-		 * "             and pr.PRG_CODE=u.PRG_CODE\r\n" +
-		 * "			  and u.USER_CODE ="+userCode;
+		 * sql="  SELECT u.MODULE_CODE,m.MODULE_NAME,m.ACTIVE_YN,m.INS_BY,m.INS_DATE,m.UPDATE_BY,m.UPDATE_DATE,m.SEQ_NO,sb.SUB_MODULE_CODE,sb.SUB_MODULE_NAME,sb.MODULE_CODE,sb.INS_BY,sb.INS_DATE,sb.UPDATE_BY,sb.UPDATE_DATE,sb.ACTIVE_YN,pr.PRG_CODE,pr.PRG_NAME,pr.PRG_TYPE,pr.PRG_HREF_NAME,pr.ACTIVE_YN,pr.INS_BY,pr.INS_DATE,pr.UPDATE_BY,pr.UPDATE_DATE,pr.SUB_MODULE_CODE,pr.MODULE_CODE,FROM hrms.m_module m, hrms.m_urights u,hrms.m_sub_module sb ,hrms.m_program pr \r\n"
+		 * + " where m.MODULE_CODE = u.MODULE_CODE\r\n"
+		 * +" and  m.ACTIVE_YN LIKE '%Y%'\r\n" +
+		 * " and sb.SUB_MODULE_CODE=u.SUB_MODULE_CODE\r\n" +
+		 * " and pr.PRG_CODE=u.PRG_CODE\r\n" + " and u.USER_CODE ="+userCode;
 		 */
+		 
 		
-		String sql="  SELECT u.MODULE_CODE,m.MODULE_NAME,m.ACTIVE_YN,m.INS_BY,m.INS_DATE,m.UPDATE_BY,m.UPDATE_DATE,m.SEQ_NO FROM hrms.m_module m, hrms.m_urights u \r\n"
-				+ "	 where m.MODULE_CODE = u.MODULE_CODE\r\n"
-				+"   and  m.ACTIVE_YN LIKE '%Y%'\r\n"
-				+ "	 and u.USER_CODE ="+userCode;
+//		String sql="  SELECT u.MODULE_CODE,m.MODULE_NAME,m.ACTIVE_YN,m.INS_BY,m.INS_DATE,m.UPDATE_BY,m.UPDATE_DATE,m.SEQ_NO FROM hrms.m_module m, hrms.m_urights u \r\n"
+//				+ "	 where m.MODULE_CODE = u.MODULE_CODE\r\n"
+//				+"   and  m.ACTIVE_YN LIKE '%Y%'\r\n"
+//				+ "	 and u.USER_CODE ="+userCode;
 		
-		  System.out.println("Surendra Print Sql Query "+userCode);
+		  System.out.println(" Print Sql Query "+userCode);
 		SQLQuery query = session.createSQLQuery(sql);
 		query.addEntity(Module.class);
+		
+		
 		List modules = query.list();
 		
 		
