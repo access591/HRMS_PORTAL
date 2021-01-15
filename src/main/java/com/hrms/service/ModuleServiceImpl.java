@@ -22,17 +22,27 @@ public class ModuleServiceImpl implements ModuleService {
 	@Autowired
 	private ModuleDao moduleDao;
 
+	
+	  @Override
+	  
+	  public List<MenuModule> getAllModules() {
+	  
+	  List<MenuModule> menuModulelist = processModules(moduleDao.getAllModules());
+	  return menuModulelist; }
+	 
+	 
+	
 	@Override
-	public List<MenuModule> getAllModules() {
-
-		List<MenuModule> menuModulelist = processModules(moduleDao.getAllModules());
+	public List<MenuModule> getAllModulesList(String userCode) {
+		List<MenuModule> menuModulelist = processModules(moduleDao.getAllModulesList(userCode));
 		return menuModulelist;
 	}
-
+	
 	private List<MenuModule> processModules(List<Module> modules) {
 		List<MenuModule> menuModuleList = new ArrayList<MenuModule>();
 
 		for (Module module : modules) {
+			
 			MenuModule menuModule = new MenuModule();
 			menuModule.setModuleCode(module.getModuleCode());
 			menuModule.setModuleName(module.getModuleName());
@@ -126,11 +136,7 @@ public class ModuleServiceImpl implements ModuleService {
 		return moduleDao.getActiveModules();
 	}
 
-	@Override
-	public List<MenuModule> getAllModulesList(String userCode) {
-		List<MenuModule> menuModulelist = processModules(moduleDao.getAllModulesList(userCode));
-		return menuModulelist;
-	}
+	
 
 	
 
