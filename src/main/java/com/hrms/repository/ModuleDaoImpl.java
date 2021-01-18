@@ -131,6 +131,12 @@ public class ModuleDaoImpl implements ModuleDao {
 		return modules;
 	}
 
+	@Override
+	public List<SubModule> getAllSubModule(String modulecCode, String UserCode) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	
 
 }
