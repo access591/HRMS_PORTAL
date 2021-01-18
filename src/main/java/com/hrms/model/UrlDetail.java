@@ -12,7 +12,7 @@ public class UrlDetail implements Serializable {
 
 	/**
 	 * 
-	 * Auth Surendra
+	 * Auth Surendra Access
 	 * 
 	 */
 	private static final long serialVersionUID = 842108347597795726L;
