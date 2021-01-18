@@ -27,10 +27,12 @@ public class GradeMaterController {
 	private ModuleService moduleService;
 	@Autowired
 	PageMappingService pageMappingService;
-@GetMapping("/gradeMaster")
-	public String DesignationMaster(Model model,HttpSession session) {
+	
 	int pageno=1;
 	String reqPage="/gradeMaster";
+@GetMapping("/gradeMaster")
+	public String DesignationMaster(Model model,HttpSession session) {
+
 	 List<Grade>listGrade = gradeMaterService.getAllGrades();
 	  model.addAttribute("listGrade", listGrade); 
 		String userCode= (String)session.getAttribute("username");
@@ -50,7 +52,7 @@ public class GradeMaterController {
 	if (isGradeExist) {
 	    redirectAttributes.addFlashAttribute("message", "Grade Code Already exists !  ");
 	    redirectAttributes.addFlashAttribute("alertClass", "alert-success");
-	    return "redirect:/gradeMaster";
+	    return "redirect:"+pageMappingService.PageRequestMapping(reqPage,pageno);
 	
 	}
 	    else {
@@ -60,32 +62,35 @@ public class GradeMaterController {
 			session.setAttribute("username",session.getAttribute("username"));
  
   }
-	return"redirect:/gradeMaster";
+	 return "redirect:"+pageMappingService.PageRequestMapping(reqPage,pageno);
   
   }
 
 @GetMapping(value = {"/editGrade/{id}"})
 public String editdesignation(@PathVariable("id")String id,  Model model,HttpSession session)
- { 
+ { int editPageNo=2;
+	String reqPageedit="/editGrade";
+	
+	
 	Grade gradeEdit = gradeMaterService.findGradeById(id);
 	  model.addAttribute("gradeEdit", gradeEdit);
 
     session.setAttribute("username",session.getAttribute("username")); 
-       return "/editGrade"; 
+       return pageMappingService.PageRequestMapping(reqPageedit,editPageNo);
 }
 @PostMapping("/updateGrade")
 public String updateDesignation(@ModelAttribute("gradeupdate") Grade g, Model model) {
 
 	  this.gradeMaterService.updateGrade(g);
   	  
-	  return "redirect:/gradeMaster";
+	  return "redirect:"+pageMappingService.PageRequestMapping(reqPage,pageno);
 }
 @GetMapping(value = {"/deleteGarde/{id}"})
 public String deletedesignation(@PathVariable("id")String id,  Model model,HttpSession session)
  { 
 	  this.gradeMaterService.removeGrade(id);
     session.setAttribute("username",session.getAttribute("username")); 
-    return "redirect:/gradeMaster";
+    return "redirect:"+pageMappingService.PageRequestMapping(reqPage,pageno);
 }
 	
 }
