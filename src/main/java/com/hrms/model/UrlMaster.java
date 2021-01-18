@@ -3,12 +3,16 @@ package com.hrms.model;
 import java.io.Serializable;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
+@Entity
+@Table(name ="URL_MASTER")
 
 public class UrlMaster implements Serializable{
 
 	/**
-	 * 
+	 * author Surendra Access
 	 */
 	private static final long serialVersionUID = 842108347597795726L;
 	@Id
