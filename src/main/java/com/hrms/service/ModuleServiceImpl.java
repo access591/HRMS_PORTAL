@@ -6,9 +6,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.hrms.model.MenuModule;
 import com.hrms.model.Module;
 import com.hrms.model.Program;
@@ -56,7 +56,11 @@ public class ModuleServiceImpl implements ModuleService {
 	private List<SubModuleProgram> getSubModuleProgramsList(Module module) {
 		List<SubModuleProgram> liSubModulePrograms = new ArrayList<SubModuleProgram>();
 
-		for (SubModule submodule : module.getSubModules()) {
+	//	String userCode= ;
+	//String modulecCode=module.getModuleCode();
+
+	//	List<SubModule> submodulelist1=moduleDao.getAllSubModule(modulecCode,userCode);
+		for (SubModule submodule :  module.getSubModules()) {
 			SubModuleProgram subModuleProgram = new SubModuleProgram();
 			subModuleProgram.setModuleCode(module.getModuleCode());
 			subModuleProgram.setModuleName(module.getModuleName());
