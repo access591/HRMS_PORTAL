@@ -67,7 +67,7 @@ public class GradeMaterController {
   }
 
 @GetMapping(value = {"/editGrade/{id}"})
-public String editdesignation(@PathVariable("id")String id,  Model model,HttpSession session)
+public String editGrade(@PathVariable("id")String id,  Model model,HttpSession session)
  { int editPageNo=2;
 	String reqPageedit="/editGrade";
 	
@@ -79,18 +79,23 @@ public String editdesignation(@PathVariable("id")String id,  Model model,HttpSes
        return pageMappingService.PageRequestMapping(reqPageedit,editPageNo);
 }
 @PostMapping("/updateGrade")
-public String updateDesignation(@ModelAttribute("gradeupdate") Grade g, Model model) {
+public String updateGradep(@ModelAttribute("gradeupdate") Grade g, Model model) {
 
 	  this.gradeMaterService.updateGrade(g);
   	  
 	  return "redirect:"+pageMappingService.PageRequestMapping(reqPage,pageno);
 }
 @GetMapping(value = {"/deleteGarde/{id}"})
-public String deletedesignation(@PathVariable("id")String id,  Model model,HttpSession session)
+public String deletegrade(@PathVariable("id")String id,  Model model,HttpSession session)
  { 
+		
+		  int deletePageNo=3; 
+		  String reqPagedelete="/deleteGarde";
+		 
+	
 	  this.gradeMaterService.removeGrade(id);
     session.setAttribute("username",session.getAttribute("username")); 
-    return "redirect:"+pageMappingService.PageRequestMapping(reqPage,pageno);
+    return "redirect:"+pageMappingService.PageRequestMapping(reqPagedelete,deletePageNo);
 }
 	
 }
