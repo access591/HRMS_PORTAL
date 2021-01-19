@@ -9,6 +9,8 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.hrms.model.Login;
 import com.hrms.model.MenuModule;
 import com.hrms.model.Module;
 import com.hrms.model.Program;
@@ -18,10 +20,12 @@ import com.hrms.repository.ModuleDao;
 
 @Service
 public class ModuleServiceImpl implements ModuleService {
-
+	Login login=new Login();
 	@Autowired
 	private ModuleDao moduleDao;
 
+	
+	
 	
 	  @Override
 	  
@@ -34,6 +38,10 @@ public class ModuleServiceImpl implements ModuleService {
 	
 	@Override
 	public List<MenuModule> getAllModulesList(String userCode) {
+		
+		login.setUserCode(userCode);
+	
+		
 		List<MenuModule> menuModulelist = processModules(moduleDao.getAllModulesList(userCode));
 		return menuModulelist;
 	}
@@ -55,11 +63,12 @@ public class ModuleServiceImpl implements ModuleService {
 
 	private List<SubModuleProgram> getSubModuleProgramsList(Module module) {
 		List<SubModuleProgram> liSubModulePrograms = new ArrayList<SubModuleProgram>();
+		String ucode=login.getUserCode();
+		String modulecCode=module.getModuleCode();
+		System.out.println("Sub Module User Code "+ucode);
+	
 
-
-	String modulecCode=module.getModuleCode();
-
-		List<SubModule> subMOdules=moduleDao.getAllSubModule(modulecCode);
+		List<SubModule> subMOdules=moduleDao.getAllSubModule(modulecCode,ucode);
 		for (SubModule submodule :  subMOdules) {
 			SubModuleProgram subModuleProgram = new SubModuleProgram();
 			subModuleProgram.setModuleCode(module.getModuleCode());
@@ -85,9 +94,11 @@ public class ModuleServiceImpl implements ModuleService {
 	}
 
 	private Map<String, String> getSubModuleProgramMap(SubModule subModule,Module module) {
+		String ucode=login.getUserCode();
 		String moduleCode=module.getModuleCode();
 		String smCode=subModule.getSubModuleCode();
-		List<Program> programs=moduleDao.GetAllProgramList(moduleCode,smCode);
+		System.out.println("Program module  User Code Test"+ucode);
+		List<Program> programs=moduleDao.GetAllProgramList(moduleCode,smCode,ucode);
 		Map<String, String> programMap = new HashMap<String, String>();
 		for (Program program : programs) {
 			String name = program.getProgramName();

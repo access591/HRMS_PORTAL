@@ -18,8 +18,8 @@ public interface ModuleDao {
 	   public void removeModule(String id);
 	   List<Module>getActiveModules();
 	   List<Module> getAllModulesList(String userCode);
-	   List<SubModule> getAllSubModule(String modulecCode);
-	   List<Program> GetAllProgramList(String moduleCode,String smCode);
+	   List<SubModule> getAllSubModule(String modulecCode, String ucode);
+	   List<Program> GetAllProgramList(String moduleCode,String smCode, String Ucode);
 	   
 
 }
