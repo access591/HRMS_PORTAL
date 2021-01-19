@@ -28,26 +28,26 @@ public class ModuleDaoImpl implements ModuleDao {
 		Criteria criteria = session.createCriteria(Module.class);
 		criteria.addOrder(Order.asc("seqNo"));
 		List<Module> modules = (List<Module>) criteria.setFetchMode("M_MODULE", FetchMode.SELECT).list();
-		
+
 		return modules;
-	
+
 	}
 
 	@Override
 	public void addModule(Module module) {
-		 Session session = sessionFactory.openSession(); 
-		 Transaction tx = session.beginTransaction();
-		 session.persist(module);
-		 tx.commit();
-		  session.close();
+		Session session = sessionFactory.openSession();
+		Transaction tx = session.beginTransaction();
+		session.persist(module);
+		tx.commit();
+		session.close();
 	}
 
 	@Override
 	public Module findModule(Module module) {
-		
+
 		Session session = sessionFactory.openSession();
 		Criteria criteria = session.createCriteria(Module.class);
-		Module mcode = (Module) criteria.setFetchMode("M_MODULE",FetchMode.SELECT)
+		Module mcode = (Module) criteria.setFetchMode("M_MODULE", FetchMode.SELECT)
 				.add(Restrictions.eq("moduleCode", module.getModuleCode())).uniqueResult();
 		return mcode;
 	}
@@ -57,7 +57,7 @@ public class ModuleDaoImpl implements ModuleDao {
 		Session session = sessionFactory.openSession();
 		Criteria criteria = session.createCriteria(Module.class);
 		Module moduleEdit = (Module) criteria.setFetchMode("M_MODULE", FetchMode.SELECT)
-			.add(Restrictions.eq("moduleCode", id)).uniqueResult();
+				.add(Restrictions.eq("moduleCode", id)).uniqueResult();
 
 		return moduleEdit;
 	}
@@ -68,8 +68,8 @@ public class ModuleDaoImpl implements ModuleDao {
 		Transaction tx = session.beginTransaction();
 		session.update(m);
 		tx.commit();
-		session.close();	
-		
+		session.close();
+
 	}
 
 	@Override
@@ -81,8 +81,8 @@ public class ModuleDaoImpl implements ModuleDao {
 
 		session.delete(m);
 		tx.commit();
-		session.close();	
-		
+		session.close();
+
 	}
 
 	@Override
@@ -90,53 +90,54 @@ public class ModuleDaoImpl implements ModuleDao {
 		Session session = sessionFactory.openSession();
 		Criteria criteria = session.createCriteria(Module.class);
 		List<Module> modulesList = (List<Module>) criteria.setFetchMode("M_MODULE", FetchMode.SELECT).list();
-		
+
 		return modulesList;
 	}
+
 	@Override
 	public List<Module> getAllModulesList(String userCode) {
 		Session session = sessionFactory.openSession();
-		
-		String sql="SELECT u.MODULE_CODE,m.MODULE_NAME,m.ACTIVE_YN,m.INS_BY,m.INS_DATE,m.UPDATE_BY,m.UPDATE_DATE,m.SEQ_NO,sb.SUB_MODULE_CODE,sb.SUB_MODULE_NAME,sb.MODULE_CODE,sb.INS_BY,sb.INS_DATE,sb.UPDATE_BY,sb.UPDATE_DATE,sb.ACTIVE_YN,pr.PRG_CODE,pr.PRG_NAME,pr.PRG_TYPE,pr.PRG_HREF_NAME,pr.ACTIVE_YN,pr.INS_BY,pr.INS_DATE,pr.UPDATE_BY,pr.UPDATE_DATE,pr.SUB_MODULE_CODE,pr.MODULE_CODE FROM hrms.m_module m, hrms.m_urights u,hrms.m_sub_module sb ,hrms.m_program pr\r\n"
-				+ "where m.MODULE_CODE = u.MODULE_CODE\r\n"
-				+ "and  m.ACTIVE_YN LIKE '%Y%'\r\n"
-				+ "and sb.SUB_MODULE_CODE=u.SUB_MODULE_CODE\r\n"
-				+ "and pr.PRG_CODE=u.PRG_CODE\r\n"
-				+ "	and u.USER_CODE ="+userCode;
-		
-		 
-		/*
-		 * String
-		 * sql="  SELECT u.MODULE_CODE,m.MODULE_NAME,m.ACTIVE_YN,m.INS_BY,m.INS_DATE,m.UPDATE_BY,m.UPDATE_DATE,m.SEQ_NO,sb.SUB_MODULE_CODE,sb.SUB_MODULE_NAME,sb.MODULE_CODE,sb.INS_BY,sb.INS_DATE,sb.UPDATE_BY,sb.UPDATE_DATE,sb.ACTIVE_YN,pr.PRG_CODE,pr.PRG_NAME,pr.PRG_TYPE,pr.PRG_HREF_NAME,pr.ACTIVE_YN,pr.INS_BY,pr.INS_DATE,pr.UPDATE_BY,pr.UPDATE_DATE,pr.SUB_MODULE_CODE,pr.MODULE_CODE,FROM hrms.m_module m, hrms.m_urights u,hrms.m_sub_module sb ,hrms.m_program pr \r\n"
-		 * + " where m.MODULE_CODE = u.MODULE_CODE\r\n"
-		 * +" and  m.ACTIVE_YN LIKE '%Y%'\r\n" +
-		 * " and sb.SUB_MODULE_CODE=u.SUB_MODULE_CODE\r\n" +
-		 * " and pr.PRG_CODE=u.PRG_CODE\r\n" + " and u.USER_CODE ="+userCode;
-		 */
-		 
-		
-//		String sql="  SELECT u.MODULE_CODE,m.MODULE_NAME,m.ACTIVE_YN,m.INS_BY,m.INS_DATE,m.UPDATE_BY,m.UPDATE_DATE,m.SEQ_NO FROM hrms.m_module m, hrms.m_urights u \r\n"
-//				+ "	 where m.MODULE_CODE = u.MODULE_CODE\r\n"
-//				+"   and  m.ACTIVE_YN LIKE '%Y%'\r\n"
-//				+ "	 and u.USER_CODE ="+userCode;
-		
-		  System.out.println(" Print Sql Query "+userCode);
+
+		String sql = "SELECT u.MODULE_CODE,m.MODULE_NAME,m.ACTIVE_YN,m.INS_BY,m.INS_DATE,m.UPDATE_BY,m.UPDATE_DATE,m.SEQ_NO,sb.SUB_MODULE_CODE,sb.SUB_MODULE_NAME,sb.MODULE_CODE,sb.INS_BY,sb.INS_DATE,sb.UPDATE_BY,sb.UPDATE_DATE,sb.ACTIVE_YN,pr.PRG_CODE,pr.PRG_NAME,pr.PRG_TYPE,pr.PRG_HREF_NAME,pr.ACTIVE_YN,pr.INS_BY,pr.INS_DATE,pr.UPDATE_BY,pr.UPDATE_DATE,pr.SUB_MODULE_CODE,pr.MODULE_CODE FROM hrms.m_module m, hrms.m_urights u,hrms.m_sub_module sb ,hrms.m_program pr\r\n"
+				+ "where m.MODULE_CODE = u.MODULE_CODE\r\n" + "and  m.ACTIVE_YN LIKE '%Y%'\r\n"
+				+ "and sb.SUB_MODULE_CODE=u.SUB_MODULE_CODE\r\n" + "and pr.PRG_CODE=u.PRG_CODE\r\n"
+				+ "	and u.USER_CODE =" + userCode;
+
 		SQLQuery query = session.createSQLQuery(sql);
 		query.addEntity(Module.class);
-		
-		
+
 		List modules = query.list();
-		
-		
+
 		return modules;
 	}
 
 	@Override
-	public List<SubModule> getAllSubModule(String modulecCode, String UserCode) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<SubModule> getAllSubModule(String modulecCode) {
+		Session session = sessionFactory.openSession();
+
+		String sql = "SELECT  SMC.SUB_MODULE_CODE,SMC.INS_DATE,SMC.INS_BY,SMC.ACTIVE_YN,SMC.SUB_MODULE_NAME,SMC.MODULE_CODE,SMC.SEQ_NO,SMC.UPDATE_BY,SMC.UPDATE_DATE  FROM hrms.m_sub_module SMC "
+				+ " where SMC.MODULE_CODE=" + modulecCode;
+
+		SQLQuery query = session.createSQLQuery(sql);
+		query.addEntity(SubModule.class);
+
+		List subMOdules = query.list();
+
+		return subMOdules;
 	}
 
-	
+	@Override
+	public List<Program> GetAllProgramList(String moduleCode, String smCode) {
+		Session session = sessionFactory.openSession();
+
+		String sql = "SELECT  PRG_CODE,PRG_NAME,MODULE_CODE,PRG_TYPE,PRG_HREF_NAME ,ACTIVE_YN,INS_BY,INS_DATE,UPDATE_BY,UPDATE_DATE,SUB_MODULE_CODE,SEQ_NO,pModuleCode,subModuleCode,dmoduleCode,dsubMouduleCode  \r\n"
+				+ "FROM  hrms.m_program pmc " + "where pmc.MODULE_CODE=" + moduleCode + " and pmc.SUB_MODULE_CODE='"
+				+ smCode + "'";
+		SQLQuery query = session.createSQLQuery(sql);
+		query.addEntity(Program.class);
+		List Programs = query.list();
+
+		return Programs;
+	}
 
 }

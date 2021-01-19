@@ -56,17 +56,17 @@ public class ModuleServiceImpl implements ModuleService {
 	private List<SubModuleProgram> getSubModuleProgramsList(Module module) {
 		List<SubModuleProgram> liSubModulePrograms = new ArrayList<SubModuleProgram>();
 
-	//	String userCode= ;
-	//String modulecCode=module.getModuleCode();
 
-	//	List<SubModule> submodulelist1=moduleDao.getAllSubModule(modulecCode,userCode);
-		for (SubModule submodule :  module.getSubModules()) {
+	String modulecCode=module.getModuleCode();
+
+		List<SubModule> subMOdules=moduleDao.getAllSubModule(modulecCode);
+		for (SubModule submodule :  subMOdules) {
 			SubModuleProgram subModuleProgram = new SubModuleProgram();
 			subModuleProgram.setModuleCode(module.getModuleCode());
 			subModuleProgram.setModuleName(module.getModuleName());
 			subModuleProgram.setSubModuleCode(submodule.getSubModuleCode());
 			subModuleProgram.setSubModuleName(submodule.getSubModuleName());
-			subModuleProgram.setSubPrograms(getSubModuleProgramMap(submodule));
+			subModuleProgram.setSubPrograms(getSubModuleProgramMap(submodule,module));
 			liSubModulePrograms.add(subModuleProgram);
 		}
 		return liSubModulePrograms;
@@ -84,8 +84,10 @@ public class ModuleServiceImpl implements ModuleService {
 		return programMap;
 	}
 
-	private Map<String, String> getSubModuleProgramMap(SubModule subModule) {
-		List<Program> programs = subModule.getSubModulePrograms();
+	private Map<String, String> getSubModuleProgramMap(SubModule subModule,Module module) {
+		String moduleCode=module.getModuleCode();
+		String smCode=subModule.getSubModuleCode();
+		List<Program> programs=moduleDao.GetAllProgramList(moduleCode,smCode);
 		Map<String, String> programMap = new HashMap<String, String>();
 		for (Program program : programs) {
 			String name = program.getProgramName();
