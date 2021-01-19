@@ -112,7 +112,7 @@ public class ModuleDaoImpl implements ModuleDao {
 	}
 
 	@Override
-	public List<SubModule> getAllSubModule(String modulecCode) {
+	public List<SubModule> getAllSubModule(String modulecCode, String ucode) {
 		Session session = sessionFactory.openSession();
 
 		String sql = "SELECT  SMC.SUB_MODULE_CODE,SMC.INS_DATE,SMC.INS_BY,SMC.ACTIVE_YN,SMC.SUB_MODULE_NAME,SMC.MODULE_CODE,SMC.SEQ_NO,SMC.UPDATE_BY,SMC.UPDATE_DATE  FROM hrms.m_sub_module SMC "
@@ -127,7 +127,7 @@ public class ModuleDaoImpl implements ModuleDao {
 	}
 
 	@Override
-	public List<Program> GetAllProgramList(String moduleCode, String smCode) {
+	public List<Program> GetAllProgramList(String moduleCode, String smCode,String Ucode) {
 		Session session = sessionFactory.openSession();
 
 		String sql = "SELECT  PRG_CODE,PRG_NAME,MODULE_CODE,PRG_TYPE,PRG_HREF_NAME ,ACTIVE_YN,INS_BY,INS_DATE,UPDATE_BY,UPDATE_DATE,SUB_MODULE_CODE,SEQ_NO,pModuleCode,subModuleCode,dmoduleCode,dsubMouduleCode  \r\n"
