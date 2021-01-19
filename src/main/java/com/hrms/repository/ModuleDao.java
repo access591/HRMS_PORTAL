@@ -4,6 +4,7 @@ import java.util.List;
 
 
 import com.hrms.model.Module;
+import com.hrms.model.Program;
 import com.hrms.model.SubModule;
 
 public interface ModuleDao {
@@ -17,7 +18,8 @@ public interface ModuleDao {
 	   public void removeModule(String id);
 	   List<Module>getActiveModules();
 	   List<Module> getAllModulesList(String userCode);
-	   List<SubModule> getAllSubModule(String modulecCode, String UserCode );
+	   List<SubModule> getAllSubModule(String modulecCode);
+	   List<Program> GetAllProgramList(String moduleCode,String smCode);
 	   
 
 }
