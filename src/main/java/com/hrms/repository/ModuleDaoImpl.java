@@ -113,8 +113,10 @@ public class ModuleDaoImpl implements ModuleDao {
 		Session session = sessionFactory.openSession();
 		
 		String sql = "SELECT distinct SMC.SUB_MODULE_CODE,SMC.INS_DATE,SMC.INS_BY,SMC.ACTIVE_YN,SMC.SUB_MODULE_NAME,SMC.MODULE_CODE,SMC.SEQ_NO,SMC.UPDATE_BY,SMC.UPDATE_DATE  \r\n"
-				+ "FROM  hrms.m_sub_module SMC , hrms.urights ur\r\n" + "where SMC.MODULE_CODE='" + modulecCode + "'"
-				+ "and ur.user_code='" + ucode + "'";
+				+ "FROM  hrms.m_sub_module SMC , hrms.m_urights ur\r\n" 
+				+ "where SMC.MODULE_CODE='"+modulecCode + "'"
+				+"and  SMC.SUB_MODULE_CODE= ur.SUB_MODULE_CODE\r\n"
+				+ "and ur.user_code='"+ucode+ "'";
 		SQLQuery query = session.createSQLQuery(sql);
 		query.addEntity(SubModule.class);
 		List subMOdules = query.list();
@@ -126,7 +128,11 @@ public class ModuleDaoImpl implements ModuleDao {
 		Session session = sessionFactory.openSession();
 		String sql = "SELECT distinct pmc.PRG_CODE,pmc.PRG_NAME,pmc.MODULE_CODE,pmc.PRG_TYPE,pmc.PRG_HREF_NAME,pmc.ACTIVE_YN,pmc.INS_BY,pmc.INS_DATE,pmc.UPDATE_BY,pmc.UPDATE_DATE,pmc.SUB_MODULE_CODE,pmc.SEQ_NO,pModuleCode,subModuleCode,dmoduleCode,dsubMouduleCode  \r\n"
 				+ "FROM  hrms.m_program pmc, hrms.m_urights ur ,hrms.m_module mm\r\n" + "where mm.MODULE_CODE='"
-				+ moduleCode + "'" + "and pmc.SUB_MODULE_CODE='" + smCode + "'" + "and ur.USER_CODE='" + Ucode + "'";
+				+ moduleCode + "'" 
+				+ "and pmc.SUB_MODULE_CODE='" 
+				+ smCode + "'" 
+				+ "and pmc.PRG_CODE= ur.PRG_CODE\r\n"
+				+ "and ur.USER_CODE='" + Ucode + "'";
 
 		SQLQuery query = session.createSQLQuery(sql);
 		query.addEntity(Program.class);
