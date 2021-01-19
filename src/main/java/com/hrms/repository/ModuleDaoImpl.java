@@ -97,11 +97,16 @@ public class ModuleDaoImpl implements ModuleDao {
 	@Override
 	public List<Module> getAllModulesList(String userCode) {
 		Session session = sessionFactory.openSession();
+
+		String sql="SELECT  DISTINCT u.MODULE_CODE,m.MODULE_NAME,m.ACTIVE_YN,m.INS_BY,m.INS_DATE,m.UPDATE_BY,m.UPDATE_DATE,m.SEQ_NO\r\n"
+				+ " FROM 	hrms.m_module m\r\n"
+				+ " INNER JOIN 	hrms.m_sub_module sb  on sb.MODULE_CODE=m.MODULE_CODE \r\n"
+				+ " INNER JOIN 	hrms.m_program pr on pr.MODULE_CODE=m.MODULE_CODE and pr.SUB_MODULE_CODE=sb.SUB_MODULE_CODE\r\n"
+				+ " INNER JOIN  hrms.m_urights u on u.MODULE_CODE=m.MODULE_CODE and u.SUB_MODULE_CODE=sb.SUB_MODULE_CODE\r\n"
+				+ " and u.PRG_CODE=pr.PRG_CODE\r\n"
+				+ " where m.ACTIVE_YN LIKE '%Y%' "
+				+ "and u.USER_CODE ="+userCode;
 		
-		String sql = "SELECT u.MODULE_CODE,m.MODULE_NAME,m.ACTIVE_YN,m.INS_BY,m.INS_DATE,m.UPDATE_BY,m.UPDATE_DATE,m.SEQ_NO,sb.SUB_MODULE_CODE,sb.SUB_MODULE_NAME,sb.MODULE_CODE,sb.INS_BY,sb.INS_DATE,sb.UPDATE_BY,sb.UPDATE_DATE,sb.ACTIVE_YN,pr.PRG_CODE,pr.PRG_NAME,pr.PRG_TYPE,pr.PRG_HREF_NAME,pr.ACTIVE_YN,pr.INS_BY,pr.INS_DATE,pr.UPDATE_BY,pr.UPDATE_DATE,pr.SUB_MODULE_CODE,pr.MODULE_CODE FROM hrms.m_module m, hrms.m_urights u,hrms.m_sub_module sb ,hrms.m_program pr\r\n"
-				+ "where m.MODULE_CODE = u.MODULE_CODE\r\n" + "and  m.ACTIVE_YN LIKE '%Y%'\r\n"
-				+ "and sb.SUB_MODULE_CODE=u.SUB_MODULE_CODE\r\n" + "and pr.PRG_CODE=u.PRG_CODE\r\n"
-				+ "	and u.USER_CODE =" + userCode;
 		SQLQuery query = session.createSQLQuery(sql);
 		query.addEntity(Module.class);
 		List modules = query.list();
@@ -112,7 +117,7 @@ public class ModuleDaoImpl implements ModuleDao {
 	public List<SubModule> getAllSubModule(String modulecCode, String ucode) {
 		Session session = sessionFactory.openSession();
 		
-		String sql = "SELECT distinct SMC.SUB_MODULE_CODE,SMC.INS_DATE,SMC.INS_BY,SMC.ACTIVE_YN,SMC.SUB_MODULE_NAME,SMC.MODULE_CODE,SMC.SEQ_NO,SMC.UPDATE_BY,SMC.UPDATE_DATE  \r\n"
+		String sql = "SELECT DISTINCT  SMC.SUB_MODULE_CODE,SMC.INS_DATE,SMC.INS_BY,SMC.ACTIVE_YN,SMC.SUB_MODULE_NAME,SMC.MODULE_CODE,SMC.SEQ_NO,SMC.UPDATE_BY,SMC.UPDATE_DATE  \r\n"
 				+ "FROM  hrms.m_sub_module SMC , hrms.m_urights ur\r\n" 
 				+ "where SMC.MODULE_CODE='"+modulecCode + "'"
 				+"and  SMC.SUB_MODULE_CODE= ur.SUB_MODULE_CODE\r\n"
@@ -126,7 +131,7 @@ public class ModuleDaoImpl implements ModuleDao {
 	@Override
 	public List<Program> GetAllProgramList(String moduleCode, String smCode, String Ucode) {
 		Session session = sessionFactory.openSession();
-		String sql = "SELECT distinct pmc.PRG_CODE,pmc.PRG_NAME,pmc.MODULE_CODE,pmc.PRG_TYPE,pmc.PRG_HREF_NAME,pmc.ACTIVE_YN,pmc.INS_BY,pmc.INS_DATE,pmc.UPDATE_BY,pmc.UPDATE_DATE,pmc.SUB_MODULE_CODE,pmc.SEQ_NO,pModuleCode,subModuleCode,dmoduleCode,dsubMouduleCode  \r\n"
+		String sql = "SELECT DISTINCT  pmc.PRG_CODE,pmc.PRG_NAME,pmc.MODULE_CODE,pmc.PRG_TYPE,pmc.PRG_HREF_NAME,pmc.ACTIVE_YN,pmc.INS_BY,pmc.INS_DATE,pmc.UPDATE_BY,pmc.UPDATE_DATE,pmc.SUB_MODULE_CODE,pmc.SEQ_NO,pModuleCode,subModuleCode,dmoduleCode,dsubMouduleCode  \r\n"
 				+ "FROM  hrms.m_program pmc, hrms.m_urights ur ,hrms.m_module mm\r\n" + "where mm.MODULE_CODE='"
 				+ moduleCode + "'" 
 				+ "and pmc.SUB_MODULE_CODE='" 
