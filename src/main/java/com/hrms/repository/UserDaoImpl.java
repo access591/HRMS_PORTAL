@@ -7,6 +7,8 @@ import org.hibernate.FetchMode;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -15,7 +17,7 @@ import com.hrms.model.UserEntity;
 
 @Repository
 public class UserDaoImpl implements UserDao {
-
+	static final Logger logger = LoggerFactory.getLogger(UserDaoImpl.class);
 	@Autowired
 	SessionFactory sessionFactory;
 
@@ -26,6 +28,7 @@ public class UserDaoImpl implements UserDao {
 		UserEntity user = (UserEntity) criteria.setFetchMode("Myuser", FetchMode.SELECT)
 				.add(Restrictions.eq("userCode", login.getUserCode()))
 				.add(Restrictions.eq("userPass", login.getUserPassword())).uniqueResult();
+		        logger.info("User Login : {}",user);
 		return user;
 
 	}
@@ -35,6 +38,7 @@ public class UserDaoImpl implements UserDao {
 		Session session = sessionFactory.openSession();
 		Criteria criteria = session.createCriteria(UserEntity.class);
 		List<UserEntity> listUser = (List<UserEntity>) criteria.setFetchMode("Myuser", FetchMode.SELECT).list();
+		 logger.info("User list : {}",listUser);
 		return listUser;
 	}
 
@@ -44,7 +48,7 @@ public class UserDaoImpl implements UserDao {
 		Criteria criteria = session.createCriteria(UserEntity.class);
 		UserEntity userRecord = (UserEntity) criteria.setFetchMode("Myuser", FetchMode.SELECT)
 				.add(Restrictions.eq("userCode", id)).uniqueResult();
-
+		 logger.info("User Record : {}",userRecord);
 		return userRecord;
 	}
 
