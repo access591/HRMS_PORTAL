@@ -1,7 +1,8 @@
 package com.hrms.repository;
 
 import java.util.List;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.hibernate.Criteria;
 import org.hibernate.FetchMode;
 import org.hibernate.Session;
@@ -18,30 +19,48 @@ import com.hrms.model.Bank;
 public class BankDaoImpl implements BankDao {
 	@Autowired
 	SessionFactory sessionFactory;
+	private Logger logger = LoggerFactory.getLogger(BankDaoImpl.class.getName());
 
 	@Override
 	public void addBank(Bank bank) {
-		Session session = sessionFactory.openSession();
-		Transaction tx = session.beginTransaction();
-		session.persist(bank);
-		tx.commit();
-		session.close();
+		try {
+			Session session = sessionFactory.openSession();
+			Transaction tx = session.beginTransaction();
+			session.persist(bank);
+			tx.commit();
+			session.close();
+		} catch (Exception e) {
+			logger.info("BankDaoImpl.addBank" + e.getMessage());
+		}
 
 	}
 
 	@Override
 	public List<Bank> getAllBanks() {
-		Session session = sessionFactory.openSession();
-		Criteria criteria = session.createCriteria(Bank.class);
-		List<Bank> listBank = (List<Bank>) criteria.setFetchMode("M_BANK", FetchMode.SELECT).list();
+		List<Bank> listBank = null;
+
+		try {
+			Session session = sessionFactory.openSession();
+			Criteria criteria = session.createCriteria(Bank.class);
+			listBank = (List<Bank>) criteria.setFetchMode("M_BANK", FetchMode.SELECT).list();
+
+		} catch (Exception e) {
+			logger.info("BankDaoImpl.getAllBanks" + e.getMessage());
+		}
 		return listBank;
 	}
+
 	@Override
 	public Bank findBankById(String id) {
-		Session session = sessionFactory.openSession();
-		Criteria criteria = session.createCriteria(Bank.class);
-		Bank bankEdit = (Bank) criteria.setFetchMode("M_BANK", FetchMode.SELECT)
-				.add(Restrictions.eq("Bank_Code", id)).uniqueResult();
+		Bank bankEdit = null;
+		try {
+			Session session = sessionFactory.openSession();
+			Criteria criteria = session.createCriteria(Bank.class);
+			bankEdit = (Bank) criteria.setFetchMode("M_BANK", FetchMode.SELECT).add(Restrictions.eq("Bank_Code", id))
+					.uniqueResult();
+		} catch (Exception e) {
+			logger.info("BankDaoImpl.findBankById" + e.getMessage());
+		}
 
 		return bankEdit;
 
@@ -49,27 +68,31 @@ public class BankDaoImpl implements BankDao {
 
 	@Override
 	public void updateBank(Bank d) {
-
-		Session session = this.sessionFactory.getCurrentSession();
-		Transaction tx = session.beginTransaction();
-		session.update(d);
-		tx.commit();
-		session.close();
+		try {
+			Session session = this.sessionFactory.getCurrentSession();
+			Transaction tx = session.beginTransaction();
+			session.update(d);
+			tx.commit();
+			session.close();
+		} catch (Exception e) {
+			logger.info("BankDaoImpl.updateBank" + e.getMessage());
+		}
 
 	}
 
 	@Override
 	public void removeBank(String id) {
-		Session session = this.sessionFactory.getCurrentSession();
-		Transaction tx = session.beginTransaction();
-		Bank p = (Bank) session.load(Bank.class, new String(id));
-		System.out.println("value of p " + p);
-
-		session.delete(p);
-		tx.commit();
-		session.close();
+		try {
+			Session session = this.sessionFactory.getCurrentSession();
+			Transaction tx = session.beginTransaction();
+			Bank p = (Bank) session.load(Bank.class, new String(id));
+			session.delete(p);
+			tx.commit();
+			session.close();
+		} catch (Exception e) {
+			logger.info("BankDaoImpl.removeBank" + e.getMessage());
+		}
 
 	}
 
-	
 }
