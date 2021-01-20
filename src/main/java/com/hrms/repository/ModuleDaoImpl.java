@@ -138,13 +138,12 @@ public class ModuleDaoImpl implements ModuleDao {
 		List modules = null;
 		try {
 			Session session = sessionFactory.openSession();
-			String sql = "SELECT  DISTINCT u.MODULE_CODE,m.MODULE_NAME,m.ACTIVE_YN,m.INS_BY,m.INS_DATE,m.UPDATE_BY,m.UPDATE_DATE,m.SEQ_NO\r\n"
-					+ " FROM 	hrms.m_module m\r\n"
-					+ " INNER JOIN 	hrms.m_sub_module sb  on sb.MODULE_CODE=m.MODULE_CODE \r\n"
-					+ " INNER JOIN 	hrms.m_program pr on pr.MODULE_CODE=m.MODULE_CODE and pr.SUB_MODULE_CODE=sb.SUB_MODULE_CODE\r\n"
-					+ " INNER JOIN  hrms.m_urights u on u.MODULE_CODE=m.MODULE_CODE and u.SUB_MODULE_CODE=sb.SUB_MODULE_CODE\r\n"
-					+ " and u.PRG_CODE=pr.PRG_CODE\r\n" + " where m.ACTIVE_YN LIKE '%Y%' " + "and u.USER_CODE ="
-					+ userCode;
+
+			String sql = "SELECT  DISTINCT u.MODULE_CODE,m.MODULE_NAME,m.ACTIVE_YN,m.INS_BY,m.INS_DATE,m.UPDATE_BY,m.UPDATE_DATE,m.SEQ_NO  \r\n"
+					+ "	FROM 	hrms.m_module m , hrms.m_urights u\r\n"
+					+ "	Where m.MODULE_CODE = u.MODULE_CODE\r\n"
+					+ " and m.ACTIVE_YN ='Y' AND u.ACTIVE_YN ='Y'\r\n"
+					+ " and u.USER_CODE =" + userCode + " ORDER BY m.seq_no";
 
 			SQLQuery query = session.createSQLQuery(sql);
 			query.addEntity(Module.class);
@@ -161,9 +160,16 @@ public class ModuleDaoImpl implements ModuleDao {
 		List subMOdules = null;
 		try {
 			Session session = sessionFactory.openSession();
-			String sql = "SELECT DISTINCT  SMC.SUB_MODULE_CODE,SMC.INS_DATE,SMC.INS_BY,SMC.ACTIVE_YN,SMC.SUB_MODULE_NAME,SMC.MODULE_CODE,SMC.SEQ_NO,SMC.UPDATE_BY,SMC.UPDATE_DATE  \r\n"
-					+ "FROM  hrms.m_sub_module SMC , hrms.m_urights ur\r\n" + "where SMC.MODULE_CODE='" + modulecCode
-					+ "'" + "and  SMC.SUB_MODULE_CODE= ur.SUB_MODULE_CODE\r\n" + "and ur.user_code='" + ucode + "'";
+
+			String sql = "SELECT distinct u.SUB_MODULE_CODE,S.INS_DATE,S.INS_BY,S.ACTIVE_YN,S.SUB_MODULE_NAME,S.MODULE_CODE,S.SEQ_NO,S.UPDATE_BY,S.UPDATE_DATE   \r\n"
+					+ "	FROM 	hrms.m_module m , hrms.m_urights u ,hrms.m_sub_module s\r\n"
+					+ "	Where m.MODULE_CODE = u.MODULE_CODE\r\n"
+					+ " AND U.MODULE_CODE =s.MODULE_CODE\r\n"
+					+ " and u.SUB_MODULE_CODE =s.SUB_MODULE_CODE\r\n"
+					+ " and m.ACTIVE_YN ='Y' AND u.ACTIVE_YN ='Y' and s.ACTIVE_YN ='Y'\r\n"
+					+ " and u.USER_CODE =" + ucode + " and s.MODULE_CODE =" + modulecCode
+					+ " ORDER BY s.seq_no";
+
 			SQLQuery query = session.createSQLQuery(sql);
 			query.addEntity(SubModule.class);
 			subMOdules = query.list();
@@ -177,19 +183,18 @@ public class ModuleDaoImpl implements ModuleDao {
 	@Override
 	public List<Program> GetAllProgramList(String moduleCode, String smCode, String Ucode) {
 		Session session = sessionFactory.openSession();
-		List Programs = null;
-		try {
-			String sql = "SELECT DISTINCT  pmc.PRG_CODE,pmc.PRG_NAME,pmc.MODULE_CODE,pmc.PRG_TYPE,pmc.PRG_HREF_NAME,pmc.ACTIVE_YN,pmc.INS_BY,pmc.INS_DATE,pmc.UPDATE_BY,pmc.UPDATE_DATE,pmc.SUB_MODULE_CODE,pmc.SEQ_NO,pModuleCode,subModuleCode,dmoduleCode,dsubMouduleCode  \r\n"
-					+ "FROM  hrms.m_program pmc, hrms.m_urights ur ,hrms.m_module mm\r\n" + "where mm.MODULE_CODE='"
-					+ moduleCode + "'" + "and pmc.SUB_MODULE_CODE='" + smCode + "'"
-					+ "and pmc.PRG_CODE= ur.PRG_CODE\r\n" + "and ur.USER_CODE='" + Ucode + "'";
+		String sql = "SELECT  DISTINCT DISTINCT  U.PRG_CODE,p.PRG_NAME,p.MODULE_CODE,p.PRG_TYPE,p.PRG_HREF_NAME,p.ACTIVE_YN,p.INS_BY,p.INS_DATE,p.UPDATE_BY,p.UPDATE_DATE,p.SUB_MODULE_CODE,p.SEQ_NO ,pModuleCode,subModuleCode,dmoduleCode,dsubMouduleCode \r\n"
+				+ " FROM 	hrms.m_module m , hrms.m_urights u ,hrms.m_sub_module s ,m_program p\r\n"
+				+ "  Where m.MODULE_CODE = u.MODULE_CODE\r\n" + "  AND U.MODULE_CODE =s.MODULE_CODE\r\n"
+				+ "  and u.SUB_MODULE_CODE =s.SUB_MODULE_CODE\r\n" + "  and u.MODULE_CODE =p.MODULE_CODE\r\n"
+				+ "  and u.SUB_MODULE_CODE =p.SUB_MODULE_CODE\r\n" + "  and u.PRG_CODE =p.PRG_code\r\n"
+				+ "  and m.ACTIVE_YN ='Y' AND u.ACTIVE_YN ='Y' and s.ACTIVE_YN ='Y' and p.ACTIVE_YN ='Y'\r\n"
+				+ "  and u.USER_CODE ='" + Ucode + "'" + "and u.MODULE_CODE ='" + moduleCode + "'"
+				+ "and  u.SUB_MODULE_CODE ='" + smCode + "'" + " ORDER BY P.seq_no ";
 
-			SQLQuery query = session.createSQLQuery(sql);
-			query.addEntity(Program.class);
-			Programs = query.list();
-		} catch (Exception e) {
-			logger.info("ModuleDaoImpl.GetAllProgramList" + e.getMessage());
-		}
+		SQLQuery query = session.createSQLQuery(sql);
+		query.addEntity(Program.class);
+		List Programs = query.list();
 
 		return Programs;
 	}
