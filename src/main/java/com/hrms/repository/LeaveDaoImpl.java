@@ -10,6 +10,8 @@ import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.hrms.model.Leave;
 
@@ -17,31 +19,49 @@ import com.hrms.model.Leave;
 public class LeaveDaoImpl implements LeaveDao {
 	@Autowired
 	SessionFactory sessionFactory;
+	private Logger logger = LoggerFactory.getLogger(LeaveDaoImpl.class.getName());
 
 	@Override
 	public void addLeave(Leave leave) {
-		Session session = sessionFactory.openSession();
-		Transaction tx = session.beginTransaction();
-		session.persist(leave);
-		tx.commit();
-		session.close();
+		try {
+			Session session = sessionFactory.openSession();
+			Transaction tx = session.beginTransaction();
+			session.persist(leave);
+			tx.commit();
+			session.close();
+
+		} catch (Exception e) {
+			logger.info("LeaveDaoImpl.addLeave" + e.getMessage());
+		}
 
 	}
 
 	@Override
 	public List<Leave> getAllLeaves() {
-		Session session = sessionFactory.openSession();
-		Criteria criteria = session.createCriteria(Leave.class);
-		List<Leave> listLeave = (List<Leave>) criteria.setFetchMode("M_LEAVE", FetchMode.SELECT).list();
+		List<Leave> listLeave = null;
+		try {
+			Session session = sessionFactory.openSession();
+			Criteria criteria = session.createCriteria(Leave.class);
+			listLeave = (List<Leave>) criteria.setFetchMode("M_LEAVE", FetchMode.SELECT).list();
+
+		} catch (Exception e) {
+			logger.info("LeaveDaoImpl.getAllLeaves" + e.getMessage());
+		}
 		return listLeave;
 	}
 
 	@Override
 	public Leave findLeaveById(String id) {
-		Session session = sessionFactory.openSession();
-		Criteria criteria = session.createCriteria(Leave.class);
-		Leave leaveEdit = (Leave) criteria.setFetchMode("M_LEAVE", FetchMode.SELECT)
-				.add(Restrictions.eq("Lev_code", id)).uniqueResult();
+		Leave leaveEdit = null;
+		try {
+			Session session = sessionFactory.openSession();
+			Criteria criteria = session.createCriteria(Leave.class);
+			leaveEdit = (Leave) criteria.setFetchMode("M_LEAVE", FetchMode.SELECT).add(Restrictions.eq("Lev_code", id))
+					.uniqueResult();
+
+		} catch (Exception e) {
+			logger.info("LeaveDaoImpl.findLeaveById" + e.getMessage());
+		}
 
 		return leaveEdit;
 
@@ -49,25 +69,31 @@ public class LeaveDaoImpl implements LeaveDao {
 
 	@Override
 	public void updateLeave(Leave d) {
-
-		Session session = this.sessionFactory.getCurrentSession();
-		Transaction tx = session.beginTransaction();
-		session.update(d);
-		tx.commit();
-		session.close();
+		try {
+			Session session = this.sessionFactory.getCurrentSession();
+			Transaction tx = session.beginTransaction();
+			session.update(d);
+			tx.commit();
+			session.close();
+		} catch (Exception e) {
+			logger.info("LeaveDaoImpl.updateLeave" + e.getMessage());
+		}
 
 	}
 
 	@Override
 	public void removeLeave(String id) {
-		Session session = this.sessionFactory.getCurrentSession();
-		Transaction tx = session.beginTransaction();
-		Leave p = (Leave) session.load(Leave.class, new String(id));
-		System.out.println("value of p " + p);
+		try {
+			Session session = this.sessionFactory.getCurrentSession();
+			Transaction tx = session.beginTransaction();
+			Leave p = (Leave) session.load(Leave.class, new String(id));
+			session.delete(p);
+			tx.commit();
+			session.close();
 
-		session.delete(p);
-		tx.commit();
-		session.close();
+		} catch (Exception e) {
+			logger.info("LeaveDaoImpl.removeLeave" + e.getMessage());
+		}
 
 	}
 
