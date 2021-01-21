@@ -11,61 +11,90 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.hrms.model.Grade;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import com.hrms.model.Holiday;
 @Repository
 public class HolidayDaoImpl implements HolidayDao {
 
-	
 	@Autowired
 	SessionFactory sessionFactory;
+	private Logger logger = LoggerFactory.getLogger(HolidayDaoImpl.class.getName());
+
 	@Override
 	public void addHoliday(Holiday holiday) {
-		 Session session = sessionFactory.openSession(); 
-		 Transaction tx = session.beginTransaction();
-		 session.persist(holiday);
-		 tx.commit();
-		  session.close();
-		
+		try {
+
+			Session session = sessionFactory.openSession();
+			Transaction tx = session.beginTransaction();
+			session.persist(holiday);
+			tx.commit();
+			session.close();
+		} catch (Exception e) {
+			logger.info("HolidayDaoImpl.addHoliday" + e.getMessage());
+		}
+
 	}
 
 	@Override
 	public List<Holiday> getAllHolidays() {
-		Session session = sessionFactory.openSession();
-		Criteria criteria = session.createCriteria(Holiday.class);
-		List<Holiday> listHoliday = (List<Holiday>) criteria.setFetchMode("Holiday_Code", FetchMode.SELECT).list();
+		List<Holiday> listHoliday = null;
+		try {
+			Session session = sessionFactory.openSession();
+			Criteria criteria = session.createCriteria(Holiday.class);
+			listHoliday = (List<Holiday>) criteria.setFetchMode("Holiday_Code", FetchMode.SELECT).list();
+
+		} catch (Exception e) {
+			logger.info("HolidayDaoImpl.getAllHolidays" + e.getMessage());
+		}
 		return listHoliday;
 	}
 
 	@Override
 	public Holiday findHolidayById(String id) {
-		Session session = sessionFactory.openSession();
-		Criteria criteria = session.createCriteria(Holiday.class);
-		Holiday editHoliday = (Holiday) criteria.setFetchMode("Holiday_Code", FetchMode.SELECT)
-				.add(Restrictions.eq("Holiday_Code", id)).uniqueResult();
+		Holiday editHoliday = null;
+		try {
+
+			Session session = sessionFactory.openSession();
+			Criteria criteria = session.createCriteria(Holiday.class);
+			editHoliday = (Holiday) criteria.setFetchMode("Holiday_Code", FetchMode.SELECT)
+					.add(Restrictions.eq("Holiday_Code", id)).uniqueResult();
+
+		} catch (Exception e) {
+			logger.info("HolidayDaoImpl.findHolidayById" + e.getMessage());
+		}
 		return editHoliday;
 	}
 
 	@Override
 	public void updateHoliday(Holiday h) {
-	
-		Session session = this.sessionFactory.getCurrentSession();
-		Transaction tx = session.beginTransaction();
-		session.update(h);
-		tx.commit();
-		session.close();	
+		try {
+			Session session = this.sessionFactory.getCurrentSession();
+			Transaction tx = session.beginTransaction();
+			session.update(h);
+			tx.commit();
+			session.close();
+
+		} catch (Exception e) {
+			logger.info("HolidayDaoImpl.updateHoliday" + e.getMessage());
+		}
+
 	}
 
 	@Override
 	public void removeHoliday(String id) {
-		Session session = this.sessionFactory.getCurrentSession();
-		Transaction tx = session.beginTransaction();
-		Holiday H = (Holiday) session.load(Holiday.class, new String(id));
-		session.delete(H);
-		tx.commit();
-		session.close();	
-		
-		
+		try {
+
+			Session session = this.sessionFactory.getCurrentSession();
+			Transaction tx = session.beginTransaction();
+			Holiday H = (Holiday) session.load(Holiday.class, new String(id));
+			session.delete(H);
+			tx.commit();
+			session.close();
+		} catch (Exception e) {
+			logger.info("HolidayDaoImpl.removeHoliday" + e.getMessage());
+		}
+
 	}
 
 }
