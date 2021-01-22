@@ -15,13 +15,20 @@ import org.springframework.stereotype.Repository;
 
 import com.hrms.model.Section;
 
-
+/**
+ * @author Access surendra
+ *
+ */
 @Repository
 public class SectionDaoImpl implements SectionDao {
 	@Autowired
 	SessionFactory sessionFactory;
 	private Logger logger = LoggerFactory.getLogger(SectionDaoImpl.class.getName());
 
+	/**
+	 * 
+	 * add section Method
+	 */
 	@Override
 	public void addSection(Section section) {
 		try {
@@ -38,6 +45,10 @@ public class SectionDaoImpl implements SectionDao {
 
 	}
 
+	/**
+	 * 
+	 * List section Method
+	 */
 	@Override
 	public List<Section> getAllSections() {
 		List<Section> listSection = null;
@@ -53,6 +64,9 @@ public class SectionDaoImpl implements SectionDao {
 		return listSection;
 	}
 
+	/**
+	 * edit find Unique result section Method
+	 */
 	@Override
 	public Section findSectionById(String id) {
 		Section sectionEdit = null;
@@ -69,6 +83,10 @@ public class SectionDaoImpl implements SectionDao {
 
 	}
 
+	/**
+	 * 
+	 * update section Method
+	 */
 	@Override
 	public void updateSection(Section d) {
 		try {
@@ -84,6 +102,10 @@ public class SectionDaoImpl implements SectionDao {
 
 	}
 
+	/**
+	 * 
+	 * delete section Method
+	 */
 	@Override
 	public void removeSection(String id) {
 		try {
@@ -100,6 +122,10 @@ public class SectionDaoImpl implements SectionDao {
 
 	}
 
+	/**
+	 * 
+	 * add check already record exit or not section Method
+	 */
 	@Override
 	public Section checkSectionExists(Section section) {
 		Section secode = null;
