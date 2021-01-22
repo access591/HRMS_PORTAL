@@ -28,6 +28,13 @@ public class ProgramController {
 	private ModuleService moduleService;
 	@Autowired
 	SubModuleService subModuleService;
+	
+	/**
+	 * Method to get Program  Result 	
+	 * @param model
+	 * @param session
+	 * @return
+	 */
 	@GetMapping("/program")
 	public String program(@ModelAttribute Module module, Model model, HttpSession session) {
 		List<Program> listpPrograms = programService.getAllPrograms();
@@ -47,7 +54,12 @@ public class ProgramController {
 		session.setAttribute("username", session.getAttribute("username"));
 		return "program";
 	}
-
+	/**
+	 * Method to Save Program 	
+	 * @param model
+	 * @param session
+	 * @return
+	 */
 	@PostMapping("/saveProgram")
 	public String SaveProgram1(@ModelAttribute("program")Program program, Model model,
 			RedirectAttributes redirectAttributes, HttpSession session) {
@@ -79,7 +91,12 @@ public class ProgramController {
 		return "redirect:/program";
 
 	}
-
+	/**
+	 * Method to Edit Program 	
+	 * @param model
+	 * @param session
+	 * @return
+	 */
 	@GetMapping(value = { "/editProgram/{id}" })
 	public String editProgramdata(@PathVariable("id") String id, Model model, HttpSession session) {
 		
@@ -96,7 +113,12 @@ public class ProgramController {
 		session.setAttribute("username", session.getAttribute("username"));
 		return "/editProgram";
 	}
-	
+	/**
+	 * Method to update Program 	
+	 * @param model
+	 * @param session
+	 * @return
+	 */
 @PostMapping("/updateProgram")
 	public String updateProgram(@ModelAttribute("programupdate") Program p, Model model) {
 
@@ -104,6 +126,12 @@ public class ProgramController {
 	  	  
 		  return "redirect:/program";
 	}
+/**
+ * Method to Delete Program 	
+ * @param model
+ * @param session
+ * @return
+ */
 @GetMapping(value = {"/deleteProgram/{id}"})
 public String deleteprogram(@PathVariable("id")String id,  Model model,HttpSession session)
 { 
