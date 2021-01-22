@@ -32,7 +32,12 @@ public class DepartmentController {
 	DepartmentService departmentService;
 	@Autowired
 	private ModuleService moduleService;
-	
+	/**
+	 * Method to get Department Result 	
+	 * @param model
+	 * @param session
+	 * @return
+	 */	
 @GetMapping("/departmentMaster")
 public String DepartmentMaster(Model model,HttpSession session) {
 	
@@ -46,7 +51,12 @@ public String DepartmentMaster(Model model,HttpSession session) {
 	session.setAttribute("username",session.getAttribute("username"));
 		return "departmentMaster";
 	}
-
+/**
+ * Method to Save Department Details	
+ * @param model
+ * @param session
+ * @return
+ */	
 @PostMapping("/saveDepartment")
 	public String SaveDepartment(@ModelAttribute("department") Department department, Model model,RedirectAttributes redirectAttributes,HttpSession session) {
 	
@@ -68,7 +78,12 @@ else
 }
 	return "redirect:/departmentMaster";
 }	
-
+/**
+ * Method to Edit Department Details	
+ * @param model
+ * @param session
+ * @return
+ */	
 @GetMapping(value = {"/editDepartment/{id}"})
 public String editdepartment(@PathVariable("id")String id,  Model model,HttpSession session)
  { 
@@ -79,7 +94,12 @@ public String editdepartment(@PathVariable("id")String id,  Model model,HttpSess
     session.setAttribute("username",session.getAttribute("username")); 
        return "/editDepartment"; 
 }
-
+/**
+ * Method to Update Department Details	
+ * @param model
+ * @param session
+ * @return
+ */	
 @PostMapping("/updateDepartment")
 public String updateDepartment(@ModelAttribute("deptupdate") Department d, Model model) {
 
@@ -88,6 +108,12 @@ public String updateDepartment(@ModelAttribute("deptupdate") Department d, Model
 	  return "redirect:/departmentMaster";
 }
 
+/**
+ * Method to Delete  Department Details	
+ * @param model
+ * @param session
+ * @return
+ */	
 @GetMapping(value = {"/deleteDepartment/{id}"})
 public String deletedepartment(@PathVariable("id")String id,  Model model,HttpSession session)
  { 
