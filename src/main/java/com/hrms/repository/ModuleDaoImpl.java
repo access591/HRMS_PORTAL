@@ -140,7 +140,7 @@ public class ModuleDaoImpl implements ModuleDao {
 			Session session = sessionFactory.openSession();
 
 			String sql = "SELECT  DISTINCT u.MODULE_CODE,m.MODULE_NAME,m.ACTIVE_YN,m.INS_BY,m.INS_DATE,m.UPDATE_BY,m.UPDATE_DATE,m.SEQ_NO  \r\n"
-					+ "	FROM 	hrms.m_module m , hrms.m_urights u\r\n"
+					+ "	FROM 	m_module m ,m_urights u\r\n"
 					+ "	Where m.MODULE_CODE = u.MODULE_CODE\r\n"
 					+ " and m.ACTIVE_YN ='Y' AND u.ACTIVE_YN ='Y'\r\n"
 					+ " and u.USER_CODE =" + userCode + " ORDER BY m.seq_no";
@@ -162,7 +162,7 @@ public class ModuleDaoImpl implements ModuleDao {
 			Session session = sessionFactory.openSession();
 
 			String sql = "SELECT distinct u.SUB_MODULE_CODE,S.INS_DATE,S.INS_BY,S.ACTIVE_YN,S.SUB_MODULE_NAME,S.MODULE_CODE,S.SEQ_NO,S.UPDATE_BY,S.UPDATE_DATE   \r\n"
-					+ "	FROM 	hrms.m_module m , hrms.m_urights u ,hrms.m_sub_module s\r\n"
+					+ "	FROM 	m_module m , m_urights u ,m_sub_module s\r\n"
 					+ "	Where m.MODULE_CODE = u.MODULE_CODE\r\n"
 					+ " AND U.MODULE_CODE =s.MODULE_CODE\r\n"
 					+ " and u.SUB_MODULE_CODE =s.SUB_MODULE_CODE\r\n"
@@ -184,7 +184,7 @@ public class ModuleDaoImpl implements ModuleDao {
 	public List<Program> GetAllProgramList(String moduleCode, String smCode, String Ucode) {
 		Session session = sessionFactory.openSession();
 		String sql = "SELECT  DISTINCT DISTINCT  U.PRG_CODE,p.PRG_NAME,p.MODULE_CODE,p.PRG_TYPE,p.PRG_HREF_NAME,p.ACTIVE_YN,p.INS_BY,p.INS_DATE,p.UPDATE_BY,p.UPDATE_DATE,p.SUB_MODULE_CODE,p.SEQ_NO ,pModuleCode,subModuleCode,dmoduleCode,dsubMouduleCode \r\n"
-				+ " FROM 	hrms.m_module m , hrms.m_urights u ,hrms.m_sub_module s ,m_program p\r\n"
+				+ " FROM 	m_module m , m_urights u ,m_sub_module s ,m_program p\r\n"
 				+ "  Where m.MODULE_CODE = u.MODULE_CODE\r\n" + "  AND U.MODULE_CODE =s.MODULE_CODE\r\n"
 				+ "  and u.SUB_MODULE_CODE =s.SUB_MODULE_CODE\r\n" + "  and u.MODULE_CODE =p.MODULE_CODE\r\n"
 				+ "  and u.SUB_MODULE_CODE =p.SUB_MODULE_CODE\r\n" + "  and u.PRG_CODE =p.PRG_code\r\n"

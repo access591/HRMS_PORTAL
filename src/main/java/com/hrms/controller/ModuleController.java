@@ -25,7 +25,13 @@ public class ModuleController {
 
 	@Autowired
 	ModuleService moduleService;
-
+	/**
+	 * Method to get Module Result 	
+	 * @param model
+	 * @param session
+	 * @return
+	 */
+	
 	@GetMapping("/module")
 	public String module(@ModelAttribute Module module, Model model, HttpSession session) {
 		List<Module> modules1 = moduleService.getModules();
@@ -39,6 +45,12 @@ public class ModuleController {
 		return "module";
 	}
 
+	/**
+	 * Method to Save Module 	
+	 * @param model
+	 * @param session
+	 * @return
+	 */
 	@PostMapping("/saveModule")
 	  public String SaveModule(@ModelAttribute("module") Module module, Model model,HttpSession session,RedirectAttributes redirectAttributes) {
 			
@@ -58,7 +70,12 @@ public class ModuleController {
 			return"redirect:/module";
 		}
 	  }
-	
+	/**
+	 * Method to Edit Module 	
+	 * @param model
+	 * @param session
+	 * @return
+	 */
 	@GetMapping(value = {"/editModule/{id}"})
 	public String editModule(@PathVariable("id")String id,  Model model,HttpSession session)
 	 { 
@@ -68,6 +85,12 @@ public class ModuleController {
 	    session.setAttribute("username",session.getAttribute("username")); 
 	       return "/editModule"; 
 	}
+	/**
+	 * Method to Edit Module 	
+	 * @param model
+	 * @param session
+	 * @return
+	 */
 	@PostMapping("/updateModule")
 	public String updateModule(@ModelAttribute("moduleupdate") Module m, Model model) {
 
@@ -75,6 +98,12 @@ public class ModuleController {
 	  	  
 		  return "redirect:/module";
 	}
+	/**
+	 * Method to Delete Module 	
+	 * @param model
+	 * @param session
+	 * @return
+	 */
 	@GetMapping(value = {"/deleteModule/{id}"})
 	public String deleteModule(@PathVariable("id")String id,  Model model,HttpSession session)
 	 { 

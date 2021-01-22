@@ -28,6 +28,12 @@ public class SubModuleController {
 	SubModuleService subModuleService;
 	@Autowired
 	private ModuleService moduleService;
+	/**
+	 * Method to get SubModule Result 	
+	 * @param model
+	 * @param session
+	 * @return
+	 */
 @GetMapping("/submodulepage")
 	public String SubmodulePage(Model model,HttpSession session) {
 		List<SubModule> listSubModule = subModuleService.getAllSubModules();
@@ -42,7 +48,12 @@ public class SubModuleController {
 		session.setAttribute("username", session.getAttribute("username"));
 		return "subModule";
 	}
-
+/**
+ * Method to Save  SubModule 	
+ * @param model
+ * @param session
+ * @return
+ */
 	@PostMapping("/saveSubModule")
 	public String SaveSubModule(@ModelAttribute("submodule") SubModule subModule, Model model,
 			RedirectAttributes redirectAttributes, HttpSession session) {
@@ -65,7 +76,12 @@ public class SubModuleController {
 
 	}
 	
-
+	/**
+	 * Method to Edit  SubModule 	
+	 * @param model
+	 * @param session
+	 * @return
+	 */
 	@GetMapping(value = { "/editSubModule/{id}" })
 	public String editsubmodule(@PathVariable("id") String id, Model model, HttpSession session) {
 		SubModule subModuleEdit = subModuleService.findSubModuleById(id);
@@ -78,6 +94,12 @@ public class SubModuleController {
 		return "/editSubModule";
 	}
 
+	/**
+	 * Method to update  SubModule 	
+	 * @param model
+	 * @param session
+	 * @return
+	 */
 	@PostMapping("/updateSubModule")
 	public String updatesubmodule(@ModelAttribute("submoduleupdate") SubModule subModule, Model model) {
 
@@ -86,6 +108,12 @@ public class SubModuleController {
 		return "redirect:/submodulepage";
 	}
 
+	/**
+	 * Method to Delete  SubModule 	
+	 * @param model
+	 * @param session
+	 * @return
+	 */
 	@GetMapping(value = { "/deleteSubModule/{id}" })
 	public String deletesubmodule(@PathVariable("id") String id, Model model, HttpSession session) {
 		this.subModuleService.removeSubModule(id);
