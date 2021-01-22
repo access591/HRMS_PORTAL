@@ -140,10 +140,10 @@ public class ModuleDaoImpl implements ModuleDao {
 			Session session = sessionFactory.openSession();
 
 			String sql = "SELECT  DISTINCT u.MODULE_CODE,m.MODULE_NAME,m.ACTIVE_YN,m.INS_BY,m.INS_DATE,m.UPDATE_BY,m.UPDATE_DATE,m.SEQ_NO  \r\n"
-					+ "	FROM 	m_module m ,m_urights u\r\n"
+					+ "	FROM 	M_MODULE m ,M_URIGHTS u\r\n"
 					+ "	Where m.MODULE_CODE = u.MODULE_CODE\r\n"
 					+ " and m.ACTIVE_YN ='Y' AND u.ACTIVE_YN ='Y'\r\n"
-					+ " and u.USER_CODE =" + userCode + " ORDER BY m.seq_no";
+					+ " and u.USER_CODE =" + userCode + " ORDER BY m.SEQ_NO";
 
 			SQLQuery query = session.createSQLQuery(sql);
 			query.addEntity(Module.class);
@@ -161,14 +161,15 @@ public class ModuleDaoImpl implements ModuleDao {
 		try {
 			Session session = sessionFactory.openSession();
 
-			String sql = "SELECT distinct u.SUB_MODULE_CODE,S.INS_DATE,S.INS_BY,S.ACTIVE_YN,S.SUB_MODULE_NAME,S.MODULE_CODE,S.SEQ_NO,S.UPDATE_BY,S.UPDATE_DATE   \r\n"
-					+ "	FROM 	m_module m , m_urights u ,m_sub_module s\r\n"
+			
+			String sql = "SELECT DISTINCT u.SUB_MODULE_CODE,S.INS_DATE,S.INS_BY,S.ACTIVE_YN,S.SUB_MODULE_NAME,S.MODULE_CODE,S.SEQ_NO,S.UPDATE_BY,S.UPDATE_DATE   \r\n"
+					+ "	FROM 	M_MODULE m , M_URIGHTS u ,M_SUB_MODULE s\r\n"
 					+ "	Where m.MODULE_CODE = u.MODULE_CODE\r\n"
 					+ " AND U.MODULE_CODE =s.MODULE_CODE\r\n"
 					+ " and u.SUB_MODULE_CODE =s.SUB_MODULE_CODE\r\n"
 					+ " and m.ACTIVE_YN ='Y' AND u.ACTIVE_YN ='Y' and s.ACTIVE_YN ='Y'\r\n"
 					+ " and u.USER_CODE =" + ucode + " and s.MODULE_CODE =" + modulecCode
-					+ " ORDER BY s.seq_no";
+					+ " ORDER BY s.SEQ_NO";
 
 			SQLQuery query = session.createSQLQuery(sql);
 			query.addEntity(SubModule.class);
@@ -182,19 +183,26 @@ public class ModuleDaoImpl implements ModuleDao {
 
 	@Override
 	public List<Program> GetAllProgramList(String moduleCode, String smCode, String Ucode) {
-		Session session = sessionFactory.openSession();
-		String sql = "SELECT  DISTINCT DISTINCT  U.PRG_CODE,p.PRG_NAME,p.MODULE_CODE,p.PRG_TYPE,p.PRG_HREF_NAME,p.ACTIVE_YN,p.INS_BY,p.INS_DATE,p.UPDATE_BY,p.UPDATE_DATE,p.SUB_MODULE_CODE,p.SEQ_NO ,pModuleCode,subModuleCode,dmoduleCode,dsubMouduleCode \r\n"
-				+ " FROM 	m_module m , m_urights u ,m_sub_module s ,m_program p\r\n"
-				+ "  Where m.MODULE_CODE = u.MODULE_CODE\r\n" + "  AND U.MODULE_CODE =s.MODULE_CODE\r\n"
-				+ "  and u.SUB_MODULE_CODE =s.SUB_MODULE_CODE\r\n" + "  and u.MODULE_CODE =p.MODULE_CODE\r\n"
-				+ "  and u.SUB_MODULE_CODE =p.SUB_MODULE_CODE\r\n" + "  and u.PRG_CODE =p.PRG_code\r\n"
-				+ "  and m.ACTIVE_YN ='Y' AND u.ACTIVE_YN ='Y' and s.ACTIVE_YN ='Y' and p.ACTIVE_YN ='Y'\r\n"
-				+ "  and u.USER_CODE ='" + Ucode + "'" + "and u.MODULE_CODE ='" + moduleCode + "'"
-				+ "and  u.SUB_MODULE_CODE ='" + smCode + "'" + " ORDER BY P.seq_no ";
+		List Programs =null;
+		try {
+			Session session = sessionFactory.openSession();
+			String sql = "SELECT  DISTINCT DISTINCT  U.PRG_CODE,p.PRG_NAME,p.MODULE_CODE,p.PRG_TYPE,p.PRG_HREF_NAME,p.ACTIVE_YN,p.INS_BY,p.INS_DATE,p.UPDATE_BY,p.UPDATE_DATE,p.SUB_MODULE_CODE,p.SEQ_NO ,pModuleCode,subModuleCode,dmoduleCode,dsubMouduleCode \r\n"
+					+ " FROM 	M_MODULE m , M_URIGHTS u ,M_SUB_MODULE s ,M_PROGRAM p\r\n"
+					+ "  Where m.MODULE_CODE = u.MODULE_CODE\r\n" + "  AND U.MODULE_CODE =s.MODULE_CODE\r\n"
+					+ "  and u.SUB_MODULE_CODE =s.SUB_MODULE_CODE\r\n" + "  and u.MODULE_CODE =p.MODULE_CODE\r\n"
+					+ "  and u.SUB_MODULE_CODE =p.SUB_MODULE_CODE\r\n" + "  and u.PRG_CODE =p.PRG_code\r\n"
+					+ "  and m.ACTIVE_YN ='Y' AND u.ACTIVE_YN ='Y' and s.ACTIVE_YN ='Y' and p.ACTIVE_YN ='Y'\r\n"
+					+ "  and u.USER_CODE ='" + Ucode + "'" + "and u.MODULE_CODE ='" + moduleCode + "'"
+					+ "and  u.SUB_MODULE_CODE ='" + smCode + "'" + " ORDER BY P.SEQ_NO ";
 
-		SQLQuery query = session.createSQLQuery(sql);
-		query.addEntity(Program.class);
-		List Programs = query.list();
+			SQLQuery query = session.createSQLQuery(sql);
+			query.addEntity(Program.class);
+			 Programs = query.list();
+			
+		} catch (Exception e) {
+			logger.info("ModuleDaoImpl.GetAllProgramList" + e.getMessage());
+		}
+		
 
 		return Programs;
 	}
