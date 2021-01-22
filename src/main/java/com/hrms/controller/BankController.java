@@ -30,7 +30,12 @@ public class BankController {
 	BankService bankService;
 	@Autowired
 	private ModuleService moduleService;
-	
+/**
+ * Method to get Bank Result 	
+ * @param model
+ * @param session
+ * @return
+ */
 @GetMapping("/bankMaster")
 public String bankMaster(Model model,HttpSession session) {
 	
@@ -45,7 +50,12 @@ public String bankMaster(Model model,HttpSession session) {
 		return "BankMaster";
 	}
 
-
+/**
+ * Method to Save Bank Details
+ * @param model
+ * @param session
+ * @return
+ */
 @PostMapping("/saveBank")
 	public String SaveBank(@ModelAttribute("bank") Bank bank, Model model) {
 		if (bank.getBank_Code() != "") {
@@ -57,7 +67,12 @@ public String bankMaster(Model model,HttpSession session) {
 		return "redirect:/bankMaster";
 
 	}	
-
+/**
+ * Method to Edit Bank Details
+ * @param model
+ * @param session
+ * @return
+ */
 @GetMapping(value = {"/editBank/{id}"})
 public String editbank(@PathVariable("id")String id,  Model model,HttpSession session)
  { 
@@ -68,7 +83,12 @@ public String editbank(@PathVariable("id")String id,  Model model,HttpSession se
     session.setAttribute("username",session.getAttribute("username")); 
        return "/editBank"; 
 }
-
+/**
+ * Method to Update Bank Details
+ * @param model
+ * @param session
+ * @return
+ */
 @PostMapping("/updateBank")
 public String updateBank(@ModelAttribute("bankupdate") Bank d, Model model) {
 
@@ -76,7 +96,12 @@ public String updateBank(@ModelAttribute("bankupdate") Bank d, Model model) {
   	  
 	  return "redirect:/bankMaster";
 }
-
+/**
+ * Method to Delete Bank Details
+ * @param model
+ * @param session
+ * @return
+ */
 @GetMapping(value = {"/deleteBank/{id}"})
 public String deletebank(@PathVariable("id")String id,  Model model,HttpSession session)
  { 
