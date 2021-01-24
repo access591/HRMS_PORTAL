@@ -143,7 +143,8 @@ public class ModuleDaoImpl implements ModuleDao {
 					+ "	FROM 	M_MODULE m ,M_URIGHTS u\r\n"
 					+ "	Where m.MODULE_CODE = u.MODULE_CODE\r\n"
 					+ " and m.ACTIVE_YN ='Y' AND u.ACTIVE_YN ='Y'\r\n"
-					+ " and u.USER_CODE =" + userCode + " ORDER BY m.SEQ_NO";
+					+ " and u.USER_CODE ='"+ userCode +"'" 
+					+ " ORDER BY m.SEQ_NO";
 
 			SQLQuery query = session.createSQLQuery(sql);
 			query.addEntity(Module.class);
@@ -163,13 +164,14 @@ public class ModuleDaoImpl implements ModuleDao {
 
 			
 			String sql = "SELECT DISTINCT u.SUB_MODULE_CODE,S.INS_DATE,S.INS_BY,S.ACTIVE_YN,S.SUB_MODULE_NAME,S.MODULE_CODE,S.SEQ_NO,S.UPDATE_BY,S.UPDATE_DATE   \r\n"
-					+ "	FROM 	M_MODULE m , M_URIGHTS u ,M_SUB_MODULE s\r\n"
+					+ "	FROM 	M_MODULE m , M_URIGHTS u ,M_SUB_MODULE S \r\n"
 					+ "	Where m.MODULE_CODE = u.MODULE_CODE\r\n"
-					+ " AND U.MODULE_CODE =s.MODULE_CODE\r\n"
-					+ " and u.SUB_MODULE_CODE =s.SUB_MODULE_CODE\r\n"
-					+ " and m.ACTIVE_YN ='Y' AND u.ACTIVE_YN ='Y' and s.ACTIVE_YN ='Y'\r\n"
-					+ " and u.USER_CODE =" + ucode + " and s.MODULE_CODE =" + modulecCode
-					+ " ORDER BY s.SEQ_NO";
+					+ " AND u.MODULE_CODE =S.MODULE_CODE\r\n"
+					+ " and u.SUB_MODULE_CODE =S.SUB_MODULE_CODE\r\n"
+					+ " and m.ACTIVE_YN ='Y' AND u.ACTIVE_YN ='Y' and S.ACTIVE_YN ='Y'\r\n"
+					+ " and u.USER_CODE ='" + ucode+"'"
+					+ " and S.MODULE_CODE ='" + modulecCode+"'"
+					+ " ORDER BY S.SEQ_NO";
 
 			SQLQuery query = session.createSQLQuery(sql);
 			query.addEntity(SubModule.class);
@@ -186,14 +188,16 @@ public class ModuleDaoImpl implements ModuleDao {
 		List Programs =null;
 		try {
 			Session session = sessionFactory.openSession();
-			String sql = "SELECT  DISTINCT DISTINCT  U.PRG_CODE,p.PRG_NAME,p.MODULE_CODE,p.PRG_TYPE,p.PRG_HREF_NAME,p.ACTIVE_YN,p.INS_BY,p.INS_DATE,p.UPDATE_BY,p.UPDATE_DATE,p.SUB_MODULE_CODE,p.SEQ_NO ,dmoduleCode,dsubMouduleCode \r\n"
+			String sql = "SELECT  DISTINCT DISTINCT  u.PRG_CODE,p.PRG_NAME,p.MODULE_CODE,p.PRG_TYPE,p.PRG_HREF_NAME,p.ACTIVE_YN,p.INS_BY,p.INS_DATE,p.UPDATE_BY,p.UPDATE_DATE,p.SUB_MODULE_CODE,p.SEQ_NO ,dmoduleCode,dsubMouduleCode \r\n"
 					+ " FROM 	M_MODULE m , M_URIGHTS u ,M_SUB_MODULE s ,M_PROGRAM p\r\n"
-					+ "  Where m.MODULE_CODE = u.MODULE_CODE\r\n" + "  AND U.MODULE_CODE =s.MODULE_CODE\r\n"
+					+ "  Where m.MODULE_CODE = u.MODULE_CODE\r\n" + "  AND u.MODULE_CODE =s.MODULE_CODE\r\n"
 					+ "  and u.SUB_MODULE_CODE =s.SUB_MODULE_CODE\r\n" + "  and u.MODULE_CODE =p.MODULE_CODE\r\n"
 					+ "  and u.SUB_MODULE_CODE =p.SUB_MODULE_CODE\r\n" + "  and u.PRG_CODE =p.PRG_code\r\n"
 					+ "  and m.ACTIVE_YN ='Y' AND u.ACTIVE_YN ='Y' and s.ACTIVE_YN ='Y' and p.ACTIVE_YN ='Y'\r\n"
-					+ "  and u.USER_CODE ='" + Ucode + "'" + "and u.MODULE_CODE ='" + moduleCode + "'"
-					+ "and  u.SUB_MODULE_CODE ='" + smCode + "'" + " ORDER BY P.SEQ_NO ";
+					+ "  and u.USER_CODE ='" + Ucode + "'" 
+					+ "and u.MODULE_CODE ='" + moduleCode + "'"
+					+ "and  u.SUB_MODULE_CODE ='" + smCode + "'" 
+					+ " ORDER BY p.SEQ_NO ";
 
 			SQLQuery query = session.createSQLQuery(sql);
 			query.addEntity(Program.class);
