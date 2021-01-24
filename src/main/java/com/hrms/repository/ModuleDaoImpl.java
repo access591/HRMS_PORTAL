@@ -183,7 +183,7 @@ public class ModuleDaoImpl implements ModuleDao {
 	@Override
 	public List<Program> GetAllProgramList(String moduleCode, String smCode, String Ucode) {
 		Session session = sessionFactory.openSession();
-		String sql = "SELECT  DISTINCT DISTINCT  U.PRG_CODE,p.PRG_NAME,p.MODULE_CODE,p.PRG_TYPE,p.PRG_HREF_NAME,p.ACTIVE_YN,p.INS_BY,p.INS_DATE,p.UPDATE_BY,p.UPDATE_DATE,p.SUB_MODULE_CODE,p.SEQ_NO ,dmoduleCode,dsubMouduleCode \r\n"
+		String sql = "SELECT  DISTINCT DISTINCT  U.PRG_CODE,p.PRG_NAME,p.MODULE_CODE,p.PRG_TYPE,p.PRG_HREF_NAME,p.ACTIVE_YN,p.INS_BY,p.INS_DATE,p.UPDATE_BY,p.UPDATE_DATE,p.SUB_MODULE_CODE,p.SEQ_NO ,pModuleCode,subModuleCode,dmoduleCode,dsubMouduleCode \r\n"
 				+ " FROM 	hrms.m_module m , hrms.m_urights u ,hrms.m_sub_module s ,m_program p\r\n"
 				+ "  Where m.MODULE_CODE = u.MODULE_CODE\r\n" + "  AND U.MODULE_CODE =s.MODULE_CODE\r\n"
 				+ "  and u.SUB_MODULE_CODE =s.SUB_MODULE_CODE\r\n" + "  and u.MODULE_CODE =p.MODULE_CODE\r\n"
