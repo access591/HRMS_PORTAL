@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hrms.model.Login;
 import com.hrms.model.MenuModule;
@@ -106,6 +107,25 @@ public class UserController {
 			return "list-users";
 		}
 	
-	
 
+	@PostMapping("/saveUser")
+	public String SaveUser(@ModelAttribute("user") UserEntity userEntity, Model model,HttpSession session,RedirectAttributes redirectAttributes) {
+
+		boolean isUserExist = userService.checkUserExistsOrNot(userEntity);	
+		
+
+		if (isUserExist) {
+		    redirectAttributes.addFlashAttribute("message", "User Code Already exists !  ");
+		    redirectAttributes.addFlashAttribute("alertClass", "alert-success");
+		    return "redirect:/userMaster";
+	}
+		else
+		{
+			userService.addUser(userEntity); 
+			session.setAttribute("username",session.getAttribute("username"));	
+			return"redirect:/userMaster";
+		
+		}
+
+}
 }

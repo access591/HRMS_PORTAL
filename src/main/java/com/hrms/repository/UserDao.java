@@ -10,4 +10,6 @@ public interface UserDao {
 	
 	List<UserEntity> getAllUsers();
 	UserEntity findDataById(String id);
+	public void addUser(UserEntity userEntity);
+	UserEntity checkUserExistsOrNot(UserEntity userEntity);
 }

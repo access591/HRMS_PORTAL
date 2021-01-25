@@ -10,4 +10,6 @@ public interface UserService {
 	boolean checkUserExists(Login login);
 	public List<UserEntity> getAllUsers();
 	UserEntity findDataById(String id);
+	void addUser(UserEntity userEntity);
+	  boolean checkUserExistsOrNot(UserEntity userEntity);
 }
