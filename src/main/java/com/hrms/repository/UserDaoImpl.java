@@ -83,6 +83,21 @@ public class UserDaoImpl implements UserDao {
 
 		return usercode;
 	}
+
+	@Override
+	public void removeUser(String id) {
+		try {
+			Session session = this.sessionFactory.getCurrentSession();
+			Transaction tx = session.beginTransaction();
+			UserEntity u = (UserEntity) session.load(UserEntity.class, new String(id));
+			session.delete(u);
+			tx.commit();
+			session.close();
+		} catch (Exception e) {
+			logger.info("UserDaoImpl.removeUser" + e.getMessage());
+		}
+
 	}
+}
 
 

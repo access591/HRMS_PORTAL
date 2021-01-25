@@ -52,4 +52,10 @@ public class UserServiceImpl implements UserService {
 				return false;
 			}
 	}
+
+	@Override
+	public void removeUser(String id) {
+		this.userDao.removeUser(id);
+		
+	}
 	}

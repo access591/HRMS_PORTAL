@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -93,39 +94,59 @@ public class UserController {
 		return subModule;
 	}
 	
-	@GetMapping("/userMaster")	
-	public String UserMaster(Model model,HttpSession session) {
-		
-		List<UserEntity>listUsers = userService.getAllUsers();
-		model.addAttribute("users", listUsers); 
-		String userCode= (String)session.getAttribute("username");
+	@GetMapping("/userMaster")
+	public String UserMaster(Model model, HttpSession session) {
+
+		List<UserEntity> listUsers = userService.getAllUsers();
+		model.addAttribute("users", listUsers);
+		String userCode = (String) session.getAttribute("username");
 		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
 		if (modules != null) {
 			model.addAttribute("modules", modules);
 		}
-		session.setAttribute("username",session.getAttribute("username"));
-			return "list-users";
-		}
-	
+		session.setAttribute("username", session.getAttribute("username"));
+		return "list-users";
+	}
 
+	/**
+	 * 
+	 * @param Method to be Save userEntity
+	 * @param model
+	 * @param session
+	 * @param redirectAttributes
+	 * @return
+	 */
 	@PostMapping("/saveUser")
-	public String SaveUser(@ModelAttribute("user") UserEntity userEntity, Model model,HttpSession session,RedirectAttributes redirectAttributes) {
+	public String SaveUser(@ModelAttribute("user") UserEntity userEntity, Model model, HttpSession session,
+			RedirectAttributes redirectAttributes) {
 
-		boolean isUserExist = userService.checkUserExistsOrNot(userEntity);	
-		
+		boolean isUserExist = userService.checkUserExistsOrNot(userEntity);
 
 		if (isUserExist) {
-		    redirectAttributes.addFlashAttribute("message", "User Code Already exists !  ");
-		    redirectAttributes.addFlashAttribute("alertClass", "alert-success");
-		    return "redirect:/userMaster";
-	}
-		else
-		{
-			userService.addUser(userEntity); 
-			session.setAttribute("username",session.getAttribute("username"));	
-			return"redirect:/userMaster";
-		
+			redirectAttributes.addFlashAttribute("message", "User Code Already exists !  ");
+			redirectAttributes.addFlashAttribute("alertClass", "alert-success");
+			return "redirect:/userMaster";
+		} else {
+			userService.addUser(userEntity);
+			session.setAttribute("username", session.getAttribute("username"));
+			return "redirect:/userMaster";
+
 		}
 
-}
+	}
+
+	/**
+	 * 
+	 * @param Method  to Delete by id
+	 * @param model
+	 * @param session
+	 * @return
+	 */
+	@GetMapping(value = { "/deleteUser/{id}" })
+	public String deleteUser(@PathVariable("id") String id, Model model, HttpSession session) {
+		this.userService.removeUser(id);
+		session.setAttribute("username", session.getAttribute("username"));
+		return "redirect:/userMaster";
+	}
+	
 }
