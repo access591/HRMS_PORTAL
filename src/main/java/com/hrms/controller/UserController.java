@@ -120,6 +120,7 @@ public class UserController {
 	public String SaveUser(@ModelAttribute("user") UserEntity userEntity, Model model, HttpSession session,
 			RedirectAttributes redirectAttributes) {
 
+		
 		boolean isUserExist = userService.checkUserExistsOrNot(userEntity);
 
 		if (isUserExist) {
@@ -127,6 +128,8 @@ public class UserController {
 			redirectAttributes.addFlashAttribute("alertClass", "alert-success");
 			return "redirect:/userMaster";
 		} else {
+			String username= (String)session.getAttribute("uuuuu");
+			userEntity.setInsBy(username);
 			userService.addUser(userEntity);
 			session.setAttribute("username", session.getAttribute("username"));
 			return "redirect:/userMaster";
@@ -134,7 +137,26 @@ public class UserController {
 		}
 
 	}
+	
+	@GetMapping(value = { "/editUser/{id}" })
+	public String editUser(@PathVariable("id") String id, Model model, HttpSession session) {
 
+		UserEntity userEdit = userService.findUserById(id);
+		model.addAttribute("userEdit", userEdit);
+
+		session.setAttribute("username", session.getAttribute("username"));
+		return "/editUser";
+	}
+
+	@PostMapping("/upadteUser")
+	public String updateUser(@ModelAttribute("userUpdate") UserEntity u, Model model, HttpSession session) {
+
+		String username= (String)session.getAttribute("uuuuu");
+			u.setUpdBy(username);
+		  this.userService.updateUser(u);
+	  	  
+		  return "redirect:/userMaster";
+	}
 	/**
 	 * 
 	 * @param Method  to Delete by id
