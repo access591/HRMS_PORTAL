@@ -35,4 +35,21 @@ public class UserServiceImpl implements UserService {
 		return userDao.findDataById(id);
 
 	}
-}
+
+	@Override
+	public void addUser(UserEntity userEntity) {
+		this.userDao.addUser(userEntity);
+		
+	}
+
+	@Override
+	public boolean checkUserExistsOrNot(UserEntity userEntity) {
+	
+		UserEntity e = userDao.checkUserExistsOrNot(userEntity);
+			if (e != null) {
+				return true;
+			} else {
+				return false;
+			}
+	}
+	}
