@@ -98,6 +98,34 @@ public class UserDaoImpl implements UserDao {
 		}
 
 	}
-}
 
+	@Override
+	public UserEntity findUserById(String id) {
+		UserEntity userEdit = null;
+		try {
+			Session session = sessionFactory.openSession();
+			Criteria criteria = session.createCriteria(UserEntity.class);
+			userEdit = (UserEntity) criteria.setFetchMode("Myuser", FetchMode.SELECT)
+					.add(Restrictions.eq("userCode", id)).uniqueResult();
+		} catch (Exception e) {
+			logger.info("UserDaoImpl.findUserById" + e.getMessage());
+		}
+
+		return userEdit;
+	}
+
+	@Override
+	public void updateUser(UserEntity u) {
+		try {
+			Session session = this.sessionFactory.getCurrentSession();
+			Transaction tx = session.beginTransaction();
+			session.update(u);
+			tx.commit();
+			session.close();
+		} catch (Exception e) {
+			logger.info("UserDaoImpl.updateUser" + e.getMessage());
+		}
+
+	}
+}
 

@@ -1,6 +1,7 @@
 package com.hrms.model;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -36,13 +37,13 @@ public class UserEntity implements Serializable{
 	private String insBy;
 
 	@Column(name = "ins_date")
-	private String insDate;
+	private Date insDate= new Date();
 
 	@Column(name = "upd_by")
 	private String updBy;
 
 	@Column(name = "upd_date")
-	private String updDate;
+	private Date updDate=new Date(); 
 	@Column(name ="Desg_Name")
 	private String  DesgName;
 	
@@ -103,11 +104,11 @@ public class UserEntity implements Serializable{
 		this.insBy = insBy;
 	}
 
-	public String getInsDate() {
+	public Date getInsDate() {
 		return insDate;
 	}
 
-	public void setInsDate(String insDate) {
+	public void setInsDate(Date insDate) {
 		this.insDate = insDate;
 	}
 
@@ -119,11 +120,11 @@ public class UserEntity implements Serializable{
 		this.updBy = updBy;
 	}
 
-	public String getUpdDate() {
+	public Date getUpdDate() {
 		return updDate;
 	}
 
-	public void setUpdDate(String updDate) {
+	public void setUpdDate(Date updDate) {
 		this.updDate = updDate;
 	}
 }
