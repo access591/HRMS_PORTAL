@@ -91,5 +91,21 @@ public class UserController {
 
 		return subModule;
 	}
+	
+	@GetMapping("/userMaster")	
+	public String UserMaster(Model model,HttpSession session) {
+		
+		List<UserEntity>listUsers = userService.getAllUsers();
+		model.addAttribute("users", listUsers); 
+		String userCode= (String)session.getAttribute("username");
+		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
+		if (modules != null) {
+			model.addAttribute("modules", modules);
+		}
+		session.setAttribute("username",session.getAttribute("username"));
+			return "list-users";
+		}
+	
+	
 
 }
