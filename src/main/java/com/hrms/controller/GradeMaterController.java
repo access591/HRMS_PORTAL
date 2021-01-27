@@ -30,6 +30,12 @@ public class GradeMaterController {
 	
 	int pageno=1;
 	String reqPage="/gradeMaster";
+	/**
+	 * Request mapping list data grade master 
+	 * @param model
+	 * @param session
+	 * @return
+	 */
 @GetMapping("/gradeMaster")
 	public String DesignationMaster(Model model,HttpSession session) {
 
@@ -44,6 +50,14 @@ public class GradeMaterController {
 	  session.setAttribute("username",session.getAttribute("username"));
 	  return pageMappingService.PageRequestMapping(reqPage,pageno);
 		}
+/**
+ * request mapping Save  grade data 
+ * @param grade
+ * @param model
+ * @param session
+ * @param redirectAttributes
+ * @return
+ */
 	
 @PostMapping("/saveGrade")
   public String SaveGrade(@ModelAttribute("grade") Grade grade, Model model,HttpSession session,RedirectAttributes redirectAttributes) {
@@ -78,6 +92,12 @@ public String editGrade(@PathVariable("id")String id,  Model model,HttpSession s
     session.setAttribute("username",session.getAttribute("username")); 
        return pageMappingService.PageRequestMapping(reqPageedit,editPageNo);
 }
+/**
+ * 
+ * @param  Request mapping Update grade data 
+ * @param model
+ * @return
+ */
 @PostMapping("/updateGrade")
 public String updateGradep(@ModelAttribute("gradeupdate") Grade g, Model model) {
 
@@ -85,6 +105,13 @@ public String updateGradep(@ModelAttribute("gradeupdate") Grade g, Model model) 
   	  
 	  return "redirect:"+pageMappingService.PageRequestMapping(reqPage,pageno);
 }
+/**
+ * Request Mapping delete grade data 
+ * @param id
+ * @param model
+ * @param session
+ * @return
+ */
 @GetMapping(value = {"/deleteGarde/{id}"})
 public String deletegrade(@PathVariable("id")String id,  Model model,HttpSession session)
  { 
