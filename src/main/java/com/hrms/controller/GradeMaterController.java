@@ -115,14 +115,12 @@ public String updateGradep(@ModelAttribute("gradeupdate") Grade g, Model model) 
 @GetMapping(value = {"/deleteGarde/{id}"})
 public String deletegrade(@PathVariable("id")String id,  Model model,HttpSession session)
  { 
-		
-		  int deletePageNo=3; 
-		  String reqPagedelete="/deleteGarde";
+
 		 
 	
 	  this.gradeMaterService.removeGrade(id);
     session.setAttribute("username",session.getAttribute("username")); 
-    return "redirect:"+pageMappingService.PageRequestMapping(reqPagedelete,deletePageNo);
+    return "redirect:/"+pageMappingService.PageRequestMapping(reqPage,pageno);
 }
 	
 }
