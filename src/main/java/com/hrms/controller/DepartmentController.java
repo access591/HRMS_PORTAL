@@ -1,8 +1,6 @@
 package com.hrms.controller;
 
-
 import java.util.List;
-
 
 import javax.servlet.http.HttpSession;
 
@@ -20,18 +18,22 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hrms.model.Department;
 import com.hrms.model.MenuModule;
-import com.hrms.model.Module;
+
 import com.hrms.service.DepartmentService;
 import com.hrms.service.ModuleService;
+import com.hrms.service.PageMappingService;
 
 
 @Controller
 public class DepartmentController {
-
+	int pageno=4;
+	String reqPage="/departmentMaster";
 	@Autowired
 	DepartmentService departmentService;
 	@Autowired
 	private ModuleService moduleService;
+	@Autowired
+	PageMappingService pageMappingService;
 	/**
 	 * Method to get Department Result 	
 	 * @param model
@@ -49,7 +51,7 @@ public String DepartmentMaster(Model model,HttpSession session) {
 		model.addAttribute("modules", modules);
 	}
 	session.setAttribute("username",session.getAttribute("username"));
-		return "departmentMaster";
+	  return pageMappingService.PageRequestMapping(reqPage,pageno);
 	}
 /**
  * Method to Save Department Details	
@@ -66,7 +68,7 @@ public String DepartmentMaster(Model model,HttpSession session) {
 	if (isModuleExist) {
 	    redirectAttributes.addFlashAttribute("message", "Department Code Already exists !  ");
 	    redirectAttributes.addFlashAttribute("alertClass", "alert-success");
-	    return "redirect:/departmentMaster";
+	    return "redirect:"+pageMappingService.PageRequestMapping(reqPage,pageno);
 
 }
 else 
@@ -76,7 +78,7 @@ else
 	model.addAttribute("listDepartment", listDepartment);
 	session.setAttribute("username",session.getAttribute("username"));	
 }
-	return "redirect:/departmentMaster";
+	  return "redirect:"+pageMappingService.PageRequestMapping(reqPage,pageno);
 }	
 /**
  * Method to Edit Department Details	
@@ -87,12 +89,13 @@ else
 @GetMapping(value = {"/editDepartment/{id}"})
 public String editdepartment(@PathVariable("id")String id,  Model model,HttpSession session)
  { 
-	  
+	int editPageNo=5;
+	String reqPageedit="/editDepartment";
 	Department departmentEdit = departmentService.findDepartmentById(id);
 	  model.addAttribute("departmentEdit", departmentEdit);
 
     session.setAttribute("username",session.getAttribute("username")); 
-       return "/editDepartment"; 
+    return pageMappingService.PageRequestMapping(reqPageedit,editPageNo);
 }
 /**
  * Method to Update Department Details	
@@ -105,7 +108,7 @@ public String updateDepartment(@ModelAttribute("deptupdate") Department d, Model
 
 	  this.departmentService.updateDepartment(d);
   	  
-	  return "redirect:/departmentMaster";
+	  return "redirect:/"+pageMappingService.PageRequestMapping(reqPage,pageno);
 }
 
 /**
@@ -119,7 +122,7 @@ public String deletedepartment(@PathVariable("id")String id,  Model model,HttpSe
  { 
 	  this.departmentService.removeDepartment(id);
     session.setAttribute("username",session.getAttribute("username")); 
-    return "redirect:/departmentMaster";
+    return "redirect:/"+pageMappingService.PageRequestMapping(reqPage,pageno);
 }
 
 }
