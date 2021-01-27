@@ -29,7 +29,14 @@ public class SectionController {
 	SectionService sectionService;
 	@Autowired
 	private ModuleService moduleService;
-	
+	/**
+	 * 
+	 * Request mapping  section list data
+	 * 
+	 * @param model
+	 * @param session
+	 * @return
+	 */	
 @GetMapping("/sectionMaster")
 public String sectionMaster(Model model,HttpSession session) {
 	
@@ -44,7 +51,14 @@ public String sectionMaster(Model model,HttpSession session) {
 		return "sectionMaster";
 	}
 
-
+/**
+ * Request Mapping save section Master
+ * 
+ * @param holiday
+ * @param model
+ * @param session
+ * @return
+ */
 @PostMapping("/saveSection")
 	public String SaveSection(@ModelAttribute("section") Section section, Model model,RedirectAttributes redirectAttributes) {
 	boolean isModuleExist = sectionService.checkSectionExists(section);	
@@ -63,7 +77,14 @@ public String sectionMaster(Model model,HttpSession session) {
 		return "redirect:/sectionMaster";
 
 	}	
-
+/**
+ * Request Mapping fetching Id Base edit Section data
+ * 
+ * @param id
+ * @param model
+ * @param session
+ * @return
+ */
 @GetMapping(value = {"/editSection/{id}"})
 public String editsection(@PathVariable("id")String id,  Model model,HttpSession session)
  { 
@@ -74,7 +95,13 @@ public String editsection(@PathVariable("id")String id,  Model model,HttpSession
     session.setAttribute("username",session.getAttribute("username")); 
        return "/editSection"; 
 }
-
+/**
+ * Request Mapping Update Section data
+ * 
+ * @param
+ * @param model
+ * @return
+ */
 @PostMapping("/updateSection")
 public String updateSection(@ModelAttribute("sectupdate") Section d, Model model) {
 
@@ -82,7 +109,13 @@ public String updateSection(@ModelAttribute("sectupdate") Section d, Model model
   	  
 	  return "redirect:/sectionMaster";
 }
-
+/**
+ * 
+ * @param Request Mapping Delete By Id Section Data
+ * @param model
+ * @param session
+ * @return
+ */
 @GetMapping(value = {"/deleteSection/{id}"})
 public String deletesection(@PathVariable("id")String id,  Model model,HttpSession session)
  { 
