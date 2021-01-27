@@ -31,7 +31,14 @@ public class LeaveMasterController {
 	LeaveService leaveService;
 	@Autowired
 	ModuleService moduleService;
-	
+
+	/**
+	 * 
+	 * Request mapping LeaveMaster list data 
+	 * @param model
+	 * @param session
+	 * @return
+	 */
 @GetMapping("/leaveMaster")
 public String LeaveMaster(Model model,HttpSession session) {
 	
@@ -46,7 +53,13 @@ public String LeaveMaster(Model model,HttpSession session) {
 		return "LeaveMaster";
 	}
 
-
+/**
+ * Request Mapping save Leave Master
+ * @param holiday
+ * @param model
+ * @param session
+ * @return
+ */
 @PostMapping("/saveLeave")
 	public String SaveLeave(@ModelAttribute("leave") Leave leave, Model model) {
 		if (leave.getLev_code() != "") {
@@ -59,7 +72,13 @@ public String LeaveMaster(Model model,HttpSession session) {
 
 	}	
 
-
+/**
+ * Request Mapping fetching  Id Base edit Leave Data 
+ * @param id
+ * @param model
+ * @param session
+ * @return
+ */
   @GetMapping(value = {"/editLeave/{id}"})
   public String editleave(@PathVariable("id")String id,  Model model,HttpSession session)
    { 
@@ -69,7 +88,12 @@ public String LeaveMaster(Model model,HttpSession session) {
       session.setAttribute("username",session.getAttribute("username")); 
          return "/editLeave"; 
   }
-  
+  /**
+	 * Request Mapping Update Leave data 
+	 * @param 
+	 * @param model
+	 * @return
+	 */
   @PostMapping("/updateLeave")
   public String updateLeave(@ModelAttribute("leaveupdate") Leave d, Model model) {
  
@@ -77,7 +101,13 @@ public String LeaveMaster(Model model,HttpSession session) {
     	  
 	  return "redirect:/leaveMaster";
   }
-  
+  /**
+	 * 
+	 * @param  Request Mapping  Delete By Id Leave Data
+	 * @param model
+	 * @param session
+	 * @return
+	 */
   @GetMapping(value = {"/deleteLeave/{id}"})
   public String deleteleave(@PathVariable("id")String id,  Model model,HttpSession session)
    { 
