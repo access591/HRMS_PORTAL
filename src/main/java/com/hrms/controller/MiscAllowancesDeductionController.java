@@ -23,7 +23,15 @@ public class MiscAllowancesDeductionController
 	MiscAllowanceDeductionService miscAllowanceDeductionService;
 	@Autowired
 	private ModuleService moduleService;
-	
+
+	/**
+	 * 
+	 * Request mapping MiscAllowanceDeduction  list data
+	 * 
+	 * @param model
+	 * @param session
+	 * @return
+	 */
 @GetMapping("/miscAllowances")
 public String MiscAllowances(Model model,HttpSession session) 
 {
@@ -37,7 +45,14 @@ public String MiscAllowances(Model model,HttpSession session)
       session.setAttribute("username",session.getAttribute("username"));
        return "miscAllowanceDeduction"; 
 }
-
+/**
+ * Request Mapping save AllowncesDeduction
+ * 
+ * @param holiday
+ * @param model
+ * @param session
+ * @return
+ */
 @PostMapping("/saveAllowncesDeduction")
  public String SaveAllowncesDeduction(@ModelAttribute("miscAllowance") MiscAllowance miscAllowance, Model model,HttpSession session)
  {
@@ -52,6 +67,14 @@ public String MiscAllowances(Model model,HttpSession session)
 	return"redirect:/miscAllowances";
  
  }
+/**
+ * Request Mapping fetching Id Base AllowanceDeduction  Loan data
+ * 
+ * @param id
+ * @param model
+ * @param session
+ * @return
+ */
 
 @GetMapping(value = {"/editAllowanceDeduction/{id}"})
 public String editAllowncesDeduction(@PathVariable("id")String id,  Model model,HttpSession session)
@@ -62,6 +85,13 @@ public String editAllowncesDeduction(@PathVariable("id")String id,  Model model,
     session.setAttribute("username",session.getAttribute("username")); 
        return "/editAllowanceDeduction"; 
 }
+/**
+ * 
+ * @param Request Mapping update AllowanceDeduction Data
+ * @param model
+ * @param session
+ * @return
+ */
 @PostMapping("/updateAllowanceDeduction")
 public String updateAllowncesDeduction(@ModelAttribute("miscAllowanceUpdate") MiscAllowance M, Model model) {
 
@@ -69,6 +99,13 @@ public String updateAllowncesDeduction(@ModelAttribute("miscAllowanceUpdate") Mi
   	  
 	  return "redirect:/miscAllowances";
 }
+/**
+ * 
+ * @param Request Mapping Delete By Id AllowanceDeduction Data
+ * @param model
+ * @param session
+ * @return
+ */
 @GetMapping(value = {"/deleteAllowanceDeduction/{id}"})
 public String deleteAllowncesDeduction(@PathVariable("id")String id,  Model model,HttpSession session)
  { 
