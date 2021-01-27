@@ -26,7 +26,7 @@ import com.hrms.service.PageMappingService;
 
 @Controller
 public class DepartmentController {
-	int pageno=4;
+	int pageno=3;
 	String reqPage="/departmentMaster";
 	@Autowired
 	DepartmentService departmentService;
@@ -89,7 +89,7 @@ else
 @GetMapping(value = {"/editDepartment/{id}"})
 public String editdepartment(@PathVariable("id")String id,  Model model,HttpSession session)
  { 
-	int editPageNo=5;
+	int editPageNo=4;
 	String reqPageedit="/editDepartment";
 	Department departmentEdit = departmentService.findDepartmentById(id);
 	  model.addAttribute("departmentEdit", departmentEdit);
