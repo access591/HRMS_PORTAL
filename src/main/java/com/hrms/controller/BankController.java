@@ -21,15 +21,19 @@ import com.hrms.model.Bank;
 import com.hrms.model.MenuModule;
 import com.hrms.service.BankService;
 import com.hrms.service.ModuleService;
+import com.hrms.service.PageMappingService;
 
 
 @Controller
 public class BankController {
-
+	int pageno=7;
+	String reqPage="/bankMaster";
 	@Autowired
 	BankService bankService;
 	@Autowired
 	private ModuleService moduleService;
+	@Autowired
+	PageMappingService pageMappingService;
 /**
  * Method to get Bank Result 	
  * @param model
@@ -47,7 +51,7 @@ public String bankMaster(Model model,HttpSession session) {
 		model.addAttribute("modules", modules);
 	}
 	session.setAttribute("username",session.getAttribute("username"));
-		return "BankMaster";
+	return pageMappingService.PageRequestMapping(reqPage,pageno);
 	}
 
 /**
@@ -64,8 +68,8 @@ public String bankMaster(Model model,HttpSession session) {
 			List<Bank> listBank = bankService.getAllBanks();
 			model.addAttribute("listBank", listBank);
 		} 
-		return "redirect:/bankMaster";
-
+		   return "redirect:"+pageMappingService.PageRequestMapping(reqPage,pageno);
+		   	
 	}	
 /**
  * Method to Edit Bank Details
@@ -76,12 +80,14 @@ public String bankMaster(Model model,HttpSession session) {
 @GetMapping(value = {"/editBank/{id}"})
 public String editbank(@PathVariable("id")String id,  Model model,HttpSession session)
  { 
+	int editPageNo=8;
+	String reqPageedit="/editBank";
 	  
 	Bank bankEdit = bankService.findBankById(id);
 	  model.addAttribute("bankEdit", bankEdit);
 
     session.setAttribute("username",session.getAttribute("username")); 
-       return "/editBank"; 
+    return pageMappingService.PageRequestMapping(reqPageedit,editPageNo);
 }
 /**
  * Method to Update Bank Details
@@ -94,7 +100,7 @@ public String updateBank(@ModelAttribute("bankupdate") Bank d, Model model) {
 
 	  this.bankService.updateBank(d);
   	  
-	  return "redirect:/bankMaster";
+	  return "redirect:/"+pageMappingService.PageRequestMapping(reqPage,pageno);
 }
 /**
  * Method to Delete Bank Details
@@ -110,7 +116,7 @@ public String deletebank(@PathVariable("id")String id,  Model model,HttpSession 
 	  this.bankService.removeBank(id);
 
     session.setAttribute("username",session.getAttribute("username")); 
-    return "redirect:/bankMaster";
+    return "redirect:/"+pageMappingService.PageRequestMapping(reqPage,pageno);
 }
 
 
