@@ -60,7 +60,7 @@ public class Bank implements Serializable
 	@Column(name = "STATE_CODE")
 	private String state_code;
 	
-	@Column(name = "COUNTRY_CODE")
+	@Column(name = "COUNTRY_CODE" ,updatable = false)
 	private String country_code;
 	
 	@Column(name = "ACCOUNT_NO")
