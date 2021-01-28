@@ -17,14 +17,20 @@ import com.hrms.model.Holiday;
 import com.hrms.model.MenuModule;
 import com.hrms.service.HolidayService;
 import com.hrms.service.ModuleService;
+import com.hrms.service.PageMappingService;
 
 @Controller
 public class HolidayController 
 {
+	int pageno=9;
+	String reqPage="/HolidayMaster";
+	
 	@Autowired
 	HolidayService holidayService;
 	@Autowired
 	private ModuleService moduleService;
+	@Autowired
+	PageMappingService pageMappingService;
 	/**
 	 * 
 	 * Request mapping Holiday list data 
@@ -42,7 +48,7 @@ public class HolidayController
 			model.addAttribute("modules", modules);
 		}
 		session.setAttribute("username",session.getAttribute("username"));
-			return "HolidayMaster";
+		return pageMappingService.PageRequestMapping(reqPage,pageno);
 		}
 	
 	/**
@@ -61,7 +67,7 @@ public class HolidayController
 				session.setAttribute("username",session.getAttribute("username"));
 	 
 	  }
-		return"redirect:/HolidayMaster";
+			 return "redirect:"+pageMappingService.PageRequestMapping(reqPage,pageno);
 	  
 	  }
 	/**
@@ -74,10 +80,12 @@ public class HolidayController
 	@GetMapping(value = {"/editHoliday/{id}"})
 	public String editHoliday(@PathVariable("id")String id,  Model model,HttpSession session)
 	 { 
+		int editPageNo=10;
+		String reqPageedit="/editHoliday";
 	Holiday Holidayedit = holidayService.findHolidayById(id);
 	model.addAttribute("Holidayedit", Holidayedit);
 	session.setAttribute("username",session.getAttribute("username")); 
-	       return "/editHoliday"; 
+	 return pageMappingService.PageRequestMapping(reqPageedit,editPageNo);
 	 }
 	
 	/**
@@ -91,7 +99,7 @@ public class HolidayController
 
 		  this.holidayService.updateHoliday(h);
 	  	  
-		  return "redirect:/HolidayMaster";
+		  return "redirect:"+pageMappingService.PageRequestMapping(reqPage,pageno);
 	
 	}
 	
@@ -107,7 +115,7 @@ public class HolidayController
 	 { 
 	this.holidayService.removeHoliday(id);
 	    session.setAttribute("username",session.getAttribute("username")); 
-	    return "redirect:/HolidayMaster";
+	    return "redirect:/"+pageMappingService.PageRequestMapping(reqPage,pageno);
 	}
 
 	
