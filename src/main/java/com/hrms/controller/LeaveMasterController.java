@@ -22,15 +22,19 @@ import com.hrms.model.Leave;
 import com.hrms.model.MenuModule;
 import com.hrms.service.LeaveService;
 import com.hrms.service.ModuleService;
+import com.hrms.service.PageMappingService;
 
 
 @Controller
 public class LeaveMasterController {
-
+	int pageno=11;
+	String reqPage="/leaveMaster";
 	@Autowired
 	LeaveService leaveService;
 	@Autowired
 	ModuleService moduleService;
+	@Autowired
+	PageMappingService pageMappingService;
 
 	/**
 	 * 
@@ -50,7 +54,7 @@ public String LeaveMaster(Model model,HttpSession session) {
 		model.addAttribute("modules", modules);
 	}
 	session.setAttribute("username",session.getAttribute("username"));
-		return "LeaveMaster";
+	 return pageMappingService.PageRequestMapping(reqPage,pageno);
 	}
 
 /**
@@ -68,7 +72,7 @@ public String LeaveMaster(Model model,HttpSession session) {
 			List<Leave> listLeave = leaveService.getAllLeaves();
 			model.addAttribute("listLeave", listLeave);
 		} 
-		return "redirect:/leaveMaster";
+		  return "redirect:"+pageMappingService.PageRequestMapping(reqPage,pageno);
 
 	}	
 
@@ -82,11 +86,13 @@ public String LeaveMaster(Model model,HttpSession session) {
   @GetMapping(value = {"/editLeave/{id}"})
   public String editleave(@PathVariable("id")String id,  Model model,HttpSession session)
    { 
+	  int editPageNo=12;
+		String reqPageedit="/editLeave";
 	   Leave leaveEdit = leaveService.findLeaveById(id);
 	  model.addAttribute("leaveEdit", leaveEdit);
 
       session.setAttribute("username",session.getAttribute("username")); 
-         return "/editLeave"; 
+      return pageMappingService.PageRequestMapping(reqPageedit,editPageNo);
   }
   /**
 	 * Request Mapping Update Leave data 
@@ -99,7 +105,8 @@ public String LeaveMaster(Model model,HttpSession session) {
  
 	  this.leaveService.updateLeave(d);
     	  
-	  return "redirect:/leaveMaster";
+	  return "redirect:/"+pageMappingService.PageRequestMapping(reqPage,pageno);
+
   }
   /**
 	 * 
@@ -116,7 +123,8 @@ public String LeaveMaster(Model model,HttpSession session) {
 	  this.leaveService.removeLeave(id);
 
       session.setAttribute("username",session.getAttribute("username")); 
-      return "redirect:/leaveMaster";
+      return "redirect:/"+pageMappingService.PageRequestMapping(reqPage,pageno);
+
   }
 
 
