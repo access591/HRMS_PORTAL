@@ -17,14 +17,18 @@ import com.hrms.model.Loan;
 import com.hrms.model.MenuModule;
 import com.hrms.service.LoanMaterService;
 import com.hrms.service.ModuleService;
+import com.hrms.service.PageMappingService;
 
 @Controller
 public class LoanController {
+	int pageno=13;
+	String reqPage="/loanMaster";
 	@Autowired
 	LoanMaterService loanMaterService;
 	@Autowired
 	private ModuleService moduleService;
-
+	@Autowired
+	PageMappingService pageMappingService;
 	/**
 	 * 
 	 * Request mapping  Loan list data
@@ -44,7 +48,7 @@ public class LoanController {
 			model.addAttribute("modules", modules);
 		}
 		session.setAttribute("username", session.getAttribute("username"));
-		return "/loanMaster";
+		 return pageMappingService.PageRequestMapping(reqPage,pageno);
 	}
 
 	/**
@@ -64,7 +68,8 @@ public class LoanController {
 			session.setAttribute("username", session.getAttribute("username"));
 
 		}
-		return "redirect:/loanMaster";
+		return "redirect:"+pageMappingService.PageRequestMapping(reqPage,pageno);
+
 
 	}
 
@@ -79,11 +84,13 @@ public class LoanController {
 
 	@GetMapping(value = { "/editLoan/{id}" })
 	public String editLoan(@PathVariable("id") String id, Model model, HttpSession session) {
+		 int editPageNo=14;
+			String reqPageedit="/editLoan";
 		Loan loanEdit = loanMaterService.findLoanById(id);
 		model.addAttribute("loanEdit", loanEdit);
 
 		session.setAttribute("username", session.getAttribute("username"));
-		return "/editLoan";
+		 return pageMappingService.PageRequestMapping(reqPageedit,editPageNo);
 	}
 
 	/**
@@ -98,7 +105,8 @@ public class LoanController {
 
 		this.loanMaterService.updateLoan(L);
 
-		return "redirect:/loanMaster";
+		return "redirect:"+pageMappingService.PageRequestMapping(reqPage,pageno);
+
 	}
 
 	/**
@@ -112,7 +120,8 @@ public class LoanController {
 	public String deleteLoan(@PathVariable("id") String id, Model model, HttpSession session) {
 		this.loanMaterService.removeLoan(id);
 		session.setAttribute("username", session.getAttribute("username"));
-		return "redirect:/loanMaster";
+		return "redirect:/"+pageMappingService.PageRequestMapping(reqPage,pageno);
+
 	}
 
 }
