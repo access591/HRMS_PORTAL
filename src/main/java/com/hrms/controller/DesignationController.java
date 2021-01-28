@@ -22,15 +22,18 @@ import com.hrms.model.Designation;
 import com.hrms.model.MenuModule;
 import com.hrms.service.DesignationService;
 import com.hrms.service.ModuleService;
+import com.hrms.service.PageMappingService;
 
 @Controller
 public class DesignationController {
-
+	int pageno=5;
+	String reqPage="/designationMaster";
 	@Autowired
 	DesignationService designationService;
 	@Autowired
 	private ModuleService moduleService;
-
+	@Autowired
+	PageMappingService pageMappingService;
 	/**
 	 * 
 	 * @param Request mapping of list Designation data
@@ -48,7 +51,7 @@ public class DesignationController {
 			model.addAttribute("modules", modules);
 		}
 		session.setAttribute("username", session.getAttribute("username"));
-		return "designationMaster";
+		 return pageMappingService.PageRequestMapping(reqPage,pageno);
 	}
 
 	/**
@@ -66,13 +69,13 @@ public class DesignationController {
 		if (isModuleExist) {
 			redirectAttributes.addFlashAttribute("message", "Designation Code Already exists !  ");
 			redirectAttributes.addFlashAttribute("alertClass", "alert-success");
-			return "redirect:/designationMaster";
+			  return "redirect:"+pageMappingService.PageRequestMapping(reqPage,pageno);
 		} else {
 			designationService.addDesignation(designation);
 			List<Designation> listDesignation = designationService.getAllDesignations();
 			model.addAttribute("listDesignation", listDesignation);
 		}
-		return "redirect:/designationMaster";
+		  return "redirect:"+pageMappingService.PageRequestMapping(reqPage,pageno);
 
 	}
 
@@ -85,12 +88,13 @@ public class DesignationController {
 	 */
 	@GetMapping(value = { "/editDesignation/{id}" })
 	public String editdesignation(@PathVariable("id") String id, Model model, HttpSession session) {
-
+		int editPageNo=6;
+		String reqPageedit="/editDesignation";
 		Designation designationEdit = designationService.findDesignationById(id);
 		model.addAttribute("designationEdit", designationEdit);
 
 		session.setAttribute("username", session.getAttribute("username"));
-		return "/editDesignation";
+		 return pageMappingService.PageRequestMapping(reqPageedit,editPageNo);
 	}
 
 	/**
@@ -104,7 +108,7 @@ public class DesignationController {
 
 		this.designationService.updateDesignation(d);
 
-		return "redirect:/designationMaster";
+		 return "redirect:/"+pageMappingService.PageRequestMapping(reqPage,pageno);
 	}
 
 	/**
@@ -120,7 +124,7 @@ public class DesignationController {
 		this.designationService.removeDesignation(id);
 
 		session.setAttribute("username", session.getAttribute("username"));
-		return "redirect:/designationMaster";
+		 return "redirect:/"+pageMappingService.PageRequestMapping(reqPage,pageno);
 	}
 
 }
