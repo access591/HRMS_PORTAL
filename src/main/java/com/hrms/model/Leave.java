@@ -28,7 +28,7 @@ public class Leave implements Serializable{
 	@Column(name = "LEV_TYPE")
 	private String lev_type;
 	
-	@Column(name = "TOTAL_LEV")
+	@Column(name = "TOTAL_LEV", updatable = false)
 	private String total_lev;
 	
 	@Column(name = "UNPAID")
