@@ -46,6 +46,16 @@ public class UserController {
 		return "sign-in";
 	}
 
+	@GetMapping("/dashboard")
+	public String Dashbord(Model model,HttpSession session) {
+		String userCode= (String)session.getAttribute("username");
+		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
+		if (modules != null) {
+			model.addAttribute("modules", modules);
+		}
+		return "dashboard";
+	}
+
 	@PostMapping("/loginUser")
 	public String loginUser(@ModelAttribute("user") Login login, Model model,
 			@RequestParam(name = "g-recaptcha-response") String captcha,HttpSession session) {
