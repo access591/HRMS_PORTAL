@@ -30,8 +30,8 @@ public class PageMappingDaoImpl implements PageMappingDao {
 		try {
 			Session session = sessionFactory.openSession();
 			UrlDetail urlsp = new UrlDetail();
-			SQLQuery query = session.createSQLQuery("select page_name from url_dtl where url_id=" + id
-					+ " and req_mapping='" + requestMpping + "'").addScalar("page_name", new StringType());
+			SQLQuery query = session.createSQLQuery("select PAGE_NAME from URL_DTL where URL_ID=" + id
+					+ " and REQ_MAPPING='" + requestMpping + "'").addScalar("PAGE_NAME", new StringType());
 			List rows = query.list();
 			// urlsp.setPage_name(rows.toString());
 			pagname = rows.get(0).toString();
