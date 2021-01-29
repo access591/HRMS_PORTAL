@@ -15,14 +15,19 @@ import com.hrms.model.MenuModule;
 import com.hrms.model.MiscAllowance;
 import com.hrms.service.MiscAllowanceDeductionService;
 import com.hrms.service.ModuleService;
+import com.hrms.service.PageMappingService;
 
 @Controller
 public class MiscAllowancesDeductionController 
 {
+	int pageno=15;
+	String reqPage="/miscAllowances";
 	@Autowired
 	MiscAllowanceDeductionService miscAllowanceDeductionService;
 	@Autowired
 	private ModuleService moduleService;
+	@Autowired
+	PageMappingService pageMappingService;
 
 	/**
 	 * 
@@ -43,7 +48,8 @@ public String MiscAllowances(Model model,HttpSession session)
   		model.addAttribute("modules", modules);
   	}
       session.setAttribute("username",session.getAttribute("username"));
-       return "miscAllowanceDeduction"; 
+      return pageMappingService.PageRequestMapping(reqPage,pageno);
+
 }
 /**
  * Request Mapping save AllowncesDeduction
@@ -64,7 +70,8 @@ public String MiscAllowances(Model model,HttpSession session)
          session.setAttribute("username",session.getAttribute("username"));
 	} 
 	
-	return"redirect:/miscAllowances";
+	 return "redirect:"+pageMappingService.PageRequestMapping(reqPage,pageno);
+
  
  }
 /**
@@ -79,11 +86,14 @@ public String MiscAllowances(Model model,HttpSession session)
 @GetMapping(value = {"/editAllowanceDeduction/{id}"})
 public String editAllowncesDeduction(@PathVariable("id")String id,  Model model,HttpSession session)
  { 
+	 int editPageNo=16;
+		String reqPageedit="/editAllowanceDeduction";
 	MiscAllowance editMiscAllowance = miscAllowanceDeductionService.findMiscAllowanceDeductionById(id);
 	  model.addAttribute("editMiscAllowance", editMiscAllowance);
 
     session.setAttribute("username",session.getAttribute("username")); 
-       return "/editAllowanceDeduction"; 
+    return pageMappingService.PageRequestMapping(reqPageedit,editPageNo);
+    
 }
 /**
  * 
@@ -96,8 +106,8 @@ public String editAllowncesDeduction(@PathVariable("id")String id,  Model model,
 public String updateAllowncesDeduction(@ModelAttribute("miscAllowanceUpdate") MiscAllowance M, Model model) {
 
 	  this.miscAllowanceDeductionService.updateMiscAllowanceDeduction(M);
-  	  
-	  return "redirect:/miscAllowances";
+
+	  return "redirect:/"+pageMappingService.PageRequestMapping(reqPage,pageno);
 }
 /**
  * 
@@ -111,7 +121,8 @@ public String deleteAllowncesDeduction(@PathVariable("id")String id,  Model mode
  { 
 	  this.miscAllowanceDeductionService.removeMiscAllowanceDeduction(id);
     session.setAttribute("username",session.getAttribute("username")); 
-    return"redirect:/miscAllowances";
+    return "redirect:/"+pageMappingService.PageRequestMapping(reqPage,pageno);
+ 
 }
 
 
