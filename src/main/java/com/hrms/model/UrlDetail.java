@@ -19,7 +19,7 @@ public class UrlDetail implements Serializable {
 	private static final long serialVersionUID = 842108347597795726L;
 	@Id
 	@Column(name ="URL_ID")
-	private int  Url_Id;
+	private String  Url_Id;
 	
 	@Column(name ="REQ_MAPPING")
 	private String	Req_Mapping;
@@ -45,10 +45,11 @@ public class UrlDetail implements Serializable {
 	
 	
 	
-	public int getUrl_Id() {
+
+	public String getUrl_Id() {
 		return Url_Id;
 	}
-	public void setUrl_Id(int url_Id) {
+	public void setUrl_Id(String url_Id) {
 		Url_Id = url_Id;
 	}
 	public String getReq_Mapping() {

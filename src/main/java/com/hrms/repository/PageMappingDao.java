@@ -12,4 +12,6 @@ public interface PageMappingDao {
 	void addPage(UrlDetail urlDetail);
 
 	UrlDetail checkUrlDetailExists(UrlDetail urlDetail);
+	
+	public void removePage(String id);
 }

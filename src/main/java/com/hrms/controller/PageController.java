@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -60,5 +61,13 @@ model.addAttribute("listUrlDetail", listUrlDetail);
 return"redirect:/pageMaster";
 
 }
+@GetMapping(value = {"/deletePage/{id}"})
+public String deletedepartment(@PathVariable("id")String id,  Model model,HttpSession session)
+ { 
+	  this.pageMappingService.removePage(id);
+    session.setAttribute("username",session.getAttribute("username")); 
+    return"redirect:/pageMaster";
+}
+
 
 }
