@@ -1,6 +1,7 @@
 package com.hrms.model;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,30 +18,80 @@ public class UrlDetail implements Serializable {
 	 */
 	private static final long serialVersionUID = 842108347597795726L;
 	@Id
-	@Column(name ="REQ_MAPPING")
-	private String	req_mapping;
-	@Column(name ="PAGE_NAME")
-	private String page_name;
 	@Column(name ="URL_ID")
-	private int  url_id;
+	private int  Url_Id;
 	
-	public String getReq_mapping() {
-		return req_mapping;
+	@Column(name ="REQ_MAPPING")
+	private String	Req_Mapping;
+	
+	@Column(name ="PAGE_NAME")
+	private String Page_Name;
+	
+	@Column(name = "ACTIVE_YN")
+	private String active;
+
+	@Column(name = "INS_BY")
+	private String insertedBy;
+
+	@Column(name = "INS_DATE")
+	private Date insertedDate;
+
+	@Column(name = "UPDATE_BY")
+	private String updateBy;
+
+	@Column(name = "UPDATE_DATE")
+	private Date updatedDate;
+	
+	
+	
+	
+	public int getUrl_Id() {
+		return Url_Id;
 	}
-	public void setReq_mapping(String req_mapping) {
-		this.req_mapping = req_mapping;
+	public void setUrl_Id(int url_Id) {
+		Url_Id = url_Id;
 	}
-	public String getPage_name() {
-		return page_name;
+	public String getReq_Mapping() {
+		return Req_Mapping;
 	}
-	public void setPage_name(String page_name) {
-		this.page_name = page_name;
+	public void setReq_Mapping(String req_Mapping) {
+		Req_Mapping = req_Mapping;
 	}
-	public int getUrl_id() {
-		return url_id;
+	public String getPage_Name() {
+		return Page_Name;
 	}
-	public void setUrl_id(int url_id) {
-		this.url_id = url_id;
+	public void setPage_Name(String page_Name) {
+		Page_Name = page_Name;
+	}
+	public String getActive() {
+		return active;
+	}
+	public void setActive(String active) {
+		this.active = active;
+	}
+	public String getInsertedBy() {
+		return insertedBy;
+	}
+	public void setInsertedBy(String insertedBy) {
+		this.insertedBy = insertedBy;
+	}
+	public Date getInsertedDate() {
+		return insertedDate;
+	}
+	public void setInsertedDate(Date insertedDate) {
+		this.insertedDate = insertedDate;
+	}
+	public String getUpdateBy() {
+		return updateBy;
+	}
+	public void setUpdateBy(String updateBy) {
+		this.updateBy = updateBy;
+	}
+	public Date getUpdatedDate() {
+		return updatedDate;
+	}
+	public void setUpdatedDate(Date updatedDate) {
+		this.updatedDate = updatedDate;
 	}
 	
 			
