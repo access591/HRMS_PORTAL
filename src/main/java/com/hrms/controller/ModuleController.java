@@ -19,12 +19,16 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.hrms.model.MenuModule;
 import com.hrms.model.Module;
 import com.hrms.service.ModuleService;
+import com.hrms.service.PageMappingService;
 
 @Controller
 public class ModuleController {
-
+	int pageno=19;
+	String reqPage="/module";
 	@Autowired
 	ModuleService moduleService;
+	@Autowired
+	PageMappingService pageMappingService;
 	/**
 	 * Method to get Module Result 	
 	 * @param model
@@ -42,7 +46,7 @@ public class ModuleController {
 			model.addAttribute("modules", modules);
 		}
 		session.setAttribute("username", session.getAttribute("username"));
-		return "module";
+		  return pageMappingService.PageRequestMapping(reqPage,pageno);
 	}
 
 	/**
@@ -59,7 +63,7 @@ public class ModuleController {
 		if (isModuleExist) {
 			    redirectAttributes.addFlashAttribute("message", "Module Already exists !  ");
 			    redirectAttributes.addFlashAttribute("alertClass", "alert-success");
-			return"redirect:/module";
+			    return "redirect:"+pageMappingService.PageRequestMapping(reqPage,pageno);
 		}
 		else 
 		{
@@ -79,11 +83,13 @@ public class ModuleController {
 	@GetMapping(value = {"/editModule/{id}"})
 	public String editModule(@PathVariable("id")String id,  Model model,HttpSession session)
 	 { 
+		 int editPageNo=20;
+			String reqPageedit="/editModule";
 		Module moduleEdit = moduleService.findModuleById(id);
 		  model.addAttribute("moduleEdit", moduleEdit);
 
 	    session.setAttribute("username",session.getAttribute("username")); 
-	       return "/editModule"; 
+	    return pageMappingService.PageRequestMapping(reqPageedit,editPageNo);
 	}
 	/**
 	 * Method to Edit Module 	
@@ -96,7 +102,7 @@ public class ModuleController {
 
 		  this.moduleService.updateModule(m);
 	  	  
-		  return "redirect:/module";
+		  return "redirect:/"+pageMappingService.PageRequestMapping(reqPage,pageno);
 	}
 	/**
 	 * Method to Delete Module 	
@@ -109,7 +115,7 @@ public class ModuleController {
 	 { 
 		  this.moduleService.removeModule(id);
 	    session.setAttribute("username",session.getAttribute("username")); 
-	    return "redirect:/module";
+	    return "redirect:/"+pageMappingService.PageRequestMapping(reqPage,pageno);
 	}
 	
 
