@@ -20,21 +20,27 @@ import com.hrms.model.MenuModule;
 import com.hrms.model.SubModule;
 import com.hrms.model.Module;
 import com.hrms.service.ModuleService;
+import com.hrms.service.PageMappingService;
 import com.hrms.service.SubModuleService;
 
 @Controller
 public class SubModuleController {
+	int pageno=21;
+	String reqPage="/subModule";
+	
 	@Autowired
 	SubModuleService subModuleService;
 	@Autowired
 	private ModuleService moduleService;
+	@Autowired
+	PageMappingService pageMappingService;
 	/**
 	 * Method to get SubModule Result 	
 	 * @param model
 	 * @param session
 	 * @return
 	 */
-@GetMapping("/submodulepage")
+@GetMapping("/subModule")
 	public String SubmodulePage(Model model,HttpSession session) {
 		List<SubModule> listSubModule = subModuleService.getAllSubModules();
 		model.addAttribute("listSubModule", listSubModule);
@@ -46,7 +52,7 @@ public class SubModuleController {
 			model.addAttribute("modules", modules);
 		}
 		session.setAttribute("username", session.getAttribute("username"));
-		return "subModule";
+		 return pageMappingService.PageRequestMapping(reqPage,pageno);
 	}
 /**
  * Method to Save  SubModule 	
@@ -62,7 +68,7 @@ public class SubModuleController {
 		if (isSubModuleExist) {
 			redirectAttributes.addFlashAttribute("message", " Sub Module Already exists !  ");
 			redirectAttributes.addFlashAttribute("alertClass", "alert-success");
-			return "redirect:/submodulepage";
+			 return "redirect:"+pageMappingService.PageRequestMapping(reqPage,pageno);
 		}
 
 		else {
@@ -72,7 +78,7 @@ public class SubModuleController {
 			session.setAttribute("username", session.getAttribute("username"));
 		}
 
-		return "redirect:/submodulepage";
+		 return "redirect:"+pageMappingService.PageRequestMapping(reqPage,pageno);
 
 	}
 	
@@ -84,6 +90,8 @@ public class SubModuleController {
 	 */
 	@GetMapping(value = { "/editSubModule/{id}" })
 	public String editsubmodule(@PathVariable("id") String id, Model model, HttpSession session) {
+		  int editPageNo=22;
+			String reqPageedit="/editSubModule";
 		SubModule subModuleEdit = subModuleService.findSubModuleById(id);
 		model.addAttribute("subModuleEdit", subModuleEdit);
 
@@ -91,7 +99,7 @@ public class SubModuleController {
 		model.addAttribute("modulesList", modulesList);
 
 		session.setAttribute("username", session.getAttribute("username"));
-		return "/editSubModule";
+		return pageMappingService.PageRequestMapping(reqPageedit,editPageNo);
 	}
 
 	/**
@@ -105,7 +113,8 @@ public class SubModuleController {
 
 		this.subModuleService.updateSubModule(subModule);
 
-		return "redirect:/submodulepage";
+		 return "redirect:/"+pageMappingService.PageRequestMapping(reqPage,pageno);
+
 	}
 
 	/**
@@ -118,7 +127,8 @@ public class SubModuleController {
 	public String deletesubmodule(@PathVariable("id") String id, Model model, HttpSession session) {
 		this.subModuleService.removeSubModule(id);
 		session.setAttribute("username", session.getAttribute("username"));
-		return "redirect:/submodulepage";
+		 return "redirect:/"+pageMappingService.PageRequestMapping(reqPage,pageno);
+
 	}
 
 }
