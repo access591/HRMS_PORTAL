@@ -44,4 +44,10 @@ public class PageMappingServiceImpl implements PageMappingService {
 		}
 
 	}
+
+	@Override
+	public void removePage(String id) {
+		this.pageMappingDao.removePage(id);
+		
+	}
 }

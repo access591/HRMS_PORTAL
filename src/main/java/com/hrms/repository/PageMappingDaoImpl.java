@@ -14,8 +14,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
-
 import com.hrms.model.UrlDetail;
 
 @Repository
@@ -88,5 +86,20 @@ public class PageMappingDaoImpl implements PageMappingDao {
 		}
 
 		return urlid;
+	}
+
+	@Override
+	public void removePage(String id) {
+		try {
+			Session session = this.sessionFactory.getCurrentSession();
+			Transaction tx = session.beginTransaction();
+			UrlDetail u = (UrlDetail) session.load(UrlDetail.class, new String(id));
+			session.delete(u);
+			tx.commit();
+			session.close();
+		} catch (Exception e) {
+			logger.info("PageMappingDaoImpl.removePage" + e.getMessage());
+		}
+
 	}
 }

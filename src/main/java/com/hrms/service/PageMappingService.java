@@ -14,4 +14,6 @@ public interface PageMappingService
 
 	boolean checkUrlDetailExists(UrlDetail urlDetail);
 	
+	public void removePage(String id);
+	
 }
