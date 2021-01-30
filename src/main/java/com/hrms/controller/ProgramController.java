@@ -17,17 +17,22 @@ import com.hrms.model.Module;
 import com.hrms.model.Program;
 import com.hrms.model.SubModule;
 import com.hrms.service.ModuleService;
+import com.hrms.service.PageMappingService;
 import com.hrms.service.ProgramService;
 import com.hrms.service.SubModuleService;
 
 @Controller
 public class ProgramController {
+	int pageno=23;
+	String reqPage="/program";
 	@Autowired
 	ProgramService programService;
 	@Autowired
 	private ModuleService moduleService;
 	@Autowired
 	SubModuleService subModuleService;
+	@Autowired
+	PageMappingService pageMappingService;
 	
 	/**
 	 * Method to get Program  Result 	
@@ -52,7 +57,8 @@ public class ProgramController {
 			model.addAttribute("modules", modules);
 		}
 		session.setAttribute("username", session.getAttribute("username"));
-		return "program";
+		//return "program";
+		 return pageMappingService.PageRequestMapping(reqPage,pageno);
 	}
 	/**
 	 * Method to Save Program 	
@@ -75,9 +81,10 @@ public class ProgramController {
 	
 		boolean isSubModuleExist = programService.checkProgramExists(program);
 		if (isSubModuleExist) {
-			redirectAttributes.addFlashAttribute("message", " Sub Module Already exists !");
+			redirectAttributes.addFlashAttribute("message", " Program Already exists !");
 			redirectAttributes.addFlashAttribute("alertClass", "alert-success");
-			return "redirect:/program";
+			//return "redirect:/program";
+			  return "redirect:"+pageMappingService.PageRequestMapping(reqPage,pageno);
 		}
 
 		else {
@@ -88,7 +95,8 @@ public class ProgramController {
 			model.addAttribute("listpPrograms", listpPrograms);
 			session.setAttribute("username", session.getAttribute("username"));
 		}
-		return "redirect:/program";
+		//return "redirect:/program";
+		  return "redirect:"+pageMappingService.PageRequestMapping(reqPage,pageno);
 
 	}
 	/**
@@ -99,7 +107,8 @@ public class ProgramController {
 	 */
 	@GetMapping(value = { "/editProgram/{id}" })
 	public String editProgramdata(@PathVariable("id") String id, Model model, HttpSession session) {
-		
+		int editPageNo=24;
+		String reqPageedit="/editProgram";
 		
 		Program programEdit = programService.findProgramById(id);
 		model.addAttribute("programEdit", programEdit);
@@ -111,7 +120,8 @@ public class ProgramController {
 		model.addAttribute("subModulesList", subModulesList);
 
 		session.setAttribute("username", session.getAttribute("username"));
-		return "/editProgram";
+		//return "/editProgram";
+		return pageMappingService.PageRequestMapping(reqPageedit,editPageNo);
 	}
 	/**
 	 * Method to update Program 	
@@ -124,7 +134,10 @@ public class ProgramController {
 
 		  this.programService.updateProgram(p);
 	  	  
-		  return "redirect:/program";
+		 // return "redirect:/program";
+		  
+		  return "redirect:/"+pageMappingService.PageRequestMapping(reqPage,pageno);
+
 	}
 /**
  * Method to Delete Program 	
@@ -137,7 +150,9 @@ public String deleteprogram(@PathVariable("id")String id,  Model model,HttpSessi
 { 
 	  this.programService.removeProgram(id);
    session.setAttribute("username",session.getAttribute("username")); 
-   return "redirect:/program";
+  // return "redirect:/program";
+   return "redirect:/"+pageMappingService.PageRequestMapping(reqPage,pageno);
+
 }
 
 
