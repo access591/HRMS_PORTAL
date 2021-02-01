@@ -48,6 +48,21 @@ public class PageMappingServiceImpl implements PageMappingService {
 	@Override
 	public void removePage(String id) {
 		this.pageMappingDao.removePage(id);
-		
+
+	}
+
+	@Override
+	public UrlDetail findUrlDetailById(String id) {
+		return pageMappingDao.findUrlDetailById(id);
+	}
+
+	@Override
+	public void updatePage(UrlDetail u) {
+		u.setPage_Name(u.getPage_Name());
+		u.setReq_Mapping(u.getReq_Mapping());
+		u.setActive(u.getActive());
+		u.setUpdatedDate(u.getUpdatedDate());
+		this.pageMappingDao.updatePage(u);
+
 	}
 }

@@ -10,8 +10,14 @@ public interface PageMappingDao {
 	List<UrlDetail> getAllPages();
 
 	void addPage(UrlDetail urlDetail);
+	
+  	UrlDetail findUrlDetailById(String id);
+  	
+  	 public void updatePage(UrlDetail u); 
+
 
 	UrlDetail checkUrlDetailExists(UrlDetail urlDetail);
+	
 	
 	public void removePage(String id);
 }

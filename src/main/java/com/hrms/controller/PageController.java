@@ -24,50 +24,63 @@ public class PageController {
 	@Autowired
 	PageMappingService pageMappingService;
 	
-	
-@GetMapping("/pageMaster")
-public String PageMater(Model model,HttpSession session)
-	{
-	List<UrlDetail> listUrlDetail = pageMappingService.getAllPages();
-	model.addAttribute("listUrlDetail", listUrlDetail);
-	String userCode= (String)session.getAttribute("username");
-	List<MenuModule> modules = moduleService.getAllModulesList(userCode);
-	if (modules != null) {
-		model.addAttribute("modules", modules);
-	}
+	@GetMapping("/pageMaster")
+	public String PageMater(Model model, HttpSession session) {
+		List<UrlDetail> listUrlDetail = pageMappingService.getAllPages();
+		model.addAttribute("listUrlDetail", listUrlDetail);
+		String userCode = (String) session.getAttribute("username");
+		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
+		if (modules != null) {
+			model.addAttribute("modules", modules);
+		}
 		return "pageMaster";
 	}
 
+	@PostMapping("/savePages")
+	public String savePages(@ModelAttribute("Pages") UrlDetail urlDetail, Model model, HttpSession session,
+			RedirectAttributes redirectAttributes) {
+		boolean isUrlDetailExist = pageMappingService.checkUrlDetailExists(urlDetail);
 
+		if (isUrlDetailExist) {
+			redirectAttributes.addFlashAttribute("message", "Url id Already exists !  ");
+			redirectAttributes.addFlashAttribute("alertClass", "alert-success");
+			return "redirect:/pageMaster";
 
-@PostMapping("/savePages")
-public String savePages(@ModelAttribute("Pages") UrlDetail urlDetail, Model model,HttpSession session,RedirectAttributes redirectAttributes) {
-boolean isUrlDetailExist = pageMappingService.checkUrlDetailExists(urlDetail);
+		} else {
+			pageMappingService.addPage(urlDetail);
+			List<UrlDetail> listUrlDetail = pageMappingService.getAllPages();
+			model.addAttribute("listUrlDetail", listUrlDetail);
 
-if (isUrlDetailExist) {
-redirectAttributes.addFlashAttribute("message", "Url id Already exists !  ");
-redirectAttributes.addFlashAttribute("alertClass", "alert-success");
-return"redirect:/pageMaster";
+			session.setAttribute("username", session.getAttribute("username"));
 
-}
-else {
-	pageMappingService.addPage(urlDetail); 
-	List<UrlDetail> listUrlDetail = pageMappingService.getAllPages();
-model.addAttribute("listUrlDetail", listUrlDetail);
-	
-	session.setAttribute("username",session.getAttribute("username"));
+		}
+		return "redirect:/pageMaster";
 
-}
-return"redirect:/pageMaster";
+	}
 
-}
-@GetMapping(value = {"/deletePage/{id}"})
-public String deletedepartment(@PathVariable("id")String id,  Model model,HttpSession session)
- { 
-	  this.pageMappingService.removePage(id);
-    session.setAttribute("username",session.getAttribute("username")); 
-    return"redirect:/pageMaster";
-}
+	@GetMapping(value = { "/editPage/{id}" })
+	public String editUrlDetail(@PathVariable("id") String id, Model model, HttpSession session) {
 
+		UrlDetail urlDetailEdit = pageMappingService.findUrlDetailById(id);
+		model.addAttribute("urlDetailEdit", urlDetailEdit);
+
+		session.setAttribute("username", session.getAttribute("username"));
+		return "/editUrlDetail";
+	}
+
+	@PostMapping("/updatePage")
+	public String updatePageUrl(@ModelAttribute("upPages") UrlDetail u, Model model) {
+
+		this.pageMappingService.updatePage(u);
+
+		return "redirect:/pageMaster";
+	}
+
+	@GetMapping(value = { "/deletePage/{id}" })
+	public String deletePage(@PathVariable("id") String id, Model model, HttpSession session) {
+		this.pageMappingService.removePage(id);
+		session.setAttribute("username", session.getAttribute("username"));
+		return "redirect:/pageMaster";
+	}
 
 }

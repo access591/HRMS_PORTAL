@@ -102,4 +102,34 @@ public class PageMappingDaoImpl implements PageMappingDao {
 		}
 
 	}
+
+	@Override
+	public UrlDetail findUrlDetailById(String id) {
+		UrlDetail editUrlDetail = null;
+		try {
+
+			Session session = sessionFactory.openSession();
+			Criteria criteria = session.createCriteria(UrlDetail.class);
+			editUrlDetail = (UrlDetail) criteria.setFetchMode("Url_Id", FetchMode.SELECT)
+					.add(Restrictions.eq("Url_Id", id)).uniqueResult();
+
+		} catch (Exception e) {
+			logger.info("PageMappingDaoImpl.findUrlDetailById" + e.getMessage());
+		}
+		return editUrlDetail;
+	}
+
+	@Override
+	public void updatePage(UrlDetail u) {
+		try {
+			Session session = this.sessionFactory.getCurrentSession();
+			Transaction tx = session.beginTransaction();
+			session.update(u);
+			tx.commit();
+			session.close();
+		} catch (Exception e) {
+			logger.info("PageMappingDaoImpl.updatePage" + e.getMessage());
+		}
+
+	}
 }
