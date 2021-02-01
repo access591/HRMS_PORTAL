@@ -13,4 +13,5 @@ public interface ProgramService {
 	Program findProgramById(String id);
 	 public void updateProgram(Program p); 
 	  public void removeProgram(String id);
+	  List<Program> getActivePrograms();
 }

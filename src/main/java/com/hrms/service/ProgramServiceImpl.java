@@ -66,6 +66,11 @@ public class ProgramServiceImpl implements ProgramService {
 		this.programDao.removeProgram(id);
 		
 	}
+
+	@Override
+	public List<Program> getActivePrograms() {
+		return programDao.getAllPrograms();
+	}
 	
 
 }

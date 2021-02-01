@@ -52,7 +52,64 @@ body {
 								</div>
 								<div class="card-body">
 									<form id="validation-form" action="#" th:action="@{/saveUserRights}" th:object="${UserRights}" method="post">
-										<div class="row">
+							<div class="row">
+								<div class="col-12 col-lg-6">
+									
+										
+										<div class="mb-3">
+												<label class="form-label">Users</label>
+												<label style="color: red">*</label>
+												<select class="form-control select2" name="user_code"id="user_code" required aria-required="true">
+												 <option value="">Select User</option>
+												<option th:each="users: ${listUsers}" th:value="${users.getUserCode()}" th:text="${users.getUserName()}"></option>
+											     	</select>
+											</div>
+										
+									   		<div class="mb-3">
+												<label class="form-label">Sub Module</label>
+												<label style="color: red">*</label>
+												<select class="form-control select2" name="sub_module_code"id="sub_module_code" required aria-required="true">
+												 <option value="">Select Sub Module</option>
+												<option th:each="submodule: ${subModulesList}" th:value="${submodule.getSubModuleCode()}" th:text="${submodule.getSubModuleName()}"></option>
+											     	</select>
+											</div>
+
+									<div class="form-group">
+									<label class="form-label">Status</label>
+									<div class="custom-controls-stacked">
+										<label class="radio-inline">
+										 <input type="radio"value="Y" name="active" checked> Active
+										</label> 
+										<label class="radio-inline"> 
+										<input type="radio"value="N" name="active"> Inactive
+										</label>
+									</div>
+								</div>
+							</div>
+						<div class="col-12 col-lg-6">
+									      	   <div class="mb-3">
+														<label class="form-label">Module</label>
+															<label style="color: red">*</label>
+													   <select class="form-control select2" name="module_code"id="module_code" required aria-required="true">
+												    <option value="">Select Module</option>
+													<option   th:each="module: ${modulesList}" th:value="${module.getModuleCode()}" th:text="${module.getModuleName()}"></option>
+											     	</select>
+										   			</div>
+										   			
+										   			
+										   			  <div class="mb-3">
+														<label class="form-label">Program</label>
+															<label style="color: red">*</label>
+													   <select class="form-control select2" name="prg_code"id="prg_code" required aria-required="true">
+												    <option value="">Select Program</option>
+													<option   th:each="program: ${programsList}" th:value="${program.getProgramCode()}" th:text="${program.getProgramName()}"></option>
+											     	</select>
+										   			</div>
+										   			
+										   			
+										   			
+						</div>
+										
 						
 										
 										</div>
@@ -67,30 +124,35 @@ body {
 								<div class="card-header">
 								</div>
 								<div class="card-body">
-							<!-- 	<table id="datatables-buttons" class="table table-striped display" style="width:100%">
+								<table id="datatables-buttons" class="table table-striped display" style="width:100%">
 										<thead>
 											<tr>
 												<th>User Code </th>
 												<th>Module Code </th>
 											     <th>Sub Module Code</th>
 												<th>Program Code</th>
+												<th>Status</th>
+												<th> Action </th>
 											
 												
 												
 											</tr>
 										</thead>
 										<tbody>
-											<tr  th:each="listofgrade : ${listGrade}">
-												<td th:text="${listofgrade.Grade_Code}"></td>
-												<td th:text="${listofgrade.Garde_Name}"></td>
-												<td th:text="${listofgrade.active}"></td>
-												<td><a th:href="@{/editGrade/{id}(id=${listofgrade.Grade_Code})}" class="btn btn-primary"><i class="fa fa-edit"></i></a>
-												<a th:href="@{/deleteGarde/{id}(id=${listofgrade.Grade_Code})}" class="btn btn-primary"onclick="return confirm('Are you sure?')"><i class="fa fa-times"></i></a>
+											<tr  th:each="listUserRights : ${listUserRights}">
+												<td th:text="${listUserRights.user_code}"></td>
+												<td th:text="${listUserRights.module_code}"></td>
+												<td th:text="${listUserRights.sub_module_code}"></td>
+												<td th:text="${listUserRights.prg_code}"></td>
+												
+												<td th:text="${listUserRights.active_yn}"></td>
+												<td><a th:href="@{/editGrade/{id}(id=${listUserRights.user_code})}" class="btn btn-primary"><i class="fa fa-edit"></i></a>
+												<a th:href="@{/deleteGarde/{id}(id=${listUserRights.user_code})}" class="btn btn-primary"onclick="return confirm('Are you sure?')"><i class="fa fa-times"></i></a>
 												</td>
 											</tr>
 										</tbody>
 									
-									</table> -->
+									</table> 
 								</div>
 								
 							</div>
