@@ -29,7 +29,7 @@ public List<UserRights> getAllUserRights() {
 		try {
 			Session session = sessionFactory.openSession();
 			Criteria criteria = session.createCriteria(UserRights.class);
-			UserRightsList = (List<UserRights>) criteria.setFetchMode("PRG_CODE", FetchMode.SELECT).list();
+			UserRightsList = (List<UserRights>) criteria.setFetchMode("M_URIGHTS", FetchMode.SELECT).list();
 		} catch (Exception e) {
 			logger.info("UserProgramRightDaoImpl.getAllUserRights" + e.getMessage());
 		}
