@@ -13,7 +13,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.hrms.model.UserEntity;
 import com.hrms.model.UserRights;
 @Repository
 public class UserProgramRightDaoImpl implements UserProgramRightDao {
@@ -67,6 +66,22 @@ public UserRights checkUserRightsExists(UserRights userRights) {
 			logger.info("UserProgramRightDaoImpl.checkUserRightsExists" + e.getMessage());
 		}
 		return prcode;
+}
+
+@Override
+public void removeUserProgramRight(String id) {
+	try {
+		Session session = this.sessionFactory.getCurrentSession();
+		Transaction tx = session.beginTransaction();
+		UserRights p = (UserRights) session.load(UserRights.class, new String(id));
+		session.delete(p);
+		tx.commit();
+		session.close();
+
+	} catch (Exception e) {
+		logger.info("UserProgramRightDaoImpl.checkUserRightsExists" + e.getMessage());
+	}
+	
 }
 
 }

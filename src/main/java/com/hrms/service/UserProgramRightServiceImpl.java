@@ -33,5 +33,10 @@ public class UserProgramRightServiceImpl implements UserProgramRightService {
 			return false;
 		}
 	}
+	@Override
+	public void removeUserProgramRight(String id) {
+		this.userProgramRightDao.removeUserProgramRight(id);
+		
+	}
 
 }
