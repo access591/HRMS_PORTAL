@@ -8,6 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hrms.model.MenuModule;
 import com.hrms.model.Module;
@@ -35,11 +38,15 @@ public class UserProgramRightController {
 	
 	@Autowired
 	UserProgramRightService  userProgramRightService  ;
+	
+	
 @GetMapping("/userProgramRights")
 	public String UserProgramRightsList(Model model,HttpSession session) {
-		
+	String userCode= (String)session.getAttribute("username");	
+	
 	List<UserRights> listUserRights = userProgramRightService.getAllUserRights();
-	model.addAttribute("listUserRights", listUserRights);
+	model.addAttribute("listUserRight", listUserRights);
+	
 	List<UserEntity> listUsers = userService.getAllUsers();
 	model.addAttribute("listUsers", listUsers);	
 	
@@ -52,7 +59,7 @@ public class UserProgramRightController {
 	List<Program> programsList = programService.getActivePrograms();
 	model.addAttribute("programsList", programsList);
 	
-		String userCode= (String)session.getAttribute("username");
+		
 		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
 		if (modules != null) {
 			model.addAttribute("modules", modules);
@@ -60,6 +67,25 @@ public class UserProgramRightController {
 		session.setAttribute("username",session.getAttribute("username"));
 			return "UserProgramRight";
 		}
+
+@PostMapping("/saveUserRights")
+public String userProgramRightSave(@ModelAttribute("UserRights") UserRights userRights, Model model,HttpSession session,RedirectAttributes redirectAttributes) {
+
+	boolean isUserRightsExist = userProgramRightService.checkUserRightsExists(userRights);
+	
+	if (isUserRightsExist) {
+	    redirectAttributes.addFlashAttribute("message", "Program  Already exists !  ");
+	    redirectAttributes.addFlashAttribute("alertClass", "alert-success");
+	    return"redirect:/userProgramRights";
+	
+	}
+    else {
+	userProgramRightService.addUserProgramRight(userRights); 
+	session.setAttribute("username",session.getAttribute("username"));
+    }
+return"redirect:/userProgramRights";
+
+	}
 
 
 }
