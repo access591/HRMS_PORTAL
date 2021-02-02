@@ -88,6 +88,37 @@ return"redirect:/userProgramRights";
 
 	}
 
+@GetMapping(value = {"/editUserRights/{id}"})
+public String editUserRights(@PathVariable("id")String id,  Model model,HttpSession session)
+ { 
+	List<UserEntity> listUsers = userService.getAllUsers();
+	model.addAttribute("listUsers", listUsers);	
+	
+	List<Module> modulesList = moduleService.getActiveModules();
+	model.addAttribute("modulesList", modulesList);
+	
+	List<SubModule>subModulesList=subModuleService.getActiveSubModules();
+	model.addAttribute("subModulesList", subModulesList);
+	
+	List<Program> programsList = programService.getActivePrograms();
+	model.addAttribute("programsList", programsList);
+	
+	
+	  UserRights userRightsEdit = userProgramRightService.findUserRightById(id);
+	  model.addAttribute("userRightsEdit", userRightsEdit);
+
+    session.setAttribute("username",session.getAttribute("username")); 
+       return "/editUserRights"; 
+}
+
+@PostMapping("/updateUserRights")
+public String upadteUserRight(@ModelAttribute("UserRights") UserRights ur, Model model)
+{
+	  this.userProgramRightService.updateUserRights(ur);
+	  return"redirect:/userProgramRights";
+	
+}
+
 @GetMapping(value = {"/deleteUserRights/{id}"})
 public String deleteUserRights(@PathVariable("id")String id,  Model model,HttpSession session)
  { 

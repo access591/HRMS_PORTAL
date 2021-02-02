@@ -11,6 +11,10 @@ public interface UserProgramRightDao {
 	public void addUserProgramRight(UserRights userRights);
 
 	UserRights checkUserRightsExists(UserRights userRights);
+	
+	 UserRights findUserRightById(String id);
+	 
+	 public void updateUserRights(UserRights ur);
 
 	public void removeUserProgramRight(String id);
 

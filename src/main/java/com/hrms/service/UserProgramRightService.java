@@ -9,6 +9,10 @@ public interface UserProgramRightService {
 	public void addUserProgramRight(UserRights userRights);
 
 	boolean checkUserRightsExists(UserRights userRights);
+	
+	 UserRights findUserRightById(String id);
+	 
+	  public void updateUserRights(UserRights ur);
 
 	public void removeUserProgramRight(String id);
 }
