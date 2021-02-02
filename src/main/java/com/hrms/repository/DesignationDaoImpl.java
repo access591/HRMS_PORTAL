@@ -2,6 +2,8 @@ package com.hrms.repository;
 
 import java.util.List;
 
+import javax.annotation.Resource;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.hibernate.Criteria;
@@ -10,27 +12,29 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Repository;
 import com.hrms.model.Designation;
 
 @Repository
 public class DesignationDaoImpl implements DesignationDao {
-	@Autowired
+
+	@Resource(name = "sessionFactory")
 	SessionFactory sessionFactory;
+	
 	private Logger logger = LoggerFactory.getLogger(DesignationDaoImpl.class.getName());
 
 	@Override
 	public void addDesignation(Designation designation) {
 		try {
-			Session session = sessionFactory.openSession();
+			Session session = this.sessionFactory.getCurrentSession();
 			Transaction tx = session.beginTransaction();
 			session.persist(designation);
 			tx.commit();
 			session.close();
 		} catch (Exception e) {
 
-			logger.info("DesignationDaoImpl.addDesignation" + e.getMessage());
+			logger.error(e.getMessage(), e);
 		}
 
 	}
@@ -39,11 +43,11 @@ public class DesignationDaoImpl implements DesignationDao {
 	public List<Designation> getAllDesignations() {
 		List<Designation> listDesignation = null;
 		try {
-			Session session = sessionFactory.openSession();
+			Session session = this.sessionFactory.getCurrentSession();
 			Criteria criteria = session.createCriteria(Designation.class);
 			listDesignation = (List<Designation>) criteria.setFetchMode("M_DESIGNATION", FetchMode.SELECT).list();
 		} catch (Exception e) {
-			logger.info("DesignationDaoImpl.getAllDesignations" + e.getMessage());
+			logger.error(e.getMessage(), e);
 		}
 
 		return listDesignation;
@@ -53,12 +57,12 @@ public class DesignationDaoImpl implements DesignationDao {
 	public Designation findDesignationById(String id) {
 		Designation designationEdit = null;
 		try {
-			Session session = sessionFactory.openSession();
+			Session session = this.sessionFactory.getCurrentSession();
 			Criteria criteria = session.createCriteria(Designation.class);
 			designationEdit = (Designation) criteria.setFetchMode("M_DESIGNATION", FetchMode.SELECT)
 					.add(Restrictions.eq("Desg_code", id)).uniqueResult();
 		} catch (Exception e) {
-			logger.info("DesignationDaoImpl.findDesignationById" + e.getMessage());
+			logger.error(e.getMessage(), e);
 		}
 		return designationEdit;
 
@@ -73,7 +77,7 @@ public class DesignationDaoImpl implements DesignationDao {
 			tx.commit();
 			session.close();
 		} catch (Exception e) {
-			logger.info("DesignationDaoImpl.updateDesignation" + e.getMessage());
+			logger.error(e.getMessage(), e);
 		}
 
 	}
@@ -90,7 +94,7 @@ public class DesignationDaoImpl implements DesignationDao {
 			tx.commit();
 			session.close();
 		} catch (Exception e) {
-			logger.info("DesignationDaoImpl.removeDesignation" + e.getMessage());
+			logger.error(e.getMessage(), e);
 		}
 
 	}
@@ -99,13 +103,13 @@ public class DesignationDaoImpl implements DesignationDao {
 	public Designation checkDesignationExists(Designation designation) {
 		Designation decode = null;
 		try {
-			Session session = sessionFactory.openSession();
+			Session session = this.sessionFactory.getCurrentSession();
 			Criteria criteria = session.createCriteria(Designation.class);
 			decode = (Designation) criteria.setFetchMode("M_DESIGNATION", FetchMode.SELECT)
 					.add(Restrictions.eq("Desg_code", designation.getDesg_code())).uniqueResult();
 
 		} catch (Exception e) {
-			logger.info("DesignationDaoImpl.checkDesignationExists" + e.getMessage());
+			logger.error(e.getMessage(), e);
 		}
 		return decode;
 	}
