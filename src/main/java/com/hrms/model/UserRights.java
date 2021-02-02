@@ -5,6 +5,7 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -19,7 +20,9 @@ public class UserRights implements Serializable {
 	 */
 	private static final long serialVersionUID = 3115353075342584614L;
 
-	
+	@Id
+	@GeneratedValue
+	 private Long id;
 	@Column(name = "USER_CODE")
 	private String user_code;
 	
@@ -28,7 +31,7 @@ public class UserRights implements Serializable {
 	
 	@Column(name = "SUB_MODULE_CODE")
 	private String sub_module_code;
-	@Id
+
 	@Column(name = "PRG_CODE")
 	private String prg_code;
 	
@@ -49,6 +52,12 @@ public class UserRights implements Serializable {
 	
 	
 	
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
 	public String getUser_code() {
 		return user_code;
 	}

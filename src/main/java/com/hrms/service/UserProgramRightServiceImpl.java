@@ -34,12 +34,12 @@ public class UserProgramRightServiceImpl implements UserProgramRightService {
 		}
 	}
 	@Override
-	public void removeUserProgramRight(String id) {
+	public void removeUserProgramRight(long id) {
 		this.userProgramRightDao.removeUserProgramRight(id);
 		
 	}
 	@Override
-	public UserRights findUserRightById(String id) {
+	public UserRights findUserRightById(long id) {
 		return userProgramRightDao.findUserRightById(id);
 	
 	}

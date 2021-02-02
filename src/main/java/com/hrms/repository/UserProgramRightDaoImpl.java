@@ -69,11 +69,11 @@ public UserRights checkUserRightsExists(UserRights userRights) {
 }
 
 @Override
-public void removeUserProgramRight(String id) {
+public void removeUserProgramRight(long id) {
 	try {
 		Session session = this.sessionFactory.getCurrentSession();
 		Transaction tx = session.beginTransaction();
-		UserRights p = (UserRights) session.load(UserRights.class, new String(id));
+		UserRights p = (UserRights) session.load(UserRights.class,(id));
 		session.delete(p);
 		tx.commit();
 		session.close();
@@ -85,14 +85,14 @@ public void removeUserProgramRight(String id) {
 }
 
 @Override
-public UserRights findUserRightById(String id) {
+public UserRights findUserRightById(long id) {
 	  UserRights userRightsEdit = null;
 			try {
 
 				Session session = sessionFactory.openSession();
 				Criteria criteria = session.createCriteria(UserRights.class);
-				userRightsEdit = (UserRights) criteria.setFetchMode("prg_code", FetchMode.SELECT)
-						.add(Restrictions.eq("prg_code", id)).uniqueResult();
+				userRightsEdit = (UserRights) criteria.setFetchMode("id", FetchMode.SELECT)
+						.add(Restrictions.eq("id", id)).uniqueResult();
 
 			} catch (Exception e) {
 				logger.info("UserProgramRightDaoImpl.findUserRightById" + e.getMessage());
