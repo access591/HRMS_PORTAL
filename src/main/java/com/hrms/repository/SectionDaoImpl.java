@@ -2,6 +2,8 @@ package com.hrms.repository;
 
 import java.util.List;
 
+import javax.annotation.Resource;
+
 import org.hibernate.Criteria;
 import org.hibernate.FetchMode;
 import org.hibernate.Session;
@@ -10,7 +12,6 @@ import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.hrms.model.Section;
@@ -21,7 +22,7 @@ import com.hrms.model.Section;
  */
 @Repository
 public class SectionDaoImpl implements SectionDao {
-	@Autowired
+	@Resource(name = "sessionFactory")
 	SessionFactory sessionFactory;
 	private Logger logger = LoggerFactory.getLogger(SectionDaoImpl.class.getName());
 
@@ -32,14 +33,14 @@ public class SectionDaoImpl implements SectionDao {
 	@Override
 	public void addSection(Section section) {
 		try {
-			Session session = sessionFactory.openSession();
+			Session session = this.sessionFactory.getCurrentSession();
 			Transaction tx = session.beginTransaction();
 			session.persist(section);
 			tx.commit();
 			session.close();
 
 		} catch (Exception e) {
-			logger.info("SectionDaoImpl.addSection" + e.getMessage());
+			logger.error(e.getMessage(), e);
 
 		}
 
@@ -54,12 +55,12 @@ public class SectionDaoImpl implements SectionDao {
 		List<Section> listSection = null;
 		try {
 
-			Session session = sessionFactory.openSession();
+			Session session = this.sessionFactory.getCurrentSession();
 			Criteria criteria = session.createCriteria(Section.class);
 			listSection = (List<Section>) criteria.setFetchMode("M_SECTION", FetchMode.SELECT).list();
 
 		} catch (Exception e) {
-			logger.info("SectionDaoImpl.getAllSections" + e.getMessage());
+			logger.error(e.getMessage(), e);
 		}
 		return listSection;
 	}
@@ -71,13 +72,13 @@ public class SectionDaoImpl implements SectionDao {
 	public Section findSectionById(String id) {
 		Section sectionEdit = null;
 		try {
-			Session session = sessionFactory.openSession();
+			Session session = this.sessionFactory.getCurrentSession();
 			Criteria criteria = session.createCriteria(Section.class);
 			sectionEdit = (Section) criteria.setFetchMode("M_SECTION", FetchMode.SELECT)
 					.add(Restrictions.eq("Sect_Code", id)).uniqueResult();
 
 		} catch (Exception e) {
-			logger.info("SectionDaoImpl.findSectionById" + e.getMessage());
+			logger.error(e.getMessage(), e);
 		}
 		return sectionEdit;
 
@@ -97,7 +98,7 @@ public class SectionDaoImpl implements SectionDao {
 			session.close();
 
 		} catch (Exception e) {
-			logger.info("SectionDaoImpl.updateSection" + e.getMessage());
+			logger.error(e.getMessage(), e);
 		}
 
 	}
@@ -117,7 +118,7 @@ public class SectionDaoImpl implements SectionDao {
 			session.close();
 
 		} catch (Exception e) {
-			logger.info("SectionDaoImpl.removeSection" + e.getMessage());
+			logger.error(e.getMessage(), e);
 		}
 
 	}
@@ -132,13 +133,13 @@ public class SectionDaoImpl implements SectionDao {
 
 		try {
 
-			Session session = sessionFactory.openSession();
+			Session session = this.sessionFactory.getCurrentSession();
 			Criteria criteria = session.createCriteria(Section.class);
 			secode = (Section) criteria.setFetchMode("M_SECTION", FetchMode.SELECT)
 					.add(Restrictions.eq("Sect_Code", section.getSect_Code())).uniqueResult();
 
 		} catch (Exception e) {
-			logger.info("SectionDaoImpl.checkSectionExists" + e.getMessage());
+			logger.error(e.getMessage(), e);
 		}
 		return secode;
 	}
