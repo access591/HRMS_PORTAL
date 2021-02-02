@@ -1,6 +1,9 @@
 package com.hrms.repository;
 
 import java.util.List;
+
+import javax.annotation.Resource;
+
 import org.hibernate.Criteria;
 import org.hibernate.FetchMode;
 import org.hibernate.SQLQuery;
@@ -9,7 +12,6 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import org.slf4j.Logger;
@@ -20,7 +22,7 @@ import com.hrms.model.SubModule;
 @Repository
 public class ModuleDaoImpl implements ModuleDao {
 	private Logger logger = LoggerFactory.getLogger(ModuleDaoImpl.class.getName());
-	@Autowired
+	@Resource(name = "sessionFactory")
 	SessionFactory sessionFactory;
 
 	@Override
@@ -28,13 +30,13 @@ public class ModuleDaoImpl implements ModuleDao {
 
 		List<Module> modules = null;
 		try {
-			Session session = sessionFactory.openSession();
+			final Session session = this.sessionFactory.getCurrentSession();
 			Criteria criteria = session.createCriteria(Module.class);
 			criteria.addOrder(Order.asc("seqNo"));
 			modules = (List<Module>) criteria.setFetchMode("M_MODULE", FetchMode.SELECT).list();
 
 		} catch (Exception e) {
-			logger.info("ModuleDaoImpl.getAllModules" + e.getMessage());
+			logger.error(e.getMessage(), e);
 		}
 
 		return modules;
@@ -44,14 +46,13 @@ public class ModuleDaoImpl implements ModuleDao {
 	@Override
 	public void addModule(Module module) {
 		try {
-			Session session = sessionFactory.openSession();
+			final Session session = this.sessionFactory.getCurrentSession();
 			Transaction tx = session.beginTransaction();
 			session.persist(module);
 			tx.commit();
 			session.close();
 		} catch (Exception e) {
-			logger.info("ModuleDaoImpl.addModule" + e.getMessage());
-
+			logger.error(e.getMessage(), e);
 		}
 
 	}
@@ -60,12 +61,12 @@ public class ModuleDaoImpl implements ModuleDao {
 	public Module findModule(Module module) {
 		Module mcode = null;
 		try {
-			Session session = sessionFactory.openSession();
+			final Session session = this.sessionFactory.getCurrentSession();
 			Criteria criteria = session.createCriteria(Module.class);
 			mcode = (Module) criteria.setFetchMode("M_MODULE", FetchMode.SELECT)
 					.add(Restrictions.eq("moduleCode", module.getModuleCode())).uniqueResult();
 		} catch (Exception e) {
-			logger.info("ModuleDaoImpl.findModule" + e.getMessage());
+			logger.error(e.getMessage(), e);
 
 		}
 
@@ -76,14 +77,14 @@ public class ModuleDaoImpl implements ModuleDao {
 	public Module findModuleById(String id) {
 		Module moduleEdit = null;
 		try {
-			Session session = sessionFactory.openSession();
+			final Session session = this.sessionFactory.getCurrentSession();
 			Criteria criteria = session.createCriteria(Module.class);
 			moduleEdit = (Module) criteria.setFetchMode("M_MODULE", FetchMode.SELECT)
 					.add(Restrictions.eq("moduleCode", id)).uniqueResult();
 		}
 
 		catch (Exception e) {
-			logger.info("ModuleDaoImpl.findModuleById" + e.getMessage());
+			logger.error(e.getMessage(), e);
 
 		}
 		return moduleEdit;
@@ -92,13 +93,13 @@ public class ModuleDaoImpl implements ModuleDao {
 	@Override
 	public void updateModule(Module m) {
 		try {
-			Session session = this.sessionFactory.getCurrentSession();
+			final Session session = this.sessionFactory.getCurrentSession();
 			Transaction tx = session.beginTransaction();
 			session.update(m);
 			tx.commit();
 			session.close();
 		} catch (Exception e) {
-			logger.info("ModuleDaoImpl.updateModule" + e.getMessage());
+			logger.error(e.getMessage(), e);
 		}
 
 	}
@@ -106,14 +107,14 @@ public class ModuleDaoImpl implements ModuleDao {
 	@Override
 	public void removeModule(String id) {
 		try {
-			Session session = this.sessionFactory.getCurrentSession();
+			final Session session = this.sessionFactory.getCurrentSession();
 			Transaction tx = session.beginTransaction();
 			Module m = (Module) session.load(Module.class, new String(id));
 			session.delete(m);
 			tx.commit();
 			session.close();
 		} catch (Exception e) {
-			logger.info("ModuleDaoImpl.removeModule" + e.getMessage());
+			logger.error(e.getMessage(), e);
 		}
 
 	}
@@ -122,12 +123,12 @@ public class ModuleDaoImpl implements ModuleDao {
 	public List<Module> getActiveModules() {
 		List<Module> modulesList = null;
 		try {
-			Session session = sessionFactory.openSession();
+			final Session session = this.sessionFactory.getCurrentSession();
 			Criteria criteria = session.createCriteria(Module.class);
 			modulesList = (List<Module>) criteria.setFetchMode("M_MODULE", FetchMode.SELECT).list();
 
 		} catch (Exception e) {
-			logger.info("ModuleDaoImpl.getActiveModules" + e.getMessage());
+			logger.error(e.getMessage(), e);
 		}
 		return modulesList;
 	}
@@ -137,7 +138,7 @@ public class ModuleDaoImpl implements ModuleDao {
 
 		List modules = null;
 		try {
-			Session session = sessionFactory.openSession();
+			final Session session = this.sessionFactory.getCurrentSession();
 
 			String sql = "SELECT  DISTINCT u.MODULE_CODE,m.MODULE_NAME,m.ACTIVE_YN,m.INS_BY,m.INS_DATE,m.UPDATE_BY,m.UPDATE_DATE,m.SEQ_NO  \r\n"
 					+ "	FROM 	M_MODULE m ,M_URIGHTS u\r\n"
@@ -150,7 +151,7 @@ public class ModuleDaoImpl implements ModuleDao {
 			query.addEntity(Module.class);
 			modules = query.list();
 		} catch (Exception e) {
-			logger.info("ModuleDaoImpl.getAllModulesList" + e.getMessage());
+			logger.error(e.getMessage(), e);
 		}
 
 		return modules;
@@ -160,7 +161,7 @@ public class ModuleDaoImpl implements ModuleDao {
 	public List<SubModule> getAllSubModule(String modulecCode, String ucode) {
 		List subMOdules = null;
 		try {
-			Session session = sessionFactory.openSession();
+			final Session session = this.sessionFactory.getCurrentSession();
 
 			
 			String sql = "SELECT DISTINCT u.SUB_MODULE_CODE,S.INS_DATE,S.INS_BY,S.ACTIVE_YN,S.SUB_MODULE_NAME,S.MODULE_CODE,S.SEQ_NO,S.UPDATE_BY,S.UPDATE_DATE   \r\n"
@@ -177,7 +178,7 @@ public class ModuleDaoImpl implements ModuleDao {
 			query.addEntity(SubModule.class);
 			subMOdules = query.list();
 		} catch (Exception e) {
-			logger.info("ModuleDaoImpl.getAllSubModule" + e.getMessage());
+			logger.error(e.getMessage(), e);
 		}
 
 		return subMOdules;
@@ -187,7 +188,7 @@ public class ModuleDaoImpl implements ModuleDao {
 	public List<Program> GetAllProgramList(String moduleCode, String smCode, String Ucode) {
 		List Programs =null;
 		try {
-			Session session = sessionFactory.openSession();
+			final Session session = this.sessionFactory.getCurrentSession();
 			String sql = "SELECT  DISTINCT DISTINCT  u.PRG_CODE,p.PRG_NAME,p.MODULE_CODE,p.PRG_TYPE,p.PRG_HREF_NAME,p.ACTIVE_YN,p.INS_BY,p.INS_DATE,p.UPDATE_BY,p.UPDATE_DATE,p.SUB_MODULE_CODE,p.SEQ_NO ,dmoduleCode,dsubMouduleCode \r\n"
 					+ " FROM 	M_MODULE m , M_URIGHTS u ,M_SUB_MODULE s ,M_PROGRAM p\r\n"
 					+ "  Where m.MODULE_CODE = u.MODULE_CODE\r\n" + "  AND u.MODULE_CODE =s.MODULE_CODE\r\n"
@@ -204,7 +205,7 @@ public class ModuleDaoImpl implements ModuleDao {
 			 Programs = query.list();
 			
 		} catch (Exception e) {
-			logger.info("ModuleDaoImpl.GetAllProgramList" + e.getMessage());
+			logger.error(e.getMessage(), e);
 		}
 		
 
