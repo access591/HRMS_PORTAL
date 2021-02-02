@@ -38,5 +38,20 @@ public class UserProgramRightServiceImpl implements UserProgramRightService {
 		this.userProgramRightDao.removeUserProgramRight(id);
 		
 	}
+	@Override
+	public UserRights findUserRightById(String id) {
+		return userProgramRightDao.findUserRightById(id);
+	
+	}
+	@Override
+	public void updateUserRights(UserRights ur) {
+		ur.setUser_code(ur.getUser_code());
+		ur.setModule_code(ur.getModule_code());
+		ur.setSub_module_code(ur.getSub_module_code());
+		ur.setPrg_code(ur.getPrg_code());
+		ur.setUpd_date(ur.getUpd_date());
+		this.userProgramRightDao.updateUserRights(ur);
+		
+	}
 
 }

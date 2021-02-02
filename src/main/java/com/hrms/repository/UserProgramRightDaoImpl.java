@@ -84,4 +84,37 @@ public void removeUserProgramRight(String id) {
 	
 }
 
+@Override
+public UserRights findUserRightById(String id) {
+	  UserRights userRightsEdit = null;
+			try {
+
+				Session session = sessionFactory.openSession();
+				Criteria criteria = session.createCriteria(UserRights.class);
+				userRightsEdit = (UserRights) criteria.setFetchMode("prg_code", FetchMode.SELECT)
+						.add(Restrictions.eq("prg_code", id)).uniqueResult();
+
+			} catch (Exception e) {
+				logger.info("UserProgramRightDaoImpl.findUserRightById" + e.getMessage());
+			}
+			return userRightsEdit;
+	  
+}
+
+@Override
+public void updateUserRights(UserRights ur) {
+	try {
+		Session session = this.sessionFactory.getCurrentSession();
+		Transaction tx = session.beginTransaction();
+		session.update(ur);
+		tx.commit();
+		session.close();
+
+	} catch (Exception e) {
+		logger.info("UserProgramRightDaoImpl.updateUserRights" + e.getMessage());
+	}
+
+	
+}
+
 }
