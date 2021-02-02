@@ -89,7 +89,7 @@ return"redirect:/userProgramRights";
 	}
 
 @GetMapping(value = {"/editUserRights/{id}"})
-public String editUserRights(@PathVariable("id")String id,  Model model,HttpSession session)
+public String editUserRights(@PathVariable("id")long id,  Model model,HttpSession session)
  { 
 	List<UserEntity> listUsers = userService.getAllUsers();
 	model.addAttribute("listUsers", listUsers);	
@@ -120,7 +120,7 @@ public String upadteUserRight(@ModelAttribute("UserRights") UserRights ur, Model
 }
 
 @GetMapping(value = {"/deleteUserRights/{id}"})
-public String deleteUserRights(@PathVariable("id")String id,  Model model,HttpSession session)
+public String deleteUserRights(@PathVariable("id")Long id,  Model model,HttpSession session)
  { 
 	  this.userProgramRightService.removeUserProgramRight(id);
     session.setAttribute("username",session.getAttribute("username")); 
