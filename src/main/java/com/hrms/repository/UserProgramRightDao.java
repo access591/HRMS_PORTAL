@@ -12,10 +12,10 @@ public interface UserProgramRightDao {
 
 	UserRights checkUserRightsExists(UserRights userRights);
 	
-	 UserRights findUserRightById(String id);
+	 UserRights findUserRightById(long id);
 	 
 	 public void updateUserRights(UserRights ur);
 
-	public void removeUserProgramRight(String id);
+	public void removeUserProgramRight(long id);
 
 }
