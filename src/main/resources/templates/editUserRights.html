@@ -68,7 +68,7 @@ body {
 									   		<div class="mb-3">
 												<label class="form-label">Sub Module</label>
 												<label style="color: red">*</label>
-												<select class="form-control select2" name="sub_module_code"id="sub_module_code" required aria-required="true">
+												<select class="form-control select2" name="sub_module_code"id="sub_module_code" required aria-required="true" disabled>
 												 <option value="">Select Sub Module</option>
 												<option th:each="submodule: ${subModulesList}" th:value="${submodule.getSubModuleCode()}" th:text="${submodule.getSubModuleName()}" th:field="${userRightsEdit.sub_module_code}"></option>
 											     	</select>
@@ -91,7 +91,7 @@ body {
 									      	   <div class="mb-3">
 														<label class="form-label">Module</label>
 															<label style="color: red">*</label>
-													   <select class="form-control select2" name="module_code"id="module_code" required aria-required="true">
+													   <select class="form-control select2" name="module_code"id="module_code" required aria-required="true" disabled>
 												    <option value="">Select Module</option>
 											     	<option   th:each="module: ${modulesList}" th:value="${module.getModuleCode()}" th:text="${module.getModuleName()}"th:field="${userRightsEdit.module_code}"></option>
 											     	</select>
@@ -101,7 +101,7 @@ body {
 										   			  <div class="mb-3">
 														<label class="form-label">Program</label>
 															<label style="color: red">*</label>
-													   <select class="form-control select2" name="prg_code"id="prg_code" required aria-required="true">
+													   <select class="form-control select2" name="prg_code"id="prg_code" required aria-required="true" disabled>
 												    <option value="">Select Program</option>
 													<option   th:each="program: ${programsList}" th:value="${program.getProgramCode()}" th:text="${program.getProgramName()}" th:field="${userRightsEdit.prg_code}"></option>
 											     	</select>
