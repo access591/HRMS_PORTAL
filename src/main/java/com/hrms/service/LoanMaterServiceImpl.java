@@ -14,29 +14,29 @@ public class LoanMaterServiceImpl implements LoanMaterService {
 	@Override
 	public void addLoan(Loan loan) {
 		loan.setIns_date(new Date());
-		  this.loanMaterDao.addLoan(loan);
+		  this.loanMaterDao.saveOrUpdate(loan);
 	}
 	@Override
 	public List<Loan> getAllLoans() {
-		List<Loan> listLoan = loanMaterDao.getAllLoans();
+		List<Loan> listLoan = loanMaterDao.findAll();
 		return listLoan;
 	}
 
 	@Override
 	public Loan findLoanById(String id) {
-		return loanMaterDao.findLoanById(id);
+		return loanMaterDao.findById(id);
 	}
 	@Override
 	public void updateLoan(Loan L) {
 		L.setLoan_Name(L.getLoan_Name());
 		L.setUpd_date(L.getUpd_date());
 		L.setActive(L.getActive());
-		this.loanMaterDao.updateLoan(L);
+		this.loanMaterDao.saveOrUpdate(L);
 	}
 
 	@Override
 	public void removeLoan(String id) {
 		
-		this.loanMaterDao.removeLoan(id);
+		this.loanMaterDao.delete(id);
 	}
 }
