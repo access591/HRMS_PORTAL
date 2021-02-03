@@ -5,12 +5,14 @@ import java.util.List;
 
 public interface GenericDao<E> {
 	List<E> findAll();
-	void delete( String id );
-	E findById( String id );
+
+	void delete(String id);
+
+	E findById(String id);
+
 	void saveOrUpdate(E entity);
+
 	E existOrNot(E obj);
-	
-	
 	
 	
 
