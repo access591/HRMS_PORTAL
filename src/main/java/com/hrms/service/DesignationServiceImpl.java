@@ -14,18 +14,18 @@ public class DesignationServiceImpl implements DesignationService {
 	@Override
 	public void addDesignation(Designation designation) {
 		designation.setIns_date(new Date());
-		this.designationDao.addDesignation(designation);
+		this.designationDao.saveOrUpdate(designation);
 	}
 
 	@Override
 	public List<Designation> getAllDesignations() {
-		List<Designation> listDesignation = designationDao.getAllDesignations();
+		List<Designation> listDesignation = designationDao.findAll();
 		return listDesignation;
 	}
 
 	@Override
 	public Designation findDesignationById(String id) {
-		return designationDao.findDesignationById(id);
+		return designationDao.findById(id);
 	}
 
 	@Override
@@ -33,19 +33,19 @@ public class DesignationServiceImpl implements DesignationService {
 		d.setDesg_Name(d.getDesg_Name());
 		d.setUpd_date(d.getUpd_date());
 		d.setActive(d.getActive());
-		this.designationDao.updateDesignation(d);
+		this.designationDao.saveOrUpdate(d);
 
 	}
 
 	@Override
 	public void removeDesignation(String id) {
-		this.designationDao.removeDesignation(id);
+		this.designationDao.delete(id);
 
 	}
 
 	@Override
 	public boolean checkDesignationExists(Designation designation) {
-		Designation e = designationDao.checkDesignationExists(designation);
+		Designation e = designationDao.existOrNot(designation);
 		if (e != null) {
 			return true;
 		} else {
