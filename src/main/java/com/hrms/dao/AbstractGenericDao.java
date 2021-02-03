@@ -9,13 +9,14 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class AbstractGenericDao<E> implements GenericDao<E>{
+public class AbstractGenericDao<E> implements GenericDao<E> {
 	private final Class<E> entityClass;
+
 	public AbstractGenericDao() {
 		this.entityClass = (Class<E>) ((ParameterizedType) this.getClass().getGenericSuperclass())
 				.getActualTypeArguments()[0];
 	}
-	
+
 	@Autowired
 	private SessionFactory sessionFactory;
 
@@ -25,23 +26,19 @@ public class AbstractGenericDao<E> implements GenericDao<E>{
 
 	@Override
 	public List<E> findAll() {
-	
+
 		return getSession().createCriteria(this.entityClass).list();
 	}
-
-
-
-
 
 	@Override
 	public E findById(String id) {
 		return (E) getSession().get(this.entityClass, id);
-		
+
 	}
 
 	@Override
 	public void saveOrUpdate(E entity) {
-		
+
 		Transaction tx = getSession().beginTransaction();
 		getSession().saveOrUpdate(entity);
 		tx.commit();
@@ -52,7 +49,7 @@ public class AbstractGenericDao<E> implements GenericDao<E>{
 		Transaction tx = getSession().beginTransaction();
 		getSession().delete(getSession().load(this.entityClass, new String(id)));
 		tx.commit();
-		
+
 	}
 
 	@Override
@@ -60,9 +57,5 @@ public class AbstractGenericDao<E> implements GenericDao<E>{
 		// TODO Auto-generated method stub
 		return null;
 	}
-
-
-	
-
 
 }
