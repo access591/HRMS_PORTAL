@@ -1,15 +1,8 @@
 package com.hrms.repository;
 
-import java.util.List;
-
+import com.hrms.dao.GenericDao;
 import com.hrms.model.Grade;
 
-public interface GradeMaterDao {
+public interface GradeMaterDao extends GenericDao<Grade> {
 
-	  public void addGrade(Grade grade);
-	  List<Grade>getAllGrades();
-	  Grade findGradeById(String id);
-	   public void updateGrade(Grade d); 
-	   public void removeGrade(String id);
-	   Grade checkGradeExists(Grade grade);
 }
