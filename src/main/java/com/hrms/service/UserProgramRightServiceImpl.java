@@ -15,18 +15,18 @@ public class UserProgramRightServiceImpl implements UserProgramRightService {
 	@Override
 	public List<UserRights> getAllUserRights() {
 		
-		List<UserRights> listUserRights = userProgramRightDao.getAllUserRights();
+		List<UserRights> listUserRights = userProgramRightDao.findAll();
 		return listUserRights;
 	}
 	@Override
 	public void addUserProgramRight(UserRights userRights) {
 		userRights.setIns_date(new Date());
-		 this.userProgramRightDao.addUserProgramRight(userRights);
+		 this.userProgramRightDao.saveOrUpdate(userRights);
 		
 	}
 	@Override
 	public boolean checkUserRightsExists(UserRights userRights) {
-		UserRights e = userProgramRightDao.checkUserRightsExists(userRights);
+		UserRights e = userProgramRightDao.existOrNot(userRights);
 		if (e != null) {
 			return true;
 		} else {
@@ -35,12 +35,12 @@ public class UserProgramRightServiceImpl implements UserProgramRightService {
 	}
 	@Override
 	public void removeUserProgramRight(long id) {
-		this.userProgramRightDao.removeUserProgramRight(id);
+		this.userProgramRightDao.delete(id);
 		
 	}
 	@Override
 	public UserRights findUserRightById(long id) {
-		return userProgramRightDao.findUserRightById(id);
+		return userProgramRightDao.findById(id);
 	
 	}
 	@Override
@@ -50,7 +50,7 @@ public class UserProgramRightServiceImpl implements UserProgramRightService {
 		ur.setSub_module_code(ur.getSub_module_code());
 		ur.setPrg_code(ur.getPrg_code());
 		ur.setUpd_date(ur.getUpd_date());
-		this.userProgramRightDao.updateUserRights(ur);
+		this.userProgramRightDao.saveOrUpdate(ur);
 		
 	}
 
