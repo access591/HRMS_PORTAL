@@ -15,18 +15,18 @@ public class BankServiceImpl implements BankService {
 	@Override
 	public void addBank(Bank bank) {
 		bank.setIns_date(new Date());
-		this.bankDao.addBank(bank);
+		this.bankDao.saveOrUpdate(bank);
 	}
 
 	@Override
 	public List<Bank> getAllBanks() {
-		List<Bank> listBank = bankDao.getAllBanks();
+		List<Bank> listBank = bankDao.findAll();
 		return listBank;
 	}
-	
+
 	@Override
 	public Bank findBankById(String id) {
-		return bankDao.findBankById(id);
+		return bankDao.findById(id);
 	}
 
 	@Override
@@ -34,13 +34,13 @@ public class BankServiceImpl implements BankService {
 		d.setBank_Code(d.getBank_Code());
 		d.setUpd_date(d.getUpd_date());
 		d.setActive(d.getActive());
-		this.bankDao.updateBank(d);
+		this.bankDao.saveOrUpdate(d);
 
 	}
 
 	@Override
 	public void removeBank(String id) {
-		this.bankDao.removeBank(id);
+		this.bankDao.delete(id);
 
 	}
 
