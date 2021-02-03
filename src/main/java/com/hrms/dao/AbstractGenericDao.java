@@ -55,6 +55,13 @@ public class AbstractGenericDao<E> implements GenericDao<E>{
 		
 	}
 
+	@Override
+	public E existOrNot(E obj) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
 	
 
 
