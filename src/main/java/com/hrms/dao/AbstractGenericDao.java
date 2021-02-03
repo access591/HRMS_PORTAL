@@ -58,4 +58,18 @@ public class AbstractGenericDao<E> implements GenericDao<E> {
 		return null;
 	}
 
+	@Override
+	public E findById(long id) {
+		return (E) getSession().get(this.entityClass, id);
+
+	}
+
+	@Override
+	public void delete(long id) {
+		Transaction tx = getSession().beginTransaction();
+		getSession().delete(getSession().load(this.entityClass, (id)));
+		tx.commit();
+
+	}
+
 }
