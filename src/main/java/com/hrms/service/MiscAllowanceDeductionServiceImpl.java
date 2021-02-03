@@ -9,34 +9,35 @@ import org.springframework.stereotype.Service;
 import com.hrms.model.Grade;
 import com.hrms.model.MiscAllowance;
 import com.hrms.repository.MiscAllowanceDeductionDao;
+
 @Service
-public class MiscAllowanceDeductionServiceImpl implements MiscAllowanceDeductionService{
+public class MiscAllowanceDeductionServiceImpl implements MiscAllowanceDeductionService {
 	@Autowired
 	MiscAllowanceDeductionDao miscAllowanceDeductionDao;
+
 	@Override
 	public void addMiscAllowanceDeduction(MiscAllowance miscAllowance) {
 		miscAllowance.setIns_date(new Date());
-		  this.miscAllowanceDeductionDao.addMiscAllowanceDeduction(miscAllowance); 
-		
+		this.miscAllowanceDeductionDao.saveOrUpdate(miscAllowance);
+
 	}
 
 	@Override
 	public List<MiscAllowance> getAllMiscAllowanceDeduction() {
-	
-		List<MiscAllowance> listMiscAllowanceDeduction = miscAllowanceDeductionDao.getAllMiscAllowanceDeduction();
+
+		List<MiscAllowance> listMiscAllowanceDeduction = miscAllowanceDeductionDao.findAll();
 		return listMiscAllowanceDeduction;
-		
+
 	}
 
 	@Override
 	public MiscAllowance findMiscAllowanceDeductionById(String id) {
-		return miscAllowanceDeductionDao.findMiscAllowanceDeductionById(id);
-	
+		return miscAllowanceDeductionDao.findById(id);
+
 	}
 
 	@Override
-	public void updateMiscAllowanceDeduction(MiscAllowance M)
-	{
+	public void updateMiscAllowanceDeduction(MiscAllowance M) {
 		M.setDescription(M.getDescription());
 		M.setHead(M.getHead());
 		M.setType(M.getType());
@@ -46,15 +47,14 @@ public class MiscAllowanceDeductionServiceImpl implements MiscAllowanceDeduction
 		M.setSub_Group_Name(M.getSub_Group_Name());
 		M.setUpd_date(M.getUpd_date());
 		M.setActive(M.getActive());
-		this.miscAllowanceDeductionDao.updateMiscAllowanceDeduction(M);	
-	
-		
+		this.miscAllowanceDeductionDao.saveOrUpdate(M);
+
 	}
 
 	@Override
 	public void removeMiscAllowanceDeduction(String id) {
-		this.miscAllowanceDeductionDao.removeMiscAllowanceDeduction(id);
-		
+		this.miscAllowanceDeductionDao.delete(id);
+
 	}
 
 }
