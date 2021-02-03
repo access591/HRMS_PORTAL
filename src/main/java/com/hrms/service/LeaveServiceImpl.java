@@ -15,18 +15,18 @@ public class LeaveServiceImpl implements LeaveService {
 	@Override
 	public void addLeave(Leave leave) {
 		leave.setIns_date(new Date());
-		this.leaveDao.addLeave(leave);
+		this.leaveDao.saveOrUpdate(leave);
 	}
 
 	@Override
 	public List<Leave> getAllLeaves() {
-		List<Leave> listLeave = leaveDao.getAllLeaves();
+		List<Leave> listLeave = leaveDao.findAll();
 		return listLeave;
 	}
 
 	@Override
 	public Leave findLeaveById(String id) {
-		return leaveDao.findLeaveById(id);
+		return leaveDao.findById(id);
 	}
 
 	@Override
@@ -34,13 +34,13 @@ public class LeaveServiceImpl implements LeaveService {
 		d.setLev_code(d.getLev_code());
 		d.setUpd_date(d.getUpd_date());
 		d.setActive(d.getActive());
-		this.leaveDao.updateLeave(d);
+		this.leaveDao.saveOrUpdate(d);
 
 	}
 
 	@Override
 	public void removeLeave(String id) {
-		this.leaveDao.removeLeave(id);
+		this.leaveDao.delete(id);
 
 	}
 
