@@ -8,7 +8,8 @@ public interface GenericDao<E> {
 	void delete( String id );
 	E findById( String id );
 	void saveOrUpdate(E entity);
-
+	E existOrNot(E obj);
+	
 	
 	
 	

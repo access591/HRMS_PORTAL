@@ -16,18 +16,18 @@ public class DepartmentServiceImpl implements DepartmentService {
 	@Override
 	public void addDepartment(Department department) {
 		department.setIns_date(new Date());
-		this.departmentDao.addDepartment(department);
+		this.departmentDao.saveOrUpdate(department);
 	}
 
 	@Override
 	public List<Department> getAllDepartments() {
-		List<Department> listDepartment = departmentDao.getAllDepartments();
+		List<Department> listDepartment = departmentDao.findAll();
 		return listDepartment;
 	}
 	
 	@Override
 	public Department findDepartmentById(String id) {
-		return departmentDao.findDepartmentById(id);
+		return departmentDao.findById(id);
 	}
 
 	@Override
@@ -35,19 +35,19 @@ public class DepartmentServiceImpl implements DepartmentService {
 		d.setDep_Name(d.getDep_Name());
 		d.setUpd_date(d.getUpd_date());
 		d.setActive(d.getActive());
-		this.departmentDao.updateDepartment(d);
+		this.departmentDao.saveOrUpdate(d);
 
 	}
 
 	@Override
 	public void removeDepartment(String id) {
-		this.departmentDao.removeDepartment(id);
+		this.departmentDao.delete(id);
 
 	}
 
 	@Override
 	public boolean checkDepartmentExists(Department department) {
-		Department e = departmentDao.checkDepartmentExists(department);
+		Department e = departmentDao.existOrNot(department);
 			if (e != null) {
 				return true;
 			} else {

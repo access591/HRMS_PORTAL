@@ -2,17 +2,13 @@ package com.hrms.repository;
 
 import java.util.List;
 
+import com.hrms.dao.GenericDao;
 import com.hrms.model.Department;
 
 
 
-public interface DepartmentDao
+public interface DepartmentDao extends GenericDao<Department>
 {
-	List<Department>getAllDepartments();
-	void addDepartment(Department department);
-	Department findDepartmentById(String id);
-	public void updateDepartment(Department d);
-	public void removeDepartment(String id);
-	Department checkDepartmentExists(Department department);
+	
 	
 }
