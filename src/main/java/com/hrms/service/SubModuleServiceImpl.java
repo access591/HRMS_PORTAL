@@ -16,7 +16,7 @@ public class SubModuleServiceImpl  implements SubModuleService{
 	@Override
 	public List<SubModule> getAllSubModules() {
 
-		List<SubModule> listSubModule = subModuleDao.getAllSubModules();
+		List<SubModule> listSubModule = subModuleDao.findAll();
 		return listSubModule;
 
 	}
@@ -24,13 +24,13 @@ public class SubModuleServiceImpl  implements SubModuleService{
 	@Override
 	public void addSubModule(SubModule subModule) {
 
-		this.subModuleDao.addSubModule(subModule);
+		this.subModuleDao.saveOrUpdate(subModule);
 
 	}
 
 	@Override
 	public SubModule findSubModuleById(String id) {
-		return subModuleDao.findSubModuleById(id);
+		return subModuleDao.findById(id);
 	}
 
 	@Override
@@ -39,29 +39,28 @@ public class SubModuleServiceImpl  implements SubModuleService{
 		subModule.setModuleCode(subModule.getModuleCode());
 		subModule.setSeqNoSubModule(subModule.getSeqNoSubModule());
 		subModule.setAcitveSubModule(subModule.getAcitveSubModule());
-		this.subModuleDao.updateSubModule(subModule);
+		this.subModuleDao.saveOrUpdate(subModule);
 
 	}
 
 	@Override
 	public void removeSubModule(String id) {
-		this.subModuleDao.removeSubModule(id);
+		this.subModuleDao.delete(id);
 	}
 
 	@Override
 	public boolean checkSubModuleExists(SubModule subModule) {
-		 SubModule e = subModuleDao.checkSubModuleExists(subModule);
-			if (e != null) {
-				return true;
-			} else {
-				return false;
-			}
+		SubModule e = subModuleDao.existOrNot(subModule);
+		if (e != null) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	@Override
 	public List<SubModule> getActiveSubModules() {
-		return subModuleDao.getActiveSubModules();
+		return subModuleDao.findAll();
 	}
-
 
 }
