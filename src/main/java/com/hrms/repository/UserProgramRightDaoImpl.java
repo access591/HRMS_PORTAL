@@ -62,7 +62,7 @@ public UserRights checkUserRightsExists(UserRights userRights) {
 			Session session = this.sessionFactory.getCurrentSession();
 			Criteria criteria = session.createCriteria(UserRights.class);
 			prcode = (UserRights) criteria.setFetchMode("M_URIGHTS", FetchMode.SELECT)
-					.add(Restrictions.eq("prg_code", userRights.getPrg_code())).uniqueResult();
+					.add(Restrictions.eq("id", userRights.getPrg_code())).uniqueResult();
 
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
