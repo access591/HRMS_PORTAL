@@ -17,13 +17,13 @@ public class HolidayServiceImpl implements HolidayService {
 	@Override
 	public void addHoliday(Holiday holiday) {
 		holiday.setIns_date(new Date());
-		  this.holidayDao.addHoliday(holiday);
+		  this.holidayDao.saveOrUpdate(holiday);
 		
 	}
 	
 	@Override
 	public List<Holiday> getAllHolidays() {
-		List<Holiday> listHoliday = holidayDao.getAllHolidays();
+		List<Holiday> listHoliday = holidayDao.findAll();
 		return listHoliday;
 	}
 
@@ -33,7 +33,7 @@ public class HolidayServiceImpl implements HolidayService {
 	@Override
 	public Holiday findHolidayById(String id) {
 		
-		return holidayDao.findHolidayById(id);
+		return holidayDao.findById(id);
 	}
 
 	@Override
@@ -44,7 +44,7 @@ public class HolidayServiceImpl implements HolidayService {
 		h.setHoliday_Type(h.getHoliday_Type());
 		h.setUpd_date(h.getUpd_date());
 		h.setActive(h.getActive());
-		this.holidayDao.updateHoliday(h);
+		this.holidayDao.saveOrUpdate(h);
 		
 		
 	}
@@ -52,7 +52,7 @@ public class HolidayServiceImpl implements HolidayService {
 	@Override
 	public void removeHoliday(String id) {
 		
-		this.holidayDao.removeHoliday(id);
+		this.holidayDao.delete(id);
 	}
 
 
