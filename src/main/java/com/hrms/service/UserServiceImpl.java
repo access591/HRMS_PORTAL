@@ -26,26 +26,26 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public List<UserEntity> getAllUsers() {
-		List<UserEntity> listUsers = userDao.getAllUsers();
+		List<UserEntity> listUsers = userDao.findAll();
 		return listUsers;
 	}
 
 	@Override
 	public UserEntity findDataById(String id) {
-		return userDao.findDataById(id);
+		return userDao.findById(id);
 
 	}
 
 	@Override
 	public void addUser(UserEntity userEntity) {
-		this.userDao.addUser(userEntity);
+		this.userDao.saveOrUpdate(userEntity);
 		
 	}
 
 	@Override
 	public boolean checkUserExistsOrNot(UserEntity userEntity) {
 	
-		UserEntity e = userDao.checkUserExistsOrNot(userEntity);
+		UserEntity e = userDao.existOrNot(userEntity);
 			if (e != null) {
 				return true;
 			} else {
@@ -55,14 +55,14 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void removeUser(String id) {
-		this.userDao.removeUser(id);
+		this.userDao.delete(id);
 		
 	}
 
 	@Override
 	public UserEntity findUserById(String id) {
 		
-		return userDao.findUserById(id);
+		return userDao.findById(id);
 	}
 
 	@Override
@@ -73,6 +73,6 @@ public class UserServiceImpl implements UserService {
 		u.setUserActiveYn(u.getUserActiveYn());
 		u.setUserPass(u.getUserPass());
 		u.setUpdDate(u.getUpdDate());
-		this.userDao.updateUser(u);
+		this.userDao.saveOrUpdate(u);
 	}
 	}
