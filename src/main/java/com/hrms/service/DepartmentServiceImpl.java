@@ -4,9 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.hrms.model.Department;
-import com.hrms.model.SubModule;
 import com.hrms.repository.DepartmentDao;
 @Service
 public class DepartmentServiceImpl implements DepartmentService {
@@ -16,6 +14,7 @@ public class DepartmentServiceImpl implements DepartmentService {
 	@Override
 	public void addDepartment(Department department) {
 		department.setIns_date(new Date());
+		department.setDepartment_Code("DEP-" + String.format("%04d", departmentDao.getMAX_DEPARTMENT_CODE()));
 		this.departmentDao.saveOrUpdate(department);
 	}
 
@@ -24,7 +23,7 @@ public class DepartmentServiceImpl implements DepartmentService {
 		List<Department> listDepartment = departmentDao.findAll();
 		return listDepartment;
 	}
-	
+
 	@Override
 	public Department findDepartmentById(String id) {
 		return departmentDao.findById(id);
@@ -48,12 +47,11 @@ public class DepartmentServiceImpl implements DepartmentService {
 	@Override
 	public boolean checkDepartmentExists(Department department) {
 		Department e = departmentDao.existOrNot(department);
-			if (e != null) {
-				return true;
-			} else {
-				return false;
-			}
+		if (e != null) {
+			return true;
+		} else {
+			return false;
+		}
 	}
-
 
 }

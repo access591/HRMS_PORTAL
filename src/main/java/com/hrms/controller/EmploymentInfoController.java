@@ -17,7 +17,7 @@ public class EmploymentInfoController {
 	@Autowired
 	private ModuleService moduleService;
 	@GetMapping("/empInfo")
-	public String DesignationMaster(Model model,HttpSession session) {
+	public String employeeMaster(Model model,HttpSession session) {
 		String userCode= (String)session.getAttribute("username");
 		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
 		if (modules != null) {
