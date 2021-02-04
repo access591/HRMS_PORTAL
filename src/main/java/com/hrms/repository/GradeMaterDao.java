@@ -5,4 +5,6 @@ import com.hrms.model.Grade;
 
 public interface GradeMaterDao extends GenericDao<Grade> {
 
+	int getMAX_GRADE_CODE();
+
 }
