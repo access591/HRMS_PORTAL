@@ -24,33 +24,28 @@ public class ModuleServiceImpl implements ModuleService {
 	@Autowired
 	private ModuleDao moduleDao;
 
-	
-	
-	
-	  @Override
-	  
-	  public List<MenuModule> getAllModules() {
-	  
-	  List<MenuModule> menuModulelist = processModules(moduleDao.getAllModules());
-	  return menuModulelist; }
-	 
-	 
-	
+	@Override
+
+	public List<MenuModule> getAllModules() {
+
+		List<MenuModule> menuModulelist = processModules(moduleDao.findAll());
+		return menuModulelist;
+	}
+
 	@Override
 	public List<MenuModule> getAllModulesList(String userCode) {
-		
+
 		login.setUserCode(userCode);
-	
-		
+
 		List<MenuModule> menuModulelist = processModules(moduleDao.getAllModulesList(userCode));
 		return menuModulelist;
 	}
-	
+
 	private List<MenuModule> processModules(List<Module> modules) {
 		List<MenuModule> menuModuleList = new ArrayList<MenuModule>();
 
 		for (Module module : modules) {
-			
+
 			MenuModule menuModule = new MenuModule();
 			menuModule.setModuleCode(module.getModuleCode());
 			menuModule.setModuleName(module.getModuleName());
@@ -63,19 +58,18 @@ public class ModuleServiceImpl implements ModuleService {
 
 	private List<SubModuleProgram> getSubModuleProgramsList(Module module) {
 		List<SubModuleProgram> liSubModulePrograms = new ArrayList<SubModuleProgram>();
-		String ucode=login.getUserCode();
-		String modulecCode=module.getModuleCode();
-		System.out.println("Sub Module User Code "+ucode);
-	
+		String ucode = login.getUserCode();
+		String modulecCode = module.getModuleCode();
+		System.out.println("Sub Module User Code " + ucode);
 
-		List<SubModule> subMOdules=moduleDao.getAllSubModule(modulecCode,ucode);
-		for (SubModule submodule :  subMOdules) {
+		List<SubModule> subMOdules = moduleDao.getAllSubModule(modulecCode, ucode);
+		for (SubModule submodule : subMOdules) {
 			SubModuleProgram subModuleProgram = new SubModuleProgram();
 			subModuleProgram.setModuleCode(module.getModuleCode());
 			subModuleProgram.setModuleName(module.getModuleName());
 			subModuleProgram.setSubModuleCode(submodule.getSubModuleCode());
 			subModuleProgram.setSubModuleName(submodule.getSubModuleName());
-			subModuleProgram.setSubPrograms(getSubModuleProgramMap(submodule,module));
+			subModuleProgram.setSubPrograms(getSubModuleProgramMap(submodule, module));
 			liSubModulePrograms.add(subModuleProgram);
 		}
 		return liSubModulePrograms;
@@ -93,12 +87,12 @@ public class ModuleServiceImpl implements ModuleService {
 		return programMap;
 	}
 
-	private Map<String, String> getSubModuleProgramMap(SubModule subModule,Module module) {
-		String ucode=login.getUserCode();
-		String moduleCode=module.getModuleCode();
-		String smCode=subModule.getSubModuleCode();
-		System.out.println("Program module  User Code Test"+ucode);
-		List<Program> programs=moduleDao.GetAllProgramList(moduleCode,smCode,ucode);
+	private Map<String, String> getSubModuleProgramMap(SubModule subModule, Module module) {
+		String ucode = login.getUserCode();
+		String moduleCode = module.getModuleCode();
+		String smCode = subModule.getSubModuleCode();
+		System.out.println("Program module  User Code Test" + ucode);
+		List<Program> programs = moduleDao.GetAllProgramList(moduleCode, smCode, ucode);
 		Map<String, String> programMap = new HashMap<String, String>();
 		for (Program program : programs) {
 			String name = program.getProgramName();
@@ -107,20 +101,23 @@ public class ModuleServiceImpl implements ModuleService {
 		}
 		return programMap;
 	}
+
 	@Override
 	public void addModule(Module module) {
 		module.setInsertedDate(new Date());
-		
-		  this.moduleDao.addModule(module);
-		
+
+		this.moduleDao.saveOrUpdate(module);
+
 	}
+
 	@Override
 	public List<Module> getModules() {
-		return moduleDao.getAllModules();
+		return moduleDao.findAll();
 	}
+
 	@Override
 	public boolean checkModuleExists(Module module) {
-		
+
 		Module e = moduleDao.findModule(module);
 		if (e != null) {
 			return true;
@@ -131,30 +128,27 @@ public class ModuleServiceImpl implements ModuleService {
 
 	@Override
 	public Module findModuleById(String id) {
-		return moduleDao.findModuleById(id);
+		return moduleDao.findById(id);
 	}
 
 	@Override
 	public void updateModule(Module m) {
-	m.setModuleName(m.getModuleName());
-	m.setActive(m.getActive());
-	m.setActive(m.getActive());
-	m.setUpdatedDate(m.getUpdatedDate());
-	this.moduleDao.updateModule(m);
-		
+		m.setModuleName(m.getModuleName());
+		m.setActive(m.getActive());
+		m.setActive(m.getActive());
+		m.setUpdatedDate(m.getUpdatedDate());
+		this.moduleDao.saveOrUpdate(m);
+
 	}
+
 	@Override
 	public void removeModule(String id) {
-		this.moduleDao.removeModule(id);
+		this.moduleDao.delete(id);
 	}
 
 	@Override
 	public List<Module> getActiveModules() {
-		return moduleDao.getActiveModules();
+		return moduleDao.findAll();
 	}
-
-	
-
-	
 
 }
