@@ -20,7 +20,7 @@ public class DepartmentDaoImpl extends AbstractGenericDao<Department> implements
 
 	@Override
 	public int getMAX_DEPARTMENT_CODE() {
-		{
+		
 			String sql=" select MAX(substr(DEPARTMENT_CODE,-4)) as MAX_ID from M_DEPARTMENT";
 				return jdbcTemplate.query(sql, new ResultSetExtractor<Integer>() {
 				public Integer extractData(ResultSet rs)  {
@@ -47,4 +47,4 @@ public class DepartmentDaoImpl extends AbstractGenericDao<Department> implements
 	}
 	
 }
-}
+
