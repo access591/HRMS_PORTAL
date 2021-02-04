@@ -153,8 +153,8 @@ body {
 											<tr  th:each="listofgrade : ${listpPrograms}">
 												<td th:text="${listofgrade.programCode}"></td>
 												<td th:text="${listofgrade.programName}"></td>
-												<td th:text="${listofgrade.pModuleCode.moduleCode}"></td>
-												<td th:text="${listofgrade.subModuleCode.subModuleCode}"></td>
+												<td th:text="${listofgrade.pModuleCode.moduleName}"></td>
+												<td th:text="${listofgrade.subModuleCode.subModuleName}"></td>
 												<td th:text="${listofgrade.activeYn}"></td>
 												<td><a th:href="@{/editProgram/{id}(id=${listofgrade.programCode})}" class="btn btn-primary"><i class="fa fa-edit"></i></a>
 												<a th:href="@{/deleteProgram/{id}(id=${listofgrade.programCode})}" class="btn btn-primary"onclick="return confirm('Are you sure?')"><i class="fa fa-times"></i></a>
