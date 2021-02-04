@@ -23,20 +23,20 @@ public class PageMappingServiceImpl implements PageMappingService {
 
 	@Override
 	public List<UrlDetail> getAllPages() {
-		List<UrlDetail> listUrlDetail = pageMappingDao.getAllPages();
+		List<UrlDetail> listUrlDetail = pageMappingDao.findAll();
 		return listUrlDetail;
 	}
 
 	@Override
 	public void addPage(UrlDetail urlDetail) {
 		urlDetail.setInsertedDate(new Date());
-		this.pageMappingDao.addPage(urlDetail);
+		this.pageMappingDao.saveOrUpdate(urlDetail);
 
 	}
 
 	@Override
 	public boolean checkUrlDetailExists(UrlDetail urlDetail) {
-		UrlDetail e = pageMappingDao.checkUrlDetailExists(urlDetail);
+		UrlDetail e = pageMappingDao.existOrNot(urlDetail);
 		if (e != null) {
 			return true;
 		} else {
@@ -47,13 +47,13 @@ public class PageMappingServiceImpl implements PageMappingService {
 
 	@Override
 	public void removePage(String id) {
-		this.pageMappingDao.removePage(id);
+		this.pageMappingDao.delete(id);
 
 	}
 
 	@Override
 	public UrlDetail findUrlDetailById(String id) {
-		return pageMappingDao.findUrlDetailById(id);
+		return pageMappingDao.findById(id);
 	}
 
 	@Override
@@ -62,7 +62,7 @@ public class PageMappingServiceImpl implements PageMappingService {
 		u.setReq_Mapping(u.getReq_Mapping());
 		u.setActive(u.getActive());
 		u.setUpdatedDate(u.getUpdatedDate());
-		this.pageMappingDao.updatePage(u);
+		this.pageMappingDao.saveOrUpdate(u);
 
 	}
 }
