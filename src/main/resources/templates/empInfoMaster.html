@@ -5,7 +5,11 @@
 <script type="text/javascript" th:src="@{/js/app.js}"></script>
 <link rel="stylesheet" type="text/css" th:href="@{/css/modern.css}" />
 <script  src="https://www.googletagmanager.com/gtag/js?id=UA-120946860-7"></script>
+
+
 <style>
+
+
 body {
 	opacity: 0;
 }
@@ -88,7 +92,7 @@ body {
 
 												<div class="form-group ">
 													<label class="form-label">Date Of Birth</label> <span
-														class="text-danger">*</span> <input
+														class="text-danger">*</span> <input 
 														class="form-control required" type="text"id="Date_Of_Birth"
 														name="Date_Of_Birth" />
 
@@ -574,36 +578,59 @@ body {
 		$(function() {
 			
 			
-		$("input[name=\"Date_Of_Birth\"]").daterangepicker({
+		$("input[name='Date_Of_Birth']").daterangepicker({
 				singleDatePicker: true,
-				dateFormat: 'YYYY/MM/DD',
+			    autoApply: true,
+				locale: {
+		            format: 'YYYY/MM/DD'
+		        },
 				showDropdowns: true
 			});
 
 		$("input[name=\"Loi_Date\"]").daterangepicker({
 				singleDatePicker: true,
+				   autoApply: true,
+				locale: {
+		            format: 'YYYY/MM/DD'
+		        },
 				showDropdowns: true
 			});
 			
 		
 			$("input[name=\"Date_Of_Joining\"]").daterangepicker({
 				singleDatePicker: true,
+				   autoApply: true,
+				locale: {
+		            format: 'YYYY/MM/DD'
+		        },
 				showDropdowns: true
 			});
 			
 			$("input[name=\"Status_Date\"]").daterangepicker({
 				singleDatePicker: true,
+				   autoApply: true,
+				locale: {
+		            format: 'YYYY/MM/DD'
+		        },
 				showDropdowns: true
 			});
 			
 			$("input[name=\"Leaving_Date\"]").daterangepicker({
 				singleDatePicker: true,
+				   autoApply: true,
+				locale: {
+		            format: 'YYYY/MM/DD'
+		        },
 				showDropdowns: true
 			});
 			
 			
 			$("input[name=\"Wedding_Date\"]").daterangepicker({
 				singleDatePicker: true,
+				   autoApply: true,
+				locale: {
+		            format: 'YYYY/MM/DD'
+		        },
 				showDropdowns: true
 			});
 			
