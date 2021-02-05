@@ -44,7 +44,7 @@ body {
 					</div>
 					<div class="row">
 						<div class="col-12">
-							<form id="smartwizard-validation" class="wizard wizard-primary" action="javascript:void(0)">
+		<form id="smartwizard-validation" class="wizard wizard-primary" action="javascript:void(0)">
 								<ul>
 									<li><a href="#validation-step-1"><br /><small>Employee details</small></a></li>
 									<li><a href="#validation-step-2"><br /><small>Department Details </small></a></li>
@@ -53,7 +53,7 @@ body {
 								</ul>
 								<div>
 								
-     <div id="validation-step-1">
+                         <div id="validation-step-1">
 
 										<div class="row">
 											<div class="col-12 col-lg-6">
@@ -61,13 +61,13 @@ body {
 												<div class="form-group">
 													<label class="form-label">Emp Code <span
 														class="text-danger">*</span>
-													</label> <input name="userName" type="text"
+													</label> <input name="Emp_Code" type="text" id="Emp_Code"
 														class="form-control required">
 												</div>
 												<div class="form-group">
 													<label class="form-label">Name <span
 														class="text-danger">*</span>
-													</label> <input name="name" type="text"
+													</label> <input name="Emp_Name" type="text"
 														class="form-control required">
 												</div>
 												<div class="form-group">
@@ -82,21 +82,21 @@ body {
 												<div class="form-group ">
 													<label class="form-label">Company Code <span
 														class="text-danger">*</span>
-													</label> <input name="confirm" type="text"
+													</label> <input name="Comp_Code" type="text" id="Comp_Code"
 														class="form-control required">
 												</div>
 
 												<div class="form-group ">
 													<label class="form-label">Date Of Birth</label> <span
 														class="text-danger">*</span> <input
-														class="form-control required" type="text"
-														name="datesingle" />
+														class="form-control required" type="text"id="Date_Of_Birth"
+														name="Date_Of_Birth" />
 
 												</div>
 												<div class="form-group">
 													<label class="form-label">Birth State <span
 														class="text-danger">*</span>
-													</label> <input name="BirthState" type="text"
+													</label> <input name="Birth_State" type="text"id="Birth_State"
 														class="form-control required">
 												</div>
 											</div>
@@ -106,13 +106,13 @@ body {
 												<div class="form-group">
 													<label class="form-label">Emp Ref No. <span
 														class="text-danger">*</span>
-													</label> <input name="userNamexx" type="text"
+													</label> <input name="Emp_Ref_No" type="text" id="Emp_Ref_No"
 														class="form-control required">
 												</div>
 												<div class="form-group">
 													<label class="form-label">Type</label> <span
 														class="text-danger">*</span> <select
-														class="form-control required" name="eType" id="eType">
+														class="form-control required" name="Emp_Type" id="Emp_Type">
 														<option value="">Select Type</option>
 														<option value="P">Permanent</option>
 														<option value="C">Casual</option>
@@ -121,7 +121,7 @@ body {
 												<div class="form-group">
 													<label class="form-label">Location Type</label> <span
 														class="text-danger">*</span> <select
-														class="form-control required" name="LC" id="LC">
+														class="form-control required" name="Location_Type" id="Location_Type">
 														<option value="">Select Type</option>
 														<option value="C">Company</option>
 														<option value="G">Govt Office</option>
@@ -131,21 +131,21 @@ body {
 												<div class="form-group ">
 													<label class="form-label">Weekly Working Days <span
 														class="text-danger">*</span>
-													</label> <input name="confirmxx" type="text"
+													</label> <input name="Weekly_Working_Day" type="text"id="Weekly_Working_Day"
 														class="form-control required">
 												</div>
 
 												<div class="form-group">
 													<label class="form-label">Birth Place <span
 														class="text-danger">*</span>
-													</label> <input name="bplace" type="text"
+													</label> <input  type="text"id="Birth_Place"name="Birth_Place"
 														class="form-control required">
 												</div>
 
 												<div class="form-group">
 													<label class="form-label">Domicile <span
 														class="text-danger">*</span>
-													</label> <input name="domicile" type="text"
+													</label> <input name="domicile" type="text"id="domicile"
 														class="form-control required">
 												</div>
 
@@ -153,75 +153,64 @@ body {
 										</div>
 									</div>
 									
-<div id="validation-step-2">
-									
-									
-									
-									
+                         <div id="validation-step-2">
 									<div class="row">
 										<div class="col-12 col-lg-6">
-									
 										<div class="form-group">
 											<label class="form-label">Card No.    
 												<span class="text-danger">*</span>
 											</label>
-											<input name="cardNo" type="text" class="form-control required">
+											<input  type="text" class="form-control required" name="Card_No" id="Card_No">
 										</div>
+										
+										
 										<div class="form-group">
 											<label class="form-label">Designation
 												<span class="text-danger">*</span>
 											</label>
-											<input name="designation" type="text" class="form-control required">
+											<input  type="text" class="form-control required"  name="Emp_Designation"id="Emp_Designation">
 										</div>
+										
 										<div class="form-group">
 											<label class="form-label">Shift Code.
 												<span class="text-danger">*</span>
 											</label>
-											<input name="siftCode" type="text" class="form-control required">
+											<input  type="text" class="form-control required" name="Shift_Code" id="Shift_Code">
 										</div>
+										
+										
 										
 										<div class="form-group ">
 											<label class="form-label">Passport No.
 												<span class="text-danger">*</span>
 											</label>
-											<input name="pasportNo" type="text" class="form-control required">
+											<input type="text" class="form-control required"  name="Passport_No"  id="Passport_No" >
 										</div>
 										
 										
 										 <div class="form-group ">
 												<label class="form-label">LOI</label>
 												<span class="text-danger">*</span>
-												<input  type="text" id="loi" name="loidatesingle" class="form-control required">
+												<input  type="text" id="Loi_Date" name="Loi_Date" class="form-control required">
 											
 										</div>
 								
 										 <div class="form-group ">
 												<label class="form-label"> Status Date</label>
 												<span class="text-danger">*</span>
-												<input  type="text" name="statusDate" class="form-control required">
-											
+												<input  type="text"  class="form-control required" name="Status_Date"id="Status_Date">
 										</div>
-										
-									<!-- 	<div class="form-group">
-											<label class="form-label">Reason 
-											
-												<span class="text-danger">*</span>
-											</label>
-											<input name="bplace" type="text" class="form-control required">
-										</div> -->
-										 <div class="form-group">
-										 <div class="card">
-								        <div class="card-header">
-									    <h5 class="card-title mb-0">Reason</h5>
-								           </div>
-								        <div class="card-body">
-									<textarea class="form-control required" rows="2"id="reason" name="reason" placeholder="Textarea"></textarea>
-								       </div>
-							           </div>
-							           </div>
-										
-										
 									
+										<div class="form-group">
+										<div class="card">
+								       			 <div class="card-header">
+									   			 <h5 class="card-title mb-0">Reason</h5>
+								           		</div>
+								        <div class="card-body">
+											<textarea class="form-control required" rows="2"id="reason" name="reason" placeholder="Textarea"></textarea>
+								       	</div>
+							           </div>
+							           </div>
 										</div>
 										
 									
@@ -230,7 +219,7 @@ body {
 											<label class="form-label">Department Code.
 												<span class="text-danger">*</span>
 											</label>
-											<input name="deptCode" type="text" class="form-control required">
+											<input  type="text" name="Department_Code"id="Department_Code" class="form-control required">
 										</div>
 										
 										
@@ -238,7 +227,7 @@ body {
 											<label class="form-label">Manager  Code.
 												<span class="text-danger">*</span>
 											</label>
-											<input name="userNamexx" type="text" class="form-control required">
+											<input  type="text" name="Manager_Code" id="Manager_Code"class="form-control required">
 										</div>
 								
 								
@@ -246,7 +235,7 @@ body {
 											<label class="form-label">IT Pan No
 												<span class="text-danger">*</span>
 											</label>
-											<input name="itpanno" type="text" class="form-control required">
+											<input type="text" name="It_Pan_No"id="It_Pan_No" class="form-control required">
 										</div>
 								
 								
@@ -254,7 +243,7 @@ body {
 											<label class="form-label">UAN  No.
 												<span class="text-danger">*</span>
 											</label>
-											<input name="uanno" type="text" class="form-control required">
+											<input  type="text" name="Uan_No" id="Uan_No"class="form-control required">
 										</div>
 								
 								 
@@ -262,37 +251,26 @@ body {
 									    <div class="form-group ">
 												<label class="form-label">Date Of Joining</label>
 												<span class="text-danger">*</span>
-												<input  type="text" name="dateofjoining" class="form-control required">
+												<input  type="text" name="Date_Of_Joining" id="Date_Of_Joining"class="form-control required">
 											
 										</div>
 										
 										 <div class="form-group ">
 												<label class="form-label"> Leaving Date </label>
 												<span class="text-danger">*</span>
-												<input class="form-control required" type="text" name="leavingDate" />
-											
+												<input class="form-control required" type="text" name="Leaving_Date" id="Leaving_Date" >
 										</div>
-										
-									
-										
 								</div>	
 						   </div>
-										
-										
-</div>
+						</div>
 
-
-
-<div id="validation-step-3">
-
-							
-
+                         <div id="validation-step-3">
 											<div class="form-row">
 												<div class="form-group sm col-md-4">
-												<label for="inputSex">sex
-													<span class="text-danger">*</span>
+												<label for="inputSex">Gender
+												<span class="text-danger">*</span>
 												</label>
-												<select id="inputSex" class="form-control required">
+												<select id="Emp_Gender"name="Emp_Gender" class="form-control required">
 													<option selected>Choose...Your Gender </option>
 													<option>Male</option>
 														<option>Female</option>
@@ -302,26 +280,25 @@ body {
 												<label for="inputHieght">Height
 												<span class="text-danger">*</span>
 												</label>
-												<input type="text" class="form-control required" id="inputHieght">
+												<input type="text" class="form-control required" name="Emp_Height" id="Emp_Height">
 											</div>
 											<div class="form-group col-md-2">
 												<label for="identiMark">identity Mark
 												<span class="text-danger">*</span>
 												</label>
-												<input type="text" class="form-control required" id="identiMark">
+												<input type="text" class="form-control required" Name="Identity_Mark" id="Identity_Mark">
 											</div>
-											
 											<div class="form-group col-md-2">
 												<label for="bloodGroup">Blood Group
 												<span class="text-danger">*</span>
 												</label> <input
-													type="text" class="form-control required" id="bloodGroup">
+													type="text" class="form-control required"  id="Blood_Group"  name="Blood_Group">
 											</div>
 											<div class="form-group col-md-2">
 												<label for="maritalStatus:">Marital Status
 												<span class="text-danger">*</span>
 												</label> <select
-													id="maritalStatus" class="form-control required">
+													id="Marital_Status" 	Name="Marital_Status" class="form-control required">
 													<option selected> Marital Status</option>
 													<option>Single</option>
 													<option>Married</option>
@@ -330,14 +307,13 @@ body {
 											
 											
 										</div>
-										
-						<div class="form-row">
+											<div class="form-row">
 											
 											   <div class="form-group col-md-4">
 												<label for="preDisease">Pre Disease
 												<span class="text-danger">*</span>
 												</label> <select
-													id="preDisease" class="form-control required">
+													id="Pre_Disease"  name="Pre_Disease"  class="form-control required">
 													<option selected>Choose..Your Disease</option>
 													<option>Yes</option>
 													<option>No</option>
@@ -348,7 +324,7 @@ body {
 											<label for="weddingDate">Wedding Date
 											<span class="text-danger">*</span>
 											</label>
-											<input type="text" class="form-control required"id="weddingDate" name="weddingDate">
+											<input type="text" class="form-control required"id="Wedding_Date" name="Wedding_Date">
 
 											</div>
 											
@@ -357,7 +333,7 @@ body {
 												<span class="text-danger">*</span>
 												</label>
 												
-												<input type="text" class="form-control required" id="noChild">
+												<input type="text" class="form-control required" id="No_Of_Child" name="No_Of_Child">
 											</div>
 											
 											<div class="form-group col-md-2">
@@ -365,7 +341,7 @@ body {
 												<span class="text-danger">*</span>
 												</label>
 												
-												<input type="text" class="form-control required" id="caste">
+												<input type="text" class="form-control required" id="Emp_Caste" name="Emp_Caste">
 											</div>
 												
 										 <div class="form-group col-md-2">
@@ -373,20 +349,18 @@ body {
 												<span class="text-danger">*</span>
 												</label>
 												
-												<input type="text" class="form-control required" id="religion">
+												<input type="text" class="form-control required" id="Emp_Religion" name="Emp_Religion">
 											</div>
 									
 
 							</div>
-							      
-							      
-							      <div class="form-row">
-							      <div class="form-group col-md-4">
+							                <div class="form-row">
+							            <div class="form-group col-md-4">
 												<label for="nationality">Nationality
 												<span class="text-danger">*</span>
 												</label>
 												
-												<input type="text" class="form-control required" id="nationality">
+												<input type="text" class="form-control required" id="Emp_Nationality" name="Emp_Nationality">
 											</div>
 											
 											    <div class="form-group col-md-2">
@@ -394,198 +368,188 @@ body {
 												<span class="text-danger">*</span>
 												</label>
 												
-												<input type="text" class="form-control required" id="companyCode">
+												<input type="text" class="form-control required" id="Company_Code">
 											</div>
 											
-							      <div class="form-group col-md-2">
+							     			 <div class="form-group col-md-2">
 												<label for="mediclaim">Mediclaim
 												<span class="text-danger">*</span>
 												</label>
-												
-												<input type="text" class="form-control required" id="mediclaim">
+												<input type="text" class="form-control required" id="mediclaim" name="mediclaim">
 											</div>
+											
 											<div class="form-group col-md-2">
 												<label for="gpa">GPA
 												<span class="text-danger">*</span>
 												</label>
-												
-												<input type="text" class="form-control required" id="gpa">
+												<input type="text" class="form-control required" id="gpa"  name="gpa" >
 											</div>
 								
 							      
 							      </div>
-							      
-							      
-							       <div class="form-row">
+							                <div class="form-row">
 							       
-							        <div class="form-group col-md-2">
-												<label for="Paddress">Address1<span class="text-danger">*</span></label>
+							        			<div class="form-group col-md-2">
+												<label for="Emp_Address1">Address1<span class="text-danger">*</span></label>
+												<input type="text" class="form-control required" id="Emp_Address1" name="Emp_Address1">
+												</div>
 												
-												<input type="text" class="form-control required" id="Paddress1">
+											 <div class="form-group col-md-2">
+												<label for="Emp_Address2">Address2<span class="text-danger">*</span></label>
+												
+												<input type="text" class="form-control required" id="Emp_Address2" name="Emp_Address2">
 											</div>
 											 <div class="form-group col-md-2">
-												<label for="pAddress2">Address2<span class="text-danger">*</span></label>
+												<label for="Emp_City">City<span class="text-danger">*</span></label>
 												
-												<input type="text" class="form-control required" id="pAddress2">
+												<input type="text" class="form-control required" id="Emp_City"  name="Emp_City">
 											</div>
 											 <div class="form-group col-md-2">
-												<label for="city">City<span class="text-danger">*</span></label>
+												<label for="Emp_State">State<span class="text-danger">*</span></label>
 												
-												<input type="text" class="form-control required" id="city">
+												<input type="text" class="form-control required" id="Emp_State" name="Emp_State">
 											</div>
 											 <div class="form-group col-md-2">
-												<label for="state">State<span class="text-danger">*</span></label>
+												<label for="Pin_Code">PinCode<span class="text-danger">*</span></label>
 												
-												<input type="text" class="form-control required" id="state">
+												<input type="text" class="form-control required" id="Pin_Code"name="Pin_Code">
 											</div>
 											 <div class="form-group col-md-2">
-												<label for="pinCode">PinCode<span class="text-danger">*</span></label>
+												<label for="Emp_Mobile">Mobile<span class="text-danger">*</span></label>
 												
-												<input type="text" class="form-control required" id="pinCode">
-											</div>
-											 <div class="form-group col-md-2">
-												<label for="mobile">Mobile<span class="text-danger">*</span></label>
-												
-												<input type="text" class="form-control required" id="mobile">
+												<input type="text" class="form-control required" id="Emp_Mobile" name="Emp_Mobile">
 											</div>
 											
 							       
 							       </div>
-							  
-                            <div class="form-row">
+                          				    <div class="form-row">
 							       
-							        <div class="form-group col-md-2">
-												<label for="lAddress">Local Address1<span class="text-danger">*</span></label>
-												
-												<input type="text" class="form-control required" id="lAddress1">
+							        		<div class="form-group col-md-2">
+												<label for="Emp_Local_Add1">Local Address1
+												<span class="text-danger">*</span></label>
+												<input type="text" class="form-control required" id="Emp_Local_Add1" name="Emp_Local_Add1">
 											</div>
+											 
 											 <div class="form-group col-md-2">
-												<label for="lAddress2">Local Address2<span class="text-danger">*</span></label>
-												
-												<input type="text" class="form-control required" id="LAddress2">
+												<label for="Emp_Local_Add2">Local Address2
+												<span class="text-danger">*</span></label>
+												<input type="text" class="form-control required" id="Emp_Local_Add2" name="Emp_Local_Add2">
 											</div>
+											
 											 <div class="form-group col-md-2">
-												<label for="lCity">City<span class="text-danger">*</span></label>
-												
-												<input type="text" class="form-control required" id="lCity">
+												<label for="Emp_Local_City">City
+												<span class="text-danger">*</span></label>
+												<input type="text" class="form-control required" id="Emp_Local_City" name="Emp_Local_City" >
 											</div>
+											
 											 <div class="form-group col-md-2">
-												<label for="lState">State<span class="text-danger">*</span></label>
-												
-												<input type="text" class="form-control required" id="lState">
+												<label for="Emp_Local_State">State
+												<span class="text-danger">*</span></label>
+												<input type="text" class="form-control required" id="Emp_Local_State" name="Emp_Local_State">
 											</div>
+											
 											 <div class="form-group col-md-2">
-												<label for="lPinCode">PinCode<span class="text-danger">*</span></label>
-												
-												<input type="text" class="form-control required" id="lPinCode">
+												<label for="Emp_Local_PinCode">PinCode
+												<span class="text-danger">*</span></label>
+												<input type="text" class="form-control required" id="Emp_Local_PinCode"  name="Emp_Local_PinCode">
 											</div>
+											
 											 <div class="form-group col-md-2">
-												<label for="lMobile">Mobile<span class="text-danger">*</span></label>
-												
-												<input type="text" class="form-control required" id="lMobile">
+												<label for="Emp_Local_Mobile_No">Mobile<span class="text-danger">*</span></label>
+												<input type="text" class="form-control required" id="Emp_Local_Mobile_No" name="Emp_Local_Mobile_No">
 											</div>
 							       </div>
                      
-
+                        </div>
+                     
+                         <div id="validation-step-4">
+                     
+                         	               <div class="form-row">
+									        <div class="form-group col-md-4">
+											<label for="Comp_Mobile_No">Company Mobile No
+											<span class="text-danger">*</span></label>
+											<input type="text" class="form-control required" id="Comp_Mobile_No" name="Comp_Mobile_No">
+											</div>
+											
+									<div class="form-group col-md-4">
+										<label for="Company_Email">Email
+										<span class="text-danger">*</span></label>
+										<input type="text" class="form-control required" id="Company_Email" name="Company_Email">
+										</div>
 										
- </div>
-                     
-                     <div id="validation-step-4">
-                     
-                         <div class="form-row">
-							       
-							        <div class="form-group col-md-4">
-												<label for="cMobileNo">Company Mobile No<span class="text-danger">*</span></label>
-												
-												<input type="text" class="form-control required" id="cMobileNo">
-											</div>
-											
-											 <div class="form-group col-md-4">
-												<label for="compnayEmail">Email<span class="text-danger">*</span></label>
-												
-												<input type="text" class="form-control required" id="compnayEmail">
-											</div>
-											
-											 <div class="form-group col-md-4">
-												<label for="profInst">Prof Inst<span class="text-danger">*</span></label>
-												
-												<input type="text" class="form-control required" id="profInst">
-											</div>
-									
-							       
+									 <div class="form-group col-md-4">
+										 <label for="Prof_Inst">Prof Inst
+										<span class="text-danger">*</span></label>
+										<input type="text" class="form-control required" id="Prof_Inst" name="Prof_Inst">
+										</div>
 							       </div>
-                     
-                                         <div class="form-row">
+                                 		   <div class="form-row">
+                                           
                                            <div class="form-group col-md-4">
-												<label for="rateTravelling">Local Travelling Rate Per KM
+												<label for="Local_Travel_Pr_km">Local Travelling Rate Per KM  
 												<span class="text-danger">*</span>
 												</label>
-												
-												<input type="text" class="form-control required" id="rateTravelling">
+												<input type="text" class="form-control required" id="Local_Travel_Pr_km" name="Local_Travel_Pr_km">
 											</div>
+											 
 											 <div class="form-group col-md-4">
-												<label for="hobbies">Hobbies<span class="text-danger">*</span></label>
-												
-												<input type="text" class="form-control required" id="hobbies">
+												<label for="hobbies">Hobbies
+												<span class="text-danger">*</span></label>
+												<input type="text" class="form-control required" id="hobbies" name="hobbies">
 											</div>
+											
 											 <div class="form-group col-md-4">
 												<label for="clubs">Clubs<span class="text-danger">*</span></label>
 												
-												<input type="text" class="form-control required" id="clubs">
+												<input type="text" class="form-control required" id="clubs" name="clubs">
 											</div>
                      
-                                               </div>
-                     
-                     								  <div class="form-row">
-                                         			  <div class="form-group col-md-6">
-														<label for="regCode">Registration code
-														<span class="text-danger">*</span>
-														</label>
-												
-											<input type="text" class="form-control required" id="regCode">
+                                </div>
+                     			           <div class="form-row">
+                                      	  <div class="form-group col-md-6">
+												<label for="Reg_Code">Registration code
+												<span class="text-danger">*</span></label>
+												<input type="text" class="form-control required" id="Reg_Code" name="Reg_Code">
 											</div>
-											 <div class="form-group col-md-6">
-												<label for="estf ">Estf 
+											
+											
+											
+										 	<div class="form-group col-md-6">
+												<label for="Estf_Work ">Estf Work
 												<span class="text-danger">*</span>
 												</label>
-												<input type="text" class="form-control required" id="estf">
-											</div>
+												<input type="text" class="form-control required" id="Estf_Work" name="Estf_Work">
+												</div>
                      
-                                               </div>
-                                               
-                                               		  <div class="form-row">
-                                               		  
-                                               		  <div class="form-group col-md-6">
-												    <label for="eEmp_Cat">eEmp_Cat<span class="text-danger">*</span></label> <select
-													id="eEmp_Cat" class="form-control required">
+                                 </div>
+                                           <div class="form-row">
+                                           <div class="form-group col-md-6">
+												    <label for="E_Emp_Cat">eEmp_Cat
+												    <span class="text-danger">*</span></label> 
+												    <select id="E_Emp_Cat" name="E_Emp_Cat" class="form-control required">
 													<option selected> Category</option>
 													<option>Permanent </option>
 													<option>Temporary </option>
 											     	</select>
-											    </div>
+											 </div>
                                                		  
                                                	
 											 <div class="form-group col-md-6">
-												<label for="eCategory ">E-Category </label>
-												<input type="text" class="form-control required" id="eCategory">
+												<label for="E_Category ">E-Category
+												<span class="text-danger">*</span>
+												 </label>
+												<input type="text" class="form-control required" id="E_Category" name="E_Category">
 											</div>
-                     
                                                </div>
-                     
-                     
-                     
-                     
-                     
-                     
-                     
-                     
-                     
-                                         <div class="form-group">
-											<label class="custom-control custom-checkbox">
-												<input type="checkbox" class="custom-control-input">
+                                           <div class="form-group">
+											<label  class="custom-control custom-checkbox required">
+											
+												<input type="checkbox" class="custom-control-input" id=Emp_Agree name="Emp_Agree">
 												<span class="custom-control-label">I agree with the Terms and Conditions</span>
 											</label>
 										</div>
+										
+										
 										<button class="btn btn-submit btn-primary" type="button">Finish</button>
                      
                      </div>
@@ -594,8 +558,8 @@ body {
                      
                      
 								</div>
-							</form>
-						</div>
+	</form>
+			</div>
 					</div>
 
 				</div>
@@ -609,36 +573,36 @@ body {
 	<script>
 		$(function() {
 			
-			$("input[name=\"datesingle\"]").daterangepicker({
+			
+		$("input[name=\"Date_Of_Birth\"]").daterangepicker({
 				singleDatePicker: true,
+				dateFormat: 'YYYY/MM/DD',
 				showDropdowns: true
 			});
-			
-			
-			
-			$("input[name=\"weddingDate\"]").daterangepicker({
-				singleDatePicker: true,
-				showDropdowns: true
-			});
-			
-			
-			$("input[name=\"loidatesingle\"]").daterangepicker({
+
+		$("input[name=\"Loi_Date\"]").daterangepicker({
 				singleDatePicker: true,
 				showDropdowns: true
 			});
 			
 		
-			$("input[name=\"dateofjoining\"]").daterangepicker({
+			$("input[name=\"Date_Of_Joining\"]").daterangepicker({
 				singleDatePicker: true,
 				showDropdowns: true
 			});
 			
-			$("input[name=\"statusDate\"]").daterangepicker({
+			$("input[name=\"Status_Date\"]").daterangepicker({
 				singleDatePicker: true,
 				showDropdowns: true
 			});
 			
-			$("input[name=\"leavingDate\"]").daterangepicker({
+			$("input[name=\"Leaving_Date\"]").daterangepicker({
+				singleDatePicker: true,
+				showDropdowns: true
+			});
+			
+			
+			$("input[name=\"Wedding_Date\"]").daterangepicker({
 				singleDatePicker: true,
 				showDropdowns: true
 			});
@@ -660,6 +624,22 @@ body {
 			});
 			datatablesButtons.buttons().container().appendTo("#datatables-buttons_wrapper .col-md-6:eq(0)")
 		});
+		
+		
+		
+		
+		$( document ).ready(function() {
+		    $("#from-datepicker").datepicker({ 
+		        format: 'yyyy-mm-dd'
+		    });
+		    $("#from-datepicker").on("change", function () {
+		        var fromdate = $(this).val();
+		        alert(fromdate);
+		    });
+		}); 
+		
+		
+		
 	</script>
 	
 		<script>
