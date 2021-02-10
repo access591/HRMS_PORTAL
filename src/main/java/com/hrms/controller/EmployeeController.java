@@ -24,6 +24,10 @@ public class EmployeeController {
 	EmployeeService employeeService;
 	@GetMapping("/employeeMaster")
 	public String employeeMaster(Model model,HttpSession session) {
+		
+		 List<Employee>listEmployee = employeeService.getAllEmployees();
+		  model.addAttribute("listEmployee", listEmployee); 
+		
 		String userCode= (String)session.getAttribute("username");
 		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
 		if (modules != null) {
