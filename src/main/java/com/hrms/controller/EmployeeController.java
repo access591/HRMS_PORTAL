@@ -13,12 +13,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.hrms.model.Employee;
 import com.hrms.model.MenuModule;
+import com.hrms.service.EmployeeService;
 import com.hrms.service.ModuleService;
 
 @Controller
 public class EmployeeController {
 	@Autowired
 	private ModuleService moduleService;
+	@Autowired
+	EmployeeService employeeService;
 	@GetMapping("/employeeMaster")
 	public String employeeMaster(Model model,HttpSession session) {
 		String userCode= (String)session.getAttribute("username");
@@ -33,10 +36,10 @@ public class EmployeeController {
 @PostMapping("/saveEmployee")
 	public String employeeMasterSave(@ModelAttribute("employees") Employee employee, Model model,HttpSession session) {
 
-		//employeeService.addEmployee(employee); 
+	       employeeService.addEmployee(employee); 
 		session.setAttribute("username",session.getAttribute("username"));
 
-	return"redirect:/empInfoMaster";
+	return"redirect:/employeeMaster";
 
 		}	
 
