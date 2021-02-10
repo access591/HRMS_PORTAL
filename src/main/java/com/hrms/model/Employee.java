@@ -21,6 +21,9 @@ public class Employee implements Serializable {
 	@Column(name ="EMP_CODE")
 	private String Emp_Code;
 	
+	@Column(name="EMP_IMG", nullable=false, columnDefinition="mediumblob")
+	private byte[] Emp_Img;
+	
 	@Column(name ="EMP_NAME")
 	private String Emp_Name;
 	
@@ -222,6 +225,14 @@ public class Employee implements Serializable {
 
 	public void setEmp_Code(String emp_Code) {
 		Emp_Code = emp_Code;
+	}
+
+	public byte[] getEmp_Img() {
+		return Emp_Img;
+	}
+
+	public void setEmp_Img(byte[] emp_Img) {
+		Emp_Img = emp_Img;
 	}
 
 	public String getEmp_Name() {
