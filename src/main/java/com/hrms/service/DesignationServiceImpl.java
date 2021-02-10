@@ -14,6 +14,7 @@ public class DesignationServiceImpl implements DesignationService {
 	@Override
 	public void addDesignation(Designation designation) {
 		designation.setIns_date(new Date());
+		designation.setDesg_code(designationDao.getMAX_Id("DES"));
 		this.designationDao.saveOrUpdate(designation);
 	}
 
