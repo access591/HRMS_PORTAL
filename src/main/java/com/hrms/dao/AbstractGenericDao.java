@@ -1,5 +1,6 @@
 package com.hrms.dao;
 import java.lang.reflect.ParameterizedType;
+import java.sql.ResultSet;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -8,10 +9,13 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.ResultSetExtractor;
 
 public class AbstractGenericDao<E> implements GenericDao<E> {
 	private final Class<E> entityClass;
-
+	 @Autowired
+	 private JdbcTemplate jdbcTemplate;
 	public AbstractGenericDao() {
 		this.entityClass = (Class<E>) ((ParameterizedType) this.getClass().getGenericSuperclass())
 				.getActualTypeArguments()[0];
@@ -70,6 +74,32 @@ public class AbstractGenericDao<E> implements GenericDao<E> {
 		getSession().delete(getSession().load(this.entityClass, (id)));
 		tx.commit();
 
+	}
+
+	@Override
+	public String getMAX_Id(String Cid) {
+		
+		String sql="select FN_PRGM_CODE('"+Cid+"') Cid";
+		return jdbcTemplate.query(sql, new ResultSetExtractor<String>() {
+			String Cid;
+		public String extractData(ResultSet rs)  {
+			try {
+				if (rs.next())
+				{
+					Cid=rs.getString("Cid");
+				}
+			
+			} catch (Exception e) {
+				System.out.println(e);
+				
+			}
+		
+				return Cid; 
+				
+		}
+	});
+
+		
 	}
 
 }

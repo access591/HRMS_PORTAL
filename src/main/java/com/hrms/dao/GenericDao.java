@@ -17,6 +17,6 @@ public interface GenericDao<E> {
 	E existOrNot(E obj);
 
 	void delete(long id);
-	
+	String getMAX_Id(String Cid);
 
 }
