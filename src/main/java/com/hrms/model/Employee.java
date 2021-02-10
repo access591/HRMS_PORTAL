@@ -7,6 +7,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 @Entity
 @Table(name ="M_EMPLOYEE")
 public class Employee implements Serializable {
@@ -29,6 +31,7 @@ public class Employee implements Serializable {
 	private String Comp_Code;
 	
 	@Column(name ="DATE_OF_BIRTH")
+	@Temporal(TemporalType.DATE)
 	private Date Date_Of_Birth;
 	
 	@Column(name ="BIRTH_STATE")
@@ -65,9 +68,11 @@ public class Employee implements Serializable {
 	private String Passport_No;
 	
 	@Column(name ="LOI_DATE")
+	@Temporal(TemporalType.DATE)
 	private Date Loi_Date;
 	
 	@Column(name ="STATUS_DATE")
+	@Temporal(TemporalType.DATE)
 	private Date Status_Date;
 	
 	@Column(name ="REASON")
@@ -84,11 +89,12 @@ public class Employee implements Serializable {
 	
 	@Column(name ="UAN_NO")
 	private String Uan_No;
-	
+	@Temporal(TemporalType.DATE)
 	@Column(name ="DATE_OF_JOINING")
 	private Date Date_Of_Joining;
 	
 	@Column(name ="LEAVING_DATE")
+	@Temporal(TemporalType.DATE)
 	private Date Leaving_Date;
 	//step-2=====================end.....=============
 	@Column(name ="EMP_GENDER")
@@ -111,6 +117,7 @@ public class Employee implements Serializable {
 	private String Pre_Disease;
 	
 	@Column(name ="WEDDING_DATE")
+	@Temporal(TemporalType.DATE)
 	private Date Wedding_Date;
 	
 	@Column(name ="NO_OF_CHILD")
