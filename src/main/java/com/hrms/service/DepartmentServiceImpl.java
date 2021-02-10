@@ -14,7 +14,7 @@ public class DepartmentServiceImpl implements DepartmentService {
 	@Override
 	public void addDepartment(Department department) {
 		department.setIns_date(new Date());
-		department.setDepartment_Code( departmentDao.getMAX_DEPARTMENT_CODE());
+		department.setDepartment_Code( departmentDao.getMAX_Id("DEP"));
 		this.departmentDao.saveOrUpdate(department);
 	}
 
