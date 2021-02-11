@@ -17,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -72,6 +73,17 @@ public class EmployeeController {
 
 	return"redirect:/employeeMaster";
 
-		}	
+		}
+
+
+@GetMapping(value = {"/deleteEmployee/{id}"})
+public String deleteUserRights(@PathVariable("id")String id,  Model model,HttpSession session)
+ { 
+	  this.employeeService.removeEmployeet(id);
+    session.setAttribute("username",session.getAttribute("username")); 
+    return"redirect:/employeeMaster";
+}
+
+
 
 }
