@@ -14,6 +14,7 @@ public class SectionServiceImpl implements SectionService {
 	@Override
 	public void addSection(Section section) {
 		section.setIns_date(new Date());
+		section.setSect_Code(sectionDao.getMAX_Id("SEC"));
 		this.sectionDao.saveOrUpdate(section);
 	}
 
