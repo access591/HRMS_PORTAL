@@ -34,9 +34,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 	}
 
 	@Override
-	public void updateEmployee(Employee d) {
-	d.setEmp_Name(d.getEmp_Name());
-
+	public void updateEmployee(Employee e) {
+	e.setEmp_Name(e.getEmp_Name());
+	this.employeeDao.saveOrUpdate(e);
 		
 	}
 
