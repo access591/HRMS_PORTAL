@@ -16,6 +16,7 @@ public class HolidayServiceImpl implements HolidayService {
 	HolidayDao holidayDao;
 	@Override
 	public void addHoliday(Holiday holiday) {
+		holiday.setHoliday_Code(holidayDao.getMAX_Id("HLD"));
 		holiday.setIns_date(new Date());
 		  this.holidayDao.saveOrUpdate(holiday);
 		
