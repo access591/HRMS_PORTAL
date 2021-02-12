@@ -8,6 +8,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
 
@@ -54,12 +55,14 @@ public class EmployeeController {
 			@RequestParam("file") MultipartFile multipartFile) {
 
 		try {
+			UUID uuid=UUID.randomUUID();
 			String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
-			employee.setEmp_Img(fileName);
+			employee.setEmp_Img(uuid.toString().substring(0, 12)+"_"+fileName);
 
 			String folderPath = "\\src\\main\\resources\\static\\img\\";
 			String uploadDir = System.getProperty("user.dir") + folderPath;
-			String path = Paths.get(uploadDir + multipartFile.getOriginalFilename()).toString();
+			//String path = Paths.get(uploadDir + multipartFile.getOriginalFilename()).toString();
+			String path = Paths.get(uploadDir + employee.getEmp_Img()).toString();
 
 			BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(new File(path)));
 			stream.write(multipartFile.getBytes());
