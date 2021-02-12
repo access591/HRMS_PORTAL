@@ -105,5 +105,26 @@ public class EmployeeController {
 
 		return "redirect:/employeeMaster";
 	}
+	
+	
+	
+	@GetMapping(value = { "/editEmployee/{id}" })
+	public String editEmployee(@PathVariable("id") String id, Model model, HttpSession session) {
 
+		Employee employeeEdit = employeeService.findEmployeeById(id);
+		model.addAttribute("employeeEdit", employeeEdit);
+
+		session.setAttribute("username", session.getAttribute("username"));
+		return "/editEmployee";
+	}
+
+	@PostMapping("/updateEmployee")
+	public String updatePageUrl(@ModelAttribute("employees") Employee e, Model model) {
+
+		this.employeeService.updateEmployee(e);
+
+		return "redirect:/employeeMaster";
+	}	
+	
+	
 }
