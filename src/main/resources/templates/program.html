@@ -52,12 +52,13 @@ body {
 
 								</div>
 								<div class="card-body">
-									<form id="validation-form" action="#" th:action="@{/saveProgram}" th:object="${program}" method="post">										<div class="row">
+									<form id="validation-form" action="#" th:action="@{/saveProgram}" th:object="${program}" method="post">							
+												<div class="row">
 											<div class="col-12 col-lg-6">
 												<div class="form-group">
 													<label> Program Code </label> 
 													<label style="color: red">*</label>
-													<input type="text" class="form-control" id="programCode" maxlength="12"  title="Program Code" name="programCode"required>
+													<input type="text" class="form-control" id="programCode" maxlength="12"  title="Program Code" name="programCode"readonly>
 												</div>
 												<div class="mb-3">
 														<label class="form-label">Module</label>
