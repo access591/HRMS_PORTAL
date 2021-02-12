@@ -33,57 +33,74 @@ public class EmployeeController {
 	private ModuleService moduleService;
 	@Autowired
 	EmployeeService employeeService;
+
 	@GetMapping("/employeeMaster")
-	public String employeeMaster(Model model,HttpSession session) {
-		
-		 List<Employee>listEmployee = employeeService.getAllEmployees();
-		  model.addAttribute("listEmployee", listEmployee); 
-		
-		String userCode= (String)session.getAttribute("username");
+	public String employeeMaster(Model model, HttpSession session) {
+
+		List<Employee> listEmployee = employeeService.getAllEmployees();
+		model.addAttribute("listEmployee", listEmployee);
+
+		String userCode = (String) session.getAttribute("username");
 		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
 		if (modules != null) {
 			model.addAttribute("modules", modules);
 		}
-		session.setAttribute("username",session.getAttribute("username"));
-			return "empInfoMaster";
-		}
-	
-@PostMapping("/saveEmployee")
-	public String employeeMasterSave(@ModelAttribute("employees") Employee employee, Model model,HttpSession session,@RequestParam("file") MultipartFile multipartFile) {
-
-	
-	try {
-		String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
-		employee.setEmp_Img(fileName);
-		
-		String folderPath ="\\src\\main\\resources\\static\\img\\";
-		String uploadDir = System.getProperty("user.dir")+folderPath;
-        String path = Paths.get(uploadDir + multipartFile.getOriginalFilename()).toString();
-        
-        BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(new File(path)));
-		stream.write(multipartFile.getBytes());
-		stream.close();
-		
-		employeeService.addEmployee(employee); 
-		session.setAttribute("username",session.getAttribute("username"));
-	} catch (IOException e) {
-		
-		e.printStackTrace();
+		session.setAttribute("username", session.getAttribute("username"));
+		return "empInfoMaster";
 	}
 
-	return"redirect:/employeeMaster";
+	@PostMapping("/saveEmployee")
+	public String employeeMasterSave(@ModelAttribute("employees") Employee employee, Model model, HttpSession session,
+			@RequestParam("file") MultipartFile multipartFile) {
 
+		try {
+			String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+			employee.setEmp_Img(fileName);
+
+			String folderPath = "\\src\\main\\resources\\static\\img\\";
+			String uploadDir = System.getProperty("user.dir") + folderPath;
+			String path = Paths.get(uploadDir + multipartFile.getOriginalFilename()).toString();
+
+			BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(new File(path)));
+			stream.write(multipartFile.getBytes());
+			stream.close();
+
+			employeeService.addEmployee(employee);
+			session.setAttribute("username", session.getAttribute("username"));
+		} catch (IOException e) {
+
+			e.printStackTrace();
 		}
 
+		return "redirect:/employeeMaster";
 
-@GetMapping(value = {"/deleteEmployee/{id}"})
-public String deleteUserRights(@PathVariable("id")String id,  Model model,HttpSession session)
- { 
-	  this.employeeService.removeEmployeet(id);
-    session.setAttribute("username",session.getAttribute("username")); 
-    return"redirect:/employeeMaster";
-}
+	}
 
+	@GetMapping(value = { "/deleteEmployee/{id}/{Emp_Img}" })
+	public String deleteUserRights(@PathVariable("id") String id, @PathVariable("Emp_Img") String Emp_Img, Model model,
+			HttpSession session) {
+		try {
+			
+			this.employeeService.removeEmployeet(id);
+			String folderPath = "\\src\\main\\resources\\static\\img\\";
+			String uploadDir = System.getProperty("user.dir") + folderPath;
+			File file = new File(uploadDir + Emp_Img);
 
+			if (file.delete()) {
+				System.out.println(file.getName() + " is deleted!"); //
+			} else
+			{
+				System.out.println("Delete operation is failed.");
+
+			}
+
+			session.setAttribute("username", session.getAttribute("username"));
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return "redirect:/employeeMaster";
+	}
 
 }

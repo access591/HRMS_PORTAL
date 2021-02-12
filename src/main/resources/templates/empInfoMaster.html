@@ -623,7 +623,8 @@ body {
 												<td th:text="${listemployee.Date_Of_Joining}"></td>
 												<td><img th:src="@{'/img/'+${listemployee.Emp_Img}}" alt="Avatar" width="125" height="125" /> </td>
 												<td><a th:href="@{/editEmployee/{id}(id=${listemployee.Emp_Code})}" class="btn btn-primary"><i class="fa fa-edit"></i></a>
-												<a th:href="@{/deleteEmployee/{id}(id=${listemployee.Emp_Code})}" class="btn btn-primary"onclick="return confirm('Are you sure?')"><i class="fa fa-times"></i></a>
+												<a th:href="@{/deleteEmployee/{id}/{Emp_Img}(id=${listemployee.Emp_Code},Emp_Img=${listemployee.Emp_Img})}" class="btn btn-primary"onclick="return confirm('Are you sure?')"><i class="fa fa-times"></i></a>
+												
 												</td>
 											</tr>
 										</tbody>
