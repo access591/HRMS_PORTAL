@@ -51,12 +51,54 @@ public class EmployeeServiceImpl implements EmployeeService {
 	e.setCard_No(e.getCard_No());
 	e.setEmp_Designation(e.getEmp_Designation());
 	e.setShift_Code(e.getShift_Code());
-	
-	
-	
-	
-	
-	
+	e.setPassport_No(e.getPassport_No());
+	e.setLoi_Date(e.getLoi_Date());
+	e.setStatus_Date(e.getStatus_Date());
+	e.setReason(e.getReason());
+	e.setDepartment_Code(e.getDepartment_Code());
+	e.setManager_Code(e.getManager_Code());
+	e.setIt_Pan_No(e.getIt_Pan_No());
+	e.setUan_No(e.getUan_No());
+	e.setDate_Of_Joining(e.getDate_Of_Joining());
+	e.setLeaving_Date(e.getLeaving_Date());
+	//three  Step Start...................................................
+	e.setEmp_Gender(e.getEmp_Gender());
+	e.setEmp_Height(e.getEmp_Height());
+	e.setIdentity_Mark(e.getIdentity_Mark());
+	e.setBlood_Group(e.getBlood_Group());
+	e.setMarital_Status(e.getMarital_Status());
+	e.setPre_Disease(e.getPre_Disease());
+	e.setWedding_Date(e.getWedding_Date());
+	e.setNo_Of_Child(e.getNo_Of_Child());
+	e.setEmp_Caste(e.getEmp_Caste());
+	e.setEmp_Religion(e.getEmp_Religion());
+	e.setEmp_Nationality(e.getEmp_Nationality());
+	e.setCompany_Code(e.getCompany_Code());
+	e.setMediclaim(e.getMediclaim());
+	e.setGpa(e.getGpa());
+	e.setEmp_Address1(e.getEmp_Address1());
+	e.setEmp_Address2(e.getEmp_Address2());
+	e.setEmp_City(e.getEmp_City());
+	e.setEmp_State(e.getEmp_State());
+	e.setPin_Code(e.getPin_Code());
+	e.setEmp_Mobile(e.getEmp_Mobile());
+	e.setEmp_Local_Add1(e.getEmp_Local_Add1());
+	e.setEmp_Local_Add2(e.getEmp_Local_Add2());
+	e.setEmp_Local_City(e.getEmp_Local_City());
+	e.setEmp_Local_State(e.getEmp_Local_State());
+	e.setEmp_Local_PinCode(e.getEmp_Local_PinCode());
+	e.setEmp_Local_Mobile_No(e.getEmp_Local_Mobile_No());
+	//four  Step Start...................................................
+	e.setComp_Mobile_No(e.getComp_Mobile_No());
+	e.setCompany_Email(e.getCompany_Email());
+	e.setProf_Inst(e.getProf_Inst());
+	e.setLocal_Travel_Pr_km(e.getLocal_Travel_Pr_km());
+	e.setHobbies(e.getHobbies());
+	e.setClubs(e.getClubs());
+	e.setReg_Code(e.getReg_Code());
+	e.setEstf_Work(e.getEstf_Work());
+	e.setE_Emp_Cat(e.getE_Emp_Cat());
+	e.setE_Category(e.getE_Category());
 	
 	this.employeeDao.saveOrUpdate(e);
 		
