@@ -119,12 +119,46 @@ public class EmployeeController {
 	}
 
 	@PostMapping("/updateEmployee")
-	public String updatePageUrl(@ModelAttribute("employees") Employee e, Model model) {
+	public String updatePageUrl(@ModelAttribute("employees") Employee e, Model model,@RequestParam("file") MultipartFile multipartFile) {
+		String Emp_Img=e.getEmp_Img().toString();
+	
+		
+		try {
+			UUID uuid=UUID.randomUUID();
+			
+			String folderPath = "\\src\\main\\resources\\static\\img\\";
+			String uploadDir = System.getProperty("user.dir") + folderPath;
+			File file = new File(uploadDir + Emp_Img);
+			
+			String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+			if(fileName!="")
+			{
+				file.delete();
+				e.setEmp_Img(uuid.toString().substring(0, 12)+"_"+fileName);	
+				String path = Paths.get(uploadDir + e.getEmp_Img()).toString();
+				BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(new File(path)));
+				stream.write(multipartFile.getBytes());
+				stream.close();
+				this.employeeService.updateEmployee(e);
 
-		this.employeeService.updateEmployee(e);
+				
+			}
+			
+			
+			else if(Emp_Img!=null)
+			{
+				e.setEmp_Img(Emp_Img);
+				this.employeeService.updateEmployee(e);
+			}
+			
+			this.employeeService.updateEmployee(e);
 
-		return "redirect:/employeeMaster";
+			
+		} catch (Exception e2) {
+			e2.printStackTrace();
 	}	
-	
-	
+		this.employeeService.updateEmployee(e);
+	return "redirect:/employeeMaster";
 }
+}
+
