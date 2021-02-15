@@ -36,6 +36,28 @@ public class EmployeeServiceImpl implements EmployeeService {
 	@Override
 	public void updateEmployee(Employee e) {
 	e.setEmp_Name(e.getEmp_Name());
+	e.setEmp_Img(e.getEmp_Img());
+	e.seteActive(e.geteActive());
+	e.setComp_Code(e.getComp_Code());
+	e.setDate_Of_Birth(e.getDate_Of_Birth());
+	e.setBirth_State(e.getBirth_State());
+	e.setEmp_Ref_No(e.getEmp_Ref_No());
+	e.setEmp_Type(e.getEmp_Type());
+	e.setLocation_Type(e.getLocation_Type());
+	e.setWeekly_Working_Day(e.getWeekly_Working_Day());
+	e.setBirth_Place(e.getBirth_Place());
+	e.setDomicile(e.getDomicile());
+	//Second Step Start...................................................
+	e.setCard_No(e.getCard_No());
+	e.setEmp_Designation(e.getEmp_Designation());
+	e.setShift_Code(e.getShift_Code());
+	
+	
+	
+	
+	
+	
+	
 	this.employeeDao.saveOrUpdate(e);
 		
 	}
