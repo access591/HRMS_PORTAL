@@ -99,8 +99,9 @@ body {
 												<div class="form-group">
 													<label class="form-label">Name <span
 														class="text-danger">*</span>
-													</label> <input name="Emp_Name" type="text"
-														class="form-control required">
+													</label>
+													 <input name="Emp_Name" id="Emp_Name"pattern="^[a-zA-Z\s]*$" type="text"maxlength="50"
+														class="form-control"required aria-required="true"title="Name">
 												</div>
 												<div class="form-group">
 													<label class="form-label">Emp Active</label> <span
@@ -114,8 +115,8 @@ body {
 												<div class="form-group ">
 													<label class="form-label">Company Code <span
 														class="text-danger">*</span>
-													</label> <input name="Comp_Code" type="text" id="Comp_Code"
-														class="form-control required">
+													</label> <input name="Comp_Code" type="text" id="Comp_Code"maxlength="25"
+														class="form-control required" title="Company Code">
 												</div>
 
 												<div class="form-group ">
@@ -128,13 +129,13 @@ body {
 												<div class="form-group">
 													<label class="form-label">Birth State <span
 														class="text-danger">*</span>
-													</label> <input name="Birth_State" type="text"id="Birth_State"
+													</label> <input name="Birth_State"pattern="^[a-zA-Z\s]*$"maxlength="20"  type="text"id="Birth_State"
 														class="form-control required">
 												</div>
 												<div class="form-group">
 													<label class="form-label">Birth Place <span
 														class="text-danger">*</span>
-													</label> <input  type="text"id="Birth_Place"name="Birth_Place"
+													</label> <input  type="text"id="Birth_Place"name="Birth_Place"pattern="^[a-zA-Z\s]*$"maxlength="20" 
 														class="form-control required">
 												</div>
 											</div>
@@ -154,7 +155,7 @@ body {
 												<div class="form-group">
 													<label class="form-label">Emp Ref No. <span
 														class="text-danger">*</span>
-													</label> <input name="Emp_Ref_No" type="text" id="Emp_Ref_No"
+													</label> <input name="Emp_Ref_No" type="text" id="Emp_Ref_No" pattern="\d{1,10}" title="Only digits"maxlength="10" 
 														class="form-control required">
 												</div>
 												<div class="form-group">
@@ -179,7 +180,7 @@ body {
 												<div class="form-group ">
 													<label class="form-label">Weekly Working Days <span
 														class="text-danger">*</span>
-													</label> <input name="Weekly_Working_Day" type="text"id="Weekly_Working_Day"
+													</label> <input name="Weekly_Working_Day" type="text"id="Weekly_Working_Day" maxlength="2"pattern="\d{1,10}" title="Only digits"
 														class="form-control required">
 												</div>
 
@@ -188,7 +189,7 @@ body {
 												<div class="form-group">
 													<label class="form-label">Domicile <span
 														class="text-danger">*</span>
-													</label> <input name="domicile" type="text"id="domicile"
+													</label> <input name="domicile" type="text"id="domicile"pattern="^[a-zA-Z\s]*$"maxlength="20"
 														class="form-control required">
 												</div>
 
@@ -203,7 +204,7 @@ body {
 											<label class="form-label">Card No.    
 												<span class="text-danger">*</span>
 											</label>
-											<input  type="text" class="form-control required" name="Card_No" id="Card_No">
+											<input  type="text" class="form-control required" name="Card_No" id="Card_No" maxlength="15" pattern="\d{1,10}" title="Only digits">
 										</div>
 										
 										
