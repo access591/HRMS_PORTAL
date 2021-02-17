@@ -1,5 +1,10 @@
 package com.hrms.repository;
 
-public class StateDaoImpl {
+import org.springframework.stereotype.Repository;
+
+import com.hrms.dao.AbstractGenericDao;
+import com.hrms.model.State;
+@Repository
+public class StateDaoImpl extends AbstractGenericDao<State> implements StateDao{
 
 }

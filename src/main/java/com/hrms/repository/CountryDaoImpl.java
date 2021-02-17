@@ -1,5 +1,11 @@
 package com.hrms.repository;
 
-public class CountryDaoImpl {
+import org.springframework.stereotype.Repository;
+
+import com.hrms.dao.AbstractGenericDao;
+import com.hrms.model.Country;
+
+@Repository
+public class CountryDaoImpl extends AbstractGenericDao<Country> implements CountryDao {
 
 }
