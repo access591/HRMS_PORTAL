@@ -1,5 +1,8 @@
 package com.hrms.repository;
 
-public interface StateDao {
+import com.hrms.dao.GenericDao;
+import com.hrms.model.State;
+
+public interface StateDao extends GenericDao<State> {
 
 }

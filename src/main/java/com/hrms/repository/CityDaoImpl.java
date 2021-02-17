@@ -1,5 +1,13 @@
 package com.hrms.repository;
+import org.springframework.stereotype.Repository;
 
-public class CityDaoImpl {
+import com.hrms.dao.AbstractGenericDao;
+import com.hrms.model.City;
+/**
+ * @author Access surendra
+ *
+ */
+@Repository
+public class CityDaoImpl extends AbstractGenericDao<City> implements CityDao {
 
 }

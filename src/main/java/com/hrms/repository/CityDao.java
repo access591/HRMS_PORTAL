@@ -1,5 +1,8 @@
 package com.hrms.repository;
 
-public interface CityDao {
+import com.hrms.dao.GenericDao;
+import com.hrms.model.City;
+
+public interface CityDao extends GenericDao<City>{
 
 }
