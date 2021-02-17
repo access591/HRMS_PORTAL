@@ -10,36 +10,38 @@ import com.hrms.repository.CityDao;
 
 @Service
 public class CityServiceImpl implements CityService {
-@Autowired
-CityDao cityDao;
+	@Autowired
+	CityDao cityDao;
+
 	@Override
 	public void addCity(City city) {
-		
-		
+
+		city.setCityCode(cityDao.getMAX_Id("CTY"));
+		this.cityDao.saveOrUpdate(city);
 	}
 
 	@Override
 	public List<City> getAllCities() {
-		
-		return null;
+		List<City> listCity = cityDao.findAll();
+		return listCity;
 	}
 
 	@Override
 	public City findCityById(String id) {
-		
-		return null;
+
+		return cityDao.findById(id);
 	}
 
 	@Override
 	public void updateCity(City c) {
-		
-		
+		this.cityDao.saveOrUpdate(c);
+
 	}
 
 	@Override
 	public void removeCity(String id) {
-		
-		
+		this.cityDao.delete(id);
+
 	}
 
 }

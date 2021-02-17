@@ -17,4 +17,11 @@ public class City implements Serializable {
 	@Id
 	@Column(name = "CITY_CODE")
 	private String cityCode;
+	public String getCityCode() {
+		return cityCode;
+	}
+	public void setCityCode(String cityCode) {
+		this.cityCode = cityCode;
+	}
+	
 }
