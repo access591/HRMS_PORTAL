@@ -17,6 +17,11 @@ public class Country implements Serializable {
 	@Id
 	@Column(name = "COUNTRY_CODE")
 	private String countryCode;
+	@Column(name = "COUNTRY_NAME")
+	private String countryName;
+	@Column(name = "ACTIVE_YN")
+	private String active;
+	
 
 	public String getCountryCode() {
 		return countryCode;
@@ -25,5 +30,22 @@ public class Country implements Serializable {
 	public void setCountryCode(String countryCode) {
 		this.countryCode = countryCode;
 	}
+
+	public String getCountryName() {
+		return countryName;
+	}
+
+	public void setCountryName(String countryName) {
+		this.countryName = countryName;
+	}
+
+	public String getActive() {
+		return active;
+	}
+
+	public void setActive(String active) {
+		this.active = active;
+	}
+	
 	
 }
