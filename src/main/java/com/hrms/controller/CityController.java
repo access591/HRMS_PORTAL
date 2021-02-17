@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.hrms.model.City;
 import com.hrms.model.MenuModule;
+import com.hrms.model.UrlDetail;
 import com.hrms.service.CityService;
 import com.hrms.service.ModuleService;
 
@@ -51,6 +52,26 @@ public class CityController {
 		return "redirect:/cityMaster";
 
 	}
+
+	@GetMapping(value = { "/editCity/{id}" })
+	public String editCity(@PathVariable("id") String id, Model model, HttpSession session) {
+
+		City cityEdit = cityService.findCityById(id);
+		model.addAttribute("cityEdit", cityEdit);
+		session.setAttribute("username", session.getAttribute("username"));
+		
+		return "/editCity";
+	}
+	
+	
+	@PostMapping("/updateCity")
+	public String updatePageUrl(@ModelAttribute("city") City c, Model model) {
+
+		this.cityService.updateCity(c);
+
+		return "redirect:/cityMaster";
+	}
+	
 	@GetMapping(value = { "/deleteCity/{id}" })
 	public String deleteCity(@PathVariable("id") String id, Model model, HttpSession session) {
 		this.cityService.removeCity(id);
