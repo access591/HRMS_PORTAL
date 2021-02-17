@@ -16,4 +16,12 @@ public class State implements Serializable{
 	@Id
 	@Column(name = "STATE_CODE")
 	private String stateCode;
+	
+	public String getStateCode() {
+		return stateCode;
+	}
+	public void setStateCode(String stateCode) {
+		this.stateCode = stateCode;
+	}
+	
 }
