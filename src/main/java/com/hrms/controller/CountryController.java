@@ -31,6 +31,8 @@ public class CountryController {
 		if (modules != null) {
 			model.addAttribute("modules", modules);
 		}
+		List<Country> listCountry = countryService.getAllCountrys();
+		model.addAttribute("listCountry", listCountry);
 		session.setAttribute("username", session.getAttribute("username"));
 
 		return "countryMaster";
@@ -40,6 +42,8 @@ public class CountryController {
 	public String saveCountry(@ModelAttribute("country") Country country, Model model, HttpSession session) {
 
 		countryService.addCountry(country);
+		List<Country> listCountry = countryService.getAllCountrys();
+		model.addAttribute("listCountry", listCountry);
 		session.setAttribute("username", session.getAttribute("username"));
 
 		return "redirect:/countryMaster";
