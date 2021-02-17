@@ -25,12 +25,14 @@ public class StateController {
 
 	@GetMapping("/stateMaster")
 	public String stateMaster(Model model, HttpSession session) {
-
+		
 		String userCode = (String) session.getAttribute("username");
 		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
 		if (modules != null) {
 			model.addAttribute("modules", modules);
 		}
+		List<State> listState =stateService.getAllStates();
+		model.addAttribute("listState", listState);
 		session.setAttribute("username", session.getAttribute("username"));
 		return "stateMaster";
 	}
@@ -39,6 +41,9 @@ public class StateController {
 	public String saveState(@ModelAttribute("state") State state, Model model, HttpSession session) {
 
 		stateService.addState(state);
+
+		List<State> listState =stateService.getAllStates();
+		model.addAttribute("listState", listState);
 		session.setAttribute("username", session.getAttribute("username"));
 
 		return "redirect:/stateMaster";

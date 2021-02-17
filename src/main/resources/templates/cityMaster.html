@@ -91,7 +91,7 @@ body {
 								</div>
 							</div>
 						</div>
-	   <!--    <div class="col-12">
+	      <div class="col-12">
 							<div class="card">
 								<div class="card-header">
 								</div>
@@ -99,20 +99,20 @@ body {
 								<table id="datatables-buttons" class="table table-striped display" style="width:100%">
 										<thead>
 											<tr>
-												<th>Grade code</th>
-												<th>Grade Name </th>
+												<th>City Code</th>
+												<th>City Name </th>
 												<th>Status</th>
 												<th>Action</th>
 												
 											</tr>
 										</thead>
 										<tbody>
-											<tr  th:each="listofgrade : ${listGrade}">
-												<td th:text="${listofgrade.Grade_Code}"></td>
-												<td th:text="${listofgrade.Garde_Name}"></td>
-												<td th:text="${listofgrade.active}"></td>
-												<td><a th:href="@{/editGrade/{id}(id=${listofgrade.Grade_Code})}" class="btn btn-primary"><i class="fa fa-edit"></i></a>
-												<a th:href="@{/deleteGarde/{id}(id=${listofgrade.Grade_Code})}" class="btn btn-primary"onclick="return confirm('Are you sure?')"><i class="fa fa-times"></i></a>
+											<tr  th:each="listOfCity : ${listCity}">
+												<td th:text="${listOfCity.cityCode}"></td>
+												<td th:text="${listOfCity.cityName}"></td>
+												<td th:text="${listOfCity.active}"></td>
+												<td><a th:href="@{/editCity/{id}(id=${listOfCity.cityCode})}" class="btn btn-primary"><i class="fa fa-edit"></i></a>
+												<a th:href="@{/deleteCity/{id}(id=${listOfCity.cityCode})}" class="btn btn-primary"onclick="return confirm('Are you sure?')"><i class="fa fa-times"></i></a>
 												</td>
 											</tr>
 										</tbody>
@@ -121,7 +121,7 @@ body {
 								</div>
 								
 							</div>
-						</div> -->
+						</div>
 					</div>
 				</div>
 

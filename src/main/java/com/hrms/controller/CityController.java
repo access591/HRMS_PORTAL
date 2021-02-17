@@ -25,11 +25,15 @@ public class CityController {
 
 	@GetMapping("/cityMaster")
 	public String cityMaster(Model model, HttpSession session) {
+		List<City> listCity = cityService.getAllCities();
+		model.addAttribute("listCity", listCity);
+		
 		String userCode = (String) session.getAttribute("username");
 		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
 		if (modules != null) {
 			model.addAttribute("modules", modules);
 		}
+		
 		session.setAttribute("username", session.getAttribute("username"));
 
 		return "cityMaster";
@@ -39,7 +43,8 @@ public class CityController {
 	public String saveCity(@ModelAttribute("city") City city, Model model, HttpSession session) {
 
 		cityService.addCity(city);
-		;
+		List<City> listCity = cityService.getAllCities();
+		model.addAttribute("listCity", listCity);
 		session.setAttribute("username", session.getAttribute("username"));
 
 		return "redirect:/cityMaster";
