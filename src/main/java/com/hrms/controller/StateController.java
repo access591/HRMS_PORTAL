@@ -50,6 +50,26 @@ public class StateController {
 		return "redirect:/stateMaster";
 
 	}
+	
+	@GetMapping(value = { "/editState/{id}" })
+	public String editState(@PathVariable("id") String id, Model model, HttpSession session) {
+
+		State stateEdit = stateService.findStateById(id);
+		model.addAttribute("stateEdit", stateEdit);
+		session.setAttribute("username", session.getAttribute("username"));
+		
+		return "/editState";
+	}
+	
+	
+	@PostMapping("/updateState")
+	public String updateState(@ModelAttribute("city") State c, Model model) {
+
+		this.stateService.updateState(c);
+
+		return "redirect:/stateMaster";
+	}
+	
 	@GetMapping(value = { "/deleteState/{id}" })
 	public String deleteState(@PathVariable("id") String id, Model model, HttpSession session) {
 		this.stateService.removeState(id);
