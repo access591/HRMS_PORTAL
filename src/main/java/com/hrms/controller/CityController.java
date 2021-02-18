@@ -65,7 +65,7 @@ public class CityController {
 	
 	
 	@PostMapping("/updateCity")
-	public String updatePageUrl(@ModelAttribute("city") City c, Model model) {
+	public String updateCity(@ModelAttribute("city") City c, Model model) {
 
 		this.cityService.updateCity(c);
 
