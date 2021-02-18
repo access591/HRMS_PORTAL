@@ -51,6 +51,25 @@ public class CountryController {
 
 	}
 	
+	@GetMapping(value = { "/editCountry/{id}" })
+	public String editCountry(@PathVariable("id") String id, Model model, HttpSession session) {
+
+		Country countryEdit = countryService.findCountryById(id);
+		model.addAttribute("countryEdit", countryEdit);
+		session.setAttribute("username", session.getAttribute("username"));
+		
+		return "/editCountry";
+	}
+	
+	
+	@PostMapping("/updateCountry")
+	public String updateCountry(@ModelAttribute("country") Country c, Model model) {
+
+		this.countryService.updateCountry(c);
+
+		return "redirect:/countryMaster";
+	}
+	
 	@GetMapping(value = { "/deleteCountry/{id}" })
 	public String deleteCountry(@PathVariable("id") String id, Model model, HttpSession session) {
 		this.countryService.removeCountry(id);
