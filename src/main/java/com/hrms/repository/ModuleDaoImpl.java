@@ -59,6 +59,35 @@ public class ModuleDaoImpl extends AbstractGenericDao<Module> implements ModuleD
 			SQLQuery query = session.createSQLQuery(sql);
 			query.addEntity(Module.class);
 			modules = query.list();
+			
+
+			  /*
+				 * Criteria criteriaUser=session.createCriteria(UserRights.class).setProjection(
+				 * Projections.projectionList().
+				 * add(Projections.property("module_code"),"module_code"));
+				 * criteriaUser.add(Restrictions.eq("user_code", userCode)); List<UserRights>
+				 * moduleName=criteriaUser.list();
+				 * 
+				 * List <String> moduleNameuser =new ArrayList<String>(); for(UserRights
+				 * right:moduleName) { moduleNameuser.add(right.getModule_code()); }
+				 * 
+				 * modules = (List) criteriaModule.setFetchMode("M_MODULE", FetchMode.SELECT)
+				 * .add(Restrictions.eq("moduleCode", moduleNameuser)).uniqueResult();
+				 * 
+				 * 
+				 */
+			 
+			
+			
+			/*
+			 * final Session session = this.sessionFactory.getCurrentSession(); Criteria
+			 * moduleCriteria = session.createCriteria(Module.class); Criteria userCriteria
+			 * = userCriteria.createCriteria("Myuser");
+			 * userCriteria.add(Restrictions.gt(userCode); List results =
+			 * moduleCriteria.list();
+			 */
+			
+			
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
 		}
