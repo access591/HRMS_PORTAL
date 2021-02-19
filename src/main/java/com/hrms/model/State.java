@@ -1,9 +1,12 @@
 package com.hrms.model;
 
 import java.io.Serializable;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 @Entity
 @Table(name = "M_STATE")
@@ -23,6 +26,8 @@ public class State implements Serializable{
 	@Column(name = "ACTIVE_YN")
 	private String active;
 	
+	@OneToMany(mappedBy = "stateCode")
+	private List<City> Citys;
 	public String getStateCode() {
 		return stateCode;
 	}
@@ -40,6 +45,12 @@ public class State implements Serializable{
 	}
 	public void setActive(String active) {
 		this.active = active;
+	}
+	public List<City> getCitys() {
+		return Citys;
+	}
+	public void setCitys(List<City> citys) {
+		Citys = citys;
 	}
 	
 	

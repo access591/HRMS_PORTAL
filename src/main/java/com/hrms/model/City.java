@@ -23,8 +23,15 @@ public class City implements Serializable {
 	
 	@Column(name = "ACTIVE_YN")
 	private String active;
-	
+	@Column(name = "STATE_CODE")
+	private String stateCode;
 
+	public String getStateCode() {
+		return stateCode;
+	}
+	public void setStateCode(String stateCode) {
+		this.stateCode = stateCode;
+	}
 	public String getCityCode() {
 		return cityCode;
 	}
