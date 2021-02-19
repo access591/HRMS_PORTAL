@@ -44,23 +44,23 @@ body {
 						<div class="col-12">
 							<div class="card">
 								<div class="card-header">
-									<h5 class="card-title">Create Award </h5>
+									<h5 class="card-title">Create Activity </h5>
 								<div class="alert-outline">
 									<div th:if="${message}" th:text="${message}" style="color: red">
 									</div> 
 									</div>	
 								</div>
 								<div class="card-body">
-									<form id="validation-form" action="#" th:action="@{/saveAward}" th:object="${award}" method="post">
+									<form id="validation-form" action="#" th:action="@{/saveActivity}" th:object="${activity}" method="post">
 										<div class="row">
 											<div class="col-12 col-lg-6">
 												<div class="form-group">
 										
-											  <label> Award id </label>
+											  <label> Activity Code </label>
 											  		<label style="color: red">*</label>
 											  	 
 											   <input
-														type="text" class="form-control" id="id" name="id" readonly="readonly">
+														type="text" class="form-control" id="actCode" name="actCode" readonly="readonly">
 												</div>
 
 												<div class="form-group">
@@ -79,9 +79,9 @@ body {
 											</div>
 											<div class="col-12 col-lg-6">
 											<div class="form-group">
-											<label class="form-label"> Award Name</label>
+											<label class="form-label"> Activity Name</label>
 											<label style="color: red">*</label>
-											 <input type="text" class="form-control " onkeypress="return /[a-z]/i.test(event.key)" id="awardName" name="awardName"required aria-required="true">
+											 <input type="text" class="form-control" onkeypress="return /[a-z]/i.test(event.key)" id="actName" name="actName"required aria-required="true">
 										</div>
 											</div>
 										</div>
@@ -99,20 +99,20 @@ body {
 								<table id="datatables-buttons" class="table table-striped display" style="width:100%">
 										<thead>
 											<tr>
-												<th> Award id </th>
-												<th>Award Name </th>
+												<th>Activity Code</th>
+												<th>Activity Name </th>
 												<th>Status</th>
 												<th>Action</th>
 												
 											</tr>
 										</thead>
 										<tbody>
-											<tr  th:each="listOfAward : ${listAward}">
-												<td th:text="${listOfAward.id}"></td>
-												<td th:text="${listOfAward.awardName}"></td>
-												<td th:text="${listOfAward.active}"></td>
-												<td><a th:href="@{/editAward/{id}(id=${listOfAward.id})}" class="btn btn-primary"><i class="fa fa-edit"></i></a>
-												<a th:href="@{/deleteAward/{id}(id=${listOfAward.id})}" class="btn btn-primary"onclick="return confirm('Are you sure?')"><i class="fa fa-times"></i></a>
+											<tr  th:each="listOfAct : ${listActivities}">
+												<td th:text="${listOfAct.actCode}"></td>
+												<td th:text="${listOfAct.actName}"></td>
+												<td th:text="${listOfAct.active}"></td>
+												<td><a th:href="@{/editActivity/{id}(id=${listOfAct.actCode})}" class="btn btn-primary"><i class="fa fa-edit"></i></a>
+												<a th:href="@{/deleteActivity/{id}(id=${listOfAct.actCode})}" class="btn btn-primary"onclick="return confirm('Are you sure?')"><i class="fa fa-times"></i></a>
 												</td>
 											</tr>
 										</tbody>
