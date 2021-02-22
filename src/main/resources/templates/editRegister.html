@@ -51,7 +51,7 @@ body {
 									</div>	
 								</div>
 								<div class="card-body">
-									<form id="validation-form" action="#" th:action="@{/saveRegister}" th:object="${register}" method="post">
+									<form id="validation-form" action="#" th:action="@{/updateRegister}" th:object="${register}" method="post">
 										<div class="row">
 											<div class="col-12 col-lg-6">
 												<div class="form-group">
@@ -60,20 +60,20 @@ body {
 											  		<label style="color: red">*</label>
 											  	 
 											   <input
-														type="text" class="form-control" id="regCode" name="regCode" readonly="readonly">
+														type="text" class="form-control" id="regCode" name="regCode" th:value="${registerEdit.regCode}" readonly="readonly">
 												</div>
 
-												<div class="form-group">
-
+											<div class="form-group">
 													<label class="form-label">Status</label>
 													<div class="custom-controls-stacked">
-
-														<label class="radio-inline"> <input type="radio"
-															value="Y" name="active" checked> Active
-														</label> <label class="radio-inline"> <input type="radio"
-															value="N" name="active"> Inactive
-														</label>
-
+													
+														<label class="radio-inline">
+														<input type="radio" value="Y" name="active" th:checked="${registerEdit.active}==Y "/>Active   
+															</label>
+															&nbsp;&nbsp;
+														<label class="radio-inline">
+														<input type="radio" value="N" name="active" th:checked="${registerEdit.active}==N"/> &nbsp;Inactive  
+															</label>
 													</div>
 												</div>
 											</div>
@@ -81,7 +81,7 @@ body {
 											<div class="form-group">
 											<label class="form-label">Description</label>
 											<label style="color: red">*</label>
-											 <input type="text" class="form-control uppercase" onkeypress="return /[a-z]/i.test(event.key)" id="descriptionReg" name="descriptionReg"required aria-required="true">
+											 <input type="text" class="form-control uppercase" onkeypress="return /[a-z]/i.test(event.key)" id="descriptionReg" name="descriptionReg" th:value="${registerEdit.descriptionReg}" required aria-required="true">
 										</div>
 											</div>
 										</div>
@@ -91,37 +91,7 @@ body {
 								</div>
 							</div>
 						</div>
-						<div class="col-12">
-							<div class="card">
-								<div class="card-header"></div>
-								<div class="card-body">
-									<table id="datatables-buttons"
-										class="table table-striped display" style="width: 100%">
-										<thead>
-											<tr>
-												<th>Reg Code</th>
-												<th>Description</th>
-												<th>Status</th>
-												<th>Action</th>
-
-											</tr>
-										</thead>
-										<tbody>
-											<tr  th:each="listOfCity : ${listRegister}">
-												<td th:text="${listOfCity.regCode}"></td>
-												<td th:text="${listOfCity.descriptionReg}"></td>
-												<td th:text="${listOfCity.active}"></td>
-												<td><a th:href="@{/editRegister/{id}(id=${listOfCity.regCode})}" class="btn btn-primary"><i class="fa fa-edit"></i></a>
-												<a th:href="@{/deleteRegister/{id}(id=${listOfCity.regCode})}" class="btn btn-primary"onclick="return confirm('Are you sure?')"><i class="fa fa-times"></i></a>
-												</td>
-											</tr>
-										</tbody>
-
-									</table>
-								</div>
-
-							</div>
-						</div>
+		
 					</div>
 				</div>
 
@@ -132,24 +102,7 @@ body {
 		</footer>
 		</div>
 		</div>
-	<script>
-		$(function() {
-			// Datatables basic
-			$('#datatables-basic').DataTable({
-				responsive: true
-			});
-			// Datatables with Buttons
-			var datatablesButtons = $('#datatables-buttons').DataTable({
-				  deferRender:true,
-		            scrollCollapse: true,
-		            scroller: false,
-				   responsive: true,
-				   lengthMenu :[[10,20,30,-1 ],['10 rows', '20 rows', '30 rows', 'Show all' ] ],
-					buttons :[]
-			});
-			datatablesButtons.buttons().container().appendTo("#datatables-buttons_wrapper .col-md-6:eq(0)")
-		});
-	</script>
+	
 		
 		
 </body>

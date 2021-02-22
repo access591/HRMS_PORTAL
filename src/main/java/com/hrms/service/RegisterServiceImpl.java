@@ -10,14 +10,15 @@ import com.hrms.model.Register;
 import com.hrms.repository.RegisterDao;
 @Service
 public class RegisterServiceImpl implements RegisterService {
-@Autowired
-RegisterDao registerDao;
+	@Autowired
+	RegisterDao registerDao;
+
 	@Override
 	public void addRegister(Register res) {
 		res.setIns_date(new Date());
 		res.setRegCode(registerDao.getMAX_Id("REG"));
 		this.registerDao.saveOrUpdate(res);
-		
+
 	}
 
 	@Override
@@ -28,20 +29,23 @@ RegisterDao registerDao;
 
 	@Override
 	public Register findRegisterById(String id) {
-		// TODO Auto-generated method stub
-		return null;
+
+		return registerDao.findById(id);
 	}
 
 	@Override
 	public void updateRegister(Register res) {
-		// TODO Auto-generated method stub
-		
+		res.setDescriptionReg(res.getDescriptionReg());
+		res.setUpd_date(res.getUpd_date());
+		res.setActive(res.getActive());
+		this.registerDao.saveOrUpdate(res);
+
 	}
 
 	@Override
 	public void removeRegister(String id) {
-		// TODO Auto-generated method stub
-		
+		this.registerDao.delete(id);
+
 	}
 
 }

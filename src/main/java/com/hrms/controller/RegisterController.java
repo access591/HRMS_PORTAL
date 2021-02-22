@@ -41,7 +41,7 @@ public class RegisterController {
 
 	@PostMapping("/saveRegister")
 	public String saveRegister(@ModelAttribute("register") Register register, Model model, HttpSession session) {
-		
+
 		registerService.addRegister(register);
 		List<Register> listRegister = registerService.getAllRegisters();
 		model.addAttribute("listRegister", listRegister);
@@ -50,6 +50,24 @@ public class RegisterController {
 
 		return "redirect:/registerMaster";
 
+	}
+
+	@GetMapping(value = { "/editRegister/{id}" })
+	public String editRegister(@PathVariable("id") String id, Model model, HttpSession session) {
+
+		Register registerEdit = registerService.findRegisterById(id);
+		model.addAttribute("registerEdit", registerEdit);
+		session.setAttribute("username", session.getAttribute("username"));
+
+		return "/editRegister";
+	}
+
+	@PostMapping("/updateRegister")
+	public String updateRegister(@ModelAttribute("register") Register r, Model model) {
+
+		this.registerService.updateRegister(r);
+
+		return "redirect:/registerMaster";
 	}
 
 	@GetMapping(value = { "/deleteRegister/{id}" })
