@@ -41,7 +41,8 @@ public class CountryController {
 
 	@PostMapping("/saveCountry")
 	public String saveCountry(@ModelAttribute("country") Country country, Model model, HttpSession session) {
-
+		String insertedBY = (String) session.getAttribute("userlogin");
+		country.setIns_by(insertedBY);
 		countryService.addCountry(country);
 		List<Country> listCountry = countryService.getAllCountrys();
 		model.addAttribute("listCountry", listCountry);
@@ -63,8 +64,9 @@ public class CountryController {
 	
 	
 	@PostMapping("/updateCountry")
-	public String updateCountry(@ModelAttribute("country") Country c, Model model) {
-
+	public String updateCountry(@ModelAttribute("country") Country c, Model model, HttpSession session) {
+		String updatedBY = (String) session.getAttribute("userlogin");
+		c.setUpd_by(updatedBY);
 		this.countryService.updateCountry(c);
 
 		return "redirect:/countryMaster";
