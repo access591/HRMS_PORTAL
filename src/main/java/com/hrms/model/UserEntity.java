@@ -33,16 +33,16 @@ public class UserEntity implements Serializable{
 	@Column(name = "User_active_yn")
 	private String userActiveYn;
 
-	@Column(name = "Ins_by")
+	@Column(name = "Ins_by",updatable = false)
 	private String insBy;
 
-	@Column(name = "ins_date")
+	@Column(name = "ins_date",updatable = false)
 	private Date insDate= new Date();
 
-	@Column(name = "upd_by")
+	@Column(name = "upd_by",insertable = false)
 	private String updBy;
 
-	@Column(name = "upd_date")
+	@Column(name = "upd_date",insertable = false)
 	private Date updDate=new Date(); 
 	@Column(name ="Desg_Name")
 	private String  DesgName;
