@@ -41,7 +41,8 @@ public class RegisterController {
 
 	@PostMapping("/saveRegister")
 	public String saveRegister(@ModelAttribute("register") Register register, Model model, HttpSession session) {
-
+		String insertedBY = (String) session.getAttribute("userlogin");
+		register.setIns_by(insertedBY);
 		registerService.addRegister(register);
 		List<Register> listRegister = registerService.getAllRegisters();
 		model.addAttribute("listRegister", listRegister);
@@ -63,8 +64,9 @@ public class RegisterController {
 	}
 
 	@PostMapping("/updateRegister")
-	public String updateRegister(@ModelAttribute("register") Register r, Model model) {
-
+	public String updateRegister(@ModelAttribute("register") Register r, Model model,HttpSession session) {
+		String updatedBY = (String) session.getAttribute("userlogin");
+		r.setUpd_by(updatedBY);
 		this.registerService.updateRegister(r);
 
 		return "redirect:/registerMaster";

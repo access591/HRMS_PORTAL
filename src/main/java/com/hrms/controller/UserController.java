@@ -67,7 +67,7 @@ public class UserController {
 			
 			String id=login.getUserCode();
 			UserEntity userRecord = userService.findDataById(id);
-			session.setAttribute("uuuuu",userRecord.getUserName());
+			session.setAttribute("userlogin",userRecord.getUserName());
 			session.setAttribute("user_desg",userRecord.getDesgName());
 		session.setAttribute("username",login.getUserCode());
 		String userCode= (String)session.getAttribute("username");
@@ -138,7 +138,7 @@ public class UserController {
 			redirectAttributes.addFlashAttribute("alertClass", "alert-success");
 			return "redirect:/userMaster";
 		} else {
-			String username= (String)session.getAttribute("uuuuu");
+			String username= (String)session.getAttribute("userlogin");
 			userEntity.setInsBy(username);
 			userService.addUser(userEntity);
 			session.setAttribute("username", session.getAttribute("username"));
@@ -161,7 +161,7 @@ public class UserController {
 	@PostMapping("/upadteUser")
 	public String updateUser(@ModelAttribute("userUpdate") UserEntity u, Model model, HttpSession session) {
 
-		String username= (String)session.getAttribute("uuuuu");
+		String username= (String)session.getAttribute("userlogin");
 			u.setUpdBy(username);
 		  this.userService.updateUser(u);
 	  	  
