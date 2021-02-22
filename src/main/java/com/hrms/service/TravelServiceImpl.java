@@ -29,13 +29,13 @@ TravelDao  travelDao;
 	@Override
 	public Travel findTravelById(String id) {
 	
-		return null;
+		return travelDao.findById(id);
 	}
 
 	@Override
-	public void updateTravel(Travel c) {
+	public void updateTravel(Travel t) {
 	
-		
+	this.travelDao.saveOrUpdate(t);	
 	}
 
 	@Override

@@ -52,6 +52,23 @@ public class TravelController {
 		return "redirect:/travelDetails";
 
 	}
+	
+	@GetMapping(value = {"/editTravel/{id}"})
+	public String editTravel(@PathVariable("id") String id, Model model, HttpSession session) {
+
+		Travel travelEdit = travelService.findTravelById(id);
+		model.addAttribute("travelEdit",travelEdit);
+		session.setAttribute("username", session.getAttribute("username"));
+		
+		return "/editTravel";
+	}
+	@PostMapping("/updateTravel")
+	public String updateTravel(@ModelAttribute("travel")Travel c, Model model) {
+
+		this.travelService.updateTravel(c);
+
+		return "redirect:/travelDetails";
+	}
 
 	@GetMapping(value = { "/deleteTravel/{id}" })
 	public String deleteTravel(@PathVariable("id") String id, Model model, HttpSession session) {
