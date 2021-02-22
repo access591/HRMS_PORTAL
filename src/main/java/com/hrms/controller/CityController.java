@@ -43,7 +43,8 @@ public class CityController {
 
 	@PostMapping("/saveCity")
 	public String saveCity(@ModelAttribute("city") City city, Model model, HttpSession session) {
-
+		String insertedBY = (String) session.getAttribute("userlogin");
+		city.setIns_by(insertedBY);
 		cityService.addCity(city);
 		List<City> listCity = cityService.getAllCities();
 		model.addAttribute("listCity", listCity);
@@ -65,8 +66,9 @@ public class CityController {
 	
 	
 	@PostMapping("/updateCity")
-	public String updateCity(@ModelAttribute("city") City c, Model model) {
-
+	public String updateCity(@ModelAttribute("city") City c, Model model, HttpSession session) {
+		String updatedBY = (String) session.getAttribute("userlogin");
+		c.setUpd_by(updatedBY);
 		this.cityService.updateCity(c);
 
 		return "redirect:/cityMaster";
