@@ -108,7 +108,7 @@ body {
 								</div>
 							</div>
 						</div>
-	      <div class="col-12">
+	                         <div class="col-12">
 							<div class="card">
 								<div class="card-header">
 								</div>
@@ -116,20 +116,29 @@ body {
 								<table id="datatables-buttons" class="table table-striped display" style="width:100%">
 										<thead>
 											<tr>
-												<th>City Code</th>
-												<th>City Name </th>
+												<th>Skill Level Code</th>
+												<th>Skill Category Description </th>
+												<th>Level</th>
+												<th>Skill Parameter Code</th>
+												<th>Skill Parameter Description</th>
+												<th>Skill Parameter Max Mark</th>
 												<th>Status</th>
 												<th>Action</th>
 												
 											</tr>
 										</thead>
 										<tbody>
-											<tr  th:each="listOfCity : ${listCity}">
-												<td th:text="${listOfCity.cityCode}"></td>
-												<td th:text="${listOfCity.cityName}"></td>
+											<tr  th:each="listOfCity : ${listSkillCategory}">
+												<td th:text="${listOfCity.skillLevelCode}"></td>
+												<td th:text="${listOfCity.skillCatDesc}"></td>
+												<td th:text="${listOfCity.skillLevel}"></td>
+												<td th:text="${listOfCity.skillParaCode}"></td>
+												<td th:text="${listOfCity.skillParaDes}"></td>
+												<td th:text="${listOfCity.skillParaMaxMark}"></td>
+												
 												<td th:text="${listOfCity.active}"></td>
-												<td><a th:href="@{/editCity/{id}(id=${listOfCity.cityCode})}" class="btn btn-primary"><i class="fa fa-edit"></i></a>
-												<a th:href="@{/deleteCity/{id}(id=${listOfCity.cityCode})}" class="btn btn-primary"onclick="return confirm('Are you sure?')"><i class="fa fa-times"></i></a>
+												<td><a th:href="@{/editSkillCategory/{id}(id=${listOfCity.skillLevelCode})}" class="btn btn-primary"><i class="fa fa-edit"></i></a>
+												<a th:href="@{/deleteSkillCategory/{id}(id=${listOfCity.skillLevelCode})}" class="btn btn-primary"onclick="return confirm('Are you sure?')"><i class="fa fa-times"></i></a>
 												</td>
 											</tr>
 										</tbody>
