@@ -12,6 +12,7 @@ body {
 .uppercase {
   text-transform: uppercase;
 }
+
 </style>
 <script>
 	window.dataLayer = window.dataLayer || [];
@@ -108,28 +109,37 @@ body {
 								</div>
 							</div>
 						</div>
-	      <div class="col-12">
+	                         <div class="col-12">
 							<div class="card">
 								<div class="card-header">
 								</div>
 								<div class="card-body">
-								<table id="datatables-buttons" class="table table-striped display" style="width:100%">
+								<table id="example" class="table table-striped dataTable dtr-inline collapsed" style="width:100%">
 										<thead>
 											<tr>
-												<th>City Code</th>
-												<th>City Name </th>
+												<th>Skill Level Code</th>
+												<th>Skill Category Description </th>
+												<th>Level</th>
+												<th>Skill Parameter Code</th>
+												<th>Skill Parameter Description</th>
+												<th>Skill Parameter Max Mark</th>
 												<th>Status</th>
 												<th>Action</th>
 												
 											</tr>
 										</thead>
 										<tbody>
-											<tr  th:each="listOfCity : ${listCity}">
-												<td th:text="${listOfCity.cityCode}"></td>
-												<td th:text="${listOfCity.cityName}"></td>
+											<tr  th:each="listOfCity : ${listSkillCategory}">
+												<td th:text="${listOfCity.skillLevelCode}"></td>
+												<td th:text="${listOfCity.skillCatDesc}"></td>
+												<td th:text="${listOfCity.skillLevel}"></td>
+												<td th:text="${listOfCity.skillParaCode}"></td>
+												<td th:text="${listOfCity.skillParaDes}"></td>
+												<td th:text="${listOfCity.skillParaMaxMark}"></td>
+												
 												<td th:text="${listOfCity.active}"></td>
-												<td><a th:href="@{/editCity/{id}(id=${listOfCity.cityCode})}" class="btn btn-primary"><i class="fa fa-edit"></i></a>
-												<a th:href="@{/deleteCity/{id}(id=${listOfCity.cityCode})}" class="btn btn-primary"onclick="return confirm('Are you sure?')"><i class="fa fa-times"></i></a>
+												<td><a th:href="@{/editSkillCategory/{id}(id=${listOfCity.skillLevelCode})}"><i class="align-middle fas fa-fw fa-pen"></i></a>
+												<a th:href="@{/deleteSkillCategory/{id}(id=${listOfCity.skillLevelCode})}" onclick="return confirm('Are you sure?')"><i class="align-middle fas fa-fw fa-trash"></i></a>
 												</td>
 											</tr>
 										</tbody>
@@ -150,22 +160,15 @@ body {
 		</div>
 		</div>
 	<script>
-		$(function() {
-			// Datatables basic
-			$('#datatables-basic').DataTable({
-				responsive: true
-			});
-			// Datatables with Buttons
-			var datatablesButtons = $('#datatables-buttons').DataTable({
-				  deferRender:true,
-		            scrollCollapse: true,
-		            scroller: false,
-				   responsive: true,
-				   lengthMenu :[[10,20,30,-1 ],['10 rows', '20 rows', '30 rows', 'Show all' ] ],
-					buttons :[]
-			});
-			datatablesButtons.buttons().container().appendTo("#datatables-buttons_wrapper .col-md-6:eq(0)")
-		});
+	$(document).ready(function() {
+	    $('#example').DataTable( {
+	        "scrollY": 200,
+	        "scrollX": true,
+	        deferRender:true,
+            scrollCollapse: true,
+            
+	    } );
+	} );
 	</script>
 		
 		

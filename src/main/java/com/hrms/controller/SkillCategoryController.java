@@ -9,9 +9,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.hrms.model.City;
+
 import com.hrms.model.MenuModule;
 import com.hrms.model.SkillCategory;
 import com.hrms.service.ModuleService;
@@ -47,8 +48,32 @@ public class SkillCategoryController {
 		session.setAttribute("username", session.getAttribute("username"));
 
 		return "redirect:/skillCategoryMaster";
-
 	}	
+	
+	@GetMapping(value = { "/editSkillCategory/{id}" })
+	public String editSkillCategory(@PathVariable("id") String id, Model model, HttpSession session) {
+		SkillCategory skillCategoryEdit = skillCategoryService.findSkillCategoryById(id);
+		model.addAttribute("skillCategoryEdit", skillCategoryEdit);
+		session.setAttribute("username", session.getAttribute("username"));
+		return "/editSkillCategory";
+	}
+	
+	@PostMapping("/updateSkillCategory")
+	public String updateCity(@ModelAttribute("skillCategory") SkillCategory sc, Model model, HttpSession session) {
+		String updatedBY = (String) session.getAttribute("userlogin");
+		sc.setUpd_by(updatedBY);
+		this.skillCategoryService.updateSkillCategory(sc);
+		return "redirect:/skillCategoryMaster";
+	}
+	
+	
+	@GetMapping(value = { "/deleteSkillCategory/{id}" })
+	public String deleteSkillCategory(@PathVariable("id") String id, Model model, HttpSession session) {
+		this.skillCategoryService.removeSkillCategory(id);
+		session.setAttribute("username", session.getAttribute("username"));
+		return "redirect:/skillCategoryMaster";
+	}
+
 	
 	
 }
