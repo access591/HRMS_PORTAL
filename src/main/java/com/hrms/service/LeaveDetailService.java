@@ -12,7 +12,7 @@ public interface LeaveDetailService {
 
 	LeaveDetail findLeaveDetailById(String id);
 
-	public void updateTravel(LeaveDetail c);
+	public void updateLeaveDetail(LeaveDetail c);
 
 	public void removeLeaveDetail(String id);
 

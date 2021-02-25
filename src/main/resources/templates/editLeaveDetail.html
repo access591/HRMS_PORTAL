@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<script type="text/javascript" th:src="@{/js/settings.js}"></script>
+<script type="text/javascript" th:src="@{/js/app.js}"></script>
+<link rel="stylesheet" type="text/css" th:href="@{/css/modern.css}" />
+<script src="https://www.googletagmanager.com/gtag/js?id=UA-120946860-7"></script>
+<style>
+body {
+	opacity: 0;
+}
+
+.uppercase {
+	text-transform: uppercase;
+}
+</style>
+<script>
+	window.dataLayer = window.dataLayer || [];
+	function gtag() {
+		dataLayer.push(arguments);
+	}
+	gtag('js', new Date());
+
+	gtag('config', 'UA-120946860-7');
+</script>
+<head>
+<meta charset="utf-8" />
+<title>HRMS</title>
+</head>
+<body>
+	<div class="wrapper">
+		<nav id="sidebar" class="sidebar">
+			<div th:replace="/fragments/sidebar :: div"></div>
+		</nav>
+		<div class="main">
+			<div th:replace="/fragments/header ::div"></div>
+			<main class="content">
+				<div class="container-fluid">
+					<div class="header">
+						<h1 class="header-title">Master</h1>
+						<nav aria-label="breadcrumb"></nav>
+					</div>
+					<div class="row">
+						<div class="col-12">
+							<div class="card">
+								<div class="card-header">
+									<h5 class="card-title">Update Leave Detail</h5>
+									<div class="alert-outline">
+										<div th:if="${message}" th:text="${message}"
+											style="color: red"></div>
+									</div>
+								</div>
+								<div class="card-body">
+									<form id="validation-form" action="#"
+										th:action="@{/updateLeaveDetail}" th:object="${leaveDetail}"
+										method="post">
+										<div class="row">
+											<div class="col-12 col-lg-6">
+												<div class="form-group">
+													<label> Leave Code </label> <label style="color: red">*</label>
+													<input type="text" class="form-control" id="lvCode"
+														name="lvCode" th:value="${leaveDetailEdit.lvCode}" readonly="readonly">
+												</div>
+
+												<div class="form-group">
+													<label class="form-label"> Total Leaves</label> <label
+														style="color: red">*</label>
+								<input type="text"class="form-control uppercase" id="totalLeave"name="totalLeave" th:value="${leaveDetailEdit.totalLeave}"  required aria-required="true">
+												</div>
+
+												<div class="form-group">
+													<label class="form-label">LWP</label> <label
+														style="color: red">*</label> <select class="form-control"
+														name="lwp" id="lwp">
+														<option th:value="No" th:selected="${leaveDetailEdit.lwp}==No">No</option>
+														<option th:value="Yes"th:selected="${leaveDetailEdit.lwp}==Yes" >Yes</option>
+
+													</select>
+												</div>
+												<div class="form-group">
+													<label class="form-label"> Maximum Limit</label> <label
+														style="color: red">*</label> <input type="text"
+														class="form-control uppercase" id="maxLimit"
+														name="maxLimit" th:value="${leaveDetailEdit.maxLimit}" required aria-required="true">
+												</div>
+											<div class="form-group">
+													<label class="form-label">Status</label>
+													<div class="custom-controls-stacked">
+													
+														<label class="radio-inline">
+														<input type="radio" value="Y" name="active" th:checked="${leaveDetailEdit.active}==Y "/>Active   
+															</label>
+															&nbsp;&nbsp;
+														<label class="radio-inline">
+														<input type="radio" value="N" name="active" th:checked="${leaveDetailEdit.active}==N"/> &nbsp;Inactive  
+															</label>
+													</div>
+												</div>
+
+
+											</div>
+											<div class="col-12 col-lg-6">
+
+												<div class="form-group">
+													<label class="form-label">Type</label> <label
+														style="color: red">*</label> <select class="form-control"
+														name="leaveType" id="leaveType">
+														<option th:value="CASUAL" th:selected="${leaveDetailEdit.leaveType}==CASUAL">CASUAL LEAVE</option>
+														<option th:value="SICK" th:selected="${leaveDetailEdit.leaveType}==SICK">SICK LEAVE</option>
+														<option th:value="PUBLIC" th:selected="${leaveDetailEdit.leaveType}==PUBLIC">PUBLIC HOLIDAY</option>
+														<option th:value="RELIGIOUS" th:selected="${leaveDetailEdit.leaveType}==RELIGIOUS">RELIGIOUS HOLIDAYS</option>
+														<option th:value="MATERNITY" th:selected="${leaveDetailEdit.leaveType}==MATERNITY">MATERNITY LEAVE</option>
+														<option th:value="BEREAVEMENT" th:selected="${leaveDetailEdit.leaveType}==BEREAVEMENT">BEREAVEMENT LEAVE</option>
+														<option th:value="COMPENSATORY" th:selected="${leaveDetailEdit.leaveType}==COMPENSATORY">COMPENSATORY LEAVE</option>
+														<option th:value="UNPAID" th:selected="${leaveDetailEdit.leaveType}==UNPAID">UNPAID LEAVE</option>
+
+													</select>
+												</div>
+
+												<div class="form-group">
+													<label class="form-label">Status</label> <label
+														style="color: red">*</label> <select class="form-control"
+														name="leaveStatus" id="leaveStatus">
+														<option th:value="RESET"
+															th:selected="${leaveDetailEdit.leaveStatus}==RESET">RESET</option>
+														<option th:value="CUMULATIVE"
+															th:selected="${leaveDetailEdit.leaveStatus}==CUMULATIVE">CUMULATIVE</option>
+
+													</select>
+												</div>
+												<div class="form-group">
+													<label class="form-label"> Entitlement Days</label> <label
+														style="color: red">*</label> <input type="text"
+														class="form-control uppercase" id="entDay"  th:value="${leaveDetailEdit.entDay}" name="entDay"
+														required aria-required="true">
+												</div>
+
+												<div class="form-group">
+													<label class="form-label"> Abbreviation </label> <label
+														style="color: red">*</label> <input type="text"
+														class="form-control uppercase" id="abbrev" name="abbrev" th:value="${leaveDetailEdit.abbrev}"
+														required aria-required="true">
+												</div>
+
+											</div>
+										</div>
+										<button type="submit" class="btn btn-primary">Save</button>
+										<button type="submit"class="btn btn-primary" value="cancel">Cancel</button>
+									</form>
+								</div>
+							</div>
+						</div>
+				
+					</div>
+				</div>
+
+			</main>
+
+			<footer class="footer">
+				<div th:replace="/fragments/footer :: div"></div>
+			</footer>
+		</div>
+	</div>
+	
+
+
+</body>
+</html>
