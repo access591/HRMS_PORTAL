@@ -33,7 +33,7 @@ public class LeaveDetailServiceImpl  implements LeaveDetailService{
 	}
 
 	@Override
-	public void updateTravel(LeaveDetail leaveDetail) {
+	public void updateLeaveDetail(LeaveDetail leaveDetail) {
 	this.leaveDetailDao.saveOrUpdate(leaveDetail);
 		
 	}
