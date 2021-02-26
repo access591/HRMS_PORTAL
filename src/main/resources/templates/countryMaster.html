@@ -81,7 +81,7 @@ body {
 											<div class="form-group">
 											<label class="form-label">Country Name</label>
 											<label style="color: red">*</label>
-											 <input type="text" class="form-control uppercase" onkeypress="return /[a-z]/i.test(event.key)" id="countryName" name="countryName"required aria-required="true">
+											 <input type="text" class="form-control"pattern="^[a-zA-Z\s]*$"maxlength="30"  id="countryName" name="countryName"required aria-required="true">
 										</div>
 											</div>
 										</div>
@@ -111,8 +111,8 @@ body {
 												<td th:text="${listofCountry.countryCode}"></td>
 												<td th:text="${listofCountry.countryName}"></td>
 												<td th:text="${listofCountry.active}"></td>
-												<td><a th:href="@{/editCountry/{id}(id=${listofCountry.countryCode})}" class="btn btn-primary"><i class="fa fa-edit"></i></a>
-												<a th:href="@{/deleteCountry/{id}(id=${listofCountry.countryCode})}" class="btn btn-primary"onclick="return confirm('Are you sure?')"><i class="fa fa-times"></i></a>
+												<td><a th:href="@{/editCountry/{id}(id=${listofCountry.countryCode})}"><i class="align-middle fas fa-fw fa-pen"></i></a>
+												<a th:href="@{/deleteCountry/{id}(id=${listofCountry.countryCode})}" onclick="return confirm('Are you sure?')"><i class="align-middle fas fa-fw fa-trash"></i></a>
 												</td>
 											</tr>
 										</tbody>
