@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.hrms.model.City;
 import com.hrms.model.MenuModule;
 import com.hrms.model.Shift;
 import com.hrms.service.ModuleService;
@@ -53,6 +52,25 @@ public class ShiftController {
 
 	}
 	
+	@GetMapping(value = { "/editShift/{id}" })
+	public String editShift(@PathVariable("id") String id, Model model, HttpSession session) {
+
+		Shift shiftEdit = shiftService.findShiftById(id);
+		model.addAttribute("shiftEdit", shiftEdit);
+		session.setAttribute("username", session.getAttribute("username"));
+		
+		return "/editShift";
+	}
+	
+	
+	@PostMapping("/updateShift")
+	public String updateShift(@ModelAttribute("shift") Shift s, Model model, HttpSession session) {
+		String updatedBY = (String) session.getAttribute("userlogin");
+		s.setUpdBy(updatedBY);
+		this.shiftService.updateShift(s);
+
+		return "redirect:/shiftMaster";
+	}
 	@GetMapping(value = { "/deleteShift/{id}" })
 	public String deleteShift(@PathVariable("id") String id, Model model, HttpSession session) {
 		this.shiftService.removeShift(id);
