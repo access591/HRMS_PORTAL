@@ -67,10 +67,10 @@ body {
 													<div class="custom-controls-stacked">
 													
 														<label class="radio-inline">
-														<input type="radio" value="Y" name="active" th:checked="${designationEdit.active}==Y "/>Active   
+														<input type="radio" value="Y" name="active" th:checked="${designationEdit.active}==Y "/> Active  &nbsp; 
 															</label>
 														<label class="radio-inline">
-														<input type="radio" value="N" name="active" th:checked="${designationEdit.active}==N"/>Inactive  
+														<input type="radio" value="N" name="active" th:checked="${designationEdit.active}==N"/> &nbsp; Inactive  
 															</label>
 													</div>
 												</div>
@@ -80,7 +80,7 @@ body {
 											
 											<label class="form-label">Designation Name</label>
 											<label style="color: red">*</label>
-											 <input type="text" class="form-control uppercase"  pattern="^[a-zA-Z\s]*$" maxlength="25" id="Desg_Name" name="Desg_Name"th:value="${designationEdit.Desg_Name}" required aria-required="true">
+											 <input type="text" class="form-control"  pattern="^[a-zA-Z\s]*$" maxlength="25" id="Desg_Name" name="Desg_Name"th:value="${designationEdit.Desg_Name}" required aria-required="true">
 										   </div>
 
 											</div>

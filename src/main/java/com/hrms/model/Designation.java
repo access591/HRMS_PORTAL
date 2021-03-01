@@ -64,7 +64,7 @@ public class Designation implements Serializable{
 	public void setDesg_Name(String desg_Name) {
 		
 		
-		Desg_Name = desg_Name.toUpperCase();
+		Desg_Name = desg_Name;
 	}
 
 	public String getIns_by() {
