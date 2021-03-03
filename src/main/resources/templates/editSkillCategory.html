@@ -63,13 +63,13 @@ body {
 											<div class="form-group">
 										   <label class="form-label"> Level</label>
 										   <label style="color: red">*</label>
-											 <input type="text" class="form-control uppercase"  id="skillLevel" name="skillLevel" th:value="${skillCategoryEdit.skillLevel}" required aria-required="true">
+											 <input type="text" class="form-control "  pattern="^[a-zA-Z\s]*$" maxlength="12"  id="skillLevel" name="skillLevel"  title="Level" th:value="${skillCategoryEdit.skillLevel}" required aria-required="true">
 										    </div>
 										    
 										<div class="form-group">
 										   <label class="form-label"> Skill Parameter  Description</label>
 										   <label style="color: red">*</label>
-											 <input type="text" class="form-control uppercase"  id="skillParaDes" name="skillParaDes"  th:value="${skillCategoryEdit.skillParaDes}"required aria-required="true">
+											 <input type="text" class="form-control " pattern="^[a-zA-Z\s]*$" maxlength="50"  title="Skill Parameter Description"  id="skillParaDes" name="skillParaDes"  th:value="${skillCategoryEdit.skillParaDes}"required aria-required="true">
 										</div>
 										
 										
@@ -89,17 +89,17 @@ body {
 										<div class="form-group">
 										   <label class="form-label"> Skill Category Description </label>
 										   <label style="color: red">*</label>
-											 <input type="text" class="form-control uppercase"  id="skillCatDesc" name="skillCatDesc" th:value="${skillCategoryEdit.skillCatDesc}"required aria-required="true">
+											 <input type="text" class="form-control " pattern="^[a-zA-Z\s]*$" maxlength="50"  id="skillCatDesc" name="skillCatDesc" th:value="${skillCategoryEdit.skillCatDesc}"required aria-required="true">
 										</div>
 										<div class="form-group">
 										   <label class="form-label"> Skill Parameter Code </label>
 										   <label style="color: red">*</label>
-											 <input type="text" class="form-control uppercase"  id=" skillParaCode" name="skillParaCode" th:value="${skillCategoryEdit.skillParaCode}"required aria-required="true">
+											 <input type="text" class="form-control " maxlength="12" pattern="\d{1,12}"  id=" skillParaCode" name="skillParaCode" th:value="${skillCategoryEdit.skillParaCode}"required aria-required="true">
 										</div>
 										<div class="form-group">
 										   <label class="form-label"> Skill Parameter Max Mark</label>
 										   <label style="color: red">*</label>
-											 <input type="text" class="form-control uppercase"  id="skillParaMaxMark" name="skillParaMaxMark" th:value="${skillCategoryEdit.skillParaMaxMark}"required aria-required="true">
+											 <input type="text" class="form-control" maxlength="12" pattern="\d{1,10}"  id="skillParaMaxMark" name="skillParaMaxMark" th:value="${skillCategoryEdit.skillParaMaxMark}"required aria-required="true">
 										</div>
 										
 											</div>

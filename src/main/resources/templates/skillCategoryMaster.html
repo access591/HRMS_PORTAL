@@ -64,13 +64,13 @@ body {
 											<div class="form-group">
 										   <label class="form-label"> Level</label>
 										   <label style="color: red">*</label>
-											 <input type="text" class="form-control uppercase"  id="skillLevel" name="skillLevel"required aria-required="true">
+											 <input type="text" class="form-control"  pattern="^[a-zA-Z\s]*$" id="skillLevel" name="skillLevel"required aria-required="true">
 										    </div>
 										    
 										<div class="form-group">
 										   <label class="form-label"> Skill Parameter  Description</label>
 										   <label style="color: red">*</label>
-											 <input type="text" class="form-control uppercase"  id="skillParaDes" name="skillParaDes"required aria-required="true">
+											 <input type="text" class="form-control"  id="skillParaDes" name="skillParaDes"pattern="^[a-zA-Z\s]*$" maxlength="50" required aria-required="true">
 										</div>
 										
 										
@@ -88,17 +88,17 @@ body {
 										<div class="form-group">
 										   <label class="form-label"> Skill Category Description </label>
 										   <label style="color: red">*</label>
-											 <input type="text" class="form-control uppercase"  id="skillCatDesc" name="skillCatDesc"required aria-required="true">
+											 <input type="text" class="form-control"  id="skillCatDesc" name="skillCatDesc"pattern="^[a-zA-Z\s]*$" maxlength="50" required aria-required="true">
 										</div>
 										<div class="form-group">
 										   <label class="form-label"> Skill Parameter Code </label>
 										   <label style="color: red">*</label>
-											 <input type="text" class="form-control uppercase"  id=" skillParaCode" name="skillParaCode"required aria-required="true">
+											 <input type="text" class="form-control "  id=" skillParaCode"maxlength="12" pattern="\d{1,12}" name="skillParaCode"required aria-required="true">
 										</div>
 										<div class="form-group">
 										   <label class="form-label"> Skill Parameter Max Mark</label>
 										   <label style="color: red">*</label>
-											 <input type="text" class="form-control uppercase"  id="skillParaMaxMark" name="skillParaMaxMark"required aria-required="true">
+											 <input type="text" class="form-control" maxlength="12"  id="skillParaMaxMark" name="skillParaMaxMark" pattern="\d{1,12}"required aria-required="true">
 										</div>
 										
 											</div>
