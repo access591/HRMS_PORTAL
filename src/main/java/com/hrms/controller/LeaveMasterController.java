@@ -66,12 +66,11 @@ public String LeaveMaster(Model model,HttpSession session) {
  */
 @PostMapping("/saveLeave")
 	public String SaveLeave(@ModelAttribute("leave") Leave leave, Model model) {
-		if (leave.getLev_code() != "") {
+	
 			leaveService.addLeave(leave);
-			
 			List<Leave> listLeave = leaveService.getAllLeaves();
 			model.addAttribute("listLeave", listLeave);
-		} 
+	
 		  return "redirect:"+pageMappingService.PageRequestMapping(reqPage,pageno);
 
 	}	
