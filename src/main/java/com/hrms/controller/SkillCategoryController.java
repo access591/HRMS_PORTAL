@@ -16,13 +16,24 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.hrms.model.MenuModule;
 import com.hrms.model.SkillCategory;
 import com.hrms.service.ModuleService;
+import com.hrms.service.PageMappingService;
 import com.hrms.service.SkillCategoryService;
 @Controller
 public class SkillCategoryController {
+	int pageno = 35;
+	String reqPage = "/skillCategoryMaster";
 	@Autowired
 	private ModuleService moduleService;
 	@Autowired
 	SkillCategoryService skillCategoryService;
+	@Autowired
+	PageMappingService pageMappingService;
+	/**
+	 * Request Mapping Skill Cat Master 
+	 * @param model
+	 * @param session
+	 * @return
+	 */
 	@GetMapping("/skillCategoryMaster")
 	public String skillCategoryMaster(Model model, HttpSession session) {
 		List<SkillCategory> listSkillCategory = skillCategoryService.getAllSkillCategorys();
@@ -34,9 +45,15 @@ public class SkillCategoryController {
 			model.addAttribute("modules", modules);
 		}
 		session.setAttribute("username", session.getAttribute("username"));
-		return "skillCategoryMaster";
+		return pageMappingService.PageRequestMapping(reqPage, pageno);
 	}
-
+/**
+ * 
+ * @param save Skill Category
+ * @param model
+ * @param session
+ * @return
+ */
 	@PostMapping("/saveSkillCategory")
 	public String saveCity(@ModelAttribute("skillCategory") SkillCategory sc, Model model, HttpSession session) {
 		String insertedBY = (String) session.getAttribute("userlogin");
@@ -47,31 +64,53 @@ public class SkillCategoryController {
 		
 		session.setAttribute("username", session.getAttribute("username"));
 
-		return "redirect:/skillCategoryMaster";
+		return "redirect:/"+ pageMappingService.PageRequestMapping(reqPage, pageno);
 	}	
 	
+	/**
+	 * 
+	 * @param id find and set value update page 
+	 * @param model
+	 * @param session
+	 * @return
+	 */
 	@GetMapping(value = { "/editSkillCategory/{id}" })
 	public String editSkillCategory(@PathVariable("id") String id, Model model, HttpSession session) {
+		int editPageNo =36;
+		String reqPageedit ="/editSkillCategory";
+		
 		SkillCategory skillCategoryEdit = skillCategoryService.findSkillCategoryById(id);
 		model.addAttribute("skillCategoryEdit", skillCategoryEdit);
 		session.setAttribute("username", session.getAttribute("username"));
-		return "/editSkillCategory";
+		return pageMappingService.PageRequestMapping(reqPageedit, editPageNo);
 	}
-	
+	/**
+	 * 
+	 * @param update Skill Category
+	 * @param model
+	 * @param session
+	 * @return
+	 */
 	@PostMapping("/updateSkillCategory")
 	public String updateCity(@ModelAttribute("skillCategory") SkillCategory sc, Model model, HttpSession session) {
 		String updatedBY = (String) session.getAttribute("userlogin");
 		sc.setUpd_by(updatedBY);
 		this.skillCategoryService.updateSkillCategory(sc);
-		return "redirect:/skillCategoryMaster";
+		return "redirect:/"+ pageMappingService.PageRequestMapping(reqPage, pageno);
 	}
 	
-	
+	/**
+	 * delete skill cat.
+	 * @param id
+	 * @param model
+	 * @param session
+	 * @return
+	 */
 	@GetMapping(value = { "/deleteSkillCategory/{id}" })
 	public String deleteSkillCategory(@PathVariable("id") String id, Model model, HttpSession session) {
 		this.skillCategoryService.removeSkillCategory(id);
 		session.setAttribute("username", session.getAttribute("username"));
-		return "redirect:/skillCategoryMaster";
+		return "redirect:/"+ pageMappingService.PageRequestMapping(reqPage, pageno);
 	}
 
 	
