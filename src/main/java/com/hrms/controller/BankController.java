@@ -62,12 +62,10 @@ public String bankMaster(Model model,HttpSession session) {
  */
 @PostMapping("/saveBank")
 	public String SaveBank(@ModelAttribute("bank") Bank bank, Model model) {
-		if (bank.getBank_Code() != "") {
 			bankService.addBank(bank);
-			
 			List<Bank> listBank = bankService.getAllBanks();
 			model.addAttribute("listBank", listBank);
-		} 
+		
 		   return "redirect:"+pageMappingService.PageRequestMapping(reqPage,pageno);
 		   	
 	}	

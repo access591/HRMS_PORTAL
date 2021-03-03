@@ -27,14 +27,25 @@ import com.hrms.model.Employee;
 import com.hrms.model.MenuModule;
 import com.hrms.service.EmployeeService;
 import com.hrms.service.ModuleService;
+import com.hrms.service.PageMappingService;
 
 @Controller
 public class EmployeeController {
+	int pageno = 43;
+	String reqPage = "/employeeMaster";
+	
+	@Autowired
+	PageMappingService pageMappingService;
 	@Autowired
 	private ModuleService moduleService;
 	@Autowired
 	EmployeeService employeeService;
-
+/**
+ * get All employee Details page 
+ * @param model
+ * @param session
+ * @return
+ */
 	@GetMapping("/employeeMaster")
 	public String employeeMaster(Model model, HttpSession session) {
 
@@ -47,9 +58,16 @@ public class EmployeeController {
 			model.addAttribute("modules", modules);
 		}
 		session.setAttribute("username", session.getAttribute("username"));
-		return "empInfoMaster";
+		return pageMappingService.PageRequestMapping(reqPage, pageno);
 	}
-
+/**
+ * Save Employee Page 
+ * @param employee
+ * @param model
+ * @param session
+ * @param multipartFile
+ * @return
+ */
 	@PostMapping("/saveEmployee")
 	public String employeeMasterSave(@ModelAttribute("employees") Employee employee, Model model, HttpSession session,
 			@RequestParam("file") MultipartFile multipartFile) {
@@ -75,46 +93,35 @@ public class EmployeeController {
 			e.printStackTrace();
 		}
 
-		return "redirect:/employeeMaster";
+		return "redirect:/" + pageMappingService.PageRequestMapping(reqPage, pageno);
 
 	}
 
-	@GetMapping(value = { "/deleteEmployee/{id}/{Emp_Img}" })
-	public String deleteUserRights(@PathVariable("id") String id, @PathVariable("Emp_Img") String Emp_Img, Model model,
-			HttpSession session) {
-		try {
-
-			this.employeeService.removeEmployeet(id);
-			String folderPath = "\\src\\main\\resources\\static\\img\\";
-			String uploadDir = System.getProperty("user.dir") + folderPath;
-			File file = new File(uploadDir + Emp_Img);
-
-			if (file.delete()) {
-				System.out.println(file.getName() + " is deleted!"); //
-			} else {
-				System.out.println("Delete operation is failed.");
-
-			}
-
-			session.setAttribute("username", session.getAttribute("username"));
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		return "redirect:/employeeMaster";
-	}
-
+	/**
+	 * Edit Employee 
+	 * @param id
+	 * @param model
+	 * @param session
+	 * @return
+	 */
 	@GetMapping(value = { "/editEmployee/{id}" })
 	public String editEmployee(@PathVariable("id") String id, Model model, HttpSession session) {
-
+		int editPageNo = 44;
+		String reqPageedit = "/editEmployee";
+		
 		Employee employeeEdit = employeeService.findEmployeeById(id);
 		model.addAttribute("employeeEdit", employeeEdit);
 
 		session.setAttribute("username", session.getAttribute("username"));
-		return "/editEmployee";
+		return pageMappingService.PageRequestMapping(reqPageedit, editPageNo);
 	}
-
+/**
+ * update employee
+ * @param e
+ * @param model
+ * @param multipartFile
+ * @return
+ */
 	@PostMapping("/updateEmployee")
 	public String updatePageUrl(@ModelAttribute("employees") Employee e, Model model,@RequestParam("file") MultipartFile multipartFile) {
 		String Emp_Img = e.getEmp_Img().toString();
@@ -147,7 +154,41 @@ public class EmployeeController {
 			e2.printStackTrace();
 		}
 		this.employeeService.updateEmployee(e);
-		return "redirect:/employeeMaster";
+		return "redirect:/" + pageMappingService.PageRequestMapping(reqPage, pageno);
 	}
+	/**
+	 * 
+	 * @param id delete employee 
+	 * @param Emp_Img
+	 * @param model
+	 * @param session
+	 * @return
+	 */
+	@GetMapping(value = { "/deleteEmployee/{id}/{Emp_Img}" })
+	public String deleteEmployee(@PathVariable("id") String id, @PathVariable("Emp_Img") String Emp_Img, Model model,
+			HttpSession session) {
+		try {
+
+			this.employeeService.removeEmployeet(id);
+			String folderPath = "\\src\\main\\resources\\static\\img\\";
+			String uploadDir = System.getProperty("user.dir") + folderPath;
+			File file = new File(uploadDir + Emp_Img);
+
+			if (file.delete()) {
+				System.out.println(file.getName() + " is deleted!"); //
+			} else {
+				System.out.println("Delete operation is failed.");
+
+			}
+
+			session.setAttribute("username", session.getAttribute("username"));
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return "redirect:/" + pageMappingService.PageRequestMapping(reqPage, pageno);
+	}
+
 }
 
