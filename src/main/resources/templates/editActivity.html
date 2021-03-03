@@ -68,7 +68,7 @@ body {
 													<div class="custom-controls-stacked">
 													
 														<label class="radio-inline">
-														<input type="radio" value="Y" name="active" th:checked="${activityEdit.active}==Y "/>Active   
+														<input type="radio" value="Y" name="active" th:checked="${activityEdit.active}==Y "/>&nbsp; Active   
 															</label>
 															&nbsp;&nbsp;
 														<label class="radio-inline">
@@ -81,7 +81,7 @@ body {
 											<div class="form-group">
 											<label class="form-label"> Activity Name</label>
 											<label style="color: red">*</label>
-											 <input type="text" class="form-control" onkeypress="return /[a-z]/i.test(event.key)" id="actName" name="actName" th:value="${activityEdit.actName}"required aria-required="true">
+											 <input type="text" class="form-control" pattern="^[a-zA-Z\s]*$" maxlength="40"  id="actName" name="actName" th:value="${activityEdit.actName}"required aria-required="true">
 										</div>
 											</div>
 										</div>
