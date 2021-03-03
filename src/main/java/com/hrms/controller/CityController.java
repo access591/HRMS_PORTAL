@@ -17,19 +17,28 @@ import com.hrms.model.MenuModule;
 import com.hrms.model.UrlDetail;
 import com.hrms.service.CityService;
 import com.hrms.service.ModuleService;
+import com.hrms.service.PageMappingService;
 
 @Controller
 public class CityController {
+	int pageno=25;
+	String reqPage="/cityMaster";
 	@Autowired
 	private ModuleService moduleService;
 	@Autowired
 	CityService cityService;
-
+	@Autowired
+	PageMappingService pageMappingService;
+/**
+ *  Request mapping City Master 
+ * @param model
+ * @param session
+ * @return
+ */
 	@GetMapping("/cityMaster")
 	public String cityMaster(Model model, HttpSession session) {
 		List<City> listCity = cityService.getAllCities();
 		model.addAttribute("listCity", listCity);
-		
 		String userCode = (String) session.getAttribute("username");
 		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
 		if (modules != null) {
@@ -38,47 +47,79 @@ public class CityController {
 		
 		session.setAttribute("username", session.getAttribute("username"));
 
-		return "cityMaster";
+		  return pageMappingService.PageRequestMapping(reqPage,pageno);
 	}
-
+	
+	/**
+	 * save Cities  request mapping city master 
+	 * @param city
+	 * @param model
+	 * @param session
+	 * @return
+	 */
 	@PostMapping("/saveCity")
 	public String saveCity(@ModelAttribute("city") City city, Model model, HttpSession session) {
+		
 		String insertedBY = (String) session.getAttribute("userlogin");
 		city.setIns_by(insertedBY);
+		
 		cityService.addCity(city);
 		List<City> listCity = cityService.getAllCities();
 		model.addAttribute("listCity", listCity);
 		session.setAttribute("username", session.getAttribute("username"));
 
-		return "redirect:/cityMaster";
+		return "redirect:" + pageMappingService.PageRequestMapping(reqPage, pageno);
 
 	}
 
+	/**
+	 * Get Single Record And Edit Record 
+	 * @param id
+	 * @param model
+	 * @param session
+	 * @return
+	 */
 	@GetMapping(value = { "/editCity/{id}" })
 	public String editCity(@PathVariable("id") String id, Model model, HttpSession session) {
-
+		int editPageNo = 26;
+		String reqPageedit = "/editCity";
 		City cityEdit = cityService.findCityById(id);
 		model.addAttribute("cityEdit", cityEdit);
 		session.setAttribute("username", session.getAttribute("username"));
-		
-		return "/editCity";
+
+		return pageMappingService.PageRequestMapping(reqPageedit, editPageNo);
 	}
-	
+	/**
+	 * Request Mapping  update City 
+	 * @param c
+	 * @param model
+	 * @param session
+	 * @return
+	 */
 	
 	@PostMapping("/updateCity")
 	public String updateCity(@ModelAttribute("city") City c, Model model, HttpSession session) {
+		
 		String updatedBY = (String) session.getAttribute("userlogin");
 		c.setUpd_by(updatedBY);
 		this.cityService.updateCity(c);
 
-		return "redirect:/cityMaster";
+		return "redirect:/" + pageMappingService.PageRequestMapping(reqPage, pageno);
 	}
 	
+	/**
+	 * Delete City record 
+	 * @param id
+	 * @param model
+	 * @param session
+	 * @return
+	 */
 	@GetMapping(value = { "/deleteCity/{id}" })
 	public String deleteCity(@PathVariable("id") String id, Model model, HttpSession session) {
+		
 		this.cityService.removeCity(id);
 		session.setAttribute("username", session.getAttribute("username"));
-		return "redirect:/cityMaster";
+		return "redirect:/" + pageMappingService.PageRequestMapping(reqPage, pageno);
 	}
 	
 }
