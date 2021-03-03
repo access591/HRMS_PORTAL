@@ -81,7 +81,7 @@ body {
 											<div class="form-group">
 											<label class="form-label"> Award Name</label>
 											<label style="color: red">*</label>
-											 <input type="text" class="form-control " onkeypress="return /[a-z]/i.test(event.key)" id="awardName" name="awardName"required aria-required="true">
+											 <input type="text" class="form-control "  pattern="^[a-zA-Z\s]*$" maxlength="25" title=" Award Name" id="awardName" name="awardName"required aria-required="true">
 										</div>
 											</div>
 										</div>
@@ -96,7 +96,7 @@ body {
 								<div class="card-header">
 								</div>
 								<div class="card-body">
-								<table id="datatables-buttons" class="table table-striped display" style="width:100%">
+								<table id="example" class="table table-striped display" style="width:100%">
 										<thead>
 											<tr>
 												<th> Award id </th>
@@ -111,8 +111,8 @@ body {
 												<td th:text="${listOfAward.id}"></td>
 												<td th:text="${listOfAward.awardName}"></td>
 												<td th:text="${listOfAward.active}"></td>
-												<td><a th:href="@{/editAward/{id}(id=${listOfAward.id})}" class="btn btn-primary"><i class="fa fa-edit"></i></a>
-												<a th:href="@{/deleteAward/{id}(id=${listOfAward.id})}" class="btn btn-primary"onclick="return confirm('Are you sure?')"><i class="fa fa-times"></i></a>
+												<td><a th:href="@{/editAward/{id}(id=${listOfAward.id})}"><i class="align-middle fas fa-fw fa-pen"></i></a>
+												<a th:href="@{/deleteAward/{id}(id=${listOfAward.id})}" onclick="return confirm('Are you sure?')"><i class="align-middle fas fa-fw fa-trash"></i></a>
 												</td>
 											</tr>
 										</tbody>
@@ -133,22 +133,15 @@ body {
 		</div>
 		</div>
 	<script>
-		$(function() {
-			// Datatables basic
-			$('#datatables-basic').DataTable({
-				responsive: true
-			});
-			// Datatables with Buttons
-			var datatablesButtons = $('#datatables-buttons').DataTable({
-				  deferRender:true,
-		            scrollCollapse: true,
-		            scroller: false,
-				   responsive: true,
-				   lengthMenu :[[10,20,30,-1 ],['10 rows', '20 rows', '30 rows', 'Show all' ] ],
-					buttons :[]
-			});
-			datatablesButtons.buttons().container().appendTo("#datatables-buttons_wrapper .col-md-6:eq(0)")
-		});
+	$(document).ready(function() {
+	    $('#example').DataTable( {
+	        "scrollY": 200,
+	        "scrollX": true,
+	        deferRender:true,
+            scrollCollapse: true,
+            
+	    } );
+	} );
 	</script>
 		
 		
