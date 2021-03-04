@@ -44,7 +44,7 @@ public class ActivityController {
 		if (modules != null) {
 			model.addAttribute("modules", modules);
 		}
-		session.setAttribute("username", session.getAttribute("username"));
+
 		return pageMappingService.PageRequestMapping(reqPage, pageno);
 	}
 	/**
@@ -61,7 +61,7 @@ public class ActivityController {
 		activityService.addActivity(activities);
 		List<Activities> listActivities = activityService.getAllActivitys();
 		model.addAttribute("listActivities", listActivities);
-		session.setAttribute("username", session.getAttribute("username"));
+
 
 		return "redirect:/"+ pageMappingService.PageRequestMapping(reqPage, pageno);
 
@@ -79,7 +79,7 @@ public class ActivityController {
 		String reqPageedit ="/editActivity";
 		Activities activityEdit = activityService.findActivityById(id);
 		model.addAttribute("activityEdit", activityEdit);
-		session.setAttribute("username", session.getAttribute("username"));
+
 		
 		return pageMappingService.PageRequestMapping(reqPageedit, editPageNo);
 	}
@@ -107,7 +107,6 @@ public class ActivityController {
 	@GetMapping(value = { "/deleteActivity/{id}" })
 	public String deleteActivity(@PathVariable("id") String id, Model model, HttpSession session) {
 		this.activityService.removeActivity(id);
-		session.setAttribute("username", session.getAttribute("username"));
 		return "redirect:/"+ pageMappingService.PageRequestMapping(reqPage, pageno);
 	}
 
