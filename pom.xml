@@ -9,7 +9,7 @@
 		<version>2.2.7.RELEASE</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.howtodoinjava</groupId>
+	<groupId>com.accessinfotech.hrms</groupId>
 	<artifactId>hrms</artifactId>
 	<version>portal</version>
 	<name>HRMS</name>
