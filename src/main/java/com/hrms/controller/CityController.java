@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.hrms.model.City;
 import com.hrms.model.MenuModule;
-import com.hrms.model.UrlDetail;
 import com.hrms.service.CityService;
 import com.hrms.service.ModuleService;
 import com.hrms.service.PageMappingService;
