@@ -63,7 +63,7 @@ public class ActivityController {
 		model.addAttribute("listActivities", listActivities);
 
 
-		return "redirect:/"+ pageMappingService.PageRequestMapping(reqPage, pageno);
+		return "redirect:" + pageMappingService.PageRequestMapping(reqPage, pageno);
 
 	}
 	/**
