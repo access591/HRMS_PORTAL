@@ -67,7 +67,7 @@ public class RegisterController {
 
 		session.setAttribute("username", session.getAttribute("username"));
 
-		return "redirect:/" + pageMappingService.PageRequestMapping(reqPage, pageno);
+		 return "redirect:"+pageMappingService.PageRequestMapping(reqPage,pageno);
 
 	}
 /**
