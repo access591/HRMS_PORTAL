@@ -89,7 +89,7 @@ public class AbstractGenericDao<E> implements GenericDao<E> {
 				}
 			
 			} catch (Exception e) {
-				System.out.println(e);
+				e.printStackTrace();
 				
 			}
 		
