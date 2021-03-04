@@ -64,7 +64,7 @@ public class AwardController {
 		model.addAttribute("listAward", listAward);
 		session.setAttribute("username", session.getAttribute("username"));
 
-		return "redirect:/"+ pageMappingService.PageRequestMapping(reqPage, pageno);
+		return "redirect:" + pageMappingService.PageRequestMapping(reqPage, pageno);
 
 	}
 /**
@@ -95,10 +95,10 @@ public class AwardController {
 	 */
 
 	@PostMapping("/updateAward")
-	public String updateAward(@ModelAttribute("city") Award a, Model model, HttpSession session) {
+	public String updateAward(@ModelAttribute("award") Award award, Model model, HttpSession session) {
 		String updatedBY = (String) session.getAttribute("userlogin");
-		a.setUpd_by(updatedBY);
-		this.awardService.updateAward(a);
+		award.setUpd_by(updatedBY);
+		this.awardService.updateAward(award);
 
 		return "redirect:/" + pageMappingService.PageRequestMapping(reqPage, pageno);
 	}
