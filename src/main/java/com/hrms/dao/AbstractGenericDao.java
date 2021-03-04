@@ -36,7 +36,7 @@ public class AbstractGenericDao<E> implements GenericDao<E> {
 
 	@Override
 	public E findById(String id) {
-		return (E) getSession().get(this.entityClass, id);
+		return  getSession().get(this.entityClass, id);
 
 	}
 
@@ -64,7 +64,7 @@ public class AbstractGenericDao<E> implements GenericDao<E> {
 
 	@Override
 	public E findById(long id) {
-		return (E) getSession().get(this.entityClass, id);
+		return  getSession().get(this.entityClass, id);
 
 	}
 

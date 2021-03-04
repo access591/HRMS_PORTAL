@@ -55,10 +55,10 @@ public class ActivityController {
 	 * @return
 	 */
 	@PostMapping("/saveActivity")
-	public String saveActivity(@ModelAttribute("activity")Activities act, Model model, HttpSession session) {
+	public String saveActivity(@ModelAttribute("activity")Activities activities, Model model, HttpSession session) {
 		String insertedBY = (String) session.getAttribute("userlogin");
-		act.setIns_by(insertedBY);
-		activityService.addActivity(act);
+		activities.setIns_by(insertedBY);
+		activityService.addActivity(activities);
 		List<Activities> listActivities = activityService.getAllActivitys();
 		model.addAttribute("listActivities", listActivities);
 		session.setAttribute("username", session.getAttribute("username"));
@@ -91,10 +91,10 @@ public class ActivityController {
 	 * @return
 	 */
 	@PostMapping("/updateActivity")
-	public String updateActivity(@ModelAttribute("activity")Activities a, Model model, HttpSession session) {
+	public String updateActivity(@ModelAttribute("activity")Activities activities, Model model, HttpSession session) {
 		String updatedBY = (String) session.getAttribute("userlogin");
-		a.setUpd_by(updatedBY);
-		this.activityService.updateActivity(a);
+		activities.setUpd_by(updatedBY);
+		this.activityService.updateActivity(activities);
 		return "redirect:/"+ pageMappingService.PageRequestMapping(reqPage, pageno);
 	}
 	/**
