@@ -51,7 +51,7 @@ public class AbstractGenericDao<E> implements GenericDao<E> {
 	@Override
 	public void delete(String id) {
 		Transaction tx = getSession().beginTransaction();
-		getSession().delete(getSession().load(this.entityClass, new String(id)));
+		getSession().delete(getSession().load(this.entityClass,id));
 		tx.commit();
 
 	}
@@ -77,16 +77,16 @@ public class AbstractGenericDao<E> implements GenericDao<E> {
 	}
 
 	@Override
-	public String getMAX_Id(String Cid) {
+	public String getMAX_Id(String incId) {
 		
-		String sql="select FN_PRGM_CODE('"+Cid+"') Cid";
+		String sql="select FN_PRGM_CODE('"+incId+"') incId";
 		return jdbcTemplate.query(sql, new ResultSetExtractor<String>() {
-			String Cid;
+			String incId;
 		public String extractData(ResultSet rs)  {
 			try {
 				if (rs.next())
 				{
-					Cid=rs.getString("Cid");
+					incId=rs.getString("incId");
 				}
 			
 			} catch (Exception e) {
@@ -94,7 +94,7 @@ public class AbstractGenericDao<E> implements GenericDao<E> {
 				
 			}
 		
-				return Cid; 
+				return incId; 
 				
 		}
 	});
