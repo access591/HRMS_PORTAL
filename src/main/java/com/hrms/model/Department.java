@@ -21,85 +21,63 @@ public class Department implements Serializable
 {
 
 	/**
-	 * Mohit Access 
+	 * Surendra Access 
 	 */
 	private static final long serialVersionUID = -4001846236713344340L;
 
 	@Id
 	@Column(name = "DEPARTMENT_CODE")
-	private String Department_Code;
+	private String departmentCode;
 	
 	@Column(name = "DEP_NAME")
-	private String Dep_Name;
+	private String deptName;
 	
 	@Column(name = "DEPH_Code")
-	private String Deph_code;
+	private String dephCode;
 	
 	
 	@Column(name = "DEPH_NAME")
-	private String Deph_Name;
-	
-	@Column(name = "INS_BY")
-	private String Ins_by;
-	
-	@Column(name = "INS_DATE")
-	private Date ins_date =new Date();
-	
-	@Column(name = "UPD_BY")
-	private String upd_by;
-	
-	@Column(name = "UPD_DATE")
-	private Date  upd_date = new Date();
+	private String dephName;
+
 	@Column(name = "ACTIVE_YN")
 	private String active;
+    @Column(name = "INS_BY",updatable = false)
+	private String insBy;
+	
+	@Column(name = "INS_DATE",updatable = false)
+	private Date insDate =new Date();
+	
+	@Column(name = "UPD_BY",insertable = false)
+	private String updBy;
+	
+	@Column(name = "UPD_DATE",insertable = false)
+	private Date  updDate = new Date();
+	
 
-	public String getDepartment_Code() {
-		return Department_Code;
+	
+	public String getDepartmentCode() {
+		return departmentCode;
 	}
-	public void setDepartment_Code(String department_Code) {
-		Department_Code = department_Code;
+	public void setDepartmentCode(String departmentCode) {
+		this.departmentCode = departmentCode;
 	}
-	public String getDep_Name() {
-		return Dep_Name;
+	public String getDeptName() {
+		return deptName;
 	}
-	public void setDep_Name(String dep_Name) {
-		Dep_Name = dep_Name;
+	public void setDeptName(String deptName) {
+		this.deptName = deptName;
 	}
-	public String getDeph_code() {
-		return Deph_code;
+	public String getDephCode() {
+		return dephCode;
 	}
-	public void setDeph_code(String deph_code) {
-		Deph_code = deph_code;
+	public void setDephCode(String dephCode) {
+		this.dephCode = dephCode;
 	}
-	public String getDeph_Name() {
-		return Deph_Name;
+	public String getDephName() {
+		return dephName;
 	}
-	public void setDeph_Name(String deph_Name) {
-		Deph_Name = deph_Name;
-	}
-	public String getIns_by() {
-		return Ins_by;
-	}
-	public void setIns_by(String ins_by) {
-		Ins_by = ins_by;
-	}
-	public Date getIns_date() {
-		return ins_date;
-	}
-	public void setIns_date(Date ins_date) {
-		this.ins_date = ins_date;
-	}
-	public String getUpd_by() {
-		return upd_by;
-	}
-	public void setUpd_by(String upd_by) {
-		this.upd_by = upd_by;
-	}
-	public Date getUpd_date() {
-		return upd_date;
-	}
-	public void setUpd_date(Date upd_date) {
-		this.upd_date = upd_date;
+	public void setDephName(String dephName) {
+		this.dephName = dephName;
 	}
 	public String getActive() {
 		return active;
@@ -107,6 +85,31 @@ public class Department implements Serializable
 	public void setActive(String active) {
 		this.active = active;
 	}
+	public String getInsBy() {
+		return insBy;
+	}
+	public void setInsBy(String insBy) {
+		this.insBy = insBy;
+	}
+	public Date getInsDate() {
+		return insDate;
+	}
+	public void setInsDate(Date insDate) {
+		this.insDate = insDate;
+	}
+	public String getUpdBy() {
+		return updBy;
+	}
+	public void setUpdBy(String updBy) {
+		this.updBy = updBy;
+	}
+	public Date getUpdDate() {
+		return updDate;
+	}
+	public void setUpdDate(Date updDate) {
+		this.updDate = updDate;
+	}
+	
 }	
 	
 	

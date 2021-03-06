@@ -13,8 +13,8 @@ public class DepartmentServiceImpl implements DepartmentService {
 
 	@Override
 	public void addDepartment(Department department) {
-		department.setIns_date(new Date());
-		department.setDepartment_Code( departmentDao.getMAX_Id("DEP"));
+		department.setInsDate(new Date());
+		department.setDepartmentCode( departmentDao.getMAX_Id("DEP"));
 		this.departmentDao.saveOrUpdate(department);
 	}
 
@@ -31,8 +31,8 @@ public class DepartmentServiceImpl implements DepartmentService {
 
 	@Override
 	public void updateDepartment(Department d) {
-		d.setDep_Name(d.getDep_Name());
-		d.setUpd_date(d.getUpd_date());
+		d.setDeptName(d.getDeptName());
+		d.setUpdDate(d.getUpdDate());
 		d.setActive(d.getActive());
 		this.departmentDao.saveOrUpdate(d);
 
