@@ -14,8 +14,8 @@ public class BankServiceImpl implements BankService {
 
 	@Override
 	public void addBank(Bank bank) {
-		bank.setIns_date(new Date());
-		bank.setBank_Code(bankDao.getMAX_Id("BNK"));
+		bank.setInsDate(new Date());
+		bank.setBankCode(bankDao.getMAX_Id("BNK"));
 		this.bankDao.saveOrUpdate(bank);
 	}
 
@@ -32,8 +32,8 @@ public class BankServiceImpl implements BankService {
 
 	@Override
 	public void updateBank(Bank d) {
-		d.setBank_Code(d.getBank_Code());
-		d.setUpd_date(d.getUpd_date());
+		d.setBankCode(d.getBankCode());
+		d.setUpdDate(d.getUpdDate());
 		d.setActive(d.getActive());
 		this.bankDao.saveOrUpdate(d);
 

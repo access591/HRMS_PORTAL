@@ -56,32 +56,32 @@ body {
 											  <label style="color: red">*</label>
 											  	 
 											   <input
-												type="text" class="form-control" maxlength="9" id="Bank_Code" name="Bank_Code" disabled/>
+												type="text" class="form-control" maxlength="9" id="BankCode" name="BankCode" disabled/>
 												</div>
 												<div class="form-group">
 											<label class="form-label">Bank Name</label>
 											<label style="color: red">*</label>
-											 <input type="text" class="form-control uppercase" maxlength="20" pattern="^[a-zA-Z\s]*$" id="bank_name" name="bank_name"required aria-required="true"title="Only text">
+											 <input type="text" class="form-control uppercase" maxlength="20" pattern="^[a-zA-Z\s]*$" id="bankName" name="bankName"required aria-required="true"title="Only text">
 										   </div>
 										   <div class="form-group">
 											<label class="form-label">Bank Address</label>
 											<label style="color: red">*</label>
-											 <input type="text" class="form-control uppercase"  maxlength="50"id="bank_add" name="bank_add"required aria-required="true">
+											 <input type="text" class="form-control uppercase"  maxlength="50"id="bankAdd" name="bankAdd"required aria-required="true">
 										   </div>
 										   <div class="form-group">
 											<label class="form-label">Bank Address 2</label>
 											<label style="color: red">*</label>
-											 <input type="text" class="form-control uppercase" maxlength="50" id="bank_addr2" name="bank_addr2"required aria-required="true">
+											 <input type="text" class="form-control uppercase" maxlength="50" id="bankAddr2" name="bankAddr2"required aria-required="true">
 										   </div>
 										   <div class="form-group">
 											<label class="form-label">City Code</label>
 											<label style="color: red">*</label>
-											 <input type="text" class="form-control uppercase"  maxlength="10"id="city_code" name="city_code"required aria-required="true" pattern="\d{1,10}" title="Only digits"/>
+											 <input type="text" class="form-control uppercase"  maxlength="10"id="cityCode" name="cityCode"required aria-required="true" pattern="\d{1,10}" title="Only digits"/>
 										   </div>
 										   <div class="form-group">
 											<label class="form-label">State Code</label>
 											<label style="color: red">*</label>
-											 <input type="text" class="form-control uppercase" maxlength="10" id="state_code" name="state_code"required aria-required="true"   pattern="\d{1,10}" title="Only digits"/>
+											 <input type="text" class="form-control uppercase" maxlength="10" id="stateCode" name="stateCode"required aria-required="true"   pattern="\d{1,10}" title="Only digits"/>
 										   </div>
 												<div class="form-group">
 
@@ -101,32 +101,32 @@ body {
 											 <div class="form-group">
 											<label class="form-label">Country Code</label>
 											<label style="color: red">*</label>
-											 <input type="text" class="form-control uppercase"maxlength="10"  id="country_code" name="country_code"required aria-required="true" pattern="\d{1,10}" title="Only digits"/>
+											 <input type="text" class="form-control uppercase"maxlength="10"  id="countryCode" name="countryCode"required aria-required="true" pattern="\d{1,10}" title="Only digits"/>
 										   </div>
 										    <div class="form-group">
 											<label class="form-label">Account No</label>
 											<label style="color: red">*</label>
-											 <input type="text" class="form-control uppercase" maxlength="15" id="account_no" name="account_no"required aria-required="true" pattern="\d{1,15}" title="Only digits"/>
+											 <input type="text" class="form-control uppercase" maxlength="15" id="accountNo" name="accountNo"required aria-required="true" pattern="\d{1,15}" title="Only digits"/>
 										   </div>
 										    <div class="form-group">
 											<label class="form-label">IFSC Code</label>
 											<label style="color: red">*</label>
-											 <input type="text" class="form-control uppercase" maxlength="11"  id="ifsc_code" name="ifsc_code"required aria-required="true" pattern="^[a-zA-Z0-9_.-]*$" title="Only digits"/>
+											 <input type="text" class="form-control uppercase" maxlength="11"  id="ifscCode" name="ifscCode"required aria-required="true" pattern="^[a-zA-Z0-9_.-]*$" title="Only digits"/>
 										   </div>
 										    <div class="form-group">
 											<label class="form-label">Swift Code</label>
 											<label style="color: red">*</label>
-											 <input type="text" class="form-control uppercase" maxlength="11"  id="swift_code" name="swift_code"required aria-required="true"pattern="\d{1,11}" title="Only digits"/>
+											 <input type="text" class="form-control uppercase" maxlength="11"  id="swiftCode" name="swiftCode"required aria-required="true"pattern="\d{1,11}" title="Only digits"/>
 										   </div>
 										    <div class="form-group">
 											<label class="form-label">Telephone No</label>
 											<label style="color: red">*</label>
-											 <input type="text" class="form-control uppercase" maxlength="11" id="telephone_no" name="telephone_no"required aria-required="true"pattern="\d{1,11}" title="Only digits"/>
+											 <input type="text" class="form-control uppercase" maxlength="11" id="telephoneNo" name="telephoneNo"required aria-required="true"pattern="\d{1,11}" title="Only digits"/>
 										   </div>
 										    <div class="form-group">
 											<label class="form-label">Mobile No</label>
 											<label style="color: red">*</label>
-											 <input type="text" class="form-control uppercase" maxlength="11" id="mobile_no" name="mobile_no"required aria-required="true"pattern="\d{1,11}" title="Only digits"/>
+											 <input type="text" class="form-control uppercase" maxlength="11" id="mobileNo" name="mobileNo"required aria-required="true"pattern="\d{1,11}" title="Only digits"/>
 										   </div>									
 										
 											</div>
@@ -157,14 +157,14 @@ body {
 										</thead>
 										<tbody>
 											<tr  th:each="listbank : ${listBank}">
-												<td th:text="${listbank.Bank_Code}"></td>
-												<td th:text="${listbank.bank_name}"></td>
-												<td th:text="${listbank.country_code}"></td>
-												<td th:text="${listbank.account_no}"></td>
-												<td th:text="${listbank.mobile_no}"></td>
+												<td th:text="${listbank.BankCode}"></td>
+												<td th:text="${listbank.bankName}"></td>
+												<td th:text="${listbank.countryCode}"></td>
+												<td th:text="${listbank.accountNo}"></td>
+												<td th:text="${listbank.mobileNo}"></td>
 												<td th:text="${listbank.active}"></td>
-												<td><a th:href="@{/editBank/{id}(id=${listbank.Bank_Code})}" class="btn btn-primary"><i class="fa fa-edit"></i></a>
-												<a th:href="@{/deleteBank/{id}(id=${listbank.Bank_Code})}" class="btn btn-primary"onclick="return confirm('Are you sure?')"><i class="fa fa-times"></i></a>
+												<td><a th:href="@{/editBank/{id}(id=${listbank.BankCode})}" class="btn btn-primary"><i class="fa fa-edit"></i></a>
+												<a th:href="@{/deleteBank/{id}(id=${listbank.BankCode})}" class="btn btn-primary"onclick="return confirm('Are you sure?')"><i class="fa fa-times"></i></a>
 												</td>
 											</tr>
 										</tbody>

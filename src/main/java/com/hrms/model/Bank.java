@@ -43,182 +43,155 @@ public class Bank implements Serializable
 
 	@Id
 	@Column(name = "BANK_CODE")
-	private String Bank_Code;
+	private String BankCode;
 	
 	@Column(name = "BANK_NAME")
-	private String bank_name;
+	private String bankName;
 	
 	@Column(name = "BANK_ADD")
-	private String bank_add;
+	private String bankAdd;
 	
 	@Column(name = "BANK_ADDR2")
-	private String bank_addr2;
+	private String bankAddr2;
 	
 	@Column(name = "CITY_CODE")
-	private String city_code;
+	private String cityCode;
 	
 	@Column(name = "STATE_CODE")
-	private String state_code;
+	private String stateCode;
 	
 	@Column(name = "COUNTRY_CODE" ,updatable = false)
-	private String country_code;
+	private String countryCode;
 	
 	@Column(name = "ACCOUNT_NO")
-	private String account_no;
+	private String accountNo;
 	
 	@Column(name = "IFSC_CODE")
-	private String ifsc_code;
+	private String ifscCode;
 	
 	@Column(name = "SWIFT_CODE")
-	private String swift_code;
+	private String swiftCode;
 	
 	@Column(name = "TELEPHONE_NO")
-	private String telephone_no;
+	private String telephoneNo;
 	
 	@Column(name = "MOBILE_NO")
-	private String mobile_no;
+	private String mobileNo;
 	
-	@Column(name = "INS_BY")
-	private String Ins_by;
+    @Column(name = "INS_BY",updatable = false)
+	private String insBy;
 	
-	@Column(name = "INS_DATE")
-	private Date ins_date =new Date();
+	@Column(name = "INS_DATE",updatable = false)
+	private Date insDate =new Date();
 	
-	@Column(name = "UPD_BY")
-	private String upd_by;
+	@Column(name = "UPD_BY",insertable = false)
+	private String updBy;
 	
-	@Column(name = "UPD_DATE")
-	private Date  upd_date = new Date();
+	@Column(name = "UPD_DATE",insertable = false)
+	private Date  updDate = new Date();
+	
+	
+
 	
 	@Column(name = "ACTIVE_YN")
 	private String active;
 
-	public String getBank_Code() {
-		return Bank_Code;
+	
+
+	public String getBankCode() {
+		return BankCode;
 	}
 
-	public void setBank_Code(String bank_Code) {
-		Bank_Code = bank_Code;
+	public void setBankCode(String bankCode) {
+		BankCode = bankCode;
 	}
 
-	public String getBank_name() {
-		return bank_name;
+	public String getBankName() {
+		return bankName;
 	}
 
-	public void setBank_name(String bank_name) {
-		this.bank_name = bank_name;
+	public void setBankName(String bankName) {
+		this.bankName = bankName;
 	}
 
-	public String getBank_add() {
-		return bank_add;
+	public String getBankAdd() {
+		return bankAdd;
 	}
 
-	public void setBank_add(String bank_add) {
-		this.bank_add = bank_add;
+	public void setBankAdd(String bankAdd) {
+		this.bankAdd = bankAdd;
 	}
 
-	public String getBank_addr2() {
-		return bank_addr2;
+	public String getBankAddr2() {
+		return bankAddr2;
 	}
 
-	public void setBank_addr2(String bank_addr2) {
-		this.bank_addr2 = bank_addr2;
+	public void setBankAddr2(String bankAddr2) {
+		this.bankAddr2 = bankAddr2;
 	}
 
-	public String getCity_code() {
-		return city_code;
+	public String getCityCode() {
+		return cityCode;
 	}
 
-	public void setCity_code(String city_code) {
-		this.city_code = city_code;
+	public void setCityCode(String cityCode) {
+		this.cityCode = cityCode;
 	}
 
-	public String getState_code() {
-		return state_code;
+	public String getStateCode() {
+		return stateCode;
 	}
 
-	public void setState_code(String state_code) {
-		this.state_code = state_code;
+	public void setStateCode(String stateCode) {
+		this.stateCode = stateCode;
 	}
 
-	public String getCountry_code() {
-		return country_code;
+	public String getCountryCode() {
+		return countryCode;
 	}
 
-	public void setCountry_code(String country_code) {
-		this.country_code = country_code;
+	public void setCountryCode(String countryCode) {
+		this.countryCode = countryCode;
 	}
 
-	public String getAccount_no() {
-		return account_no;
+	public String getAccountNo() {
+		return accountNo;
 	}
 
-	public void setAccount_no(String account_no) {
-		this.account_no = account_no;
+	public void setAccountNo(String accountNo) {
+		this.accountNo = accountNo;
 	}
 
-	public String getIfsc_code() {
-		return ifsc_code;
+	public String getIfscCode() {
+		return ifscCode;
 	}
 
-	public void setIfsc_code(String ifsc_code) {
-		this.ifsc_code = ifsc_code;
+	public void setIfscCode(String ifscCode) {
+		this.ifscCode = ifscCode;
 	}
 
-	public String getSwift_code() {
-		return swift_code;
+	public String getSwiftCode() {
+		return swiftCode;
 	}
 
-	public void setSwift_code(String swift_code) {
-		this.swift_code = swift_code;
+	public void setSwiftCode(String swiftCode) {
+		this.swiftCode = swiftCode;
 	}
 
-	public String getTelephone_no() {
-		return telephone_no;
+	public String getTelephoneNo() {
+		return telephoneNo;
 	}
 
-	public void setTelephone_no(String telephone_no) {
-		this.telephone_no = telephone_no;
+	public void setTelephoneNo(String telephoneNo) {
+		this.telephoneNo = telephoneNo;
 	}
 
-	public String getMobile_no() {
-		return mobile_no;
+	public String getMobileNo() {
+		return mobileNo;
 	}
 
-	public void setMobile_no(String mobile_no) {
-		this.mobile_no = mobile_no;
-	}
-
-	public String getIns_by() {
-		return Ins_by;
-	}
-
-	public void setIns_by(String ins_by) {
-		Ins_by = ins_by;
-	}
-
-	public Date getIns_date() {
-		return ins_date;
-	}
-
-	public void setIns_date(Date ins_date) {
-		this.ins_date = ins_date;
-	}
-
-	public String getUpd_by() {
-		return upd_by;
-	}
-
-	public void setUpd_by(String upd_by) {
-		this.upd_by = upd_by;
-	}
-
-	public Date getUpd_date() {
-		return upd_date;
-	}
-
-	public void setUpd_date(Date upd_date) {
-		this.upd_date = upd_date;
+	public void setMobileNo(String mobileNo) {
+		this.mobileNo = mobileNo;
 	}
 
 	public String getActive() {
@@ -231,6 +204,38 @@ public class Bank implements Serializable
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	public String getInsBy() {
+		return insBy;
+	}
+
+	public void setInsBy(String insBy) {
+		this.insBy = insBy;
+	}
+
+	public Date getInsDate() {
+		return insDate;
+	}
+
+	public void setInsDate(Date insDate) {
+		this.insDate = insDate;
+	}
+
+	public String getUpdBy() {
+		return updBy;
+	}
+
+	public void setUpdBy(String updBy) {
+		this.updBy = updBy;
+	}
+
+	public Date getUpdDate() {
+		return updDate;
+	}
+
+	public void setUpdDate(Date updDate) {
+		this.updDate = updDate;
 	}
 	
 	
