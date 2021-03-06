@@ -17,7 +17,8 @@ public class MiscAllowanceDeductionServiceImpl implements MiscAllowanceDeduction
 
 	@Override
 	public void addMiscAllowanceDeduction(MiscAllowance miscAllowance) {
-		miscAllowance.setIns_date(new Date());
+		miscAllowance.setInsDate(new Date());
+		miscAllowance.setAllowanceCode(miscAllowanceDeductionDao.getMAX_Id("MAD"));
 		this.miscAllowanceDeductionDao.saveOrUpdate(miscAllowance);
 
 	}
@@ -37,17 +38,17 @@ public class MiscAllowanceDeductionServiceImpl implements MiscAllowanceDeduction
 	}
 
 	@Override
-	public void updateMiscAllowanceDeduction(MiscAllowance M) {
-		M.setDescription(M.getDescription());
-		M.setHead(M.getHead());
-		M.setType(M.getType());
-		M.setAct_Code(M.getAct_Code());
-		M.setAccount_Name(M.getAccount_Name());
-		M.setSub_Group_Code(M.getSub_Group_Code());
-		M.setSub_Group_Name(M.getSub_Group_Name());
-		M.setUpd_date(M.getUpd_date());
-		M.setActive(M.getActive());
-		this.miscAllowanceDeductionDao.saveOrUpdate(M);
+	public void updateMiscAllowanceDeduction(MiscAllowance miscAllowance) {
+		miscAllowance.setDescription(miscAllowance.getDescription());
+		miscAllowance.setHead(miscAllowance.getHead());
+		miscAllowance.setType(miscAllowance.getType());
+		miscAllowance.setActCode(miscAllowance.getActCode());
+		miscAllowance.setAccountName(miscAllowance.getAccountName());
+		miscAllowance.setSubGroupCode(miscAllowance.getSubGroupCode());
+		miscAllowance.setSubGroupName(miscAllowance.getSubGroupName());
+		miscAllowance.setUpdDate(miscAllowance.getUpdDate());
+		miscAllowance.setActive(miscAllowance.getActive());
+		this.miscAllowanceDeductionDao.saveOrUpdate(miscAllowance);
 
 	}
 

@@ -60,15 +60,16 @@ public String MiscAllowances(Model model,HttpSession session)
  * @return
  */
 @PostMapping("/saveAllowncesDeduction")
- public String SaveAllowncesDeduction(@ModelAttribute("miscAllowance") MiscAllowance miscAllowance, Model model,HttpSession session)
- {
-	if (miscAllowance.getAllowance_Code()!= "")
-	{
+ public String saveAllowncesDeduction(@ModelAttribute("miscAllowance") MiscAllowance miscAllowance, Model model,HttpSession session)
+ { 
+	
+	     String insertedBY = (String) session.getAttribute("userlogin");
+	     miscAllowance.setInsBy(insertedBY);
         miscAllowanceDeductionService.addMiscAllowanceDeduction(miscAllowance);
          List<MiscAllowance> listMiscAllowanceDeduction = miscAllowanceDeductionService.getAllMiscAllowanceDeduction();
          model.addAttribute("listMiscAllowanceDeduction", listMiscAllowanceDeduction); 
          session.setAttribute("username",session.getAttribute("username"));
-	} 
+	
 	
 	 return "redirect:"+pageMappingService.PageRequestMapping(reqPage,pageno);
 
@@ -103,9 +104,11 @@ public String editAllowncesDeduction(@PathVariable("id")String id,  Model model,
  * @return
  */
 @PostMapping("/updateAllowanceDeduction")
-public String updateAllowncesDeduction(@ModelAttribute("miscAllowanceUpdate") MiscAllowance M, Model model) {
+public String updateAllowncesDeduction(@ModelAttribute("miscAllowanceUpdate") MiscAllowance miscAllowance, Model model,HttpSession session) {
 
-	  this.miscAllowanceDeductionService.updateMiscAllowanceDeduction(M);
+	String updatedBY = (String) session.getAttribute("userlogin");
+	miscAllowance.setUpdBy(updatedBY);
+	  this.miscAllowanceDeductionService.updateMiscAllowanceDeduction(miscAllowance);
 
 	  return "redirect:/"+pageMappingService.PageRequestMapping(reqPage,pageno);
 }
