@@ -15,8 +15,8 @@ public class GradeMaterServiceImpl implements GradeMaterService{
 
 	@Override
 	public void addGrade(Grade grade) {
-		grade.setIns_date(new Date());
-		grade.setGrade_Code(gradeMaterDao.getMAX_Id("GRD"));
+		grade.setInsDate(new Date());
+		grade.setGradeCode(gradeMaterDao.getMAX_Id("GRD"));
 		this.gradeMaterDao.saveOrUpdate(grade);
 
 	}
@@ -36,8 +36,8 @@ public class GradeMaterServiceImpl implements GradeMaterService{
 
 	@Override
 	public void updateGrade(Grade g) {
-		g.setGarde_Name(g.getGarde_Name());
-		g.setUpd_date(g.getUpd_date());
+		g.setGardeName(g.getGardeName());
+		g.setUpdDate(g.getUpdDate());
 		g.setActive(g.getActive());
 		this.gradeMaterDao.saveOrUpdate(g);
 
