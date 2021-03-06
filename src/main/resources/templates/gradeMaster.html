@@ -60,7 +60,7 @@ body {
 											  		<label style="color: red">*</label>
 											  	 
 											   <input
-														type="text" class="form-control" id="Grade_Code" name="Grade_Code" readonly="readonly">
+														type="text" class="form-control" id="gradeCode" name="gradeCode" readonly="readonly">
 												</div>
 
 												<div class="form-group">
@@ -81,7 +81,7 @@ body {
 											<div class="form-group">
 											<label class="form-label"> Grade Name</label>
 											<label style="color: red">*</label>
-											 <input type="text" class="form-control uppercase" onkeypress="return /[a-z]/i.test(event.key)" id="Garde_Name" name="Garde_Name"required aria-required="true">
+											 <input type="text" class="form-control" pattern="^[a-zA-Z\s]*$" id="gardeName" maxlength="40" title="Grade Name" name="gardeName"required aria-required="true">
 										</div>
 											</div>
 										</div>
@@ -108,11 +108,11 @@ body {
 										</thead>
 										<tbody>
 											<tr  th:each="listofgrade : ${listGrade}">
-												<td th:text="${listofgrade.Grade_Code}"></td>
-												<td th:text="${listofgrade.Garde_Name}"></td>
+												<td th:text="${listofgrade.gradeCode}"></td>
+												<td th:text="${listofgrade.gardeName}"></td>
 												<td th:text="${listofgrade.active}"></td>
-												<td><a th:href="@{/editGrade/{id}(id=${listofgrade.Grade_Code})}" class="btn btn-primary"><i class="fa fa-edit"></i></a>
-												<a th:href="@{/deleteGarde/{id}(id=${listofgrade.Grade_Code})}" class="btn btn-primary"onclick="return confirm('Are you sure?')"><i class="fa fa-times"></i></a>
+												<td><a th:href="@{/editGrade/{id}(id=${listofgrade.gradeCode})}"><i class="fa fa-edit"></i></a>
+												<a th:href="@{/deleteGarde/{id}(id=${listofgrade.gradeCode})}" onclick="return confirm('Are you sure?')"><i class="fa fa-times"></i></a>
 												</td>
 											</tr>
 										</tbody>

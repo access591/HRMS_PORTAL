@@ -19,60 +19,62 @@ public class Grade implements Serializable
 
 	  @Id
 		@Column(name = "GRADE_CODE")
-		private String Grade_Code;
+		private String gradeCode;
 
 		@Column(name = "GARDE_NAME")
-		private String Garde_Name;
+		private String gardeName;
+	    @Column(name = "INS_BY",updatable = false)
+		private String insBy;
 		
-		@Column(name = "INS_BY")
-		private String Ins_by;
+		@Column(name = "INS_DATE",updatable = false)
+		private Date insDate =new Date();
 		
-		@Column(name = "INS_DATE")
-		private Date ins_date = new Date();
+		@Column(name = "UPD_BY",insertable = false)
+		private String updBy;
 		
-		@Column(name = "UPD_BY")
-		private String upd_by;
+		@Column(name = "UPD_DATE",insertable = false)
+		private Date  updDate = new Date();
 		
-		@Column(name = "UPD_DATE")
-		private Date  upd_date = new Date();
+		
 		@Column(name = "ACTIVE_YN")
 		private String active;
 		
-		public String getGrade_Code() {
-			return Grade_Code;
+	
+		public String getGradeCode() {
+			return gradeCode;
 		}
-		public void setGrade_Code(String grade_Code) {
-			Grade_Code = grade_Code;
+		public void setGradeCode(String gradeCode) {
+			this.gradeCode = gradeCode;
 		}
-		public String getGarde_Name() {
-			return Garde_Name;
+		public String getGardeName() {
+			return gardeName;
 		}
-		public void setGarde_Name(String garde_Name) {
-			Garde_Name = garde_Name.toUpperCase();
+		public void setGardeName(String gardeName) {
+			this.gardeName = gardeName;
 		}
-		public String getIns_by() {
-			return Ins_by;
+		public String getInsBy() {
+			return insBy;
 		}
-		public void setIns_by(String ins_by) {
-			Ins_by = ins_by;
+		public void setInsBy(String insBy) {
+			this.insBy = insBy;
 		}
-		public Date getIns_date() {
-			return ins_date;
+		public Date getInsDate() {
+			return insDate;
 		}
-		public void setIns_date(Date ins_date) {
-			this.ins_date = ins_date;
+		public void setInsDate(Date insDate) {
+			this.insDate = insDate;
 		}
-		public String getUpd_by() {
-			return upd_by;
+		public String getUpdBy() {
+			return updBy;
 		}
-		public void setUpd_by(String upd_by) {
-			this.upd_by = upd_by;
+		public void setUpdBy(String updBy) {
+			this.updBy = updBy;
 		}
-		public Date getUpd_date() {
-			return upd_date;
+		public Date getUpdDate() {
+			return updDate;
 		}
-		public void setUpd_date(Date upd_date) {
-			this.upd_date = upd_date;
+		public void setUpdDate(Date updDate) {
+			this.updDate = updDate;
 		}
 		public String getActive() {
 			return active;

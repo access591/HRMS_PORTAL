@@ -13,8 +13,8 @@ public class DesignationServiceImpl implements DesignationService {
 
 	@Override
 	public void addDesignation(Designation designation) {
-		designation.setIns_date(new Date());
-		designation.setDesg_code(designationDao.getMAX_Id("DES"));
+		designation.setInsDate(new Date());
+		designation.setDesgCode(designationDao.getMAX_Id("DES"));
 		this.designationDao.saveOrUpdate(designation);
 	}
 
@@ -31,8 +31,8 @@ public class DesignationServiceImpl implements DesignationService {
 
 	@Override
 	public void updateDesignation(Designation d) {
-		d.setDesg_Name(d.getDesg_Name());
-		d.setUpd_date(d.getUpd_date());
+		d.setDesgName(d.getDesgName());
+		d.setUpdDate(d.getUpdDate());
 		d.setActive(d.getActive());
 		this.designationDao.saveOrUpdate(d);
 
