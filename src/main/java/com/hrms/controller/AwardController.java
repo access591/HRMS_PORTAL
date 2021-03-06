@@ -58,7 +58,7 @@ public class AwardController {
 	@PostMapping("/saveAward")
 	public String saveAward(@ModelAttribute("award") Award award, Model model, HttpSession session) {
 		String insertedBY = (String) session.getAttribute("userlogin");
-		award.setIns_by(insertedBY);
+		award.setInsBy(insertedBY);
 		awardService.addAward(award);
 		List<Award> listAward = awardService.getAllAwards();
 		model.addAttribute("listAward", listAward);
@@ -97,7 +97,7 @@ public class AwardController {
 	@PostMapping("/updateAward")
 	public String updateAward(@ModelAttribute("award") Award award, Model model, HttpSession session) {
 		String updatedBY = (String) session.getAttribute("userlogin");
-		award.setUpd_by(updatedBY);
+		award.setUpdBy(updatedBY);
 		this.awardService.updateAward(award);
 
 		return "redirect:/" + pageMappingService.PageRequestMapping(reqPage, pageno);
