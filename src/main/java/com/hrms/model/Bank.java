@@ -43,7 +43,7 @@ public class Bank implements Serializable
 
 	@Id
 	@Column(name = "BANK_CODE")
-	private String BankCode;
+	private String bankCode;
 	
 	@Column(name = "BANK_NAME")
 	private String bankName;
@@ -98,12 +98,14 @@ public class Bank implements Serializable
 
 	
 
+
+
 	public String getBankCode() {
-		return BankCode;
+		return bankCode;
 	}
 
 	public void setBankCode(String bankCode) {
-		BankCode = bankCode;
+		this.bankCode = bankCode;
 	}
 
 	public String getBankName() {
