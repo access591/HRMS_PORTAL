@@ -97,11 +97,11 @@ public class CityController {
 	 */
 	
 	@PostMapping("/updateCity")
-	public String updateCity(@ModelAttribute("city") City c, Model model, HttpSession session) {
+	public String updateCity(@ModelAttribute("city") City city, Model model, HttpSession session) {
 		
 		String updatedBY = (String) session.getAttribute("userlogin");
-		c.setUpdBy(updatedBY);
-		this.cityService.updateCity(c);
+		city.setUpdBy(updatedBY);
+		this.cityService.updateCity(city);
 
 		return "redirect:/" + pageMappingService.PageRequestMapping(reqPage, pageno);
 	}

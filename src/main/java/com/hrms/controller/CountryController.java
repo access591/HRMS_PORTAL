@@ -46,7 +46,7 @@ public class CountryController {
 		}
 		List<Country> listCountry = countryService.getAllCountrys();
 		model.addAttribute("listCountry", listCountry);
-		session.setAttribute("username", session.getAttribute("username"));
+
 
 		return pageMappingService.PageRequestMapping(reqPage, pageno);
 	}
@@ -67,7 +67,7 @@ public class CountryController {
 		countryService.addCountry(country);
 		List<Country> listCountry = countryService.getAllCountrys();
 		model.addAttribute("listCountry", listCountry);
-		session.setAttribute("username", session.getAttribute("username"));
+		
 
 		 return "redirect:"+pageMappingService.PageRequestMapping(reqPage,pageno);
 
@@ -88,7 +88,7 @@ public class CountryController {
 
 		Country countryEdit = countryService.findCountryById(id);
 		model.addAttribute("countryEdit", countryEdit);
-		session.setAttribute("username", session.getAttribute("username"));
+	
 
 		return pageMappingService.PageRequestMapping(reqPageedit, editPageNo);
 	}
@@ -101,11 +101,11 @@ public class CountryController {
 	 * @return
 	 */
 	@PostMapping("/updateCountry")
-	public String updateCountry(@ModelAttribute("country") Country c, Model model, HttpSession session) {
+	public String updateCountry(@ModelAttribute("country") Country country, Model model, HttpSession session) {
 
 		String updatedBY = (String) session.getAttribute("userlogin");
-		c.setUpdBy(updatedBY);
-		this.countryService.updateCountry(c);
+		country.setUpdBy(updatedBY);
+		this.countryService.updateCountry(country);
 
 		return "redirect:/" + pageMappingService.PageRequestMapping(reqPage, pageno);
 	}
@@ -120,7 +120,6 @@ public class CountryController {
 	@GetMapping(value = { "/deleteCountry/{id}" })
 	public String deleteCountry(@PathVariable("id") String id, Model model, HttpSession session) {
 		this.countryService.removeCountry(id);
-		session.setAttribute("username", session.getAttribute("username"));
 		return "redirect:/" + pageMappingService.PageRequestMapping(reqPage, pageno);
 	}
 }
