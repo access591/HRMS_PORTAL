@@ -60,7 +60,7 @@ public class CityController {
 	public String saveCity(@ModelAttribute("city") City city, Model model, HttpSession session) {
 		
 		String insertedBY = (String) session.getAttribute("userlogin");
-		city.setIns_by(insertedBY);
+		city.setInsBy(insertedBY);
 		
 		cityService.addCity(city);
 		List<City> listCity = cityService.getAllCities();
@@ -100,7 +100,7 @@ public class CityController {
 	public String updateCity(@ModelAttribute("city") City c, Model model, HttpSession session) {
 		
 		String updatedBY = (String) session.getAttribute("userlogin");
-		c.setUpd_by(updatedBY);
+		c.setUpdBy(updatedBY);
 		this.cityService.updateCity(c);
 
 		return "redirect:/" + pageMappingService.PageRequestMapping(reqPage, pageno);
