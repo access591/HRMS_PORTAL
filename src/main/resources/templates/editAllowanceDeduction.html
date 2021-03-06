@@ -56,26 +56,26 @@ body {
 												<div class="form-group">
 											     <label> Code </label>
 											  	<label style="color: red">*</label>
-											   <input type="text" class="form-control" id="Allowance_Code" name="Allowance_Code" th:value="${editMiscAllowance.Allowance_Code}" readonly>
+											   <input type="text" class="form-control" id="allowanceCode" name="allowanceCode" th:value="${editMiscAllowance.allowanceCode}" readonly>
 												</div>
 												
 												<div class="form-group">
 											<label class="form-label">Head</label>
 											<label style="color: red">*</label>
-											 <input type="text" class="form-control uppercase" id="head" name="head" th:value="${editMiscAllowance.head}" required aria-required="true">
+											 <input type="text" class="form-control"maxlength="40" pattern="^[a-zA-Z\s]*$"  id="head" name="head" th:value="${editMiscAllowance.head}" required aria-required="true">
 										      </div>
 										      
 										      <div class="form-group">
 											     <label> Act Code </label>
 											  	<label style="color: red">*</label>
-											   <input type="text" class="form-control" id="Act_Code" name="Act_Code"  th:value="${editMiscAllowance.Act_Code}" required aria-required="true">
+											   <input type="text" class="form-control" id="actCode" name="actCode"  th:value="${editMiscAllowance.actCode}" required aria-required="true"pattern="\d{1,10}" title="Only digits"/>
 												</div>
 												
 												
 												 <div class="form-group">
 											     <label> Sub Group Code </label>
 											  	<label style="color: red">*</label>
-											   <input type="text" class="form-control" id="Sub_Group_Code" name="Sub_Group_Code" th:value="${editMiscAllowance.Sub_Group_Code}" required aria-required="true">
+											   <input type="text" class="form-control" id="subGroupCode" name="subGroupCode" th:value="${editMiscAllowance.subGroupCode}" required aria-required="true"pattern="\d{1,10}" title="Only digits"/>
 												</div>
 										      
 										      
@@ -98,14 +98,14 @@ body {
 											<div class="form-group">
 											<label class="form-label">Description</label>
 											<label style="color: red">*</label>
-											 <input type="text" class="form-control uppercase" id="description" name="description"  th:value="${editMiscAllowance.description}" required aria-required="true">
+											 <input type="text" class="form-control" maxlength="40" pattern="^[a-zA-Z\s]*$" id="description" name="description"  th:value="${editMiscAllowance.description}" required aria-required="true">
 										</div>
 										
 										
 										<div class="form-group">
 											<label class="form-label">Type</label>
 											<label style="color: red">*</label>
-											 <input type="text" class="form-control uppercase" id="type" name="type"  th:value="${editMiscAllowance.type}"  required aria-required="true">
+											 <input type="text" class="form-control"  maxlength="20" pattern="^[a-zA-Z\s]*$"id="type" name="type"  th:value="${editMiscAllowance.type}"  required aria-required="true">
 										</div>
 										
 										
@@ -113,13 +113,13 @@ body {
 										<div class="form-group">
 											<label class="form-label">Account Name </label>
 											<label style="color: red">*</label>
-											 <input type="text" class="form-control uppercase" id="Account_Name" name="Account_Name"  th:value="${editMiscAllowance.Account_Name}" required aria-required="true">
+											 <input type="text" class="form-control" maxlength="50" pattern="^[a-zA-Z\s]*$" id="accountName" name="accountName"  th:value="${editMiscAllowance.accountName}" required aria-required="true">
 										</div>
 										
 										 <div class="form-group">
 											     <label> Sub Group Name </label>
 											  	<label style="color: red">*</label>
-											   <input type="text" class="form-control" id="Sub_Group_Name" name="Sub_Group_Name"  th:value="${editMiscAllowance.Sub_Group_Name}" required aria-required="true">
+											   <input type="text" class="form-control" id="subGroupName" name="subGroupName" maxlength="50" pattern="^[a-zA-Z\s]*$"  th:value="${editMiscAllowance.subGroupName}" required aria-required="true">
 												</div>
 											</div>
 										</div>

@@ -19,13 +19,13 @@ private static final long serialVersionUID = -1201231658058617763L;
 	
 	@Id
 	@Column(name ="ALLOWANCE_CODE")
-	private String Allowance_Code;
+	private String allowanceCode;
 	@Column(name ="HEAD")
 	private String head;
 	@Column(name ="ACT_CODE")
-	private String Act_Code;
+	private String actCode;
 	@Column(name ="SUB_GROUP_CODE")
-	private String Sub_Group_Code;
+	private String subGroupCode;
 	@Column(name ="ACTIVE")
 	private String active;
 	@Column(name ="DESCRIPTION")
@@ -33,103 +33,124 @@ private static final long serialVersionUID = -1201231658058617763L;
 	@Column(name ="TYPE")
 	private String type;
 	@Column(name ="ACCOUNT_NAME")
-	private String Account_Name;
+	private String accountName;
 	@Column(name ="SUB_GROUP_NAME")
-	private String Sub_Group_Name;
+	private String subGroupName;
 	
-	@Column(name = "INS_BY")
-	private String Ins_by;
+    @Column(name = "INS_BY",updatable = false)
+	private String insBy;
 	
-	@Column(name = "INS_DATE")
-	private Date ins_date = new Date();
+	@Column(name = "INS_DATE",updatable = false)
+	private Date insDate =new Date();
 	
-	@Column(name = "UPD_BY")
-	private String upd_by;
+	@Column(name = "UPD_BY",insertable = false)
+	private String updBy;
 	
-	@Column(name = "UPD_DATE")
-	private Date  upd_date = new Date();
-	
-	
-	public String getAllowance_Code() {
-		return Allowance_Code;
+	@Column(name = "UPD_DATE",insertable = false)
+	private Date  updDate = new Date();
+
+	public String getAllowanceCode() {
+		return allowanceCode;
 	}
-	public void setAllowance_Code(String allowance_Code) {
-		Allowance_Code = allowance_Code;
+
+	public void setAllowanceCode(String allowanceCode) {
+		this.allowanceCode = allowanceCode;
 	}
+
 	public String getHead() {
 		return head;
 	}
+
 	public void setHead(String head) {
 		this.head = head;
 	}
-	public String getAct_Code() {
-		return Act_Code;
+
+	public String getActCode() {
+		return actCode;
 	}
-	public void setAct_Code(String act_Code) {
-		Act_Code = act_Code;
+
+	public void setActCode(String actCode) {
+		this.actCode = actCode;
 	}
-	public String getSub_Group_Code() {
-		return Sub_Group_Code;
+
+	public String getSubGroupCode() {
+		return subGroupCode;
 	}
-	public void setSub_Group_Code(String sub_Group_Code) {
-		Sub_Group_Code = sub_Group_Code;
+
+	public void setSubGroupCode(String subGroupCode) {
+		this.subGroupCode = subGroupCode;
 	}
+
 	public String getActive() {
 		return active;
 	}
+
 	public void setActive(String active) {
 		this.active = active;
 	}
+
 	public String getDescription() {
 		return description;
 	}
+
 	public void setDescription(String description) {
 		this.description = description;
 	}
+
 	public String getType() {
 		return type;
 	}
+
 	public void setType(String type) {
 		this.type = type;
 	}
-	public String getAccount_Name() {
-		return Account_Name;
+
+	public String getAccountName() {
+		return accountName;
 	}
-	public void setAccount_Name(String account_Name) {
-		Account_Name = account_Name;
+
+	public void setAccountName(String accountName) {
+		this.accountName = accountName;
 	}
-	public String getSub_Group_Name() {
-		return Sub_Group_Name;
+
+	public String getSubGroupName() {
+		return subGroupName;
 	}
-	public void setSub_Group_Name(String sub_Group_Name) {
-		Sub_Group_Name = sub_Group_Name;
+
+	public void setSubGroupName(String subGroupName) {
+		this.subGroupName = subGroupName;
 	}
-	public String getIns_by() {
-		return Ins_by;
+
+	public String getInsBy() {
+		return insBy;
 	}
-	public void setIns_by(String ins_by) {
-		Ins_by = ins_by;
+
+	public void setInsBy(String insBy) {
+		this.insBy = insBy;
 	}
-	public Date getIns_date() {
-		return ins_date;
+
+	public Date getInsDate() {
+		return insDate;
 	}
-	public void setIns_date(Date ins_date) {
-		this.ins_date = ins_date;
+
+	public void setInsDate(Date insDate) {
+		this.insDate = insDate;
 	}
-	public String getUpd_by() {
-		return upd_by;
+
+	public String getUpdBy() {
+		return updBy;
 	}
-	public void setUpd_by(String upd_by) {
-		this.upd_by = upd_by;
+
+	public void setUpdBy(String updBy) {
+		this.updBy = updBy;
 	}
-	public Date getUpd_date() {
-		return upd_date;
+
+	public Date getUpdDate() {
+		return updDate;
 	}
-	public void setUpd_date(Date upd_date) {
-		this.upd_date = upd_date;
+
+	public void setUpdDate(Date updDate) {
+		this.updDate = updDate;
 	}
-	
-	
-	
 
 }

@@ -53,26 +53,26 @@ body {
 												<div class="form-group">
 											     <label> Code </label>
 											  	<label style="color: red">*</label>
-											   <input type="text" class="form-control" id="Allowance_Code" name="Allowance_Code" required aria-required="true">
+											   <input type="text" class="form-control" id="allowanceCode" name="allowanceCode"readonly>
 												</div>
 												
 												<div class="form-group">
 											<label class="form-label">Head</label>
 											<label style="color: red">*</label>
-											 <input type="text" class="form-control uppercase" id="head" name="head"required aria-required="true">
+											 <input type="text" class="form-control" maxlength="40" pattern="^[a-zA-Z\s]*$"  id="head" name="head"required aria-required="true">
 										      </div>
 										      
 										      <div class="form-group">
 											     <label> Act Code </label>
 											  	<label style="color: red">*</label>
-											   <input type="text" class="form-control" id="Act_Code" name="Act_Code" required aria-required="true">
+											   <input type="text" class="form-control" id="actCode" name="actCode" required aria-required="true" pattern="\d{1,10}" title="Only digits"/>
 												</div>
 												
 												
 												 <div class="form-group">
 											     <label> Sub Group Code </label>
 											  	<label style="color: red">*</label>
-											   <input type="text" class="form-control" id="Sub_Group_Code" name="Sub_Group_Code" required aria-required="true">
+											   <input type="text" class="form-control" id="subGroupCode" name="subGroupCode" required aria-required="true"pattern="\d{1,10}" title="Only digits">
 												</div>
 										      
 										      
@@ -84,9 +84,9 @@ body {
 													<div class="custom-controls-stacked">
 
 														<label class="radio-inline"> <input type="radio"
-															value="Y" name="active" checked> Active
+															value="Y" name="active" checked> &nbsp;Active
 														</label> <label class="radio-inline"> <input type="radio"
-															value="N" name="active"> Inactive
+															value="N" name="active">&nbsp Inactive
 														</label>
 
 													</div>
@@ -96,14 +96,14 @@ body {
 											<div class="form-group">
 											<label class="form-label">Description</label>
 											<label style="color: red">*</label>
-											 <input type="text" class="form-control uppercase" id="description" name="description"required aria-required="true">
+											 <input type="text" class="form-control"  maxlength="40" pattern="^[a-zA-Z\s]*$"  id="description" name="description"required aria-required="true">
 										</div>
 										
 										
 										<div class="form-group">
 											<label class="form-label">Type</label>
 											<label style="color: red">*</label>
-											 <input type="text" class="form-control uppercase" id="type" name="type"required aria-required="true">
+											 <input type="text" class="form-control " id="type" name="type"required aria-required="true" maxlength="20" pattern="^[a-zA-Z\s]*$">
 										</div>
 										
 										
@@ -111,21 +111,15 @@ body {
 										<div class="form-group">
 											<label class="form-label">Account Name </label>
 											<label style="color: red">*</label>
-											 <input type="text" class="form-control uppercase" id="Account_Name" name="Account_Name"required aria-required="true">
+											 <input type="text" class="form-control " maxlength="40" pattern="^[a-zA-Z\s]*$" id="accountName" name="accountName"required aria-required="true">
 										</div>
 										
 										 <div class="form-group">
 											     <label> Sub Group Name </label>
 											  	<label style="color: red">*</label>
-											   <input type="text" class="form-control" id="Sub_Group_Name" name="Sub_Group_Name" required aria-required="true">
+											   <input type="text" class="form-control" id="subGroupName" maxlength="40" pattern="^[a-zA-Z\s]*$" name="subGroupName" required aria-required="true">
 												</div>
-										      
-										
-										
-										
-										
-										
-										
+
 										
 											</div>
 										</div>
@@ -154,13 +148,13 @@ body {
 										</thead>
 										<tbody>
 											<tr  th:each="listMiscAllowance : ${listMiscAllowanceDeduction}">
-												<td th:text="${listMiscAllowance.Allowance_Code}"></td>
+												<td th:text="${listMiscAllowance.allowanceCode}"></td>
 												<td th:text="${listMiscAllowance.description}"></td>
 
 												<td th:text="${listMiscAllowance.active}"></td>
 												
-												<td> <a th:href="@{/editAllowanceDeduction/{id}(id=${listMiscAllowance.Allowance_Code})}" class="btn btn-primary"><i class="fa fa-edit"></i></a>
-												<a th:href="@{/deleteAllowanceDeduction/{id}(id=${listMiscAllowance.Allowance_Code})}" class="btn btn-primary"onclick="return confirm('Are you sure?')"><i class="fa fa-times"></i></a>
+												<td> <a th:href="@{/editAllowanceDeduction/{id}(id=${listMiscAllowance.allowanceCode})}"><i class="fa fa-edit"></i></a>
+												<a th:href="@{/deleteAllowanceDeduction/{id}(id=${listMiscAllowance.allowanceCode})}" onclick="return confirm('Are you sure?')"><i class="fa fa-times"></i></a>
 												</td>
 											</tr>
 										</tbody>
