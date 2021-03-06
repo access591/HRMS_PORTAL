@@ -60,14 +60,14 @@ body {
 										
 											  <label> Holiday Code </label>
 											  		<label style="color: red">*</label>
-											   <input type="text" class="form-control" id="Holiday_Code" name="Holiday_Code" th:value="${Holidayedit.Holiday_Code}" readonly required aria-required="true">
+											   <input type="text" class="form-control" id="holidayCode" name="holidayCode" th:value="${Holidayedit.holidayCode}" readonly required aria-required="true">
 												</div>
 												
 												<div class="form-group ">
 													<label class="form-label">Date Of Holiday</label> <span
 														class="text-danger">*</span> <input
-														class="form-control required" type="text" id="Date_Of_Holiday" 
-														name="Date_Of_Holiday" th:value="${Holidayedit.Date_Of_Holiday}">
+														class="form-control required" type="text" id="dateOfHoliday" 
+														name="dateOfHoliday" th:value="${Holidayedit.dateOfHoliday}">
 												</div>
 												<div class="form-group">
 													<label class="form-label">Status</label>
@@ -93,9 +93,9 @@ body {
 	                                      <div class="form-group">
 											<label class="form-label">Holiday Type</label>
 											<label style="color: red">*</label>
-										     	<select class="form-control" name="Holiday_Type"id="Holiday_Type" >
-													<option  th:value="N"  th:selected="${Holidayedit.Holiday_Type}==N">National</option>
-													<option th:value="S" th:selected="${Holidayedit.Holiday_Type}==S">State</option>
+										     	<select class="form-control" name="holidayType"id="holidayType" >
+													<option  th:value="N"  th:selected="${Holidayedit.holidayType}==N">National</option>
+													<option th:value="S" th:selected="${Holidayedit.holidayType}==S">State</option>
 												
 											</select>
 										    </div>
@@ -124,7 +124,7 @@ body {
 	<script>
 		$(function() {
 			// Datatables basic
-			$("input[name=\"Date_Of_Holiday\"]").datepicker({
+			$("input[name=\"dateOfHoliday\"]").datepicker({
 				    dateFormat: 'yy-mm-dd'
 			});
 			

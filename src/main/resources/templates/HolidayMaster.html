@@ -58,14 +58,14 @@ body {
 											  		<label style="color: red">*</label>
 											  	 
 											   <input
-														type="text" class="form-control" id="Holiday_Code" name="Holiday_Code"disabled>
+														type="text" class="form-control" id="holidayCode" name="holidayCode"disabled>
 												</div>
 												
 												<div class="form-group ">
 													<label class="form-label">Date Of Holiday</label> <span
 														class="text-danger">*</span> <input
-														class="form-control required" type="text" id="Date_Of_Holiday"
-														name="Date_Of_Holiday" />
+														class="form-control required" type="text" id="dateOfHoliday"
+														name="dateOfHoliday" />
 
 												</div>
 											
@@ -95,7 +95,7 @@ body {
 										<div class="form-group">
 											<label class="form-label">Holiday Type</label>
 											<label style="color: red">*</label>
-											<select class="form-control" name="Holiday_Type"id="Holiday_Type">
+											<select class="form-control" name="holidayType"id="holidayType">
 													<option value="N">National </option>
 													<option value="S">State</option>
 												
@@ -132,13 +132,13 @@ body {
 										</thead>
 										<tbody>
 											<tr  th:each="listholiday : ${listHoliday}">
-												<td th:text="${listholiday.Holiday_Code}"></td>
+												<td th:text="${listholiday.holidayCode}"></td>
 												<td th:text="${listholiday.description}"></td>
-												<td th:text="${listholiday.Date_Of_Holiday}"></td>
-												<td th:text="${listholiday.Holiday_Type}"></td>
+												<td th:text="${listholiday.dateOfHoliday}"></td>
+												<td th:text="${listholiday.holidayType}"></td>
 												<td th:text="${listholiday.active}"></td>
-												<td><a th:href="@{/editHoliday/{id}(id=${listholiday.Holiday_Code})}" class="btn btn-primary"><i class="fa fa-edit"></i></a>
-												<a th:href="@{/deleteHoliday/{id}(id=${listholiday.Holiday_Code})}" class="btn btn-primary"onclick="return confirm('Are you sure?')"><i class="fa fa-times"></i></a>
+												<td><a th:href="@{/editHoliday/{id}(id=${listholiday.holidayCode})}" class="btn btn-primary"><i class="fa fa-edit"></i></a>
+												<a th:href="@{/deleteHoliday/{id}(id=${listholiday.holidayCode})}" class="btn btn-primary"onclick="return confirm('Are you sure?')"><i class="fa fa-times"></i></a>
 												</td>
 											</tr>
 										</tbody>
@@ -162,7 +162,7 @@ body {
 		$(function() {
 			// Datatables basic
 			
-				$("input[name=\"Date_Of_Holiday\"]").datepicker({
+				$("input[name=\"dateOfHoliday\"]").datepicker({
 				    dateFormat: 'yy-mm-dd'
 			});
 			
