@@ -61,13 +61,13 @@ public class LoanController {
 	 */
 	@PostMapping("/saveLoan")
 	public String SaveLoan(@ModelAttribute("loan") Loan loan, Model model, HttpSession session) {
-		if (loan.getLoan_Code() != "") {
+	
 			loanMaterService.addLoan(loan);
 			List<Loan> listLoan = loanMaterService.getAllLoans();
 			model.addAttribute("listLoan", listLoan);
 			session.setAttribute("username", session.getAttribute("username"));
 
-		}
+	
 		return "redirect:"+pageMappingService.PageRequestMapping(reqPage,pageno);
 
 
