@@ -22,7 +22,7 @@ public class Holiday implements Serializable
 	private static final long serialVersionUID = 3252326016046684834L;
 	 @Id
 		@Column(name = "HOLIDAY_CODE")
-	    private String 	Holiday_Code;
+	    private String 	holidayCode;
 	 
 	    @Column(name = "DESCRIPTION")
 	    private String  description;
@@ -30,58 +30,31 @@ public class Holiday implements Serializable
 	    @Column(name ="DATE_OF_HOLIDAY")
 	    @DateTimeFormat(pattern ="yyyy-mm-dd")
 	    @Temporal(TemporalType.DATE)
-	    private Date Date_Of_Holiday;
+	    private Date dateOfHoliday;
 	    
 	    @Column(name ="HOLIDAY_TYPE")
-	    private String  Holiday_Type;
+	    private String  holidayType;
 	    
 	    @Column(name ="ACTIVE")
 	    private String active;
-	    
-	    @Column(name = "INS_BY")
-		private String Ins_by;
+	    @Column(name = "INS_BY",updatable = false)
+		private String insBy;
 		
-		@Column(name = "INS_DATE")
-		private Date ins_date = new Date();
+		@Column(name = "INS_DATE",updatable = false)
+		private Date insDate =new Date();
 		
-		@Column(name = "UPD_BY")
-		private String upd_by;
+		@Column(name = "UPD_BY",insertable = false)
+		private String updBy;
 		
-		@Column(name = "UPD_DATE")
-		private Date  upd_date = new Date();
-
-		public String getHoliday_Code() {
-			return Holiday_Code;
-		}
-
-		public void setHoliday_Code(String holiday_Code) {
-			Holiday_Code = holiday_Code;
-		}
-
-		public String getDescription() {
+		@Column(name = "UPD_DATE",insertable = false)
+		private Date  updDate = new Date();
+	    public String getDescription() {
 			return description;
 		}
 
 		public void setDescription(String description) {
 			this.description = description;
-		}
-
-		public Date getDate_Of_Holiday() {
-			return Date_Of_Holiday;
-		}
-
-		public void setDate_Of_Holiday(Date date_Of_Holiday) {
-			Date_Of_Holiday = date_Of_Holiday;
-		}
-
-		public String getHoliday_Type() {
-			return Holiday_Type;
-		}
-
-		public void setHoliday_Type(String holiday_Type) {
-			Holiday_Type = holiday_Type;
-		}
-
+		}			
 		public String getActive() {
 			return active;
 		}
@@ -90,40 +63,60 @@ public class Holiday implements Serializable
 			this.active = active;
 		}
 
-		public String getIns_by() {
-			return Ins_by;
+		public String getHolidayCode() {
+			return holidayCode;
 		}
 
-		public void setIns_by(String ins_by) {
-			Ins_by = ins_by;
+		public void setHolidayCode(String holidayCode) {
+			this.holidayCode = holidayCode;
 		}
 
-		public Date getIns_date() {
-			return ins_date;
+		public Date getDateOfHoliday() {
+			return dateOfHoliday;
 		}
 
-		public void setIns_date(Date ins_date) {
-			this.ins_date = ins_date;
+		public void setDateOfHoliday(Date dateOfHoliday) {
+			this.dateOfHoliday = dateOfHoliday;
 		}
 
-		public String getUpd_by() {
-			return upd_by;
+		public String getHolidayType() {
+			return holidayType;
 		}
 
-		public void setUpd_by(String upd_by) {
-			this.upd_by = upd_by;
+		public void setHolidayType(String holidayType) {
+			this.holidayType = holidayType;
 		}
 
-		public Date getUpd_date() {
-			return upd_date;
+		public String getInsBy() {
+			return insBy;
 		}
 
-		public void setUpd_date(Date upd_date) {
-			this.upd_date = upd_date;
+		public void setInsBy(String insBy) {
+			this.insBy = insBy;
 		}
-		
-		
-	    
-	
-	
+
+		public Date getInsDate() {
+			return insDate;
+		}
+
+		public void setInsDate(Date insDate) {
+			this.insDate = insDate;
+		}
+
+		public String getUpdBy() {
+			return updBy;
+		}
+
+		public void setUpdBy(String updBy) {
+			this.updBy = updBy;
+		}
+
+		public Date getUpdDate() {
+			return updDate;
+		}
+
+		public void setUpdDate(Date updDate) {
+			this.updDate = updDate;
+		}
+
 }

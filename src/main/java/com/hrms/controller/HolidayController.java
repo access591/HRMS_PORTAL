@@ -60,7 +60,7 @@ public class HolidayController
 	 */
 	@PostMapping("/saveHolidays")
 	  public String SaveHoliday(@ModelAttribute("holidays") Holiday holiday, Model model,HttpSession session) {
-			if (holiday.getHoliday_Code() != "") {
+			if (holiday.getHolidayCode() != "") {
 				holidayService.addHoliday(holiday); 
 				List<Holiday>listHoliday = holidayService.getAllHolidays();
 				model.addAttribute("listHoliday", listHoliday); 
