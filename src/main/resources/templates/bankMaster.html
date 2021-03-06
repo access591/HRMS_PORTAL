@@ -56,7 +56,7 @@ body {
 											  <label style="color: red">*</label>
 											  	 
 											   <input
-												type="text" class="form-control" maxlength="9" id="BankCode" name="BankCode" disabled/>
+												type="text" class="form-control" maxlength="9" id="bankCode" name="bankCode" disabled/>
 												</div>
 												<div class="form-group">
 											<label class="form-label">Bank Name</label>
@@ -157,14 +157,14 @@ body {
 										</thead>
 										<tbody>
 											<tr  th:each="listbank : ${listBank}">
-												<td th:text="${listbank.BankCode}"></td>
+												<td th:text="${listbank.bankCode}"></td>
 												<td th:text="${listbank.bankName}"></td>
 												<td th:text="${listbank.countryCode}"></td>
 												<td th:text="${listbank.accountNo}"></td>
 												<td th:text="${listbank.mobileNo}"></td>
 												<td th:text="${listbank.active}"></td>
-												<td><a th:href="@{/editBank/{id}(id=${listbank.BankCode})}" class="btn btn-primary"><i class="fa fa-edit"></i></a>
-												<a th:href="@{/deleteBank/{id}(id=${listbank.BankCode})}" class="btn btn-primary"onclick="return confirm('Are you sure?')"><i class="fa fa-times"></i></a>
+												<td><a th:href="@{/editBank/{id}(id=${listbank.bankCode})}" class="btn btn-primary"><i class="fa fa-edit"></i></a>
+												<a th:href="@{/deleteBank/{id}(id=${listbank.bankCode})}" class="btn btn-primary"onclick="return confirm('Are you sure?')"><i class="fa fa-times"></i></a>
 												</td>
 											</tr>
 										</tbody>
