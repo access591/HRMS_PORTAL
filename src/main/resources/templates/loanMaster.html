@@ -57,7 +57,7 @@ body {
 											  		<label style="color: red">*</label>
 											  	 
 											   <input
-														type="text" class="form-control" id="Loan_Code" name="Loan_Code" required aria-required="true">
+														type="text" class="form-control" id="loanCode" name="loanCode"readonly>
 												</div>
 
 												<div class="form-group">
@@ -78,7 +78,7 @@ body {
 											<div class="form-group">
 											<label class="form-label"> Loan Name</label>
 											<label style="color: red">*</label>
-											 <input type="text" class="form-control uppercase" onkeypress="return /[a-z]/i.test(event.key)" id="Loan_Name" name="Loan_Name"required aria-required="true">
+											 <input type="text" class="form-control" maxlength="40" pattern="^[a-zA-Z\s]*$" id="loanName" name="loanName"required aria-required="true">
 										</div>
 											</div>
 										</div>
@@ -107,11 +107,11 @@ body {
 										</thead>
 										<tbody>
 											<tr  th:each="listofloan : ${listLoan}">
-												<td th:text="${listofloan.Loan_Code}"></td>
-												<td th:text="${listofloan.Loan_Name}"></td>
+												<td th:text="${listofloan.loanCode}"></td>
+												<td th:text="${listofloan.loanName}"></td>
 												<td th:text="${listofloan.active}"></td>
-												<td><a th:href="@{/editLoan/{id}(id=${listofloan.Loan_Code})}" class="btn btn-primary"><i class="fa fa-edit"></i></a>
-												<a th:href="@{/deleteLoan/{id}(id=${listofloan.Loan_Code})}" class="btn btn-primary"onclick="return confirm('Are you sure?')"><i class="fa fa-times"></i></a>
+												<td><a th:href="@{/editLoan/{id}(id=${listofloan.loanCode})}"><i class="fa fa-edit"></i></a>
+												<a th:href="@{/deleteLoan/{id}(id=${listofloan.loanCode})}" onclick="return confirm('Are you sure?')"><i class="fa fa-times"></i></a>
 												</td>
 											</tr>
 										</tbody>

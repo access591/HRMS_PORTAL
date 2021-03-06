@@ -19,65 +19,69 @@ public class Loan implements Serializable {
 	
 	       @Id
 			@Column(name = "LOAN_CODE")
-			private String Loan_Code;
-
+			private String loanCode;
+	       
 			@Column(name = "LOAN_NAME")
-			private String Loan_Name;
+			private String loanName;
 			
-			@Column(name = "INS_BY")
-			private String Ins_by;
+		    @Column(name = "INS_BY",updatable = false)
+			private String insBy;
 			
-			@Column(name = "INS_DATE")
-			private Date ins_date = new Date();
+			@Column(name = "INS_DATE",updatable = false)
+			private Date insDate =new Date();
 			
-			@Column(name = "UPD_BY")
-			private String upd_by;
+			@Column(name = "UPD_BY",insertable = false)
+			private String updBy;
 			
-			@Column(name = "UPD_DATE")
-			private Date  upd_date = new Date();
+			@Column(name = "UPD_DATE",insertable = false)
+			private Date  updDate = new Date();
+
+			
 			@Column(name = "ACTIVE_YN")
 			private String active;
-			public String getLoan_Code() {
-				return Loan_Code;
-			}
-			public void setLoan_Code(String loan_Code) {
-				Loan_Code = loan_Code;
-			}
-			public String getLoan_Name() {
-				return Loan_Name;
-			}
-			public void setLoan_Name(String loan_Name) {
-				Loan_Name = loan_Name;
-			}
-			public String getIns_by() {
-				return Ins_by;
-			}
-			public void setIns_by(String ins_by) {
-				Ins_by = ins_by;
-			}
-			public Date getIns_date() {
-				return ins_date;
-			}
-			public void setIns_date(Date ins_date) {
-				this.ins_date = ins_date;
-			}
-			public String getUpd_by() {
-				return upd_by;
-			}
-			public void setUpd_by(String upd_by) {
-				this.upd_by = upd_by;
-			}
-			public Date getUpd_date() {
-				return upd_date;
-			}
-			public void setUpd_date(Date upd_date) {
-				this.upd_date = upd_date;
-			}
+
+			
 			public String getActive() {
 				return active;
 			}
 			public void setActive(String active) {
 				this.active = active;
+			}
+			public String getLoanCode() {
+				return loanCode;
+			}
+			public void setLoanCode(String loanCode) {
+				this.loanCode = loanCode;
+			}
+			public String getLoanName() {
+				return loanName;
+			}
+			public void setLoanName(String loanName) {
+				this.loanName = loanName;
+			}
+			public String getInsBy() {
+				return insBy;
+			}
+			public void setInsBy(String insBy) {
+				this.insBy = insBy;
+			}
+			public Date getInsDate() {
+				return insDate;
+			}
+			public void setInsDate(Date insDate) {
+				this.insDate = insDate;
+			}
+			public String getUpdBy() {
+				return updBy;
+			}
+			public void setUpdBy(String updBy) {
+				this.updBy = updBy;
+			}
+			public Date getUpdDate() {
+				return updDate;
+			}
+			public void setUpdDate(Date updDate) {
+				this.updDate = updDate;
 			}
 			
 	

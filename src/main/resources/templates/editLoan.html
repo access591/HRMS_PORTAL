@@ -60,7 +60,7 @@ body {
 											       <label> Loan Code </label>
 											  		<label style="color: red">*</label>
 											  	 
-											   <input type="text"class="form-control" id="Loan_Code" name="Loan_Code" th:value="${loanEdit.Loan_Code}" readonly >
+											   <input type="text"class="form-control" id="loanCode" name="loanCode" th:value="${loanEdit.loanCode}" readonly >
 												</div>
 
 												<div class="form-group">
@@ -81,7 +81,7 @@ body {
 											
 											<label class="form-label">Loan Name</label>
 											<label style="color: red">*</label>
-											 <input type="text" class="form-control uppercase" id="Loan_Name" name="Loan_Name"th:value="${loanEdit.Loan_Name}" required aria-required="true">
+											 <input type="text" class="form-control" id="loanName"pattern="^[a-zA-Z\s]*$"maxlength="40"  name="loanName"th:value="${loanEdit.loanName}" required aria-required="true">
 										   </div>
 
 											</div>

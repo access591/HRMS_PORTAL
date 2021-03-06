@@ -13,7 +13,8 @@ public class LoanMaterServiceImpl implements LoanMaterService {
 	LoanMaterDao loanMaterDao;
 	@Override
 	public void addLoan(Loan loan) {
-		loan.setIns_date(new Date());
+		loan.setInsDate(new Date());
+		loan.setLoanCode(loanMaterDao.getMAX_Id("LNC"));
 		  this.loanMaterDao.saveOrUpdate(loan);
 	}
 	@Override
@@ -28,8 +29,8 @@ public class LoanMaterServiceImpl implements LoanMaterService {
 	}
 	@Override
 	public void updateLoan(Loan L) {
-		L.setLoan_Name(L.getLoan_Name());
-		L.setUpd_date(L.getUpd_date());
+		L.setLoanName(L.getLoanName());
+		L.setUpdDate(L.getUpdDate());
 		L.setActive(L.getActive());
 		this.loanMaterDao.saveOrUpdate(L);
 	}
