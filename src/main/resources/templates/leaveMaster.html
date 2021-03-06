@@ -57,12 +57,12 @@ body {
 											  <label style="color: red">*</label>
 											  	 
 											   <input
-												type="text" class="form-control" id="Lev_code" name="Lev_code" required aria-required="true">
+												type="text" class="form-control" id="levCode" name="levCode" required aria-required="true">
 												</div>
 												<div class="form-group">
 											<label class="form-label">Total Leave</label>
 											<label style="color: red">*</label>
-											 <input type="text" class="form-control uppercase" id="total_lev" name="total_lev"required aria-required="true">
+											 <input type="text" class="form-control" id="totalLev" name="totalLev" required aria-required="true">
 										   </div>
 												
 
@@ -82,12 +82,12 @@ body {
 											</div>
 											<div class="col-12 col-lg-6">
 											<div class="form-group">
-												 <label for="lev_type">Leave Type</label>
+												 <label for="levType">Leave Type</label>
 												 <input
-												type="text" class="form-control" id="lev_type" name="lev_type" required aria-required="true">
+												type="text" class="form-control" id="levType" name="levType" required aria-required="true">
                                                  
                                                    <div class="select">
-                                                   <select id="lev_type">
+                                                   <select id="levType">
                                                    <option value="Paternity">Paternity</option>
                                                    <option value="Maternity">Maternity</option>
                                                    <option value="Sick">Sick</option>
@@ -140,12 +140,12 @@ body {
 										</thead>
 										<tbody>
 											<tr  th:each="listleave : ${listLeave}">
-												<td th:text="${listleave.Lev_code}"></td>
-												<td th:text="${listleave.total_lev}"></td>
-												<td th:text="${listleave.lev_type}"></td>
+												<td th:text="${listleave.levCode}"></td>
+												<td th:text="${listleave.totalLev}"></td>
+												<td th:text="${listleave.levType}"></td>
 												<td th:text="${listleave.active}"></td>
-												<td><a th:href="@{/editLeave/{id}(id=${listleave.Lev_code})}" class="btn btn-primary"><i class="fa fa-edit"></i></a>
-												<a th:href="@{/deleteLeave/{id}(id=${listleave.Lev_code})}" class="btn btn-primary"onclick="return confirm('Are you sure?')"><i class="fa fa-times"></i></a>
+												<td><a th:href="@{/editLeave/{id}(id=${listleave.levCode})}"><i class="fa fa-edit"></i></a>
+												<a th:href="@{/deleteLeave/{id}(id=${listleave.levCode})}"onclick="return confirm('Are you sure?')"><i class="fa fa-times"></i></a>
 												</td>
 											</tr>
 										</tbody>

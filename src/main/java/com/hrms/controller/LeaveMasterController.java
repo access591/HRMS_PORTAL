@@ -44,7 +44,7 @@ public class LeaveMasterController {
 	 * @return
 	 */
 @GetMapping("/leaveMaster")
-public String LeaveMaster(Model model,HttpSession session) {
+public String leaveMaster(Model model,HttpSession session) {
 	
 	List<Leave> listLeave = leaveService.getAllLeaves();
 	model.addAttribute("listLeave", listLeave);
@@ -65,7 +65,7 @@ public String LeaveMaster(Model model,HttpSession session) {
  * @return
  */
 @PostMapping("/saveLeave")
-	public String SaveLeave(@ModelAttribute("leave") Leave leave, Model model) {
+	public String saveLeave(@ModelAttribute("leave") Leave leave, Model model) {
 	
 			leaveService.addLeave(leave);
 			List<Leave> listLeave = leaveService.getAllLeaves();

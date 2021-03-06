@@ -14,7 +14,7 @@ public class LeaveServiceImpl implements LeaveService {
 
 	@Override
 	public void addLeave(Leave leave) {
-		leave.setIns_date(new Date());
+		leave.setInsDate(new Date());
 		this.leaveDao.saveOrUpdate(leave);
 	}
 
@@ -31,8 +31,8 @@ public class LeaveServiceImpl implements LeaveService {
 
 	@Override
 	public void updateLeave(Leave d) {
-		d.setLev_code(d.getLev_code());
-		d.setUpd_date(d.getUpd_date());
+		d.setLevCode(d.getLevCode());
+		d.setUpdDate(d.getUpdDate());
 		d.setActive(d.getActive());
 		this.leaveDao.saveOrUpdate(d);
 
