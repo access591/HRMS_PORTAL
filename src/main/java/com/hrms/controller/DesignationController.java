@@ -41,7 +41,7 @@ public class DesignationController {
 	 * @return
 	 */
 	@GetMapping("/designationMaster")
-	public String DesignationMaster(Model model, HttpSession session) {
+	public String designationMaster(Model model, HttpSession session) {
 
 		List<Designation> listDesignation = designationService.getAllDesignations();
 		model.addAttribute("listDesignation", listDesignation);
@@ -62,7 +62,7 @@ public class DesignationController {
 	 * @return
 	 */
 	@PostMapping("/saveDesignation")
-	public String SaveDesignation(@ModelAttribute("designation") Designation designation, Model model,
+	public String saveDesignation(@ModelAttribute("designation") Designation designation, Model model,
 			RedirectAttributes redirectAttributes) {
 		boolean isModuleExist = designationService.checkDesignationExists(designation);
 
@@ -104,9 +104,9 @@ public class DesignationController {
 	 * @return
 	 */
 	@PostMapping("/updateDesignation")
-	public String updateDesignation(@ModelAttribute("desiupdate") Designation d, Model model) {
+	public String updateDesignation(@ModelAttribute("desiupdate") Designation designation, Model model) {
 
-		this.designationService.updateDesignation(d);
+		this.designationService.updateDesignation(designation);
 
 		 return "redirect:/"+pageMappingService.PageRequestMapping(reqPage,pageno);
 	}

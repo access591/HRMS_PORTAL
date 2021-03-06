@@ -41,7 +41,7 @@ public class DepartmentController {
 	 * @return
 	 */	
 @GetMapping("/departmentMaster")
-public String DepartmentMaster(Model model,HttpSession session) {
+public String departmentMaster(Model model,HttpSession session) {
 	
 	List<Department> listDepartment = departmentService.getAllDepartments();
 	model.addAttribute("listDepartment", listDepartment);
@@ -50,7 +50,7 @@ public String DepartmentMaster(Model model,HttpSession session) {
 	if (modules != null) {
 		model.addAttribute("modules", modules);
 	}
-	session.setAttribute("username",session.getAttribute("username"));
+	
 	  return pageMappingService.PageRequestMapping(reqPage,pageno);
 	}
 /**
@@ -60,7 +60,7 @@ public String DepartmentMaster(Model model,HttpSession session) {
  * @return
  */	
 @PostMapping("/saveDepartment")
-	public String SaveDepartment(@ModelAttribute("department") Department department, Model model,RedirectAttributes redirectAttributes,HttpSession session) {
+	public String saveDepartment(@ModelAttribute("department") Department department, Model model,RedirectAttributes redirectAttributes,HttpSession session) {
 	
 	boolean isModuleExist = departmentService.checkDepartmentExists(department);	
 	
@@ -76,7 +76,7 @@ else
 	departmentService.addDepartment(department);
 	List<Department> listDepartment = departmentService.getAllDepartments();
 	model.addAttribute("listDepartment", listDepartment);
-	session.setAttribute("username",session.getAttribute("username"));	
+	
 }
 	  return "redirect:"+pageMappingService.PageRequestMapping(reqPage,pageno);
 }	
@@ -94,7 +94,7 @@ public String editdepartment(@PathVariable("id")String id,  Model model,HttpSess
 	Department departmentEdit = departmentService.findDepartmentById(id);
 	  model.addAttribute("departmentEdit", departmentEdit);
 
-    session.setAttribute("username",session.getAttribute("username")); 
+   
     return pageMappingService.PageRequestMapping(reqPageedit,editPageNo);
 }
 /**
@@ -104,9 +104,9 @@ public String editdepartment(@PathVariable("id")String id,  Model model,HttpSess
  * @return
  */	
 @PostMapping("/updateDepartment")
-public String updateDepartment(@ModelAttribute("deptupdate") Department d, Model model) {
+public String updateDepartment(@ModelAttribute("deptupdate") Department department, Model model) {
 
-	  this.departmentService.updateDepartment(d);
+	  this.departmentService.updateDepartment(department);
   	  
 	  return "redirect:/"+pageMappingService.PageRequestMapping(reqPage,pageno);
 }
@@ -121,7 +121,6 @@ public String updateDepartment(@ModelAttribute("deptupdate") Department d, Model
 public String deletedepartment(@PathVariable("id")String id,  Model model,HttpSession session)
  { 
 	  this.departmentService.removeDepartment(id);
-    session.setAttribute("username",session.getAttribute("username")); 
     return "redirect:/"+pageMappingService.PageRequestMapping(reqPage,pageno);
 }
 
