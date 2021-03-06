@@ -60,7 +60,7 @@ body {
 											  		<label style="color: red">*</label>
 											  	 
 											   <input
-														type="text" class="form-control"maxlength="10" id="Desg_code" name="Desg_code" readonly>
+														type="text" class="form-control"maxlength="10" id="desgCode" name="desgCode" readonly>
 												</div>
 
 												<div class="form-group">
@@ -81,7 +81,7 @@ body {
 											<div class="form-group">
 											<label class="form-label">Designation Name</label>
 											<label style="color: red">*</label>
-											 <input type="text" class="form-control" pattern="^[a-zA-Z\s]*$" title="Designation Name" maxlength="25" id="Desg_Name" name="Desg_Name"required aria-required="true">
+											 <input type="text" class="form-control" pattern="^[a-zA-Z\s]*$" title="Designation Name" maxlength="25" id="desgName" name="desgName"required aria-required="true">
 										</div>
 											</div>
 										</div>
@@ -108,11 +108,11 @@ body {
 										</thead>
 										<tbody>
 											<tr  th:each="listdesignation : ${listDesignation}">
-												<td th:text="${listdesignation.Desg_code}"></td>
-												<td th:text="${listdesignation.Desg_Name}"></td>
+												<td th:text="${listdesignation.desgCode}"></td>
+												<td th:text="${listdesignation.desgName}"></td>
 												<td th:text="${listdesignation.active}"></td>
-												<td><a th:href="@{/editDesignation/{id}(id=${listdesignation.Desg_code})}" class="btn btn-primary"><i class="fa fa-edit"></i></a>
-												<a th:href="@{/deleteDesignation/{id}(id=${listdesignation.Desg_code})}" class="btn btn-primary"onclick="return confirm('Are you sure?')"><i class="fa fa-times"></i></a>
+												<td><a th:href="@{/editDesignation/{id}(id=${listdesignation.desgCode})}" class="btn btn-primary"><i class="fa fa-edit"></i></a>
+												<a th:href="@{/deleteDesignation/{id}(id=${listdesignation.desgCode})}" class="btn btn-primary"onclick="return confirm('Are you sure?')"><i class="fa fa-times"></i></a>
 												</td>
 											</tr>
 										</tbody>

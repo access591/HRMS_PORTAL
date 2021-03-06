@@ -22,22 +22,23 @@ public class Designation implements Serializable{
 	private static final long serialVersionUID = -5996491080389467939L;
 	@Id
 	@Column(name = "DESG_CODE")
-	private String Desg_code;
+	private String desgCode;
 
 	@Column(name = "DESG_NAME")
-	private String Desg_Name;
+	private String desgName;
 	
-	@Column(name = "INS_BY")
-	private String Ins_by;
+    @Column(name = "INS_BY",updatable = false)
+	private String insBy;
 	
-	@Column(name = "INS_DATE")
-	private Date ins_date = new Date();
+	@Column(name = "INS_DATE",updatable = false)
+	private Date insDate =new Date();
 	
-	@Column(name = "UPD_BY")
-	private String upd_by;
+	@Column(name = "UPD_BY",insertable = false)
+	private String updBy;
 	
-	@Column(name = "UPD_DATE")
-	private Date  upd_date = new Date();
+	@Column(name = "UPD_DATE",insertable = false)
+	private Date  updDate = new Date();
+
 	@Column(name = "ACTIVE_YN")
 	private String active;
 	
@@ -45,58 +46,58 @@ public class Designation implements Serializable{
 		return active;
 	}
 
+	public String getDesgCode() {
+		return desgCode;
+	}
+
+	public void setDesgCode(String desgCode) {
+		this.desgCode = desgCode;
+	}
+
+	public String getDesgName() {
+		return desgName;
+	}
+
+	public void setDesgName(String desgName) {
+		this.desgName = desgName;
+	}
+
+	public String getInsBy() {
+		return insBy;
+	}
+
+	public void setInsBy(String insBy) {
+		this.insBy = insBy;
+	}
+
+	public Date getInsDate() {
+		return insDate;
+	}
+
+	public void setInsDate(Date insDate) {
+		this.insDate = insDate;
+	}
+
+	public String getUpdBy() {
+		return updBy;
+	}
+
+	public void setUpdBy(String updBy) {
+		this.updBy = updBy;
+	}
+
+	public Date getUpdDate() {
+		return updDate;
+	}
+
+	public void setUpdDate(Date updDate) {
+		this.updDate = updDate;
+	}
+
 	public void setActive(String active) {
 		this.active = active;
 	}
 
-	public String getDesg_code() {
-		return Desg_code;
-	}
-
-	public void setDesg_code(String desg_code) {
-		Desg_code = desg_code;
-	}
-
-	public String getDesg_Name() {
-		return Desg_Name;
-	}
-
-	public void setDesg_Name(String desg_Name) {
-		
-		
-		Desg_Name = desg_Name;
-	}
-
-	public String getIns_by() {
-		return Ins_by;
-	}
-
-	public void setIns_by(String ins_by) {
-		Ins_by = ins_by;
-	}
-
-	public Date getIns_date() {
-		return ins_date;
-	}
-
-	public void setIns_date(Date ins_date) {
-		this.ins_date = ins_date;
-	}
-
-	public String getUpd_by() {
-		return upd_by;
-	}
-
-	public void setUpd_by(String upd_by) {
-		this.upd_by = upd_by;
-	}
-
-	public Date getUpd_date() {
-		return upd_date;
-	}
-
-	public void setUpd_date(Date upd_date) {
-		this.upd_date = upd_date;
-	}
+	
 	
 }
