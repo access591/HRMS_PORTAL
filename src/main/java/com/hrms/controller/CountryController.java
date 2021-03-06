@@ -62,7 +62,7 @@ public class CountryController {
 	public String saveCountry(@ModelAttribute("country") Country country, Model model, HttpSession session) {
 		
 		String insertedBY = (String) session.getAttribute("userlogin");
-		country.setIns_by(insertedBY);
+		country.setInsBy(insertedBY);
 		
 		countryService.addCountry(country);
 		List<Country> listCountry = countryService.getAllCountrys();
@@ -104,7 +104,7 @@ public class CountryController {
 	public String updateCountry(@ModelAttribute("country") Country c, Model model, HttpSession session) {
 
 		String updatedBY = (String) session.getAttribute("userlogin");
-		c.setUpd_by(updatedBY);
+		c.setUpdBy(updatedBY);
 		this.countryService.updateCountry(c);
 
 		return "redirect:/" + pageMappingService.PageRequestMapping(reqPage, pageno);
