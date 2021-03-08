@@ -57,7 +57,7 @@ public class SkillCategoryController {
 	@PostMapping("/saveSkillCategory")
 	public String saveCity(@ModelAttribute("skillCategory") SkillCategory sc, Model model, HttpSession session) {
 		String insertedBY = (String) session.getAttribute("userlogin");
-		sc.setIns_by(insertedBY);
+		sc.setInsBy(insertedBY);
 		skillCategoryService.addSkillCategory(sc);
 		List<SkillCategory> listSkillCategory = skillCategoryService.getAllSkillCategorys();
 		model.addAttribute("listSkillCategory", listSkillCategory);
@@ -94,7 +94,7 @@ public class SkillCategoryController {
 	@PostMapping("/updateSkillCategory")
 	public String updateCity(@ModelAttribute("skillCategory") SkillCategory sc, Model model, HttpSession session) {
 		String updatedBY = (String) session.getAttribute("userlogin");
-		sc.setUpd_by(updatedBY);
+		sc.setUpdBy(updatedBY);
 		this.skillCategoryService.updateSkillCategory(sc);
 		return "redirect:/"+ pageMappingService.PageRequestMapping(reqPage, pageno);
 	}
