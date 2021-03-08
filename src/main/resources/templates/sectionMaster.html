@@ -58,7 +58,7 @@ body {
 											  <label>Section Code </label>
 											  		<label style="color: red">*</label>
 											  	 
-											   <input type="text" class="form-control" maxlength="10"id="Sect_Code" name="Sect_Code" readonly>
+											   <input type="text" class="form-control" maxlength="10"id="sectionCode" name="sectionCode" readonly>
 												</div>
 												<div class="form-group">
 
@@ -78,7 +78,7 @@ body {
 											<div class="form-group">
 											<label class="form-label">Amount limit</label>
 											<label style="color: red">*</label>
-											 <input type="text" class="form-control number"  maxlength="12" id="Amt_lt" name="Amt_lt" pattern="\d{1,12}" required >
+											 <input type="text" class="form-control number"  maxlength="12" id="amountLimit" name="amountLimit" pattern="\d{1,12}" required >
 										</div>
 										
 											</div>
@@ -100,18 +100,17 @@ body {
 												<th>Code</th>
 												<th>Amount Limit </th>
 												<th>Status</th>
-												<th>Inserted Date</th>
+												
 												<th>Action</th>
 											</tr>
 										</thead>
 										<tbody>
 											<tr  th:each="listsection : ${listSection}">
-												<td th:text="${listsection.Sect_Code}"></td>
-												<td th:text="${listsection.Amt_lt}"></td>
+												<td th:text="${listsection.sectionCode}"></td>
+												<td th:text="${listsection.amountLimit}"></td>
 												<td th:text="${listsection.active}"></td>
-												<td th:text="${listsection.ins_date}"></td>
-												<td><a th:href="@{/editSection/{id}(id=${listsection.Sect_Code})}" class="btn btn-primary"><i class="fa fa-edit"></i></a>
-												<a th:href="@{/deleteSection/{id}(id=${listsection.Sect_Code})}" class="btn btn-primary"onclick="return confirm('Are you sure?')"><i class="fa fa-times"></i></a>
+												<td><a th:href="@{/editSection/{id}(id=${listsection.sectionCode})}"><i class="fa fa-edit"></i></a>
+												<a th:href="@{/deleteSection/{id}(id=${listsection.sectionCode})}"onclick="return confirm('Are you sure?')"><i class="fa fa-times"></i></a>
 												</td>
 											</tr>
 										</tbody>

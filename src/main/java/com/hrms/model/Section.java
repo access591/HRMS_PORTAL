@@ -20,16 +20,7 @@ import javax.persistence.Table;
 
 public class Section implements Serializable
 {
-
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -4845127670430227293L;
-
-	/**
-	 * 
-	 */
-	
 
 	/**
 	 * Mohit Access 
@@ -38,61 +29,62 @@ public class Section implements Serializable
 
 	@Id
 	@Column(name = "SECT_CODE")
-	private String Sect_Code;
+	private String sectionCode;
 	
 	@Column(name = "AMOUNT_LIMIT")
-	private String Amt_lt;
-	
-	@Column(name = "INS_BY")
-	private String Ins_by;
-	
-	@Column(name = "INS_DATE")
-	private Date ins_date =new Date();
-	
-	@Column(name = "UPD_BY")
-	private String upd_by;
-	
-	@Column(name = "UPD_DATE")
-	private Date  upd_date = new Date();
+	private String amountLimit;
+
 	@Column(name = "ACTIVE_YN")
 	private String active;
 	
+    @Column(name = "INS_BY",updatable = false)
+	private String insBy;
 	
-	public String getSect_Code() {
-		return Sect_Code;
+	@Column(name = "INS_DATE",updatable = false)
+	private Date insDate =new Date();
+	
+	@Column(name = "UPD_BY",insertable = false)
+	private String updBy;
+	
+	@Column(name = "UPD_DATE",insertable = false)
+	private Date  updDate = new Date();
+	
+	
+	public String getSectionCode() {
+		return sectionCode;
 	}
-	public void setSect_Code(String sect_Code) {
-		Sect_Code = sect_Code;
+	public void setSectionCode(String sectionCode) {
+		this.sectionCode = sectionCode;
 	}
-	public String getAmt_lt() {
-		return Amt_lt;
+	public String getAmountLimit() {
+		return amountLimit;
 	}
-	public void setAmt_lt(String amt_lt) {
-		Amt_lt = amt_lt;
+	public void setAmountLimit(String amountLimit) {
+		this.amountLimit = amountLimit;
 	}
-	public String getIns_by() {
-		return Ins_by;
+	public String getInsBy() {
+		return insBy;
 	}
-	public void setIns_by(String ins_by) {
-		Ins_by = ins_by;
+	public void setInsBy(String insBy) {
+		this.insBy = insBy;
 	}
-	public Date getIns_date() {
-		return ins_date;
+	public Date getInsDate() {
+		return insDate;
 	}
-	public void setIns_date(Date ins_date) {
-		this.ins_date = ins_date;
+	public void setInsDate(Date insDate) {
+		this.insDate = insDate;
 	}
-	public String getUpd_by() {
-		return upd_by;
+	public String getUpdBy() {
+		return updBy;
 	}
-	public void setUpd_by(String upd_by) {
-		this.upd_by = upd_by;
+	public void setUpdBy(String updBy) {
+		this.updBy = updBy;
 	}
-	public Date getUpd_date() {
-		return upd_date;
+	public Date getUpdDate() {
+		return updDate;
 	}
-	public void setUpd_date(Date upd_date) {
-		this.upd_date = upd_date;
+	public void setUpdDate(Date updDate) {
+		this.updDate = updDate;
 	}
 	public String getActive() {
 		return active;
@@ -100,10 +92,6 @@ public class Section implements Serializable
 	public void setActive(String active) {
 		this.active = active;
 	}
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-	
 
 	
 }	
