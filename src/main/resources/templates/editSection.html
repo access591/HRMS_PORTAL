@@ -59,7 +59,7 @@ body {
 											       <label>Section Code </label>
 											  		<label style="color: red">*</label>
 											  	 
-											   <input type="text"class="form-control" id="Sect_Code" maxlength="12"  name="Sect_Code" th:value="${sectionEdit.Sect_Code}" readonly >
+											   <input type="text"class="form-control" id="sectionCode" maxlength="12"  name="sectionCode" th:value="${sectionEdit.sectionCode}" readonly >
 												</div>
 
 												<div class="form-group">
@@ -80,7 +80,7 @@ body {
 											
 											<label class="form-label">Amount Limit</label>
 											<label style="color: red">*</label>
-											 <input type="text" class="form-control uppercase" maxlength="12"  pattern="\d{1,12}" id="Amt_lt" name="Amt_lt"th:value="${sectionEdit.Amt_lt}" required aria-required="true">
+											 <input type="text" class="form-control" maxlength="12"  pattern="\d{1,12}" id="amountLimit" name="amountLimit"th:value="${sectionEdit.amountLimit}" required aria-required="true">
 										   </div>
 
 											</div>

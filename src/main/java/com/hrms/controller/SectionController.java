@@ -52,7 +52,6 @@ public String sectionMaster(Model model,HttpSession session) {
    		model.addAttribute("modules", modules);
    	}
 	session.setAttribute("username",session.getAttribute("username"));
-		//return "sectionMaster";
 	 return pageMappingService.PageRequestMapping(reqPage,pageno);
 	}
 
@@ -65,13 +64,12 @@ public String sectionMaster(Model model,HttpSession session) {
  * @return
  */
 @PostMapping("/saveSection")
-	public String SaveSection(@ModelAttribute("section") Section section, Model model,RedirectAttributes redirectAttributes) {
+	public String saveSection(@ModelAttribute("section") Section section, Model model,RedirectAttributes redirectAttributes) {
 	boolean isModuleExist = sectionService.checkSectionExists(section);	
 	
 	if (isModuleExist) {
 		redirectAttributes.addFlashAttribute("message", "Section Code Already exists !  ");
 	    redirectAttributes.addFlashAttribute("alertClass", "alert-success");
-	    //return "redirect:/sectionMaster";
 	    return "redirect:"+pageMappingService.PageRequestMapping(reqPage,pageno);
 	}
 	
@@ -80,7 +78,6 @@ public String sectionMaster(Model model,HttpSession session) {
 			List<Section> listSection = sectionService.getAllSections();
 			model.addAttribute("listSection", listSection);
 		} 
-		//return "redirect:/sectionMaster";
 	  return "redirect:"+pageMappingService.PageRequestMapping(reqPage,pageno);
 
 	}	
@@ -92,17 +89,13 @@ public String sectionMaster(Model model,HttpSession session) {
  * @param session
  * @return
  */
-@GetMapping(value = {"/editSection/{id}"})
-public String editsection(@PathVariable("id")String id,  Model model,HttpSession session)
- { 
-	 int editPageNo=18;
-		String reqPageedit="/editSection";
+@GetMapping(value = { "/editSection/{id}" })
+public String editsection(@PathVariable("id") String id, Model model, HttpSession session) {
+	int editPageNo = 18;
+	String reqPageedit = "/editSection";
 	Section sectionEdit = sectionService.findSectionById(id);
-	  model.addAttribute("sectionEdit", sectionEdit);
-
-    session.setAttribute("username",session.getAttribute("username")); 
-      // return "/editSection"; 
-    return pageMappingService.PageRequestMapping(reqPageedit,editPageNo);
+	model.addAttribute("sectionEdit", sectionEdit);
+	return pageMappingService.PageRequestMapping(reqPageedit, editPageNo);
 }
 /**
  * Request Mapping Update Section data
@@ -114,10 +107,8 @@ public String editsection(@PathVariable("id")String id,  Model model,HttpSession
 @PostMapping("/updateSection")
 public String updateSection(@ModelAttribute("sectupdate") Section d, Model model) {
 
-	  this.sectionService.updateSection(d);
-  	  
-	  //return "redirect:/sectionMaster";
-	  return "redirect:/"+pageMappingService.PageRequestMapping(reqPage,pageno);
+	this.sectionService.updateSection(d);
+	return "redirect:/" + pageMappingService.PageRequestMapping(reqPage, pageno);
 }
 /**
  * 
@@ -126,17 +117,13 @@ public String updateSection(@ModelAttribute("sectupdate") Section d, Model model
  * @param session
  * @return
  */
-@GetMapping(value = {"/deleteSection/{id}"})
-public String deletesection(@PathVariable("id")String id,  Model model,HttpSession session)
- { 
-	
-	  
-	  this.sectionService.removeSection(id);
+@GetMapping(value = { "/deleteSection/{id}" })
+public String deletesection(@PathVariable("id") String id, Model model, HttpSession session) {
 
-    session.setAttribute("username",session.getAttribute("username")); 
-   // return "redirect:/sectionMaster";
-    return "redirect:/"+pageMappingService.PageRequestMapping(reqPage,pageno);
+	this.sectionService.removeSection(id);
+
+	session.setAttribute("username", session.getAttribute("username"));
+	return "redirect:/" + pageMappingService.PageRequestMapping(reqPage, pageno);
 }
-
 
 }

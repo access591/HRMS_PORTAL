@@ -13,8 +13,8 @@ public class SectionServiceImpl implements SectionService {
 
 	@Override
 	public void addSection(Section section) {
-		section.setIns_date(new Date());
-		section.setSect_Code(sectionDao.getMAX_Id("SEC"));
+		section.setInsDate(new Date());
+		section.setSectionCode(sectionDao.getMAX_Id("SEC"));
 		this.sectionDao.saveOrUpdate(section);
 	}
 
@@ -31,8 +31,8 @@ public class SectionServiceImpl implements SectionService {
 
 	@Override
 	public void updateSection(Section d) {
-		d.setSect_Code(d.getSect_Code());
-		d.setUpd_date(d.getUpd_date());
+		d.setSectionCode(d.getSectionCode());
+		d.setUpdDate(d.getUpdDate());
 		d.setActive(d.getActive());
 		this.sectionDao.saveOrUpdate(d);
 
