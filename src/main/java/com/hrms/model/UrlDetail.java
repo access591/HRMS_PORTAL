@@ -19,13 +19,13 @@ public class UrlDetail implements Serializable {
 	private static final long serialVersionUID = 842108347597795726L;
 	@Id
 	@Column(name ="URL_ID")
-	private String  Url_Id;
+	private String  urlId;
 	
 	@Column(name ="REQ_MAPPING")
-	private String	Req_Mapping;
+	private String	reqMapping;
 	
 	@Column(name ="PAGE_NAME")
-	private String Page_Name;
+	private String pageName;
 	
 	@Column(name = "ACTIVE_YN")
 	private String active;
@@ -46,23 +46,24 @@ public class UrlDetail implements Serializable {
 	
 	
 
-	public String getUrl_Id() {
-		return Url_Id;
+	
+	public String getUrlId() {
+		return urlId;
 	}
-	public void setUrl_Id(String url_Id) {
-		Url_Id = url_Id;
+	public void setUrlId(String urlId) {
+		this.urlId = urlId;
 	}
-	public String getReq_Mapping() {
-		return Req_Mapping;
+	public String getReqMapping() {
+		return reqMapping;
 	}
-	public void setReq_Mapping(String req_Mapping) {
-		Req_Mapping = req_Mapping;
+	public void setReqMapping(String reqMapping) {
+		this.reqMapping = reqMapping;
 	}
-	public String getPage_Name() {
-		return Page_Name;
+	public String getPageName() {
+		return pageName;
 	}
-	public void setPage_Name(String page_Name) {
-		Page_Name = page_Name;
+	public void setPageName(String pageName) {
+		this.pageName = pageName;
 	}
 	public String getActive() {
 		return active;
