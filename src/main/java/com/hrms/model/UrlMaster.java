@@ -17,28 +17,27 @@ public class UrlMaster implements Serializable{
 	private static final long serialVersionUID = 842108347597795726L;
 	@Id
 	@Column(name ="URL_ID")
-	private int url_id;
+	private int urlId;
 	@Column(name ="SR_NO")
-	private int sr_no;
+	private int srNo;
 	@Column(name ="SCREEN_TYPE")
-	private String screen_type;
-	public int getUrl_id() {
-		return url_id;
+	private String screenType;
+	public int getUrlId() {
+		return urlId;
 	}
-	public void setUrl_id(int url_id) {
-		this.url_id = url_id;
+	public void setUrlId(int urlId) {
+		this.urlId = urlId;
 	}
-	public int getSr_no() {
-		return sr_no;
+	public int getSrNo() {
+		return srNo;
 	}
-	public void setSr_no(int sr_no) {
-		this.sr_no = sr_no;
+	public void setSrNo(int srNo) {
+		this.srNo = srNo;
 	}
-	public String getScreen_type() {
-		return screen_type;
+	public String getScreenType() {
+		return screenType;
 	}
-	public void setScreen_type(String screen_type) {
-		this.screen_type = screen_type;
+	public void setScreenType(String screenType) {
+		this.screenType = screenType;
 	}
-	
 }
