@@ -60,12 +60,10 @@ public class RegisterController {
 	@PostMapping("/saveRegister")
 	public String saveRegister(@ModelAttribute("register") Register register, Model model, HttpSession session) {
 		String insertedBY = (String) session.getAttribute("userlogin");
-		register.setIns_by(insertedBY);
+		register.setInsBy(insertedBY);
 		registerService.addRegister(register);
 		List<Register> listRegister = registerService.getAllRegisters();
 		model.addAttribute("listRegister", listRegister);
-
-		session.setAttribute("username", session.getAttribute("username"));
 
 		 return "redirect:"+pageMappingService.PageRequestMapping(reqPage,pageno);
 
@@ -85,7 +83,6 @@ public class RegisterController {
 
 		Register registerEdit = registerService.findRegisterById(id);
 		model.addAttribute("registerEdit", registerEdit);
-		session.setAttribute("username", session.getAttribute("username"));
 
 		return pageMappingService.PageRequestMapping(reqPageedit, editPageNo);
 	}
@@ -99,7 +96,7 @@ public class RegisterController {
 	@PostMapping("/updateRegister")
 	public String updateRegister(@ModelAttribute("register") Register r, Model model, HttpSession session) {
 		String updatedBY = (String) session.getAttribute("userlogin");
-		r.setUpd_by(updatedBY);
+		r.setUpdBy(updatedBY);
 		this.registerService.updateRegister(r);
 
 		return "redirect:/" + pageMappingService.PageRequestMapping(reqPage, pageno);
@@ -115,7 +112,6 @@ public class RegisterController {
 	@GetMapping(value = { "/deleteRegister/{id}" })
 	public String deleteRegister(@PathVariable("id") String id, Model model, HttpSession session) {
 		this.registerService.removeRegister(id);
-		session.setAttribute("username", session.getAttribute("username"));
 		return "redirect:/" + pageMappingService.PageRequestMapping(reqPage, pageno);
 	}
 

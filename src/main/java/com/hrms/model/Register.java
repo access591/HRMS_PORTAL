@@ -22,17 +22,20 @@ public class Register implements Serializable {
 	@Column(name = "DESCRIPTION")
 	private String descriptionReg ;
 	
-	@Column(name = "INS_BY",updatable = false)
-	private String Ins_by;
+	
+    @Column(name = "INS_BY",updatable = false)
+	private String insBy;
 	
 	@Column(name = "INS_DATE",updatable = false)
-	private Date ins_date =new Date();
+	private Date insDate =new Date();
 	
 	@Column(name = "UPD_BY",insertable = false)
-	private String upd_by;
+	private String updBy;
 	
 	@Column(name = "UPD_DATE",insertable = false)
-	private Date  upd_date = new Date();
+	private Date  updDate = new Date();
+	
+	
 	
 	@Column(name = "ACTIVE_YN")
 	private String active;
@@ -49,29 +52,29 @@ public class Register implements Serializable {
 	public void setDescriptionReg(String descriptionReg) {
 		this.descriptionReg = descriptionReg;
 	}
-	public String getIns_by() {
-		return Ins_by;
+	public String getInsBy() {
+		return insBy;
 	}
-	public void setIns_by(String ins_by) {
-		Ins_by = ins_by;
+	public void setInsBy(String insBy) {
+		this.insBy = insBy;
 	}
-	public Date getIns_date() {
-		return ins_date;
+	public Date getInsDate() {
+		return insDate;
 	}
-	public void setIns_date(Date ins_date) {
-		this.ins_date = ins_date;
+	public void setInsDate(Date insDate) {
+		this.insDate = insDate;
 	}
-	public String getUpd_by() {
-		return upd_by;
+	public String getUpdBy() {
+		return updBy;
 	}
-	public void setUpd_by(String upd_by) {
-		this.upd_by = upd_by;
+	public void setUpdBy(String updBy) {
+		this.updBy = updBy;
 	}
-	public Date getUpd_date() {
-		return upd_date;
+	public Date getUpdDate() {
+		return updDate;
 	}
-	public void setUpd_date(Date upd_date) {
-		this.upd_date = upd_date;
+	public void setUpdDate(Date updDate) {
+		this.updDate = updDate;
 	}
 	public String getActive() {
 		return active;
@@ -79,7 +82,5 @@ public class Register implements Serializable {
 	public void setActive(String active) {
 		this.active = active;
 	}
-	
-	
 	
 }
