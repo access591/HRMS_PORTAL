@@ -11,13 +11,13 @@ import com.hrms.model.ReCaptchResponseType;
 public class ReCaptchaValidationService {
 
     private static final String GOOGLE_RECAPTCHA_ENDPOINT = "https://www.google.com/recaptcha/api/siteverify";
-    private final String RECAPTCHA_SECRET ="6LfnrvcZAAAAAOkyd2BMyhRfqxbqw5e-Dcxsm9MN";
+    private final String reCaptchaSecret ="6LfnrvcZAAAAAOkyd2BMyhRfqxbqw5e-Dcxsm9MN";
 
     public boolean validateCaptcha(String captchaResponse){
         RestTemplate restTemplate = new RestTemplate();
 
         MultiValueMap<String, String> requestMap = new LinkedMultiValueMap<>();
-        requestMap.add("secret", RECAPTCHA_SECRET);
+        requestMap.add("secret", reCaptchaSecret);
         requestMap.add("response", captchaResponse);
 
         ReCaptchResponseType apiResponse = restTemplate.postForObject(GOOGLE_RECAPTCHA_ENDPOINT, requestMap, ReCaptchResponseType.class);

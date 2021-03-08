@@ -60,7 +60,7 @@ public class UserController {
 	public String loginUser(@ModelAttribute("user") Login login, Model model,
 			@RequestParam(name = "g-recaptcha-response") String captcha,HttpSession session) {
 		boolean isUserExist = userService.checkUserExists(login);
-		if (isUserExist /* && validator.validateCaptcha(captcha) */ ) {
+		if (isUserExist  && validator.validateCaptcha(captcha)  ) {
 			//moduleService.addModule(getModuleObject());
 			//moduleService.update(getModuleObject());
 			 //subModuleService.add(getSubModuleObject(),"1001");

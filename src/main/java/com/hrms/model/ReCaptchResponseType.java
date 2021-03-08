@@ -3,7 +3,7 @@ package com.hrms.model;
 public class ReCaptchResponseType {  
 	 
 	private boolean success;
-	private String challenge_ts;
+	private String challenge;
 	private String hostname;
 	
 	public boolean isSuccess() {
@@ -12,11 +12,12 @@ public class ReCaptchResponseType {
 	public void setSuccess(boolean success) {
 		this.success = success;
 	}
-	public String getChallenge_ts() {
-		return challenge_ts;
+	
+	public String getChallenge() {
+		return challenge;
 	}
-	public void setChallenge_ts(String challenge_ts) {
-		this.challenge_ts = challenge_ts;
+	public void setChallenge(String challenge) {
+		this.challenge = challenge;
 	}
 	public String getHostname() {
 		return hostname;
