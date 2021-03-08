@@ -20,7 +20,7 @@ public class UserProgramRightServiceImpl implements UserProgramRightService {
 	}
 	@Override
 	public void addUserProgramRight(UserRights userRights) {
-		userRights.setIns_date(new Date());
+		userRights.setInsDate(new Date());
 		 this.userProgramRightDao.saveOrUpdate(userRights);
 		
 	}
@@ -45,11 +45,11 @@ public class UserProgramRightServiceImpl implements UserProgramRightService {
 	}
 	@Override
 	public void updateUserRights(UserRights ur) {
-		ur.setUser_code(ur.getUser_code());
-		ur.setModule_code(ur.getModule_code());
-		ur.setSub_module_code(ur.getSub_module_code());
-		ur.setPrg_code(ur.getPrg_code());
-		ur.setUpd_date(ur.getUpd_date());
+		ur.setUserCode(ur.getUserCode());
+		ur.setModuleCode(ur.getModuleCode());
+		ur.setSubModuleCode(ur.getSubModuleCode());
+		ur.setPrgCode(ur.getPrgCode());
+		ur.setUpdDate(ur.getUpdDate());
 		this.userProgramRightDao.saveOrUpdate(ur);
 		
 	}

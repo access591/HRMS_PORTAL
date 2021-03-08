@@ -6,6 +6,7 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -20,36 +21,35 @@ public class UserRights implements Serializable {
 	 */
 	private static final long serialVersionUID = 3115353075342584614L;
 
-	@Id
-	@GeneratedValue
-	 private Long id;
+	 @Id
+	 @GeneratedValue(strategy= GenerationType.IDENTITY)
+    private Long id;
 	@Column(name = "USER_CODE")
-	private String user_code;
+	private String userCode;
 	
 	@Column(name = "MODULE_CODE")
-	private String module_code;
+	private String moduleCode;
 	
 	@Column(name = "SUB_MODULE_CODE")
-	private String sub_module_code;
+	private String subModuleCode;
 
 	@Column(name = "PRG_CODE")
-	private String prg_code;
-	
+	private String prgCode;
+
 	@Column(name = "ACTIVE_YN")
-	private String active_yn;
-	
-	@Column(name = "INS_BY")
-	private String ins_by;
-	
-	@Column(name = "INS_DATE")
-	private Date ins_date = new Date();
-	
-	@Column(name = "UPD_BY")
-	private String upd_by;
-	
-	@Column(name = "UPD_DATE")
-	private Date upd_date = new Date();
-	
+	private String active;
+
+	@Column(name = "INS_BY", updatable = false)
+	private String insBy;
+
+	@Column(name = "INS_DATE", updatable = false)
+	private Date insDate = new Date();
+
+	@Column(name = "UPD_BY", insertable = false)
+	private String updBy;
+
+	@Column(name = "UPD_DATE", insertable = false)
+	private Date updDate = new Date();
 	
 	
 	public Long getId() {
@@ -58,62 +58,60 @@ public class UserRights implements Serializable {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public String getUser_code() {
-		return user_code;
+	public String getUserCode() {
+		return userCode;
 	}
-	public void setUser_code(String user_code) {
-		this.user_code = user_code;
+	public void setUserCode(String userCode) {
+		this.userCode = userCode;
 	}
-	public String getModule_code() {
-		return module_code;
+	public String getModuleCode() {
+		return moduleCode;
 	}
-	public void setModule_code(String module_code) {
-		this.module_code = module_code;
+	public void setModuleCode(String moduleCode) {
+		this.moduleCode = moduleCode;
 	}
-	
-	public String getSub_module_code() {
-		return sub_module_code;
+	public String getSubModuleCode() {
+		return subModuleCode;
 	}
-	public void setSub_module_code(String sub_module_code) {
-		this.sub_module_code = sub_module_code;
+	public void setSubModuleCode(String subModuleCode) {
+		this.subModuleCode = subModuleCode;
 	}
-	public String getPrg_code() {
-		return prg_code;
+	public String getPrgCode() {
+		return prgCode;
 	}
-	public void setPrg_code(String prg_code) {
-		this.prg_code = prg_code;
+	public void setPrgCode(String prgCode) {
+		this.prgCode = prgCode;
 	}
-	public String getActive_yn() {
-		return active_yn;
+	public String getActive() {
+		return active;
 	}
-	public void setActive_yn(String active_yn) {
-		this.active_yn = active_yn;
+	public void setActive(String active) {
+		this.active = active;
 	}
-	public String getIns_by() {
-		return ins_by;
+	public String getInsBy() {
+		return insBy;
 	}
-	public void setIns_by(String ins_by) {
-		this.ins_by = ins_by;
+	public void setInsBy(String insBy) {
+		this.insBy = insBy;
 	}
-	public Date getIns_date() {
-		return ins_date;
+	public Date getInsDate() {
+		return insDate;
 	}
-	public void setIns_date(Date ins_date) {
-		this.ins_date = ins_date;
+	public void setInsDate(Date insDate) {
+		this.insDate = insDate;
 	}
-	public String getUpd_by() {
-		return upd_by;
+	public String getUpdBy() {
+		return updBy;
 	}
-	public void setUpd_by(String upd_by) {
-		this.upd_by = upd_by;
+	public void setUpdBy(String updBy) {
+		this.updBy = updBy;
 	}
-	public Date getUpd_date() {
-		return upd_date;
+	public Date getUpdDate() {
+		return updDate;
 	}
-	public void setUpd_date(Date upd_date) {
-		this.upd_date = upd_date;
+	public void setUpdDate(Date updDate) {
+		this.updDate = updDate;
 	}
-	
 	
 	
 	
