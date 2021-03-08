@@ -59,7 +59,7 @@ body {
 										<div class="mb-3">
 												<label class="form-label">Users</label>
 												<label style="color: red">*</label>
-												<select class="form-control select2" name="user_code"id="user_code" required aria-required="true">
+												<select class="form-control select2" name="userCode"id="userCode" required aria-required="true">
 												 <option value="">Select User</option>
 												<option th:each="users: ${listUsers}" th:value="${users.getUserCode()}" th:text="${users.getUserName()}"></option>
 											     	</select>
@@ -68,7 +68,7 @@ body {
 									   		<div class="mb-3">
 												<label class="form-label">Sub Module</label>
 												<label style="color: red">*</label>
-												<select class="form-control select2" name="sub_module_code"id="sub_module_code" required aria-required="true">
+												<select class="form-control select2" name="subModuleCode"id="subModuleCode" required aria-required="true">
 												 <option value="">Select Sub Module</option>
 												<option th:each="submodule: ${subModulesList}" th:value="${submodule.getSubModuleCode()}" th:text="${submodule.getSubModuleName()}"></option>
 											     	</select>
@@ -78,10 +78,10 @@ body {
 									<label class="form-label">Status</label>
 									<div class="custom-controls-stacked">
 										<label class="radio-inline">
-										 <input type="radio"value="Y" name="active_yn" checked> Active
+										 <input type="radio"value="Y" name="active" checked> Active
 										</label> 
 										<label class="radio-inline"> 
-										<input type="radio"value="N" name="active_yn"> Inactive
+										<input type="radio"value="N" name="active"> Inactive
 										</label>
 									</div>
 								</div>
@@ -90,7 +90,7 @@ body {
 									      	   <div class="mb-3">
 														<label class="form-label">Module</label>
 															<label style="color: red">*</label>
-													   <select class="form-control select2" name="module_code"id="module_code" required aria-required="true">
+													   <select class="form-control select2" name="moduleCode"id="moduleCode" required aria-required="true">
 												    <option value="">Select Module</option>
 													<option   th:each="module: ${modulesList}" th:value="${module.getModuleCode()}" th:text="${module.getModuleName()}"></option>
 											     	</select>
@@ -100,7 +100,7 @@ body {
 										   			  <div class="mb-3">
 														<label class="form-label">Program</label>
 															<label style="color: red">*</label>
-													   <select class="form-control select2" name="prg_code"id="prg_code" required aria-required="true">
+													   <select class="form-control select2" name="prgCode"id="prgCode" required aria-required="true">
 												    <option value="">Select Program</option>
 													<option   th:each="program: ${programsList}" th:value="${program.getProgramCode()}" th:text="${program.getProgramName()}"></option>
 											     	</select>
@@ -138,14 +138,14 @@ body {
 										</thead>
 										<tbody>
 											<tr  th:each="listUserR : ${listUserRight}">
-												<td th:text="${listUserR.user_code}"></td>
-												<td th:text="${listUserR.module_code}"></td>
-												<td th:text="${listUserR.sub_module_code}"></td>
-												<td th:text="${listUserR.prg_code}"></td>
+												<td th:text="${listUserR.userCode}"></td>
+												<td th:text="${listUserR.moduleCode}"></td>
+												<td th:text="${listUserR.subModuleCode}"></td>
+												<td th:text="${listUserR.prgCode}"></td>
 												
-												<td th:text="${listUserR.active_yn}"></td>
-												<td><a th:href="@{/editUserRights/{id}(id=${listUserR.id})}" class="btn btn-primary"><i class="fa fa-edit"></i></a>
-												<a th:href="@{/deleteUserRights/{id}(id=${listUserR.id})}" class="btn btn-primary"onclick="return confirm('Are you sure?')"><i class="fa fa-times"></i></a>
+												<td th:text="${listUserR.active}"></td>
+												<td><a th:href="@{/editUserRights/{id}(id=${listUserR.id})}"><i class="fa fa-edit"></i></a>
+												<a th:href="@{/deleteUserRights/{id}(id=${listUserR.id})}"onclick="return confirm('Are you sure?')"><i class="fa fa-times"></i></a>
 												</td>
 											</tr>
 										</tbody>
