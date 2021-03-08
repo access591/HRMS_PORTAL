@@ -58,8 +58,8 @@ public class PageMappingServiceImpl implements PageMappingService {
 
 	@Override
 	public void updatePage(UrlDetail u) {
-		u.setPage_Name(u.getPage_Name());
-		u.setReq_Mapping(u.getReq_Mapping());
+		u.setPageName(u.getPageName());
+		u.setReqMapping(u.getReqMapping());
 		u.setActive(u.getActive());
 		u.setUpdatedDate(u.getUpdatedDate());
 		this.pageMappingDao.saveOrUpdate(u);

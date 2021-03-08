@@ -58,14 +58,14 @@ body {
 												<div class="form-group">
 											 		 <label> Url_Id </label>
 											  		<label style="color: red">*</label>
-											   <input type="text" class="form-control" id="Url_Id" name="Url_Id" required aria-required="true">
+											   <input type="text" class="form-control" id="urlId" name="urlId" required aria-required="true">
 												</div>
 												
 												
 												<div class="form-group">
 											 		 <label> Request Mapping </label>
 											  		<label style="color: red">*</label>
-											   <input type="text" class="form-control" id="Req_Mapping" name="Req_Mapping" required aria-required="true">
+											   <input type="text" class="form-control" id="reqMapping" name="reqMapping" required aria-required="true">
 												</div>
 
 												<div class="form-group">
@@ -86,7 +86,7 @@ body {
 											<div class="form-group">
 											<label class="form-label"> Page Name</label>
 											<label style="color: red">*</label>
-											 <input type="text" class="form-control " onkeypress="return /[a-z]/i.test(event.key)" id="Page_Name" name="Page_Name"required aria-required="true">
+											 <input type="text" class="form-control" onkeypress="return /[a-z]/i.test(event.key)" id="pageName" name="pageName"required aria-required="true">
 										</div>
 											</div>
 										</div>
@@ -114,12 +114,12 @@ body {
 										</thead>
 										 <tbody>
 											<tr  th:each="listUrlDetail : ${listUrlDetail}">
-												<td th:text="${listUrlDetail.Url_Id}"></td>
-												<td th:text="${listUrlDetail.Page_Name}"></td>
-												<td th:text="${listUrlDetail.Req_Mapping}"></td>
+												<td th:text="${listUrlDetail.urlId}"></td>
+												<td th:text="${listUrlDetail.pageName}"></td>
+												<td th:text="${listUrlDetail.reqMapping}"></td>
 												<td th:text="${listUrlDetail.active}"></td>
-												<td><a th:href="@{/editPage/{id}(id=${listUrlDetail.Url_Id})}" class="btn btn-primary"><i class="fa fa-edit"></i></a>
-												<a th:href="@{/deletePage/{id}(id=${listUrlDetail.Url_Id})}" class="btn btn-primary"onclick="return confirm('Are you sure?')"><i class="fa fa-times"></i></a>
+												<td><a th:href="@{/editPage/{id}(id=${listUrlDetail.urlId})}"><i class="fa fa-edit"></i></a>
+												<a th:href="@{/deletePage/{id}(id=${listUrlDetail.urlId})}"onclick="return confirm('Are you sure?')"><i class="fa fa-times"></i></a>
 												</td>
 											</tr>
 										</tbody> 
