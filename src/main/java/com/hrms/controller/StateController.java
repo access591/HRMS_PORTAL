@@ -60,7 +60,7 @@ public class StateController {
 	public String saveState(@ModelAttribute("state") State state, Model model, HttpSession session) {
 		
 		String insertedBY = (String) session.getAttribute("userlogin");
-		state.setIns_by(insertedBY);
+		state.setInsBy(insertedBY);
 		stateService.addState(state);
 
 		List<State> listState =stateService.getAllStates();
@@ -103,7 +103,7 @@ public class StateController {
 	public String updateState(@ModelAttribute("city") State c, Model model, HttpSession session) {
 		
 		String updatedBY = (String) session.getAttribute("userlogin");
-		c.setUpd_by(updatedBY);
+		c.setUpdBy(updatedBY);
 		this.stateService.updateState(c);
 
 		return "redirect:/" + pageMappingService.PageRequestMapping(reqPage, pageno);
