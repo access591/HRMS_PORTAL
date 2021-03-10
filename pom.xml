@@ -73,6 +73,13 @@
 		<artifactId>tomcat-dbcp</artifactId>
 		<version>9.0.1</version>
 	</dependency>
+	<!-- https://mvnrepository.com/artifact/com.h3xstream.findsecbugs/findsecbugs-samples-java -->
+<dependency>
+    <groupId>com.h3xstream.findsecbugs</groupId>
+    <artifactId>findsecbugs-samples-java</artifactId>
+    <version>1.11.0</version>
+</dependency>
+	
 	</dependencies>
 <profiles>
 <profile>

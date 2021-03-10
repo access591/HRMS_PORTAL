@@ -75,12 +75,12 @@ public class EmployeeController {
 		try {
 			UUID uuid=UUID.randomUUID();
 			String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
-			employee.setEmp_Img(uuid.toString().substring(0, 12)+"_"+fileName);
+			employee.setEmpImg(uuid.toString().substring(0, 12)+"_"+fileName);
 
 			String folderPath = "\\src\\main\\resources\\static\\img\\";
 			String uploadDir = System.getProperty("user.dir") + folderPath;
 			//String path = Paths.get(uploadDir + multipartFile.getOriginalFilename()).toString();
-			String path = Paths.get(uploadDir + employee.getEmp_Img()).toString();
+			String path = Paths.get(uploadDir + employee.getEmpImg()).toString();
 
 			BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(new File(path)));
 			stream.write(multipartFile.getBytes());
@@ -124,7 +124,7 @@ public class EmployeeController {
  */
 	@PostMapping("/updateEmployee")
 	public String updatePageUrl(@ModelAttribute("employees") Employee e, Model model,@RequestParam("file") MultipartFile multipartFile) {
-		String Emp_Img = e.getEmp_Img().toString();
+		String Emp_Img = e.getEmpImg().toString();
 
 		try {
 
@@ -136,15 +136,15 @@ public class EmployeeController {
 
 			if (fileName.trim().length() > 0) {
 				file.delete();
-				e.setEmp_Img(uuid.toString().substring(0, 12) + "_" + fileName);
-				String path = Paths.get(uploadDir + e.getEmp_Img()).toString();
+				e.setEmpImg(uuid.toString().substring(0, 12) + "_" + fileName);
+				String path = Paths.get(uploadDir + e.getEmpImg()).toString();
 				BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(new File(path)));
 				stream.write(multipartFile.getBytes());
 				stream.close();
 				this.employeeService.updateEmployee(e);
 
 			} else if (Emp_Img != null) {
-				e.setEmp_Img(Emp_Img);
+				e.setEmpImg(Emp_Img);
 				this.employeeService.updateEmployee(e);
 			}
 

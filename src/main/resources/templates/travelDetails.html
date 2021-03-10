@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"lang="en">
 <script src="js/settings.js"></script>
 <script src="js/app.js"></script>
 
@@ -26,8 +26,8 @@ body {
 <title>HRMS</title>
 </head>
 <body>
-<div class="wrapper">
-<nav id="sidebar" class="sidebar">
+<div class="wrapper" >
+<nav id="sidebar" class="sidebar" aria-label="Site sidebar"> 
  <div th:replace="fragments/sidebar :: div"></div>
  </nav>
 		<div class="main">
@@ -114,14 +114,15 @@ body {
 								<div class="card-header">
 								</div>
 								<div class="card-body">
-									<table id="datatables-buttons" class="table table-striped display" style="width:100%">
+									<table id="datatables-buttons"aria-describedby="datatables-buttons" class="table table-striped display" style="width:100%">
 										<thead>
 											<tr>
-												<th>Travel  Code</th>
-												<th>Start City Name </th>
-												<th>Vist City Name</th>
-												<th>Status</th>
-												<th>Action</th>
+											
+												<th scope="col">Travel  Code</th>
+												<th scope="col">Start City Name </th>
+												<th scope="col">Vist City Name</th>
+												<th scope="col">Status</th>
+												<th scope="col">Action</th>
 											</tr>
 										</thead>
 										<tbody>
@@ -131,8 +132,8 @@ body {
 												<td th:text="${listOfTravel.visitCityName}"></td>
 												<td th:text="${listOfTravel.active}"></td>
 												
-												<td><a th:href="@{/editTravel/{id}(id=${listOfTravel.travelCode})}" class="btn btn-primary"><i class="fa fa-edit"></i></a>
-												<a th:href="@{/deleteTravel/{id}(id=${listOfTravel.travelCode})}" class="btn btn-primary"onclick="return confirm('Are you sure?')"><i class="fa fa-times"></i></a>
+												<td><a th:href="@{/editTravel/{id}(id=${listOfTravel.travelCode})}" class="btn btn-primary"><em class="fa fa-edit"></em></a>
+												<a th:href="@{/deleteTravel/{id}(id=${listOfTravel.travelCode})}" class="btn btn-primary"onclick="return confirm('Are you sure?')"><em class="fa fa-times"></em></a>
 												</td>
 											</tr>
 										</tbody>
