@@ -9,218 +9,215 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
 @Entity
-@Table(name ="M_EMPLOYEE")
+@Table(name = "M_EMPLOYEE")
 public class Employee implements Serializable {
 
 	/**
-	 *  @author Access Surendra
+	 * @author Access Surendra
 	 */
 	private static final long serialVersionUID = -5019623265481596682L;
 	@Id
-	@Column(name ="EMP_CODE")
+	@Column(name = "EMP_CODE")
 	private String empCode;
-	
-	@Column(name="EMP_IMG")
+
+	@Column(name = "EMP_IMG")
 	private String empImg;
-	
-	@Column(name ="EMP_NAME")
+
+	@Column(name = "EMP_NAME")
 	private String empName;
-	
-	@Column(name ="EACTIVE")
+
+	@Column(name = "EACTIVE")
 	private String eActive;
-	
-	@Column(name ="COMP_CODE")
+
+	@Column(name = "COMP_CODE")
 	private String compCode;
-	
-	@Column(name ="DATE_OF_BIRTH")
+
+	@Column(name = "DATE_OF_BIRTH")
 	@Temporal(TemporalType.DATE)
 	private Date dateOfBirth;
-	
-	@Column(name ="BIRTH_STATE")
-	private String  birthState;
-	
-	@Column(name ="EMP_REF_NO")
+
+	@Column(name = "BIRTH_STATE")
+	private String birthState;
+
+	@Column(name = "EMP_REF_NO")
 	private String empRefNo;
-	
-	@Column(name ="EMP_TYPE")
+
+	@Column(name = "EMP_TYPE")
 	private String empType;
-	
-	@Column(name ="LOCATION_TYPE")
+
+	@Column(name = "LOCATION_TYPE")
 	private String locationType;
-	
-	@Column(name ="WEEKLY_WORKING_DAY")
+
+	@Column(name = "WEEKLY_WORKING_DAY")
 	private String weeklyWorkingDay;
-	
-	@Column(name ="BIRTH_PLACE")
+
+	@Column(name = "BIRTH_PLACE")
 	private String birthPlace;
-	
-	@Column(name ="DOMICILE")
+
+	@Column(name = "DOMICILE")
 	private String domicile;
-	//STEP-1======================end....
-	@Column(name ="CARD_NO")
+	// STEP-1======================end....
+	@Column(name = "CARD_NO")
 	private String cardNo;
-	
-	@Column(name ="EMP_DESIGNATION")
+
+	@Column(name = "EMP_DESIGNATION")
 	private String empDesignation;
-	
-	@Column(name ="SHIFT_CODE")
+
+	@Column(name = "SHIFT_CODE")
 	private String shiftCode;
-	
-	@Column(name ="PASSPORT_NO")
+
+	@Column(name = "PASSPORT_NO")
 	private String passportNo;
-	
-	@Column(name ="LOI_DATE")
+
+	@Column(name = "LOI_DATE")
 	@Temporal(TemporalType.DATE)
 	private Date loiDate;
-	
-	@Column(name ="STATUS_DATE")
+
+	@Column(name = "STATUS_DATE")
 	@Temporal(TemporalType.DATE)
 	private Date statusDate;
-	
-	@Column(name ="REASON")
+
+	@Column(name = "REASON")
 	private String reason;
-	
-	@Column(name ="DEPARTMENT_CODE")
+
+	@Column(name = "DEPARTMENT_CODE")
 	private String departmentCode;
-	
-	@Column(name ="MANAGER_CODE")
+
+	@Column(name = "MANAGER_CODE")
 	private String managerCode;
-	
-	@Column(name ="IT_PAN_NO")
+
+	@Column(name = "IT_PAN_NO")
 	private String itPanNo;
-	
-	@Column(name ="UAN_NO")
+
+	@Column(name = "UAN_NO")
 	private String uanNo;
 	@Temporal(TemporalType.DATE)
-	@Column(name ="DATE_OF_JOINING")
+	@Column(name = "DATE_OF_JOINING")
 	private Date dateOfJoining;
-	
-	@Column(name ="LEAVING_DATE")
+
+	@Column(name = "LEAVING_DATE")
 	@Temporal(TemporalType.DATE)
 	private Date leavingDate;
-	//step-2=====================end.....=============
-	@Column(name ="EMP_GENDER")
+	// step-2=====================end.....=============
+	@Column(name = "EMP_GENDER")
 	private String empGender;
-	
-	@Column(name ="EMP_HEIGHT")
+
+	@Column(name = "EMP_HEIGHT")
 	private String empHeight;
-	
-	@Column(name ="IDENTITY_MARK")
+
+	@Column(name = "IDENTITY_MARK")
 	private String identityMark;
-	
-	@Column(name ="BLOOD_GROUP")
+
+	@Column(name = "BLOOD_GROUP")
 	private String bloodGroup;
-	
-	@Column(name ="MARITAL_STATUS")
+
+	@Column(name = "MARITAL_STATUS")
 	private String maritalStatus;
-	//line-1=====================end.....
-	
-	@Column(name ="PRE_DISEASE")
+	// line-1=====================end.....
+
+	@Column(name = "PRE_DISEASE")
 	private String preDisease;
-	
-	@Column(name ="WEDDING_DATE")
+
+	@Column(name = "WEDDING_DATE")
 	@Temporal(TemporalType.DATE)
 	private Date weddingDate;
-	
-	@Column(name ="NO_OF_CHILD")
+
+	@Column(name = "NO_OF_CHILD")
 	private String noOfChild;
-	
-	@Column(name ="EMP_CASTE")
+
+	@Column(name = "EMP_CASTE")
 	private String empCaste;
-	
-	@Column(name ="EMP_RELIGION")
+
+	@Column(name = "EMP_RELIGION")
 	private String empReligion;
-	//line-2=====================end.....
-	
-	@Column(name ="EMP_NATIONALITY")
+	// line-2=====================end.....
+
+	@Column(name = "EMP_NATIONALITY")
 	private String empNationality;
-	
-	@Column(name ="COMPANY_CODE")
+
+	@Column(name = "COMPANY_CODE")
 	private String companyCode;
-	
-	@Column(name ="MEDICLAIM")
+
+	@Column(name = "MEDICLAIM")
 	private String mediclaim;
-	
-	@Column(name ="GPA")
+
+	@Column(name = "GPA")
 	private String gpa;
-	//line-3=====================end..4...
-	
-	@Column(name ="EMP_ADDRESS1")
+	// line-3=====================end..4...
+
+	@Column(name = "EMP_ADDRESS1")
 	private String empAddress1;
-	
-	@Column(name ="EMP_ADDRESS2")
+
+	@Column(name = "EMP_ADDRESS2")
 	private String empAddress2;
-	
-	@Column(name ="EMP_CITY")
+
+	@Column(name = "EMP_CITY")
 	private String empCity;
-	
-	@Column(name ="EMP_STATE")
+
+	@Column(name = "EMP_STATE")
 	private String empState;
-	
-	@Column(name ="PIN_CODE")
+
+	@Column(name = "PIN_CODE")
 	private String pinCode;
-	
-	@Column(name ="EMP_MOBILE")
+
+	@Column(name = "EMP_MOBILE")
 	private String empMobile;
-	//line-4=====================end..6...
-	
-	@Column(name ="EMP_LOCAL_ADD1")
+	// line-4=====================end..6...
+
+	@Column(name = "EMP_LOCAL_ADD1")
 	private String empLocalAdd1;
-	
-	@Column(name ="EMP_LOCAL_ADD2")
+
+	@Column(name = "EMP_LOCAL_ADD2")
 	private String empLocalAdd2;
-	
-	@Column(name ="EMP_LOCAL_CITY")
+
+	@Column(name = "EMP_LOCAL_CITY")
 	private String empLocalCity;
-	
-	@Column(name ="EMP_LOCAL_STATE")
+
+	@Column(name = "EMP_LOCAL_STATE")
 	private String empLocalState;
-	
-	@Column(name ="EMP_LOCAL_PINCODE")
+
+	@Column(name = "EMP_LOCAL_PINCODE")
 	private String empLocalPinCode;
-	
-	@Column(name ="EMP_LOCAL_MOBILE_NO")
+
+	@Column(name = "EMP_LOCAL_MOBILE_NO")
 	private String empLocalMobileNo;
-	
-	
+
 //step-3=====================end.....==========6========
-	@Column(name ="COMP_MOBILE_NO")
+	@Column(name = "COMP_MOBILE_NO")
 	private String compMobileNo;
-	
-	@Column(name ="COMPANY_EMAIL")
+
+	@Column(name = "COMPANY_EMAIL")
 	private String companyEmail;
-	
-	@Column(name ="PROF_INST")
+
+	@Column(name = "PROF_INST")
 	private String profInst;
-	
-	@Column(name ="LOCAL_TRAVEL_PR_KM")
+
+	@Column(name = "LOCAL_TRAVEL_PR_KM")
 	private String localTravelPrkm;
-	
-	@Column(name ="HOBBIES")
+
+	@Column(name = "HOBBIES")
 	private String hobbies;
-	
-	@Column(name ="CLUBS")
+
+	@Column(name = "CLUBS")
 	private String clubs;
-	
-	@Column(name ="REG_CODE")
+
+	@Column(name = "REG_CODE")
 	private String regCode;
-	
-	@Column(name ="ESTF_WORK")
+
+	@Column(name = "ESTF_WORK")
 	private String estfWork;
-	
-	@Column(name ="E_EMP_CAT")
+
+	@Column(name = "E_EMP_CAT")
 	private String electronicEmpCat;
-	
-	@Column(name ="E_CATEGORY")
+
+	@Column(name = "E_CATEGORY")
 	private String electronicCategory;
-	
-	@Column(name ="EMP_AGREE")
+
+	@Column(name = "EMP_AGREE")
 	private String empAgree;
-	//step-4=====================end.....==11================	
-
-	
-
+	// step-4=====================end.....==11================
 
 	public String geteActive() {
 		return eActive;
@@ -326,9 +323,6 @@ public class Employee implements Serializable {
 		this.domicile = domicile;
 	}
 
-	
-	
-	
 	public String getCardNo() {
 		return cardNo;
 	}
@@ -361,8 +355,6 @@ public class Employee implements Serializable {
 		this.passportNo = passportNo;
 	}
 
-	
-
 	public String getReason() {
 		return reason;
 	}
@@ -370,8 +362,6 @@ public class Employee implements Serializable {
 	public void setReason(String reason) {
 		this.reason = reason;
 	}
-
-
 
 	public Date getLoiDate() {
 		return loiDate;
@@ -405,8 +395,6 @@ public class Employee implements Serializable {
 		this.managerCode = managerCode;
 	}
 
-	
-
 	public String getItPanNo() {
 		return itPanNo;
 	}
@@ -438,8 +426,6 @@ public class Employee implements Serializable {
 	public void setLeavingDate(Date leavingDate) {
 		this.leavingDate = leavingDate;
 	}
-
-	
 
 	public String getEmpGender() {
 		return empGender;
@@ -521,8 +507,6 @@ public class Employee implements Serializable {
 		this.empReligion = empReligion;
 	}
 
-
-
 	public String getMediclaim() {
 		return mediclaim;
 	}
@@ -538,8 +522,6 @@ public class Employee implements Serializable {
 	public void setGpa(String gpa) {
 		this.gpa = gpa;
 	}
-
-	
 
 	public String getEmpNationality() {
 		return empNationality;
@@ -653,8 +635,6 @@ public class Employee implements Serializable {
 		this.empLocalMobileNo = empLocalMobileNo;
 	}
 
-	
-
 	public String getHobbies() {
 		return hobbies;
 	}
@@ -743,10 +723,4 @@ public class Employee implements Serializable {
 		this.empAgree = empAgree;
 	}
 
-
-	
-	
-	
-	
-	
 }
