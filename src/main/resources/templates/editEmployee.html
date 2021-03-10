@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"lang="en">
 
 <script type="text/javascript" th:src="@{/js/settings.js}"></script>
 <script type="text/javascript" th:src="@{/js/app.js}"></script>
@@ -50,13 +50,7 @@ body {
 <meta charset="utf-8" />
 <title>HRMS</title>
 </head>
-<!-- <div id="loading">
-<img id="loading-image" src="img/spinner.gif" alt="Loading..." />
-</div> -->
-<body>
-<div class="splash active" id="loading">
-	<img id="loading-image" src="img/spinner.gif" alt="Loading..." />
-	</div>
+
 <div class="wrapper">
 <nav id="sidebar" class="sidebar">
  <div th:replace="/fragments/sidebar :: div"></div>
@@ -92,14 +86,14 @@ body {
 												<div class="form-group">
 													<label class="form-label">Emp Code <span
 														class="text-danger">*</span>
-													</label> <input name="Emp_Code" type="text" id="Emp_Code"th:value="${employeeEdit.Emp_Code}"
+													</label> <input name="empCode" type="text" id="empCode"th:value="${employeeEdit.empCode}"
 														class="form-control"readonly>
 												</div>
 	
 												<div class="form-group">
 													<label class="form-label">Name <span
 														class="text-danger">*</span>
-													</label> <input name="Emp_Name" type="text" th:value="${employeeEdit.Emp_Name}"
+													</label> <input name="empName" id="empName"type="text" th:value="${employeeEdit.empName}"
 														class="form-control required">
 												</div>
 												<div class="form-group">
@@ -114,27 +108,27 @@ body {
 												<div class="form-group ">
 													<label class="form-label">Company Code <span
 														class="text-danger">*</span>
-													</label> <input name="Comp_Code" type="text" id="Comp_Code" th:value="${employeeEdit.Comp_Code}"
+													</label> <input name="compCode" type="text" id="compCode" th:value="${employeeEdit.compCode}"
 														class="form-control required">
 												</div>
 
 												<div class="form-group ">
 													<label class="form-label">Date Of Birth</label> <span
 														class="text-danger">*</span> <input 
-														class="form-control required" type="text"id="Date_Of_Birth" th:value="${employeeEdit.Date_Of_Birth}"
-														name="Date_Of_Birth" />
+														class="form-control required" type="text"id="dateOfBirth" th:value="${employeeEdit.dateOfBirth}"
+														name="dateOfBirth" />
 
 												</div>
 												<div class="form-group">
 													<label class="form-label">Birth State <span
 														class="text-danger">*</span>
-													</label> <input name="Birth_State" type="text"id="Birth_State"  th:value="${employeeEdit.Birth_State}"
+													</label> <input name="birthState" type="text"id="birthState"  th:value="${employeeEdit.birthState}"
 														class="form-control required">
 												</div>
 												<div class="form-group">
 													<label class="form-label">Birth Place <span
 														class="text-danger">*</span>
-													</label> <input  type="text"id="Birth_Place"name="Birth_Place"th:value="${employeeEdit.Birth_Place}"
+													</label> <input  type="text"id="birthPlace"name="birthPlace"th:value="${employeeEdit.birthPlace}"
 														class="form-control required">
 												</div>
 											</div>
@@ -145,41 +139,41 @@ body {
 													<label class="form-label">Upload Image <span
 														class="text-danger">*</span>
 													</label>
-													<input type="hidden" id="Emp_Img" name="Emp_Img" th:value="${employeeEdit.Emp_Img}">
+													<input type="hidden" id="empImg" name="empImg" th:value="${employeeEdit.empImg}">
 													 <input type="file" id="file" name="file" accept="image/png, image/jpeg"   onchange="preview_image(event)"/>
-											     <img id="output_image"width="100px" th:src="@{'/img/'+${employeeEdit.Emp_Img}}" height="100px"style="border-radius:50%"/>
+											     <img id="output_image"width="100px" th:src="@{'/img/'+${employeeEdit.empImg}}" height="100px"style="border-radius:50%"alt="employee">
 												</div>
 												
 												
 												<div class="form-group">
 													<label class="form-label">Emp Ref No. <span
 														class="text-danger">*</span>
-													</label> <input name="Emp_Ref_No" type="text" id="Emp_Ref_No" th:value="${employeeEdit.Emp_Ref_No}"
+													</label> <input name="empRefNo" type="text" id="empRefNo" th:value="${employeeEdit.empRefNo}"
 														class="form-control required">
 												</div>
 												<div class="form-group">
 													<label class="form-label">Type</label> <span
 														class="text-danger">*</span> <select
-														class="form-control required" name="Emp_Type" id="Emp_Type">
+														class="form-control required" name="empType" id="empType">
 														<option value="">Select Type</option>
-														<option value="P" th:selected="${employeeEdit.Emp_Type}==P">Permanent</option>
-														<option value="C" th:selected="${employeeEdit.Emp_Type}==C">Casual</option>
+														<option value="P" th:selected="${employeeEdit.empType}==P">Permanent</option>
+														<option value="C" th:selected="${employeeEdit.empType}==C">Casual</option>
 													</select>
 												</div>
 												<div class="form-group">
 													<label class="form-label">Location Type</label> <span
 														class="text-danger">*</span> <select
-														class="form-control required" name="Location_Type" id="Location_Type">
+														class="form-control required" name="locationType" id="locationType">
 														<option value="">Select Type</option>
-														<option value="C" th:selected="${employeeEdit.Location_Type}==C">Company</option>
-														<option value="G" th:selected="${employeeEdit.Location_Type}==G">Govt Office</option>
+														<option value="C" th:selected="${employeeEdit.locationType}==C">Company</option>
+														<option value="G" th:selected="${employeeEdit.locationType}==G">Govt Office</option>
 													</select>
 												</div>
 
 												<div class="form-group ">
 													<label class="form-label">Weekly Working Days <span
 														class="text-danger">*</span>
-													</label> <input name="Weekly_Working_Day" type="text"id="Weekly_Working_Day"th:value="${employeeEdit.Weekly_Working_Day}"
+													</label> <input name="weeklyWorkingDay" type="text"id="weeklyWorkingDay"th:value="${employeeEdit.weeklyWorkingDay}"
 														class="form-control required">
 												</div>
 
@@ -203,7 +197,7 @@ body {
 											<label class="form-label">Card No.    
 												<span class="text-danger">*</span>
 											</label>
-											<input  type="text" class="form-control required" name="Card_No" id="Card_No" th:value="${employeeEdit.Card_No}">
+											<input  type="text" class="form-control required" name="cardNo" id="cardNo" th:value="${employeeEdit.cardNo}">
 										</div>
 										
 										
@@ -211,14 +205,14 @@ body {
 											<label class="form-label">Designation
 												<span class="text-danger">*</span>
 											</label>
-											<input  type="text" class="form-control required"  name="Emp_Designation"id="Emp_Designation"  th:value="${employeeEdit.Emp_Designation}">
+											<input  type="text" class="form-control required"  name="empDesignation"id="empDesignation"  th:value="${employeeEdit.empDesignation}">
 										</div>
 										
 										<div class="form-group">
 											<label class="form-label">Shift Code.
 												<span class="text-danger">*</span>
 											</label>
-											<input  type="text" class="form-control required" name="Shift_Code" id="Shift_Code" th:value="${employeeEdit.Shift_Code}">
+											<input  type="text" class="form-control required" name="shiftCode" id="shiftCode" th:value="${employeeEdit.shiftCode}">
 										</div>
 										
 										
@@ -227,21 +221,21 @@ body {
 											<label class="form-label">Passport No.
 												<span class="text-danger">*</span>
 											</label>
-											<input type="text" class="form-control required"  name="Passport_No"  id="Passport_No" th:value="${employeeEdit.Passport_No}" >
+											<input type="text" class="form-control required"  name="passportNo"  id="passportNo" th:value="${employeeEdit.passportNo}" >
 										</div>
 										
 										
 										 <div class="form-group ">
 												<label class="form-label">LOI</label>
 												<span class="text-danger">*</span>
-												<input  type="text" id="Loi_Date" name="Loi_Date" th:value="${employeeEdit.Loi_Date}" class="form-control required">
+												<input  type="text" id="loiDate" name="loiDate" th:value="${employeeEdit.loiDate}" class="form-control required">
 											
 										</div>
 								
 										 <div class="form-group ">
 												<label class="form-label"> Status Date</label>
 												<span class="text-danger">*</span>
-												<input  type="text"  class="form-control required" name="Status_Date"id="Status_Date" th:value="${employeeEdit.Status_Date}">
+												<input  type="text"  class="form-control required" name="statusDate"id="statusDate" th:value="${employeeEdit.statusDate}">
 										</div>
 									
 										<div class="form-group">
@@ -262,7 +256,7 @@ body {
 											<label class="form-label">Department Code.
 												<span class="text-danger">*</span>
 											</label>
-											<input  type="text" name="Department_Code"id="Department_Code" 	th:value="${employeeEdit.Department_Code}" class="form-control required">
+											<input  type="text" name="departmentCode"id="departmentCode" 	th:value="${employeeEdit.departmentCode}" class="form-control required">
 										</div>
 										
 										
@@ -270,7 +264,7 @@ body {
 											<label class="form-label">Manager  Code.
 												<span class="text-danger">*</span>
 											</label>
-											<input  type="text" name="Manager_Code" id="Manager_Code" 	th:value="${employeeEdit.Manager_Code}" class="form-control required">
+											<input  type="text" name="managerCode" id="managerCode"th:value="${employeeEdit.managerCode}" class="form-control required">
 										</div>
 								
 								
@@ -278,7 +272,7 @@ body {
 											<label class="form-label">IT Pan No
 												<span class="text-danger">*</span>
 											</label>
-											<input type="text" name="It_Pan_No"id="It_Pan_No" 	th:value="${employeeEdit.It_Pan_No}" class="form-control required">
+											<input type="text" name="itPanNo"id="itPanNo" 	th:value="${employeeEdit.itPanNo}" class="form-control required">
 										</div>
 								
 								
@@ -286,7 +280,7 @@ body {
 											<label class="form-label">UAN  No.
 												<span class="text-danger">*</span>
 											</label>
-											<input  type="text" name="Uan_No" id="Uan_No" 	th:value="${employeeEdit.Uan_No}" class="form-control required">
+											<input  type="text" name="uanNo" id="uanNo" 	th:value="${employeeEdit.uanNo}" class="form-control required">
 										</div>
 								
 								 
@@ -294,14 +288,14 @@ body {
 									    <div class="form-group ">
 												<label class="form-label">Date Of Joining</label>
 												<span class="text-danger">*</span>
-												<input  type="text" name="Date_Of_Joining" id="Date_Of_Joining" 	th:value="${employeeEdit.Date_Of_Joining}" class="form-control required">
+												<input  type="text" name="dateOfJoining" id="dateOfJoining" 	th:value="${employeeEdit.dateOfJoining}" class="form-control required">
 											
 										</div>
 										
 										 <div class="form-group ">
 												<label class="form-label"> Leaving Date </label>
 												<span class="text-danger">*</span>
-												<input class="form-control required" type="text" name="Leaving_Date" id="Leaving_Date" th:value="${employeeEdit.Leaving_Date}" >
+												<input class="form-control required" type="text" name="leavingDate" id="leavingDate" th:value="${employeeEdit.leavingDate}" >
 										</div>
 								</div>	
 						   </div>
@@ -314,23 +308,23 @@ body {
 												<label for="inputSex">Gender
 												<span class="text-danger">*</span>
 												</label>
-												<select id="Emp_Gender"name="Emp_Gender" class="form-control required">
+												<select id="empGender"name="empGender" class="form-control required">
 													<option selected>Choose...Your Gender </option>
-													<option  value="Male" th:selected="${employeeEdit.Emp_Gender}==Male">Male</option>
-														<option value="Female" th:selected="${employeeEdit.Emp_Gender}==Female">Female</option>
+													<option  value="Male" th:selected="${employeeEdit.empGender}==Male">Male</option>
+														<option value="Female" th:selected="${employeeEdit.empGender}==Female">Female</option>
 												</select>
 											   </div>
 											    <div class="form-group sm col-md-4">
 												<label for="inputHieght">Height
 												<span class="text-danger">*</span>
 												</label>
-												<input type="text" class="form-control required" name="Emp_Height" id="Emp_Height" 	th:value="${employeeEdit.Emp_Height}">
+												<input type="text" class="form-control required" name="empHeight" id="empHeight" 	th:value="${employeeEdit.empHeight}">
 											</div>
 											    <div class="form-group col-md-4">
 												<label for="identiMark">identity Mark
 												<span class="text-danger">*</span>
 												</label>
-												<input type="text" class="form-control required" Name="Identity_Mark" id="Identity_Mark" 	th:value="${employeeEdit.Identity_Mark}">
+												<input type="text" class="form-control required" Name="identityMark" id="identityMark" 	th:value="${employeeEdit.identityMark}">
 											</div>
 										 </div>
 										<div class="form-row">
@@ -338,26 +332,26 @@ body {
 												<label for="bloodGroup">Blood Group
 												<span class="text-danger">*</span>
 												</label> <input
-													type="text" class="form-control required"  id="Blood_Group"  name="Blood_Group"	th:value="${employeeEdit.Blood_Group}">
+													type="text" class="form-control required"  id="bloodGroup"  name="bloodGroup"	th:value="${employeeEdit.bloodGroup}">
 											</div>
 											    <div class="form-group col-md-4">
 												<label for="maritalStatus:">Marital Status
 												<span class="text-danger">*</span>
 												</label> <select
-													id="Marital_Status" 	Name="Marital_Status" class="form-control required">
+													id="maritalStatus" 	Name="maritalStatus" class="form-control required">
 													<option selected> Marital Status</option>
-													<option  value="Single" th:selected="${employeeEdit.Marital_Status}==Single">Single</option>
-													<option  value="Married" th:selected="${employeeEdit.Marital_Status}==Married">Married</option>
+													<option  value="Single" th:selected="${employeeEdit.maritalStatus}==Single">Single</option>
+													<option  value="Married" th:selected="${employeeEdit.maritalStatus}==Married">Married</option>
 												</select>
 											</div>
 											    <div class="form-group col-md-4">
 												<label for="preDisease">Pre Disease
 												<span class="text-danger">*</span>
 												</label> <select
-													id="Pre_Disease"  name="Pre_Disease"  class="form-control required">
+													id="preDisease"  name="preDisease"  class="form-control required">
 													<option selected>Choose..Your Disease</option>
-													<option value="Yes" th:selected="${employeeEdit.Pre_Disease}==Yes">Yes</option>
-													<option value="No" th:selected="${employeeEdit.Pre_Disease}==No">No</option>
+													<option value="Yes" th:selected="${employeeEdit.preDisease}==Yes">Yes</option>
+													<option value="No" th:selected="${employeeEdit.preDisease}==No">No</option>
 												</select>
 											</div>
 										 </div>
@@ -367,7 +361,7 @@ body {
 											<label for="weddingDate">Wedding Date
 											<span class="text-danger">*</span>
 											</label>
-											<input type="text" class="form-control required"id="Wedding_Date" name="Wedding_Date" 	th:value="${employeeEdit.Wedding_Date}">
+											<input type="text" class="form-control required"id="weddingDate" name="weddingDate" 	th:value="${employeeEdit.weddingDate}">
 
 											</div>
 											<div class="form-group col-md-4">
@@ -375,14 +369,14 @@ body {
 												<span class="text-danger">*</span>
 												</label>
 												
-												<input type="text" class="form-control required" id="No_Of_Child" name="No_Of_Child" th:value="${employeeEdit.No_Of_Child}">
+												<input type="text" class="form-control required" id="noOfChild" name="noOfChild" th:value="${employeeEdit.noOfChild}">
 											</div>
 											<div class="form-group col-md-4">
 												<label for="caste">Caste
 												<span class="text-danger">*</span>
 												</label>
 												
-												<input type="text" class="form-control required" id="Emp_Caste" name="Emp_Caste" th:value="${employeeEdit.Emp_Caste}">
+												<input type="text" class="form-control required" id="empCaste" name="empCaste" th:value="${employeeEdit.empCaste}">
 											</div>
 										</div>
 							
@@ -392,21 +386,21 @@ body {
 												<span class="text-danger">*</span>
 												</label>
 												
-												<input type="text" class="form-control required" id="Emp_Religion" name="Emp_Religion" th:value="${employeeEdit.Emp_Religion}">
+												<input type="text" class="form-control required" id="empReligion" name="empReligion" th:value="${employeeEdit.empReligion}">
 											</div>
 							               <div class="form-group col-md-4">
 												<label for="nationality">Nationality
 												<span class="text-danger">*</span>
 												</label>
 												
-												<input type="text" class="form-control required" id="Emp_Nationality" name="Emp_Nationality" th:value="${employeeEdit.Emp_Nationality}">
+												<input type="text" class="form-control required" id="empNationality" name="empNationality" th:value="${employeeEdit.empNationality}">
 											</div>
 										   <div class="form-group col-md-4">
 												<label for="companyCode">Company Code
 												<span class="text-danger">*</span>
 												</label>
 												
-												<input type="text" class="form-control required"  name="Company_Code" id="Company_Code" th:value="${employeeEdit.Company_Code}">
+												<input type="text" class="form-control required"  name="companyCode" id="companyCode" th:value="${employeeEdit.companyCode}">
 											</div>
 							     		   </div>
 							     			 
@@ -426,7 +420,7 @@ body {
 											</div>
 							        		<div class="form-group col-md-4">
 												<label for="Emp_Address1">Address1<span class="text-danger">*</span></label>
-												<input type="text" class="form-control required" id="Emp_Address1" name="Emp_Address1" th:value="${employeeEdit.Emp_Address1}">
+												<input type="text" class="form-control required" id="empAddress1" name="empAddress1" th:value="${employeeEdit.empAddress1}">
 												</div>
 											</div>
 											
@@ -434,17 +428,17 @@ body {
 											 <div class="form-group col-md-4">
 												<label for="Emp_Address2">Address2<span class="text-danger">*</span></label>
 												
-												<input type="text" class="form-control required" id="Emp_Address2" name="Emp_Address2" th:value="${employeeEdit.Emp_Address2}">
+												<input type="text" class="form-control required" id="empAddress2" name="empAddress2" th:value="${employeeEdit.empAddress2}">
 											</div>
 											 <div class="form-group col-md-4">
 												<label for="Emp_City">City<span class="text-danger">*</span></label>
 												
-												<input type="text" class="form-control required" id="Emp_City"  name="Emp_City" th:value="${employeeEdit.Emp_City}">
+												<input type="text" class="form-control required" id="empCity"  name="empCity" th:value="${employeeEdit.empCity}">
 											</div>
 											 <div class="form-group col-md-4">
 												<label for="Emp_State">State<span class="text-danger">*</span></label>
 												
-												<input type="text" class="form-control required" id="Emp_State" name="Emp_State" th:value="${employeeEdit.Emp_State}">
+												<input type="text" class="form-control required" id="empState" name="empState" th:value="${employeeEdit.empState}">
 											</div>
 											</div>
 											
@@ -453,17 +447,17 @@ body {
 											<div class="form-group col-md-4">
 											<label for="Pin_Code">PinCode<span class="text-danger">*</span></label>
 												
-												<input type="text" class="form-control required" id="Pin_Code"name="Pin_Code" th:value="${employeeEdit.Pin_Code}">
+												<input type="text" class="form-control required" id="pinCode"name="pinCode" th:value="${employeeEdit.pinCode}">
 											</div>
 											 <div class="form-group col-md-4">
 												<label for="Emp_Mobile">Mobile<span class="text-danger">*</span></label>
 												
-												<input type="text" class="form-control required" id="Emp_Mobile" name="Emp_Mobile" th:value="${employeeEdit.Emp_Mobile}">
+												<input type="text" class="form-control required" id="empMobile" name="empMobile" th:value="${employeeEdit.empMobile}">
 											</div>
 											<div class="form-group col-md-4">
 												<label for="Emp_Local_Add1">Local Address1
 												<span class="text-danger">*</span></label>
-												<input type="text" class="form-control required" id="Emp_Local_Add1" name="Emp_Local_Add1" th:value="${employeeEdit.Emp_Local_Add1}">
+												<input type="text" class="form-control required" id="empLocalAdd1" name="empLocalAdd1" th:value="${employeeEdit.empLocalAdd1}">
 											</div>
 							       
 							                </div>
@@ -472,17 +466,17 @@ body {
 											 <div class="form-group col-md-4">
 												<label for="Emp_Local_Add2">Local Address2
 												<span class="text-danger">*</span></label>
-												<input type="text" class="form-control required" id="Emp_Local_Add2" name="Emp_Local_Add2" th:value="${employeeEdit.Emp_Local_Add2}">
+												<input type="text" class="form-control required" id="empLocalAdd2" name="empLocalAdd2" th:value="${employeeEdit.empLocalAdd2}">
 											</div>
 											 <div class="form-group col-md-4">
 												<label for="Emp_Local_City">City
 												<span class="text-danger">*</span></label>
-												<input type="text" class="form-control required" id="Emp_Local_City" name="Emp_Local_City" th:value="${employeeEdit.Emp_Local_City}" >
+												<input type="text" class="form-control required" id="empLocalCity" name="empLocalCity" th:value="${employeeEdit.empLocalCity}" >
 											</div>
 											 <div class="form-group col-md-4">
 												<label for="Emp_Local_State">State
 												<span class="text-danger">*</span></label>
-												<input type="text" class="form-control required" id="Emp_Local_State" name="Emp_Local_State" th:value="${employeeEdit.Emp_Local_State}">
+												<input type="text" class="form-control required" id="empLocalState" name="empLocalState" th:value="${employeeEdit.empLocalState}">
 											</div>
 											</div>
 											
@@ -492,11 +486,11 @@ body {
 											 <div class="form-group col-md-4">
 												<label for="Emp_Local_PinCode">PinCode
 												<span class="text-danger">*</span></label>
-												<input type="text" class="form-control required" id="Emp_Local_PinCode"  name="Emp_Local_PinCode"  th:value="${employeeEdit.Emp_Local_PinCode}">
+												<input type="text" class="form-control required" id="empLocalPinCode"  name="empLocalPinCode"  th:value="${employeeEdit.empLocalPinCode}">
 											</div>
 											 <div class="form-group col-md-4">
 												<label for="Emp_Local_Mobile_No">Mobile<span class="text-danger">*</span></label>
-												<input type="text" class="form-control required" id="Emp_Local_Mobile_No" name="Emp_Local_Mobile_No"  th:value="${employeeEdit.Emp_Local_Mobile_No}">
+												<input type="text" class="form-control required" id="empLocalMobileNo" name="empLocalMobileNo"  th:value="${employeeEdit.empLocalMobileNo}">
 											</div>
 							                </div>
                      
@@ -508,19 +502,19 @@ body {
 									        <div class="form-group col-md-4">
 											<label for="Comp_Mobile_No">Company Mobile No
 											<span class="text-danger">*</span></label>
-											<input type="text" class="form-control required" id="Comp_Mobile_No" name="Comp_Mobile_No" th:value="${employeeEdit.Comp_Mobile_No}">
+											<input type="text" class="form-control required" id="compMobileNo" name="compMobileNo" th:value="${employeeEdit.compMobileNo}">
 											</div>
 											
 									<div class="form-group col-md-4">
 										<label for="Company_Email">Email
 										<span class="text-danger">*</span></label>
-										<input type="text" class="form-control required" id="Company_Email" name="Company_Email"  th:value="${employeeEdit.Company_Email}">
+										<input type="text" class="form-control required" id="companyEmail" name="companyEmail"  th:value="${employeeEdit.companyEmail}">
 										</div>
 										
 									 <div class="form-group col-md-4">
 										 <label for="Prof_Inst">Prof Inst
 										<span class="text-danger">*</span></label>
-										<input type="text" class="form-control required" id="Prof_Inst" name="Prof_Inst" th:value="${employeeEdit.Prof_Inst}">
+										<input type="text" class="form-control required" id="profInst" name="profInst" th:value="${employeeEdit.profInst}">
 										</div>
 							       </div>
                                  		   <div class="form-row">
@@ -529,7 +523,7 @@ body {
 												<label for="Local_Travel_Pr_km">Local Travelling Rate Per KM  
 												<span class="text-danger">*</span>
 												</label>
-												<input type="text" class="form-control required" id="Local_Travel_Pr_km" name="Local_Travel_Pr_km" th:value="${employeeEdit.Local_Travel_Pr_km}">
+												<input type="text" class="form-control required" id="localTravelPrkm" name="localTravelPrkm" th:value="${employeeEdit.localTravelPrkm}">
 											</div>
 											 
 											 <div class="form-group col-md-4">
@@ -549,7 +543,7 @@ body {
                                       	  <div class="form-group col-md-6">
 												<label for="Reg_Code">Registration code
 												<span class="text-danger">*</span></label>
-												<input type="text" class="form-control required" id="Reg_Code" name="Reg_Code" th:value="${employeeEdit.Reg_Code}">
+												<input type="text" class="form-control required" id="regCode" name="regCode" th:value="${employeeEdit.regCode}">
 											</div>
 											
 											
@@ -558,7 +552,7 @@ body {
 												<label for="Estf_Work ">Estf Work
 												<span class="text-danger">*</span>
 												</label>
-												<input type="text" class="form-control required" id="Estf_Work" name="Estf_Work" th:value="${employeeEdit.Estf_Work}">
+												<input type="text" class="form-control required" id="estfWork" name="estfWork" th:value="${employeeEdit.estfWork}">
 												</div>
                      
                                  </div>
@@ -566,25 +560,25 @@ body {
                                            <div class="form-group col-md-6">
 												    <label for="E_Emp_Cat">eEmp_Cat
 												    <span class="text-danger">*</span></label> 
-												    <select id="E_Emp_Cat" name="E_Emp_Cat" class="form-control required">
+												    <select id="electronicEmpCat" name="electronicEmpCat" class="form-control required">
 													<option selected> Category</option>
-													<option th:value="Permanent" th:selected="${employeeEdit.E_Emp_Cat}==Permanent">Permanent </option>
-													<option th:value="Temporary" th:selected="${employeeEdit.E_Emp_Cat}==Temporary">Temporary </option>
+													<option th:value="Permanent" th:selected="${employeeEdit.electronicEmpCat}==Permanent">Permanent </option>
+													<option th:value="Temporary" th:selected="${employeeEdit.electronicEmpCat}==Temporary">Temporary </option>
 											     	</select>
 											 </div>
                                                		  
                                                	
 											 <div class="form-group col-md-6">
-												<label for="E_Category ">E-Category
+												<label for="electronicCategory ">E-Category
 												<span class="text-danger">*</span>
 												 </label>
-												<input type="text" class="form-control required" id="E_Category" name="E_Category" th:value="${employeeEdit.E_Category}">
+												<input type="text" class="form-control required" id="electronicCategory" name="electronicCategory" th:value="${employeeEdit.electronicCategory}">
 											</div>
                                                </div>
                                            <div class="form-group">
 											<label  class="custom-control custom-checkbox required">
 											
-												<input type="checkbox" class="custom-control-input" id=Emp_Agree name="Emp_Agree" th:checked="${employeeEdit.Card_No}">
+												<input type="checkbox" class="custom-control-input" id=empAgree name="empAgree" th:checked="${employeeEdit.empAgree}">
 												<span class="custom-control-label">I agree with the Terms and Conditions</span>
 											</label>
 										</div>
@@ -616,7 +610,7 @@ body {
 		$(function() {
 			
 			
-		$("input[name='Date_Of_Birth']").daterangepicker({
+		$("input[name='dateOfBirth']").daterangepicker({
 				singleDatePicker: true,
 			    autoApply: true,
 				locale: {
@@ -625,7 +619,7 @@ body {
 				showDropdowns: true
 			});
 
-		$("input[name=\"Loi_Date\"]").daterangepicker({
+		$("input[name=\"loiDate\"]").daterangepicker({
 				singleDatePicker: true,
 				   autoApply: true,
 				locale: {
@@ -635,7 +629,7 @@ body {
 			});
 			
 		
-			$("input[name=\"Date_Of_Joining\"]").daterangepicker({
+			$("input[name=\"dateOfJoining\"]").daterangepicker({
 				singleDatePicker: true,
 				   autoApply: true,
 				locale: {
@@ -644,7 +638,7 @@ body {
 				showDropdowns: true
 			});
 			
-			$("input[name=\"Status_Date\"]").daterangepicker({
+			$("input[name=\"statusDate\"]").daterangepicker({
 				singleDatePicker: true,
 				   autoApply: true,
 				locale: {
@@ -653,7 +647,7 @@ body {
 				showDropdowns: true
 			});
 			
-			$("input[name=\"Leaving_Date\"]").daterangepicker({
+			$("input[name=\"leavingDate\"]").daterangepicker({
 				singleDatePicker: true,
 				   autoApply: true,
 				locale: {
@@ -663,7 +657,7 @@ body {
 			});
 			
 			
-			$("input[name=\"Wedding_Date\"]").daterangepicker({
+			$("input[name=\"weddingDate\"]").daterangepicker({
 				singleDatePicker: true,
 				   autoApply: true,
 				locale: {

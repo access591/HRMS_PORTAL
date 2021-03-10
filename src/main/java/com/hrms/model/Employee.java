@@ -19,125 +19,125 @@ public class Employee implements Serializable {
 	private static final long serialVersionUID = -5019623265481596682L;
 	@Id
 	@Column(name ="EMP_CODE")
-	private String Emp_Code;
+	private String empCode;
 	
 	@Column(name="EMP_IMG")
-	private String Emp_Img;
+	private String empImg;
 	
 	@Column(name ="EMP_NAME")
-	private String Emp_Name;
+	private String empName;
 	
 	@Column(name ="EACTIVE")
 	private String eActive;
 	
 	@Column(name ="COMP_CODE")
-	private String Comp_Code;
+	private String compCode;
 	
 	@Column(name ="DATE_OF_BIRTH")
 	@Temporal(TemporalType.DATE)
-	private Date Date_Of_Birth;
+	private Date dateOfBirth;
 	
 	@Column(name ="BIRTH_STATE")
-	private String  Birth_State;
+	private String  birthState;
 	
 	@Column(name ="EMP_REF_NO")
-	private String Emp_Ref_No;
+	private String empRefNo;
 	
 	@Column(name ="EMP_TYPE")
-	private String Emp_Type;
+	private String empType;
 	
 	@Column(name ="LOCATION_TYPE")
-	private String Location_Type;
+	private String locationType;
 	
 	@Column(name ="WEEKLY_WORKING_DAY")
-	private String Weekly_Working_Day;
+	private String weeklyWorkingDay;
 	
 	@Column(name ="BIRTH_PLACE")
-	private String Birth_Place;
+	private String birthPlace;
 	
 	@Column(name ="DOMICILE")
 	private String domicile;
 	//STEP-1======================end....
 	@Column(name ="CARD_NO")
-	private String Card_No;
+	private String cardNo;
 	
 	@Column(name ="EMP_DESIGNATION")
-	private String Emp_Designation;
+	private String empDesignation;
 	
 	@Column(name ="SHIFT_CODE")
-	private String Shift_Code;
+	private String shiftCode;
 	
 	@Column(name ="PASSPORT_NO")
-	private String Passport_No;
+	private String passportNo;
 	
 	@Column(name ="LOI_DATE")
 	@Temporal(TemporalType.DATE)
-	private Date Loi_Date;
+	private Date loiDate;
 	
 	@Column(name ="STATUS_DATE")
 	@Temporal(TemporalType.DATE)
-	private Date Status_Date;
+	private Date statusDate;
 	
 	@Column(name ="REASON")
 	private String reason;
 	
 	@Column(name ="DEPARTMENT_CODE")
-	private String Department_Code;
+	private String departmentCode;
 	
 	@Column(name ="MANAGER_CODE")
-	private String Manager_Code;
+	private String managerCode;
 	
 	@Column(name ="IT_PAN_NO")
-	private String It_Pan_No;
+	private String itPanNo;
 	
 	@Column(name ="UAN_NO")
-	private String Uan_No;
+	private String uanNo;
 	@Temporal(TemporalType.DATE)
 	@Column(name ="DATE_OF_JOINING")
-	private Date Date_Of_Joining;
+	private Date dateOfJoining;
 	
 	@Column(name ="LEAVING_DATE")
 	@Temporal(TemporalType.DATE)
-	private Date Leaving_Date;
+	private Date leavingDate;
 	//step-2=====================end.....=============
 	@Column(name ="EMP_GENDER")
-	private String Emp_Gender;
+	private String empGender;
 	
 	@Column(name ="EMP_HEIGHT")
-	private String Emp_Height;
+	private String empHeight;
 	
 	@Column(name ="IDENTITY_MARK")
-	private String Identity_Mark;
+	private String identityMark;
 	
 	@Column(name ="BLOOD_GROUP")
-	private String Blood_Group;
+	private String bloodGroup;
 	
 	@Column(name ="MARITAL_STATUS")
-	private String Marital_Status;
+	private String maritalStatus;
 	//line-1=====================end.....
 	
 	@Column(name ="PRE_DISEASE")
-	private String Pre_Disease;
+	private String preDisease;
 	
 	@Column(name ="WEDDING_DATE")
 	@Temporal(TemporalType.DATE)
-	private Date Wedding_Date;
+	private Date weddingDate;
 	
 	@Column(name ="NO_OF_CHILD")
-	private String No_Of_Child;
+	private String noOfChild;
 	
 	@Column(name ="EMP_CASTE")
-	private String Emp_Caste;
+	private String empCaste;
 	
 	@Column(name ="EMP_RELIGION")
-	private String Emp_Religion;
+	private String empReligion;
 	//line-2=====================end.....
 	
 	@Column(name ="EMP_NATIONALITY")
-	private String Emp_Nationality;
+	private String empNationality;
 	
 	@Column(name ="COMPANY_CODE")
-	private String Company_Code;
+	private String companyCode;
 	
 	@Column(name ="MEDICLAIM")
 	private String mediclaim;
@@ -147,55 +147,55 @@ public class Employee implements Serializable {
 	//line-3=====================end..4...
 	
 	@Column(name ="EMP_ADDRESS1")
-	private String Emp_Address1;
+	private String empAddress1;
 	
 	@Column(name ="EMP_ADDRESS2")
-	private String Emp_Address2;
+	private String empAddress2;
 	
 	@Column(name ="EMP_CITY")
-	private String Emp_City;
+	private String empCity;
 	
 	@Column(name ="EMP_STATE")
-	private String Emp_State;
+	private String empState;
 	
 	@Column(name ="PIN_CODE")
-	private String Pin_Code;
+	private String pinCode;
 	
 	@Column(name ="EMP_MOBILE")
-	private String Emp_Mobile;
+	private String empMobile;
 	//line-4=====================end..6...
 	
 	@Column(name ="EMP_LOCAL_ADD1")
-	private String Emp_Local_Add1;
+	private String empLocalAdd1;
 	
 	@Column(name ="EMP_LOCAL_ADD2")
-	private String Emp_Local_Add2;
+	private String empLocalAdd2;
 	
 	@Column(name ="EMP_LOCAL_CITY")
-	private String Emp_Local_City;
+	private String empLocalCity;
 	
 	@Column(name ="EMP_LOCAL_STATE")
-	private String Emp_Local_State;
+	private String empLocalState;
 	
 	@Column(name ="EMP_LOCAL_PINCODE")
-	private String Emp_Local_PinCode;
+	private String empLocalPinCode;
 	
 	@Column(name ="EMP_LOCAL_MOBILE_NO")
-	private String Emp_Local_Mobile_No;
+	private String empLocalMobileNo;
 	
 	
 //step-3=====================end.....==========6========
 	@Column(name ="COMP_MOBILE_NO")
-	private String Comp_Mobile_No;
+	private String compMobileNo;
 	
 	@Column(name ="COMPANY_EMAIL")
-	private String Company_Email;
+	private String companyEmail;
 	
 	@Column(name ="PROF_INST")
-	private String Prof_Inst;
+	private String profInst;
 	
 	@Column(name ="LOCAL_TRAVEL_PR_KM")
-	private String Local_Travel_Pr_km;
+	private String localTravelPrkm;
 	
 	@Column(name ="HOBBIES")
 	private String hobbies;
@@ -204,115 +204,118 @@ public class Employee implements Serializable {
 	private String clubs;
 	
 	@Column(name ="REG_CODE")
-	private String Reg_Code;
+	private String regCode;
 	
 	@Column(name ="ESTF_WORK")
-	private String Estf_Work;
+	private String estfWork;
 	
 	@Column(name ="E_EMP_CAT")
-	private String E_Emp_Cat;
+	private String electronicEmpCat;
 	
 	@Column(name ="E_CATEGORY")
-	private String E_Category;
+	private String electronicCategory;
 	
 	@Column(name ="EMP_AGREE")
-	private String Emp_Agree;
+	private String empAgree;
 	//step-4=====================end.....==11================	
 
-	public String getEmp_Code() {
-		return Emp_Code;
-	}
+	
 
-	public void setEmp_Code(String emp_Code) {
-		Emp_Code = emp_Code;
-	}
-
-	public String getEmp_Img() {
-		return Emp_Img;
-	}
-
-	public void setEmp_Img(String emp_Img) {
-		Emp_Img = emp_Img;
-	}
-
-	public String getEmp_Name() {
-		return Emp_Name;
-	}
-
-	public void setEmp_Name(String emp_Name) {
-		Emp_Name = emp_Name;
-	}
 
 	public String geteActive() {
 		return eActive;
 	}
 
+	public String getEmpCode() {
+		return empCode;
+	}
+
+	public void setEmpCode(String empCode) {
+		this.empCode = empCode;
+	}
+
+	public String getEmpImg() {
+		return empImg;
+	}
+
+	public void setEmpImg(String empImg) {
+		this.empImg = empImg;
+	}
+
+	public String getEmpName() {
+		return empName;
+	}
+
+	public void setEmpName(String empName) {
+		this.empName = empName;
+	}
+
+	public String getCompCode() {
+		return compCode;
+	}
+
+	public void setCompCode(String compCode) {
+		this.compCode = compCode;
+	}
+
+	public Date getDateOfBirth() {
+		return dateOfBirth;
+	}
+
+	public void setDateOfBirth(Date dateOfBirth) {
+		this.dateOfBirth = dateOfBirth;
+	}
+
+	public String getBirthState() {
+		return birthState;
+	}
+
+	public void setBirthState(String birthState) {
+		this.birthState = birthState;
+	}
+
+	public String getEmpRefNo() {
+		return empRefNo;
+	}
+
+	public void setEmpRefNo(String empRefNo) {
+		this.empRefNo = empRefNo;
+	}
+
+	public String getEmpType() {
+		return empType;
+	}
+
+	public void setEmpType(String empType) {
+		this.empType = empType;
+	}
+
+	public String getLocationType() {
+		return locationType;
+	}
+
+	public void setLocationType(String locationType) {
+		this.locationType = locationType;
+	}
+
+	public String getWeeklyWorkingDay() {
+		return weeklyWorkingDay;
+	}
+
+	public void setWeeklyWorkingDay(String weeklyWorkingDay) {
+		this.weeklyWorkingDay = weeklyWorkingDay;
+	}
+
+	public String getBirthPlace() {
+		return birthPlace;
+	}
+
+	public void setBirthPlace(String birthPlace) {
+		this.birthPlace = birthPlace;
+	}
+
 	public void seteActive(String eActive) {
 		this.eActive = eActive;
-	}
-
-	public String getComp_Code() {
-		return Comp_Code;
-	}
-
-	public void setComp_Code(String comp_Code) {
-		Comp_Code = comp_Code;
-	}
-
-	public Date getDate_Of_Birth() {
-		return Date_Of_Birth;
-	}
-
-	public void setDate_Of_Birth(Date date_Of_Birth) {
-		Date_Of_Birth = date_Of_Birth;
-	}
-
-	public String getBirth_State() {
-		return Birth_State;
-	}
-
-	public void setBirth_State(String birth_State) {
-		Birth_State = birth_State;
-	}
-
-	public String getEmp_Ref_No() {
-		return Emp_Ref_No;
-	}
-
-	public void setEmp_Ref_No(String emp_Ref_No) {
-		Emp_Ref_No = emp_Ref_No;
-	}
-
-	public String getEmp_Type() {
-		return Emp_Type;
-	}
-
-	public void setEmp_Type(String emp_Type) {
-		Emp_Type = emp_Type;
-	}
-
-	public String getLocation_Type() {
-		return Location_Type;
-	}
-
-	public void setLocation_Type(String location_Type) {
-		Location_Type = location_Type;
-	}
-
-	public String getWeekly_Working_Day() {
-		return Weekly_Working_Day;
-	}
-
-	public void setWeekly_Working_Day(String weekly_Working_Day) {
-		Weekly_Working_Day = weekly_Working_Day;
-	}
-
-	public String getBirth_Place() {
-		return Birth_Place;
-	}
-
-	public void setBirth_Place(String birth_Place) {
-		Birth_Place = birth_Place;
 	}
 
 	public String getDomicile() {
@@ -323,53 +326,42 @@ public class Employee implements Serializable {
 		this.domicile = domicile;
 	}
 
-	public String getCard_No() {
-		return Card_No;
+	
+	
+	
+	public String getCardNo() {
+		return cardNo;
 	}
 
-	public void setCard_No(String card_No) {
-		Card_No = card_No;
+	public void setCardNo(String cardNo) {
+		this.cardNo = cardNo;
 	}
 
-	public String getEmp_Designation() {
-		return Emp_Designation;
+	public String getEmpDesignation() {
+		return empDesignation;
 	}
 
-	public void setEmp_Designation(String emp_Designation) {
-		Emp_Designation = emp_Designation;
+	public void setEmpDesignation(String empDesignation) {
+		this.empDesignation = empDesignation;
 	}
 
-	public String getShift_Code() {
-		return Shift_Code;
+	public String getShiftCode() {
+		return shiftCode;
 	}
 
-	public void setShift_Code(String shift_Code) {
-		Shift_Code = shift_Code;
+	public void setShiftCode(String shiftCode) {
+		this.shiftCode = shiftCode;
 	}
 
-	public String getPassport_No() {
-		return Passport_No;
+	public String getPassportNo() {
+		return passportNo;
 	}
 
-	public void setPassport_No(String passport_No) {
-		Passport_No = passport_No;
+	public void setPassportNo(String passportNo) {
+		this.passportNo = passportNo;
 	}
 
-	public Date getLoi_Date() {
-		return Loi_Date;
-	}
-
-	public void setLoi_Date(Date loi_Date) {
-		Loi_Date = loi_Date;
-	}
-
-	public Date getStatus_Date() {
-		return Status_Date;
-	}
-
-	public void setStatus_Date(Date status_Date) {
-		Status_Date = status_Date;
-	}
+	
 
 	public String getReason() {
 		return reason;
@@ -379,149 +371,157 @@ public class Employee implements Serializable {
 		this.reason = reason;
 	}
 
-	public String getDepartment_Code() {
-		return Department_Code;
+
+
+	public Date getLoiDate() {
+		return loiDate;
 	}
 
-	public void setDepartment_Code(String department_Code) {
-		Department_Code = department_Code;
+	public void setLoiDate(Date loiDate) {
+		this.loiDate = loiDate;
 	}
 
-	public String getManager_Code() {
-		return Manager_Code;
+	public Date getStatusDate() {
+		return statusDate;
 	}
 
-	public void setManager_Code(String manager_Code) {
-		Manager_Code = manager_Code;
+	public void setStatusDate(Date statusDate) {
+		this.statusDate = statusDate;
 	}
 
-	public String getIt_Pan_No() {
-		return It_Pan_No;
+	public String getDepartmentCode() {
+		return departmentCode;
 	}
 
-	public void setIt_Pan_No(String it_Pan_No) {
-		It_Pan_No = it_Pan_No;
+	public void setDepartmentCode(String departmentCode) {
+		this.departmentCode = departmentCode;
 	}
 
-	public String getUan_No() {
-		return Uan_No;
+	public String getManagerCode() {
+		return managerCode;
 	}
 
-	public void setUan_No(String uan_No) {
-		Uan_No = uan_No;
+	public void setManagerCode(String managerCode) {
+		this.managerCode = managerCode;
 	}
 
-	public Date getDate_Of_Joining() {
-		return Date_Of_Joining;
+	
+
+	public String getItPanNo() {
+		return itPanNo;
 	}
 
-	public void setDate_Of_Joining(Date date_Of_Joining) {
-		Date_Of_Joining = date_Of_Joining;
+	public void setItPanNo(String itPanNo) {
+		this.itPanNo = itPanNo;
 	}
 
-	public Date getLeaving_Date() {
-		return Leaving_Date;
+	public String getUanNo() {
+		return uanNo;
 	}
 
-	public void setLeaving_Date(Date leaving_Date) {
-		Leaving_Date = leaving_Date;
+	public void setUanNo(String uanNo) {
+		this.uanNo = uanNo;
 	}
 
-	public String getEmp_Gender() {
-		return Emp_Gender;
+	public Date getDateOfJoining() {
+		return dateOfJoining;
 	}
 
-	public void setEmp_Gender(String emp_Gender) {
-		Emp_Gender = emp_Gender;
+	public void setDateOfJoining(Date dateOfJoining) {
+		this.dateOfJoining = dateOfJoining;
 	}
 
-	public String getEmp_Height() {
-		return Emp_Height;
+	public Date getLeavingDate() {
+		return leavingDate;
 	}
 
-	public void setEmp_Height(String emp_Height) {
-		Emp_Height = emp_Height;
+	public void setLeavingDate(Date leavingDate) {
+		this.leavingDate = leavingDate;
 	}
 
-	public String getIdentity_Mark() {
-		return Identity_Mark;
+	
+
+	public String getEmpGender() {
+		return empGender;
 	}
 
-	public void setIdentity_Mark(String identity_Mark) {
-		Identity_Mark = identity_Mark;
+	public void setEmpGender(String empGender) {
+		this.empGender = empGender;
 	}
 
-	public String getBlood_Group() {
-		return Blood_Group;
+	public String getEmpHeight() {
+		return empHeight;
 	}
 
-	public void setBlood_Group(String blood_Group) {
-		Blood_Group = blood_Group;
+	public void setEmpHeight(String empHeight) {
+		this.empHeight = empHeight;
 	}
 
-	public String getMarital_Status() {
-		return Marital_Status;
+	public String getIdentityMark() {
+		return identityMark;
 	}
 
-	public void setMarital_Status(String marital_Status) {
-		Marital_Status = marital_Status;
+	public void setIdentityMark(String identityMark) {
+		this.identityMark = identityMark;
 	}
 
-	public String getPre_Disease() {
-		return Pre_Disease;
+	public String getBloodGroup() {
+		return bloodGroup;
 	}
 
-	public void setPre_Disease(String pre_Disease) {
-		Pre_Disease = pre_Disease;
+	public void setBloodGroup(String bloodGroup) {
+		this.bloodGroup = bloodGroup;
 	}
 
-	public Date getWedding_Date() {
-		return Wedding_Date;
+	public String getMaritalStatus() {
+		return maritalStatus;
 	}
 
-	public void setWedding_Date(Date wedding_Date) {
-		Wedding_Date = wedding_Date;
+	public void setMaritalStatus(String maritalStatus) {
+		this.maritalStatus = maritalStatus;
 	}
 
-	public String getNo_Of_Child() {
-		return No_Of_Child;
+	public String getPreDisease() {
+		return preDisease;
 	}
 
-	public void setNo_Of_Child(String no_Of_Child) {
-		No_Of_Child = no_Of_Child;
+	public void setPreDisease(String preDisease) {
+		this.preDisease = preDisease;
 	}
 
-	public String getEmp_Caste() {
-		return Emp_Caste;
+	public Date getWeddingDate() {
+		return weddingDate;
 	}
 
-	public void setEmp_Caste(String emp_Caste) {
-		Emp_Caste = emp_Caste;
+	public void setWeddingDate(Date weddingDate) {
+		this.weddingDate = weddingDate;
 	}
 
-	public String getEmp_Religion() {
-		return Emp_Religion;
+	public String getNoOfChild() {
+		return noOfChild;
 	}
 
-	public void setEmp_Religion(String emp_Religion) {
-		Emp_Religion = emp_Religion;
+	public void setNoOfChild(String noOfChild) {
+		this.noOfChild = noOfChild;
 	}
 
-	public String getEmp_Nationality() {
-		return Emp_Nationality;
+	public String getEmpCaste() {
+		return empCaste;
 	}
 
-	public void setEmp_Nationality(String emp_Nationality) {
-		Emp_Nationality = emp_Nationality;
+	public void setEmpCaste(String empCaste) {
+		this.empCaste = empCaste;
 	}
 
-	public String getCompany_Code() {
-		return Company_Code;
+	public String getEmpReligion() {
+		return empReligion;
 	}
 
-	public void setCompany_Code(String company_Code) {
-		Company_Code = company_Code;
+	public void setEmpReligion(String empReligion) {
+		this.empReligion = empReligion;
 	}
+
+
 
 	public String getMediclaim() {
 		return mediclaim;
@@ -539,133 +539,121 @@ public class Employee implements Serializable {
 		this.gpa = gpa;
 	}
 
-	public String getEmp_Address1() {
-		return Emp_Address1;
+	
+
+	public String getEmpNationality() {
+		return empNationality;
 	}
 
-	public void setEmp_Address1(String emp_Address1) {
-		Emp_Address1 = emp_Address1;
+	public void setEmpNationality(String empNationality) {
+		this.empNationality = empNationality;
 	}
 
-	public String getEmp_Address2() {
-		return Emp_Address2;
+	public String getCompanyCode() {
+		return companyCode;
 	}
 
-	public void setEmp_Address2(String emp_Address2) {
-		Emp_Address2 = emp_Address2;
+	public void setCompanyCode(String companyCode) {
+		this.companyCode = companyCode;
 	}
 
-	public String getEmp_City() {
-		return Emp_City;
+	public String getEmpAddress1() {
+		return empAddress1;
 	}
 
-	public void setEmp_City(String emp_City) {
-		Emp_City = emp_City;
+	public void setEmpAddress1(String empAddress1) {
+		this.empAddress1 = empAddress1;
 	}
 
-	public String getEmp_State() {
-		return Emp_State;
+	public String getEmpAddress2() {
+		return empAddress2;
 	}
 
-	public void setEmp_State(String emp_State) {
-		Emp_State = emp_State;
+	public void setEmpAddress2(String empAddress2) {
+		this.empAddress2 = empAddress2;
 	}
 
-	public String getPin_Code() {
-		return Pin_Code;
+	public String getEmpCity() {
+		return empCity;
 	}
 
-	public void setPin_Code(String pin_Code) {
-		Pin_Code = pin_Code;
+	public void setEmpCity(String empCity) {
+		this.empCity = empCity;
 	}
 
-	public String getEmp_Mobile() {
-		return Emp_Mobile;
+	public String getEmpState() {
+		return empState;
 	}
 
-	public void setEmp_Mobile(String emp_Mobile) {
-		Emp_Mobile = emp_Mobile;
+	public void setEmpState(String empState) {
+		this.empState = empState;
 	}
 
-	public String getEmp_Local_Add1() {
-		return Emp_Local_Add1;
+	public String getPinCode() {
+		return pinCode;
 	}
 
-	public void setEmp_Local_Add1(String emp_Local_Add1) {
-		Emp_Local_Add1 = emp_Local_Add1;
+	public void setPinCode(String pinCode) {
+		this.pinCode = pinCode;
 	}
 
-	public String getEmp_Local_Add2() {
-		return Emp_Local_Add2;
+	public String getEmpMobile() {
+		return empMobile;
 	}
 
-	public void setEmp_Local_Add2(String emp_Local_Add2) {
-		Emp_Local_Add2 = emp_Local_Add2;
+	public void setEmpMobile(String empMobile) {
+		this.empMobile = empMobile;
 	}
 
-	public String getEmp_Local_City() {
-		return Emp_Local_City;
+	public String getEmpLocalAdd1() {
+		return empLocalAdd1;
 	}
 
-	public void setEmp_Local_City(String emp_Local_City) {
-		Emp_Local_City = emp_Local_City;
+	public void setEmpLocalAdd1(String empLocalAdd1) {
+		this.empLocalAdd1 = empLocalAdd1;
 	}
 
-	public String getEmp_Local_State() {
-		return Emp_Local_State;
+	public String getEmpLocalAdd2() {
+		return empLocalAdd2;
 	}
 
-	public void setEmp_Local_State(String emp_Local_State) {
-		Emp_Local_State = emp_Local_State;
+	public void setEmpLocalAdd2(String empLocalAdd2) {
+		this.empLocalAdd2 = empLocalAdd2;
 	}
 
-	public String getEmp_Local_PinCode() {
-		return Emp_Local_PinCode;
+	public String getEmpLocalCity() {
+		return empLocalCity;
 	}
 
-	public void setEmp_Local_PinCode(String emp_Local_PinCode) {
-		Emp_Local_PinCode = emp_Local_PinCode;
+	public void setEmpLocalCity(String empLocalCity) {
+		this.empLocalCity = empLocalCity;
 	}
 
-	public String getEmp_Local_Mobile_No() {
-		return Emp_Local_Mobile_No;
+	public String getEmpLocalState() {
+		return empLocalState;
 	}
 
-	public void setEmp_Local_Mobile_No(String emp_Local_Mobile_No) {
-		Emp_Local_Mobile_No = emp_Local_Mobile_No;
+	public void setEmpLocalState(String empLocalState) {
+		this.empLocalState = empLocalState;
 	}
 
-	public String getComp_Mobile_No() {
-		return Comp_Mobile_No;
+	public String getEmpLocalPinCode() {
+		return empLocalPinCode;
 	}
 
-	public void setComp_Mobile_No(String comp_Mobile_No) {
-		Comp_Mobile_No = comp_Mobile_No;
+	public void setEmpLocalPinCode(String empLocalPinCode) {
+		this.empLocalPinCode = empLocalPinCode;
 	}
 
-	public String getCompany_Email() {
-		return Company_Email;
+	public String getEmpLocalMobileNo() {
+		return empLocalMobileNo;
 	}
 
-	public void setCompany_Email(String company_Email) {
-		Company_Email = company_Email;
+	public void setEmpLocalMobileNo(String empLocalMobileNo) {
+		this.empLocalMobileNo = empLocalMobileNo;
 	}
 
-	public String getProf_Inst() {
-		return Prof_Inst;
-	}
-
-	public void setProf_Inst(String prof_Inst) {
-		Prof_Inst = prof_Inst;
-	}
-
-	public String getLocal_Travel_Pr_km() {
-		return Local_Travel_Pr_km;
-	}
-
-	public void setLocal_Travel_Pr_km(String local_Travel_Pr_km) {
-		Local_Travel_Pr_km = local_Travel_Pr_km;
-	}
+	
 
 	public String getHobbies() {
 		return hobbies;
@@ -683,46 +671,79 @@ public class Employee implements Serializable {
 		this.clubs = clubs;
 	}
 
-	public String getReg_Code() {
-		return Reg_Code;
+	public String getCompMobileNo() {
+		return compMobileNo;
 	}
 
-	public void setReg_Code(String reg_Code) {
-		Reg_Code = reg_Code;
+	public void setCompMobileNo(String compMobileNo) {
+		this.compMobileNo = compMobileNo;
 	}
 
-	public String getEstf_Work() {
-		return Estf_Work;
+	public String getCompanyEmail() {
+		return companyEmail;
 	}
 
-	public void setEstf_Work(String estf_Work) {
-		Estf_Work = estf_Work;
+	public void setCompanyEmail(String companyEmail) {
+		this.companyEmail = companyEmail;
 	}
 
-	public String getE_Emp_Cat() {
-		return E_Emp_Cat;
+	public String getProfInst() {
+		return profInst;
 	}
 
-	public void setE_Emp_Cat(String e_Emp_Cat) {
-		E_Emp_Cat = e_Emp_Cat;
+	public void setProfInst(String profInst) {
+		this.profInst = profInst;
 	}
 
-	public String getE_Category() {
-		return E_Category;
+	public String getLocalTravelPrkm() {
+		return localTravelPrkm;
 	}
 
-	public void setE_Category(String e_Category) {
-		E_Category = e_Category;
+	public void setLocalTravelPrkm(String localTravelPrkm) {
+		this.localTravelPrkm = localTravelPrkm;
 	}
 
-	public String getEmp_Agree() {
-		return Emp_Agree;
+	public String getRegCode() {
+		return regCode;
 	}
 
-	public void setEmp_Agree(String emp_Agree) {
-		Emp_Agree = emp_Agree;
+	public void setRegCode(String regCode) {
+		this.regCode = regCode;
 	}
-	
+
+	public String getEstfWork() {
+		return estfWork;
+	}
+
+	public void setEstfWork(String estfWork) {
+		this.estfWork = estfWork;
+	}
+
+	public String getElectronicEmpCat() {
+		return electronicEmpCat;
+	}
+
+	public void setElectronicEmpCat(String electronicEmpCat) {
+		this.electronicEmpCat = electronicEmpCat;
+	}
+
+	public String getElectronicCategory() {
+		return electronicCategory;
+	}
+
+	public void setElectronicCategory(String electronicCategory) {
+		this.electronicCategory = electronicCategory;
+	}
+
+	public String getEmpAgree() {
+		return empAgree;
+	}
+
+	public void setEmpAgree(String empAgree) {
+		this.empAgree = empAgree;
+	}
+
+
 	
 	
 	

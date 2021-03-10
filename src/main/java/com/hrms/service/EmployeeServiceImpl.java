@@ -15,7 +15,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 	EmployeeDao employeeDao;
 	@Override
 	public void addEmployee(Employee employee) {
-	employee.setEmp_Code(employeeDao.getMAX_Id("EMP"));
+	employee.setEmpCode(employeeDao.getMAX_Id("EMP"));
 	this.employeeDao.saveOrUpdate(employee);
 		
 	}
@@ -35,70 +35,70 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 	@Override
 	public void updateEmployee(Employee e) {
-	e.setEmp_Name(e.getEmp_Name());
-	e.setEmp_Img(e.getEmp_Img());
+	e.setEmpName(e.getEmpName());
+	e.setEmpImg(e.getEmpImg());
 	e.seteActive(e.geteActive());
-	e.setComp_Code(e.getComp_Code());
-	e.setDate_Of_Birth(e.getDate_Of_Birth());
-	e.setBirth_State(e.getBirth_State());
-	e.setEmp_Ref_No(e.getEmp_Ref_No());
-	e.setEmp_Type(e.getEmp_Type());
-	e.setLocation_Type(e.getLocation_Type());
-	e.setWeekly_Working_Day(e.getWeekly_Working_Day());
-	e.setBirth_Place(e.getBirth_Place());
+	e.setCompCode(e.getCompCode());
+	e.setDateOfBirth(e.getDateOfBirth());
+	e.setBirthState(e.getBirthState());
+	e.setEmpRefNo(e.getEmpRefNo());
+	e.setEmpType(e.getEmpType());
+	e.setLocationType(e.getLocationType());
+	e.setWeeklyWorkingDay(e.getWeeklyWorkingDay());
+	e.setBirthPlace(e.getBirthPlace());
 	e.setDomicile(e.getDomicile());
 	//Second Step Start...................................................
-	e.setCard_No(e.getCard_No());
-	e.setEmp_Designation(e.getEmp_Designation());
-	e.setShift_Code(e.getShift_Code());
-	e.setPassport_No(e.getPassport_No());
-	e.setLoi_Date(e.getLoi_Date());
-	e.setStatus_Date(e.getStatus_Date());
+	e.setCardNo(e.getCardNo());
+	e.setEmpDesignation(e.getEmpDesignation());
+	e.setShiftCode(e.getShiftCode());
+	e.setPassportNo(e.getPassportNo());
+	e.setLoiDate(e.getLoiDate());
+	e.setStatusDate(e.getStatusDate());
 	e.setReason(e.getReason());
-	e.setDepartment_Code(e.getDepartment_Code());
-	e.setManager_Code(e.getManager_Code());
-	e.setIt_Pan_No(e.getIt_Pan_No());
-	e.setUan_No(e.getUan_No());
-	e.setDate_Of_Joining(e.getDate_Of_Joining());
-	e.setLeaving_Date(e.getLeaving_Date());
+	e.setDepartmentCode(e.getDepartmentCode());
+	e.setManagerCode(e.getManagerCode());
+	e.setItPanNo(e.getItPanNo());
+	e.setUanNo(e.getUanNo());
+	e.setDateOfJoining(e.getDateOfJoining());
+	e.setLeavingDate(e.getLeavingDate());
 	//three  Step Start...................................................
-	e.setEmp_Gender(e.getEmp_Gender());
-	e.setEmp_Height(e.getEmp_Height());
-	e.setIdentity_Mark(e.getIdentity_Mark());
-	e.setBlood_Group(e.getBlood_Group());
-	e.setMarital_Status(e.getMarital_Status());
-	e.setPre_Disease(e.getPre_Disease());
-	e.setWedding_Date(e.getWedding_Date());
-	e.setNo_Of_Child(e.getNo_Of_Child());
-	e.setEmp_Caste(e.getEmp_Caste());
-	e.setEmp_Religion(e.getEmp_Religion());
-	e.setEmp_Nationality(e.getEmp_Nationality());
-	e.setCompany_Code(e.getCompany_Code());
+	e.setEmpGender(e.getEmpGender());
+	e.setEmpHeight(e.getEmpHeight());
+	e.setIdentityMark(e.getIdentityMark());
+	e.setBloodGroup(e.getBloodGroup());
+	e.setMaritalStatus(e.getMaritalStatus());
+	e.setPreDisease(e.getPreDisease());
+	e.setWeddingDate(e.getWeddingDate());
+	e.setNoOfChild(e.getNoOfChild());
+	e.setEmpCaste(e.getEmpCaste());
+	e.setEmpReligion(e.getEmpReligion());
+	e.setEmpNationality(e.getEmpNationality());
+	e.setCompanyCode(e.getCompanyCode());
 	e.setMediclaim(e.getMediclaim());
 	e.setGpa(e.getGpa());
-	e.setEmp_Address1(e.getEmp_Address1());
-	e.setEmp_Address2(e.getEmp_Address2());
-	e.setEmp_City(e.getEmp_City());
-	e.setEmp_State(e.getEmp_State());
-	e.setPin_Code(e.getPin_Code());
-	e.setEmp_Mobile(e.getEmp_Mobile());
-	e.setEmp_Local_Add1(e.getEmp_Local_Add1());
-	e.setEmp_Local_Add2(e.getEmp_Local_Add2());
-	e.setEmp_Local_City(e.getEmp_Local_City());
-	e.setEmp_Local_State(e.getEmp_Local_State());
-	e.setEmp_Local_PinCode(e.getEmp_Local_PinCode());
-	e.setEmp_Local_Mobile_No(e.getEmp_Local_Mobile_No());
+	e.setEmpAddress1(e.getEmpAddress1());
+	e.setEmpAddress2(e.getEmpAddress2());
+	e.setEmpCity(e.getEmpCity());
+	e.setEmpState(e.getEmpState());
+	e.setPinCode(e.getPinCode());
+	e.setEmpMobile(e.getEmpMobile());
+	e.setEmpLocalAdd1(e.getEmpLocalAdd1());
+	e.setEmpLocalAdd2(e.getEmpLocalAdd2());
+	e.setEmpLocalCity(e.getEmpLocalCity());
+	e.setEmpLocalState(e.getEmpLocalState());
+	e.setEmpLocalPinCode(e.getEmpLocalPinCode());
+	e.setEmpLocalMobileNo(e.getEmpLocalMobileNo());
 	//four  Step Start...................................................
-	e.setComp_Mobile_No(e.getComp_Mobile_No());
-	e.setCompany_Email(e.getCompany_Email());
-	e.setProf_Inst(e.getProf_Inst());
-	e.setLocal_Travel_Pr_km(e.getLocal_Travel_Pr_km());
+	e.setCompMobileNo(e.getCompMobileNo());
+	e.setCompanyEmail(e.getCompanyEmail());
+	e.setProfInst(e.getProfInst());
+	e.setLocalTravelPrkm(e.getLocalTravelPrkm());
 	e.setHobbies(e.getHobbies());
 	e.setClubs(e.getClubs());
-	e.setReg_Code(e.getReg_Code());
-	e.setEstf_Work(e.getEstf_Work());
-	e.setE_Emp_Cat(e.getE_Emp_Cat());
-	e.setE_Category(e.getE_Category());
+	e.setRegCode(e.getRegCode());
+	e.setEstfWork(e.getEstfWork());
+	e.setElectronicEmpCat(e.getElectronicEmpCat());
+	e.setElectronicCategory(e.getElectronicCategory());
 	
 	this.employeeDao.saveOrUpdate(e);
 		
