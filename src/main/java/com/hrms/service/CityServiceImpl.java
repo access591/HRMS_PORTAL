@@ -52,7 +52,7 @@ public class CityServiceImpl implements CityService {
 		Sort sort = sortDirection.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortField).ascending() :
 			Sort.by(sortField).descending();
 		Pageable pageable = PageRequest.of(pageNo - 1, pageSize, sort);
-		return  null;//this.cityDao.findAll(pageable);
+		return this.cityDao.findAll(pageable);
 	}
 
 }
