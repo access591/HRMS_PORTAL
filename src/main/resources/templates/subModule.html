@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"lang="en">
 
 <script type="text/javascript" th:src="@{/js/settings.js}"></script>
 <script type="text/javascript" th:src="@{/js/app.js}"></script>
@@ -28,7 +28,7 @@ body {
 </head>
 <body>
 <div class="wrapper">
-<nav id="sidebar" class="sidebar">
+<nav id="sidebar" class="sidebar"aria-label="Site sidebar">
  <div th:replace="/fragments/sidebar :: div"></div>
  </nav>
 		<div class="main">
@@ -122,15 +122,15 @@ body {
 
 								</div>
 								<div class="card-body">
-								<table id="datatables-buttons" class="table table-striped display" style="width:100%">
+								<table id="datatables-buttons" class="table table-striped display" aria-describedby="datatables-buttons"style="width:100%">
 										<thead>
 											<tr>
-												<th>Sub Module</th>
-												<th>Sub Module Name </th>
-												<th>Module</th>
-												<th>seqNo</th>
-												<th>Is Active</th>
-												<th>Action</th>
+												<th scope="col">Sub Module</th>
+												<th scope="col">Sub Module Name </th>
+												<th scope="col">Module</th>
+												<th scope="col">seqNo</th>
+												<th scope="col">Is Active</th>
+												<th scope="col" >Action</th>
 											
 												
 											</tr>
@@ -143,8 +143,8 @@ body {
 												<td th:text="${listsubModule.seqNoSubModule}"></td>
 												<td th:text="${listsubModule.acitveSubModule}"></td>
 						                     	<td>
-						                     	<a th:href="@{/editSubModule/{id}(id=${listsubModule.subModuleCode})}" class="btn btn-primary"><i class="fa fa-edit"></i></a>
-												<a th:href="@{/deleteSubModule/{id}(id=${listsubModule.subModuleCode})}" class="btn btn-primary"onclick="return confirm('Are you sure?')"><i class="fa fa-times"></i></a>
+						                     	<a th:href="@{/editSubModule/{id}(id=${listsubModule.subModuleCode})}"><em class="fa fa-edit"></em></a>
+												<a th:href="@{/deleteSubModule/{id}(id=${listsubModule.subModuleCode})}"onclick="return confirm('Are you sure?')"><em class="fa fa-times"></em></a>
 												</td>
 											</tr>
 										</tbody>
