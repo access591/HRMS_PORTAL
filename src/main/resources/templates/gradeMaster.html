@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"lang="en">
 
 <script type="text/javascript" th:src="@{/js/settings.js}"></script>
 <script type="text/javascript" th:src="@{/js/app.js}"></script>
@@ -28,7 +28,7 @@ body {
 </head>
 <body>
 <div class="wrapper">
-<nav id="sidebar" class="sidebar">
+<nav id="sidebar" class="sidebar"aria-label="Site sidebar">
  <div th:replace="/fragments/sidebar :: div"></div>
  </nav>
 		<div class="main">
@@ -96,13 +96,13 @@ body {
 								<div class="card-header">
 								</div>
 								<div class="card-body">
-								<table id="datatables-buttons" class="table table-striped display" style="width:100%">
+								<table id="datatables-buttons" class="table table-striped display"aria-describedby="datatables-buttons" style="width:100%">
 										<thead>
 											<tr>
-												<th>Grade code</th>
-												<th>Grade Name </th>
-												<th>Status</th>
-												<th>Action</th>
+												<th scope="col">Grade code</th>
+												<th scope="col">Grade Name </th>
+												<th scope="col">Status</th>
+												<th scope="col">Action</th>
 												
 											</tr>
 										</thead>
@@ -111,8 +111,8 @@ body {
 												<td th:text="${listofgrade.gradeCode}"></td>
 												<td th:text="${listofgrade.gardeName}"></td>
 												<td th:text="${listofgrade.active}"></td>
-												<td><a th:href="@{/editGrade/{id}(id=${listofgrade.gradeCode})}"><i class="fa fa-edit"></i></a>
-												<a th:href="@{/deleteGarde/{id}(id=${listofgrade.gradeCode})}" onclick="return confirm('Are you sure?')"><i class="fa fa-times"></i></a>
+												<td><a th:href="@{/editGrade/{id}(id=${listofgrade.gradeCode})}"><em class="fa fa-edit"></em></a>
+												<a th:href="@{/deleteGarde/{id}(id=${listofgrade.gradeCode})}" onclick="return confirm('Are you sure?')"><em class="fa fa-times"></em></a>
 												</td>
 											</tr>
 										</tbody>

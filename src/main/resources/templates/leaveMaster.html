@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"lang="en">
 
 <script type="text/javascript" th:src="@{/js/settings.js}"></script>
 <script type="text/javascript" th:src="@{/js/app.js}"></script>
@@ -28,7 +28,7 @@ body {
 </head>
 <body>
 <div class="wrapper">
-<nav id="sidebar" class="sidebar">
+<nav id="sidebar" class="sidebar"aria-label="Site sidebar">
  <div th:replace="fragments/sidebar :: div"></div>
  </nav>
 		<div class="main">
@@ -128,14 +128,14 @@ body {
 									<h6 class="card-subtitle text-muted">DataTables.</h6>
 								</div>
 								<div class="card-body">
-									<table id="datatables-buttons" class="table table-striped display" style="width:100%">
+									<table id="datatables-buttons"aria-describedby="datatables-buttons" class="table table-striped display" style="width:100%">
 										<thead>
 											<tr>
-												<th>Leave code</th>
-												<th>Total Leave </th>
-												<th>Leave Type </th>
-												<th>Status</th>
-												<th>Action</th>
+												<th scope="col">Leave code</th>
+												<th scope="col">Total Leave </th>
+												<th scope="col">Leave Type </th>
+												<th scope="col">Status</th>
+												<th scope="col">Action</th>
 											</tr>
 										</thead>
 										<tbody>
@@ -144,8 +144,8 @@ body {
 												<td th:text="${listleave.totalLev}"></td>
 												<td th:text="${listleave.levType}"></td>
 												<td th:text="${listleave.active}"></td>
-												<td><a th:href="@{/editLeave/{id}(id=${listleave.levCode})}"><i class="fa fa-edit"></i></a>
-												<a th:href="@{/deleteLeave/{id}(id=${listleave.levCode})}"onclick="return confirm('Are you sure?')"><i class="fa fa-times"></i></a>
+												<td><a th:href="@{/editLeave/{id}(id=${listleave.levCode})}"><em class="fa fa-edit"></em></a>
+												<a th:href="@{/deleteLeave/{id}(id=${listleave.levCode})}"onclick="return confirm('Are you sure?')"><em class="fa fa-times"></em></a>
 												</td>
 											</tr>
 										</tbody>
