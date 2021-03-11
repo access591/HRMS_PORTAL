@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"lang="en">
 
 <script type="text/javascript" th:src="@{/js/settings.js}"></script>
 <script type="text/javascript" th:src="@{/js/app.js}"></script>
@@ -28,7 +28,7 @@ body {
 </head>
 <body>
 <div class="wrapper">
-<nav id="sidebar" class="sidebar">
+<nav id="sidebar" class="sidebar"aria-label="Site sidebar">
  <div th:replace="/fragments/sidebar :: div"></div>
  </nav>
 		<div class="main">
@@ -122,15 +122,15 @@ body {
 								<div class="card-header">
 								</div>
 								<div class="card-body">
-								<table id="datatables-buttons" class="table table-striped display" style="width:100%">
+								<table id="datatables-buttons" class="table table-striped display" style="width:100%"aria-describedby="datatables-buttons">
 										<thead>
 											<tr>
-												<th>User Code </th>
-												<th>Module Code </th>
-											     <th>Sub Module Code</th>
-												<th>Program Code</th>
-												<th>Status</th>
-												<th> Action </th>
+												<th scope="col">User Code </th>
+												<th scope="col">Module Code </th>
+											     <th scope="col">Sub Module Code</th>
+												<th scope="col">Program Code</th>
+												<th scope="col">Status</th>
+												<th scope="col"> Action </th>
 											
 												
 												
@@ -144,8 +144,8 @@ body {
 												<td th:text="${listUserR.prgCode}"></td>
 												
 												<td th:text="${listUserR.active}"></td>
-												<td><a th:href="@{/editUserRights/{id}(id=${listUserR.id})}"><i class="fa fa-edit"></i></a>
-												<a th:href="@{/deleteUserRights/{id}(id=${listUserR.id})}"onclick="return confirm('Are you sure?')"><i class="fa fa-times"></i></a>
+												<td><a th:href="@{/editUserRights/{id}(id=${listUserR.id})}"><em class="fa fa-edit"></em></a>
+												<a th:href="@{/deleteUserRights/{id}(id=${listUserR.id})}"onclick="return confirm('Are you sure?')"><em class="fa fa-times"></em></a>
 												</td>
 											</tr>
 										</tbody>
