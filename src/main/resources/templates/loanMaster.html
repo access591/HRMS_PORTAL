@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"lang="en">
 
 <script type="text/javascript" th:src="@{/js/settings.js}"></script>
 <script type="text/javascript" th:src="@{/js/app.js}"></script>
@@ -28,7 +28,7 @@ body {
 </head>
 <body>
 <div class="wrapper">
-<nav id="sidebar" class="sidebar">
+<nav id="sidebar" class="sidebar"aria-label="Site sidebar">
  <div th:replace="/fragments/sidebar :: div"></div>
  </nav>
 		<div class="main">
@@ -95,13 +95,13 @@ body {
 									<h6 class="card-subtitle text-muted">DataTables.</h6>
 								</div>
 								<div class="card-body">
-								<table id="datatables-buttons" class="table table-striped display" style="width:100%">
+								<table id="datatables-buttons"aria-describedby="datatables-buttons" class="table table-striped display" style="width:100%">
 										<thead>
 											<tr>
-												<th>Loan code</th>
-												<th>Loan Name </th>
-												<th>Status</th>
-												<th>Action</th>
+												<th scope="col">Loan code</th>
+												<th scope="col">Loan Name </th>
+												<th scope="col">Status</th>
+												<th scope="col">Action</th>
 												
 											</tr>
 										</thead>
@@ -110,8 +110,8 @@ body {
 												<td th:text="${listofloan.loanCode}"></td>
 												<td th:text="${listofloan.loanName}"></td>
 												<td th:text="${listofloan.active}"></td>
-												<td><a th:href="@{/editLoan/{id}(id=${listofloan.loanCode})}"><i class="fa fa-edit"></i></a>
-												<a th:href="@{/deleteLoan/{id}(id=${listofloan.loanCode})}" onclick="return confirm('Are you sure?')"><i class="fa fa-times"></i></a>
+												<td><a th:href="@{/editLoan/{id}(id=${listofloan.loanCode})}"><em class="fa fa-edit"></em></a>
+												<a th:href="@{/deleteLoan/{id}(id=${listofloan.loanCode})}" onclick="return confirm('Are you sure?')"><em class="fa fa-times"></em></a>
 												</td>
 											</tr>
 										</tbody>
