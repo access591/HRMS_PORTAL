@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"lang="en">
 <script src="js/settings.js"></script>
 <script src="js/app.js"></script>
 <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/themes/base/jquery-ui.css" rel="stylesheet" />
@@ -29,7 +29,7 @@ body {
 </head>
 <body>
 <div class="wrapper">
-<nav id="sidebar" class="sidebar">
+<nav id="sidebar" class="sidebar"aria-label="Site sidebar">
  <div th:replace="fragments/sidebar :: div"></div>
  </nav>
 		<div class="main">
@@ -119,15 +119,15 @@ body {
 									<h6 class="card-subtitle text-muted">DataTables.</h6>
 								</div>
 								<div class="card-body">
-									 <table id="datatables-buttons" class="table table-striped display" style="width:100%">
+									 <table id="datatables-buttons" class="table table-striped display" style="width:100%"aria-describedby="example">
 										<thead>
 											<tr>
-												<th>Holiday code</th>
-												<th>Description </th>
-												<th>Date Of Holiday</th>
-												<th>Holiday Type</th>
-												<th>Status</th>
-												<th>Action</th>
+												<th scope="col">Holiday code</th>
+												<th scope="col">Description </th>
+												<th scope="col">Date Of Holiday</th>
+												<th scope="col">Holiday Type</th>
+												<th scope="col">Status</th>
+												<th scope="col">Action</th>
 											</tr>
 										</thead>
 										<tbody>
@@ -137,8 +137,8 @@ body {
 												<td th:text="${listholiday.dateOfHoliday}"></td>
 												<td th:text="${listholiday.holidayType}"></td>
 												<td th:text="${listholiday.active}"></td>
-												<td><a th:href="@{/editHoliday/{id}(id=${listholiday.holidayCode})}" class="btn btn-primary"><i class="fa fa-edit"></i></a>
-												<a th:href="@{/deleteHoliday/{id}(id=${listholiday.holidayCode})}" class="btn btn-primary"onclick="return confirm('Are you sure?')"><i class="fa fa-times"></i></a>
+												<td><a th:href="@{/editHoliday/{id}(id=${listholiday.holidayCode})}" class="btn btn-primary"><em class="fa fa-edit"></em></a>
+												<a th:href="@{/deleteHoliday/{id}(id=${listholiday.holidayCode})}" class="btn btn-primary"onclick="return confirm('Are you sure?')"><em class="fa fa-times"></em></a>
 												</td>
 											</tr>
 										</tbody>

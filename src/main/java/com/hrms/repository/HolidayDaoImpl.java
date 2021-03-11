@@ -6,8 +6,6 @@ import com.hrms.dao.AbstractGenericDao;
 import com.hrms.model.Holiday;
 @Repository
 public class HolidayDaoImpl  extends AbstractGenericDao<Holiday>implements HolidayDao {
-private Logger logger = LoggerFactory.getLogger(HolidayDaoImpl.class.getName());
-
 
 
 }
