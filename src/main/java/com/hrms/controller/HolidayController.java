@@ -39,7 +39,7 @@ public class HolidayController
 	 * @return
 	 */
 	@GetMapping("/HolidayMaster")	
-	public String DepartmentMaster(Model model,HttpSession session) {
+	public String departmentMaster(Model model,HttpSession session) {
 		List<Holiday>listHoliday = holidayService.getAllHolidays();
 		model.addAttribute("listHoliday", listHoliday); 
 		String userCode= (String)session.getAttribute("username");
@@ -59,8 +59,8 @@ public class HolidayController
 	 * @return
 	 */
 	@PostMapping("/saveHolidays")
-	  public String SaveHoliday(@ModelAttribute("holidays") Holiday holiday, Model model,HttpSession session) {
-			if (holiday.getHolidayCode() != "") {
+	  public String saveHoliday(@ModelAttribute("holidays") Holiday holiday, Model model,HttpSession session) {
+			if (holiday.getHolidayCode()==null) {
 				holidayService.addHoliday(holiday); 
 				List<Holiday>listHoliday = holidayService.getAllHolidays();
 				model.addAttribute("listHoliday", listHoliday); 
@@ -82,8 +82,8 @@ public class HolidayController
 	 { 
 		int editPageNo=10;
 		String reqPageedit="/editHoliday";
-	Holiday Holidayedit = holidayService.findHolidayById(id);
-	model.addAttribute("Holidayedit", Holidayedit);
+	Holiday holidayedit = holidayService.findHolidayById(id);
+	model.addAttribute("Holidayedit", holidayedit);
 	session.setAttribute("username",session.getAttribute("username")); 
 	 return pageMappingService.PageRequestMapping(reqPageedit,editPageNo);
 	 }
@@ -95,9 +95,9 @@ public class HolidayController
 	 * @return
 	 */
 	@PostMapping("/updateHoliday")
-	public String updateHoliday(@ModelAttribute("holidayupdate") Holiday h, Model model) {
+	public String updateHoliday(@ModelAttribute("holidayupdate") Holiday holiday, Model model) {
 
-		  this.holidayService.updateHoliday(h);
+		  this.holidayService.updateHoliday(holiday);
 	  	  
 		  return "redirect:"+pageMappingService.PageRequestMapping(reqPage,pageno);
 	
