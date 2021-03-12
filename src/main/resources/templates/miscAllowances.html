@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"lang="en">
 <script src="js/settings.js"></script>
 <script src="js/app.js"></script>
 
@@ -27,7 +27,7 @@ body {
 </head>
 <body>
 <div class="wrapper">
-<nav id="sidebar" class="sidebar">
+<nav id="sidebar" class="sidebar"aria-label="Site sidebar">
  <div th:replace="fragments/sidebar :: div"></div>
  </nav>
 		<div class="main">
@@ -43,8 +43,7 @@ body {
 						<div class="col-12">
 							<div class="card">
 								<div class="card-header">
-									<h5 class="card-title">Misc Allowances & Deduction Master</h5>
-
+									<h5 class="card-title">Misc Allowances  Deduction Master</h5>
 								</div>
 								<div class="card-body">
 									<form id="validation-form" action="#" th:action="@{/saveAllowncesDeduction}" th:object="${miscAllowance}" method="post">
@@ -86,7 +85,7 @@ body {
 														<label class="radio-inline"> <input type="radio"
 															value="Y" name="active" checked> &nbsp;Active
 														</label> <label class="radio-inline"> <input type="radio"
-															value="N" name="active">&nbsp Inactive
+															value="N" name="active">&nbsp; Inactive
 														</label>
 
 													</div>
@@ -105,8 +104,6 @@ body {
 											<label style="color: red">*</label>
 											 <input type="text" class="form-control " id="type" name="type"required aria-required="true" maxlength="20" pattern="^[a-zA-Z\s]*$">
 										</div>
-										
-										
 										
 										<div class="form-group">
 											<label class="form-label">Account Name </label>
@@ -136,14 +133,13 @@ body {
 									<h6 class="card-subtitle text-muted">DataTables.</h6>
 								</div>
 								<div class="card-body">
-									<table id="datatables-buttons" class="table table-striped display" style="width:100%">
+									<table id="datatables-buttons"aria-describedby="datatables-buttons" class="table table-striped display" style="width:100%">
 										<thead>
 											<tr>
-												<th>Allowance code</th>
-												<th>Description </th>
-												<th>Status</th>
-												
-												<th>Action</th>
+												<th scope="col">Allowance code</th>
+												<th scope="col">Description </th>
+												<th scope="col">Status</th>
+												<th scope="col">Action</th>
 											</tr>
 										</thead>
 										<tbody>
@@ -153,8 +149,8 @@ body {
 
 												<td th:text="${listMiscAllowance.active}"></td>
 												
-												<td> <a th:href="@{/editAllowanceDeduction/{id}(id=${listMiscAllowance.allowanceCode})}"><i class="fa fa-edit"></i></a>
-												<a th:href="@{/deleteAllowanceDeduction/{id}(id=${listMiscAllowance.allowanceCode})}" onclick="return confirm('Are you sure?')"><i class="fa fa-times"></i></a>
+												<td> <a th:href="@{/editAllowanceDeduction/{id}(id=${listMiscAllowance.allowanceCode})}"><em class="fa fa-edit"></em></a>
+												<a th:href="@{/deleteAllowanceDeduction/{id}(id=${listMiscAllowance.allowanceCode})}" onclick="return confirm('Are you sure?')"><em class="fa fa-times"></em></a>
 												</td>
 											</tr>
 										</tbody>

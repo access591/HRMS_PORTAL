@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"lang="en">
 
 <script type="text/javascript" th:src="@{/js/settings.js}"></script>
 <script type="text/javascript" th:src="@{/js/app.js}"></script>
@@ -28,7 +28,7 @@ body {
 </head>
 <body>
 <div class="wrapper">
-<nav id="sidebar" class="sidebar">
+<nav id="sidebar" class="sidebar"aria-label="Site sidebar">
  <div th:replace="/fragments/sidebar :: div"></div>
  </nav>
 		<div class="main">
@@ -108,14 +108,14 @@ body {
 
 								</div>
 								<div class="card-body">
-								<table id="datatables-buttons" class="table table-striped display" style="width:100%">
+								<table id="datatables-buttons"aria-describedby="datatables-buttons" class="table table-striped display" style="width:100%">
 										<thead>
 											<tr>
-											<th>Module Code</th>
-											<th>Module Name</th>
-											<th>Seq No.</th>
-											<th>Status</th>
-											<th>Operation</th>
+											<th scope="col">Module Code</th>
+											<th scope="col">Module Name</th>
+											<th scope="col">Seq No.</th>
+											<th scope="col">Status</th>
+											<th scope="col">Operation</th>
 										</tr>
 										</thead>
 										<tbody>
@@ -124,8 +124,8 @@ body {
 											<td id="module_name" th:text="${module.moduleName}"></td>
 											<td id="seq_no" th:text="${module.seqNo}"></td>
 											<td id="module_status" th:text="${module.active}"></td>
-											<td><a th:href="@{/editModule/{id}(id=${module.moduleCode})}" class="btn btn-primary"><i class="fa fa-edit"></i></a>
-												<a th:href="@{/deleteModule/{id}(id=${module.moduleCode})}" class="btn btn-primary"onclick="return confirm('Are you sure?')"><i class="fa fa-times"></i></a>
+											<td><a th:href="@{/editModule/{id}(id=${module.moduleCode})}" class="btn btn-primary"><em class="fa fa-edit"></em></a>
+												<a th:href="@{/deleteModule/{id}(id=${module.moduleCode})}" class="btn btn-primary"onclick="return confirm('Are you sure?')"><em class="fa fa-times"></em></a>
 												</td>
 											
 										</tr>
