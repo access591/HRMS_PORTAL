@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"lang="en">
 
 <script type="text/javascript" th:src="@{/js/settings.js}"></script>
 <script type="text/javascript" th:src="@{/js/app.js}"></script>
@@ -28,7 +28,7 @@ body {
 </head>
 <body>
 <div class="wrapper">
-<nav id="sidebar" class="sidebar">
+<nav id="sidebar" class="sidebar"aria-label="Site sidebar">
  <div th:replace="/fragments/sidebar :: div"></div>
  </nav>
 		<div class="main">
@@ -101,14 +101,14 @@ body {
 								<div class="card-header">
 								</div>
 								<div class="card-body">
-								<table id="datatables-buttons" class="table table-striped display" style="width:100%">
+								<table id="datatables-buttons"aria-describedby="datatables-buttons" class="table table-striped display" style="width:100%">
 										<thead>
 											<tr>
-												<th>URL ID</th>
-												<th>PAGE NAME </th>
-												<th>REQ MAPPING </th>
-												<th>STATUS</th>
-												<th>ACTION</th>
+												<th scope="col">URL ID</th>
+												<th scope="col">PAGE NAME </th>
+												<th scope="col">REQ MAPPING </th>
+												<th scope="col">STATUS</th>
+												<th scope="col">ACTION</th>
 												
 											</tr>
 										</thead>
@@ -118,8 +118,8 @@ body {
 												<td th:text="${listUrlDetail.pageName}"></td>
 												<td th:text="${listUrlDetail.reqMapping}"></td>
 												<td th:text="${listUrlDetail.active}"></td>
-												<td><a th:href="@{/editPage/{id}(id=${listUrlDetail.urlId})}"><i class="fa fa-edit"></i></a>
-												<a th:href="@{/deletePage/{id}(id=${listUrlDetail.urlId})}"onclick="return confirm('Are you sure?')"><i class="fa fa-times"></i></a>
+												<td><a th:href="@{/editPage/{id}(id=${listUrlDetail.urlId})}"><em class="fa fa-edit"></em></a>
+												<a th:href="@{/deletePage/{id}(id=${listUrlDetail.urlId})}"onclick="return confirm('Are you sure?')"><em class="fa fa-times"></em></a>
 												</td>
 											</tr>
 										</tbody> 
