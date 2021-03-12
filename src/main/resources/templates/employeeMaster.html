@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"lang="en">
 
 <script type="text/javascript" th:src="@{/js/settings.js}"></script>
 <script type="text/javascript" th:src="@{/js/app.js}"></script>
@@ -50,9 +50,9 @@ body {
 <meta charset="utf-8" />
 <title>HRMS</title>
 </head>
-<!-- <div id="loading">
+ <div id="loading">
 <img id="loading-image" src="img/spinner.gif" alt="Loading..." />
-</div> -->
+</div> 
 <body>
 <div class="splash active" id="loading">
 	<img id="loading-image" src="img/spinner.gif" alt="Loading..." />
@@ -148,7 +148,7 @@ body {
 													</label>
 													
 													 <input type="file" id="file" name="file" accept="image/png, image/jpeg"  onchange="preview_image(event)"/>
-											     <img id="output_image"width="100px" height="100px"style="border-radius:50%"/>
+											     <img id="output_image"width="100px" height="100px"style="border-radius:50%"alt="image">
 												</div>
 												
 												
@@ -591,7 +591,7 @@ body {
 										</div>
 										
 										<button type="submit" class="btn btn-primary">Save</button>
-									<!-- 	<button class="btn btn-submit btn-primary" type="button">Finish</button> -->
+							
                      
                      </div>
                      
@@ -606,14 +606,14 @@ body {
 								<div class="card-header">
 								</div>
 								<div class="card-body">
-								<table id="datatables-buttons" class="table table-striped display" style="width:100%">
+								<table id="datatables-buttons"aria-describedby="datatables-buttons" class="table table-striped display" style="width:100%">
 										<thead>
 											<tr>
-												<th>Emp id</th>
-												<th>Emp Name </th>
-												<th>Date Of Joining</th>
-												<th>employee images</th>
-												<th>Action</th>
+												<th scope="col">Emp id</th>
+												<th scope="col">Emp Name </th>
+												<th scope="col">Date Of Joining</th>
+												<th scope="col">employee images</th>
+												<th scope="col">Action</th>
 												
 											</tr>
 										</thead>
@@ -623,8 +623,8 @@ body {
 												<td th:text="${listemployee.empName}"></td>
 												<td th:text="${listemployee.dateOfJoining}"></td>
 												<td><img th:src="@{'/img/'+${listemployee.empImg}}" alt="Avatar" width="48" height="48"class="rounded-circle mr-2" /> </td>
-												<td><a th:href="@{/editEmployee/{id}(id=${listemployee.empCode})}"><i class="fa fa-edit"></i></a>
-												<a th:href="@{/deleteEmployee/{id}/{empImg}(id=${listemployee.empCode},empImg=${listemployee.empImg})}" onclick="return confirm('Are you sure?')"><i class="fa fa-times"></i></a>
+												<td><a th:href="@{/editEmployee/{id}(id=${listemployee.empCode})}"><em class="fa fa-edit"></em></a>
+												<a th:href="@{/deleteEmployee/{id}/{empImg}(id=${listemployee.empCode},empImg=${listemployee.empImg})}" onclick="return confirm('Are you sure?')"><em class="fa fa-times"></em></a>
 												
 												</td>
 											</tr>
