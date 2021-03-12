@@ -112,8 +112,8 @@ body {
 												<td th:text="${listOfCity.cityCode}"></td>
 												<td th:text="${listOfCity.cityName}"></td>
 												<td th:text="${listOfCity.active}"></td>
-												<td><a th:href="@{/editCity/{id}(id=${listOfCity.cityCode})}" class="btn btn-primary"><i class="fa fa-edit"></i></a>
-												<a th:href="@{/deleteCity/{id}(id=${listOfCity.cityCode})}" class="btn btn-primary"onclick="return confirm('Are you sure?')"><i class="fa fa-times"></i></a>
+												<td><a th:href="@{/editCity/{id}(id=${listOfCity.cityCode})}" class="btn btn-primary"><em class="fa fa-edit"></em></a>
+												<a th:href="@{/deleteCity/{id}(id=${listOfCity.cityCode})}" class="btn btn-primary"onclick="return confirm('Are you sure?')"><em class="fa fa-times"></em></a>
 												</td>
 											</tr>
 										</tbody>
