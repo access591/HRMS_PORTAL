@@ -14,7 +14,7 @@ public class ShiftServiceImpl implements ShiftService {
 ShiftDao ShiftDao;
 	@Override
 	public void addShift(Shift shift) {
-		shift.setShiftCode(ShiftDao.getMAX_Id("SFC"));
+		shift.setShiftCode(ShiftDao.getMaxId("SFC"));
 		this.ShiftDao.saveOrUpdate(shift);
 		
 	}

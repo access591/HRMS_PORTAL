@@ -14,7 +14,7 @@ public class TravelServiceImpl implements TravelService {
 TravelDao  travelDao;
 	@Override
 	public void addTravel(Travel travel) {
-		travel.setTravelCode(travelDao.getMAX_Id("TVL"));
+		travel.setTravelCode(travelDao.getMaxId("TVL"));
 		this.travelDao.saveOrUpdate(travel);
 		
 	}

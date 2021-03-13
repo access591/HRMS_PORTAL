@@ -23,7 +23,7 @@ public class ProgramServiceImpl implements ProgramService {
 
 	@Override
 	public void addProgram(Program program) {
-		program.setProgramCode(programDao.getMAX_Id("PRG"));
+		program.setProgramCode(programDao.getMaxId("PRG"));
 		programDao.saveOrUpdate(program);
 	}
 

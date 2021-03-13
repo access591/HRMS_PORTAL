@@ -16,7 +16,7 @@ public class RegisterServiceImpl implements RegisterService {
 	@Override
 	public void addRegister(Register res) {
 		res.setInsDate(new Date());
-		res.setRegCode(registerDao.getMAX_Id("REG"));
+		res.setRegCode(registerDao.getMaxId("REG"));
 		this.registerDao.saveOrUpdate(res);
 
 	}

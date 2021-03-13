@@ -13,7 +13,7 @@ public class CountryServiceImpl implements CountryService {
 	CountryDao countryDao;
 	@Override
 	public void addCountry(Country country) {
-		country.setCountryCode(countryDao.getMAX_Id("CTR"));
+		country.setCountryCode(countryDao.getMaxId("CTR"));
 		this.countryDao.saveOrUpdate(country);
 	}
 

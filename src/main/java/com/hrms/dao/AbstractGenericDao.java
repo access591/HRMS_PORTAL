@@ -60,7 +60,7 @@ public class AbstractGenericDao<E> implements GenericDao<E> {
 
 	@Override
 	public E existOrNot(E obj) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
@@ -79,7 +79,7 @@ public class AbstractGenericDao<E> implements GenericDao<E> {
 	}
 
 	@Override
-	public String getMAX_Id(String incId) {
+	public String getMaxId(String incId) {
 		
 		String sql="select FN_PRGM_CODE('"+incId+"') incId";
 		return jdbcTemplate.query(sql, new ResultSetExtractor<String>() {

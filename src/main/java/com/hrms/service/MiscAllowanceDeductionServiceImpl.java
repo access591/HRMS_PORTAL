@@ -18,7 +18,7 @@ public class MiscAllowanceDeductionServiceImpl implements MiscAllowanceDeduction
 	@Override
 	public void addMiscAllowanceDeduction(MiscAllowance miscAllowance) {
 		miscAllowance.setInsDate(new Date());
-		miscAllowance.setAllowanceCode(miscAllowanceDeductionDao.getMAX_Id("MAD"));
+		miscAllowance.setAllowanceCode(miscAllowanceDeductionDao.getMaxId("MAD"));
 		this.miscAllowanceDeductionDao.saveOrUpdate(miscAllowance);
 
 	}

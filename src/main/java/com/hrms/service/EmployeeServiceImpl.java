@@ -15,7 +15,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 	EmployeeDao employeeDao;
 	@Override
 	public void addEmployee(Employee employee) {
-	employee.setEmpCode(employeeDao.getMAX_Id("EMP"));
+	employee.setEmpCode(employeeDao.getMaxId("EMP"));
 	this.employeeDao.saveOrUpdate(employee);
 		
 	}

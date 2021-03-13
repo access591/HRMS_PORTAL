@@ -14,7 +14,7 @@ public class LeaveDetailServiceImpl  implements LeaveDetailService{
 	LeaveDetailDao leaveDetailDao;
 	@Override
 	public void addLeaveDetail(LeaveDetail leaveDetail) {
-		leaveDetail.setLvCode(leaveDetailDao.getMAX_Id("LVC"));
+		leaveDetail.setLvCode(leaveDetailDao.getMaxId("LVC"));
 		this.leaveDetailDao.saveOrUpdate(leaveDetail);
 		
 	}
