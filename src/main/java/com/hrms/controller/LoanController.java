@@ -38,7 +38,7 @@ public class LoanController {
 	 * @return
 	 */
 	@GetMapping("/loanMaster")
-	public String LoanMaster(Model model, HttpSession session) {
+	public String loanMaster(Model model, HttpSession session) {
 
 		List<Loan> listLoan = loanMaterService.getAllLoans();
 		model.addAttribute("listLoan", listLoan);
@@ -60,7 +60,7 @@ public class LoanController {
 	 * @return
 	 */
 	@PostMapping("/saveLoan")
-	public String SaveLoan(@ModelAttribute("loan") Loan loan, Model model, HttpSession session) {
+	public String saveLoan(@ModelAttribute("loan") Loan loan, Model model, HttpSession session) {
 	
 			loanMaterService.addLoan(loan);
 			List<Loan> listLoan = loanMaterService.getAllLoans();
@@ -101,9 +101,9 @@ public class LoanController {
 	 * @return
 	 */
 	@PostMapping("/updateLoan")
-	public String updateLoan(@ModelAttribute("loanupdate") Loan L, Model model) {
+	public String updateLoan(@ModelAttribute("loanupdate") Loan loan, Model model) {
 
-		this.loanMaterService.updateLoan(L);
+		this.loanMaterService.updateLoan(loan);
 
 		return "redirect:"+pageMappingService.PageRequestMapping(reqPage,pageno);
 

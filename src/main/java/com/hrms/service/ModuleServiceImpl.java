@@ -92,7 +92,7 @@ public class ModuleServiceImpl implements ModuleService {
 		String moduleCode = module.getModuleCode();
 		String smCode = subModule.getSubModuleCode();
 		System.out.println("Program module  User Code Test" + ucode);
-		List<Program> programs = moduleDao.GetAllProgramList(moduleCode, smCode, ucode);
+		List<Program> programs = moduleDao.getAllProgramList(moduleCode, smCode, ucode);
 		Map<String, String> programMap = new HashMap<String, String>();
 		for (Program program : programs) {
 			String name = program.getProgramName();

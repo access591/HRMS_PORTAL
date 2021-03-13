@@ -69,14 +69,14 @@ public class ProgramController {
 	@PostMapping("/saveProgram")
 	public String SaveProgram1(@ModelAttribute("program")Program program, Model model,
 			RedirectAttributes redirectAttributes, HttpSession session) {
-		Module m=new Module();
-		SubModule S=new SubModule();
+		Module module=new Module();
+		SubModule subModule=new SubModule();
 		
-		m.setModuleCode(program.getDmoduleCode());
-		S.setSubModuleCode(program.getDsubMouduleCode());
+		module.setModuleCode(program.getDmoduleCode());
+		subModule.setSubModuleCode(program.getDsubMouduleCode());
 		
-		program.setpModuleCode(m);
-		program.setSubModuleCode(S);
+		program.setpModuleCode(module);
+		program.setSubModuleCode(subModule);
 		
 	
 		boolean isSubModuleExist = programService.checkProgramExists(program);

@@ -56,7 +56,7 @@ public class ModuleController {
 	 * @return
 	 */
 	@PostMapping("/saveModule")
-	  public String SaveModule(@ModelAttribute("module") Module module, Model model,HttpSession session,RedirectAttributes redirectAttributes) {
+	  public String saveModule(@ModelAttribute("module") Module module, Model model,HttpSession session,RedirectAttributes redirectAttributes) {
 			
 		boolean isModuleExist = moduleService.checkModuleExists(module);
 		

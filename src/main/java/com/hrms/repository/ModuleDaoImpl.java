@@ -121,7 +121,7 @@ public class ModuleDaoImpl extends AbstractGenericDao<Module> implements ModuleD
 	}
 
 	@Override
-	public List<Program> GetAllProgramList(String moduleCode, String smCode, String Ucode) {
+	public List<Program> getAllProgramList(String moduleCode, String smCode, String userCode) {
 		List programs = null;
 		try {
 			final Session session = this.sessionFactory.getCurrentSession();
@@ -131,7 +131,7 @@ public class ModuleDaoImpl extends AbstractGenericDao<Module> implements ModuleD
 					+ "  and u.SUB_MODULE_CODE =s.SUB_MODULE_CODE\r\n" + "  and u.MODULE_CODE =p.MODULE_CODE\r\n"
 					+ "  and u.SUB_MODULE_CODE =p.SUB_MODULE_CODE\r\n" + "  and u.PRG_CODE =p.PRG_code\r\n"
 					+ "  and m.ACTIVE_YN ='Y' AND u.ACTIVE_YN ='Y' and s.ACTIVE_YN ='Y' and p.ACTIVE_YN ='Y'\r\n"
-					+ "  and u.USER_CODE ='" + Ucode + "'" + "and u.MODULE_CODE ='" + moduleCode + "'"
+					+ "  and u.USER_CODE ='" + userCode + "'" + "and u.MODULE_CODE ='" + moduleCode + "'"
 					+ "and  u.SUB_MODULE_CODE ='" + smCode + "'" + " ORDER BY p.SEQ_NO ";
 
 			SQLQuery query = session.createSQLQuery(sql);
