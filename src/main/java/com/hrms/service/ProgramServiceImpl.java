@@ -46,12 +46,12 @@ public class ProgramServiceImpl implements ProgramService {
 
 	@Override
 	public void updateProgram(Program p) {
-		Module m = new Module();
-		SubModule S = new SubModule();
-		m.setModuleCode(p.getDmoduleCode());
-		S.setSubModuleCode(p.getDsubMouduleCode());
-		p.setpModuleCode(m);
-		p.setSubModuleCode(S);
+		Module module = new Module();
+		SubModule subModule = new SubModule();
+		module.setModuleCode(p.getDmoduleCode());
+		subModule.setSubModuleCode(p.getDsubMouduleCode());
+		p.setpModuleCode(module);
+		p.setSubModuleCode(subModule);
 		p.setProgramName(p.getProgramName());
 		p.setActiveYn(p.getActiveYn());
 		p.setProgramHrefName(p.getProgramHrefName());

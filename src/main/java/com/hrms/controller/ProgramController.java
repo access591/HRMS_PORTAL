@@ -67,7 +67,7 @@ public class ProgramController {
 	 * @return
 	 */
 	@PostMapping("/saveProgram")
-	public String SaveProgram1(@ModelAttribute("program")Program program, Model model,
+	public String saveProgram1(@ModelAttribute("program")Program program, Model model,
 			RedirectAttributes redirectAttributes, HttpSession session) {
 		Module module=new Module();
 		SubModule subModule=new SubModule();
