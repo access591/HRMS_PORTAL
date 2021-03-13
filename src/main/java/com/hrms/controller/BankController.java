@@ -61,7 +61,7 @@ public String bankMaster(Model model,HttpSession session) {
  * @return
  */
 @PostMapping("/saveBank")
-	public String SaveBank(@ModelAttribute("bank") Bank bank, Model model) {
+	public String saveBank(@ModelAttribute("bank") Bank bank, Model model) {
 			bankService.addBank(bank);
 			List<Bank> listBank = bankService.getAllBanks();
 			model.addAttribute("listBank", listBank);
