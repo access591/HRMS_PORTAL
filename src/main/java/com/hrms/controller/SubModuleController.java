@@ -41,7 +41,7 @@ public class SubModuleController {
 	 * @return
 	 */
 @GetMapping("/subModule")
-	public String SubmodulePage(Model model,HttpSession session) {
+	public String submodulePage(Model model,HttpSession session) {
 		List<SubModule> listSubModule = subModuleService.getAllSubModules();
 		model.addAttribute("listSubModule", listSubModule);
 		List<Module> modulesList = moduleService.getActiveModules();
@@ -61,7 +61,7 @@ public class SubModuleController {
  * @return
  */
 	@PostMapping("/saveSubModule")
-	public String SaveSubModule(@ModelAttribute("submodule") SubModule subModule, Model model,
+	public String saveSubModule(@ModelAttribute("submodule") SubModule subModule, Model model,
 			RedirectAttributes redirectAttributes, HttpSession session) {
 
 		boolean isSubModuleExist = subModuleService.checkSubModuleExists(subModule);

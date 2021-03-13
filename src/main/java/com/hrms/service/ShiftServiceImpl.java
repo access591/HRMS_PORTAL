@@ -11,36 +11,36 @@ import com.hrms.repository.ShiftDao;
 @Service
 public class ShiftServiceImpl implements ShiftService {
 @Autowired
-ShiftDao ShiftDao;
+ShiftDao shiftDao;
 	@Override
 	public void addShift(Shift shift) {
-		shift.setShiftCode(ShiftDao.getMaxId("SFC"));
-		this.ShiftDao.saveOrUpdate(shift);
+		shift.setShiftCode(shiftDao.getMaxId("SFC"));
+		this.shiftDao.saveOrUpdate(shift);
 		
 	}
 
 	@Override
 	public List<Shift> getAllShifts() {
 	
-		List<Shift> listShift = ShiftDao.findAll();
+		List<Shift> listShift = shiftDao.findAll();
 		return listShift;
 	}
 
 	@Override
 	public Shift findShiftById(String id) {
 	
-		return ShiftDao.findById(id);
+		return shiftDao.findById(id);
 	}
 
 	@Override
 	public void updateShift(Shift s) {
-		this.ShiftDao.saveOrUpdate(s);
+		this.shiftDao.saveOrUpdate(s);
 		
 	}
 
 	@Override
 	public void removeShift(String id) {
-		this.ShiftDao.delete(id);
+		this.shiftDao.delete(id);
 
 		
 	}

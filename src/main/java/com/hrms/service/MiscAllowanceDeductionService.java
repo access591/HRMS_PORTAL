@@ -11,6 +11,6 @@ public interface MiscAllowanceDeductionService
 public void addMiscAllowanceDeduction(MiscAllowance miscAllowance);
 List<MiscAllowance>getAllMiscAllowanceDeduction();
 MiscAllowance findMiscAllowanceDeductionById(String id);
-public void updateMiscAllowanceDeduction(MiscAllowance M);
+public void updateMiscAllowanceDeduction(MiscAllowance miscAllowance);
 public void removeMiscAllowanceDeduction(String id);
 }

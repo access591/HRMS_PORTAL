@@ -25,7 +25,7 @@ public class PageController {
 	PageMappingService pageMappingService;
 	
 	@GetMapping("/pageMaster")
-	public String PageMater(Model model, HttpSession session) {
+	public String pageMater(Model model, HttpSession session) {
 		List<UrlDetail> listUrlDetail = pageMappingService.getAllPages();
 		model.addAttribute("listUrlDetail", listUrlDetail);
 		String userCode = (String) session.getAttribute("username");

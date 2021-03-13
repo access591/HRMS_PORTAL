@@ -11,36 +11,36 @@ import com.hrms.repository.StateDao;
 public class StateServiceImpl  implements StateService{
 
 	@Autowired
-	StateDao StateDao;
+	StateDao stateDao;
 	@Override
 	public void addState(State state) {
-	state.setStateCode(StateDao.getMaxId("STT"));	
-	this.StateDao.saveOrUpdate(state);
+	state.setStateCode(stateDao.getMaxId("STT"));	
+	this.stateDao.saveOrUpdate(state);
 		
 	}
 
 	@Override
 	public List<State> getAllStates() {
-	List<State> listState = StateDao.findAll();
+	List<State> listState = stateDao.findAll();
 		return listState;
 	}
 
 	@Override
 	public State findStateById(String id) {
 	
-		return StateDao.findById(id);
+		return stateDao.findById(id);
 	}
 
 	@Override
 	public void updateState(State s) {
 	
-		this.StateDao.saveOrUpdate(s);	
+		this.stateDao.saveOrUpdate(s);	
 	}
 
 	@Override
 	public void removeState(String id) {
 		
-		this.StateDao.delete(id);
+		this.stateDao.delete(id);
 	}
 
 }
