@@ -37,7 +37,7 @@ public class MiscAllowancesDeductionController
 	 * @return
 	 */
 @GetMapping("/miscAllowances")
-public String MiscAllowances(Model model,HttpSession session) 
+public String miscAllowances(Model model,HttpSession session) 
 {
 	 List<MiscAllowance> listMiscAllowanceDeduction = miscAllowanceDeductionService.getAllMiscAllowanceDeduction();
       model.addAttribute("listMiscAllowanceDeduction", listMiscAllowanceDeduction); 

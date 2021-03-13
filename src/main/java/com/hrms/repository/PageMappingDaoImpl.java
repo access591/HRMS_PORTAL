@@ -28,7 +28,7 @@ public class PageMappingDaoImpl extends AbstractGenericDao<UrlDetail>implements 
 		String pagname = null;
 		try {
 			Session session = this.sessionFactory.getCurrentSession();
-			UrlDetail urlsp = new UrlDetail();
+		
 			SQLQuery query = session.createSQLQuery(
 					"select PAGE_NAME from URL_DTL where URL_ID=" + id + " and REQ_MAPPING='" + requestMpping + "'")
 					.addScalar("PAGE_NAME", new StringType());

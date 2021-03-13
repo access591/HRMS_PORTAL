@@ -37,7 +37,7 @@ public class GradeMaterController {
 	 * @return
 	 */
 @GetMapping("/gradeMaster")
-	public String DesignationMaster(Model model,HttpSession session) {
+	public String gradeMaster(Model model,HttpSession session) {
 
 	 List<Grade>listGrade = gradeMaterService.getAllGrades();
 	  model.addAttribute("listGrade", listGrade); 
@@ -60,7 +60,7 @@ public class GradeMaterController {
  */
 	
 @PostMapping("/saveGrade")
-  public String SaveGrade(@ModelAttribute("grade") Grade grade, Model model,HttpSession session,RedirectAttributes redirectAttributes) {
+  public String saveGrade(@ModelAttribute("grade") Grade grade, Model model,HttpSession session,RedirectAttributes redirectAttributes) {
 	boolean isGradeExist = gradeMaterService.checkGradeExists(grade);
 	
 	if (isGradeExist) {

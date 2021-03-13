@@ -28,11 +28,11 @@ public class LoanMaterServiceImpl implements LoanMaterService {
 		return loanMaterDao.findById(id);
 	}
 	@Override
-	public void updateLoan(Loan L) {
-		L.setLoanName(L.getLoanName());
-		L.setUpdDate(L.getUpdDate());
-		L.setActive(L.getActive());
-		this.loanMaterDao.saveOrUpdate(L);
+	public void updateLoan(Loan loan) {
+		loan.setLoanName(loan.getLoanName());
+		loan.setUpdDate(loan.getUpdDate());
+		loan.setActive(loan.getActive());
+		this.loanMaterDao.saveOrUpdate(loan);
 	}
 
 	@Override
