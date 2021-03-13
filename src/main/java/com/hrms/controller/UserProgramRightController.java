@@ -42,7 +42,7 @@ public class UserProgramRightController {
 	
 	
 @GetMapping("/userProgramRights")
-	public String UserProgramRightsList(Model model,HttpSession session) {
+	public String userProgramRightsList(Model model,HttpSession session) {
 	String userCode= (String)session.getAttribute("username");	
 	
 	List<UserRights> listUserRights = userProgramRightService.getAllUserRights();
