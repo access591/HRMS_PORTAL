@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.hrms.model.City;
+
 import com.hrms.model.Register;
 import com.hrms.repository.RegisterDao;
 @Service
