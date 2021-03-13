@@ -8,7 +8,7 @@ import com.hrms.model.SubModule;
 
 @Repository
 public class SubModuleDaoImpl extends AbstractGenericDao<SubModule> implements SubModuleDao {
-	private Logger logger = LoggerFactory.getLogger(SubModuleDaoImpl.class.getName());
+	
 
 
 }

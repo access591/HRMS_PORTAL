@@ -47,7 +47,7 @@ public class UserController {
 	}
 
 	@GetMapping("/dashboard")
-	public String Dashbord(Model model,HttpSession session) {
+	public String dashbord(Model model,HttpSession session) {
 		String userCode= (String)session.getAttribute("username");
 		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
 		if (modules != null) {
@@ -61,9 +61,6 @@ public class UserController {
 			@RequestParam(name = "g-recaptcha-response") String captcha,HttpSession session) {
 		boolean isUserExist = userService.checkUserExists(login);
 		if (isUserExist  && validator.validateCaptcha(captcha)  ) {
-			//moduleService.addModule(getModuleObject());
-			//moduleService.update(getModuleObject());
-			 //subModuleService.add(getSubModuleObject(),"1001");
 			
 			String id=login.getUserCode();
 			UserEntity userRecord = userService.findDataById(id);
@@ -105,7 +102,7 @@ public class UserController {
 	}
 	
 	@GetMapping("/userMaster")
-	public String UserMaster(Model model, HttpSession session) {
+	public String userMaster(Model model, HttpSession session) {
 
 		List<UserEntity> listUsers = userService.getAllUsers();
 		model.addAttribute("users", listUsers);
@@ -127,7 +124,7 @@ public class UserController {
 	 * @return
 	 */
 	@PostMapping("/saveUser")
-	public String SaveUser(@ModelAttribute("user") UserEntity userEntity, Model model, HttpSession session,
+	public String saveUser(@ModelAttribute("user") UserEntity userEntity, Model model, HttpSession session,
 			RedirectAttributes redirectAttributes) {
 
 		
