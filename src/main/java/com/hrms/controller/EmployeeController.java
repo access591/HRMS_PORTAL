@@ -79,7 +79,7 @@ public class EmployeeController {
 
 			String folderPath = "\\src\\main\\resources\\static\\img\\";
 			String uploadDir = System.getProperty("user.dir") + folderPath;
-			//String path = Paths.get(uploadDir + multipartFile.getOriginalFilename()).toString();
+	
 			String path = Paths.get(uploadDir + employee.getEmpImg()).toString();
 
 			BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(new File(path)));
@@ -124,14 +124,14 @@ public class EmployeeController {
  */
 	@PostMapping("/updateEmployee")
 	public String updatePageUrl(@ModelAttribute("employees") Employee e, Model model,@RequestParam("file") MultipartFile multipartFile) {
-		String Emp_Img = e.getEmpImg().toString();
+		String empImg = e.getEmpImg().toString();
 
 		try {
 
 			UUID uuid = UUID.randomUUID();
 			String folderPath = "\\src\\main\\resources\\static\\img\\";
 			String uploadDir = System.getProperty("user.dir") + folderPath;
-			File file = new File(uploadDir + Emp_Img);
+			File file = new File(uploadDir + empImg);
 			String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
 
 			if (fileName.trim().length() > 0) {
@@ -143,8 +143,8 @@ public class EmployeeController {
 				stream.close();
 				this.employeeService.updateEmployee(e);
 
-			} else if (Emp_Img != null) {
-				e.setEmpImg(Emp_Img);
+			} else if (empImg != null) {
+				e.setEmpImg(empImg);
 				this.employeeService.updateEmployee(e);
 			}
 
@@ -165,17 +165,17 @@ public class EmployeeController {
 	 * @return
 	 */
 	@GetMapping(value = { "/deleteEmployee/{id}/{Emp_Img}" })
-	public String deleteEmployee(@PathVariable("id") String id, @PathVariable("Emp_Img") String Emp_Img, Model model,
+	public String deleteEmployee(@PathVariable("id") String id, @PathVariable("Emp_Img") String empImage, Model model,
 			HttpSession session) {
 		try {
 
 			this.employeeService.removeEmployeet(id);
 			String folderPath = "\\src\\main\\resources\\static\\img\\";
 			String uploadDir = System.getProperty("user.dir") + folderPath;
-			File file = new File(uploadDir + Emp_Img);
+			File file = new File(uploadDir + empImage);
 
 			if (file.delete()) {
-				System.out.println(file.getName() + " is deleted!"); //
+				System.out.println(file.getName() + " is deleted!"); 
 			} else {
 				System.out.println("Delete operation is failed.");
 
