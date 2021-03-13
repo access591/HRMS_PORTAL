@@ -50,13 +50,9 @@ body {
 <meta charset="utf-8" />
 <title>HRMS</title>
 </head>
- <div id="loading">
-<img id="loading-image" src="img/spinner.gif" alt="Loading..." />
-</div> 
+ 
 <body>
-<div class="splash active" id="loading">
-	<img id="loading-image" src="img/spinner.gif" alt="Loading..." />
-	</div>
+
 <div class="wrapper">
 <nav id="sidebar" class="sidebar">
  <div th:replace="/fragments/sidebar :: div"></div>
@@ -148,7 +144,7 @@ body {
 													</label>
 													
 													 <input type="file" id="file" name="file" accept="image/png, image/jpeg"  onchange="preview_image(event)"/>
-											     <img id="output_image"width="100px" height="100px"style="border-radius:50%"alt="image">
+											     <img id="output_image"width="100px" height="100px"style="border-radius:50%" alt="output_image">
 												</div>
 												
 												
