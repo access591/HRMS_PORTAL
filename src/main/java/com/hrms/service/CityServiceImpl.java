@@ -19,7 +19,7 @@ public class CityServiceImpl implements CityService {
 	@Override
 	public void addCity(City city) {
 
-		city.setCityCode(cityDao.getMAX_Id("CTY"));
+		city.setCityCode(cityDao.getMaxId("CTY"));
 		this.cityDao.saveOrUpdate(city);
 	}
 

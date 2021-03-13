@@ -23,7 +23,7 @@ public class SubModuleServiceImpl  implements SubModuleService{
 
 	@Override
 	public void addSubModule(SubModule subModule) {
-		subModule.setSubModuleCode(subModuleDao.getMAX_Id("SUB"));
+		subModule.setSubModuleCode(subModuleDao.getMaxId("SUB"));
 		this.subModuleDao.saveOrUpdate(subModule);
 
 	}

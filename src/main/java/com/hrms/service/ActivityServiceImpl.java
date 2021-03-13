@@ -14,7 +14,7 @@ public class ActivityServiceImpl implements ActivityService {
 ActivityDao activityDao;
 	@Override
 	public void addActivity(Activities act) {
-		act.setActCode(activityDao.getMAX_Id("ACT"));
+		act.setActCode(activityDao.getMaxId("ACT"));
 		this.activityDao.saveOrUpdate(act);
 	}
 

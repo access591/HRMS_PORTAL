@@ -14,7 +14,7 @@ public class StateServiceImpl  implements StateService{
 	StateDao StateDao;
 	@Override
 	public void addState(State state) {
-	state.setStateCode(StateDao.getMAX_Id("STT"));	
+	state.setStateCode(StateDao.getMaxId("STT"));	
 	this.StateDao.saveOrUpdate(state);
 		
 	}

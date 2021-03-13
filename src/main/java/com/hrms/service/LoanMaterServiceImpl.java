@@ -14,7 +14,7 @@ public class LoanMaterServiceImpl implements LoanMaterService {
 	@Override
 	public void addLoan(Loan loan) {
 		loan.setInsDate(new Date());
-		loan.setLoanCode(loanMaterDao.getMAX_Id("LNC"));
+		loan.setLoanCode(loanMaterDao.getMaxId("LNC"));
 		  this.loanMaterDao.saveOrUpdate(loan);
 	}
 	@Override

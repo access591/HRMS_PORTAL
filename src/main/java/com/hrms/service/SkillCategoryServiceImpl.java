@@ -13,7 +13,7 @@ public class SkillCategoryServiceImpl implements SkillCategoryService {
 
 	@Override
 	public void addSkillCategory(SkillCategory sc) {
-		sc.setSkillLevelCode(skillCategoryDao.getMAX_Id("SCM"));
+		sc.setSkillLevelCode(skillCategoryDao.getMaxId("SCM"));
 		this.skillCategoryDao.saveOrUpdate(sc);
 	}
 

@@ -16,7 +16,7 @@ public class GradeMaterServiceImpl implements GradeMaterService{
 	@Override
 	public void addGrade(Grade grade) {
 		grade.setInsDate(new Date());
-		grade.setGradeCode(gradeMaterDao.getMAX_Id("GRD"));
+		grade.setGradeCode(gradeMaterDao.getMaxId("GRD"));
 		this.gradeMaterDao.saveOrUpdate(grade);
 
 	}

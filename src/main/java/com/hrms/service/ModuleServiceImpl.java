@@ -105,7 +105,7 @@ public class ModuleServiceImpl implements ModuleService {
 	@Override
 	public void addModule(Module module) {
 		module.setInsertedDate(new Date());
-		module.setModuleCode(moduleDao.getMAX_Id("MOD"));
+		module.setModuleCode(moduleDao.getMaxId("MOD"));
 		this.moduleDao.saveOrUpdate(module);
 
 	}
