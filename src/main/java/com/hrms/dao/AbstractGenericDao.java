@@ -7,7 +7,6 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.criterion.Criterion;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
@@ -105,8 +104,9 @@ public class AbstractGenericDao<E> implements GenericDao<E> {
 	}
 	@Override
 	public Page<E> findAll(Pageable pageable) {
-		return (Page<E>) getSession().createCriteria(this.entityClass)
-				.add((Criterion) pageable).list();
+		Page<E> page = findAll(pageable);
+		System.out.println("page===================="+page);
+	    return (Page<E>) page.getContent();
 	
 	}
 
