@@ -31,15 +31,15 @@ public class CityController {
 	@Autowired
 	PageMappingService pageMappingService;
 /**
- *  Request mapping City Master 
+ * 
+ * Request mapping City Master 
  * @param model
  * @param session
  * @return
  */
 	@GetMapping("/cityMaster")
 	public String cityMaster(Model model, HttpSession session) {
-		List<City> listCity = cityService.getAllCities();
-		model.addAttribute("listCity", listCity);
+		
 		String userCode = (String) session.getAttribute("username");
 		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
 		if (modules != null) {
@@ -48,7 +48,7 @@ public class CityController {
 		
 		session.setAttribute("username", session.getAttribute("username"));
 
-		  return pageMappingService.PageRequestMapping(reqPage,pageno);
+		 return findPaginated(1, "cityCode", "asc", model);
 	}
 	
 	/**
@@ -128,9 +128,12 @@ public class CityController {
 public String findPaginated(@PathVariable(value = "pageNo") int pageNo, @RequestParam("sortField") String sortField, @RequestParam("sortDir") String sortDir, Model model) {
 		
 	int pageSize = 5;
-		Page<City> page = cityService.findPaginated(pageNo, pageSize, sortField, sortDir);
-		List<City> listOfCities = page.getContent();
+	List<City> listCity = cityService.getAllCities();
 
+		Page<City> page = cityService.findPaginated(pageNo, pageSize, sortField, sortDir,listCity);
+		List<City> listOfCities = page.getContent();
+	
+	    model.addAttribute("listCity", listCity);
 		model.addAttribute("currentPage", pageNo);
 		model.addAttribute("totalPages", page.getTotalPages());
 		model.addAttribute("totalItems", page.getTotalElements());
