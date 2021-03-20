@@ -102,13 +102,26 @@ public class AbstractGenericDao<E> implements GenericDao<E> {
 
 		
 	}
-	@Override
-	public Page<E> findAll(Pageable pageable) {
-		Page<E> page = findAll(pageable);
-		System.out.println("page===================="+page);
-	    return (Page<E>) page.getContent();
-	
-	}
+	/*
+	 * @Override public Page<E> findAll(Pageable pageable) { Page<E> page =
+	 * findAll(pageable); System.out.println("page===================="+page);
+	 * return (Page<E>) page.getContent();
+	 * 
+	 * }
+	 */
+	/*
+	 * @Override public Page<E> findAll(Pageable pageable) {
+	 * 
+	 * Page<E> page = findAll(pageable);
+	 * System.out.println("page===================="+page); return (Page<E>)
+	 * page.getContent();
+	 * 
+	 * pageable =
+	 * pageable.create(pageable).ignoreCase().enableLike().excludeZeroes(); return
+	 * getSession().createCriteria(this.entityClass).add(pageable).list();
+	 * 
+	 * }
+	 */
 
 
 }
