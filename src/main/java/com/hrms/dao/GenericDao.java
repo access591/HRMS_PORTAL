@@ -8,7 +8,8 @@ import org.springframework.data.domain.Pageable;
 
 public interface GenericDao<E> {
 	List<E> findAll();
-	Page<E> findAll(Pageable pageable);
+
+	/* Page<E> findAll(Pageable pageable); */
 	void delete(String id);
 
 	E findById(String id);
