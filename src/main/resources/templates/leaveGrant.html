@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"lang="en">
-
 <script type="text/javascript" th:src="@{/js/settings.js}"></script>
 <script type="text/javascript" th:src="@{/js/app.js}"></script>
 <link rel="stylesheet" type="text/css" th:href="@{/css/modern.css}" />
@@ -36,7 +35,7 @@ body {
 			<main class="content">
 				<div class="container-fluid">
 					<div class="header">
-						<h1 class="header-title"> Master</h1>
+						<h1 class="header-title">Personal</h1>
 						<nav aria-label="breadcrumb">
 						</nav>
 					</div>
@@ -44,14 +43,14 @@ body {
 						<div class="col-12">
 							<div class="card">
 								<div class="card-header">
-									<h5 class="card-title">Create Country </h5>
+									<h5 class="card-title">	Leave Grant Register </h5>
 								<div class="alert-outline">
 									<div th:if="${message}" th:text="${message}" style="color: red">
 									</div> 
 									</div>	
 								</div>
-								<div class="card-body">
-									<form id="validation-form" action="#" th:action="@{/searchLeaveGrant}" th:object="${country}" method="post">
+<!-- 								<div class="card-body">
+									<form id="validation-form" action="#" th:action="@{/searchLeaveGrant}"  method="GET">
 										<div class="row">
 											<div class="col-12 col-lg-6">
 												<div class="form-group">
@@ -86,7 +85,7 @@ body {
 										 <input type="submit" class="btn btn-primary" value="Search">
 								 <button type="reset"class="btn btn-primary" value="Reset">Reset</button>
 									</form>
-								</div>
+								</div> -->
 							</div>
 						</div>
 	      <div class="col-12">
@@ -97,21 +96,26 @@ body {
 								<table id="datatables-buttons" class="table table-striped display" style="width:100%"aria-describedby="datatables-buttons">
 										<thead>
 											<tr>
-												<th scope="col">Country Code</th>
-												<th scope="col">Country Name </th>
-												<th scope="col">Status</th>
+												<th scope="col">Card No</th>
+												<th scope="col">Employee Code</th>
+												<th scope="col">Employee Name </th>
+												<th scope="col">previous  year Balance</th>
+												<th scope="col">Current  year Leave</th>
 												<th scope="col">Action</th>
+												
 												
 											</tr>
 										</thead>
 										<tbody>
-											<!-- <tr  th:each="listofCountry : ${listCountry}">
-												<td th:text="${listofCountry.countryCode}"></td>
-												<td th:text="${listofCountry.countryName}"></td>
-												<td th:text="${listofCountry.active}"></td>
-												<td><a th:href="@{/editCountry/{id}(id=${listofCountry.countryCode})}"><em class="align-middle fas fa-fw fa-pen"></em></a>
-												<a th:href="@{/deleteCountry/{id}(id=${listofCountry.countryCode})}" onclick="return confirm('Are you sure?')"><em class="align-middle fas fa-fw fa-trash"></em></a>
-												</td> -->
+											<tr  th:each="listofCountry : ${listEmployee}">
+												<td th:text="${listofCountry.cardNo}"></td>
+												<td th:text="${listofCountry.empCode}"></td>
+												<td class="pt-3-half" contenteditable="true"th:text="${listofCountry.empName}"></td>
+												     <td> </td>
+													<td> </td>
+												<td><a th:href="@{/editLeaveGrant/{id}(id=${listofCountry.empCode})}"><em class="align-middle fas fa-fw fa-pen"></em></a>
+												<a th:href="@{/deleteLeaveGrant/{id}(id=${listofCountry.empCode})}" onclick="return confirm('Are you sure?')"><em class="align-middle fas fa-fw fa-trash"></em></a>
+												</td> 
 											</tr>
 										</tbody>
 									
