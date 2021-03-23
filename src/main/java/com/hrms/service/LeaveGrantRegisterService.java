@@ -8,6 +8,9 @@ import java.util.List;
 import com.hrms.model.LeaveGrant;
 
 public interface LeaveGrantRegisterService {
+    public void addLeaveGrant(LeaveGrant leaveGrant);
+	List<LeaveGrant>getAllLeaveGrants();
 	LeaveGrant findLeaveGrantById(String id);
-	List<LeaveGrant> getAllLeaveGarnt();
+	public void updateLeaveGrant(LeaveGrant l);
+	public void removeLeaveGrant(String id);
 }

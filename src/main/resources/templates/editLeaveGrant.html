@@ -46,14 +46,14 @@ body {
 						<div class="col-12">
 							<div class="card">
 								<div class="card-header">
-									<h5 class="card-title">	Leave Grant Register </h5>
+									<h5 class="card-title">	update Grant Register </h5>
 								<div class="alert-outline">
 									<div th:if="${message}" th:text="${message}" style="color: red">
 									</div> 
 									</div>	
 								</div>
 							<div class="card-body">
-									<form id="validation-form" action="#" th:action="@{/saveLeaveGrant}" th:object="${leaveGrant}" method="POST">
+									<form id="validation-form" action="#" th:action="@{/updateLeaveGrant}" th:object="${leaveGrant}" method="POST">
 										<div class="row">
 											<div class="col-12 col-lg-6">
 											
@@ -63,27 +63,29 @@ body {
 												<select class="form-control select2"onchange="myFunction()" name="empCode"id="empCode" required aria-required="true">
 												 <option value="">Select Employee</option>
 												<option th:each="emp :${listEmployee}" th:value="${emp.getEmpCode()}" th:text="${emp.getEmpName()}"></option>
+											     <option th:each="leave: ${leaveGrantEdit}" th:value="${leave.getEmpCode()}" th:text="${leave.getEmpName()}"th:field="${leaveGrantEdit.empCode}"></option>
+											     	
 											     	</select>
 											     
-											     	  <input type="hidden" class="form-control" id="empName" name="empName" size="50" > 
+											     	  <input type="hidden" class="form-control" th:value="${leaveGrantEdit.empName}"id="empName" name="empName" size="50" > 
 											</div>
 											
 											<div class="form-group ">
 													<label class="form-label">Year</label> <span
 														class="text-danger">*</span> 
-														<input class="form-control required" type="text"id="year"name="year"/>
+														<input class="form-control required" type="text"id="year"name="year"th:value="${leaveGrantEdit.year}"/>
 
 												</div>
 
 												<div class="form-group">
 											  <label>leaveAvailed </label>
 											  	<label style="color: red">*</label>
-											   <input type="text" class="form-control" id="leaveAvailed" name="leaveAvailed" size="50" >
+											   <input type="text" class="form-control" id="leaveAvailed" name="leaveAvailed" th:value="${leaveGrantEdit.leaveAvailed}"size="50" >
 												</div>
 													<div class="form-group">
 											  <label> previous YR Balance </label>
 											  	<label style="color: red">*</label>
-											   <input type="text" class="form-control" id="previousYrBalance" name="previousYrBalance" size="50" >
+											   <input type="text" class="form-control" id="previousYrBalance" th:value="${leaveGrantEdit.previousYrBalance}"name="previousYrBalance" size="50" >
 												</div>
 
 						
@@ -92,79 +94,46 @@ body {
 												<div class="form-group">
 											  <label>  No Of Leave Granted </label>
 											  	<label style="color: red">*</label>
-											   <input type="text" class="form-control" id="noOfLeavesGranted" name="noOfLeavesGranted" size="50" >
+											   <input type="text" class="form-control" id="noOfLeavesGranted" name="noOfLeavesGranted"th:value="${leaveGrantEdit.noOfLeavesGranted}" size="50" >
 												</div>
 											
 											<div class="form-group">
 													<label class="form-label">Type</label> <label
 														style="color: red">*</label> <select class="form-control"
 														name="leaveType" id="leaveType">
-														<option value="CASUAL">CASUAL LEAVE</option>
-														<option value="SICK">SICK LEAVE</option>
-														<option value="PUBLIC">PUBLIC HOLIDAY</option>
-														<option value="RELIGIOUS">RELIGIOUS HOLIDAYS</option>
-														<option value="MATERNITY">MATERNITY LEAVE</option>
-														<option value="BEREAVEMENT">BEREAVEMENT LEAVE</option>
-														<option value="COMPENSATORY">COMPENSATORY LEAVE</option>
-														<option value="UNPAID">UNPAID LEAVE</option>
+														<option value="CASUAL" th:selected="${leaveGrantEdit.leaveType}==CASUAL">CASUAL LEAVE</option>
+														<option value="SICK" th:selected="${leaveGrantEdit.leaveType}==SICK">SICK LEAVE</option>
+														<option value="PUBLIC" th:selected="${leaveGrantEdit.leaveType}==PUBLIC">PUBLIC HOLIDAY</option>
+														<option value="RELIGIOUS" th:selected="${leaveGrantEdit.leaveType}==RELIGIOUS">RELIGIOUS HOLIDAYS</option>
+														<option value="MATERNITY" th:selected="${leaveGrantEdit.leaveType}==MATERNITY">MATERNITY LEAVE</option>
+														<option value="BEREAVEMENT" th:selected="${leaveGrantEdit.leaveType}==BEREAVEMENT">BEREAVEMENT LEAVE</option>
+														<option value="COMPENSATORY" th:selected="${leaveGrantEdit.leaveType}==COMPENSATORY">COMPENSATORY LEAVE</option>
+														<option value="UNPAID"th:selected="${leaveGrantEdit.leaveType}==UNPAID">UNPAID LEAVE</option>
 
 													</select>
 												</div>
 												<div class="form-group">
 											  <label>Leave Code  </label>
 											  	<label style="color: red">*</label>
-											   <input type="text" class="form-control" id="leaveCode" name="leaveCode" size="50" >
+											   <input type="text" class="form-control" id="leaveCode" name="leaveCode"th:value="${leaveGrantEdit.leaveCode}" size="50" >
 												</div>
 												
 												
 												<div class="form-group">
 											  <label>  Closing Balance  </label>
 											  	<label style="color: red">*</label>
-											   <input type="text" class="form-control" id="closingBal" name="closingBal" size="50" >
+											   <input type="text" class="form-control" id="closingBal" name="closingBal"th:value="${leaveGrantEdit.closingBal}" size="50" >
 												</div>
 												
 											</div>
 										</div>
 										 <input type="submit" class="btn btn-primary" value="Submit">
-								 <button type="reset"class="btn btn-primary" value="Reset">Reset</button>
+								<button type="submit"class="btn btn-primary" value="cancel">Cancel</button>
 									</form>
 								</div>
 							</div>
 						</div>
-	      <div class="col-12">
-							<div class="card">
-								<div class="card-header">
-								</div>
-								<div class="card-body">
-								<table id="datatables-buttons" class="table table-striped display" style="width:100%"aria-describedby="datatables-buttons">
-										<thead>
-											<tr>
-												
-												<th scope="col">EMP CODE</th>
-												<th scope="col">EMP NAME</th>
-												<th scope="col">previous  year Balance</th>
-												<th scope="Col">Leave Available </th>
-												<th scope="col">Action</th>
-											</tr>
-										</thead>
-								          <tbody>
-											<tr  th:each="listofCountry : ${listLeaveGrant}">
-												
-												 <td th:text="${listofCountry.empCode}"></td>
-													<td th:text="${listofCountry.empName}"></td>
-													 <td th:text="${listofCountry.previousYrBalance}"></td>
-													<td th:text="${listofCountry.leaveAvailed}"></td>
-												<td><a th:href="@{/editLeaveGrant/{id}(id=${listofCountry.empCode})}"><em class="align-middle fas fa-fw fa-pen"></em></a>
-												<a th:href="@{/deleteLeaveGrant/{id}(id=${listofCountry.empCode})}" onclick="return confirm('Are you sure?')"><em class="align-middle fas fa-fw fa-trash"></em></a>
-												</td> 
-											</tr>
-										</tbody>  
-									
-									</table>
-								</div>
-								
-							</div>
-						</div>
+
 					</div>
 				</div>
 

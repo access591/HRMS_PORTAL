@@ -1,7 +1,8 @@
 package com.hrms.repository;
 
+import com.hrms.dao.GenericDao;
 import com.hrms.model.LeaveGrant;
 
-public interface LeaveGrantRegisterDao {
-	LeaveGrant findYearAndType(String year,String leaveType);
+public interface LeaveGrantRegisterDao  extends GenericDao<LeaveGrant>{
+	
 }

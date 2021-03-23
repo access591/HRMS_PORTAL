@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.hrms.model.Award;
 import com.hrms.model.LeaveGrant;
 import com.hrms.repository.LeaveGrantRegisterDao;
 @Service
@@ -13,16 +14,35 @@ public class LeaveGrantRegisterImpl  implements LeaveGrantRegisterService{
 LeaveGrantRegisterDao leaveGrantRegisterDao;
 
 @Override
-public LeaveGrant findLeaveGrantById(String id) {
+public void addLeaveGrant(LeaveGrant leaveGrant) {
+	this.leaveGrantRegisterDao.saveOrUpdate(leaveGrant);
 	
-	return null;
 }
 
 @Override
-public List<LeaveGrant> getAllLeaveGarnt() {
-	
-	return null;
+public List<LeaveGrant> getAllLeaveGrants() {
+	List<LeaveGrant> listLeaveGrant = leaveGrantRegisterDao.findAll();
+	return listLeaveGrant;
 }
+
+@Override
+public LeaveGrant findLeaveGrantById(String id) {
+	return leaveGrantRegisterDao.findById(id);
+}
+
+@Override
+public void updateLeaveGrant(LeaveGrant l) {
+	this.leaveGrantRegisterDao.saveOrUpdate(l);	
+	
+}
+
+@Override
+public void removeLeaveGrant(String id) {
+	this.leaveGrantRegisterDao.delete(id);
+	
+}
+
+
 	
 
 }
