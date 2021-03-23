@@ -16,11 +16,5 @@ import com.hrms.model.Module;
 @Repository
 public class LeaveGrantRegisterDaoImpl extends AbstractGenericDao<LeaveGrant> implements LeaveGrantRegisterDao {
 	
-	@Override
-	public LeaveGrant findYearAndType(String year, String leaveType) {
-		Criteria criteria = getSession().createCriteria(Module.class);
-		LeaveGrant designationEdit =(LeaveGrant) criteria.setFetchMode("M_EMPLOYEE", FetchMode.SELECT).add(Restrictions.eq("year",year)).add(Restrictions.eq("",leaveType)).uniqueResult(); 
 
-		   return designationEdit;
-		}
 }
