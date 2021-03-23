@@ -46,25 +46,18 @@ public class UserController {
 		return "sign-in";
 	}
 
-	@GetMapping("/dashboard")
-	public String dashbord(Model model,HttpSession session) {
-		String userCode= (String)session.getAttribute("username");
-		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
-		if (modules != null) {
-			model.addAttribute("modules", modules);
-		}
-		return "dashboard";
-	}
-
 	@PostMapping("/loginUser")
 	public String loginUser(@ModelAttribute("user") Login login, Model model,
 			@RequestParam(name = "g-recaptcha-response") String captcha,HttpSession session) {
 		boolean isUserExist = userService.checkUserExists(login);
-		if (isUserExist  && validator.validateCaptcha(captcha)  ) {
+		if (isUserExist /* && validator.validateCaptcha(captcha) */ ) {
+			//moduleService.addModule(getModuleObject());
+			//moduleService.update(getModuleObject());
+			 //subModuleService.add(getSubModuleObject(),"1001");
 			
 			String id=login.getUserCode();
 			UserEntity userRecord = userService.findDataById(id);
-			session.setAttribute("userlogin",userRecord.getUserName());
+			session.setAttribute("uuuuu",userRecord.getUserName());
 			session.setAttribute("user_desg",userRecord.getDesgName());
 		session.setAttribute("username",login.getUserCode());
 		String userCode= (String)session.getAttribute("username");
@@ -102,7 +95,7 @@ public class UserController {
 	}
 	
 	@GetMapping("/userMaster")
-	public String userMaster(Model model, HttpSession session) {
+	public String UserMaster(Model model, HttpSession session) {
 
 		List<UserEntity> listUsers = userService.getAllUsers();
 		model.addAttribute("users", listUsers);
@@ -124,7 +117,7 @@ public class UserController {
 	 * @return
 	 */
 	@PostMapping("/saveUser")
-	public String saveUser(@ModelAttribute("user") UserEntity userEntity, Model model, HttpSession session,
+	public String SaveUser(@ModelAttribute("user") UserEntity userEntity, Model model, HttpSession session,
 			RedirectAttributes redirectAttributes) {
 
 		
@@ -135,7 +128,7 @@ public class UserController {
 			redirectAttributes.addFlashAttribute("alertClass", "alert-success");
 			return "redirect:/userMaster";
 		} else {
-			String username= (String)session.getAttribute("userlogin");
+			String username= (String)session.getAttribute("uuuuu");
 			userEntity.setInsBy(username);
 			userService.addUser(userEntity);
 			session.setAttribute("username", session.getAttribute("username"));
@@ -158,7 +151,7 @@ public class UserController {
 	@PostMapping("/upadteUser")
 	public String updateUser(@ModelAttribute("userUpdate") UserEntity u, Model model, HttpSession session) {
 
-		String username= (String)session.getAttribute("userlogin");
+		String username= (String)session.getAttribute("uuuuu");
 			u.setUpdBy(username);
 		  this.userService.updateUser(u);
 	  	  
@@ -176,14 +169,6 @@ public class UserController {
 		this.userService.removeUser(id);
 		session.setAttribute("username", session.getAttribute("username"));
 		return "redirect:/userMaster";
-	}
-	
-	@GetMapping("/logout")
-	public String logout(HttpSession session) {
-		session.removeAttribute("username");
-		session.invalidate();
-		return "redirect:./";
-		
 	}
 	
 }
