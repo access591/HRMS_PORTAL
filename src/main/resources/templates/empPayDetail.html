@@ -1,0 +1,1181 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"lang="en">
+<script type="text/javascript" th:src="@{/js/ajax_emp_pay_details.js}"></script>
+<script type="text/javascript" th:src="@{/js/settings.js}"></script>
+<script type="text/javascript" th:src="@{/js/app.js}"></script>
+<link rel="stylesheet" type="text/css" th:href="@{/css/modern.css}" />
+<script  src="https://www.googletagmanager.com/gtag/js?id=UA-120946860-7"></script>
+
+<style>
+body {
+	opacity: 0;
+}
+
+.uppercase {
+	text-transform: uppercase;
+}
+
+.sm_input4 {
+	width: 80px;
+}
+
+.sm_input5 {
+	width: 100px;
+}
+
+.input1 {
+	width: 60px;
+}
+
+.input2 {
+	width: 120px;
+}
+
+.input3 {
+	width: 150px;
+}
+
+.input_size {
+	width: 120px;
+}
+
+.close {
+	cursor: pointer;
+	position: absolute;
+	top: 50%;
+	right: 0%;
+	padding: 12px 16px;
+	transform: translate(0%, -50%);
+}
+
+.close:hover {
+	background: #bbb;
+}
+
+a {
+	text-decoration: none;
+	display: inline-block;
+	padding: 8px 16px;
+}
+
+a:hover {
+	background-color: #ddd;
+	color: black;
+}
+
+.previous {
+	background-color: #f1f1f1;
+	color: black;
+}
+
+.next {
+	background-color: #4c8baf;
+	color: white;
+}
+
+.round {
+	border-radius: 50%;
+}
+
+.tab3 {
+	width: 85px;
+}
+
+body {
+	font-family: "Open Sans", sans-serif;
+	line-height: 1.25;
+}
+
+table {
+	border: 1px solid #ccc;
+	border-collapse: collapse;
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	table-layout: fixed;
+}
+
+table caption {
+	font-size: 1.5em;
+	margin: .5em 0 .75em;
+}
+
+table tr {
+	background-color: #f8f8f8;
+	border: 1px solid #ddd;
+	padding: .35em;
+}
+
+table th, table td {
+	padding: .625em;
+	text-align: center;
+}
+
+table th {
+	font-size: .85em;
+	letter-spacing: .1em;
+	text-transform: uppercase;
+}
+
+@media screen and (max-width: 600px) {
+	table {
+		border: 0;
+	}
+	table caption {
+		font-size: 1.3em;
+	}
+	table thead {
+		border: none;
+		clip: rect(0, 0, 0, 0);
+		height: 1px;
+		margin: -1px;
+		overflow: hidden;
+		padding: 0;
+		position: absolute;
+		width: 1px;
+	}
+	table tr {
+		border-bottom: 3px solid #ddd;
+		display: block;
+		margin-bottom: .625em;
+	}
+	table td {
+		border-bottom: 1px solid #ddd;
+		display: block;
+		font-size: .8em;
+		text-align: right;
+	}
+	table td::before {
+		/*
+    * aria-label has no advantage, it won't be read inside a table
+    content: attr(aria-label);
+    */
+		content: attr(data-label);
+		float: left;
+		font-weight: bold;
+		text-transform: uppercase;
+	}
+	table td:last-child {
+		border-bottom: 0;
+	}
+}
+
+.card {
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+	transition: 0.3s;
+	/* padding-top: 50px; */
+}
+
+.sm_input {
+	width: 70px;
+}
+
+.sm_input1 {
+	width: 55px;
+}
+
+.sm_input2 {
+	width: 115px;
+}
+
+.demo {
+	padding: 30px;
+	min-height: 280px;
+}
+
+.tab-content {
+	padding: 10px;
+}
+
+
+@nav-link-hover-bg: #eeeeee ;
+        @nav-tabs-border-color: #dddddd ;
+        @border-radius-base: 5px ;
+        @screen-xs-max: 767px ;
+
+
+
+        .nav-tabs.nav-tabs-dropdown, .nav-tabs-dropdown {@media (max-width
+	: @screen-xs-max) {border: 1px solid @nav-tabs-border-color ;
+                border-radius: @border-radius-base ;
+                overflow: hidden ;
+                position: relative ;
+
+                &::after {
+	content: "?";
+	position: absolute;
+	top: 8px;
+	right: 15px;
+	z-index: 2;
+	pointer-events: none;
+}
+
+&
+.open {a { position:relative;
+	display: block;
+}
+
+>
+li.active>a {
+	background-color: @nav-link-hover-bg;
+}
+
+}
+li {
+	display: block;
+	padding: 0;
+	vertical-align: bottom;
+}
+
+>
+li>a {
+	position: absolute;
+	top: 0;
+	left: 0;
+	margin: 0;
+	width: 100%;
+	height: 100%;
+	display: inline-block;
+	border-color: transparent;
+	&:
+	focus
+	,
+	&
+	:
+	hover
+	,
+	&:
+	active
+	{
+	
+                        
+	border-color
+	:
+	 
+	transparent;
+}
+
+}
+>
+li.active>a {
+	display: block;
+	border-color: transparent;
+	position: relative;
+	z-index: 1;
+	background: #fff;
+	&:
+	focus
+	,
+	&
+	:
+	hover
+	,
+	&:
+	active
+	{
+	
+                        
+	border-color
+	:
+	 
+	transparent;
+}
+}
+}
+}
+</style>
+
+<script>
+	window.dataLayer = window.dataLayer || [];
+	function gtag() {
+		dataLayer.push(arguments);
+	}
+	 gtag('js', new Date());
+
+	gtag('config', 'UA-120946860-7');
+</script>
+<head>
+<meta charset="utf-8" />
+<title>HRMS</title>
+</head>
+<body>
+	<div class="wrapper">
+		<nav id="sidebar" class="sidebar">
+			<div th:replace="/fragments/sidebar :: div"></div>
+		</nav>
+		<div class="main">
+			<div th:replace="/fragments/header ::div"></div>
+
+			<form action="#" th:action="@{/saveemployepaydetail}"
+				th:object="${employeePayDetail}" novalidate method="post">
+
+				<main class="content">
+					<div class="container-fluid">
+						<div class="header">
+							<h1 class="header-title">Master</h1>
+							<nav aria-label="breadcrumb"></nav>
+						</div>
+						<div class="row">
+							<div class="col-12">
+								<div class="card">
+									<div class="card-header">
+										<h5 class="card-title">Employee Details</h5>
+										<div class="alert-outline">
+											<div th:if="${message}" th:text="${message}"
+												style="color: red"></div>
+										</div>
+									</div>
+
+
+
+									<!-- card 1 -->
+
+									<!--  form content here -->
+									<div class="card">
+										<div class="row">
+											<div class="col-md-1 col-sm-3"></div>
+
+											<div class="col-md-5 col-sm-4">
+												<label> Empp. </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+												&nbsp;&nbsp;&nbsp;&nbsp; <select id="employeeDropdown"
+													name="empCode" onchange="display()">
+													<option value=" ">Select</option>
+													<option th:each="employee: ${listEmployee}"
+														th:text="${employee.empCode}">${employee.empCode}</option>
+												</select> &nbsp;&nbsp; <input id="emp_name" type="text"
+													name="empName" class="input_size1">
+											</div>
+
+											<div class="col-md-5 col-sm-4">
+												<label>Dept. </label> <input id="emp_dept_code"
+													class="sm_input" type="text" name="deptCode">&nbsp;&nbsp;
+												<input id="emp_dept_name" type="text " class="input_size1"
+													name="deptName">
+											</div>
+											<div class="col-md-1 col-sm-3"></div>
+										</div>
+										<br>
+										<div class="row">
+											<div class="col-md-1 col-sm-3"></div>
+											<div class="col-md-5 col-sm-4">
+												<div class="row">
+													<div class="col-md-6 col-sm-5">
+														<label> Old Emp. Code </label> <input class="sm_input1"
+															type="text" name="deptCode1">
+													</div>
+													<div class="col-md-6 col-sm-5" style="margin-left: -20px;">
+														<label> WEF Dt.* </label> <input type="date"
+															class="sm_input" name="wefdate" id="wef_date">
+													</div>
+												</div>
+											</div>
+											<div class="col-md-5">
+												<label>Desig. </label> <input id="emp_desig_code"
+													class="sm_input1" type="text" name="desigCode">&nbsp;&nbsp;
+												<input id="emp_desig_name" type="text" class="input_size1">
+											</div>
+											<div class="col-md-1 col-sm-3"></div>
+										</div>
+										<br>
+									</div>
+
+									<!-- card 1 end -->
+
+									<!-- card 2 -->
+									<div class="container-fluid" style="margin-top: 50px;">
+										<div class="card">
+											<div class="row">
+												<div class="col-md-1 col-sm-3"></div>
+												<div class="col-md-10 col-sm-6">
+													<div class="row">
+														<div class="col-md-4 col-sm-4">
+															<label>Emp. Ins. No.</label>&nbsp; <input type="text"
+																class="input_size" name="empInsuranceNo">
+														</div>
+														<div class="col-md-4 col-sm-4">
+															<label>PF No.</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+															<input type="text" class="input_size" name="pfNo">
+														</div>
+														<div class="col-md-4 col-sm-4">
+															<label>Effective Date</label> <input type="text"
+																class="input_size" name="pfEffectiveDate">
+														</div>
+													</div>
+													<br>
+													<div class="row">
+														<div class="col-md-4 col-sm-4">
+															<label>Group Ins. No.</label> <input type="text"
+																class="input_size" name="groupInsuranceNo">
+														</div>
+														<div class="col-md-4 col-sm-4">
+															<label>Emp. ESI No.</label>&nbsp;&nbsp; <input
+																type="text" class="input_size" name="empEsiNo">
+														</div>
+														<div class="col-md-4 col-sm-4">
+															<label>Effective Date</label> <input type="text"
+																class="input_size" name="esiEffectiveDate">
+														</div>
+													</div>
+													<br>
+													<div class="row">
+														<div class="col-md-4 col-sm-4">
+															<label>Arrear Due</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+															<input type="text" class="input_size" name="arrearDue">
+														</div>
+														<div class="col-md-4 col-sm-4">
+															<label>Arrear Paid</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+															<input type="text" class="input_size" name="arrearPaid">
+														</div>
+														<!-- <div class="col-md-4 col-sm-4">
+															<label>Grade</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+															<input type="text" class="input_size">
+														</div> -->
+													</div>
+													<br>
+												</div>
+												<div class="col-md-1 col-sm-3"></div>
+											</div>
+										</div>
+									</div>
+
+
+									<div class="container-fluid" style="margin-top: 50px;">
+										<div class="card">
+											<div class="row">
+												<div class="col-md-1"></div>
+												<div class="col-md-10">
+													<div class="row">
+														<div class="demo">
+															<div role="tabpanel">
+
+																<ul class="nav nav-tabs nav-justified nav-tabs-dropdown"
+																	role="tablist">
+																	<li role="presentation" class="active"><a
+																		href="#home" aria-controls="home" role="tab"
+																		data-toggle="tab">Employee Pay Details</a></li>
+																	<li role="presentation"><a href="#profile"
+																		aria-controls="profile" role="tab" data-toggle="tab">Deductions</a></li>
+																	<li role="presentation"><a href="#messages"
+																		aria-controls="messages" role="tab" data-toggle="tab">Allowances
+																			Deductions</a></li>
+
+																</ul>
+
+																<div class="tab-content">
+
+																	<!--  tab 1 -->
+																	<div role="tabpanel" class="tab-pane active" id="home">
+																		<div class="container-fluid"
+																			style="margin-top: 100px;">
+																			<div class="row">
+																				<div class="col-md-2"></div>
+																				<div class="col-md-8">
+
+																					<!-- employee pay details -->
+
+
+																					<label>Basic Pay*</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+																					<input id="basic_pay_m" type="number" value="0"
+																						class="input_size"
+																						onkeyup="basicPayCal(this.value);" onchange=""
+																						name="basicPay">&nbsp;&nbsp; <input
+																						id="basic_pay_y" type="number" value="0"
+																						class="input_size" name="basicPayY">
+
+
+																					<!--additional pay  -->
+																					<br> <br> <label>Addl. Pay</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+																					<input id="addl_pay_m" type="number" value="0"
+																						class="input_size"
+																						onkeyup="basicAditionalCal(this.value);"
+																						onchange="">&nbsp;&nbsp; <input
+																						id="addl_pay_y" type="number" value="0"
+																						class="input_size"><br> <br> <label>F.D.A.
+																						%</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+																					<input id="fda_m_percent" type="number" value="0"
+																						class="sm_input1"
+																						onkeyup="fdaPercentMonthly(this.value);"
+																						onchange="">&nbsp;&nbsp;<input
+																						id="fda_m_percent_result" type="number" value="0"
+																						class="sm_input2">&nbsp;&nbsp;<input
+																						id="fda_y_percent" type="number" value="0"
+																						class="sm_input1">&nbsp;&nbsp;<input
+																						id="fda_y_percent_result" type="number" value="0"
+																						class="sm_input2"><br> <br> <label>V.D.A.</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+																					<input type="number" value="0" class="input_size">&nbsp;&nbsp;
+																					<input type="number" value="0" class="input_size"><br>
+																					<br> <label>HRA Rate (%)</label>&nbsp;&nbsp;&nbsp;&nbsp;
+																					<input id="hra_m_percent" type="number" value="0"
+																						class="sm_input1" onkeyup="hraPercent(this.value)"
+																						onchange="" name="hraRate">&nbsp;&nbsp;<input
+																						id="hra_m_percent_result" type="number" value="0"
+																						class="sm_input2" name="hraValue">&nbsp;&nbsp;<input
+																						id="hra_y_percent" type="number" value="0"
+																						class="sm_input1" name="hraRateY">&nbsp;&nbsp;<input
+																						id="hra_y_percent_result" type="number" value="0"
+																						class="sm_input2" name="hravalueY"><br>
+																					<br> <label>LTA Rate (%)</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+																					<input id="lta_m_percent" type="number" value="0"
+																						class="sm_input1">&nbsp;&nbsp;<input
+																						id="lta_m_percent_result" type="number" value="0"
+																						class="sm_input2">&nbsp;&nbsp;<input
+																						id="lta_y_percent" type="number" value="0"
+																						class="sm_input1">&nbsp;&nbsp;<input
+																						id="lta_y_percent_result" type="number" value="0"
+																						class="sm_input2"><br> <label>Medical
+																						<br> Allowance
+																					</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+																					<input id="medical_allow_m" type="number" value="0"
+																						class="input_size"
+																						onkeyup="medicalAllowanceCal(this.value)"
+																						onchange="" name="medicalAllow">&nbsp;&nbsp;
+																					<input id="medical_allow_y" type="number" value="0"
+																						class="input_size" name="medicalAllowY"><br>
+
+
+																					<label>Conveyance <br> Allowance
+																					</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input
+																						id="conveyance_m" type="number" value="0"
+																						class="input_size"
+																						onkeyup='çonveyanceCal(this.value)' onchange=""
+																						name="conveyanceAllow">&nbsp;&nbsp; <input
+																						id="conveyance_y" type="number" value="0"
+																						class="input_size" name="conveyanceAllowY"><br>
+																					<br> <label>Bonus/ Exgratia</label>&nbsp;&nbsp;&nbsp;
+																					<input type="number" value="0" class="input_size"
+																						onkeyup='bonusCal(this.value)'
+																						onchange="totalAllowance()" name="bonus"
+																						id="bonus_m">&nbsp;&nbsp; <input
+																						id="bonus_y" type="number" value="0"
+																						class="input_size" name="bonusY"><br>
+																					<br> <label>Overtime Rate</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+																					<select class="sm_input1">
+																						<option></option>
+																					</select>&nbsp;&nbsp; <input type="number" value="0"
+																						class="sm_input2"><br> <br> <label>Total
+																						Allowances</label>&nbsp;&nbsp; <input
+																						id="total_allowances_m" type="number" value="0"
+																						class="input_size" name="totalAllow">&nbsp;&nbsp;
+																					<input id="total_allowances_y" type="number"
+																						value="0" class="input_size" name="totalAllowY"><br>
+																					<label>Gross(inc. Emp. <br> PF & Emp.
+																						ESI)
+																					</label>&nbsp;&nbsp;&nbsp; <input type="number" value="0"
+																						class="input_size" name="gross" id="grossM">&nbsp;&nbsp;
+																					<input type="number" value="0" class="input_size"
+																						name="grossY" id="grossY"><br> <br>
+																					<label>Net Pay</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+																					<input type="number" value="0" class="input_size"
+																						name="netPay" id="net_pay_m">&nbsp;&nbsp;
+																					<input type="number" value="0" class="input_size"
+																						id="net_pay_y"><br> <br> <label>CTC</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+																					<input type="number" value="0" class="input_size"
+																						id="ctc" name="ctc">&nbsp;&nbsp; <input
+																						type="number" value="0"><br> <label>Company
+																						Leased <br> Accomodation
+																					</label>&nbsp;&nbsp;&nbsp; <select style="width: 155px;">
+																						<option></option>
+																					</select> <input type="submit" value="add">
+
+
+																					<!-- employee pay details end -->
+																				</div>
+																				<div class="col-md-2"></div>
+																			</div>
+																		</div>
+																	</div>
+
+																	<!--  tab 1 end -->
+
+
+																	<!-- TAB 2 DEDUCTION CALCULATION -->
+																	<div role="tabpanel" class="tab-pane" id="profile">
+																		<div class="container-fluid"
+																			style="margin-top: 100px;">
+																			<div class="row">
+
+																				<div class="col-md-12 col-sm-12">
+
+
+
+																					<div class="col-md-12 col-sm-12"
+																						style="margin-bottom: 50px;">
+																						<table>
+																							<!-- <caption>Statement Summary</caption> -->
+																							<thead>
+																								<tr>
+																									<th scope="col"></th>
+																									<th scope="col">Monthly Basis</th>
+																									<th scope="col">Yearly Basis</th>
+																									<td data-label=""></td>
+
+
+																								</tr>
+																							</thead>
+																							<tbody>
+																								<tr>
+																									<td data-label="">FPF %</td>
+																									<td data-label=""><input type="radio"
+																										name="radioBtn" id="r1" value="r1"
+																										onclick='calculateEsiAndEpf()'
+																										style="margin-left: 25px;"> Condition
+																										Not applicable<br> <input type="radio"
+																										name="radioBtn" id="r2" value="r2"
+																										onclick='calculateEsiAndEpf()'>
+																										Calculated on 15000<br> <input
+																										type="radio" name="radioBtn" id="r3"
+																										value="r3" onclick='calculateEsiAndEpf()'>
+																										Calculated on Actual<br> <input
+																										type="radio" name="radioBtn" id="r4"
+																										value="r4" style="margin-left: 35px;"
+																										onclick='calculateEsiAndEpf()'>
+																										Calculated FPF and PF on 15000 and EPF on
+																										Actual<br></td>
+																									<!-- <td data-label=""><input type="radio"></td> -->
+																									<td data-label=""></td>
+
+																								</tr>
+
+																								<tr>
+																									<td data-label="">FPF %</td>
+																									<td data-label=""><input type="number"
+																										class="sm_input1" id="deduction_fpf_percent"
+																										value="0"
+																										onkeyup='calculateEsiAndEpfByFpf(this.value)'>&nbsp;&nbsp;
+																										<input type="number" class="sm_input4"
+																										id="deduction_fpf_m" value="0"></td>
+																									<td data-label=""><input type="number"
+																										class="sm_input5" id="deduction_fpf_y"
+																										value="0"></td>
+																									<td data-label=""></td>
+
+																								</tr>
+
+																								<tr>
+																									<td data-label="">Pension Fund (%)</td>
+																									<td data-label=""><input type="number"
+																										class="sm_input1" id="deduction_pf_percent"
+																										value='0'
+																										onkeyup='calculateEsiAndEpfByPf(this.value)'>&nbsp;&nbsp;
+
+																										<input type="number" class="sm_input4"
+																										id="deduction_pf_m" value="0"></td>
+																									<td data-label=""><input type="number"
+																										class="sm_input5" id="deduction_pf_y"
+																										value="0"></td>
+																									<td data-label=""></td>
+
+																								</tr>
+
+																								<tr>
+																									<td data-label="">EPF (%)</td>
+																									<td data-label=""><input type="number"
+																										class="sm_input1" id="deduction_epf_percent"
+																										value='0'
+																										onkeyup='calculateEsiAndEpfByEpf(this.value)'>&nbsp;&nbsp;
+
+																										<input type="number" class="sm_input4"
+																										id="deduction_epf_m" value="0"></td>
+																									<td data-label=""><input type="number"
+																										class="sm_input5" id="deduction_epf_y"
+																										value="0"></td>
+																									<td data-label=" "><select
+																										id='epfDropdown' name='epfChoose'
+																										onchange='calculateEpf()'>
+																											<option value=''>choose</option>
+																											<option value='y'>Yes</option>
+																											<option value='n'>No</option>
+																									</select></td>
+																									<!-- <td data-label=""><input type="text"></td> -->
+
+																								</tr>
+																								<tr>
+																									<td data-label="">ESI</td>
+
+																									<td data-label=" "><input type="number"
+																										class="sm_input5" id="deduction_esi_m"
+																										value="0"></td>
+
+																									<td data-label=""><input type="number"
+																										class="sm_input5" id="deduction_esi_y"
+																										value="0"></td>
+
+																									<td data-label=" "><select
+																										id='esiDropdown' name='ésiChoose'
+																										onchange='calculateEsi()'>
+																											<option value=''>choose</option>
+																											<option value='y'>Yes</option>
+																											<option value='n'>No</option>
+																									</select></td>
+																									<!-- <td data-label=""></td> -->
+
+
+																								</tr>
+																								<tr>
+																									<td data-label="">SI</td>
+
+																									<td data-label=" "><input type="number"
+																										class="sm_input5" id="deduction_si_m"
+																										value="0" onkeyup='calculateSi(this.value)'></td>
+
+																									<td data-label=""><input type="number"
+																										class="sm_input5" id="deduction_si_y"
+																										value="0"></td>
+
+																									<td data-label=""></td>
+
+
+																								</tr>
+																								<tr>
+																									<td data-label="">VPF</td>
+
+																									<td data-label=" "><input type="number"
+																										class="sm_input5" id="deduction_vpf_m"
+																										value="0" onkeyup="calculateVpf(this.value)"></td>
+
+																									<td data-label=""><input type="number"
+																										class="sm_input5" id="deduction_vpf_y"
+																										value="0"></td>
+
+																									<td data-label=""></td>
+
+
+																								</tr>
+																								<tr>
+																									<td data-label="">Labour Charges</td>
+
+																									<td data-label=" "><input type="number"
+																										class="sm_input5" id="deduction_labour_m"
+																										value="0"
+																										onkeyup="calculateLabour(this.value)"></td>
+
+																									<td data-label=""><input type="number"
+																										class="sm_input5" id="deduction_labour_y"
+																										value="0"></td>
+
+																									<td data-label=""></td>
+
+
+
+																								</tr>
+																								<tr>
+																									<td data-label="">Insurance Premium</td>
+
+																									<td data-label=" "><input type="number"
+																										class="sm_input5" id="deduction_insurance_m"
+																										value="0"
+																										onkeyup="calculateInsurancePremium(this.value)"></td>
+
+																									<td data-label=""><input type="number"
+																										class="sm_input5" id="deduction_insurance_y"
+																										value="0"></td>
+
+																									<td data-label=""></td>
+
+
+																								</tr>
+																								<tr>
+																									<td data-label="">TDS</td>
+
+																									<td data-label=" "><input type="number"
+																										class="sm_input5" id="deduction_tds" value="0"
+																										onkeyup="totalDeduction(this.value)"></td>
+
+																									<td data-label=""></td>
+
+																									<td data-label=""></td>
+
+
+																								</tr>
+																								<tr>
+																									<td data-label="">Surcharge</td>
+
+																									<td data-label=" "><input type="number"
+																										class="sm_input5" id="deduction_surcharge"
+																										value="0" onkeyup="totalDeduction(this.value)"></td>
+
+																									<td data-label=""><input type="text"
+																										class="sm_input5"
+																										id="deduction_surcharge_check"></td>
+
+																									<td data-label=""></td>
+
+
+																								</tr>
+																								<tr>
+																									<td data-label="">Education Cess</td>
+
+																									<td data-label=" "><input type="type"
+																										class="sm_input5" id="deduction_edu" value="0"
+																										onkeyup="totalDeduction(this.value)"></td>
+
+																									<td data-label=""><input type="text"
+																										class="sm_input5"></td>
+
+																									<td data-label=""></td>
+
+
+
+																								</tr>
+																								<tr>
+																									<td data-label="">Section Code</td>
+
+																									<td data-label=" "><input type="number "
+																										class="sm_input5" id="deduction_section"></td>
+
+																									<td data-label=""><input type="text"
+																										class="sm_input5"></td>
+
+																									<td data-label=""></td>
+
+																								</tr>
+																								<tr>
+																									<td data-label="">Total Deduction</td>
+
+																									<td data-label=" "><input type="number"
+																										class="sm_input5" id="deduction_total_m"></td>
+
+																									<td data-label=""><input type="number"
+																										class="sm_input5" id="deduction_total_y"></td>
+
+																								</tr>
+																								<tr>
+																									<td data-label="">CTC</td>
+
+																									<td data-label=" "><input type="number"
+																										class="sm_input5" id="deduction_total_ctc"></td>
+
+																									<td data-label=""></td>
+
+																									<td data-label=""></td>
+																									<!-- <td data-label="Amount"><input type="text"></td> -->
+
+																								</tr>
+
+																							</tbody>
+																						</table>
+																						<br>
+
+																					</div>
+
+																				</div>
+																				<!-- <div class="col-md-2">
+    </div> -->
+																			</div>
+																		</div>
+																	</div>
+
+																	<!-- TAB 2 DEDUCTION END -->
+
+
+																	<!-- tab 3 -->
+																	<div role="tabpanel" class="tab-pane" id="messages">
+																		<div class="container-fluid">
+																			<div class="row">
+
+																				<div class="col-md-12 col-sm-12"
+																					style="margin-bottom: 50px;">
+																					<table>
+																						<!-- <caption>Statement Summary</caption> -->
+																						<thead>
+																							<tr>
+																								<th scope="col">Code*</th>
+																								<th scope="col">Type</th>
+																								<th scope="col">Allowances Deductions Names</th>
+																								<th scope="col">ESI Effected</th>
+																								<th scope="col">Head Desc.</th>
+																								<th scope="col">Effect With Work Days</th>
+																								<th scope="col">Amount* Monthly Basis</th>
+																								<th scope="col">Amount* Yearly Basis</th>
+																							</tr>
+																						</thead>
+																						
+																						<tbody>
+																							<tr th:each=" listMiscAllowanceDeduction : ${listMiscAllowanceDeduction} " >
+																								
+																								<td>
+																								 <select id="spicealAllowanceCode" name="allowanceCode">
+																									<option value=" ">Select</option>
+																									<option th:each="emp: ${listMiscAllowanceDeduction}"
+																										th:text="${emp.allowanceCode}">${emp.allowanceCode}</option>
+																								</select>
+																								</td>
+																								
+																								
+																								
+																									
+																								<td data-label="Allowance-Type"><input name ="type"
+																									type="text" class="tab3" th:value="${listMiscAllowanceDeduction.type}" id="allowanceType"></td>
+																									
+																								<td data-label="Allowance-Account"><input type="text" name="accountName" id="accountName"
+																									class="tab3" th:value="${listMiscAllowanceDeduction.accountName}"></td>
+																									
+																								<td><input type="checkbox" id="allowanceDeductionEsiEffectiveDate"></td>
+																								
+																								<td><input type="text" class="tab3" th:value="${listMiscAllowanceDeduction.head}" id="head"></td>
+																								
+																								<td><input type="checkbox" id="allowanceDeductionEffectiveWorkDate"></td>
+																								
+																								<td><input type="text" class="tab3"></td>
+																								
+																								<td><input type="text" class="tab3"></td>
+																							</tr>
+																							
+																							<!-- <tr>
+																								<td data-label="Account"><input type="text"
+																									class="tab3"></td>
+																								<td data-label="Due Date"><input
+																									type="text" class="tab3"></td>
+																								<td data-label="Amount"><input type="text"
+																									class="tab3"></td>
+																								<td><input type="checkbox"></td>
+																								<td><input type="text" class="tab3"></td>
+																								<td><input type="checkbox"></td>
+																								<td><input type="text" class="tab3"></td>
+																								<td><input type="text" class="tab3"></td>
+																							</tr>
+																							<tr>
+																								<td data-label="Account"><input type="text"
+																									class="tab3"></td>
+																								<td data-label="Due Date"><input
+																									type="text" class="tab3"></td>
+																								<td data-label="Amount"><input type="text"
+																									class="tab3"></td>
+																								<td><input type="checkbox"></td>
+																								<td><input type="text" class="tab3"></td>
+																								<td><input type="checkbox"></td>
+																								<td><input type="text" class="tab3"></td>
+																								<td><input type="text" class="tab3"></td>
+																							</tr>
+																							<tr>
+																								<td data-label="Account"><input type="text"
+																									class="tab3"></td>
+																								<td data-label="Due Date"><input
+																									type="text" class="tab3"></td>
+																								<td data-label="Amount"><input type="text"
+																									class="tab3"></td>
+																								<td><input type="checkbox"></td>
+																								<td><input type="text" class="tab3"></td>
+																								<td><input type="checkbox"></td>
+																								<td><input type="text" class="tab3"></td>
+																								<td><input type="text" class="tab3"></td>
+																							</tr>
+																							<tr>
+																								<td data-label="Account"><input type="text"
+																									class="tab3"></td>
+																								<td data-label="Due Date"><input
+																									type="text" class="tab3"></td>
+																								<td data-label="Amount"><input type="text"
+																									class="tab3"></td>
+																								<td><input type="checkbox"></td>
+																								<td><input type="text" class="tab3"></td>
+																								<td><input type="checkbox"></td>
+																								<td><input type="text" class="tab3"></td>
+																								<td><input type="text" class="tab3"></td>
+																							</tr>
+																							<tr>
+																								<td data-label="Account"><input type="text"
+																									class="tab3"></td>
+																								<td data-label="Due Date"><input
+																									type="text" class="tab3"></td>
+																								<td data-label="Amount"><input type="text"
+																									class="tab3"></td>
+																								<td><input type="checkbox"></td>
+																								<td><input type="text" class="tab3"></td>
+																								<td><input type="checkbox"></td>
+																								<td><input type="text" class="tab3"></td>
+																								<td><input type="text" class="tab3"></td>
+																							</tr>
+																							<tr>
+																								<td data-label="Account"><input type="text"
+																									class="tab3"></td>
+																								<td data-label="Due Date"><input
+																									type="text" class="tab3"></td>
+																								<td data-label="Amount"><input type="text"
+																									class="tab3"></td>
+																								<td><input type="checkbox"></td>
+																								<td><input type="text" class="tab3"></td>
+																								<td><input type="checkbox"></td>
+																								<td><input type="text" class="tab3"></td>
+																								<td><input type="text" class="tab3"></td>
+																							</tr>
+																							<tr>
+																								<td data-label="Account"><input type="text"
+																									class="tab3"></td>
+																								<td data-label="Due Date"><input
+																									type="text" class="tab3"></td>
+																								<td data-label="Amount"><input type="text"
+																									class="tab3"></td>
+																								<td><input type="checkbox"></td>
+																								<td><input type="text" class="tab3"></td>
+																								<td><input type="checkbox"></td>
+																								<td><input type="text" class="tab3"></td>
+																								<td><input type="text" class="tab3"></td>
+																							</tr>
+																							<tr>
+																								<td data-label="Account"><input type="text"
+																									class="tab3"></td>
+																								<td data-label="Due Date"><input
+																									type="text" class="tab3"></td>
+																								<td data-label="Amount"><input type="text"
+																									class="tab3"></td>
+																								<td><input type="checkbox"></td>
+																								<td><input type="text" class="tab3"></td>
+																								<td><input type="checkbox"></td>
+																								<td><input type="text" class="tab3"></td>
+																								<td><input type="text" class="tab3"></td>
+																							</tr>   -->	
+																					</tbody>
+																					</table>
+																					<br> <a href="#" class="previous">&laquo;
+																						Previous</a> <a href="#" class="next">Next &raquo;</a>
+																					<a href="#" class="previous round">&#8249;</a> <a
+																						href="#" class="next round">&#8250;</a> <a
+																						href="#" class="close"></a>
+
+
+																				</div>
+
+																			</div>
+																		</div>
+																	</div>
+
+																	<!--  tab3 end -->
+																</div>
+
+																<input type="submit" value=" add">
+
+															</div>
+														</div>
+													</div>
+												</div>
+
+											</div>
+										</div>
+									</div>
+
+
+
+
+									<!-- form content end -->
+								</div>
+							</div>
+
+							<!-- bottom table -->
+							<div class="col-12">
+								<div class="card">
+									<div class="card-header"></div>
+									<div class="card-body">
+										<table id="datatables-buttons"
+											class="table table-striped display" style="width: 100%">
+											<thead>
+												<tr>
+													<th>Employee Code</th>
+													<th>Employee Name</th>
+													<th>Department Code</th>
+													<th>Employee Status</th>
+													<th>Card No</th>
+													<th>Action</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr th:each="list : ${listEmpPayDetail}">
+													<td th:text="${list.empCode}"></td>
+													<td th:text="${list.empName}"></td>
+													<td th:text="${list.empName}"></td>
+													<td></td>
+													<td></td>
+													<td>
+													<td><a
+														th:href="@{/editEmpPayDetail/{empCode}(empCode=${list.empCode})}"><i
+															class="fa fa-edit"></i></a> <a
+														th:href="@{/editEmpPayDetail/{empCode}(empCode=${list.empCode})}"><i
+															class="fa fa-edit"></i></a></td>
+												</tr>
+											</tbody>
+
+										</table>
+									</div>
+
+								</div>
+							</div>
+							<!-- botttom table end  -->
+						</div>
+
+
+						<!-- bottom table  -->
+
+						<!-- bottom table end -->
+					</div>
+
+
+
+
+				</main>
+
+			</form>
+
+
+			<footer class="footer">
+				<div th:replace="/fragments/footer :: div"></div>
+			</footer>
+		</div>
+	</div>
+
+	<script>
+      //open and close tab menu
+    $('.nav-tabs-dropdown')
+        .on("click", "li:not('.active') a", function(event) {  $(this).closest('ul').removeClass("open");
+        })
+        .on("click", "li.active a", function(event) {        $(this).closest('ul').toggleClass("open");
+        });
+    </script>
+	<script>
+
+	$(document).ready(function() {
+		   var datatablesButtons =  $('#example').DataTable( {
+	        "scrollY": 200,
+	        "scrollX": true,
+	        deferRender:true,
+	        lengthChange: false,
+	    	buttons: ['copy', 'csv', 'excel', 'pdf', 'print'],
+            scrollCollapse: true,
+            
+	    } );
+	
+		datatablesButtons.buttons().container().appendTo("#example_wrapper .col-md-6:eq(0)")
+	    
+	} );
+	
+	$('[name=empId]').val( '' );
+
+
+	
+	</script>
+	<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+	<script
+		src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+	<script
+		src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+	<script
+		src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>
+	<script
+		src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.bootstrap4.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+	<script
+		src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js"></script>
+	<script
+		src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.print.min.js"></script>
+	<script
+		src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.colVis.min.js"></script>
+
+
+
+</body>
+</html>
