@@ -26,10 +26,10 @@ public class LeaveGrant  implements Serializable{
 	private String leaveCode;
 
 	@Column(name = "NO_OF_LEAVES_GRANTED")
-	private String noOfLeavesGranted;
+	private int noOfLeavesGranted;
 
 	@Column(name = " PREVIOUS_YR_BALANCE")
-	private String previousYrBalance;
+	private int previousYrBalance;
 
 	@Column(name = "YEAR")
 	private String year;
@@ -38,10 +38,10 @@ public class LeaveGrant  implements Serializable{
 	private String leaveType;
 
 	@Column(name = "LEAVE_AVAILED")
-	private String leaveAvailed;
+	private int leaveAvailed;
 
 	@Column(name = "CLOSING_BAL")
-	private String closingBal;
+	private int closingBal;
 
 	
 	@Column(name = "INS_BY", updatable = false)
@@ -63,7 +63,6 @@ public class LeaveGrant  implements Serializable{
 	public void setEmpCode(String empCode) {
 		this.empCode = empCode;
 	}
-	
 
 	public String getEmpName() {
 		return empName;
@@ -81,23 +80,22 @@ public class LeaveGrant  implements Serializable{
 		this.leaveCode = leaveCode;
 	}
 
-	public String getNoOfLeavesGranted() {
+	public int getNoOfLeavesGranted() {
 		return noOfLeavesGranted;
 	}
 
-	public void setNoOfLeavesGranted(String noOfLeavesGranted) {
+	public void setNoOfLeavesGranted(int noOfLeavesGranted) {
 		this.noOfLeavesGranted = noOfLeavesGranted;
 	}
 
-	public String getPreviousYrBalance() {
+	public int getPreviousYrBalance() {
 		return previousYrBalance;
 	}
 
-	public void setPreviousYrBalance(String previousYrBalance) {
+	public void setPreviousYrBalance(int previousYrBalance) {
 		this.previousYrBalance = previousYrBalance;
 	}
 
-	
 	public String getYear() {
 		return year;
 	}
@@ -106,7 +104,6 @@ public class LeaveGrant  implements Serializable{
 		this.year = year;
 	}
 
-	
 	public String getLeaveType() {
 		return leaveType;
 	}
@@ -115,19 +112,19 @@ public class LeaveGrant  implements Serializable{
 		this.leaveType = leaveType;
 	}
 
-	public String getLeaveAvailed() {
+	public int getLeaveAvailed() {
 		return leaveAvailed;
 	}
 
-	public void setLeaveAvailed(String leaveAvailed) {
+	public void setLeaveAvailed(int leaveAvailed) {
 		this.leaveAvailed = leaveAvailed;
 	}
 
-	public String getClosingBal() {
+	public int getClosingBal() {
 		return closingBal;
 	}
 
-	public void setClosingBal(String closingBal) {
+	public void setClosingBal(int closingBal) {
 		this.closingBal = closingBal;
 	}
 
@@ -162,6 +159,7 @@ public class LeaveGrant  implements Serializable{
 	public void setUpdDate(Date updDate) {
 		this.updDate = updDate;
 	}
+
 	
 
 }

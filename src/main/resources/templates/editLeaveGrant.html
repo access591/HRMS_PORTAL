@@ -80,12 +80,12 @@ body {
 												<div class="form-group">
 											  <label>leaveAvailed </label>
 											  	<label style="color: red">*</label>
-											   <input type="text" class="form-control" id="leaveAvailed" name="leaveAvailed" th:value="${leaveGrantEdit.leaveAvailed}"size="50" >
+											   <input type="text" class="form-control" id="leaveAvailed" name="leaveAvailed" th:value="${leaveGrantEdit.leaveAvailed}"pattern="\d{1,2}"maxlength="2">
 												</div>
 													<div class="form-group">
 											  <label> previous YR Balance </label>
 											  	<label style="color: red">*</label>
-											   <input type="text" class="form-control" id="previousYrBalance" th:value="${leaveGrantEdit.previousYrBalance}"name="previousYrBalance" size="50" >
+											   <input type="text" class="form-control" id="previousYrBalance" th:value="${leaveGrantEdit.previousYrBalance}"name="previousYrBalance" pattern="\d{1,2}"maxlength="2" >
 												</div>
 
 						
@@ -94,7 +94,7 @@ body {
 												<div class="form-group">
 											  <label>  No Of Leave Granted </label>
 											  	<label style="color: red">*</label>
-											   <input type="text" class="form-control" id="noOfLeavesGranted" name="noOfLeavesGranted"th:value="${leaveGrantEdit.noOfLeavesGranted}" size="50" >
+											   <input type="text" class="form-control" id="noOfLeavesGranted" name="noOfLeavesGranted"th:value="${leaveGrantEdit.noOfLeavesGranted}" pattern="\d{1,2}"maxlength="2">
 												</div>
 											
 											<div class="form-group">
@@ -115,14 +115,14 @@ body {
 												<div class="form-group">
 											  <label>Leave Code  </label>
 											  	<label style="color: red">*</label>
-											   <input type="text" class="form-control" id="leaveCode" name="leaveCode"th:value="${leaveGrantEdit.leaveCode}" size="50" >
+											   <input type="text" class="form-control" id="leaveCode" name="leaveCode"th:value="${leaveGrantEdit.leaveCode}" pattern="\d{1,5}"maxlength="5">
 												</div>
 												
 												
 												<div class="form-group">
 											  <label>  Closing Balance  </label>
 											  	<label style="color: red">*</label>
-											   <input type="text" class="form-control" id="closingBal" name="closingBal"th:value="${leaveGrantEdit.closingBal}" size="50" >
+											   <input type="text" class="form-control" id="closingBal" name="closingBal"th:value="${leaveGrantEdit.closingBal}"pattern="\d{1,2}"maxlength="2" >
 												</div>
 												
 											</div>
