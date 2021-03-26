@@ -220,13 +220,7 @@ body {
 											<div class="row">
 											<div class="col-12 col-lg-6">
 											
-														<div class="form-group">
-														<label class="form-label">Basic Pay*</label>
-														<input id="basic_pay_m" type="number" value="0"class="input_size"onkeyup="basicPayCal(this.value);" onchange=""
-																						name="basicPay">
-														<label class="form-label"> </label>
-														<input id="basic_pay_y" type="number" value="0"class="input_size" name="basicPayY">
-														</div>
+													
 														</div>
 															
 										                		<div class="form-group">
@@ -620,26 +614,27 @@ body {
 
 																	<!-- tab 3 -->
 																	<div role="tabpanel" class="tab-pane" id="messages">
-																		<div class="container-fluid">
-																			<div class="row">
-
-																				<div class="col-md-12 col-sm-12"
-																					style="margin-bottom: 50px;">
-																					<table>
-																					
+																		
+																	     <div class="col-12">
+																			<div class="card">
+																				<div class="card-header">
+												
+																					<h6 class="card-subtitle text-muted">DataTables.</h6>
+																				</div>
+																				<div class="card-body">
+																			<table id="example"aria-describedby="example" class="table table-striped display" style="width:100%">
 																						<thead>
 																							<tr>
-																								<th scope="col">Code*</th>
-																								<th scope="col">Type</th>
-																								<th scope="col">Allowances Deductions Names</th>
-																								<th scope="col">ESI Effected</th>
-																								<th scope="col">Head Desc.</th>
-																								<th scope="col">Effect With Work Days</th>
-																								<th scope="col">Amount* Monthly Basis</th>
-																								<th scope="col">Amount* Yearly Basis</th>
+																							<th scope="col">Code*</th>
+																							<th scope="col">Type</th>
+																							<th scope="col">Allowances Deductions Names</th>
+																							<th scope="col">ESI Effected</th>
+																							<th scope="col">Head Desc.</th>
+																							<th scope="col">Effect With Work Days</th>
+																							<th scope="col">Amount* Monthly Basis</th>
+																							<th scope="col">Amount* Yearly Basis</th>
 																							</tr>
 																						</thead>
-																						
 																						<tbody>
 																							<tr th:each=" listMiscAllowanceDeduction : ${listMiscAllowanceDeduction} " >
 																								
@@ -670,22 +665,122 @@ body {
 																								
 																								<td><input type="text" class="tab3"></td>
 																							</tr>
-																							
-																						
-																					</tbody>
+																						</tbody>
+																					
 																					</table>
-																					<br> <a href="#" class="previous">&laquo;
-																						Previous</a> <a href="#" class="next">Next &raquo;</a>
-																					<a href="#" class="previous round">&#8249;</a> <a
-																						href="#" class="next round">&#8250;</a> <a
-																						href="#" class="close"></a>
-
-
 																				</div>
-
+																				
 																			</div>
 																		</div>
+
 																	</div>
+																	
+																	<div class="container-fluid">
+
+					
+					
+					
+					
+					<div class="row">
+
+						<div class="col-12">
+							<div id="smartwizard-validation" class="wizard wizard-primary" >
+								<ul>
+									<li><a href="#validation-step-1">Employee Pay Details<br /></a></li>
+									<li><a href="#validation-step-2">Deductions<br /></a></li>
+									<li><a href="#validation-step-3">Allowances Deductions<br /></a></li>
+								</ul>
+
+								<div>
+									<div id="validation-step-1">
+										   <div class="form-row">
+												<div class="form-group sm col-md-4">
+												
+												<div class="form-group">
+														<label class="form-label">Basic Pay*</label>
+														<input id="basic_pay_m" type="number" value="0"class="input_size"onkeyup="basicPayCal(this.value);" onchange=""
+																						name="basicPay">
+														<label class="form-label"> </label>
+														
+														</div>
+											   </div>
+											    <div class="form-group sm col-md-4">
+												<label for="inputHieght">
+												<span class="text-danger">*</span>
+												</label>
+												<input id="basic_pay_y" type="number" value="0"class="input_size" name="basicPayY">
+											</div>
+											   
+										 </div>
+										 
+										  <div class="form-row">
+										          <div class="form-group sm col-md-4">
+													<label class="form-label">Addl. Pay</label>&nbsp;&nbsp;&nbsp;&nbsp;
+													<input id="addl_pay_m" type="number" value="0"class="input_size"
+																onkeyup="basicAditionalCal(this.value);"onchange="">
+															    
+															    </div>
+															    
+															    
+												<div class="form-group sm col-md-4">
+												<label for="inputHieght">
+												<span class="text-danger">*</span>
+												</label>
+												<input id="addl_pay_y" type="number" value="0"class="input_size">
+											</div>
+										  </div>
+										 
+										 
+										 
+									</div>
+									
+									
+									<div id="validation-step-2">
+										<div class="form-group">
+											<label class="form-label">First name
+												<span class="text-danger">*</span>
+											</label>
+											<input name="wizard-name" type="text" class="form-control required">
+										</div>
+										<div class="form-group">
+											<label class="form-label">Last name
+												<span class="text-danger">*</span>
+											</label>
+											<input name="wizard-surname" type="text" class="form-control required">
+										</div>
+										<div class="form-group">
+											<label class="form-label">Email
+												<span class="text-danger">*</span>
+											</label>
+											<input name="wizard-email" type="text" class="form-control required email">
+										</div>
+										<div class="form-group mb-0">
+											<label class="form-label">Address</label>
+											<input name="wizard-address" type="text" class="form-control">
+										</div>
+									</div>
+									
+									
+									<div id="validation-step-3">
+										<div class="form-group">
+											<label class="custom-control custom-checkbox">
+												<input type="checkbox" class="custom-control-input">
+												<span class="custom-control-label">I agree with the Terms and Conditions</span>
+											</label>
+										</div>
+									</div>
+									
+									
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					
+					
+					
+
+				</div>
 
 																	<!--  tab3 end -->
 																</div>
@@ -761,12 +856,97 @@ body {
 			});
 		});
 	</script>
-	<script
-		src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>
-	<script
-		src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.bootstrap4.min.js"></script>
-
-
+	<script>
+	$(document).ready(function() {
+	    $('#example').DataTable( {
+	        "scrollY": 200,
+	        "scrollX": true,
+	        deferRender:true,
+            scrollCollapse: true,
+            
+	    } );
+	} );
+	</script>
+	<script>
+		$(function() {
+			$("#smartwizard-default-primary").smartWizard({
+				theme: "default",
+				showStepURLhash: false
+			});
+			$("#smartwizard-default-success").smartWizard({
+				theme: "default",
+				showStepURLhash: false
+			});
+			$("#smartwizard-default-danger").smartWizard({
+				theme: "default",
+				showStepURLhash: false
+			});
+			$("#smartwizard-default-warning").smartWizard({
+				theme: "default",
+				showStepURLhash: false
+			});
+			$("#smartwizard-arrows-primary").smartWizard({
+				theme: "arrows",
+				showStepURLhash: false
+			});
+			$("#smartwizard-arrows-success").smartWizard({
+				theme: "arrows",
+				showStepURLhash: false
+			});
+			$("#smartwizard-arrows-danger").smartWizard({
+				theme: "arrows",
+				showStepURLhash: false
+			});
+			$("#smartwizard-arrows-warning").smartWizard({
+				theme: "arrows",
+				showStepURLhash: false
+			});
+			// Validation
+			var $validationForm = $("#smartwizard-validation");
+			$validationForm.validate({
+				errorPlacement: function errorPlacement(error, element) {
+					$(element).parents(".form-group").append(
+						error.addClass("invalid-feedback small d-block")
+					)
+				},
+				highlight: function(element) {
+					$(element).addClass("is-invalid");
+				},
+				unhighlight: function(element) {
+					$(element).removeClass("is-invalid");
+				},
+				rules: {
+					"wizard-confirm": {
+						equalTo: "input[name=\"wizard-password\"]"
+					}
+				}
+			});
+			$validationForm
+				.smartWizard({
+					autoAdjustHeight: false,
+					backButtonSupport: false,
+					useURLhash: false,
+					showStepURLhash: false,
+					toolbarSettings: {
+						toolbarExtraButtons: [$("<button class=\"btn btn-submit btn-primary\" type=\"button\">Finish</button>")]
+					}
+				})
+				.on("leaveStep", function(e, anchorObject, stepNumber, stepDirection) {
+					if (stepDirection === "forward") {
+						return $validationForm.valid();
+					}
+					return true;
+				});
+			$validationForm.find(".btn-submit").on("click", function() {
+				if (!$validationForm.valid()) {
+					return;
+				}
+				alert("Great! The form is valid and ready to submit.");
+				return false;
+			});
+		});
+	</script>
+		
 
 </body>
 </html>
