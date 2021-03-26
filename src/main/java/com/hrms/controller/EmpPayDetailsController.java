@@ -53,17 +53,8 @@ public class EmpPayDetailsController {
 
 		List<MiscAllowance> listMiscAllowanceDeduction = miscAllowanceDeductionService.getAllMiscAllowanceDeduction();
 		model.addAttribute("listMiscAllowanceDeduction", listMiscAllowanceDeduction);
-
-		System.out.println("emp pay detail module");
 		List<Employee> listEmployee = employeeService.getAllEmployees();
-
 		List<EmployeePayDetail> listEmpPayDetail = empPayDetailService.getAllEmployeePayDetail();
-		System.out.println(" length : " + listEmpPayDetail.size());
-
-//		for (int i = 0; i < listEmpPayDetail.size(); i++) {
-//			System.out.println(" employe name : " + listEmpPayDetail.get(i).getEmpCode());
-//		}
-
 		String userCode = (String) session.getAttribute("username");
 		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
 		if (modules != null) {
@@ -73,7 +64,7 @@ public class EmpPayDetailsController {
 			model.addAttribute("listEmployee", listEmployee);
 		}
 		if (listEmpPayDetail != null) {
-			System.out.println("emp pay detail list");
+		
 			model.addAttribute("listEmpPayDetail", listEmpPayDetail);
 		}
 
@@ -105,7 +96,7 @@ public class EmpPayDetailsController {
 			HttpSession session, Model model) {
 
 		System.out.println("save employe pay detail " + employeePayDetail);
-		String userCode = (String) session.getAttribute("username");
+	
 		List<EmployeePayDetail> listEmployeePayDetail = empPayDetailService.getAllEmployeePayDetail();
 
 		// EmployeePayDetail em = empPayDetailService
@@ -120,13 +111,11 @@ public class EmpPayDetailsController {
 		}
 		model.addAttribute(listEmployeePayDetail);
 		System.out.println(" empoloyee pay detail data :" + employeePayDetail.getEmpName());
-		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
+		
 
 		// List<EmployeePayDetail> listEmployeePayDetail =
 		// empPayDetailService.getAllEmployeePayDetail();
-		if (modules != null) {
-			model.addAttribute("modules", modules);
-		}
+		
 		session.setAttribute("username", session.getAttribute("username"));
 		return "redirect:/" + pageMappingService.PageRequestMapping(reqPage, pageno);
 	}
