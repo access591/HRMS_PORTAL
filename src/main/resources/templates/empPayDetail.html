@@ -133,21 +133,21 @@ body {
 										 		<div class="container-fluid" style="margin-top: 50px;">
 										<div class="card">
 											<div class="row">
-												<div class="col-md-1 col-sm-3"></div>
-												<div class="col-md-10 col-sm-6">
+												<div class="col-md-12 col-sm-3"></div>
+												<div class="col-md-12 col-sm-6">
 													
 													
 													<div class="row">
-														<div class="col-md-4 col-sm-4">
+													<div class="form-group sm col-md-4">
 															<label>Emp. Ins. No.</label>&nbsp; <input type="text"
 																class="input_size" name="empInsuranceNo">
 														</div>
-														<div class="col-md-4 col-sm-4">
+													<div class="form-group sm col-md-4">
 															<label>PF No.</label>
-															&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+															
 															<input type="text" class="input_size" name="pfNo">
 														</div>
-														<div class="col-md-4 col-sm-4">
+														<div class="form-group sm col-md-4">
 															<label>Effective Date</label> 
 															<input type="text"class="input_size" name="pfEffectiveDate">
 														</div>
@@ -155,27 +155,27 @@ body {
 													</div>
 													<br>
 													<div class="row">
-														<div class="col-md-4 col-sm-4">
+														<div class="form-group sm col-md-4">
 															<label>Group Ins. No.</label> <input type="text"
 																class="input_size" name="groupInsuranceNo">
 														</div>
-														<div class="col-md-4 col-sm-4">
+														<div class="form-group sm col-md-4">
 															<label>Emp. ESI No.</label>&nbsp;&nbsp; <input
 																type="text" class="input_size" name="empEsiNo">
 														</div>
-														<div class="col-md-4 col-sm-4">
+													<div class="form-group sm col-md-4">
 															<label>Effective Date</label> <input type="text"
 																class="input_size" name="esiEffectiveDate">
 														</div>
 													</div>
 													<br>
 													<div class="row">
-														<div class="col-md-4 col-sm-4">
-															<label>Arrear Due</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+														<div class="form-group sm col-md-4">
+															<label>Arrear Due</label>
 															<input type="text" class="input_size" name="arrearDue">
 														</div>
-														<div class="col-md-4 col-sm-4">
-															<label>Arrear Paid</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+														<div class="form-group sm col-md-4">
+															<label>Arrear Paid</label>
 															<input type="text" class="input_size" name="arrearPaid">
 														</div>
 														
@@ -215,22 +215,27 @@ body {
 											<div class="col-md-2"></div>
 											<div class="col-md-12">
 											<!-- employee pay details -->
+											
+											<div class="row">
+											<div class="col-12 col-lg-6">
+											
 														<div class="form-group">
-														<label class="form-label">Basic Pay*  </label>
+														<label class="form-label">Basic Pay*</label>
 														<input id="basic_pay_m" type="number" value="0"class="input_size"onkeyup="basicPayCal(this.value);" onchange=""
 																						name="basicPay">
 														<label class="form-label"> </label>
 														<input id="basic_pay_y" type="number" value="0"class="input_size" name="basicPayY">
 														</div>
+														</div>
 															
-															<div class="form-group">
+										                		<div class="form-group">
 																<label class="form-label">Addl. Pay</label>&nbsp;&nbsp;&nbsp;&nbsp;
 																<input id="addl_pay_m" type="number" value="0"class="input_size"
 																onkeyup="basicAditionalCal(this.value);"onchange="">
 															    <input id="addl_pay_y" type="number" value="0"class="input_size">
 															    </div>
-																						
-																			<div class="form-group">
+																<div class="col-12 col-lg-6">						
+																<div class="form-group">
 																			<label class="form-label"> F.D.A.% </label>&nbsp;&nbsp;&nbsp;
 																			<input id="fda_m_percent" type="number" value="0"class="sm_input1"
 																			onkeyup="fdaPercentMonthly(this.value);"onchange="">
@@ -239,15 +244,15 @@ body {
 																			<input id="fda_y_percent" type="number" value="0"class="sm_input1">
 																			<input id="fda_y_percent_result" type="number" value="0"class="sm_input2">
 																			</div>
-																						
-																				<div class="form-group">
+							</div>															
+																<div class="form-group">
 																				<label class="form-label">V.D.A.</label>&nbsp;&nbsp;&nbsp;
 																				<input type="number" value="0" class="input_size">&nbsp;&nbsp;
 																				<input type="number" value="0" class="input_size"><br>
 																				</div>
 																					
 																					
-																				<div class="form-group">
+																<div class="form-group">
 																					<label class="form-label">HRA Rate (%) </label>
 																					<input id="hra_m_percent" type="number" value="0"class="sm_input1" onkeyup="hraPercent(this.value)"
 																						onchange="" name="hraRate">
@@ -257,7 +262,7 @@ body {
 																						</div>
 																						
 																						
-																					   <div class="form-group">
+															   <div class="form-group">
 																				    	<label class="form-label">LTA Rate (%)  </label>
 																					     <input id="lta_m_percent" type="number" value="0"class="sm_input1">
 																						<input id="lta_m_percent_result" type="number" value="0"class="sm_input2">
@@ -266,20 +271,20 @@ body {
 																						</div>
 																						
 																						
-																						<div class="form-group">
+															    		<div class="form-group">
 																						<label class="form-label">Medical  Allowance  </label>
 																					     <input id="medical_allow_m" type="number" value="0"class="input_size"onkeyup="medicalAllowanceCal(this.value)"
 																						onchange="" name="medicalAllow">&nbsp;&nbsp;
 																					    <input id="medical_allow_y" type="number" value="0"class="input_size" name="medicalAllowY"><br>
 																				         </div>
 																				         
-																				     <div class="form-group">
+																	     <div class="form-group">
 																				    <label  class="form-label">Conveyance  Allowance  </label> 
 																					<input id="conveyance_m" type="number" value="0" class="input_size"onkeyup='çonveyanceCal(this.value)' onchange=""name="conveyanceAllow">
 																				     <input id="conveyance_y" type="number" value="0"class="input_size" name="conveyanceAllowY">
 																					</div>
 																						
-																					<div class="form-group">
+																		<div class="form-group">
 																					 <label class="form-label">Bonus/ Exgratia</label>&nbsp;&nbsp;&nbsp;
 																					<input type="number" value="0" class="input_size"onkeyup='bonusCal(this.value)'
 																						onchange="totalAllowance()" name="bonus"id="bonus_m">&nbsp;&nbsp;
@@ -287,38 +292,38 @@ body {
 																						</div>
 																						
 																					
-																					<div class="form-group">
+																		<div class="form-group">
 																					<label class="form-label">Overtime Rate</label>
 																					<select class="sm_input1"><option></option>
 																					 </select>&nbsp;&nbsp; <input type="number" value="0"class="sm_input2"><br> <br> 
 																						</div>
 																						
 																						
-																					<div class="form-group">
+															      		<div class="form-group">
 																					<label  class="form-label">Total   Allowances</label>&nbsp;&nbsp;
 																					<input id="total_allowances_m" type="number" value="0" class="input_size" name="totalAllow">&nbsp;&nbsp;
 																					<input id="total_allowances_y" type="number" value="0" class="input_size" name="totalAllowY"><br>
 																					</div>
 																					
-																					<div class="form-group">
+																		<div class="form-group">
 																					<label class="form-label">Gross(inc. Emp. <br> PF & Emp.ESI)</label>
 																					<input type="number" value="0"class="input_size" name="gross" id="grossM">
 																					<input type="number" value="0" class="input_size"name="grossY" id="grossY">
 																					<br>
 																					</div>
 																					
-																					<div class="form-group">
+																		<div class="form-group">
 																					<label class="form-label">Net Pay</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 																					<input type="number" value="0" class="input_size"name="netPay" id="net_pay_m">&nbsp;&nbsp;
 																					<input type="number" value="0" class="input_size" id="net_pay_y">
 																					</div>
 																						
-																					<div class="form-group">
+																		<div class="form-group">
 																					<label class="form-label">CTC</label>&nbsp;&nbsp;																					<input type="number" value="0" class="input_size"id="ctc" name="ctc">&nbsp;&nbsp; 
 																						<input type="number" value="0">
 																						</div>
 																						
-																					<div class="form-group">
+																		<div class="form-group">
 																					<label class="form-label">CompanyLeased <br>Accomodation</label>
 																					<select style="width: 155px;">
 																						<option></option>
@@ -328,12 +333,12 @@ body {
 
 																					<!-- employee pay details end -->
 																				</div>
-																				<div class="col-md-2"></div>
-																			</div>
+																		<div class="col-md-2"></div>
+																</div>
 																		</div>
 																	</div>
 																	</div>
-
+</div>
 																	<!--  tab 1 end -->
 
 
