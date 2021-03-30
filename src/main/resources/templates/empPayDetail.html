@@ -51,9 +51,8 @@ body {
 									<h5 class="card-title">Employee Pay Details</h5>
 
 								</div>
-								<div class="card-body">
-									<form id="validation-form" action="#"
-										th:action="@{/saveemployepaydetail}"
+						<div class="card-body">
+						<form id="validation-form" action="#"th:action="@{/saveemployepaydetail}"
 										th:object="${employeePayDetail}" method="post">
 
 										<div class="row">
@@ -188,133 +187,209 @@ body {
 										</div>
 									</div>
 								</div>
-									<div class="row" >
-	                                <div class="col-12">
-	                               <div  class="wizard wizard-primary">
-	                            
-					<div class="container-fluid" style="margin-top: 50px;">
-										    <div class="card">
-											<div class="row">
-											<div class="demo">
-											<div role="tabpanel">
-											
-											<ul class="nav nav-tabs nav-justified nav-tabs-dropdown"role="tablist">
-											<li role="presentation" class="active">
-											<a href="#home" aria-controls="home" role="tab" data-toggle="tab">Employee Pay Details</a> &nbsp;&nbsp;&nbsp;&nbsp;</li> 
-											<li role="presentation">
-											<a href="#profile"aria-controls="profile" role="tab" data-toggle="tab">Deductions</a> &nbsp;&nbsp;&nbsp;&nbsp;
-											</li><li role="presentation">
-											<a href="#messages"aria-controls="messages" role="tab" data-toggle="tab">Allowances Deductions</a> &nbsp;&nbsp;&nbsp;&nbsp;
-											</li>
-											</ul>
-											<div class="tab-content">
+								
 
-																	<!--  tab 1 -->
-											<div role="tabpanel" class="tab-pane active" id="home">
-											<div class="container-fluid"style="margin-top: 100px;">
-											<div class="row">
-											<div class="col-md-2"></div>
-											<div class="col-md-12">
-											<!-- employee pay details -->
-											
-											<div class="row">
-											<div class="col-12 col-lg-6">
-											
-													
-														</div>
+
 															
-										                		<div class="form-group">
-																<label class="form-label">Addl. Pay</label>&nbsp;&nbsp;&nbsp;&nbsp;
-																<input id="addl_pay_m" type="number" value="0"class="input_size"
+																	
+					<div class="container-fluid">
+
+					<div class="row">
+
+						<div class="col-12">
+							<div id="smartwizard-validation" class="wizard wizard-primary" >
+								<ul>
+									<li><a href="#validation-step-1">Employee Pay Details<br /></a></li>
+									<li><a href="#validation-step-2">Deductions<br /></a></li>
+									<li><a href="#validation-step-3">Allowances Deductions<br /></a></li>
+								</ul>
+
+								<div>
+									<div id="validation-step-1">
+										   <div class="form-row">
+												<div class="form-group sm col-md-6">
+												
+												<div class="form-group">
+														<label class="form-label">Basic Pay*</label>
+														<input id="basic_pay_m" type="number" value="0"class="input_size"onkeyup="basicPayCal(this.value);" onchange=""
+																						name="basicPay">
+														<label class="form-label"> </label>
+														
+														</div>
+											   </div>
+											    <div class="form-group sm col-md-6">
+												<label for="inputHieght">
+												<span class="text-danger">*</span>
+												</label>
+												<input id="basic_pay_y" type="number" value="0"class="input_size" name="basicPayY">
+											</div>
+											   
+										 </div>
+										 
+										  <div class="form-row">
+										          <div class="form-group sm col-md-6">
+													<label class="form-label">Addl. Pay</label>&nbsp;&nbsp;&nbsp;&nbsp;
+													<input id="addl_pay_m" type="number" value="0"class="input_size"
 																onkeyup="basicAditionalCal(this.value);"onchange="">
-															    <input id="addl_pay_y" type="number" value="0"class="input_size">
+															    
 															    </div>
-																<div class="col-12 col-lg-6">						
-																<div class="form-group">
-																			<label class="form-label"> F.D.A.% </label>&nbsp;&nbsp;&nbsp;
-																			<input id="fda_m_percent" type="number" value="0"class="sm_input1"
-																			onkeyup="fdaPercentMonthly(this.value);"onchange="">
-																						
+															    
+															    
+												<div class="form-group sm col-md-6">
+												<label for="inputHieght">
+												<span class="text-danger">*</span>
+												</label>
+												<input id="addl_pay_y" type="number" value="0"class="input_size">
+											</div>
+										  </div>  <div class="form-row"><label class="form-label"> F.D.A.% </label></div>
+										  
+										                          <div class="form-row">
+										                       				<div class="form-group sm col-md-3">
+																			
+																			<input id="fda_m_percent" type="number" value="0"class="sm_input1"onkeyup="fdaPercentMonthly(this.value);"onchange="">
+																			</div>
+																			<div class="form-group  sm col-md-3">
 																			<input id="fda_m_percent_result" type="number" value="0"class="sm_input2">
+																			 	</div>
+																			 	
+																			 	<div class="form-group  sm col-md-3">
 																			<input id="fda_y_percent" type="number" value="0"class="sm_input1">
+																			</div>
+																			 	<div class="form-group  sm col-md-3">
 																			<input id="fda_y_percent_result" type="number" value="0"class="sm_input2">
 																			</div>
-							</div>															
-																<div class="form-group">
-																				<label class="form-label">V.D.A.</label>&nbsp;&nbsp;&nbsp;
-																				<input type="number" value="0" class="input_size">&nbsp;&nbsp;
+																			
+																			
+										                          </div>
+										                            <div class="form-row">
+										                            
+										                          				
+																<div class="form-group sm col-md-6">
+																				<label class="form-label">V.D.A.</label>
+																				<input type="number" value="0" class="input_size">
+																				</div>
+																				<div class="form-group sm col-md-6">
 																				<input type="number" value="0" class="input_size"><br>
 																				</div>
+																				</div>
+																				   
+																				     <div class="form-row">
+																				     <label class="form-label"> HRA Rate (%) </label>
+																				     </div>
+																				       <div class="form-row">
+																				<div class="form-group sm col-md-3">
 																					
-																					
-																<div class="form-group">
-																					<label class="form-label">HRA Rate (%) </label>
-																					<input id="hra_m_percent" type="number" value="0"class="sm_input1" onkeyup="hraPercent(this.value)"
+																					<input id="hra_m_percent" type="number" value="0" class="sm_input1" onkeyup="hraPercent(this.value)"
 																						onchange="" name="hraRate">
+																						</div>
+																						<div class="form-group sm col-md-3">
 																						<input id="hra_m_percent_result" type="number" value="0"class="sm_input2" name="hraValue">
+																						</div>
+																						<div class="form-group sm col-md-3">
 																						<input id="hra_y_percent" type="number" value="0"class="sm_input1" name="hraRateY">
+																						</div>
+																						
+																						<div class="form-group sm col-md-3">
 																						<input id="hra_y_percent_result" type="number" value="0"class="sm_input2" name="hravalueY"><br>
 																						</div>
-																						
-																						
-															   <div class="form-group">
-																				    	<label class="form-label">LTA Rate (%)  </label>
-																					     <input id="lta_m_percent" type="number" value="0"class="sm_input1">
+																				
+																				</div>
+																				
+																		  
+																		         <div class="form-row">
+																		         <label class="form-label">LTA Rate (%)  </label>
+																		         </div>
+																		          <div class="form-row">
+																		        <div class="form-group sm col-md-3">
+																				<input id="lta_m_percent" type="number" value="0"class="sm_input1">
+																				</div>
+																						<div class="form-group sm col-md-3">
 																						<input id="lta_m_percent_result" type="number" value="0"class="sm_input2">
-																						<input id="lta_y_percent" type="number" value="0"class="sm_input1">
-																						<input id="lta_y_percent_result" type="number" value="0"class="sm_input2">
 																						</div>
-																						
-																						
-															    		<div class="form-group">
-																						<label class="form-label">Medical  Allowance  </label>
+																						<div class="form-group sm col-md-3">
+																						<input id="lta_y_percent" type="number" value="0"class="sm_input1">
+																						</div>
+																						<div class="form-group sm col-md-3">
+																						<input id="lta_y_percent_result" type="number" value="0"class="sm_input2">
+																					</div>
+																					
+																					</div>
+																			<div class="form-row">
+																			<div class="form-group sm col-md-6">
+																					<label class="form-label"> Medical  Allowance  </label>
 																					     <input id="medical_allow_m" type="number" value="0"class="input_size"onkeyup="medicalAllowanceCal(this.value)"
-																						onchange="" name="medicalAllow">&nbsp;&nbsp;
+																						onchange="" name="medicalAllow">
+																						</div>
+																						<div class="form-group sm col-md-6">
 																					    <input id="medical_allow_y" type="number" value="0"class="input_size" name="medicalAllowY"><br>
 																				         </div>
-																				         
-																	     <div class="form-group">
+										  									</div>
+										  									
+										  									<div class="form-row">
+										  									        <div class="form-group sm col-md-6">
 																				    <label  class="form-label">Conveyance  Allowance  </label> 
 																					<input id="conveyance_m" type="number" value="0" class="input_size"onkeyup='çonveyanceCal(this.value)' onchange=""name="conveyanceAllow">
+																				      </div>
+																				      
+																				      <div class="form-group sm col-md-6">
 																				     <input id="conveyance_y" type="number" value="0"class="input_size" name="conveyanceAllowY">
 																					</div>
-																						
-																		<div class="form-group">
+																					</div>	
+																					
+																		<div class="form-row">
+																		          <div class="form-group sm col-md-6">
 																					 <label class="form-label">Bonus/ Exgratia</label>&nbsp;&nbsp;&nbsp;
 																					<input type="number" value="0" class="input_size"onkeyup='bonusCal(this.value)'
-																						onchange="totalAllowance()" name="bonus"id="bonus_m">&nbsp;&nbsp;
+																						onchange="totalAllowance()" name="bonus"id="bonus_m">
+																						</div>
+																						<div class="form-group sm col-md-6">
 																						 <input id="bonus_y" type="number" value="0" class="input_size" name="bonusY">
 																						</div>
+																		</div>
 																						
-																					
+																		<div class="form-row">		
 																		<div class="form-group">
 																					<label class="form-label">Overtime Rate</label>
 																					<select class="sm_input1"><option></option>
-																					 </select>&nbsp;&nbsp; <input type="number" value="0"class="sm_input2"><br> <br> 
+																					 </select>
+																					  <input type="number" value="0"class="sm_input2"><br> <br> 
 																						</div>
+																		</div>
 																						
-																						
-															      		<div class="form-group">
+																		<div class="form-row">				
+															      		 <div class="form-group sm col-md-6">
 																					<label  class="form-label">Total   Allowances</label>&nbsp;&nbsp;
 																					<input id="total_allowances_m" type="number" value="0" class="input_size" name="totalAllow">&nbsp;&nbsp;
+																					</div>
+																					 <div class="form-group sm col-md-6">
 																					<input id="total_allowances_y" type="number" value="0" class="input_size" name="totalAllowY"><br>
 																					</div>
+																					</div>
 																					
-																		<div class="form-group">
+																					
+																		<div class="form-row">		
+																		            <div class="form-group sm col-md-6">
 																					<label class="form-label">Gross(inc. Emp. <br> PF & Emp.ESI)</label>
 																					<input type="number" value="0"class="input_size" name="gross" id="grossM">
+																					 </div>
+																					 <div class="form-group sm col-md-6">
 																					<input type="number" value="0" class="input_size"name="grossY" id="grossY">
 																					<br>
 																					</div>
+																					</div>
 																					
-																		<div class="form-group">
-																					<label class="form-label">Net Pay</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+																		<div class="form-row">				
+																		 <div class="form-group sm col-md-6">
+																					<label class="form-label">Net Pay</label>
 																					<input type="number" value="0" class="input_size"name="netPay" id="net_pay_m">&nbsp;&nbsp;
+																					</div>
+																					 <div class="form-group sm col-md-6">
 																					<input type="number" value="0" class="input_size" id="net_pay_y">
+																					</div>
 																					</div>
 																						
 																		<div class="form-group">
-																					<label class="form-label">CTC</label>&nbsp;&nbsp;																					<input type="number" value="0" class="input_size"id="ctc" name="ctc">&nbsp;&nbsp; 
+																					<label class="form-label">CTC</label>																				<input type="number" value="0" class="input_size"id="ctc" name="ctc">&nbsp;&nbsp; 
 																						<input type="number" value="0">
 																						</div>
 																						
@@ -324,29 +399,15 @@ body {
 																						<option></option>
 																					</select> 
 																					<input type="submit" value="add">
-
-
-																					<!-- employee pay details end -->
-																				</div>
-																		<div class="col-md-2"></div>
-																</div>
-																		</div>
-																	</div>
-																	</div>
-</div>
-																	<!--  tab 1 end -->
-
-
-																	<!-- TAB 2 DEDUCTION CALCULATION -->
-																	<div role="tabpanel" class="tab-pane" id="profile">
-																		<div class="container-fluid"
-																			style="margin-top: 100px;">
-																			<div class="row">
-
-																				<div class="col-md-12 col-sm-12">
-																					<div class="col-md-12 col-sm-12"
-																						style="margin-bottom: 50px;">
-																						<table id="datatables-buttons"aria-describedby="datatables-buttons" class="table table-striped display" style="width:100%">
+										  									
+										  									
+										 </div>
+										 
+									</div>
+									
+									
+									<div id="validation-step-2">
+									<table id="datatables-buttons"aria-describedby="datatables-buttons" class="table table-striped display" style="width:100%">
 																					
 																							<thead>
 																								<tr>
@@ -598,31 +659,11 @@ body {
 
 																							</tbody>
 																						</table>
-																						<br>
-
-																					</div>
-
-																				</div>
-																				<!-- <div class="col-md-2">
-    </div> -->
-																			</div>
-																		</div>
-																	</div>
-
-																	<!-- TAB 2 DEDUCTION END -->
-
-
-																	<!-- tab 3 -->
-																	<div role="tabpanel" class="tab-pane" id="messages">
-																		
-																	     <div class="col-12">
-																			<div class="card">
-																				<div class="card-header">
-												
-																					<h6 class="card-subtitle text-muted">DataTables.</h6>
-																				</div>
-																				<div class="card-body">
-																			<table id="example"aria-describedby="example" class="table table-striped display" style="width:100%">
+									</div>
+									
+									
+									<div id="validation-step-3">
+										<table id="example"aria-describedby="example" class="table table-striped display" style="width:100%">
 																						<thead>
 																							<tr>
 																							<th scope="col">Code*</th>
@@ -668,159 +709,48 @@ body {
 																						</tbody>
 																					
 																					</table>
-																				</div>
-																				
-																			</div>
-																		</div>
-
-																	</div>
-																	
-																	<div class="container-fluid">
-
-					
-					
-					
-					
-					<div class="row">
-
-						<div class="col-12">
-							<div id="smartwizard-validation" class="wizard wizard-primary" >
-								<ul>
-									<li><a href="#validation-step-1">Employee Pay Details<br /></a></li>
-									<li><a href="#validation-step-2">Deductions<br /></a></li>
-									<li><a href="#validation-step-3">Allowances Deductions<br /></a></li>
-								</ul>
-
-								<div>
-									<div id="validation-step-1">
-										   <div class="form-row">
-												<div class="form-group sm col-md-4">
-												
-												<div class="form-group">
-														<label class="form-label">Basic Pay*</label>
-														<input id="basic_pay_m" type="number" value="0"class="input_size"onkeyup="basicPayCal(this.value);" onchange=""
-																						name="basicPay">
-														<label class="form-label"> </label>
-														
-														</div>
-											   </div>
-											    <div class="form-group sm col-md-4">
-												<label for="inputHieght">
-												<span class="text-danger">*</span>
-												</label>
-												<input id="basic_pay_y" type="number" value="0"class="input_size" name="basicPayY">
-											</div>
-											   
-										 </div>
-										 
-										  <div class="form-row">
-										          <div class="form-group sm col-md-4">
-													<label class="form-label">Addl. Pay</label>&nbsp;&nbsp;&nbsp;&nbsp;
-													<input id="addl_pay_m" type="number" value="0"class="input_size"
-																onkeyup="basicAditionalCal(this.value);"onchange="">
-															    
-															    </div>
-															    
-															    
-												<div class="form-group sm col-md-4">
-												<label for="inputHieght">
-												<span class="text-danger">*</span>
-												</label>
-												<input id="addl_pay_y" type="number" value="0"class="input_size">
-											</div>
-										  </div>
-										 
-										 
-										 
-									</div>
+						                                            			</div>
 									
 									
-									<div id="validation-step-2">
-										<div class="form-group">
-											<label class="form-label">First name
-												<span class="text-danger">*</span>
-											</label>
-											<input name="wizard-name" type="text" class="form-control required">
-										</div>
-										<div class="form-group">
-											<label class="form-label">Last name
-												<span class="text-danger">*</span>
-											</label>
-											<input name="wizard-surname" type="text" class="form-control required">
-										</div>
-										<div class="form-group">
-											<label class="form-label">Email
-												<span class="text-danger">*</span>
-											</label>
-											<input name="wizard-email" type="text" class="form-control required email">
-										</div>
-										<div class="form-group mb-0">
-											<label class="form-label">Address</label>
-											<input name="wizard-address" type="text" class="form-control">
-										</div>
-									</div>
-									
-									
-									<div id="validation-step-3">
-										<div class="form-group">
-											<label class="custom-control custom-checkbox">
-												<input type="checkbox" class="custom-control-input">
-												<span class="custom-control-label">I agree with the Terms and Conditions</span>
-											</label>
-										</div>
-									</div>
-									
-									
-								</div>
-							</div>
-						</div>
-					</div>
+					          </div>
+						                                      	</div>
+					                                       	</div>
+				                                     	</div>
 					
 					
 					
 					
 
-				</div>
+				
 
 																	<!--  tab3 end -->
-																</div>
+															
 
 																<input type="submit" value=" add">
-
-															</div>
-														</div>
-													</div>
-												</div>
-
-											</div>
-										</div>
-									</div>
-
+                                                                         </div>
+						
+						
+							
+						
+									
 		
 						
-	                                </div>
+	                           
+
 	                              
 										
 										<button type="submit" class="btn btn-primary">Save</button>
 										<button type="reset" class="btn btn-primary" value="Reset">Reset</button>
 									</form>
-								</div>
-							</div>
-						</div>
-						<div class="col-12">
-							<div class="card">
-								<div class="card-header">
-
-									<h6 class="card-subtitle text-muted">DataTables.</h6>
-								</div>
-								<div class="card-body"></div>
-
-							</div>
-						</div>
-
-					</div>
-				</div>
-
+									</div>
+									</div>
+									</div>
+									</div>
+									</div>
+									
+					
+					
+					
 			</main>
 			<footer class="footer">
 				<div th:replace="fragments/footer :: div"></div>
@@ -927,16 +857,9 @@ body {
 					backButtonSupport: false,
 					useURLhash: false,
 					showStepURLhash: false,
-					toolbarSettings: {
-						toolbarExtraButtons: [$("<button class=\"btn btn-submit btn-primary\" type=\"button\">Finish</button>")]
-					}
+					
 				})
-				.on("leaveStep", function(e, anchorObject, stepNumber, stepDirection) {
-					if (stepDirection === "forward") {
-						return $validationForm.valid();
-					}
-					return true;
-				});
+				
 			$validationForm.find(".btn-submit").on("click", function() {
 				if (!$validationForm.valid()) {
 					return;
