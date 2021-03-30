@@ -67,7 +67,7 @@ body {
 													<div class="custom-controls-stacked">
 													
 														<label class="radio-inline">
-														<input type="radio" value="Y" name="active" th:checked="${cityEdit.active}==Y "/>Active   
+														<input type="radio" value="Y" name="active" th:checked="${cityEdit.active}==Y "/> Active   
 															</label>
 															&nbsp;&nbsp;
 														<label class="radio-inline">
@@ -80,7 +80,7 @@ body {
 											<div class="form-group">
 											<label class="form-label"> City Name</label>
 											<label style="color: red">*</label>
-											 <input type="text" class="form-control" pattern="^[a-zA-Z\s]*$"maxlength="20"  id="cityName" name="cityName" th:value="${cityEdit.cityName}"required aria-required="true">
+											 <input type="text" class="form-control" title="City Name" pattern="^[a-zA-Z\s]*$"maxlength="20"  id="cityName" name="cityName" th:value="${cityEdit.cityName}"required aria-required="true">
 										</div>
 											</div>
 										</div>

@@ -84,7 +84,7 @@ body {
 											<div class="form-group">
 											<label class="form-label"> City Name</label>
 											<label style="color: red">*</label>
-											 <input type="text" class="form-control " pattern="^[a-zA-Z\s]*$"maxlength="20"  id="cityName" name="cityName"required aria-required="true">
+											 <input type="text" class="form-control " pattern="^[a-zA-Z\s]*$"maxlength="20" title="City Name"  id="cityName" name="cityName"required aria-required="true">
 										</div>
 											</div>
 										</div>
@@ -103,7 +103,7 @@ body {
 										<thead>
 											<tr>
 												<th  scope="col"> <a th:href="@{'/page/' + ${currentPage} + '?sortField=cityCode&sortDir=' + ${reverseSortDir}}">
-						                         city code</a>  </th>
+						                         City code</a>  </th>
 												<th  scope="col">City Name </th>
 												<th  scope="col">Status</th>
 												<th  scope="col">Action</th>
