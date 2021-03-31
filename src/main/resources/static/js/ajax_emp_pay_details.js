@@ -40,7 +40,7 @@ function ajaxRequestForDepartment(val){
 	var deptCode = val;
     console.log("ajax request : "+ deptCode);
     var xhr1 = new XMLHttpRequest();
-    xhr1.open('POST','http://localhost:8181/departmentMaster/'+deptCode,true);
+    xhr1.open('POST','http://localhost:8080/departmentMaster/'+deptCode,true);
     xhr1.getResponseHeader('content-type','application/json');
 	xhr1.response = 'json';
     xhr1.onload = function(){

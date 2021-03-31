@@ -1,10 +1,13 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<script src="js/settings.js"></script>
+<script src="js/app.js"></script>
 <script type="text/javascript" th:src="@{/js/ajax_emp_pay_details.js}"></script>
 <script type="text/javascript" th:src="@{/js/settings.js}"></script>
 <script type="text/javascript" th:src="@{/js/app.js}"></script>
 <link rel="stylesheet" type="text/css" th:href="@{/css/modern.css}" />
-<script  src="https://www.googletagmanager.com/gtag/js?id=UA-120946860-7"></script>
+<script src="https://www.googletagmanager.com/gtag/js?id=UA-120946860-7"></script>
+
 
 <style>
 body {
@@ -14,277 +17,7 @@ body {
 .uppercase {
 	text-transform: uppercase;
 }
-
-.sm_input4 {
-	width: 80px;
-}
-
-.sm_input5 {
-	width: 100px;
-}
-
-.input1 {
-	width: 60px;
-}
-
-.input2 {
-	width: 120px;
-}
-
-.input3 {
-	width: 150px;
-}
-
-.input_size {
-	width: 120px;
-}
-
-.close {
-	cursor: pointer;
-	position: absolute;
-	top: 50%;
-	right: 0%;
-	padding: 12px 16px;
-	transform: translate(0%, -50%);
-}
-
-.close:hover {
-	background: #bbb;
-}
-
-a {
-	text-decoration: none;
-	display: inline-block;
-	padding: 8px 16px;
-}
-
-a:hover {
-	background-color: #ddd;
-	color: black;
-}
-
-.previous {
-	background-color: #f1f1f1;
-	color: black;
-}
-
-.next {
-	background-color: #4c8baf;
-	color: white;
-}
-
-.round {
-	border-radius: 50%;
-}
-
-.tab3 {
-	width: 85px;
-}
-
-body {
-	font-family: "Open Sans", sans-serif;
-	line-height: 1.25;
-}
-
-table {
-	border: 1px solid #ccc;
-	border-collapse: collapse;
-	margin: 0;
-	padding: 0;
-	width: 100%;
-	table-layout: fixed;
-}
-
-table caption {
-	font-size: 1.5em;
-	margin: .5em 0 .75em;
-}
-
-table tr {
-	background-color: #f8f8f8;
-	border: 1px solid #ddd;
-	padding: .35em;
-}
-
-table th, table td {
-	padding: .625em;
-	text-align: center;
-}
-
-table th {
-	font-size: .85em;
-	letter-spacing: .1em;
-	text-transform: uppercase;
-}
-
-@media screen and (max-width: 600px) {
-	table {
-		border: 0;
-	}
-	table caption {
-		font-size: 1.3em;
-	}
-	table thead {
-		border: none;
-		clip: rect(0, 0, 0, 0);
-		height: 1px;
-		margin: -1px;
-		overflow: hidden;
-		padding: 0;
-		position: absolute;
-		width: 1px;
-	}
-	table tr {
-		border-bottom: 3px solid #ddd;
-		display: block;
-		margin-bottom: .625em;
-	}
-	table td {
-		border-bottom: 1px solid #ddd;
-		display: block;
-		font-size: .8em;
-		text-align: right;
-	}
-	table td::before {
-		/*
-    * aria-label has no advantage, it won't be read inside a table
-    content: attr(aria-label);
-    */
-		content: attr(data-label);
-		float: left;
-		font-weight: bold;
-		text-transform: uppercase;
-	}
-	table td:last-child {
-		border-bottom: 0;
-	}
-}
-
-.card {
-	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-	transition: 0.3s;
-	/* padding-top: 50px; */
-}
-
-.sm_input {
-	width: 70px;
-}
-
-.sm_input1 {
-	width: 55px;
-}
-
-.sm_input2 {
-	width: 115px;
-}
-
-.demo {
-	padding: 30px;
-	min-height: 280px;
-}
-
-.tab-content {
-	padding: 10px;
-}
-
-
-@nav-link-hover-bg: #eeeeee ;
-        @nav-tabs-border-color: #dddddd ;
-        @border-radius-base: 5px ;
-        @screen-xs-max: 767px ;
-
-
-
-        .nav-tabs.nav-tabs-dropdown, .nav-tabs-dropdown {@media (max-width
-	: @screen-xs-max) {border: 1px solid @nav-tabs-border-color ;
-                border-radius: @border-radius-base ;
-                overflow: hidden ;
-                position: relative ;
-
-                &::after {
-	content: "?";
-	position: absolute;
-	top: 8px;
-	right: 15px;
-	z-index: 2;
-	pointer-events: none;
-}
-
-&
-.open {a { position:relative;
-	display: block;
-}
-
->
-li.active>a {
-	background-color: @nav-link-hover-bg;
-}
-
-}
-li {
-	display: block;
-	padding: 0;
-	vertical-align: bottom;
-}
-
->
-li>a {
-	position: absolute;
-	top: 0;
-	left: 0;
-	margin: 0;
-	width: 100%;
-	height: 100%;
-	display: inline-block;
-	border-color: transparent;
-	&:
-	focus
-	,
-	&
-	:
-	hover
-	,
-	&:
-	active
-	{
-	
-                        
-	border-color
-	:
-	 
-	transparent;
-}
-
-}
->
-li.active>a {
-	display: block;
-	border-color: transparent;
-	position: relative;
-	z-index: 1;
-	background: #fff;
-	&:
-	focus
-	,
-	&
-	:
-	hover
-	,
-	&:
-	active
-	{
-	
-                        
-	border-color
-	:
-	 
-	transparent;
-}
-}
-}
-}
 </style>
-
 <script>
 	window.dataLayer = window.dataLayer || [];
 	function gtag() {
@@ -300,136 +33,152 @@ li.active>a {
 </head>
 <body>
 	<div class="wrapper">
-		<nav id="sidebar" class="sidebar">
-			<div th:replace="/fragments/sidebar :: div"></div>
+		<nav id="sidebar" class="sidebar" aria-label="Site sidebar">
+			<div th:replace="fragments/sidebar :: div"></div>
 		</nav>
 		<div class="main">
-			<div th:replace="/fragments/header ::div"></div>
+			<div th:replace="fragments/header ::div"></div>
+			<main class="content">
+				<div class="container-fluid">
+					<div class="header">
+						<h1 class="header-title">HRMS</h1>
+						<nav aria-label="breadcrumb"></nav>
+					</div>
+					<div class="row">
+						<div class="col-12">
+							<div class="card">
+								<div class="card-header">
+									<h5 class="card-title">Employee Pay Details</h5>
 
-			<form action="#" th:action="@{/saveemployepaydetail}"
-				th:object="${employeePayDetail}" novalidate method="post">
+								</div>
+						<div class="card-body">
+						<form id="validation-form" action="#"th:action="@{/saveemployepaydetail}"
+										th:object="${employeePayDetail}" method="post">
 
-				<main class="content">
-					<div class="container-fluid">
-						<div class="header">
-							<h1 class="header-title">Master</h1>
-							<nav aria-label="breadcrumb"></nav>
-						</div>
-						<div class="row">
-							<div class="col-12">
-								<div class="card">
-									<div class="card-header">
-										<h5 class="card-title">Employee Details</h5>
-										<div class="alert-outline">
-											<div th:if="${message}" th:text="${message}"
-												style="color: red"></div>
-										</div>
-									</div>
-
-
-
-									<!-- card 1 -->
-
-									<!--  form content here -->
-									<div class="card">
 										<div class="row">
-											<div class="col-md-1 col-sm-3"></div>
+											<div class="col-12 col-lg-6">
+												<div class="form-group">
+													<label class="form-label"> Employee Code </label> <label
+														style="color: red">*</label> <select id="employeeDropdown"
+														class="form-control" name="empCode" onchange="display()">
+														<option value=" ">Select</option>
+														<option th:each="employee: ${listEmployee}"
+															th:text="${employee.empCode}">${employee.empCode}</option>
+													</select>
 
-											<div class="col-md-5 col-sm-4">
-												<label> Empp. </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-												&nbsp;&nbsp;&nbsp;&nbsp; <select id="employeeDropdown"
-													name="empCode" onchange="display()">
-													<option value=" ">Select</option>
-													<option th:each="employee: ${listEmployee}"
-														th:text="${employee.empCode}">${employee.empCode}</option>
-												</select> &nbsp;&nbsp; <input id="emp_name" type="text"
-													name="empName" class="input_size1">
-											</div>
 
-											<div class="col-md-5 col-sm-4">
-												<label>Dept. </label> <input id="emp_dept_code"
-													class="sm_input" type="text" name="deptCode">&nbsp;&nbsp;
-												<input id="emp_dept_name" type="text " class="input_size1"
-													name="deptName">
-											</div>
-											<div class="col-md-1 col-sm-3"></div>
-										</div>
-										<br>
-										<div class="row">
-											<div class="col-md-1 col-sm-3"></div>
-											<div class="col-md-5 col-sm-4">
-												<div class="row">
-													<div class="col-md-6 col-sm-5">
-														<label> Old Emp. Code </label> <input class="sm_input1"
-															type="text" name="deptCode1">
-													</div>
-													<div class="col-md-6 col-sm-5" style="margin-left: -20px;">
-														<label> WEF Dt.* </label> <input type="date"
-															class="sm_input" name="wefdate" id="wef_date">
-													</div>
 												</div>
+												<div class="form-group">
+													<label class="form-label">name </label> <label
+														style="color: red">*</label> <input type="text"
+														class="form-control" id="emp_name" name="empName"
+														maxlength="40" pattern="^[a-zA-Z\s]*$" required
+														aria-required="true">
+												</div>
+
+
+												<div class="form-group">
+													<label class="form-label">Old Emp. Code </label> <label
+														style="color: red">*</label> <input type="text"
+														class="form-control" id="deptCode1" name="deptCode1"
+														maxlength="40" pattern="^[a-zA-Z\s]*$" required
+														aria-required="true">
+												</div>
+
+
+												<div class="form-group ">
+													<label class="form-label">WEF Date</label> <span
+														class="text-danger">*</span> <input
+														class="form-control required" type="text" id="wef_date"
+														name="wefdate" />
+
+												</div>
+
+
 											</div>
-											<div class="col-md-5">
-												<label>Desig. </label> <input id="emp_desig_code"
-													class="sm_input1" type="text" name="desigCode">&nbsp;&nbsp;
-												<input id="emp_desig_name" type="text" class="input_size1">
+											<div class="col-12 col-lg-6">
+												<div class="form-group">
+													<label class="form-label">Department Code </label> <label
+														style="color: red">*</label> <input type="text"
+														class="form-control" id="emp_dept_code" name="deptCode">
+
+												</div>
+												<div class="form-group">
+													<label class="form-label">Department Name </label> <label
+														style="color: red">*</label> <input type="text"
+														class="form-control" id="emp_dept_name" name="deptName">
+
+												</div>
+
+												<div class="form-group">
+													<label class="form-label">Designation Code </label> <label
+														style="color: red">*</label> <input type="text"
+														class="form-control" id="desigCode" name="desigCode">
+
+												</div>
+
+												<div class="form-group">
+													<label class="form-label">Designation Name </label> <label
+														style="color: red">*</label> <input type="text"
+														class="form-control" id="emp_desig_name"
+														name="emp_desig_name">
+
+												</div>
+
+
 											</div>
-											<div class="col-md-1 col-sm-3"></div>
 										</div>
-										<br>
-									</div>
-
-									<!-- card 1 end -->
-
-									<!-- card 2 -->
-									<div class="container-fluid" style="margin-top: 50px;">
+										 <div class="form-row">
+										 		<div class="container-fluid" style="margin-top: 50px;">
 										<div class="card">
 											<div class="row">
-												<div class="col-md-1 col-sm-3"></div>
-												<div class="col-md-10 col-sm-6">
+												<div class="col-md-12 col-sm-3"></div>
+												<div class="col-md-12 col-sm-3">
 													<div class="row">
-														<div class="col-md-4 col-sm-4">
-															<label>Emp. Ins. No.</label>&nbsp; <input type="text"
-																class="input_size" name="empInsuranceNo">
-														</div>
-														<div class="col-md-4 col-sm-4">
-															<label>PF No.</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+													<div class="form-group sm col-md-4">
+													<label>Emp. Ins. No.</label>
+													<input type="text"class="input_size" name="empInsuranceNo">
+												    </div>
+													
+													<div class="form-group sm col-md-4">
+															<label>PF No.</label>
 															<input type="text" class="input_size" name="pfNo">
 														</div>
-														<div class="col-md-4 col-sm-4">
-															<label>Effective Date</label> <input type="text"
-																class="input_size" name="pfEffectiveDate">
+														
+														<div class="form-group sm col-md-4">
+															<label>Effective Date</label> 
+															<input type="text"class="input_size" name="pfEffectiveDate">
 														</div>
 													</div>
 													<br>
 													<div class="row">
-														<div class="col-md-4 col-sm-4">
+														<div class="form-group sm col-md-4">
 															<label>Group Ins. No.</label> <input type="text"
 																class="input_size" name="groupInsuranceNo">
 														</div>
-														<div class="col-md-4 col-sm-4">
+														
+														<div class="form-group sm col-md-4">
 															<label>Emp. ESI No.</label>&nbsp;&nbsp; <input
 																type="text" class="input_size" name="empEsiNo">
 														</div>
-														<div class="col-md-4 col-sm-4">
+														
+													<div class="form-group sm col-md-4">
 															<label>Effective Date</label> <input type="text"
 																class="input_size" name="esiEffectiveDate">
 														</div>
+														
 													</div>
 													<br>
 													<div class="row">
-														<div class="col-md-4 col-sm-4">
-															<label>Arrear Due</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+														<div class="form-group sm col-md-4">
+															<label>Arrear Due</label>
 															<input type="text" class="input_size" name="arrearDue">
 														</div>
-														<div class="col-md-4 col-sm-4">
-															<label>Arrear Paid</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+														<div class="form-group sm col-md-4">
+															<label>Arrear Paid</label>
 															<input type="text" class="input_size" name="arrearPaid">
 														</div>
-														<!-- <div class="col-md-4 col-sm-4">
-															<label>Grade</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-															<input type="text" class="input_size">
-														</div> -->
+														
 													</div>
 													<br>
 												</div>
@@ -437,180 +186,235 @@ li.active>a {
 											</div>
 										</div>
 									</div>
+								</div>
+								
 
 
-									<div class="container-fluid" style="margin-top: 50px;">
-										<div class="card">
-											<div class="row">
-												<div class="col-md-1"></div>
-												<div class="col-md-10">
-													<div class="row">
-														<div class="demo">
-															<div role="tabpanel">
+															
+																	
+					<div class="container-fluid">
 
-																<ul class="nav nav-tabs nav-justified nav-tabs-dropdown"
-																	role="tablist">
-																	<li role="presentation" class="active"><a
-																		href="#home" aria-controls="home" role="tab"
-																		data-toggle="tab">Employee Pay Details</a></li>
-																	<li role="presentation"><a href="#profile"
-																		aria-controls="profile" role="tab" data-toggle="tab">Deductions</a></li>
-																	<li role="presentation"><a href="#messages"
-																		aria-controls="messages" role="tab" data-toggle="tab">Allowances
-																			Deductions</a></li>
+					<div class="row">
 
-																</ul>
+						<div class="col-12">
+							<div id="smartwizard-validation" class="wizard wizard-primary" >
+								<ul>
+									<li><a href="#validation-step-1">Employee Pay Details<br /></a></li>
+									<li><a href="#validation-step-2">Deductions<br /></a></li>
+									<li><a href="#validation-step-3">Allowances Deductions<br /></a></li>
+								</ul>
 
-																<div class="tab-content">
-
-																	<!--  tab 1 -->
-																	<div role="tabpanel" class="tab-pane active" id="home">
-																		<div class="container-fluid"
-																			style="margin-top: 100px;">
-																			<div class="row">
-																				<div class="col-md-2"></div>
-																				<div class="col-md-8">
-
-																					<!-- employee pay details -->
-
-
-																					<label>Basic Pay*</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-																					<input id="basic_pay_m" type="number" value="0"
-																						class="input_size"
-																						onkeyup="basicPayCal(this.value);" onchange=""
-																						name="basicPay">&nbsp;&nbsp; <input
-																						id="basic_pay_y" type="number" value="0"
-																						class="input_size" name="basicPayY">
-
-
-																					<!--additional pay  -->
-																					<br> <br> <label>Addl. Pay</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-																					<input id="addl_pay_m" type="number" value="0"
-																						class="input_size"
-																						onkeyup="basicAditionalCal(this.value);"
-																						onchange="">&nbsp;&nbsp; <input
-																						id="addl_pay_y" type="number" value="0"
-																						class="input_size"><br> <br> <label>F.D.A.
-																						%</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
-																					<input id="fda_m_percent" type="number" value="0"
-																						class="sm_input1"
-																						onkeyup="fdaPercentMonthly(this.value);"
-																						onchange="">&nbsp;&nbsp;<input
-																						id="fda_m_percent_result" type="number" value="0"
-																						class="sm_input2">&nbsp;&nbsp;<input
-																						id="fda_y_percent" type="number" value="0"
-																						class="sm_input1">&nbsp;&nbsp;<input
-																						id="fda_y_percent_result" type="number" value="0"
-																						class="sm_input2"><br> <br> <label>V.D.A.</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-																					<input type="number" value="0" class="input_size">&nbsp;&nbsp;
-																					<input type="number" value="0" class="input_size"><br>
-																					<br> <label>HRA Rate (%)</label>&nbsp;&nbsp;&nbsp;&nbsp;
-																					<input id="hra_m_percent" type="number" value="0"
-																						class="sm_input1" onkeyup="hraPercent(this.value)"
-																						onchange="" name="hraRate">&nbsp;&nbsp;<input
-																						id="hra_m_percent_result" type="number" value="0"
-																						class="sm_input2" name="hraValue">&nbsp;&nbsp;<input
-																						id="hra_y_percent" type="number" value="0"
-																						class="sm_input1" name="hraRateY">&nbsp;&nbsp;<input
-																						id="hra_y_percent_result" type="number" value="0"
-																						class="sm_input2" name="hravalueY"><br>
-																					<br> <label>LTA Rate (%)</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-																					<input id="lta_m_percent" type="number" value="0"
-																						class="sm_input1">&nbsp;&nbsp;<input
-																						id="lta_m_percent_result" type="number" value="0"
-																						class="sm_input2">&nbsp;&nbsp;<input
-																						id="lta_y_percent" type="number" value="0"
-																						class="sm_input1">&nbsp;&nbsp;<input
-																						id="lta_y_percent_result" type="number" value="0"
-																						class="sm_input2"><br> <label>Medical
-																						<br> Allowance
-																					</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-																					<input id="medical_allow_m" type="number" value="0"
-																						class="input_size"
-																						onkeyup="medicalAllowanceCal(this.value)"
-																						onchange="" name="medicalAllow">&nbsp;&nbsp;
-																					<input id="medical_allow_y" type="number" value="0"
-																						class="input_size" name="medicalAllowY"><br>
-
-
-																					<label>Conveyance <br> Allowance
-																					</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input
-																						id="conveyance_m" type="number" value="0"
-																						class="input_size"
-																						onkeyup='çonveyanceCal(this.value)' onchange=""
-																						name="conveyanceAllow">&nbsp;&nbsp; <input
-																						id="conveyance_y" type="number" value="0"
-																						class="input_size" name="conveyanceAllowY"><br>
-																					<br> <label>Bonus/ Exgratia</label>&nbsp;&nbsp;&nbsp;
-																					<input type="number" value="0" class="input_size"
-																						onkeyup='bonusCal(this.value)'
-																						onchange="totalAllowance()" name="bonus"
-																						id="bonus_m">&nbsp;&nbsp; <input
-																						id="bonus_y" type="number" value="0"
-																						class="input_size" name="bonusY"><br>
-																					<br> <label>Overtime Rate</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-																					<select class="sm_input1">
-																						<option></option>
-																					</select>&nbsp;&nbsp; <input type="number" value="0"
-																						class="sm_input2"><br> <br> <label>Total
-																						Allowances</label>&nbsp;&nbsp; <input
-																						id="total_allowances_m" type="number" value="0"
-																						class="input_size" name="totalAllow">&nbsp;&nbsp;
-																					<input id="total_allowances_y" type="number"
-																						value="0" class="input_size" name="totalAllowY"><br>
-																					<label>Gross(inc. Emp. <br> PF & Emp.
-																						ESI)
-																					</label>&nbsp;&nbsp;&nbsp; <input type="number" value="0"
-																						class="input_size" name="gross" id="grossM">&nbsp;&nbsp;
-																					<input type="number" value="0" class="input_size"
-																						name="grossY" id="grossY"><br> <br>
-																					<label>Net Pay</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-																					<input type="number" value="0" class="input_size"
-																						name="netPay" id="net_pay_m">&nbsp;&nbsp;
-																					<input type="number" value="0" class="input_size"
-																						id="net_pay_y"><br> <br> <label>CTC</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-																					<input type="number" value="0" class="input_size"
-																						id="ctc" name="ctc">&nbsp;&nbsp; <input
-																						type="number" value="0"><br> <label>Company
-																						Leased <br> Accomodation
-																					</label>&nbsp;&nbsp;&nbsp; <select style="width: 155px;">
-																						<option></option>
-																					</select> <input type="submit" value="add">
-
-
-																					<!-- employee pay details end -->
-																				</div>
-																				<div class="col-md-2"></div>
+								<div>
+									<div id="validation-step-1">
+										   <div class="form-row">
+												<div class="form-group sm col-md-6">
+												
+												<div class="form-group">
+														<label class="form-label">Basic Pay*</label>
+														<input id="basic_pay_m" type="number" value="0"class="input_size"onkeyup="basicPayCal(this.value);" onchange=""
+																						name="basicPay">
+														<label class="form-label"> </label>
+														
+														</div>
+											   </div>
+											    <div class="form-group sm col-md-6">
+												<label for="inputHieght">
+												<span class="text-danger">*</span>
+												</label>
+												<input id="basic_pay_y" type="number" value="0"class="input_size" name="basicPayY">
+											</div>
+											   
+										 </div>
+										 
+										  <div class="form-row">
+										          <div class="form-group sm col-md-6">
+													<label class="form-label">Addl. Pay</label>&nbsp;&nbsp;&nbsp;&nbsp;
+													<input id="addl_pay_m" type="number" value="0"class="input_size"
+																onkeyup="basicAditionalCal(this.value);"onchange="">
+															    
+															    </div>
+															    
+															    
+												<div class="form-group sm col-md-6">
+												<label for="inputHieght">
+												<span class="text-danger">*</span>
+												</label>
+												<input id="addl_pay_y" type="number" value="0"class="input_size">
+											</div>
+										  </div>  <div class="form-row"><label class="form-label"> F.D.A.% </label></div>
+										  
+										                          <div class="form-row">
+										                       				<div class="form-group sm col-md-3">
+																			
+																			<input id="fda_m_percent" type="number" value="0"class="sm_input1"onkeyup="fdaPercentMonthly(this.value);"onchange="">
 																			</div>
+																			<div class="form-group  sm col-md-3">
+																			<input id="fda_m_percent_result" type="number" value="0"class="sm_input2">
+																			 	</div>
+																			 	
+																			 	<div class="form-group  sm col-md-3">
+																			<input id="fda_y_percent" type="number" value="0"class="sm_input1">
+																			</div>
+																			 	<div class="form-group  sm col-md-3">
+																			<input id="fda_y_percent_result" type="number" value="0"class="sm_input2">
+																			</div>
+																			
+																			
+										                          </div>
+										                            <div class="form-row">
+										                            
+										                          				
+																<div class="form-group sm col-md-6">
+																				<label class="form-label">V.D.A.</label>
+																				<input type="number" value="0" class="input_size">
+																				</div>
+																				<div class="form-group sm col-md-6">
+																				<input type="number" value="0" class="input_size"><br>
+																				</div>
+																				</div>
+																				   
+																				     <div class="form-row">
+																				     <label class="form-label"> HRA Rate (%) </label>
+																				     </div>
+																				       <div class="form-row">
+																				<div class="form-group sm col-md-3">
+																					
+																					<input id="hra_m_percent" type="number" value="0" class="sm_input1" onkeyup="hraPercent(this.value)"
+																						onchange="" name="hraRate">
+																						</div>
+																						<div class="form-group sm col-md-3">
+																						<input id="hra_m_percent_result" type="number" value="0"class="sm_input2" name="hraValue">
+																						</div>
+																						<div class="form-group sm col-md-3">
+																						<input id="hra_y_percent" type="number" value="0"class="sm_input1" name="hraRateY">
+																						</div>
+																						
+																						<div class="form-group sm col-md-3">
+																						<input id="hra_y_percent_result" type="number" value="0"class="sm_input2" name="hravalueY"><br>
+																						</div>
+																				
+																				</div>
+																				
+																		  
+																		         <div class="form-row">
+																		         <label class="form-label">LTA Rate (%)  </label>
+																		         </div>
+																		          <div class="form-row">
+																		        <div class="form-group sm col-md-3">
+																				<input id="lta_m_percent" type="number" value="0"class="sm_input1">
+																				</div>
+																						<div class="form-group sm col-md-3">
+																						<input id="lta_m_percent_result" type="number" value="0"class="sm_input2">
+																						</div>
+																						<div class="form-group sm col-md-3">
+																						<input id="lta_y_percent" type="number" value="0"class="sm_input1">
+																						</div>
+																						<div class="form-group sm col-md-3">
+																						<input id="lta_y_percent_result" type="number" value="0"class="sm_input2">
+																					</div>
+																					
+																					</div>
+																			<div class="form-row">
+																			<div class="form-group sm col-md-6">
+																					<label class="form-label"> Medical  Allowance  </label>
+																					     <input id="medical_allow_m" type="number" value="0"class="input_size"onkeyup="medicalAllowanceCal(this.value)"
+																						onchange="" name="medicalAllow">
+																						</div>
+																						<div class="form-group sm col-md-6">
+																					    <input id="medical_allow_y" type="number" value="0"class="input_size" name="medicalAllowY"><br>
+																				         </div>
+										  									</div>
+										  									
+										  									<div class="form-row">
+										  									        <div class="form-group sm col-md-6">
+																				    <label  class="form-label">Conveyance  Allowance  </label> 
+																					<input id="conveyance_m" type="number" value="0" class="input_size"onkeyup='çonveyanceCal(this.value)' onchange=""name="conveyanceAllow">
+																				      </div>
+																				      
+																				      <div class="form-group sm col-md-6">
+																				     <input id="conveyance_y" type="number" value="0"class="input_size" name="conveyanceAllowY">
+																					</div>
+																					</div>	
+																					
+																		<div class="form-row">
+																		          <div class="form-group sm col-md-6">
+																					 <label class="form-label">Bonus/ Exgratia</label>&nbsp;&nbsp;&nbsp;
+																					<input type="number" value="0" class="input_size"onkeyup='bonusCal(this.value)'
+																						onchange="totalAllowance()" name="bonus"id="bonus_m">
+																						</div>
+																						<div class="form-group sm col-md-6">
+																						 <input id="bonus_y" type="number" value="0" class="input_size" name="bonusY">
+																						</div>
 																		</div>
-																	</div>
-
-																	<!--  tab 1 end -->
-
-
-																	<!-- TAB 2 DEDUCTION CALCULATION -->
-																	<div role="tabpanel" class="tab-pane" id="profile">
-																		<div class="container-fluid"
-																			style="margin-top: 100px;">
-																			<div class="row">
-
-																				<div class="col-md-12 col-sm-12">
-
-
-
-																					<div class="col-md-12 col-sm-12"
-																						style="margin-bottom: 50px;">
-																						<table>
-																							<!-- <caption>Statement Summary</caption> -->
+																						
+																		<div class="form-row">		
+																		<div class="form-group">
+																					<label class="form-label">Overtime Rate</label>
+																					<select class="sm_input1"><option></option>
+																					 </select>
+																					  <input type="number" value="0"class="sm_input2"><br> <br> 
+																						</div>
+																		</div>
+																						
+																		<div class="form-row">				
+															      		 <div class="form-group sm col-md-6">
+																					<label  class="form-label">Total   Allowances</label>&nbsp;&nbsp;
+																					<input id="total_allowances_m" type="number" value="0" class="input_size" name="totalAllow">&nbsp;&nbsp;
+																					</div>
+																					 <div class="form-group sm col-md-6">
+																					<input id="total_allowances_y" type="number" value="0" class="input_size" name="totalAllowY"><br>
+																					</div>
+																					</div>
+																					
+																					
+																		<div class="form-row">		
+																		            <div class="form-group sm col-md-6">
+																					<label class="form-label">Gross(inc. Emp. <br> PF & Emp.ESI)</label>
+																					<input type="number" value="0"class="input_size" name="gross" id="grossM">
+																					 </div>
+																					 <div class="form-group sm col-md-6">
+																					<input type="number" value="0" class="input_size"name="grossY" id="grossY">
+																					<br>
+																					</div>
+																					</div>
+																					
+																		<div class="form-row">				
+																		 <div class="form-group sm col-md-6">
+																					<label class="form-label">Net Pay</label>
+																					<input type="number" value="0" class="input_size"name="netPay" id="net_pay_m">&nbsp;&nbsp;
+																					</div>
+																					 <div class="form-group sm col-md-6">
+																					<input type="number" value="0" class="input_size" id="net_pay_y">
+																					</div>
+																					</div>
+																						
+																		<div class="form-group">
+																					<label class="form-label">CTC</label>																				<input type="number" value="0" class="input_size"id="ctc" name="ctc">&nbsp;&nbsp; 
+																						<input type="number" value="0">
+																						</div>
+																						
+																		<div class="form-group">
+																					<label class="form-label">CompanyLeased <br>Accomodation</label>
+																					<select style="width: 155px;">
+																						<option></option>
+																					</select> 
+																					<input type="submit" value="add">
+										  									
+										  									
+										 </div>
+										 
+									</div>
+									
+									
+									<div id="validation-step-2">
+									<table id="datatables-buttons"aria-describedby="datatables-buttons" class="table table-striped display" style="width:100%">
+																					
 																							<thead>
 																								<tr>
 																									<th scope="col"></th>
 																									<th scope="col">Monthly Basis</th>
 																									<th scope="col">Yearly Basis</th>
 																									<td data-label=""></td>
-
-
 																								</tr>
 																							</thead>
 																							<tbody>
@@ -632,7 +436,7 @@ li.active>a {
 																										onclick='calculateEsiAndEpf()'>
 																										Calculated FPF and PF on 15000 and EPF on
 																										Actual<br></td>
-																									<!-- <td data-label=""><input type="radio"></td> -->
+																								
 																									<td data-label=""></td>
 
 																								</tr>
@@ -687,7 +491,7 @@ li.active>a {
 																											<option value='y'>Yes</option>
 																											<option value='n'>No</option>
 																									</select></td>
-																									<!-- <td data-label=""><input type="text"></td> -->
+																								
 
 																								</tr>
 																								<tr>
@@ -708,7 +512,7 @@ li.active>a {
 																											<option value='y'>Yes</option>
 																											<option value='n'>No</option>
 																									</select></td>
-																									<!-- <td data-label=""></td> -->
+																							
 
 
 																								</tr>
@@ -849,48 +653,29 @@ li.active>a {
 																									<td data-label=""></td>
 
 																									<td data-label=""></td>
-																									<!-- <td data-label="Amount"><input type="text"></td> -->
+																									
 
 																								</tr>
 
 																							</tbody>
 																						</table>
-																						<br>
-
-																					</div>
-
-																				</div>
-																				<!-- <div class="col-md-2">
-    </div> -->
-																			</div>
-																		</div>
-																	</div>
-
-																	<!-- TAB 2 DEDUCTION END -->
-
-
-																	<!-- tab 3 -->
-																	<div role="tabpanel" class="tab-pane" id="messages">
-																		<div class="container-fluid">
-																			<div class="row">
-
-																				<div class="col-md-12 col-sm-12"
-																					style="margin-bottom: 50px;">
-																					<table>
-																						<!-- <caption>Statement Summary</caption> -->
+									</div>
+									
+									
+									<div id="validation-step-3">
+										<table id="example"aria-describedby="example" class="table table-striped display" style="width:100%">
 																						<thead>
 																							<tr>
-																								<th scope="col">Code*</th>
-																								<th scope="col">Type</th>
-																								<th scope="col">Allowances Deductions Names</th>
-																								<th scope="col">ESI Effected</th>
-																								<th scope="col">Head Desc.</th>
-																								<th scope="col">Effect With Work Days</th>
-																								<th scope="col">Amount* Monthly Basis</th>
-																								<th scope="col">Amount* Yearly Basis</th>
+																							<th scope="col">Code*</th>
+																							<th scope="col">Type</th>
+																							<th scope="col">Allowances Deductions Names</th>
+																							<th scope="col">ESI Effected</th>
+																							<th scope="col">Head Desc.</th>
+																							<th scope="col">Effect With Work Days</th>
+																							<th scope="col">Amount* Monthly Basis</th>
+																							<th scope="col">Amount* Yearly Basis</th>
 																							</tr>
 																						</thead>
-																						
 																						<tbody>
 																							<tr th:each=" listMiscAllowanceDeduction : ${listMiscAllowanceDeduction} " >
 																								
@@ -921,261 +706,170 @@ li.active>a {
 																								
 																								<td><input type="text" class="tab3"></td>
 																							</tr>
-																							
-																							<!-- <tr>
-																								<td data-label="Account"><input type="text"
-																									class="tab3"></td>
-																								<td data-label="Due Date"><input
-																									type="text" class="tab3"></td>
-																								<td data-label="Amount"><input type="text"
-																									class="tab3"></td>
-																								<td><input type="checkbox"></td>
-																								<td><input type="text" class="tab3"></td>
-																								<td><input type="checkbox"></td>
-																								<td><input type="text" class="tab3"></td>
-																								<td><input type="text" class="tab3"></td>
-																							</tr>
-																							<tr>
-																								<td data-label="Account"><input type="text"
-																									class="tab3"></td>
-																								<td data-label="Due Date"><input
-																									type="text" class="tab3"></td>
-																								<td data-label="Amount"><input type="text"
-																									class="tab3"></td>
-																								<td><input type="checkbox"></td>
-																								<td><input type="text" class="tab3"></td>
-																								<td><input type="checkbox"></td>
-																								<td><input type="text" class="tab3"></td>
-																								<td><input type="text" class="tab3"></td>
-																							</tr>
-																							<tr>
-																								<td data-label="Account"><input type="text"
-																									class="tab3"></td>
-																								<td data-label="Due Date"><input
-																									type="text" class="tab3"></td>
-																								<td data-label="Amount"><input type="text"
-																									class="tab3"></td>
-																								<td><input type="checkbox"></td>
-																								<td><input type="text" class="tab3"></td>
-																								<td><input type="checkbox"></td>
-																								<td><input type="text" class="tab3"></td>
-																								<td><input type="text" class="tab3"></td>
-																							</tr>
-																							<tr>
-																								<td data-label="Account"><input type="text"
-																									class="tab3"></td>
-																								<td data-label="Due Date"><input
-																									type="text" class="tab3"></td>
-																								<td data-label="Amount"><input type="text"
-																									class="tab3"></td>
-																								<td><input type="checkbox"></td>
-																								<td><input type="text" class="tab3"></td>
-																								<td><input type="checkbox"></td>
-																								<td><input type="text" class="tab3"></td>
-																								<td><input type="text" class="tab3"></td>
-																							</tr>
-																							<tr>
-																								<td data-label="Account"><input type="text"
-																									class="tab3"></td>
-																								<td data-label="Due Date"><input
-																									type="text" class="tab3"></td>
-																								<td data-label="Amount"><input type="text"
-																									class="tab3"></td>
-																								<td><input type="checkbox"></td>
-																								<td><input type="text" class="tab3"></td>
-																								<td><input type="checkbox"></td>
-																								<td><input type="text" class="tab3"></td>
-																								<td><input type="text" class="tab3"></td>
-																							</tr>
-																							<tr>
-																								<td data-label="Account"><input type="text"
-																									class="tab3"></td>
-																								<td data-label="Due Date"><input
-																									type="text" class="tab3"></td>
-																								<td data-label="Amount"><input type="text"
-																									class="tab3"></td>
-																								<td><input type="checkbox"></td>
-																								<td><input type="text" class="tab3"></td>
-																								<td><input type="checkbox"></td>
-																								<td><input type="text" class="tab3"></td>
-																								<td><input type="text" class="tab3"></td>
-																							</tr>
-																							<tr>
-																								<td data-label="Account"><input type="text"
-																									class="tab3"></td>
-																								<td data-label="Due Date"><input
-																									type="text" class="tab3"></td>
-																								<td data-label="Amount"><input type="text"
-																									class="tab3"></td>
-																								<td><input type="checkbox"></td>
-																								<td><input type="text" class="tab3"></td>
-																								<td><input type="checkbox"></td>
-																								<td><input type="text" class="tab3"></td>
-																								<td><input type="text" class="tab3"></td>
-																							</tr>
-																							<tr>
-																								<td data-label="Account"><input type="text"
-																									class="tab3"></td>
-																								<td data-label="Due Date"><input
-																									type="text" class="tab3"></td>
-																								<td data-label="Amount"><input type="text"
-																									class="tab3"></td>
-																								<td><input type="checkbox"></td>
-																								<td><input type="text" class="tab3"></td>
-																								<td><input type="checkbox"></td>
-																								<td><input type="text" class="tab3"></td>
-																								<td><input type="text" class="tab3"></td>
-																							</tr>   -->	
-																					</tbody>
+																						</tbody>
+																					
 																					</table>
-																					<br> <a href="#" class="previous">&laquo;
-																						Previous</a> <a href="#" class="next">Next &raquo;</a>
-																					<a href="#" class="previous round">&#8249;</a> <a
-																						href="#" class="next round">&#8250;</a> <a
-																						href="#" class="close"></a>
+						                                            			</div>
+									
+									
+					          </div>
+						                                      	</div>
+					                                       	</div>
+				                                     	</div>
+					
+					
+					
+					
 
-
-																				</div>
-
-																			</div>
-																		</div>
-																	</div>
+				
 
 																	<!--  tab3 end -->
-																</div>
+															
 
 																<input type="submit" value=" add">
+                                                                         </div>
+						
+						
+							
+						
+									
+		
+						
+	                           
 
-															</div>
-														</div>
-													</div>
-												</div>
-
-											</div>
-										</div>
+	                              
+										
+										<button type="submit" class="btn btn-primary">Save</button>
+										<button type="reset" class="btn btn-primary" value="Reset">Reset</button>
+									</form>
 									</div>
-
-
-
-
-									<!-- form content end -->
-								</div>
-							</div>
-
-							<!-- bottom table -->
-							<div class="col-12">
-								<div class="card">
-									<div class="card-header"></div>
-									<div class="card-body">
-										<table id="datatables-buttons"
-											class="table table-striped display" style="width: 100%">
-											<thead>
-												<tr>
-													<th>Employee Code</th>
-													<th>Employee Name</th>
-													<th>Department Code</th>
-													<th>Employee Status</th>
-													<th>Card No</th>
-													<th>Action</th>
-												</tr>
-											</thead>
-											<tbody>
-												<tr th:each="list : ${listEmpPayDetail}">
-													<td th:text="${list.empCode}"></td>
-													<td th:text="${list.empName}"></td>
-													<td th:text="${list.empName}"></td>
-													<td></td>
-													<td></td>
-													<td>
-													<td><a
-														th:href="@{/editEmpPayDetail/{empCode}(empCode=${list.empCode})}"><i
-															class="fa fa-edit"></i></a> <a
-														th:href="@{/editEmpPayDetail/{empCode}(empCode=${list.empCode})}"><i
-															class="fa fa-edit"></i></a></td>
-												</tr>
-											</tbody>
-
-										</table>
 									</div>
-
-								</div>
-							</div>
-							<!-- botttom table end  -->
-						</div>
-
-
-						<!-- bottom table  -->
-
-						<!-- bottom table end -->
-					</div>
-
-
-
-
-				</main>
-
-			</form>
-
-
+									</div>
+									</div>
+									</div>
+									
+					
+					
+					
+			</main>
 			<footer class="footer">
-				<div th:replace="/fragments/footer :: div"></div>
+				<div th:replace="fragments/footer :: div"></div>
 			</footer>
 		</div>
 	</div>
-
 	<script>
-      //open and close tab menu
-    $('.nav-tabs-dropdown')
-        .on("click", "li:not('.active') a", function(event) {  $(this).closest('ul').removeClass("open");
-        })
-        .on("click", "li.active a", function(event) {        $(this).closest('ul').toggleClass("open");
-        });
-    </script>
+		$(function() {
+			$("input[name='wefdate']").daterangepicker({
+					singleDatePicker: true,
+				    autoApply: true,
+					locale: {
+			            format: 'YYYY/MM/DD'
+			        },
+					showDropdowns: true
+				});
+			
+			$("input[name='pfEffectiveDate']").daterangepicker({
+				singleDatePicker: true,
+			    autoApply: true,
+				locale: {
+		            format: 'YYYY/MM/DD'
+		        },
+				showDropdowns: true
+			});
+			$("input[name='esiEffectiveDate']").daterangepicker({
+				singleDatePicker: true,
+			    autoApply: true,
+				locale: {
+		            format: 'YYYY/MM/DD'
+		        },
+				showDropdowns: true
+			});
+		});
+	</script>
 	<script>
-
 	$(document).ready(function() {
-		   var datatablesButtons =  $('#example').DataTable( {
+	    $('#example').DataTable( {
 	        "scrollY": 200,
 	        "scrollX": true,
 	        deferRender:true,
-	        lengthChange: false,
-	    	buttons: ['copy', 'csv', 'excel', 'pdf', 'print'],
             scrollCollapse: true,
             
 	    } );
-	
-		datatablesButtons.buttons().container().appendTo("#example_wrapper .col-md-6:eq(0)")
-	    
 	} );
-	
-	$('[name=empId]').val( '' );
-
-
-	
 	</script>
-	<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-	<script
-		src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-	<script
-		src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
-	<script
-		src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>
-	<script
-		src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.bootstrap4.min.js"></script>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
-	<script
-		src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js"></script>
-	<script
-		src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.print.min.js"></script>
-	<script
-		src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.colVis.min.js"></script>
-
-
+	<script>
+		$(function() {
+			$("#smartwizard-default-primary").smartWizard({
+				theme: "default",
+				showStepURLhash: false
+			});
+			$("#smartwizard-default-success").smartWizard({
+				theme: "default",
+				showStepURLhash: false
+			});
+			$("#smartwizard-default-danger").smartWizard({
+				theme: "default",
+				showStepURLhash: false
+			});
+			$("#smartwizard-default-warning").smartWizard({
+				theme: "default",
+				showStepURLhash: false
+			});
+			$("#smartwizard-arrows-primary").smartWizard({
+				theme: "arrows",
+				showStepURLhash: false
+			});
+			$("#smartwizard-arrows-success").smartWizard({
+				theme: "arrows",
+				showStepURLhash: false
+			});
+			$("#smartwizard-arrows-danger").smartWizard({
+				theme: "arrows",
+				showStepURLhash: false
+			});
+			$("#smartwizard-arrows-warning").smartWizard({
+				theme: "arrows",
+				showStepURLhash: false
+			});
+			// Validation
+			var $validationForm = $("#smartwizard-validation");
+			$validationForm.validate({
+				errorPlacement: function errorPlacement(error, element) {
+					$(element).parents(".form-group").append(
+						error.addClass("invalid-feedback small d-block")
+					)
+				},
+				highlight: function(element) {
+					$(element).addClass("is-invalid");
+				},
+				unhighlight: function(element) {
+					$(element).removeClass("is-invalid");
+				},
+				rules: {
+					"wizard-confirm": {
+						equalTo: "input[name=\"wizard-password\"]"
+					}
+				}
+			});
+			$validationForm
+				.smartWizard({
+					autoAdjustHeight: false,
+					backButtonSupport: false,
+					useURLhash: false,
+					showStepURLhash: false,
+					
+				})
+				
+			$validationForm.find(".btn-submit").on("click", function() {
+				if (!$validationForm.valid()) {
+					return;
+				}
+				alert("Great! The form is valid and ready to submit.");
+				return false;
+			});
+		});
+	</script>
+		
 
 </body>
 </html>

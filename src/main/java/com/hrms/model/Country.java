@@ -45,11 +45,11 @@ public class Country implements Serializable {
 	}
 
 	public String getCountryName() {
-		return countryName;
+		return countryName.toUpperCase();
 	}
 
 	public void setCountryName(String countryName) {
-		this.countryName = countryName;
+		this.countryName = countryName.toUpperCase();
 	}
 
 	public String getActive() {

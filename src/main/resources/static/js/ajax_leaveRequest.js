@@ -66,6 +66,7 @@ function ajaxRequestForDepartmentLeave(val){
 }
 
 var leaveTypeId = "";
+var fromDateType = "f";
 
 function leaveType(){
 	
@@ -77,14 +78,19 @@ function leaveType(){
 		document.getElementById("to_date_type").disabled = true;
 		document.getElementById("to_date").disabled = true;
 		document.getElementById("to_date").value = document.getElementById("from_date").value;
-																			
-	}
+		countLeaveDays();
+	}																
+
 	else{
 		console.log("multiple leave type ");
 		document.getElementById("to_date_type").disabled = false;
 		document.getElementById("to_date").disabled = false;
+		
+		countLeaveDays();
+
 	}
 }
+	
 
 function changeToDate(val){
 	console.log(" dateChange function" + val);
@@ -93,4 +99,36 @@ function changeToDate(val){
 		document.getElementById("to_date").value = val;
 		//document.getElementById("to_date").disabled = true;
 	}
+}
+
+function dayType(){
+	fromDateType = document.getElementById("from_date_type").value;
+	
+	fromDateType = fromDateType;
+	console.log(fromDateType + " in day type ");
+	
+	countLeaveDays();
+}
+
+function countLeaveDays(){
+
+	console.log("count leave days blocks ");
+	if(leaveTypeId == "single" && fromDateType =="f" )
+	{
+		document.getElementById("leave_for").value = 1 ;
+		console.log("single / f type ");
+	}
+	if(leaveTypeId == "single" && fromDateType =="h" )
+	{
+		document.getElementById("leave_for").value = 0.5 ;
+		console.log("single / h type ");
+	}
+	if(leaveTypeId == "" && (fromDateType =="h" || fromDateType == "f") )
+	{
+		document.getElementById("leave_for").value = 1 ;
+		console.log("blank / h or f type ");
+	}
+	console.log(" f case : "+ fromDateType + " and " + leaveTypeId);
+
+
 }

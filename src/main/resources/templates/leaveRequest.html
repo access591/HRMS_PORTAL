@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<script type="text/javascript" th:src="@{/js/settings.js}"></script>
+<script type="text/javascript" th:src="@{/js/app.js}"></script>
+<script type="text/javascript" th:src="@{/js/ajax_leaveRequest.js}"></script>
+<link rel="stylesheet" type="text/css" th:href="@{/css/modern.css}" />
+<script src="https://www.googletagmanager.com/gtag/js?id=UA-120946860-7"></script>
+<style>
+body {
+	opacity: 0;
+}
+
+.uppercase {
+	text-transform: uppercase;
+}
+</style>
+<script>
+	window.dataLayer = window.dataLayer || [];
+	function gtag() {
+		dataLayer.push(arguments);
+	}
+	gtag('js', new Date());
+
+	gtag('config', 'UA-120946860-7');
+</script>
+<head>
+<meta charset="utf-8" />
+<title>HRMS</title>
+</head>
+
+<body>
+
+	<div class="wrapper">
+
+
+		<!--  nav start -->
+		<nav id="sidebar" class="sidebar">
+			<div th:replace="/fragments/sidebar :: div"></div>
+		</nav>
+		<!-- nav end  -->
+
+
+		<!-- main start here  -->
+		<div class="main">
+
+			<div th:replace="/fragments/header ::div"></div>
+
+			<!-- content div start  -->
+			<main class="content">
+
+				<!-- container div start -->
+				<div class="container-fluid">
+
+
+					<!-- header div  -->
+					<div class="header">
+						<h1 class="header-title">Master</h1>
+
+						<nav aria-label="breadcrumb"></nav>
+					</div>
+					<!-- header div end  -->
+
+
+					<!-- main row div  -->
+					<div class="row">
+
+						<!-- div column start  -->
+						<div class="col-12">
+
+							<!-- card start  -->
+							<div class="card">
+
+								<!-- card header  -->
+								<div class="card-header">
+
+									<h5 class="card-title"></h5>
+
+									<!-- div start  -->
+									<div class="alert-outline">
+										<div th:if="${message}" th:text="${message}"
+											style="color: red"></div>
+									</div>
+									<!-- div end -->
+
+								</div>
+								<!-- card header end  -->
+
+<form id="" action="#" th:action="@{/saveLeaveRequest}" th:object="${leaveRequest}" method="post">
+								<!--  card body start  -->
+								<div class="card-body">
+
+
+									<!-- first block  -->
+									<div class="row">
+										<div class="col-md-2"></div>
+
+										<div class="col-md-8 "
+											style="margin-top: 50px; border: 1px solid black; padding: 10px;">
+
+											<!-- row  -->
+											<div class="row">
+												<label class="col-md-3">Employee</label> <input
+													class="col-md-2" id="leaveRequestEmpId" value="" name="empCode"/> <select
+													class="col-md-6" id="employeeDropDownLeave"
+													onchange="leaveEmployeDisplay()">
+													<option value="">Select Employee</option>
+													<option th:each="employee: ${listEmployee}"
+														th:text="${employee.empName}"
+														th:value=" ${employee.empCode}"></option>
+
+												</select>
+											</div>
+											<!-- row end  -->
+
+											<!-- row  -->
+											<div class="row" style="padding: 5px;">
+												<label class="col-md-3">Department</label> <input
+													type="text" class="col-md-2" id="leaveDepartmentId"
+													value="" name="deptCode"> <input type="text" class="col-md-6"
+													id="leaveDepartmentName" value="">
+											</div>
+											<!--row end  -->
+										</div>
+										<div class="col-md-2"></div>
+									</div>
+									<!-- first blcck end  -->
+
+									<!-- second block / leave information  -->
+
+									<div class="row">
+										<div class="col-md-2"></div>
+
+										<div class="col-md-8 "
+											style="margin-top: 50px; border: 1px solid black; padding: 10px;">
+
+											<!-- first row -->
+											<div class="row">
+												<label class="col-md-3">Type of Leave</label> <select
+													class="col-md-3" id="leave_type_id" onchange="leaveType()">
+													<option value="">Select</option>
+													<option value="single">Single</option>
+													<option value="multiple">Multiple</option>
+												</select>
+											</div>
+											<!--row end  -->
+
+
+
+											<!--2nd row  -->
+											<div class="row" style="padding: 5px;">
+												<label class="col-md-3">From Date</label><input type="date"
+													id="from_date" class="col-md-3" name="fromDate"
+													value="2018-07-22" min="2018-01-01" max="2018-12-31"
+													onchange="changeToDate(this.value)"> <label
+													class="col-md-3">From Date Type</label> <select
+													class="col-md-3" name='fromDateType' id="from_date_type" onchange="dayType()">
+													<option value=" f">Full</option>
+													<option value="h">Half</option>
+												</select>
+											</div>
+											<!-- 2nd row end  -->
+
+											<!--3rd row  -->
+											<div class="row" style="padding: 5px;">
+												<label class="col-md-3">To Date</label><input type="date"
+													id="to_date" class="col-md-3" name="toDate"
+													value="2018-07-22" min="2018-01-01" max="2018-12-31">
+
+
+												<label class="col-md-3">To Date Type</label><input
+													type="date" id="to_date_type" class="col-md-3"
+													name="toDateType" value="2018-07-22" min="2018-01-01"
+													max="2018-12-31">
+											</div>
+											<!-- 3rd row end  -->
+
+											<!--4th row  -->
+											<div class="row" style="padding: 5px;">
+												<label class="col-md-3">Leave</label><input type="text" id="leave_for"
+													class="col-md-3" name='leaveFor' readonly> <select class="col-md-6">
+													<option>Casual</option>
+													<option>Medical</option>
+												</select>
+											</div>
+											<!-- 4th row end  -->
+
+											<!--5th row  -->
+											<div class="row" style="padding: 5px;">
+												<label class="col-md-3">Shift</label><input type="time"min="09:00" max="18:00"
+													class="col-md-3"> <input type="time"
+													class="col-md-4"> <select class="col-md-2">
+													<option>Shift 1</option>
+													<option>Shift 2</option>
+												</select>
+											</div>
+											<!-- 5th row end  -->
+
+											<!--6th row  -->
+											<div class="row" style="padding: 5px;">
+												<label class="col-md-3">Reason</label> <input type="text"
+													class="col-md-9" name='reason'>
+											</div>
+											<!-- 6th row end  -->
+
+											<!--7th row  -->
+											<div class="row" style="padding: 5px;">
+												<label class="col-md-3">Apply Date</label><input type="date"
+													id='myDatePicker'
+													class="col-md-4" name='applyDate'>
+
+											</div>
+											<!-- 7th row end  -->
+
+
+										</div>
+										<div class="col-md-2"></div>
+									</div>
+									<!-- second block end  -->
+
+
+									<!-- 3rd block /leave status  -->
+
+									<div class="row">
+									
+													
+										<div class="col-md-2"></div>
+
+										<div class="col-md-8 "
+											style="margin-top: 50px; border: 1px solid black; padding: 10px;">
+
+											<!-- first row  -->
+
+
+											<div class="row">
+
+												
+												
+												
+												<label class="col-md-3">Casual Leaves</label> <input
+													type="text" class="col-md-4" value = "7" />
+
+
+											</div>
+
+
+											<!-- first row end  -->
+
+											<!-- first row  -->
+
+
+											<div class="row" style="padding: 5px;">
+												<label class="col-md-3">Earned Leaves</label> <input
+												 	type=" text " class="col-md-4" value="6"/>
+
+											</div>
+
+
+											<!-- first row end  -->
+
+											<!-- first row  -->
+
+
+											<div class="row" style="padding: 5px;">
+												<label class="col-md-3">Sick Leaves</label> <input
+													type=" text " class="col-md-4" value="5"/>
+
+											</div>
+
+
+											<!-- first row end  -->
+
+										</div>
+										<div class="col-md-2"></div>
+									
+									</div>
+
+									<!-- 3rd block end  -->
+
+									<!-- 4th block /Approval   -->
+
+									<div class="row">
+										<div class="col-md-2"></div>
+
+										<div class="col-md-8 "
+											style="margin-top: 50px; border: 1px solid black; padding: 10px;">
+
+											<!-- first row  -->
+
+
+											<div class="row">
+												<label class="col-md-3">Approved</label> <input
+													type=" text " class="col-md-4" />
+
+
+											</div>
+
+
+											<!-- first row end  -->
+
+											<!-- first row  -->
+											<div class="row" style="padding: 5px;">
+												<label class="col-md-3">Approval by</label> <input
+													type=" text " class="col-md-4" />
+
+											</div>
+											<!-- first row end  -->
+
+											<!-- first row  -->
+											<div class="row" style="padding: 5px;">
+												<label class="col-md-3">Approved date</label> <input
+													type=" text " class="col-md-4" />
+
+											</div>
+											<!-- first row end  -->
+
+										</div>
+										<div class="col-md-2"></div>
+									</div>
+
+									<!-- 3rd block end  -->
+								</div>
+
+								<!-- card body end  -->
+								<button type="submit" class="btn btn-primary">Save</button>
+								   <button type="submit"class="btn btn-primary" value="cancel">Cancel</button>
+								
+</form>								
+
+							</div>
+							<!-- card end  -->
+							
+							
+								   
+								   
+						</div>
+
+						<!-- div card end -->
+
+
+						<!-- table div satrt  -->
+						<div class="col-12">
+							<div class="card">
+								<div class="card-header"></div>
+								<div class="card-body">
+									<table id="example" class="table table-striped display"
+										style="width: 100%">
+										<thead>
+											<tr>
+												<th>id</th>
+												<th>Name</th>
+												<th>Apply Date</th>
+												<th>Action</th>
+
+											</tr>
+										</thead>
+										
+										<tbody>
+											 <tr th:each="leave : ${leaveRequestByEmp}">
+												<td th:text="${leave.empCode}"></td>
+												<td th:text="${leave.applyDate}"></td>
+												<td th:text="${leave.reason}"></td>
+												
+												<td><a th:href="@{/viewLeaveRequest/{empCode}/{applyDate}
+															(empCode=${leave.empCode},applyDate=${leave.applyDate})}"><i class="align-middle fas fa-fw fa-pen"></i></a>
+												
+												</td>
+											
+											</tr>
+										</tbody>
+
+									</table>
+								</div>
+
+							</div>
+						</div>
+
+						<!--table div end   -->
+						
+						
+
+					</div>
+					<!-- container div end  -->
+				</div>
+
+				<!-- content div  end  -->
+								   				   
+
+			</main>
+
+			<!-- main close  -->
+
+			<footer class="footer">
+				<div th:replace="/fragments/footer :: div"></div>
+			</footer>
+		</div>
+	</div>
+	<script>
+		$(document).ready(
+				function() {
+					var datatablesButtons = $('#example').DataTable({
+						"scrollY" : 200,
+						"scrollX" : true,
+						deferRender : true,
+						lengthChange : false,
+						buttons : [ 'copy', 'csv', 'excel', 'pdf', 'print' ],
+						scrollCollapse : true,
+
+					});
+
+					datatablesButtons.buttons().container().appendTo(
+							"#example_wrapper .col-md-6:eq(0)")
+
+				});
+		
+		document.getElementById("myDatePicker").valueAsDate = new Date();
+		
+	</script>
+	<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+	<script
+		src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+	<script
+		src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+	<script
+		src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>
+	<script
+		src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.bootstrap4.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+	<script
+		src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js"></script>
+	<script
+		src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.print.min.js"></script>
+	<script
+		src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.colVis.min.js"></script>
+
+
+
+</body>
+</html>
