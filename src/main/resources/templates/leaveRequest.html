@@ -74,7 +74,7 @@ body {
 								<!-- card header  -->
 								<div class="card-header">
 
-									<h5 class="card-title">Create Award</h5>
+									<h5 class="card-title"></h5>
 
 									<!-- div start  -->
 									<div class="alert-outline">
@@ -154,9 +154,9 @@ body {
 													value="2018-07-22" min="2018-01-01" max="2018-12-31"
 													onchange="changeToDate(this.value)"> <label
 													class="col-md-3">From Date Type</label> <select
-													class="col-md-3" name='fromDateType'>
-													<option value=" full">Full</option>
-													<option value="half">Half</option>
+													class="col-md-3" name='fromDateType' id="from_date_type" onchange="dayType()">
+													<option value=" f">Full</option>
+													<option value="h">Half</option>
 												</select>
 											</div>
 											<!-- 2nd row end  -->
@@ -177,8 +177,8 @@ body {
 
 											<!--4th row  -->
 											<div class="row" style="padding: 5px;">
-												<label class="col-md-3">Leave</label><input type="text"
-													class="col-md-3" name='leaveFor'> <select class="col-md-6">
+												<label class="col-md-3">Leave</label><input type="text" id="leave_for"
+													class="col-md-3" name='leaveFor' readonly> <select class="col-md-6">
 													<option>Casual</option>
 													<option>Medical</option>
 												</select>
@@ -187,8 +187,8 @@ body {
 
 											<!--5th row  -->
 											<div class="row" style="padding: 5px;">
-												<label class="col-md-3">Shift</label><input type="text"
-													class="col-md-3"> <input type="text"
+												<label class="col-md-3">Shift</label><input type="time"min="09:00" max="18:00"
+													class="col-md-3"> <input type="time"
 													class="col-md-4"> <select class="col-md-2">
 													<option>Shift 1</option>
 													<option>Shift 2</option>
@@ -347,24 +347,25 @@ body {
 										style="width: 100%">
 										<thead>
 											<tr>
-												<th>Award id</th>
-												<th>Award Name</th>
-												<th>Status</th>
+												<th>id</th>
+												<th>Name</th>
+												<th>Apply Date</th>
 												<th>Action</th>
 
 											</tr>
 										</thead>
+										
 										<tbody>
-											<!-- <tr th:each="listOfAward : ${listAward}">
-												<td th:text="${listOfAward.id}"></td>
-												<td th:text="${listOfAward.awardName}"></td>
-												<td th:text="${listOfAward.active}"></td> -->
-											<!-- <td><a
-													th:href="@{/editAward/{id}(id=${listOfAward.id})}"><i
-														class="align-middle fas fa-fw fa-pen"></i></a> <a
-													th:href="@{/deleteAward/{id}(id=${listOfAward.id})}"
-													onclick="return confirm('Are you sure?')"><i
-														class="align-middle fas fa-fw fa-trash"></i></a></td> -->
+											 <tr th:each="leave : ${leaveRequestByEmp}">
+												<td th:text="${leave.empCode}"></td>
+												<td th:text="${leave.applyDate}"></td>
+												<td th:text="${leave.reason}"></td>
+												
+												<td><a th:href="@{/viewLeaveRequest/{empCode}/{applyDate}
+															(empCode=${leave.empCode},applyDate=${leave.applyDate})}"><i class="align-middle fas fa-fw fa-pen"></i></a>
+												
+												</td>
+											
 											</tr>
 										</tbody>
 
