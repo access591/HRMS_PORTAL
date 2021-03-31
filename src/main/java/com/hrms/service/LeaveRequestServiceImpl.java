@@ -14,9 +14,9 @@ public class LeaveRequestServiceImpl implements LeaveRequestService{
 
 	@Autowired LeaveRequestDao leaveRequestDao;
 	@Override
-	public List<LeaveRequest> findAllByName(String empCode) {
+	public List<LeaveRequest> findAllByEmpCode(String empCode) {
 		
-		return this.leaveRequestDao.findAllByName(empCode);
+		return this.leaveRequestDao.findAllByEmpCode(empCode);
 		
 	}
 	@Override
@@ -43,6 +43,11 @@ public class LeaveRequestServiceImpl implements LeaveRequestService{
 	public void removeLeaveRequest(String id) {
 		this.leaveRequestDao.delete(id);
 		
+	}
+	@Override
+	public List<LeaveRequest> findByEmpCodeAndApplyDate(String empCode, String applyDate) {
+		
+		return this.leaveRequestDao.findByEmpCodeAndApplyDate(empCode, applyDate);
 	}
 
 }

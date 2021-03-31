@@ -3,9 +3,9 @@ package com.hrms.repository;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -21,26 +21,39 @@ public class LeaveRequestDaoImpl extends AbstractGenericDao<LeaveRequest> implem
 	
 	
 	@Override
-	public List<LeaveRequest> findAllByName(String empCode) {
+	public List<LeaveRequest> findAllByEmpCode(String empCode) {
 		
-		List<LeaveRequest> leaveRequest = new ArrayList<LeaveRequest>();
+		System.out.println(" leave request dao Impl model ");
+		List<LeaveRequest> leaverequestByEmpCode = new ArrayList<LeaveRequest>();
 		try {
 			final Session session = this.sessionFactory.getCurrentSession();
 			
-			  String sql = "select * from LeaveRequest where empCode = "+ empCode;
+			String hql = "FROM LeaveRequest E WHERE E.empCode =:empCode";
+			Query query = session.createQuery(hql);
+			query.setParameter("empCode" , empCode);
+			List results = query.list();
 			 
-			  
-			  SQLQuery query = session.createSQLQuery(sql); query.addEntity(Module.class);
-			  leaveRequest = query.list();
-			  	
 			
-			
+			leaverequestByEmpCode = results;
 		} catch (Exception e) {
-			//logger.error(e.getMessage(), e);
+			System.out.println("exception block in leaveRequestDaoImpl model ");
+			 e.printStackTrace();
 		}
 
-		return leaveRequest;
+		return leaverequestByEmpCode;
 		
+	}
+
+
+	@Override
+	public List<LeaveRequest> findByEmpCodeAndApplyDate(String empCode, String applyDate) {
+		 Session session = this.sessionFactory.getCurrentSession();
+		 String hql = "FROM LeaveRequest e WHERE e.empCode=:empCode and e.applyDate=:applyDate";
+		 Query query = session.createQuery(hql);
+		 query.setParameter("empCode", empCode);
+		 query.setParameter("applyDate", applyDate);
+		 List result = query.list();
+		return result;
 	}
 
 }

@@ -13,7 +13,8 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="leave_request")
-public class LeaveRequest{
+public class LeaveRequest  {
+	
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -21,8 +22,32 @@ public class LeaveRequest{
 	
 	private String empCode;
 	
+	private String empName;
+	
 	private String deptCode;
 	
+	private String deptName;
+	
+	public String getEmpName() {
+		return empName;
+	}
+
+
+	public void setEmpName(String empName) {
+		this.empName = empName;
+	}
+
+
+	public String getDeptName() {
+		return deptName;
+	}
+
+
+	public void setDeptName(String deptName) {
+		this.deptName = deptName;
+	}
+
+
 	private String leaveCode;
 	
 	private String toDate;

@@ -8,6 +8,7 @@ import com.hrms.model.LeaveRequest;
 
 public interface LeaveRequestDao  extends GenericDao<LeaveRequest>{
 	
-	List<LeaveRequest> findAllByName(String empCode);
+	List<LeaveRequest> findAllByEmpCode(String empCode);
+	List<LeaveRequest> findByEmpCodeAndApplyDate(String empCode,String applyDate);
 
 }
