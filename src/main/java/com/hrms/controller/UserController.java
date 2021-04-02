@@ -171,4 +171,12 @@ public class UserController {
 		return "redirect:/userMaster";
 	}
 	
+	@GetMapping("/logout")
+	public String logout(HttpSession session) {
+		session.removeAttribute("username");
+		session.invalidate();
+		return "redirect:./";
+		
+	}
+	
 }
