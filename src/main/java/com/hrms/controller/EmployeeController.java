@@ -9,9 +9,15 @@ import java.nio.file.Paths;
 import java.util.List;
 import java.util.UUID;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -21,7 +27,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
+import com.hrms.ImageUtil;
 import com.hrms.model.Employee;
 import com.hrms.model.MenuModule;
 import com.hrms.service.EmployeeService;
@@ -32,13 +40,15 @@ import com.hrms.service.PageMappingService;
 public class EmployeeController {
 	int pageno = 43;
 	String reqPage = "/employeeMaster";
-	
+	@Value("${upoadDir}")
+	private String uploadFolder;
 	@Autowired
 	PageMappingService pageMappingService;
 	@Autowired
 	private ModuleService moduleService;
 	@Autowired
 	EmployeeService employeeService;
+	private final Logger log = LoggerFactory.getLogger(this.getClass());
 /**
  * get All employee Details page 
  * @param model
@@ -46,7 +56,7 @@ public class EmployeeController {
  * @return
  */
 	@GetMapping("/employeeMaster")
-	public String employeeMaster(Model model, HttpSession session) {
+	public ModelAndView employeeMaster(Model model, HttpSession session) {
 
 		List<Employee> listEmployee = employeeService.getAllEmployees();
 		model.addAttribute("listEmployee", listEmployee);
@@ -57,7 +67,12 @@ public class EmployeeController {
 			model.addAttribute("modules", modules);
 		}
 		session.setAttribute("username", session.getAttribute("username"));
-		return pageMappingService.PageRequestMapping(reqPage, pageno);
+		//model.addAttribute("imgUtil", new ImageUtil());
+		ModelAndView modelAndView = new ModelAndView(pageMappingService.PageRequestMapping(reqPage, pageno));
+	    modelAndView.addObject("imgUtil", new ImageUtil());
+	    modelAndView.addObject("listEmployee", listEmployee);
+		return modelAndView;
+	
 	}
 /**
  * Save Employee Page 
@@ -69,29 +84,19 @@ public class EmployeeController {
  */
 	@PostMapping("/saveEmployee")
 	public String employeeMasterSave(@ModelAttribute("employees") Employee employee, Model model, HttpSession session,
-			@RequestParam("file") MultipartFile multipartFile) {
+			@RequestParam("image") MultipartFile file,HttpServletRequest request) {
 
 		try {
-			UUID uuid=UUID.randomUUID();
-			String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
-			employee.setEmpImg(uuid.toString().substring(0, 12)+"_"+fileName);
-
-			String folderPath = "\\src\\main\\resources\\static\\img\\";
-			String uploadDir = System.getProperty("user.dir") + folderPath;
-	
-			String path = Paths.get(uploadDir + employee.getEmpImg()).toString();
-
-			BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(new File(path)));
-			stream.write(multipartFile.getBytes());
-			stream.close();
-
+			byte[] imageData = file.getBytes();
+			employee.setImageProfile(imageData);
 			employeeService.addEmployee(employee);
+			log.info("HttpStatus===" + new ResponseEntity<>(HttpStatus.OK));
 			session.setAttribute("username", session.getAttribute("username"));
 		} catch (IOException e) {
 
 			e.printStackTrace();
 		}
-
+		model.addAttribute("imgUtil", new ImageUtil());
 		return "redirect:/" + pageMappingService.PageRequestMapping(reqPage, pageno);
 
 	}
@@ -110,7 +115,7 @@ public class EmployeeController {
 		
 		Employee employeeEdit = employeeService.findEmployeeById(id);
 		model.addAttribute("employeeEdit", employeeEdit);
-
+		model.addAttribute("imgUtil", new ImageUtil());
 		session.setAttribute("username", session.getAttribute("username"));
 		return pageMappingService.PageRequestMapping(reqPageedit, editPageNo);
 	}
@@ -123,7 +128,7 @@ public class EmployeeController {
  */
 	@PostMapping("/updateEmployee")
 	public String updatePageUrl(@ModelAttribute("employees") Employee e, Model model,@RequestParam("file") MultipartFile multipartFile) {
-		String empImg = e.getEmpImg().toString();
+		String empImg = e.getImageProfile().toString();
 
 		try {
 
@@ -163,29 +168,17 @@ public class EmployeeController {
 	 * @param session
 	 * @return
 	 */
-	@GetMapping(value = { "/deleteEmployee/{id}/{Emp_Img}" })
-	public String deleteEmployee(@PathVariable("id") String id, @PathVariable("Emp_Img") String empImage, Model model,
+
+	@GetMapping(value = { "/deleteEmployee/{id}" })
+	public String deleteEmployee(@PathVariable("id") String id,  Model model,
 			HttpSession session) {
 		try {
-
 			this.employeeService.removeEmployeet(id);
-			String folderPath = "\\src\\main\\resources\\static\\img\\";
-			String uploadDir = System.getProperty("user.dir") + folderPath;
-			File file = new File(uploadDir + empImage);
-
-			if (file.delete()) {
-				System.out.println(file.getName() + " is deleted!"); 
-			} else {
-				System.out.println("Delete operation is failed.");
-
-			}
-
 			session.setAttribute("username", session.getAttribute("username"));
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 		return "redirect:/" + pageMappingService.PageRequestMapping(reqPage, pageno);
 	}
 

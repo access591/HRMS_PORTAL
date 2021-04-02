@@ -1,11 +1,13 @@
 package com.hrms.model;
 
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -21,7 +23,9 @@ public class Employee implements Serializable {
 	@Id
 	@Column(name = "EMP_CODE")
 	private String empCode;
-
+	@Lob
+    @Column(name = "ImageProfile", length = Integer.MAX_VALUE, nullable = true)
+    private byte[] imageProfile;
 	@Column(name = "EMP_IMG")
 	private String empImg;
 
@@ -222,6 +226,7 @@ public class Employee implements Serializable {
 	public String geteActive() {
 		return eActive;
 	}
+
 
 	public String getEmpCode() {
 		return empCode;
@@ -722,5 +727,41 @@ public class Employee implements Serializable {
 	public void setEmpAgree(String empAgree) {
 		this.empAgree = empAgree;
 	}
+
+
+	@Override
+	public String toString() {
+		return "Employee [empCode=" + empCode + ", ImageProfile=" + Arrays.toString(imageProfile) + ", empImg=" + empImg
+				+ ", empName=" + empName + ", eActive=" + eActive + ", compCode=" + compCode + ", dateOfBirth="
+				+ dateOfBirth + ", birthState=" + birthState + ", empRefNo=" + empRefNo + ", empType=" + empType
+				+ ", locationType=" + locationType + ", weeklyWorkingDay=" + weeklyWorkingDay + ", birthPlace="
+				+ birthPlace + ", domicile=" + domicile + ", cardNo=" + cardNo + ", empDesignation=" + empDesignation
+				+ ", shiftCode=" + shiftCode + ", passportNo=" + passportNo + ", loiDate=" + loiDate + ", statusDate="
+				+ statusDate + ", reason=" + reason + ", departmentCode=" + departmentCode + ", managerCode="
+				+ managerCode + ", itPanNo=" + itPanNo + ", uanNo=" + uanNo + ", dateOfJoining=" + dateOfJoining
+				+ ", leavingDate=" + leavingDate + ", empGender=" + empGender + ", empHeight=" + empHeight
+				+ ", identityMark=" + identityMark + ", bloodGroup=" + bloodGroup + ", maritalStatus=" + maritalStatus
+				+ ", preDisease=" + preDisease + ", weddingDate=" + weddingDate + ", noOfChild=" + noOfChild
+				+ ", empCaste=" + empCaste + ", empReligion=" + empReligion + ", empNationality=" + empNationality
+				+ ", companyCode=" + companyCode + ", mediclaim=" + mediclaim + ", gpa=" + gpa + ", empAddress1="
+				+ empAddress1 + ", empAddress2=" + empAddress2 + ", empCity=" + empCity + ", empState=" + empState
+				+ ", pinCode=" + pinCode + ", empMobile=" + empMobile + ", empLocalAdd1=" + empLocalAdd1
+				+ ", empLocalAdd2=" + empLocalAdd2 + ", empLocalCity=" + empLocalCity + ", empLocalState="
+				+ empLocalState + ", empLocalPinCode=" + empLocalPinCode + ", empLocalMobileNo=" + empLocalMobileNo
+				+ ", compMobileNo=" + compMobileNo + ", companyEmail=" + companyEmail + ", profInst=" + profInst
+				+ ", localTravelPrkm=" + localTravelPrkm + ", hobbies=" + hobbies + ", clubs=" + clubs + ", regCode="
+				+ regCode + ", estfWork=" + estfWork + ", electronicEmpCat=" + electronicEmpCat
+				+ ", electronicCategory=" + electronicCategory + ", empAgree=" + empAgree + "]";
+	}
+
+
+	public byte[] getImageProfile() {
+		return imageProfile;
+	}
+
+
+	public void setImageProfile(byte[] imageProfile) {
+		this.imageProfile = imageProfile;
+	}	
 
 }

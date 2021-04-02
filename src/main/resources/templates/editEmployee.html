@@ -139,9 +139,9 @@ body {
 													<label class="form-label">Upload Image <span
 														class="text-danger">*</span>
 													</label>
-													<input type="hidden" id="empImg" name="empImg" th:value="${employeeEdit.empImg}">
+													<input type="hidden" id="empImg" name="empImg" th:value="${employeeEdit.imageProfile}">
 													 <input type="file" id="file" name="file" accept="image/png, image/jpeg"   onchange="preview_image(event)"/>
-											     <img id="output_image"width="100px" th:src="@{'/img/'+${employeeEdit.empImg}}" height="100px"style="border-radius:50%"alt="employee">
+											     <img id="output_image"width="100px" th:src="@{'data:image/jpeg;base64,'+${imgUtil.getImgData(employeeEdit.imageProfile)}}" height="100px"style="border-radius:50%"alt="employee">
 												</div>
 												
 												
