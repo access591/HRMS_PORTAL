@@ -11,8 +11,11 @@ public interface LeaveRequestService {
 	
 	public void addLeave(LeaveRequest leaveRequest);
 	List<LeaveRequest> getAllLeaves();
-	LeaveRequest findLeaveRequestById(String id);
+	//LeaveRequest findLeaveRequestById(String id);
 	public void updateLeaveRequest(LeaveRequest d);
 	public void removeLeaveRequest(String id);
 	List<LeaveRequest> findByEmpCodeAndApplyDate(String empCode, String applyDate);
+	public List<LeaveRequest> findAllByDeptCodeAndStatus(String deptCode);
+
+	LeaveRequest findLeaveRequestById(long id);
 }

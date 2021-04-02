@@ -74,7 +74,7 @@ body {
 								<!-- card header  -->
 								<div class="card-header">
 
-									<h5 class="card-title"></h5>
+									<h5 class="card-title">Leave Request</h5>
 
 									<!-- div start  -->
 									<div class="alert-outline">
@@ -86,7 +86,7 @@ body {
 								</div>
 								<!-- card header end  -->
 
-<form id="" action="#" th:action="@{/saveLeaveRequest}" th:object="${leaveRequest}" method="post">
+							<form id="" action="#" th:action="@{/saveLeaveRequest}" th:object="${leaveRequest}" method="post">
 								<!--  card body start  -->
 								<div class="card-body">
 
@@ -103,13 +103,15 @@ body {
 												<label class="col-md-3">Employee</label> <input
 													class="col-md-2" id="leaveRequestEmpId" value="" name="empCode"/> <select
 													class="col-md-6" id="employeeDropDownLeave"
-													onchange="leaveEmployeDisplay()">
+													onchange="leaveEmployeDisplay()" >
 													<option value="">Select Employee</option>
 													<option th:each="employee: ${listEmployee}"
-														th:text="${employee.empName}"
+														th:text="${employee.empName}" 
 														th:value=" ${employee.empCode}"></option>
 
 												</select>
+												
+												<input type="hidden" name="empName" value="" id="hiddenField"> 
 											</div>
 											<!-- row end  -->
 
@@ -118,7 +120,7 @@ body {
 												<label class="col-md-3">Department</label> <input
 													type="text" class="col-md-2" id="leaveDepartmentId"
 													value="" name="deptCode"> <input type="text" class="col-md-6"
-													id="leaveDepartmentName" value="">
+													id="leaveDepartmentName" value="" name="deptName">
 											</div>
 											<!--row end  -->
 										</div>
@@ -151,7 +153,7 @@ body {
 											<div class="row" style="padding: 5px;">
 												<label class="col-md-3">From Date</label><input type="date"
 													id="from_date" class="col-md-3" name="fromDate"
-													value="2018-07-22" min="2018-01-01" max="2018-12-31"
+													
 													onchange="changeToDate(this.value)"> <label
 													class="col-md-3">From Date Type</label> <select
 													class="col-md-3" name='fromDateType' id="from_date_type" onchange="dayType()">
@@ -168,10 +170,14 @@ body {
 													value="2018-07-22" min="2018-01-01" max="2018-12-31">
 
 
-												<label class="col-md-3">To Date Type</label><input
-													type="date" id="to_date_type" class="col-md-3"
-													name="toDateType" value="2018-07-22" min="2018-01-01"
-													max="2018-12-31">
+												<label class="col-md-3">To Date Type</label>
+													
+													<select
+														class="col-md-3" name='toDateType' id="to_date_type" onchange="">
+														<option value=" f">Full</option>
+														<option value="h">Half</option>
+													</select>
+												
 											</div>
 											<!-- 3rd row end  -->
 
@@ -414,6 +420,7 @@ body {
 				});
 		
 		document.getElementById("myDatePicker").valueAsDate = new Date();
+		document.getElementById("from_date").valueAsDate = new Date();
 		
 	</script>
 	<script src="https://code.jquery.com/jquery-3.3.1.js"></script>

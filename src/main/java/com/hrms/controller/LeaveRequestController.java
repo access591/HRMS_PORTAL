@@ -87,51 +87,22 @@ public class LeaveRequestController {
 	
 	
 	
-//	@GetMapping(value = { "/viewLeaveRequest/{empCode}/{applyDate}" })
-//	public String viewLeaveRequestByEmpId(@PathVariable("empCode")String empCode, @PathVariable("applyDate") String applyDate,
-//						Model model,HttpSession httpSession) {
-//		
-//		int pagenoView = 61;
-//		String reqPageView = "/viewLeaveRequest";
-//		
-//		System.out.println("emp code : "+ empCode);
-//		
-//		List<LeaveRequest> listLeaveRequestByEmpCode = leaveRequestService.findAllByEmpCode(reqPageView);
-//		model.addAttribute("listLeaveRequestByEmpCode", listLeaveRequestByEmpCode);
-//		
-//		
-//		for(int i=0;i<listLeaveRequestByEmpCode.size();i++) {
-//			LeaveRequest request = listLeaveRequestByEmpCode.get(i);
-//			
-//			if(request.getApplyDate().equals(applyDate)){
-//				if(request != null) {
-//					model.addAttribute("leaveDetail",request);
-//				}
-//			}
-//		}
-//		
-//		String userCode = (String) httpSession.getAttribute("userlogin");
-//		
-//		httpSession.setAttribute("username", httpSession.getAttribute("username"));
-//		
-//		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
-//		if (modules != null) {
-//			model.addAttribute("modules", modules);
-//		}
-//		httpSession.setAttribute("userlogin", userCode);
-//		return pageMappingService.PageRequestMapping(reqPageView, pagenoView);
-//	}
-//	
-	
 	
 	@GetMapping(value = { "/viewLeaveRequest/{empCode}/{applyDate}" })
 	public String viewLeaveRequestByEmpId(@PathVariable("empCode")String empCode, @PathVariable("applyDate") String applyDate,
-						Model model,HttpSession httpSession) {
+						Model model,HttpSession session) {
 		int pagenoView = 61;
 		String reqPageView = "/viewLeaveRequest";
+		
+		
+		
 		List<LeaveRequest> leaveRequest = this.leaveRequestService.findByEmpCodeAndApplyDate(empCode, applyDate);
 		if(leaveRequest != null) {
 			model.addAttribute("leaveDetail", leaveRequest.get(0));
+		}
+		List<MenuModule> modules = moduleService.getAllModulesList(session.getAttribute("username").toString());
+		if (modules != null) {
+			model.addAttribute("modules", modules);
 		}
 		return pageMappingService.PageRequestMapping(reqPageView, pagenoView);
 	}

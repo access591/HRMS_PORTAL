@@ -10,5 +10,6 @@ public interface LeaveRequestDao  extends GenericDao<LeaveRequest>{
 	
 	List<LeaveRequest> findAllByEmpCode(String empCode);
 	List<LeaveRequest> findByEmpCodeAndApplyDate(String empCode,String applyDate);
+	List<LeaveRequest> findAllByDeptCodeAndStatus(String deptCode);
 
 }
