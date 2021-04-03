@@ -67,7 +67,6 @@ public class EmployeeController {
 			model.addAttribute("modules", modules);
 		}
 		session.setAttribute("username", session.getAttribute("username"));
-		//model.addAttribute("imgUtil", new ImageUtil());
 		ModelAndView modelAndView = new ModelAndView(pageMappingService.PageRequestMapping(reqPage, pageno));
 	    modelAndView.addObject("imgUtil", new ImageUtil());
 	    modelAndView.addObject("listEmployee", listEmployee);
@@ -127,37 +126,20 @@ public class EmployeeController {
  * @return
  */
 	@PostMapping("/updateEmployee")
-	public String updatePageUrl(@ModelAttribute("employees") Employee e, Model model,@RequestParam("file") MultipartFile multipartFile) {
-		String empImg = e.getImageProfile().toString();
+	public String updatePageUrl(@ModelAttribute("employees") Employee employee, Model model,@RequestParam("file") MultipartFile multipartFile) {
+		
 
 		try {
 
-			UUID uuid = UUID.randomUUID();
-			String folderPath = "\\src\\main\\resources\\static\\img\\";
-			String uploadDir = System.getProperty("user.dir") + folderPath;
-			File file = new File(uploadDir + empImg);
-			String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
-
-			if (fileName.trim().length() > 0) {
-				file.delete();
-				e.setEmpImg(uuid.toString().substring(0, 12) + "_" + fileName);
-				String path = Paths.get(uploadDir + e.getEmpImg()).toString();
-				BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(new File(path)));
-				stream.write(multipartFile.getBytes());
-				stream.close();
-				this.employeeService.updateEmployee(e);
-
-			} else if (empImg != null) {
-				e.setEmpImg(empImg);
-				this.employeeService.updateEmployee(e);
-			}
-
-			this.employeeService.updateEmployee(e);
+			byte[] imageData = multipartFile.getBytes();
+			employee.setImageProfile(imageData);
+			
+			this.employeeService.updateEmployee(employee);
 
 		} catch (Exception e2) {
 			e2.printStackTrace();
 		}
-		this.employeeService.updateEmployee(e);
+		this.employeeService.updateEmployee(employee);
 		return "redirect:/" + pageMappingService.PageRequestMapping(reqPage, pageno);
 	}
 	/**
