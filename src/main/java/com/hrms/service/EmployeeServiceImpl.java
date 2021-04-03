@@ -36,7 +36,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 	@Override
 	public void updateEmployee(Employee e) {
 	e.setEmpName(e.getEmpName());
-	e.setEmpImg(e.getEmpImg());
+	e.setImageProfile(e.getImageProfile());
 	e.seteActive(e.geteActive());
 	e.setCompCode(e.getCompCode());
 	e.setDateOfBirth(e.getDateOfBirth());
