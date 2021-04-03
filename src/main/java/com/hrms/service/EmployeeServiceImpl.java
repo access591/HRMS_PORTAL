@@ -110,4 +110,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 		
 	}
 
+	@Override
+	public List<Employee> getEmployeeByDeptCode(String deptCode) {
+		return this.employeeDao.getEmployeeByDeptCode(deptCode);
+	}
+
 }
