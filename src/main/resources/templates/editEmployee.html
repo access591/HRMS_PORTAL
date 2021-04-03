@@ -139,7 +139,7 @@ body {
 													<label class="form-label">Upload Image <span
 														class="text-danger">*</span>
 													</label>
-													<input type="hidden" id="imageProfile" name="imageProfile" th:value="${employeeEdit.imageProfile}">
+													<input type="hidden" id="imageProfile" name="imageProfile" >
 													 <input type="file" id="file" name="file" accept="image/png, image/jpeg"   onchange="preview_image(event)"/>
 											     <img id="output_image"width="100px" th:src="@{'data:image/jpeg;base64,'+${imgUtil.getImgData(employeeEdit.imageProfile)}}" height="100px"style="border-radius:50%"alt="employee">
 												</div>
@@ -606,6 +606,8 @@ body {
 		</footer>
 		</div>
 		</div>
+		
+		
 	<script>
 		$(function() {
 			
@@ -681,6 +683,7 @@ body {
 			datatablesButtons.buttons().container().appendTo("#datatables-buttons_wrapper .col-md-6:eq(0)")
 		});
 		
+		
 	</script>
 	
 		<script>
@@ -745,6 +748,9 @@ function preview_image(event)
  reader.readAsDataURL(event.target.files[0]);
 }
 </script>
+ 
+
+
 <script>
 
   $('#loading').show();
