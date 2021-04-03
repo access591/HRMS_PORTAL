@@ -115,6 +115,7 @@ public class EmployeeController {
 		Employee employeeEdit = employeeService.findEmployeeById(id);
 		model.addAttribute("employeeEdit", employeeEdit);
 		model.addAttribute("imgUtil", new ImageUtil());
+		session.setAttribute("imgUtilSession",employeeEdit.getImageProfile());
 		session.setAttribute("username", session.getAttribute("username"));
 		return pageMappingService.PageRequestMapping(reqPageedit, editPageNo);
 	}
@@ -126,13 +127,20 @@ public class EmployeeController {
  * @return
  */
 	@PostMapping("/updateEmployee")
-	public String updatePageUrl(@ModelAttribute("employees") Employee employee, Model model,@RequestParam("file") MultipartFile multipartFile) {
-		
+	public String updatePageUrl(@ModelAttribute("employees") Employee employee, HttpSession session, Model model,@RequestParam("file") MultipartFile multipartFile) {
+		byte[] imgUtilSession = (byte[]) session.getAttribute("imgUtilSession");
 
 		try {
 
 			byte[] imageData = multipartFile.getBytes();
+			if(imageData.length==0)
+			{
+				employee.setImageProfile(imgUtilSession);
+			}
+			else
+			{
 			employee.setImageProfile(imageData);
+			}
 			
 			this.employeeService.updateEmployee(employee);
 
