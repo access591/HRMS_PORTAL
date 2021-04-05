@@ -70,14 +70,14 @@ body {
 											<div class="form-group">
 											<label class="form-label">City Code </label>
 											<label style="color: red">*</label>
-											 <input type="text" class="form-control" id="cityCode" title="cityCode" name="cityCode"  maxlength="40"  pattern="^[a-zA-Z\s]*$" required aria-required="true">
+											 <input type="text" class="form-control" id="cityCode" title="cityCode" name="cityCode"  maxlength="40"  pattern="\d{1,10}" required aria-required="true">
 										      </div>
 											
 											
 									   <div class="form-group">
 											<label class="form-label">Phone </label>
 											<label style="color: red">*</label>
-											 <input type="text" class="form-control" id="phone" title="phone" name="phone"  maxlength="40"  pattern="^[a-zA-Z\s]*$" required aria-required="true">
+											 <input type="text" class="form-control" id="phone" title="phoneNo" name="phoneNo"  maxlength="40"  pattern="\d{1,10}" required aria-required="true">
 										      </div>
 										      
 										  <div class="form-group">
@@ -119,7 +119,7 @@ body {
 											<div class="form-group">
 											<label class="form-label">fax  </label>
 											<label style="color: red">*</label>
-											 <input type="text" class="form-control" id="fax" title="fax" name="fax"  maxlength="40"  pattern="^[a-zA-Z\s]*$" required aria-required="true">
+											 <input type="text" class="form-control" id="fax" title="fax" name="fax"  maxlength="10"  pattern="\d{1,10}" required aria-required="true">
 										      </div>
 					
 											</div>
@@ -134,17 +134,30 @@ body {
 							<div class="card">
 								<div class="card-header">
 
-									<h6 class="card-subtitle text-muted">DataTables.</h6>
+									
 								</div>
 								<div class="card-body">
-					<table id="datatables-buttons"class="table table-striped display" style="width: 100%"aria-describedby="example">
+					<table id="datatables-buttons" class="table table-striped display" style="width:100%"aria-describedby="datatables-buttons">
 										<thead>
 											<tr>
-
+												<th scope="col">Insurance Code</th>
+												<th scope="col">Insurance Name </th>
+												
+												<th scope="col">Status</th>
+												<th scope="col">Action</th>
 											</tr>
 										</thead>
-
-
+										<tbody>
+											<tr  th:each="listofInsurance : ${listInsurance}">
+												<td th:text="${listofInsurance.insCode}"></td>
+												<td th:text="${listofInsurance.name}"></td>
+												<td th:text="${listofInsurance.active}"></td>
+												<td><a th:href="@{/editInsurance/{id}(id=${listofInsurance.insCode})}"><em class="align-middle fas fa-fw fa-pen"></em></a>
+												<a th:href="@{/deleteInsurance/{id}(id=${listofInsurance.insCode})}" onclick="return confirm('Are you sure?')"><em class="align-middle fas fa-fw fa-trash"></em></a>
+												</td>
+											</tr>
+										</tbody>
+									
 									</table>
 								</div>
 
