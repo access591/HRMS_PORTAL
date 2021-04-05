@@ -1,6 +1,7 @@
 package com.hrms.model;
 
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -27,26 +28,6 @@ public class LeaveRequest  {
 	private String deptCode;
 	
 	private String deptName;
-	
-	public String getEmpName() {
-		return empName;
-	}
-
-
-	public void setEmpName(String empName) {
-		this.empName = empName;
-	}
-
-
-	public String getDeptName() {
-		return deptName;
-	}
-
-
-	public void setDeptName(String deptName) {
-		this.deptName = deptName;
-	}
-
 
 	private String leaveCode;
 	
@@ -96,10 +77,32 @@ public class LeaveRequest  {
 	@Column(name = "UPD_DATE", insertable = false)
 	private Date updDate = new Date();
 	
+
+	private String status = new String("N");
+	
 	
 	public LeaveRequest() {
 		super();
 		// TODO Auto-generated constructor stub
+	}
+	
+	public String getEmpName() {
+		return empName;
+	}
+
+
+	public void setEmpName(String empName) {
+		this.empName = empName;
+	}
+
+
+	public String getDeptName() {
+		return deptName;
+	}
+
+
+	public void setDeptName(String deptName) {
+		this.deptName = deptName;
 	}
 
 
@@ -350,6 +353,27 @@ public class LeaveRequest  {
 
 	public void setUpdDate(Date updDate) {
 		this.updDate = updDate;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	@Override
+	public String toString() {
+		return "LeaveRequest [leaveRequestId=" + leaveRequestId + ", empCode=" + empCode + ", empName=" + empName
+				+ ", deptCode=" + deptCode + ", deptName=" + deptName + ", leaveCode=" + leaveCode + ", toDate="
+				+ toDate + ", fromDate=" + fromDate + ", fromDateType=" + fromDateType + ", toDateType=" + toDateType
+				+ ", applyDate=" + applyDate + ", approvedDate=" + approvedDate + ", approevedBy=" + approevedBy
+				+ ", shiftCode=" + shiftCode + ", reason=" + reason + ", leaveFor=" + leaveFor + ", cancelBy="
+				+ cancelBy + ", cancelDate=" + cancelDate + ", numberOfLeaves=" + numberOfLeaves + ", requestFromDate="
+				+ requestFromDate + ", requestToDate=" + requestToDate + ", requestFromDateType=" + requestFromDateType
+				+ ", requestToDateTYpe=" + requestToDateTYpe + ", insBy=" + insBy + ", insDate=" + insDate + ", updBy="
+				+ updBy + ", updDate=" + updDate + ", status=" + status + "]";
 	}
 
 	

@@ -20,7 +20,7 @@ body {
 	function gtag() {
 		dataLayer.push(arguments);
 	}
-	gtag('js', new Date());
+	 gtag('js', new Date());
 
 	gtag('config', 'UA-120946860-7');
 </script>
@@ -74,7 +74,7 @@ body {
 								<!-- card header  -->
 								<div class="card-header">
 
-									<h5 class="card-title"></h5>
+									<h5 class="card-title">Leave Request</h5>
 
 									<!-- div start  -->
 									<div class="alert-outline">
@@ -86,253 +86,182 @@ body {
 								</div>
 								<!-- card header end  -->
 
-<form id="" action="#" th:action="@{/saveLeaveRequest}" th:object="${leaveRequest}" method="post">
+
 								<!--  card body start  -->
 								<div class="card-body">
 
+									<!-- from  -->
+									<form id="" action="#" th:action="@{/saveLeaveRequest}" th:object="${leaveRequest}" method="post">
 
-									<!-- first block  -->
-									<div class="row">
-										<div class="col-md-2"></div>
+										<!-- Employee row -->
+										<div class="row">
+											<div class="col-12 col-lg-6">
+												<div class="form-group">
 
-										<div class="col-md-8 "
-											style="margin-top: 50px; border: 1px solid black; padding: 10px;">
-
-											<!-- row  -->
-											<div class="row">
-												<label class="col-md-3">Employee</label> <input
-													class="col-md-2" id="leaveRequestEmpId" value="" name="empCode"/> <select
-													class="col-md-6" id="employeeDropDownLeave"
-													onchange="leaveEmployeDisplay()">
+													<label> Employee id </label> <label style="color: red">*</label>
+													<input
+													class="form-control" id="leaveRequestEmpId" value="" name="empCode"/>
+												</div>
+											</div>
+											
+											<div class="col-12 col-lg-6">
+												<label class="form-label">Select Employee</label>
+												<label style="color: red">*</label>
+												<select
+													class="form-control" id="employeeDropDownLeave"
+													onchange="leaveEmployeDisplay()" >
 													<option value="">Select Employee</option>
 													<option th:each="employee: ${listEmployee}"
-														th:text="${employee.empName}"
+														th:text="${employee.empName}" 
 														th:value=" ${employee.empCode}"></option>
 
 												</select>
-											</div>
-											<!-- row end  -->
-
-											<!-- row  -->
-											<div class="row" style="padding: 5px;">
-												<label class="col-md-3">Department</label> <input
-													type="text" class="col-md-2" id="leaveDepartmentId"
-													value="" name="deptCode"> <input type="text" class="col-md-6"
-													id="leaveDepartmentName" value="">
-											</div>
-											<!--row end  -->
+												<input type="hidden" name="empName" value="" id="hiddenField"> 
+										   	</div>
 										</div>
-										<div class="col-md-2"></div>
-									</div>
-									<!-- first blcck end  -->
+										
+										
+										<!-- Department row -->
+										<div class="row">
+											<div class="col-12 col-lg-6">
+												<div class="form-group">
 
-									<!-- second block / leave information  -->
-
-									<div class="row">
-										<div class="col-md-2"></div>
-
-										<div class="col-md-8 "
-											style="margin-top: 50px; border: 1px solid black; padding: 10px;">
-
-											<!-- first row -->
-											<div class="row">
-												<label class="col-md-3">Type of Leave</label> <select
-													class="col-md-3" id="leave_type_id" onchange="leaveType()">
-													<option value="">Select</option>
-													<option value="single">Single</option>
-													<option value="multiple">Multiple</option>
-												</select>
+													<label> Dept Code </label> <label style="color: red">*</label>
+													<input
+													type="text" class="form-control" id="leaveDepartmentId"
+													value="" name="deptCode">
+												</div>
 											</div>
-											<!--row end  -->
+											
+											<div class="col-12 col-lg-6">
+												<label class="form-label">Department Name</label>
+												<label style="color: red">*</label>
+												<input type="text" class="form-control"
+													id="leaveDepartmentName" value="" name="deptName">
+										   	</div>
+										</div>
+										
+										
+										
+										
+										
+										<!--########################################################################  -->
+										<div class="row">
+											<div class="col-12 col-lg-6">
+												<div class="form-group">
 
-
-
-											<!--2nd row  -->
-											<div class="row" style="padding: 5px;">
-												<label class="col-md-3">From Date</label><input type="date"
-													id="from_date" class="col-md-3" name="fromDate"
-													value="2018-07-22" min="2018-01-01" max="2018-12-31"
-													onchange="changeToDate(this.value)"> <label
-													class="col-md-3">From Date Type</label> <select
-													class="col-md-3" name='fromDateType' id="from_date_type" onchange="dayType()">
+													<label> Type of Leave </label> <label style="color: red">*</label>
+													<select class="form-control select2"id="leave_type_id" onchange="leaveType()">
+														<option value="">Select</option>
+														<option value="single">Single</option>
+														<option value="multiple">Multiple</option>
+											    	</select>
+												</div>
+											</div>
+											
+											<div class="col-12 col-lg-6">
+												<label class="form-label">Apply Date</label>
+												<label style="color: red">*</label>
+												<input type="date"class="form-control"
+													id='myDatePicker'
+													name='applyDate'>
+										   	</div>
+										</div>
+										
+										
+										<!--########################################################################  -->
+										<div class="row">
+										
+											<div class="col-12 col-lg-6">
+												<label class="form-label">From Date</label>
+												<label style="color: red">*</label>
+												<input type="date"
+													id="from_date" class="form-control" name="fromDate"
+													onchange="changeToDate(this.value)">
+										   	</div>
+											
+											<div class="col-12 col-lg-6">
+												<label class="form-label">To Date</label>
+												<label style="color: red">*</label>
+												<input type="date"class="form-control"
+													id="to_date"name="toDate"
+													value="2018-07-22" min="2018-01-01" max="2018-12-31">
+										   	</div>
+										</div>
+										
+										
+										<!--########################################################################  -->
+										<div class="row">
+										
+											<div class="col-12 col-lg-6">
+												<label class="form-label">From Date Type</label>
+												<label style="color: red">*</label>
+												<select
+													class="form-control" name='fromDateType' id="from_date_type" onchange="dayType()">
 													<option value=" f">Full</option>
 													<option value="h">Half</option>
 												</select>
+										   	</div>
+											
+											<div class="col-12 col-lg-6">
+												<label class="form-label">To Date Type</label>
+												<label style="color: red">*</label>
+												<select
+														class="form-control" name='toDateType' id="to_date_type" onchange="">
+														<option value=" f">Full</option>
+														<option value="h">Half</option>
+												</select>
+										   	</div>
+										</div>
+										
+										
+										<!--########################################################################  -->
+										<div class="row">
+											<div class="col-12 col-lg-6">
+												<div class="form-group">
+
+													<label> Leave(days) </label> <label style="color: red">*</label>
+													<input type="text" id="leave_for"
+													class="form-control" name='leaveFor' readonly>
+												</div>
 											</div>
-											<!-- 2nd row end  -->
-
-											<!--3rd row  -->
-											<div class="row" style="padding: 5px;">
-												<label class="col-md-3">To Date</label><input type="date"
-													id="to_date" class="col-md-3" name="toDate"
-													value="2018-07-22" min="2018-01-01" max="2018-12-31">
-
-
-												<label class="col-md-3">To Date Type</label><input
-													type="date" id="to_date_type" class="col-md-3"
-													name="toDateType" value="2018-07-22" min="2018-01-01"
-													max="2018-12-31">
-											</div>
-											<!-- 3rd row end  -->
-
-											<!--4th row  -->
-											<div class="row" style="padding: 5px;">
-												<label class="col-md-3">Leave</label><input type="text" id="leave_for"
-													class="col-md-3" name='leaveFor' readonly> <select class="col-md-6">
+											
+											<div class="col-12 col-lg-6">
+												<label class="form-label">Leave type</label>
+												<label style="color: red">*</label>
+												<select class="form-control">
 													<option>Casual</option>
 													<option>Medical</option>
 												</select>
-											</div>
-											<!-- 4th row end  -->
-
-											<!--5th row  -->
-											<div class="row" style="padding: 5px;">
-												<label class="col-md-3">Shift</label><input type="time"min="09:00" max="18:00"
-													class="col-md-3"> <input type="time"
-													class="col-md-4"> <select class="col-md-2">
-													<option>Shift 1</option>
-													<option>Shift 2</option>
-												</select>
-											</div>
-											<!-- 5th row end  -->
-
-											<!--6th row  -->
-											<div class="row" style="padding: 5px;">
-												<label class="col-md-3">Reason</label> <input type="text"
-													class="col-md-9" name='reason'>
-											</div>
-											<!-- 6th row end  -->
-
-											<!--7th row  -->
-											<div class="row" style="padding: 5px;">
-												<label class="col-md-3">Apply Date</label><input type="date"
-													id='myDatePicker'
-													class="col-md-4" name='applyDate'>
-
-											</div>
-											<!-- 7th row end  -->
-
-
+										   	</div>
 										</div>
-										<div class="col-md-2"></div>
-									</div>
-									<!-- second block end  -->
+										
+										<!--########################################################################  -->
+										<div class="row">
+											<div class="col-12 col-lg-6">
+												<div class="form-group">
 
-
-									<!-- 3rd block /leave status  -->
-
-									<div class="row">
-									
-													
-										<div class="col-md-2"></div>
-
-										<div class="col-md-8 "
-											style="margin-top: 50px; border: 1px solid black; padding: 10px;">
-
-											<!-- first row  -->
-
-
-											<div class="row">
-
-												
-												
-												
-												<label class="col-md-3">Casual Leaves</label> <input
-													type="text" class="col-md-4" value = "7" />
-
-
+													<label> Reason </label> <label style="color: red">*</label>
+													<input type="text"
+													class="form-control" name='reason'>
+												</div>
 											</div>
-
-
-											<!-- first row end  -->
-
-											<!-- first row  -->
-
-
-											<div class="row" style="padding: 5px;">
-												<label class="col-md-3">Earned Leaves</label> <input
-												 	type=" text " class="col-md-4" value="6"/>
-
-											</div>
-
-
-											<!-- first row end  -->
-
-											<!-- first row  -->
-
-
-											<div class="row" style="padding: 5px;">
-												<label class="col-md-3">Sick Leaves</label> <input
-													type=" text " class="col-md-4" value="5"/>
-
-											</div>
-
-
-											<!-- first row end  -->
-
+											
+											
 										</div>
-										<div class="col-md-2"></div>
-									
-									</div>
-
-									<!-- 3rd block end  -->
-
-									<!-- 4th block /Approval   -->
-
-									<div class="row">
-										<div class="col-md-2"></div>
-
-										<div class="col-md-8 "
-											style="margin-top: 50px; border: 1px solid black; padding: 10px;">
-
-											<!-- first row  -->
+										<button type="submit" class="btn btn-primary">Apply</button>
+										<button type="reset"class="btn btn-primary" value="Reset">Reset</button>
+									</form>
 
 
-											<div class="row">
-												<label class="col-md-3">Approved</label> <input
-													type=" text " class="col-md-4" />
+									<!-- form end  -->
 
 
-											</div>
-
-
-											<!-- first row end  -->
-
-											<!-- first row  -->
-											<div class="row" style="padding: 5px;">
-												<label class="col-md-3">Approval by</label> <input
-													type=" text " class="col-md-4" />
-
-											</div>
-											<!-- first row end  -->
-
-											<!-- first row  -->
-											<div class="row" style="padding: 5px;">
-												<label class="col-md-3">Approved date</label> <input
-													type=" text " class="col-md-4" />
-
-											</div>
-											<!-- first row end  -->
-
-										</div>
-										<div class="col-md-2"></div>
-									</div>
-
-									<!-- 3rd block end  -->
 								</div>
 
 								<!-- card body end  -->
-								<button type="submit" class="btn btn-primary">Save</button>
-								   <button type="submit"class="btn btn-primary" value="cancel">Cancel</button>
-								
-</form>								
-
 							</div>
 							<!-- card end  -->
-							
-							
-								   
-								   
 						</div>
 
 						<!-- div card end -->
@@ -376,15 +305,13 @@ body {
 						</div>
 
 						<!--table div end   -->
-						
-						
 
 					</div>
 					<!-- container div end  -->
+
 				</div>
 
 				<!-- content div  end  -->
-								   				   
 
 			</main>
 
@@ -414,6 +341,7 @@ body {
 				});
 		
 		document.getElementById("myDatePicker").valueAsDate = new Date();
+		document.getElementById("from_date").valueAsDate = new Date();
 		
 	</script>
 	<script src="https://code.jquery.com/jquery-3.3.1.js"></script>

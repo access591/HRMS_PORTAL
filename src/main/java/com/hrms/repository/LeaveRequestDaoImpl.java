@@ -56,4 +56,15 @@ public class LeaveRequestDaoImpl extends AbstractGenericDao<LeaveRequest> implem
 		return result;
 	}
 
+
+	@Override
+	public List<LeaveRequest> findAllByDeptCodeAndStatus(String deptCode) {
+		Session session = this.sessionFactory.getCurrentSession();
+		String hql = "from LeaveRequest e where e.deptCode = :deptCode and e.status = 'N' ";
+		Query query = session.createQuery(hql);
+		query.setParameter("deptCode", deptCode);
+		List result = query.list();
+		return result;
+	}
+
 }
