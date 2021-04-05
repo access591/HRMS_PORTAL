@@ -40,8 +40,7 @@ import com.hrms.service.PageMappingService;
 public class EmployeeController {
 	int pageno = 43;
 	String reqPage = "/employeeMaster";
-	@Value("${upoadDir}")
-	private String uploadFolder;
+	
 	@Autowired
 	PageMappingService pageMappingService;
 	@Autowired
