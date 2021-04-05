@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org"lang="en">
+<script src="./js/settings.js"></script>
+<script src="./js/app.js"></script>
+<link rel="stylesheet" type="text/css" th:href="@{/css/modern.css}" />
+
+<script  src="https://www.googletagmanager.com/gtag/js?id=UA-120946860-7"></script>
+<style>
+body {
+	opacity: 0;
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+</style>
+<script>
+	window.dataLayer = window.dataLayer || [];
+	function gtag() {
+		dataLayer.push(arguments);
+	}
+	gtag('js', new Date());
+
+	gtag('config', 'UA-120946860-7');
+</script>
+<head>
+<meta charset="utf-8" />
+<title>HRMS</title>
+</head>
+<body>
+<div class="wrapper">
+<nav id="sidebar" class="sidebar"aria-label="Site sidebar">
+ <div th:replace="fragments/sidebar :: div"></div>
+ </nav>
+		<div class="main">
+			<div th:replace="fragments/header ::div"></div>
+			<main class="content">
+				<div class="container-fluid">
+					<div class="header">
+						<h1 class="header-title">HRMS</h1>
+						<nav aria-label="breadcrumb">
+						</nav>
+					</div>
+					<div class="row">
+						<div class="col-12">
+							<div class="card">
+								<div class="card-header">
+									<h5 class="card-title"> Create Insurance Master</h5>
+
+								</div>
+								<div class="card-body">
+									<form id="validation-form" action="#" th:action="@{/updateInsurance}" th:object="${updinsurance}" method="post">
+								
+										
+										<div class="row">
+											<div class="col-12 col-lg-6">
+												<div class="form-group">
+										
+											  <label> Insurance Code </label>
+											  		<label style="color: red">*</label>
+											  	 
+											   <input type="text" class="form-control" id="insCode"  name="insCode"  th:value="${insuranceEdit.insCode}" readonly>
+												</div>
+												
+												<div class="form-group">
+											<label class="form-label">Address1 </label>
+											<label style="color: red">*</label>
+											 <input type="text" class="form-control" id="add1" title="add1" name="add1"th:value="${insuranceEdit.add1}"  maxlength="40"  pattern="^[a-zA-Z\s]*$" required aria-required="true">
+										      </div>
+											
+											<div class="form-group">
+											<label class="form-label">City Code </label>
+											<label style="color: red">*</label>
+											 <input type="text" class="form-control" id="cityCode" title="cityCode" name="cityCode" th:value="${insuranceEdit.cityCode}" maxlength="40"  pattern="\d{1,10}" required aria-required="true">
+										      </div>
+											
+											
+									   <div class="form-group">
+											<label class="form-label">Phone </label>
+											<label style="color: red">*</label>
+											 <input type="text" class="form-control" id="phone" title="phoneNo" name="phoneNo"  maxlength="40" th:value="${insuranceEdit.phoneNo}" pattern="\d{1,10}" required aria-required="true">
+										      </div>
+										      
+										  <div class="form-group">
+											<label class="form-label">Email </label>
+											<label style="color: red">*</label>
+											 <input type="text" class="form-control" id="email" title="email" name="email"  maxlength="40"th:value="${insuranceEdit.email}"  pattern="^[a-zA-Z\s]*$" required aria-required="true">
+										      </div>
+											
+									    <div class="form-group">
+													<label class="form-label">Status</label>
+													<div class="custom-controls-stacked">
+														<label class="radio-inline">
+														<input type="radio" value="Y" name="active" th:checked="${insuranceEdit.active}==Y "/>Active   
+															</label>
+															&nbsp;&nbsp;
+														<label class="radio-inline">
+														<input type="radio" value="N" name="active" th:checked="${insuranceEdit.active}==N"/> &nbsp;Inactive  
+															</label>
+													</div>
+												</div>
+											</div>
+											
+											<div class="col-12 col-lg-6">
+											<div class="form-group">
+											<label class="form-label">Name </label>
+											<label style="color: red">*</label>
+											 <input type="text" class="form-control" id="name" title="name" name="name"  maxlength="40" th:value="${insuranceEdit.name}" pattern="^[a-zA-Z\s]*$" required aria-required="true">
+										</div>
+										
+										<div class="form-group">
+											<label class="form-label">Address2 </label>
+											<label style="color: red">*</label>
+											 <input type="text" class="form-control" id="add2" title="add2" name="add2"  maxlength="40"th:value="${insuranceEdit.add2}"  pattern="^[a-zA-Z\s]*$" required aria-required="true">
+										      </div>
+										      
+										      	<div class="form-group">
+											<label class="form-label">City Description  </label>
+											<label style="color: red">*</label>
+											 <input type="text" class="form-control" id="cityDesc" title="cityDesc" name="cityDesc"  maxlength="40" th:value="${insuranceEdit.cityDesc}" pattern="^[a-zA-Z\s]*$" required aria-required="true">
+										      </div>
+										
+										
+											<div class="form-group">
+											<label class="form-label">fax  </label>
+											<label style="color: red">*</label>
+											 <input type="text" class="form-control" id="fax" title="fax" name="fax"  maxlength="10"  pattern="\d{1,10}"th:value="${insuranceEdit.fax}" required aria-required="true">
+										      </div>
+					
+											</div>
+										</div>
+										<button type="submit" class="btn btn-primary">Update</button>
+								       <button type="submit"class="btn btn-primary" value="cancel">Cancel</button>
+									</form>
+								</div>
+							</div>
+						</div>
+					
+
+					</div>
+				</div>
+
+			</main>
+		<footer class="footer">
+		<div th:replace="fragments/footer :: div"></div>
+		</footer>
+		</div>
+		</div>
+
+		
+		
+</body>
+</html>
