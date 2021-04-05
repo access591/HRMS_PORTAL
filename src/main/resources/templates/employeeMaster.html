@@ -200,7 +200,7 @@ body {
 											<label class="form-label">Card No.    
 												<span class="text-danger">*</span>
 											</label>
-											<input  type="text" class="form-control required" name="cardNo" id="cardNo" maxlength="15" pattern="\d{1,10}" title="Only digits">
+											<input  type="text" class="form-control required" name="cardNo" id="cardNo" maxlength="10" pattern="\d{1,10}" title="Only digits">
 										</div>
 										
 										
@@ -208,14 +208,14 @@ body {
 											<label class="form-label">Designation
 												<span class="text-danger">*</span>
 											</label>
-											<input  type="text" class="form-control required"  name="empDesignation"id="empDesignation">
+											<input  type="text" class="form-control required" pattern="^[a-zA-Z\s]*$"maxlength="30" name="empDesignation"id="empDesignation">
 										</div>
 										
 										<div class="form-group">
 											<label class="form-label">Shift Code.
 												<span class="text-danger">*</span>
 											</label>
-											<input  type="text" class="form-control required" name="shiftCode" id="shiftCode">
+											<input  type="text" class="form-control required" name="shiftCode"  maxlength="15" pattern="\d{1,15}" id="shiftCode">
 										</div>
 										
 										
@@ -224,7 +224,7 @@ body {
 											<label class="form-label">Passport No.
 												<span class="text-danger">*</span>
 											</label>
-											<input type="text" class="form-control required"  name="passportNo"  id="passportNo" >
+											<input type="text" class="form-control required" maxlength="9"  name="passportNo"  id="passportNo" >
 										</div>
 										
 										
@@ -247,7 +247,7 @@ body {
 									   			 <h5 class="card-title mb-0">Reason</h5>
 								           		</div>
 								        <div class="card-body">
-											<textarea class="form-control required" rows="2"id="reason" name="reason" placeholder="Textarea"></textarea>
+											<textarea class="form-control required" rows="2"id="reason" maxlength="50" name="reason" placeholder="Textarea"></textarea>
 								       	</div>
 							           </div>
 							           </div>
@@ -259,7 +259,7 @@ body {
 											<label class="form-label">Department Code.
 												<span class="text-danger">*</span>
 											</label>
-											<input  type="text" name="departmentCode"id="departmentCode" class="form-control required">
+											<input  type="text" name="departmentCode"id="departmentCode"maxlength="10"pattern="\d{1,10}"  class="form-control required">
 										</div>
 										
 										
@@ -267,7 +267,7 @@ body {
 											<label class="form-label">Manager  Code.
 												<span class="text-danger">*</span>
 											</label>
-											<input  type="text" name="managerCode" id="managerCode"class="form-control required">
+											<input  type="text" name="managerCode"maxlength="10"pattern="\d{1,10}" id="managerCode"class="form-control required">
 										</div>
 								
 								
@@ -275,7 +275,7 @@ body {
 											<label class="form-label">IT Pan No
 												<span class="text-danger">*</span>
 											</label>
-											<input type="text" name="itPanNo"id="itPanNo" class="form-control required">
+											<input type="text" name="itPanNo"id="itPanNo"maxlength="19"class="form-control required">
 										</div>
 								
 								
@@ -283,7 +283,7 @@ body {
 											<label class="form-label">UAN  No.
 												<span class="text-danger">*</span>
 											</label>
-											<input  type="text" name="uanNo" id="uanNo"class="form-control required">
+											<input  type="text" name="uanNo" maxlength="12"id="uanNo"class="form-control required">
 										</div>
 								
 								 
@@ -321,13 +321,13 @@ body {
 												<label for="inputHieght">Height
 												<span class="text-danger">*</span>
 												</label>
-												<input type="text" class="form-control required" name="empHeight" id="empHeight">
+												<input type="text" class="form-control required" maxlength="3" name="empHeight" id="empHeight">
 											</div>
 											    <div class="form-group col-md-4">
 												<label for="identiMark">identity Mark
 												<span class="text-danger">*</span>
 												</label>
-												<input type="text" class="form-control required" Name="identityMark" id="identityMark">
+												<input type="text" class="form-control required"  maxlength="15"Name="identityMark" id="identityMark">
 											</div>
 										 </div>
 										<div class="form-row">
@@ -335,7 +335,7 @@ body {
 												<label for="bloodGroup">Blood Group
 												<span class="text-danger">*</span>
 												</label> <input
-													type="text" class="form-control required"  id="bloodGroup"  name="bloodGroup">
+													type="text" class="form-control required" maxlength="2"  id="bloodGroup"  name="bloodGroup">
 											</div>
 											    <div class="form-group col-md-4">
 												<label for="maritalStatus:">Marital Status
@@ -372,14 +372,14 @@ body {
 												<span class="text-danger">*</span>
 												</label>
 												
-												<input type="text" class="form-control required" id="noOfChild" name="noOfChild">
+												<input type="text" class="form-control required"  maxlength="1" id="noOfChild" name="noOfChild">
 											</div>
 											<div class="form-group col-md-4">
 												<label for="caste">Caste
 												<span class="text-danger">*</span>
 												</label>
 												
-												<input type="text" class="form-control required" id="empCaste" name="empCaste">
+												<input type="text" class="form-control required" maxlength="15" id="empCaste" name="empCaste">
 											</div>
 										</div>
 							
@@ -389,21 +389,21 @@ body {
 												<span class="text-danger">*</span>
 												</label>
 												
-												<input type="text" class="form-control required" id="empReligion" name="empReligion">
+												<input type="text" class="form-control required"  maxlength="15"id="empReligion" name="empReligion">
 											</div>
 							               <div class="form-group col-md-4">
 												<label for="nationality">Nationality
 												<span class="text-danger">*</span>
 												</label>
 												
-												<input type="text" class="form-control required" id="empNationality" name="empNationality">
+												<input type="text" class="form-control required"   maxlength="15"id="empNationality" name="empNationality">
 											</div>
 										   <div class="form-group col-md-4">
 												<label for="companyCode">Company Code
 												<span class="text-danger">*</span>
 												</label>
 												
-												<input type="text" class="form-control required"  name="companyCode" id="companyCode">
+												<input type="text" class="form-control required"  maxlength="15" name="companyCode" id="companyCode">
 											</div>
 							     		   </div>
 							     			 
@@ -413,17 +413,17 @@ body {
 												<label for="mediclaim">Mediclaim
 												<span class="text-danger">*</span>
 												</label>
-												<input type="text" class="form-control required" id="mediclaim" name="mediclaim">
+												<input type="text" class="form-control required" id="mediclaim"  maxlength="15"name="mediclaim">
 											</div>
 											<div class="form-group col-md-4">
 												<label for="gpa">GPA
 												<span class="text-danger">*</span>
 												</label>
-												<input type="text" class="form-control required" id="gpa"  name="gpa" >
+												<input type="text" class="form-control required" id="gpa" maxlength="10"  name="gpa" >
 											</div>
 							        		<div class="form-group col-md-4">
 												<label for="Emp_Address1">Address1<span class="text-danger">*</span></label>
-												<input type="text" class="form-control required" id="empAddress1" name="empAddress1">
+												<input type="text" class="form-control required" id="empAddress1" maxlength="100" name="empAddress1">
 												</div>
 											</div>
 											
@@ -431,17 +431,17 @@ body {
 											 <div class="form-group col-md-4">
 												<label for="Emp_Address2">Address2<span class="text-danger">*</span></label>
 												
-												<input type="text" class="form-control required" id="empAddress2" name="empAddress2">
+												<input type="text" class="form-control required" id="empAddress2" maxlength="100" name="empAddress2">
 											</div>
 											 <div class="form-group col-md-4">
 												<label for="Emp_City">City<span class="text-danger">*</span></label>
 												
-												<input type="text" class="form-control required" id="empCity"  name="empCity">
+												<input type="text" class="form-control required" id="empCity"  maxlength="20" name="empCity">
 											</div>
 											 <div class="form-group col-md-4">
 												<label for="Emp_State">State<span class="text-danger">*</span></label>
 												
-												<input type="text" class="form-control required" id="empState" name="empState">
+												<input type="text" class="form-control required" maxlength="20" id="empState" name="empState">
 											</div>
 											</div>
 											
@@ -450,17 +450,17 @@ body {
 											<div class="form-group col-md-4">
 											<label for="Pin_Code">PinCode<span class="text-danger">*</span></label>
 												
-												<input type="text" class="form-control required" id="pinCode"name="pinCode">
+												<input type="text" class="form-control required" maxlength="6"pattern="\d{1,6}"id="pinCode"name="pinCode">
 											</div>
 											 <div class="form-group col-md-4">
 												<label for="Emp_Mobile">Mobile<span class="text-danger">*</span></label>
 												
-												<input type="text" class="form-control required" id="empMobile" name="empMobile">
+												<input type="text" class="form-control required" maxlength="10"pattern="\d{1,10}" id="empMobile" name="empMobile">
 											</div>
 											<div class="form-group col-md-4">
 												<label for="Emp_Local_Add1">Local Address1
 												<span class="text-danger">*</span></label>
-												<input type="text" class="form-control required" id="empLocalAdd1" name="empLocalAdd1">
+												<input type="text" class="form-control required" maxlength="100"id="empLocalAdd1" name="empLocalAdd1">
 											</div>
 							       
 							                </div>
@@ -469,17 +469,17 @@ body {
 											 <div class="form-group col-md-4">
 												<label for="Emp_Local_Add2">Local Address2
 												<span class="text-danger">*</span></label>
-												<input type="text" class="form-control required" id="empLocalAdd2" name="empLocalAdd2">
+												<input type="text" class="form-control required" maxlength="100"id="empLocalAdd2" name="empLocalAdd2">
 											</div>
 											 <div class="form-group col-md-4">
 												<label for="Emp_Local_City">City
 												<span class="text-danger">*</span></label>
-												<input type="text" class="form-control required" id="empLocalCity" name="empLocalCity" >
+												<input type="text" class="form-control required" maxlength="20"id="empLocalCity" name="empLocalCity" >
 											</div>
 											 <div class="form-group col-md-4">
 												<label for="Emp_Local_State">State
 												<span class="text-danger">*</span></label>
-												<input type="text" class="form-control required" id="empLocalState" name="empLocalState">
+												<input type="text" class="form-control required" maxlength="20"id="empLocalState" name="empLocalState">
 											</div>
 											</div>
 											
@@ -489,11 +489,11 @@ body {
 											 <div class="form-group col-md-4">
 												<label for="Emp_Local_PinCode">PinCode
 												<span class="text-danger">*</span></label>
-												<input type="text" class="form-control required" id="empLocalPinCode"  name="empLocalPinCode">
+												<input type="text" class="form-control required" maxlength="6"pattern="\d{1,6}" id="empLocalPinCode"  name="empLocalPinCode">
 											</div>
 											 <div class="form-group col-md-4">
 												<label for="Emp_Local_Mobile_No">Mobile<span class="text-danger">*</span></label>
-												<input type="text" class="form-control required" id="empLocalMobileNo" name="empLocalMobileNo">
+												<input type="text" class="form-control required" maxlength="10"pattern="\d{1,10}" id="empLocalMobileNo" name="empLocalMobileNo">
 											</div>
 							                </div>
                      
@@ -505,19 +505,19 @@ body {
 									        <div class="form-group col-md-4">
 											<label for="Comp_Mobile_No">Company Mobile No
 											<span class="text-danger">*</span></label>
-											<input type="text" class="form-control required" id="compMobileNo" name="compMobileNo">
+											<input type="text" class="form-control required" maxlength="10"pattern="\d{1,10}"id="compMobileNo" name="compMobileNo">
 											</div>
 											
 									<div class="form-group col-md-4">
 										<label for="Company_Email">Email
 										<span class="text-danger">*</span></label>
-										<input type="text" class="form-control required" id="companyEmail" name="companyEmail">
+										<input type="text" class="form-control required" id="companyEmail"maxlength="50" name="companyEmail">
 										</div>
 										
 									 <div class="form-group col-md-4">
 										 <label for="Prof_Inst">Prof Inst
 										<span class="text-danger">*</span></label>
-										<input type="text" class="form-control required" id="profInst" name="profInst">
+										<input type="text" class="form-control required" id="profInst"maxlength="25" name="profInst">
 										</div>
 							       </div>
                                  		   <div class="form-row">
@@ -526,19 +526,20 @@ body {
 												<label for="Local_Travel_Pr_km">Local Travelling Rate Per KM  
 												<span class="text-danger">*</span>
 												</label>
-												<input type="text" class="form-control required" id="localTravelPrkm" name="localTravelPrkm">
+												<input type="text" class="form-control required" maxlength="2"id="localTravelPrkm" name="localTravelPrkm">
 											</div>
 											 
 											 <div class="form-group col-md-4">
 												<label for="hobbies">Hobbies
 												<span class="text-danger">*</span></label>
-												<input type="text" class="form-control required" id="hobbies" name="hobbies">
+												<input type="text" class="form-control required" maxlength="25"id="hobbies" name="hobbies">
 											</div>
 											
 											 <div class="form-group col-md-4">
 												<label for="clubs">Clubs<span class="text-danger">*</span></label>
 												
-												<input type="text" class="form-control required" id="clubs" name="clubs">
+												<input type="text" class="form-control required" maxlength="35"id="clubs" pattern="^[a-zA-Z\s]*$"
+												 name="clubs">
 											</div>
                      
                                 </div>
@@ -546,7 +547,7 @@ body {
                                       	  <div class="form-group col-md-6">
 												<label for="Reg_Code">Registration code
 												<span class="text-danger">*</span></label>
-												<input type="text" class="form-control required" id="regCode" name="regCode">
+												<input type="text" class="form-control required"maxlength="15" id="regCode" name="regCode">
 											</div>
 											
 											
@@ -555,7 +556,7 @@ body {
 												<label for="Estf_Work ">Estf Work
 												<span class="text-danger">*</span>
 												</label>
-												<input type="text" class="form-control required" id="estfWork" name="estfWork">
+												<input type="text" class="form-control required" maxlength="15" id="estfWork" name="estfWork">
 												</div>
                      
                                  </div>
@@ -575,7 +576,7 @@ body {
 												<label for="E_Category ">E-Category
 												<span class="text-danger">*</span>
 												 </label>
-												<input type="text" class="form-control required" id="electronicCategory" name="electronicCategory">
+												<input type="text" class="form-control required" maxlength="25"id="electronicCategory" name="electronicCategory">
 											</div>
                                                </div>
                                            <div class="form-group">
