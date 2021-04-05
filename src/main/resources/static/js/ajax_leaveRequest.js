@@ -1,12 +1,15 @@
 function leaveEmployeDisplay(){
 	
 	 var d = document.getElementById("employeeDropDownLeave");
+	 
 	var dValue = document.getElementById("employeeDropDownLeave").value;
 	
 	console.log(" d value is :"+ dValue );
    
 	 var displayItem = d.options[d.selectedIndex].text;
-
+	 
+	 document.getElementById("hiddenField").value = displayItem;
+	 
 	document.getElementById("leaveRequestEmpId").value = dValue;
 	
     console.log(displayItem);
@@ -19,7 +22,7 @@ function ajaxRequestLeave(val){
 	var empCode = val;
     console.log("ajax request : "+ empCode);
     const xhr = new XMLHttpRequest();
-    xhr.open('POST','http://localhost:8181/empPayDetail/'+empCode,true);
+    xhr.open('POST','empPayDetail/'+empCode,true);
     xhr.getResponseHeader('content-type','application/json');
     xhr.onload = function(){
         if(this.status===200){
@@ -46,7 +49,7 @@ function ajaxRequestForDepartmentLeave(val){
 	var deptCode = val;
     console.log("ajax request : "+ deptCode);
     var xhr1 = new XMLHttpRequest();
-    xhr1.open('POST','http://localhost:8181/departmentMaster/'+deptCode,true);
+    xhr1.open('POST','getdepartment/'+deptCode,true);
     xhr1.getResponseHeader('content-type','application/json');
 	xhr1.response = 'json';
     xhr1.onload = function(){

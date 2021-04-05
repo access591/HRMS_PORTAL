@@ -20,7 +20,7 @@ body {
 </style>
 <script>
 	window.dataLayer = window.dataLayer || [];
-	function gtag() {
+	function gtag() { 
 		dataLayer.push(arguments);
 	}
 	 gtag('js', new Date());
@@ -51,8 +51,9 @@ body {
 									<h5 class="card-title">Employee Pay Details</h5>
 
 								</div>
-						<div class="card-body">
-						<form id="validation-form" action="#"th:action="@{/saveemployepaydetail}"
+								<div class="card-body">
+									<form id="validation-form" action="#"
+										th:action="@{/saveemployepaydetail}"
 										th:object="${employeePayDetail}" method="post">
 
 										<div class="row">
@@ -128,629 +129,668 @@ body {
 
 											</div>
 										</div>
-										 <div class="form-row">
-										 		<div class="container-fluid" style="margin-top: 50px;">
-										<div class="card">
-											<div class="row">
-												<div class="col-md-12 col-sm-3"></div>
-												<div class="col-md-12 col-sm-3">
+										<div class="form-row">
+											<div class="container-fluid" style="margin-top: 50px;">
+												<div class="card">
 													<div class="row">
-													<div class="form-group sm col-md-4">
-													<label>Emp. Ins. No.</label>
-													<input type="text"class="input_size" name="empInsuranceNo">
-												    </div>
-													
-													<div class="form-group sm col-md-4">
-															<label>PF No.</label>
-															<input type="text" class="input_size" name="pfNo">
+														<div class="col-md-12 col-sm-3"></div>
+														<div class="col-md-12 col-sm-3">
+															<div class="row">
+																<div class="form-group sm col-md-4">
+																	<label>Emp. Ins. No.</label> <input type="text"
+																		class="input_size" name="empInsuranceNo">
+																</div>
+
+																<div class="form-group sm col-md-4">
+																	<label>PF No.</label> <input type="text"
+																		class="input_size" name="pfNo">
+																</div>
+
+																<div class="form-group sm col-md-4">
+																	<label>Effective Date</label> <input type="text"
+																		class="input_size" name="pfEffectiveDate">
+																</div>
+															</div>
+															<br>
+															<div class="row">
+																<div class="form-group sm col-md-4">
+																	<label>Group Ins. No.</label> <input type="text"
+																		class="input_size" name="groupInsuranceNo">
+																</div>
+
+																<div class="form-group sm col-md-4">
+																	<label>Emp. ESI No.</label>&nbsp;&nbsp; <input
+																		type="text" class="input_size" name="empEsiNo">
+																</div>
+
+																<div class="form-group sm col-md-4">
+																	<label>Effective Date</label> <input type="text"
+																		class="input_size" name="esiEffectiveDate">
+																</div>
+
+															</div>
+															<br>
+															<div class="row">
+																<div class="form-group sm col-md-4">
+																	<label>Arrear Due</label> <input type="text"
+																		class="input_size" name="arrearDue">
+																</div>
+																<div class="form-group sm col-md-4">
+																	<label>Arrear Paid</label> <input type="text"
+																		class="input_size" name="arrearPaid">
+																</div>
+
+															</div>
+															<br>
 														</div>
-														
-														<div class="form-group sm col-md-4">
-															<label>Effective Date</label> 
-															<input type="text"class="input_size" name="pfEffectiveDate">
-														</div>
+														<div class="col-md-1 col-sm-3"></div>
 													</div>
-													<br>
-													<div class="row">
-														<div class="form-group sm col-md-4">
-															<label>Group Ins. No.</label> <input type="text"
-																class="input_size" name="groupInsuranceNo">
-														</div>
-														
-														<div class="form-group sm col-md-4">
-															<label>Emp. ESI No.</label>&nbsp;&nbsp; <input
-																type="text" class="input_size" name="empEsiNo">
-														</div>
-														
-													<div class="form-group sm col-md-4">
-															<label>Effective Date</label> <input type="text"
-																class="input_size" name="esiEffectiveDate">
-														</div>
-														
-													</div>
-													<br>
-													<div class="row">
-														<div class="form-group sm col-md-4">
-															<label>Arrear Due</label>
-															<input type="text" class="input_size" name="arrearDue">
-														</div>
-														<div class="form-group sm col-md-4">
-															<label>Arrear Paid</label>
-															<input type="text" class="input_size" name="arrearPaid">
-														</div>
-														
-													</div>
-													<br>
 												</div>
-												<div class="col-md-1 col-sm-3"></div>
 											</div>
 										</div>
-									</div>
-								</div>
-								
 
 
-															
-																	
-					<div class="container-fluid">
 
-					<div class="row">
 
-						<div class="col-12">
-							<div id="smartwizard-validation" class="wizard wizard-primary" >
-								<ul>
-									<li><a href="#validation-step-1">Employee Pay Details<br /></a></li>
-									<li><a href="#validation-step-2">Deductions<br /></a></li>
-									<li><a href="#validation-step-3">Allowances Deductions<br /></a></li>
-								</ul>
 
-								<div>
-									<div id="validation-step-1">
-										   <div class="form-row">
-												<div class="form-group sm col-md-6">
-												
-												<div class="form-group">
-														<label class="form-label">Basic Pay*</label>
-														<input id="basic_pay_m" type="number" value="0"class="input_size"onkeyup="basicPayCal(this.value);" onchange=""
-																						name="basicPay">
-														<label class="form-label"> </label>
-														
+										<div class="container-fluid">
+
+											<div class="row">
+
+												<div class="col-12">
+													<div id="smartwizard-validation"
+														class="wizard wizard-primary">
+														<ul>
+															<li><a href="#validation-step-1">Employee Pay
+																	Details<br />
+															</a></li>
+															<li><a href="#validation-step-2">Deductions<br /></a></li>
+															<li><a href="#validation-step-3">Allowances
+																	Deductions<br />
+															</a></li>
+														</ul>
+
+														<div>
+															<div id="validation-step-1">
+																<div class="form-row">
+																	<div class="form-group sm col-md-6">
+
+																		<div class="form-group">
+																			<label class="form-label">Basic Pay*</label> <input
+																				id="basic_pay_m" type="number" value="0"
+																				class="input_size"
+																				onkeyup="basicPayCal(this.value);" onchange=""
+																				name="basicPay"> <label class="form-label">
+																			</label>
+
+																		</div>
+																	</div>
+																	<div class="form-group sm col-md-6">
+																		<label for="inputHieght"> <span
+																			class="text-danger">*</span>
+																		</label> <input id="basic_pay_y" type="number" value="0"
+																			class="input_size" name="basicPayY">
+																	</div>
+
+																</div>
+
+																<div class="form-row">
+																	<div class="form-group sm col-md-6">
+																		<label class="form-label">Addl. Pay</label>&nbsp;&nbsp;&nbsp;&nbsp;
+																		<input id="addl_pay_m" type="number" value="0"
+																			class="input_size"
+																			onkeyup="basicAditionalCal(this.value);" onchange="">
+
+																	</div>
+
+
+																	<div class="form-group sm col-md-6">
+																		<label for="inputHieght"> <span
+																			class="text-danger">*</span>
+																		</label> <input id="addl_pay_y" type="number" value="0"
+																			class="input_size">
+																	</div>
+																</div>
+																<div class="form-row">
+																	<label class="form-label"> F.D.A.% </label>
+																</div>
+
+																<div class="form-row">
+																	<div class="form-group sm col-md-3">
+
+																		<input id="fda_m_percent" type="number" value="0"
+																			class="sm_input1"
+																			onkeyup="fdaPercentMonthly(this.value);" onchange="">
+																	</div>
+																	<div class="form-group  sm col-md-3">
+																		<input id="fda_m_percent_result" type="number"
+																			value="0" class="sm_input2">
+																	</div>
+
+																	<div class="form-group  sm col-md-3">
+																		<input id="fda_y_percent" type="number" value="0"
+																			class="sm_input1">
+																	</div>
+																	<div class="form-group  sm col-md-3">
+																		<input id="fda_y_percent_result" type="number"
+																			value="0" class="sm_input2">
+																	</div>
+
+
+																</div>
+																<div class="form-row">
+
+
+																	<div class="form-group sm col-md-6">
+																		<label class="form-label">V.D.A.</label> <input
+																			type="number" value="0" class="input_size">
+																	</div>
+																	<div class="form-group sm col-md-6">
+																		<input type="number" value="0" class="input_size"><br>
+																	</div>
+																</div>
+
+																<div class="form-row">
+																	<label class="form-label"> HRA Rate (%) </label>
+																</div>
+																<div class="form-row">
+																	<div class="form-group sm col-md-3">
+
+																		<input id="hra_m_percent" type="number" value="0"
+																			class="sm_input1" onkeyup="hraPercent(this.value)"
+																			onchange="" name="hraRate">
+																	</div>
+																	<div class="form-group sm col-md-3">
+																		<input id="hra_m_percent_result" type="number"
+																			value="0" class="sm_input2" name="hraValue">
+																	</div>
+																	<div class="form-group sm col-md-3">
+																		<input id="hra_y_percent" type="number" value="0"
+																			class="sm_input1" name="hraRateY">
+																	</div>
+
+																	<div class="form-group sm col-md-3">
+																		<input id="hra_y_percent_result" type="number"
+																			value="0" class="sm_input2" name="hravalueY"><br>
+																	</div>
+
+																</div>
+
+
+																<div class="form-row">
+																	<label class="form-label">LTA Rate (%) </label>
+																</div>
+																<div class="form-row">
+																	<div class="form-group sm col-md-3">
+																		<input id="lta_m_percent" type="number" value="0"
+																			class="sm_input1">
+																	</div>
+																	<div class="form-group sm col-md-3">
+																		<input id="lta_m_percent_result" type="number"
+																			value="0" class="sm_input2">
+																	</div>
+																	<div class="form-group sm col-md-3">
+																		<input id="lta_y_percent" type="number" value="0"
+																			class="sm_input1">
+																	</div>
+																	<div class="form-group sm col-md-3">
+																		<input id="lta_y_percent_result" type="number"
+																			value="0" class="sm_input2">
+																	</div>
+
+																</div>
+																<div class="form-row">
+																	<div class="form-group sm col-md-6">
+																		<label class="form-label"> Medical Allowance </label>
+																		<input id="medical_allow_m" type="number" value="0"
+																			class="input_size"
+																			onkeyup="medicalAllowanceCal(this.value)" onchange=""
+																			name="medicalAllow">
+																	</div>
+																	<div class="form-group sm col-md-6">
+																		<input id="medical_allow_y" type="number" value="0"
+																			class="input_size" name="medicalAllowY"><br>
+																	</div>
+																</div>
+
+																<div class="form-row">
+																	<div class="form-group sm col-md-6">
+																		<label class="form-label">Conveyance Allowance
+																		</label> <input id="conveyance_m" type="number" value="0"
+																			class="input_size"
+																			onkeyup='çonveyanceCal(this.value)' onchange=""
+																			name="conveyanceAllow">
+																	</div>
+
+																	<div class="form-group sm col-md-6">
+																		<input id="conveyance_y" type="number" value="0"
+																			class="input_size" name="conveyanceAllowY">
+																	</div>
+																</div>
+
+																<div class="form-row">
+																	<div class="form-group sm col-md-6">
+																		<label class="form-label">Bonus/ Exgratia</label>&nbsp;&nbsp;&nbsp;
+																		<input type="number" value="0" class="input_size"
+																			onkeyup='bonusCal(this.value)'
+																			onchange="totalAllowance()" name="bonus" id="bonus_m">
+																	</div>
+																	<div class="form-group sm col-md-6">
+																		<input id="bonus_y" type="number" value="0"
+																			class="input_size" name="bonusY">
+																	</div>
+																</div>
+
+																<div class="form-row">
+																	<div class="form-group">
+																		<label class="form-label">Overtime Rate</label> <select
+																			class="sm_input1"><option></option>
+																		</select> <input type="number" value="0" class="sm_input2"><br>
+																		<br>
+																	</div>
+																</div>
+
+																<div class="form-row">
+																	<div class="form-group sm col-md-6">
+																		<label class="form-label">Total Allowances</label>&nbsp;&nbsp;
+																		<input id="total_allowances_m" type="number" value="0"
+																			class="input_size" name="totalAllow">&nbsp;&nbsp;
+																	</div>
+																	<div class="form-group sm col-md-6">
+																		<input id="total_allowances_y" type="number" value="0"
+																			class="input_size" name="totalAllowY"><br>
+																	</div>
+																</div>
+
+
+																<div class="form-row">
+																	<div class="form-group sm col-md-6">
+																		<label class="form-label">Gross(inc. Emp. <br>
+																			PF & Emp.ESI)
+																		</label> <input type="number" value="0" class="input_size"
+																			name="gross" id="grossM">
+																	</div>
+																	<div class="form-group sm col-md-6">
+																		<input type="number" value="0" class="input_size"
+																			name="grossY" id="grossY"> <br>
+																	</div>
+																</div>
+
+																<div class="form-row">
+																	<div class="form-group sm col-md-6">
+																		<label class="form-label">Net Pay</label> <input
+																			type="number" value="0" class="input_size"
+																			name="netPay" id="net_pay_m">&nbsp;&nbsp;
+																	</div>
+																	<div class="form-group sm col-md-6">
+																		<input type="number" value="0" class="input_size"
+																			id="net_pay_y">
+																	</div>
+																</div>
+
+																<div class="form-group">
+																	<label class="form-label">CTC</label> <input
+																		type="number" value="0" class="input_size" id="ctc"
+																		name="ctc">&nbsp;&nbsp; <input type="number"
+																		value="0">
+																</div>
+
+																<div class="form-group">
+																	<label class="form-label">CompanyLeased <br>Accomodation
+																	</label> <select style="width: 155px;">
+																		<option></option>
+																	</select> <input type="submit" value="add">
+
+
+																</div>
+
+															</div>
+
+
+															<div id="validation-step-2">
+																<table id="datatables-buttons"
+																	aria-describedby="datatables-buttons"
+																	class="table table-striped display" style="width: 100%">
+
+																	<thead>
+																		<tr>
+																			<th scope="col"></th>
+																			<th scope="col">Monthly Basis</th>
+																			<th scope="col">Yearly Basis</th>
+																			<td data-label=""></td>
+																		</tr>
+																	</thead>
+																	<tbody>
+																		<tr>
+																			<td data-label="">FPF %</td>
+																			<td data-label=""><input type="radio"
+																				name="radioBtn" id="r1" value="r1"
+																				onclick='calculateEsiAndEpf()'
+																				style="margin-left: 25px;"> Condition Not
+																				applicable<br> <input type="radio"
+																				name="radioBtn" id="r2" value="r2"
+																				onclick='calculateEsiAndEpf()'> Calculated
+																				on 15000<br> <input type="radio"
+																				name="radioBtn" id="r3" value="r3"
+																				onclick='calculateEsiAndEpf()'> Calculated
+																				on Actual<br> <input type="radio"
+																				name="radioBtn" id="r4" value="r4"
+																				style="margin-left: 35px;"
+																				onclick='calculateEsiAndEpf()'> Calculated
+																				FPF and PF on 15000 and EPF on Actual<br></td>
+
+																			<td data-label=""></td>
+
+																		</tr>
+
+																		<tr>
+																			<td data-label="">FPF %</td>
+																			<td data-label=""><input type="number"
+																				class="sm_input1" id="deduction_fpf_percent"
+																				value="0"
+																				onkeyup='calculateEsiAndEpfByFpf(this.value)'>&nbsp;&nbsp;
+																				<input type="number" class="sm_input4"
+																				id="deduction_fpf_m" value="0"></td>
+																			<td data-label=""><input type="number"
+																				class="sm_input5" id="deduction_fpf_y" value="0"></td>
+																			<td data-label=""></td>
+
+																		</tr>
+
+																		<tr>
+																			<td data-label="">Pension Fund (%)</td>
+																			<td data-label=""><input type="number"
+																				class="sm_input1" id="deduction_pf_percent"
+																				value='0'
+																				onkeyup='calculateEsiAndEpfByPf(this.value)'>&nbsp;&nbsp;
+
+																				<input type="number" class="sm_input4"
+																				id="deduction_pf_m" value="0"></td>
+																			<td data-label=""><input type="number"
+																				class="sm_input5" id="deduction_pf_y" value="0"></td>
+																			<td data-label=""></td>
+
+																		</tr>
+
+																		<tr>
+																			<td data-label="">EPF (%)</td>
+																			<td data-label=""><input type="number"
+																				class="sm_input1" id="deduction_epf_percent"
+																				value='0'
+																				onkeyup='calculateEsiAndEpfByEpf(this.value)'>&nbsp;&nbsp;
+
+																				<input type="number" class="sm_input4"
+																				id="deduction_epf_m" value="0"></td>
+																			<td data-label=""><input type="number"
+																				class="sm_input5" id="deduction_epf_y" value="0"></td>
+																			<td data-label=" "><select id='epfDropdown'
+																				name='epfChoose' onchange='calculateEpf()'>
+																					<option value=''>choose</option>
+																					<option value='y'>Yes</option>
+																					<option value='n'>No</option>
+																			</select></td>
+
+
+																		</tr>
+																		<tr>
+																			<td data-label="">ESI</td>
+
+																			<td data-label=" "><input type="number"
+																				class="sm_input5" id="deduction_esi_m" value="0"></td>
+
+																			<td data-label=""><input type="number"
+																				class="sm_input5" id="deduction_esi_y" value="0"></td>
+
+																			<td data-label=" "><select id='esiDropdown'
+																				name='ésiChoose' onchange='calculateEsi()'>
+																					<option value=''>choose</option>
+																					<option value='y'>Yes</option>
+																					<option value='n'>No</option>
+																			</select></td>
+
+
+
+																		</tr>
+																		<tr>
+																			<td data-label="">SI</td>
+
+																			<td data-label=" "><input type="number"
+																				class="sm_input5" id="deduction_si_m" value="0"
+																				onkeyup='calculateSi(this.value)'></td>
+
+																			<td data-label=""><input type="number"
+																				class="sm_input5" id="deduction_si_y" value="0"></td>
+
+																			<td data-label=""></td>
+
+
+																		</tr>
+																		<tr>
+																			<td data-label="">VPF</td>
+
+																			<td data-label=" "><input type="number"
+																				class="sm_input5" id="deduction_vpf_m" value="0"
+																				onkeyup="calculateVpf(this.value)"></td>
+
+																			<td data-label=""><input type="number"
+																				class="sm_input5" id="deduction_vpf_y" value="0"></td>
+
+																			<td data-label=""></td>
+
+
+																		</tr>
+																		<tr>
+																			<td data-label="">Labour Charges</td>
+
+																			<td data-label=" "><input type="number"
+																				class="sm_input5" id="deduction_labour_m" value="0"
+																				onkeyup="calculateLabour(this.value)"></td>
+
+																			<td data-label=""><input type="number"
+																				class="sm_input5" id="deduction_labour_y" value="0"></td>
+
+																			<td data-label=""></td>
+
+
+
+																		</tr>
+																		<tr>
+																			<td data-label="">Insurance Premium</td>
+
+																			<td data-label=" "><input type="number"
+																				class="sm_input5" id="deduction_insurance_m"
+																				value="0"
+																				onkeyup="calculateInsurancePremium(this.value)"></td>
+
+																			<td data-label=""><input type="number"
+																				class="sm_input5" id="deduction_insurance_y"
+																				value="0"></td>
+
+																			<td data-label=""></td>
+
+
+																		</tr>
+																		<tr>
+																			<td data-label="">TDS</td>
+
+																			<td data-label=" "><input type="number"
+																				class="sm_input5" id="deduction_tds" value="0"
+																				onkeyup="totalDeduction(this.value)"></td>
+
+																			<td data-label=""></td>
+
+																			<td data-label=""></td>
+
+
+																		</tr>
+																		<tr>
+																			<td data-label="">Surcharge</td>
+
+																			<td data-label=" "><input type="number"
+																				class="sm_input5" id="deduction_surcharge" value="0"
+																				onkeyup="totalDeduction(this.value)"></td>
+
+																			<td data-label=""><input type="text"
+																				class="sm_input5" id="deduction_surcharge_check"></td>
+
+																			<td data-label=""></td>
+
+
+																		</tr>
+																		<tr>
+																			<td data-label="">Education Cess</td>
+
+																			<td data-label=" "><input type="type"
+																				class="sm_input5" id="deduction_edu" value="0"
+																				onkeyup="totalDeduction(this.value)"></td>
+
+																			<td data-label=""><input type="text"
+																				class="sm_input5"></td>
+
+																			<td data-label=""></td>
+
+
+
+																		</tr>
+																		<tr>
+																			<td data-label="">Section Code</td>
+
+																			<td data-label=" "><input type="number "
+																				class="sm_input5" id="deduction_section"></td>
+
+																			<td data-label=""><input type="text"
+																				class="sm_input5"></td>
+
+																			<td data-label=""></td>
+
+																		</tr>
+																		<tr>
+																			<td data-label="">Total Deduction</td>
+
+																			<td data-label=" "><input type="number"
+																				class="sm_input5" id="deduction_total_m"></td>
+
+																			<td data-label=""><input type="number"
+																				class="sm_input5" id="deduction_total_y"></td>
+
+																		</tr>
+																		<tr>
+																			<td data-label="">CTC</td>
+
+																			<td data-label=" "><input type="number"
+																				class="sm_input5" id="deduction_total_ctc"></td>
+
+																			<td data-label=""></td>
+
+																			<td data-label=""></td>
+
+
+																		</tr>
+
+																	</tbody>
+																</table>
+															</div>
+
+
+															<div id="validation-step-3">
+																<table id="example" aria-describedby="example"
+																	class="table table-striped display" style="width: 100%">
+																	<thead>
+																		<tr>
+																			<th scope="col">Code*</th>
+																			<th scope="col">Type</th>
+																			<th scope="col">Allowances Deductions Names</th>
+																			<th scope="col">ESI Effected</th>
+																			<th scope="col">Head Desc.</th>
+																			<th scope="col">Effect With Work Days</th>
+																			<th scope="col">Amount* Monthly Basis</th>
+																			<th scope="col">Amount* Yearly Basis</th>
+																		</tr>
+																	</thead>
+																	<tbody>
+																		<tr
+																			th:each=" listMiscAllowanceDeduction : ${listMiscAllowanceDeduction} ">
+
+																			<td><select id="spicealAllowanceCode"
+																				name="allowanceCode">
+																					<option value=" ">Select</option>
+																					<option
+																						th:each="emp: ${listMiscAllowanceDeduction}"
+																						th:text="${emp.allowanceCode}">${emp.allowanceCode}</option>
+																			</select></td>
+
+
+
+
+																			<td data-label="Allowance-Type"><input
+																				name="type" type="text" class="tab3"
+																				th:value="${listMiscAllowanceDeduction.type}"
+																				id="allowanceType"></td>
+
+																			<td data-label="Allowance-Account"><input
+																				type="text" name="accountName" id="accountName"
+																				class="tab3"
+																				th:value="${listMiscAllowanceDeduction.accountName}"></td>
+
+																			<td><input type="checkbox"
+																				id="allowanceDeductionEsiEffectiveDate"></td>
+
+																			<td><input type="text" class="tab3"
+																				th:value="${listMiscAllowanceDeduction.head}"
+																				id="head"></td>
+
+																			<td><input type="checkbox"
+																				id="allowanceDeductionEffectiveWorkDate"></td>
+
+																			<td><input type="text" class="tab3"></td>
+
+																			<td><input type="text" class="tab3"></td>
+																		</tr>
+																	</tbody>
+
+																</table>
+															</div>
+
+
 														</div>
-											   </div>
-											    <div class="form-group sm col-md-6">
-												<label for="inputHieght">
-												<span class="text-danger">*</span>
-												</label>
-												<input id="basic_pay_y" type="number" value="0"class="input_size" name="basicPayY">
+													</div>
+												</div>
 											</div>
-											   
-										 </div>
-										 
-										  <div class="form-row">
-										          <div class="form-group sm col-md-6">
-													<label class="form-label">Addl. Pay</label>&nbsp;&nbsp;&nbsp;&nbsp;
-													<input id="addl_pay_m" type="number" value="0"class="input_size"
-																onkeyup="basicAditionalCal(this.value);"onchange="">
-															    
-															    </div>
-															    
-															    
-												<div class="form-group sm col-md-6">
-												<label for="inputHieght">
-												<span class="text-danger">*</span>
-												</label>
-												<input id="addl_pay_y" type="number" value="0"class="input_size">
-											</div>
-										  </div>  <div class="form-row"><label class="form-label"> F.D.A.% </label></div>
-										  
-										                          <div class="form-row">
-										                       				<div class="form-group sm col-md-3">
-																			
-																			<input id="fda_m_percent" type="number" value="0"class="sm_input1"onkeyup="fdaPercentMonthly(this.value);"onchange="">
-																			</div>
-																			<div class="form-group  sm col-md-3">
-																			<input id="fda_m_percent_result" type="number" value="0"class="sm_input2">
-																			 	</div>
-																			 	
-																			 	<div class="form-group  sm col-md-3">
-																			<input id="fda_y_percent" type="number" value="0"class="sm_input1">
-																			</div>
-																			 	<div class="form-group  sm col-md-3">
-																			<input id="fda_y_percent_result" type="number" value="0"class="sm_input2">
-																			</div>
-																			
-																			
-										                          </div>
-										                            <div class="form-row">
-										                            
-										                          				
-																<div class="form-group sm col-md-6">
-																				<label class="form-label">V.D.A.</label>
-																				<input type="number" value="0" class="input_size">
-																				</div>
-																				<div class="form-group sm col-md-6">
-																				<input type="number" value="0" class="input_size"><br>
-																				</div>
-																				</div>
-																				   
-																				     <div class="form-row">
-																				     <label class="form-label"> HRA Rate (%) </label>
-																				     </div>
-																				       <div class="form-row">
-																				<div class="form-group sm col-md-3">
-																					
-																					<input id="hra_m_percent" type="number" value="0" class="sm_input1" onkeyup="hraPercent(this.value)"
-																						onchange="" name="hraRate">
-																						</div>
-																						<div class="form-group sm col-md-3">
-																						<input id="hra_m_percent_result" type="number" value="0"class="sm_input2" name="hraValue">
-																						</div>
-																						<div class="form-group sm col-md-3">
-																						<input id="hra_y_percent" type="number" value="0"class="sm_input1" name="hraRateY">
-																						</div>
-																						
-																						<div class="form-group sm col-md-3">
-																						<input id="hra_y_percent_result" type="number" value="0"class="sm_input2" name="hravalueY"><br>
-																						</div>
-																				
-																				</div>
-																				
-																		  
-																		         <div class="form-row">
-																		         <label class="form-label">LTA Rate (%)  </label>
-																		         </div>
-																		          <div class="form-row">
-																		        <div class="form-group sm col-md-3">
-																				<input id="lta_m_percent" type="number" value="0"class="sm_input1">
-																				</div>
-																						<div class="form-group sm col-md-3">
-																						<input id="lta_m_percent_result" type="number" value="0"class="sm_input2">
-																						</div>
-																						<div class="form-group sm col-md-3">
-																						<input id="lta_y_percent" type="number" value="0"class="sm_input1">
-																						</div>
-																						<div class="form-group sm col-md-3">
-																						<input id="lta_y_percent_result" type="number" value="0"class="sm_input2">
-																					</div>
-																					
-																					</div>
-																			<div class="form-row">
-																			<div class="form-group sm col-md-6">
-																					<label class="form-label"> Medical  Allowance  </label>
-																					     <input id="medical_allow_m" type="number" value="0"class="input_size"onkeyup="medicalAllowanceCal(this.value)"
-																						onchange="" name="medicalAllow">
-																						</div>
-																						<div class="form-group sm col-md-6">
-																					    <input id="medical_allow_y" type="number" value="0"class="input_size" name="medicalAllowY"><br>
-																				         </div>
-										  									</div>
-										  									
-										  									<div class="form-row">
-										  									        <div class="form-group sm col-md-6">
-																				    <label  class="form-label">Conveyance  Allowance  </label> 
-																					<input id="conveyance_m" type="number" value="0" class="input_size"onkeyup='çonveyanceCal(this.value)' onchange=""name="conveyanceAllow">
-																				      </div>
-																				      
-																				      <div class="form-group sm col-md-6">
-																				     <input id="conveyance_y" type="number" value="0"class="input_size" name="conveyanceAllowY">
-																					</div>
-																					</div>	
-																					
-																		<div class="form-row">
-																		          <div class="form-group sm col-md-6">
-																					 <label class="form-label">Bonus/ Exgratia</label>&nbsp;&nbsp;&nbsp;
-																					<input type="number" value="0" class="input_size"onkeyup='bonusCal(this.value)'
-																						onchange="totalAllowance()" name="bonus"id="bonus_m">
-																						</div>
-																						<div class="form-group sm col-md-6">
-																						 <input id="bonus_y" type="number" value="0" class="input_size" name="bonusY">
-																						</div>
-																		</div>
-																						
-																		<div class="form-row">		
-																		<div class="form-group">
-																					<label class="form-label">Overtime Rate</label>
-																					<select class="sm_input1"><option></option>
-																					 </select>
-																					  <input type="number" value="0"class="sm_input2"><br> <br> 
-																						</div>
-																		</div>
-																						
-																		<div class="form-row">				
-															      		 <div class="form-group sm col-md-6">
-																					<label  class="form-label">Total   Allowances</label>&nbsp;&nbsp;
-																					<input id="total_allowances_m" type="number" value="0" class="input_size" name="totalAllow">&nbsp;&nbsp;
-																					</div>
-																					 <div class="form-group sm col-md-6">
-																					<input id="total_allowances_y" type="number" value="0" class="input_size" name="totalAllowY"><br>
-																					</div>
-																					</div>
-																					
-																					
-																		<div class="form-row">		
-																		            <div class="form-group sm col-md-6">
-																					<label class="form-label">Gross(inc. Emp. <br> PF & Emp.ESI)</label>
-																					<input type="number" value="0"class="input_size" name="gross" id="grossM">
-																					 </div>
-																					 <div class="form-group sm col-md-6">
-																					<input type="number" value="0" class="input_size"name="grossY" id="grossY">
-																					<br>
-																					</div>
-																					</div>
-																					
-																		<div class="form-row">				
-																		 <div class="form-group sm col-md-6">
-																					<label class="form-label">Net Pay</label>
-																					<input type="number" value="0" class="input_size"name="netPay" id="net_pay_m">&nbsp;&nbsp;
-																					</div>
-																					 <div class="form-group sm col-md-6">
-																					<input type="number" value="0" class="input_size" id="net_pay_y">
-																					</div>
-																					</div>
-																						
-																		<div class="form-group">
-																					<label class="form-label">CTC</label>																				<input type="number" value="0" class="input_size"id="ctc" name="ctc">&nbsp;&nbsp; 
-																						<input type="number" value="0">
-																						</div>
-																						
-																		<div class="form-group">
-																					<label class="form-label">CompanyLeased <br>Accomodation</label>
-																					<select style="width: 155px;">
-																						<option></option>
-																					</select> 
-																					<input type="submit" value="add">
-										  									
-										  									
-										 </div>
-										 
-									</div>
-									
-									
-									<div id="validation-step-2">
-									<table id="datatables-buttons"aria-describedby="datatables-buttons" class="table table-striped display" style="width:100%">
-																					
-																							<thead>
-																								<tr>
-																									<th scope="col"></th>
-																									<th scope="col">Monthly Basis</th>
-																									<th scope="col">Yearly Basis</th>
-																									<td data-label=""></td>
-																								</tr>
-																							</thead>
-																							<tbody>
-																								<tr>
-																									<td data-label="">FPF %</td>
-																									<td data-label=""><input type="radio"
-																										name="radioBtn" id="r1" value="r1"
-																										onclick='calculateEsiAndEpf()'
-																										style="margin-left: 25px;"> Condition
-																										Not applicable<br> <input type="radio"
-																										name="radioBtn" id="r2" value="r2"
-																										onclick='calculateEsiAndEpf()'>
-																										Calculated on 15000<br> <input
-																										type="radio" name="radioBtn" id="r3"
-																										value="r3" onclick='calculateEsiAndEpf()'>
-																										Calculated on Actual<br> <input
-																										type="radio" name="radioBtn" id="r4"
-																										value="r4" style="margin-left: 35px;"
-																										onclick='calculateEsiAndEpf()'>
-																										Calculated FPF and PF on 15000 and EPF on
-																										Actual<br></td>
-																								
-																									<td data-label=""></td>
 
-																								</tr>
 
-																								<tr>
-																									<td data-label="">FPF %</td>
-																									<td data-label=""><input type="number"
-																										class="sm_input1" id="deduction_fpf_percent"
-																										value="0"
-																										onkeyup='calculateEsiAndEpfByFpf(this.value)'>&nbsp;&nbsp;
-																										<input type="number" class="sm_input4"
-																										id="deduction_fpf_m" value="0"></td>
-																									<td data-label=""><input type="number"
-																										class="sm_input5" id="deduction_fpf_y"
-																										value="0"></td>
-																									<td data-label=""></td>
 
-																								</tr>
 
-																								<tr>
-																									<td data-label="">Pension Fund (%)</td>
-																									<td data-label=""><input type="number"
-																										class="sm_input1" id="deduction_pf_percent"
-																										value='0'
-																										onkeyup='calculateEsiAndEpfByPf(this.value)'>&nbsp;&nbsp;
 
-																										<input type="number" class="sm_input4"
-																										id="deduction_pf_m" value="0"></td>
-																									<td data-label=""><input type="number"
-																										class="sm_input5" id="deduction_pf_y"
-																										value="0"></td>
-																									<td data-label=""></td>
 
-																								</tr>
 
-																								<tr>
-																									<td data-label="">EPF (%)</td>
-																									<td data-label=""><input type="number"
-																										class="sm_input1" id="deduction_epf_percent"
-																										value='0'
-																										onkeyup='calculateEsiAndEpfByEpf(this.value)'>&nbsp;&nbsp;
+											<!--  tab3 end -->
 
-																										<input type="number" class="sm_input4"
-																										id="deduction_epf_m" value="0"></td>
-																									<td data-label=""><input type="number"
-																										class="sm_input5" id="deduction_epf_y"
-																										value="0"></td>
-																									<td data-label=" "><select
-																										id='epfDropdown' name='epfChoose'
-																										onchange='calculateEpf()'>
-																											<option value=''>choose</option>
-																											<option value='y'>Yes</option>
-																											<option value='n'>No</option>
-																									</select></td>
-																								
 
-																								</tr>
-																								<tr>
-																									<td data-label="">ESI</td>
+											<input type="submit" value=" add">
+										</div>
 
-																									<td data-label=" "><input type="number"
-																										class="sm_input5" id="deduction_esi_m"
-																										value="0"></td>
 
-																									<td data-label=""><input type="number"
-																										class="sm_input5" id="deduction_esi_y"
-																										value="0"></td>
 
-																									<td data-label=" "><select
-																										id='esiDropdown' name='ésiChoose'
-																										onchange='calculateEsi()'>
-																											<option value=''>choose</option>
-																											<option value='y'>Yes</option>
-																											<option value='n'>No</option>
-																									</select></td>
-																							
 
 
-																								</tr>
-																								<tr>
-																									<td data-label="">SI</td>
 
-																									<td data-label=" "><input type="number"
-																										class="sm_input5" id="deduction_si_m"
-																										value="0" onkeyup='calculateSi(this.value)'></td>
 
-																									<td data-label=""><input type="number"
-																										class="sm_input5" id="deduction_si_y"
-																										value="0"></td>
 
-																									<td data-label=""></td>
 
 
-																								</tr>
-																								<tr>
-																									<td data-label="">VPF</td>
 
-																									<td data-label=" "><input type="number"
-																										class="sm_input5" id="deduction_vpf_m"
-																										value="0" onkeyup="calculateVpf(this.value)"></td>
-
-																									<td data-label=""><input type="number"
-																										class="sm_input5" id="deduction_vpf_y"
-																										value="0"></td>
-
-																									<td data-label=""></td>
-
-
-																								</tr>
-																								<tr>
-																									<td data-label="">Labour Charges</td>
-
-																									<td data-label=" "><input type="number"
-																										class="sm_input5" id="deduction_labour_m"
-																										value="0"
-																										onkeyup="calculateLabour(this.value)"></td>
-
-																									<td data-label=""><input type="number"
-																										class="sm_input5" id="deduction_labour_y"
-																										value="0"></td>
-
-																									<td data-label=""></td>
-
-
-
-																								</tr>
-																								<tr>
-																									<td data-label="">Insurance Premium</td>
-
-																									<td data-label=" "><input type="number"
-																										class="sm_input5" id="deduction_insurance_m"
-																										value="0"
-																										onkeyup="calculateInsurancePremium(this.value)"></td>
-
-																									<td data-label=""><input type="number"
-																										class="sm_input5" id="deduction_insurance_y"
-																										value="0"></td>
-
-																									<td data-label=""></td>
-
-
-																								</tr>
-																								<tr>
-																									<td data-label="">TDS</td>
-
-																									<td data-label=" "><input type="number"
-																										class="sm_input5" id="deduction_tds" value="0"
-																										onkeyup="totalDeduction(this.value)"></td>
-
-																									<td data-label=""></td>
-
-																									<td data-label=""></td>
-
-
-																								</tr>
-																								<tr>
-																									<td data-label="">Surcharge</td>
-
-																									<td data-label=" "><input type="number"
-																										class="sm_input5" id="deduction_surcharge"
-																										value="0" onkeyup="totalDeduction(this.value)"></td>
-
-																									<td data-label=""><input type="text"
-																										class="sm_input5"
-																										id="deduction_surcharge_check"></td>
-
-																									<td data-label=""></td>
-
-
-																								</tr>
-																								<tr>
-																									<td data-label="">Education Cess</td>
-
-																									<td data-label=" "><input type="type"
-																										class="sm_input5" id="deduction_edu" value="0"
-																										onkeyup="totalDeduction(this.value)"></td>
-
-																									<td data-label=""><input type="text"
-																										class="sm_input5"></td>
-
-																									<td data-label=""></td>
-
-
-
-																								</tr>
-																								<tr>
-																									<td data-label="">Section Code</td>
-
-																									<td data-label=" "><input type="number "
-																										class="sm_input5" id="deduction_section"></td>
-
-																									<td data-label=""><input type="text"
-																										class="sm_input5"></td>
-
-																									<td data-label=""></td>
-
-																								</tr>
-																								<tr>
-																									<td data-label="">Total Deduction</td>
-
-																									<td data-label=" "><input type="number"
-																										class="sm_input5" id="deduction_total_m"></td>
-
-																									<td data-label=""><input type="number"
-																										class="sm_input5" id="deduction_total_y"></td>
-
-																								</tr>
-																								<tr>
-																									<td data-label="">CTC</td>
-
-																									<td data-label=" "><input type="number"
-																										class="sm_input5" id="deduction_total_ctc"></td>
-
-																									<td data-label=""></td>
-
-																									<td data-label=""></td>
-																									
-
-																								</tr>
-
-																							</tbody>
-																						</table>
-									</div>
-									
-									
-									<div id="validation-step-3">
-										<table id="example"aria-describedby="example" class="table table-striped display" style="width:100%">
-																						<thead>
-																							<tr>
-																							<th scope="col">Code*</th>
-																							<th scope="col">Type</th>
-																							<th scope="col">Allowances Deductions Names</th>
-																							<th scope="col">ESI Effected</th>
-																							<th scope="col">Head Desc.</th>
-																							<th scope="col">Effect With Work Days</th>
-																							<th scope="col">Amount* Monthly Basis</th>
-																							<th scope="col">Amount* Yearly Basis</th>
-																							</tr>
-																						</thead>
-																						<tbody>
-																							<tr th:each=" listMiscAllowanceDeduction : ${listMiscAllowanceDeduction} " >
-																								
-																								<td>
-																								 <select id="spicealAllowanceCode" name="allowanceCode">
-																									<option value=" ">Select</option>
-																									<option th:each="emp: ${listMiscAllowanceDeduction}"
-																										th:text="${emp.allowanceCode}">${emp.allowanceCode}</option>
-																								</select>
-																								</td>
-																								
-																								
-																								
-																									
-																								<td data-label="Allowance-Type"><input name ="type"
-																									type="text" class="tab3" th:value="${listMiscAllowanceDeduction.type}" id="allowanceType"></td>
-																									
-																								<td data-label="Allowance-Account"><input type="text" name="accountName" id="accountName"
-																									class="tab3" th:value="${listMiscAllowanceDeduction.accountName}"></td>
-																									
-																								<td><input type="checkbox" id="allowanceDeductionEsiEffectiveDate"></td>
-																								
-																								<td><input type="text" class="tab3" th:value="${listMiscAllowanceDeduction.head}" id="head"></td>
-																								
-																								<td><input type="checkbox" id="allowanceDeductionEffectiveWorkDate"></td>
-																								
-																								<td><input type="text" class="tab3"></td>
-																								
-																								<td><input type="text" class="tab3"></td>
-																							</tr>
-																						</tbody>
-																					
-																					</table>
-						                                            			</div>
-									
-									
-					          </div>
-						                                      	</div>
-					                                       	</div>
-				                                     	</div>
-					
-					
-					
-					
-
-				
-
-																	<!--  tab3 end -->
-															
-
-																<input type="submit" value=" add">
-                                                                         </div>
-						
-						
-							
-						
-									
-		
-						
-	                           
-
-	                              
-										
 										<button type="submit" class="btn btn-primary">Save</button>
 										<button type="reset" class="btn btn-primary" value="Reset">Reset</button>
 									</form>
-									</div>
-									</div>
-									</div>
-									</div>
-									</div>
-									
-					
-					
-					
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+
+
 			</main>
 			<footer class="footer">
 				<div th:replace="fragments/footer :: div"></div>
@@ -869,7 +909,7 @@ body {
 			});
 		});
 	</script>
-		
+
 
 </body>
 </html>

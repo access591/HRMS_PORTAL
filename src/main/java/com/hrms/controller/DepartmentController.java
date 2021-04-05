@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hrms.model.Department;
@@ -123,5 +124,22 @@ public String deletedepartment(@PathVariable("id")String id,  Model model,HttpSe
 	  this.departmentService.removeDepartment(id);
     return "redirect:/"+pageMappingService.PageRequestMapping(reqPage,pageno);
 }
+
+@ResponseBody
+@PostMapping(value = {"/getdepartment/{deptCode}"})
+public Department getDepartmentByDeptId(@PathVariable("deptCode") String deptCode) {
+	
+	System.out.println("get department by department id");
+	return departmentService.findDepartmentById(deptCode);
+	
+}
+
+
+
+
+
+
+
+
 
 }
