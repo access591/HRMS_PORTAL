@@ -36,7 +36,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 	@Override
 	public void updateEmployee(Employee e) {
 	e.setEmpName(e.getEmpName());
-	e.setImageProfile(e.getImageProfile());
+	e.setEmpImg(e.getEmpImg());
 	e.seteActive(e.geteActive());
 	e.setCompCode(e.getCompCode());
 	e.setDateOfBirth(e.getDateOfBirth());
@@ -108,6 +108,11 @@ public class EmployeeServiceImpl implements EmployeeService {
 	public void removeEmployeet(String id) {
 	this.employeeDao.delete(id);
 		
+	}
+
+	@Override
+	public List<Employee> getEmployeeByDeptCode(String deptCode) {
+		return this.employeeDao.getEmployeeByDeptCode(deptCode);
 	}
 
 }
