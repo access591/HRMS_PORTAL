@@ -145,6 +145,19 @@ body {
 								</div>
 							</div>
 						</div>
+						
+							<div class="col-sm-12">
+										<span class=" btn btn-primary pull-left" id="selectedTREN"
+											style="background-color: #34a7cc"> <a target="_blank"
+											id="selectedHref"href="/bankwiseReport"
+											style="color: white;"> <i class="fa fa-download"
+												style="color: white;"></i> Generate Report
+										</a></span> <span><select id="reportgenrate" name="reportgenrate"
+											class=" form-control pull-right" style="width: 65px;">
+												<option value="P">PDF</option>
+												<option value="E">EXCEL</option>
+										</select></span>
+									</div>
 						<div class="col-12">
 							<div class="card">
 								<div class="card-header"></div>
@@ -163,7 +176,7 @@ body {
 										</thead>
 										<tbody>
 											<tr th:each="listOfCity : ${listLeaveDetail}">
-												<td th:text="${listOfCity.lvCode}"></td>
+												<td id="lvCode" th:text="${listOfCity.lvCode}"></td>
 												<td th:text="${listOfCity.leaveType}"></td>
 												<td th:text="${listOfCity.totalLeave}"></td>
 												<td th:text="${listOfCity.leaveStatus}"></td>
@@ -204,6 +217,34 @@ body {
 			});
 		});
 	</script>
+	<script type="text/javascript">
+	$(document)
+			.ready(
+					function() {
+						
+						
+						
+						
+						$("#selectedTREN")
+								.click(
+										function() {
+											
+										
+											var docFormat = $('#reportgenrate')
+													.val();
+											var url = "./";
+											$("#selectedHref")
+											
+													.attr(
+															"href",url+
+															"reportLeaveDetail?_ex="+docFormat
+																	);
+											
+										
+										});
+						
+					});
+</script>
 
 
 </body>
