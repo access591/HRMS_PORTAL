@@ -145,25 +145,30 @@ body {
 								</div>
 							</div>
 						</div>
-						
-							<div class="col-sm-12">
-										<span class=" btn btn-primary pull-left" id="selectedTREN"
-											style="background-color: #34a7cc"> <a target="_blank"
-											id="selectedHref"href="/bankwiseReport"
-											style="color: white;"> <i class="fa fa-download"
-												style="color: white;"></i> Generate Report
-										</a></span> <span><select id="reportgenrate" name="reportgenrate"
-											class=" form-control pull-right" style="width: 65px;">
-												<option value="P">PDF</option>
-												<option value="E">EXCEL</option>
-										</select></span>
-									</div>
+
+
 						<div class="col-12">
 							<div class="card">
-								<div class="card-header"></div>
+								<div class="card-header">
+									<div class="col-sm-12" align="right">
+										<span class=" btn btn-primary pull-left" id="selectedTREN"
+											style="background-color: rgb(150, 148, 255)"> 
+											<a target="_blank" id="selectedHref" href="/bankwiseReport"style="color: black;">
+											 <i class="fas fa-fw fa-bell"style="color: rgb(0, 255, 128);"></i> Generate Report
+										    </a></span> <span> 
+										<select id="reportgenrate" name="reportgenrate"
+											class="custom-select flex-grow-1" style="width: 65px;">
+												<option value="P">PDF</option>
+												<option value="E">EXCEL</option>
+										</select>
+										</span>
+									</div>
+
+								</div>
 								<div class="card-body">
-									<table id="example"aria-describedby="example"class="table table-striped dataTable dtr-inline collapsed"
-										style="width: 100%;padding: 0; margin: 0;">
+									<table id="example" aria-describedby="example"
+										class="table table-striped dataTable dtr-inline collapsed"
+										style="width: 100%; padding: 0; margin: 0;">
 										<thead>
 											<tr>
 												<th scope="col">Code</th>
@@ -181,8 +186,8 @@ body {
 												<td th:text="${listOfCity.totalLeave}"></td>
 												<td th:text="${listOfCity.leaveStatus}"></td>
 
-												<td>
-												<a th:href="@{/editLeaveDetail/{id}(id=${listOfCity.lvCode})}"><em
+												<td><a
+													th:href="@{/editLeaveDetail/{id}(id=${listOfCity.lvCode})}"><em
 														class="align-middle fas fa-fw fa-pen"></em></a> <a
 													th:href="@{/deleteLeaveDetail/{id}(id=${listOfCity.lvCode})}"
 													onclick="return confirm('Are you sure?')"><em
