@@ -133,13 +133,24 @@ body {
                 <a th:href="@{/list(page=${i})}" th:text="${i}"
                 th:classappend="${currentPage}==${i}?'activepagenumber':''"></a>
                 </th:each>
+                
+                <th:class="${currentIndex != totalPageCount}? '' : 'disabled'">
+                    <span th:if='${currentIndex == totalPageCount}'>Next</span>
+                    <a th:if='${currentIndex != totalPageCount}'
+                  
+                       th:href="@{'/list?page='+${currentIndex+1}}"
+                       title='Go to next page'>next</a>
+                </th:class>
+                
+                
+                
 
-                    <th:url value="/list" var="next">
+                   <!--  <th:url value="/list" var="next">
                         <th:param name="page" value="${page + 1}"/>
                     </th:url>
                     <th:if test="${page + 1 <= maxPages}">
                         <a th:href="@{${next}}" class="pn next">Next</a>
-                    </th:if>
+                    </th:if> -->
                 </div>
 				</div>
 								
