@@ -10,6 +10,8 @@ import com.hrms.model.City;
 
 public interface CityDao extends GenericDao<City>{
 
-	Page<City> findAll(Pageable pageable,List<City> sizeOflist);
+
+
+	
 
 }
