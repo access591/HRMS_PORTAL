@@ -50,6 +50,8 @@ body {
 <meta charset="utf-8" />
 <title>HRMS</title>
 </head>
+ 
+<body>
 
 <div class="wrapper">
 <nav id="sidebar" class="sidebar">
@@ -63,7 +65,7 @@ body {
 
 					<div class="header">
 						<h1 class="header-title">
-							Employee Details
+							Update Employee Details
 						</h1>
 						
 					
@@ -71,71 +73,17 @@ body {
 					<div class="row">
 	              <div class="col-12">
 		<form id="smartwizard-validation" enctype="multipart/form-data" class="wizard wizard-primary" th:action="@{/updateEmployee}" th:object="${employees}" method="post">
-			<ul>
-			<li><a href="#validation-step-1"><br /><small>Employee details</small></a></li>
-			<li><a href="#validation-step-2"><br /><small>Department Details </small></a></li>
-			<li><a href="#validation-step-3"><br /><small>Other Details1</small></a></li>
-			<li><a href="#validation-step-4"><br /><small>Other Details2</small></a></li>
+					<ul>
+			<li><a href="#validation-step-1"><br /><small>Officer Details</small></a></li>
+			<li><a href="#validation-step-2"><br /><small>Other Details </small></a></li>
+			<li><a href="#validation-step-3"><br /><small>Arm Licence  Details</small></a></li>
+
 								</ul>
 								<div>
 								
                          <div id="validation-step-1">
-
-										<div class="row">
-											<div class="col-12 col-lg-6">
-												<div class="form-group">
-													<label class="form-label">Emp Code <span
-														class="text-danger">*</span>
-													</label> <input name="empCode" type="text" id="empCode"th:value="${employeeEdit.empCode}"
-														class="form-control"readonly>
-												</div>
-	
-												<div class="form-group">
-													<label class="form-label">Name <span
-														class="text-danger">*</span>
-													</label> <input name="empName" id="empName"type="text" th:value="${employeeEdit.empName}"
-														class="form-control required">
-												</div>
-												<div class="form-group">
-													<label class="form-label">Emp Active</label> <span
-														class="text-danger">*</span> <select
-														class="form-control required" name="eActive" id="eActive">
-														<option value="">Select Type</option>
-														<option th:value="Y" th:selected="${employeeEdit.eActive}==Y">Yes</option>
-														<option th:value="N" th:selected="${employeeEdit.eActive}==N">No</option>
-													</select>
-												</div>
-												<div class="form-group ">
-													<label class="form-label">Company Code <span
-														class="text-danger">*</span>
-													</label> <input name="compCode" type="text" id="compCode" th:value="${employeeEdit.compCode}"
-														class="form-control required">
-												</div>
-
-												<div class="form-group ">
-													<label class="form-label">Date Of Birth</label> <span
-														class="text-danger">*</span> <input 
-														class="form-control required" type="text"id="dateOfBirth" th:value="${employeeEdit.dateOfBirth}"
-														name="dateOfBirth" />
-
-												</div>
-												<div class="form-group">
-													<label class="form-label">Birth State <span
-														class="text-danger">*</span>
-													</label> <input name="birthState" type="text"id="birthState"  th:value="${employeeEdit.birthState}"
-														class="form-control required">
-												</div>
-												<div class="form-group">
-													<label class="form-label">Birth Place <span
-														class="text-danger">*</span>
-													</label> <input  type="text"id="birthPlace"name="birthPlace"th:value="${employeeEdit.birthPlace}"
-														class="form-control required">
-												</div>
-											</div>
-
-
-											<div class="col-12 col-lg-6">
-											<div class="form-group">
+											<div class="form-row">
+                                             	<div class="form-group sm col-md-12">
 													<label class="form-label">Upload Image <span
 														class="text-danger">*</span>
 													</label>
@@ -145,448 +93,384 @@ body {
 												</div>
 												
 												
-												<div class="form-group">
-													<label class="form-label">Emp Ref No. <span
-														class="text-danger">*</span>
-													</label> <input name="empRefNo" type="text" id="empRefNo" th:value="${employeeEdit.empRefNo}"
-														class="form-control required">
-												</div>
-												<div class="form-group">
-													<label class="form-label">Type</label> <span
-														class="text-danger">*</span> <select
-														class="form-control required" name="empType" id="empType">
-														<option value="">Select Type</option>
-														<option value="P" th:selected="${employeeEdit.empType}==P">Permanent</option>
-														<option value="C" th:selected="${employeeEdit.empType}==C">Casual</option>
-													</select>
-												</div>
-												<div class="form-group">
-													<label class="form-label">Location Type</label> <span
-														class="text-danger">*</span> <select
-														class="form-control required" name="locationType" id="locationType">
-														<option value="">Select Type</option>
-														<option value="C" th:selected="${employeeEdit.locationType}==C">Company</option>
-														<option value="G" th:selected="${employeeEdit.locationType}==G">Govt Office</option>
-													</select>
-												</div>
-
-												<div class="form-group ">
-													<label class="form-label">Weekly Working Days <span
-														class="text-danger">*</span>
-													</label> <input name="weeklyWorkingDay" type="text"id="weeklyWorkingDay"th:value="${employeeEdit.weeklyWorkingDay}"
-														class="form-control required">
-												</div>
-
+									     </div>
+										<div class="form-row">
+												<div class="form-group sm col-md-4">
 												
-
-												<div class="form-group">
-													<label class="form-label">Domicile <span
+													<label class="form-label">Employee Code <span
 														class="text-danger">*</span>
-													</label> <input name="domicile" type="text"id="domicile"th:value="${employeeEdit.domicile}"
+													</label> <input name="empCode" type="text" id="empCode"th:value="${employeeEdit.empCode}"
+														class="form-control"readonly>
+												</div>
+	
+										<div class="form-group sm col-md-4">
+													<label class="form-label">Designation</label> <span
+														class="text-danger">*</span> <select
+														class="form-control required" name="designation" id="designation">
+														<option value="">Select Type</option>
+														<option value="ADGP" th:selected="${employeeEdit.designation}==ADGP">ADGP</option>
+														<option value="IG"th:selected="${employeeEdit.designation}==IG">IG</option>
+														<option value="SP"th:selected="${employeeEdit.designation}==SP">SP</option>
+														<option value="DCP"th:selected="${employeeEdit.designation}==DCP">DCP</option>
+														<option value="ASP" th:selected="${employeeEdit.designation}==ASP">ASP</option>
+														<option value="AIG"th:selected="${employeeEdit.designation}==AIG">AIG</option>
+													</select>
+												</div>
+											<div class="form-group sm col-md-4">
+													<label class="form-label">Present Posting <span
+														class="text-danger">*</span>
+													</label> <input name="presentPosting" type="text"id="presentPosting" th:value="${employeeEdit.presentPosting}" title="Present Posting"
 														class="form-control required">
 												</div>
+												</div>
+											<div class="form-row">
+													<div class="form-group sm col-md-4">
+													<label class="form-label">Date  Of Retirement</label> <span
+														class="text-danger">*</span> <input 
+														class="form-control required" type="text"id="dateOfRetirement"th:value="${employeeEdit.dateOfRetirement}"
+														name="dateOfRetirement" />
 
-											</div>
-										</div>
-									</div>
-									
-                         <div id="validation-step-2">
-									<div class="row">
-										<div class="col-12 col-lg-6">
-										<div class="form-group">
-											<label class="form-label">Card No.    
-												<span class="text-danger">*</span>
-											</label>
-											<input  type="text" class="form-control required" name="cardNo" id="cardNo" th:value="${employeeEdit.cardNo}">
-										</div>
-										
-										
-										<div class="form-group">
-											<label class="form-label">Designation
-												<span class="text-danger">*</span>
-											</label>
-											<input  type="text" class="form-control required"  name="empDesignation"id="empDesignation"  th:value="${employeeEdit.empDesignation}">
-										</div>
-										
-										<div class="form-group">
-											<label class="form-label">Shift Code.
-												<span class="text-danger">*</span>
-											</label>
-											<input  type="text" class="form-control required" name="shiftCode" id="shiftCode" th:value="${employeeEdit.shiftCode}">
-										</div>
-										
-										
-										
-										<div class="form-group ">
-											<label class="form-label">Passport No.
-												<span class="text-danger">*</span>
-											</label>
-											<input type="text" class="form-control required"  name="passportNo"  id="passportNo" th:value="${employeeEdit.passportNo}" >
-										</div>
-										
-										
-										 <div class="form-group ">
-												<label class="form-label">LOI</label>
-												<span class="text-danger">*</span>
-												<input  type="text" id="loiDate" name="loiDate" th:value="${employeeEdit.loiDate}" class="form-control required">
-											
-										</div>
-								
-										 <div class="form-group ">
-												<label class="form-label"> Status Date</label>
-												<span class="text-danger">*</span>
-												<input  type="text"  class="form-control required" name="statusDate"id="statusDate" th:value="${employeeEdit.statusDate}">
-										</div>
-									
-										<div class="form-group">
-										<div class="card">
-								       			 <div class="card-header">
-									   			 <h5 class="card-title mb-0">Reason</h5>
-								           		</div>
-								        <div class="card-body">
-											<textarea class="form-control required" rows="2"id="reason" name="reason"th:text="${employeeEdit.reason}" placeholder="Textarea"></textarea>
-								       	</div>
-							           </div>
-							           </div>
-										</div>
-										
-									
-									<div class="col-12 col-lg-6">
-											<div class="form-group">
-											<label class="form-label">Department Code.
-												<span class="text-danger">*</span>
-											</label>
-											<input  type="text" name="departmentCode"id="departmentCode" 	th:value="${employeeEdit.departmentCode}" class="form-control required">
-										</div>
-										
-										
-										<div class="form-group">
-											<label class="form-label">Manager  Code.
-												<span class="text-danger">*</span>
-											</label>
-											<input  type="text" name="managerCode" id="managerCode"th:value="${employeeEdit.managerCode}" class="form-control required">
-										</div>
-								
-								
-									<div class="form-group">
-											<label class="form-label">IT Pan No
-												<span class="text-danger">*</span>
-											</label>
-											<input type="text" name="itPanNo"id="itPanNo" 	th:value="${employeeEdit.itPanNo}" class="form-control required">
-										</div>
-								
-								
-									<div class="form-group">
-											<label class="form-label">UAN  No.
-												<span class="text-danger">*</span>
-											</label>
-											<input  type="text" name="uanNo" id="uanNo" 	th:value="${employeeEdit.uanNo}" class="form-control required">
-										</div>
-								
-								 
-											
-									    <div class="form-group ">
+												</div>
+
+											<div class="form-group sm col-md-4">
+													<label class="form-label">Date  Of Posting </label> <span
+														class="text-danger">*</span> <input 
+														class="form-control required" type="text"id="dateOfPosting"th:value="${employeeEdit.dateOfPosting}"
+														name="dateOfPosting" />
+
+												</div>
+												 <div class="form-group sm col-md-4">
 												<label class="form-label">Date Of Joining</label>
 												<span class="text-danger">*</span>
-												<input  type="text" name="dateOfJoining" id="dateOfJoining" 	th:value="${employeeEdit.dateOfJoining}" class="form-control required">
-											
-										</div>
-										
-										 <div class="form-group ">
-												<label class="form-label"> Leaving Date </label>
-												<span class="text-danger">*</span>
-												<input class="form-control required" type="text" name="leavingDate" id="leavingDate" th:value="${employeeEdit.leavingDate}" >
-										</div>
-								</div>	
-						   </div>
-						</div>
-
-                         <div id="validation-step-3">
-											
-										   <div class="form-row">
-												<div class="form-group sm col-md-4">
-												<label for="inputSex">Gender
-												<span class="text-danger">*</span>
-												</label>
-												<select id="empGender"name="empGender" class="form-control required">
-													<option selected>Choose...Your Gender </option>
-													<option  value="Male" th:selected="${employeeEdit.empGender}==Male">Male</option>
-														<option value="Female" th:selected="${employeeEdit.empGender}==Female">Female</option>
-												</select>
-											   </div>
-											    <div class="form-group sm col-md-4">
-												<label for="inputHieght">Height
-												<span class="text-danger">*</span>
-												</label>
-												<input type="text" class="form-control required" name="empHeight" id="empHeight" 	th:value="${employeeEdit.empHeight}">
-											</div>
-											    <div class="form-group col-md-4">
-												<label for="identiMark">identity Mark
-												<span class="text-danger">*</span>
-												</label>
-												<input type="text" class="form-control required" Name="identityMark" id="identityMark" 	th:value="${employeeEdit.identityMark}">
-											</div>
-										 </div>
-										<div class="form-row">
-										    	<div class="form-group col-md-4">
-												<label for="bloodGroup">Blood Group
-												<span class="text-danger">*</span>
-												</label> <input
-													type="text" class="form-control required"  id="bloodGroup"  name="bloodGroup"	th:value="${employeeEdit.bloodGroup}">
-											</div>
-											    <div class="form-group col-md-4">
-												<label for="maritalStatus:">Marital Status
-												<span class="text-danger">*</span>
-												</label> <select
-													id="maritalStatus" 	Name="maritalStatus" class="form-control required">
-													<option selected> Marital Status</option>
-													<option  value="Single" th:selected="${employeeEdit.maritalStatus}==Single">Single</option>
-													<option  value="Married" th:selected="${employeeEdit.maritalStatus}==Married">Married</option>
-												</select>
-											</div>
-											    <div class="form-group col-md-4">
-												<label for="preDisease">Pre Disease
-												<span class="text-danger">*</span>
-												</label> <select
-													id="preDisease"  name="preDisease"  class="form-control required">
-													<option selected>Choose..Your Disease</option>
-													<option value="Yes" th:selected="${employeeEdit.preDisease}==Yes">Yes</option>
-													<option value="No" th:selected="${employeeEdit.preDisease}==No">No</option>
-												</select>
-											</div>
-										 </div>
-										
-										<div class="form-row">
-											<div class="form-group col-md-4">
-											<label for="weddingDate">Wedding Date
-											<span class="text-danger">*</span>
-											</label>
-											<input type="text" class="form-control required"id="weddingDate" name="weddingDate" 	th:value="${employeeEdit.weddingDate}">
-
-											</div>
-											<div class="form-group col-md-4">
-												<label for="noChild">No. Child
-												<span class="text-danger">*</span>
-												</label>
-												
-												<input type="text" class="form-control required" id="noOfChild" name="noOfChild" th:value="${employeeEdit.noOfChild}">
-											</div>
-											<div class="form-group col-md-4">
-												<label for="caste">Caste
-												<span class="text-danger">*</span>
-												</label>
-												
-												<input type="text" class="form-control required" id="empCaste" name="empCaste" th:value="${employeeEdit.empCaste}">
-											</div>
-										</div>
-							
-							                <div class="form-row">
-										   <div class="form-group col-md-4">
-												<label for="religion">Religion
-												<span class="text-danger">*</span>
-												</label>
-												
-												<input type="text" class="form-control required" id="empReligion" name="empReligion" th:value="${employeeEdit.empReligion}">
-											</div>
-							               <div class="form-group col-md-4">
-												<label for="nationality">Nationality
-												<span class="text-danger">*</span>
-												</label>
-												
-												<input type="text" class="form-control required" id="empNationality" name="empNationality" th:value="${employeeEdit.empNationality}">
-											</div>
-										   <div class="form-group col-md-4">
-												<label for="companyCode">Company Code
-												<span class="text-danger">*</span>
-												</label>
-												
-												<input type="text" class="form-control required"  name="companyCode" id="companyCode" th:value="${employeeEdit.companyCode}">
-											</div>
-							     		   </div>
-							     			 
-							     			 
-							                <div class="form-row">
-							                 <div class="form-group col-md-4">
-												<label for="mediclaim">Mediclaim
-												<span class="text-danger">*</span>
-												</label>
-												<input type="text" class="form-control required" id="mediclaim" name="mediclaim" th:value="${employeeEdit.mediclaim}">
-											</div>
-											<div class="form-group col-md-4">
-												<label for="gpa">GPA
-												<span class="text-danger">*</span>
-												</label>
-												<input type="text" class="form-control required" id="gpa"  name="gpa" th:value="${employeeEdit.gpa}">
-											</div>
-							        		<div class="form-group col-md-4">
-												<label for="Emp_Address1">Address1<span class="text-danger">*</span></label>
-												<input type="text" class="form-control required" id="empAddress1" name="empAddress1" th:value="${employeeEdit.empAddress1}">
+												<input  type="text" id="dateOfJoining" name="dateOfJoining"th:value="${employeeEdit.dateOfJoining}" class="form-control required">
+										          </div>
+										          
 												</div>
+											
+											<div class="form-row">
+									              <div class="form-group sm col-md-4">
+												<label class="form-label">Department</label>
+												<label style="color: red">*</label>
+												<select class="form-control select2"onchange="myFunction()" name="departmentCode"id="departmentCode" required aria-required="true">
+												 <option value="">Select Department</option>
+												<option th:each="dep :${listDepartment}" th:value="${dep.getDepartmentCode()}" th:text="${dep.getDeptName()}"th:field="${employeeEdit.departmentCode}"></option>
+											     	</select>
+											     
+											   <input type="hidden" class="form-control" id="depName" name="depName" size="50" > 
+											</div>
+											
+												
+												<div class="form-group sm col-md-4">
+													<label class="form-label">Employee Pay Code. <span
+														class="text-danger">*</span>
+													</label> <input name="employeePayeeCode" type="text" id="employeePayeeCode"th:value="${employeeEdit.employeePayeeCode}" pattern="\d{1,10}" title="Only digits"maxlength="10" 
+														class="form-control required">
+												</div>
+												
+												<div class="form-group sm col-md-4">
+												
+													<label class="form-label">Batch Year</label> <span
+														class="text-danger">*</span> 
+														<input class="form-control required" type="text"id="batchYear"name="batchYear"th:value="${employeeEdit.batchYear}"/>
+
+												</div>
+												</div>
+									
+												
+												
+											<div class="form-row">
+												
+													<div class="form-group sm col-md-4">
+													<label class="form-label">Type</label> <span
+														class="text-danger">*</span> <select
+														class="form-control required" name="typeCourtDepartment" id="typeCourtDepartment">
+														<option value="">Select Type</option>
+														<option value="C" th:selected="${employeeEdit.typeCourtDepartment}==C">Court</option>
+														<option value="D" th:selected="${employeeEdit.typeCourtDepartment}==D">Department</option>
+													</select>
+												</div>
+												<div class="form-group sm col-md-4">
+													<label class="form-label">Officer Type</label> <span
+														class="text-danger">*</span> <select
+														class="form-control required" name="officerType" id="officerType">
+														<option value="">Select Type</option>
+														<option value="IPS"th:selected="${employeeEdit.officerType}==IPS">IPS</option>
+														<option value="HPS"th:selected="${employeeEdit.officerType}==HPS">HPS</option>
+														<option value="DDA"th:selected="${employeeEdit.officerType}==DDA">DDA</option>
+														<option value="DA"th:selected="${employeeEdit.officerType}==DA">DA</option>
+														<option value="ADA"th:selected="${employeeEdit.officerType}==ADA">ADA</option>
+													</select>
+												</div>
+													
+												<div class="form-group sm col-md-4">
+													<label class="form-label">Vrs <span
+														class="text-danger">*</span>
+													</label> <input name=vrs type="text" id="vrs" maxlength="50" th:value="${employeeEdit.vrs}"
+														class="form-control required">
+												</div>
+													
+												</div>
+													<div class="form-row">
+													<div class="form-group sm col-md-4">
+													<label class="form-label">Vigilance Query</label> <span
+														class="text-danger">*</span> <select
+														class="form-control required" name="vigilanceQuery" id="vigilanceQuery">
+														<option value="">Select Type</option>
+														<option value="Y" th:selected="${employeeEdit.vigilanceQuery}==Y">Y</option>
+														<option value="N"  th:selected="${employeeEdit.vigilanceQuery}==N">N</option>
+														
+													</select>
+												</div>
+													<div class="form-group sm col-md-4">
+													<label class="form-label">Suspension </label> <span
+														class="text-danger">*</span> <select
+														class="form-control required" name="suspention" id="suspention">
+														<option value="">Select Type</option>
+														<option value="Y" th:selected="${employeeEdit.suspention}==Y">Y</option>
+														<option value="N"th:selected="${employeeEdit.suspention}==N">N</option>
+														
+													</select>
+												</div>
+													
+													
+													
+													</div>
+
+										
+									
+						          	</div>
+									<div id="validation-step-2">
+									<div class="form-row">
+										<div class="form-group sm col-md-4">
+											<label class="form-label">Transfer
+											<span class="text-danger">*</span>
+												</label>
+							           <input  type="text"id="transfer"name="transfer" title="Transfer"th:value="${employeeEdit.transfer}"  class="form-control required">
+										</div>
+										<div class="form-group sm col-md-4">
+											<label class="form-label">Order No.
+											<span class="text-danger">*</span>
+												</label>
+							           <input  type="text"id="orderNo"name="orderNo"th:value="${employeeEdit.orderNo}" title="Order No." class="form-control required">
+										</div>
+										 <div class="form-group sm col-md-4">
+												<label class="form-label">Order Date</label>
+												<span class="text-danger">*</span>
+												<input  type="text" id="orderDate" name="orderDate"th:value="${employeeEdit.orderDate}" class="form-control required">
+										          </div>
+									               </div>
+										
+											
+											<div class="form-row">
+											<div class="form-group sm col-md-4">
+													<label class="form-label">Under Rule 7</label> <span
+														class="text-danger">*</span> <select
+														class="form-control required" name="underRule7" id="underRule7">
+														<option value="">Select Type</option>
+														<option value="Y"th:selected="${employeeEdit.underRule7}==Y">Y</option>
+														<option value="N" th:selected="${employeeEdit.underRule7}==N">N</option>
+														
+													</select>
+												</div>
+												<div class="form-group sm col-md-4">
+													<label class="form-label">Under Rule 8</label> <span
+														class="text-danger">*</span> <select
+														class="form-control required" name="underRule8" id="underRule8">
+														<option value="">Select Type</option>
+														<option value="Y"th:selected="${employeeEdit.underRule8}==Y">Y</option>
+														<option value="N"th:selected="${employeeEdit.underRule8}==N">N</option>
+														
+													</select>
+												</div>
+												
+													<div class="form-group sm col-md-4">
+											         <label class="form-label">UAN
+											          <span class="text-danger">*</span></label>
+							                         <input  type="text"id="uan"name="uan" title="uan"th:value="${employeeEdit.uan}" class="form-control required">
+										            </div>
 											</div>
 											
 											<div class="form-row">
-											 <div class="form-group col-md-4">
-												<label for="Emp_Address2">Address2<span class="text-danger">*</span></label>
-												
-												<input type="text" class="form-control required" id="empAddress2" name="empAddress2" th:value="${employeeEdit.empAddress2}">
-											</div>
-											 <div class="form-group col-md-4">
-												<label for="Emp_City">City<span class="text-danger">*</span></label>
-												
-												<input type="text" class="form-control required" id="empCity"  name="empCity" th:value="${employeeEdit.empCity}">
-											</div>
-											 <div class="form-group col-md-4">
-												<label for="Emp_State">State<span class="text-danger">*</span></label>
-												
-												<input type="text" class="form-control required" id="empState" name="empState" th:value="${employeeEdit.empState}">
-											</div>
-											</div>
-											
-											
-											 <div class="form-row">
-											<div class="form-group col-md-4">
-											<label for="Pin_Code">PinCode<span class="text-danger">*</span></label>
-												
-												<input type="text" class="form-control required" id="pinCode"name="pinCode" th:value="${employeeEdit.pinCode}">
-											</div>
-											 <div class="form-group col-md-4">
-												<label for="Emp_Mobile">Mobile<span class="text-danger">*</span></label>
-												
-												<input type="text" class="form-control required" id="empMobile" name="empMobile" th:value="${employeeEdit.empMobile}">
-											</div>
-											<div class="form-group col-md-4">
-												<label for="Emp_Local_Add1">Local Address1
-												<span class="text-danger">*</span></label>
-												<input type="text" class="form-control required" id="empLocalAdd1" name="empLocalAdd1" th:value="${employeeEdit.empLocalAdd1}">
-											</div>
-							       
-							                </div>
-							                
-                          				    <div class="form-row">
-											 <div class="form-group col-md-4">
-												<label for="Emp_Local_Add2">Local Address2
-												<span class="text-danger">*</span></label>
-												<input type="text" class="form-control required" id="empLocalAdd2" name="empLocalAdd2" th:value="${employeeEdit.empLocalAdd2}">
-											</div>
-											 <div class="form-group col-md-4">
-												<label for="Emp_Local_City">City
-												<span class="text-danger">*</span></label>
-												<input type="text" class="form-control required" id="empLocalCity" name="empLocalCity" th:value="${employeeEdit.empLocalCity}" >
-											</div>
-											 <div class="form-group col-md-4">
-												<label for="Emp_Local_State">State
-												<span class="text-danger">*</span></label>
-												<input type="text" class="form-control required" id="empLocalState" name="empLocalState" th:value="${employeeEdit.empLocalState}">
-											</div>
-											</div>
-											
-											
-											
-											  <div class="form-row">
-											 <div class="form-group col-md-4">
-												<label for="Emp_Local_PinCode">PinCode
-												<span class="text-danger">*</span></label>
-												<input type="text" class="form-control required" id="empLocalPinCode"  name="empLocalPinCode"  th:value="${employeeEdit.empLocalPinCode}">
-											</div>
-											 <div class="form-group col-md-4">
-												<label for="Emp_Local_Mobile_No">Mobile<span class="text-danger">*</span></label>
-												<input type="text" class="form-control required" id="empLocalMobileNo" name="empLocalMobileNo"  th:value="${employeeEdit.empLocalMobileNo}">
-											</div>
-							                </div>
-                     
-                        </div>
-                     
-                         <div id="validation-step-4">
-                     
-                         	               <div class="form-row">
-									        <div class="form-group col-md-4">
-											<label for="Comp_Mobile_No">Company Mobile No
-											<span class="text-danger">*</span></label>
-											<input type="text" class="form-control required" id="compMobileNo" name="compMobileNo" th:value="${employeeEdit.compMobileNo}">
-											</div>
-											
-									<div class="form-group col-md-4">
-										<label for="Company_Email">Email
-										<span class="text-danger">*</span></label>
-										<input type="text" class="form-control required" id="companyEmail" name="companyEmail"  th:value="${employeeEdit.companyEmail}">
-										</div>
-										
-									 <div class="form-group col-md-4">
-										 <label for="Prof_Inst">Prof Inst
-										<span class="text-danger">*</span></label>
-										<input type="text" class="form-control required" id="profInst" name="profInst" th:value="${employeeEdit.profInst}">
-										</div>
-							       </div>
-                                 		   <div class="form-row">
-                                           
-                                           <div class="form-group col-md-4">
-												<label for="Local_Travel_Pr_km">Local Travelling Rate Per KM  
-												<span class="text-danger">*</span>
-												</label>
-												<input type="text" class="form-control required" id="localTravelPrkm" name="localTravelPrkm" th:value="${employeeEdit.localTravelPrkm}">
-											</div>
-											 
-											 <div class="form-group col-md-4">
-												<label for="hobbies">Hobbies
-												<span class="text-danger">*</span></label>
-												<input type="text" class="form-control required" id="hobbies" name="hobbies" th:value="${employeeEdit.hobbies}">
-											</div>
-											
-											 <div class="form-group col-md-4">
-												<label for="clubs">Clubs<span class="text-danger">*</span></label>
-												
-												<input type="text" class="form-control required" id="clubs" name="clubs" th:value="${employeeEdit.clubs}">
-											</div>
-                     
-                                </div>
-                     			           <div class="form-row">
-                                      	  <div class="form-group col-md-6">
-												<label for="Reg_Code">Registration code
-												<span class="text-danger">*</span></label>
-												<input type="text" class="form-control required" id="regCode" name="regCode" th:value="${employeeEdit.regCode}">
-											</div>
-											
-											
-											
-										 	<div class="form-group col-md-6">
-												<label for="Estf_Work ">Estf Work
-												<span class="text-danger">*</span>
-												</label>
-												<input type="text" class="form-control required" id="estfWork" name="estfWork" th:value="${employeeEdit.estfWork}">
+											<div class="form-group sm col-md-4">
+											       <label class="form-label">Add Charge
+											       <span class="text-danger">*</span></label>
+							                 <input  type="text"id="addCharge"name="addCharge" th:value="${employeeEdit.addCharge}"title="Add Charge" class="form-control required">
+										     </div>
+										      	<div class="form-group sm col-md-4">
+													<label class="form-label">On Additional Charge</label> <span
+														class="text-danger">*</span> <select
+														class="form-control required" name="onAdditionalCharge" id="onAdditionalCharge">
+														<option value="">Select Type</option>
+														<option value="Y"th:selected="${employeeEdit.onAdditionalCharge}==Y">Y</option>
+														<option value="N"th:selected="${employeeEdit.onAdditionalCharge}==N">N</option>
+														
+													</select>
 												</div>
-                     
-                                 </div>
-                                           <div class="form-row">
-                                           <div class="form-group col-md-6">
-												    <label for="E_Emp_Cat">eEmp_Cat
-												    <span class="text-danger">*</span></label> 
-												    <select id="electronicEmpCat" name="electronicEmpCat" class="form-control required">
-													<option selected> Category</option>
-													<option th:value="Permanent" th:selected="${employeeEdit.electronicEmpCat}==Permanent">Permanent </option>
-													<option th:value="Temporary" th:selected="${employeeEdit.electronicEmpCat}==Temporary">Temporary </option>
-											     	</select>
-											 </div>
-                                               		  
-                                               	
-											 <div class="form-group col-md-6">
-												<label for="electronicCategory ">E-Category
-												<span class="text-danger">*</span>
-												 </label>
-												<input type="text" class="form-control required" id="electronicCategory" name="electronicCategory" th:value="${employeeEdit.electronicCategory}">
+												 	<div class="form-group sm col-md-4">
+											       <label class="form-label">Pan No
+											       <span class="text-danger">*</span></label>
+							                 <input  type="text"id="panNo"name="panNo" title="Pan No" th:value="${employeeEdit.panNo}"class="form-control required">
+										     </div>
 											</div>
-                                               </div>
-                                           <div class="form-group">
-											<label  class="custom-control custom-checkbox required">
 											
-												<input type="checkbox" class="custom-control-input" id=empAgree name="empAgree" th:checked="${employeeEdit.empAgree}">
-												<span class="custom-control-label">I agree with the Terms and Conditions</span>
-											</label>
-										</div>
-										
-										<button type="submit" class="btn btn-primary">Save</button>
-									   <button type="submit"class="btn btn-primary" value="cancel">Cancel</button>
-                     
-                     </div>
+											
+											
+											<div class="form-row">
+											<div class="form-group sm col-md-4">
+											       <label class="form-label">Qualification
+											       <span class="text-danger">*</span></label>
+							                 <input  type="text"id="qualification"name="qualification" th:value="${employeeEdit.qualification}"title="Qualification" class="form-control required">
+										     </div>
+										     <div class="form-group sm col-md-4">
+											       <label class="form-label">Aadhar No
+											       <span class="text-danger">*</span></label>
+							                 <input  type="text"id="aadharNo"name="aadharNo" th:value="${employeeEdit.aadharNo}"title="Aadhar No" class="form-control required">
+										     </div>
+										     <div class="form-group sm col-md-4">
+											       <label class="form-label">Mobile Number
+											       <span class="text-danger">*</span></label>
+							                 <input  type="text"id="mobileNumber"name="mobileNumber"th:value="${employeeEdit.mobileNumber}" title="Mobile Number" class="form-control required">
+										     </div>
+											</div>
+											
+											
+											<div class="form-row">
+											  <div class="form-group sm col-md-4">
+											       <label class="form-label">Email
+											       <span class="text-danger">*</span></label>
+							                 <input  type="text"id="email"name="email" title="Email"th:value="${employeeEdit.email}" class="form-control required">
+										     </div>
+										       	<div class="form-group sm col-md-4">
+													<label class="form-label">Gender</label> <span
+														class="text-danger">*</span> <select
+														class="form-control required" name="gender" id="gender">
+														<option value="">Select Type</option>
+														<option value="MALE"th:selected="${employeeEdit.gender}==MALE">MALE</option>
+														<option value="FEMALE"th:selected="${employeeEdit.gender}==FEMALE">FEMALE</option>
+														
+													</select>
+												</div>
+												
+												  	<div class="form-group sm col-md-4">
+													<label class="form-label">Martial Status</label> <span
+														class="text-danger">*</span> <select
+														class="form-control required" name="martialStatus" id="martialStatus">
+														<option value="">Select Type</option>
+														<option value="MARRIED"th:selected="${employeeEdit.martialStatus}==MARRIED">MARRIED</option>
+														<option value="UNMARRIED"th:selected="${employeeEdit.martialStatus}==UNMARRIED">UNMARRIED  </option>
+														
+													</select>
+												</div>
+											</div>
+											
+											
+										  <div class="form-row">
+											  <div class="form-group sm col-md-4">
+											       <label class="form-label">Address
+											       <span class="text-danger">*</span></label>
+							                 <input  type="text"id="address"name="address"th:value="${employeeEdit.address}" title="Address" class="form-control required">
+										     </div>
+										       <div class="form-group sm col-md-4">
+											       <label class="form-label">City state
+											       <span class="text-danger">*</span></label>
+							                 <input  type="text"id="cityState"name="cityState" th:value="${employeeEdit.cityState}"title="City state" class="form-control required">
+										     </div>
+										       <div class="form-group sm col-md-4">
+											       <label class="form-label">Pin Code
+											       <span class="text-danger">*</span></label>
+							                 <input  type="text"id="pinCode"name="pinCode" th:value="${employeeEdit.pinCode}"title="Pin Code" class="form-control required">
+										     </div>
+											</div>
+
+									</div>
+
+
+									<div id="validation-step-3">
+									 
+									  <div class="form-row">
+									    <div class="form-group sm col-md-4">
+											       <label class="form-label">Name
+											       <span class="text-danger">*</span></label>
+							                 <input  type="text"id="empName"name="empName" title="Name"th:value="${employeeEdit.empName}" class="form-control required">
+										     </div>
+										       <div class="form-group sm col-md-4">
+											       <label class="form-label">Father Name
+											       <span class="text-danger">*</span></label>
+							                 <input  type="text"id="fatherName"name="fatherName" title="Father Name"th:value="${employeeEdit.fatherName}" class="form-control required">
+										     </div>
+										       <div class="form-group sm col-md-4">
+											       <label class="form-label">Address
+											       <span class="text-danger">*</span></label>
+							                 <input  type="text"id="addressArms"name="addressArms"th:value="${employeeEdit.addressArms}"  title="Address" class="form-control required">
+										     </div>
+									  </div>
+									  
+									   <div class="form-row">
+									     <div class="form-group sm col-md-4">
+											       <label class="form-label">District
+											       <span class="text-danger">*</span></label>
+							                 <input  type="text"id="district"name="district"th:value="${employeeEdit.district}"  title="District" class="form-control required">
+										     </div>
+										       <div class="form-group sm col-md-4">
+											       <label class="form-label">State
+											       <span class="text-danger">*</span></label>
+							                 <input  type="text"id="state"name="state"th:value="${employeeEdit.state}"  title="State" class="form-control required">
+										     </div>
+										       <div class="form-group sm col-md-4">
+											       <label class="form-label">Arms Area
+											       <span class="text-danger">*</span></label>
+							                 <input  type="text"id="armsArea"name="armsArea"th:value="${employeeEdit.armsArea}"  title="Arms Area" class="form-control required">
+										     </div>
+									  </div>
+									  
+									   <div class="form-row">
+									     <div class="form-group sm col-md-4">
+											       <label class="form-label">DOI
+											       <span class="text-danger">*</span></label>
+							                 <input  type="text"id="doi"name="doi"th:value="${employeeEdit.doi}" title="DOI" class="form-control required">
+										     </div>
+										       <div class="form-group sm col-md-4">
+											       <label class="form-label">DOV
+											       <span class="text-danger">*</span></label>
+							                 <input  type="text"id="dov"name="dov"th:value="${employeeEdit.dov}" title="DOV" class="form-control required">
+										     </div>
+										       <div class="form-group sm col-md-4">
+											       <label class="form-label">TOA
+											       <span class="text-danger">*</span></label>
+							                 <input  type="text"id="toa"name="toa"th:value="${employeeEdit.toa}" title="TOA" class="form-control required">
+										     </div>
+									  </div>
+									  
+									  
+									    <div class="form-row">
+									        <div class="form-group sm col-md-4">
+											       <label class="form-label">TOP
+											       <span class="text-danger">*</span></label>
+							                 <input  type="text"id="top"name="top"th:value="${employeeEdit.top}" title="TOP" class="form-control required">
+										     </div>
+										         <div class="form-group sm col-md-4">
+											       <label class="form-label">NOL
+											       <span class="text-danger">*</span></label>
+							                 <input  type="text"id="nol"name="nol"th:value="${employeeEdit.nol}" title="NOL" class="form-control required">
+										     </div>
+										         <div class="form-group sm col-md-4">
+											       <label class="form-label">LCD
+											       <span class="text-danger">*</span></label>
+							                 <input  type="text"id="lcd"name="lcd"th:value="${employeeEdit.lcd}" title="LCD" class="form-control required">
+										     </div>
+									    </div>
+									    
+									      <div class="form-row">
+									          <div class="form-group sm col-md-4">
+											       <label class="form-label">Dealer Details
+											       <span class="text-danger">*</span></label>
+							                 <input  type="text"id="dealerDetails"name="dealerDetails"th:value="${employeeEdit.dealerDetails}" title="Dealer Details" class="form-control required">
+										     </div>
+									    </div>
+
+									 <button type="submit" class="btn btn-primary">Save</button>
+									  <button type="submit"class="btn btn-primary" value="cancel">Cancel</button>
+                              </div>
                      
                      
                      
@@ -594,7 +478,7 @@ body {
 								</div>
 	</form>
 			</div>
-				
+				 
 						
 						
 					</div>
@@ -606,13 +490,11 @@ body {
 		</footer>
 		</div>
 		</div>
-		
-		
 	<script>
 		$(function() {
 			
 			
-		$("input[name='dateOfBirth']").daterangepicker({
+		$("input[name='dateOfPosting']").daterangepicker({
 				singleDatePicker: true,
 			    autoApply: true,
 				locale: {
@@ -620,18 +502,36 @@ body {
 		        },
 				showDropdowns: true
 			});
-
-		$("input[name=\"loiDate\"]").daterangepicker({
-				singleDatePicker: true,
-				   autoApply: true,
-				locale: {
-		            format: 'YYYY/MM/DD'
-		        },
-				showDropdowns: true
-			});
+		$("input[name=\"dateOfJoining\"]").daterangepicker({
+			singleDatePicker: true,
+			   autoApply: true,
+			locale: {
+	            format: 'YYYY/MM/DD'
+	        },
+			showDropdowns: true
+		});
+		$("input[name='dateOfRetirement']").daterangepicker({
+			singleDatePicker: true,
+		    autoApply: true,
+			locale: {
+	            format: 'YYYY/MM/DD'
+	        },
+			showDropdowns: true
+		});
+		$("input[name='batchYear']").datepicker({
+			
+		    autoApply: true,
+		    format: "yyyy",
+		    autoclose: true,
+		    minViewMode: "years",
+			locale: {
+	            format: 'YYYY'
+	        },
+			showDropdowns: true
+		});
 			
 		
-			$("input[name=\"dateOfJoining\"]").daterangepicker({
+		$("input[name=\"orderDate\"]").daterangepicker({
 				singleDatePicker: true,
 				   autoApply: true,
 				locale: {
@@ -639,34 +539,8 @@ body {
 		        },
 				showDropdowns: true
 			});
+
 			
-			$("input[name=\"statusDate\"]").daterangepicker({
-				singleDatePicker: true,
-				   autoApply: true,
-				locale: {
-		            format: 'YYYY/MM/DD'
-		        },
-				showDropdowns: true
-			});
-			
-			$("input[name=\"leavingDate\"]").daterangepicker({
-				singleDatePicker: true,
-				   autoApply: true,
-				locale: {
-		            format: 'YYYY/MM/DD'
-		        },
-				showDropdowns: true
-			});
-			
-			
-			$("input[name=\"weddingDate\"]").daterangepicker({
-				singleDatePicker: true,
-				   autoApply: true,
-				locale: {
-		            format: 'YYYY/MM/DD'
-		        },
-				showDropdowns: true
-			});
 			// Datatables basic
 			$('#datatables-basic').DataTable({
 				responsive: true
@@ -682,7 +556,6 @@ body {
 			});
 			datatablesButtons.buttons().container().appendTo("#datatables-buttons_wrapper .col-md-6:eq(0)")
 		});
-		
 		
 	</script>
 	
@@ -748,9 +621,6 @@ function preview_image(event)
  reader.readAsDataURL(event.target.files[0]);
 }
 </script>
- 
-
-
 <script>
 
   $('#loading').show();
@@ -763,6 +633,18 @@ function preview_image(event)
       }
   });
   
+</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+<script>
+ function myFunction(){
+    	  $('#departmentCode').click(function() {
+      	 var name= $('#departmentCode option:selected').text();
+      	$('#depName').val(name);
+      	}); 
+      }
+      
 </script>	
+
 </body>
 </html>
