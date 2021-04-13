@@ -12,6 +12,6 @@ public interface CityService {
 	City findCityById(String id);
 	public void updateCity(City c);
 	public void removeCity(String id);
-	public Page<City> findPaginated(int pageNo, int pageSize, String sortField, String sortDir,List<City> listCity);
+	
 
 }

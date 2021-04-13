@@ -2,22 +2,54 @@ package com.hrms.model;
 
 import java.io.Serializable;
 import java.util.Date;
-
+import javax.persistence.Id;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.Table;
+
 @Entity
-@Table(name ="M_INSURANCE")
+@Table(name = "M_INSURANCE")
 public class Insurance implements Serializable {
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -4529410314829331915L;
+	private static final long serialVersionUID = 236983739265533909L;
+
+	/**
+	 * 
+	 */
+
 @Id
 @Column(name = "INS_CODE")
 private String 	insCode;
+
+@Column(name = "NAME")
+private String name;
+
+@Column(name = "ADD1")
+private String add1;
+
+@Column(name = "ADD2")
+private String add2;
+
+@Column(name = "CITY_CODE")
+private String cityCode;
+
+@Column(name = "CITY_DESC")
+private String cityDesc;
+
+@Column(name = "PHONE")
+private String phoneNo;
+
+@Column(name = "FAX")
+private String fax;
+
+@Column(name = "EMAIL")
+private String email;
+
+@Column(name = "ACTIVE_YN")
+private String active;
 
 @Column(name = "INS_BY",updatable = false)
 private String insBy;
@@ -36,6 +68,64 @@ public String getInsCode() {
 }
 public void setInsCode(String insCode) {
 	this.insCode = insCode;
+}
+
+
+
+public String getName() {
+	return name;
+}
+public void setName(String name) {
+	this.name = name;
+}
+public String getAdd1() {
+	return add1;
+}
+public void setAdd1(String add1) {
+	this.add1 = add1;
+}
+public String getAdd2() {
+	return add2;
+}
+public void setAdd2(String add2) {
+	this.add2 = add2;
+}
+public String getCityCode() {
+	return cityCode;
+}
+public void setCityCode(String cityCode) {
+	this.cityCode = cityCode;
+}
+public String getCityDesc() {
+	return cityDesc;
+}
+public void setCityDesc(String cityDesc) {
+	this.cityDesc = cityDesc;
+}
+
+public String getPhoneNo() {
+	return phoneNo;
+}
+public void setPhoneNo(String phoneNo) {
+	this.phoneNo = phoneNo;
+}
+public String getFax() {
+	return fax;
+}
+public void setFax(String fax) {
+	this.fax = fax;
+}
+public String getEmail() {
+	return email;
+}
+public void setEmail(String email) {
+	this.email = email;
+}
+public String getActive() {
+	return active;
+}
+public void setActive(String active) {
+	this.active = active;
 }
 public String getInsBy() {
 	return insBy;

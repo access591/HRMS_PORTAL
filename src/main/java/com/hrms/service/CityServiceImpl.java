@@ -48,12 +48,5 @@ public class CityServiceImpl implements CityService {
 
 	}
 
-	@Override
-	public Page<City> findPaginated(int pageNo, int pageSize, String sortField, String sortDirection,List<City> listCity) {
-		Sort sort = sortDirection.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortField).ascending() :
-			Sort.by(sortField).descending();
-		Pageable pageable = PageRequest.of(pageNo - 1, pageSize, sort);
-		return this.cityDao.findAll(pageable,listCity);
-	}
-
+	
 }

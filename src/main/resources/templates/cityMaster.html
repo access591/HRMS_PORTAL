@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html xmlns:th="http://www.thymeleaf.org"lang="en">
 
 <script type="text/javascript" th:src="@{/js/settings.js}"></script>
@@ -94,7 +95,7 @@ body {
 								</div>
 							</div>
 						</div>
-	      <div class="col-12">
+	                   <div class="col-12">
 							<div class="card">
 								<div class="card-header">
 								</div>
@@ -102,8 +103,8 @@ body {
 								<table id="datatables-buttons" class = "table table-striped table-responsive-md"aria-describedby="datatables-buttons">
 										<thead>
 											<tr>
-												<th  scope="col"> <a th:href="@{'/page/' + ${currentPage} + '?sortField=cityCode&sortDir=' + ${reverseSortDir}}">
-						                         City code</a>  </th>
+												<th  scope="col">
+						                         City code  </th>
 												<th  scope="col">City Name </th>
 												<th  scope="col">Status</th>
 												<th  scope="col">Action</th>
@@ -111,40 +112,47 @@ body {
 											</tr>
 										</thead>
 										<tbody>
-											<tr  th:each="listOfCity : ${listCity}">
+											<tr  th:each="listOfCity : ${userList}">
 												<td th:text="${listOfCity.cityCode}"></td>
 												<td th:text="${listOfCity.cityName}"></td>
 												<td th:text="${listOfCity.active}"></td>
-												<td><a th:href="@{/editCity/{id}(id=${listOfCity.cityCode})}" class="btn btn-primary"><em class="fa fa-edit"></em></a>
-												<a th:href="@{/deleteCity/{id}(id=${listOfCity.cityCode})}" class="btn btn-primary"onclick="return confirm('Are you sure?')"><em class="fa fa-times"></em></a>
+												<td><a th:href="@{/editCity/{id}(id=${listOfCity.cityCode})}"><em class="fa fa-edit"></em></a>
+												<a th:href="@{/deleteCity/{id}(id=${listOfCity.cityCode})}" onclick="return confirm('Are you sure?')"><em class="fa fa-times"></em></a>
 												</td>
 											</tr>
 										</tbody>
 									
 									</table>
-			<div th:if = "${totalPages > 1}">
-			<div class = "row col-sm-10">
-				<div class = "col-sm-2">
-					Total Rows: [[${totalItems}]] 
+					<div id="pagination">
+                    <th:class="${currentIndex ==1}? 'disabled':''"/>
+                    <span th:if='${currentIndex == 1}'>First</span>
+                    <a th:if='${currentIndex != 1}'
+                       th:href="@{list?page=1}">First</a>
+
+                <th:each th:each="i : ${#numbers.sequence(beginIndex, endIndex)} ">
+                <a th:href="@{/list(page=${i})}" th:text="${i}"
+                th:classappend="${currentPage}==${i}?'activepagenumber':''"></a>
+                </th:each>
+                
+                <th:class="${currentIndex != totalPageCount}? '' : 'disabled'">
+                    <span th:if='${currentIndex == totalPageCount}'>Next</span>
+                    <a th:if='${currentIndex != totalPageCount}'
+                  
+                       th:href="@{'/list?page='+${currentIndex+1}}"
+                       title='Go to next page'>next</a>
+                </th:class>
+                
+                
+                
+
+                   <!--  <th:url value="/list" var="next">
+                        <th:param name="page" value="${page + 1}"/>
+                    </th:url>
+                    <th:if test="${page + 1 <= maxPages}">
+                        <a th:href="@{${next}}" class="pn next">Next</a>
+                    </th:if> -->
+                </div>
 				</div>
-				<div class = "col-sm-1">
-					<span th:each="i: ${#numbers.sequence(1, totalPages)}">
-						<a th:if="${currentPage != i}" th:href="@{'/page/' + ${i}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">[[${i}]]</a>
-						<span th:unless="${currentPage != i}">[[${i}]]</span>  &nbsp; &nbsp;
-					</span>
-				</div>
-				<div class = "col-sm-1">
-					<a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${currentPage + 1}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Next</a>
-					<span th:unless="${currentPage < totalPages}">Next</span>
-				</div>
-				
-				 <div class="col-sm-1">
-    				<a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${totalPages}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Last</a>
-					<span th:unless="${currentPage < totalPages}">Last</span>
-   				 </div>
-			</div>
-		</div>
-								</div>
 								
 							</div>
 						</div>
@@ -158,25 +166,7 @@ body {
 		</footer>
 		</div>
 		</div>
-	<!--  <script>
-		$(function() {
-			// Datatables basic
-			$('#datatables-basic').DataTable({
-				responsive: true
-			});
-			// Datatables with Buttons
-			var datatablesButtons = $('#datatables-buttons').DataTable({
-				  deferRender:true,
-		            scrollCollapse: true,
-		            scroller: false,
-				   responsive: true,
-				   lengthMenu :[[10,20,30,-1 ],['10 rows', '20 rows', '30 rows', 'Show all' ] ],
-					buttons :[]
-			});
-			datatablesButtons.buttons().container().appendTo("#datatables-buttons_wrapper .col-md-6:eq(0)")
-		});
-	</script> -->
-		 
+		
 		
 </body>
 </html>

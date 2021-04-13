@@ -30,8 +30,10 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.hrms.ImageUtil;
+import com.hrms.model.Department;
 import com.hrms.model.Employee;
 import com.hrms.model.MenuModule;
+import com.hrms.service.DepartmentService;
 import com.hrms.service.EmployeeService;
 import com.hrms.service.ModuleService;
 import com.hrms.service.PageMappingService;
@@ -40,8 +42,8 @@ import com.hrms.service.PageMappingService;
 public class EmployeeController {
 	int pageno = 43;
 	String reqPage = "/employeeMaster";
-	@Value("${upoadDir}")
-	private String uploadFolder;
+	@Autowired
+	DepartmentService departmentService;
 	@Autowired
 	PageMappingService pageMappingService;
 	@Autowired
@@ -60,7 +62,8 @@ public class EmployeeController {
 
 		List<Employee> listEmployee = employeeService.getAllEmployees();
 		model.addAttribute("listEmployee", listEmployee);
-
+		List<Department> listDepartment = departmentService.getAllDepartments();
+		model.addAttribute("listDepartment", listDepartment);
 		String userCode = (String) session.getAttribute("username");
 		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
 		if (modules != null) {
@@ -111,7 +114,8 @@ public class EmployeeController {
 	public String editEmployee(@PathVariable("id") String id, Model model, HttpSession session) {
 		int editPageNo = 44;
 		String reqPageedit = "/editEmployee";
-		
+		List<Department> listDepartment = departmentService.getAllDepartments();
+		model.addAttribute("listDepartment", listDepartment);
 		Employee employeeEdit = employeeService.findEmployeeById(id);
 		model.addAttribute("employeeEdit", employeeEdit);
 		model.addAttribute("imgUtil", new ImageUtil());

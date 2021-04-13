@@ -74,71 +74,16 @@ body {
 	              <div class="col-12">
 		<form id="smartwizard-validation" enctype="multipart/form-data" class="wizard wizard-primary" th:action="@{/saveEmployee}" th:object="${employees}" method="post">
 			<ul>
-			<li><a href="#validation-step-1"><br /><small>Employee details</small></a></li>
-			<li><a href="#validation-step-2"><br /><small>Department Details </small></a></li>
-			<li><a href="#validation-step-3"><br /><small>Other Details1</small></a></li>
-			<li><a href="#validation-step-4"><br /><small>Other Details2</small></a></li>
+			<li><a href="#validation-step-1"><br /><small>Officer Details</small></a></li>
+			<li><a href="#validation-step-2"><br /><small>Other Details </small></a></li>
+			<li><a href="#validation-step-3"><br /><small>Arm Licence  Details</small></a></li>
+
 								</ul>
 								<div>
 								
                          <div id="validation-step-1">
-
-										<div class="row">
-											<div class="col-12 col-lg-6">
-												<div class="form-group">
-													<label class="form-label">Emp Code <span
-														class="text-danger">*</span>
-													</label> <input name="empCode" type="text" id="empCode"
-														class="form-control"readonly>
-												</div>
-	
-												<div class="form-group">
-													<label class="form-label">Name <span
-														class="text-danger">*</span>
-													</label>
-													 <input name="empName" id="empName"pattern="^[a-zA-Z\s]*$" type="text"maxlength="50"
-														class="form-control"required aria-required="true"title="Name">
-												</div>
-												<div class="form-group">
-													<label class="form-label">Emp Active</label> <span
-														class="text-danger">*</span> <select
-														class="form-control required" name="eActive" id="eActive">
-														<option value="">Select Type</option>
-														<option value="Y">Yes</option>
-														<option value="N">No</option>
-													</select>
-												</div>
-												<div class="form-group ">
-													<label class="form-label">Company Code <span
-														class="text-danger">*</span>
-													</label> <input name="compCode" type="text" id="compCode"maxlength="25"
-														class="form-control required" title="Company Code">
-												</div>
-
-												<div class="form-group ">
-													<label class="form-label">Date Of Birth</label> <span
-														class="text-danger">*</span> <input 
-														class="form-control required" type="text"id="dateOfBirth"
-														name="dateOfBirth" />
-
-												</div>
-												<div class="form-group">
-													<label class="form-label">Birth State <span
-														class="text-danger">*</span>
-													</label> <input name="birthState"pattern="^[a-zA-Z\s]*$"maxlength="20"  type="text"id="birthState"
-														class="form-control required">
-												</div>
-												<div class="form-group">
-													<label class="form-label">Birth Place <span
-														class="text-danger">*</span>
-													</label> <input  type="text"id="birthPlace"name="birthPlace"pattern="^[a-zA-Z\s]*$"maxlength="20" 
-														class="form-control required">
-												</div>
-											</div>
-
-
-											<div class="col-12 col-lg-6">
-											<div class="form-group">
+											<div class="form-row">
+                                             	<div class="form-group sm col-md-12">
 													<label class="form-label">Upload Image <span
 														class="text-danger">*</span>
 													</label>
@@ -148,448 +93,384 @@ body {
 												</div>
 												
 												
-												<div class="form-group">
-													<label class="form-label">Emp Ref No. <span
-														class="text-danger">*</span>
-													</label> <input name="empRefNo" type="text" id="empRefNo" pattern="\d{1,10}" title="Only digits"maxlength="10" 
-														class="form-control required">
-												</div>
-												<div class="form-group">
-													<label class="form-label">Type</label> <span
-														class="text-danger">*</span> <select
-														class="form-control required" name="empType" id="empType">
-														<option value="">Select Type</option>
-														<option value="P">Permanent</option>
-														<option value="C">Casual</option>
-													</select>
-												</div>
-												<div class="form-group">
-													<label class="form-label">Location Type</label> <span
-														class="text-danger">*</span> <select
-														class="form-control required" name="locationType" id="locationType">
-														<option value="">Select Type</option>
-														<option value="C">Company</option>
-														<option value="G">Govt Office</option>
-													</select>
-												</div>
-
-												<div class="form-group ">
-													<label class="form-label">Weekly Working Days <span
-														class="text-danger">*</span>
-													</label> <input name="weeklyWorkingDay" type="text"id="weeklyWorkingDay" maxlength="2"pattern="\d{1,10}" title="Only digits"
-														class="form-control required">
-												</div>
-
+									     </div>
+										<div class="form-row">
+												<div class="form-group sm col-md-4">
 												
-
-												<div class="form-group">
-													<label class="form-label">Domicile <span
+													<label class="form-label">Employee Code <span
 														class="text-danger">*</span>
-													</label> <input name="domicile" type="text"id="domicile"pattern="^[a-zA-Z\s]*$"maxlength="20"
+													</label> <input name="empCode" type="text" id="empCode"
+														class="form-control"readonly>
+												</div>
+	
+										<div class="form-group sm col-md-4">
+													<label class="form-label">Designation</label> <span
+														class="text-danger">*</span> <select
+														class="form-control required" name="designation" id="designation">
+														<option value="">Select Type</option>
+														<option value="ADGP">ADGP</option>
+														<option value="IG">IG</option>
+														<option value="SP">SP</option>
+														<option value="DCP">DCP</option>
+														<option value="ASP">ASP</option>
+														<option value="AIG">AIG</option>
+													</select>
+												</div>
+											<div class="form-group sm col-md-4">
+													<label class="form-label">Present Posting <span
+														class="text-danger">*</span>
+													</label> <input name="presentPosting" type="text"id="presentPosting"  title="Present Posting"
 														class="form-control required">
 												</div>
+												</div>
+											<div class="form-row">
+													<div class="form-group sm col-md-4">
+													<label class="form-label">Date  Of Retirement</label> <span
+														class="text-danger">*</span> <input 
+														class="form-control required" type="text"id="dateOfRetirement"
+														name="dateOfRetirement" />
 
-											</div>
-										</div>
-									</div>
-									
-                         <div id="validation-step-2">
-									<div class="row">
-										<div class="col-12 col-lg-6">
-										<div class="form-group">
-											<label class="form-label">Card No.    
-												<span class="text-danger">*</span>
-											</label>
-											<input  type="text" class="form-control required" name="cardNo" id="cardNo" maxlength="15" pattern="\d{1,10}" title="Only digits">
-										</div>
-										
-										
-										<div class="form-group">
-											<label class="form-label">Designation
-												<span class="text-danger">*</span>
-											</label>
-											<input  type="text" class="form-control required"  name="empDesignation"id="empDesignation">
-										</div>
-										
-										<div class="form-group">
-											<label class="form-label">Shift Code.
-												<span class="text-danger">*</span>
-											</label>
-											<input  type="text" class="form-control required" name="shiftCode" id="shiftCode">
-										</div>
-										
-										
-										
-										<div class="form-group ">
-											<label class="form-label">Passport No.
-												<span class="text-danger">*</span>
-											</label>
-											<input type="text" class="form-control required"  name="passportNo"  id="passportNo" >
-										</div>
-										
-										
-										 <div class="form-group ">
-												<label class="form-label">LOI</label>
-												<span class="text-danger">*</span>
-												<input  type="text" id="loiDate" name="loiDate" class="form-control required">
-											
-										</div>
-								
-										 <div class="form-group ">
-												<label class="form-label"> Status Date</label>
-												<span class="text-danger">*</span>
-												<input  type="text"  class="form-control required" name="statusDate"id="statusDate">
-										</div>
-									
-										<div class="form-group">
-										<div class="card">
-								       			 <div class="card-header">
-									   			 <h5 class="card-title mb-0">Reason</h5>
-								           		</div>
-								        <div class="card-body">
-											<textarea class="form-control required" rows="2"id="reason" name="reason" placeholder="Textarea"></textarea>
-								       	</div>
-							           </div>
-							           </div>
-										</div>
-										
-									
-									<div class="col-12 col-lg-6">
-											<div class="form-group">
-											<label class="form-label">Department Code.
-												<span class="text-danger">*</span>
-											</label>
-											<input  type="text" name="departmentCode"id="departmentCode" class="form-control required">
-										</div>
-										
-										
-										<div class="form-group">
-											<label class="form-label">Manager  Code.
-												<span class="text-danger">*</span>
-											</label>
-											<input  type="text" name="managerCode" id="managerCode"class="form-control required">
-										</div>
-								
-								
-									<div class="form-group">
-											<label class="form-label">IT Pan No
-												<span class="text-danger">*</span>
-											</label>
-											<input type="text" name="itPanNo"id="itPanNo" class="form-control required">
-										</div>
-								
-								
-									<div class="form-group">
-											<label class="form-label">UAN  No.
-												<span class="text-danger">*</span>
-											</label>
-											<input  type="text" name="uanNo" id="uanNo"class="form-control required">
-										</div>
-								
-								 
-											
-									    <div class="form-group ">
+												</div>
+
+											<div class="form-group sm col-md-4">
+													<label class="form-label">Date  Of Posting </label> <span
+														class="text-danger">*</span> <input 
+														class="form-control required" type="text"id="dateOfPosting"
+														name="dateOfPosting" />
+
+												</div>
+												 <div class="form-group sm col-md-4">
 												<label class="form-label">Date Of Joining</label>
 												<span class="text-danger">*</span>
-												<input  type="text" name="dateOfJoining" id="dateOfJoining"class="form-control required">
-											
-										</div>
-										
-										 <div class="form-group ">
-												<label class="form-label"> Leaving Date </label>
-												<span class="text-danger">*</span>
-												<input class="form-control required" type="text" name="leavingDate" id="leavingDate" >
-										</div>
-								</div>	
-						   </div>
-						</div>
-
-                         <div id="validation-step-3">
-											
-										   <div class="form-row">
-												<div class="form-group sm col-md-4">
-												<label for="inputSex">Gender
-												<span class="text-danger">*</span>
-												</label>
-												<select id="empGender"name="empGender" class="form-control required">
-													<option selected>Choose...Your Gender </option>
-													<option value="Male">Male</option>
-														<option  value="Female">Female</option>
-												</select>
-											   </div>
-											    <div class="form-group sm col-md-4">
-												<label for="inputHieght">Height
-												<span class="text-danger">*</span>
-												</label>
-												<input type="text" class="form-control required" name="empHeight" id="empHeight">
-											</div>
-											    <div class="form-group col-md-4">
-												<label for="identiMark">identity Mark
-												<span class="text-danger">*</span>
-												</label>
-												<input type="text" class="form-control required" Name="identityMark" id="identityMark">
-											</div>
-										 </div>
-										<div class="form-row">
-										    	<div class="form-group col-md-4">
-												<label for="bloodGroup">Blood Group
-												<span class="text-danger">*</span>
-												</label> <input
-													type="text" class="form-control required"  id="bloodGroup"  name="bloodGroup">
-											</div>
-											    <div class="form-group col-md-4">
-												<label for="maritalStatus:">Marital Status
-												<span class="text-danger">*</span>
-												</label> <select
-													id="maritalStatus" 	Name="maritalStatus" class="form-control required">
-													<option selected> Marital Status</option>
-													<option  value="Single">Single</option>
-													<option  value="Married">Married</option>
-												</select>
-											</div>
-											    <div class="form-group col-md-4">
-												<label for="preDisease">Pre Disease
-												<span class="text-danger">*</span>
-												</label> <select
-													id="preDisease"  name="preDisease"  class="form-control required">
-													<option selected>Choose..Your Disease</option>
-													<option  value="Yes"> Yes</option>
-													<option value="No">No</option>
-												</select>
-											</div>
-										 </div>
-										
-										<div class="form-row">
-											<div class="form-group col-md-4">
-											<label for="weddingDate">Wedding Date
-											<span class="text-danger">*</span>
-											</label>
-											<input type="text" class="form-control required"id="weddingDate" name="weddingDate">
-
-											</div>
-											<div class="form-group col-md-4">
-												<label for="noChild">No. Child
-												<span class="text-danger">*</span>
-												</label>
-												
-												<input type="text" class="form-control required" id="noOfChild" name="noOfChild">
-											</div>
-											<div class="form-group col-md-4">
-												<label for="caste">Caste
-												<span class="text-danger">*</span>
-												</label>
-												
-												<input type="text" class="form-control required" id="empCaste" name="empCaste">
-											</div>
-										</div>
-							
-							                <div class="form-row">
-										   <div class="form-group col-md-4">
-												<label for="religion">Religion
-												<span class="text-danger">*</span>
-												</label>
-												
-												<input type="text" class="form-control required" id="empReligion" name="empReligion">
-											</div>
-							               <div class="form-group col-md-4">
-												<label for="nationality">Nationality
-												<span class="text-danger">*</span>
-												</label>
-												
-												<input type="text" class="form-control required" id="empNationality" name="empNationality">
-											</div>
-										   <div class="form-group col-md-4">
-												<label for="companyCode">Company Code
-												<span class="text-danger">*</span>
-												</label>
-												
-												<input type="text" class="form-control required"  name="companyCode" id="companyCode">
-											</div>
-							     		   </div>
-							     			 
-							     			 
-							                <div class="form-row">
-							                 <div class="form-group col-md-4">
-												<label for="mediclaim">Mediclaim
-												<span class="text-danger">*</span>
-												</label>
-												<input type="text" class="form-control required" id="mediclaim" name="mediclaim">
-											</div>
-											<div class="form-group col-md-4">
-												<label for="gpa">GPA
-												<span class="text-danger">*</span>
-												</label>
-												<input type="text" class="form-control required" id="gpa"  name="gpa" >
-											</div>
-							        		<div class="form-group col-md-4">
-												<label for="Emp_Address1">Address1<span class="text-danger">*</span></label>
-												<input type="text" class="form-control required" id="empAddress1" name="empAddress1">
+												<input  type="text" id="dateOfJoining" name="dateOfJoining" class="form-control required">
+										          </div>
+										          
 												</div>
+											
+											<div class="form-row">
+									              <div class="form-group sm col-md-4">
+												<label class="form-label">Department</label>
+												<label style="color: red">*</label>
+												<select class="form-control select2"onchange="myFunction()" name="departmentCode"id="departmentCode" required aria-required="true">
+												 <option value="">Select Department</option>
+												<option th:each="dep :${listDepartment}" th:value="${dep.getDepartmentCode()}" th:text="${dep.getDeptName()}"></option>
+											     	</select>
+											     
+											   <input type="hidden" class="form-control" id="depName" name="depName" size="50" > 
+											</div>
+											
+												
+												<div class="form-group sm col-md-4">
+													<label class="form-label">Employee Pay Code. <span
+														class="text-danger">*</span>
+													</label> <input name="employeePayeeCode" type="text" id="employeePayeeCode" pattern="\d{1,10}" title="Only digits"maxlength="10" 
+														class="form-control required">
+												</div>
+												
+												<div class="form-group sm col-md-4">
+												
+													<label class="form-label">Batch Year</label> <span
+														class="text-danger">*</span> 
+														<input class="form-control required" type="text"id="batchYear"name="batchYear"/>
+
+												</div>
+												</div>
+									
+												
+												
+											<div class="form-row">
+												
+													<div class="form-group sm col-md-4">
+													<label class="form-label">Type</label> <span
+														class="text-danger">*</span> <select
+														class="form-control required" name="typeCourtDepartment" id="typeCourtDepartment">
+														<option value="">Select Type</option>
+														<option value="C">Court</option>
+														<option value="D">Department)</option>
+													</select>
+												</div>
+												<div class="form-group sm col-md-4">
+													<label class="form-label">Officer Type</label> <span
+														class="text-danger">*</span> <select
+														class="form-control required" name="officerType" id="officerType">
+														<option value="">Select Type</option>
+														<option value="IPS">IPS</option>
+														<option value="HPS">HPS</option>
+														<option value="DDA">DDA</option>
+														<option value="DA">DA</option>
+														<option value="ADA">ADA</option>
+													</select>
+												</div>
+													
+												<div class="form-group sm col-md-4">
+													<label class="form-label">Vrs <span
+														class="text-danger">*</span>
+													</label> <input name=vrs type="text" id="vrs" maxlength="50" 
+														class="form-control required">
+												</div>
+													
+												</div>
+													<div class="form-row">
+													<div class="form-group sm col-md-4">
+													<label class="form-label">Vigilance Query</label> <span
+														class="text-danger">*</span> <select
+														class="form-control required" name="vigilanceQuery" id="vigilanceQuery">
+														<option value="">Select Type</option>
+														<option value="Y">Y</option>
+														<option value="N">N</option>
+														
+													</select>
+												</div>
+													<div class="form-group sm col-md-4">
+													<label class="form-label">Suspension </label> <span
+														class="text-danger">*</span> <select
+														class="form-control required" name="suspention" id="suspention">
+														<option value="">Select Type</option>
+														<option value="Y">Y</option>
+														<option value="N">N</option>
+														
+													</select>
+												</div>
+													
+													
+													
+													</div>
+
+										
+									
+						          	</div>
+									<div id="validation-step-2">
+									<div class="form-row">
+										<div class="form-group sm col-md-4">
+											<label class="form-label">Transfer
+											<span class="text-danger">*</span>
+												</label>
+							           <input  type="text"id="transfer"name="transfer" title="Transfer" class="form-control required">
+										</div>
+										<div class="form-group sm col-md-4">
+											<label class="form-label">Order No.
+											<span class="text-danger">*</span>
+												</label>
+							           <input  type="text"id="orderNo"name="orderNo" title="Order No." class="form-control required">
+										</div>
+										 <div class="form-group sm col-md-4">
+												<label class="form-label">Order Date</label>
+												<span class="text-danger">*</span>
+												<input  type="text" id="orderDate" name="orderDate" class="form-control required">
+										          </div>
+									               </div>
+										
+											
+											<div class="form-row">
+											<div class="form-group sm col-md-4">
+													<label class="form-label">Under Rule 7</label> <span
+														class="text-danger">*</span> <select
+														class="form-control required" name="underRule7" id="underRule7">
+														<option value="">Select Type</option>
+														<option value="Y">Y</option>
+														<option value="N">N</option>
+														
+													</select>
+												</div>
+												<div class="form-group sm col-md-4">
+													<label class="form-label">Under Rule 8</label> <span
+														class="text-danger">*</span> <select
+														class="form-control required" name="underRule8" id="underRule8">
+														<option value="">Select Type</option>
+														<option value="Y">Y</option>
+														<option value="N">N</option>
+														
+													</select>
+												</div>
+												
+													<div class="form-group sm col-md-4">
+											         <label class="form-label">UAN
+											          <span class="text-danger">*</span></label>
+							                         <input  type="text"id="uan"name="uan" title="uan" class="form-control required">
+										            </div>
 											</div>
 											
 											<div class="form-row">
-											 <div class="form-group col-md-4">
-												<label for="Emp_Address2">Address2<span class="text-danger">*</span></label>
-												
-												<input type="text" class="form-control required" id="empAddress2" name="empAddress2">
-											</div>
-											 <div class="form-group col-md-4">
-												<label for="Emp_City">City<span class="text-danger">*</span></label>
-												
-												<input type="text" class="form-control required" id="empCity"  name="empCity">
-											</div>
-											 <div class="form-group col-md-4">
-												<label for="Emp_State">State<span class="text-danger">*</span></label>
-												
-												<input type="text" class="form-control required" id="empState" name="empState">
-											</div>
-											</div>
-											
-											
-											 <div class="form-row">
-											<div class="form-group col-md-4">
-											<label for="Pin_Code">PinCode<span class="text-danger">*</span></label>
-												
-												<input type="text" class="form-control required" id="pinCode"name="pinCode">
-											</div>
-											 <div class="form-group col-md-4">
-												<label for="Emp_Mobile">Mobile<span class="text-danger">*</span></label>
-												
-												<input type="text" class="form-control required" id="empMobile" name="empMobile">
-											</div>
-											<div class="form-group col-md-4">
-												<label for="Emp_Local_Add1">Local Address1
-												<span class="text-danger">*</span></label>
-												<input type="text" class="form-control required" id="empLocalAdd1" name="empLocalAdd1">
-											</div>
-							       
-							                </div>
-							                
-                          				    <div class="form-row">
-											 <div class="form-group col-md-4">
-												<label for="Emp_Local_Add2">Local Address2
-												<span class="text-danger">*</span></label>
-												<input type="text" class="form-control required" id="empLocalAdd2" name="empLocalAdd2">
-											</div>
-											 <div class="form-group col-md-4">
-												<label for="Emp_Local_City">City
-												<span class="text-danger">*</span></label>
-												<input type="text" class="form-control required" id="empLocalCity" name="empLocalCity" >
-											</div>
-											 <div class="form-group col-md-4">
-												<label for="Emp_Local_State">State
-												<span class="text-danger">*</span></label>
-												<input type="text" class="form-control required" id="empLocalState" name="empLocalState">
-											</div>
-											</div>
-											
-											
-											
-											  <div class="form-row">
-											 <div class="form-group col-md-4">
-												<label for="Emp_Local_PinCode">PinCode
-												<span class="text-danger">*</span></label>
-												<input type="text" class="form-control required" id="empLocalPinCode"  name="empLocalPinCode">
-											</div>
-											 <div class="form-group col-md-4">
-												<label for="Emp_Local_Mobile_No">Mobile<span class="text-danger">*</span></label>
-												<input type="text" class="form-control required" id="empLocalMobileNo" name="empLocalMobileNo">
-											</div>
-							                </div>
-                     
-                        </div>
-                     
-                         <div id="validation-step-4">
-                     
-                         	               <div class="form-row">
-									        <div class="form-group col-md-4">
-											<label for="Comp_Mobile_No">Company Mobile No
-											<span class="text-danger">*</span></label>
-											<input type="text" class="form-control required" id="compMobileNo" name="compMobileNo">
-											</div>
-											
-									<div class="form-group col-md-4">
-										<label for="Company_Email">Email
-										<span class="text-danger">*</span></label>
-										<input type="text" class="form-control required" id="companyEmail" name="companyEmail">
-										</div>
-										
-									 <div class="form-group col-md-4">
-										 <label for="Prof_Inst">Prof Inst
-										<span class="text-danger">*</span></label>
-										<input type="text" class="form-control required" id="profInst" name="profInst">
-										</div>
-							       </div>
-                                 		   <div class="form-row">
-                                           
-                                           <div class="form-group col-md-4">
-												<label for="Local_Travel_Pr_km">Local Travelling Rate Per KM  
-												<span class="text-danger">*</span>
-												</label>
-												<input type="text" class="form-control required" id="localTravelPrkm" name="localTravelPrkm">
-											</div>
-											 
-											 <div class="form-group col-md-4">
-												<label for="hobbies">Hobbies
-												<span class="text-danger">*</span></label>
-												<input type="text" class="form-control required" id="hobbies" name="hobbies">
-											</div>
-											
-											 <div class="form-group col-md-4">
-												<label for="clubs">Clubs<span class="text-danger">*</span></label>
-												
-												<input type="text" class="form-control required" id="clubs" name="clubs">
-											</div>
-                     
-                                </div>
-                     			           <div class="form-row">
-                                      	  <div class="form-group col-md-6">
-												<label for="Reg_Code">Registration code
-												<span class="text-danger">*</span></label>
-												<input type="text" class="form-control required" id="regCode" name="regCode">
-											</div>
-											
-											
-											
-										 	<div class="form-group col-md-6">
-												<label for="Estf_Work ">Estf Work
-												<span class="text-danger">*</span>
-												</label>
-												<input type="text" class="form-control required" id="estfWork" name="estfWork">
+											<div class="form-group sm col-md-4">
+											       <label class="form-label">Add Charge
+											       <span class="text-danger">*</span></label>
+							                 <input  type="text"id="addCharge"name="addCharge" title="Add Charge" class="form-control required">
+										     </div>
+										      	<div class="form-group sm col-md-4">
+													<label class="form-label">On Additional Charge</label> <span
+														class="text-danger">*</span> <select
+														class="form-control required" name="onAdditionalCharge" id="onAdditionalCharge">
+														<option value="">Select Type</option>
+														<option value="Y">Y</option>
+														<option value="N">N</option>
+														
+													</select>
 												</div>
-                     
-                                 </div>
-                                           <div class="form-row">
-                                           <div class="form-group col-md-6">
-												    <label for="E_Emp_Cat">eEmp_Cat
-												    <span class="text-danger">*</span></label> 
-												    <select id="electronicEmpCat" name="electronicEmpCat" class="form-control required">
-													<option selected> Category</option>
-													<option th:value="Permanent">Permanent </option>
-													<option th:value="Temporary">Temporary </option>
-											     	</select>
-											 </div>
-                                               		  
-                                               	
-											 <div class="form-group col-md-6">
-												<label for="E_Category ">E-Category
-												<span class="text-danger">*</span>
-												 </label>
-												<input type="text" class="form-control required" id="electronicCategory" name="electronicCategory">
+												 	<div class="form-group sm col-md-4">
+											       <label class="form-label">Pan No
+											       <span class="text-danger">*</span></label>
+							                 <input  type="text"id="panNo"name="panNo" title="Pan No" class="form-control required">
+										     </div>
 											</div>
-                                               </div>
-                                           <div class="form-group">
-											<label  class="custom-control custom-checkbox required">
 											
-												<input type="checkbox" class="custom-control-input" id=empAgree name="empAgree">
-												<span class="custom-control-label">I agree with the Terms and Conditions</span>
-											</label>
-										</div>
+											
+											
+											<div class="form-row">
+											<div class="form-group sm col-md-4">
+											       <label class="form-label">Qualification
+											       <span class="text-danger">*</span></label>
+							                 <input  type="text"id="qualification"name="qualification" title="Qualification" class="form-control required">
+										     </div>
+										     <div class="form-group sm col-md-4">
+											       <label class="form-label">Aadhar No
+											       <span class="text-danger">*</span></label>
+							                 <input  type="text"id="aadharNo"name="aadharNo" title="Aadhar No" class="form-control required">
+										     </div>
+										     <div class="form-group sm col-md-4">
+											       <label class="form-label">Mobile Number
+											       <span class="text-danger">*</span></label>
+							                 <input  type="text"id="mobileNumber"name="mobileNumber" title="Mobile Number" class="form-control required">
+										     </div>
+											</div>
+											
+											
+											<div class="form-row">
+											  <div class="form-group sm col-md-4">
+											       <label class="form-label">Email
+											       <span class="text-danger">*</span></label>
+							                 <input  type="text"id="email"name="email" title="Email" class="form-control required">
+										     </div>
+										       	<div class="form-group sm col-md-4">
+													<label class="form-label">Gender</label> <span
+														class="text-danger">*</span> <select
+														class="form-control required" name="gender" id="gender">
+														<option value="">Select Type</option>
+														<option value="MALE">MALE</option>
+														<option value="FEMALE">FEMALE</option>
+														
+													</select>
+												</div>
+												
+												  	<div class="form-group sm col-md-4">
+													<label class="form-label">Martial Status</label> <span
+														class="text-danger">*</span> <select
+														class="form-control required" name="martialStatus" id="martialStatus">
+														<option value="">Select Type</option>
+														<option value="MARRIED">MARRIED</option>
+														<option value="UNMARRIED ">UNMARRIED  </option>
+														
+													</select>
+												</div>
+											</div>
+											
+											
+										  <div class="form-row">
+											  <div class="form-group sm col-md-4">
+											       <label class="form-label">Address
+											       <span class="text-danger">*</span></label>
+							                 <input  type="text"id="address"name="address" title="Address" class="form-control required">
+										     </div>
+										       <div class="form-group sm col-md-4">
+											       <label class="form-label">City state
+											       <span class="text-danger">*</span></label>
+							                 <input  type="text"id="cityState"name="cityState" title="City state" class="form-control required">
+										     </div>
+										       <div class="form-group sm col-md-4">
+											       <label class="form-label">Pin Code
+											       <span class="text-danger">*</span></label>
+							                 <input  type="text"id="pinCode"name="pinCode" title="Pin Code" class="form-control required">
+										     </div>
+											</div>
+
+									</div>
+
+
+									<div id="validation-step-3">
+									 
+									  <div class="form-row">
+									    <div class="form-group sm col-md-4">
+											       <label class="form-label">Name
+											       <span class="text-danger">*</span></label>
+							                 <input  type="text"id="empName"name="empName" title="Name" class="form-control required">
+										     </div>
+										       <div class="form-group sm col-md-4">
+											       <label class="form-label">Father Name
+											       <span class="text-danger">*</span></label>
+							                 <input  type="text"id="fatherName"name="fatherName" title="Father Name" class="form-control required">
+										     </div>
+										       <div class="form-group sm col-md-4">
+											       <label class="form-label">Address
+											       <span class="text-danger">*</span></label>
+							                 <input  type="text"id="addressArms"name="addressArms" title="Address" class="form-control required">
+										     </div>
+									  </div>
+									  
+									   <div class="form-row">
+									     <div class="form-group sm col-md-4">
+											       <label class="form-label">District
+											       <span class="text-danger">*</span></label>
+							                 <input  type="text"id="district"name="district" title="District" class="form-control required">
+										     </div>
+										       <div class="form-group sm col-md-4">
+											       <label class="form-label">State
+											       <span class="text-danger">*</span></label>
+							                 <input  type="text"id="state"name="state" title="State" class="form-control required">
+										     </div>
+										       <div class="form-group sm col-md-4">
+											       <label class="form-label">Arms Area
+											       <span class="text-danger">*</span></label>
+							                 <input  type="text"id="armsArea"name="armsArea" title="Arms Area" class="form-control required">
+										     </div>
+									  </div>
+									  
+									   <div class="form-row">
+									     <div class="form-group sm col-md-4">
+											       <label class="form-label">DOI
+											       <span class="text-danger">*</span></label>
+							                 <input  type="text"id="doi"name="doi" title="DOI" class="form-control required">
+										     </div>
+										       <div class="form-group sm col-md-4">
+											       <label class="form-label">DOV
+											       <span class="text-danger">*</span></label>
+							                 <input  type="text"id="dov"name="dov" title="DOV" class="form-control required">
+										     </div>
+										       <div class="form-group sm col-md-4">
+											       <label class="form-label">TOA
+											       <span class="text-danger">*</span></label>
+							                 <input  type="text"id="toa"name="toa" title="TOA" class="form-control required">
+										     </div>
+									  </div>
+									  
+									  
+									    <div class="form-row">
+									        <div class="form-group sm col-md-4">
+											       <label class="form-label">TOP
+											       <span class="text-danger">*</span></label>
+							                 <input  type="text"id="top"name="top" title="TOP" class="form-control required">
+										     </div>
+										         <div class="form-group sm col-md-4">
+											       <label class="form-label">NOL
+											       <span class="text-danger">*</span></label>
+							                 <input  type="text"id="nol"name="nol" title="NOL" class="form-control required">
+										     </div>
+										         <div class="form-group sm col-md-4">
+											       <label class="form-label">LCD
+											       <span class="text-danger">*</span></label>
+							                 <input  type="text"id="lcd"name="lcd" title="LCD" class="form-control required">
+										     </div>
+									    </div>
+									    
+									      <div class="form-row">
+									          <div class="form-group sm col-md-4">
+											       <label class="form-label">Dealer Details
+											       <span class="text-danger">*</span></label>
+							                 <input  type="text"id="dealerDetails"name="dealerDetails" title="Dealer Details" class="form-control required">
+										     </div>
+									    </div>
+
+									 <button type="submit" class="btn btn-primary">Save</button>
 										
-										<button type="submit" class="btn btn-primary">Save</button>
-							
-                     
-                     </div>
+                              </div>
                      
                      
                      
@@ -606,7 +487,6 @@ body {
 										<thead>
 											<tr>
 												<th scope="col">Emp id</th>
-												<th scope="col">Emp Name </th>
 												<th scope="col">Date Of Joining</th>
 												<th scope="col">employee images</th>
 												<th scope="col">Action</th>
@@ -616,17 +496,13 @@ body {
 										<tbody>
 											<tr  th:each="listemployee : ${listEmployee}">
 												<td th:text="${listemployee.empCode}"></td>
-												<td th:text="${listemployee.empName}"></td>
 												<td th:text="${listemployee.dateOfJoining}"></td>
 												
 											<td><img alt="th" th:src="@{'data:image/jpeg;base64,'+${imgUtil.getImgData(listemployee.imageProfile)}}" width="48" height="48"class="rounded-circle mr-2"></td>
 												<!-- <td><img th:src="@{'/img/'+${listemployee.empImg}}" alt="Avatar" width="48" height="48"class="rounded-circle mr-2" /> </td> -->
 												<td><a th:href="@{/editEmployee/{id}(id=${listemployee.empCode})}"><em class="fa fa-edit"></em></a>
 												<a th:href="@{/deleteEmployee/{id}(id=${listemployee.empCode})}" onclick="return confirm('Are you sure?')"><em class="fa fa-times"></em></a>
-												
-												
-												
-												
+
 												</td>
 											</tr>
 										</tbody>
@@ -649,7 +525,7 @@ body {
 		$(function() {
 			
 			
-		$("input[name='dateOfBirth']").daterangepicker({
+		$("input[name='dateOfPosting']").daterangepicker({
 				singleDatePicker: true,
 			    autoApply: true,
 				locale: {
@@ -657,18 +533,36 @@ body {
 		        },
 				showDropdowns: true
 			});
-
-		$("input[name=\"loiDate\"]").daterangepicker({
-				singleDatePicker: true,
-				   autoApply: true,
-				locale: {
-		            format: 'YYYY/MM/DD'
-		        },
-				showDropdowns: true
-			});
+		$("input[name=\"dateOfJoining\"]").daterangepicker({
+			singleDatePicker: true,
+			   autoApply: true,
+			locale: {
+	            format: 'YYYY/MM/DD'
+	        },
+			showDropdowns: true
+		});
+		$("input[name='dateOfRetirement']").daterangepicker({
+			singleDatePicker: true,
+		    autoApply: true,
+			locale: {
+	            format: 'YYYY/MM/DD'
+	        },
+			showDropdowns: true
+		});
+		$("input[name='batchYear']").datepicker({
+			
+		    autoApply: true,
+		    format: "yyyy",
+		    autoclose: true,
+		    minViewMode: "years",
+			locale: {
+	            format: 'YYYY'
+	        },
+			showDropdowns: true
+		});
 			
 		
-			$("input[name=\"dateOfJoining\"]").daterangepicker({
+		$("input[name=\"orderDate\"]").daterangepicker({
 				singleDatePicker: true,
 				   autoApply: true,
 				locale: {
@@ -676,34 +570,8 @@ body {
 		        },
 				showDropdowns: true
 			});
+
 			
-			$("input[name=\"statusDate\"]").daterangepicker({
-				singleDatePicker: true,
-				   autoApply: true,
-				locale: {
-		            format: 'YYYY/MM/DD'
-		        },
-				showDropdowns: true
-			});
-			
-			$("input[name=\"leavingDate\"]").daterangepicker({
-				singleDatePicker: true,
-				   autoApply: true,
-				locale: {
-		            format: 'YYYY/MM/DD'
-		        },
-				showDropdowns: true
-			});
-			
-			
-			$("input[name=\"weddingDate\"]").daterangepicker({
-				singleDatePicker: true,
-				   autoApply: true,
-				locale: {
-		            format: 'YYYY/MM/DD'
-		        },
-				showDropdowns: true
-			});
 			// Datatables basic
 			$('#datatables-basic').DataTable({
 				responsive: true
@@ -796,6 +664,18 @@ function preview_image(event)
       }
   });
   
+</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+<script>
+ function myFunction(){
+    	  $('#departmentCode').click(function() {
+      	 var name= $('#departmentCode option:selected').text();
+      	$('#depName').val(name);
+      	}); 
+      }
+      
 </script>	
+
 </body>
 </html>

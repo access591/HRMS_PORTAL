@@ -145,12 +145,30 @@ body {
 								</div>
 							</div>
 						</div>
+
+
 						<div class="col-12">
 							<div class="card">
-								<div class="card-header"></div>
+								<div class="card-header">
+									<div class="col-sm-12" align="right">
+										<span class=" btn btn-primary pull-left" id="selectedTREN"
+											style="background-color: rgb(150, 148, 255)"> 
+											<a target="_blank" id="selectedHref" href="/reportLeaveDetail"style="color: black;">
+											 <i class="align-middle mr-2 fas fa-fw fa-arrow-circle-down"style="color: rgb(0, 39, 95);"></i> Generate Report
+										    </a></span> <span> 
+										<select id="reportgenrate" name="reportgenrate"
+											class="custom-select flex-grow-1" style="width: 65px;">
+												<option value="P">PDF</option>
+												<option value="E">EXCEL</option>
+										</select>
+										</span>
+									</div>
+
+								</div>
 								<div class="card-body">
-									<table id="example"aria-describedby="example"class="table table-striped dataTable dtr-inline collapsed"
-										style="width: 100%;padding: 0; margin: 0;">
+									<table id="example" aria-describedby="example"
+										class="table table-striped dataTable dtr-inline collapsed"
+										style="width: 100%; padding: 0; margin: 0;">
 										<thead>
 											<tr>
 												<th scope="col">Code</th>
@@ -163,13 +181,13 @@ body {
 										</thead>
 										<tbody>
 											<tr th:each="listOfCity : ${listLeaveDetail}">
-												<td th:text="${listOfCity.lvCode}"></td>
+												<td id="lvCode" th:text="${listOfCity.lvCode}"></td>
 												<td th:text="${listOfCity.leaveType}"></td>
 												<td th:text="${listOfCity.totalLeave}"></td>
 												<td th:text="${listOfCity.leaveStatus}"></td>
 
-												<td>
-												<a th:href="@{/editLeaveDetail/{id}(id=${listOfCity.lvCode})}"><em
+												<td><a
+													th:href="@{/editLeaveDetail/{id}(id=${listOfCity.lvCode})}"><em
 														class="align-middle fas fa-fw fa-pen"></em></a> <a
 													th:href="@{/deleteLeaveDetail/{id}(id=${listOfCity.lvCode})}"
 													onclick="return confirm('Are you sure?')"><em
@@ -204,6 +222,34 @@ body {
 			});
 		});
 	</script>
+	<script type="text/javascript">
+	$(document)
+			.ready(
+					function() {
+						
+						
+						
+						
+						$("#selectedTREN")
+								.click(
+										function() {
+											
+										
+											var docFormat = $('#reportgenrate')
+													.val();
+											var url = "./";
+											$("#selectedHref")
+											
+													.attr(
+															"href",url+
+															"reportLeaveDetail?_ex="+docFormat
+																	);
+											
+										
+										});
+						
+					});
+</script>
 
 
 </body>

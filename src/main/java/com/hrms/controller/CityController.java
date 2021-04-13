@@ -2,23 +2,28 @@ package com.hrms.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
+import org.springframework.beans.support.PagedListHolder;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.hrms.model.City;
 import com.hrms.model.MenuModule;
 import com.hrms.service.CityService;
 import com.hrms.service.ModuleService;
 import com.hrms.service.PageMappingService;
+
 
 @Controller
 public class CityController {
@@ -37,19 +42,50 @@ public class CityController {
  * @param session
  * @return
  */
-	@GetMapping("/cityMaster")
-	public String cityMaster(Model model, HttpSession session) {
-		
-		String userCode = (String) session.getAttribute("username");
-		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
-		if (modules != null) {
-			model.addAttribute("modules", modules);
-		}
-		
-		session.setAttribute("username", session.getAttribute("username"));
+	@RequestMapping(value="/cityMaster")
+    public String productsRedirect(HttpServletRequest request, Model model, HttpSession
+    		  session){
+		 String userCode = (String) session.getAttribute("username"); List<MenuModule>
+		 modules = moduleService.getAllModulesList(userCode); if (modules != null) {
+		 model.addAttribute("modules", modules); } 
+		 
+		 return "redirect:getAllCities";
+    }
+  
+	 @RequestMapping(value = {"getAllCities", "/", "/list"})
+	    public ModelAndView getAllCities(@RequestParam(required = false) Integer page,HttpSession  session,Model model) {
+		 String userCode = (String) session.getAttribute("username");
+			List<MenuModule> modules = moduleService.getAllModulesList(userCode);
+			if (modules != null) {
+				model.addAttribute("modules", modules);
+			}
+	        List<City> userList =cityService.getAllCities();
+	        ModelAndView modelAndView = new ModelAndView("cityMaster", "userList", userList);
+	        PagedListHolder<City> pagedListHolder = new PagedListHolder<>(userList);
+	        pagedListHolder.setPageSize(5);
+	        modelAndView.addObject("maxPages", pagedListHolder.getPageCount());
+	        if(page==null || page < 1 || page > pagedListHolder.getPageCount())page=1;
 
-		 return findPaginated(1, "cityCode", "asc", model);
-	}
+	        modelAndView.addObject("page", page);
+	        if(page == null || page < 1 || page > pagedListHolder.getPageCount()){
+	            pagedListHolder.setPage(0);
+	            modelAndView.addObject("userList", pagedListHolder.getPageList());
+	        }
+	        else if(page <= pagedListHolder.getPageCount()) {
+	            pagedListHolder.setPage(page-1);
+	            modelAndView.addObject("userList", pagedListHolder.getPageList());
+	        }
+	       
+	    	int current = pagedListHolder.getPage() + 1;
+	    	int begin = Math.max(1, current - 5);
+	    	int end = Math.min(begin + 5, pagedListHolder.getPageCount());
+	    	int totalPageCount = pagedListHolder.getPageCount();
+	    	  modelAndView.addObject("beginIndex", begin);
+	    	  modelAndView.addObject("endIndex", end);
+	    	  modelAndView.addObject("currentIndex", current);
+	    	  modelAndView.addObject("totalPageCount", totalPageCount);
+	        return modelAndView;
+	    }
 	
 	/**
 	 * save Cities  request mapping city master 
@@ -123,26 +159,4 @@ public class CityController {
 		return "redirect:/" + pageMappingService.PageRequestMapping(reqPage, pageno);
 	}
 	
-
-@GetMapping("/page/{pageNo}")
-public String findPaginated(@PathVariable(value = "pageNo") int pageNo, @RequestParam("sortField") String sortField, @RequestParam("sortDir") String sortDir, Model model) {
-		
-	int pageSize = 5;
-	List<City> listCity = cityService.getAllCities();
-
-		Page<City> page = cityService.findPaginated(pageNo, pageSize, sortField, sortDir,listCity);
-		List<City> listOfCities = page.getContent();
-	
-	    model.addAttribute("listCity", listCity);
-		model.addAttribute("currentPage", pageNo);
-		model.addAttribute("totalPages", page.getTotalPages());
-		model.addAttribute("totalItems", page.getTotalElements());
-
-		model.addAttribute("sortField", sortField);
-		model.addAttribute("sortDir", sortDir);
-		model.addAttribute("reverseSortDir", sortDir.equals("asc") ? "desc" : "asc");
-
-		model.addAttribute("listOfCities", listOfCities);
-		 return pageMappingService.PageRequestMapping(reqPage,pageno);
-	}
 }
