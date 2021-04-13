@@ -103,6 +103,12 @@ public class Leave implements Serializable{
 	public void setUpdDate(Date updDate) {
 		this.updDate = updDate;
 	}
+	@Override
+	public String toString() {
+		return "Leave [levCode=" + levCode + ", levType=" + levType + ", totalLev=" + totalLev + ", unpaid=" + unpaid
+				+ ", insBy=" + insBy + ", insDate=" + insDate + ", updBy=" + updBy + ", updDate=" + updDate
+				+ ", active=" + active + "]";
+	}
 	
 	
 	

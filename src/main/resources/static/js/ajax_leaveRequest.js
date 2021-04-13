@@ -102,6 +102,9 @@ function changeToDate(val){
 		document.getElementById("to_date").value = val;
 		//document.getElementById("to_date").disabled = true;
 	}
+	if(leaveTypeId == "multiple"){
+		countLeaveDays();
+	}
 }
 
 function dayType(){
@@ -115,23 +118,35 @@ function dayType(){
 
 function countLeaveDays(){
 
-	console.log("count leave days blocks ");
+	console.log("leave type id : "+ leaveTypeId);
+	console.log("from date type : "+ fromDateType);
+
 	if(leaveTypeId == "single" && fromDateType =="f" )
 	{
 		document.getElementById("leave_for").value = 1 ;
-		console.log("single / f type ");
+		console.log("1st block");
 	}
 	if(leaveTypeId == "single" && fromDateType =="h" )
 	{
 		document.getElementById("leave_for").value = 0.5 ;
-		console.log("single / h type ");
+		console.log("2nd block");
 	}
 	if(leaveTypeId == "" && (fromDateType =="h" || fromDateType == "f") )
 	{
 		document.getElementById("leave_for").value = 1 ;
-		console.log("blank / h or f type ");
+		console.log("3rd block");
 	}
-	console.log(" f case : "+ fromDateType + " and " + leaveTypeId);
+	if(leaveTypeId == "multiple" ){
+		var fromDate = document.getElementById("from_date").value;
+		var toDate = document.getElementById("to_date").value;
+
+		var totalLeave = toDate - fromDate;
+		console.log("calculate days : "+ totalLeave);
+		document.getElementById("leave_for").value = 0;
+		console.log("4th block : from date "+ fromDate);
+		console.log(fromDate);
+		console.log(toDate);
+	}
 
 
 }
