@@ -1,3 +1,5 @@
+/*  ajax or js for EMP_PAY_DETAIL   */
+
 var epfDropdown = '';
 var esiDropdown = '';
 
@@ -14,7 +16,7 @@ function ajaxRequest(val){
 	var empCode = val;
     console.log("ajax request : "+ empCode);
     const xhr = new XMLHttpRequest();
-    xhr.open('POST','http://localhost:8080/empPayDetail/'+empCode,true);
+    xhr.open('POST','/empPayDetail/'+empCode,true);
     xhr.getResponseHeader('content-type','application/json');
     xhr.onload = function(){
         if(this.status===200){
@@ -40,7 +42,7 @@ function ajaxRequestForDepartment(val){
 	var deptCode = val;
     console.log("ajax request : "+ deptCode);
     var xhr1 = new XMLHttpRequest();
-    xhr1.open('POST','http://localhost:8080/departmentMaster/'+deptCode,true);
+    xhr1.open('POST','/getdepartment/'+deptCode,true);
     xhr1.getResponseHeader('content-type','application/json');
 	xhr1.response = 'json';
     xhr1.onload = function(){
@@ -688,6 +690,12 @@ function calculateCtc(){
 	document.getElementById("net_pay_y").value = netpay;
 	
 }
+
+
+
+
+/* ajax or js for LEAVE_REQUEST*/
+
 
 
 

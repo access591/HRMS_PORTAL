@@ -35,6 +35,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 	@Override
 	public void updateEmployee(Employee e) {
+
 	
 	this.employeeDao.saveOrUpdate(e);
 		
@@ -44,6 +45,11 @@ public class EmployeeServiceImpl implements EmployeeService {
 	public void removeEmployeet(String id) {
 	this.employeeDao.delete(id);
 		
+	}
+
+	@Override
+	public List<Employee> getEmployeeByDeptCode(String deptCode) {
+		return this.employeeDao.getEmployeeByDeptCode(deptCode);
 	}
 
 }

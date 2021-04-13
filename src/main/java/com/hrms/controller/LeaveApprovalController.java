@@ -71,26 +71,6 @@ public class LeaveApprovalController {
 	@GetMapping("/approveLeaveRequest/{leaveid}")
 	public String approveLeaveRequest(@PathVariable("leaveid") String leaveid, Model model ,HttpSession session) {
 		
-		/*
-		 * System.out.println("leave approval by leave id "); String userCode = (String)
-		 * session.getAttribute("username"); List<MenuModule> modules =
-		 * moduleService.getAllModulesList(userCode); List<Department> listDepartment =
-		 * departmentService.getAllDepartments(); if (modules != null) {
-		 * model.addAttribute("modules", modules); } if(listDepartment != null) {
-		 * model.addAttribute("listDepartment", listDepartment); }
-		 */
-		
-		//find empCode using userCode
-		//UserEntity user = userService.findUserById(userCode);
-		
-		/*
-		 * System.out.println("user code is : "+ user.getUserCode() +
-		 * " user employe code is : "+ user.getEmpCode());
-		 */
-		
-		
-		//approval/update leave request 
-		//LeaveRequest leaveRequest = new LeaveRequest();
 		LeaveRequest leaveRequest = leaveRequestService.findLeaveRequestById(Long.valueOf(leaveid));
 		
 		System.out.println("leave request approval : "+ leaveRequest);

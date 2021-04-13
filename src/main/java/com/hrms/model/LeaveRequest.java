@@ -13,13 +13,15 @@ import javax.persistence.Table;
 
 
 @Entity
-@Table(name="leave_request")
+@Table(name="LEAVE_REQUEST")
 public class LeaveRequest  {
 	
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "LEAVE_REQUEST_ID")
 	private Long leaveRequestId;
+	
 	
 	private String empCode;
 	
