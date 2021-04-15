@@ -108,12 +108,8 @@ body {
 														class="text-danger">*</span> <select
 														class="form-control required" name="designation" id="designation">
 														<option value="">Select Type</option>
-														<option value="ADGP">ADGP</option>
-														<option value="IG">IG</option>
-														<option value="SP">SP</option>
-														<option value="DCP">DCP</option>
-														<option value="ASP">ASP</option>
-														<option value="AIG">AIG</option>
+														<option th:each="des :${listDesignation}" th:value="${des.desgName}" th:text="${des.getDesgName()}"></option>
+														
 													</select>
 												</div>
 											<div class="form-group sm col-md-4">
@@ -161,7 +157,7 @@ body {
 											
 												
 												<div class="form-group sm col-md-4">
-													<label class="form-label">Employee Pay Code. <span
+													<label class="form-label">Employee Payee Code. <span
 														class="text-danger">*</span>
 													</label> <input name="employeePayeeCode" type="text" id="employeePayeeCode" pattern="\d{1,10}" title="Only digits"maxlength="10" 
 														class="form-control required">
