@@ -31,9 +31,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.hrms.ImageUtil;
 import com.hrms.model.Department;
+import com.hrms.model.Designation;
 import com.hrms.model.Employee;
 import com.hrms.model.MenuModule;
 import com.hrms.service.DepartmentService;
+import com.hrms.service.DesignationService;
 import com.hrms.service.EmployeeService;
 import com.hrms.service.ModuleService;
 import com.hrms.service.PageMappingService;
@@ -44,6 +46,8 @@ public class EmployeeController {
 	String reqPage = "/employeeMaster";
 	@Autowired
 	DepartmentService departmentService;
+	@Autowired
+	DesignationService designationService;
 	@Autowired
 	PageMappingService pageMappingService;
 	@Autowired
@@ -64,6 +68,8 @@ public class EmployeeController {
 		model.addAttribute("listEmployee", listEmployee);
 		List<Department> listDepartment = departmentService.getAllDepartments();
 		model.addAttribute("listDepartment", listDepartment);
+		List<Designation> listDesignation = designationService.getAllDesignations();
+		model.addAttribute("listDesignation", listDesignation);
 		String userCode = (String) session.getAttribute("username");
 		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
 		if (modules != null) {
@@ -116,6 +122,8 @@ public class EmployeeController {
 		String reqPageedit = "/editEmployee";
 		List<Department> listDepartment = departmentService.getAllDepartments();
 		model.addAttribute("listDepartment", listDepartment);
+		List<Designation> listDesignation = designationService.getAllDesignations();
+		model.addAttribute("listDesignation", listDesignation);
 		Employee employeeEdit = employeeService.findEmployeeById(id);
 		model.addAttribute("employeeEdit", employeeEdit);
 		model.addAttribute("imgUtil", new ImageUtil());
