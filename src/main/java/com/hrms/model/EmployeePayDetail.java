@@ -1,272 +1,271 @@
 package com.hrms.model;
 
-import java.sql.Date;
+import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity(name = "Emp_Pay_detail")
-public class EmployeePayDetail {
+public class EmployeePayDetail implements Serializable{
 	
-//	@Id
-//	@GeneratedValue(strategy = GenerationType.AUTO)
-//	@Column(length=25)
-//	private long empPayDetailId;
-	//
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4646106332927433733L;
+
 	@Id
-	@Column(length=25)
+	@Column(length=25,name="EMP_CODE")
 	private String empCode;
 	
-	//
-	@Column(length=25)
+	@Column(length=25,name="EMP_NAME")
 	private String empName;
-	//
-	@Column(length=25)
+	
+	@Column(length=25,name="DEPT_CODE")
 	private String deptCode;
-	//
-	@Column(length=25)
+	
+	@Column(length=25,name="DEPT_NAME")
 	private String deptName;
-	//
-	@Column(length=25)
+	
+	@Column(length=25,name="DEPT_CODE1")
 	private String deptCode1;
-	//
-	@Column(length=25)
+	
+	@Column(length=25,name="WEF_DATE")
 	private String wefdate;
-	//
-	@Column(length=25)
+	
+	@Column(length=25,name="DESIG_CODE")
 	private String desigCode;
-	//
-	@Column(length=25)
+
+	@Column(length=25,name="EMP_INSURANCE_NO")
 	private String empInsuranceNo;
-	//
-	@Column(length=25)
+	
+	@Column(length=25,name="PF_NO")
 	private String pfNo;
-	//
-	@Column(length=25)
+	
+	@Column(length=25,name="PF_EFFECTIVE_DATE")
 	private String pfEffectiveDate;
-	//
-	@Column(length=25)
+	
+	@Column(length=25,name="GROUP_INSURANCE_NO")
 	private String groupInsuranceNo;
-	//
-	@Column(length=25)
+	
+	@Column(length=25,name="EMP_ESI_NO")
 	private String empEsiNo;
-	//
-	@Column(length=25)
+	
+	@Column(length=25,name="ESI_EFFICTIVE_DATE")
 	private String esiEffectiveDate;
-	//
-	@Column(length=25)
+	
+	@Column(length=25,name="ARREAR_DUE")
 	private String arrearDue;
-	//
-	@Column(length=25)
+	
+	@Column(length=25,name="ARREAR_PAID")
 	private String arrearPaid;
 	
-	@Column(length=25)
+	@Column(length=25,name="REIMBURSE_CODE")
 	private String reimburseAcode;
 	
-	@Column(length=25)
+	@Column(length=25,name="A_NAME")
 	private String aName;
 	
-	@Column(length=25)
+	@Column(length=25,name="GROSS1")
 	private String gross1;
 	
-	@Column(length=25)
+	@Column(length=25,name="D_GROSS")
 	private String dGross;
 	
-	@Column(length=25)
+	@Column(length=25,name="GROSS1_Y")
 	private String gross1_y;
-	//
-	@Column(length=25)
+	
+	@Column(length=25,name="BASIC_PAY")
 	private String basicPay;
-	//
-	@Column(length=25)
+	
+	@Column(length=25,name="HRA_RATE")
 	private String hraRate;
-	//
-	@Column(length=25)
+	
+	@Column(length=25,name="HRA_VALUE")
 	private String hraValue;
-	//
-	@Column(length=25)
+	
+	@Column(length=25,name="COMPANY_LEASE_ACC")
 	private String companyLeasedAcc;
 	
-	@Column(length=25)
+	@Column(length=25,name="DA")
 	private String da;
-	//
-	@Column(length=25)
+	
+	@Column(length=25,name="MEDICAL_ALLOW")
 	private String medicalAllow;
 	
-	@Column(length=25)
+	@Column(length=25,name="CCA")
 	private String cca;
-	//
-	@Column(length=25)
+	
+	@Column(length=25,name="CONVEYANCE_ALLOW")
 	private String conveyanceAllow;
-	//
-	@Column(length=25)
+
+	@Column(length=25,name="BONUS")
 	private String bonus;
-	//
-	@Column(length=25)
+
+	@Column(length=25,name="EPF")
 	private String epf;
-	//
-	@Column(length=25)
+	
+	@Column(length=25,name="ESI")
 	private String esi;
-	//
-	@Column(length=25)
+	
+	@Column(length=25,name="PENSION_FUND")
 	private String pensionFund;
-	//
-	@Column(length=25)
+	
+	@Column(length=25,name="FPF")
 	private String fpf;
-	//
-	@Column(length=25)
+	
+	@Column(length=25,name="BASIC_PAY_Y")
 	private String basicPayY;
-	//
-	@Column(length=25)
+	
+	@Column(length=25,name="HRA_RATE_Y")
 	private String hraRateY;
-	//
-	@Column(length=25)
+	
+	@Column(length=25,name="HRA_VALUE_Y")
 	private String hravalueY;
 	
-	@Column(length=25)
+	@Column(length=25,name="DAY")
 	private String daY;
-	//
-	@Column(length=25)
+	
+	@Column(length=25,name="MEDICAL_ALLOW_Y")
 	private String medicalAllowY;
 	
-	@Column(length=25)
+	@Column(length=25,name="CCA_Y")
 	private String ccaY;
-	//
-	@Column(length=25)
+	
+	@Column(length=25,name="CONVEYANCE_ALLOW_Y")
 	private String conveyanceAllowY;
-	//
-	@Column(length=25)
+	
+	@Column(length=25,name="BONUS_Y")
 	private String bonusY;
 	
-	@Column(length=25)
+	@Column(length=25,name="OVER_TIME_YN")
 	private String overtimeYN;
 	
-	@Column(length=25)
+	@Column(length=25,name="OVER_TIME_RATE")
 	private String overtimerate;
 	
-	@Column(length=25)
+	@Column(length=25,name="PF_TYPE")
 	private String pfType;
-	//
-	@Column(length=25)
+	
+	@Column(length=25,name="FPF_PERC")
 	private String fpfPerc;
-	//
-	@Column(length=25)
+	
+	@Column(length=25,name="PF_PERC")
 	private String pfPerc;
-	//
-	@Column(length=25)
+
+	@Column(length=25,name="EPF_PERC")
 	private String epfPerc;
 	
-	@Column(length=25)
+	@Column(length=25,name="TOTAL_ALLOW")
 	private String totalAllow;
 	
-	@Column(length=25)
+	@Column(length=25,name="TOTAL_DEDUCTION")
 	private String totalDeduction;
 	
-	@Column(length=25)
+	@Column(length=25,name="TOTAL_ALLOW_Y")
 	private String totalAllowY;
 	
-	@Column(length=25)
+	@Column(length=25,name="TOTAL_DEDUCTION_Y")
 	private String totalDedductionY;
 	
-	@Column(length=25)
+	@Column(length=25,name="AMOUNT_PAY_ABLE_Y")
 	private String amountPayableY;
 	
-	@Column(length=25)
+	@Column(length=25,name="FPF1_Y")
 	private String fpf1Y;
 	
-	@Column(length=25)
+	@Column(length=25,name="EPF1_Y")
 	private String epf1Y;
 	
-	@Column(length=25)
+	@Column(length=25,name="ESI1_Y")
 	private String esi1Y;
 	
-	@Column(length=25)
+	@Column(length=25,name="PENSION_FUND1_Y")
 	private String pensionFund1Y;
 	
-	@Column(length=25)
+	@Column(length=25,name="ADMINSTRATIVE_CHARGE")
 	private String administrativeCharges;
 	
-	@Column(length=25)
+	@Column(length=25,name="C_CODE")
 	private String cCode;
 	
-	@Column(length=25)
+	@Column(length=25,name="ADMINSTRATIVE_CHARGE_Y")
 	private String administrativeChargesY;
 	
-	@Column(length=25)
+	@Column(length=25,name="CALCULATE_EPF")
 	private String calculateEpf;
 	
-	@Column(length=25)
+	@Column(length=25,name="CALCULATE_ESI_2")
 	private String calculateEsi2;
-	//
-	@Column(length=25)
+	
+	@Column(length=25,name="TDS")
 	private String tds;
 	
-	@Column(length=25)
+	@Column(length=25,name="SURCHARGE")
 	private String surCharge;
 	
-	@Column(length=25)
+	@Column(length=25,name="ED_CHESS")
 	private String edChess;
 	
-	@Column(length=25)
+	@Column(length=25,name="ED_CODE")
 	private String edCode;
 	
-	@Column(length=25)
+	@Column(length=25,name="SECTION_LOV")
 	private String sectionLov;
 	
-	@Column(length=25)
+	@Column(length=25,name="CTC_1")
 	private String ctc1;
 	
-	@Column(length=25)
+	@Column(length=25,name="CTC")
 	private String ctc;
-	//
-	@Column(length=25)
+	
+	@Column(length=25,name="GROSS")
 	private String gross;
-	//
-	@Column(length=25)
+	
+	@Column(length=25,name="GROSS_Y")
 	private String grossY;
-	//
-	@Column(length=25)
+	
+	@Column(length=25,name="EPF_Y")
 	private String epfY;
-	//
-	@Column(length=25)
+
+
+	@Column(length=25,name="FPF_Y")
 	private String fpfY;
-	//
-	@Column(length=25)
+
+	@Column(length=25,name="ESI_Y")
 	private String esiY;
 	
-	@Column(length=25)
+	@Column(length=25,name="SECTION_DESC")
 	private String sectionDesc;
-	//
-	@Column(length=25)
+
+	@Column(length=25,name="PENSION_FUND_Y")
 	private String pensionFundY;
-	//
-	@Column(length=25)
+
+	@Column(length=25,name="INSURANCE")
 	private String insurance;
 	
-	@Column(length=25)
+	@Column(length=25,name="INSURANCE_Y")
 	private String insuranceY;
 	
-	@Column(length=25)
+	@Column(length=25,name="ADDTION_ALLOW")
 	private String addtionAllow;
 	
-	@Column(length=25)
+	@Column(length=25,name="PF_ALLOW")
 	private String pfAllow;
 	
-	@Column(length=25)
+	@Column(length=25,name="ESIC")
 	private String esiC;
 	
-	@Column(length=25)
+	@Column(length=25,name="ESICY")
 	private String esiCY;
-	//
-	@Column(length=25)
+	
+	@Column(length=25,name="NET_PAY")
 	private String netPay;
 
 	public EmployeePayDetail() {
 		super();
-		// TODO Auto-generated constructor stub
+		
 	}
 
 	public EmployeePayDetail(String empCode, String empName, String deptCode, String deptName, String deptCode1,

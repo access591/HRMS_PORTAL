@@ -45,7 +45,6 @@ public class LeaveRequestController {
 		System.out.println("leave request controller");
 		List<Employee> listEmployee = employeeService.getAllEmployees();
 		
-		
 		String userCode = (String) session.getAttribute("username");
 		System.out.println("userCode  is : "+ userCode);
 		UserEntity userEntity = userService.findUserById(userCode);
@@ -67,7 +66,7 @@ public class LeaveRequestController {
 			model.addAttribute("modules", modules);
 		}
 		
-		
+		session.setAttribute("username", userCode);
 		
 		//leaveRequestService.findAllByName("EMP-0046");
 		return pageMappingService.PageRequestMapping(reqPage, pageno);

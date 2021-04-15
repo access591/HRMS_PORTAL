@@ -1,7 +1,7 @@
 package com.hrms.model;
 
 
-import java.math.BigDecimal;
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -14,57 +14,85 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="LEAVE_REQUEST")
-public class LeaveRequest  {
+public class LeaveRequest implements Serializable  {
 	
 	
+
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1127997960626777460L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "LEAVE_REQUEST_ID")
 	private Long leaveRequestId;
 	
-	
+	@Column(name = "EMP_CODE")
 	private String empCode;
 	
+	@Column(name = "EMP_NAME")
 	private String empName;
 	
+	@Column(name = "DEPT_CODE")
 	private String deptCode;
 	
+	@Column(name = "DEPT_NAME")
 	private String deptName;
 
+	@Column(name = "LEAVE_CODE")
 	private String leaveCode;
 	
+	@Column(name = "TO_DATE")
 	private String toDate;
 	
+	@Column(name = "FROM_CODE")
 	private String fromDate;
 	
+	@Column(name = "FROM_DATE_TYPE")
 	private String fromDateType;
 	
+	@Column(name = "TO_DATE_TYPE")
 	private String toDateType;
 	
+	@Column(name = "APPLY_CODE")
 	private String applyDate;
 	
+	@Column(name = "APPROVED_DATE")
 	private String approvedDate;
 	
+	@Column(name = "APPROVED_BY")
 	private String approevedBy;
 	
+	@Column(name = "SHIFT_CODE")
 	private String shiftCode;
 	
+	@Column(name = "REASON")
 	private String reason;
 	
+	@Column(name = "LEAVE_FOR")
 	private String leaveFor;
 
+	@Column(name = "CANCEL_BY")
 	private String cancelBy;
 	
+	@Column(name = "CANCEL_DATE")
 	private String cancelDate;
 	
+	@Column(name = "NUMBER_OF_LEAVES")
 	private String numberOfLeaves;
 	
+	@Column(name = "REQUEST_FROM_DATE")
 	private String requestFromDate;
 	
+	@Column(name = "REQUEST_TO_DATE")
 	private String requestToDate;
 	
+	@Column(name = "REQUEST_FROM_DATE_TYPE")
 	private String requestFromDateType;
 	
+	@Column(name = "REQUEST_TO_DATE_TYPE")
 	private String requestToDateTYpe;
 	
 	@Column(name = "INS_BY", updatable = false)
