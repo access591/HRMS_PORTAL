@@ -91,7 +91,7 @@ body {
 								<div class="card-body">
 
 									<!-- from  -->
-									<form id="" action="#" th:action="@{/saveLeaveRequest}" th:object="${leaveRequest}" method="post">
+									<form action="#" th:action="@{/saveLeaveRequest}" th:object="${leaveRequest}" method="post">
 
 										<!-- Employee row -->
 										<div class="row">
@@ -184,8 +184,7 @@ body {
 												<label class="form-label">To Date</label>
 												<label style="color: red">*</label>
 												<input type="date"class="form-control"
-													id="to_date"name="toDate"
-													value="2018-07-22" min="2018-01-01" max="2018-12-31">
+													id="to_date"name="toDate">
 										   	</div>
 										</div>
 										
