@@ -139,13 +139,23 @@ function countLeaveDays(){
 	if(leaveTypeId == "multiple" ){
 		var fromDate = document.getElementById("from_date").value;
 		var toDate = document.getElementById("to_date").value;
+		
+		var date1 = new Date(fromDate);
+		var date2 = new Date(toDate);
 
-		var totalLeave = toDate - fromDate;
+		
+
+		const diffTime = Math.abs(date2 - date1);
+		const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));  
+
+		console.log(" day diff. : "+ diffDays);
+		document.getElementById("leave_for").value = diffDays ;
+
+		
 		console.log("calculate days : "+ totalLeave);
-		document.getElementById("leave_for").value = 0;
+		//document.getElementById("leave_for").value = 0;
 		console.log("4th block : from date "+ fromDate);
-		console.log(fromDate);
-		console.log(toDate);
+		
 	}
 
 

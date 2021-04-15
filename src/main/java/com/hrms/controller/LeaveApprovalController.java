@@ -60,8 +60,7 @@ public class LeaveApprovalController {
 	@ResponseBody
 	@GetMapping("/leaverequest/{deptCode}")
 	public List<LeaveRequest> getAllLeaveRequestBydept(@PathVariable("deptCode") String deptCode) {
-		
-		//List<HashMap<String,Object>> leaveRequest = 
+		 
 		return leaveRequestService.findAllByDeptCodeAndStatus(deptCode);
 		
 	}

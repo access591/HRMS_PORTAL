@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"lang="en">
+
+<script type="text/javascript" th:src="@{/js/settings.js}"></script>
+<script type="text/javascript" th:src="@{/js/app.js}"></script>
+<link rel="stylesheet" type="text/css" th:href="@{/css/modern.css}" />
+
+<script  src="https://www.googletagmanager.com/gtag/js?id=UA-120946860-7"></script>
+<style>
+body {
+	opacity: 0;
+}
+.uppercase {
+  text-transform: uppercase;
+}
+</style>
+<script>
+	window.dataLayer = window.dataLayer || [];
+	function gtag() {
+		dataLayer.push(arguments);
+	}
+	 gtag('js', new Date());
+
+	gtag('config', 'UA-120946860-7');
+</script>
+<head>
+<meta charset="utf-8" />
+<title>HRMS</title>
+</head>
+<body>
+<div class="wrapper">
+<nav id="sidebar" class="sidebar"aria-label="Site sidebar">
+ <div th:replace="/fragments/sidebar :: div"></div>
+ </nav>
+		<div class="main">
+			<div th:replace="/fragments/header ::div"></div>
+			<main class="content">
+				<div class="container-fluid">
+					<div class="header">
+						<h1 class="header-title"> Master</h1>
+						<nav aria-label="breadcrumb">
+						</nav>
+					</div>
+					<div class="row">
+						<div class="col-12">
+							<div class="card">
+								<div class="card-header">
+									<h5 class="card-title">Tour Plan </h5>
+								<div class="alert-outline">
+									<div th:if="${message}" th:text="${message}" style="color: red">
+									</div> 
+									</div>	
+								</div>
+								<div class="card-body">
+									<form id="validation-form" action="#" th:action="@{/saveTourPlan}" th:object="${tourPlan}" method="POST">
+										
+										<div class="row">
+											<div class="col-12 col-lg-2">
+												<div class="form-group">
+											  <label> Employee Code </label>
+											  		<label style="color: red">*</label>	 
+											   <input
+														type="text" class="form-control" readonly  id="emp_code" name="empCode">
+												</div>
+												
+											</div>
+											
+											
+											<div class="col-12 col-lg-6">
+												<label class="form-label">Select Employee</label>
+												<label style="color: red">*</label>
+												<select
+													class="form-control" id="employeeNameDropDown"
+													onchange="leaveEmployeDisplay()" >
+													<option value="">Select Employee</option>
+													<option th:each="employee: ${listEmployee}"
+														th:text="${employee.empName}" 
+														th:value=" ${employee.empCode}"></option>
+
+												</select>
+												<input type="hidden" name="empName" value="" id="hiddenField"> 
+										   	</div>
+										   	
+										   	
+										</div>
+										
+										
+										<div class="row">
+											<div class="col-12 col-lg-2">
+												<div class="form-group">
+											  <label> Department Code </label>
+											  		<label style="color: red">*</label>	 
+											   <input
+														type="text" class="form-control" readonly  id="department_code" name="deptCode">
+												</div>
+												
+											</div>
+											<div class="col-12 col-lg-6">
+											<div class="form-group">
+											<label class="form-label"> Department Name</label>
+											<label style="color: red">*</label>
+											 <input type="text" class="form-control" readonly id="department_name" name="deptName">
+										</div>
+											</div>
+										</div>
+										
+										
+										
+										<div class="row">
+											<div class="col-12 col-lg-2">
+												<div class="form-group">
+											  <label> Designation Code </label>
+											  		<label style="color: red">*</label>	 
+											   <input
+														type="text" class="form-control" readonly id="designation_code" name="">
+												</div>
+												
+											</div>
+											<div class="col-12 col-lg-6">
+											<div class="form-group">
+											<label class="form-label"> Designation Name</label>
+											<label style="color: red">*</label>
+											 <select
+													class="form-control" id="designation_name"
+													onchange="desigNation()" >
+													<option value="">Designation</option>
+													<option th:each="designation : ${listDesignation}"
+														th:text="${designation.desgName}" 
+														th:value=" ${designation.desgCode}"></option>
+
+												</select>
+										</div>
+											</div>
+										</div>
+										
+										
+										<div class="row">
+											<div class="col-12 col-lg-3">
+												<div class="form-group">
+											  <label> Tour Start Date and Time </label>
+											  		<label style="color: red">*</label>	 
+											   <input
+														type="date" class="form-control" id="id" name="tourStartDate">
+												</div>
+												
+											</div>
+											<div class="col-12 col-lg-3">
+											<div class="form-group">
+											<label class="form-label"> Tour End Date and Time</label>
+											<label style="color: red">*</label>
+											 <input type="date" class="form-control " maxlength="25" title=" Award Name" id="awardName" name="tourEndDate" >
+										</div>
+											</div>
+										</div>
+										
+										
+										<div class="row">
+											<div class="col-12 col-lg-3">
+												<div class="form-group">
+											  <label> Tour Plan Id </label>
+											  		<label style="color: red">*</label>	 
+											   <input
+														type="text" class="form-control" id="id" name="tourPlanId">
+												</div>
+												
+											</div>
+											<div class="col-12 col-lg-3">
+											<div class="form-group">
+											<label class="form-label"> Tour Plan Date</label>
+											<label style="color: red">*</label>
+											 <input type="date" class="form-control " id="" name="tourPlanDAte">
+										</div>
+											</div>
+										</div>
+										
+										<div class="row">
+											<div class="col-12 col-lg-3">
+												<div class="form-group">
+											  <label> Mobile Number </label>
+											  		<label style="color: red">*</label>	 
+											   <input
+														type="text" class="form-control" id="id" name="mobile">
+												</div>
+												
+											</div>
+											
+										</div>
+										
+										
+										
+										<button type="submit" class="btn btn-primary">Save</button>
+								 <button type="reset"class="btn btn-primary" value="Reset">Reset</button>
+									</form>
+								</div>
+							</div>
+						</div>
+	      <div class="col-12">
+							<div class="card">
+								<div class="card-header">
+								</div>
+								<div class="card-body">
+								<table id="example" class="table table-striped display" style="width:100%"aria-describedby="example">
+										<thead>
+											<tr>
+												<th scope="col"> Start Place </th>
+												<th scope="col">End PLace </th>
+												<th scope="col">From Date</th>
+												<th scope="col">To Date</th>
+												<th scope="col">Purpose/Task to be done</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td><input type="text"></td>
+												<td><input type="text"></td>
+												<td><input type="date"></td>
+												<td><input type="date"></td>
+												<td><input type="text"></td>
+												
+												
+											</tr>
+										</tbody>
+									
+									</table>
+								</div>
+								
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</main>
+
+		<footer class="footer">
+		<div th:replace="/fragments/footer :: div"></div>
+		</footer>
+		</div>
+		</div>
+	<script>
+	$(document).ready(function() {
+		   var datatablesButtons =  $('#example').DataTable( {
+	        "scrollY": 200,
+	        "scrollX": true,
+	        deferRender:true,
+	        lengthChange: false,
+	    	buttons: ['copy', 'csv', 'excel', 'pdf', 'print'],
+            scrollCollapse: true,
+            
+	    } );
+	
+		datatablesButtons.buttons().container().appendTo("#example_wrapper .col-md-6:eq(0)")
+	    
+	} );
+	
+	</script>
+	
+	<script>
+	
+	function leaveEmployeDisplay(){
+		
+		 var d = document.getElementById("employeeNameDropDown");
+		 
+		var dValue = document.getElementById("employeeNameDropDown").value;
+		
+		console.log(" d value is :"+ dValue );
+	   
+		 var displayItem = d.options[d.selectedIndex].text;
+		 
+		 document.getElementById("hiddenField").value = displayItem;
+		 
+		document.getElementById("emp_code").value = dValue;
+		
+	    console.log(displayItem);
+
+	    ajaxRequestLeave(dValue);
+	}
+	
+	function desigNation(){
+		var field = document.getElementById("designation_name");
+		var val = document.getElementById("designation_name").value;
+		var displayItem = field.options[field.selectedIndex].text;
+		document.getElementById("designation_code").value = val;
+		console.log("fields value : "+ field);
+		console.log(" val value : "+ val);
+		console.log("display Item : "+ displayItem);
+	}
+	
+
+
+	function ajaxRequestLeave(val){
+		var empCode = val;
+	    console.log("ajax request : "+ empCode);
+	    const xhr = new XMLHttpRequest();
+	    xhr.open('POST','empPayDetail/'+empCode,true);
+	    xhr.getResponseHeader('content-type','application/json');
+	    xhr.onload = function(){
+	        if(this.status===200){
+	            let obj = JSON.parse(this.responseText);
+	            console.log(obj);
+
+				var deptCode = obj.departmentCode;
+				
+				console.log(" depARTMENT CODE :"+	deptCode);
+				
+				$('#department_code').val( obj.departmentCode); 
+				
+				ajaxRequestForDepartmentLeave(deptCode);
+	        }
+	        else{
+	            console.error("some error occured");
+	        }
+		
+	    }
+	    xhr.send();
+	}
+
+	function ajaxRequestForDepartmentLeave(val){
+		var deptCode = val;
+	    console.log("ajax request : "+ deptCode);
+	    var xhr1 = new XMLHttpRequest();
+	    xhr1.open('POST','getdepartment/'+deptCode,true);
+	    xhr1.getResponseHeader('content-type','application/json');
+		xhr1.response = 'json';
+	    xhr1.onload = function(){
+	        if(this.status===200){
+			
+				console.log("successfull");
+	             let obj1 = JSON.parse(this.responseText);
+	            console.log(obj1);
+
+				$('#department_name').val(obj1.deptName); 
+	        }
+	        else{
+	            console.error("some error occured");
+	        }
+	    }
+	    xhr1.send();
+	}
+	
+	</script>
+	
+	
+	
+		<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.bootstrap4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.print.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.colVis.min.js"></script>
+   
+
+		
+</body>
+</html>
