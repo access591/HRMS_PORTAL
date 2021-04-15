@@ -1,8 +1,7 @@
 package com.hrms.model;
 
 import java.io.Serializable;
-import java.util.Arrays;
-import java.util.Date;
+
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -43,10 +42,10 @@ public class Employee implements Serializable {
 	private String presentPosting;
 
 	@Column(name ="DATE_OF_POSTING")
-	private Date dateOfPosting;
+	private String dateOfPosting;
 
 	@Column(name ="DATE_OF_RETIREMENT")
-	private Date dateOfRetirement;
+	private String dateOfRetirement;
 
 	@Column(name ="BATCH_YEAR")
 	private String batchYear;
@@ -54,7 +53,7 @@ public class Employee implements Serializable {
 	private String departmentCode;
 	
 	@Column(name ="DATE_OF_JOINING")
-	private Date dateOfJoining;
+	private String dateOfJoining;
 	
 	
 	@Column(name ="DEPARTMENT_NAME") 
@@ -89,7 +88,7 @@ public class Employee implements Serializable {
 	private String orderNo;
 
 	@Column(name = "ORDER_DATE")
-	private Date orderDate;
+	private String orderDate;
 
 	@Column(name = "UNDER_RULE_7")
 	private String underRule7;
@@ -195,13 +194,13 @@ public class Employee implements Serializable {
 
 
 
-	public Date getDateOfJoining() {
+	public String getDateOfJoining() {
 		return dateOfJoining;
 	}
 
 
 
-	public void setDateOfJoining(Date dateOfJoining) {
+	public void setDateOfJoining(String dateOfJoining) {
 		this.dateOfJoining = dateOfJoining;
 	}
 
@@ -275,21 +274,21 @@ public class Employee implements Serializable {
 		this.presentPosting = presentPosting;
 	}
 
-	public Date getDateOfPosting() {
+	public String getDateOfPosting() {
 		return dateOfPosting;
 	}
 
-	public void setDateOfPosting(Date dateOfPosting) {
+	public void setDateOfPosting(String dateOfPosting) {
 		this.dateOfPosting = dateOfPosting;
 	}
 
 
 
-	public Date getDateOfRetirement() {
+	public String getDateOfRetirement() {
 		return dateOfRetirement;
 	}
 
-	public void setDateOfRetirement(Date dateOfRetirement) {
+	public void setDateOfRetirement(String dateOfRetirement) {
 		this.dateOfRetirement = dateOfRetirement;
 	}
 
@@ -357,13 +356,13 @@ public class Employee implements Serializable {
 
 
 
-	public Date getOrderDate() {
+	public String getOrderDate() {
 		return orderDate;
 	}
 
 
 
-	public void setOrderDate(Date orderDate) {
+	public void setOrderDate(String orderDate) {
 		this.orderDate = orderDate;
 	}
 
