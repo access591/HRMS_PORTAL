@@ -82,14 +82,7 @@ public class EmpPayDetailsController {
 		return employeeService.findEmployeeById(empCode);
 	}
 
-//	@PostMapping("empPayDetail/{deptCode}")
-//	@ResponseBody
-//	public Department getDepartmentById(@PathVariable("deptCode") String deptCode) {
-//
-//		System.out.println("department info method : " + deptCode);
-//
-//		return departmentService.findDepartmentById(deptCode);  
-//	}
+
 
 	@PostMapping("/saveemployepaydetail")
 	public String saveEmployeePaydetail(@ModelAttribute("employeePayDetail") EmployeePayDetail employeePayDetail,
@@ -99,8 +92,7 @@ public class EmpPayDetailsController {
 	
 		List<EmployeePayDetail> listEmployeePayDetail = empPayDetailService.getAllEmployeePayDetail();
 
-		// EmployeePayDetail em = empPayDetailService
-		// System.out.println(" employee salary : "+em.getEmpCode());
+
 		if (listEmployeePayDetail != null) {
 			if (!listEmployeePayDetail.contains(employeePayDetail)) {
 				empPayDetailService.addEmployeePayDetail(employeePayDetail);
@@ -113,8 +105,7 @@ public class EmpPayDetailsController {
 		System.out.println(" empoloyee pay detail data :" + employeePayDetail.getEmpName());
 		
 
-		// List<EmployeePayDetail> listEmployeePayDetail =
-		// empPayDetailService.getAllEmployeePayDetail();
+	
 		
 		session.setAttribute("username", session.getAttribute("username"));
 		return "redirect:/" + pageMappingService.PageRequestMapping(reqPage, pageno);
