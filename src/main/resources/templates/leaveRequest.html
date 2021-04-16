@@ -1,18 +1,17 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"lang="en">
 
 <script type="text/javascript" th:src="@{/js/settings.js}"></script>
 <script type="text/javascript" th:src="@{/js/app.js}"></script>
-<script type="text/javascript" th:src="@{/js/ajax_leaveRequest.js}"></script>
 <link rel="stylesheet" type="text/css" th:href="@{/css/modern.css}" />
-<script src="https://www.googletagmanager.com/gtag/js?id=UA-120946860-7"></script>
+<script type="text/javascript" th:src="@{/js/ajax_leaveRequest.js}"></script>
+<script  src="https://www.googletagmanager.com/gtag/js?id=UA-120946860-7"></script>
 <style>
 body {
 	opacity: 0;
 }
-
 .uppercase {
-	text-transform: uppercase;
+  text-transform: uppercase;
 }
 </style>
 <script>
@@ -28,66 +27,30 @@ body {
 <meta charset="utf-8" />
 <title>HRMS</title>
 </head>
-
 <body>
-
-	<div class="wrapper">
-
-
-		<!--  nav start -->
-		<nav id="sidebar" class="sidebar">
-			<div th:replace="/fragments/sidebar :: div"></div>
-		</nav>
-		<!-- nav end  -->
-
-
-		<!-- main start here  -->
+<div class="wrapper">
+<nav id="sidebar" class="sidebar"aria-label="Site sidebar">
+ <div th:replace="/fragments/sidebar :: div"></div>
+ </nav>
 		<div class="main">
-
 			<div th:replace="/fragments/header ::div"></div>
-
-			<!-- content div start  -->
 			<main class="content">
-
-				<!-- container div start -->
 				<div class="container-fluid">
-
-
-					<!-- header div  -->
 					<div class="header">
-						<h1 class="header-title">Master</h1>
-
-						<nav aria-label="breadcrumb"></nav>
+						<h1 class="header-title"> Master</h1>
+						<nav aria-label="breadcrumb">
+						</nav>
 					</div>
-					<!-- header div end  -->
-
-
-					<!-- main row div  -->
 					<div class="row">
-
-						<!-- div column start  -->
 						<div class="col-12">
-
-							<!-- card start  -->
 							<div class="card">
-
-								<!-- card header  -->
 								<div class="card-header">
-
-									<h5 class="card-title">Leave Request</h5>
-
-									<!-- div start  -->
-									<div class="alert-outline">
-										<div th:if="${message}" th:text="${message}"
-											style="color: red"></div>
-									</div>
-									<!-- div end -->
-
+									<h5 class="card-title"> Create Leave Request  </h5>
+								<div class="alert-outline">
+									<div th:if="${message}" th:text="${message}" style="color: red">
+									</div> 
+									</div>	
 								</div>
-								<!-- card header end  -->
-
-
-								<!--  card body start  -->
 								<div class="card-body">
 
 									<!-- from  -->
@@ -121,31 +84,22 @@ body {
 										</div>
 										
 										
-										<!-- Department row -->
+									
 										<div class="row">
-											<div class="col-12 col-lg-6">
-												<div class="form-group">
-
-													<label> Dept Code </label> <label style="color: red">*</label>
-													<input
-													type="text" class="form-control" id="leaveDepartmentId"
-													value="" name="deptCode">
+										<div class="col-12 col-lg-6">
+										<div class="form-group">
+										<label> Dept Code </label> <label style="color: red">*</label>
+										<input type="text" class="form-control" id="leaveDepartmentId" name="deptCode">
 												</div>
 											</div>
 											
-											<div class="col-12 col-lg-6">
+									    <div class="col-12 col-lg-6">
 												<label class="form-label">Department Name</label>
 												<label style="color: red">*</label>
 												<input type="text" class="form-control"
 													id="leaveDepartmentName" value="" name="deptName">
-										   	</div>
+									   </div>
 										</div>
-										
-										
-										
-										
-										
-										<!--########################################################################  -->
 										<div class="row">
 											<div class="col-12 col-lg-6">
 												<div class="form-group">
@@ -167,9 +121,6 @@ body {
 													name='applyDate'>
 										   	</div>
 										</div>
-										
-										
-										<!--########################################################################  -->
 										<div class="row">
 										
 											<div class="col-12 col-lg-6">
@@ -187,9 +138,6 @@ body {
 													id="to_date"name="toDate">
 										   	</div>
 										</div>
-										
-										
-										<!--########################################################################  -->
 										<div class="row">
 										
 											<div class="col-12 col-lg-6">
@@ -212,9 +160,6 @@ body {
 												</select>
 										   	</div>
 										</div>
-										
-										
-										<!--########################################################################  -->
 										<div class="row">
 											<div class="col-12 col-lg-6">
 												<div class="form-group">
@@ -234,8 +179,6 @@ body {
 												</select>
 										   	</div>
 										</div>
-										
-										<!--########################################################################  -->
 										<div class="row">
 											<div class="col-12 col-lg-6">
 												<div class="form-group">
@@ -252,21 +195,9 @@ body {
 										<button type="reset"class="btn btn-primary" value="Reset">Reset</button>
 									</form>
 
-
-									<!-- form end  -->
-
-
 								</div>
-
-								<!-- card body end  -->
 							</div>
-							<!-- card end  -->
 						</div>
-
-						<!-- div card end -->
-
-
-						<!-- table div satrt  -->
 						<div class="col-12">
 							<div class="card">
 								<div class="card-header"></div>
@@ -302,20 +233,9 @@ body {
 
 							</div>
 						</div>
-
-						<!--table div end   -->
-
 					</div>
-					<!-- container div end  -->
-
 				</div>
-
-				<!-- content div  end  -->
-
 			</main>
-
-			<!-- main close  -->
-
 			<footer class="footer">
 				<div th:replace="/fragments/footer :: div"></div>
 			</footer>
