@@ -89,7 +89,7 @@ body {
 													</label>
 													
 													 <input type="file" id="image" name="image" accept="image/png,image/jpeg"  onchange="preview_image(event)"/>
-											     <img id="output_image"width="100px" height="100px"style="border-radius:50%" alt="output_image">
+											     <img id="output_image"width="100px" height="100px"style="border-radius: 50px;" alt="output_image">
 												</div>
 												
 												
@@ -102,6 +102,11 @@ body {
 													</label> <input name="empCode" type="text" id="empCode"
 														class="form-control"readonly>
 												</div>
+												  <div class="form-group sm col-md-4">
+											       <label class="form-label">Name
+											       <span class="text-danger">*</span></label>
+							                 <input  type="text"id="empName"name="empName" title="Name"maxlength="50" pattern="^[a-zA-Z\s]*$" class="form-control required">
+										     </div>
 	
 										<div class="form-group sm col-md-4">
 													<label class="form-label">Designation</label> <span
@@ -112,12 +117,7 @@ body {
 														
 													</select>
 												</div>
-											<div class="form-group sm col-md-4">
-													<label class="form-label">Present Posting <span
-														class="text-danger">*</span>
-													</label> <input name="presentPosting" type="text"id="presentPosting"  title="Present Posting"
-														class="form-control required">
-												</div>
+											
 												</div>
 											<div class="form-row">
 							                   <div class="form-group sm col-md-4">
@@ -226,7 +226,13 @@ body {
 														
 													</select>
 												</div>
-													
+												<div class="form-group sm col-md-4">
+													<label class="form-label">Present Posting <span
+														class="text-danger">*</span>
+											</label> 
+											<input name="presentPosting" type="text"id="presentPosting"  title="Present Posting"
+														class="form-control required">
+												</div>
 													
 													
 													</div>
@@ -259,7 +265,7 @@ body {
 											<div class="form-row">
 											<div class="form-group sm col-md-4">
 													<label class="form-label">Under Rule 7</label>  <select
-														class="form-control required" name="underRule7" id="underRule7">
+														class="form-control" name="underRule7" id="underRule7">
 														<option value="">Select Type</option>
 														<option value="YES">YES</option>
 														<option value="NO"selected="selected">NO</option>
@@ -268,7 +274,7 @@ body {
 												</div>
 												<div class="form-group sm col-md-4">
 													<label class="form-label">Under Rule 8</label>
-													<select class="form-control required" name="underRule8" id="underRule8">
+													<select class="form-control" name="underRule8" id="underRule8">
 														<option value="">Select Type</option>
 														<option value="YES">YES</option>
 														<option value="NO"selected="selected">NO</option>
@@ -287,11 +293,11 @@ body {
 											<div class="form-group sm col-md-4">
 											       <label class="form-label">Add Charge
 											      </label>
-							                 <input  type="text"id="addCharge"name="addCharge" title="Add Charge" class="form-control required">
+							                 <input  type="text"id="addCharge"name="addCharge" title="Add Charge" class="form-control">
 										     </div>
 										      	<div class="form-group sm col-md-4">
 													<label class="form-label">On Additional Charge</label>  
-													<select class="form-control required" name="onAdditionalCharge" id="onAdditionalCharge">
+													<select class="form-control" name="onAdditionalCharge" id="onAdditionalCharge">
 														<option value="">Select Type</option>
 														<option value="YES">YES</option>
 														<option value="NO"selected="selected">NO</option>
@@ -321,7 +327,7 @@ body {
 										     <div class="form-group sm col-md-4">
 											       <label class="form-label">Mobile Number
 											      </label>
-							                 <input  type="text"id="mobileNumber"name="mobileNumber" title="Mobile Number"maxlength="10" class="form-control required">
+							                 <input  type="text"id="mobileNumber"name="mobileNumber" title="Mobile Number"maxlength="10" class="form-control">
 										     </div>
 											</div>
 											
@@ -330,7 +336,7 @@ body {
 											  <div class="form-group sm col-md-4">
 											       <label class="form-label">Email
 											      </label>
-							                 <input  type="text"id="email"name="email" title="Email" class="form-control required">
+							                 <input  type="text"id="email"name="email" title="Email" class="form-control">
 										     </div>
 										       	<div class="form-group sm col-md-4">
 													<label class="form-label">Gender</label> <span
@@ -380,29 +386,27 @@ body {
 									<div id="validation-step-3">
 									 
 									  <div class="form-row">
-									    <div class="form-group sm col-md-4">
-											       <label class="form-label">Name
-											       <span class="text-danger">*</span></label>
-							                 <input  type="text"id="empName"name="empName" title="Name"maxlength="50" pattern="^[a-zA-Z\s]*$" class="form-control required">
-										     </div>
+									  
 										       <div class="form-group sm col-md-4">
 											       <label class="form-label">Father Name
 											       </label>
-							                 <input  type="text"id="fatherName"name="fatherName" maxlength="40"title="Father Name"  pattern="^[a-zA-Z\s]*$"class="form-control required">
+							                 <input  type="text"id="fatherName"name="fatherName" maxlength="40"title="Father Name"  pattern="^[a-zA-Z\s]*$"class="form-control">
 										     </div>
 										       <div class="form-group sm col-md-4">
 											       <label class="form-label">Address
 											       <span class="text-danger">*</span></label>
 							                 <input  type="text"id="addressArms"name="addressArms"maxlength="60" title="Address" class="form-control required">
 										     </div>
-									  </div>
-									  
-									   <div class="form-row">
-									     <div class="form-group sm col-md-4">
+										     
+										       <div class="form-group sm col-md-4">
 											       <label class="form-label">District
 											       <span class="text-danger">*</span></label>
 							                 <input  type="text"id="district"name="district"maxlength="40" title="District" pattern="^[a-zA-Z\s]*$" class="form-control required">
 										     </div>
+									  </div>
+									  
+									   <div class="form-row">
+									   
 										       <div class="form-group sm col-md-4">
 											       <label class="form-label">State
 											       <span class="text-danger">*</span></label>
@@ -413,14 +417,15 @@ body {
 											       <span class="text-danger">*</span></label>
 							                 <input  type="text"id="armsArea"name="armsArea" title="Arms Area" maxlength="60"class="form-control required">
 										     </div>
-									  </div>
-									  
-									   <div class="form-row">
-									     <div class="form-group sm col-md-4">
+										     <div class="form-group sm col-md-4">
 											       <label class="form-label">DOI
 											       <span class="text-danger">*</span></label>
 							                 <input  type="text"id="doi"name="doi" title="DOI"maxlength="45" class="form-control required">
 										     </div>
+									  </div>
+									  
+									   <div class="form-row">
+									     
 										       <div class="form-group sm col-md-4">
 											       <label class="form-label">DOV
 											       <span class="text-danger">*</span></label>
@@ -431,15 +436,17 @@ body {
 											       <span class="text-danger">*</span></label>
 							                 <input  type="text"id="toa"name="toa" title="TOA"maxlength="45" class="form-control required">
 										     </div>
-									  </div>
-									  
-									  
-									    <div class="form-row">
-									        <div class="form-group sm col-md-4">
+										     
+										      <div class="form-group sm col-md-4">
 											       <label class="form-label">TOP
 											       <span class="text-danger">*</span></label>
 							                 <input  type="text"id="top"name="top" title="TOP"maxlength="45" class="form-control required">
 										     </div>
+									  </div>
+									  
+									  
+									    <div class="form-row">
+									       
 										         <div class="form-group sm col-md-4">
 											       <label class="form-label">NOL
 											       <span class="text-danger">*</span></label>
@@ -450,16 +457,16 @@ body {
 											       <span class="text-danger">*</span></label>
 							                 <input  type="text"id="lcd"name="lcd" title="LCD" maxlength="45"class="form-control required">
 										     </div>
-									    </div>
-									    
-									      <div class="form-row">
+										     
 									          <div class="form-group sm col-md-4">
 											       <label class="form-label">Dealer Details
 											       <span class="text-danger">*</span></label>
 							                 <input  type="text"id="dealerDetails"name="dealerDetails"maxlength="100" title="Dealer Details" class="form-control required">
 										     </div>
 									    </div>
-
+									    
+									     
+									   
 									 <button type="submit" class="btn btn-primary">Save</button>
 										
                               </div>
