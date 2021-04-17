@@ -83,17 +83,21 @@ body {
 								
                          <div id="validation-step-1">
 											<div class="form-row">
-                                             	<div class="form-group sm col-md-12">
+                                             	<div class="form-group sm col-md-4">
 													<label class="form-label">Upload Image <span
 														class="text-danger">*</span>
 													</label>
 													
-													 <input type="file" id="image" name="image" accept="image/png,image/jpeg"  onchange="preview_image(event)"/>
+													 <input type="file" id="image" name="image" accept="image/png,image/jpeg" title="image" class="form-control required"onchange="preview_image(event)"/>
 											     <img id="output_image"width="100px" height="100px"style="border-radius: 50px;" alt="output_image">
 												</div>
 												
 												
 									     </div>
+									     
+									     
+									     
+									     
 										<div class="form-row">
 												<div class="form-group sm col-md-4">
 												
@@ -102,7 +106,7 @@ body {
 													</label> <input name="empCode" type="text" id="empCode"
 														class="form-control"readonly>
 												</div>
-												  <div class="form-group sm col-md-4">
+											<div class="form-group sm col-md-4">
 											       <label class="form-label">Name
 											       <span class="text-danger">*</span></label>
 							                 <input  type="text"id="empName"name="empName" title="Name"maxlength="50" pattern="^[a-zA-Z\s]*$" class="form-control required">
@@ -119,28 +123,33 @@ body {
 												</div>
 											
 												</div>
+												
+												
+												
+												
+												
+												
+												
+												
 											<div class="form-row">
 							                   <div class="form-group sm col-md-4">
 												<label class="form-label">Date Of Joining</label>
 												<span class="text-danger">*</span>
 												<input  type="text" id="dateOfJoining" name="dateOfJoining" class="form-control required">
 										          </div>
-										          
-
-											<div class="form-group sm col-md-4">
-													<label class="form-label">Date  Of Posting </label> <span
-														class="text-danger">*</span> <input 
-														class="form-control required" type="text"id="dateOfPosting"
-														name="dateOfPosting" />
-
-												</div>
 													<div class="form-group sm col-md-4">
-													<label class="form-label">Date  Of Retirement</label> <span
-														class="text-danger">*</span> <input 
-														class="form-control required" type="text"id="dateOfRetirement"
-														name="dateOfRetirement" />
+												
+													<label class="form-label">Batch Year</label> <span
+														class="text-danger">*</span> 
+														<input class="form-control required" type="text"id="batchYear"name="batchYear"/>
 
 												</div>
+												<div class="form-group sm col-md-4">
+													<label class="form-label">VRS
+													</label> <input name=vrs type="text" id="vrs" maxlength="30" 
+														class="form-control required">
+												</div>
+												
 												</div>
 											
 											<div class="form-row">
@@ -154,39 +163,39 @@ body {
 											     
 											   <input type="hidden" class="form-control" id="depName" name="depName" size="50" > 
 											</div>
-											
+											<div class="form-group sm col-md-4">
+													<label class="form-label">Type</label> <span
+														class="text-danger">*</span> <select
+														class="form-control required" name="typeCourtDepartment" id="typeCourtDepartment">
+														
+														<option value="">Select Type</option>
+														<option value="D"selected="selected">Department</option>
+														<option value="C">Court</option>
 												
+													</select>
+												</div>
+												
+												
+													<div class="form-group sm col-md-4">
+													<label class="form-label">Date  Of Posting </label> <span
+														class="text-danger">*</span> <input 
+														class="form-control required" type="text"id="dateOfPosting"
+														name="dateOfPosting" />
+
+												</div>
+											
+												</div>
+									
+												
+												
+											<div class="form-row">
 												<div class="form-group sm col-md-4">
 													<label class="form-label">Employee Payee Code. <span
 														class="text-danger">*</span>
 													</label> <input name="employeePayeeCode" type="text" id="employeePayeeCode" pattern="\d{1,10}" title="Only digits"maxlength="10" 
 														class="form-control required">
 												</div>
-												
-												<div class="form-group sm col-md-4">
-												
-													<label class="form-label">Batch Year</label> <span
-														class="text-danger">*</span> 
-														<input class="form-control required" type="text"id="batchYear"name="batchYear"/>
-
-												</div>
-												</div>
-									
-												
-												
-											<div class="form-row">
-												
-													<div class="form-group sm col-md-4">
-													<label class="form-label">Type</label> <span
-														class="text-danger">*</span> <select
-														class="form-control required" name="typeCourtDepartment" id="typeCourtDepartment">
-														
-														<option value="">Select Type</option>
-														<option value="D"selected="selected">Department)</option>
-														<option value="C">Court</option>
-												
-													</select>
-												</div>
+													
 												<div class="form-group sm col-md-4">
 													<label class="form-label">Officer Type</label> <span
 														class="text-danger">*</span> <select
@@ -200,14 +209,20 @@ body {
 													</select>
 												</div>
 													
-												<div class="form-group sm col-md-4">
-													<label class="form-label">VRS
-													</label> <input name=vrs type="text" id="vrs" maxlength="30" 
+														<div class="form-group sm col-md-4">
+													<label class="form-label">Present Posting <span
+														class="text-danger">*</span>
+											</label> 
+											<input name="presentPosting" type="text"id="presentPosting"  title="Present Posting"
 														class="form-control required">
 												</div>
 													
+													
+												
+													
 												</div>
 													<div class="form-row">
+													
 													<div class="form-group sm col-md-4">
 													<label class="form-label">Vigilance Query</label> 
 													 <select  class="form-control required" name="vigilanceQuery" id="vigilanceQuery">
@@ -227,12 +242,13 @@ body {
 													</select>
 												</div>
 												<div class="form-group sm col-md-4">
-													<label class="form-label">Present Posting <span
-														class="text-danger">*</span>
-											</label> 
-											<input name="presentPosting" type="text"id="presentPosting"  title="Present Posting"
-														class="form-control required">
+													<label class="form-label">Date  Of Retirement</label> <span
+														class="text-danger">*</span> <input 
+														class="form-control required" type="text"id="dateOfRetirement"
+														name="dateOfRetirement" />
+
 												</div>
+											
 													
 													
 													</div>
