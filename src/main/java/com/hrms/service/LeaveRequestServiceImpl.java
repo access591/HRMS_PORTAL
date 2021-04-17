@@ -26,7 +26,7 @@ public class LeaveRequestServiceImpl implements LeaveRequestService{
 	}
 	@Override
 	public List<LeaveRequest> getAllLeaves() {
-		
+		//System.out.println("DAO MODEL : "+this.leaveRequestDao.findAll().get(1).getEmpName());
 		return this.leaveRequestDao.findAll();
 	}
 	
@@ -41,7 +41,7 @@ public class LeaveRequestServiceImpl implements LeaveRequestService{
 		
 	}
 	@Override
-	public void removeLeaveRequest(String id) {
+	public void removeLeaveRequest(Long id) {
 		this.leaveRequestDao.delete(id);
 		
 	}
@@ -53,6 +53,11 @@ public class LeaveRequestServiceImpl implements LeaveRequestService{
 	@Override
 	public List<LeaveRequest> findAllByDeptCodeAndStatus(String deptCode) {
 		return this.leaveRequestDao.findAllByDeptCodeAndStatus(deptCode);
+	}
+	@Override
+	public List<LeaveRequest> getEmployeeByStatusY() {
+		
+		return this.leaveRequestDao.getEmployeeByStatusY();
 	}
 
 }

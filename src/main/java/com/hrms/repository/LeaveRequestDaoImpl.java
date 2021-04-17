@@ -28,19 +28,18 @@ public class LeaveRequestDaoImpl extends AbstractGenericDao<LeaveRequest> implem
 		try {
 			final Session session = this.sessionFactory.getCurrentSession();
 			
-			String hql = "FROM LeaveRequest E WHERE E.empCode =:empCode";
+			String hql = "FROM LeaveRequest E WHERE E.empCode = :empCode";
 			Query query = session.createQuery(hql);
 			query.setParameter("empCode" , empCode);
 			List results = query.list();
-			 
-			
+		
 			leaverequestByEmpCode = results;
 		} catch (Exception e) {
 			System.out.println("exception block in leaveRequestDaoImpl model ");
 			 e.printStackTrace();
 		}
 
-		return leaverequestByEmpCode;
+		return leaverequestByEmpCode;  
 		
 	}
 
@@ -66,5 +65,16 @@ public class LeaveRequestDaoImpl extends AbstractGenericDao<LeaveRequest> implem
 		List result = query.list();
 		return result;
 	}
+
+
+	@Override
+	public List<LeaveRequest> getEmployeeByStatusY() {
+		Session session = this.sessionFactory.getCurrentSession();
+		String hql = "from LeaveRequest e where e.status = 'Y'";
+		Query query = session.createQuery(hql);
+		List result = query.list();
+		return result;
+	}
+
 
 }
