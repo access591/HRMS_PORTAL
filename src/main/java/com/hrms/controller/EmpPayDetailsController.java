@@ -1,5 +1,6 @@
 package com.hrms.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -93,21 +94,18 @@ public class EmpPayDetailsController {
 		List<EmployeePayDetail> listEmployeePayDetail = empPayDetailService.getAllEmployeePayDetail();
 
 
-		if (listEmployeePayDetail != null) {
-			if (!listEmployeePayDetail.contains(employeePayDetail)) {
-				empPayDetailService.addEmployeePayDetail(employeePayDetail);
-			} else {
-
-			}
-
-		}
-		model.addAttribute(listEmployeePayDetail);
-		System.out.println(" empoloyee pay detail data :" + employeePayDetail.getEmpName());
-		
-
-	
-		
-		session.setAttribute("username", session.getAttribute("username"));
+		/*
+		 * List<EmployeePayDetail> checkEmployee = listEmployeePayDetail.stream()
+		 * .filter(EmployeePayDetail e -> )
+		 * 
+		 * System.out.println(" empoloyee pay detail data :" +
+		 * employeePayDetail.getEmpName());
+		 * 
+		 * 
+		 * 
+		 * 
+		 * session.setAttribute("username", session.getAttribute("username"));
+		 */
 		return "redirect:/" + pageMappingService.PageRequestMapping(reqPage, pageno);
 	}
 

@@ -12,6 +12,7 @@ import javax.persistence.Table;
 
 
 @Entity
+//@Table(name="leave_request")
 @Table(name="LEAVE_REQUEST")
 public class LeaveRequest  {
 	
@@ -21,49 +22,70 @@ public class LeaveRequest  {
 	@Column(name = "LEAVE_REQUEST_ID")
 	private Long leaveRequestId;
 	
-	
+	@Column(name = "EMP_CODE")
 	private String empCode;
 	
+	@Column(name = "EMP_NAME")
 	private String empName;
 	
+	@Column(name = "DEPT_CODE")
 	private String deptCode;
 	
+	@Column(name = "DEPT_NAME")
 	private String deptName;
-
+	
+	@Column(name = "LEAVE_CODE")  
 	private String leaveCode;
 	
-	private String toDate;
+	@Column(name = "TO_DATE")
+	private Date toDate;
 	
-	private String fromDate;
+	@Column(name = "FROM_DATE")
+	private Date fromDate;
 	
+	@Column(name = "FROM_DATE_TYPE")
 	private String fromDateType;
 	
+	@Column(name = "TO_DATE_TYPE")
 	private String toDateType;
 	
-	private String applyDate;
+	@Column(name = "APPLY_DATE")
+	private Date applyDate;
 	
-	private String approvedDate;
+	@Column(name = "APPROVE_DATE")
+	private Date approvedDate;
 	
+	@Column(name = "APPROVED_BY")
 	private String approevedBy;
 	
+	@Column(name = "SHIFT_CODE")
 	private String shiftCode;
 	
+	@Column(name = "REASON")
 	private String reason;
 	
+	@Column(name = "LEAVE_FOR")
 	private String leaveFor;
-
+	
+	@Column(name = "CANCEL_BY")
 	private String cancelBy;
 	
+	@Column(name = "CANCEL_DATE")
 	private String cancelDate;
 	
+	@Column(name = "NUMBER_OF_LEAVES")
 	private String numberOfLeaves;
 	
+	@Column(name = "REQUEST_FROM_DATE")
 	private String requestFromDate;
 	
+	@Column(name = "REQUEST_TO_DATE")
 	private String requestToDate;
 	
+	@Column(name = "REQUEST_FROM_DATE_TYPE")
 	private String requestFromDateType;
 	
+	@Column(name = "REQUEST_TO_DATE_TYPE")
 	private String requestToDateTYpe;
 	
 	@Column(name = "INS_BY", updatable = false)
@@ -147,22 +169,22 @@ public class LeaveRequest  {
 	}
 
 
-	public String getToDate() {
+	public Date getToDate() {
 		return toDate;
 	}
 
 
-	public void setToDate(String toDate) {
+	public void setToDate(Date toDate) {
 		this.toDate = toDate;
 	}
 
 
-	public String getFromDate() {
+	public Date getFromDate() {
 		return fromDate;
 	}
 
 
-	public void setFromDate(String fromDate) {
+	public void setFromDate(Date fromDate) {
 		this.fromDate = fromDate;
 	}
 
@@ -187,22 +209,22 @@ public class LeaveRequest  {
 	}
 
 
-	public String getApplyDate() {
+	public Date getApplyDate() {
 		return applyDate;
 	}
 
 
-	public void setApplyDate(String applyDate) {
+	public void setApplyDate(Date applyDate) {
 		this.applyDate = applyDate;
 	}
 
 
-	public String getApprovedDate() {
+	public Date getApprovedDate() {
 		return approvedDate;
 	}
 
 
-	public void setApprovedDate(String approvedDate) {
+	public void setApprovedDate(Date approvedDate) {
 		this.approvedDate = approvedDate;
 	}
 
