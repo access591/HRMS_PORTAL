@@ -340,7 +340,7 @@ body {
 											  <div class="form-group sm col-md-4">
 											       <label class="form-label">Email
 											      </label>
-							                 <input  type="text"id="email"name="email" title="Email"th:value="${employeeEdit.email}" class="form-control">
+							                 <input  type="text"id="email"name="email" title="Email"th:value="${employeeEdit.email}" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"class="form-control">
 										     </div>
 										       	<div class="form-group sm col-md-4">
 													<label class="form-label">Gender</label> <span

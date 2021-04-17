@@ -56,7 +56,7 @@ body {
 										<div class="row">
 										<div class="col-12 col-lg-6">
 											<div class="form-group">
-											     <label> Shift Code </label>
+											     <label>Code </label>
 											  	 <label style="color: red">*</label>
 											     <input type="text" class="form-control" id="shiftCode" name="shiftCode" th:value="${shiftEdit.shiftCode}" readonly="readonly">
 											</div>
@@ -93,7 +93,7 @@ body {
 									
 										
 										<div class="form-group">
-											<label class="form-label">Shift Name</label>
+											<label class="form-label">Name</label>
 											<label style="color: red">*</label> 
 											<select class="form-control" name="shiftName" id="shiftName">
 											<option th:value="General" th:selected="${shiftEdit.shiftName}==General">General</option>
