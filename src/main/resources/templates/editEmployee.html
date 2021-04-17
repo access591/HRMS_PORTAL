@@ -118,28 +118,30 @@ body {
 												</div>
 										
 												</div>
+												
+												
+												
 											<div class="form-row">
 											 <div class="form-group sm col-md-4">
 												<label class="form-label">Date Of Joining</label>
 												<span class="text-danger">*</span>
 												<input  type="text" id="dateOfJoining" name="dateOfJoining"th:value="${employeeEdit.dateOfJoining}" class="form-control required">
 										          </div>	
-
-											<div class="form-group sm col-md-4">
-													<label class="form-label">Date  Of Posting </label> <span
-														class="text-danger">*</span> <input 
-														class="form-control required" type="text"id="dateOfPosting"th:value="${employeeEdit.dateOfPosting}"
-														name="dateOfPosting" />
-
-												</div>
+										          
+										        <div class="form-group sm col-md-4">
 												
-										          <div class="form-group sm col-md-4">
-													<label class="form-label">Date  Of Retirement</label> <span
-														class="text-danger">*</span> <input 
-														class="form-control required" type="text"id="dateOfRetirement"th:value="${employeeEdit.dateOfRetirement}"
-														name="dateOfRetirement" />
+													<label class="form-label">Batch Year</label> <span
+														class="text-danger">*</span> 
+														<input class="form-control required" type="text"id="batchYear"name="batchYear"th:value="${employeeEdit.batchYear}"/>
 
 												</div>
+													<div class="form-group sm col-md-4">
+													<label class="form-label">VRS 
+													</label> <input name=vrs type="text" id="vrs" maxlength="50" th:value="${employeeEdit.vrs}"
+														class="form-control">
+												</div>
+													
+
 										          
 												</div>
 											
@@ -154,29 +156,7 @@ body {
 											     
 											   <input type="hidden" class="form-control" id="depName" name="depName" size="50" > 
 											</div>
-											
-												
-												<div class="form-group sm col-md-4">
-													<label class="form-label">Employee Payee Code. <span
-														class="text-danger">*</span>
-													</label> <input name="employeePayeeCode" type="text" id="employeePayeeCode"th:value="${employeeEdit.employeePayeeCode}" pattern="\d{1,10}" title="Only digits"maxlength="10" 
-														class="form-control required">
-												</div>
-												
-												<div class="form-group sm col-md-4">
-												
-													<label class="form-label">Batch Year</label> <span
-														class="text-danger">*</span> 
-														<input class="form-control required" type="text"id="batchYear"name="batchYear"th:value="${employeeEdit.batchYear}"/>
-
-												</div>
-												</div>
-									
-												
-												
-											<div class="form-row">
-												
-													<div class="form-group sm col-md-4">
+											<div class="form-group sm col-md-4">
 													<label class="form-label">Type</label> <span
 														class="text-danger">*</span> <select
 														class="form-control required" name="typeCourtDepartment" id="typeCourtDepartment">
@@ -185,6 +165,30 @@ body {
 														<option value="D" th:selected="${employeeEdit.typeCourtDepartment}==D">Department</option>
 													</select>
 												</div>
+												
+												<div class="form-group sm col-md-4">
+													<label class="form-label">Date  Of Posting </label> <span
+														class="text-danger">*</span> <input 
+														class="form-control required" type="text"id="dateOfPosting"th:value="${employeeEdit.dateOfPosting}"
+														name="dateOfPosting" />
+
+												</div>
+												
+												
+								
+												</div>
+									
+												
+												
+											<div class="form-row">
+												<div class="form-group sm col-md-4">
+													<label class="form-label">Employee Payee Code. <span
+														class="text-danger">*</span>
+													</label> <input name="employeePayeeCode" type="text" id="employeePayeeCode"th:value="${employeeEdit.employeePayeeCode}" pattern="\d{1,10}" title="Only digits"maxlength="10" 
+														class="form-control required">
+												</div>
+												
+													
 												<div class="form-group sm col-md-4">
 													<label class="form-label">Officer Type</label> <span
 														class="text-danger">*</span> <select
@@ -197,13 +201,14 @@ body {
 														<option value="ADA"th:selected="${employeeEdit.officerType}==ADA">ADA</option>
 													</select>
 												</div>
-													
-												<div class="form-group sm col-md-4">
-													<label class="form-label">VRS 
-													</label> <input name=vrs type="text" id="vrs" maxlength="50" th:value="${employeeEdit.vrs}"
-														class="form-control">
+													<div class="form-group sm col-md-4">
+													<label class="form-label">Present Posting <span
+														class="text-danger">*</span>
+													</label> <input name="presentPosting" type="text"id="presentPosting" th:value="${employeeEdit.presentPosting}" title="Present Posting"
+														class="form-control required">
 												</div>
 													
+											
 												</div>
 													<div class="form-row">
 													<div class="form-group sm col-md-4">
@@ -224,11 +229,13 @@ body {
 														
 													</select>
 												</div>
-													<div class="form-group sm col-md-4">
-													<label class="form-label">Present Posting <span
-														class="text-danger">*</span>
-													</label> <input name="presentPosting" type="text"id="presentPosting" th:value="${employeeEdit.presentPosting}" title="Present Posting"
-														class="form-control required">
+												
+												<div class="form-group sm col-md-4">
+													<label class="form-label">Date  Of Retirement</label> <span
+														class="text-danger">*</span> <input 
+														class="form-control required" type="text"id="dateOfRetirement"th:value="${employeeEdit.dateOfRetirement}"
+														name="dateOfRetirement" />
+
 												</div>
 													
 													
