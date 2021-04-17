@@ -10,8 +10,7 @@ import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+
 
 public class AbstractGenericDao<E> implements GenericDao<E> {
 	private final Class<E> entityClass;
@@ -102,26 +101,6 @@ public class AbstractGenericDao<E> implements GenericDao<E> {
 
 		
 	}
-	/*
-	 * @Override public Page<E> findAll(Pageable pageable) { Page<E> page =
-	 * findAll(pageable); System.out.println("page===================="+page);
-	 * return (Page<E>) page.getContent();
-	 * 
-	 * }
-	 */
-	/*
-	 * @Override public Page<E> findAll(Pageable pageable) {
-	 * 
-	 * Page<E> page = findAll(pageable);
-	 * System.out.println("page===================="+page); return (Page<E>)
-	 * page.getContent();
-	 * 
-	 * pageable =
-	 * pageable.create(pageable).ignoreCase().enableLike().excludeZeroes(); return
-	 * getSession().createCriteria(this.entityClass).add(pageable).list();
-	 * 
-	 * }
-	 */
-
+	
 
 }
