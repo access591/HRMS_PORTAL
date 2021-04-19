@@ -95,7 +95,9 @@ body {
 											<label style="color: red">*</label>
 										     	<select class="form-control" name="holidayType"id="holidayType" >
 													<option  th:value="N"  th:selected="${Holidayedit.holidayType}==N">National</option>
-													<option th:value="S" th:selected="${Holidayedit.holidayType}==S">State</option>
+													<option th:value="G"th:selected="${Holidayedit.holidayType}==G">Gazetted</option>
+													<option th:value="R"th:selected="${Holidayedit.holidayType}==R">Restricted</option>
+													<option th:value="O"th:selected="${Holidayedit.holidayType}==O">other</option> 
 												
 											</select>
 										    </div>
