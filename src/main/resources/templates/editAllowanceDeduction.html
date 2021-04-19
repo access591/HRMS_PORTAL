@@ -59,16 +59,21 @@ body {
 											   <input type="text" class="form-control" id="allowanceCode" name="allowanceCode" th:value="${editMiscAllowance.allowanceCode}" readonly>
 												</div>
 												
-												<div class="form-group">
-											<label class="form-label">Head</label>
-											<label style="color: red">*</label>
-											 <input type="text" class="form-control"maxlength="40" pattern="^[a-zA-Z\s]*$"  id="head" name="head" th:value="${editMiscAllowance.head}" required aria-required="true">
-										      </div>
+											<div class="form-group">
+											   <label class="form-label">Head</label>
+											   <label style="color: red">*</label>
+											   <select class="form-control" name="head"id="head"required aria-required="true">
+											    <option value="">Select Head </option>
+											      <option th:value="General" th:selected="${editMiscAllowance.head}==General">General </option>
+											      <option th:value="Reimbursement" th:selected="${editMiscAllowance.head}==Reimbursement">Reimbursement</option>
+											</select>
+											
+										   </div>
 										      
 										      <div class="form-group">
 											     <label> Act Code </label>
 											  	<label style="color: red">*</label>
-											   <input type="text" class="form-control" id="actCode" name="actCode"  th:value="${editMiscAllowance.actCode}" required aria-required="true"pattern="\d{1,10}" title="Only digits"/>
+											   <input type="text" class="form-control" id="actCode" name="actCode"  th:value="${editMiscAllowance.actCode}" required aria-required="true" title="Only digits"/>
 												</div>
 												
 												
@@ -102,12 +107,17 @@ body {
 										</div>
 										
 										
-										<div class="form-group">
+											<div class="form-group">
 											<label class="form-label">Type</label>
 											<label style="color: red">*</label>
-											 <input type="text" class="form-control"  maxlength="20" pattern="^[a-zA-Z\s]*$"id="type" name="type"  th:value="${editMiscAllowance.type}"  required aria-required="true">
+											
+											<select class="form-control" name="type"id="type"required aria-required="true">
+											        <option value="">Select Type </option>
+													<option th:value="Allowance"th:selected="${editMiscAllowance.type}==Allowance">Allowance </option>
+													<option th:value="Deduction"th:selected="${editMiscAllowance.type}==Deduction">Deduction</option>
+											</select>
+											
 										</div>
-										
 										
 										
 										<div class="form-group">
