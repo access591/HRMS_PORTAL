@@ -35,7 +35,7 @@ body {
 			<main class="content">
 				<div class="container-fluid">
 					<div class="header">
-						<h1 class="header-title">HRMS Master</h1>
+						<h1 class="header-title">Master</h1>
 						<nav aria-label="breadcrumb">
 						</nav>
 					</div>
@@ -59,13 +59,19 @@ body {
 											  	<label style="color: red">*</label>
 											      <input type="text" class="form-control" title="Travel Code Code" id="travelCode"maxlength="10" name="travelCode" readonly>
 											</div>
+										 <div class="form-group">
+												<label class="form-label">Vist City Name</label>
+												<label style="color: red">*</label>
+												<select class="form-control select2"onchange="myvistFunction()" name="visitCityCode"id="visitCityCode" required aria-required="true">
+												 <option value="">Select City</option>
+												<option th:each="city :${cityMaster}" th:value="${city.getCityCode()}" th:text="${city.getCityName()}"></option>
+											     	</select>
+											     
+											   <input type="hidden" class="form-control" id="visitCityName" name="visitCityName" size="50" > 
+											</div>
+									        
 											
-											
-											<div class="form-group">
-											<label class="form-label">Start City Name</label>
-											<label style="color: red">*</label>
-											 <input type="text" class="form-control uppercase" id="strtCityName" title="Start City Name" maxlength="30"name="strtCityName"required aria-required="true">
-										</div>
+
 										<div class="form-group">
 
 													<label class="form-label">Status</label>
@@ -85,22 +91,19 @@ body {
 											
 											
 											<div class="col-12 col-lg-6">
-											<div class="form-group">
-											<label class="form-label">Start City Code</label>
-											<label style="color: red">*</label>
-											 <input type="text" class="form-control uppercase" title="Start City Code" id="strtCityCode"  pattern="\d{1,10}"  name="strtCityCode"maxlength="10"required aria-required="true">
-										</div>
-										<div class="form-group">
-											<label class="form-label">Visit City Code</label>
-											<label style="color: red">*</label>
-											 <input type="text" class="form-control uppercase"  pattern="\d{1,10}" id="visitCityCode" name="visitCityCode"maxlength="10" title="Visit City Code" required aria-required="true">
-										</div>
+											
+											  <div class="form-group">
+												<label class="form-label">Start City Name</label>
+												<label style="color: red">*</label>
+												<select class="form-control select2"onchange="myFunction()" name="strtCityCode"id="strtCityCode" required aria-required="true">
+												 <option value="">Select City</option>
+												<option th:each="city :${cityMaster}" th:value="${city.getCityCode()}" th:text="${city.getCityName()}"></option>
+											     	</select>
+											     
+											   <input type="hidden" class="form-control" id="strtCityName" name="strtCityName" size="50" > 
+											</div>
 										
-										<div class="form-group">
-											<label class="form-label">Vist City Name</label>
-											<label style="color: red">*</label>
-											 <input type="text" class="form-control uppercase" id="visitCityName" title="Vist City Name" maxlength="10"name="visitCityName"required aria-required="true">
-										</div>
+								
 											</div>
 										</div>
 										<button type="submit" class="btn btn-primary">Save</button>
@@ -119,7 +122,9 @@ body {
 											<tr>
 											
 												<th scope="col">Travel  Code</th>
+												<th scope="col">Start City Code </th>
 												<th scope="col">Start City Name </th>
+												<th scope="col">Vist City Code</th>
 												<th scope="col">Vist City Name</th>
 												<th scope="col">Status</th>
 												<th scope="col">Action</th>
@@ -128,12 +133,14 @@ body {
 										<tbody>
 											<tr  th:each="listOfTravel : ${listTravel}">
 												<td th:text="${listOfTravel.travelCode}"></td>
+												<td th:text="${listOfTravel.strtCityCode}"></td>
 												<td th:text="${listOfTravel.strtCityName}"></td>
+												<td th:text="${listOfTravel.visitCityCode}"></td>
 												<td th:text="${listOfTravel.visitCityName}"></td>
 												<td th:text="${listOfTravel.active}"></td>
 												
-												<td><a th:href="@{/editTravel/{id}(id=${listOfTravel.travelCode})}" class="btn btn-primary"><em class="fa fa-edit"></em></a>
-												<a th:href="@{/deleteTravel/{id}(id=${listOfTravel.travelCode})}" class="btn btn-primary"onclick="return confirm('Are you sure?')"><em class="fa fa-times"></em></a>
+												<td><a th:href="@{/editTravel/{id}(id=${listOfTravel.travelCode})}"><em class="fa fa-edit"></em></a>
+												<a th:href="@{/deleteTravel/{id}(id=${listOfTravel.travelCode})}" onclick="return confirm('Are you sure?')"><em class="fa fa-times"></em></a>
 												</td>
 											</tr>
 										</tbody>
@@ -171,7 +178,27 @@ body {
 			datatablesButtons.buttons().container().appendTo("#datatables-buttons_wrapper .col-md-6:eq(0)")
 		});
 	</script>
-		
+	<script>
+ function myFunction(){
+    	  $('#strtCityCode').click(function() {
+      	 var name= $('#strtCityCode option:selected').text();
+      	$('#strtCityName').val(name);
+      	}); 
+      }
+      
+</script>	
+	<script>
+        function myvistFunction(){
+    	  $('#visitCityCode').click(function() {
+      	 var name= $('#visitCityCode option:selected').text();
+      	$('#visitCityName').val(name);
+      	}); 
+      }
+      
+</script>	
+
+	
+	
 		
 </body>
 </html>
