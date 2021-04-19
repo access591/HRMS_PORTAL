@@ -179,4 +179,15 @@ public class UserController {
 		
 	}
 	
+	@GetMapping("/dashboard")
+	public String dashBoardMethod(Model model,HttpSession session) {
+		String userCode = (String) session.getAttribute("username");
+		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
+		if (modules != null) {
+			model.addAttribute("modules", modules);
+		}
+		return "dashboard";
+	
+	}
+	
 }
