@@ -1,6 +1,7 @@
 package com.hrms.controller;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -91,7 +92,7 @@ public class EmpPayDetailsController {
 
 		System.out.println("save employe pay detail " + employeePayDetail);
 	
-		List<EmployeePayDetail> listEmployeePayDetail = empPayDetailService.getAllEmployeePayDetail();
+		//List<EmployeePayDetail> listEmployeePayDetail = empPayDetailService.getAllEmployeePayDetail();
 
 
 		/*
@@ -106,6 +107,13 @@ public class EmpPayDetailsController {
 		 * 
 		 * session.setAttribute("username", session.getAttribute("username"));
 		 */
+		boolean isUserExists = empPayDetailService.isEmployeePayExists(employeePayDetail.getEmpCode());
+		if(isUserExists) {
+			System.out.println( " üser allready exists");
+		}else {
+			empPayDetailService.addEmployeePayDetail(employeePayDetail);
+			System.out.println("user is not exists");
+		}
 		return "redirect:/" + pageMappingService.PageRequestMapping(reqPage, pageno);
 	}
 

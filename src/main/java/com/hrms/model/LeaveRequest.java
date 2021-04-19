@@ -24,7 +24,7 @@ public class LeaveRequest  {
 	
 	@Column(name = "EMP_CODE")
 	private String empCode;
-	
+	     
 	@Column(name = "EMP_NAME")
 	private String empName;
 	
