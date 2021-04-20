@@ -99,21 +99,17 @@ body {
 
 											</div>
 											<div class="col-12 col-lg-6">
-
+												
 												<div class="form-group">
 													<label class="form-label">Type</label> <label
-														style="color: red">*</label> <select class="form-control"
-														name="leaveType" id="leaveType">
-														<option th:value="CASUAL" th:selected="${leaveDetailEdit.leaveType}==CASUAL">CASUAL LEAVE</option>
-														<option th:value="SICK" th:selected="${leaveDetailEdit.leaveType}==SICK">SICK LEAVE</option>
-														<option th:value="PUBLIC" th:selected="${leaveDetailEdit.leaveType}==PUBLIC">PUBLIC HOLIDAY</option>
-														<option th:value="RELIGIOUS" th:selected="${leaveDetailEdit.leaveType}==RELIGIOUS">RELIGIOUS HOLIDAYS</option>
-														<option th:value="MATERNITY" th:selected="${leaveDetailEdit.leaveType}==MATERNITY">MATERNITY LEAVE</option>
-														<option th:value="BEREAVEMENT" th:selected="${leaveDetailEdit.leaveType}==BEREAVEMENT">BEREAVEMENT LEAVE</option>
-														<option th:value="COMPENSATORY" th:selected="${leaveDetailEdit.leaveType}==COMPENSATORY">COMPENSATORY LEAVE</option>
-														<option th:value="UNPAID" th:selected="${leaveDetailEdit.leaveType}==UNPAID">UNPAID LEAVE</option>
+														style="color: red">*</label> 
+														<select class="form-control"name="leaveType"onchange="myvistFunction()"  id="leaveType">
+														<option value="">Select Leave</option>
+															<option th:each="ListLeave :${listLeave}" th:value="${ListLeave.getLevCode()}" th:text="${ListLeave.getLevType()}"th:field="${leaveDetailEdit.leaveType}"></option>
+														
 
 													</select>
+													<input type="hidden" class="form-control" id="levTypeName" name="levTypeName" th:value="${leaveDetailEdit.levTypeName}" >
 												</div>
 
 												<div class="form-group">
@@ -156,7 +152,15 @@ body {
 			</footer>
 		</div>
 	</div>
-	
+	<script>
+        function myvistFunction(){
+    	  $('#leaveType').click(function() {
+      	 var name= $('#leaveType option:selected').text();
+      	$('#levTypeName').val(name);
+      	}); 
+      }
+      
+</script>	
 
 
 </body>
