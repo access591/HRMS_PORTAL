@@ -46,7 +46,7 @@ public class DesignationServiceImpl implements DesignationService {
 
 	@Override
 	public boolean checkDesignationExists(Designation designation) {
-		Designation e = designationDao.existOrNot(designation);
+		Designation e = designationDao.checkDesignationExists(designation);
 		if (e != null) {
 			return true;
 		} else {

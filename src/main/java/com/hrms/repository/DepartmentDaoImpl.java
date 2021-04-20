@@ -13,7 +13,7 @@ import com.hrms.model.Department;
 @Repository
 public class DepartmentDaoImpl extends AbstractGenericDao<Department> implements DepartmentDao {
 
-	private Logger logger = LoggerFactory.getLogger(BankDaoImpl.class.getName());
+	private Logger logger = LoggerFactory.getLogger(DepartmentDaoImpl.class.getName());
 	@Override
 	public Department checkDepartmentExists(Department department) {
 		Department deptName = null;
