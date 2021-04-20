@@ -5,4 +5,6 @@ import com.hrms.model.Loan;
 
 public interface LoanMaterDao extends GenericDao<Loan> {
 
+	Loan checkLoanExists(Loan loan);
+
 }
