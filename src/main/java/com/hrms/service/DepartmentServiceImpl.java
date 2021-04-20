@@ -46,7 +46,7 @@ public class DepartmentServiceImpl implements DepartmentService {
 
 	@Override
 	public boolean checkDepartmentExists(Department department) {
-		Department e = departmentDao.existOrNot(department);
+		Department e = departmentDao.checkDepartmentExists(department);
 		if (e != null) {
 			return true;
 		} else {
