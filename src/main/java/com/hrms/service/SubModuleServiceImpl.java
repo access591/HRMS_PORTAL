@@ -50,7 +50,7 @@ public class SubModuleServiceImpl  implements SubModuleService{
 
 	@Override
 	public boolean checkSubModuleExists(SubModule subModule) {
-		SubModule e = subModuleDao.existOrNot(subModule);
+		SubModule e = subModuleDao.checkSubModuleExists(subModule);
 		if (e != null) {
 			return true;
 		} else {
@@ -61,6 +61,17 @@ public class SubModuleServiceImpl  implements SubModuleService{
 	@Override
 	public List<SubModule> getActiveSubModules() {
 		return subModuleDao.findAll();
+	}
+
+	@Override
+	public boolean checkSubModuleSeqExists(SubModule subModule) {
+		
+		SubModule e = subModuleDao.checkSubModuleSeqExists(subModule);
+		if (e != null) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 }
