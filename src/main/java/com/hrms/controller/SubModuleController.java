@@ -72,14 +72,21 @@ public class SubModuleController {
 		}
 
 		else {
+			boolean isSeqExist = subModuleService.checkSubModuleSeqExists(subModule);
+			
+			if(isSeqExist) {
+				redirectAttributes.addFlashAttribute("message2", "Seq No Already exists !  ");
+			    redirectAttributes.addFlashAttribute("alertClass", "alert-success");
+			    return "redirect:"+pageMappingService.PageRequestMapping(reqPage,pageno);
+			}else {
 			subModuleService.addSubModule(subModule);
 			List<SubModule> listSubModule = subModuleService.getAllSubModules();
 			model.addAttribute("listSubModule", listSubModule);
 			session.setAttribute("username", session.getAttribute("username"));
-		}
-
+	
 		 return "redirect:"+pageMappingService.PageRequestMapping(reqPage,pageno);
-
+			}
+		}
 	}
 	
 	/**
