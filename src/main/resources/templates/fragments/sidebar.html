@@ -25,6 +25,18 @@
 {
   cursor:pointer;
 }
+h5.tittle-w3l {
+    color: #000;
+    font-size: 15px;
+    letter-spacing: 1px;
+    text-shadow: 3px 3px 3px rgba(0, 0, 0, 0.19);
+}
+
+h5.tittle-w3l span {
+    color: #0879c9;
+    font-size: 20px;
+    letter-spacing: 0;
+}
 	
 	</style>
 			<a class="sidebar-brand" href="./dashboard">
@@ -42,8 +54,10 @@
                    <ul id="treeview">
 
 					<li class="sidebar-item" >
-					<li><a href="./dashboard" title="Menu"> <span
-							class="align-middle">Menu</span></a></li>
+					<li> <h5 class="tittle-w3l">
+				<span>M</span>EN<span>U</span>
+	</h5>
+					</li>
 					<li class="open" th:each="module: ${modules}">
 					<a class="align-middle mr-2 fas fa-fw fa-check"
 						title="${module.getModuleName()}"> 
