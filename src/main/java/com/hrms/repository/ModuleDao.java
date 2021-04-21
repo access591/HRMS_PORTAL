@@ -16,6 +16,10 @@ public interface ModuleDao  extends GenericDao<Module>{
 	List<SubModule> getAllSubModule(String modulecCode, String ucode);
 
 	List<Program> getAllProgramList(String moduleCode, String smCode, String userCode);
+
+	Module checkModuleExists(Module module);
+
+	Module checkModuleSeqExists(Module module);
 	   
 
 }

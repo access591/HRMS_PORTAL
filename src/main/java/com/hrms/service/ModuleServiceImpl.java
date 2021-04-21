@@ -118,7 +118,7 @@ public class ModuleServiceImpl implements ModuleService {
 	@Override
 	public boolean checkModuleExists(Module module) {
 
-		Module e = moduleDao.findModule(module);
+		Module e = moduleDao.checkModuleExists(module);
 		if (e != null) {
 			return true;
 		} else {
@@ -149,6 +149,17 @@ public class ModuleServiceImpl implements ModuleService {
 	@Override
 	public List<Module> getActiveModules() {
 		return moduleDao.findAll();
+	}
+
+	@Override
+	public boolean checkModuleSeqExists(Module module) {
+	
+		Module e = moduleDao.checkModuleSeqExists(module);
+		if (e != null) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 }

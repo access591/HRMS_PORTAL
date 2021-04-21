@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.hrms.dao.AbstractGenericDao;
+import com.hrms.model.Department;
 import com.hrms.model.Module;
 import com.hrms.model.Program;
 import com.hrms.model.SubModule;
@@ -134,6 +135,39 @@ public class ModuleDaoImpl extends AbstractGenericDao<Module> implements ModuleD
 		}
 
 		return programs;
+	}
+
+	@Override
+	public Module checkModuleExists(Module module) {
+		Module moduleName = null;
+		try {
+			
+			Criteria criteria = getSession().createCriteria(Module.class);
+			moduleName = (Module) criteria.setFetchMode("MODULE_NAME", FetchMode.SELECT)
+					.add(Restrictions.eq("moduleName", module.getModuleName())).uniqueResult();
+
+		} catch (Exception e) {
+			logger.info("ModuleDaoImpl.checkModuleExists" + e.getMessage());
+		}
+
+		return moduleName;
+	}
+
+	@Override
+	public Module checkModuleSeqExists(Module module) {
+		
+		Module seqNo = null;
+		try {
+			
+			Criteria criteria = getSession().createCriteria(Module.class);
+			seqNo = (Module) criteria.setFetchMode("SEQ_NO", FetchMode.SELECT)
+					.add(Restrictions.eq("seqNo", module.getSeqNo())).uniqueResult();
+
+		} catch (Exception e) {
+			logger.info("ModuleDaoImpl.checkModuleSeqExists" + e.getMessage());
+		}
+
+		return seqNo;
 	}
 
 }
