@@ -56,7 +56,7 @@ body {
 
 								</div>
 								<div class="card-body">
-									<form id="validation-form" action="#" th:action="@{/saveSubModule}" th:object="${submodule}" method="post">
+									<form id="validation-form" action="#" th:action="@{/saveSubModule}" th:object="${SubModule1}" method="post">
 										<div class="row">
 											<div class="col-12 col-lg-6">
 										
@@ -144,7 +144,7 @@ body {
 										<tr th:each="listsubModule : ${listSubModule}">
 												<td th:text="${listsubModule.subModuleCode}"></td>
 												<td th:text="${listsubModule.subModuleName}"></td>
-												<td th:text="${listsubModule.moduleCode}"></td>
+												<td th:text="${listsubModule.moduleCode.moduleName}"></td>
 												<td th:text="${listsubModule.seqNoSubModule}"></td>
 												<td th:text="${listsubModule.acitveSubModule}"></td>
 						                     	<td>
