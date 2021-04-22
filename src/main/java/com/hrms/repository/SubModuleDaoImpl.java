@@ -1,7 +1,5 @@
 package com.hrms.repository;
 
-import java.util.List;
-
 import org.hibernate.Criteria;
 import org.hibernate.FetchMode;
 import org.hibernate.criterion.Restrictions;
@@ -33,19 +31,22 @@ public class SubModuleDaoImpl extends AbstractGenericDao<SubModule> implements S
 	}
 	@Override
 	public SubModule checkSubModuleSeqExists(SubModule subModule) {
-		List<SubModule> subModuleSeq = null;
+
+		
+		
+		SubModule Subsq = null;
 		try {
 			
 			Criteria criteria = getSession().createCriteria(SubModule.class);
-			subModuleSeq =criteria.setFetchMode("SEQ_NO", FetchMode.SELECT)
-					.add(Restrictions.eq("seqNoSubModule", subModule.getSeqNoSubModule())).list();
+			Subsq = (SubModule) criteria.setFetchMode("SEQ_NO", FetchMode.SELECT)
+					.add(Restrictions.eq("seqNoSubModule", subModule.getSeqNoSubModule())).uniqueResult();
 
 		} catch (Exception e) {
-			logger.info("SubModuleDaoImpl.checkSubModuleSeqExists" + e.getMessage());
-			throw e;
+			logger.info("DepartmentDaoImpl.checkDepartmentExists" + e.getMessage());
 		}
 
-		return subModuleSeq.get(0);
+		return Subsq;
+	
 	}
 	
 
