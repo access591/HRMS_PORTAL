@@ -128,8 +128,15 @@ public class SubModuleController {
 	 * @return
 	 */
 	@PostMapping("/updateSubModule")
-	public String updatesubmodule(@ModelAttribute("submoduleupdate") SubModule subModule, Model model) {
-
+	public String updatesubmodule(@ModelAttribute("submoduleupdate") SubModule1 subModule1, Model model) {
+		Module module=new Module();
+		SubModule subModule=new SubModule();
+		module.setModuleCode(subModule1.getModuleCode());
+		subModule.setModuleCode(module);
+		subModule.setSubModuleCode(subModule1.getSubModuleCode());
+		subModule.setSubModuleName(subModule1.getSubModuleName());
+		subModule.setSeqNoSubModule(subModule1.getSeqNoSubModule());
+		subModule.setAcitveSubModule(subModule1.getAcitveSubModule());
 		
 		
 		
