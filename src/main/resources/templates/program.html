@@ -145,6 +145,7 @@ body {
 												<th scope="col">Module Name </th>
 												<th scope="col">Sub Module Name </th>
 												<th scope="col">Status</th>
+												<th scope="col">Seq No</th>
 												<th scope="col">Action</th>
 												
 											</tr>
@@ -156,6 +157,7 @@ body {
 												<td th:text="${listofgrade.pModuleCode.moduleName}"></td>
 												<td th:text="${listofgrade.subModuleCode.subModuleName}"></td>
 												<td th:text="${listofgrade.activeYn}"></td>
+												<td th:text="${listofgrade.seqProgram}"></td>
 												<td><a th:href="@{/editProgram/{id}(id=${listofgrade.programCode})}"><em class="fa fa-edit"></em></a>
 												<a th:href="@{/deleteProgram/{id}(id=${listofgrade.programCode})}" onclick="return confirm('Are you sure?')"><em class="fa fa-times"></em></a>
 												</td>
