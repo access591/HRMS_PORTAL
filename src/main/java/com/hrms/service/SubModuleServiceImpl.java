@@ -35,10 +35,7 @@ public class SubModuleServiceImpl  implements SubModuleService{
 
 	@Override
 	public void updateSubModule(SubModule subModule) {
-		subModule.setSubModuleName(subModule.getSubModuleName());
-		subModule.setModuleCode(subModule.getModuleCode());
-		subModule.setSeqNoSubModule(subModule.getSeqNoSubModule());
-		subModule.setAcitveSubModule(subModule.getAcitveSubModule());
+	
 		this.subModuleDao.saveOrUpdate(subModule);
 
 	}
