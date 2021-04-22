@@ -58,8 +58,9 @@ public class Program implements Serializable {
 
 	@Column(name = "SEQ_NO")
 	private String seqProgram;
-	
+	@Column(insertable = false,updatable = false)
 	private String dmoduleCode;
+	@Column(insertable = false,updatable = false)
 	private String dsubMouduleCode;
 	
 	
