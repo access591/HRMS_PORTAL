@@ -117,7 +117,7 @@ public class ModuleDaoImpl extends AbstractGenericDao<Module> implements ModuleD
 		List programs = null;
 		try {
 
-			String sql = "SELECT  DISTINCT DISTINCT  u.PRG_CODE,p.PRG_NAME,p.MODULE_CODE,p.PRG_TYPE,p.PRG_HREF_NAME,p.ACTIVE_YN,p.INS_BY,p.INS_DATE,p.UPDATE_BY,p.UPDATE_DATE,p.SUB_MODULE_CODE,p.SEQ_NO ,dmoduleCode,dsubMouduleCode \r\n"
+			String sql = "SELECT  DISTINCT DISTINCT  u.PRG_CODE,p.PRG_NAME,p.MODULE_CODE,p.PRG_TYPE,p.PRG_HREF_NAME,p.ACTIVE_YN,p.INS_BY,p.INS_DATE,p.UPDATE_BY,p.UPDATE_DATE,p.SUB_MODULE_CODE,p.SEQ_NO \r\n"
 					+ " FROM 	M_MODULE m , M_URIGHTS u ,M_SUB_MODULE s ,M_PROGRAM p"
 					+ "  Where m.MODULE_CODE = u.MODULE_CODE\r\n" + "  AND u.MODULE_CODE =s.MODULE_CODE\r\n"
 					+ "  and u.SUB_MODULE_CODE =s.SUB_MODULE_CODE\r\n" + "  and u.MODULE_CODE =p.MODULE_CODE\r\n"

@@ -24,8 +24,7 @@ public class Program implements Serializable {
 	@Column(name = "PRG_NAME")
 	private String programName;
 
-//	@Column(name = "MODULE_CODE")
-//	private String moduleCode;
+
 
 	@Column(name = "PRG_TYPE")
 	private String programType;
@@ -58,30 +57,7 @@ public class Program implements Serializable {
 
 	@Column(name = "SEQ_NO")
 	private String seqProgram;
-	@Column(insertable = false,updatable = false)
-	private String dmoduleCode;
-	@Column(insertable = false,updatable = false)
-	private String dsubMouduleCode;
 	
-	
-	
-
-	public String getDmoduleCode() {
-		return dmoduleCode;
-	}
-
-	public void setDmoduleCode(String dmoduleCode) {
-		this.dmoduleCode = dmoduleCode;
-	}
-
-	public String getDsubMouduleCode() {
-		return dsubMouduleCode;
-	}
-
-	public void setDsubMouduleCode(String dsubMouduleCode) {
-		this.dsubMouduleCode = dsubMouduleCode;
-	}
-
 	public String getProgramCode() {
 		return programCode;
 	}
@@ -98,13 +74,7 @@ public class Program implements Serializable {
 		this.programName = programName;
 	}
 
-//	public String getModuleCode() {
-//		return moduleCode;
-//	}
-//
-//	public void setModuleCode(String moduleCode) {
-//		this.moduleCode = moduleCode;
-//	}
+
 
 	public String getProgramType() {
 		return programType;
