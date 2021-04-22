@@ -18,6 +18,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hrms.model.MenuModule;
 import com.hrms.model.SubModule;
+import com.hrms.model.SubModule1;
 import com.hrms.model.Module;
 import com.hrms.service.ModuleService;
 import com.hrms.service.PageMappingService;
@@ -61,32 +62,43 @@ public class SubModuleController {
  * @return
  */
 	@PostMapping("/saveSubModule")
-	public String saveSubModule(@ModelAttribute("submodule") SubModule subModule, Model model,
+	public String saveSubModule(@ModelAttribute("SubModule1") SubModule1 SubModule1, Model model,
 			RedirectAttributes redirectAttributes, HttpSession session) {
-
+		String insertedBY = (String) session.getAttribute("uuuuu");
+		
+		Module module=new Module();
+		SubModule subModule=new SubModule();
+		module.setModuleCode(SubModule1.getModuleCode());
+		subModule.setModuleCode(module);
+		subModule.setSubModuleName(SubModule1.getSubModuleName());
+		subModule.setSeqNoSubModule(SubModule1.getSeqNoSubModule());
+		subModule.setAcitveSubModule(SubModule1.getAcitveSubModule());
+		subModule.setInsertedBySubModule(insertedBY);
 		boolean isSubModuleExist = subModuleService.checkSubModuleExists(subModule);
-		if (isSubModuleExist) {
-			redirectAttributes.addFlashAttribute("message", " Sub Module Already exists !  ");
-			redirectAttributes.addFlashAttribute("alertClass", "alert-success");
-			 return "redirect:"+pageMappingService.PageRequestMapping(reqPage,pageno);
-		}
-
-		else {
-			boolean isSeqExist = subModuleService.checkSubModuleSeqExists(subModule);
-			
-			if(isSeqExist) {
-				redirectAttributes.addFlashAttribute("message2", "Seq No Already exists !  ");
-			    redirectAttributes.addFlashAttribute("alertClass", "alert-success");
-			    return "redirect:"+pageMappingService.PageRequestMapping(reqPage,pageno);
-			}else {
+		 
+		  if (isSubModuleExist)
+		  { redirectAttributes.addFlashAttribute("message"," Sub Module Already exists !  ");
+		  redirectAttributes.addFlashAttribute("alertClass", "alert-success"); return
+		  "redirect:"+pageMappingService.PageRequestMapping(reqPage,pageno); }
+		  
+		  else { boolean isSeqExist =
+		  subModuleService.checkSubModuleSeqExists(subModule);
+		  
+		  if(isSeqExist) 
+		  {
+			  redirectAttributes.addFlashAttribute("message2", "Seq No Already exists !");
+		      redirectAttributes.addFlashAttribute("alertClass", "alert-success"); 
+		      return "redirect:"+pageMappingService.PageRequestMapping(reqPage,pageno);
+		  }else {
 			subModuleService.addSubModule(subModule);
 			List<SubModule> listSubModule = subModuleService.getAllSubModules();
 			model.addAttribute("listSubModule", listSubModule);
 			session.setAttribute("username", session.getAttribute("username"));
 	
 		 return "redirect:"+pageMappingService.PageRequestMapping(reqPage,pageno);
-			}
-		}
+			 } 
+
+			 } 
 	}
 	
 	/**
@@ -118,6 +130,9 @@ public class SubModuleController {
 	@PostMapping("/updateSubModule")
 	public String updatesubmodule(@ModelAttribute("submoduleupdate") SubModule subModule, Model model) {
 
+		
+		
+		
 		this.subModuleService.updateSubModule(subModule);
 
 		 return "redirect:/"+pageMappingService.PageRequestMapping(reqPage,pageno);
