@@ -19,115 +19,110 @@ public class LeaveRequest  {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "LEAVE_REQUEST_ID")
+	@Column(name = "LEAVE_REQUEST_ID" ,length=100)
 	private Long leaveRequestId;
 	
-	@Column(name = "EMP_CODE")
+	@Column(name = "EMP_CODE",length=50)
 	private String empCode;
 	     
-	@Column(name = "EMP_NAME")
-	private String empName;
+	/*
+	 * @Column(name = "EMP_NAME") private String empName;
+	 */
 	
-	@Column(name = "DEPT_CODE")
+	@Column(name = "DEPT_CODE",length=50)
 	private String deptCode;
 	
-	@Column(name = "DEPT_NAME")
-	private String deptName;
+	/*
+	 * @Column(name = "DEPT_NAME") private String deptName;
+	 */
 	
-	@Column(name = "LEAVE_CODE")  
+	@Column(name = "LEAVE_CODE",length=50)  
 	private String leaveCode;
 	
-	@Column(name = "TO_DATE")
-	private Date toDate;
+	@Column(name = "TO_DATE",length=20)
+	private String toDate;
 	
-	@Column(name = "FROM_DATE")
-	private Date fromDate;
+	@Column(name = "FROM_DATE",length=20)
+	private String fromDate;
 	
-	@Column(name = "FROM_DATE_TYPE")
+	@Column(name = "FROM_DATE_TYPE",length=10)
 	private String fromDateType;
 	
-	@Column(name = "TO_DATE_TYPE")
+	@Column(name = "TO_DATE_TYPE",length=10)
 	private String toDateType;
 	
-	@Column(name = "APPLY_DATE")
-	private Date applyDate;
+	@Column(name = "APPLY_DATE",length=20)
+	private String applyDate;
 	
-	@Column(name = "APPROVE_DATE")
-	private Date approvedDate;
+	@Column(name = "APPROVE_DATE",length=20)
+	private String approvedDate;
 	
-	@Column(name = "APPROVED_BY")
+	@Column(name = "APPROVED_BY",length=20)
 	private String approevedBy;
 	
-	@Column(name = "SHIFT_CODE")
+	@Column(name = "SHIFT_CODE",length=20)
 	private String shiftCode;
 	
-	@Column(name = "REASON")
+	@Column(name = "REASON",length=200)
 	private String reason;
 	
-	@Column(name = "LEAVE_FOR")
+	@Column(name = "DAYS",length=20)
 	private String leaveFor;
 	
-	@Column(name = "CANCEL_BY")
+	@Column(name = "CANCEL_BY",length=20)
 	private String cancelBy;
 	
-	@Column(name = "CANCEL_DATE")
+	@Column(name = "CANCEL_DATE",length=20)
 	private String cancelDate;
 	
-	@Column(name = "NUMBER_OF_LEAVES")
-	private String numberOfLeaves;
 	
-	@Column(name = "REQUEST_FROM_DATE")
+	
+	@Column(name = "REQUEST_FROM_DATE",length=20)
 	private String requestFromDate;
 	
-	@Column(name = "REQUEST_TO_DATE")
+	@Column(name = "REQUEST_TO_DATE",length=20)
 	private String requestToDate;
 	
-	@Column(name = "REQUEST_FROM_DATE_TYPE")
+	@Column(name = "REQUEST_FROM_DATE_TYPE",length=10)
 	private String requestFromDateType;
 	
-	@Column(name = "REQUEST_TO_DATE_TYPE")
+	@Column(name = "REQUEST_TO_DATE_TYPE",length=10)
 	private String requestToDateTYpe;
 	
-	@Column(name = "INS_BY", updatable = false)
+	@Column(name = "INS_BY", updatable = false,length=20)
 	private String insBy;
 
-	@Column(name = "INS_DATE", updatable = false)
+	@Column(name = "INS_DATE", updatable = false,length=20)
 	private Date insDate = new Date();
 
-	@Column(name = "UPD_BY", insertable = false)
+	@Column(name = "UPD_BY", insertable = false,length=20)
 	private String updBy;
 
-	@Column(name = "UPD_DATE", insertable = false)
+	@Column(name = "UPD_DATE", insertable = false,length=20)
 	private Date updDate = new Date();
 	
-
+	@Column(length=20)
 	private String status = new String("N");
 	
+	@Column(name = "REQUEST_TYPE",length=20)
+	private String requestType;
 	
+	
+	public String getRequestType() {
+		return requestType;
+	}
+
+
+	public void setRequestType(String requestType) {
+		this.requestType = requestType;
+	}
+
+
 	public LeaveRequest() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	
-	public String getEmpName() {
-		return empName;
-	}
-
-
-	public void setEmpName(String empName) {
-		this.empName = empName;
-	}
-
-
-	public String getDeptName() {
-		return deptName;
-	}
-
-
-	public void setDeptName(String deptName) {
-		this.deptName = deptName;
-	}
-
 
 	public Long getLeaveRequestId() {
 		return leaveRequestId;
@@ -169,22 +164,22 @@ public class LeaveRequest  {
 	}
 
 
-	public Date getToDate() {
+	public String getToDate() {
 		return toDate;
 	}
 
 
-	public void setToDate(Date toDate) {
+	public void setToDate(String toDate) {
 		this.toDate = toDate;
 	}
 
 
-	public Date getFromDate() {
+	public String getFromDate() {
 		return fromDate;
 	}
 
 
-	public void setFromDate(Date fromDate) {
+	public void setFromDate(String fromDate) {
 		this.fromDate = fromDate;
 	}
 
@@ -209,22 +204,22 @@ public class LeaveRequest  {
 	}
 
 
-	public Date getApplyDate() {
+	public String getApplyDate() {
 		return applyDate;
 	}
 
 
-	public void setApplyDate(Date applyDate) {
+	public void setApplyDate(String applyDate) {
 		this.applyDate = applyDate;
 	}
 
 
-	public Date getApprovedDate() {
+	public String getApprovedDate() {
 		return approvedDate;
 	}
 
 
-	public void setApprovedDate(Date approvedDate) {
+	public void setApprovedDate(String approvedDate) {
 		this.approvedDate = approvedDate;
 	}
 
@@ -286,16 +281,6 @@ public class LeaveRequest  {
 
 	public void setCancelDate(String cancelDate) {
 		this.cancelDate = cancelDate;
-	}
-
-
-	public String getNumberOfLeaves() {
-		return numberOfLeaves;
-	}
-
-
-	public void setNumberOfLeaves(String numberOfLeaves) {
-		this.numberOfLeaves = numberOfLeaves;
 	}
 
 
@@ -388,16 +373,18 @@ public class LeaveRequest  {
 
 	@Override
 	public String toString() {
-		return "LeaveRequest [leaveRequestId=" + leaveRequestId + ", empCode=" + empCode + ", empName=" + empName
-				+ ", deptCode=" + deptCode + ", deptName=" + deptName + ", leaveCode=" + leaveCode + ", toDate="
-				+ toDate + ", fromDate=" + fromDate + ", fromDateType=" + fromDateType + ", toDateType=" + toDateType
-				+ ", applyDate=" + applyDate + ", approvedDate=" + approvedDate + ", approevedBy=" + approevedBy
-				+ ", shiftCode=" + shiftCode + ", reason=" + reason + ", leaveFor=" + leaveFor + ", cancelBy="
-				+ cancelBy + ", cancelDate=" + cancelDate + ", numberOfLeaves=" + numberOfLeaves + ", requestFromDate="
-				+ requestFromDate + ", requestToDate=" + requestToDate + ", requestFromDateType=" + requestFromDateType
-				+ ", requestToDateTYpe=" + requestToDateTYpe + ", insBy=" + insBy + ", insDate=" + insDate + ", updBy="
-				+ updBy + ", updDate=" + updDate + ", status=" + status + "]";
+		return "LeaveRequest [leaveRequestId=" + leaveRequestId + ", empCode=" + empCode + ", deptCode=" + deptCode
+				+ ", leaveCode=" + leaveCode + ", toDate=" + toDate + ", fromDate=" + fromDate + ", fromDateType="
+				+ fromDateType + ", toDateType=" + toDateType + ", applyDate=" + applyDate + ", approvedDate="
+				+ approvedDate + ", approevedBy=" + approevedBy + ", shiftCode=" + shiftCode + ", reason=" + reason
+				+ ", leaveFor=" + leaveFor + ", cancelBy=" + cancelBy + ", cancelDate=" + cancelDate
+				+ ", requestFromDate=" + requestFromDate + ", requestToDate="
+				+ requestToDate + ", requestFromDateType=" + requestFromDateType + ", requestToDateTYpe="
+				+ requestToDateTYpe + ", insBy=" + insBy + ", insDate=" + insDate + ", updBy=" + updBy + ", updDate="
+				+ updDate + ", status=" + status + "]";
 	}
+
+	
 
 	
 

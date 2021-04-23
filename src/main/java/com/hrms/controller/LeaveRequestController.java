@@ -48,12 +48,13 @@ public class LeaveRequestController {
 		
 		String userCode = (String) session.getAttribute("username");
 		System.out.println("userCode  is : "+ userCode);
-		/* UserEntity userEntity = userService.findUserById(userCode); */
 		
-		/*
-		 * List<LeaveRequest> listLeaveRequestByEmpCode =
-		 * leaveRequestService.findAllByEmpCode( userEntity.getEmpCode());
-		 */
+		UserEntity userEntity = userService.findUserById(userCode); 
+		
+		
+		  List<LeaveRequest> listLeaveRequestByEmpCode =
+		  leaveRequestService.findAllByEmpCode( userEntity.getEmpCode());
+		 
 		
 		List<LeaveRequest> listLeaveRequest = leaveRequestService.getAllLeaves();
 		
@@ -85,8 +86,8 @@ public class LeaveRequestController {
 		String insertedBY = (String) session.getAttribute("userlogin");
 		System.out.println("inserted by :"+ insertedBY);
 		
-		System.out.println("employee Request Name : "+ leaveRequest.getEmpName());
-		
+		System.out.println("leave from date : " + leaveRequest.getFromDate());
+		System.out.println("leave to date : " + leaveRequest.getToDate());
 		leaveRequestService.addLeave(leaveRequest);
 		
 		session.setAttribute("username", session.getAttribute("username"));

@@ -70,14 +70,15 @@ function ajaxRequestForDepartmentLeave(val){
 
 var leaveTypeId = "";
 var fromDateType = "f";
+var toDateType = "f"
 
 function leaveType(){
 	
 	leaveTypeId =  document.getElementById("leave_type_id").value;
-	//console.log("type of leave : "+leaveType);
+	console.log("type of leave : "+leaveTypeId);
 	
 	if(leaveTypeId=="single"){
-		console.log(" single leave type");
+		console.log(" single if block");
 		document.getElementById("to_date_type").disabled = true;
 		document.getElementById("to_date").disabled = true;
 		document.getElementById("to_date").value = document.getElementById("from_date").value;
@@ -85,7 +86,7 @@ function leaveType(){
 	}																
 
 	else{
-		console.log("multiple leave type ");
+		console.log("multiple else block ");
 		document.getElementById("to_date_type").disabled = false;
 		document.getElementById("to_date").disabled = false;
 		
@@ -107,55 +108,101 @@ function changeToDate(val){
 	}
 }
 
-function dayType(){
-	fromDateType = document.getElementById("from_date_type").value;
+
+function getFromDate(val){
+	console.log("get ffrom date : ="+ val);
+
+	if(leaveTypeId == "single" || leaveTypeId==""){
+		document.getElementById("to_date").value = document.getElementById("from_date").value;
+	}
 	
-	fromDateType = fromDateType;
+}
+
+function getToDate(val){
+	console.log("get to date : "+ val);
+	if(leaveTypeId == "multiple" ){
+		countLeaveDays();
+	}
+}
+
+function fromDayTypeValue(val){
+	console.log("val is : " + val );
+	fromDateType = val;
+	
+	console.log("from date type : " + fromDateType);
+	
 	console.log(fromDateType + " in day type ");
-	
+	countLeaveDays();
+}
+
+function toDayTypeValue(val){
+	console.log("to date type val is : "+ val);
+	toDateType = val;
 	countLeaveDays();
 }
 
 function countLeaveDays(){
 
-	console.log("leave type id : "+ leaveTypeId);
-	console.log("from date type : "+ fromDateType);
-
+	console.log("count leave ");
+	console.log(" from day type :" + fromDateType);
+	
 	if(leaveTypeId == "single" && fromDateType =="f" )
 	{
 		document.getElementById("leave_for").value = 1 ;
 		console.log("1st block");
 	}
-	if(leaveTypeId == "single" && fromDateType =="h" )
+	if(leaveTypeId == "single" && (fromDateType =="fh" || fromDateType == "sh") )
 	{
 		document.getElementById("leave_for").value = 0.5 ;
 		console.log("2nd block");
 	}
-	if(leaveTypeId == "" && (fromDateType =="h" || fromDateType == "f") )
+	if(leaveTypeId == "" && (fromDateType =="fh" || fromDateType == "sh") )
 	{
 		document.getElementById("leave_for").value = 1 ;
 		console.log("3rd block");
 	}
 	if(leaveTypeId == "multiple" ){
+
 		var fromDate = document.getElementById("from_date").value;
 		var toDate = document.getElementById("to_date").value;
-		
-		var date1 = new Date(fromDate);
-		var date2 = new Date(toDate);
 
-		
+		var f = fromDate.split("/");
+		var t = toDate.split("/");
+		console.log("from date : "+ f);
+		console.log("to date : "+ t);
+			
+		var date1 = new Date(f[2],f[1]-1,f[0]);
+		var date2 = new Date(t[2],t[1]-1,t[0]);
 
 		const diffTime = Math.abs(date2 - date1);
-		const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));  
-
-		console.log(" day diff. : "+ diffDays);
-		document.getElementById("leave_for").value = diffDays ;
+		const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+			
+		console.log(" toatl leaves : " + diffDays);
 
 		
-		console.log("calculate days : "+ totalLeave);
-		//document.getElementById("leave_for").value = 0;
-		console.log("4th block : from date "+ fromDate);
 		
+		if(fromDateType=="f" && toDateType != "f"){
+			console.log("dirst full day second half day");
+			document.getElementById("leave_for").value = diffDays - 0.5;
+		}
+		if(fromDateType !="f" && toDateType =="f"){
+			console.log("from half day and second full day");
+			document.getElementById("leave_for").value = diffDays-0.5;
+		}
+		if(fromDateType=="f" && toDateType=="f"){
+			console.log("complete off");
+			document.getElementById("leave_for").value = diffDays;
+		}
+		if((fromDateType=="fh" || fromDateType =="sh") && (toDateType=="fh" || toDateType=="sh")){
+			console.log("- one ")
+			document.getElementById("leave_for").value = diffDays-0.5;
+			// - 0.5
+		}
+
+		
+		
+
+	
 	}
 
 
