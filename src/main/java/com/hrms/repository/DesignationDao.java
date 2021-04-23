@@ -5,4 +5,6 @@ import com.hrms.model.Designation;
 
 public interface DesignationDao extends GenericDao<Designation> {
 
+	Designation checkDesignationExists(Designation designation);
+
 }

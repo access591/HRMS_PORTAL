@@ -6,7 +6,8 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -22,10 +23,10 @@ public class SubModule implements Serializable {
 
 	@Column(name = "SUB_MODULE_NAME")
 	private String subModuleName;
-
 	
-	@Column(name = "MODULE_CODE")
-	private String moduleCode;
+	@ManyToOne
+	@JoinColumn(name = "MODULE_CODE", nullable = false)
+	private Module moduleCode;
 
 	@Column(name = "INS_BY")
 	private String insertedBySubModule;
@@ -72,11 +73,13 @@ public class SubModule implements Serializable {
 		this.subModuleName = subModuleName;
 	}
 
-	public String getModuleCode() {
+	
+
+	public Module getModuleCode() {
 		return moduleCode;
 	}
 
-	public void setModuleCode(String moduleCode) {
+	public void setModuleCode(Module moduleCode) {
 		this.moduleCode = moduleCode;
 	}
 

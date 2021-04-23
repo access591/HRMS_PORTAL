@@ -15,6 +15,7 @@ public class LeaveServiceImpl implements LeaveService {
 	@Override
 	public void addLeave(Leave leave) {
 		leave.setInsDate(new Date());
+		leave.setLevCode(leaveDao.getMaxId("LTC"));
 		this.leaveDao.saveOrUpdate(leave);
 	}
 

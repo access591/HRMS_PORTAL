@@ -18,5 +18,6 @@ public interface SubModuleService {
 	public void updateSubModule(SubModule subModule);
 
 	public void removeSubModule(String id);
+	boolean checkSubModuleSeqExists(SubModule subModule);
     
 } 

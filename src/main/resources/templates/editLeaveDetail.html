@@ -78,10 +78,9 @@ body {
 													</select>
 												</div>
 												<div class="form-group">
-													<label class="form-label"> Maximum Limit</label> <label
-														style="color: red">*</label> <input type="text"
-														class="form-control uppercase" id="maxLimit"
-														name="maxLimit" th:value="${leaveDetailEdit.maxLimit}" required aria-required="true">
+													<label class="form-label"> Maximum Limit</label>
+													  <input type="text"class="form-control" id="maxLimit"
+														name="maxLimit" th:value="${leaveDetailEdit.maxLimit}">
 												</div>
 											<div class="form-group">
 													<label class="form-label">Status</label>
@@ -100,21 +99,17 @@ body {
 
 											</div>
 											<div class="col-12 col-lg-6">
-
+												
 												<div class="form-group">
 													<label class="form-label">Type</label> <label
-														style="color: red">*</label> <select class="form-control"
-														name="leaveType" id="leaveType">
-														<option th:value="CASUAL" th:selected="${leaveDetailEdit.leaveType}==CASUAL">CASUAL LEAVE</option>
-														<option th:value="SICK" th:selected="${leaveDetailEdit.leaveType}==SICK">SICK LEAVE</option>
-														<option th:value="PUBLIC" th:selected="${leaveDetailEdit.leaveType}==PUBLIC">PUBLIC HOLIDAY</option>
-														<option th:value="RELIGIOUS" th:selected="${leaveDetailEdit.leaveType}==RELIGIOUS">RELIGIOUS HOLIDAYS</option>
-														<option th:value="MATERNITY" th:selected="${leaveDetailEdit.leaveType}==MATERNITY">MATERNITY LEAVE</option>
-														<option th:value="BEREAVEMENT" th:selected="${leaveDetailEdit.leaveType}==BEREAVEMENT">BEREAVEMENT LEAVE</option>
-														<option th:value="COMPENSATORY" th:selected="${leaveDetailEdit.leaveType}==COMPENSATORY">COMPENSATORY LEAVE</option>
-														<option th:value="UNPAID" th:selected="${leaveDetailEdit.leaveType}==UNPAID">UNPAID LEAVE</option>
+														style="color: red">*</label> 
+														<select class="form-control"name="leaveType"onchange="myvistFunction()"  id="leaveType">
+														<option value="">Select Leave</option>
+															<option th:each="ListLeave :${listLeave}" th:value="${ListLeave.getLevCode()}" th:text="${ListLeave.getLevType()}"th:field="${leaveDetailEdit.leaveType}"></option>
+														
 
 													</select>
+													<input type="hidden" class="form-control" id="levTypeName" name="levTypeName" th:value="${leaveDetailEdit.levTypeName}" >
 												</div>
 
 												<div class="form-group">
@@ -129,18 +124,14 @@ body {
 													</select>
 												</div>
 												<div class="form-group">
-													<label class="form-label"> Entitlement Days</label> <label
-														style="color: red">*</label> <input type="text"
-														class="form-control uppercase" id="entDay"  th:value="${leaveDetailEdit.entDay}" name="entDay"
-														required aria-required="true">
+													<label class="form-label"> Entitlement Days</label> 
+													 <input type="text" class="form-control" id="entDay"th:value="${leaveDetailEdit.entDay}" name="entDay">
 												</div>
 
-												<div class="form-group">
-													<label class="form-label"> Abbreviation </label> <label
-														style="color: red">*</label> <input type="text"
-														class="form-control uppercase" id="abbrev" name="abbrev" th:value="${leaveDetailEdit.abbrev}"
-														required aria-required="true">
-												</div>
+											<div class="form-group">
+											<label class="form-label"> Abbreviation </label> 
+											 <input type="text"class="form-control" id="abbrev" name="abbrev"th:value="${leaveDetailEdit.abbrev}">
+											</div>
 
 											</div>
 										</div>
@@ -161,7 +152,15 @@ body {
 			</footer>
 		</div>
 	</div>
-	
+	<script>
+        function myvistFunction(){
+    	  $('#leaveType').click(function() {
+      	 var name= $('#leaveType option:selected').text();
+      	$('#levTypeName').val(name);
+      	}); 
+      }
+      
+</script>	
 
 
 </body>

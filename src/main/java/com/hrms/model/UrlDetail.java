@@ -27,9 +27,7 @@ public class UrlDetail implements Serializable {
 	@Column(name ="PAGE_NAME")
 	private String pageName;
 	
-	@Column(name = "ACTIVE_YN")
-	private String active;
-
+	
 	@Column(name = "INS_BY")
 	private String insertedBy;
 
@@ -65,12 +63,7 @@ public class UrlDetail implements Serializable {
 	public void setPageName(String pageName) {
 		this.pageName = pageName;
 	}
-	public String getActive() {
-		return active;
-	}
-	public void setActive(String active) {
-		this.active = active;
-	}
+	
 	public String getInsertedBy() {
 		return insertedBy;
 	}

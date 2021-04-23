@@ -17,9 +17,12 @@ public class LeaveDetail implements Serializable {
 	@Id
 	@Column(name = "LEAVE_CODE")
 	private String lvCode;
+	@Column(name = "LEAVE_TYPE_NAME")
+	private String levTypeName;
 	
 	@Column(name = "TOTALLEAVE")
 	private String totalLeave;
+	
 
 	@Column(name = "LWP")
 	private String lwp;
@@ -60,6 +63,14 @@ public class LeaveDetail implements Serializable {
 
 	public void setLvCode(String lvCode) {
 		this.lvCode = lvCode;
+	}
+
+	public String getLevTypeName() {
+		return levTypeName;
+	}
+
+	public void setLevTypeName(String levTypeName) {
+		this.levTypeName = levTypeName;
 	}
 
 	public String getTotalLeave() {

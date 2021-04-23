@@ -11,9 +11,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.ModelAndView;
 
+import com.hrms.model.City;
 import com.hrms.model.MenuModule;
 import com.hrms.model.Travel;
+import com.hrms.service.CityService;
 import com.hrms.service.ModuleService;
 import com.hrms.service.PageMappingService;
 import com.hrms.service.TravelService;
@@ -29,6 +32,8 @@ public class TravelController {
 	private ModuleService moduleService;
 	@Autowired
 	TravelService travelService;
+	@Autowired
+	CityService cityService;
 /**
  * Request  Mapping Travel Details 
  * @param model
@@ -46,6 +51,8 @@ public class TravelController {
 		if (modules != null) {
 			model.addAttribute("modules", modules);
 		}
+		 List<City> cityList =cityService.getAllCities();
+		 model.addAttribute("cityMaster", cityList);
 
 		session.setAttribute("username", session.getAttribute("username"));
 
@@ -83,6 +90,9 @@ public class TravelController {
 		
 		Travel travelEdit = travelService.findTravelById(id);
 		model.addAttribute("travelEdit",travelEdit);
+		List<City> cityList =cityService.getAllCities();
+		 model.addAttribute("cityMaster", cityList);
+
 		session.setAttribute("username", session.getAttribute("username"));
 		
 		return pageMappingService.PageRequestMapping(reqPageedit, editPageNo);

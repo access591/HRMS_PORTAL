@@ -72,27 +72,7 @@ public class UserController {
 
 
 	
-	private SubModule1 getSubModuleObject() {
 
-		Date date = new Date();
-
-		SubModule1 subModule = new SubModule1();
-		subModule.setAcitveSubModule("Y");
-		subModule.setInsertedBySubModule("xyz");
-		subModule.setInsertedDateSubModule(date);
-		Module module = new Module();
-		module.setModuleCode("1001");
-		subModule.setModuleCode(module);
-		subModule.setSeqNoSubModule(2);
-		subModule.setSubModuleName("Test_Sub_module");
-		subModule.setSubModuleCode("Test_Module");
-		subModule.setSubModulePrograms(new ArrayList<Program>());
-		subModule.setUpdateBySubModule("Surendra");
-		subModule.setUpdatedDateSubModule(date);
-
-
-		return subModule;
-	}
 	
 	@GetMapping("/userMaster")
 	public String UserMaster(Model model, HttpSession session) {
@@ -177,6 +157,17 @@ public class UserController {
 		session.invalidate();
 		return "redirect:./";
 		
+	}
+	
+	@GetMapping("/dashboard")
+	public String dashBoardMethod(Model model,HttpSession session) {
+		String userCode = (String) session.getAttribute("username");
+		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
+		if (modules != null) {
+			model.addAttribute("modules", modules);
+		}
+		return "dashboard";
+	
 	}
 	
 }

@@ -67,7 +67,7 @@ public String departmentMaster(Model model,HttpSession session) {
 	
 	
 	if (isModuleExist) {
-	    redirectAttributes.addFlashAttribute("message", "Department Code Already exists !  ");
+	    redirectAttributes.addFlashAttribute("message", "Department Name Already exists !  ");
 	    redirectAttributes.addFlashAttribute("alertClass", "alert-success");
 	    return "redirect:"+pageMappingService.PageRequestMapping(reqPage,pageno);
 

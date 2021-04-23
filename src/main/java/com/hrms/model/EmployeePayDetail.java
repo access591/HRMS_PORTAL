@@ -6,6 +6,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+//@Entity(name = "Emp_Pay_detail")
+
 @Entity(name = "Emp_Pay_detail")
 public class EmployeePayDetail implements Serializable{
 	
@@ -19,7 +21,9 @@ public class EmployeePayDetail implements Serializable{
 	@Column(length=25,name="EMP_CODE")
 	private String empCode;
 	
-	@Column(length=25,name="EMP_NAME")
+
+
+	@Column(length=25,name="EMP_NAME")  
 	private String empName;
 	
 	@Column(length=25,name="DEPT_CODE")
@@ -31,6 +35,7 @@ public class EmployeePayDetail implements Serializable{
 	@Column(length=25,name="DEPT_CODE1")
 	private String deptCode1;
 	
+
 	@Column(length=25,name="WEF_DATE")
 	private String wefdate;
 	
@@ -52,6 +57,7 @@ public class EmployeePayDetail implements Serializable{
 	@Column(length=25,name="EMP_ESI_NO")
 	private String empEsiNo;
 	
+
 	@Column(length=25,name="ESI_EFFICTIVE_DATE")
 	private String esiEffectiveDate;
 	
@@ -85,7 +91,8 @@ public class EmployeePayDetail implements Serializable{
 	@Column(length=25,name="HRA_VALUE")
 	private String hraValue;
 	
-	@Column(length=25,name="COMPANY_LEASE_ACC")
+
+	@Column(length=25,name="COMPANY_LEASED_ACC")
 	private String companyLeasedAcc;
 	
 	@Column(length=25,name="DA")
@@ -100,8 +107,10 @@ public class EmployeePayDetail implements Serializable{
 	@Column(length=25,name="CONVEYANCE_ALLOW")
 	private String conveyanceAllow;
 
+	
 	@Column(length=25,name="BONUS")
 	private String bonus;
+	
 
 	@Column(length=25,name="EPF")
 	private String epf;
@@ -118,12 +127,14 @@ public class EmployeePayDetail implements Serializable{
 	@Column(length=25,name="BASIC_PAY_Y")
 	private String basicPayY;
 	
+
 	@Column(length=25,name="HRA_RATE_Y")
 	private String hraRateY;
 	
 	@Column(length=25,name="HRA_VALUE_Y")
 	private String hravalueY;
 	
+
 	@Column(length=25,name="DAY")
 	private String daY;
 	
@@ -139,10 +150,11 @@ public class EmployeePayDetail implements Serializable{
 	@Column(length=25,name="BONUS_Y")
 	private String bonusY;
 	
-	@Column(length=25,name="OVER_TIME_YN")
+
+	@Column(length=25,name="OVERTIME_YN")
 	private String overtimeYN;
 	
-	@Column(length=25,name="OVER_TIME_RATE")
+	@Column(length=25,name="OVERTIME_RATE")
 	private String overtimerate;
 	
 	@Column(length=25,name="PF_TYPE")
@@ -169,7 +181,8 @@ public class EmployeePayDetail implements Serializable{
 	@Column(length=25,name="TOTAL_DEDUCTION_Y")
 	private String totalDedductionY;
 	
-	@Column(length=25,name="AMOUNT_PAY_ABLE_Y")
+
+	@Column(length=25,name="AMOUNT_PAYABLE_Y")
 	private String amountPayableY;
 	
 	@Column(length=25,name="FPF1_Y")
@@ -184,12 +197,14 @@ public class EmployeePayDetail implements Serializable{
 	@Column(length=25,name="PENSION_FUND1_Y")
 	private String pensionFund1Y;
 	
-	@Column(length=25,name="ADMINSTRATIVE_CHARGE")
+
+	@Column(length=25,name="ADMINISTRATIVE_CHARGES")
 	private String administrativeCharges;
 	
 	@Column(length=25,name="C_CODE")
 	private String cCode;
 	
+
 	@Column(length=25,name="ADMINSTRATIVE_CHARGE_Y")
 	private String administrativeChargesY;
 	
@@ -214,6 +229,7 @@ public class EmployeePayDetail implements Serializable{
 	@Column(length=25,name="SECTION_LOV")
 	private String sectionLov;
 	
+
 	@Column(length=25,name="CTC_1")
 	private String ctc1;
 	
@@ -226,6 +242,7 @@ public class EmployeePayDetail implements Serializable{
 	@Column(length=25,name="GROSS_Y")
 	private String grossY;
 	
+
 	@Column(length=25,name="EPF_Y")
 	private String epfY;
 
@@ -257,7 +274,9 @@ public class EmployeePayDetail implements Serializable{
 	@Column(length=25,name="ESIC")
 	private String esiC;
 	
+
 	@Column(length=25,name="ESICY")
+
 	private String esiCY;
 	
 	@Column(length=25,name="NET_PAY")

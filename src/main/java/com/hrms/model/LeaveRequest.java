@@ -1,7 +1,9 @@
 package com.hrms.model;
 
 
+
 import java.io.Serializable;
+
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -13,6 +15,7 @@ import javax.persistence.Table;
 
 
 @Entity
+//@Table(name="leave_request")
 @Table(name="LEAVE_REQUEST")
 public class LeaveRequest implements Serializable  {
 	
@@ -31,7 +34,7 @@ public class LeaveRequest implements Serializable  {
 	
 	@Column(name = "EMP_CODE")
 	private String empCode;
-	
+
 	@Column(name = "EMP_NAME")
 	private String empName;
 	
@@ -41,6 +44,7 @@ public class LeaveRequest implements Serializable  {
 	@Column(name = "DEPT_NAME")
 	private String deptName;
 
+
 	@Column(name = "LEAVE_CODE")
 	private String leaveCode;
 	
@@ -49,6 +53,7 @@ public class LeaveRequest implements Serializable  {
 	
 	@Column(name = "FROM_CODE")
 	private String fromDate;
+
 	
 	@Column(name = "FROM_DATE_TYPE")
 	private String fromDateType;
@@ -56,11 +61,13 @@ public class LeaveRequest implements Serializable  {
 	@Column(name = "TO_DATE_TYPE")
 	private String toDateType;
 	
+
 	@Column(name = "APPLY_CODE")
 	private String applyDate;
 	
 	@Column(name = "APPROVED_DATE")
 	private String approvedDate;
+
 	
 	@Column(name = "APPROVED_BY")
 	private String approevedBy;
@@ -115,25 +122,6 @@ public class LeaveRequest implements Serializable  {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
-	public String getEmpName() {
-		return empName;
-	}
-
-
-	public void setEmpName(String empName) {
-		this.empName = empName;
-	}
-
-
-	public String getDeptName() {
-		return deptName;
-	}
-
-
-	public void setDeptName(String deptName) {
-		this.deptName = deptName;
-	}
 
 
 	public Long getLeaveRequestId() {
@@ -156,6 +144,16 @@ public class LeaveRequest implements Serializable  {
 	}
 
 
+	public String getEmpName() {
+		return empName;
+	}
+
+
+	public void setEmpName(String empName) {
+		this.empName = empName;
+	}
+
+
 	public String getDeptCode() {
 		return deptCode;
 	}
@@ -163,6 +161,16 @@ public class LeaveRequest implements Serializable  {
 
 	public void setDeptCode(String deptCode) {
 		this.deptCode = deptCode;
+	}
+
+
+	public String getDeptName() {
+		return deptName;
+	}
+
+
+	public void setDeptName(String deptName) {
+		this.deptName = deptName;
 	}
 
 
@@ -385,13 +393,16 @@ public class LeaveRequest implements Serializable  {
 		this.updDate = updDate;
 	}
 
+
 	public String getStatus() {
 		return status;
 	}
 
+
 	public void setStatus(String status) {
 		this.status = status;
 	}
+
 
 	@Override
 	public String toString() {
@@ -405,8 +416,8 @@ public class LeaveRequest implements Serializable  {
 				+ ", requestToDateTYpe=" + requestToDateTYpe + ", insBy=" + insBy + ", insDate=" + insDate + ", updBy="
 				+ updBy + ", updDate=" + updDate + ", status=" + status + "]";
 	}
-
 	
+
 
 	
 	

@@ -60,12 +60,20 @@ body {
 											      <input type="text" class="form-control" title="Travel Code Code" id="travelCode"maxlength="10"th:value="${travelEdit.travelCode}" name="travelCode" readonly>
 											</div>
 											
+											 <div class="form-group">
+												<label class="form-label">Vist City Name</label>
+												<label style="color: red">*</label>
+												<select class="form-control select2"onchange="myvistFunction()" name="visitCityCode"id="visitCityCode" required aria-required="true">
+												 <option value="">Select City</option>
+												<option th:each="city :${cityMaster}" th:value="${city.getCityCode()}" th:text="${city.getCityName()}"th:field="${travelEdit.visitCityCode}"></option>
+											     	</select>
+											      <input type="hidden" class="form-control" id="visitCityName"th:value="${travelEdit.visitCityName}" name="visitCityName">
+											 
+											</div>
 											
-											<div class="form-group">
-											<label class="form-label">Start City Name</label>
-											<label style="color: red">*</label>
-											 <input type="text" class="form-control uppercase" id="strtCityName" title="Start City Name" maxlength="30"name="strtCityName"th:value="${travelEdit.strtCityName}" required aria-required="true">
-										</div>
+										
+										
+										
 											<div class="form-group">
 													<label class="form-label">Status</label>
 													<div class="custom-controls-stacked">
@@ -85,22 +93,19 @@ body {
 											
 											
 											<div class="col-12 col-lg-6">
-											<div class="form-group">
-											<label class="form-label">Start City Code</label>
-											<label style="color: red">*</label>
-											 <input type="text" class="form-control uppercase" title="Start City Code" id="strtCityCode" th:value="${travelEdit.strtCityCode}"  pattern="\d{1,10}"  name="strtCityCode"maxlength="10"required aria-required="true">
-										</div>
-										<div class="form-group">
-											<label class="form-label">Visit City Code</label>
-											<label style="color: red">*</label>
-											 <input type="text" class="form-control uppercase"  pattern="\d{1,10}" id="visitCityCode" th:value="${travelEdit.visitCityCode}"name="visitCityCode"maxlength="10" title="Visit City Code" required aria-required="true">
-										</div>
+											
+											 <div class="form-group">
+												<label class="form-label">Start City Name</label>
+												<label style="color: red">*</label>
+												<select class="form-control select2"onchange="myFunction()" name="strtCityCode"id="strtCityCode" required aria-required="true">
+												 <option value="">Select City</option>
+												<option th:each="city :${cityMaster}" th:value="${city.getCityCode()}" th:text="${city.getCityName()}"th:field="${travelEdit.strtCityCode}"></option>
+											     	</select>
+											      <input type="hidden" class="form-control" id="strtCityName"  name="strtCityName"th:value="${travelEdit.strtCityName}" >
+
+											</div>
 										
-										<div class="form-group">
-											<label class="form-label">Vist City Name</label>
-											<label style="color: red">*</label>
-											 <input type="text" class="form-control uppercase" id="visitCityName" title="Vist City Name"  th:value="${travelEdit.visitCityName}" maxlength="10"name="visitCityName"required aria-required="true">
-										</div>
+						
 											</div>
 										</div>
 										<button type="submit" class="btn btn-primary">Save</button>
@@ -121,7 +126,24 @@ body {
 		</div>
 		</div>
 	
-		
+		<script>
+ function myFunction(){
+    	  $('#strtCityCode').click(function() {
+      	 var name= $('#strtCityCode option:selected').text();
+      	$('#strtCityName').val(name);
+      	}); 
+      }
+      
+</script>	
+	<script>
+        function myvistFunction(){
+    	  $('#visitCityCode').click(function() {
+      	 var name= $('#visitCityCode option:selected').text();
+      	$('#visitCityName').val(name);
+      	}); 
+      }
+      
+</script>		
 		
 </body>
 </html>

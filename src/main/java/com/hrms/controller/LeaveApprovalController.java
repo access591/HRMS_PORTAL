@@ -1,5 +1,6 @@
 package com.hrms.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -42,6 +43,13 @@ public class LeaveApprovalController {
 		String userCode = (String) session.getAttribute("username");
 		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
 		List<Department> listDepartment = departmentService.getAllDepartments();
+		List<LeaveRequest> listLeaveApproval = leaveRequestService.getEmployeeByStatusY();
+		
+		
+		
+		if(listLeaveApproval != null) {
+			model.addAttribute("listLeaveApproval" , listLeaveApproval);
+		}
 		if (modules != null) {
 			model.addAttribute("modules", modules);
 		}
@@ -60,31 +68,67 @@ public class LeaveApprovalController {
 	@ResponseBody
 	@GetMapping("/leaverequest/{deptCode}")
 	public List<LeaveRequest> getAllLeaveRequestBydept(@PathVariable("deptCode") String deptCode) {
-		
-		//List<HashMap<String,Object>> leaveRequest = 
+		 
 		return leaveRequestService.findAllByDeptCodeAndStatus(deptCode);
 		
 	}
 	
 	
 	@ResponseBody
-	@GetMapping("/approveLeaveRequest/{leaveid}")
-	public String approveLeaveRequest(@PathVariable("leaveid") String leaveid, Model model ,HttpSession session) {
+	@GetMapping("/approveLeaveRequest/{leaveRequestId}")
+	public String approveLeaveRequest(@PathVariable("leaveRequestId") String leaveid, Model model ,HttpSession session) {
 		
+		String userCode = (String) session.getAttribute("username");
 		LeaveRequest leaveRequest = leaveRequestService.findLeaveRequestById(Long.valueOf(leaveid));
 		
 		System.out.println("leave request approval : "+ leaveRequest);
 		
 		leaveRequest.setStatus("Y");
-		leaveRequestService.updateLeaveRequest(leaveRequest);
+		leaveRequest.setApproevedBy("Rahul");
+		leaveRequest.setApprovedDate(new Date().toString());
+		leaveRequestService.updateLeaveRequest(leaveRequest);   
+		
+		List<LeaveRequest> listLeaveApproval = leaveRequestService.getEmployeeByStatusY();
+		if(listLeaveApproval != null) {
+			model.addAttribute("listLeaveApproval" , listLeaveApproval);
+		}
+			
+		session.setAttribute("username", userCode);
+		
 		leaveApproval(model, session);
+		
 		return null;
 	}
 	
-	@GetMapping("demo")
-	public String demoHandler() {
-		System.out.println("testing");
-		return null;
+	
+	@GetMapping(value = { "/deleteLeaveApproval/{id}" })
+	public String deleteActivity(@PathVariable("id") Long id, Model model, HttpSession session) {
+		
+		String userCode = (String) session.getAttribute("username");
+		this.leaveRequestService.removeLeaveRequest(id);
+		session.setAttribute("username", userCode);
+		return "redirect:/"+ pageMappingService.PageRequestMapping(reqPage, pageno);
+	}
+	
+	
+	@GetMapping(value = { "/viewLeaveApproval/{id}" })
+	public String viewLeaveRequestByEmpId(@PathVariable("id")String leaveRequestId,
+						Model model,HttpSession session) {
+		int pagenoView = 61;
+		String reqPageView = "/viewLeaveRequest";
+		
+		LeaveRequest leaveRequest = this.leaveRequestService.findLeaveRequestById(Long.parseLong(leaveRequestId));
+		
+		if(leaveRequest != null) {
+			model.addAttribute("leaveDetail", leaveRequest);
+		}
+		List<MenuModule> modules = moduleService.getAllModulesList(session.getAttribute("username").toString());
+		if (modules != null) {
+			model.addAttribute("modules", modules);
+		}
+		model.addAttribute("header", "View Leave Approval");
+		model.addAttribute("myhref", "leaveApproval");
+		return pageMappingService.PageRequestMapping(reqPageView, pagenoView);
 	}
 	
 	

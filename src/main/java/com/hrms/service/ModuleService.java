@@ -14,6 +14,7 @@ public interface ModuleService {
 	Module findModuleById(String id);
 	public void updateModule(Module m); 
 	public void removeModule(String id);
+	boolean checkModuleSeqExists(Module module);
 
 	
 }

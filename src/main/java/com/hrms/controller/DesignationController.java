@@ -67,7 +67,7 @@ public class DesignationController {
 		boolean isModuleExist = designationService.checkDesignationExists(designation);
 
 		if (isModuleExist) {
-			redirectAttributes.addFlashAttribute("message", "Designation Code Already exists !  ");
+			redirectAttributes.addFlashAttribute("message", "Designation Name Already exists !  ");
 			redirectAttributes.addFlashAttribute("alertClass", "alert-success");
 			  return "redirect:"+pageMappingService.PageRequestMapping(reqPage,pageno);
 		} else {
