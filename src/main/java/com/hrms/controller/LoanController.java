@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hrms.model.Loan;
 import com.hrms.model.MenuModule;
@@ -60,16 +60,24 @@ public class LoanController {
 	 * @return
 	 */
 	@PostMapping("/saveLoan")
-	public String saveLoan(@ModelAttribute("loan") Loan loan, Model model, HttpSession session) {
-	
+	public String saveLoan(@ModelAttribute("loan") Loan loan, Model model, HttpSession session,RedirectAttributes redirectAttributes) {
+		boolean isloanExist = loanMaterService.checkLoanExists(loan);	
+		if (isloanExist) {
+		    redirectAttributes.addFlashAttribute("message", "Loan Name Already exists !  ");
+		    redirectAttributes.addFlashAttribute("alertClass", "alert-success");
+		    return "redirect:"+pageMappingService.PageRequestMapping(reqPage,pageno);
+
+	}
+	else 
+	{
 			loanMaterService.addLoan(loan);
 			List<Loan> listLoan = loanMaterService.getAllLoans();
 			model.addAttribute("listLoan", listLoan);
 			session.setAttribute("username", session.getAttribute("username"));
-
+	}
 	
 		return "redirect:"+pageMappingService.PageRequestMapping(reqPage,pageno);
-
+	
 
 	}
 

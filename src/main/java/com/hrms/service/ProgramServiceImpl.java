@@ -46,18 +46,7 @@ public class ProgramServiceImpl implements ProgramService {
 
 	@Override
 	public void updateProgram(Program p) {
-		Module module = new Module();
-		SubModule subModule = new SubModule();
-		module.setModuleCode(p.getDmoduleCode());
-		subModule.setSubModuleCode(p.getDsubMouduleCode());
-		p.setpModuleCode(module);
-		p.setSubModuleCode(subModule);
-		p.setProgramName(p.getProgramName());
-		p.setActiveYn(p.getActiveYn());
-		p.setProgramHrefName(p.getProgramHrefName());
-		p.setProgramType(p.getProgramType());
-		p.setSeqProgram(p.getSeqProgram());
-		p.setInsertedDate(p.getUpdatedDate());
+		
 		this.programDao.saveOrUpdate(p);
 
 	}

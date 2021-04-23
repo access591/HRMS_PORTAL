@@ -12,6 +12,18 @@ body {
 .uppercase {
   text-transform: uppercase;
 }
+h5.tittle-w3l {
+    color: #000;
+    font-size: 17px;
+    letter-spacing: 1px;
+    text-shadow: 3px 3px 3px rgba(0, 0, 0, 0.19);
+}
+
+h5.tittle-w3l span {
+    color: #0879c9;
+    font-size: 20px;
+    letter-spacing: 0;
+}
 </style>
 <script>
 	window.dataLayer = window.dataLayer || [];
@@ -44,7 +56,7 @@ body {
 						<div class="col-12">
 							<div class="card">
 								<div class="card-header">
-									<h5 class="card-title">Create Skill Category </h5>
+									<h5 class="card-title">Update Skill Category </h5>
 								   <div class="alert-outline">
 									<div th:if="${message}" th:text="${message}" style="color: red">
 									</div> 
@@ -53,28 +65,52 @@ body {
 								<div class="card-body">
 									<form id="validation-form" action="#" th:action="@{/updateSkillCategory}" th:object="${skillCategory}" method="post">
 										<div class="row">
-										<div class="col-12 col-lg-6">
+										<div class="col-12 col-lg-6"style="background-color:#fffbf7;">
+										<h5 class="tittle-w3l">
+				                       <span>Skill </span>Detail <span> Description</span>
+                                         </h5>
 											<div class="form-group">
 											     <label> Skill Level  Code </label>
 											  	 <label style="color: red">*</label>
 											     <input type="text" class="form-control" id="skillLevelCode" name="skillLevelCode" th:value="${skillCategoryEdit.skillLevelCode}" readonly="readonly">
 											</div>
-											
+											<div class="form-group">
+										   <label class="form-label"> Skill Category Description </label>
+										   <label style="color: red">*</label>
+											 <input type="text" class="form-control " pattern="^[a-zA-Z\s]*$" maxlength="50"  id="skillCatDesc" name="skillCatDesc" th:value="${skillCategoryEdit.skillCatDesc}"required aria-required="true">
+										</div>
 											<div class="form-group">
 										   <label class="form-label"> Level</label>
 										   <label style="color: red">*</label>
 											 <input type="text" class="form-control "  pattern="^[a-zA-Z\s]*$" maxlength="12"  id="skillLevel" name="skillLevel"  title="Level" th:value="${skillCategoryEdit.skillLevel}" required aria-required="true">
 										    </div>
 										    
+										
+											</div>
+										<div class="col-12 col-lg-6"style="background-color:#f7f7f7;">
+										  <h5 class="tittle-w3l">
+				                       <span>Skill </span>Set <span> Description </span>
+                                         </h5>
+                                         
+										<div class="form-group">
+										   <label class="form-label"> Skill Parameter Code </label>
+										   <label style="color: red">*</label>
+											 <input type="text" class="form-control " id=" skillParaCode" name="skillParaCode" th:value="${skillCategoryEdit.skillParaCode}"required aria-required="true">
+										</div>
 										<div class="form-group">
 										   <label class="form-label"> Skill Parameter  Description</label>
 										   <label style="color: red">*</label>
-											 <input type="text" class="form-control " pattern="^[a-zA-Z\s]*$" maxlength="50"  title="Skill Parameter Description"  id="skillParaDes" name="skillParaDes"  th:value="${skillCategoryEdit.skillParaDes}"required aria-required="true">
+											 <input type="text" class="form-control " title="Skill Parameter Description"  id="skillParaDes" name="skillParaDes"  th:value="${skillCategoryEdit.skillParaDes}"required aria-required="true">
+										</div>
+										<div class="form-group">
+										   <label class="form-label"> Skill Parameter Max Mark</label>
+										   <label style="color: red">*</label>
+											 <input type="text" class="form-control"  id="skillParaMaxMark" name="skillParaMaxMark" th:value="${skillCategoryEdit.skillParaMaxMark}"required aria-required="true">
 										</div>
 										
-										
-
-										 <div class="form-group">
+											</div>
+											<div class="col-12 col-lg-6">
+											 <div class="form-group">
 											<label class="form-label">Status</label>
 												<div class="custom-controls-stacked">
 													<label class="radio-inline">
@@ -84,24 +120,6 @@ body {
 														<input type="radio" value="N" name="active" th:checked="${skillCategoryEdit.active}==N"/> &nbsp;Inactive  </label>
 											 </div>
 										</div>
-											</div>
-										<div class="col-12 col-lg-6">
-										<div class="form-group">
-										   <label class="form-label"> Skill Category Description </label>
-										   <label style="color: red">*</label>
-											 <input type="text" class="form-control " pattern="^[a-zA-Z\s]*$" maxlength="50"  id="skillCatDesc" name="skillCatDesc" th:value="${skillCategoryEdit.skillCatDesc}"required aria-required="true">
-										</div>
-										<div class="form-group">
-										   <label class="form-label"> Skill Parameter Code </label>
-										   <label style="color: red">*</label>
-											 <input type="text" class="form-control " maxlength="12" pattern="\d{1,12}"  id=" skillParaCode" name="skillParaCode" th:value="${skillCategoryEdit.skillParaCode}"required aria-required="true">
-										</div>
-										<div class="form-group">
-										   <label class="form-label"> Skill Parameter Max Mark</label>
-										   <label style="color: red">*</label>
-											 <input type="text" class="form-control" maxlength="12" pattern="\d{1,10}"  id="skillParaMaxMark" name="skillParaMaxMark" th:value="${skillCategoryEdit.skillParaMaxMark}"required aria-required="true">
-										</div>
-										
 											</div>
 										</div>
 								<button type="submit" class="btn btn-primary">Save</button>

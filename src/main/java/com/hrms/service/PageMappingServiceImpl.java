@@ -60,7 +60,6 @@ public class PageMappingServiceImpl implements PageMappingService {
 	public void updatePage(UrlDetail u) {
 		u.setPageName(u.getPageName());
 		u.setReqMapping(u.getReqMapping());
-		u.setActive(u.getActive());
 		u.setUpdatedDate(u.getUpdatedDate());
 		this.pageMappingDao.saveOrUpdate(u);
 

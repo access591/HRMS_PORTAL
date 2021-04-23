@@ -54,12 +54,19 @@ body {
 										<div class="row">
 											<div class="col-12 col-lg-6">
 												<div class="form-group">
-										
 											  <label>Section Code </label>
 											  		<label style="color: red">*</label>
 											  	 
 											   <input type="text" class="form-control" maxlength="10"id="sectionCode" name="sectionCode" readonly>
 												</div>
+												
+												<div class="form-group">
+											  <label>Section Description </label>
+											  		<label style="color: red">*</label>
+											  	 
+											   <input type="text" class="form-control" maxlength="50"id="sectionDesc" name="sectionDesc">
+												</div>
+												
 												<div class="form-group">
 
 													<label class="form-label">Status</label>
@@ -99,7 +106,7 @@ body {
 											<tr>
 												<th scope="col">Code</th>
 												<th scope="col">Amount Limit </th>
-												<th scope="col">Status</th>
+												<th scope="col">Section Description</th>
 												<th scope="col">Action</th>
 											</tr>
 										</thead>
@@ -107,7 +114,7 @@ body {
 											<tr  th:each="listsection : ${listSection}">
 												<td th:text="${listsection.sectionCode}"></td>
 												<td th:text="${listsection.amountLimit}"></td>
-												<td th:text="${listsection.active}"></td>
+												<td th:text="${listsection.sectionDesc}"></td>
 												<td><a th:href="@{/editSection/{id}(id=${listsection.sectionCode})}"><em class="fa fa-edit"></em></a>
 												<a th:href="@{/deleteSection/{id}(id=${listsection.sectionCode})}"onclick="return confirm('Are you sure?')"><em class="fa fa-times"></em></a>
 												</td>
