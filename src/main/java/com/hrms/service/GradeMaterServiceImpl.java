@@ -51,7 +51,7 @@ public class GradeMaterServiceImpl implements GradeMaterService{
 
 	@Override
 	public boolean checkGradeExists(Grade grade) {
-		Grade e = gradeMaterDao.existOrNot(grade);
+		Grade e = gradeMaterDao.checkGradeExists(grade);
 		if (e != null) {
 			return true;
 		} else {

@@ -147,7 +147,7 @@ body {
 												<div class="form-group sm col-md-4">
 													<label class="form-label">VRS
 													</label> <input name=vrs type="text" id="vrs" maxlength="30" 
-														class="form-control required">
+														class="form-control">
 												</div>
 												
 												</div>
@@ -352,7 +352,7 @@ body {
 											  <div class="form-group sm col-md-4">
 											       <label class="form-label">Email
 											      </label>
-							                 <input  type="text"id="email"name="email" title="Email" class="form-control">
+							                 <input  type="text"id="email"name="email" title="Email"pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" class="form-control">
 										     </div>
 										       	<div class="form-group sm col-md-4">
 													<label class="form-label">Gender</label> <span
@@ -502,6 +502,7 @@ body {
 										<thead>
 											<tr>
 												<th scope="col">Emp id</th>
+													<th scope="col">empName</th>
 												<th scope="col">Date Of Joining</th>
 												<th scope="col">employee images</th>
 												<th scope="col">Action</th>
@@ -510,7 +511,9 @@ body {
 										</thead>
 										<tbody>
 											<tr  th:each="listemployee : ${listEmployee}">
+												
 												<td th:text="${listemployee.empCode}"></td>
+												<td th:text="${listemployee.empName}"></td>
 												<td th:text="${listemployee.dateOfJoining}"></td>
 												
 											<td><img alt="th" th:src="@{'data:image/jpeg;base64,'+${imgUtil.getImgData(listemployee.imageProfile)}}" width="48" height="48"class="rounded-circle mr-2"></td>

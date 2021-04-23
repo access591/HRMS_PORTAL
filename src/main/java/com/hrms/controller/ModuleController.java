@@ -67,11 +67,19 @@ public class ModuleController {
 		}
 		else 
 		{
-			moduleService.addModule(module); 
-			List<Module> modules1 = moduleService.getModules();
-			model.addAttribute("modules1", modules1);
-			session.setAttribute("username",session.getAttribute("username"));	
-			return"redirect:/module";
+			boolean isSeqExist = moduleService.checkModuleSeqExists(module);
+			
+			if(isSeqExist) {
+				redirectAttributes.addFlashAttribute("message2", "Seq No Already exists !  ");
+			    redirectAttributes.addFlashAttribute("alertClass", "alert-success");
+			    return "redirect:"+pageMappingService.PageRequestMapping(reqPage,pageno);
+			}else {
+				moduleService.addModule(module); 
+				List<Module> modules1 = moduleService.getModules();
+				model.addAttribute("modules1", modules1);
+				session.setAttribute("username",session.getAttribute("username"));	
+				return"redirect:/module";
+			}			
 		}
 	  }
 	/**

@@ -14,9 +14,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.hrms.model.Leave;
 import com.hrms.model.LeaveDetail;
 import com.hrms.model.MenuModule;
 import com.hrms.service.LeaveDetailService;
+import com.hrms.service.LeaveService;
 import com.hrms.service.ModuleService;
 import com.hrms.service.PageMappingService;
 
@@ -24,7 +26,8 @@ import com.hrms.service.PageMappingService;
 public class LeaveDetailController {
 	int pageno = 45;
 	String reqPage = "/leaveDetailMaster";
-
+	@Autowired
+	LeaveService leaveService;
 	@Autowired
 	PageMappingService pageMappingService;
 	@Autowired
@@ -43,7 +46,8 @@ public class LeaveDetailController {
 	public String leaveDetailMaster(Model model, HttpSession session) {
 		List<LeaveDetail> listLeaveDetail = leaveDetailService.getAllLeaveDetails();
 		model.addAttribute("listLeaveDetail", listLeaveDetail);
-
+		List<Leave> listLeave = leaveService.getAllLeaves();
+		model.addAttribute("listLeave", listLeave);
 		String userCode = (String) session.getAttribute("username");
 		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
 		if (modules != null) {
@@ -88,6 +92,8 @@ public class LeaveDetailController {
 	public String editLeaveDetail(@PathVariable("id") String id, Model model, HttpSession session) {
 		int editPageNo = 46;
 		String reqPageedit = "/editLeaveDetail";
+		List<Leave> listLeave = leaveService.getAllLeaves();
+		model.addAttribute("listLeave", listLeave);
 		LeaveDetail leaveDetailEdit = leaveDetailService.findLeaveDetailById(id);
 		model.addAttribute("leaveDetailEdit", leaveDetailEdit);
 		session.setAttribute("username", session.getAttribute("username"));

@@ -11,5 +11,6 @@ public interface LoanMaterService {
 	   Loan findLoanById(String id);
 	   public void updateLoan(Loan loan); 
 	   public void removeLoan(String id);
+	public boolean checkLoanExists(Loan loan);
 
 }

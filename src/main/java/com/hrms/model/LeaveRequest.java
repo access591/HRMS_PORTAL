@@ -1,6 +1,9 @@
 package com.hrms.model;
 
 
+
+import java.io.Serializable;
+
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -14,9 +17,16 @@ import javax.persistence.Table;
 @Entity
 //@Table(name="leave_request")
 @Table(name="LEAVE_REQUEST")
-public class LeaveRequest  {
+public class LeaveRequest implements Serializable  {
 	
 	
+
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1127997960626777460L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "LEAVE_REQUEST_ID" ,length=100)
@@ -24,17 +34,12 @@ public class LeaveRequest  {
 	
 	@Column(name = "EMP_CODE",length=50)
 	private String empCode;
-	     
-	/*
-	 * @Column(name = "EMP_NAME") private String empName;
-	 */
+
 	
 	@Column(name = "DEPT_CODE",length=50)
 	private String deptCode;
 	
-	/*
-	 * @Column(name = "DEPT_NAME") private String deptName;
-	 */
+
 	
 	@Column(name = "LEAVE_CODE",length=50)  
 	private String leaveCode;
@@ -44,6 +49,7 @@ public class LeaveRequest  {
 	
 	@Column(name = "FROM_DATE",length=20)
 	private String fromDate;
+
 	
 	@Column(name = "FROM_DATE_TYPE",length=10)
 	private String fromDateType;
@@ -51,11 +57,13 @@ public class LeaveRequest  {
 	@Column(name = "TO_DATE_TYPE",length=10)
 	private String toDateType;
 	
+
 	@Column(name = "APPLY_DATE",length=20)
 	private String applyDate;
 	
 	@Column(name = "APPROVE_DATE",length=20)
 	private String approvedDate;
+
 	
 	@Column(name = "APPROVED_BY",length=20)
 	private String approevedBy;
@@ -68,6 +76,7 @@ public class LeaveRequest  {
 	
 	@Column(name = "DAYS",length=20)
 	private String leaveFor;
+
 	
 	@Column(name = "CANCEL_BY",length=20)
 	private String cancelBy;
@@ -106,258 +115,194 @@ public class LeaveRequest  {
 	
 	@Column(name = "REQUEST_TYPE",length=20)
 	private String requestType;
-	
-	
-	public String getRequestType() {
-		return requestType;
-	}
-
-
-	public void setRequestType(String requestType) {
-		this.requestType = requestType;
-	}
-
-
-	public LeaveRequest() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-	
 
 	public Long getLeaveRequestId() {
 		return leaveRequestId;
 	}
 
-
 	public void setLeaveRequestId(Long leaveRequestId) {
 		this.leaveRequestId = leaveRequestId;
 	}
-
 
 	public String getEmpCode() {
 		return empCode;
 	}
 
-
 	public void setEmpCode(String empCode) {
 		this.empCode = empCode;
 	}
-
 
 	public String getDeptCode() {
 		return deptCode;
 	}
 
-
 	public void setDeptCode(String deptCode) {
 		this.deptCode = deptCode;
 	}
-
 
 	public String getLeaveCode() {
 		return leaveCode;
 	}
 
-
 	public void setLeaveCode(String leaveCode) {
 		this.leaveCode = leaveCode;
 	}
-
 
 	public String getToDate() {
 		return toDate;
 	}
 
-
 	public void setToDate(String toDate) {
 		this.toDate = toDate;
 	}
-
 
 	public String getFromDate() {
 		return fromDate;
 	}
 
-
 	public void setFromDate(String fromDate) {
 		this.fromDate = fromDate;
 	}
-
 
 	public String getFromDateType() {
 		return fromDateType;
 	}
 
-
 	public void setFromDateType(String fromDateType) {
 		this.fromDateType = fromDateType;
 	}
-
 
 	public String getToDateType() {
 		return toDateType;
 	}
 
-
 	public void setToDateType(String toDateType) {
 		this.toDateType = toDateType;
 	}
-
 
 	public String getApplyDate() {
 		return applyDate;
 	}
 
-
 	public void setApplyDate(String applyDate) {
 		this.applyDate = applyDate;
 	}
-
 
 	public String getApprovedDate() {
 		return approvedDate;
 	}
 
-
 	public void setApprovedDate(String approvedDate) {
 		this.approvedDate = approvedDate;
 	}
-
 
 	public String getApproevedBy() {
 		return approevedBy;
 	}
 
-
 	public void setApproevedBy(String approevedBy) {
 		this.approevedBy = approevedBy;
 	}
-
 
 	public String getShiftCode() {
 		return shiftCode;
 	}
 
-
 	public void setShiftCode(String shiftCode) {
 		this.shiftCode = shiftCode;
 	}
-
 
 	public String getReason() {
 		return reason;
 	}
 
-
 	public void setReason(String reason) {
 		this.reason = reason;
 	}
-
 
 	public String getLeaveFor() {
 		return leaveFor;
 	}
 
-
 	public void setLeaveFor(String leaveFor) {
 		this.leaveFor = leaveFor;
 	}
-
 
 	public String getCancelBy() {
 		return cancelBy;
 	}
 
-
 	public void setCancelBy(String cancelBy) {
 		this.cancelBy = cancelBy;
 	}
-
 
 	public String getCancelDate() {
 		return cancelDate;
 	}
 
-
 	public void setCancelDate(String cancelDate) {
 		this.cancelDate = cancelDate;
 	}
-
 
 	public String getRequestFromDate() {
 		return requestFromDate;
 	}
 
-
 	public void setRequestFromDate(String requestFromDate) {
 		this.requestFromDate = requestFromDate;
 	}
-
 
 	public String getRequestToDate() {
 		return requestToDate;
 	}
 
-
 	public void setRequestToDate(String requestToDate) {
 		this.requestToDate = requestToDate;
 	}
-
 
 	public String getRequestFromDateType() {
 		return requestFromDateType;
 	}
 
-
 	public void setRequestFromDateType(String requestFromDateType) {
 		this.requestFromDateType = requestFromDateType;
 	}
-
 
 	public String getRequestToDateTYpe() {
 		return requestToDateTYpe;
 	}
 
-
 	public void setRequestToDateTYpe(String requestToDateTYpe) {
 		this.requestToDateTYpe = requestToDateTYpe;
 	}
-
 
 	public String getInsBy() {
 		return insBy;
 	}
 
-
 	public void setInsBy(String insBy) {
 		this.insBy = insBy;
 	}
-
 
 	public Date getInsDate() {
 		return insDate;
 	}
 
-
 	public void setInsDate(Date insDate) {
 		this.insDate = insDate;
 	}
-
 
 	public String getUpdBy() {
 		return updBy;
 	}
 
-
 	public void setUpdBy(String updBy) {
 		this.updBy = updBy;
 	}
 
-
 	public Date getUpdDate() {
 		return updDate;
 	}
-
 
 	public void setUpdDate(Date updDate) {
 		this.updDate = updDate;
@@ -371,20 +316,17 @@ public class LeaveRequest  {
 		this.status = status;
 	}
 
-	@Override
-	public String toString() {
-		return "LeaveRequest [leaveRequestId=" + leaveRequestId + ", empCode=" + empCode + ", deptCode=" + deptCode
-				+ ", leaveCode=" + leaveCode + ", toDate=" + toDate + ", fromDate=" + fromDate + ", fromDateType="
-				+ fromDateType + ", toDateType=" + toDateType + ", applyDate=" + applyDate + ", approvedDate="
-				+ approvedDate + ", approevedBy=" + approevedBy + ", shiftCode=" + shiftCode + ", reason=" + reason
-				+ ", leaveFor=" + leaveFor + ", cancelBy=" + cancelBy + ", cancelDate=" + cancelDate
-				+ ", requestFromDate=" + requestFromDate + ", requestToDate="
-				+ requestToDate + ", requestFromDateType=" + requestFromDateType + ", requestToDateTYpe="
-				+ requestToDateTYpe + ", insBy=" + insBy + ", insDate=" + insDate + ", updBy=" + updBy + ", updDate="
-				+ updDate + ", status=" + status + "]";
+	public String getRequestType() {
+		return requestType;
+	}
+
+	public void setRequestType(String requestType) {
+		this.requestType = requestType;
 	}
 
 	
+	
+
 
 	
 

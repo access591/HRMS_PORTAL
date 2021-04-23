@@ -64,7 +64,7 @@ public class GradeMaterController {
 	boolean isGradeExist = gradeMaterService.checkGradeExists(grade);
 	
 	if (isGradeExist) {
-	    redirectAttributes.addFlashAttribute("message", "Grade Code Already exists !  ");
+	    redirectAttributes.addFlashAttribute("message", "Grade Name Already exists !  ");
 	    redirectAttributes.addFlashAttribute("alertClass", "alert-success");
 	    return "redirect:"+pageMappingService.PageRequestMapping(reqPage,pageno);
 	

@@ -52,7 +52,6 @@ public class LeaveRequestController {
 		System.out.println("leave request controller");
 		List<Employee> listEmployee = employeeService.getAllEmployees();
 		
-		
 		String userCode = (String) session.getAttribute("username");
 		System.out.println("userCode  is : "+ userCode);
 		
@@ -81,12 +80,7 @@ public class LeaveRequestController {
 			model.addAttribute("modules", modules);
 		}
 		
-		LeaveGrant leaveGrant = leaveGrantService.findLeaveGrantByEmpCode(userEntity.getEmpCode());
-		
-		//LeaveDetail leaveDetail = leaveDetailService.findLeaveDetailById(userCode)
-		if(leaveGrant != null) {
-			model.addAttribute("leaveGrant", leaveGrant);
-		}
+	
 		
 		
 		

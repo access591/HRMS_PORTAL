@@ -8,6 +8,8 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -31,13 +33,9 @@ public class Department implements Serializable
 	
 	@Column(name = "DEP_NAME")
 	private String deptName;
-	
-	@Column(name = "DEPH_Code")
-	private String dephCode;
-	
-	
-	@Column(name = "DEPH_NAME")
-	private String dephName;
+	@ManyToOne
+	@JoinColumn(name ="DEPH_Code")
+	private Employee empCode;
 
 	@Column(name = "ACTIVE_YN")
 	private String active;
@@ -67,18 +65,14 @@ public class Department implements Serializable
 	public void setDeptName(String deptName) {
 		this.deptName = deptName;
 	}
-	public String getDephCode() {
-		return dephCode;
+	
+	public Employee getEmpCode() {
+		return empCode;
 	}
-	public void setDephCode(String dephCode) {
-		this.dephCode = dephCode;
+	public void setEmpCode(Employee empCode) {
+		this.empCode = empCode;
 	}
-	public String getDephName() {
-		return dephName;
-	}
-	public void setDephName(String dephName) {
-		this.dephName = dephName;
-	}
+	
 	public String getActive() {
 		return active;
 	}

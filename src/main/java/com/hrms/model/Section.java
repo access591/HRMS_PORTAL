@@ -30,7 +30,8 @@ public class Section implements Serializable
 	@Id
 	@Column(name = "SECT_CODE")
 	private String sectionCode;
-	
+	@Column(name = "Sec_Desc")
+	private String sectionDesc;
 	@Column(name = "AMOUNT_LIMIT")
 	private String amountLimit;
 
@@ -61,6 +62,13 @@ public class Section implements Serializable
 	}
 	public void setAmountLimit(String amountLimit) {
 		this.amountLimit = amountLimit;
+	}
+	
+	public String getSectionDesc() {
+		return sectionDesc;
+	}
+	public void setSectionDesc(String sectionDesc) {
+		this.sectionDesc = sectionDesc;
 	}
 	public String getInsBy() {
 		return insBy;

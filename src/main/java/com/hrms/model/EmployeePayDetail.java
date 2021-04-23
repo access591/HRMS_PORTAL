@@ -1,27 +1,28 @@
 package com.hrms.model;
 
-import java.sql.Date;
+import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 //@Entity(name = "Emp_Pay_detail")
 
 @Entity(name = "Emp_Pay_detail")
-public class EmployeePayDetail {
+public class EmployeePayDetail implements Serializable{
 	
-//	@Id
-//	@GeneratedValue(strategy = GenerationType.AUTO)
-//	@Column(length=25)
-//	private long empPayDetailId;
-	//
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4646106332927433733L;
+
 	@Id
 	@Column(length=25,name="EMP_CODE")
 	private String empCode;
 	
+
+
 	@Column(length=25,name="EMP_NAME")  
 	private String empName;
 	
@@ -34,12 +35,13 @@ public class EmployeePayDetail {
 	@Column(length=25,name="DEPT_CODE1")
 	private String deptCode1;
 	
-	@Column(length=1000,name="WEF_DATE")
+
+	@Column(length=25,name="WEF_DATE")
 	private String wefdate;
 	
 	@Column(length=25,name="DESIG_CODE")
 	private String desigCode;
-	
+
 	@Column(length=25,name="EMP_INSURANCE_NO")
 	private String empInsuranceNo;
 	
@@ -55,7 +57,8 @@ public class EmployeePayDetail {
 	@Column(length=25,name="EMP_ESI_NO")
 	private String empEsiNo;
 	
-	@Column(length=25,name="ESI_EFFECTIVE_DATE")
+
+	@Column(length=25,name="ESI_EFFICTIVE_DATE")
 	private String esiEffectiveDate;
 	
 	@Column(length=25,name="ARREAR_DUE")
@@ -88,6 +91,7 @@ public class EmployeePayDetail {
 	@Column(length=25,name="HRA_VALUE")
 	private String hraValue;
 	
+
 	@Column(length=25,name="COMPANY_LEASED_ACC")
 	private String companyLeasedAcc;
 	
@@ -102,10 +106,12 @@ public class EmployeePayDetail {
 	
 	@Column(length=25,name="CONVEYANCE_ALLOW")
 	private String conveyanceAllow;
+
 	
 	@Column(length=25,name="BONUS")
 	private String bonus;
 	
+
 	@Column(length=25,name="EPF")
 	private String epf;
 	
@@ -121,17 +127,18 @@ public class EmployeePayDetail {
 	@Column(length=25,name="BASIC_PAY_Y")
 	private String basicPayY;
 	
-	@Column(length=25,name="HRA_RATE_y")
+
+	@Column(length=25,name="HRA_RATE_Y")
 	private String hraRateY;
 	
 	@Column(length=25,name="HRA_VALUE_Y")
 	private String hravalueY;
 	
-	
-	@Column(length=25,name="DA_Y")
+
+	@Column(length=25,name="DAY")
 	private String daY;
 	
-	@Column(length=25,name="MEDICAL_aLLOW_Y")
+	@Column(length=25,name="MEDICAL_ALLOW_Y")
 	private String medicalAllowY;
 	
 	@Column(length=25,name="CCA_Y")
@@ -143,6 +150,7 @@ public class EmployeePayDetail {
 	@Column(length=25,name="BONUS_Y")
 	private String bonusY;
 	
+
 	@Column(length=25,name="OVERTIME_YN")
 	private String overtimeYN;
 	
@@ -157,7 +165,7 @@ public class EmployeePayDetail {
 	
 	@Column(length=25,name="PF_PERC")
 	private String pfPerc;
-	
+
 	@Column(length=25,name="EPF_PERC")
 	private String epfPerc;
 	
@@ -173,6 +181,7 @@ public class EmployeePayDetail {
 	@Column(length=25,name="TOTAL_DEDUCTION_Y")
 	private String totalDedductionY;
 	
+
 	@Column(length=25,name="AMOUNT_PAYABLE_Y")
 	private String amountPayableY;
 	
@@ -188,19 +197,21 @@ public class EmployeePayDetail {
 	@Column(length=25,name="PENSION_FUND1_Y")
 	private String pensionFund1Y;
 	
+
 	@Column(length=25,name="ADMINISTRATIVE_CHARGES")
 	private String administrativeCharges;
 	
 	@Column(length=25,name="C_CODE")
 	private String cCode;
 	
-	@Column(length=25,name="ADMINISTRATIVE_CHARGES_Y")
+
+	@Column(length=25,name="ADMINSTRATIVE_CHARGE_Y")
 	private String administrativeChargesY;
 	
 	@Column(length=25,name="CALCULATE_EPF")
 	private String calculateEpf;
 	
-	@Column(length=25,name="CALCULATE_ESI2")
+	@Column(length=25,name="CALCULATE_ESI_2")
 	private String calculateEsi2;
 	
 	@Column(length=25,name="TDS")
@@ -218,7 +229,8 @@ public class EmployeePayDetail {
 	@Column(length=25,name="SECTION_LOV")
 	private String sectionLov;
 	
-	@Column(length=25,name="CTC1")
+
+	@Column(length=25,name="CTC_1")
 	private String ctc1;
 	
 	@Column(length=25,name="CTC")
@@ -230,21 +242,23 @@ public class EmployeePayDetail {
 	@Column(length=25,name="GROSS_Y")
 	private String grossY;
 	
-	@Column(length=25,name="EPFY")
+
+	@Column(length=25,name="EPF_Y")
 	private String epfY;
-	
-	@Column(length=25,name="FPFY")
+
+
+	@Column(length=25,name="FPF_Y")
 	private String fpfY;
-	
+
 	@Column(length=25,name="ESI_Y")
 	private String esiY;
 	
 	@Column(length=25,name="SECTION_DESC")
 	private String sectionDesc;
-	
+
 	@Column(length=25,name="PENSION_FUND_Y")
 	private String pensionFundY;
-	
+
 	@Column(length=25,name="INSURANCE")
 	private String insurance;
 	
@@ -260,7 +274,9 @@ public class EmployeePayDetail {
 	@Column(length=25,name="ESIC")
 	private String esiC;
 	
-	@Column(length=25,name="ESIC_Y")
+
+	@Column(length=25,name="ESICY")
+
 	private String esiCY;
 	
 	@Column(length=25,name="NET_PAY")
@@ -268,7 +284,7 @@ public class EmployeePayDetail {
 
 	public EmployeePayDetail() {
 		super();
-		// TODO Auto-generated constructor stub
+		
 	}
 
 	public EmployeePayDetail(String empCode, String empName, String deptCode, String deptName, String deptCode1,

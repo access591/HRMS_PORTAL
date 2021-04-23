@@ -49,10 +49,14 @@ body {
 									<div th:if="${message}" th:text="${message}" style="color: red">
 									</div> 
 									</div>
+									<div class="alert-outline">
+									<div th:if="${message2}" th:text="${message2}" style="color: red">
+									</div> 
+									</div>
 
 								</div>
 								<div class="card-body">
-									<form id="validation-form" action="#" th:action="@{/saveSubModule}" th:object="${submodule}" method="post">
+									<form id="validation-form" action="#" th:action="@{/saveSubModule}" th:object="${SubModule1}" method="post">
 										<div class="row">
 											<div class="col-12 col-lg-6">
 										
@@ -107,7 +111,7 @@ body {
 													<label>Sequence No</label>
 													<label style="color: red">*</label>
 													 <input type="text" class="form-control required" id="seqNoSubModule" title="Sequence No"maxlength="2" name="seqNoSubModule"required aria-required="true"
-														pattern="[0-9]">
+														>
 												</div>
 											</div>
 										</div>
@@ -140,7 +144,7 @@ body {
 										<tr th:each="listsubModule : ${listSubModule}">
 												<td th:text="${listsubModule.subModuleCode}"></td>
 												<td th:text="${listsubModule.subModuleName}"></td>
-												<td th:text="${listsubModule.moduleCode}"></td>
+												<td th:text="${listsubModule.moduleCode.moduleName}"></td>
 												<td th:text="${listsubModule.seqNoSubModule}"></td>
 												<td th:text="${listsubModule.acitveSubModule}"></td>
 						                     	<td>

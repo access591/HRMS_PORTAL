@@ -51,7 +51,7 @@ body {
 
 								</div>
 								<div class="card-body">
-									<form id="validation-form" action="#" th:action="@{/saveProgram}" th:object="${program}" method="post">							
+									<form id="validation-form" action="#" th:action="@{/saveProgram}" th:object="${program1}" method="post">							
 												<div class="row">
 											<div class="col-12 col-lg-6">
 												<div class="form-group">
@@ -62,7 +62,7 @@ body {
 												<div class="mb-3">
 														<label class="form-label">Module</label>
 															<label style="color: red">*</label>
-													   <select class="form-control select2" name="dmoduleCode"id="dmoduleCode" required aria-required="true">
+													   <select class="form-control select2" name="pModuleCode"id="pModuleCode" required aria-required="true">
 												    <option value="">Select Module</option>
 													<option   th:each="module: ${modulesList}" th:value="${module.getModuleCode()}" th:text="${module.getModuleName()}"></option>
 											     	</select>
@@ -102,7 +102,7 @@ body {
 														<div class="mb-3">
 														<label class="form-label">Sub Module</label>
 															<label style="color: red">*</label>
-													   <select class="form-control select2" name="dsubMouduleCode"id="dsubMouduleCode" required aria-required="true">
+													   <select class="form-control select2" name="subModuleCode"id="subModuleCode" required aria-required="true">
 												    <option value="">Select Sub Module</option>
 								<option th:each="submodule: ${subModulesList}" th:value="${submodule.getSubModuleCode()}" th:text="${submodule.getSubModuleName()}"></option>
 											     	</select>
@@ -145,6 +145,7 @@ body {
 												<th scope="col">Module Name </th>
 												<th scope="col">Sub Module Name </th>
 												<th scope="col">Status</th>
+												<th scope="col">Seq No</th>
 												<th scope="col">Action</th>
 												
 											</tr>
@@ -156,6 +157,7 @@ body {
 												<td th:text="${listofgrade.pModuleCode.moduleName}"></td>
 												<td th:text="${listofgrade.subModuleCode.subModuleName}"></td>
 												<td th:text="${listofgrade.activeYn}"></td>
+												<td th:text="${listofgrade.seqProgram}"></td>
 												<td><a th:href="@{/editProgram/{id}(id=${listofgrade.programCode})}"><em class="fa fa-edit"></em></a>
 												<a th:href="@{/deleteProgram/{id}(id=${listofgrade.programCode})}" onclick="return confirm('Are you sure?')"><em class="fa fa-times"></em></a>
 												</td>
