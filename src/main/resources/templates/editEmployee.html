@@ -111,9 +111,9 @@ body {
 										       <div class="form-group sm col-md-4">
 													<label class="form-label">Designation</label> <span
 														class="text-danger">*</span> <select
-														class="form-control required" name="designation" id="designation">
+														class="form-control required" name="designationCode" id="designationCode">
 														<option value="">Select Type</option>
-														<option th:each="des :${listDesignation}" th:value="${des.desgName}" th:text="${des.getDesgName()}"th:field="${employeeEdit.designation}"></option>
+														<option th:each="des :${listDesignation}" th:value="${des.desgName}" th:text="${des.getDesgName()}"th:field="${employeeEdit.designationCode}"></option>
 													</select>
 												</div>
 										
