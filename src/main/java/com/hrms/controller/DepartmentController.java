@@ -18,9 +18,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hrms.model.Department;
+import com.hrms.model.DepartmentUtiliy;
+import com.hrms.model.Employee;
 import com.hrms.model.MenuModule;
-
 import com.hrms.service.DepartmentService;
+import com.hrms.service.EmployeeService;
 import com.hrms.service.ModuleService;
 import com.hrms.service.PageMappingService;
 
@@ -35,6 +37,8 @@ public class DepartmentController {
 	private ModuleService moduleService;
 	@Autowired
 	PageMappingService pageMappingService;
+	@Autowired
+	EmployeeService employeeService;
 	/**
 	 * Method to get Department Result 	
 	 * @param model
@@ -90,6 +94,9 @@ else
 @GetMapping(value = {"/editDepartment/{id}"})
 public String editdepartment(@PathVariable("id")String id,  Model model,HttpSession session)
  { 
+	List<Employee> listEmployee = employeeService.getEmployeeByDeptCode(id);
+	model.addAttribute("listEmployee", listEmployee);
+	
 	int editPageNo=4;
 	String reqPageedit="/editDepartment";
 	Department departmentEdit = departmentService.findDepartmentById(id);
@@ -105,9 +112,25 @@ public String editdepartment(@PathVariable("id")String id,  Model model,HttpSess
  * @return
  */	
 @PostMapping("/updateDepartment")
-public String updateDepartment(@ModelAttribute("deptupdate") Department department, Model model) {
-
-	  this.departmentService.updateDepartment(department);
+public String updateDepartment(@ModelAttribute("deptupdate") DepartmentUtiliy departmentUtiliy, Model model) {
+ 
+	   try {
+		
+		   Department department=new Department();
+			Employee employee =new Employee();
+			employee.setEmpCode(departmentUtiliy.getEmpCode());
+			department.setEmpCode(employee);
+			department.setDepartmentCode(departmentUtiliy.getDepartmentCode());
+			department.setDeptName(departmentUtiliy.getDeptName());
+			department.setActive(departmentUtiliy.getActive());
+			
+			  this.departmentService.updateDepartment(department);   
+		   
+		   
+	} catch (Exception e) {
+	
+	}
+	
   	  
 	  return "redirect:/"+pageMappingService.PageRequestMapping(reqPage,pageno);
 }
@@ -133,13 +156,5 @@ public Department getDepartmentByDeptId(@PathVariable("deptCode") String deptCod
 	return departmentService.findDepartmentById(deptCode);
 	
 }
-
-
-
-
-
-
-
-
 
 }

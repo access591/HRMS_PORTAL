@@ -1,15 +1,15 @@
 package com.hrms.model;
 
 import java.io.Serializable;
-
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.validation.constraints.Size;
+
 
 @Entity
 @Table(name = "M_EMPLOYEE")
@@ -25,58 +25,65 @@ public class Employee implements Serializable {
 	 */
 
 	@Id
+	@Size(max = 25)
 	@Column(name ="EMPLOYEE_CODE")
 	private String empCode;
-
-	@Column(name ="EMPLOYEE_PAYEE_CODE")
-	private String   employeePayeeCode;
-
-	@Column(name ="OFFICER_TYPE")
-	private String officerType;
-
-	@Column(name ="TYPE_COURT_DEPARTMENT")
-	private String  typeCourtDepartment;
-
 	
-	@Column(name ="PRESENT_POSTING")
-	private String presentPosting;
-
-	@Column(name ="DATE_OF_POSTING")
-	private String dateOfPosting;
-
-	@Column(name ="DATE_OF_RETIREMENT")
-	private String dateOfRetirement;
-
+	@Size(max = 200)
+	@Column(name = "EMPLOYEE_NAME")
+	private String empName;
+	
+	@Size(max = 20)
 	@Column(name ="BATCH_YEAR")
 	private String batchYear;
+	
+	@Column(name ="DATE_OF_JOINING")
+	private Date dateOfJoining;
+	
+	@Column(name ="DATE_OF_POSTING")
+	private Date dateOfPosting;
+	
+	@Column(name ="DATE_OF_RETIREMENT")
+	private Date dateOfRetirement;
+	
+	@Size(max = 25)
 	@Column(name ="DEPARTMENT_CODE")
 	private String departmentCode;
 	
-	@Column(name ="DATE_OF_JOINING")
-	private String dateOfJoining;
-	
-	
-	@Column(name ="DEPARTMENT_NAME") 
-	private String depName;
-
-	@Column(name ="DESIGNATION")
-	private String designation;
+	@Size(max = 25)
+	@Column(name ="DESIGNATION_CODE")
+	private String designationCode;
 
 	@Lob
-	@Column(name = "ImageProfile", length = Integer.MAX_VALUE, nullable = true)
+	@Column(name = "EMP_IMG", length = Integer.MAX_VALUE, nullable = true)
 	private byte[] imageProfile;
 	
-	@Column(name = "EMP_IMG")
-	private String empImg;
-
+	@Size(max = 20)
+	@Column(name ="EMPLOYEE_PAYEE_CODE")
+	private String   employeePayeeCode;
+	
+	@Size(max = 10)
+	@Column(name ="OFFICER_TYPE")
+	private String officerType;
+	
+	@Size(max = 200)
+	@Column(name ="PRESENT_POSTING")
+	private String presentPosting;
+	
+	@Size(max = 100)
+	@Column(name ="SUSPENTION")
+	private String suspention;
+	@Size(max =2)
+	@Column(name ="TYPE_COURT_DEPARTMENT")
+	private String  typeCourtDepartment;
+	@Size(max = 200)
+	@Column(name ="VIGILANCE_QUERY")
+	private String vigilanceQuery;
+	@Size(max =20)
 	@Column(name ="VRS")
 	private String vrs;
 	
-	@Column(name ="VIGILANCE_QUERY")
-	private String vigilanceQuery;
-
-	@Column(name ="SUSPENTION")
-	private String suspention;
+	
 	
 	
 	// STEP-1======================end....
@@ -137,8 +144,7 @@ public class Employee implements Serializable {
 	
 	// STEP-2======================end....
 	
-	@Column(name = "EMP_NAME")
-	private String empName;
+	
 	@Column(name = "FATHER_NAME")
 	private String fatherName;
 
@@ -176,8 +182,66 @@ public class Employee implements Serializable {
 	@Column(name = "DEALER_DETAILS")
 	private String dealerDetails;
 
+
+
+
+
 	public String getEmpCode() {
 		return empCode;
+	}
+
+
+
+	public void setEmpCode(String empCode) {
+		this.empCode = empCode;
+	}
+
+
+
+	public String getBatchYear() {
+		return batchYear;
+	}
+
+
+
+	public void setBatchYear(String batchYear) {
+		this.batchYear = batchYear;
+	}
+
+
+
+	public Date getDateOfJoining() {
+		return dateOfJoining;
+	}
+
+
+
+	public void setDateOfJoining(Date dateOfJoining) {
+		this.dateOfJoining = dateOfJoining;
+	}
+
+
+
+	public Date getDateOfPosting() {
+		return dateOfPosting;
+	}
+
+
+
+	public void setDateOfPosting(Date dateOfPosting) {
+		this.dateOfPosting = dateOfPosting;
+	}
+
+
+
+	public Date getDateOfRetirement() {
+		return dateOfRetirement;
+	}
+
+
+
+	public void setDateOfRetirement(Date dateOfRetirement) {
+		this.dateOfRetirement = dateOfRetirement;
 	}
 
 
@@ -194,14 +258,86 @@ public class Employee implements Serializable {
 
 
 
-	public String getDateOfJoining() {
-		return dateOfJoining;
+	public String getDesignationCode() {
+		return designationCode;
 	}
 
 
 
-	public void setDateOfJoining(String dateOfJoining) {
-		this.dateOfJoining = dateOfJoining;
+	public void setDesignationCode(String designationCode) {
+		this.designationCode = designationCode;
+	}
+
+
+
+	public byte[] getImageProfile() {
+		return imageProfile;
+	}
+
+
+
+	public void setImageProfile(byte[] imageProfile) {
+		this.imageProfile = imageProfile;
+	}
+
+
+
+	public String getEmployeePayeeCode() {
+		return employeePayeeCode;
+	}
+
+
+
+	public void setEmployeePayeeCode(String employeePayeeCode) {
+		this.employeePayeeCode = employeePayeeCode;
+	}
+
+
+
+	public String getOfficerType() {
+		return officerType;
+	}
+
+
+
+	public void setOfficerType(String officerType) {
+		this.officerType = officerType;
+	}
+
+
+
+	public String getPresentPosting() {
+		return presentPosting;
+	}
+
+
+
+	public void setPresentPosting(String presentPosting) {
+		this.presentPosting = presentPosting;
+	}
+
+
+
+	public String getSuspention() {
+		return suspention;
+	}
+
+
+
+	public void setSuspention(String suspention) {
+		this.suspention = suspention;
+	}
+
+
+
+	public String getTypeCourtDepartment() {
+		return typeCourtDepartment;
+	}
+
+
+
+	public void setTypeCourtDepartment(String typeCourtDepartment) {
+		this.typeCourtDepartment = typeCourtDepartment;
 	}
 
 
@@ -210,124 +346,22 @@ public class Employee implements Serializable {
 		return vigilanceQuery;
 	}
 
+
+
 	public void setVigilanceQuery(String vigilanceQuery) {
 		this.vigilanceQuery = vigilanceQuery;
 	}
 
-	public String getSuspention() {
-		return suspention;
-	}
 
-	public void setSuspention(String suspention) {
-		this.suspention = suspention;
-	}
-
-	public String getDepName() {
-		return depName;
-	}
-
-	public void setDepName(String depName) {
-		this.depName = depName;
-	}
-
-	public void setEmpCode(String empCode) {
-		this.empCode = empCode;
-	}
-
-	public String getEmpImg() {
-		return empImg;
-	}
-
-	public void setEmpImg(String empImg) {
-		this.empImg = empImg;
-	}
-
-	public String getEmployeePayeeCode() {
-		return employeePayeeCode;
-	}
-
-	public void setEmployeePayeeCode(String employeePayeeCode) {
-		this.employeePayeeCode = employeePayeeCode;
-	}
-
-	public String getOfficerType() {
-		return officerType;
-	}
-
-	public void setOfficerType(String officerType) {
-		this.officerType = officerType;
-	}
-
-	public String getTypeCourtDepartment() {
-		return typeCourtDepartment;
-	}
-
-	public void setTypeCourtDepartment(String typeCourtDepartment) {
-		this.typeCourtDepartment = typeCourtDepartment;
-	}
-
-	public String getPresentPosting() {
-		return presentPosting;
-	}
-
-	public void setPresentPosting(String presentPosting) {
-		this.presentPosting = presentPosting;
-	}
-
-	public String getDateOfPosting() {
-		return dateOfPosting;
-	}
-
-	public void setDateOfPosting(String dateOfPosting) {
-		this.dateOfPosting = dateOfPosting;
-	}
-
-
-
-	public String getDateOfRetirement() {
-		return dateOfRetirement;
-	}
-
-	public void setDateOfRetirement(String dateOfRetirement) {
-		this.dateOfRetirement = dateOfRetirement;
-	}
-
-	public String getBatchYear() {
-		return batchYear;
-	}
-
-	public void setBatchYear(String batchYear) {
-		this.batchYear = batchYear;
-	}
-
-	public String getDesignation() {
-		return designation;
-	}
-
-	public void setDesignation(String designation) {
-		this.designation = designation;
-	}
 
 	public String getVrs() {
 		return vrs;
 	}
 
+
+
 	public void setVrs(String vrs) {
 		this.vrs = vrs;
-	}
-
-	
-
-
-	
-
-	public byte[] getImageProfile() {
-		return imageProfile;
-	}
-
-
-	public void setImageProfile(byte[] imageProfile) {
-		this.imageProfile = imageProfile;
 	}
 
 

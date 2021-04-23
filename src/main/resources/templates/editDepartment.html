@@ -61,12 +61,20 @@ body {
 											  	 
 											   <input type="text"class="form-control" id="departmentCode" name="departmentCode" th:value="${departmentEdit.departmentCode}" readonly >
 												</div>
-												<div class="form-group">
-											       <label>HOD Code </label>
-											  		<label style="color: red">*</label>
-											  	 
-											   <input type="text"class="form-control" id="dephCode"pattern="\d{1,12}" name="dephCode" th:value="${departmentEdit.dephCode}" readonly >
-												</div>
+												
+												
+												<div class="form-group" >
+											<label class="form-label">HOD</label>
+											<select class="form-control" name="empCode"id="empCode">
+												    <option value="">Select Employee</option>
+													<option th:each="e: ${listEmployee}" th:value="${e.getEmpCode()}" th:text="${e.getEmpName()}"th:field="${departmentEdit.empCode.empCode}"></option>
+													
+												
+											     </select>
+										   </div>
+												
+												
+												
 
 												<div class="form-group">
 													<label class="form-label">Status</label>
@@ -89,12 +97,12 @@ body {
 											<label style="color: red">*</label>
 											 <input type="text" class="form-control" id="deptName" title="Department Name" name="deptName"th:value="${departmentEdit.deptName}" required aria-required="true">
 										   </div>
-										   <div class="form-group">
+										  <!--  <div class="form-group">
 											
 											<label class="form-label">HOD Name</label>
 											<label style="color: red">*</label>
 											 <input type="text" class="form-control" id="dephName" title="HOD Name" name="dephName"th:value="${departmentEdit.dephName}" required aria-required="true">
-										   </div>
+										   </div> -->
 
 											</div>
 										</div>

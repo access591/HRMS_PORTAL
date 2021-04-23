@@ -62,11 +62,11 @@ body {
 											   <input
 														type="text" class="form-control" title="Department Code" id="departmentCode"maxlength="10" name="departmentCode" readonly>
 												</div>
-												<div class="form-group">
+												<!-- <div class="form-group">
 											<label class="form-label">HOD Code</label>
 											<label style="color: red">*</label>
 											 <input type="text" class="form-control" id="dephCode" title="HOD Code" maxlength="10"pattern="\d{1,12}"name="dephCode"required aria-required="true">
-										</div>
+										</div> -->
 
 												<div class="form-group">
 
@@ -90,11 +90,11 @@ body {
 											<label style="color: red">*</label>
 											 <input type="text" class="form-control" title="Department Name" id="deptName"pattern="^[a-zA-Z\s]*$" name="deptName"maxlength="30"required aria-required="true">
 										</div>
-										<div class="form-group">
+										<!-- <div class="form-group">
 											<label class="form-label">HOD Name</label>
 											<label style="color: red">*</label>
 											 <input type="text" class="form-control"pattern="^[a-zA-Z\s]*$" id="dephName" name="dephName"maxlength="20" title="HOD Name" required aria-required="true">
-										</div>
+										</div> -->
 											</div>
 										</div>
 										<button type="submit" class="btn btn-primary">Save</button>
@@ -113,10 +113,8 @@ body {
 											<tr>
 												<th scope="col">Department Code</th>
 												<th scope="col">Department Name </th>
-												<th scope="col">HOD Code</th>
-												<th scope="col">HOD Name</th>
+												<th scope="col">HOD</th>
 												<th scope="col">Status</th>
-												
 												<th scope="col">Action</th>
 											</tr>
 										</thead>
@@ -124,8 +122,8 @@ body {
 											<tr  th:each="listdepartment : ${listDepartment}">
 												<td th:text="${listdepartment.departmentCode}"></td>
 												<td th:text="${listdepartment.deptName}"></td>
-												<td th:text="${listdepartment.dephCode}"></td>
-												<td th:text="${listdepartment.dephName}"></td>
+												<td th:text="${listdepartment?.empCode?.empName}"></td>
+												
 												<td th:text="${listdepartment.active}"></td>
 												
 												<td><a th:href="@{/editDepartment/{id}(id=${listdepartment.departmentCode})}"><em class="fa fa-edit"></em></a>
