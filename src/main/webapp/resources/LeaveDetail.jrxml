@@ -114,10 +114,9 @@
 		<queryString>
 			<![CDATA[]]>
 		</queryString>
-		<field name="empName" class="java.lang.String"/>
 		<field name="deptCode" class="java.lang.String"/>
-		<field name="fromDate" class="java.util.Date"/>
-		<field name="toDate" class="java.util.Date"/>
+		<field name="fromDate" class="java.lang.String"/>
+		<field name="toDate" class="java.lang.String"/>
 		<field name="leaveFor" class="java.lang.String"/>
 		<field name="leaveCode" class="java.lang.String"/>
 		<field name="reason" class="java.lang.String"/>
@@ -306,7 +305,13 @@
 								<text><![CDATA[No of Leaves]]></text>
 							</staticText>
 						</jr:columnHeader>
-						<jr:detailCell style="Table 2_TD" height="30"/>
+						<jr:detailCell style="Table 2_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="120" height="30" uuid="1d4cb217-6920-4be9-be2b-2393b60bbbba"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{leaveFor}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
 					</jr:column>
 					<jr:column width="150" uuid="2728166c-58f7-4417-93c5-49b4f25e6f39">
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column6"/>
