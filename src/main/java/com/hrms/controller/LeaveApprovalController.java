@@ -76,7 +76,7 @@ public class LeaveApprovalController {
 	
 	@ResponseBody
 	@GetMapping("/approveLeaveRequest/{leaveRequestId}")
-	public String approveLeaveRequest(@PathVariable("leaveRequestId") String leaveid, Model model ,HttpSession session) {
+	public void approveLeaveRequest(@PathVariable("leaveRequestId") String leaveid, Model model ,HttpSession session) {
 		
 		String userCode = (String) session.getAttribute("username");
 		LeaveRequest leaveRequest = leaveRequestService.findLeaveRequestById(Long.valueOf(leaveid));
@@ -97,7 +97,7 @@ public class LeaveApprovalController {
 		
 		leaveApproval(model, session);
 		
-		return null;
+		//return null;
 	}
 	
 	
@@ -117,6 +117,7 @@ public class LeaveApprovalController {
 		int pagenoView = 61;
 		String reqPageView = "/viewLeaveRequest";
 		
+		System.out.println("view Leave Approval module : ");
 		LeaveRequest leaveRequest = this.leaveRequestService.findLeaveRequestById(Long.parseLong(leaveRequestId));
 		
 		if(leaveRequest != null) {

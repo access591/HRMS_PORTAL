@@ -169,7 +169,7 @@ body {
 										<tbody>
 											<tr th:each="leave : ${listLeaveApproval}">
 												<td th:text="${leave.empCode}"></td>
-												<td th:text="${leave.empName}"></td>
+												<td >testing</td>
 												<td th:text="${leave.approvedDate}"></td>
 												<td th:text="${leave.approevedBy}"></td>
 												
@@ -245,7 +245,7 @@ body {
 			
 			
 			var deptValue = document.getElementById("deptName").value;
-			//console.log("dept value is : "+deptValue);
+			console.log("dept value is : "+deptValue);
 
 			const xhr = new XMLHttpRequest();
 			xhr.open('GET', '/leaverequest/' + deptValue);
@@ -263,14 +263,15 @@ body {
 						leaveRequestId = obj[i].leaveRequestId;
 						leaveEmpCode = obj[i].empCode;
 						leaveApplyDate = obj[i].applyDate;
-						fromDate = obj[i].fromDate.split("T");
-						toDate = obj[i].toDate.split("T");
+						//fromDate = obj[i].fromDate.split("T");
+						//toDate = obj[i].toDate.split("T");
+						console.log("leave approval to date :  "+ obj[i].toDate )
 						
 						rows += "<tr><td>" + i + "</td><td>"
 								+ obj[i].empCode  + "</td><td>" + obj[i].empName
 								+ "</td><td>" + obj[i].deptName + "</td><td>" + obj[i].deptName + "</td><td>"
 								+ "NULL"  + "</td><td>" + obj[i].leaveFor
-								+ "</td><td>" +fromDate[0] + "</td><td>" + toDate[0] + "</td>"
+								+ "</td><td>" +obj[i].fromDate + "</td><td>" + obj[i].toDate + "</td>"
 								+ "<td>" 
 								+ "<a href='#' onclick='approveLeaveRequest()'>Approve</a>" 
 								+ "</td><td>" 
@@ -309,7 +310,7 @@ body {
 					console.log("successfull");
 					getAllLeaveRequestBydepartment();
 				} else {
-					console.error("some error occured");
+					console.error("some error occured in approval");
 				}
 			}
 			xhr.send();
