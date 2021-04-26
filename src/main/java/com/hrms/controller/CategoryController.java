@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -23,7 +24,7 @@ import com.hrms.service.PageMappingService;
 public class CategoryController {
 
 	int pageNo = 53;
-	String reqPage = "/categoryMaster"; //categoryMaster.html
+	String reqPage = "/categoryMaster";
 	@Autowired 
 	ModuleService moduleService; 
 
@@ -65,4 +66,50 @@ public class CategoryController {
 		}
 	}
 
+	@GetMapping(value = { "/editCategory/{id}" })
+	public String editCategory(@PathVariable("id") String id, Model model, HttpSession session) {
+
+		int editPageNo = 54;
+		String reqPageedit = "/editCategory";
+
+		Category categoryEdit = categoryService.findCategoryByCatId(id);
+		model.addAttribute("categoryEdit", categoryEdit);
+	
+
+		return pageMappingService.PageRequestMapping(reqPageedit, editPageNo);
+	}
+
+	/**
+	 * 
+	 * @param upadte Request MappingCategory
+	 * @param model
+	 * @return
+	 */
+	@PostMapping("/updateCategory")
+	public String updateCategory(@ModelAttribute("category") Category category, Model model) {
+
+		this.categoryService.updateCategory(category);
+
+		 return "redirect:/"+pageMappingService.PageRequestMapping(reqPage,pageNo);
+	}
+
+	/**
+	 * 
+	 * @param delete  Request mapping Category
+	 * @param model
+	 * @param session
+	 * @return
+	 */
+	@GetMapping(value = { "/deleteCategory/{id}" })
+	public String deleteCategory(@PathVariable("id") String id, Model model, HttpSession session) {
+
+		this.categoryService.removeCategory(id);
+
+		session.setAttribute("username", session.getAttribute("username"));
+		 return "redirect:/"+pageMappingService.PageRequestMapping(reqPage,pageNo);
+	}
+
+	
+	
+	
 }
