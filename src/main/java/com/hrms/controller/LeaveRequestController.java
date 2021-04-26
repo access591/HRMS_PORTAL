@@ -14,10 +14,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.hrms.model.Employee;
 import com.hrms.model.Leave;
+import com.hrms.model.LeaveDetail;
+import com.hrms.model.LeaveGrant;
 import com.hrms.model.LeaveRequest;
 import com.hrms.model.MenuModule;
 import com.hrms.model.UserEntity;
 import com.hrms.service.EmployeeService;
+import com.hrms.service.LeaveDetailService;
+import com.hrms.service.LeaveGrantRegisterService;
 import com.hrms.service.LeaveRequestService;
 import com.hrms.service.LeaveService;
 import com.hrms.service.ModuleService;
@@ -35,6 +39,9 @@ public class LeaveRequestController {
 	@Autowired PageMappingService pageMappingService;
 	@Autowired LeaveService leaveService;
 	@Autowired UserService userService;
+	@Autowired LeaveGrantRegisterService leaveGrantService;
+	@Autowired LeaveDetailService leaveDetailService;
+	
 	
 	@Autowired
 	private ModuleService moduleService;
@@ -72,8 +79,10 @@ public class LeaveRequestController {
 		if (modules != null) {
 			model.addAttribute("modules", modules);
 		}
+
+		LeaveGrant leaveGrant = leaveGrantService.findLeaveGrantByEmpCode(userEntity.getEmpCode());
 		
-		session.setAttribute("username", userCode);
+
 		
 		//leaveRequestService.findAllByName("EMP-0046");
 		return pageMappingService.PageRequestMapping(reqPage, pageno);

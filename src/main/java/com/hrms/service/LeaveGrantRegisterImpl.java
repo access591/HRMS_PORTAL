@@ -43,6 +43,14 @@ public void removeLeaveGrant(String id) {
 }
 
 
+@Override
+public LeaveGrant findLeaveGrantByEmpCode(String empCode) {
+	// TODO Auto-generated method stub
+	return this.leaveGrantRegisterDao.findLeaveGrantByEmp(empCode);
+}
+
+
+
 	
 
 }
