@@ -1,14 +1,17 @@
 package com.hrms.repository;
 
+
 import org.hibernate.Criteria;
 import org.hibernate.FetchMode;
 import org.hibernate.criterion.Restrictions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import org.springframework.stereotype.Repository;
 
 import com.hrms.dao.AbstractGenericDao;
 import com.hrms.model.Category;
+
 
 
 
@@ -35,4 +38,10 @@ public class CategoryDaoImpl extends AbstractGenericDao<Category>  implements Ca
 
 	}
 
+
+
+@Repository
+public class CategoryDaoImpl extends AbstractGenericDao<Category>  implements CategoryDao {
+
+}
 

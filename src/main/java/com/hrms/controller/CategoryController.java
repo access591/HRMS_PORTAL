@@ -10,7 +10,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 
 import com.hrms.model.Category;
 import com.hrms.model.MenuModule;
@@ -29,6 +31,11 @@ public class CategoryController {
 
 	@Autowired
 	PageMappingService pageMappingService;
+
+	
+	@Autowired private ModuleService moduleService; 
+	@Autowired PageMappingService pageMappingService;
+
 	@Autowired CategoryService categoryService;
 	
 	
@@ -36,6 +43,8 @@ public class CategoryController {
 	public String categoryMaster(Model model,HttpSession httpSession) {
 	
 		String userCode = (String) httpSession.getAttribute("username");
+
+
 
 		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
 		if (modules != null) {
@@ -48,6 +57,8 @@ public class CategoryController {
 		}
 		
 		httpSession.setAttribute("username", userCode);
+
+
 		return pageMappingService.PageRequestMapping(reqPage,pageNo);
 	}
 	
@@ -64,5 +75,30 @@ public class CategoryController {
 			return "redirect:"+pageMappingService.PageRequestMapping(reqPage,pageNo);
 		}
 	}
+
+
+	public void saveCategory(@ModelAttribute("category") Category category ,Model model,HttpSession session) {
+		
+		boolean checkCategory = categoryService.chaeckCategoryExistOrNot(category);
+		
+		if(!checkCategory) {
+			categoryService.addCategory(category);
+			System.out.println("adding category..");
+		}
+		else {
+			System.out.println("allready exist ");
+		}
+		List<Category> listCategory = categoryService.getAllCategory();
+		if(listCategory != null) {
+			model.addAttribute("listCategory" ,listCategory);
+		}
+		
+	}
+	
+	
+	
+	
+	
+	
 
 }

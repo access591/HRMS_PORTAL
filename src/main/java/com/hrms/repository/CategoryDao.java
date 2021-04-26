@@ -5,6 +5,7 @@ import com.hrms.model.Category;
 
 public interface CategoryDao extends GenericDao<Category>{
 
+
 	Category chaeckCategoryExistOrNot(Category category);
 
 }
