@@ -52,13 +52,20 @@ public class LeaveRequestController {
 		System.out.println("leave request controller");
 		List<Employee> listEmployee = employeeService.getAllEmployees();
 		
+		System.out.println("testing employe exists : " + listEmployee.get(0).getEmpName());
 		String userCode = (String) session.getAttribute("username");
 		System.out.println("userCode  is : "+ userCode);
+		
+		List<Leave> listLeave = leaveService.getAllLeaves();
+		if(listLeave != null) {
+			model.addAttribute("lisLeave", listLeave);
+		}
 		
 		UserEntity userEntity = userService.findUserById(userCode); 
 		
 		
-		  List<LeaveRequest> listLeaveRequestByEmpCode =
+		
+		List<LeaveRequest> listLeaveRequestByEmpCode =
 		  leaveRequestService.findAllByEmpCode( userEntity.getEmpCode());
 		 
 		
@@ -80,9 +87,32 @@ public class LeaveRequestController {
 			model.addAttribute("modules", modules);
 		}
 		
+		  System.out.println("joninig begin..");
+		  System.out.println(" user entity code : "+ userEntity.getEmpCode());
+		  List<LeaveGrant> leaveGrant = leaveGrantService.findLeaveGrantByEmpCode(userEntity.getEmpCode());
+		  
+		  System.out.println( "leave grant size" + leaveGrant.size());
+		  if(leaveGrant.size() == 3) {
+			 model.addAttribute("casual", leaveGrant.get(0).getLeaveAvailed());
+			 model.addAttribute("sick", leaveGrant.get(1).getLeaveAvailed());
+			 model.addAttribute("sick1", leaveGrant.get(2).getLeaveAvailed());
+		  }
+		  if(leaveGrant.size() == 2) {
+				 model.addAttribute("casual", leaveGrant.get(0).getLeaveAvailed());
+				 model.addAttribute("sick", leaveGrant.get(1).getLeaveAvailed());
+				 model.addAttribute("sick1","0");
+			  }
+		  if(leaveGrant.size() == 1) {
+				 model.addAttribute("casual", leaveGrant.get(0).getLeaveAvailed());
+				 model.addAttribute("sick", "0");
+				 model.addAttribute("sick1", "0");
+			  }
+		  else {
+			  model.addAttribute("casual", "0");
+				 model.addAttribute("sick", "0");
+				 model.addAttribute("sick1", "0"); 
+		  }
 	
-		
-		
 		
 		//leaveRequestService.findAllByName("EMP-0046");
 		return pageMappingService.PageRequestMapping(reqPage, pageno);

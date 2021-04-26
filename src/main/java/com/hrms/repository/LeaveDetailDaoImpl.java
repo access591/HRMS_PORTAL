@@ -20,7 +20,10 @@ public class LeaveDetailDaoImpl extends AbstractGenericDao<LeaveDetail> implemen
 		Session session = sessionFactory.getCurrentSession();
 		Query<LeaveDetail> query = session.createQuery("from LeaveDetail lv where lv.lvCode=:lvCode");
 		query.setParameter("lvCode", lvCode);
-		//if(query)
+		if(query.list().size()>=1) {
+			LeaveDetail lv = (LeaveDetail) query.list().get(0);
+			return lv;
+		}
 		return null;
 	}
 

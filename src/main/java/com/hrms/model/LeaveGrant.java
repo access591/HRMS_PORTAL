@@ -17,6 +17,9 @@ public class LeaveGrant  implements Serializable{
 	private static final long serialVersionUID = 5399997637115740573L;
 	
 	@Id
+	@Column(name="LEAVEGRANT_CODE")
+	private String leaveGrantCode;
+	
 	@Column(name = " EMP_CODE")
 	private String empCode;
 	
@@ -44,6 +47,14 @@ public class LeaveGrant  implements Serializable{
 	private int closingBal;
 
 	
+	public String getLeaveGrantCode() {
+		return leaveGrantCode;
+	}
+
+	public void setLeaveGrantCode(String leaveGrantCode) {
+		this.leaveGrantCode = leaveGrantCode;
+	}
+
 	@Column(name = "INS_BY", updatable = false)
 	private String insBy;
 

@@ -1,12 +1,18 @@
 package com.hrms.controller;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +22,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.hrms.EmployeeGradationExcel;
 import com.hrms.ReportUtil;
 import com.hrms.model.Employee;
 import com.hrms.model.MenuModule;
@@ -33,6 +40,7 @@ public class EmployeeInformationReportController {
 	@Autowired PageMappingService pageMappingService;
 	@Autowired ReportUtil reportUtil;
 	@Autowired EmployeeService employeeService;
+	@Autowired EmployeeGradationExcel employeeGradationExcel;
 	
 	
 	@GetMapping("/employeeInformation")
@@ -64,4 +72,22 @@ public class EmployeeInformationReportController {
 		reportUtil.allEmployeeReport(request, response, reportName, listEmployee);
 		return null;
 	}
+	
+	@ResponseBody
+	@GetMapping("employeeExcel")
+	public ResponseEntity<InputStreamResource>  empoloyeeExcelReport(HttpServletResponse response) throws IOException{
+		
+		
+		
+		ByteArrayInputStream in = employeeGradationExcel.generateExcel();
+		
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("Content-Disposition", "attachment ; filename=employee.xlsx");
+		
+		
+		return ResponseEntity.ok().headers(headers).body(new InputStreamResource(in));
+		
+		
+	}
+	
 }
