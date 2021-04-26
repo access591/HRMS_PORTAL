@@ -110,7 +110,7 @@ body {
 											<tr  th:each="category : ${listCategory}">
 												<td th:text="${category.categoryCode}"></td>
 												<td th:text="${category.categoryName}"></td>
-												<td th:text="${category.status}"></td>
+												 <td th:text="${category.active}"></td> 
 												<td><a th:href="@{/editCategory/{id}(id=${category.categoryCode})}" class="btn btn-primary"><em class="fa fa-edit"></em></a>
 												<a th:href="@{/deleteCategory/{id}(id=${category.categoryCode})}" class="btn btn-primary"onclick="return confirm('Are you sure?')"><em class="fa fa-times"></em></a>
 												</td>
