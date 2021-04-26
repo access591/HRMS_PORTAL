@@ -82,13 +82,6 @@ public class LeaveRequestController {
 
 		LeaveGrant leaveGrant = leaveGrantService.findLeaveGrantByEmpCode(userEntity.getEmpCode());
 		
-		//LeaveDetail leaveDetail = leaveDetailService.findLeaveDetailById(userCode)
-		if(leaveGrant != null) {
-			model.addAttribute("leaveGrant", leaveGrant);
-		}
-		
-
-		session.setAttribute("username", userCode);
 
 		
 		//leaveRequestService.findAllByName("EMP-0046");
