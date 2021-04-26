@@ -8,6 +8,8 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -26,7 +28,9 @@ public class Designation implements Serializable{
 
 	@Column(name = "DESG_NAME")
 	private String desgName;
-	
+	@ManyToOne
+	@JoinColumn(name = "CATEG_CODE")
+	private Category categoryCode;
     @Column(name = "INS_BY",updatable = false)
 	private String insBy;
 	
@@ -98,6 +102,15 @@ public class Designation implements Serializable{
 		this.active = active;
 	}
 
+	public Category getCategoryCode() {
+		return categoryCode;
+	}
+
+	public void setCategoryCode(Category categoryCode) {
+		this.categoryCode = categoryCode;
+	}
+
+	
 	
 	
 }
