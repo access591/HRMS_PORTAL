@@ -86,7 +86,7 @@ public class LeaveRequestController {
 		if (modules != null) {
 			model.addAttribute("modules", modules);
 		}
-		
+
 		  System.out.println("joninig begin..");
 		  System.out.println(" user entity code : "+ userEntity.getEmpCode());
 		  List<LeaveGrant> leaveGrant = leaveGrantService.findLeaveGrantByEmpCode(userEntity.getEmpCode());
@@ -113,6 +113,13 @@ public class LeaveRequestController {
 				 model.addAttribute("sick1", "0"); 
 		  }
 	
+
+		
+		
+		
+
+		session.setAttribute("username", userCode);
+
 		
 		//leaveRequestService.findAllByName("EMP-0046");
 		return pageMappingService.PageRequestMapping(reqPage, pageno);
