@@ -40,8 +40,6 @@ public class CategoryDaoImpl extends AbstractGenericDao<Category>  implements Ca
 
 
 
-@Repository
-public class CategoryDaoImpl extends AbstractGenericDao<Category>  implements CategoryDao {
 
-}
+
 
