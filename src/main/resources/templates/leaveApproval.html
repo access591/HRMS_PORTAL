@@ -151,7 +151,43 @@ body {
 
 						<!-- div card end -->
 
-
+<div class="col-12">
+							<div class="card">
+								<div class="card-header"></div>
+								<div class="card-body">
+									<table id="example" class="table table-striped display" style="width: 100%">
+										<thead>
+											<tr>
+												<th>id</th>
+												
+												<th>Name</th>
+												<th>Approved Date</th>
+												<th>Approved By</th>
+												<th>Action</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr th:each="leave : ${listLeaveApproval}">
+												<td th:text="${leave.empCode}"></td>
+												<td >testing</td>
+												<td th:text="${leave.approvedDate}"></td>
+												<td th:text="${leave.approevedBy}"></td>
+												
+												<td>
+													<a th:href="@{/viewLeaveApproval/{id}
+															(id=${leave.leaveRequestId})}"><em
+															class="align-middle fas fa-fw fa-pen"></em></a>
+													<a th:href="@{/deleteLeaveApproval/{id}(id=${leave.leaveRequestId})}"
+														onclick="return confirm('Are you sure?')"><em
+															class="align-middle fas fa-fw fa-trash"></em></a>
+													
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
 
 
 					</div>
@@ -209,10 +245,10 @@ body {
 			
 			
 			var deptValue = document.getElementById("deptName").value;
-			//console.log("dept value is : "+deptValue);
+			console.log("dept value is : "+deptValue);
 
 			const xhr = new XMLHttpRequest();
-			xhr.open('GET', 'http://localhost:8181/leaverequest/' + deptValue);
+			xhr.open('GET', '/leaverequest/' + deptValue);
 			xhr.getResponseHeader('content-type', 'application/json');
 
 			xhr.onload = function() {
@@ -227,6 +263,9 @@ body {
 						leaveRequestId = obj[i].leaveRequestId;
 						leaveEmpCode = obj[i].empCode;
 						leaveApplyDate = obj[i].applyDate;
+						//fromDate = obj[i].fromDate.split("T");
+						//toDate = obj[i].toDate.split("T");
+						console.log("leave approval to date :  "+ obj[i].toDate )
 						
 						rows += "<tr><td>" + i + "</td><td>"
 								+ obj[i].empCode  + "</td><td>" + obj[i].empName
@@ -236,7 +275,7 @@ body {
 								+ "<td>" 
 								+ "<a href='#' onclick='approveLeaveRequest()'>Approve</a>" 
 								+ "</td><td>" 
-								+ "<a href=/viewLeaveRequest/" +leaveEmpCode+"/" +leaveApplyDate+ "  "
+								+ "<a href=/viewLeaveApproval/" +leaveRequestId+"/  "
 								+">View</a>" + "</td></tr>";
 								
 						$(rows).appendTo("#itemList tbody");
@@ -254,21 +293,6 @@ body {
 		function viewLeaveRequest(){
 			
 			href = "viewLeaveRequest/'+leaveEmpCode+"/"+leaveApplyDate";
-			
-			/* const xhr = new XMLHttpRequest();
-			xhr.open('GET', 'http://localhost:8181/viewLeaveRequest/'+leaveEmpCode+"/"+leaveApplyDate,true); 
-			xhr.getResponseHeader('content-type', 'application/json');
-
-			xhr.onload = function() {
-				if (this.status === 200) {
-					//obj = JSON.parse(this.responseText);	
-					console.log("successfull");
-					//getAllLeaveRequestBydepartment();
-				} else {
-					console.error("some error occured");
-				}
-			}
-			xhr.send(); */
 		}
 		
 		
@@ -283,11 +307,10 @@ body {
 
 			xhr.onload = function() {
 				if (this.status === 200) {
-					//obj = JSON.parse(this.responseText);	
 					console.log("successfull");
 					getAllLeaveRequestBydepartment();
 				} else {
-					console.error("some error occured");
+					console.error("some error occured in approval");
 				}
 			}
 			xhr.send();
@@ -303,9 +326,7 @@ body {
 					var row = table.deleteRow(rowCount-1);
 					rowCount--;
 				}
-				/* else{
-					alert('There should be atleast one row');
-				} */
+				
 			}
 			
 		}

@@ -45,29 +45,35 @@ public class LeaveRequestController {
 		System.out.println("leave request controller");
 		List<Employee> listEmployee = employeeService.getAllEmployees();
 		
-		
 		String userCode = (String) session.getAttribute("username");
 		System.out.println("userCode  is : "+ userCode);
-		UserEntity userEntity = userService.findUserById(userCode);
 		
-		List<LeaveRequest> listLeaveRequestByEmpCode = leaveRequestService.findAllByEmpCode(
-													userEntity.getEmpCode());
-		model.addAttribute("leaveRequestByEmp", listLeaveRequestByEmpCode);
+		UserEntity userEntity = userService.findUserById(userCode); 
 		
 		
+		  List<LeaveRequest> listLeaveRequestByEmpCode =
+		  leaveRequestService.findAllByEmpCode( userEntity.getEmpCode());
+		 
+		
+		List<LeaveRequest> listLeaveRequest = leaveRequestService.getAllLeaves();
+		
+		System.out.println("leave request size : " + listLeaveRequest.size());
+		
+		if(listLeaveRequest != null) {
+			model.addAttribute("listRequest",listLeaveRequest);
+		}
 		
 		if(listEmployee != null)
 		{
 			model.addAttribute("listEmployee" , listEmployee);
 		}
 		
-		
 		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
 		if (modules != null) {
 			model.addAttribute("modules", modules);
 		}
 		
-		
+		session.setAttribute("username", userCode);
 		
 		//leaveRequestService.findAllByName("EMP-0046");
 		return pageMappingService.PageRequestMapping(reqPage, pageno);
@@ -79,6 +85,8 @@ public class LeaveRequestController {
 		String insertedBY = (String) session.getAttribute("userlogin");
 		System.out.println("inserted by :"+ insertedBY);
 		
+		System.out.println("leave from date : " + leaveRequest.getFromDate());
+		System.out.println("leave to date : " + leaveRequest.getToDate());
 		leaveRequestService.addLeave(leaveRequest);
 		
 		session.setAttribute("username", session.getAttribute("username"));
@@ -88,23 +96,34 @@ public class LeaveRequestController {
 	
 	
 	
-	@GetMapping(value = { "/viewLeaveRequest/{empCode}/{applyDate}" })
-	public String viewLeaveRequestByEmpId(@PathVariable("empCode")String empCode, @PathVariable("applyDate") String applyDate,
+	@GetMapping(value = { "/viewLeaveRequest/{id}" })
+	public String viewLeaveRequestByEmpId(@PathVariable("id")String leaveRequestId,
 						Model model,HttpSession session) {
 		int pagenoView = 61;
 		String reqPageView = "/viewLeaveRequest";
 		
 		
 		
-		List<LeaveRequest> leaveRequest = this.leaveRequestService.findByEmpCodeAndApplyDate(empCode, applyDate);
+		//List<LeaveRequest> leaveRequest = this.leaveRequestService.findByEmpCodeAndApplyDate(empCode, applyDate);
+		LeaveRequest leaveRequest = this.leaveRequestService.findLeaveRequestById(Long.parseLong(leaveRequestId));
+		
 		if(leaveRequest != null) {
-			model.addAttribute("leaveDetail", leaveRequest.get(0));
+			model.addAttribute("leaveDetail", leaveRequest);
 		}
 		List<MenuModule> modules = moduleService.getAllModulesList(session.getAttribute("username").toString());
 		if (modules != null) {
 			model.addAttribute("modules", modules);
 		}
+		model.addAttribute("header", "View Leave Request");
+		model.addAttribute("myhref", "leaveRequest");
 		return pageMappingService.PageRequestMapping(reqPageView, pagenoView);
+	}
+	
+	@GetMapping(value = { "/deleteLeaveRequest/{id}" })
+	public String deleteActivity(@PathVariable("id") Long id, Model model, HttpSession session) {
+		
+		this.leaveRequestService.removeLeaveRequest(id);
+		return "redirect:/"+ pageMappingService.PageRequestMapping(reqPage, pageno);
 	}
 	
 	

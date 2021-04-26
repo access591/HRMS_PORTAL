@@ -14,5 +14,7 @@ public interface EmployeePayDetailService {
 	public void updateEmployeePayDetail(EmployeePayDetail c);
 
 	public void removeEmployeePayDetail(long id);
+	
+	public boolean isEmployeePayExists(String empCode);
 
 }

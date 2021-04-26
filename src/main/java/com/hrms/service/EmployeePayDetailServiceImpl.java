@@ -43,4 +43,10 @@ public class EmployeePayDetailServiceImpl implements EmployeePayDetailService {
 
 	}
 
+	@Override
+	public boolean isEmployeePayExists(String empCode) {
+		
+		return this.empPayDetailDao.isEmployeePayExists(empCode);
+	}
+
 }
