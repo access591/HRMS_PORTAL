@@ -15,10 +15,10 @@ public class ArmsLicenseDetails implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 5657442637595445194L;
+	
 	@Id
-	@Size(max =5)
-	@Column(name ="SR_NO")
-	int seNo;
+	@Column(name ="ARMS_CODE")
+	private String armsCode;
 	@Size(max =50)
 	@Column(name ="NAME")
 	private String name;
@@ -49,20 +49,23 @@ public class ArmsLicenseDetails implements Serializable {
 	@Size(max =100)
 	@Column(name = "TOP")
 	private String top;
-	@Size(max =5)
-	@Column(name = "NOL")
-	private int nol;
+	
+	
+	@Column(name = "ARMS_NOL")
+	private int armsNol;
+	
 	@Size(max =1000)
 	@Column(name = "LCD")
 	private String lcd;
 	@Size(max =1000)
 	@Column(name = "DEALER_DETAILS")
 	private String dealerDetails;
-	public int getSeNo() {
-		return seNo;
+	
+	public String getArmsCode() {
+		return armsCode;
 	}
-	public void setSeNo(int seNo) {
-		this.seNo = seNo;
+	public void setArmsCode(String armsCode) {
+		this.armsCode = armsCode;
 	}
 	public String getName() {
 		return name;
@@ -124,11 +127,12 @@ public class ArmsLicenseDetails implements Serializable {
 	public void setTop(String top) {
 		this.top = top;
 	}
-	public int getNol() {
-		return nol;
+	
+	public int getArmsNol() {
+		return armsNol;
 	}
-	public void setNol(int nol) {
-		this.nol = nol;
+	public void setArmsNol(int armsNol) {
+		this.armsNol = armsNol;
 	}
 	public String getLcd() {
 		return lcd;
