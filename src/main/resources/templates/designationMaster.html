@@ -62,6 +62,12 @@ body {
 											   <input
 														type="text" class="form-control"maxlength="10" id="desgCode" name="desgCode" readonly>
 												</div>
+												
+												<div class="form-group">
+											<label class="form-label">Designation Name</label>
+											<label style="color: red">*</label>
+											 <input type="text" class="form-control" pattern="^[a-zA-Z\s]*$" title="Designation Name" maxlength="25" id="desgName" name="desgName"required aria-required="true">
+										       </div>
 
 												<div class="form-group">
 
@@ -79,10 +85,14 @@ body {
 											</div>
 											<div class="col-12 col-lg-6">
 											<div class="form-group">
-											<label class="form-label">Designation Name</label>
-											<label style="color: red">*</label>
-											 <input type="text" class="form-control" pattern="^[a-zA-Z\s]*$" title="Designation Name" maxlength="25" id="desgName" name="desgName"required aria-required="true">
-										</div>
+											
+											<label class="form-label">Category</label>
+												<label style="color: red">*</label>
+												<select class="form-control select2" name="categoryCode"id="categoryCode" required aria-required="true">
+												 <option value="">Select Cat....</option>
+												<option th:each="cat: ${listCategory}" th:value="${cat.getCategoryCode()}" th:text="${cat.getCategoryName()}"></option>
+											     	</select>
+											 </div>
 											</div>
 										</div>
 										<button type="submit" class="btn btn-primary">Save</button>
@@ -101,6 +111,7 @@ body {
 										<thead>
 											<tr>
 												<th  scope="col">Designation code</th>
+												<th  scope="col">Category </th>
 												<th  scope="col">Designation Name </th>
 												<th  scope="col">Status</th>
 												<th  scope="col">Action</th>
@@ -109,10 +120,11 @@ body {
 										<tbody>
 											<tr  th:each="listdesignation : ${listDesignation}">
 												<td th:text="${listdesignation.desgCode}"></td>
+												<td th:text="${listdesignation.categoryCode.categoryName}"></td>
 												<td th:text="${listdesignation.desgName}"></td>
 												<td th:text="${listdesignation.active}"></td>
-												<td><a th:href="@{/editDesignation/{id}(id=${listdesignation.desgCode})}" class="btn btn-primary"><em class="fa fa-edit"></em></a>
-												<a th:href="@{/deleteDesignation/{id}(id=${listdesignation.desgCode})}" class="btn btn-primary"onclick="return confirm('Are you sure?')"><em class="fa fa-times"></em></a>
+												<td><a th:href="@{/editDesignation/{id}(id=${listdesignation.desgCode})}" ><em class="fa fa-edit"></em></a>
+												<a th:href="@{/deleteDesignation/{id}(id=${listdesignation.desgCode})}" onclick="return confirm('Are you sure?')"><em class="fa fa-times"></em></a>
 												</td>
 											</tr>
 										</tbody>

@@ -116,9 +116,11 @@ public class LeaveRequestController {
 
 		
 		
+
 		
 
 		session.setAttribute("username", userCode);
+
 
 		
 		//leaveRequestService.findAllByName("EMP-0046");
