@@ -82,19 +82,7 @@ body {
 								<div>
 								
                          <div id="validation-step-1">
-											<div class="form-row">
-                                             	<div class="form-group sm col-md-4">
-													<label class="form-label">Upload Image <span
-														class="text-danger">*</span>
-													</label>
-													
-													 <input type="file" id="image" name="image" accept="image/png,image/jpeg" title="image" class="form-control required"onchange="preview_image(event)"/>
-											     <img id="output_image"width="100px" height="100px"style="border-radius: 50px;" alt="output_image">
-												</div>
-												
-												
-									     </div>
-									     
+											
 									     
 									     
 									     
@@ -111,58 +99,56 @@ body {
 											       <span class="text-danger">*</span></label>
 							                 <input  type="text"id="empName"name="empName" title="Name"maxlength="50" pattern="^[a-zA-Z\s]*$" class="form-control required">
 										     </div>
-	
-										<div class="form-group sm col-md-4">
-													<label class="form-label">Designation</label> <span
-														class="text-danger">*</span> <select
-														class="form-control required" name="designation" id="designation">
-														<option value="">Select Type</option>
-														<option th:each="des :${listDesignation}" th:value="${des.desgName}" th:text="${des.getDesgName()}"></option>
-														
-													</select>
-												</div>
-											
-												</div>
-												
-												
-												
-												
-												
-												
-												
-												
-											<div class="form-row">
-							                   <div class="form-group sm col-md-4">
-												<label class="form-label">Date Of Joining</label>
-												<span class="text-danger">*</span>
-												<input  type="text" id="dateOfJoining" name="dateOfJoining" class="form-control required">
-										          </div>
-													<div class="form-group sm col-md-4">
+										     	<div class="form-group sm col-md-4">
 												
 													<label class="form-label">Batch Year</label> <span
 														class="text-danger">*</span> 
 														<input class="form-control required" type="text"id="batchYear"name="batchYear"/>
 
 												</div>
-												<div class="form-group sm col-md-4">
-													<label class="form-label">VRS
-													</label> <input name=vrs type="text" id="vrs" maxlength="30" 
-														class="form-control">
+	
+										           
+											
 												</div>
 												
-												</div>
-											
-											<div class="form-row">
-									              <div class="form-group sm col-md-4">
+												
+												
+											<div class="form-row">	
+											 <div class="form-group sm col-md-4">
 												<label class="form-label">Department</label>
 												<label style="color: red">*</label>
-												<select class="form-control select2"onchange="myFunction()" name="departmentCode"id="departmentCode" required aria-required="true">
+												<select class="form-control select2" name="departmentCode"id="departmentCode" required aria-required="true">
 												 <option value="">Select Department</option>
 												<option th:each="dep :${listDepartment}" th:value="${dep.getDepartmentCode()}" th:text="${dep.getDeptName()}"></option>
 											     	</select>
-											     
-											   <input type="hidden" class="form-control" id="depName" name="depName" size="50" > 
 											</div>
+											 <div class="form-group sm col-md-4">
+													<label class="form-label">Category</label> <span
+														class="text-danger">*</span> <select
+														class="form-control required" name="categoryCode" id="categoryCode">
+														<option value="">Select Category</option>
+														<option th:each="cat :${listCategory}" th:value="${cat.getCategoryCode()}" th:text="${cat.getCategoryName()}"></option>
+														
+													</select>
+												  </div>
+											
+											
+												 <div class="form-group sm col-md-4">
+													<label class="form-label">Designation</label> <span
+														class="text-danger">*</span> <select
+														class="form-control required" name="designationCode" id="designationCode">
+														<option value="">Select Type</option>
+														<option th:each="des :${listDesignation}" th:value="${des.desgName}" th:text="${des.getDesgName()}"></option>
+														
+													</select>
+												  </div>
+											</div>	
+												
+												
+										
+											
+											<div class="form-row">
+									             
 											<div class="form-group sm col-md-4">
 													<label class="form-label">Type</label> <span
 														class="text-danger">*</span> <select
@@ -174,7 +160,11 @@ body {
 												
 													</select>
 												</div>
-												
+												 <div class="form-group sm col-md-4">
+												<label class="form-label">Date Of Joining</label>
+												<span class="text-danger">*</span>
+												<input  type="text" id="dateOfJoining" name="dateOfJoining" class="form-control required">
+										          </div>
 												
 													<div class="form-group sm col-md-4">
 													<label class="form-label">Date  Of Posting </label> <span
@@ -225,21 +215,28 @@ body {
 													
 													<div class="form-group sm col-md-4">
 													<label class="form-label">Vigilance Query</label> 
-													 <select  class="form-control required" name="vigilanceQuery" id="vigilanceQuery">
+													 <input name="vigilanceQuery" type="text"id="vigilanceQuery"  title="Vigilance Query"
+														class="form-control">
+													 
+													 <!-- <select  class="form-control required" name="vigilanceQuery" id="vigilanceQuery">
 														<option value="">Select Type</option>
 														<option value="YES">YES</option>
 														<option value="NO"selected="selected">NO</option>
 														
-													</select>
+													</select> -->
 												</div>
 													<div class="form-group sm col-md-4">
-													<label class="form-label">Suspension </label>  <select
+													<label class="form-label">Suspension </label>
+													 <input name="suspention" type="text"id="suspention"  title="Suspention"
+														class="form-control">
+													
+													  <!-- <select
 														class="form-control required" name="suspention" id="suspention">
 														<option value="">Select Type</option>
 														<option value="YES">YES</option>
 														<option value="NO" selected="selected">No</option>
 														
-													</select>
+													</select> -->
 												</div>
 												<div class="form-group sm col-md-4">
 													<label class="form-label">Date  Of Retirement</label> <span
@@ -248,22 +245,44 @@ body {
 														name="dateOfRetirement" />
 
 												</div>
-											
-													
-													
 													</div>
+													
+												<div class="form-row">
+												<div class="form-group sm col-md-4">
+													<label class="form-label">VRS
+													</label> <input name=vrs type="text" id="vrs" maxlength="30" 
+														class="form-control">
+												</div>
+												
+											
+                                             	<div class="form-group sm col-md-4">
+													<label class="form-label">Upload Image <span
+														class="text-danger">*</span>
+													</label>
+													
+													 <input type="file" id="image" name="image" accept="image/png,image/jpeg" title="image" class="form-control required"onchange="preview_image(event)"/>
+											     <img id="output_image"width="100px" height="100px"style="border-radius: 50px;" alt="output_image">
+												</div>
+												
+												</div>
 
 										
 									
 						          	</div>
 									<div id="validation-step-2">
 									<div class="form-row">
-										<div class="form-group sm col-md-4">
+									 <div class="form-group sm col-md-4">
+											       <label class="form-label">Aadhar No
+											       <span class="text-danger">*</span></label>
+							                 <input  type="text"id="aadharNo"name="aadharNo" title="Aadhar No" pattern="\d{1,12}"maxlength="12" class="form-control required">
+										     </div>
+									
+										<!-- <div class="form-group sm col-md-4">
 											<label class="form-label">Transfer
 											<span class="text-danger">*</span>
 												</label>
 							           <input  type="text"id="transfer"name="transfer" title="Transfer" maxlength="30"class="form-control required">
-										</div>
+										</div> -->
 										<div class="form-group sm col-md-4">
 											<label class="form-label">Order No.
 											<span class="text-danger">*</span>
@@ -283,8 +302,8 @@ body {
 													<label class="form-label">Under Rule 7</label>  <select
 														class="form-control" name="underRule7" id="underRule7">
 														<option value="">Select Type</option>
-														<option value="YES">YES</option>
-														<option value="NO"selected="selected">NO</option>
+														<option value="Y">YES</option>
+														<option value="N"selected="selected">NO</option>
 														
 													</select>
 												</div>
@@ -292,8 +311,8 @@ body {
 													<label class="form-label">Under Rule 8</label>
 													<select class="form-control" name="underRule8" id="underRule8">
 														<option value="">Select Type</option>
-														<option value="YES">YES</option>
-														<option value="NO"selected="selected">NO</option>
+														<option value="Y">YES</option>
+														<option value="N"selected="selected">NO</option>
 														
 													</select>
 												</div>
@@ -335,16 +354,18 @@ body {
 											       <span class="text-danger">*</span></label>
 							                 <input  type="text"id="qualification"name="qualification" title="Qualification"maxlength="40" pattern="^[a-zA-Z\s]*$" class="form-control required">
 										     </div>
+										    
 										     <div class="form-group sm col-md-4">
-											       <label class="form-label">Aadhar No
-											       <span class="text-danger">*</span></label>
-							                 <input  type="text"id="aadharNo"name="aadharNo" title="Aadhar No" pattern="\d{1,12}"maxlength="12" class="form-control required">
-										     </div>
-										     <div class="form-group sm col-md-4">
-											       <label class="form-label">Mobile Number
+											       <label class="form-label">Mobile Number 1
 											      </label>
-							                 <input  type="text"id="mobileNumber"name="mobileNumber" title="Mobile Number"maxlength="10" class="form-control">
+							                 <input  type="text"id="mobileNumber1"name="mobileNumber1" title="Mobile Number1"maxlength="10" class="form-control">
 										     </div>
+										      <div class="form-group sm col-md-4">
+											       <label class="form-label">Mobile Number 2
+											      </label>
+							                 <input  type="text"id="mobileNumber2"name="mobileNumber2" title="Mobile Number 2"maxlength="10" class="form-control">
+										     </div>
+										    
 											</div>
 											
 											
@@ -354,16 +375,7 @@ body {
 											      </label>
 							                 <input  type="text"id="email"name="email" title="Email"pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" class="form-control">
 										     </div>
-										       	<div class="form-group sm col-md-4">
-													<label class="form-label">Gender</label> <span
-														class="text-danger">*</span> <select
-														class="form-control required" name="gender" id="gender">
-														<option value="">Select Type</option>
-														<option value="MALE">MALE</option>
-														<option value="FEMALE">FEMALE</option>
-														
-													</select>
-												</div>
+										       	
 												
 												  	<div class="form-group sm col-md-4">
 													<label class="form-label">Martial Status</label> <span
@@ -375,26 +387,66 @@ body {
 														
 													</select>
 												</div>
+												 <div class="form-group sm col-md-4">
+													<label class="form-label">Gender</label> <span
+														class="text-danger">*</span> <select
+														class="form-control required" name="gender" id="gender">
+														<option value="">Select Type</option>
+														<option value="M">MALE</option>
+														<option value="F">FEMALE</option>
+														
+													</select>
+												</div>
 											</div>
 											
 											
 										  <div class="form-row">
+											  
 											  <div class="form-group sm col-md-4">
-											       <label class="form-label">Address
+											       <label class="form-label">Country 
 											       <span class="text-danger">*</span></label>
-							                 <input  type="text"id="address"name="address" title="Address"maxlength="60" class="form-control required">
+							                 <input  type="text"id="countryCode"name="countryCode" title="Country"maxlength="45" pattern="^[a-zA-Z\s]*$" class="form-control required">
 										     </div>
-										       <div class="form-group sm col-md-4">
-											       <label class="form-label">City state
+											  
+											    <div class="form-group sm col-md-4">
+											       <label class="form-label">State 
 											       <span class="text-danger">*</span></label>
-							                 <input  type="text"id="cityState"name="cityState" title="City state"maxlength="45" pattern="^[a-zA-Z\s]*$" class="form-control required">
+							                 <input  type="text"id="stateCode"name="stateCode" title="State"maxlength="45" pattern="^[a-zA-Z\s]*$" class="form-control required">
 										     </div>
+											  
 										       <div class="form-group sm col-md-4">
+											       <label class="form-label">City 
+											       <span class="text-danger">*</span></label>
+							                 <input  type="text"id="cityCode"name="cityCode" title="City"maxlength="45" pattern="^[a-zA-Z\s]*$" class="form-control required">
+										     </div>
+										       
+											</div>
+											
+											 <div class="form-row">
+											 <div class="form-group sm col-md-4">
+											       <label class="form-label">Address1
+											       <span class="text-danger">*</span></label>
+							                 <input  type="text"id="address1"name="address1" title="Address1"maxlength="60" class="form-control required">
+										     </div>
+										     <div class="form-group sm col-md-4">
+											       <label class="form-label">Address2
+											       <span class="text-danger">*</span></label>
+							                 <input  type="text"id="address2"name="address2" title="Address2"maxlength="60" class="form-control required">
+										     </div>
+										     <div class="form-group sm col-md-4">
 											       <label class="form-label">Pin Code
 											       <span class="text-danger">*</span></label>
 							                 <input  type="text"id="pinCode"name="pinCode" title="Pin Code"maxlength="8" class="form-control required">
 										     </div>
-											</div>
+											 </div>
+											 
+											  <div class="form-row">
+											    <div class="form-group sm col-md-4">
+											       <label class="form-label">Telephone No
+											       <span class="text-danger">*</span></label>
+							                 <input  type="text"id="telephone"name="telephone" title="Telephone No"maxlength="8" class="form-control required">
+										     </div>
+											  </div>
 
 									</div>
 
@@ -685,15 +737,7 @@ function preview_image(event)
 </script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
-<script>
- function myFunction(){
-    	  $('#departmentCode').click(function() {
-      	 var name= $('#departmentCode option:selected').text();
-      	$('#depName').val(name);
-      	}); 
-      }
-      
-</script>	
+
 
 </body>
 </html>

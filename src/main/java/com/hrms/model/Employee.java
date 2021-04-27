@@ -479,10 +479,12 @@ public class Employee implements Serializable {
 		this.underRule8 = underRule8;
 	}
 
-	
+	public String getCategoryCode() {
+		return categoryCode;
+	}
 
-	
-
-
+	public void setCategoryCode(String categoryCode) {
+		this.categoryCode = categoryCode;
+	}
 
 }
