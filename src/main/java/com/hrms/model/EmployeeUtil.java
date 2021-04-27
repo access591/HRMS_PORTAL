@@ -49,15 +49,19 @@ public class EmployeeUtil {
 	private String aadharNo;
 	private String addCharge;
 	private String email;
+	
 	private String gender;
 	private String martialStatus;
 	private String telephone;
+	
 	private String onAdditionalCharge;
 	private Date orderDate;
 	private String orderNo;
+	
 	private String panNo;
 	private String pinCode;
 	private String qualification;
+	
 	private String uan;
 	private String underRule7;
 	private String underRule8;
@@ -74,19 +78,23 @@ public class EmployeeUtil {
   //=====================22
 	// STEP-2==========Arms_license_details============end....
 	
-	int seNo;
+    private String armsCode;
 	private String name;
 	private String fatherName;
 	private String addressArms;
+	
 	private String  district;
 	private String state;
 	private String armsArea;
+	
 	private Date doi;
 	private Date dov;
 	private String toa;
+	
 	private String top;
-	private int nol;
+	private int armsNol;
 	private String lcd;
+	
 	private String dealerDetails;
 	public String getEmpCode() {
 		return empCode;
@@ -325,14 +333,16 @@ public class EmployeeUtil {
 	public void setUnderRule8(String underRule8) {
 		this.underRule8 = underRule8;
 	}
-	public int getSeNo() {
-		return seNo;
-	}
-	public void setSeNo(int seNo) {
-		this.seNo = seNo;
-	}
+	//==========================================
+	
 	public String getName() {
 		return name;
+	}
+	public String getArmsCode() {
+		return armsCode;
+	}
+	public void setArmsCode(String armsCode) {
+		this.armsCode = armsCode;
 	}
 	public void setName(String name) {
 		this.name = name;
@@ -391,11 +401,12 @@ public class EmployeeUtil {
 	public void setTop(String top) {
 		this.top = top;
 	}
-	public int getNol() {
-		return nol;
+	
+	public int getArmsNol() {
+		return armsNol;
 	}
-	public void setNol(int nol) {
-		this.nol = nol;
+	public void setArmsNol(int armsNol) {
+		this.armsNol = armsNol;
 	}
 	public String getLcd() {
 		return lcd;

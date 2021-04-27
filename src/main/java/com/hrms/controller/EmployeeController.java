@@ -25,12 +25,14 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.hrms.ImageUtil;
+import com.hrms.model.ArmsLicenseDetails;
 import com.hrms.model.Category;
 import com.hrms.model.Department;
 import com.hrms.model.Designation;
 import com.hrms.model.Employee;
 import com.hrms.model.EmployeeUtil;
 import com.hrms.model.MenuModule;
+import com.hrms.service.ArmsLicenseService;
 import com.hrms.service.CategoryService;
 import com.hrms.service.DepartmentService;
 import com.hrms.service.DesignationService;
@@ -54,6 +56,8 @@ public class EmployeeController {
 	EmployeeService employeeService;
 	@Autowired
 	CategoryService categoryService;
+	@Autowired
+	ArmsLicenseService armsLicenseService;
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
 /**
  * get All employee Details page 
@@ -101,7 +105,7 @@ public class EmployeeController {
 	@PostMapping("/saveEmployee")
 	public String employeeMasterSave(@ModelAttribute("employees")EmployeeUtil eutility , Model model, HttpSession session,@RequestParam("image") MultipartFile file,HttpServletRequest request)
 	{
-		
+		ArmsLicenseDetails armsLicense =new ArmsLicenseDetails();
 		Employee employee=new Employee();
 		employee.setEmpName(eutility.getEmpName());
 		
@@ -124,14 +128,61 @@ public class EmployeeController {
 		employee.setVigilanceQuery(eutility.getVigilanceQuery());
 		employee.setVrs(eutility.getVrs());
 		//step 1 complete==================================
+		employee.setAadharNo(eutility.getAadharNo());
+		employee.setAddCharge(eutility.getAddCharge());
+		employee.setEmail(eutility.getEmail());
 		
+		employee.setGender(eutility.getGender());
+		employee.setMartialStatus(eutility.getMartialStatus());
+		employee.setTelephone(eutility.getTelephone());
 		
+		employee.setOnAdditionalCharge(eutility.getOnAdditionalCharge());
+		employee.setOrderDate(eutility.getOrderDate());
+		employee.setOrderNo(eutility.getOrderNo());
+		
+		employee.setPanNo(eutility.getPanNo());
+		employee.setPinCode(eutility.getPinCode());
+		employee.setQualification(eutility.getQualification());
+		
+		employee.setUan(eutility.getUan());
+		employee.setUnderRule7(eutility.getUnderRule7());
+		employee.setUnderRule8(eutility.getUnderRule8());
+		
+		employee.setCityCode(eutility.getCityCode());
+		employee.setStateCode(eutility.getStateCode());
+		employee.setCountryCode(eutility.getCountryCode());
+		
+		employee.setMobileNumber1(eutility.getMobileNumber1());
+		employee.setMobileNumber2(eutility.getMobileNumber2());
+		employee.setAddress1(eutility.getAddress1());
+		employee.setAddress2(eutility.getAddress2());
 		
 		//step 2 complete==================================
+		armsLicense.setName(eutility.getName());
+		armsLicense.setFatherName(eutility.getFatherName());
+		armsLicense.setAddressArms(eutility.getAddressArms());
+		
+		armsLicense.setDistrict(eutility.getDistrict());
+		armsLicense.setState(eutility.getState());
+		armsLicense.setArmsArea(eutility.getArmsArea());
+		
+		armsLicense.setDoi(eutility.getDoi());
+		armsLicense.setDov(eutility.getDov());
+		armsLicense.setToa(eutility.getToa());
+		
+		armsLicense.setTop(eutility.getTop());
+		armsLicense.setArmsNol(eutility.getArmsNol());
+		armsLicense.setLcd(eutility.getLcd());
+		armsLicense.setDealerDetails(eutility.getDealerDetails());
+		
+		//step 3  complete==================================
+		
+		
 		try {
 			byte[] imageData = file.getBytes();
 			employee.setImageProfile(imageData);
 			employeeService.addEmployee(employee);
+			armsLicenseService.addArmsLicenseDetails(armsLicense);
 			log.info("HttpStatus===" + new ResponseEntity<>(HttpStatus.OK));
 			session.setAttribute("username", session.getAttribute("username"));
 		} catch (IOException e) {
