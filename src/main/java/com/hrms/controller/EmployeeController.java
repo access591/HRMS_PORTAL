@@ -1,26 +1,21 @@
 package com.hrms.controller;
 
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
+
 import java.io.IOException;
 
-import java.nio.file.Paths;
-import java.util.List;
-import java.util.UUID;
 
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,10 +25,12 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.hrms.ImageUtil;
+import com.hrms.model.Category;
 import com.hrms.model.Department;
 import com.hrms.model.Designation;
 import com.hrms.model.Employee;
 import com.hrms.model.MenuModule;
+import com.hrms.service.CategoryService;
 import com.hrms.service.DepartmentService;
 import com.hrms.service.DesignationService;
 import com.hrms.service.EmployeeService;
@@ -54,6 +51,8 @@ public class EmployeeController {
 	private ModuleService moduleService;
 	@Autowired
 	EmployeeService employeeService;
+	@Autowired
+	CategoryService categoryService;
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
 /**
  * get All employee Details page 
@@ -66,10 +65,16 @@ public class EmployeeController {
 
 		List<Employee> listEmployee = employeeService.getAllEmployees();
 		model.addAttribute("listEmployee", listEmployee);
+		
 		List<Department> listDepartment = departmentService.getAllDepartments();
 		model.addAttribute("listDepartment", listDepartment);
+		
+		List<Category> listCategory = categoryService.getAllCategory();
+		model.addAttribute("listCategory" ,listCategory);
+		
 		List<Designation> listDesignation = designationService.getAllDesignations();
 		model.addAttribute("listDesignation", listDesignation);
+		
 		String userCode = (String) session.getAttribute("username");
 		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
 		if (modules != null) {
@@ -77,9 +82,11 @@ public class EmployeeController {
 		}
 		session.setAttribute("username", session.getAttribute("username"));
 		ModelAndView modelAndView = new ModelAndView(pageMappingService.PageRequestMapping(reqPage, pageno));
-	    modelAndView.addObject("imgUtil", new ImageUtil());
+	   
+		modelAndView.addObject("imgUtil", new ImageUtil());
 	    modelAndView.addObject("listEmployee", listEmployee);
-		return modelAndView;
+		
+	    return modelAndView;
 	
 	}
 /**

@@ -12,10 +12,8 @@ public class EmployeeUtil {
 	private String empName;
 	
 	private String departmentCode;
-	
-	private String designationCode;
-	
 	private String categoryCode;
+	private String designationCode;
 	
 	private String batchYear;
 	
@@ -24,7 +22,6 @@ public class EmployeeUtil {
 	private Date dateOfPosting;
 	
 	private Date dateOfRetirement;
-	
 
 
 	@Lob
