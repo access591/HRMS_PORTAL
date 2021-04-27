@@ -53,42 +53,36 @@ body {
 								<div class="card-body">
 									<form id="validation-form" action="#" th:action="@{/employeeDetailPdf}" th:object="${designation}" method="post">
 										<div class="row">
+											
 											<div class="col-12 col-lg-6">
-												<div class="form-group">
-										
-											  <label> Category Code </label>
-											  		<label style="color: red">*</label>
-											  	 
-											   <input
-														type="text" class="form-control"maxlength="10" readonly>
-												</div>
-
-												<div class="form-group">
-
-													<label class="form-label">Status</label>
-													<div class="custom-controls-stacked">
-
-														<label class="radio-inline"> <input type="radio"
-															value="Y" name="active" checked> Active
-														</label> <label class="radio-inline"> <input type="radio"
-															value="N" name="active"> Inactive
-														</label>
-
-													</div>
-												</div>
-											</div>
-											<div class="col-12 col-lg-6">
-											<div class="form-group">
-											<label class="form-label">Designation Name</label>
-											<label style="color: red">*</label>
-											 <select class="form-control select2" id="designation_name" name="designation_name">
-														<option value="">Select Designation</option>
-														<option value="DIG" name="designation" >DIG</option>
+												<label class="form-label">Category Name</label>
+												<label style="color: red">*</label>
+												<select class="form-control" id="select_category"
+													onchange="changeCategory()">
+													<option value="">Select Category</option>
+													<!-- <option th:each="employee: ${listEmployee}"
+														th:text="${employee.empName}" th:value=" ${employee.empCode}">
+													</option> -->
+														<option value="ALL" name="designation">All</option>
+														<option value="DIG" name="designation">DIG</option>
 														<option value="IPS" name="designation">IPS</option>
 														<option value="ADA" name="designation">ADA</option>
 														<option value="DA" name="designation">DA</option>
 														<option value="SP" name="designation">SP</option>
-													</select>
+														
+												</select>
+												
+											</div>
+											
+											<div class="col-12 col-lg-6">
+											<div class="form-group">
+											<label class="form-label">Employee Name</label>
+											<label style="color: red">*</label>
+											 
+											 <select class="form-control select2" id="designation_name" name="designation_name">
+														<option value="">Select Employee</option>
+														
+											</select>
 													
 													
 													
@@ -170,7 +164,13 @@ body {
 
 }
 	
-			
+	function changeCategory(){
+		console.log("select category : " + document.getElementById("select_category").value);
+		var ALL = 0,DIG=1,IPS=2 ,ADA=3,DA=4,SP=5;
+		var selectedCategory = document.getElementById("select_category").value;
+		
+		
+	}
 	
 	</script>
 	
