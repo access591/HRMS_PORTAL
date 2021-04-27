@@ -29,6 +29,7 @@ import com.hrms.model.Category;
 import com.hrms.model.Department;
 import com.hrms.model.Designation;
 import com.hrms.model.Employee;
+import com.hrms.model.EmployeeUtil;
 import com.hrms.model.MenuModule;
 import com.hrms.service.CategoryService;
 import com.hrms.service.DepartmentService;
@@ -98,9 +99,35 @@ public class EmployeeController {
  * @return
  */
 	@PostMapping("/saveEmployee")
-	public String employeeMasterSave(@ModelAttribute("employees") Employee employee, Model model, HttpSession session,
-			@RequestParam("image") MultipartFile file,HttpServletRequest request) {
-
+	public String employeeMasterSave(@ModelAttribute("employees")EmployeeUtil eutility , Model model, HttpSession session,@RequestParam("image") MultipartFile file,HttpServletRequest request)
+	{
+		
+		Employee employee=new Employee();
+		employee.setEmpName(eutility.getEmpName());
+		
+		employee.setDepartmentCode(eutility.getDepartmentCode());
+		employee.setCategoryCode(eutility.getCategoryCode());
+		employee.setDesignationCode(eutility.getDesignationCode());
+		
+		
+		employee.setBatchYear(eutility.getBatchYear());
+		employee.setDateOfJoining(eutility.getDateOfJoining());
+		employee.setDateOfPosting(eutility.getDateOfPosting());
+		employee.setDateOfRetirement(eutility.getDateOfRetirement());
+		
+		employee.setEmployeePayeeCode(eutility.getEmployeePayeeCode());
+		employee.setOfficerType(eutility.getOfficerType());
+		employee.setPresentPosting(eutility.getPresentPosting());
+		employee.setSuspention(eutility.getSuspention());
+		
+		employee.setTypeCourtDepartment(eutility.getTypeCourtDepartment());
+		employee.setVigilanceQuery(eutility.getVigilanceQuery());
+		employee.setVrs(eutility.getVrs());
+		//step 1 complete==================================
+		
+		
+		
+		//step 2 complete==================================
 		try {
 			byte[] imageData = file.getBytes();
 			employee.setImageProfile(imageData);

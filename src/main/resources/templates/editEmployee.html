@@ -247,12 +247,7 @@ body {
 						          	</div>
 									<div id="validation-step-2">
 									<div class="form-row">
-										<div class="form-group sm col-md-4">
-											<label class="form-label">Transfer
-											<span class="text-danger">*</span>
-												</label>
-							           <input  type="text"id="transfer"name="transfer" title="Transfer"th:value="${employeeEdit.transfer}"  class="form-control required">
-										</div>
+										
 										<div class="form-group sm col-md-4">
 											<label class="form-label">Order No.
 											<span class="text-danger">*</span>
@@ -331,7 +326,7 @@ body {
 										     <div class="form-group sm col-md-4">
 											       <label class="form-label">Mobile Number
 											       </label>
-							                 <input  type="text"id="mobileNumber"name="mobileNumber"th:value="${employeeEdit.mobileNumber}" title="Mobile Number" class="form-control">
+							                 <input  type="text"id="mobileNumber1"name="mobileNumber1"th:value="${employeeEdit.mobileNumber1}" title="Mobile Number" class="form-control">
 										     </div>
 											</div>
 											
@@ -370,12 +365,12 @@ body {
 											  <div class="form-group sm col-md-4">
 											       <label class="form-label">Address
 											       <span class="text-danger">*</span></label>
-							                 <input  type="text"id="address"name="address"th:value="${employeeEdit.address}" title="Address" class="form-control required">
+							                 <input  type="text"id="address1"name="address1"th:value="${employeeEdit.address1}" title="Address" class="form-control required">
 										     </div>
 										       <div class="form-group sm col-md-4">
 											       <label class="form-label">City state
 											       <span class="text-danger">*</span></label>
-							                 <input  type="text"id="cityState"name="cityState" th:value="${employeeEdit.cityState}"title="City state" class="form-control required">
+							                 <input  type="text"id="cityCode"name="cityCode" th:value="${employeeEdit.cityCode}"title="City " class="form-control required">
 										     </div>
 										       <div class="form-group sm col-md-4">
 											       <label class="form-label">Pin Code
@@ -388,7 +383,7 @@ body {
 
 
 									<div id="validation-step-3">
-									 
+									<!--  
 									  <div class="form-row">
 									  
 										       <div class="form-group sm col-md-4">
@@ -444,10 +439,10 @@ body {
 							                 <input  type="text"id="top"name="top"th:value="${employeeEdit.top}" title="TOP" class="form-control required">
 										     </div> 
 										     
-									  </div>
+									  </div> -->
 									  
 									  
-									    <div class="form-row">
+									    <!-- <div class="form-row">
 									      
 										<div class="form-group sm col-md-4">
 										<label class="form-label">NOL
@@ -464,7 +459,7 @@ body {
 											       <span class="text-danger">*</span></label>
 							                 <input  type="text"id="dealerDetails"name="dealerDetails"th:value="${employeeEdit.dealerDetails}" title="Dealer Details" class="form-control required">
 										     </div>
-									    </div>
+									    </div> -->
 									 <button type="submit" class="btn btn-primary">Save</button>
 									  <button type="submit"class="btn btn-primary" value="cancel">Cancel</button>
                               </div>
