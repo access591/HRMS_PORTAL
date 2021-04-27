@@ -1,5 +1,7 @@
 package com.hrms.repository;
 
+import java.util.List;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,20 +17,24 @@ public class LeaveGrantRegisterDaoImpl extends AbstractGenericDao<LeaveGrant> im
 	@Autowired SessionFactory sessionFactory;
 	
 	@Override
-	public LeaveGrant findLeaveGrantByEmp(String empCode) {
+	public List findLeaveGrantByEmp(String empCode) {
 		
+		System.out.println(" session factory creating ");
 		Session session = sessionFactory.getCurrentSession();
 		String hql = "from LeaveGrant l where l.empCode=:empCode";
 		Query query = session.createQuery(hql);
 		query.setParameter("empCode", empCode);
+		System.out.println("size session factory : " + query.list().size());
 		
-		LeaveGrant leaveGrant = null;
+		
+		List leaveGrant = null;
 		if(query.list().size()>=1) {
-			leaveGrant = (LeaveGrant) query.list().get(0);
-			return leaveGrant;
+			leaveGrant = query.list();		
+			//System.out.println("leave grant detail by user code : " +leaveGrant.getLeaveType());
+			//return leaveGrant;
 		}
 		
-		return null;
+		return leaveGrant;
 	}
 	
 

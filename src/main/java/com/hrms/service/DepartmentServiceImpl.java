@@ -26,7 +26,8 @@ public class DepartmentServiceImpl implements DepartmentService {
 
 	@Override
 	public Department findDepartmentById(String id) {
-		return departmentDao.findById(id);
+		System.out.println("department id os : " +id);
+		return this.departmentDao.findById(id);
 	}
 
 	@Override

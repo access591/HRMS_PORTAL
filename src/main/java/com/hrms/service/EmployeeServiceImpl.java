@@ -23,8 +23,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 	@Override
 	public List<Employee> getAllEmployees() {
 		
-		 List<Employee> listEmployee = employeeDao.findAll();
-			return listEmployee;
+		List<Employee> listEmployee = employeeDao.findAll();
+		return listEmployee;
 	}
 
 	@Override
