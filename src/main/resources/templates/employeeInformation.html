@@ -51,24 +51,21 @@ body {
 									</div>
 								</div>
 								<div class="card-body">
-									<form id="validation-form" action="#" th:action="@{/employeeDetailPdf}" th:object="${designation}" method="post">
+									<form id="validation-form" action="#" th:action="@{/createExcelsheet}" th:object="${designation}" method="post">
 										<div class="row">
 											
 											<div class="col-12 col-lg-6">
 												<label class="form-label">Category Name</label>
 												<label style="color: red">*</label>
-												<select class="form-control" id="select_category"
+												<select class="form-control" id="select_category" name="select_category"
 													onchange="changeCategory()">
-													<option value="">Select Category</option>
-													<!-- <option th:each="employee: ${listEmployee}"
-														th:text="${employee.empName}" th:value=" ${employee.empCode}">
-													</option> -->
-														<option value="ALL" name="designation">All</option>
-														<option value="DIG" name="designation">DIG</option>
-														<option value="IPS" name="designation">IPS</option>
-														<option value="ADA" name="designation">ADA</option>
-														<option value="DA" name="designation">DA</option>
-														<option value="SP" name="designation">SP</option>
+													<option value="">All Category</option>
+													
+													<option th:each="category: ${listCategory}"
+														th:text="${category.categoryName}" th:value=" ${category.categoryCode}">
+													</option>
+														
+														
 														
 												</select>
 												
@@ -79,8 +76,10 @@ body {
 											<label class="form-label">Employee Name</label>
 											<label style="color: red">*</label>
 											 
-											 <select class="form-control select2" id="designation_name" name="designation_name">
-														<option value="">Select Employee</option>
+											 <select class="form-control select2" id="employeeName" 
+											 	name="employeeName" disabled>
+														<option value="">All</option>
+														
 														
 											</select>
 													
@@ -90,9 +89,10 @@ body {
 											</div>
 										</div>
 										
-										<Button type="submit">Generate Pdf</Button>
+										<!-- <Button type="submit">Generate Pdf</Button> -->
+										<Button type="submit">Download Excel Sheet</Button>
 										
-										<a href="#" th:href="@{employeeExcel}">Download Excel Sheet</a>
+										<!-- <a href="#" th:href="@{employeeExcel}">Download Excel Sheet</a> -->
 									
 										<!-- <Button id = "generate_pdf_button" onclick="generatePdfFunction()">Generate Pdf</Button> -->
 									</form>
@@ -164,13 +164,73 @@ body {
 
 }
 	
-	function changeCategory(){
-		console.log("select category : " + document.getElementById("select_category").value);
-		var ALL = 0,DIG=1,IPS=2 ,ADA=3,DA=4,SP=5;
-		var selectedCategory = document.getElementById("select_category").value;
+	 function changeCategory(){
 		
 		
-	}
+		var selectedCategoryValue = document.getElementById("select_category").value;
+		console.log("select category : " +selectedCategoryValue);
+		 //$('#employeeName').append($('<option>', {value:0, text:'Select Employee'}));
+		 
+		 var x = document.getElementById("employeeName");
+		 console.log( "x value : "+ x);
+		 
+		 var length = x.options.length;
+		 for (i = length-1; i >= 1; i--) {
+		   x.options[i] = null;
+		 }
+		
+		if( selectedCategoryValue !== "" ||  document.getElementById("select_category").selected ==false ){
+			const xhr = new XMLHttpRequest();
+		    xhr.open('GET','getEmployeeByCategory/'+selectedCategoryValue,true);
+		    xhr.getResponseHeader('content-type','application/json');
+		    xhr.onload = function(){
+		        if(this.status===200){
+		            let obj = JSON.parse(this.responseText);
+		            console.log(obj);
+
+		            console.log("employee name : " +obj[0].empName)
+		            $('select[name="employeeName"]').prop("disabled", false);
+                   // $('select[name="employeeName"]').html(obj.empName);
+                    
+                    $.each(obj, function(i, item) {
+                    	console.log(" i " +i+ " item : "+item.empName);
+                       // $('#employeeName').append($('<option>', {value:i, text:item.empName}));
+                    	 $('#employeeName').append($('<option>').val(this.empCode).text(this.empName));
+                    });
+					
+		        }
+		        else{
+		            console.error("some error occured");
+		        }
+			
+		    }
+		    xhr.send();
+		}
+		else{
+			$('select[name="employeeName"]').prop("disabled", true);
+		}
+		
+	} 
+	
+	
+	/*  $('select[name="select_category"]').on('change', function() {
+	    var selectedCategoryValue = $(this).val();
+	    console.log(" in jquery : categoryId " + selectedCategoryValue);
+
+	     $.ajax({
+	        type: "GET",
+	        url: "getEmployeeByCategory/"+selectedCategoryValue,
+	        data: {selectedCategoryValue : selectedCategoryValue },
+	        success: function (data) {
+	                    //remove disabled from province and change the options
+	                    console.log("response data : " +data.responseText);
+	                    $('select[name="employeeName"]').prop("disabled", false);
+	                    $('select[name="employeeName"]').html(data.response);
+	        }
+	    }); 
+	});  */
+
+	
 	
 	</script>
 	

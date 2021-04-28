@@ -52,6 +52,14 @@ public class Employee implements Serializable {
 	@Column(name ="DEPARTMENT_CODE")
 	private String departmentCode;
 	
+	public String getCategoryCode() {
+		return categoryCode;
+	}
+
+	public void setCategoryCode(String categoryCode) {
+		this.categoryCode = categoryCode;
+	}
+
 	@Size(max = 25)
 	@Column(name ="DESIGNATION_CODE")
 	private String designationCode;
