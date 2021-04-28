@@ -86,6 +86,8 @@ public class EmployeeController {
 		  model.addAttribute("listState", listState);
 		  List<Country> listCountry = countryService.getAllCountrys();
 		 model.addAttribute("listCountry", listCountry);
+		List<ArmsLicenseDetails>listArmsLicense=armsLicenseService.getAllArmsLicenses();
+		model.addAttribute("listArmsLicense", listArmsLicense);
 		
 		List<Employee> listEmployee = employeeService.getAllEmployees();
 		model.addAttribute("listEmployee", listEmployee);
@@ -242,6 +244,8 @@ public class EmployeeController {
 		model.addAttribute("listDesignation", listDesignation);
 		Employee employeeEdit = employeeService.findEmployeeById(id);
 		model.addAttribute("employeeEdit", employeeEdit);
+		ArmsLicenseDetails armsLicenseEdit =armsLicenseService.findArmsLicenseById(id);
+		model.addAttribute("armsLicenseEdit", armsLicenseEdit);
 		model.addAttribute("imgUtil", new ImageUtil());
 		session.setAttribute("imgUtilSession",employeeEdit.getImageProfile());
 		session.setAttribute("username", session.getAttribute("username"));

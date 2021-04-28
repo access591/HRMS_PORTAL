@@ -577,6 +577,7 @@ body {
 										<thead>
 											<tr>
 												<th scope="col">Emp id</th>
+												<th scope="col">arms code </th>
 													<th scope="col">empName</th>
 												<th scope="col">Date Of Joining</th>
 												<th scope="col">employee images</th>
@@ -585,9 +586,12 @@ body {
 											</tr>
 										</thead>
 										<tbody>
+									
+									<!-- 	<th:block  th:each="arm : ${listArmsLicense}"> -->
 											<tr  th:each="listemployee : ${listEmployee}">
 												
 												<td th:text="${listemployee.empCode}"></td>
+												<td th:each="arm : ${listArmsLicense}"  th:text="${arm.armsCode}"></td>
 												<td th:text="${listemployee.empName}"></td>
 												<td th:text="${listemployee.dateOfJoining}"></td>
 												
@@ -597,7 +601,9 @@ body {
 												<a th:href="@{/deleteEmployee/{id}(id=${listemployee.empCode})}" onclick="return confirm('Are you sure?')"><em class="fa fa-times"></em></a>
 
 												</td>
-											</tr>
+												
+												</tr>
+										<!-- 	</th:block> -->
 										</tbody>
 									
 									</table>
