@@ -162,10 +162,12 @@
 										
 											<div class="col-12 col-lg-6">
 												<label class="form-label">Leave type</label>
-												<label style="color: red">*</label>
-												<select class="form-control">
-													<option>Casual</option>
-													<option>Medical</option>
+												<select class="form-control" 
+													>
+													<option value="">Leave Type</option>
+													<option th:each="leave : ${listLeave}"
+														th:text="${leave.levType}" th:value=" ${leave.levCode}">
+													</option>
 												</select>
 											</div>
 											
@@ -187,6 +189,40 @@
 												</div>
 											</div>
 										</div>
+
+										
+										
+										<!-- leave detail card  -->
+						<div class="card">
+						
+							<div class="card-header">
+								<h5 class="card-title">Leave Status </h5>
+							</div>
+							<div class="card-body">
+							
+							
+								<div class="row" >
+											<div class="col-12 col-lg-4">
+												<label class="form-label">Casual Leave </label>
+												<label style="color: red">*</label>
+												<input class="from-control" th:value="${casual}">
+											</div>
+											<div class="col-12 col-lg-4">
+												<label class="form-label">Earned Leave </label>
+												<label style="color: red">*</label>
+												<input class="from-control" th:value="${sick}">
+											</div>
+											<div class="col-12 col-lg-4">
+												<label class="form-label">Sick Leave </label>
+												<label style="color: red">*</label>
+												<input class="from-control" th:value="${sick1}">
+											</div>
+								</div>
+										
+										
+							</div>
+						</div>
+
 										<button type="submit" class="btn btn-primary">Apply</button>
 										<button type="reset" class="btn btn-primary" value="Reset">Reset</button>
 									</form>

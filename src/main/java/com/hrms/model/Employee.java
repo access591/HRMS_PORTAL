@@ -54,7 +54,7 @@ public class Employee implements Serializable {
 	@Column(name ="DEPARTMENT_CODE")
 	private String departmentCode;
 	
-	
+
 
 	@Size(max = 25)
 	@Column(name ="DESIGNATION_CODE")

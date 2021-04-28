@@ -14,5 +14,5 @@ public interface LeaveGrantRegisterService {
 	public void updateLeaveGrant(LeaveGrant l);
 	public void removeLeaveGrant(String id);
 	
-	LeaveGrant findLeaveGrantByEmpCode(String empCode);
+	List findLeaveGrantByEmpCode(String empCode);
 }

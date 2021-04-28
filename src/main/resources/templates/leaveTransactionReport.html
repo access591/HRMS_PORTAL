@@ -36,7 +36,7 @@ body {
 			<main class="content">
 				<div class="container-fluid">
 					<div class="header">
-						<h1 class="header-title"> Master</h1> 
+						<h1 class="header-title"> HRMS</h1>
 						<nav aria-label="breadcrumb">
 						</nav>
 					</div>
@@ -44,61 +44,134 @@ body {
 						<div class="col-12">
 							<div class="card" style="border-radius:2.2rem">
 								<div class="card-header">
-									<h5 class="card-title">Employee Report </h5>
+									<h5 class="card-title">Employee Leave Transaction Details </h5>
 										<div class="alert-outline">
 									<div th:if="${message}" th:text="${message}" style="color: red">
 									</div> 
 									</div>
 								</div>
 								<div class="card-body">
-									<form id="validation-form" action="#" th:action="@{/createleaveRequestReport}" method="post">
+									<form id="validation-form" action="#" th:action="@{/leaveTransactionReport}" th:object="${leaveTransaction}" method="post">
 										<div class="row">
 											<div class="col-12 col-lg-6">
 												<div class="form-group">
 										
-											  <label> Employee Code </label>
+											  <label> Department Code </label>
 											  		<label style="color: red">*</label>
 											  	 
 											   <input
-														type="text" class="form-control"maxlength="10" readonly>
+														type="text" class="form-control"maxlength="10">
 												</div>
-
-												<div class="form-group">
-
-													<label class="form-label">Status</label>
-													
-													<div class="custom-controls-stacked">
-
-														<label class="radio-inline"> <input type="radio"
-															value="Y" name="active" checked> Active
-														</label> <label class="radio-inline"> <input type="radio"
-															value="N" name="active"> Inactive
-														</label>
-														
-
-													</div>
-												</div>
+											</div>
+											
+											<div class="col-12 col-lg-6">
+												<label class="form-label">Select Employee</label>
+												<label style="color: red">*</label>
+												<select class="form-control" id="employeeDropDownLeave"
+													onchange="leaveEmployeDisplay()">
+													<option value="">Select Employee</option>
+													<option th:each="employee: ${listEmployee}"
+														th:text="${employee.empName}" th:value=" ${employee.empCode}">
+													</option>
+												</select>
+												<input type="hidden" name="" value="" id="hiddenField">
 											</div>
 											<div class="col-12 col-lg-6">
 											<div class="form-group">
-											<label class="form-label">Employee</label>
+											<label class="form-label">From Date</label>
 											<label style="color: red">*</label>
-											 <select class="form-control select2" id="emp_name" name="empName">
-														<option value="">Select Employee </option>
-														
-														<option th:each="employee: ${listEmployee}"
-														th:text="${employee.empName}" th:value="${employee.empCode}">
-													</option>		
-													</select>
+											<input
+														type="text" class="form-control"maxlength="10">
 													
 													
 													
-										</div>
 											</div>
+											</div>
+											
+											
+											<div class="col-12 col-lg-6">
+											<div class="form-group">
+											<label class="form-label">To Date</label>
+											<label style="color: red">*</label>
+											 
+												<input
+														type="text" class="form-control"maxlength="10">	
+													
+													
+											</div>
+											</div>
+											
+											
+											<div class="col-12 col-lg-6">
+											<div class="form-group">
+											<label class="form-label">Destination Type</label>
+											<label style="color: red">*</label>
+											<input
+														type="text" class="form-control"maxlength="10">
+													
+													
+													
+											</div>
+											</div>
+											
+											
+											<div class="col-12 col-lg-6">
+											<div class="form-group">
+											<label class="form-label">Desformat</label>
+											<label style="color: red">*</label>
+											 
+												<input
+														type="text" class="form-control"maxlength="10">	
+													
+													
+											</div>
+											</div>
+											
+											
+											<div class="col-12 col-lg-6">
+											<div class="form-group">
+											<label class="form-label">File Name/E-mail-ID</label>
+											<label style="color: red">*</label>
+											 
+												<input
+														type="text" class="form-control"maxlength="10">	
+													
+													
+											</div>
+											</div>
+											
+											<div class="col-12 col-lg-6">
+											<div class="form-group">
+											<label class="form-label">Sender</label>
+											<label style="color: red">*</label>
+											 
+												<input
+														type="text" class="form-control"maxlength="10">	
+													
+													
+											</div>
+											</div>
+											
+											
+											<div class="col-12 col-lg-6">
+											<div class="form-group">
+											<label class="form-label">CC</label>
+											<label style="color: red">*</label>
+											 
+												<input
+														type="text" class="form-control"maxlength="10">	
+													
+													
+											</div>
+											</div>
+											
+											
 										</div>
 										
 										<Button type="submit">Generate Pdf</Button>
 										
+										<a href="#" >Download Excel Sheet</a>
+									
 										<!-- <Button id = "generate_pdf_button" onclick="generatePdfFunction()">Generate Pdf</Button> -->
 									</form>
 									
