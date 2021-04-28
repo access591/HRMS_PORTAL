@@ -86,9 +86,13 @@ public class EmployeeController {
 		  model.addAttribute("listState", listState);
 		  List<Country> listCountry = countryService.getAllCountrys();
 		 model.addAttribute("listCountry", listCountry);
-		List<ArmsLicenseDetails>listArmsLicense=armsLicenseService.getAllArmsLicenses();
+		
+		 List<ArmsLicenseDetails>listArmsLicense=armsLicenseService.getAllArmsLicenses();
 		model.addAttribute("listArmsLicense", listArmsLicense);
 		
+		
+		List<EmployeeUtil>listEmployee2= employeeService.getAllEmployeesAndArms();
+		model.addAttribute("listEmployee2", listEmployee2);
 		List<Employee> listEmployee = employeeService.getAllEmployees();
 		model.addAttribute("listEmployee", listEmployee);
 		
@@ -198,12 +202,14 @@ public class EmployeeController {
 		armsLicense.setDealerDetails(eutility.getDealerDetails());
 		
 		//step 3  complete==================================
-		
+	
 		
 		try {
 			byte[] imageData = file.getBytes();
 			employee.setImageProfile(imageData);
 			employeeService.addEmployee(employee);
+			String empCode= employee.getEmpCode();
+			armsLicense.setEmpCode(empCode);
 			armsLicenseService.addArmsLicenseDetails(armsLicense);
 			log.info("HttpStatus===" + new ResponseEntity<>(HttpStatus.OK));
 			session.setAttribute("username", session.getAttribute("username"));

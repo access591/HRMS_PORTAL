@@ -49,6 +49,16 @@ public class ArmsLicenseDetails implements Serializable {
 	@Size(max =100)
 	@Column(name = "TOP")
 	private String top;
+
+	@Column(name ="EMPLOYEE_CODE")
+	private String empCode;
+	
+	public String getEmpCode() {
+		return empCode;
+	}
+	public void setEmpCode(String empCode) {
+		this.empCode = empCode;
+	}
 	@Column(name = "INS_BY", updatable = false)
 	private String insBy;
 

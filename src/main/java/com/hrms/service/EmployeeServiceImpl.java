@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hrms.model.Employee;
+import com.hrms.model.EmployeeUtil;
 import com.hrms.repository.EmployeeDao;
 
 
@@ -50,6 +51,12 @@ public class EmployeeServiceImpl implements EmployeeService {
 	@Override
 	public List<Employee> getEmployeeByDeptCode(String deptCode) {
 		return this.employeeDao.getEmployeeByDeptCode(deptCode);
+	}
+
+	@Override
+	public List<EmployeeUtil> getAllEmployeesAndArms() {
+		List<EmployeeUtil> allEmployeesAndArms=employeeDao.getAllEmployeesAndArms();
+		return allEmployeesAndArms;
 	}
 
 }
