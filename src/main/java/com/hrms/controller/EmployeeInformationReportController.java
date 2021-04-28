@@ -1,12 +1,19 @@
 package com.hrms.controller;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,9 +23,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.hrms.EmployeeGradationExcel;
 import com.hrms.ReportUtil;
+import com.hrms.model.Category;
 import com.hrms.model.Employee;
 import com.hrms.model.MenuModule;
+import com.hrms.service.CategoryService;
+import com.hrms.service.DesignationService;
 import com.hrms.service.EmployeeService;
 import com.hrms.service.ModuleService;
 import com.hrms.service.PageMappingService;
@@ -33,7 +44,14 @@ public class EmployeeInformationReportController {
 	@Autowired PageMappingService pageMappingService;
 	@Autowired ReportUtil reportUtil;
 	@Autowired EmployeeService employeeService;
+	@Autowired EmployeeGradationExcel employeeGradationExcel;
+	@Autowired CategoryService categoryService;
+	@Autowired DesignationService designationService;
 	
+	
+	
+	
+//	Gradation / Employee controlller
 	
 	@GetMapping("/employeeInformation")
 	public String employeeInformation(Model model, HttpSession session) {
@@ -42,6 +60,11 @@ public class EmployeeInformationReportController {
 		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
 		if (modules != null) {
 			model.addAttribute("modules", modules);
+		}
+		
+		List<Category> listCategory = categoryService.getAllCategory();
+		if(listCategory != null) {
+			model.addAttribute("listCategory", listCategory);
 		}
 
 		session.setAttribute("username", session.getAttribute("username"));
@@ -64,4 +87,97 @@ public class EmployeeInformationReportController {
 		reportUtil.allEmployeeReport(request, response, reportName, listEmployee);
 		return null;
 	}
+	
+	/*
+	 * @ResponseBody
+	 * 
+	 * @GetMapping("employeeExcel") public ResponseEntity<InputStreamResource>
+	 * empoloyeeExcelReport(HttpServletResponse response) throws IOException{
+	 * 
+	 * 
+	 * 
+	 * ByteArrayInputStream in = employeeGradationExcel.generateExcel();
+	 * 
+	 * HttpHeaders headers = new HttpHeaders(); headers.add("Content-Disposition",
+	 * "attachment ; filename=employee.xlsx");
+	 * 
+	 * 
+	 * return ResponseEntity.ok().headers(headers).body(new
+	 * InputStreamResource(in));
+	 * 
+	 * 
+	 * }
+	 */
+	
+	@ResponseBody
+	@GetMapping("getEmployeeByCategory/{categoryName}")
+	public List<Employee> getEmployeeByCategory(@PathVariable("categoryName") String categoryCode) {
+		
+		System.out.println("category code : " + categoryCode);
+		List<Employee> listEmployeeByCategory = null;
+		if(categoryCode.equals("0")) {
+			System.out.println(" hiiii");
+			listEmployeeByCategory = employeeService.getAllEmployees();
+		}
+		else {
+			listEmployeeByCategory = employeeService.getEmployeeByCategoryCode(categoryCode);
+			
+			
+		}
+		return listEmployeeByCategory;
+	}
+	
+	@PostMapping("/createExcelsheet")
+	public ResponseEntity<InputStreamResource> createExcelsheet(HttpServletRequest req, HttpServletResponse re) {
+		
+		
+		
+		
+		String categoryType = req.getParameter("select_category");
+		String employeeType = req.getParameter("employeeName");
+		
+		System.out.println("category type : " + categoryType);
+		System.out.println("employee type : " + employeeType);
+		
+		List<Employee> listEmployee = null;
+		List<Employee> listEmployee1 = new ArrayList<Employee>();
+		
+		 if(categoryType.equals("") || categoryType.equals(null)) {
+				System.out.println("all employee and category ");
+				listEmployee = employeeService.getAllEmployees();
+				
+				listEmployee1.addAll(listEmployee);
+				
+			}
+		else {
+				System.out.println("else block ");
+				//all employee of particular department
+				if(employeeType.equals("") || employeeType.equals(null)) {
+					System.out.println(" alll employee by category id");
+					listEmployee = employeeService.getEmployeeByCategoryCode(categoryType);
+					listEmployee1.addAll(listEmployee);
+					
+				}
+				/* only one employee of particular department */
+				else {
+					System.out.println("one employee");
+					Employee employee = employeeService.findEmployeeById(employeeType);
+					listEmployee1.add(employee);
+					
+				}	
+			}
+		 System.out.println("resources size = "+listEmployee1.size());
+		ByteArrayInputStream in = employeeGradationExcel.generateExcel(listEmployee1);
+		
+		 
+		HttpHeaders headers = new HttpHeaders(); headers.add("Content-Disposition",
+		  "attachment ; filename=employee.xlsx");
+		  
+		  
+		  return ResponseEntity.ok().headers(headers).body(new
+		  InputStreamResource(in));
+		
+		
+	}
+	
 }

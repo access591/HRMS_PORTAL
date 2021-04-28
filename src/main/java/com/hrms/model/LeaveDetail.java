@@ -17,6 +17,7 @@ public class LeaveDetail implements Serializable {
 	@Id
 	@Column(name = "LEAVE_CODE")
 	private String lvCode;
+	
 	@Column(name = "LEAVE_TYPE_NAME")
 	private String levTypeName;
 	

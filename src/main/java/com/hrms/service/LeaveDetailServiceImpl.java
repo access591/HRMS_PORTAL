@@ -119,4 +119,10 @@ public class LeaveDetailServiceImpl  implements LeaveDetailService{
 		
 	}
 
+	@Override
+	public LeaveDetail findLeaveDetailByLvCode(String lvCode) {
+		
+		return this.leaveDetailDao.findLeaveDetailByLvCode(lvCode);
+	}
+
 }

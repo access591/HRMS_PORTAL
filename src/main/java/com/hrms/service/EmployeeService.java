@@ -13,7 +13,11 @@ public interface EmployeeService {
 	public void updateEmployee(Employee e);
 	public void removeEmployeet(String id);
 	public List<Employee> getEmployeeByDeptCode(String deptCode);
+
 	public List<EmployeeUtil> getAllEmployeesAndArms();
+
+	public List<Employee> getEmployeeByCategoryCode(String categoryCode);
+
 
 
 }

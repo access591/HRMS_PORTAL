@@ -24,8 +24,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 	@Override
 	public List<Employee> getAllEmployees() {
 		
-		 List<Employee> listEmployee = employeeDao.findAll();
-			return listEmployee;
+		List<Employee> listEmployee = employeeDao.findAll();
+		return listEmployee;
 	}
 
 	@Override
@@ -53,10 +53,15 @@ public class EmployeeServiceImpl implements EmployeeService {
 		return this.employeeDao.getEmployeeByDeptCode(deptCode);
 	}
 
-	@Override
+
 	public List<EmployeeUtil> getAllEmployeesAndArms() {
 		List<EmployeeUtil> allEmployeesAndArms=employeeDao.getAllEmployeesAndArms();
 		return allEmployeesAndArms;
+
+	public List<Employee> getEmployeeByCategoryCode(String categoryCode) {
+		
+		return this.employeeDao.getEmployeeByCategoryCode(categoryCode);
+
 	}
 
 }

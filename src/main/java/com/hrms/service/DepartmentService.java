@@ -13,5 +13,6 @@ public interface DepartmentService
 	Department findDepartmentById(String id);
 	public void updateDepartment(Department d);
 	public void removeDepartment(String id);
+	public List<Department> findDepartmentByEmpCode(String empCode);
 
 }

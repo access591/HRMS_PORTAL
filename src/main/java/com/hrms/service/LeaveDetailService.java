@@ -21,5 +21,7 @@ public interface LeaveDetailService {
 
 	public void leaveReportGenratepdf(HttpServletRequest request, HttpServletResponse response, String reportFileName,
 			List<LeaveDetail> dataList);
+	
+	public LeaveDetail findLeaveDetailByLvCode(String lvCode);
 
 }
