@@ -57,7 +57,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 	public List<EmployeeUtil> getAllEmployeesAndArms() {
 		List<EmployeeUtil> allEmployeesAndArms=employeeDao.getAllEmployeesAndArms();
 		return allEmployeesAndArms;
-
+	}
 	public List<Employee> getEmployeeByCategoryCode(String categoryCode) {
 		
 		return this.employeeDao.getEmployeeByCategoryCode(categoryCode);

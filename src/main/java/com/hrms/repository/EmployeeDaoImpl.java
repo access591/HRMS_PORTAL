@@ -38,6 +38,7 @@ public class EmployeeDaoImpl  extends AbstractGenericDao<Employee> implements Em
 		 SQLQuery query = getSession().createSQLQuery(sql);
 		  employeeUtils = query.list();
 		 return query.list();
+	}
 
 	public List<Employee> getEmployeeByCategoryCode(String categoryCode) {
 		
