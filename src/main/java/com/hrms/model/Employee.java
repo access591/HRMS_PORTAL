@@ -2,11 +2,14 @@ package com.hrms.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
@@ -174,7 +177,11 @@ public class Employee implements Serializable {
 
 	@Column(name = "UPD_DATE", insertable = false)
 	private Date updDate = new Date();
-	
+
+	/*
+	 * @OneToMany(mappedBy = "armsCode") public List<ArmsLicenseDetails>
+	 * armsLicenseDetails;
+	 */
 	// STEP-2=============23=========end....
 	
 	
@@ -182,6 +189,16 @@ public class Employee implements Serializable {
 	public String getEmpCode() {
 		return empCode;
 	}
+
+
+	/*
+	 * public List<ArmsLicenseDetails> getArmsLicenseDetails() { return
+	 * armsLicenseDetails; }
+	 * 
+	 * 
+	 * public void setArmsLicenseDetails(List<ArmsLicenseDetails>
+	 * armsLicenseDetails) { this.armsLicenseDetails = armsLicenseDetails; }
+	 */
 
 	public void setEmpCode(String empCode) {
 		this.empCode = empCode;
