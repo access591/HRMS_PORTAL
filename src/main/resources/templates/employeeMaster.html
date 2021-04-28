@@ -206,10 +206,6 @@ body {
 											<input name="presentPosting" type="text"id="presentPosting"  title="Present Posting"
 														class="form-control required">
 												</div>
-													
-													
-												
-													
 												</div>
 													<div class="form-row">
 													
@@ -402,8 +398,9 @@ body {
 											       <span class="text-danger">*</span></label>
 										              <select
 														class="form-control required" name="countryCode" id="countryCode">
+														<option value="">Select Country</option>
 														<option th:each="lco :${listCountry}" th:value="${lco.getCountryCode()}" th:text="${lco.getCountryName()}">Select  Country Type</option>
-														<option value=""></option>
+														
 													 </select> 
 										     </div>
 											  
@@ -412,8 +409,9 @@ body {
 											       <span class="text-danger">*</span></label>
 										              <select
 														class="form-control required" name="stateCode" id="stateCode">
+														<option value="">Select State</option>
 														<option  th:each="ls :${listState}"th:value="${ls.getStateCode()}" th:text="${ls.getStateName()}">Select  State</option>
-														<option value=""></option>
+														
 													 </select> 
 										    
 										     </div>
@@ -423,8 +421,9 @@ body {
 											       <span class="text-danger">*</span></label>
 										             <select
 														class="form-control required" name="cityCode" id="cityCode">
+															<option value="">Select City</option>
 														<option th:each="lc :${CityList}" th:value="${lc.getCityCode()}" th:text="${lc.getCityName()}">Select  City</option>
-														<option value=""></option>
+													
 													 </select> 
 										   
 										     </div>
