@@ -55,4 +55,10 @@ public class DepartmentServiceImpl implements DepartmentService {
 		}
 	}
 
+	@Override
+	public List<Department> findDepartmentByEmpCode(String empCode) {
+		
+		return this.departmentDao.findByDepartmentByDeptCode(empCode);
+	}
+
 }

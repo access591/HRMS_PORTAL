@@ -18,10 +18,19 @@ public class EmployeeDaoImpl  extends AbstractGenericDao<Employee> implements Em
 	public List<Employee> getEmployeeByDeptCode(String deptCode) {
 		
 		Session session = this.sessionFactory.getCurrentSession();
-		Query query = session.createQuery("from Employee where departmentCode = :deptCode");
+		Query query = session.createQuery("from Employee e where e.departmentCode = :deptCode");
 		query.setParameter("deptCode", deptCode);
 		//List list = query.list();
 		return query.list();
+	}
+	@Override
+	public List<Employee> getEmployeeByCategoryCode(String categoryCode) {
+		
+		Session session = this.sessionFactory.getCurrentSession();
+		Query query = session.createQuery("from Employee e where e.categoryCode = :categoryCode ");
+		query.setParameter("categoryCode", categoryCode);
+		List<Employee> employeeList = query.list();
+		return employeeList;
 	}
 
 }
