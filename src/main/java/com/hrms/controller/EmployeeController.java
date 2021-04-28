@@ -225,6 +225,17 @@ public class EmployeeController {
 	public String editEmployee(@PathVariable("id") String id, Model model, HttpSession session) {
 		int editPageNo = 44;
 		String reqPageedit = "/editEmployee";
+		
+		  List<City>CityList =cityService.getAllCities();
+		  model.addAttribute("CityList", CityList);
+		  List<State> listState = stateService.getAllStates();
+		  model.addAttribute("listState", listState);
+		  List<Country> listCountry = countryService.getAllCountrys();
+		  model.addAttribute("listCountry", listCountry);
+		
+		
+		List<Category> listCategory = categoryService.getAllCategory();
+		model.addAttribute("listCategory" ,listCategory);
 		List<Department> listDepartment = departmentService.getAllDepartments();
 		model.addAttribute("listDepartment", listDepartment);
 		List<Designation> listDesignation = designationService.getAllDesignations();
