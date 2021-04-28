@@ -96,7 +96,7 @@ public class Employee implements Serializable {
 	
 	
 	
-	// STEP-1=========16=============end....
+	// STEP-1=========17=============end....
 	@Size(max =16)
 	@Column(name = "AADHAR_NO")
 	private String aadharNo;
@@ -436,7 +436,7 @@ public class Employee implements Serializable {
 	}
 
 	public void setPanNo(String panNo) {
-		this.panNo = panNo;
+		this.panNo = panNo.toUpperCase();
 	}
 
 	public String getPinCode() {

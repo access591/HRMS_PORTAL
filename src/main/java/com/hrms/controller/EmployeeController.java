@@ -27,18 +27,24 @@ import org.springframework.web.servlet.ModelAndView;
 import com.hrms.ImageUtil;
 import com.hrms.model.ArmsLicenseDetails;
 import com.hrms.model.Category;
+import com.hrms.model.City;
+import com.hrms.model.Country;
 import com.hrms.model.Department;
 import com.hrms.model.Designation;
 import com.hrms.model.Employee;
 import com.hrms.model.EmployeeUtil;
 import com.hrms.model.MenuModule;
+import com.hrms.model.State;
 import com.hrms.service.ArmsLicenseService;
 import com.hrms.service.CategoryService;
+import com.hrms.service.CityService;
+import com.hrms.service.CountryService;
 import com.hrms.service.DepartmentService;
 import com.hrms.service.DesignationService;
 import com.hrms.service.EmployeeService;
 import com.hrms.service.ModuleService;
 import com.hrms.service.PageMappingService;
+import com.hrms.service.StateService;
 
 @Controller
 public class EmployeeController {
@@ -58,6 +64,12 @@ public class EmployeeController {
 	CategoryService categoryService;
 	@Autowired
 	ArmsLicenseService armsLicenseService;
+	@Autowired
+	CityService cityService;
+	@Autowired
+	StateService stateService;
+	@Autowired
+	CountryService countryService;
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
 /**
  * get All employee Details page 
@@ -67,7 +79,14 @@ public class EmployeeController {
  */
 	@GetMapping("/employeeMaster")
 	public ModelAndView employeeMaster(Model model, HttpSession session) {
-
+   
+		  List<City>CityList =cityService.getAllCities();
+		  model.addAttribute("CityList", CityList);
+		  List<State> listState = stateService.getAllStates();
+		  model.addAttribute("listState", listState);
+		  List<Country> listCountry = countryService.getAllCountrys();
+		 model.addAttribute("listCountry", listCountry);
+		
 		List<Employee> listEmployee = employeeService.getAllEmployees();
 		model.addAttribute("listEmployee", listEmployee);
 		
@@ -156,6 +175,7 @@ public class EmployeeController {
 		employee.setMobileNumber2(eutility.getMobileNumber2());
 		employee.setAddress1(eutility.getAddress1());
 		employee.setAddress2(eutility.getAddress2());
+		employee.setTransfer(eutility.getTransfer());
 		
 		//step 2 complete==================================
 		armsLicense.setName(eutility.getName());

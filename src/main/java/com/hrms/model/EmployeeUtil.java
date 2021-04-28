@@ -61,7 +61,7 @@ public class EmployeeUtil {
 	private String panNo;
 	private String pinCode;
 	private String qualification;
-	
+	private String transfer;
 	private String uan;
 	private String underRule7;
 	private String underRule8;
@@ -321,6 +321,13 @@ public class EmployeeUtil {
 	public void setUan(String uan) {
 		this.uan = uan;
 	}
+	
+	public String getTransfer() {
+		return transfer;
+	}
+	public void setTransfer(String transfer) {
+		this.transfer = transfer;
+	}
 	public String getUnderRule7() {
 		return underRule7;
 	}
@@ -335,14 +342,15 @@ public class EmployeeUtil {
 	}
 	//==========================================
 	
-	public String getName() {
-		return name;
-	}
+	
 	public String getArmsCode() {
 		return armsCode;
 	}
 	public void setArmsCode(String armsCode) {
 		this.armsCode = armsCode;
+	}
+	public String getName() {
+		return name;
 	}
 	public void setName(String name) {
 		this.name = name;
