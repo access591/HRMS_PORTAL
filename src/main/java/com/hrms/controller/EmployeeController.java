@@ -358,16 +358,16 @@ public class EmployeeController {
 			{
 			employee.setImageProfile(imageData);
 			}
+			armsLicenseService.updateArmsLicenseService(armsLicense);
+			employeeService.updateEmployee(employee);
 			
-			this.employeeService.updateEmployee(employee);
-			this.armsLicenseService.updateArmsLicenseService(armsLicense);
 
 		} catch (Exception e2) {
 			e2.printStackTrace();
 		}
+		armsLicenseService.updateArmsLicenseService(armsLicense);
+		employeeService.updateEmployee(employee);
 		
-		this.employeeService.updateEmployee(employee);
-		this.armsLicenseService.updateArmsLicenseService(armsLicense);
 		return "redirect:/" + pageMappingService.PageRequestMapping(reqPage, pageno);
 	}
 	/**
@@ -379,16 +379,18 @@ public class EmployeeController {
 	 * @return
 	 */
 
-	@GetMapping(value = { "/deleteEmployee/{id}" })
-	public String deleteEmployee(@PathVariable("id") String id,  Model model,
+	@GetMapping(value = { "/deleteEmployee/{id}/{id2}" })
+	public String deleteEmployee(@PathVariable("id") String id, @PathVariable("id2") String id2, Model model,
 			HttpSession session) {
 		try {
-			this.employeeService.removeEmployeet(id);
+			
+			armsLicenseService.removeArmsLicenseService(id2);
 			session.setAttribute("username", session.getAttribute("username"));
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		employeeService.removeEmployeet(id);
 		return "redirect:/" + pageMappingService.PageRequestMapping(reqPage, pageno);
 	}
 

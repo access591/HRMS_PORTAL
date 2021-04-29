@@ -33,5 +33,10 @@ public class ArmsLicenseServiceImpl implements ArmsLicenseService {
 		this.armsLicenseDao.saveOrUpdate(armsLicense);
 		
 	}
+	@Override
+	public void removeArmsLicenseService(String id2) {
+		this.armsLicenseDao.delete(id2);
+		
+	}
 
 }

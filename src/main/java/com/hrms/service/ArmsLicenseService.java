@@ -14,4 +14,6 @@ public interface ArmsLicenseService {
 
 	void updateArmsLicenseService(ArmsLicenseDetails armsLicense);
 
+	void removeArmsLicenseService(String id2);
+
 }
