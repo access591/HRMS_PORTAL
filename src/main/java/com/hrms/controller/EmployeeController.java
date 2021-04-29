@@ -271,8 +271,11 @@ public class EmployeeController {
 		byte[] imgUtilSession = (byte[]) session.getAttribute("imgUtilSession");
 		ArmsLicenseDetails armsLicense =new ArmsLicenseDetails();
 		Employee employee=new Employee();
-		
-		employee.setEmpCode(eutility.getEmpCode());
+		String empCode=eutility.getEmpCode();
+		String[] empArray = empCode.split(",");
+		String uniqueid = empArray [0];
+		employee.setEmpCode(uniqueid);
+		employee.setEmpCode(uniqueid);
          employee.setEmpName(eutility.getEmpName());
 		
 		employee.setDepartmentCode(eutility.getDepartmentCode());
