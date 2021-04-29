@@ -27,8 +27,7 @@ public class Employee implements Serializable {
 	 */
 
 	@Id
-	@Size(max = 25)
-	@Column(name ="EMPLOYEE_CODE")
+	@Column(name ="EMPLOYEE_CODE",updatable = false)
 	private String empCode;
 	
 	@Size(max = 200)

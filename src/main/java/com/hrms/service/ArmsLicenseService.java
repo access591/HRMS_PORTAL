@@ -12,4 +12,6 @@ public interface ArmsLicenseService {
 
 	List<ArmsLicenseDetails> getAllArmsLicenses();
 
+	void updateArmsLicenseService(ArmsLicenseDetails armsLicense);
+
 }

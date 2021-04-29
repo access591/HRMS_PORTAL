@@ -267,9 +267,86 @@ public class EmployeeController {
  * @return
  */
 	@PostMapping("/updateEmployee")
-	public String updatePageUrl(@ModelAttribute("employees") Employee employee, HttpSession session, Model model,@RequestParam("file") MultipartFile multipartFile) {
+	public String updatePageUrl(@ModelAttribute("employees") EmployeeUtil eutility, HttpSession session, Model model,@RequestParam("file") MultipartFile multipartFile) {
 		byte[] imgUtilSession = (byte[]) session.getAttribute("imgUtilSession");
-
+		ArmsLicenseDetails armsLicense =new ArmsLicenseDetails();
+		Employee employee=new Employee();
+		
+		employee.setEmpCode(eutility.getEmpCode());
+         employee.setEmpName(eutility.getEmpName());
+		
+		employee.setDepartmentCode(eutility.getDepartmentCode());
+		employee.setCategoryCode(eutility.getCategoryCode());
+		employee.setDesignationCode(eutility.getDesignationCode());
+		
+		
+		employee.setBatchYear(eutility.getBatchYear());
+		employee.setDateOfJoining(eutility.getDateOfJoining());
+		employee.setDateOfPosting(eutility.getDateOfPosting());
+		employee.setDateOfRetirement(eutility.getDateOfRetirement());
+		
+		employee.setEmployeePayeeCode(eutility.getEmployeePayeeCode());
+		employee.setOfficerType(eutility.getOfficerType());
+		employee.setPresentPosting(eutility.getPresentPosting());
+		employee.setSuspention(eutility.getSuspention());
+		
+		employee.setTypeCourtDepartment(eutility.getTypeCourtDepartment());
+		employee.setVigilanceQuery(eutility.getVigilanceQuery());
+		employee.setVrs(eutility.getVrs());
+		//step 1 complete==================================
+		employee.setAadharNo(eutility.getAadharNo());
+		employee.setAddCharge(eutility.getAddCharge());
+		employee.setEmail(eutility.getEmail());
+		
+		employee.setGender(eutility.getGender());
+		employee.setMartialStatus(eutility.getMartialStatus());
+		employee.setTelephone(eutility.getTelephone());
+		
+		employee.setOnAdditionalCharge(eutility.getOnAdditionalCharge());
+		employee.setOrderDate(eutility.getOrderDate());
+		employee.setOrderNo(eutility.getOrderNo());
+		
+		employee.setPanNo(eutility.getPanNo());
+		employee.setPinCode(eutility.getPinCode());
+		employee.setQualification(eutility.getQualification());
+		
+		employee.setUan(eutility.getUan());
+		employee.setUnderRule7(eutility.getUnderRule7());
+		employee.setUnderRule8(eutility.getUnderRule8());
+		
+		employee.setCityCode(eutility.getCityCode());
+		employee.setStateCode(eutility.getStateCode());
+		employee.setCountryCode(eutility.getCountryCode());
+		
+		employee.setMobileNumber1(eutility.getMobileNumber1());
+		employee.setMobileNumber2(eutility.getMobileNumber2());
+		employee.setAddress1(eutility.getAddress1());
+		employee.setAddress2(eutility.getAddress2());
+		employee.setTransfer(eutility.getTransfer());
+		
+		//step 2 complete==================================
+		armsLicense.setArmsCode(eutility.getArmsCode());
+		//armsLicense.setEmpCode(eutility.getEmpCode());
+		armsLicense.setName(eutility.getName());
+		armsLicense.setFatherName(eutility.getFatherName());
+		armsLicense.setAddressArms(eutility.getAddressArms());
+		
+		armsLicense.setDistrict(eutility.getDistrict());
+		armsLicense.setState(eutility.getState());
+		armsLicense.setArmsArea(eutility.getArmsArea());
+		
+		armsLicense.setDoi(eutility.getDoi());
+		armsLicense.setDov(eutility.getDov());
+		armsLicense.setToa(eutility.getToa());
+		
+		armsLicense.setTop(eutility.getTop());
+		armsLicense.setArmsNol(eutility.getArmsNol());
+		armsLicense.setLcd(eutility.getLcd());
+		armsLicense.setDealerDetails(eutility.getDealerDetails());
+		
+		
+		
+		
 		try {
 
 			byte[] imageData = multipartFile.getBytes();
@@ -283,11 +360,14 @@ public class EmployeeController {
 			}
 			
 			this.employeeService.updateEmployee(employee);
+			this.armsLicenseService.updateArmsLicenseService(armsLicense);
 
 		} catch (Exception e2) {
 			e2.printStackTrace();
 		}
+		
 		this.employeeService.updateEmployee(employee);
+		this.armsLicenseService.updateArmsLicenseService(armsLicense);
 		return "redirect:/" + pageMappingService.PageRequestMapping(reqPage, pageno);
 	}
 	/**
