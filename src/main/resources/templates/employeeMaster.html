@@ -579,7 +579,7 @@ body {
 												<th scope="col">Emp id</th>
 												<th scope="col">arms code </th>
 													<th scope="col">empName</th>
-												<th scope="col">Date Of Joining</th>
+												<!-- <th scope="col">Date Of Joining</th> -->
 												<th scope="col">employee images</th>
 												<th scope="col">Action</th>
 												
@@ -588,20 +588,20 @@ body {
 										<tbody>
 									
 										
-											   <tr  th:each="listemployee : ${listEmployee}">
-												<td th:text="${listemployee.empCode}"></td>
-												<th:block  th:each="arm : ${listArmsLicense}"> 
-												<td th:text="${arm.armsCode}"> </td> 	</th:block>
-												<td th:text="${listemployee.empName}"></td>
-												<td th:text="${listemployee.dateOfJoining}"></td>
+											   <tr th:each="leave,stats:${listEmployee2}">
+												<td th:text="${leave[0]}"></td>
+												<td  th:text="${leave[1]}"> </td> 
+												<td th:text="${leave[2]}"></td>
 												
-											<td><img alt="th" th:src="@{'data:image/jpeg;base64,'+${imgUtil.getImgData(listemployee.imageProfile)}}" width="48" height="48"class="rounded-circle mr-2"></td>
-												<!-- <td><img th:src="@{'/img/'+${listemployee.empImg}}" alt="Avatar" width="48" height="48"class="rounded-circle mr-2" /> </td> -->
-												<td><a th:href="@{/editEmployee/{id}(id=${listemployee.empCode})}"><em class="fa fa-edit"></em></a>
-												<a th:href="@{/deleteEmployee/{id}(id=${listemployee.empCode})}" onclick="return confirm('Are you sure?')"><em class="fa fa-times"></em></a>
+												<!-- <td th:text="${listemployee.dateOfJoining}"></td> -->
+												
+									 <td><img alt="th" th:src="@{'data:image/jpeg;base64,'+${imgUtil.getImgData(leave[3])}}" width="48" height="48"class="rounded-circle mr-2"></td>
+												<!-- <td><img th:src="@{'/img/'+${listemployee.empImg}}" alt="Avatar" width="48" height="48"class="rounded-circle mr-2" /> </td>  -->
+												 <td><a th:href="@{/editEmployee/{id}/{id2}(id=${leave[0]},id2=${leave[1]})}"><em class="fa fa-edit"></em></a>
+												<a th:href="@{/deleteEmployee/{id}(id=${leave[0]})}" onclick="return confirm('Are you sure?')"><em class="fa fa-times"></em></a>
 
-												</td>
-											
+												</td> 
+										
 												</tr>
 										
 										</tbody>
