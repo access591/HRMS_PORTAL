@@ -93,8 +93,9 @@ public class EmployeeController {
 		
 		List<EmployeeUtil>listEmployee2= employeeService.getAllEmployeesAndArms();
 		model.addAttribute("listEmployee2", listEmployee2);
-		List<Employee> listEmployee = employeeService.getAllEmployees();
-		model.addAttribute("listEmployee", listEmployee);
+		
+		  List<Employee> listEmployee = employeeService.getAllEmployees();
+		  model.addAttribute("listEmployee", listEmployee);
 		
 		List<Department> listDepartment = departmentService.getAllDepartments();
 		model.addAttribute("listDepartment", listDepartment);
@@ -114,7 +115,7 @@ public class EmployeeController {
 		ModelAndView modelAndView = new ModelAndView(pageMappingService.PageRequestMapping(reqPage, pageno));
 	   
 		modelAndView.addObject("imgUtil", new ImageUtil());
-	    modelAndView.addObject("listEmployee", listEmployee);
+	 modelAndView.addObject("listEmployee", listEmployee);
 		
 	    return modelAndView;
 	
@@ -229,8 +230,8 @@ public class EmployeeController {
 	 * @param session
 	 * @return
 	 */
-	@GetMapping(value = { "/editEmployee/{id}" })
-	public String editEmployee(@PathVariable("id") String id, Model model, HttpSession session) {
+	@GetMapping(value = {"/editEmployee/{id}/{id2}" })
+	public String editEmployee(@PathVariable("id") String id,@PathVariable("id2") String id2, Model model, HttpSession session) {
 		int editPageNo = 44;
 		String reqPageedit = "/editEmployee";
 		
@@ -248,9 +249,10 @@ public class EmployeeController {
 		model.addAttribute("listDepartment", listDepartment);
 		List<Designation> listDesignation = designationService.getAllDesignations();
 		model.addAttribute("listDesignation", listDesignation);
+		
 		Employee employeeEdit = employeeService.findEmployeeById(id);
 		model.addAttribute("employeeEdit", employeeEdit);
-		ArmsLicenseDetails armsLicenseEdit =armsLicenseService.findArmsLicenseById(id);
+		ArmsLicenseDetails armsLicenseEdit =armsLicenseService.findArmsLicenseById(id2);
 		model.addAttribute("armsLicenseEdit", armsLicenseEdit);
 		model.addAttribute("imgUtil", new ImageUtil());
 		session.setAttribute("imgUtilSession",employeeEdit.getImageProfile());
