@@ -435,83 +435,109 @@ body {
 
 
 									<div id="validation-step-3">
-									<!--  
+				
 									  <div class="form-row">
+									  
+									   <div class="form-group sm col-md-4">
+											   <label class="form-label">Arms Code   </label>
+											      
+							                 <input  type="text"id="armsCode"name="armsCode" th:value="${armsLicenseEdit.armsCode}" class="form-control"readonly>
+										     </div>
+									  
 									  
 										       <div class="form-group sm col-md-4">
 											       <label class="form-label">Father Name
 											       <span class="text-danger">*</span></label>
-							                 <input  type="text"id="fatherName"name="fatherName" title="Father Name"th:value="${employeeEdit.fatherName}" class="form-control">
+							                 <input  type="text"id="fatherName"name="fatherName" title="Father Name"th:value="${armsLicenseEdit.fatherName}" class="form-control">
 										     </div>
-										       <div class="form-group sm col-md-4">
+										     <div class="form-group sm col-md-4">
+											       <label class="form-label">Address
+											       <span class="text-danger">*</span></label>
+							                 <input  type="text"id="addressArms"name="addressArms"th:value="${armsLicenseEdit.addressArms}"  title="Address" class="form-control required">
+										     </div> 
+									  </div>
+									   <div class="form-row">
+									   <div class="form-group sm col-md-4">
 											       <label class="form-label">District
 											       <span class="text-danger">*</span></label>
-							                 <input  type="text"id="district"name="district"th:value="${employeeEdit.district}"  title="District" class="form-control required">
+							                 <input  type="text"id="district"name="district"th:value="${armsLicenseEdit.district}"  title="District" class="form-control required">
 										     </div>
 										       <div class="form-group sm col-md-4">
 											       <label class="form-label">State
 											       <span class="text-danger">*</span></label>
-							                 <input  type="text"id="state"name="state"th:value="${employeeEdit.state}"  title="State" class="form-control required">
+							                 <input  type="text"id="state"name="state"th:value="${armsLicenseEdit.state}"  title="State" class="form-control required">
 										     </div>
-									  </div>
-									  
-									   <div class="form-row">
-									    <div class="form-group sm col-md-4">
-											       <label class="form-label">Address
-											       <span class="text-danger">*</span></label>
-							                 <input  type="text"id="addressArms"name="addressArms"th:value="${employeeEdit.addressArms}"  title="Address" class="form-control required">
-										     </div>
-										       <div class="form-group sm col-md-4">
+										     <div class="form-group sm col-md-4">
 											       <label class="form-label">Arms Area
 											       <span class="text-danger">*</span></label>
-							                 <input  type="text"id="armsArea"name="armsArea"th:value="${employeeEdit.armsArea}"  title="Arms Area" class="form-control required">
-										     </div>
-										       <div class="form-group sm col-md-4">
-											       <label class="form-label">DOI
-											       <span class="text-danger">*</span></label>
-							                 <input  type="text"id="doi"name="doi"th:value="${employeeEdit.doi}" title="DOI" class="form-control required">
-										     </div>
-									  </div>
+							                 <input  type="text"id="armsArea"name="armsArea"th:value="${armsLicenseEdit.armsArea}"  title="Arms Area" class="form-control required">
+										     </div> 
+									  
+									   </div> 
+									  
 									  
 									   <div class="form-row">
 									   
+										       
 										       <div class="form-group sm col-md-4">
+											       <label class="form-label">DOI
+											       <span class="text-danger">*</span></label>
+							                 <input  type="text"id="doi"name="doi"th:value="${armsLicenseEdit.doi}" title="DOI" class="form-control required">
+										     </div>
+										      <div class="form-group sm col-md-4">
 											       <label class="form-label">DOV
 											       <span class="text-danger">*</span></label>
-							                 <input  type="text"id="dov"name="dov"th:value="${employeeEdit.dov}" title="DOV" class="form-control required">
+							                 <input  type="text"id="dov"name="dov"th:value="${armsLicenseEdit.dov}" title="DOV" class="form-control required">
 										     </div>
-										       <div class="form-group sm col-md-4">
+										      <div class="form-group sm col-md-4">
 											       <label class="form-label">TOA
 											       <span class="text-danger">*</span></label>
-							                 <input  type="text"id="toa"name="toa"th:value="${employeeEdit.toa}" title="TOA" class="form-control required">
+							                 <input  type="text"id="toa"name="toa"th:value="${armsLicenseEdit.toa}" title="TOA" class="form-control required">
 										     </div>
+									  </div>
+									  
+									   <div class="form-row">
+									 
+										      
+										      
 										      <div class="form-group sm col-md-4">
 											       <label class="form-label">TOP
 											       <span class="text-danger">*</span></label>
-							                 <input  type="text"id="top"name="top"th:value="${employeeEdit.top}" title="TOP" class="form-control required">
+							                 <input  type="text"id="top"name="top"th:value="${armsLicenseEdit.top}" title="TOP" class="form-control required">
 										     </div> 
 										     
-									  </div> -->
-									  
-									  
-									    <!-- <div class="form-row">
-									      
-										<div class="form-group sm col-md-4">
+										     <div class="form-group sm col-md-4">
 										<label class="form-label">NOL
 										<span class="text-danger">*</span></label>
-							             <input  type="text"id="nol"name="nol"th:value="${employeeEdit.nol}" title="NOL" class="form-control required">
+							             <input  type="text"id="armsNol"name="armsNol"th:value="${armsLicenseEdit.armsNol}" title="NOL" class="form-control required">
 										 </div>
-										         <div class="form-group sm col-md-4">
+										 
+										 <div class="form-group sm col-md-4">
 											       <label class="form-label">LCD
 											       <span class="text-danger">*</span></label>
-							                 <input  type="text"id="lcd"name="lcd"th:value="${employeeEdit.lcd}" title="LCD" class="form-control required">
+							                 <input  type="text"id="lcd"name="lcd"th:value="${armsLicenseEdit.lcd}" title="LCD" class="form-control required">
 										     </div>
+										     
+									  </div> 
+									  
+									  
+									     <div class="form-row">
+									      
+										
+										         
 										     <div class="form-group sm col-md-4">
 											       <label class="form-label">Dealer Details
 											       <span class="text-danger">*</span></label>
-							                 <input  type="text"id="dealerDetails"name="dealerDetails"th:value="${employeeEdit.dealerDetails}" title="Dealer Details" class="form-control required">
+							                 <input  type="text"id="dealerDetails"name="dealerDetails"th:value="${armsLicenseEdit.dealerDetails}" title="Dealer Details" class="form-control required">
+										    <input  type="hidden"id="empCode"name="empCode"th:value="${armsLicenseEdit.empCode}" >
 										     </div>
-									    </div> -->
+										     <div class="form-group sm col-md-4">
+											      
+										    <input  type="hidden"id="empCode"name="empCode"th:value="${armsLicenseEdit.empCode}" >
+										     </div> 
+										     
+										     
+									    </div>
 									 <button type="submit" class="btn btn-primary">Save</button>
 									  <button type="submit"class="btn btn-primary" value="cancel">Cancel</button>
                               </div>
@@ -584,6 +610,22 @@ body {
 				showDropdowns: true
 			});
 
+		$("input[name=\"dov\"]").daterangepicker({
+			singleDatePicker: true,
+			   autoApply: true,
+			locale: {
+				format: 'YYYY/MM/DD'
+	        },
+			showDropdowns: true
+		});
+		$("input[name=\"doi\"]").daterangepicker({
+			singleDatePicker: true,
+			   autoApply: true,
+			locale: {
+				format: 'YYYY/MM/DD'
+	        },
+			showDropdowns: true
+		});
 			
 			// Datatables basic
 			$('#datatables-basic').DataTable({

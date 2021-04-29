@@ -50,7 +50,7 @@ public class ArmsLicenseDetails implements Serializable {
 	@Column(name = "TOP")
 	private String top;
 
-	@Column(name ="EMPLOYEE_CODE")
+	@Column(name ="EMPLOYEE_CODE",updatable = false)
 	private String empCode;
 	
 	public String getEmpCode() {

@@ -28,5 +28,10 @@ public class ArmsLicenseServiceImpl implements ArmsLicenseService {
 		List<ArmsLicenseDetails> listArmsLicense = armsLicenseDao.findAll();
 		return listArmsLicense;
 	}
+	@Override
+	public void updateArmsLicenseService(ArmsLicenseDetails armsLicense) {
+		this.armsLicenseDao.saveOrUpdate(armsLicense);
+		
+	}
 
 }
