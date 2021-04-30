@@ -34,7 +34,7 @@ public class EmployeeGradationExcel {
 	 private XSSFWorkbook workbook;
 	 private XSSFSheet sheet;
 	 private List<Employee> listEmployee;
-	 private DepartmentService departmentService;
+	 @Autowired DepartmentService departmentService;
 	 
 	 @Autowired EmployeeService employeeService;
 	 @Autowired DesignationService designationService;
@@ -90,9 +90,10 @@ public class EmployeeGradationExcel {
 				System.out.println("single employee : =" +emp.getDepartmentCode());
 				System.out.println("single employee : =" +emp.getDateOfJoining());
 				
-				//Department d = departmentService.findDepartmentById(emp.getDepartmentCode());
+				Employee e = employeeService.findEmployeeById(emp.getEmpCode());
+				Department d = departmentService.findDepartmentById(e.getDepartmentCode());
 				//Department d = departmentService.findDepartmentByEmpCode(emp.getDepartmentCode()).get(0);
-				//System.out.println( "department detail : =" +d.getDeptName());
+				System.out.println( "department detail : =" +d.getDeptName());
 				Designation desig = designationService.findDesignationById(emp.getDesignationCode());
 				System.out.println( "designation detail : =" +desig.getDesgName());
 				Category category = categoryService.findCategoryByCatId(emp.getCategoryCode());
@@ -102,7 +103,7 @@ public class EmployeeGradationExcel {
 				row.createCell(0).setCellValue(emp.getEmpCode());
 				row.createCell(1).setCellValue(emp.getEmpName());
 				row.createCell(2).setCellValue(category.getCategoryName());
-				row.createCell(3).setCellValue("");
+				row.createCell(3).setCellValue(d.getDeptName());
 				row.createCell(4).setCellValue(desig.getDesgName());
 				row.createCell(5).setCellValue("");
 				row.createCell(6).setCellValue(emp.getBatchYear());

@@ -50,7 +50,7 @@ public class LeaveApprovalController {
 		if(listLeaveApproval != null) {
 			model.addAttribute("listLeaveApproval" , listLeaveApproval);
 		}
-		if (modules != null) {
+		if (modules != null) {  
 			model.addAttribute("modules", modules);
 		}
 		if(listDepartment != null) {

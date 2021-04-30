@@ -1,5 +1,6 @@
 package com.hrms.repository;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -74,6 +75,42 @@ public class LeaveRequestDaoImpl extends AbstractGenericDao<LeaveRequest> implem
 		Query query = session.createQuery(hql);
 		List result = query.list();
 		return result;
+	}
+
+
+	@Override
+	public List<LeaveRequest> findByEmpBetweenDate(String empCode, Date toDate, Date fromDate) {
+		
+		List<LeaveRequest> listLeaveRequest = null;
+		try {
+		Session session = sessionFactory.getCurrentSession();
+		
+		String qu = "FROM LeaveRequest\r\n"
+				+ "WHERE ( FROM_DATE >=:fromDate and TO_DATE <=:toDate ) and  EMP_CODE =:empCode";
+		Query query = session.createQuery(qu);
+		
+		System.out.println("query set : = " + query.toString());
+		query.setParameter("fromDate", fromDate);
+		query.setParameter("toDate", toDate);
+		query.setParameter("empCode", empCode);
+		listLeaveRequest = query.list();
+		return listLeaveRequest;
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return listLeaveRequest;
+	}
+
+
+	@Override
+	public LeaveRequest findByToDate(Date date) {
+		
+		Session session = sessionFactory.getCurrentSession();
+		Query<LeaveRequest> query = session.createQuery("from LeaveRequest l where l.toDate =:date", LeaveRequest.class);
+		query.setParameter("date", date);
+		List<LeaveRequest> list = query.list();
+		return list.get(0);
 	}
 
 

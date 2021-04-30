@@ -3,7 +3,6 @@ package com.hrms.model;
 
 
 import java.io.Serializable;
-
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -11,13 +10,17 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 
 @Entity
 //@Table(name="leave_request")
 @Table(name="LEAVE_REQUEST")
-public class LeaveRequest implements Serializable  {
+public class LeaveRequest implements Serializable  {  
 	
 	
 
@@ -32,7 +35,8 @@ public class LeaveRequest implements Serializable  {
 	@Column(name = "LEAVE_REQUEST_ID" ,length=100)
 	private Long leaveRequestId;
 	
-	@Column(name = "EMP_CODE",length=50)
+	
+	@Column(name = "EMP_CODE")
 	private String empCode;
 
 	
@@ -41,14 +45,16 @@ public class LeaveRequest implements Serializable  {
 	
 
 	
-	@Column(name = "LEAVE_CODE",length=50)  
+	@Column(name = "LEAVE_CODE")  
 	private String leaveCode;
 	
-	@Column(name = "TO_DATE",length=20)
-	private String toDate;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@Column(name = "TO_DATE")  
+	private Date toDate;
 	
-	@Column(name = "FROM_DATE",length=20)
-	private String fromDate;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@Column(name = "FROM_DATE")  
+	private Date fromDate;
 
 	
 	@Column(name = "FROM_DATE_TYPE",length=10)
@@ -57,8 +63,8 @@ public class LeaveRequest implements Serializable  {
 	@Column(name = "TO_DATE_TYPE",length=10)
 	private String toDateType;
 	
-
-	@Column(name = "APPLY_DATE",length=20)
+	//@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@Column(name = "APPLY_DATE")
 	private String applyDate;
 	
 	@Column(name = "APPROVE_DATE",length=20)
@@ -121,8 +127,10 @@ public class LeaveRequest implements Serializable  {
 	}
 
 	public void setLeaveRequestId(Long leaveRequestId) {
-		this.leaveRequestId = leaveRequestId;
+		this.leaveRequestId = leaveRequestId; 
 	}
+
+	
 
 	public String getEmpCode() {
 		return empCode;
@@ -148,19 +156,19 @@ public class LeaveRequest implements Serializable  {
 		this.leaveCode = leaveCode;
 	}
 
-	public String getToDate() {
+	public Date getToDate() {
 		return toDate;
 	}
 
-	public void setToDate(String toDate) {
+	public void setToDate(Date toDate) {
 		this.toDate = toDate;
 	}
 
-	public String getFromDate() {
+	public Date getFromDate() {
 		return fromDate;
 	}
 
-	public void setFromDate(String fromDate) {
+	public void setFromDate(Date fromDate) {
 		this.fromDate = fromDate;
 	}
 
@@ -324,6 +332,18 @@ public class LeaveRequest implements Serializable  {
 		this.requestType = requestType;
 	}
 
+	public LeaveRequest() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+
+	
+	
+
+	
+
+	
 	
 	
 

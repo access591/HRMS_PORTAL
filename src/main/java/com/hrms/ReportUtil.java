@@ -142,7 +142,7 @@ public class ReportUtil {
 
 	}
 
-	// Employe report
+	// Employee gradation information pdf  report
 
 	public void allEmployeeReport(HttpServletRequest request, HttpServletResponse response, String reportFileName,
 			List<?> sourceData) {
@@ -188,5 +188,57 @@ public class ReportUtil {
 		// return null;
 
 	}
+	
+	
+	
+	public void leaveTransactionPdfReportByEmp(HttpServletRequest request, HttpServletResponse response, String reportFileName,
+			List<?> sourceData) {
+		System.out.println("leave transaction report...");
+		String sourceFileName = request.getSession().getServletContext()
+				.getRealPath("resources/" + reportFileName + ".jrxml");
+		System.out.println("resources : = "+sourceFileName);
+
+		try {
+
+			JasperCompileManager.compileReportToFile(sourceFileName);
+			sourceFileName = request.getSession().getServletContext()
+					.getRealPath("/resources/" + reportFileName + ".jasper");
+			JRBeanCollectionDataSource beanColDataSource = new JRBeanCollectionDataSource(sourceData);
+
+			HashMap<String, Object> map = new HashMap<String, Object>();
+
+			map.put("Parameter", beanColDataSource);//Parameter
+
+			JasperReport report = (JasperReport) JRLoader.loadObjectFromFile(sourceFileName);
+			JasperPrint jasperPrint = JasperFillManager.fillReport(report, map, new JREmptyDataSource());
+
+			if (jasperPrint != null) {
+				byte[] pdfReport = JasperExportManager.exportReportToPdf(jasperPrint);
+				response.reset();
+				response.setContentType("application/pdf");
+				response.setHeader("Cache-Control", "no-store");
+				response.setHeader("Cache-Control", "private");
+				response.setHeader("Pragma", "no-store");
+				response.setContentLength(pdfReport.length);
+				try {
+					response.getOutputStream().write(pdfReport);
+					response.getOutputStream().flush();
+					response.getOutputStream().close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+
+			}
+		} catch (JRException e) {
+			e.printStackTrace();
+		}
+		// return null;
+
+	}
+	
+	
+	//leave transaction pdf report 
+	
+	
 
 }

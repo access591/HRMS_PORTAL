@@ -149,7 +149,7 @@ public String deletedepartment(@PathVariable("id")String id,  Model model,HttpSe
 }
 
 @ResponseBody
-@PostMapping(value = {"/getdepartment/{deptCode}"})
+@GetMapping(value = {"getdepartmentd/{deptCode}"})
 public Department getDepartmentByDeptId(@PathVariable("deptCode") String deptCode) {
 	
 	System.out.println("get department by department id");
