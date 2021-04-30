@@ -120,7 +120,7 @@ body {
 										<tbody>
 											<tr  th:each="listdesignation : ${listDesignation}">
 												<td th:text="${listdesignation.desgCode}"></td>
-												<td th:text="${listdesignation.categoryCode.categoryName}"></td>
+												<td th:text="${listdesignation?.categoryCode?.categoryName}"></td>
 												<td th:text="${listdesignation.desgName}"></td>
 												<td th:text="${listdesignation.active}"></td>
 												<td><a th:href="@{/editDesignation/{id}(id=${listdesignation.desgCode})}" ><em class="fa fa-edit"></em></a>
