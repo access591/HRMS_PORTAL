@@ -15,7 +15,14 @@ LeaveGrantRegisterDao leaveGrantRegisterDao;
 
 @Override
 public void addLeaveGrant(LeaveGrant leaveGrant) {
-	this.leaveGrantRegisterDao.saveOrUpdate(leaveGrant);
+	leaveGrant.setLeaveGrantCode(leaveGrantRegisterDao.getMaxId("LGR"));
+	
+	try {
+		this.leaveGrantRegisterDao.saveOrUpdate(leaveGrant);
+	} catch (Exception e) {
+	
+		e.printStackTrace();
+	}
 	
 }
 

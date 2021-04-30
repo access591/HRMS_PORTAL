@@ -8,25 +8,23 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 @Entity
-@Table(name = "LEAVE_GRANT")
+@Table(name = "M_LEAVE_GRANT")
 public class LeaveGrant  implements Serializable{
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 5399997637115740573L;
-	
+	private static final long serialVersionUID = -5180255080078306637L;
+
 	@Id
 	@Column(name="LEAVEGRANT_CODE")
 	private String leaveGrantCode;
 	
-	@Column(name = " EMP_CODE")
-	private String empCode;
+	@Column(name = "EMP_CODE")
+	private Employee empCode;
 	
-	@Column(name ="EMP_NAME")
-	private String empName;
 	@Column(name = "LEAVE_CODE")
-	private String leaveCode;
+	private Leave levCode;
 
 	@Column(name = "NO_OF_LEAVES_GRANTED")
 	private int noOfLeavesGranted;
@@ -36,24 +34,12 @@ public class LeaveGrant  implements Serializable{
 
 	@Column(name = "YEAR")
 	private String year;
-
-	@Column(name = "LEAVE_TYPE")
-	private String leaveType;
-
 	@Column(name = "LEAVE_AVAILED")
 	private int leaveAvailed;
 
 	@Column(name = "CLOSING_BAL")
 	private int closingBal;
 
-	
-	public String getLeaveGrantCode() {
-		return leaveGrantCode;
-	}
-
-	public void setLeaveGrantCode(String leaveGrantCode) {
-		this.leaveGrantCode = leaveGrantCode;
-	}
 
 	@Column(name = "INS_BY", updatable = false)
 	private String insBy;
@@ -67,28 +53,12 @@ public class LeaveGrant  implements Serializable{
 	@Column(name = "UPD_DATE", insertable = false)
 	private Date updDate = new Date();
 
-	public String getEmpCode() {
-		return empCode;
+	public String getLeaveGrantCode() {
+		return leaveGrantCode;
 	}
 
-	public void setEmpCode(String empCode) {
-		this.empCode = empCode;
-	}
-
-	public String getEmpName() {
-		return empName;
-	}
-
-	public void setEmpName(String empName) {
-		this.empName = empName;
-	}
-
-	public String getLeaveCode() {
-		return leaveCode;
-	}
-
-	public void setLeaveCode(String leaveCode) {
-		this.leaveCode = leaveCode;
+	public void setLeaveGrantCode(String leaveGrantCode) {
+		this.leaveGrantCode = leaveGrantCode;
 	}
 
 	public int getNoOfLeavesGranted() {
@@ -99,12 +69,20 @@ public class LeaveGrant  implements Serializable{
 		this.noOfLeavesGranted = noOfLeavesGranted;
 	}
 
-	public int getPreviousYrBalance() {
-		return previousYrBalance;
+	public Employee getEmpCode() {
+		return empCode;
 	}
 
-	public void setPreviousYrBalance(int previousYrBalance) {
-		this.previousYrBalance = previousYrBalance;
+	public void setEmpCode(Employee empCode) {
+		this.empCode = empCode;
+	}
+
+	public Leave getLevCode() {
+		return levCode;
+	}
+
+	public void setLevCode(Leave levCode) {
+		this.levCode = levCode;
 	}
 
 	public String getYear() {
@@ -115,12 +93,20 @@ public class LeaveGrant  implements Serializable{
 		this.year = year;
 	}
 
-	public String getLeaveType() {
-		return leaveType;
+	public int getClosingBal() {
+		return closingBal;
 	}
 
-	public void setLeaveType(String leaveType) {
-		this.leaveType = leaveType;
+	public void setClosingBal(int closingBal) {
+		this.closingBal = closingBal;
+	}
+
+	public int getPreviousYrBalance() {
+		return previousYrBalance;
+	}
+
+	public void setPreviousYrBalance(int previousYrBalance) {
+		this.previousYrBalance = previousYrBalance;
 	}
 
 	public int getLeaveAvailed() {
@@ -129,14 +115,6 @@ public class LeaveGrant  implements Serializable{
 
 	public void setLeaveAvailed(int leaveAvailed) {
 		this.leaveAvailed = leaveAvailed;
-	}
-
-	public int getClosingBal() {
-		return closingBal;
-	}
-
-	public void setClosingBal(int closingBal) {
-		this.closingBal = closingBal;
 	}
 
 	public String getInsBy() {
@@ -170,6 +148,9 @@ public class LeaveGrant  implements Serializable{
 	public void setUpdDate(Date updDate) {
 		this.updDate = updDate;
 	}
+	
+
+
 
 	
 
