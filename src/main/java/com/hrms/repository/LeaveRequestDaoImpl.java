@@ -35,6 +35,7 @@ public class LeaveRequestDaoImpl extends AbstractGenericDao<LeaveRequest> implem
 			List results = query.list();
 		
 			leaverequestByEmpCode = results;
+			System.out.println("leave request dao impl is completed");
 		} catch (Exception e) {
 			System.out.println("exception block in leaveRequestDaoImpl model ");
 			 e.printStackTrace();
@@ -58,7 +59,7 @@ public class LeaveRequestDaoImpl extends AbstractGenericDao<LeaveRequest> implem
 
 
 	@Override
-	public List<LeaveRequest> findAllByDeptCodeAndStatus(String deptCode) {
+	public List<LeaveRequest> findAllByDeptCodeAndStatusN(String deptCode) {
 		Session session = this.sessionFactory.getCurrentSession();
 		String hql = "from LeaveRequest e where e.deptCode = :deptCode and e.status = 'N' ";
 		Query query = session.createQuery(hql);

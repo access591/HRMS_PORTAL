@@ -52,8 +52,8 @@ public class LeaveRequestServiceImpl implements LeaveRequestService{
 		return this.leaveRequestDao.findByEmpCodeAndApplyDate(empCode, applyDate);
 	}
 	@Override
-	public List<LeaveRequest> findAllByDeptCodeAndStatus(String deptCode) {
-		return this.leaveRequestDao.findAllByDeptCodeAndStatus(deptCode);
+	public List<LeaveRequest> findAllByDeptCodeAndStatusN(String deptCode) {
+		return this.leaveRequestDao.findAllByDeptCodeAndStatusN(deptCode);
 	}
 	@Override
 	public List<LeaveRequest> getEmployeeByStatusY() {

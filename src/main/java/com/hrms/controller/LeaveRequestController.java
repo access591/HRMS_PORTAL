@@ -124,7 +124,7 @@ public class LeaveRequestController {
 		System.out.println("inserted by :"+ insertedBY);
 		
 		System.out.println("leave from date : " + leaveRequest.getEmpCode());
-		//ßSystem.out.println("leave to date : " + leaveRequest.getToDate());
+		System.out.println("leave to date : " + leaveRequest.getLeaveCode());
 		leaveRequestService.addLeave(leaveRequest);
 		
 		session.setAttribute("username", session.getAttribute("username"));

@@ -1,5 +1,6 @@
 package com.hrms.controller;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -13,10 +14,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hrms.model.Department;
+import com.hrms.model.Designation;
+import com.hrms.model.Employee;
+import com.hrms.model.EmployeeLeaveRequest;
 import com.hrms.model.LeaveRequest;
 import com.hrms.model.MenuModule;
 import com.hrms.model.UserEntity;
 import com.hrms.service.DepartmentService;
+import com.hrms.service.DesignationService;
+import com.hrms.service.EmployeeService;
 import com.hrms.service.LeaveRequestService;
 import com.hrms.service.ModuleService;
 import com.hrms.service.PageMappingService;
@@ -35,6 +41,8 @@ public class LeaveApprovalController {
 	@Autowired DepartmentService departmentService;
 	@Autowired LeaveRequestService leaveRequestService;
 	@Autowired UserService userService;
+	@Autowired EmployeeService employeeService;
+	@Autowired DesignationService designationService;
 	
 	@GetMapping("/leaveApproval")
 	public String leaveApproval(Model model, HttpSession session) {
@@ -44,9 +52,7 @@ public class LeaveApprovalController {
 		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
 		List<Department> listDepartment = departmentService.getAllDepartments();
 		List<LeaveRequest> listLeaveApproval = leaveRequestService.getEmployeeByStatusY();
-		
-		
-		
+
 		if(listLeaveApproval != null) {
 			model.addAttribute("listLeaveApproval" , listLeaveApproval);
 		}
@@ -69,7 +75,24 @@ public class LeaveApprovalController {
 	@GetMapping("/leaverequest/{deptCode}")
 	public List<LeaveRequest> getAllLeaveRequestBydept(@PathVariable("deptCode") String deptCode) {
 		 
-		return leaveRequestService.findAllByDeptCodeAndStatus(deptCode);
+		List<LeaveRequest> list = leaveRequestService.findAllByDeptCodeAndStatusN(deptCode);
+		System.out.println("list size : "+ list.size());
+		List<EmployeeLeaveRequest> listEmr = new ArrayList<EmployeeLeaveRequest>();
+		EmployeeLeaveRequest empLvRe;
+		/*for(int i =0;i<list.size();i++) {
+			Employee emp = employeeService.findEmployeeById(list.get(i).getEmpCode());
+			System.out.println("emp loiye detail :"+ emp.getEmpName());
+			Department dept = departmentService.findDepartmentById(emp.getDepartmentCode());
+			System.out.println("department detail : "+ dept.getDeptName());
+			Designation desig = designationService.findDesignationById(emp.getDesignationCode());
+			System.out.println("desig nation : "+ desig.getDesgName());
+			empLvRe = new EmployeeLeaveRequest(emp.getEmpName(),dept.getDeptName(),desig.getDesgName(),list.get(i).getFromDate().toString(),
+					list.get(i).getToDate().toString());
+			listEmr.add(empLvRe);
+			System.out.println("counting : "+ i);
+		}
+		*/
+		return leaveRequestService.findAllByDeptCodeAndStatusN(deptCode);
 		
 	}
 	

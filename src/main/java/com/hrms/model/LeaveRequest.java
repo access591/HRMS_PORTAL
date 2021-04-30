@@ -67,7 +67,7 @@ public class LeaveRequest implements Serializable  {
 	@Column(name = "APPLY_DATE")
 	private String applyDate;
 	
-	@Column(name = "APPROVE_DATE",length=20)
+	@Column(name = "APPROVE_DATE",length=100)
 	private String approvedDate;
 
 	
