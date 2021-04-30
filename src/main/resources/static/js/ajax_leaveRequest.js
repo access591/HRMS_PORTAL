@@ -1,19 +1,12 @@
 function leaveEmployeDisplay(){
 	
-	 var d = document.getElementById("employeeDropDownLeave");
-	 
-	var dValue = document.getElementById("employeeDropDownLeave").value;
-	
-	console.log(" d value is :"+ dValue );
-   
-	 var displayItem = d.options[d.selectedIndex].text;
-	 
-	 document.getElementById("hiddenField").value = displayItem;
-	 
-	document.getElementById("leaveRequestEmpId").value = dValue;
-	
+	 var d = document.getElementById("employeeDropDownLeave"); 
+	var dValue = document.getElementById("employeeDropDownLeave").value;	
+	console.log(" d value is :"+ dValue );  
+	 var displayItem = d.options[d.selectedIndex].text;	 
+	 document.getElementById("hiddenField").value = displayItem;	 
+	document.getElementById("leaveRequestEmpId").value = dValue;	
     console.log(displayItem);
-
     ajaxRequestLeave(dValue);
 }
 
@@ -49,7 +42,7 @@ function ajaxRequestForDepartmentLeave(val){
 	var deptCode = val;
     console.log("ajax request : "+ deptCode);
     var xhr1 = new XMLHttpRequest();
-    xhr1.open('GET','getdepartment/'+deptCode,true);
+    xhr1.open('GET','getdepartmentd/'+deptCode,true);
     xhr1.getResponseHeader('content-type','application/json');
 	xhr1.response = 'json';
     xhr1.onload = function(){
@@ -72,7 +65,7 @@ var leaveTypeId = "";
 var fromDateType = "f";
 var toDateType = "f"
 
-function leaveType(){
+function leaveTypeFun(){
 	
 	leaveTypeId =  document.getElementById("leave_type_id").value;
 	console.log("type of leave : "+leaveTypeId);
@@ -166,13 +159,10 @@ function countLeaveDays(){
 		var fromDate = document.getElementById("from_date").value;
 		var toDate = document.getElementById("to_date").value;
 
-		var f = fromDate.split("/");
-		var t = toDate.split("/");
-		console.log("from date : "+ f);
-		console.log("to date : "+ t);
+		
 			
-		var date1 = new Date(f[2],f[1]-1,f[0]);
-		var date2 = new Date(t[2],t[1]-1,t[0]);
+		var date1 = new Date(fromDate);
+		var date2 = new Date(toDate);
 
 		const diffTime = Math.abs(date2 - date1);
 		const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));

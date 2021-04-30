@@ -1,5 +1,6 @@
 package com.hrms.controller;
 
+import java.sql.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -10,19 +11,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hrms.ReportUtil;
 import com.hrms.model.Department;
 import com.hrms.model.Designation;
 import com.hrms.model.Employee;
 import com.hrms.model.LeaveDetail;
+import com.hrms.model.LeaveRequest;
 import com.hrms.model.MenuModule;
 import com.hrms.service.DepartmentService;
 import com.hrms.service.DesignationService;
 import com.hrms.service.EmployeeService;
 import com.hrms.service.LeaveDetailService;
+import com.hrms.service.LeaveRequestService;
 import com.hrms.service.ModuleService;
 import com.hrms.service.PageMappingService;
 
@@ -45,6 +51,7 @@ public class LeveReportController {
 	@Autowired EmployeeService employeeService;
 	@Autowired DesignationService designationService; 
 	@Autowired DepartmentService departmentService;
+	@Autowired LeaveRequestService leaveRequestService;
 	
 	@GetMapping("/leaveRegister")
 	public String viewLeaveRegisterReport(Model model,HttpSession session,HttpServletRequest request, HttpServletResponse response) {
@@ -125,7 +132,7 @@ public class LeveReportController {
 	
 	
 	
-	/* leave Transaction report */
+	/* leave Transaction detail report */
 	
 	@GetMapping("/leaveTransactionReport")
 	public String leaveTransactionReport(Model model,HttpSession session,HttpServletRequest request, HttpServletResponse response) {
@@ -154,18 +161,47 @@ public class LeveReportController {
 //		List<Department> listDpartment = 
 		session.setAttribute("username", session.getAttribute("username"));
 
+	
 		return pageMappingService.PageRequestMapping(reqpageOfleaveRequestTransactionReport, pageNoLeaveTransactionReport);  
 	}
 	
 	
 	
-	 @PostMapping("createLeaveTransactionReport") 
-	 public String createLeaveTransactionReport(@RequestParam("emp") String empCode) {
+	 @PostMapping("createleaveTransactionReport") 
+	 public String createLeaveTransactionReport(@RequestParam("employeeName") String employeeName,@RequestParam("fromDate") Date fromDate,
+			 						@RequestParam("toDate")Date toDate , Model model,HttpServletRequest req,HttpServletResponse res) {
 		 
 		 System.out.println("creating Leave transaction Report");
 		 
+		 System.out.println("employee : "+ employeeName);
+		 System.out.println("to date : "+toDate+" From Date : "+ fromDate);
+		 List<Employee> listEmployee = employeeService.getAllEmployees();
+		 if(listEmployee != null) {
+				model.addAttribute("listEmployee", listEmployee);
+		 }
 		 
+		 
+		 List<LeaveRequest> listLeaveRequest = leaveRequestService.findByEmpBetweenDate(employeeName, toDate, fromDate);
+		 //LeaveRequest listLeave = leaveRequestService.findByToDate(toDate);
+		 String reportName = "LeaveTransaction";  //LeaveTransaction.jrxml
+		 reportUtil.leaveTransactionPdfReportByEmp(req, res, reportName, listLeaveRequest);
+		 System.out.println("size : " +listLeaveRequest.get(0).getDeptCode());
 		 return pageMappingService.PageRequestMapping(reqpageOfleaveRequestTransactionReport, pageNoLeaveTransactionReport);
+	 }
+	 
+	 
+	 
+	 
+	 @ResponseBody
+	 @GetMapping("getDepartmentByEmpCode/{empCode}")
+	 public Department getDepartmentByEmpCode(@PathVariable("empCode") String empCode) {
+		 System.out.println("Get Department By Emp Code / LeaveTransactionController");
+		 System.out.println("emp code is : " + empCode);
+		 Employee employee = employeeService.findEmployeeById(empCode);
+		 
+		 Department department =departmentService.findDepartmentById(employee.getDepartmentCode());
+		 System.out.println("dePARTMent Service : " + department.getDeptName());
+		 return department;
 	 }
 	 
 	

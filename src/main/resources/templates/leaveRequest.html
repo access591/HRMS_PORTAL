@@ -67,7 +67,7 @@
 												<div class="form-group">
 													<label> Employee id </label> <label style="color: red">*</label>
 													<input class="form-control" id="leaveRequestEmpId" value=""
-														name="empCode" />
+														name="empCode" readonly />
 												</div>
 											</div>
 											<div class="col-12 col-lg-6">
@@ -89,14 +89,14 @@
 												<div class="form-group">
 													<label> Dept Code </label> <label style="color: red">*</label>
 													<input type="text" class="form-control" id="leaveDepartmentId"
-														value="" name="deptCode">
+														value="" name="deptCode" readonly>
 												</div>
 											</div>
 											<div class="col-12 col-lg-6">
 												<label class="form-label">Department Name</label>
 												<label style="color: red">*</label>
 												<input type="text" class="form-control" id="leaveDepartmentName"
-													value="" name="deptName">
+													value="" name="deptName" readonly>
 											</div>
 										</div>
 										<div class="row">
@@ -104,7 +104,7 @@
 												<div class="form-group">
 													<label> Type of Leave </label> <label style="color: red">*</label>
 													<select class="form-control select2" id="leave_type_id" name="requestType"
-														onchange="leaveType()">
+														onchange = "leaveTypeFun()">
 														<option value="">Select</option>
 														<option value="single">Single</option>
 														<option value="multiple">Multiple</option>
@@ -114,20 +114,20 @@
 											<div class="col-12 col-lg-6">
 												<label class="form-label">Apply Date</label>
 												<label style="color: red">*</label>
-												<input type="text" class="form-control" id='applyDate' name='applyDate'>
+												<input type="date" class="form-control" id='applyDate' name='applyDate'>
 											</div>
 										</div>
 										<div class="row">
 											<div class="col-12 col-lg-6">
 												<label class="form-label">From Date</label>
 												<label style="color: red">*</label>
-												<input type="text" id="from_date" class="form-control" name="fromDate"
+												<input type="date" id="from_date" class="form-control" name="fromDate"
 												onchange = "getFromDate(this.value)">
 											</div>
 											<div class="col-12 col-lg-6">
 												<label class="form-label">To Date</label>
 												<label style="color: red">*</label>
-												<input type="text" class="form-control" id="to_date" name="toDate" 
+												<input type="date" class="form-control" id="to_date" name="toDate" 
 												onchange="getToDate(this.value)">
 											</div>
 										</div>
@@ -162,7 +162,7 @@
 										
 											<div class="col-12 col-lg-6">
 												<label class="form-label">Leave type</label>
-												<select class="form-control" 
+												<select class="form-control"  name ="leaveType"
 													>
 													<option value="">Leave Type</option>
 													<option th:each="leave : ${listLeave}"
@@ -201,21 +201,21 @@
 							<div class="card-body">
 							
 							
-								<div class="row" >
+								<div class="row container" >
 											<div class="col-12 col-lg-4">
 												<label class="form-label">Casual Leave </label>
 												<label style="color: red">*</label>
-												<input class="from-control" th:value="${casual}">
+													<input class="from-control" value="0">
 											</div>
 											<div class="col-12 col-lg-4">
 												<label class="form-label">Earned Leave </label>
 												<label style="color: red">*</label>
-												<input class="from-control" th:value="${sick}">
+													<input class="from-control" value="0">
 											</div>
 											<div class="col-12 col-lg-4">
-												<label class="form-label">Sick Leave </label>
+												<label class="form-label">  Sick  Leave </label>
 												<label style="color: red">*</label>
-												<input class="from-control" th:value="${sick1}">
+													<input class="from-control" value="0">
 											</div>
 								</div>
 										
@@ -279,12 +279,14 @@
 	
 	
 	
-	
+		document.getElementById('applyDate').value = new Date().toISOString().substring(0, 10);
+		document.getElementById('from_date').value = new Date().toISOString().substring(0, 10);
+		document.getElementById('to_date').value = new Date().toISOString().substring(0, 10);
 		$(function () {
 
 			
 			
-			$("input[name='applyDate']").daterangepicker({
+			/* $("input[name='applyDate']").daterangepicker({
 				singleDatePicker: true,
 				autoApply: true,
 				locale: {
@@ -314,7 +316,7 @@
 					format: 'DD/MM/YYYY'
 				},
 				showDropdowns: true
-			});
+			}); */
 
  			
 			

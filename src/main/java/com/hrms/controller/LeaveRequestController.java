@@ -58,7 +58,7 @@ public class LeaveRequestController {
 		
 		List<Leave> listLeave = leaveService.getAllLeaves();
 		if(listLeave != null) {
-			model.addAttribute("lisLeave", listLeave);
+			model.addAttribute("listLeave", listLeave);
 		}
 		
 		UserEntity userEntity = userService.findUserById(userCode); 
@@ -88,42 +88,32 @@ public class LeaveRequestController {
 		}
 
 		  System.out.println("joninig begin..");
-		  System.out.println(" user entity code : "+ userEntity.getEmpCode());
-		  List<LeaveGrant> leaveGrant = leaveGrantService.findLeaveGrantByEmpCode(userEntity.getEmpCode());
+		 // System.out.println(" user entity code : "+ userEntity.getEmpCode());
+		  //List<LeaveGrant> leaveGrant = leaveGrantService.findLeaveGrantByEmpCode(userEntity.getEmpCode());
 		  
-		  System.out.println( "leave grant size" + leaveGrant.size());
-		  if(leaveGrant.size() == 3) {
-			 model.addAttribute("casual", leaveGrant.get(0).getLeaveAvailed());
-			 model.addAttribute("sick", leaveGrant.get(1).getLeaveAvailed());
-			 model.addAttribute("sick1", leaveGrant.get(2).getLeaveAvailed());
-		  }
-		  if(leaveGrant.size() == 2) {
-				 model.addAttribute("casual", leaveGrant.get(0).getLeaveAvailed());
-				 model.addAttribute("sick", leaveGrant.get(1).getLeaveAvailed());
-				 model.addAttribute("sick1","0");
-			  }
-		  if(leaveGrant.size() == 1) {
-				 model.addAttribute("casual", leaveGrant.get(0).getLeaveAvailed());
-				 model.addAttribute("sick", "0");
-				 model.addAttribute("sick1", "0");
-			  }
-		  else {
-			  model.addAttribute("casual", "0");
-				 model.addAttribute("sick", "0");
-				 model.addAttribute("sick1", "0"); 
-		  }
-	
+		  //System.out.println( "leave grant size" + leaveGrant.size());
+		  //if(leaveGrant.size() == 3) {
+			// model.addAttribute("casual", leaveGrant.get(0).getLeaveAvailed());
+			// model.addAttribute("sick", leaveGrant.get(1).getLeaveAvailed());
+			// model.addAttribute("sick1", leaveGrant.get(2).getLeaveAvailed());
+		  //}
+		  //if(leaveGrant.size() == 2) {
+			//	 model.addAttribute("casual", leaveGrant.get(0).getLeaveAvailed());
+			//	 model.addAttribute("sick", leaveGrant.get(1).getLeaveAvailed());
+			//	 model.addAttribute("sick1","0");
+			//  }
+		 // if(leaveGrant.size() == 1) {
+		//		 model.addAttribute("casual", leaveGrant.get(0).getLeaveAvailed());
+		//		 model.addAttribute("sick", "0");
+		//		 model.addAttribute("sick1", "0");
+		//	  }
+		 // else {
+		//.addAttribute("casual", "0");
+		//		 model.addAttribute("sick", "0");
+		//		 model.addAttribute("sick1", "0"); 
+		 // }
 
-		
-		
-
-		
-
-		session.setAttribute("username", userCode);
-
-
-		
-		//leaveRequestService.findAllByName("EMP-0046");
+		session.setAttribute("username" , userCode);
 		return pageMappingService.PageRequestMapping(reqPage, pageno);
 	}
 	
@@ -133,8 +123,8 @@ public class LeaveRequestController {
 		String insertedBY = (String) session.getAttribute("userlogin");
 		System.out.println("inserted by :"+ insertedBY);
 		
-		System.out.println("leave from date : " + leaveRequest.getFromDate());
-		System.out.println("leave to date : " + leaveRequest.getToDate());
+		System.out.println("leave from date : " + leaveRequest.getEmpCode());
+		//ßSystem.out.println("leave to date : " + leaveRequest.getToDate());
 		leaveRequestService.addLeave(leaveRequest);
 		
 		session.setAttribute("username", session.getAttribute("username"));

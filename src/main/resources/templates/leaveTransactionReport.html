@@ -51,27 +51,28 @@ body {
 									</div>
 								</div>
 								<div class="card-body">
-									<form id="validation-form" action="#" th:action="@{/leaveTransactionReport}" th:object="${leaveTransaction}" method="post">
+									<form id="validation-form" action="#" th:action="@{/createleaveTransactionReport}" method="post">
 										<div class="row">
 											<div class="col-12 col-lg-6">
 												<div class="form-group">
 										
-											  <label> Department Code </label>
+											  <label> Department Name </label>
 											  		<label style="color: red">*</label>
 											  	 
 											   <input
-														type="text" class="form-control"maxlength="10">
+														type="text" class="form-control"maxlength="10" id="deptName">
 												</div>
 											</div>
 											
 											<div class="col-12 col-lg-6">
 												<label class="form-label">Select Employee</label>
 												<label style="color: red">*</label>
-												<select class="form-control" id="employeeDropDownLeave"
-													onchange="leaveEmployeDisplay()">
+												<select class="form-control" id="employeeName" name="employeeName"
+													onchange="findDetailByEmpCode()">
 													<option value="">Select Employee</option>
 													<option th:each="employee: ${listEmployee}"
 														th:text="${employee.empName}" th:value=" ${employee.empCode}">
+														
 													</option>
 												</select>
 												<input type="hidden" name="" value="" id="hiddenField">
@@ -81,7 +82,7 @@ body {
 											<label class="form-label">From Date</label>
 											<label style="color: red">*</label>
 											<input
-														type="text" class="form-control"maxlength="10">
+														type="date" class="form-control" id="fromdate" name="fromDate"   >
 													
 													
 													
@@ -95,82 +96,19 @@ body {
 											<label style="color: red">*</label>
 											 
 												<input
-														type="text" class="form-control"maxlength="10">	
+														type="date" class="form-control" id="todate" name="toDate">	
 													
 													
 											</div>
 											</div>
 											
-											
-											<div class="col-12 col-lg-6">
-											<div class="form-group">
-											<label class="form-label">Destination Type</label>
-											<label style="color: red">*</label>
-											<input
-														type="text" class="form-control"maxlength="10">
-													
-													
-													
-											</div>
-											</div>
-											
-											
-											<div class="col-12 col-lg-6">
-											<div class="form-group">
-											<label class="form-label">Desformat</label>
-											<label style="color: red">*</label>
-											 
-												<input
-														type="text" class="form-control"maxlength="10">	
-													
-													
-											</div>
-											</div>
-											
-											
-											<div class="col-12 col-lg-6">
-											<div class="form-group">
-											<label class="form-label">File Name/E-mail-ID</label>
-											<label style="color: red">*</label>
-											 
-												<input
-														type="text" class="form-control"maxlength="10">	
-													
-													
-											</div>
-											</div>
-											
-											<div class="col-12 col-lg-6">
-											<div class="form-group">
-											<label class="form-label">Sender</label>
-											<label style="color: red">*</label>
-											 
-												<input
-														type="text" class="form-control"maxlength="10">	
-													
-													
-											</div>
-											</div>
-											
-											
-											<div class="col-12 col-lg-6">
-											<div class="form-group">
-											<label class="form-label">CC</label>
-											<label style="color: red">*</label>
-											 
-												<input
-														type="text" class="form-control"maxlength="10">	
-													
-													
-											</div>
-											</div>
 											
 											
 										</div>
 										
 										<Button type="submit">Generate Pdf</Button>
 										
-										<a href="#" >Download Excel Sheet</a>
+										<!-- <a href="#" >Download Excel Sheet</a> -->
 									
 										<!-- <Button id = "generate_pdf_button" onclick="generatePdfFunction()">Generate Pdf</Button> -->
 									</form>
@@ -210,6 +148,26 @@ body {
 			});
 			datatablesButtons.buttons().container().appendTo("#datatables-buttons_wrapper .col-md-6:eq(0)")
 		});
+		
+		$(function(){
+			/* $('#fromdate').daterangepicker({
+				singleDatePicker: true,
+			    autoApply: true,
+				locale: {
+		            format: 'DD/MM/YYYY'
+		        },
+				showDropdowns: true
+			});
+			
+			$('#todate').daterangepicker({
+				singleDatePicker: true,
+			    autoApply: true,
+				locale: {
+		            format: 'DD/MM/YYYY'
+		        },
+				showDropdowns: true
+			}); */
+		});
 	</script>
 	
 	
@@ -241,6 +199,36 @@ body {
 		
 
 }
+	
+	
+	function findDetailByEmpCode(){
+		var empCode = document.getElementById("employeeName").value;
+		console.log("employee code : " + empCode);
+		
+		if(empCode !== "" || document.getElementById("employeeName".selected == false)){
+			const xhr = new XMLHttpRequest();
+		    xhr.open('GET','getDepartmentByEmpCode/'+empCode,true);
+		    xhr.getResponseHeader('content-type','application/json');
+		    xhr.onload = function(){
+		        if(this.status===200){
+		            let obj = JSON.parse(this.responseText);
+		            console.log(obj);
+
+		            console.log("department name : " +obj.deptName);
+		            $('#deptName').val(obj.deptName);
+                   
+                    
+                    
+					
+		        }
+		        else{
+		            console.error("some error occured");
+		        }
+			
+		    }
+		    xhr.send();
+		}
+	}
 	
 			
 	
