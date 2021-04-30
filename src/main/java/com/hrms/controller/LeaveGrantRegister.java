@@ -13,12 +13,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.hrms.model.Employee;
+import com.hrms.model.Leave;
 import com.hrms.model.LeaveGrant;
+import com.hrms.model.LeaveGrantUtil;
 import com.hrms.model.MenuModule;
 import com.hrms.model.Travel;
 import com.hrms.model.UserRights;
 import com.hrms.service.EmployeeService;
 import com.hrms.service.LeaveGrantRegisterService;
+import com.hrms.service.LeaveService;
 import com.hrms.service.ModuleService;
 
 @Controller
@@ -28,11 +31,15 @@ public class LeaveGrantRegister {
 	@Autowired
 	EmployeeService employeeService;
 	@Autowired
+	LeaveService leaveService;
+	@Autowired
 	LeaveGrantRegisterService leaveGrantRegisterService;
 	@GetMapping("/leaveGrant")
 	public String leaveGrantRegister(Model model,HttpSession session) {
 		List<Employee> listEmployee = employeeService.getAllEmployees();
 		model.addAttribute("listEmployee", listEmployee);
+		List<Leave> listLeave = leaveService.getAllLeaves();
+		model.addAttribute("listLeave", listLeave);
 		List<LeaveGrant> listLeaveGrant = leaveGrantRegisterService.getAllLeaveGrants();
 		model.addAttribute("listLeaveGrant", listLeaveGrant);
 		String userCode = (String) session.getAttribute("username");
@@ -45,7 +52,24 @@ public class LeaveGrantRegister {
 		}
 	
 	@PostMapping("/saveLeaveGrant")
-	public String saveLeaveGrant(@ModelAttribute("leaveGrant") LeaveGrant leaveGrant, Model model, HttpSession session) {
+	public String saveLeaveGrant(@ModelAttribute("leaveGrant")LeaveGrantUtil leaveGrantUtil, Model model, HttpSession session) {
+		Employee emp=new Employee();
+		emp.setEmpCode(leaveGrantUtil.getEmpCode());
+		System.out.println("list>>>>>>>>>>>>>>"+leaveGrantUtil.getEmpCode());
+		Leave leave=new Leave();
+		leave.setLevCode(leaveGrantUtil.getLevCode());
+		
+		
+		LeaveGrant leaveGrant=new  LeaveGrant();
+	
+	
+		leaveGrant.setNoOfLeavesGranted(leaveGrantUtil.getNoOfLeavesGranted());
+		leaveGrant.setEmpCode(emp);
+		leaveGrant.setLevCode(leave);
+		leaveGrant.setYear(leaveGrantUtil.getYear());
+		leaveGrant.setClosingBal(leaveGrantUtil.getClosingBal());
+		leaveGrant.setLeaveAvailed(leaveGrantUtil.getLeaveAvailed());
+		leaveGrant.setPreviousYrBalance(leaveGrantUtil.getPreviousYrBalance());
 		leaveGrantRegisterService.addLeaveGrant(leaveGrant);
 		List<LeaveGrant> listLeaveGrant = leaveGrantRegisterService.getAllLeaveGrants();
 		model.addAttribute("listLeaveGrant", listLeaveGrant);
