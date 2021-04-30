@@ -1,6 +1,7 @@
 package com.hrms.controller;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,6 +22,8 @@ import com.hrms.ReportUtil;
 import com.hrms.model.Department;
 import com.hrms.model.Designation;
 import com.hrms.model.Employee;
+import com.hrms.model.EmployeeLeaveRequest;
+import com.hrms.model.Leave;
 import com.hrms.model.LeaveDetail;
 import com.hrms.model.LeaveRequest;
 import com.hrms.model.MenuModule;
@@ -29,6 +32,7 @@ import com.hrms.service.DesignationService;
 import com.hrms.service.EmployeeService;
 import com.hrms.service.LeaveDetailService;
 import com.hrms.service.LeaveRequestService;
+import com.hrms.service.LeaveService;
 import com.hrms.service.ModuleService;
 import com.hrms.service.PageMappingService;
 
@@ -52,6 +56,8 @@ public class LeveReportController {
 	@Autowired DesignationService designationService; 
 	@Autowired DepartmentService departmentService;
 	@Autowired LeaveRequestService leaveRequestService;
+	@Autowired LeaveService leaveService;
+	@Autowired EmployeeLeaveRequest employeeLeaveRequest;
 	
 	@GetMapping("/leaveRegister")
 	public String viewLeaveRegisterReport(Model model,HttpSession session,HttpServletRequest request, HttpServletResponse response) {
@@ -183,16 +189,33 @@ public class LeveReportController {
 		 
 		 List<LeaveRequest> listLeaveRequest = leaveRequestService.findByEmpBetweenDate(employeeName, toDate, fromDate);
 		 //LeaveRequest listLeave = leaveRequestService.findByToDate(toDate);
-		 String reportName = "LeaveTransaction";  //LeaveTransaction.jrxml
-		 reportUtil.leaveTransactionPdfReportByEmp(req, res, reportName, listLeaveRequest);
+		 List<EmployeeLeaveRequest> empLeaveRequest = new ArrayList<EmployeeLeaveRequest>();
+		 //List<MenuModule> empLeaveRequest = null;
+		 EmployeeLeaveRequest empLvRe;
+		for(int i = 0;i<listLeaveRequest.size();i++) 
+		 {
+			 //System.out.println("for loof "+listLeaveRequest.get(i).getLeaveCode());
+			 Leave leave = leaveService.findLeaveById(listLeaveRequest.get(i).getLeaveCode());
+			 System.out.println("for loof leave : "+leave.getLevType());
+			 Employee employee = employeeService.findEmployeeById(listLeaveRequest.get(i).getEmpCode());
+			 System.out.println("for loof employee :  "+ employee.getEmpName());
+			 Department department = departmentService.findDepartmentById(listLeaveRequest.get(i).getDeptCode());
+			 System.out.println("for loof departmnt : "+ department.getDeptName());
+			 empLvRe = new EmployeeLeaveRequest(employee.getEmpName(),department.getDeptName(),
+					 leave.getLevType(),listLeaveRequest.get(i).getToDate().toString(),listLeaveRequest.get(i).getFromDate().toString(),
+					 listLeaveRequest.get(i).getApplyDate().toString(),listLeaveRequest.get(i).getApproevedBy(),listLeaveRequest.get(i).getReason(),
+					 listLeaveRequest.get(i).getLeaveFor());
+			 empLeaveRequest.add(empLvRe);
+		 } 
+		 String reportName = "LeaveTransaction";  
+		 reportUtil.leaveTransactionPdfReportByEmp(req, res, reportName, empLeaveRequest);
 		 System.out.println("size : " +listLeaveRequest.get(0).getDeptCode());
 		 return pageMappingService.PageRequestMapping(reqpageOfleaveRequestTransactionReport, pageNoLeaveTransactionReport);
 	 }
 	 
-	 
-	 
-	 
-	 @ResponseBody
+	
+
+	@ResponseBody
 	 @GetMapping("getDepartmentByEmpCode/{empCode}")
 	 public Department getDepartmentByEmpCode(@PathVariable("empCode") String empCode) {
 		 System.out.println("Get Department By Emp Code / LeaveTransactionController");

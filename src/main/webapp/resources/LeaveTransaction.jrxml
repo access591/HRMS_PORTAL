@@ -33,10 +33,14 @@
 		<queryString>
 			<![CDATA[]]>
 		</queryString>
-		<field name="fromDate" class="java.util.Date"/>
+		<field name="fromDate" class="java.lang.String"/>
 		<field name="leaveFor" class="java.lang.String"/>
-		<field name="toDate" class="java.util.Date"/>
+		<field name="toDate" class="java.lang.String"/>
 		<field name="approevedBy" class="java.lang.String"/>
+		<field name="empName" class="java.lang.String"/>
+		<field name="deptName" class="java.lang.String"/>
+		<field name="leaveCode" class="java.lang.String"/>
+		<field name="reason" class="java.lang.String"/>
 	</subDataset>
 	<parameter name="Parameter" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
 	<queryString>
@@ -63,11 +67,11 @@
 			</staticText>
 			<staticText>
 				<reportElement x="580" y="120" width="50" height="19" uuid="85c3733e-7a36-4431-9f69-2edc4e99db5e"/>
-				<text><![CDATA[Run Date]]></text>
+				<text><![CDATA[Run By]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="580" y="150" width="50" height="19" uuid="3ea4d86b-c1f0-40d7-9046-2822f36ab6e1"/>
-				<text><![CDATA[Run By]]></text>
+				<text><![CDATA[Run Date]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="630" y="120" width="50" height="19" uuid="fc61cf4a-8f38-49f5-a97f-eb8cbc9a00ba"/>
@@ -122,7 +126,13 @@
 								<text><![CDATA[Name]]></text>
 							</staticText>
 						</jr:columnHeader>
-						<jr:detailCell style="Table_TD" height="30"/>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="80" height="30" uuid="321c1a62-dca4-4073-aa18-5103717dcb9e"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{empName}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
 					</jr:column>
 					<jr:column width="90" uuid="76a52347-e9c2-486a-9b72-e21760b1c2eb">
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column3"/>
@@ -135,7 +145,13 @@
 								<text><![CDATA[Department]]></text>
 							</staticText>
 						</jr:columnHeader>
-						<jr:detailCell style="Table_TD" height="30"/>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="90" height="30" uuid="a22acdb5-1e4e-43b9-bc2f-d0642db3459d"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{deptName}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
 					</jr:column>
 					<jr:column width="90" uuid="f601a7ba-be81-4b09-ae37-c450c5cfa04a">
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column4"/>
@@ -148,7 +164,13 @@
 								<text><![CDATA[Department]]></text>
 							</staticText>
 						</jr:columnHeader>
-						<jr:detailCell style="Table_TD" height="30"/>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="90" height="30" uuid="3cd02754-7cf3-4de8-bd1c-28fe7e69fbc7"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{deptName}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
 					</jr:column>
 					<jr:column width="80" uuid="01007207-4fdf-4ebd-9dad-2a91dbc52a78">
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column5"/>
@@ -161,7 +183,13 @@
 								<text><![CDATA[Leave Type]]></text>
 							</staticText>
 						</jr:columnHeader>
-						<jr:detailCell style="Table_TD" height="30"/>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="80" height="30" uuid="ca3f0936-dfc7-4fd9-b16c-8bb2b3390566"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{leaveCode}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
 					</jr:column>
 					<jr:column width="80" uuid="4d904dcc-b378-45ff-b578-d26473d86dce">
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column6"/>
@@ -177,6 +205,7 @@
 						<jr:detailCell style="Table_TD" height="30">
 							<textField>
 								<reportElement x="0" y="0" width="80" height="30" uuid="018faf00-c585-4f64-991a-06637993948e"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
 								<textFieldExpression><![CDATA[$F{fromDate}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
@@ -195,6 +224,7 @@
 						<jr:detailCell style="Table_TD" height="30">
 							<textField>
 								<reportElement x="0" y="0" width="70" height="30" uuid="227529c0-f0c2-408f-89a9-70d6976f418a"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
 								<textFieldExpression><![CDATA[$F{toDate}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
@@ -213,6 +243,7 @@
 						<jr:detailCell style="Table_TD" height="30">
 							<textField>
 								<reportElement x="0" y="0" width="70" height="30" uuid="0a6827a7-b4d0-482c-bab6-c2fbd8461b23"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
 								<textFieldExpression><![CDATA[$F{leaveFor}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
@@ -231,6 +262,7 @@
 						<jr:detailCell style="Table_TD" height="30">
 							<textField>
 								<reportElement x="0" y="0" width="80" height="30" uuid="bd0fd000-a5d5-4995-ab01-fceda09d6418"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
 								<textFieldExpression><![CDATA[$F{approevedBy}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
@@ -246,7 +278,13 @@
 								<text><![CDATA[Remarks]]></text>
 							</staticText>
 						</jr:columnHeader>
-						<jr:detailCell style="Table_TD" height="30"/>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="90" height="30" uuid="6e021a7a-7b36-472b-84ae-9be0b07ad2cc"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{reason}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
 					</jr:column>
 				</jr:table>
 			</componentElement>
