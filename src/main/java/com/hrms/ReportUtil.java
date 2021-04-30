@@ -37,9 +37,11 @@ public class ReportUtil {
 	public List<?> leaveRequestReport(HttpServletResponse response, HttpServletRequest request, String reportFileName,
 			List<?> sourceData) {
 
-		List<LeaveRequest> listLeave = leaveRequestService.findAllByEmpCode("EMP-0049");
-
-		List<LeaveRequest> leaveDataSource = new ArrayList();
+		List<LeaveRequest> listLeave = leaveRequestService.findAllByEmpCode("EMP-0003");
+		
+		System.out.println("list leave size : "+listLeave.size());
+		
+		List<LeaveRequest> leaveDataSource = new ArrayList<LeaveRequest>();
 		LeaveRequest lv = listLeave.get(0);
 		leaveDataSource.add(lv);
 		// System.out.println("leave request : "+leaveRequest);

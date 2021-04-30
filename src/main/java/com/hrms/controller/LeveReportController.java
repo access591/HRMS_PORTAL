@@ -192,21 +192,23 @@ public class LeveReportController {
 		 List<EmployeeLeaveRequest> empLeaveRequest = new ArrayList<EmployeeLeaveRequest>();
 		 //List<MenuModule> empLeaveRequest = null;
 		 EmployeeLeaveRequest empLvRe;
+		 System.out.println("return for block"  + listLeaveRequest.size());
 		for(int i = 0;i<listLeaveRequest.size();i++) 
 		 {
-			 //System.out.println("for loof "+listLeaveRequest.get(i).getLeaveCode());
+			
 			 Leave leave = leaveService.findLeaveById(listLeaveRequest.get(i).getLeaveCode());
-			 System.out.println("for loof leave : "+leave.getLevType());
 			 Employee employee = employeeService.findEmployeeById(listLeaveRequest.get(i).getEmpCode());
-			 System.out.println("for loof employee :  "+ employee.getEmpName());
 			 Department department = departmentService.findDepartmentById(listLeaveRequest.get(i).getDeptCode());
-			 System.out.println("for loof departmnt : "+ department.getDeptName());
+			 
 			 empLvRe = new EmployeeLeaveRequest(employee.getEmpName(),department.getDeptName(),
 					 leave.getLevType(),listLeaveRequest.get(i).getToDate().toString(),listLeaveRequest.get(i).getFromDate().toString(),
 					 listLeaveRequest.get(i).getApplyDate().toString(),listLeaveRequest.get(i).getApproevedBy(),listLeaveRequest.get(i).getReason(),
 					 listLeaveRequest.get(i).getLeaveFor());
+			 
 			 empLeaveRequest.add(empLvRe);
-		 } 
+			 System.out.println("return for block i value : "+ i);
+		} 
+		System.out.println("return for block"  + empLeaveRequest.size());
 		 String reportName = "LeaveTransaction";  
 		 reportUtil.leaveTransactionPdfReportByEmp(req, res, reportName, empLeaveRequest);
 		 System.out.println("size : " +listLeaveRequest.get(0).getDeptCode());

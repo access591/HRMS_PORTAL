@@ -114,7 +114,6 @@
 		<queryString>
 			<![CDATA[]]>
 		</queryString>
-		<field name="empName" class="java.lang.String"/>
 		<field name="deptCode" class="java.lang.String"/>
 		<field name="fromDate" class="java.util.Date"/>
 		<field name="toDate" class="java.util.Date"/>
@@ -190,21 +189,6 @@
 				<textElement textAlignment="Left" verticalAlignment="Middle"/>
 				<text><![CDATA[Designation]]></text>
 			</staticText>
-			<textField>
-				<reportElement x="110" y="30" width="100" height="20" uuid="3547f581-3d64-442e-8c9c-729f24f3481c"/>
-				<textElement verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$P{empName}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="110" y="50" width="100" height="20" uuid="a689c1a4-ddc9-44ef-89c6-c8c81e59458a"/>
-				<textElement verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$P{deptName}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="110" y="70" width="100" height="20" uuid="acfda10f-ec28-49f7-a87f-493836131f70"/>
-				<textElement verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$P{desig}]]></textFieldExpression>
-			</textField>
 			<staticText>
 				<reportElement x="580" y="45" width="60" height="30" uuid="f54587c7-3058-4197-b870-b4ce2402d9c7">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>

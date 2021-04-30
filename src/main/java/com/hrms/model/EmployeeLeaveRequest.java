@@ -185,6 +185,15 @@ public class EmployeeLeaveRequest {
 		//this.cancelBy = cancelBy;
 		//this.cancelDate = cancelDate;
 	}
+
+	public EmployeeLeaveRequest(String empName2, String deptName2, String desgName2, String fromDate, String toDate) {
+		this.empName = empName2;
+		this.deptName = deptName2;
+		this.desgName = desgName2;
+		this.fromDate = fromDate;
+		this.toDate = toDate;
+	
+	}
 	
 	
 	
