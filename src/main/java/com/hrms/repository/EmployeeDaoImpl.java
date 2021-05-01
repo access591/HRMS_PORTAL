@@ -2,6 +2,7 @@ package com.hrms.repository;
 
 import java.util.List;
 
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -10,6 +11,8 @@ import org.springframework.stereotype.Repository;
 
 import com.hrms.dao.AbstractGenericDao;
 import com.hrms.model.Employee;
+import com.hrms.model.EmployeeUtil;
+import com.hrms.model.Module;
 @Repository
 public class EmployeeDaoImpl  extends AbstractGenericDao<Employee> implements EmployeeDao{
 
@@ -24,6 +27,19 @@ public class EmployeeDaoImpl  extends AbstractGenericDao<Employee> implements Em
 		return query.list();
 	}
 	@Override
+
+	public List<EmployeeUtil> getAllEmployeesAndArms() {
+		List employeeUtils = null;
+		
+		Session session = this.sessionFactory.getCurrentSession();
+		 String sql =" SELECT  DISTINCT  e.EMPLOYEE_CODE,a.ARMS_CODE,e.EMPLOYEE_NAME,e.EMP_IMG\r\n"
+				+ "				FROM 	M_EMPLOYEE e ,ARMS_LICENSE_DETAILS a where e.EMPLOYEE_CODE= a.EMPLOYEE_CODE";
+		
+		 SQLQuery query = getSession().createSQLQuery(sql);
+		  employeeUtils = query.list();
+		 return employeeUtils;
+	}
+
 	public List<Employee> getEmployeeByCategoryCode(String categoryCode) {
 		
 		Session session = this.sessionFactory.getCurrentSession();
@@ -31,6 +47,7 @@ public class EmployeeDaoImpl  extends AbstractGenericDao<Employee> implements Em
 		query.setParameter("categoryCode", categoryCode);
 		List<Employee> employeeList = query.list();
 		return employeeList;
+
 	}
 	@Override
 	public List<Employee> findByDateOfJoiningMonth(int month) {
