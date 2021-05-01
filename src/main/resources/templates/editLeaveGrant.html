@@ -57,36 +57,40 @@ body {
 										<div class="row">
 											<div class="col-12 col-lg-6">
 											
-											<div class="mb-3">
+											
+											
+											<div class="form-group">
+											  <label>Leave Grant Code  </label>
+											  	<label style="color: red">*</label>
+											   <input type="text" class="form-control" id="leaveGrantCode" name="leaveGrantCode"th:field="${leaveGrantEdit.leaveGrantCode}" readonly >
+												</div>
+											
+											
+											
+											
+											<div class="form-group">
 												<label class="form-label">Employee Code</label>
 												<label style="color: red">*</label>
-												<select class="form-control select2"onchange="myFunction()" name="empCode"id="empCode" required aria-required="true">
+												<select class="form-control select2" name="empCode"id="empCode" required aria-required="true">
 												 <option value="">Select Employee</option>
-												<option th:each="emp :${listEmployee}" th:value="${emp.getEmpCode()}" th:text="${emp.getEmpName()}"></option>
-											     <option th:each="leave: ${leaveGrantEdit}" th:value="${leave.getEmpCode()}" th:text="${leave.getEmpName()}"th:field="${leaveGrantEdit.empCode}"></option>
-											     	
+												<option th:each="e :${listEmployee}"th:value="${e.getEmpCode()}" th:text="${e.getEmpName()}"th:field="${leaveGrantEdit.empCode.empCode}"></option>
 											     	</select>
-											     
-											     	  <input type="hidden" class="form-control" th:value="${leaveGrantEdit.empName}"id="empName" name="empName" size="50" > 
+
+											     	 
 											</div>
-											
 											<div class="form-group ">
 													<label class="form-label">Year</label> <span
 														class="text-danger">*</span> 
-														<input class="form-control required" type="text"id="year"name="year"th:value="${leaveGrantEdit.year}"/>
+														<input class="form-control required" type="text"id="year"name="year"th:value="${leaveGrantEdit.year}"required aria-required="true">
 
 												</div>
 
 												<div class="form-group">
 											  <label>leaveAvailed </label>
 											  	<label style="color: red">*</label>
-											   <input type="text" class="form-control" id="leaveAvailed" name="leaveAvailed" th:value="${leaveGrantEdit.leaveAvailed}"pattern="\d{1,2}"maxlength="2">
+											   <input type="text" class="form-control" id="leaveAvailed" name="leaveAvailed" th:value="${leaveGrantEdit.leaveAvailed}"pattern="\d{1,2}"maxlength="2"required aria-required="true">
 												</div>
-													<div class="form-group">
-											  <label> previous YR Balance </label>
-											  	<label style="color: red">*</label>
-											   <input type="text" class="form-control" id="previousYrBalance" th:value="${leaveGrantEdit.previousYrBalance}"name="previousYrBalance" pattern="\d{1,2}"maxlength="2" >
-												</div>
+													
 
 						
 											</div>
@@ -94,35 +98,31 @@ body {
 												<div class="form-group">
 											  <label>  No Of Leave Granted </label>
 											  	<label style="color: red">*</label>
-											   <input type="text" class="form-control" id="noOfLeavesGranted" name="noOfLeavesGranted"th:value="${leaveGrantEdit.noOfLeavesGranted}" pattern="\d{1,2}"maxlength="2">
+											   <input type="text" class="form-control" id="noOfLeavesGranted" name="noOfLeavesGranted"th:value="${leaveGrantEdit.noOfLeavesGranted}" pattern="\d{1,2}"maxlength="2"required aria-required="true">
 												</div>
 											
 											<div class="form-group">
 													<label class="form-label">Type</label> <label
 														style="color: red">*</label> <select class="form-control"
-														name="leaveType" id="leaveType">
-														<option value="CASUAL" th:selected="${leaveGrantEdit.leaveType}==CASUAL">CASUAL LEAVE</option>
-														<option value="SICK" th:selected="${leaveGrantEdit.leaveType}==SICK">SICK LEAVE</option>
-														<option value="PUBLIC" th:selected="${leaveGrantEdit.leaveType}==PUBLIC">PUBLIC HOLIDAY</option>
-														<option value="RELIGIOUS" th:selected="${leaveGrantEdit.leaveType}==RELIGIOUS">RELIGIOUS HOLIDAYS</option>
-														<option value="MATERNITY" th:selected="${leaveGrantEdit.leaveType}==MATERNITY">MATERNITY LEAVE</option>
-														<option value="BEREAVEMENT" th:selected="${leaveGrantEdit.leaveType}==BEREAVEMENT">BEREAVEMENT LEAVE</option>
-														<option value="COMPENSATORY" th:selected="${leaveGrantEdit.leaveType}==COMPENSATORY">COMPENSATORY LEAVE</option>
-														<option value="UNPAID"th:selected="${leaveGrantEdit.leaveType}==UNPAID">UNPAID LEAVE</option>
+														name="levCode" id="levCode"required aria-required="true">
+														 <option value="">Select Leave</option>
+															<option th:each="lea :${listLeave}" th:value="${lea.getLevCode()}" th:text="${lea.getLevType()}"th:field="${leaveGrantEdit.levCode.levCode}"></option>
+														
 
 													</select>
 												</div>
-												<div class="form-group">
-											  <label>Leave Code  </label>
-											  	<label style="color: red">*</label>
-											   <input type="text" class="form-control" id="leaveCode" name="leaveCode"th:value="${leaveGrantEdit.leaveCode}" pattern="\d{1,5}"maxlength="5">
-												</div>
+												
 												
 												
 												<div class="form-group">
 											  <label>  Closing Balance  </label>
 											  	<label style="color: red">*</label>
-											   <input type="text" class="form-control" id="closingBal" name="closingBal"th:value="${leaveGrantEdit.closingBal}"pattern="\d{1,2}"maxlength="2" >
+											   <input type="text" class="form-control" id="closingBal" name="closingBal"th:value="${leaveGrantEdit.closingBal}"pattern="\d{1,2}"maxlength="2"required aria-required="true" >
+												</div>
+												<div class="form-group">
+											  <label> previous YR Balance </label>
+											  	<label style="color: red">*</label>
+											   <input type="text" class="form-control" id="previousYrBalance" th:value="${leaveGrantEdit.previousYrBalance}"name="previousYrBalance" pattern="\d{1,2}"maxlength="2" required aria-required="true">
 												</div>
 												
 											</div>
@@ -173,16 +173,7 @@ body {
 			showDropdowns: true
 		});
 	</script>
-	<script>
 
-      function myFunction(){
-    	  $('#empCode').click(function() {
-      	 var name= $('#empCode option:selected').text();
-      	$('#empName').val(name);
-      	}); 
-      }
-      
-</script>
 		
 		
 </body>

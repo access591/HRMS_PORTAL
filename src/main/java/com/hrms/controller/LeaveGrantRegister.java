@@ -53,14 +53,9 @@ public class LeaveGrantRegister {
 	public String saveLeaveGrant(@ModelAttribute("leaveGrant")LeaveGrantUtil leaveGrantUtil, Model model, HttpSession session) {
 		Employee emp=new Employee();
 		emp.setEmpCode(leaveGrantUtil.getEmpCode());
-		System.out.println("list>>>>>>>>>>>>>>"+leaveGrantUtil.getEmpCode());
 		Leave leave=new Leave();
 		leave.setLevCode(leaveGrantUtil.getLevCode());
-		
-		
 		LeaveGrant leaveGrant=new  LeaveGrant();
-	
-	
 		leaveGrant.setNoOfLeavesGranted(leaveGrantUtil.getNoOfLeavesGranted());
 		leaveGrant.setEmpCode(emp);
 		leaveGrant.setLevCode(leave);
@@ -82,7 +77,10 @@ public class LeaveGrantRegister {
 	@GetMapping(value = {"/editLeaveGrant/{id}"})
 	  public String editdesignation(@PathVariable("id")String id,  Model model,HttpSession session)
 	   { 
-		  
+		List<Employee> listEmployee = employeeService.getAllEmployees();
+		model.addAttribute("listEmployee", listEmployee);
+		List<Leave> listLeave = leaveService.getAllLeaves();
+		model.addAttribute("listLeave", listLeave);
 		LeaveGrant leaveGrantEdit = leaveGrantRegisterService.findLeaveGrantById(id);
 		  model.addAttribute("leaveGrantEdit", leaveGrantEdit);
 	
@@ -92,8 +90,21 @@ public class LeaveGrantRegister {
 	
 	
 	@PostMapping("/updateLeaveGrant")
-	public String updateLeaveGrant(@ModelAttribute("leaveGrant")LeaveGrant leaveGrant, Model model)
+	public String updateLeaveGrant(@ModelAttribute("leaveGrant")LeaveGrantUtil leaveGrantUtil , Model model)
 	{
+		Employee emp=new Employee();
+		emp.setEmpCode(leaveGrantUtil.getEmpCode());
+		Leave leave=new Leave();
+		leave.setLevCode(leaveGrantUtil.getLevCode());
+		LeaveGrant leaveGrant=new  LeaveGrant();
+		leaveGrant.setNoOfLeavesGranted(leaveGrantUtil.getNoOfLeavesGranted());
+		leaveGrant.setLeaveGrantCode(leaveGrantUtil.getLeaveGrantCode());
+		leaveGrant.setEmpCode(emp);
+		leaveGrant.setLevCode(leave);
+		leaveGrant.setYear(leaveGrantUtil.getYear());
+		leaveGrant.setClosingBal(leaveGrantUtil.getClosingBal());
+		leaveGrant.setLeaveAvailed(leaveGrantUtil.getLeaveAvailed());
+		leaveGrant.setPreviousYrBalance(leaveGrantUtil.getPreviousYrBalance());
 		  this.leaveGrantRegisterService.updateLeaveGrant(leaveGrant);
 		  return"redirect:/leaveGrant";
 		
