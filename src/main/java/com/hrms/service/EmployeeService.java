@@ -13,6 +13,7 @@ public interface EmployeeService {
 	public void removeEmployeet(String id);
 	public List<Employee> getEmployeeByDeptCode(String deptCode);
 	public List<Employee> getEmployeeByCategoryCode(String categoryCode);
+	public List<Employee> findByDateOfJoiningMonth(int month);
 
 
 }

@@ -58,4 +58,10 @@ public class EmployeeServiceImpl implements EmployeeService {
 		return this.employeeDao.getEmployeeByCategoryCode(categoryCode);
 	}
 
+	@Override
+	public List<Employee> findByDateOfJoiningMonth(int month) {
+		System.out.println("Service methosd calling");
+		return this.employeeDao.findByDateOfJoiningMonth(month);
+	}
+
 }

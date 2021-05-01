@@ -7,6 +7,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class EmployeeLeaveRequest {
 
+	private String empCode;
+	private String maritalStatus;
+	private Date empDateOfJoning;
 	private String empName;
 	private String deptName;
 	private String desgName;
@@ -35,6 +38,37 @@ public class EmployeeLeaveRequest {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+
+	
+	public String getEmpCode() {
+		return empCode;
+	}
+
+
+	public void setEmpCode(String empCode) {
+		this.empCode = empCode;
+	}
+
+
+	public String getMaritalStatus() {
+		return maritalStatus;
+	}
+
+
+	public void setMaritalStatus(String maritalStatus) {
+		this.maritalStatus = maritalStatus;
+	}
+
+
+	public Date getEmpDateOfJoning() {
+		return empDateOfJoning;
+	}
+
+
+	public void setEmpDateOfJoning(Date empDateOfJoning) {
+		this.empDateOfJoning = empDateOfJoning;
+	}
+
 
 	public String getEmpName() {
 		return empName;
@@ -193,6 +227,16 @@ public class EmployeeLeaveRequest {
 		this.fromDate = fromDate;
 		this.toDate = toDate;
 	
+	}
+
+
+	public EmployeeLeaveRequest(String empCode2, String empName2, String deptName2, String martialStatus,
+			Date dateOfJoining) {
+		this.empCode = empCode2;
+		this.empName = empName2;
+		this.deptName = deptName2;
+		this.maritalStatus = martialStatus;
+		this.empDateOfJoning = dateOfJoining;
 	}
 	
 	
