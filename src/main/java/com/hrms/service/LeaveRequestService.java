@@ -1,5 +1,6 @@
 package com.hrms.service;
 
+import java.sql.Date;
 import java.util.List;
 
 
@@ -19,5 +20,6 @@ public interface LeaveRequestService {
 
 	LeaveRequest findLeaveRequestById(long id);
 	List<LeaveRequest> getEmployeeByStatusY();
-	
+	List<LeaveRequest> findByEmpBetweenDate(String empCode, Date toDate, Date fromDate);
+	 LeaveRequest findByToDate(Date date);
 }

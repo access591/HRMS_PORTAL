@@ -1,5 +1,6 @@
 package com.hrms.service;
 
+import java.sql.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,6 +59,16 @@ public class LeaveRequestServiceImpl implements LeaveRequestService{
 	public List<LeaveRequest> getEmployeeByStatusY() {
 		
 		return this.leaveRequestDao.getEmployeeByStatusY();
+	}
+	@Override
+	public List<LeaveRequest> findByEmpBetweenDate(String empCode, Date toDate, Date fromDate) {
+		
+		return this.leaveRequestDao.findByEmpBetweenDate(empCode, toDate, fromDate);
+	}
+	@Override
+	public LeaveRequest findByToDate(Date date) {
+		// TODO Auto-generated method stub
+		return this.leaveRequestDao.findByToDate(date);
 	}
 
 }
