@@ -17,6 +17,7 @@ public interface EmployeeService {
 	public List<EmployeeUtil> getAllEmployeesAndArms();
 
 	public List<Employee> getEmployeeByCategoryCode(String categoryCode);
+	public List<Employee> findByDateOfJoiningMonth(int month);
 
 
 

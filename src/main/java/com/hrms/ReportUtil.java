@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.hrms.model.EmployeeLeaveRequest;
 import com.hrms.model.LeaveDetail;
 import com.hrms.model.LeaveRequest;
 import com.hrms.service.LeaveDetailService;
@@ -192,7 +193,7 @@ public class ReportUtil {
 	}
 	
 	
-	
+	//LEAVE TRASACTION PDF REPORT
 	public void leaveTransactionPdfReportByEmp(HttpServletRequest request, HttpServletResponse response, String reportFileName,
 			List<?> sourceData) {
 		System.out.println("leave transaction report...");
@@ -238,8 +239,53 @@ public class ReportUtil {
 
 	}
 	
+	//	BIRT AND ANNIVERASARY REPORT
+	public void birthAnniversaryReport(HttpServletRequest request, HttpServletResponse response, String reportFileName,
+			List<EmployeeLeaveRequest> sourceData) {
+		System.out.println("birth anniversary  report...");
+		String sourceFileName = request.getSession().getServletContext()
+				.getRealPath("resources/" + reportFileName + ".jrxml");
+		System.out.println("resources : = "+sourceFileName);
+
+		try {
+
+			JasperCompileManager.compileReportToFile(sourceFileName);
+			sourceFileName = request.getSession().getServletContext()
+					.getRealPath("/resources/" + reportFileName + ".jasper");
+			JRBeanCollectionDataSource beanColDataSource = new JRBeanCollectionDataSource(sourceData);
+
+			HashMap<String, Object> map = new HashMap<String, Object>();
+
+			map.put("Parameter1", beanColDataSource);//Parameter
+
+			JasperReport report = (JasperReport) JRLoader.loadObjectFromFile(sourceFileName);
+			JasperPrint jasperPrint = JasperFillManager.fillReport(report, map, new JREmptyDataSource());
+
+			if (jasperPrint != null) {
+				byte[] pdfReport = JasperExportManager.exportReportToPdf(jasperPrint);
+				response.reset();
+				response.setContentType("application/pdf");
+				response.setHeader("Cache-Control", "no-store");
+				response.setHeader("Cache-Control", "private");
+				response.setHeader("Pragma", "no-store");
+				response.setContentLength(pdfReport.length);
+				try {
+					response.getOutputStream().write(pdfReport);
+					response.getOutputStream().flush();
+					response.getOutputStream().close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+
+			}
+		} catch (JRException e) {
+			e.printStackTrace();
+		}
+		// return null;
+
+	}
 	
-	//leave transaction pdf report 
+	
 	
 	
 

@@ -26,9 +26,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.hrms.EmployeeGradationExcel;
 import com.hrms.ReportUtil;
 import com.hrms.model.Category;
+import com.hrms.model.Department;
 import com.hrms.model.Employee;
+import com.hrms.model.EmployeeLeaveRequest;
 import com.hrms.model.MenuModule;
 import com.hrms.service.CategoryService;
+import com.hrms.service.DepartmentService;
 import com.hrms.service.DesignationService;
 import com.hrms.service.EmployeeService;
 import com.hrms.service.ModuleService;
@@ -40,6 +43,9 @@ public class EmployeeInformationReportController {
 	int pageNo = 54;
 	String reqPage = "employeeInformation";
 	
+	int birthAniversaryPageNo = 55;
+	String birthAniversaryPage = "birthAnniversary";
+	
 	@Autowired private ModuleService moduleService;
 	@Autowired PageMappingService pageMappingService;
 	@Autowired ReportUtil reportUtil;
@@ -47,10 +53,8 @@ public class EmployeeInformationReportController {
 	@Autowired EmployeeGradationExcel employeeGradationExcel;
 	@Autowired CategoryService categoryService;
 	@Autowired DesignationService designationService;
-	
-	
-	
-	
+	@Autowired DepartmentService departmentService;
+
 //	Gradation / Employee controlller
 	
 	@GetMapping("/employeeInformation")
@@ -178,6 +182,74 @@ public class EmployeeInformationReportController {
 		  InputStreamResource(in));
 		
 		
+	}
+	
+	
+	
+	//Birth Report Controller
+	
+	@GetMapping("/birthAnniversary")
+	public String viewBirthAniversaryUi(Model model, HttpSession session) {
+		
+		String userCode = (String) session.getAttribute("username");
+		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
+		if (modules != null) {
+			model.addAttribute("modules", modules);
+		}
+		
+		
+
+		session.setAttribute("username", session.getAttribute("username"));
+
+		return pageMappingService.PageRequestMapping(birthAniversaryPage, birthAniversaryPageNo);
+	}
+	
+	@PostMapping("/createbirtAnnReport")
+	public String createBirthAniversaryUi(@RequestParam("month")String month,@RequestParam("reportType")String reportType,
+											Model model, HttpSession session,HttpServletRequest req,
+											HttpServletResponse response) {
+		
+		String userCode = (String) session.getAttribute("username");
+		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
+		if (modules != null) {
+			model.addAttribute("modules", modules);
+		}
+		System.out.println("report type value : "+reportType);
+		System.out.println("month value : "+month);
+		
+		List<EmployeeLeaveRequest> em = new ArrayList<EmployeeLeaveRequest>();
+		EmployeeLeaveRequest empl;
+		List<Employee> employeeList = employeeService.findByDateOfJoiningMonth( Integer.parseInt(month.toString()));
+		
+		if(reportType.equals("B")) {
+			for(int i =0 ;i<employeeList.size();i++) {
+				Department department = departmentService.findDepartmentById(employeeList.get(i).getDepartmentCode());
+				
+				empl = new EmployeeLeaveRequest(employeeList.get(i).getEmpCode(),employeeList.get(i).getEmpName(),
+						department.getDeptName(),employeeList.get(i).getMartialStatus(),employeeList.get(i).getDateOfJoining());
+				em.add(empl);
+			}
+			System.out.println("ëm size : "+ em.size());
+			String reportFileName = "birtReport";
+			reportUtil.birthAnniversaryReport(req, response, reportFileName,em);
+		}else if(reportType.equals("A")) {
+			for(int i =0 ;i<employeeList.size();i++) {
+				Department department = departmentService.findDepartmentById(employeeList.get(i).getDepartmentCode());
+				
+				empl = new EmployeeLeaveRequest(employeeList.get(i).getEmpCode(),employeeList.get(i).getEmpName(),
+						department.getDeptName(),employeeList.get(i).getMartialStatus(),employeeList.get(i).getDateOfJoining());
+				em.add(empl);
+			}
+			System.out.println("ëm size : "+ em.size());
+			String reportFileName = "Anniversary";
+			reportUtil.birthAnniversaryReport(req, response, reportFileName,em);
+		}
+		
+		
+		
+		session.setAttribute("username", session.getAttribute("username"));
+
+		return pageMappingService.PageRequestMapping(birthAniversaryPage, birthAniversaryPageNo);
 	}
 	
 }

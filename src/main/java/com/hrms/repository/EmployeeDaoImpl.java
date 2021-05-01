@@ -49,5 +49,20 @@ public class EmployeeDaoImpl  extends AbstractGenericDao<Employee> implements Em
 		return employeeList;
 
 	}
+	@Override
+	public List<Employee> findByDateOfJoiningMonth(int month) {
+		
+		try {
+		Session session = this.sessionFactory.getCurrentSession();
+		Query query = session.createQuery("SELECT e FROM Employee e WHERE MONTH(e.dateOfJoining) = :month ");
+		query.setParameter("month", month);
+		List result = query.list();
+		return result;
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
 
 }
