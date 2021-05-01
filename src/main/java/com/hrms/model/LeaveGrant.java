@@ -6,6 +6,8 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 @Entity
 @Table(name = "M_LEAVE_GRANT")
@@ -19,11 +21,11 @@ public class LeaveGrant  implements Serializable{
 	@Id
 	@Column(name="LEAVEGRANT_CODE")
 	private String leaveGrantCode;
-	
-	@Column(name = "EMP_CODE")
+	@ManyToOne
+	@JoinColumn(name = "EMP_CODE", nullable = false)
 	private Employee empCode;
-	
-	@Column(name = "LEAVE_CODE")
+	@ManyToOne
+	@JoinColumn(name = "LEAVE_CODE", nullable = false)
 	private Leave levCode;
 
 	@Column(name = "NO_OF_LEAVES_GRANTED")
