@@ -3,10 +3,12 @@ package com.hrms.model;
 import java.io.Serializable;
 import java.util.Date;
 
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
@@ -52,13 +54,7 @@ public class Employee implements Serializable {
 	@Column(name ="DEPARTMENT_CODE")
 	private String departmentCode;
 	
-	public String getCategoryCode() {
-		return categoryCode;
-	}
 
-	public void setCategoryCode(String categoryCode) {
-		this.categoryCode = categoryCode;
-	}
 
 	@Size(max = 25)
 	@Column(name ="DESIGNATION_CODE")
@@ -96,7 +92,7 @@ public class Employee implements Serializable {
 	
 	
 	
-	// STEP-1=========16=============end....
+	// STEP-1=========17=============end....
 	@Size(max =16)
 	@Column(name = "AADHAR_NO")
 	private String aadharNo;
@@ -171,6 +167,22 @@ public class Employee implements Serializable {
 	@Column(name = "UNDER_RULE_8")
 	private String underRule8;
 
+	@Column(name = "INS_BY", updatable = false)
+	private String insBy;
+
+	@Column(name = "INS_DATE", updatable = false)
+	private Date insDate = new Date();
+
+	@Column(name = "UPD_BY", insertable = false)
+	private String updBy;
+
+	@Column(name = "UPD_DATE", insertable = false)
+	private Date updDate = new Date();
+
+	/*
+	 * @OneToMany(mappedBy = "armsCode") public List<ArmsLicenseDetails>
+	 * armsLicenseDetails;
+	 */
 	// STEP-2=============23=========end....
 	
 	
@@ -178,6 +190,16 @@ public class Employee implements Serializable {
 	public String getEmpCode() {
 		return empCode;
 	}
+
+
+	/*
+	 * public List<ArmsLicenseDetails> getArmsLicenseDetails() { return
+	 * armsLicenseDetails; }
+	 * 
+	 * 
+	 * public void setArmsLicenseDetails(List<ArmsLicenseDetails>
+	 * armsLicenseDetails) { this.armsLicenseDetails = armsLicenseDetails; }
+	 */
 
 	public void setEmpCode(String empCode) {
 		this.empCode = empCode;
@@ -436,7 +458,7 @@ public class Employee implements Serializable {
 	}
 
 	public void setPanNo(String panNo) {
-		this.panNo = panNo;
+		this.panNo = panNo.toUpperCase();
 	}
 
 	public String getPinCode() {
@@ -487,10 +509,45 @@ public class Employee implements Serializable {
 		this.underRule8 = underRule8;
 	}
 
+	public String getCategoryCode() {
+		return categoryCode;
+	}
+
+	public void setCategoryCode(String categoryCode) {
+		this.categoryCode = categoryCode;
+	}
+
+	public String getInsBy() {
+		return insBy;
+	}
+
+	public void setInsBy(String insBy) {
+		this.insBy = insBy;
+	}
+
+	public Date getInsDate() {
+		return insDate;
+	}
+
+	public void setInsDate(Date insDate) {
+		this.insDate = insDate;
+	}
+
+	public String getUpdBy() {
+		return updBy;
+	}
+
+	public void setUpdBy(String updBy) {
+		this.updBy = updBy;
+	}
+
+	public Date getUpdDate() {
+		return updDate;
+	}
+
+	public void setUpdDate(Date updDate) {
+		this.updDate = updDate;
+	}
 	
-
-	
-
-
 
 }
