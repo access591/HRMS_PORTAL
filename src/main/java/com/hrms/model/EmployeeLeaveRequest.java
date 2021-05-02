@@ -238,6 +238,21 @@ public class EmployeeLeaveRequest {
 		this.maritalStatus = martialStatus;
 		this.empDateOfJoning = dateOfJoining;
 	}
+
+
+	public EmployeeLeaveRequest(String departmentCode, String designationCode, Date dateOfJoining) {
+		//this.de
+	}
+
+
+	public EmployeeLeaveRequest(String empName2, String deptName2, String desgName2) {
+		this.empName = empName2;
+		this.deptName = deptName2;
+		this.desgName = desgName2;
+	}
+
+
+	
 	
 	
 	
