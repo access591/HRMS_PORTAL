@@ -46,14 +46,14 @@ body {
 						<div class="col-12">
 							<div class="card">
 								<div class="card-header">
-									<h5 class="card-title">	Leave Grant Register </h5>
+									<h5 class="card-title">	Medical Reimbursement </h5>
 								<div class="alert-outline">
 									<div th:if="${message}" th:text="${message}" style="color: red">
 									</div> 
 									</div>	
 								</div>
 							<div class="card-body">
-									<form id="validation-form" action="#" th:action="@{/saveLeaveGrant}" th:object="${leaveGrant}" method="POST">
+									<form id="validation-form" action="#" th:action="@{/saveMedicalReimbursement}" th:object="${medicalReimbursement}" method="POST">
 										<div class="row">
 											<div class="col-12 col-lg-6">
 											
@@ -61,7 +61,7 @@ body {
 											<div class="form-group">
 											  <label>Slip No </label>
 											  	<label style="color: red">*</label>
-											   <input type="text" class="form-control" id="leaveGrantCode" name="leaveGrantCode" readonly >
+											   <input type="text" class="form-control" id="slipNo" name="slipNo" readonly >
 												</div>
 												
 											
@@ -80,7 +80,7 @@ body {
 											<div class="form-group">
 													<label class="form-label">Relation</label> 
 													 <select
-														class="form-control required" name="gender" id="gender">
+														class="form-control required" name="empRelation" id="empRelation">
 														<option value="">Select Relation</option>
 														<option value="S">Self</option>
 														<option value="F">family</option>
@@ -94,7 +94,7 @@ body {
 												<div class="form-group">
 													<label class="form-label">Treatment Type</label> 
 													 <select
-														class="form-control required" name="gender" id="gender">
+														class="form-control required" name="treatmentType" id="treatmentType">
 														<option value="">Select Type</option>
 														<option value="O">Operations</option>
 														<option value="H">Hospital</option>
@@ -125,7 +125,7 @@ body {
 											<div class="form-group">
 													<label class="form-label">Name Of Person</label> <label style="color: red">*</label>
 														
-														 <input Type="text" class="form-control"name="levCode" id="levCode"required aria-required="true">
+														 <input Type="text" class="form-control"name="nameOfPerson" id="nameOfPerson"required aria-required="true">
 
 												</div>
 												
@@ -134,8 +134,8 @@ body {
 											<div class="form-group">
 													<label class="form-label">Indoor/Outdoor</label> 
 													 <select
-														class="form-control required" name="gender" id="gender">
-														<option value="">Select Relation</option>
+														class="form-control required" name="medIndOut" id="medIndOut">
+														<option value="">Select Type</option>
 														<option value="I">Indoor</option>
 														<option value="O">Outdoor</option>
 														
@@ -144,9 +144,10 @@ body {
 												</div>
 												
 												<div class="form-group">
+										
 													<label class="form-label">Description</label> <label style="color: red">*</label>
 														
-														 <input Type="text" class="form-control"name="levCode" id="levCode"required aria-required="true">
+														 <input Type="text" class="form-control"name="treatDescription" id="treatDescription"required aria-required="true">
 
 												</div>
 												
