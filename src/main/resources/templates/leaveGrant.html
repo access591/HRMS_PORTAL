@@ -79,14 +79,14 @@ body {
 											<div class="form-group ">
 													<label class="form-label">Year</label> <span
 														class="text-danger">*</span> 
-														<input class="form-control required" type="text"id="year"name="year"/>
+														<input class="form-control required" type="text"id="year"name="year"required aria-required="true"/>
 
 												</div>
 
 												<div class="form-group">
 											  <label>leaveAvailed </label>
 											  	<label style="color: red">*</label>
-											   <input type="text" class="form-control" id="leaveAvailed" name="leaveAvailed" pattern="\d{1,2}"maxlength="2"/>
+											   <input type="text" class="form-control" id="leaveAvailed" name="leaveAvailed" pattern="\d{1,2}"maxlength="2"required aria-required="true"/>
 												</div>
 												
 						
@@ -95,13 +95,13 @@ body {
 												<div class="form-group">
 											  <label>  No Of Leave Granted </label>
 											  	<label style="color: red">*</label>
-											   <input type="text" class="form-control" id="noOfLeavesGranted" name="noOfLeavesGranted" pattern="\d{1,2}"maxlength="2"/>
+											   <input type="text" class="form-control" id="noOfLeavesGranted" name="noOfLeavesGranted" pattern="\d{1,2}"maxlength="2"required aria-required="true"/>
 												</div>
 											
 											<div class="form-group">
 													<label class="form-label">Type</label> <label
 														style="color: red">*</label> <select class="form-control"
-														name="levCode" id="levCode">
+														name="levCode" id="levCode"required aria-required="true">
 														 <option value="">Select Leave</option>
 															<option th:each="lea :${listLeave}" th:value="${lea.getLevCode()}" th:text="${lea.getLevType()}"></option>
 														
@@ -113,12 +113,12 @@ body {
 												<div class="form-group">
 											  <label>  Closing Balance  </label>
 											  	<label style="color: red">*</label>
-											   <input type="text" class="form-control" id="closingBal" name="closingBal" size="50" pattern="\d{1,2}" maxlength="2">
+											   <input type="text" class="form-control" id="closingBal" name="closingBal" size="50" pattern="\d{1,2}" maxlength="2"required aria-required="true">
 												</div>
 													<div class="form-group">
 											  <label> previous YR Balance </label>
 											  	<label style="color: red">*</label>
-											   <input type="text" class="form-control" id="previousYrBalance" name="previousYrBalance" pattern="\d{1,2}"maxlength="2"/>
+											   <input type="text" class="form-control" id="previousYrBalance" name="previousYrBalance" pattern="\d{1,2}"maxlength="2"/required aria-required="true">
 												</div>
 												
 												
@@ -138,28 +138,24 @@ body {
 								<table id="datatables-buttons" class="table table-striped display" style="width:100%"aria-describedby="datatables-buttons">
 										<thead>
 											<tr>
-												
-												<th scope="col">EMP CODE</th>
-												<th scope="col">EMP NAME</th>
-												<th scope="col">previous  year Balance</th>
+												<th scope="col">Leave Grant Code</th>
+												<th scope="col">Employee Name </th>
+												<th scope="col">Leave Type </th>
 												<th scope="Col">Leave Available </th>
 												<th scope="col">Action</th>
 											</tr>
 										</thead>
-								         <!--  <tbody>
+								          <tbody>
 											<tr  th:each="listofCountry : ${listLeaveGrant}">
-												
-												 <td th:text="${listofCountry.empCode}"></td>
-													<td th:text="${listofCountry.empName}"></td>
-													 <td th:text="${listofCountry.previousYrBalance}"></td>
+												 <td th:text="${listofCountry.leaveGrantCode}"></td>
+												<td th:text="${listofCountry?.empCode?.empName}"></td>
+												<td th:text="${listofCountry?.levCode?.levType}"></td>
 													<td th:text="${listofCountry.leaveAvailed}"></td>
-												<td><a th:href="@{/editLeaveGrant/{id}(id=${listofCountry.empCode})}"><em class="align-middle fas fa-fw fa-pen"></em></a>
-												<a th:href="@{/deleteLeaveGrant/{id}(id=${listofCountry.empCode})}" onclick="return confirm('Are you sure?')"><em class="align-middle fas fa-fw fa-trash"></em></a>
+												<td><a th:href="@{/editLeaveGrant/{id}(id=${listofCountry.leaveGrantCode})}"><em class="align-middle fas fa-fw fa-pen"></em></a>
+												<a th:href="@{/deleteLeaveGrant/{id}(id=${listofCountry.leaveGrantCode})}" onclick="return confirm('Are you sure?')"><em class="align-middle fas fa-fw fa-trash"></em></a>
 												</td> 
 											</tr>
-										</tbody>   -->
-									
-									</table>
+										</tbody>  				</table>
 								</div>
 								
 							</div>
