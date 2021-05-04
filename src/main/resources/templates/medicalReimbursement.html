@@ -43,6 +43,7 @@ body {
 						</nav>
 					</div>
 					<div class="row">
+					<form id="validation-form" action="#" th:action="@{/saveMedicalReimbursement}" th:object="${medicalReimbursement}" method="POST">
 						<div class="col-12">
 							<div class="card">
 								<div class="card-header">
@@ -53,7 +54,7 @@ body {
 									</div>	
 								</div>
 							<div class="card-body">
-									<form id="validation-form" action="#" th:action="@{/saveMedicalReimbursement}" th:object="${medicalReimbursement}" method="POST">
+									
 										<div class="row">
 											<div class="col-12 col-lg-6">
 											
@@ -153,9 +154,8 @@ body {
 												
 											</div>
 										</div>
-										 <input type="submit" class="btn btn-primary" value="Submit">
-								 <button type="reset"class="btn btn-primary" value="Reset">Reset</button>
-									</form>
+										
+									
 								</div>
 							</div>
 						</div>
@@ -164,6 +164,7 @@ body {
 								<div class="card-header">
 								</div>
 								<div class="card-body">
+								<input id="_cr" name="_cr" type="hidden"value="1">
 								<table id="datatables-buttons" class="table table-striped display" style="width:100%"aria-describedby="datatables-buttons">
 												<thead>
 					<tr><th class="text-center">
@@ -201,14 +202,14 @@ body {
 						1
 						</td>
 						<td>
-						<input type="text" name='medStDrname0'  placeholder='Name' class="form-control"/>
+						<input type="text" name='medStDr0'  placeholder='Name' class="form-control" value=""/>
 						</td>
 						<td>
 					
 						<input type="text" name='caseMemoNo0' placeholder='CASHMEMO NO' class="form-control"/>
 						</td>
 						<td>
-						<input type="text" name='caseMemoDate0' placeholder='Case Memo Date' class="form-control"/>
+						<input type="Date" name='caseMemoDate0' placeholder='Case Memo Date' class="form-control"/>
 						</td>
 						<td>
 						<input type="text" name='calmlAmount0' placeholder='Claiming Amount' class="form-control"/>
@@ -229,23 +230,36 @@ body {
                     <tr id='addr1'></tr>
                     
 				</tbody>
-				<tr align="center">
-					<td >
-						<div class="form-group">
+				<tr>
+				<td colspan="4"></td>
+				
+					<td>
+					 <div class="form-group ">  
 					<label class="form-label">Total Amount</label>
 					<input type="text" name='totalAmount' placeholder='Total Amount' class="form-control"/>
-						</div>
-						
-						</td>
-					</tr>
+					</div>
+					</td>
+					<td>
+					<input type="text" name='totalPassing'  class="form-control"/>
+					</td>
+					<td>
+					<input type="text" name='totalGovtExt' class="form-control"/>
+					</td>
+					<td>
 					
+					</td>
+					
+					</tr>
 				 
-			</table>		
+			</table>	 <input type="submit" class="btn btn-primary" value="Submit">
+								 <button type="reset"class="btn btn-primary" value="Reset">Reset</button>	
 								</div>
 								<a id="add_row" class="fa pull-right btn btn-default ">Add Row</a><a id='delete_row' class="fa pull-right btn btn-default">Delete Row</a>	
 							</div>
 							
 						</div>
+						
+						</form>
 					</div>
 				</div>
 
@@ -284,46 +298,48 @@ body {
         },
 		showDropdowns: true
 	});
-	$("input[name='caseMemoDate0']").daterangepicker({
-		singleDatePicker: true,
-	    autoApply: true,
-		locale: {
-            format: 'DD/MM/YYYY'
-        },
-		showDropdowns: true
-	});
+	
 	</script>
 	
 <script>
 $(document).ready(function(){
-	
-	
-	
+
     var i=1;
    $("#add_row").click(function(){
-    $('#addr'+i).html("<td>"+ (i+1) +"</td><td><input name='medStDr"+i+"' type='text' placeholder='Name' class='form-control input-md'/> </td><td><input  name='caseMemoNo"+i+"' type='text' placeholder='Case Memo No'  class='form-control input-md'></td><td><input  name='caseMemoDate"+i+"' type='text' placeholder='Case Memo Date'  class='form-control input-md'></td><td><input  name='calmlAmount"+i+"' type='text' placeholder='Calming Amount'  class='form-control input-md'></td><td><input  name='passedAmount"+i+"' type='text' placeholder='Passed Amount'  class='form-control input-md'></td><td><input  name='govtexemptionAmount"+i+"' type='text' placeholder='govt Exemption Amount'  class='form-control input-md'></td><td><input  name='remark"+i+"' type='text' placeholder='Remark'  class='form-control input-md'></td>");
+    $('#addr'+i).html("<td>"+ (i+1) +"</td><td><input name='medStDr"+i+"' type='text' placeholder='Name' class='form-control input-md'/> </td><td><input  name='caseMemoNo"+i+"' type='text' placeholder='Case Memo No'  class='form-control input-md'></td><td><input  name='caseMemoDate"+i+"' type='Date' placeholder='Case Memo Date'  class='form-control input-md'></td><td><input  name='calmlAmount"+i+"' type='text' placeholder='Calming Amount'  class='form-control input-md'></td><td><input  name='passedAmount"+i+"' type='text' placeholder='Passed Amount'  class='form-control input-md'></td><td><input  name='govtexemptionAmount"+i+"' type='text' placeholder='govt Exemption Amount'  class='form-control input-md'></td><td><input  name='remark"+i+"' type='text' placeholder='Remark'  class='form-control input-md'></td>");
 
     $('#datatables-buttons').append('<tr id="addr'+(i+1)+'"></tr>');
+    $('#_cr').val(i);
     i++; 
 });
+   
+ 
+
+	
+   
    $("#delete_row").click(function(){
   	 if(i>1){
 		 $("#addr"+(i-1)).html('');
+		 $('#_cr').val(i - 1);
 		 i--;
 		 }
 	 });
+   
+  
+   
    function calculateRow(row) {
-	    var price = +row.find('input[name^="price"]').val();
-	    alert(price)
+	    var price = +row.find('input[name^="passedAmount"]').val();
+	    alert(price);
 
 	}
    function calculateGrandTotal() {
 	    var grandTotal = 0;
-	    $("datatables-buttons").find('input[name^="name"]').each(function () {
+	    $("datatables-buttons").find('input[name^="passedAmount"]').each(function () {
 	        grandTotal += +$(this).val();
 	    });
 	    $("#grandtotal").text(grandTotal.toFixed(2));
-	    alert(grandTotal)
+	    
+	    alert(grandTotal);
 
 	}
 });
