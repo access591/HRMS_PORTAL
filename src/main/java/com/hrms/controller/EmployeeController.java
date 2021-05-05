@@ -2,8 +2,7 @@ package com.hrms.controller;
 
 
 import java.io.IOException;
-
-
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -70,6 +69,8 @@ public class EmployeeController {
 	StateService stateService;
 	@Autowired
 	CountryService countryService;
+	
+	
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
 /**
  * get All employee Details page 
@@ -90,9 +91,40 @@ public class EmployeeController {
 		 List<ArmsLicenseDetails>listArmsLicense=armsLicenseService.getAllArmsLicenses();
 		model.addAttribute("listArmsLicense", listArmsLicense);
 		
+		List<EmployeeUtil> listEmployeeUtil= new ArrayList<EmployeeUtil>();
+		EmployeeUtil empl;
+		List<EmployeeUtil>listEmployee22= employeeService.getAllEmployeesAndArms();
 		
-		List<EmployeeUtil>listEmployee2= employeeService.getAllEmployeesAndArms();
-		model.addAttribute("listEmployee2", listEmployee2);
+		List<Employee>listEmployee2= employeeService.getAllEmployees();
+		
+		for(int i=0;i<listEmployee2.size();i++)
+		{
+		
+			
+			Department d=departmentService.findDepartmentById(listEmployee2.get(i).getDepartmentCode());
+			Designation desig = designationService.findDesignationById(listEmployee2.get(i).getDesignationCode());
+			ArmsLicenseDetails arms= armsLicenseService.findArmsByEmpEmpCode(listEmployee2.get(i).getEmpCode());
+			
+	
+			
+			
+			          empl = new EmployeeUtil(listEmployee2.get(i).getEmpCode(),
+					                arms.getArmsCode(),
+					  				listEmployee2.get(i).getEmpName(),
+					  				listEmployee2.get(i).getCategoryCode(),
+					  				d.getDeptName(),desig.getDesgName(),
+					  				listEmployee2.get(i).getImageProfile());
+			                       listEmployeeUtil.add(empl);
+			                       
+			                   
+			 
+		}
+		
+		
+		
+		
+		
+		model.addAttribute("listEmployeeUtil", listEmployeeUtil);
 		
 		  List<Employee> listEmployee = employeeService.getAllEmployees();
 		  model.addAttribute("listEmployee", listEmployee);

@@ -306,7 +306,7 @@ $(document).ready(function(){
 
     var i=1;
    $("#add_row").click(function(){
-    $('#addr'+i).html("<td>"+ (i+1) +"</td><td><input name='medStDr"+i+"' type='text' placeholder='Name' class='form-control input-md'/> </td><td><input  name='caseMemoNo"+i+"' type='text' placeholder='Case Memo No'  class='form-control input-md'></td><td><input  name='caseMemoDate"+i+"' type='Date' placeholder='Case Memo Date'  class='form-control input-md'></td><td><input  name='calmlAmount"+i+"' type='text' placeholder='Calming Amount'  class='form-control input-md'></td><td><input  name='passedAmount"+i+"' type='text' placeholder='Passed Amount'  class='form-control input-md'></td><td><input  name='govtexemptionAmount"+i+"' type='text' placeholder='govt Exemption Amount'  class='form-control input-md'></td><td><input  name='remark"+i+"' type='text' placeholder='Remark'  class='form-control input-md'></td>");
+    $('#addr'+i).html("<td>"+ (i+1) +"</td><td><input name='medStDr"+i+"' type='text' placeholder='Name' class='form-control input-md'/> </td><td><input  name='caseMemoNo"+i+"' type='text' placeholder='Case Memo No'  class='form-control input-md'></td><td><input  name='caseMemoDate"+i+"' type='Date' placeholder='Case Memo Date'  class='form-control input-md'></td><td><input  name='calmlAmount"+i+"' type='text' onkeyup='syncAddress()' placeholder='Calming Amount'  class='form-control input-md'></td><td><input  name='passedAmount"+i+"' type='text' placeholder='Passed Amount'  class='form-control input-md'></td><td><input  name='govtexemptionAmount"+i+"' type='text' placeholder='govt Exemption Amount'  class='form-control input-md'></td><td><input  name='remark"+i+"' type='text' placeholder='Remark'  class='form-control input-md'></td>");
 
     $('#datatables-buttons').append('<tr id="addr'+(i+1)+'"></tr>');
     $('#_cr').val(i+1);
@@ -344,8 +344,22 @@ $(document).ready(function(){
 	}
 });
 
-</script>
 
+
+
+
+</script>
+<!-- <script>
+function syncAddress()
+{
+	//console.log()
+
+	var n1 = document.getElementById("calmlAmount'+i+''");
+	alert("testing"+n1);
+  var n2 = document.getElementById('totalAmount');
+  n2.value = n1.value;
+}
+</script> -->
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 		
 </body>
