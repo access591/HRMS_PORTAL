@@ -164,7 +164,7 @@ body {
 								<div class="card-header">
 								</div>
 								<div class="card-body">
-								<input id="_cr" name="_cr" type="hidden"value="1">
+								<input id="_cr" name="_cr" type="text"value="1">
 								<table id="datatables-buttons" class="table table-striped display" style="width:100%"aria-describedby="datatables-buttons">
 												<thead>
 					<tr><th class="text-center">
@@ -309,7 +309,7 @@ $(document).ready(function(){
     $('#addr'+i).html("<td>"+ (i+1) +"</td><td><input name='medStDr"+i+"' type='text' placeholder='Name' class='form-control input-md'/> </td><td><input  name='caseMemoNo"+i+"' type='text' placeholder='Case Memo No'  class='form-control input-md'></td><td><input  name='caseMemoDate"+i+"' type='Date' placeholder='Case Memo Date'  class='form-control input-md'></td><td><input  name='calmlAmount"+i+"' type='text' placeholder='Calming Amount'  class='form-control input-md'></td><td><input  name='passedAmount"+i+"' type='text' placeholder='Passed Amount'  class='form-control input-md'></td><td><input  name='govtexemptionAmount"+i+"' type='text' placeholder='govt Exemption Amount'  class='form-control input-md'></td><td><input  name='remark"+i+"' type='text' placeholder='Remark'  class='form-control input-md'></td>");
 
     $('#datatables-buttons').append('<tr id="addr'+(i+1)+'"></tr>');
-    $('#_cr').val(i);
+    $('#_cr').val(i+1);
     i++; 
 });
    

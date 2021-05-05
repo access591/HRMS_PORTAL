@@ -14,9 +14,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.hrms.model.Employee;
 import com.hrms.model.MedicalReimbursement;
+import com.hrms.model.MedicalReimbursementDetail;
 import com.hrms.model.MedicalReimbursementUtil;
 import com.hrms.model.MenuModule;
 import com.hrms.service.EmployeeService;
+import com.hrms.service.MedicalReimbursementDetailsService;
 import com.hrms.service.MedicalReimbursementService;
 import com.hrms.service.ModuleService;
 
@@ -28,6 +30,8 @@ public class MedicalReimbursementController {
 	private ModuleService moduleService;
 	@Autowired
 	MedicalReimbursementService medicalReimbursementService;
+	@Autowired
+	MedicalReimbursementDetailsService medicalReimbursementDetailsService;
 	@GetMapping("/medicalReimbursement")
 	public String medicalReimbursement(Model model, HttpSession session) {
 		
@@ -45,9 +49,9 @@ public class MedicalReimbursementController {
 	@PostMapping("/saveMedicalReimbursement")
 	String saveLeaveDetail(@ModelAttribute("medicalReimbursement") MedicalReimbursementUtil medicalReimbursement, Model model,
 			HttpSession session,HttpServletRequest request){
-		int flag = 0;
-		int counter = 1;
+		
 		 MedicalReimbursement m2=new MedicalReimbursement();
+		 MedicalReimbursementDetail m4=new MedicalReimbursementDetail();
 		 Employee emp=new Employee();
 		 emp.setEmpCode(medicalReimbursement.getEmpCode());
 		 m2.setEmpCode(emp);
@@ -59,68 +63,76 @@ public class MedicalReimbursementController {
 		 m2.setTreatDescription(medicalReimbursement.getTreatDescription());
 		 m2.setClaimingDate(medicalReimbursement.getClaimingDate());
 		 
-		 //medicalReimbursementService.addMedicalReimbursement(m2);
+		 medicalReimbursementService.addMedicalReimbursement(m2);
 		
-
+           String slipNo=m2.getSlipNo();
+           session.setAttribute("slipNo",slipNo);
+         
+           
+           System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"+slipNo);
+        
 		
+        int flag = 0;
+   		int counter = 1;
 		try {
+			
+			
 			boolean insertStatusMR = false;
 			counter = Integer.parseInt(request.getParameter("_cr"));
 			System.out.println("counter::::::::::::::::::::" + counter);
 			
 		
-			for (int i = 0; i < counter; i++) 
+			for (int i =0; i < counter; i++) 
 			{
-				if (request.getParameter("i" + i) != null) {
-					m2.setSrNo(request.getParameter("i" + i));
-				} else {
-				m2.setSrNo("" + i);
-				}
-				
+				System.out.println("for loop run time>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
 				if (request.getParameter("medStDr" + i) != null) {
-					m2.setMedStDr(request.getParameter("medStDr" + i));
+					m4.setMedStDr(request.getParameter("medStDr" + i));
 				} else {
-				m2.setMedStDr("" + i);
+					m4.setMedStDr("" + i);
 				}
 				
 				if(request.getParameter("caseMemoNo" + i) != null) {
-					m2.setCaseMemoNo(request.getParameter("caseMemoNo" + i));
+					m4.setCaseMemoNo(request.getParameter("caseMemoNo" + i));
 				} else {
-				m2.setCaseMemoNo("" + i);
+					m4.setCaseMemoNo("" + i);
 				}
 				
 			
 				if(request.getParameter("caseMemoDate" + i) != null) {
-					m2.setCaseMemoDate(request.getParameter("caseMemoDate" + i));
+					m4.setCaseMemoDate(request.getParameter("caseMemoDate" + i));
 				} else {
-				m2.setCaseMemoDate("" + i);
+					m4.setCaseMemoDate("" + i);
 				}
 					
 				if(request.getParameter("calmlAmount" + i) != null) {
-					m2.setCalmlAmount(request.getParameter("calmlAmount" + i));
+					m4.setCalmlAmount(request.getParameter("calmlAmount" + i));
 				} else {
-				m2.setCalmlAmount("" + i);
+					m4.setCalmlAmount("" + i);
 				}
 				
 				if(request.getParameter("passedAmount" + i) != null) {
-					m2.setPassedAmount(request.getParameter("passedAmount" + i));
+					m4.setPassedAmount(request.getParameter("passedAmount" + i));
 				} else {
-				m2.setPassedAmount("" + i);
+					m4.setPassedAmount("" + i);
 				}
 				
 				if(request.getParameter("govtexemptionAmount" + i) != null) {
-					m2.setGovtexemptionAmount(request.getParameter("govtexemptionAmount" + i));
+					m4.setGovtexemptionAmount(request.getParameter("govtexemptionAmount" + i));
 				} else {
-				m2.setGovtexemptionAmount("" + i);
+					m4.setGovtexemptionAmount("" + i);
 				}
 				
 				if(request.getParameter("remark" + i) != null) {
-					m2.setRemark(request.getParameter("remark" + i));
+					m4.setRemark(request.getParameter("remark" + i));
 				} else {
-				m2.setRemark("" + i);
+					m4.setRemark("" + i);
 				}
 				
-				insertStatusMR= medicalReimbursementService.addMedicalReimbursement(m2);
+				
+			
+		       m2.setSlipNo(slipNo);
+				m4.setSlipNo(m2);
+				insertStatusMR= medicalReimbursementDetailsService.addMedicalReimbursementDetails(m4);
 				
 				if (insertStatusMR) {
 					System.out.println("Counter" + flag);
