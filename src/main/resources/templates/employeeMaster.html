@@ -97,7 +97,7 @@ body {
 											<div class="form-group sm col-md-4">
 											       <label class="form-label">Name
 											       <span class="text-danger">*</span></label>
-							                 <input  type="text"id="empName"name="empName" title="Name"maxlength="50" pattern="^[a-zA-Z\s]*$" class="form-control required">
+							                 <input  type="text"id="empName"name="empName" title="Name"onkeyup="sync()"maxlength="50" pattern="^[a-zA-Z\s]*$" class="form-control required">
 										     </div>
 										     	<div class="form-group sm col-md-4">
 												
@@ -264,14 +264,15 @@ body {
 									
 						          	</div>
 									<div id="validation-step-2">
-									<div class="form-row">
-									 <div class="form-group sm col-md-4">
-											       <label class="form-label">Aadhar No
-											       <span class="text-danger">*</span></label>
-							                 <input  type="text"id="aadharNo"name="aadharNo" title="Aadhar No" pattern="\d{1,16}"maxlength="16" class="form-control required">
-										     </div>
-									
-								
+							
+										<div class="form-row">
+										<div class="form-group sm col-md-4">
+											<label class="form-label">Transfer
+											<span class="text-danger">*</span>
+												</label>
+							                   <input  type="text"id="transfer"name="transfer" title="Transfer" maxlength="30"class="form-control required">
+										</div> 
+										
 										<div class="form-group sm col-md-4">
 											<label class="form-label">Order No.
 											<span class="text-danger">*</span>
@@ -283,8 +284,7 @@ body {
 												<span class="text-danger">*</span>
 												<input  type="text" id="orderDate" name="orderDate" class="form-control required">
 										          </div>
-									               </div>
-										
+										</div>
 											
 											<div class="form-row">
 											<div class="form-group sm col-md-4">
@@ -406,7 +406,7 @@ body {
 											       <label class="form-label">State 
 											       <span class="text-danger">*</span></label>
 										              <select
-														class="form-control required" name="stateCode" id="stateCode">
+														class="form-control required" name="stateCode" id="stateCode" onchange="myFunctionState()">
 														<option value="">Select State</option>
 														<option  th:each="ls :${listState}"th:value="${ls.getStateCode()}" th:text="${ls.getStateName()}">Select  State</option>
 														
@@ -432,12 +432,12 @@ body {
 											 <div class="form-group sm col-md-4">
 											       <label class="form-label">Address1
 											       <span class="text-danger">*</span></label>
-							                 <input  type="text"id="address1"name="address1" title="Address1"maxlength="200" class="form-control required">
+							                 <input  type="text"id="address1"name="address1" title="Address1"onkeyup="syncAddress()"maxlength="200" class="form-control required">
 										     </div>
 										     <div class="form-group sm col-md-4">
 											       <label class="form-label">Address2
-											       <span class="text-danger">*</span></label>
-							                 <input  type="text"id="address2"name="address2" title="Address2"maxlength="200" class="form-control required">
+											       </label>
+							                 <input  type="text"id="address2"name="address2" title="Address2"maxlength="200" class="form-control ">
 										     </div>
 										     <div class="form-group sm col-md-4">
 											       <label class="form-label">Pin Code
@@ -447,17 +447,18 @@ body {
 											 </div>
 											 
 											  <div class="form-row">
-											  	<div class="form-group sm col-md-4">
-											<label class="form-label">Transfer
-											<span class="text-danger">*</span>
-												</label>
-							                   <input  type="text"id="transfer"name="transfer" title="Transfer" maxlength="30"class="form-control required">
-										</div> 
+											  	
 											    <div class="form-group sm col-md-4">
 											       <label class="form-label">Telephone No
-											       <span class="text-danger">*</span></label>
-							                 <input  type="text"id="telephone"name="telephone" title="Telephone No"maxlength="12" class="form-control required">
+											      </label>
+							                 <input  type="text"id="telephone"name="telephone" title="Telephone No"maxlength="12" class="form-control ">
 										     </div>
+										      <div class="form-group sm col-md-4">
+											       <label class="form-label">Aadhar No
+											       <span class="text-danger">*</span></label>
+							                 <input  type="text"id="aadharNo"name="aadharNo" title="Aadhar No" pattern="\d{1,16}"maxlength="16" class="form-control required">
+										     </div>
+									
 											  </div>
 
 									</div>
@@ -781,6 +782,32 @@ function preview_image(event)
  reader.readAsDataURL(event.target.files[0]);
 }
 </script>
+
+<script>
+function sync()
+{
+  var n1 = document.getElementById('empName');
+  var n2 = document.getElementById('name');
+  n2.value = n1.value;
+}
+</script>
+<script>
+function syncAddress()
+{
+  var n1 = document.getElementById('address1');
+  var n2 = document.getElementById('addressArms');
+  n2.value = n1.value;
+}
+</script>
+ <script>
+ function myFunctionState(){
+   $('#stateCode').click(function() {
+      	 var name= $('#stateCode option:selected').text();
+      	$('#state').val(name);
+      	}); 
+      }
+      
+</script>	
 <script>
 
   $('#loading').show();

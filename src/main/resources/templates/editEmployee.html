@@ -241,10 +241,11 @@ body {
 									<div id="validation-step-2">
 									<div class="form-row">
 										<div class="form-group sm col-md-4">
-											       <label class="form-label">Aadhar No
-											       <span class="text-danger">*</span></label>
-							                 <input  type="text"id="aadharNo"name="aadharNo" th:value="${employeeEdit.aadharNo}"title="Aadhar No" class="form-control required">
-										     </div>
+											<label class="form-label">Transfer
+											<span class="text-danger">*</span>
+												</label>
+							                   <input  type="text"id="transfer"name="transfer" title="Transfer"th:value="${employeeEdit.Transfer}" maxlength="30"class="form-control required">
+										</div> 
 										<div class="form-group sm col-md-4">
 											<label class="form-label">Order No.
 											<span class="text-danger">*</span>
@@ -407,8 +408,8 @@ body {
 										     
 										      <div class="form-group sm col-md-4">
 											       <label class="form-label">Address2
-											       <span class="text-danger">*</span></label>
-							                 <input  type="text"id="address2"name="address2"th:value="${employeeEdit.address2}" title="Address" class="form-control required">
+											       </label>
+							                 <input  type="text"id="address2"name="address2"th:value="${employeeEdit.address2}" title="Address" class="form-control">
 										     </div>
 										      
 										       <div class="form-group sm col-md-4">
@@ -418,16 +419,17 @@ body {
 										     </div>
 											</div>
 											<div class="form-row">
-											  	<div class="form-group sm col-md-4">
-											<label class="form-label">Transfer
-											<span class="text-danger">*</span>
-												</label>
-							                   <input  type="text"id="transfer"name="transfer" title="Transfer"th:value="${employeeEdit.Transfer}" maxlength="30"class="form-control required">
-										</div> 
+											  	
 											    <div class="form-group sm col-md-4">
 											       <label class="form-label">Telephone No
+											      </label>
+							                 <input  type="text"id="telephone"name="telephone" th:value="${employeeEdit.telephone}"title="Telephone No"maxlength="12" class="form-control ">
+										     </div>
+										     
+										     <div class="form-group sm col-md-4">
+											       <label class="form-label">Aadhar No
 											       <span class="text-danger">*</span></label>
-							                 <input  type="text"id="telephone"name="telephone" th:value="${employeeEdit.telephone}"title="Telephone No"maxlength="12" class="form-control required">
+							                 <input  type="text"id="aadharNo"name="aadharNo" th:value="${employeeEdit.aadharNo}"title="Aadhar No" class="form-control required">
 										     </div>
 											  </div>
 
