@@ -14,6 +14,10 @@ public class EmployeeUtil {
 	private String departmentCode;
 	private String categoryCode;
 	private String designationCode;
+	private String departmentName;
+	private String designationName;
+	
+	
 	
 	private String batchYear;
 	
@@ -96,6 +100,32 @@ public class EmployeeUtil {
 	private String lcd;
 	
 	private String dealerDetails;
+	
+	
+	
+	public EmployeeUtil(String empCode2, String armsCode2, String empName2, String categoryCode2, String deptName,
+		String desgName, byte[] imageProfile2) {
+		this.empCode = empCode2;
+		this.armsCode=armsCode2;
+		this.empName=empName2;
+		this.categoryCode=categoryCode2;
+		this.departmentName=deptName;
+		this.designationName=desgName;
+		this.imageProfile=imageProfile2;
+		
+	}
+	public String getDepartmentName() {
+		return departmentName;
+	}
+	public void setDepartmentName(String departmentName) {
+		this.departmentName = departmentName;
+	}
+	public String getDesignationName() {
+		return designationName;
+	}
+	public void setDesignationName(String designationName) {
+		this.designationName = designationName;
+	}
 	public String getEmpCode() {
 		return empCode;
 	}
