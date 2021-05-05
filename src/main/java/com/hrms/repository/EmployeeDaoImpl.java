@@ -32,7 +32,7 @@ public class EmployeeDaoImpl  extends AbstractGenericDao<Employee> implements Em
 		List employeeUtils = null;
 		
 		Session session = this.sessionFactory.getCurrentSession();
-		 String sql =" SELECT  DISTINCT  e.EMPLOYEE_CODE,a.ARMS_CODE,e.EMPLOYEE_NAME,e.EMP_IMG\r\n"
+		 String sql =" SELECT  DISTINCT  e.EMPLOYEE_CODE,a.ARMS_CODE,e.EMPLOYEE_NAME,e.CATEGORY_CODE,e.DEPARTMENT_CODE,e.DESIGNATION_CODE,e.EMP_IMG\r\n"
 				+ "				FROM 	M_EMPLOYEE e ,ARMS_LICENSE_DETAILS a where e.EMPLOYEE_CODE= a.EMPLOYEE_CODE";
 		
 		 SQLQuery query = getSession().createSQLQuery(sql);
