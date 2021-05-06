@@ -22,7 +22,7 @@ public class LeaveGrant  implements Serializable{
 	@Column(name="LEAVEGRANT_CODE")
 	private String leaveGrantCode;
 	@ManyToOne
-	@JoinColumn(name = "EMP_CODE", nullable = false)
+	@JoinColumn(name = "EMPLOYEE_CODE", nullable = false)
 	private Employee empCode;
 	@ManyToOne
 	@JoinColumn(name = "LEAVE_CODE", nullable = false)
