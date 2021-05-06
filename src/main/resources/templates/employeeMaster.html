@@ -588,13 +588,13 @@ body {
 								<table id="datatables-buttons"aria-describedby="datatables-buttons" class="table table-striped display" style="width:100%">
 										<thead>
 											<tr>
-												<th scope="col">Emp id</th>
-												<th scope="col">arms code </th>
-													<th scope="col">empName</th>
+												<th scope="col">Employee  Id</th>
+												<th scope="col">Arms Code </th>
+													<th scope="col">Employee Name</th>
 												<th scope="col">Category Code</th>
-												<th scope="col">Dept</th>
-												<th scope="col">des</th>
-												<th scope="col">employee images</th>
+												<th scope="col">Department Name</th>
+												<th scope="col">Designation  </th>
+												<!-- <th scope="col">employee images</th> -->
 												<th scope="col">Action</th>
 												
 											</tr>
@@ -609,10 +609,10 @@ body {
 												<td th:text="${leave.categoryCode}"></td>
 												<td th:text="${leave.departmentName}"></td>
 												<td th:text="${leave.designationName}"></td>
-												<!-- <td th:text="${listemployee.dateOfJoining}"></td> -->
+							
 												
-									 <td><img alt="th" th:src="@{'data:image/jpeg;base64,'+${imgUtil.getImgData(leave.imageProfile)}}" width="48" height="48"class="rounded-circle mr-2"></td>
-												<!-- <td><img th:src="@{'/img/'+${listemployee.empImg}}" alt="Avatar" width="48" height="48"class="rounded-circle mr-2" /> </td>  -->
+								<!-- 	 <td><img alt="th" th:src="@{'data:image/jpeg;base64,'+${imgUtil.getImgData(leave.imageProfile)}}" width="48" height="48"class="rounded-circle mr-2"></td> -->
+											
 												
 												
 												 <td><a th:href="@{/editEmployee/{id}/{id2}(id=${leave.empCode},id2=${leave.armsCode})}"><em class="fa fa-edit"></em></a>
