@@ -2,6 +2,7 @@ package com.hrms.repository;
 
 import java.util.List;
 
+import org.hibernate.HibernateException;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -31,13 +32,19 @@ public class EmployeeDaoImpl  extends AbstractGenericDao<Employee> implements Em
 	public List<EmployeeUtil> getAllEmployeesAndArms() {
 		List employeeUtils = null;
 		
-		Session session = this.sessionFactory.getCurrentSession();
-		 String sql =" SELECT  DISTINCT  e.EMPLOYEE_CODE,a.ARMS_CODE,e.EMPLOYEE_NAME,e.CATEGORY_CODE,e.DEPARTMENT_CODE,e.DESIGNATION_CODE,e.EMP_IMG\r\n"
-				+ "				FROM 	M_EMPLOYEE e ,ARMS_LICENSE_DETAILS a where e.EMPLOYEE_CODE= a.EMPLOYEE_CODE";
-		
-		 SQLQuery query = getSession().createSQLQuery(sql);
-		  employeeUtils = query.list();
-		 return employeeUtils;
+		try {
+			Session session = this.sessionFactory.getCurrentSession();
+			 String sql =" SELECT  DISTINCT  e.EMPLOYEE_CODE,a.ARMS_CODE,e.EMPLOYEE_NAME,e.CATEGORY_CODE,e.DEPARTMENT_CODE,e.DESIGNATION_CODE,e.EMP_IMG\r\n"
+					+ "				FROM 	M_EMPLOYEE e ,ARMS_LICENSE_DETAILS a where e.EMPLOYEE_CODE= a.EMPLOYEE_CODE";
+			
+			 SQLQuery query = getSession().createSQLQuery(sql);
+			  employeeUtils = query.list();
+			 return employeeUtils;
+		} catch (HibernateException e) {
+			
+			e.printStackTrace();
+		}
+		 return null;
 	}
 
 	public List<Employee> getEmployeeByCategoryCode(String categoryCode) {
