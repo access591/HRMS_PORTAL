@@ -19,4 +19,7 @@ public interface EmployeeDao extends GenericDao<Employee> {
 	public List<Employee> findByDepartmentCode(String deptCode);
 
 
+
+
+
 }

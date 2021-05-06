@@ -82,9 +82,6 @@ body {
 								<div>
 								
                          <div id="validation-step-1">
-											
-									     
-									     
 									     
 										<div class="form-row">
 												<div class="form-group sm col-md-4">
@@ -97,7 +94,7 @@ body {
 											<div class="form-group sm col-md-4">
 											       <label class="form-label">Name
 											       <span class="text-danger">*</span></label>
-							                 <input  type="text"id="empName"name="empName" title="Name"maxlength="50" pattern="^[a-zA-Z\s]*$" class="form-control required">
+							                 <input  type="text"id="empName"name="empName" title="Name"onkeyup="sync()"maxlength="50" pattern="^[a-zA-Z\s]*$" class="form-control required">
 										     </div>
 										     	<div class="form-group sm col-md-4">
 												
@@ -184,7 +181,7 @@ body {
 														class="form-control required">
 												</div>
 													
-												<div class="form-group sm col-md-4">
+												<!-- <div class="form-group sm col-md-4">
 													<label class="form-label">Officer Type</label> <span
 														class="text-danger">*</span> <select
 														class="form-control required" name="officerType" id="officerType">
@@ -195,7 +192,12 @@ body {
 														<option value="DA">DA</option>
 														<option value="ADA">ADA</option>
 													</select>
-												</div>
+												</div> -->
+												 <div class="form-group sm col-md-4">
+											       <label class="form-label">Aadhar No
+											       <span class="text-danger">*</span></label>
+							                 <input  type="text"id="aadharNo"name="aadharNo" title="Aadhar No" pattern="\d{1,16}"maxlength="16" class="form-control required">
+										     </div>
 													
 														<div class="form-group sm col-md-4">
 													<label class="form-label">Present Posting <span
@@ -247,7 +249,11 @@ body {
 													</label> <input name=vrs type="text" id="vrs" maxlength="30" 
 														class="form-control">
 												</div>
-												
+												<div class="form-group sm col-md-4">
+											       <label class="form-label">Date of Birth</label>
+											       <span class="text-danger">*</span>
+											       <input  type="text"id="empDob"name="empDob"  class="form-control required">
+											      </div>
 											
                                              	<div class="form-group sm col-md-4">
 													<label class="form-label">Upload Image <span
@@ -264,14 +270,15 @@ body {
 									
 						          	</div>
 									<div id="validation-step-2">
-									<div class="form-row">
-									 <div class="form-group sm col-md-4">
-											       <label class="form-label">Aadhar No
-											       <span class="text-danger">*</span></label>
-							                 <input  type="text"id="aadharNo"name="aadharNo" title="Aadhar No" pattern="\d{1,16}"maxlength="16" class="form-control required">
-										     </div>
-									
-								
+							
+										<div class="form-row">
+										<div class="form-group sm col-md-4">
+											<label class="form-label">Transfer
+											<span class="text-danger">*</span>
+												</label>
+							                   <input  type="text"id="transfer"name="transfer" title="Transfer" maxlength="30"class="form-control required">
+										</div> 
+										
 										<div class="form-group sm col-md-4">
 											<label class="form-label">Order No.
 											<span class="text-danger">*</span>
@@ -283,8 +290,7 @@ body {
 												<span class="text-danger">*</span>
 												<input  type="text" id="orderDate" name="orderDate" class="form-control required">
 										          </div>
-									               </div>
-										
+										</div>
 											
 											<div class="form-row">
 											<div class="form-group sm col-md-4">
@@ -406,7 +412,7 @@ body {
 											       <label class="form-label">State 
 											       <span class="text-danger">*</span></label>
 										              <select
-														class="form-control required" name="stateCode" id="stateCode">
+														class="form-control required" name="stateCode" id="stateCode" onchange="myFunctionState()">
 														<option value="">Select State</option>
 														<option  th:each="ls :${listState}"th:value="${ls.getStateCode()}" th:text="${ls.getStateName()}">Select  State</option>
 														
@@ -432,12 +438,12 @@ body {
 											 <div class="form-group sm col-md-4">
 											       <label class="form-label">Address1
 											       <span class="text-danger">*</span></label>
-							                 <input  type="text"id="address1"name="address1" title="Address1"maxlength="200" class="form-control required">
+							                 <input  type="text"id="address1"name="address1" title="Address1"onkeyup="syncAddress()"maxlength="200" class="form-control required">
 										     </div>
 										     <div class="form-group sm col-md-4">
 											       <label class="form-label">Address2
-											       <span class="text-danger">*</span></label>
-							                 <input  type="text"id="address2"name="address2" title="Address2"maxlength="200" class="form-control required">
+											       </label>
+							                 <input  type="text"id="address2"name="address2" title="Address2"maxlength="200" class="form-control ">
 										     </div>
 										     <div class="form-group sm col-md-4">
 											       <label class="form-label">Pin Code
@@ -447,18 +453,90 @@ body {
 											 </div>
 											 
 											  <div class="form-row">
-											  	<div class="form-group sm col-md-4">
-											<label class="form-label">Transfer
-											<span class="text-danger">*</span>
-												</label>
-							                   <input  type="text"id="transfer"name="transfer" title="Transfer" maxlength="30"class="form-control required">
-										</div> 
+											  	
 											    <div class="form-group sm col-md-4">
 											       <label class="form-label">Telephone No
-											       <span class="text-danger">*</span></label>
-							                 <input  type="text"id="telephone"name="telephone" title="Telephone No"maxlength="12" class="form-control required">
+											      </label>
+							                 <input  type="text"id="telephone"name="telephone" title="Telephone No"maxlength="12" class="form-control ">
 										     </div>
+										     
+									
 											  </div>
+											  
+											  
+											    <div class="form-row">
+											     <div class="form-group sm col-md-4">
+											      <label class="form-label">Promotion</label>
+											      <input  type="text"id="promotion"name="promotion" maxlength="250" title="Promotion" class="form-control ">
+											     </div>
+											      <div class="form-group sm col-md-4">
+											      <label class="form-label">Acp</label>
+											      <input  type="text"id="acp"name="acp" title="Acp"maxlength="250" class="form-control ">
+											     </div>
+											      <div class="form-group sm col-md-4">
+											      <label class="form-label">Apr</label>
+											      <input  type="text"id="apr"name="apr" maxlength="250"title="Apr"class="form-control " >
+											     </div>
+											     
+											      </div>
+											       <div class="form-row">
+											      <div class="form-group sm col-md-4">
+											      <label class="form-label">Acr</label>
+											      <input  type="text"id="acr"name="acr" title="Acr" maxlength="250"class="form-control ">
+											      </div>
+											      <div class="form-group sm col-md-4">
+											      <label class="form-label">Training</label>
+											      <input  type="text"id="training"name="training" maxlength="250"title="Training"class="form-control " >
+											     </div>
+											      <div class="form-group sm col-md-4">
+											      <label class="form-label">Ltc</label>
+											      <input  type="text"id="ltc"name="ltc" title="" maxlength="250"class="form-control ">
+											       </div>
+											      </div>
+											       <div class="form-row">
+											       <div class="form-group sm col-md-4">
+											       <label class="form-label">Leave Account</label>
+											      <input  type="text"id="leaveAccount"name="leaveAccount"maxlength="250" title="Ltc"class="form-control " >
+											      </div>
+											       <div class="form-group sm col-md-4">
+											       <label class="form-label">Awards</label>
+											      <input  type="text"id="empAwards"name="empAwards"maxlength="250" title="Awards"class="form-control " >
+											     </div>
+											      <div class="form-group sm col-md-4">
+											      <label class="form-label">On Deputation</label>
+											       <select onchange="changetextbox();"
+														class="form-control " name="onDeputation" id="onDeputation">
+														<option value="">Select Type</option>
+														<option value="Y">YES</option>
+														<option value="N"selected>NO</option>
+													</select>
+											      </div>
+											      </div>
+											      
+											       <div class="form-row">
+											        <div class="form-group sm col-md-4">
+											        <label class="form-label">Deputation</label>
+											       <input  type="text"id="empDeputation"name="empDeputation"maxlength="250" title="Deputation"class="form-control " >
+											       </div>
+											        <div class="form-group sm col-md-4">
+											        <label class="form-label">Previous Postings</label>
+											       <input  type="text"id="previousPostings"name="previousPostings"maxlength="250" title="Previous Postings"class="form-control " >
+											       </div>
+											       <div class="form-group sm col-md-4">
+											       <label class="form-label">Expired</label>
+											     <select
+														class="form-control " name="expired" id="expired">
+														<option value="">Select Type</option>
+														<option value="Y">YES</option>
+														<option value="N"selected>NO</option>
+														
+													</select>
+											     
+											      </div>
+											      </div>
+											      
+											     
+											    
 
 									</div>
 
@@ -587,11 +665,13 @@ body {
 								<table id="datatables-buttons"aria-describedby="datatables-buttons" class="table table-striped display" style="width:100%">
 										<thead>
 											<tr>
-												<th scope="col">Emp id</th>
-												<th scope="col">arms code </th>
-													<th scope="col">empName</th>
-												<!-- <th scope="col">Date Of Joining</th> -->
-												<th scope="col">employee images</th>
+												<th scope="col">Employee  Id</th>
+												<th scope="col">Arms Code </th>
+													<th scope="col">Employee Name</th>
+												<th scope="col">Category Code</th>
+												<th scope="col">Department Name</th>
+												<th scope="col">Designation  </th>
+												<!-- <th scope="col">employee images</th> -->
 												<th scope="col">Action</th>
 												
 											</tr>
@@ -599,17 +679,21 @@ body {
 										<tbody>
 									
 										
-											   <tr th:each="leave,stats:${listEmployee2}">
-												<td th:text="${leave[0]}"></td>
-												<td  th:text="${leave[1]}"> </td> 
-												<td th:text="${leave[2]}"></td>
+											   <tr th:each="leave:${listEmployeeUtil}">
+												<td th:text="${leave.empCode}"></td>
+												<td  th:text="${leave.armsCode}"> </td> 
+												<td th:text="${leave.empName}"></td>
+												<td th:text="${leave.categoryCode}"></td>
+												<td th:text="${leave.departmentName}"></td>
+												<td th:text="${leave.designationName}"></td>
+							
 												
-												<!-- <td th:text="${listemployee.dateOfJoining}"></td> -->
+								<!-- 	 <td><img alt="th" th:src="@{'data:image/jpeg;base64,'+${imgUtil.getImgData(leave.imageProfile)}}" width="48" height="48"class="rounded-circle mr-2"></td> -->
+											
 												
-									 <td><img alt="th" th:src="@{'data:image/jpeg;base64,'+${imgUtil.getImgData(leave[3])}}" width="48" height="48"class="rounded-circle mr-2"></td>
-												<!-- <td><img th:src="@{'/img/'+${listemployee.empImg}}" alt="Avatar" width="48" height="48"class="rounded-circle mr-2" /> </td>  -->
-												 <td><a th:href="@{/editEmployee/{id}/{id2}(id=${leave[0]},id2=${leave[1]})}"><em class="fa fa-edit"></em></a>
-												<a th:href="@{/deleteEmployee/{id}/{id2}(id=${leave[0]},id2=${leave[1]})}" onclick="return confirm('Are you sure?')"><em class="fa fa-times"></em></a>
+												
+												 <td><a th:href="@{/editEmployee/{id}/{id2}(id=${leave.empCode},id2=${leave.armsCode})}"><em class="fa fa-edit"></em></a>
+												<a th:href="@{/deleteEmployee/{id}/{id2}(id=${leave.empCode},id2=${leave.armsCode})}" onclick="return confirm('Are you sure?')"><em class="fa fa-times"></em></a>
 
 												</td> 
 										
@@ -633,7 +717,15 @@ body {
 		</div>
 	<script>
 		$(function() {
-			
+
+			$("input[name='empDob']").daterangepicker({
+				singleDatePicker: true,
+			    autoApply: true,
+				locale: {
+		            format: 'DD/MM/YYYY'
+		        },
+				showDropdowns: true
+			});
 			
 		$("input[name='dateOfPosting']").daterangepicker({
 				singleDatePicker: true,
@@ -769,32 +861,69 @@ body {
 			}); */
 		});
 	</script>
-	<script type='text/javascript'>
-function preview_image(event) 
-{
- var reader = new FileReader();
- reader.onload = function()
- {
-  var output = document.getElementById('output_image');
-  output.src = reader.result;
- }
- reader.readAsDataURL(event.target.files[0]);
-}
-</script>
-<script>
 
-  $('#loading').show();
-  $.ajax({
-      // Other ajax parameters
-      success: function () {
-         // hiding the image here
-         debugger;
-         $('#loading').hide();
+	<script type="text/javascript">
+		function changetextbox() {
+			if (document.getElementById("onDeputation").value === "Y")
+
+			{
+				document.getElementById("empDeputation").disabled = 'true';
+
+			} else {
+
+				document.getElementById("empDeputation").disabled = '';
+			}
+
+		}
+	</script>
+
+
+	<script type='text/javascript'>
+		function preview_image(event) {
+			var reader = new FileReader();
+			reader.onload = function() {
+				var output = document.getElementById('output_image');
+				output.src = reader.result;
+			}
+			reader.readAsDataURL(event.target.files[0]);
+		}
+	</script>
+
+	<script>
+		function sync() {
+			var n1 = document.getElementById('empName');
+			var n2 = document.getElementById('name');
+			n2.value = n1.value;
+		}
+	</script>
+	<script>
+		function syncAddress() {
+			var n1 = document.getElementById('address1');
+			var n2 = document.getElementById('addressArms');
+			n2.value = n1.value;
+		}
+	</script>
+	<script>
+ function myFunctionState(){
+   $('#stateCode').click(function() {
+      	 var name= $('#stateCode option:selected').text();
+      	$('#state').val(name);
+      	}); 
       }
-  });
-  
+      
 </script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+	<script>
+		$('#loading').show();
+		$.ajax({
+			// Other ajax parameters
+			success : function() {
+				// hiding the image here
+				debugger;
+				$('#loading').hide();
+			}
+		});
+	</script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
 
 

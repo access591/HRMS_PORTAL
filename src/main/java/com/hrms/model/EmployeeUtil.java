@@ -14,6 +14,10 @@ public class EmployeeUtil {
 	private String departmentCode;
 	private String categoryCode;
 	private String designationCode;
+	private String departmentName;
+	private String designationName;
+	
+	
 	
 	private String batchYear;
 	
@@ -29,7 +33,7 @@ public class EmployeeUtil {
 	
 	private String   employeePayeeCode;
 	
-	private String officerType;
+	
 	
 	private String presentPosting;
 	
@@ -76,6 +80,22 @@ public class EmployeeUtil {
     private String address2;
 
   //=====================22
+    
+    private String promotion;
+    private String acp;
+    private String apr;
+    private String acr;
+    private String training;
+    private String ltc;
+    private String leaveAccount;
+    private String empAwards;
+    private String onDeputation;
+    private String empDeputation;
+    private String previousPostings;
+    private String expired;
+    private Date empDob;
+    
+    
 	// STEP-2==========Arms_license_details============end....
 	
     private String armsCode;
@@ -96,6 +116,32 @@ public class EmployeeUtil {
 	private String lcd;
 	
 	private String dealerDetails;
+	
+	
+	
+	public EmployeeUtil(String empCode2, String armsCode2, String empName2, String categoryCode2, String deptName,
+		String desgName, byte[] imageProfile2) {
+		this.empCode = empCode2;
+		this.armsCode=armsCode2;
+		this.empName=empName2;
+		this.categoryCode=categoryCode2;
+		this.departmentName=deptName;
+		this.designationName=desgName;
+		this.imageProfile=imageProfile2;
+		
+	}
+	public String getDepartmentName() {
+		return departmentName;
+	}
+	public void setDepartmentName(String departmentName) {
+		this.departmentName = departmentName;
+	}
+	public String getDesignationName() {
+		return designationName;
+	}
+	public void setDesignationName(String designationName) {
+		this.designationName = designationName;
+	}
 	public String getEmpCode() {
 		return empCode;
 	}
@@ -163,12 +209,8 @@ public class EmployeeUtil {
 	public void setEmployeePayeeCode(String employeePayeeCode) {
 		this.employeePayeeCode = employeePayeeCode;
 	}
-	public String getOfficerType() {
-		return officerType;
-	}
-	public void setOfficerType(String officerType) {
-		this.officerType = officerType;
-	}
+
+	
 	public String getPresentPosting() {
 		return presentPosting;
 	}
@@ -428,8 +470,84 @@ public class EmployeeUtil {
 	public void setDealerDetails(String dealerDetails) {
 		this.dealerDetails = dealerDetails;
 	}
-	
-	
+	public String getPromotion() {
+		return promotion;
+	}
+	public void setPromotion(String promotion) {
+		this.promotion = promotion;
+	}
+	public String getAcp() {
+		return acp;
+	}
+	public void setAcp(String acp) {
+		this.acp = acp;
+	}
+	public String getApr() {
+		return apr;
+	}
+	public void setApr(String apr) {
+		this.apr = apr;
+	}
+	public String getAcr() {
+		return acr;
+	}
+	public void setAcr(String acr) {
+		this.acr = acr;
+	}
+	public String getTraining() {
+		return training;
+	}
+	public void setTraining(String training) {
+		this.training = training;
+	}
+	public String getLtc() {
+		return ltc;
+	}
+	public void setLtc(String ltc) {
+		this.ltc = ltc;
+	}
+	public String getLeaveAccount() {
+		return leaveAccount;
+	}
+	public void setLeaveAccount(String leaveAccount) {
+		this.leaveAccount = leaveAccount;
+	}
+	public String getEmpAwards() {
+		return empAwards;
+	}
+	public void setEmpAwards(String empAwards) {
+		this.empAwards = empAwards;
+	}
+	public String getOnDeputation() {
+		return onDeputation;
+	}
+	public void setOnDeputation(String onDeputation) {
+		this.onDeputation = onDeputation;
+	}
+	public String getEmpDeputation() {
+		return empDeputation;
+	}
+	public void setEmpDeputation(String empDeputation) {
+		this.empDeputation = empDeputation;
+	}
+	public String getPreviousPostings() {
+		return previousPostings;
+	}
+	public void setPreviousPostings(String previousPostings) {
+		this.previousPostings = previousPostings;
+	}
+	public String getExpired() {
+		return expired;
+	}
+	public void setExpired(String expired) {
+		this.expired = expired;
+	}
+	public Date getEmpDob() {
+		return empDob;
+	}
+	public void setEmpDob(Date empDob) {
+		this.empDob = empDob;
+	}
 	
 	
 }

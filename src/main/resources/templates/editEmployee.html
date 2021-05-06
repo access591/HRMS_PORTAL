@@ -175,7 +175,7 @@ body {
 												</div>
 												
 													
-												<div class="form-group sm col-md-4">
+												<!-- <div class="form-group sm col-md-4">
 													<label class="form-label">Officer Type</label> <span
 														class="text-danger">*</span> <select
 														class="form-control required" name="officerType" id="officerType">
@@ -186,7 +186,13 @@ body {
 														<option value="DA"th:selected="${employeeEdit.officerType}==DA">DA</option>
 														<option value="ADA"th:selected="${employeeEdit.officerType}==ADA">ADA</option>
 													</select>
-												</div>
+												</div> -->
+												
+												  <div class="form-group sm col-md-4">
+											       <label class="form-label">Aadhar No
+											       <span class="text-danger">*</span></label>
+							                 <input  type="text"id="aadharNo"name="aadharNo" th:value="${employeeEdit.aadharNo}"title="Aadhar No" class="form-control required">
+										     </div>
 													<div class="form-group sm col-md-4">
 													<label class="form-label">Present Posting <span
 														class="text-danger">*</span>
@@ -223,7 +229,14 @@ body {
 													</label> <input name=vrs type="text" id="vrs" maxlength="50" th:value="${employeeEdit.vrs}"
 														class="form-control">
 												    </div>
-                                             	<div class="form-group sm col-md-12">
+												    <div class="form-group sm col-md-4">
+											       <label class="form-label">Date of Birth</label>
+											       <span class="text-danger">*</span>
+											       <input  type="text"id="empDob"name="empDob"th:value="${employeeEdit.empDob}"  class="form-control required">
+											      </div>
+												    
+												    
+                                             	<div class="form-group sm col-md-4">
 													<label class="form-label">Upload Image <span
 														class="text-danger">*</span>
 													</label>
@@ -238,13 +251,14 @@ body {
 										
 									
 						          	</div>
-									<div id="validation-step-2">
+						<div id="validation-step-2">
 									<div class="form-row">
 										<div class="form-group sm col-md-4">
-											       <label class="form-label">Aadhar No
-											       <span class="text-danger">*</span></label>
-							                 <input  type="text"id="aadharNo"name="aadharNo" th:value="${employeeEdit.aadharNo}"title="Aadhar No" class="form-control required">
-										     </div>
+											<label class="form-label">Transfer
+											<span class="text-danger">*</span>
+												</label>
+							                   <input  type="text"id="transfer"name="transfer" title="Transfer"th:value="${employeeEdit.Transfer}" maxlength="30"class="form-control required">
+										</div> 
 										<div class="form-group sm col-md-4">
 											<label class="form-label">Order No.
 											<span class="text-danger">*</span>
@@ -407,8 +421,8 @@ body {
 										     
 										      <div class="form-group sm col-md-4">
 											       <label class="form-label">Address2
-											       <span class="text-danger">*</span></label>
-							                 <input  type="text"id="address2"name="address2"th:value="${employeeEdit.address2}" title="Address" class="form-control required">
+											       </label>
+							                 <input  type="text"id="address2"name="address2"th:value="${employeeEdit.address2}" title="Address" class="form-control">
 										     </div>
 										      
 										       <div class="form-group sm col-md-4">
@@ -418,23 +432,91 @@ body {
 										     </div>
 											</div>
 											<div class="form-row">
-											  	<div class="form-group sm col-md-4">
-											<label class="form-label">Transfer
-											<span class="text-danger">*</span>
-												</label>
-							                   <input  type="text"id="transfer"name="transfer" title="Transfer"th:value="${employeeEdit.Transfer}" maxlength="30"class="form-control required">
-										</div> 
+											  	
 											    <div class="form-group sm col-md-4">
 											       <label class="form-label">Telephone No
-											       <span class="text-danger">*</span></label>
-							                 <input  type="text"id="telephone"name="telephone" th:value="${employeeEdit.telephone}"title="Telephone No"maxlength="12" class="form-control required">
+											      </label>
+							                 <input  type="text"id="telephone"name="telephone" th:value="${employeeEdit.telephone}"title="Telephone No"maxlength="12" class="form-control ">
 										     </div>
+										     
+										   
 											  </div>
+											  
+											   <div class="form-row">
+											     <div class="form-group sm col-md-4">
+											      <label class="form-label">Promotion</label>
+											      <input  type="text"id="promotion"name="promotion"th:value="${employeeEdit.promotion}" maxlength="250" title="Promotion" class="form-control ">
+											     </div>
+											      <div class="form-group sm col-md-4">
+											      <label class="form-label">Acp</label>
+											      <input  type="text"id="acp"name="acp" title="Acp"th:value="${employeeEdit.acp}"maxlength="250" class="form-control ">
+											     </div>
+											      <div class="form-group sm col-md-4">
+											      <label class="form-label">Apr</label>
+											      <input  type="text"id="apr"name="apr" th:value="${employeeEdit.apr}"maxlength="250"title="Apr"class="form-control " >
+											     </div>
+											     
+											      </div>
+											       <div class="form-row">
+											      <div class="form-group sm col-md-4">
+											      <label class="form-label">Acr</label>
+											      <input  type="text"id="acr"name="acr"th:value="${employeeEdit.acr}" title="Acr" maxlength="250"class="form-control ">
+											      </div>
+											      <div class="form-group sm col-md-4">
+											      <label class="form-label">Training</label>
+											      <input  type="text"id="training"name="training"th:value="${employeeEdit.training}" maxlength="250"title="Training"class="form-control " >
+											     </div>
+											      <div class="form-group sm col-md-4">
+											      <label class="form-label">Ltc</label>
+											      <input  type="text"id="ltc"name="ltc" th:value="${employeeEdit.ltc}"title="" maxlength="250"class="form-control ">
+											       </div>
+											      </div>
+											       <div class="form-row">
+											       <div class="form-group sm col-md-4">
+											       <label class="form-label">Leave Account</label>
+											      <input  type="text"id="leaveAccount"name="leaveAccount"th:value="${employeeEdit.leaveAccount}"maxlength="250" title="Ltc"class="form-control " >
+											      </div>
+											       <div class="form-group sm col-md-4">
+											       <label class="form-label">Awards</label>
+											      <input  type="text"id="empAwards"name="empAwards"th:value="${employeeEdit.empAwards}"maxlength="250" title="Awards"class="form-control " >
+											     </div>
+											      <div class="form-group sm col-md-4">
+											      <label class="form-label">On Deputation</label>
+											       <select onchange="changetextbox();"
+														class="form-control " name="onDeputation" id="onDeputation">
+														<option value="">Select Type</option>
+														<option value="Y"th:selected="${employeeEdit.onDeputation}==Y">YES</option>
+														<option value="N"th:selected="${employeeEdit.onDeputation}==N">NO</option>
+													</select>
+											      </div>
+											      </div>
+											      
+											       <div class="form-row">
+											        <div class="form-group sm col-md-4">
+											        <label class="form-label">Deputation</label>
+											       <input  type="text"id="empDeputation"name="empDeputation"th:value="${employeeEdit.empDeputation}"maxlength="250" title="Deputation"class="form-control " >
+											       </div>
+											        <div class="form-group sm col-md-4">
+											        <label class="form-label">Previous Postings</label>
+											       <input  type="text"id="previousPostings"name="previousPostings"th:value="${employeeEdit.previousPostings}"maxlength="250" title="Previous Postings"class="form-control " >
+											       </div>
+											       <div class="form-group sm col-md-4">
+											       <label class="form-label">Expired</label>
+											     <select
+														class="form-control " name="expired" id="expired">
+														<option value="">Select Type</option>
+														<option value="Y"th:selected="${employeeEdit.expired}==Y">YES</option>
+														<option value="N"th:selected="${employeeEdit.expired}==N">NO</option>
+														
+													</select>
+											     
+											      </div>
+											      </div>
 
 									</div>
 
 
-									<div id="validation-step-3">
+						<div id="validation-step-3">
 				
 									  <div class="form-row">
 									  
@@ -568,7 +650,14 @@ body {
 	<script>
 		$(function() {
 			
-			
+			$("input[name='empDob']").daterangepicker({
+				singleDatePicker: true,
+			    autoApply: true,
+				locale: {
+					 format: 'YYYY/MM/DD'
+		        },
+				showDropdowns: true
+			});	
 		$("input[name='dateOfPosting']").daterangepicker({
 				singleDatePicker: true,
 			    autoApply: true,
@@ -700,6 +789,44 @@ body {
 			}); */
 		});
 	</script>
+	<script type="text/javascript">
+		function changetextbox() {
+			if (document.getElementById("onDeputation").value === "Y")
+
+			{
+				document.getElementById("empDeputation").disabled = 'true';
+
+			} else {
+
+				document.getElementById("empDeputation").disabled = '';
+			}
+
+		}
+	</script>
+	
+	<script>
+		function sync() {
+			var n1 = document.getElementById('empName');
+			var n2 = document.getElementById('name');
+			n2.value = n1.value;
+		}
+	</script>
+	<script>
+		function syncAddress() {
+			var n1 = document.getElementById('address1');
+			var n2 = document.getElementById('addressArms');
+			n2.value = n1.value;
+		}
+	</script>
+	<script>
+ function myFunctionState(){
+   $('#stateCode').click(function() {
+      	 var name= $('#stateCode option:selected').text();
+      	$('#state').val(name);
+      	}); 
+      }
+      
+</script>
 	<script type='text/javascript'>
 function preview_image(event) 
 {

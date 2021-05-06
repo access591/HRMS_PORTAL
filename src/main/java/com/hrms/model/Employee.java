@@ -20,7 +20,12 @@ public class Employee implements Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -3548208510334449114L;
+	private static final long serialVersionUID = -615585907130702990L;
+
+	/**
+	 * 
+	 */
+
 
 	/**
 	 * @author Access Surendra
@@ -68,9 +73,7 @@ public class Employee implements Serializable {
 	@Column(name ="EMPLOYEE_PAYEE_CODE")
 	private String   employeePayeeCode;
 	
-	@Size(max = 10)
-	@Column(name ="OFFICER_TYPE")
-	private String officerType;
+	
 	
 	@Size(max = 200)
 	@Column(name ="PRESENT_POSTING")
@@ -166,10 +169,59 @@ public class Employee implements Serializable {
 	@Size(max =1)
 	@Column(name = "UNDER_RULE_8")
 	private String underRule8;
+	//========================================
+	@Size(max =255)
+	@Column(name = "PROMOTION")
+	private String promotion;
+	@Size(max =255)
+	@Column(name = "ACP")
+	private String acp;
+	@Size(max =255)
+	@Column(name = "APR")
+	private String apr;
+	
+	@Size(max =255)
+	@Column(name = "ACR")
+	private String acr;
+
+	@Size(max =255)
+	@Column(name = "TRAINING")
+	private String training;
+
+	@Size(max =255)
+	@Column(name = "LTC")
+	private String ltc;
+	
+	@Size(max =255)
+	@Column(name = "LEAVE_Account")
+	private String leaveAccount;
+	
+	@Size(max =255)
+	@Column(name = "EMP_AWARDS")
+	private String empAwards;
+	
+	@Size(max =1)
+	@Column(name = "ON_DEPUTATION")
+	private String onDeputation;
+	
+	@Size(max =255)
+	@Column(name = "EMP_DEPUTATION")
+	private String empDeputation;
+	@Size(max =255)
+	@Column(name = "PREVIOUS_POSTINGS")
+	private String previousPostings;
+	@Size(max =1)
+	@Column(name = "EXPIRED")
+	private String expired;
+	@Column(name = "EMP_DOB")
+	private Date empDob;
+	
+
 
 	@Column(name = "INS_BY", updatable = false)
 	private String insBy;
 
+	
 	@Column(name = "INS_DATE", updatable = false)
 	private Date insDate = new Date();
 
@@ -277,13 +329,7 @@ public class Employee implements Serializable {
 		this.employeePayeeCode = employeePayeeCode;
 	}
 
-	public String getOfficerType() {
-		return officerType;
-	}
-
-	public void setOfficerType(String officerType) {
-		this.officerType = officerType;
-	}
+	
 
 	public String getPresentPosting() {
 		return presentPosting;
@@ -549,5 +595,139 @@ public class Employee implements Serializable {
 		this.updDate = updDate;
 	}
 	
+	//======================
+	public String getPromotion() {
+		return promotion;
+	}
+
+
+	public void setPromotion(String promotion) {
+		this.promotion = promotion;
+	}
+
+
+	public String getAcp() {
+		return acp;
+	}
+
+
+	public void setAcp(String acp) {
+		this.acp = acp;
+	}
+
+
+	public String getApr() {
+		return apr;
+	}
+
+
+	public void setApr(String apr) {
+		this.apr = apr;
+	}
+
+
+	public String getAcr() {
+		return acr;
+	}
+
+
+	public void setAcr(String acr) {
+		this.acr = acr;
+	}
+
+
+	public String getTraining() {
+		return training;
+	}
+
+
+	public void setTraining(String training) {
+		this.training = training;
+	}
+
+
+	public String getLtc() {
+		return ltc;
+	}
+
+
+	public void setLtc(String ltc) {
+		this.ltc = ltc;
+	}
+
+
+	public String getLeaveAccount() {
+		return leaveAccount;
+	}
+
+
+	public void setLeaveAccount(String leaveAccount) {
+		this.leaveAccount = leaveAccount;
+	}
+
+
+	
+
+
+	public String getEmpAwards() {
+		return empAwards;
+	}
+
+
+	public void setEmpAwards(String empAwards) {
+		this.empAwards = empAwards;
+	}
+
+
+	public String getOnDeputation() {
+		return onDeputation;
+	}
+
+
+	public void setOnDeputation(String onDeputation) {
+		this.onDeputation = onDeputation;
+	}
+	public String getEmpDeputation() {
+		return empDeputation;
+	}
+
+
+	public void setEmpDeputation(String empDeputation) {
+		this.empDeputation = empDeputation;
+	}
+
+
+	public String getPreviousPostings() {
+		return previousPostings;
+	}
+
+
+	public void setPreviousPostings(String previousPostings) {
+		this.previousPostings = previousPostings;
+	}
+
+
+	public String getExpired() {
+		return expired;
+	}
+
+
+	public void setExpired(String expired) {
+		this.expired = expired;
+	}
+
+
+	public Date getEmpDob() {
+		return empDob;
+	}
+
+
+	public void setEmpDob(Date empDob) {
+		this.empDob = empDob;
+	}
+
+	
+	
+	//============================
 
 }
