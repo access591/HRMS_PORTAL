@@ -22,7 +22,7 @@ import com.hrms.ReportUtil;
 import com.hrms.model.Department;
 import com.hrms.model.Designation;
 import com.hrms.model.Employee;
-import com.hrms.model.EmployeeLeaveRequest;
+import com.hrms.model.CommonUtil;
 import com.hrms.model.Leave;
 import com.hrms.model.LeaveDetail;
 import com.hrms.model.LeaveRequest;
@@ -57,7 +57,7 @@ public class LeveReportController {
 	@Autowired DepartmentService departmentService;
 	@Autowired LeaveRequestService leaveRequestService;
 	@Autowired LeaveService leaveService;
-	@Autowired EmployeeLeaveRequest employeeLeaveRequest;
+	@Autowired CommonUtil employeeLeaveRequest;
 	
 	@GetMapping("/leaveRegister")
 	public String viewLeaveRegisterReport(Model model,HttpSession session,HttpServletRequest request, HttpServletResponse response) {
@@ -189,9 +189,9 @@ public class LeveReportController {
 		 
 		 List<LeaveRequest> listLeaveRequest = leaveRequestService.findByEmpBetweenDate(employeeName, toDate, fromDate);
 		 //LeaveRequest listLeave = leaveRequestService.findByToDate(toDate);
-		 List<EmployeeLeaveRequest> empLeaveRequest = new ArrayList<EmployeeLeaveRequest>();
+		 List<CommonUtil> empLeaveRequest = new ArrayList<CommonUtil>();
 		 //List<MenuModule> empLeaveRequest = null;
-		 EmployeeLeaveRequest empLvRe;
+		 CommonUtil empLvRe;
 		 System.out.println("return for block"  + listLeaveRequest.size());
 		for(int i = 0;i<listLeaveRequest.size();i++) 
 		 {
@@ -200,7 +200,7 @@ public class LeveReportController {
 			 Employee employee = employeeService.findEmployeeById(listLeaveRequest.get(i).getEmpCode());
 			 Department department = departmentService.findDepartmentById(listLeaveRequest.get(i).getDeptCode());
 			 
-			 empLvRe = new EmployeeLeaveRequest(employee.getEmpName(),department.getDeptName(),
+			 empLvRe = new CommonUtil(employee.getEmpName(),department.getDeptName(),
 					 leave.getLevType(),listLeaveRequest.get(i).getToDate().toString(),listLeaveRequest.get(i).getFromDate().toString(),
 					 listLeaveRequest.get(i).getApplyDate().toString(),listLeaveRequest.get(i).getApproevedBy(),listLeaveRequest.get(i).getReason(),
 					 listLeaveRequest.get(i).getLeaveFor());

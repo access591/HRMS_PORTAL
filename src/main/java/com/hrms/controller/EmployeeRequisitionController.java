@@ -27,7 +27,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.hrms.model.Department;
 import com.hrms.model.Designation;
 import com.hrms.model.Employee;
-import com.hrms.model.EmployeeLeaveRequest;
+import com.hrms.model.CommonUtil;
 import com.hrms.model.MenuModule;
 import com.hrms.model.EmployeeRequisition;
 import com.hrms.model.EmployeeRequisitionCreationDto;
@@ -135,12 +135,12 @@ public class EmployeeRequisitionController {
 	
 	@ResponseBody
 	@GetMapping("/designationbydept/{selecteDepartmentValue}")
-	public List<EmployeeLeaveRequest> getDesignationByDepartment(@PathVariable("selecteDepartmentValue") String deptCode) {
+	public List<CommonUtil> getDesignationByDepartment(@PathVariable("selecteDepartmentValue") String deptCode) {
 		
 		System.out.println("department value is"+ deptCode);
 		List<Employee> employeeList = employeeService.findByDepartmentCode(deptCode);
-		List<EmployeeLeaveRequest> details = new ArrayList<EmployeeLeaveRequest>();
-		EmployeeLeaveRequest empl = new EmployeeLeaveRequest();
+		List<CommonUtil> details = new ArrayList<CommonUtil>();
+		CommonUtil empl = new CommonUtil();
 		for(int i =0;i<employeeList.size();i++) {
 			Designation designation = designationService.findDesignationById(employeeList.get(i).getDesignationCode());
 			
