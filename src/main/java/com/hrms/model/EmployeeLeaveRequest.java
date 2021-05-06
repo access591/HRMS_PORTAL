@@ -13,7 +13,7 @@ public class EmployeeLeaveRequest {
 	private String empName;
 	private String deptName;
 	private String desgName;
-	
+	private String desigCode;
 	private String leaveCode;
 	private String toDate;
 	  
@@ -121,6 +121,16 @@ public class EmployeeLeaveRequest {
 	public String getFromDateType() {
 		return fromDateType;
 	}
+
+	public String getDesigCode() {
+		return desigCode;
+	}
+
+
+	public void setDesigCode(String desigCode) {
+		this.desigCode = desigCode;
+	}
+
 
 	public void setFromDateType(String fromDateType) {
 		this.fromDateType = fromDateType;
@@ -238,6 +248,21 @@ public class EmployeeLeaveRequest {
 		this.maritalStatus = martialStatus;
 		this.empDateOfJoning = dateOfJoining;
 	}
+
+
+	public EmployeeLeaveRequest(String departmentCode, String designationCode, Date dateOfJoining) {
+		//this.de
+	}
+
+
+	public EmployeeLeaveRequest(String empName2, String deptName2, String desgName2) {
+		this.empName = empName2;
+		this.deptName = deptName2;
+		this.desgName = desgName2;
+	}
+
+
+	
 	
 	
 	

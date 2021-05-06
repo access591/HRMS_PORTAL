@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,6 +18,7 @@ import com.hrms.model.LeaveRequest;
 import com.hrms.service.LeaveDetailService;
 import com.hrms.service.LeaveRequestService;
 
+import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.JREmptyDataSource;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
@@ -116,7 +118,11 @@ public class ReportUtil {
 
 			HashMap<String, Object> map = new HashMap<String, Object>();
 
-			map.put("ItemDataSource", beanColDataSource);
+			map.put("Parameter1", beanColDataSource);
+			map.put("Parameter2", "Rahul");
+			map.put("empname", "Rahul");   
+			
+			
 
 			JasperReport report = (JasperReport) JRLoader.loadObjectFromFile(sourceFileName);
 			JasperPrint jasperPrint = JasperFillManager.fillReport(report, map, new JREmptyDataSource());
@@ -285,6 +291,54 @@ public class ReportUtil {
 
 	}
 	
+	
+	
+	
+	
+//EMPLOYEE JOINING LETTTER
+	
+	public void employeeJoiningLetter(HttpServletRequest request, HttpServletResponse response, String reportFileName,
+			List<EmployeeLeaveRequest> sourceData) {
+		System.out.println("Employee Joining report...");
+		String sourceFileName = request.getSession().getServletContext()
+				.getRealPath("resources/" + reportFileName + ".jrxml");
+		System.out.println("resources : = "+sourceFileName);
+
+		try {
+
+			JasperReport jasperReport = JasperCompileManager.compileReport(sourceFileName);
+			JRDataSource dataSource = new JREmptyDataSource();
+			Map<String,Object> parameter = new HashMap<String,Object>();
+			parameter.put("name",sourceData.get(0).getEmpName());
+			parameter.put("dept", sourceData.get(0).getDeptName());
+			parameter.put("desig", sourceData.get(0).getDesgName());
+			//parameter.put("wef", sourceData.get(0).getDesgName());
+			JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameter,dataSource);
+			JasperExportManager.exportReportToPdfFile(jasperPrint,sourceFileName);
+
+			if (jasperPrint != null) {
+				byte[] pdfReport = JasperExportManager.exportReportToPdf(jasperPrint);
+				response.reset();
+				response.setContentType("application/pdf");
+				response.setHeader("Cache-Control", "no-store");
+				response.setHeader("Cache-Control", "private");
+				response.setHeader("Pragma", "no-store");
+				response.setContentLength(pdfReport.length);
+				try {
+					response.getOutputStream().write(pdfReport);
+					response.getOutputStream().flush();
+					response.getOutputStream().close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+
+			}
+		} catch (JRException e) {
+			e.printStackTrace();
+		}
+		// return null;
+
+	}
 	
 	
 	

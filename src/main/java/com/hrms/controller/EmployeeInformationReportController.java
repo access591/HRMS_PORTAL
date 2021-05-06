@@ -27,6 +27,7 @@ import com.hrms.EmployeeGradationExcel;
 import com.hrms.ReportUtil;
 import com.hrms.model.Category;
 import com.hrms.model.Department;
+import com.hrms.model.Designation;
 import com.hrms.model.Employee;
 import com.hrms.model.EmployeeLeaveRequest;
 import com.hrms.model.MenuModule;
@@ -45,6 +46,9 @@ public class EmployeeInformationReportController {
 	
 	int birthAniversaryPageNo = 55;
 	String birthAniversaryPage = "birthAnniversary";
+	
+	int joiningLetterPageNo = 56;
+	String joiningLetterPage = "joining_offerLetter";
 	
 	@Autowired private ModuleService moduleService;
 	@Autowired PageMappingService pageMappingService;
@@ -252,4 +256,58 @@ public class EmployeeInformationReportController {
 		return pageMappingService.PageRequestMapping(birthAniversaryPage, birthAniversaryPageNo);
 	}
 	
+	
+//EMPLOYEE JOINING / OFFER LETTER REPORT 
+	
+	@GetMapping("/joining_offerLetter")
+	public String employeeJoiningReport(Model model, HttpSession session) {
+		
+		String userCode = (String) session.getAttribute("username");
+		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
+		if (modules != null) {
+			model.addAttribute("modules", modules);
+		}
+		
+		List<Employee> employeeList = employeeService.getAllEmployees();
+		if(employeeList != null) {
+			model.addAttribute("employeeList", employeeList);
+		}
+
+		session.setAttribute("username", session.getAttribute("username"));
+
+		return pageMappingService.PageRequestMapping(joiningLetterPage, joiningLetterPageNo);
+	}
+	
+	
+	@PostMapping("/createJoinOfferLetter")
+	public String createJoiningOfferLetter(@RequestParam("empName")String empCode,@RequestParam("reportType")String reportType,
+											Model model, HttpSession session,HttpServletRequest req,
+											HttpServletResponse response) {
+		
+		String userCode = (String) session.getAttribute("username");
+		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
+		if (modules != null) {
+			model.addAttribute("modules", modules);
+		}
+		System.out.println("report type value : "+reportType);
+		System.out.println("month value : "+empCode); 
+		
+		List<EmployeeLeaveRequest> em = new ArrayList<EmployeeLeaveRequest>();
+		EmployeeLeaveRequest empl;
+		
+		Employee employee = employeeService.findEmployeeById(empCode);
+		
+		Department department = departmentService.findDepartmentById(employee.getDepartmentCode());
+		Designation designation = designationService.findDesignationById(employee.getDesignationCode());
+		
+		empl = new EmployeeLeaveRequest(employee.getEmpName(),
+										department.getDeptName(),designation.getDesgName());
+		em.add(empl);
+		String reportFileName = "EmployeeJoiningLetter";
+		
+		reportUtil.employeeJoiningLetter(req, response, reportFileName, em);
+		session.setAttribute("username", session.getAttribute("username"));
+
+		return pageMappingService.PageRequestMapping(joiningLetterPage, joiningLetterPageNo);
+	}
 }
