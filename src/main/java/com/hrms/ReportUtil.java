@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.hrms.model.EmployeeLeaveRequest;
+import com.hrms.model.CommonUtil;
 import com.hrms.model.LeaveDetail;
 import com.hrms.model.LeaveRequest;
 import com.hrms.service.LeaveDetailService;
@@ -247,7 +247,7 @@ public class ReportUtil {
 	
 	//	BIRT AND ANNIVERASARY REPORT
 	public void birthAnniversaryReport(HttpServletRequest request, HttpServletResponse response, String reportFileName,
-			List<EmployeeLeaveRequest> sourceData) {
+			List<CommonUtil> sourceData) {
 		System.out.println("birth anniversary  report...");
 		String sourceFileName = request.getSession().getServletContext()
 				.getRealPath("resources/" + reportFileName + ".jrxml");
@@ -298,7 +298,7 @@ public class ReportUtil {
 //EMPLOYEE JOINING LETTTER
 	
 	public void employeeJoiningLetter(HttpServletRequest request, HttpServletResponse response, String reportFileName,
-			List<EmployeeLeaveRequest> sourceData) {
+			List<CommonUtil> sourceData) {
 		System.out.println("Employee Joining report...");
 		String sourceFileName = request.getSession().getServletContext()
 				.getRealPath("resources/" + reportFileName + ".jrxml");

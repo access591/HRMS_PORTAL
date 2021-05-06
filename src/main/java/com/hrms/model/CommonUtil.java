@@ -4,8 +4,10 @@ import java.util.Date;
 
 import org.springframework.stereotype.Component;
 
+
+//EmployeeLeaveRequest
 @Component
-public class EmployeeLeaveRequest {
+public class CommonUtil {
 
 	private String empCode;
 	private String maritalStatus;
@@ -34,7 +36,7 @@ public class EmployeeLeaveRequest {
 	
 	private String cancelDate;
 
-	public EmployeeLeaveRequest() {
+	public CommonUtil() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -208,7 +210,7 @@ public class EmployeeLeaveRequest {
 		this.cancelDate = cancelDate;
 	}
 
-	public EmployeeLeaveRequest(String empName, String deptName,  String leaveCode, String toDate,
+	public CommonUtil(String empName, String deptName,  String leaveCode, String toDate,
 			String fromDate, String applyDate, 
 			String approevedBy, String reason, String leaveFor) {
 		super();
@@ -230,7 +232,7 @@ public class EmployeeLeaveRequest {
 		//this.cancelDate = cancelDate;
 	}
 
-	public EmployeeLeaveRequest(String empName2, String deptName2, String desgName2, String fromDate, String toDate) {
+	public CommonUtil(String empName2, String deptName2, String desgName2, String fromDate, String toDate) {
 		this.empName = empName2;
 		this.deptName = deptName2;
 		this.desgName = desgName2;
@@ -240,7 +242,7 @@ public class EmployeeLeaveRequest {
 	}
 
 
-	public EmployeeLeaveRequest(String empCode2, String empName2, String deptName2, String martialStatus,
+	public CommonUtil(String empCode2, String empName2, String deptName2, String martialStatus,
 			Date dateOfJoining) {
 		this.empCode = empCode2;
 		this.empName = empName2;
@@ -250,12 +252,12 @@ public class EmployeeLeaveRequest {
 	}
 
 
-	public EmployeeLeaveRequest(String departmentCode, String designationCode, Date dateOfJoining) {
+	public CommonUtil(String departmentCode, String designationCode, Date dateOfJoining) {
 		//this.de
 	}
 
 
-	public EmployeeLeaveRequest(String empName2, String deptName2, String desgName2) {
+	public CommonUtil(String empName2, String deptName2, String desgName2) {
 		this.empName = empName2;
 		this.deptName = deptName2;
 		this.desgName = desgName2;

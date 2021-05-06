@@ -29,7 +29,7 @@ import com.hrms.model.Category;
 import com.hrms.model.Department;
 import com.hrms.model.Designation;
 import com.hrms.model.Employee;
-import com.hrms.model.EmployeeLeaveRequest;
+import com.hrms.model.CommonUtil;
 import com.hrms.model.MenuModule;
 import com.hrms.service.CategoryService;
 import com.hrms.service.DepartmentService;
@@ -221,15 +221,15 @@ public class EmployeeInformationReportController {
 		System.out.println("report type value : "+reportType);
 		System.out.println("month value : "+month);
 		
-		List<EmployeeLeaveRequest> em = new ArrayList<EmployeeLeaveRequest>();
-		EmployeeLeaveRequest empl;
+		List<CommonUtil> em = new ArrayList<CommonUtil>();
+		CommonUtil empl;
 		List<Employee> employeeList = employeeService.findByDateOfJoiningMonth( Integer.parseInt(month.toString()));
 		
 		if(reportType.equals("B")) {
 			for(int i =0 ;i<employeeList.size();i++) {
 				Department department = departmentService.findDepartmentById(employeeList.get(i).getDepartmentCode());
 				
-				empl = new EmployeeLeaveRequest(employeeList.get(i).getEmpCode(),employeeList.get(i).getEmpName(),
+				empl = new CommonUtil(employeeList.get(i).getEmpCode(),employeeList.get(i).getEmpName(),
 						department.getDeptName(),employeeList.get(i).getMartialStatus(),employeeList.get(i).getDateOfJoining());
 				em.add(empl);
 			}
@@ -240,7 +240,7 @@ public class EmployeeInformationReportController {
 			for(int i =0 ;i<employeeList.size();i++) {
 				Department department = departmentService.findDepartmentById(employeeList.get(i).getDepartmentCode());
 				
-				empl = new EmployeeLeaveRequest(employeeList.get(i).getEmpCode(),employeeList.get(i).getEmpName(),
+				empl = new CommonUtil(employeeList.get(i).getEmpCode(),employeeList.get(i).getEmpName(),
 						department.getDeptName(),employeeList.get(i).getMartialStatus(),employeeList.get(i).getDateOfJoining());
 				em.add(empl);
 			}
@@ -292,15 +292,15 @@ public class EmployeeInformationReportController {
 		System.out.println("report type value : "+reportType);
 		System.out.println("month value : "+empCode); 
 		
-		List<EmployeeLeaveRequest> em = new ArrayList<EmployeeLeaveRequest>();
-		EmployeeLeaveRequest empl;
+		List<CommonUtil> em = new ArrayList<CommonUtil>();
+		CommonUtil empl;
 		
 		Employee employee = employeeService.findEmployeeById(empCode);
 		
 		Department department = departmentService.findDepartmentById(employee.getDepartmentCode());
 		Designation designation = designationService.findDesignationById(employee.getDesignationCode());
 		
-		empl = new EmployeeLeaveRequest(employee.getEmpName(),
+		empl = new CommonUtil(employee.getEmpName(),
 										department.getDeptName(),designation.getDesgName());
 		em.add(empl);
 		String reportFileName = "EmployeeJoiningLetter";

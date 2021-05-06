@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.hrms.model.Department;
 import com.hrms.model.Designation;
 import com.hrms.model.Employee;
-import com.hrms.model.EmployeeLeaveRequest;
+import com.hrms.model.CommonUtil;
 import com.hrms.model.LeaveRequest;
 import com.hrms.model.MenuModule;
 import com.hrms.model.UserEntity;
@@ -77,8 +77,8 @@ public class LeaveApprovalController {
 		 
 		List<LeaveRequest> list = leaveRequestService.findAllByDeptCodeAndStatusN(deptCode);
 		System.out.println("list size : "+ list.size());
-		List<EmployeeLeaveRequest> listEmr = new ArrayList<EmployeeLeaveRequest>();
-		EmployeeLeaveRequest empLvRe;
+		List<CommonUtil> listEmr = new ArrayList<CommonUtil>();
+		CommonUtil empLvRe;
 		/*for(int i =0;i<list.size();i++) {
 			Employee emp = employeeService.findEmployeeById(list.get(i).getEmpCode());
 			System.out.println("emp loiye detail :"+ emp.getEmpName());
