@@ -82,9 +82,6 @@ body {
 								<div>
 								
                          <div id="validation-step-1">
-											
-									     
-									     
 									     
 										<div class="form-row">
 												<div class="form-group sm col-md-4">
@@ -470,44 +467,44 @@ body {
 											    <div class="form-row">
 											     <div class="form-group sm col-md-4">
 											      <label class="form-label">Promotion</label>
-											      <input  type="text"id="promotion"name="promotion" title="" class="form-control ">
+											      <input  type="text"id="promotion"name="promotion" maxlength="250" title="Promotion" class="form-control ">
 											     </div>
 											      <div class="form-group sm col-md-4">
 											      <label class="form-label">Acp</label>
-											      <input  type="text"id="acp"name="acp" title="" class="form-control ">
+											      <input  type="text"id="acp"name="acp" title="Acp"maxlength="250" class="form-control ">
 											     </div>
 											      <div class="form-group sm col-md-4">
 											      <label class="form-label">Apr</label>
-											      <input  type="text"id="apr"name="apr" title=""class="form-control " >
+											      <input  type="text"id="apr"name="apr" maxlength="250"title="Apr"class="form-control " >
 											     </div>
 											     
 											      </div>
 											       <div class="form-row">
 											      <div class="form-group sm col-md-4">
 											      <label class="form-label">Acr</label>
-											      <input  type="text"id="acr"name="acr" title="" class="form-control ">
+											      <input  type="text"id="acr"name="acr" title="Acr" maxlength="250"class="form-control ">
 											      </div>
 											      <div class="form-group sm col-md-4">
 											      <label class="form-label">Training</label>
-											      <input  type="text"id="training"name="training" title=""class="form-control " >
+											      <input  type="text"id="training"name="training" maxlength="250"title="Training"class="form-control " >
 											     </div>
 											      <div class="form-group sm col-md-4">
 											      <label class="form-label">Ltc</label>
-											      <input  type="text"id="ltc"name="ltc" title="" class="form-control ">
+											      <input  type="text"id="ltc"name="ltc" title="" maxlength="250"class="form-control ">
 											       </div>
 											      </div>
 											       <div class="form-row">
 											       <div class="form-group sm col-md-4">
 											       <label class="form-label">Leave Account</label>
-											      <input  type="text"id="leaveAccount"name="leaveAccount" title=""class="form-control " >
+											      <input  type="text"id="leaveAccount"name="leaveAccount"maxlength="250" title="Ltc"class="form-control " >
 											      </div>
 											       <div class="form-group sm col-md-4">
 											       <label class="form-label">Awards</label>
-											      <input  type="text"id="empAwards"name="empAwards" title=""class="form-control " >
+											      <input  type="text"id="empAwards"name="empAwards"maxlength="250" title="Awards"class="form-control " >
 											     </div>
 											      <div class="form-group sm col-md-4">
 											      <label class="form-label">On Deputation</label>
-											       <select
+											       <select onchange="changetextbox();"
 														class="form-control " name="onDeputation" id="onDeputation">
 														<option value="">Select Type</option>
 														<option value="Y">YES</option>
@@ -519,11 +516,11 @@ body {
 											       <div class="form-row">
 											        <div class="form-group sm col-md-4">
 											        <label class="form-label">Deputation</label>
-											       <input  type="text"id="empDeputation"name="empDeputation" title=""class="form-control " >
+											       <input  type="text"id="empDeputation"name="empDeputation"maxlength="250" title="Deputation"class="form-control " >
 											       </div>
 											        <div class="form-group sm col-md-4">
 											        <label class="form-label">Previous Postings</label>
-											       <input  type="text"id="previousPostings"name="previousPostings" title=""class="form-control " >
+											       <input  type="text"id="previousPostings"name="previousPostings"maxlength="250" title="Previous Postings"class="form-control " >
 											       </div>
 											       <div class="form-group sm col-md-4">
 											       <label class="form-label">Expired</label>
@@ -864,36 +861,49 @@ body {
 			}); */
 		});
 	</script>
-	<script type='text/javascript'>
-function preview_image(event) 
-{
- var reader = new FileReader();
- reader.onload = function()
- {
-  var output = document.getElementById('output_image');
-  output.src = reader.result;
- }
- reader.readAsDataURL(event.target.files[0]);
-}
-</script>
 
-<script>
-function sync()
-{
-  var n1 = document.getElementById('empName');
-  var n2 = document.getElementById('name');
-  n2.value = n1.value;
-}
-</script>
-<script>
-function syncAddress()
-{
-  var n1 = document.getElementById('address1');
-  var n2 = document.getElementById('addressArms');
-  n2.value = n1.value;
-}
-</script>
- <script>
+	<script type="text/javascript">
+		function changetextbox() {
+			if (document.getElementById("onDeputation").value === "Y")
+
+			{
+				document.getElementById("empDeputation").disabled = 'true';
+
+			} else {
+
+				document.getElementById("empDeputation").disabled = '';
+			}
+
+		}
+	</script>
+
+
+	<script type='text/javascript'>
+		function preview_image(event) {
+			var reader = new FileReader();
+			reader.onload = function() {
+				var output = document.getElementById('output_image');
+				output.src = reader.result;
+			}
+			reader.readAsDataURL(event.target.files[0]);
+		}
+	</script>
+
+	<script>
+		function sync() {
+			var n1 = document.getElementById('empName');
+			var n2 = document.getElementById('name');
+			n2.value = n1.value;
+		}
+	</script>
+	<script>
+		function syncAddress() {
+			var n1 = document.getElementById('address1');
+			var n2 = document.getElementById('addressArms');
+			n2.value = n1.value;
+		}
+	</script>
+	<script>
  function myFunctionState(){
    $('#stateCode').click(function() {
       	 var name= $('#stateCode option:selected').text();
@@ -901,21 +911,19 @@ function syncAddress()
       	}); 
       }
       
-</script>	
-<script>
-
-  $('#loading').show();
-  $.ajax({
-      // Other ajax parameters
-      success: function () {
-         // hiding the image here
-         debugger;
-         $('#loading').hide();
-      }
-  });
-  
 </script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+	<script>
+		$('#loading').show();
+		$.ajax({
+			// Other ajax parameters
+			success : function() {
+				// hiding the image here
+				debugger;
+				$('#loading').hide();
+			}
+		});
+	</script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
 
 

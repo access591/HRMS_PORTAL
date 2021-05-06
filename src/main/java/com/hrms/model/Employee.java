@@ -68,11 +68,7 @@ public class Employee implements Serializable {
 	@Column(name ="EMPLOYEE_PAYEE_CODE")
 	private String   employeePayeeCode;
 	
-	/*
-	 * @Size(max = 10)
-	 * 
-	 * @Column(name ="OFFICER_TYPE") private String officerType;
-	 */
+	
 	
 	@Size(max = 200)
 	@Column(name ="PRESENT_POSTING")
@@ -328,12 +324,7 @@ public class Employee implements Serializable {
 		this.employeePayeeCode = employeePayeeCode;
 	}
 
-	/*
-	 * public String getOfficerType() { return officerType; }
-	 * 
-	 * public void setOfficerType(String officerType) { this.officerType =
-	 * officerType; }
-	 */
+	
 
 	public String getPresentPosting() {
 		return presentPosting;
