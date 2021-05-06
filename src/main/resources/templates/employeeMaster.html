@@ -184,7 +184,7 @@ body {
 														class="form-control required">
 												</div>
 													
-												<div class="form-group sm col-md-4">
+												<!-- <div class="form-group sm col-md-4">
 													<label class="form-label">Officer Type</label> <span
 														class="text-danger">*</span> <select
 														class="form-control required" name="officerType" id="officerType">
@@ -195,7 +195,12 @@ body {
 														<option value="DA">DA</option>
 														<option value="ADA">ADA</option>
 													</select>
-												</div>
+												</div> -->
+												 <div class="form-group sm col-md-4">
+											       <label class="form-label">Aadhar No
+											       <span class="text-danger">*</span></label>
+							                 <input  type="text"id="aadharNo"name="aadharNo" title="Aadhar No" pattern="\d{1,16}"maxlength="16" class="form-control required">
+										     </div>
 													
 														<div class="form-group sm col-md-4">
 													<label class="form-label">Present Posting <span
@@ -247,7 +252,11 @@ body {
 													</label> <input name=vrs type="text" id="vrs" maxlength="30" 
 														class="form-control">
 												</div>
-												
+												<div class="form-group sm col-md-4">
+											       <label class="form-label">Date of Birth</label>
+											       <span class="text-danger">*</span>
+											       <input  type="text"id="empDob"name="empDob"  class="form-control required">
+											      </div>
 											
                                              	<div class="form-group sm col-md-4">
 													<label class="form-label">Upload Image <span
@@ -453,13 +462,84 @@ body {
 											      </label>
 							                 <input  type="text"id="telephone"name="telephone" title="Telephone No"maxlength="12" class="form-control ">
 										     </div>
-										      <div class="form-group sm col-md-4">
-											       <label class="form-label">Aadhar No
-											       <span class="text-danger">*</span></label>
-							                 <input  type="text"id="aadharNo"name="aadharNo" title="Aadhar No" pattern="\d{1,16}"maxlength="16" class="form-control required">
-										     </div>
+										     
 									
 											  </div>
+											  
+											  
+											    <div class="form-row">
+											     <div class="form-group sm col-md-4">
+											      <label class="form-label">Promotion</label>
+											      <input  type="text"id="promotion"name="promotion" title="" class="form-control ">
+											     </div>
+											      <div class="form-group sm col-md-4">
+											      <label class="form-label">Acp</label>
+											      <input  type="text"id="acp"name="acp" title="" class="form-control ">
+											     </div>
+											      <div class="form-group sm col-md-4">
+											      <label class="form-label">Apr</label>
+											      <input  type="text"id="apr"name="apr" title=""class="form-control " >
+											     </div>
+											     
+											      </div>
+											       <div class="form-row">
+											      <div class="form-group sm col-md-4">
+											      <label class="form-label">Acr</label>
+											      <input  type="text"id="acr"name="acr" title="" class="form-control ">
+											      </div>
+											      <div class="form-group sm col-md-4">
+											      <label class="form-label">Training</label>
+											      <input  type="text"id="training"name="training" title=""class="form-control " >
+											     </div>
+											      <div class="form-group sm col-md-4">
+											      <label class="form-label">Ltc</label>
+											      <input  type="text"id="ltc"name="ltc" title="" class="form-control ">
+											       </div>
+											      </div>
+											       <div class="form-row">
+											       <div class="form-group sm col-md-4">
+											       <label class="form-label">Leave Account</label>
+											      <input  type="text"id="leaveAccount"name="leaveAccount" title=""class="form-control " >
+											      </div>
+											       <div class="form-group sm col-md-4">
+											       <label class="form-label">Awards</label>
+											      <input  type="text"id="empAwards"name="empAwards" title=""class="form-control " >
+											     </div>
+											      <div class="form-group sm col-md-4">
+											      <label class="form-label">On Deputation</label>
+											       <select
+														class="form-control " name="onDeputation" id="onDeputation">
+														<option value="">Select Type</option>
+														<option value="Y">YES</option>
+														<option value="N"selected>NO</option>
+													</select>
+											      </div>
+											      </div>
+											      
+											       <div class="form-row">
+											        <div class="form-group sm col-md-4">
+											        <label class="form-label">Deputation</label>
+											       <input  type="text"id="empDeputation"name="empDeputation" title=""class="form-control " >
+											       </div>
+											        <div class="form-group sm col-md-4">
+											        <label class="form-label">Previous Postings</label>
+											       <input  type="text"id="previousPostings"name="previousPostings" title=""class="form-control " >
+											       </div>
+											       <div class="form-group sm col-md-4">
+											       <label class="form-label">Expired</label>
+											     <select
+														class="form-control " name="expired" id="expired">
+														<option value="">Select Type</option>
+														<option value="Y">YES</option>
+														<option value="N"selected>NO</option>
+														
+													</select>
+											     
+											      </div>
+											      </div>
+											      
+											     
+											    
 
 									</div>
 
@@ -640,7 +720,15 @@ body {
 		</div>
 	<script>
 		$(function() {
-			
+
+			$("input[name='empDob']").daterangepicker({
+				singleDatePicker: true,
+			    autoApply: true,
+				locale: {
+		            format: 'DD/MM/YYYY'
+		        },
+				showDropdowns: true
+			});
 			
 		$("input[name='dateOfPosting']").daterangepicker({
 				singleDatePicker: true,

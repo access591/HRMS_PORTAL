@@ -178,7 +178,7 @@ public class EmployeeController {
 		employee.setDateOfRetirement(eutility.getDateOfRetirement());
 		
 		employee.setEmployeePayeeCode(eutility.getEmployeePayeeCode());
-		employee.setOfficerType(eutility.getOfficerType());
+		/* employee.setOfficerType(eutility.getOfficerType()); */
 		employee.setPresentPosting(eutility.getPresentPosting());
 		employee.setSuspention(eutility.getSuspention());
 		
@@ -215,6 +215,47 @@ public class EmployeeController {
 		employee.setAddress1(eutility.getAddress1());
 		employee.setAddress2(eutility.getAddress2());
 		employee.setTransfer(eutility.getTransfer());
+		//step 2 complete=new Requirement=================================
+		
+		/* private String promotion; 
+		 private String acp;
+		 private String apr;
+		 
+		 private String acr;
+		private String training;
+	    private String ltc;*/
+		
+		
+		    /*private String  leaveAccount; 
+		    private String empAwards; 
+		    private String onDeputation;
+		    
+		     private String empDeputation;
+		     private String previousPostings; 
+		      private String expired;
+		      
+		       private Date empDob;
+		 */
+		
+		
+		employee.setPromotion(eutility.getPromotion());
+		employee.setAcp(eutility.getAcp());
+		employee.setApr(eutility.getApr());
+		
+		employee.setAcr(eutility.getAcr());
+		employee.setTraining(eutility.getTraining());
+		employee.setLtc(eutility.getLtc());
+		
+		employee.setLeaveAccount(eutility.getLeaveAccount());
+		employee.setEmpAwards(eutility.getEmpAwards());
+		employee.setOnDeputation(eutility.getOnDeputation());
+		
+		employee.setEmpDeputation(eutility.getEmpDeputation());
+		employee.setPreviousPostings(eutility.getPreviousPostings());
+		employee.setExpired(eutility.getExpired());
+		
+		employee.setEmpDob(eutility.getEmpDob());
+		
 		
 		//step 2 complete==================================
 		armsLicense.setName(eutility.getName());
@@ -321,7 +362,7 @@ public class EmployeeController {
 		employee.setDateOfRetirement(eutility.getDateOfRetirement());
 		
 		employee.setEmployeePayeeCode(eutility.getEmployeePayeeCode());
-		employee.setOfficerType(eutility.getOfficerType());
+		/* employee.setOfficerType(eutility.getOfficerType()); */
 		employee.setPresentPosting(eutility.getPresentPosting());
 		employee.setSuspention(eutility.getSuspention());
 		
