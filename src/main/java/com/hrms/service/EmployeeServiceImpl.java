@@ -70,4 +70,10 @@ public class EmployeeServiceImpl implements EmployeeService {
 		return this.employeeDao.findByDateOfJoiningMonth(month);
 	}
 
+	@Override
+	public List<Employee> findByDepartmentCode(String deptCode) {
+		
+		return this.employeeDao.findByDepartmentCode(deptCode);
+	}
+
 }
