@@ -33,7 +33,7 @@ public class EmployeeUtil {
 	
 	private String   employeePayeeCode;
 	
-	/* private String officerType; */
+	
 	
 	private String presentPosting;
 	
@@ -210,10 +210,7 @@ public class EmployeeUtil {
 		this.employeePayeeCode = employeePayeeCode;
 	}
 
-	/*
-	 * public String getOfficerType() { return officerType; } public void
-	 * setOfficerType(String officerType) { this.officerType = officerType; }
-	 */
+	
 	public String getPresentPosting() {
 		return presentPosting;
 	}
