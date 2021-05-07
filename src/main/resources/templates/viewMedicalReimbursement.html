@@ -60,7 +60,7 @@ body {
 												<label class="form-label">Slip No</label>
 												<label style="color: red">*</label>
 												<select class="form-control select2" name="slipNo"id="slipNo"onchange="myFunctionSlipNo()" required aria-required="true">
-												 <option value="">Select User</option>
+												 <option value="">Select Slip No</option>
 												<option th:each="users: ${listMedicalReimbursement}" th:value="${users.getSlipNo()}" th:text="${users.getSlipNo()}"></option>
 											     	</select>
 											</div>
@@ -221,7 +221,7 @@ body {
 	            console.log(obj);empCode
 	            $('#dateOfSlip').val(obj.dateOfSlip);
 				$('#nameOfPerson').val(obj.nameOfPerson);
-			
+				$('#empCode').val(obj.empCode);
 				
 	        }
 	        else{
