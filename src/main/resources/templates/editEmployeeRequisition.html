@@ -89,26 +89,16 @@ body {
 											</div>
 											<div class="col-12 col-lg-6">
 												<label class="form-label">Department Name</label> <label
-													style="color: red">*</label> <select class="form-control"
-													id="departmentDropdown" onchange="changeDepartment()">
-													<option value="">Select Department</option>
-													<option th:each="department :  ${departmentList}"
-														th:text="${department.deptName}"
-														th:value=" ${department.departmentCode}"></option>
-												</select>
+													style="color: red">*</label><input type="text" class="form-control" id="departmentId"
+														value="" th:field="*{deptCode}">
 											</div>
 										</div>
 										<div class="row">
 											<div class="col-12 col-lg-6">
 												<div class="form-group">
 													<label> Requisition Priorty </label> <label
-														style="color: red">*</label> <select
-														class="form-control select2" id="leave_type_id"
-														th:field="*{reqPriority}">
-														<option value="">Select</option>
-														<option value="low">Low</option>
-														<option value="high">High</option>
-													</select>
+														style="color: red">*</label> <input type="text" class="form-control" id="reqPriority"
+														value="" th:field="*{reqPriority}">
 												</div>
 											</div>
 											<div class="col-12 col-lg-6">
@@ -168,28 +158,22 @@ body {
 															id="desigCode"
 															th:field="*{employeRequisitionDetail[__${stat.index}__].desigCode}"></td>
 
-														<td><select id="designationName"
-															name="designationName" onchange="selectDesignation()">
-																<option value=" ">Select</option>
+														<td><input type="text" style="width: 130px;"
+															id="desigCode"
+															th:field="*{employeRequisitionDetail[__${stat.index}__].desigCode}"></td>
 
 
-														</select></td>
+														
 
 
 
-														<td><select id="location"
-															th:field="*{employeRequisitionDetail[__${stat.index}__].location}">
-																<option value=" ">Select</option>
-																<option value="court">Court</option>
-																<option value="department">Department</option>
-														</select></td>
+														<td><input type="text" style="width: 130px;"
+															id="location"
+															th:field="*{employeRequisitionDetail[__${stat.index}__].location}"></td>
 
-														<td><select id="sex"
-															th:field="*{employeRequisitionDetail[__${stat.index}__].sex}">
-																<option value=" ">Select</option>
-																<option value="male">Male</option>
-																<option value="female">Female</option>
-														</select></td>
+														<td><input type="text" style="width: 130px;"
+															id="sex"
+															th:field="*{employeRequisitionDetail[__${stat.index}__].sex}"></td>
 
 														<td><input name="ageFrom" type="text"
 															style="width: 130px;" id="ageFrom"

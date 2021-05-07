@@ -15,6 +15,7 @@ public class EmployeeRequisitionServiceImpl implements EmployeeRequisitionServic
 
 	@Autowired EmployeeRequisitionDao employeRequisitionDao;
 	@Autowired SessionFactory sessionfactory;
+	//@Autowired
 	@Override
 	public void addEmployeeRequisition(EmployeeRequisition employeReq) {
 		Session session = sessionfactory.openSession();
@@ -39,7 +40,10 @@ public class EmployeeRequisitionServiceImpl implements EmployeeRequisitionServic
 
 	@Override
 	public void updateEmployeeRequisition(EmployeeRequisition c) {
-		this.employeRequisitionDao.saveOrUpdate(c);
+		
+		//EmployeeRequisition eq = sessionfactory.find
+		
+		//this.employeRequisitionDao.saveOrUpdate(c);
 		
 	}
 

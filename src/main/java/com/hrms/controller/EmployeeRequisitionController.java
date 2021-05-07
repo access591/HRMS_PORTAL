@@ -130,6 +130,25 @@ public class EmployeeRequisitionController {
 	}
 	
 	
+	@GetMapping(value = {"editRequisition/{id}"})
+	public String editRequisition(@PathVariable("id") String reqCode,@ModelAttribute("req") EmployeeRequisition employeeRequisition,
+			Model model) {
+		System.out.println("=====================>");
+		
+		EmployeeRequisition requisition = employeeRequisitionService.findEmployeeRequisitiondById(reqCode);
+		//requisition.getEmployeRequisitionDetail()
+		if(requisition != null) {
+			model.addAttribute("req", requisition);
+		}
+		System.out.println("employee requisition id : "+ reqCode);
+		return "editEmployeeRequisition";
+	}
+	
+	
+	//editEmployeeRequisition.html
+	
+	
+	
 	
 	
 	
