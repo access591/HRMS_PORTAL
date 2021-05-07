@@ -13,6 +13,7 @@ public class EmployeeUtil {
 	
 	private String departmentCode;
 	private String categoryCode;
+	private String categoryName;
 	private String designationCode;
 	private String departmentName;
 	private String designationName;
@@ -119,17 +120,19 @@ public class EmployeeUtil {
 	
 	
 	
-	public EmployeeUtil(String empCode2, String armsCode2, String empName2, String categoryCode2, String deptName,
+	public EmployeeUtil(String empCode2, String armsCode2, String empName2,  String categoryName2, String deptName,
 		String desgName, byte[] imageProfile2) {
 		this.empCode = empCode2;
 		this.armsCode=armsCode2;
 		this.empName=empName2;
-		this.categoryCode=categoryCode2;
+		this.categoryName=categoryName2;
 		this.departmentName=deptName;
 		this.designationName=desgName;
 		this.imageProfile=imageProfile2;
 		
+		
 	}
+	
 	public String getDepartmentName() {
 		return departmentName;
 	}
@@ -185,6 +188,12 @@ public class EmployeeUtil {
 		this.departmentCode = departmentCode;
 	}
 	
+	public String getCategoryName() {
+		return categoryName;
+	}
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
+	}
 	public String getCategoryCode() {
 		return categoryCode;
 	}
