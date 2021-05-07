@@ -6,10 +6,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.hrms.model.Employee;
@@ -34,7 +37,7 @@ public class MedicalReimbursementController {
 	MedicalReimbursementDetailsService medicalReimbursementDetailsService;
 	@GetMapping("/medicalReimbursement")
 	public String medicalReimbursement(Model model, HttpSession session) {
-		
+
 		List<Employee> listEmployee = employeeService.getAllEmployees();
 		model.addAttribute("listEmployee", listEmployee);
 		
@@ -167,7 +170,8 @@ public class MedicalReimbursementController {
 		
 		List<Employee> listEmployee = employeeService.getAllEmployees();
 		model.addAttribute("listEmployee", listEmployee);
-		
+		List<MedicalReimbursement>listMedicalReimbursement=medicalReimbursementService.getAllMedicalReimbursement();
+		model.addAttribute("listMedicalReimbursement", listMedicalReimbursement);
 		String userCode = (String) session.getAttribute("username");
 		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
 		if (modules != null) {
@@ -177,7 +181,23 @@ public class MedicalReimbursementController {
 		
 	}
 
-	
+	 @CrossOrigin
+	    @GetMapping("/medicalReimbursementViewDetails/{id}")
+	    public ResponseEntity<MedicalReimbursementUtil> getMedicalReimbursementById(@PathVariable(value = "id") String id) {
+		
+		 MedicalReimbursementUtil medicalReimbursement=new MedicalReimbursementUtil();
+		 MedicalReimbursement m1 = medicalReimbursementService.findByIdMedicalReimbursementMaster(id);
+		 medicalReimbursement.setDateOfSlip(m1.getDateOfSlip());
+		 medicalReimbursement.setNameOfPerson(m1.getNameOfPerson());
+
+		System.out.println("XXXXXXXXXXXXXXXXXXX>>>>>>>>>>>>>>>>>>>>>>>>"+m1.getDateOfSlip());
+		 MedicalReimbursementDetail m4=new MedicalReimbursementDetail();
+		 
+		 if(medicalReimbursement == null) {
+	            return ResponseEntity.notFound().build();
+	        }
+	        return ResponseEntity.ok().body(medicalReimbursement);
+	    }
 	
 	}
 
