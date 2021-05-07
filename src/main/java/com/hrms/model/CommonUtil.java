@@ -35,6 +35,30 @@ public class CommonUtil {
 	private String cancelBy;
 	
 	private String cancelDate;
+	
+	private String reqCode;
+	
+	 private Date reqDate;
+	
+	 private String deptCode;
+	
+	 private String reqPriority;
+	
+	 private String reqApprover;
+	 
+	 private String remarks;
+	 
+	 private String insBy;
+	 
+	 
+	 private Date insDate;
+	 
+	 private Date reqTill;
+
+	 private Date approveDate;
+	 
+	
+	 private String status;
 
 	public CommonUtil() {
 		super();
@@ -42,6 +66,116 @@ public class CommonUtil {
 	}
 
 	
+	public String getReqCode() {
+		return reqCode;
+	}
+
+
+	public void setReqCode(String reqCode) {
+		this.reqCode = reqCode;
+	}
+
+
+	public Date getReqDate() {
+		return reqDate;
+	}
+
+
+	public void setReqDate(Date reqDate) {
+		this.reqDate = reqDate;
+	}
+
+
+	public String getDeptCode() {
+		return deptCode;
+	}
+
+
+	public void setDeptCode(String deptCode) {
+		this.deptCode = deptCode;
+	}
+
+
+	public String getReqPriority() {
+		return reqPriority;
+	}
+
+
+	public void setReqPriority(String reqPriority) {
+		this.reqPriority = reqPriority;
+	}
+
+
+	public String getReqApprover() {
+		return reqApprover;
+	}
+
+
+	public void setReqApprover(String reqApprover) {
+		this.reqApprover = reqApprover;
+	}
+
+
+	public String getRemarks() {
+		return remarks;
+	}
+
+
+	public void setRemarks(String remarks) {
+		this.remarks = remarks;
+	}
+
+
+	public String getInsBy() {
+		return insBy;
+	}
+
+
+	public void setInsBy(String insBy) {
+		this.insBy = insBy;
+	}
+
+
+	public Date getInsDate() {
+		return insDate;
+	}
+
+
+	public void setInsDate(Date insDate) {
+		this.insDate = insDate;
+	}
+
+
+	public Date getReqTill() {
+		return reqTill;
+	}
+
+
+	public void setReqTill(Date reqTill) {
+		this.reqTill = reqTill;
+	}
+
+
+	public Date getApproveDate() {
+		return approveDate;
+	}
+
+
+	public void setApproveDate(Date approveDate) {
+		this.approveDate = approveDate;
+	}
+
+
+	public String getStatus() {
+		return status;
+	}
+
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+
 	public String getEmpCode() {
 		return empCode;
 	}
@@ -262,6 +396,26 @@ public class CommonUtil {
 		this.deptName = deptName2;
 		this.desgName = desgName2;
 	}
+
+
+	public CommonUtil(String deptName, String reqCode, Date reqDate, String reqPriority, String reqApprover,
+			String remarks, String insBy, Date insDate, Date reqTill, Date approveDate, String status) {
+		super();
+		this.deptName = deptName;
+		this.reqCode = reqCode;
+		this.reqDate = reqDate;
+		this.reqPriority = reqPriority;
+		this.reqApprover = reqApprover;
+		this.remarks = remarks;
+		this.insBy = insBy;
+		this.insDate = insDate;
+		this.reqTill = reqTill;
+		this.approveDate = approveDate;
+		this.status = status;
+	}
+	
+	
+	
 
 
 	
