@@ -1,16 +1,22 @@
 package com.hrms.controller;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -35,6 +41,9 @@ public class MedicalReimbursementController {
 	MedicalReimbursementService medicalReimbursementService;
 	@Autowired
 	MedicalReimbursementDetailsService medicalReimbursementDetailsService;
+	
+	
+
 	@GetMapping("/medicalReimbursement")
 	public String medicalReimbursement(Model model, HttpSession session) {
 
@@ -184,13 +193,22 @@ public class MedicalReimbursementController {
 	 @CrossOrigin
 	    @GetMapping("/medicalReimbursementViewDetails/{id}")
 	    public ResponseEntity<MedicalReimbursementUtil> getMedicalReimbursementById(@PathVariable(value = "id") String id) {
-		
+		 Employee e= new Employee();
 		 MedicalReimbursementUtil medicalReimbursement=new MedicalReimbursementUtil();
 		 MedicalReimbursement m1 = medicalReimbursementService.findByIdMedicalReimbursementMaster(id);
+		
+		 SimpleDateFormat format2 = new SimpleDateFormat("dd/MM/yyyy");
+		 Date abc=m1.getDateOfSlip();
+		  String formatedDate = format2.format(abc);
+		 
+		 System.out.println("date of slip >>>>>>>>>>>>>>>"+formatedDate);
+		 
 		 medicalReimbursement.setDateOfSlip(m1.getDateOfSlip());
+		 
 		 medicalReimbursement.setNameOfPerson(m1.getNameOfPerson());
-
-		System.out.println("XXXXXXXXXXXXXXXXXXX>>>>>>>>>>>>>>>>>>>>>>>>"+m1.getDateOfSlip());
+		
+		 medicalReimbursement.setEmpCode(m1.getEmpCode().getEmpCode());
+	
 		 MedicalReimbursementDetail m4=new MedicalReimbursementDetail();
 		 
 		 if(medicalReimbursement == null) {
