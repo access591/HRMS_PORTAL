@@ -55,6 +55,15 @@ public class MedicalReimbursement implements Serializable {
 	@Column(name = "MED_IND_OUT")
 	private String medIndOut;
 	
+	@Column(name = "APPROVED_BY")
+	private String  approvedBy ;   
+	
+	@Column(name = "APPROVAL_STATUS")
+	private String  approvalStatus ;
+	
+	@Column(name = "APPROVAL_DATE")
+	private Date approvalDate ;
+	
 	//>>>>>>>>>>>>>>>>>>>>>>>>>second Step Start>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 	
 	public String getSlipNo() {
@@ -129,6 +138,30 @@ public class MedicalReimbursement implements Serializable {
 		this.medIndOut = medIndOut;
 	}
 //...............................................
+
+	public String getApprovedBy() {
+		return approvedBy;
+	}
+
+	public void setApprovedBy(String approvedBy) {
+		this.approvedBy = approvedBy;
+	}
+
+	public String getApprovalStatus() {
+		return approvalStatus;
+	}
+
+	public void setApprovalStatus(String approvalStatus) {
+		this.approvalStatus = approvalStatus;
+	}
+
+	public Date getApprovalDate() {
+		return approvalDate;
+	}
+
+	public void setApprovalDate(Date approvalDate) {
+		this.approvalDate = approvalDate;
+	}
 
 	
 	
