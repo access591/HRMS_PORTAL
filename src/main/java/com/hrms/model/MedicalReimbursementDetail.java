@@ -46,14 +46,7 @@ public class MedicalReimbursementDetail implements Serializable {
 	
 	//>>>>>>>>>>>>>>>>>>>>>>>>>3 Step Start>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
-	@Column(name = "APPROVED_BY")
-	private String  approvedBy ;   
-	
-	@Column(name = "APPROVAL_STATUS")
-	private String  approvalStatus ;
-	
-	@Column(name = "APPROVAL_DATE")
-	private Date approvalDate ;
+
 
 	@Column(name = "INS_BY", updatable = false)
 	private String insBy;
@@ -111,24 +104,7 @@ public class MedicalReimbursementDetail implements Serializable {
 	public void setRemark(String remark) {
 		this.remark = remark;
 	}
-	public String getApprovedBy() {
-		return approvedBy;
-	}
-	public void setApprovedBy(String approvedBy) {
-		this.approvedBy = approvedBy;
-	}
-	public String getApprovalStatus() {
-		return approvalStatus;
-	}
-	public void setApprovalStatus(String approvalStatus) {
-		this.approvalStatus = approvalStatus;
-	}
-	public Date getApprovalDate() {
-		return approvalDate;
-	}
-	public void setApprovalDate(Date approvalDate) {
-		this.approvalDate = approvalDate;
-	}
+
 	public String getInsBy() {
 		return insBy;
 	}
