@@ -42,8 +42,9 @@ body {
 						<nav aria-label="breadcrumb">
 						</nav>
 					</div>
-					<div class="row">
 					<form id="validation-form" action="#" th:action="@{/saveMedicalReimbursement}" th:object="${medicalReimbursement}" method="POST">
+					<div class="row">
+					
 						<div class="col-12">
 							<div class="card">
 								<div class="card-header">
@@ -165,6 +166,16 @@ body {
 								</div>
 								<div class="card-body">
 								<input id="_cr" name="_cr" type="text"value="1">
+								<div class="col-sm-12" align="right">
+								<a th:href="@{/viewMedicalReimbursement}">
+								<em  class="fa fa-eye" style="font-size:28px"> 
+								</em></a>&nbsp;&nbsp;&nbsp;
+								
+								
+								
+								<a id="add_row" class="fa fa-plus" aria-hidden="true"style="font-size:28px;color:#001080"></a>&nbsp;&nbsp;&nbsp;
+								<a id='delete_row'class="fa fa-trash" style="font-size:28px;color:#399490fc"aria-hidden="true"></a>	
+								</div>
 								<table id="datatables-buttons" class="table table-striped display" style="width:100%"aria-describedby="datatables-buttons">
 												<thead>
 					<tr><th >
@@ -254,13 +265,14 @@ body {
 			</table>	 <input type="submit" class="btn btn-primary" value="Submit">
 								 <button type="reset"class="btn btn-primary" value="Reset">Reset</button>	
 								</div>
-								<a id="add_row" class="fa pull-right btn btn-default ">Add Row</a><a id='delete_row' class="fa pull-right btn btn-default">Delete Row</a>	
+								<!-- <a id="add_row" class="fa pull-right btn btn-default ">Add Row</a><a id='delete_row' class="fa pull-right btn btn-default">Delete Row</a>	 -->
 							</div>
 							
 						</div>
 						
-						</form>
+					
 					</div>
+						</form>
 				</div>
 
 			</main>
