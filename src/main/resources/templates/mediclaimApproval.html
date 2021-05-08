@@ -76,14 +76,14 @@ body {
 
 										</thead>
 										<tbody>
-										<tr>
-										<td></td>
+										<tr th:each = "student : ${listMedicalReimbursement}">
+										<td th:text="${student.slipNo}" ></td>
 										
-										<td></td>
+										<td  th:text="${student.dateOfSlip}"></td>
 										
-										<td></td>
+										<td  th:text="${student.empCode.empCode}"></td>
 										
-										<td></td>
+										<td th:text="${student.empCode.empName}"></td>
 										
 										<td></td>
 										

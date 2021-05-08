@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.hrms.model.Employee;
+import com.hrms.model.Loan;
 import com.hrms.model.MedicalReimbursement;
 import com.hrms.model.MedicalReimbursementDetail;
 import com.hrms.model.MedicalReimbursementUtil;
@@ -46,7 +47,8 @@ public class MedicalReimbursementController {
 
 	@GetMapping("/medicalReimbursement")
 	public String medicalReimbursement(Model model, HttpSession session) {
-
+		List<MedicalReimbursement> listMedicalReimbursement =  medicalReimbursementService.getAllMedicalReimbursement();
+		model.addAttribute("listMedicalReimbursement", listMedicalReimbursement);
 		List<Employee> listEmployee = employeeService.getAllEmployees();
 		model.addAttribute("listEmployee", listEmployee);
 		
