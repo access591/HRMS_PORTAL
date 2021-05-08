@@ -85,9 +85,15 @@ body {
 										
 										<td th:text="${student.empCode.empName}"></td>
 										
-										<td></td>
 										
-										<td></td>
+										<td>
+										<p th:each="category : ${listMedicalReimbursementDetail}"  th:text="${category.calmlAmount}"></p>
+										</td>
+										
+										<td>
+										<p th:each="category : ${listMedicalReimbursementDetail}"  th:text="${category.passedAmount}"></p>
+										
+										</td>
 										<td></td>
 										<td></td>
 										<td>

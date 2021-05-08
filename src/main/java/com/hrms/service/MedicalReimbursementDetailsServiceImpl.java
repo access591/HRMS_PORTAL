@@ -1,12 +1,14 @@
 package com.hrms.service;
 
 import java.util.Date;
+import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.hrms.model.Loan;
 import com.hrms.model.MedicalReimbursementDetail;
 import com.hrms.repository.MedicalReimbursementDetailsDao;
 
@@ -28,6 +30,11 @@ public class MedicalReimbursementDetailsServiceImpl  implements MedicalReimburse
 		s.clear();
 		s.close();
 		return true;
+	}
+	@Override
+	public List<MedicalReimbursementDetail> getAllMedicalReimbursementDetails() {
+		List<MedicalReimbursementDetail> listMedicalReimbursementDetail = medicalReimbursementDetailsDao.findAll();
+		return listMedicalReimbursementDetail;
 	}
 
 }
