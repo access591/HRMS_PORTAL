@@ -223,14 +223,14 @@ body {
 						<input type="Date" name='caseMemoDate0' placeholder='Case Memo Date' class="form-control"/>
 						</td>
 						<td>
-						<input type="text" name='calmlAmount0' placeholder='Claiming Amount' class="form-control"/>
+						<input type="text" name='calmlAmount0' placeholder='Claiming Amount' class="form-control txt"/>
 						</td>
 						
 						<td>
-						<input type="text" name='passedAmount0' placeholder='Passed Amount' class="form-control"/>
+						<input type="text" name='passedAmount0' placeholder='Passed Amount' class="form-control pas"/>
 						</td>
 						<td>
-						<input type="text" name='govtexemptionAmount0' placeholder='Govt exemption Amount' class="form-control"/>
+						<input type="text" name='govtexemptionAmount0' placeholder='Govt exemption Amount' class="form-control govt"/>
 						</td>
 						
 						
@@ -247,14 +247,14 @@ body {
 					<td>
 					 <div class="form-group ">  
 					<label class="form-label">Total Amount</label>
-					<input type="text" name='totalAmount' placeholder='Total Amount' class="form-control"/>
+					<input type="text" id="sum" name='totalAmount' placeholder='Total Amount' class="form-control"/>
 					</div>
 					</td>
 					<td>
-					<input type="text" name='totalPassing'  class="form-control"/>
+					<input type="text" id="totalPassing" name='totalPassing'  class="form-control"/>
 					</td>
 					<td>
-					<input type="text" name='totalGovtExt' class="form-control"/>
+					<input type="text" id="totalGovtExt" name='totalGovtExt' class="form-control"/>
 					</td>
 					<td>
 					
@@ -318,10 +318,11 @@ $(document).ready(function(){
 
     var i=1;
    $("#add_row").click(function(){
-    $('#addr'+i).html("<td>"+ (i+1) +"</td><td><input name='medStDr"+i+"' type='text' placeholder='Name' class='form-control input-md'/> </td><td><input  name='caseMemoNo"+i+"' type='text' placeholder='Case Memo No'  class='form-control input-md'></td><td><input  name='caseMemoDate"+i+"' type='Date' placeholder='Case Memo Date'  class='form-control input-md'></td><td><input  name='calmlAmount"+i+"' type='text' onkeyup='syncAddress()' placeholder='Calming Amount'  class='form-control input-md'></td><td><input  name='passedAmount"+i+"' type='text' placeholder='Passed Amount'  class='form-control input-md'></td><td><input  name='govtexemptionAmount"+i+"' type='text' placeholder='govt Exemption Amount'  class='form-control input-md'></td><td><input  name='remark"+i+"' type='text' placeholder='Remark'  class='form-control input-md'></td>");
+    $('#addr'+i).html("<td>"+ (i+1) +"</td><td><input name='medStDr"+i+"' type='text' placeholder='Name' class='form-control txt input-md'/> </td><td><input  name='caseMemoNo"+i+"' type='text' placeholder='Case Memo No'  class='form-control input-md'></td><td><input  name='caseMemoDate"+i+"' type='Date' placeholder='Case Memo Date'  class='form-control input-md'></td><td><input  name='calmlAmount"+i+"' type='text'placeholder='Calming Amount'  class='txt form-control input-md'></td><td><input  name='passedAmount"+i+"' type='text' placeholder='Passed Amount'  class='pas form-control input-md'></td><td><input  name='govtexemptionAmount"+i+"' type='text' placeholder='govt Exemption Amount'  class='govt form-control input-md'></td><td><input  name='remark"+i+"' type='text' placeholder='Remark'  class='form-control input-md'></td>");
 
     $('#datatables-buttons').append('<tr id="addr'+(i+1)+'"></tr>');
     $('#_cr').val(i+1);
+    
     i++; 
 });
    
@@ -357,8 +358,81 @@ $(document).ready(function(){
 });
 
 
+function calculateSum() {
+
+    var sum = 0;
+    //iterate through each textboxes and add the values
+    $(".txt").each(function () {
+
+        //add only if the value is number
+        if (!isNaN(this.value) && this.value.length != 0) {
+            sum += parseFloat(this.value);
+        }
+
+    });
+    //.toFixed() method will roundoff the final sum to 2 decimal places
+   var fds=sum;
+   //$("#").html(sum.toFixed(2));
+   $("#sum").val(sum);
+    
+}
+
+$("table").on("keyup", ".txt", function () {
+    calculateSum();
+});
 
 
+function calculateSumtotalPassing() {
+
+    var sum = 0;
+    //iterate through each textboxes and add the values
+    $(".pas").each(function () {
+
+        //add only if the value is number
+        if (!isNaN(this.value) && this.value.length != 0) {
+            sum += parseFloat(this.value);
+        }
+
+    });
+    //.toFixed() method will roundoff the final sum to 2 decimal places
+   var fds=sum;
+   //$("#").html(sum.toFixed(2));
+   $("#totalPassing").val(sum);
+    
+}
+
+$("table").on("keyup", ".pas", function () {
+	calculateSumtotalPassing();
+});
+
+
+
+function calculateSumtotalgovt() {
+
+    var sum = 0;
+    //iterate through each textboxes and add the values
+    $(".govt").each(function () {
+
+        //add only if the value is number
+        if (!isNaN(this.value) && this.value.length != 0) {
+            sum += parseFloat(this.value);
+        }
+
+    });
+    //.toFixed() method will roundoff the final sum to 2 decimal places
+   var fds=sum;
+   //$("#").html(sum.toFixed(2));
+   $("#totalGovtExt").val(sum);
+    
+}
+
+$("table").on("keyup", ".govt", function () {
+	calculateSumtotalgovt();
+});
+
+
+
+totalGovtExt
 
 </script>
 <!-- <script>
