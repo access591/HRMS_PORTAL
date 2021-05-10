@@ -38,10 +38,10 @@ public class MedicalReimbursement implements Serializable {
 	@Column(name = "SLIP_DATE")
 	private Date dateOfSlip;
 	@ManyToOne
-	@JoinColumn(name = "EMPLOYEE_CODE", nullable = false)
+	@JoinColumn(name = "EMPLOYEE_CODE",updatable = false)
 	private Employee empCode;
 
-	@Column(name = "MONTH")
+	@Column(name = "CLAIMING_DATE")
 	private Date claimingDate;
 
 	@Column(name = "NAME_OF_PERSON")
