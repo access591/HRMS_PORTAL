@@ -273,6 +273,7 @@ body {
 					
 					</div>
 						</form>
+				
 				</div>
 
 			</main>
@@ -280,6 +281,7 @@ body {
 		<footer class="footer">
 		<div th:replace="/fragments/footer :: div"></div>
 		</footer>
+		
 		</div>
 		</div>
 		<script>
@@ -311,6 +313,7 @@ body {
 		showDropdowns: true
 	});
 	
+
 	</script>
 	
 <script>
@@ -356,7 +359,6 @@ $(document).ready(function(){
 	    alert(grandTotal);
 
 	}
-});
 
 
 function calculateSum() {
@@ -406,6 +408,7 @@ $("table").on("keyup", ".pas", function () {
 	calculateSumtotalPassing();
 });
 
+});
 
 
 function calculateSumtotalgovt() {
@@ -433,9 +436,27 @@ $("table").on("keyup", ".govt", function () {
 
 
 
-totalGovtExt
+
 
 </script>
+<script>
+		$(function() {
+			// Datatables basic
+			$('#datatables-basic').DataTable({
+				responsive: true
+			});
+			// Datatables with Buttons
+			var datatablesButtons = $('#datatables-buttonsr').DataTable({
+				  deferRender:true,
+		            scrollCollapse: true,
+		            scroller: false,
+				   responsive: true,
+				   lengthMenu :[[10,20,30,-1 ],['10 rows', '20 rows', '30 rows', 'Show all' ] ],
+					buttons :[]
+			});
+			datatablesButtons.buttons().container().appendTo("#datatablesr-buttons_wrapper .col-md-6:eq(0)")
+		});
+	</script>
 <!-- <script>
 function syncAddress()
 {
@@ -448,6 +469,6 @@ function syncAddress()
 }
 </script> -->
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-		
+				
 </body>
 </html>

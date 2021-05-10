@@ -11,5 +11,6 @@ public interface MedicalReimbursementService {
 	List<MedicalReimbursement> getAllMedicalReimbursement();
 
 	MedicalReimbursement findByIdMedicalReimbursementMaster(String id);
+	void removeMedicalReimbursement(String id);
 
 }

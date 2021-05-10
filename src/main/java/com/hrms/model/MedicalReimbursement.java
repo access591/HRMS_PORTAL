@@ -2,12 +2,15 @@ package com.hrms.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 @Entity
 @Table(name = "MEDICLAIM_MASTER")
@@ -64,10 +67,22 @@ public class MedicalReimbursement implements Serializable {
 	@Column(name = "APPROVAL_DATE")
 	private Date approvalDate ;
 	
+	 @OneToMany(mappedBy="slipNo",cascade = CascadeType.ALL,
+		        orphanRemoval = true)
+	List<MedicalReimbursementDetail> medicalReimbursementDetail;
+	
 	//>>>>>>>>>>>>>>>>>>>>>>>>>second Step Start>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 	
 	public String getSlipNo() {
 		return slipNo;
+	}
+
+	public List<MedicalReimbursementDetail> getMedicalReimbursementDetail() {
+		return medicalReimbursementDetail;
+	}
+
+	public void setMedicalReimbursementDetail(List<MedicalReimbursementDetail> medicalReimbursementDetail) {
+		this.medicalReimbursementDetail = medicalReimbursementDetail;
 	}
 
 	public void setSlipNo(String slipNo) {

@@ -52,6 +52,8 @@ public class MedicalReimbursementController {
 		List<Employee> listEmployee = employeeService.getAllEmployees();
 		model.addAttribute("listEmployee", listEmployee);
 		
+		List<MedicalReimbursementDetail> listMedicalReimbursementDetail=medicalReimbursementDetailsService.getAllMedicalReimbursementDetails();
+		model.addAttribute("listMedicalReimbursementDetail", listMedicalReimbursementDetail);
 		String userCode = (String) session.getAttribute("username");
 		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
 		if (modules != null) {
@@ -176,13 +178,17 @@ public class MedicalReimbursementController {
 
 		
 	}
+	
+	
+	
 	@GetMapping("/viewMedicalReimbursement")
 	String viewMedicalReimbursement(Model model, HttpSession session) {
 		
-		List<Employee> listEmployee = employeeService.getAllEmployees();
-		model.addAttribute("listEmployee", listEmployee);
+		
 		List<MedicalReimbursement>listMedicalReimbursement=medicalReimbursementService.getAllMedicalReimbursement();
 		model.addAttribute("listMedicalReimbursement", listMedicalReimbursement);
+		List<MedicalReimbursementDetail> listMedicalReimbursementDetail=medicalReimbursementDetailsService.getAllMedicalReimbursementDetails();
+		model.addAttribute("listMedicalReimbursementDetail", listMedicalReimbursementDetail);
 		String userCode = (String) session.getAttribute("username");
 		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
 		if (modules != null) {
@@ -192,6 +198,38 @@ public class MedicalReimbursementController {
 		
 	}
 
+	
+	@GetMapping(value = { "/deleteMedicalReimbursement/{id}" })
+	public String deleteEmployee(@PathVariable("id") String id, Model model,
+			HttpSession session) {
+		try {
+			
+			medicalReimbursementService.removeMedicalReimbursement(id);
+			session.setAttribute("username", session.getAttribute("username"));
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	
+		return "redirect:/viewMedicalReimbursement";
+	}
+	
+	
+	/*
+	 * @GetMapping("/updateMedicalReimbursement") String
+	 * updateMedicalReimbursement(Model model, HttpSession session) {
+	 * 
+	 * List<Employee> listEmployee = employeeService.getAllEmployees();
+	 * model.addAttribute("listEmployee", listEmployee);
+	 * List<MedicalReimbursement>listMedicalReimbursement=
+	 * medicalReimbursementService.getAllMedicalReimbursement();
+	 * model.addAttribute("listMedicalReimbursement", listMedicalReimbursement);
+	 * String userCode = (String) session.getAttribute("username"); List<MenuModule>
+	 * modules = moduleService.getAllModulesList(userCode); if (modules != null) {
+	 * model.addAttribute("modules", modules); } return "editMedicalReimbursement";
+	 * 
+	 * }
+	 */
 	 @CrossOrigin
 	    @GetMapping("/medicalReimbursementViewDetails/{id}")
 	    public ResponseEntity<MedicalReimbursementUtil> getMedicalReimbursementById(@PathVariable(value = "id") String id) {
@@ -219,6 +257,9 @@ public class MedicalReimbursementController {
 	        return ResponseEntity.ok().body(medicalReimbursement);
 	    }
 	
+	 
+	 
+	 
 	}
 
 

@@ -53,9 +53,12 @@ public class MedicalReimbursementDetail implements Serializable {
 
 	@Column(name = "INS_DATE", updatable = false)
 	private Date insDate = new Date();
+	
 	@ManyToOne
 	@JoinColumn(name ="SLIP_NO",nullable = false)
 	private MedicalReimbursement slipNo;
+	
+	
 	public String getSrNo() {
 		return srNo;
 	}

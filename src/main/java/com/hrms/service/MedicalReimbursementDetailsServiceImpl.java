@@ -36,5 +36,7 @@ public class MedicalReimbursementDetailsServiceImpl  implements MedicalReimburse
 		List<MedicalReimbursementDetail> listMedicalReimbursementDetail = medicalReimbursementDetailsDao.findAll();
 		return listMedicalReimbursementDetail;
 	}
+	
+
 
 }
