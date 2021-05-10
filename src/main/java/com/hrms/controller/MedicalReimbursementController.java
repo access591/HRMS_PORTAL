@@ -183,23 +183,26 @@ public class MedicalReimbursementController {
 	
 	
 	
-	@GetMapping("/viewMedicalReimbursement")
-	String viewMedicalReimbursement(Model model, HttpSession session) {
-		
-		List<Employee> listEmployee = employeeService.getAllEmployees();
-		model.addAttribute("listEmployee", listEmployee);
-		List<MedicalReimbursement>listMedicalReimbursement=medicalReimbursementService.getAllMedicalReimbursement();
-		model.addAttribute("listMedicalReimbursement", listMedicalReimbursement);
-		List<MedicalReimbursementDetail> listMedicalReimbursementDetail=medicalReimbursementDetailsService.getAllMedicalReimbursementDetails();
-		model.addAttribute("listMedicalReimbursementDetail", listMedicalReimbursementDetail);
-		String userCode = (String) session.getAttribute("username");
-		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
-		if (modules != null) {
-			model.addAttribute("modules", modules);
-		}
-		return "viewMedicalReimbursement";
-		
-	}
+	/*
+	 * @GetMapping("/viewMedicalReimbursement") String
+	 * viewMedicalReimbursement(Model model, HttpSession session) {
+	 * 
+	 * List<Employee> listEmployee = employeeService.getAllEmployees();
+	 * model.addAttribute("listEmployee", listEmployee);
+	 * List<MedicalReimbursement>listMedicalReimbursement=
+	 * medicalReimbursementService.getAllMedicalReimbursement();
+	 * model.addAttribute("listMedicalReimbursement", listMedicalReimbursement);
+	 * List<MedicalReimbursementDetail>
+	 * listMedicalReimbursementDetail=medicalReimbursementDetailsService.
+	 * getAllMedicalReimbursementDetails();
+	 * model.addAttribute("listMedicalReimbursementDetail",
+	 * listMedicalReimbursementDetail); String userCode = (String)
+	 * session.getAttribute("username"); List<MenuModule> modules =
+	 * moduleService.getAllModulesList(userCode); if (modules != null) {
+	 * model.addAttribute("modules", modules); } return "viewMedicalReimbursement";
+	 * 
+	 * }
+	 */
 
 	
 	@GetMapping(value = { "/deleteMedicalReimbursement/{id}" })
@@ -214,7 +217,7 @@ public class MedicalReimbursementController {
 			e.printStackTrace();
 		}
 	
-		return "redirect:/viewMedicalReimbursement";
+		return "redirect:/medicalReimbursement";
 	}
 	
 	
@@ -279,7 +282,7 @@ public class MedicalReimbursementController {
 		  this.medicalReimbursementService.updateMedicalReimbursement(medicalReimbursement);
 	    	  
 		  
-			return "redirect:/viewMedicalReimbursement";
+			return "redirect:/medicalReimbursement";
 	  }
 	 
 	 

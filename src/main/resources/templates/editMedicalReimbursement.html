@@ -223,7 +223,7 @@ body {
 						<input type="text" name='caseMemoNo' placeholder='CASHMEMO NO' class="form-control"th:field="*{medicalReimbursementDetail[__${stat.index}__].caseMemoNo}"/>
 						</td>
 						<td>
-						<input type="Date" name='caseMemoDate' placeholder='Case Memo Date' class="form-control"th:value="*{medicalReimbursementDetail[__${stat.index}__].caseMemoDate}"th:field="*{medicalReimbursementDetail[__${stat.index}__].caseMemoDate}"/>
+						<input type="Date" name='caseMemoDate'id='caseMemoDate' placeholder='Case Memo Date' th:value="*{medicalReimbursementDetail[__${stat.index}__].caseMemoDate}" class="form-control"  th:field="*{medicalReimbursementDetail[__${stat.index}__].caseMemoDate}"/>
 						</td>
 						<td>
 						<input type="text" name='calmlAmount' placeholder='Claiming Amount' class="form-control txt"th:field="*{medicalReimbursementDetail[__${stat.index}__].calmlAmount}"/>
