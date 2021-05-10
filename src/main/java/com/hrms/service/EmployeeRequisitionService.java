@@ -16,8 +16,12 @@ public interface EmployeeRequisitionService {
 
 	public List<EmployeeRequisition> findEmployeeReqByStatusN();
 	
+	List<EmployeeRequisition> findEmployeeReqByStatusY();
+	
 	public boolean isEmployeeRequisitionExists(String empCode);
 
 	void removeEmployeeRequisition(String id);
+	
+	void approvedByReqCode(String reqCode);
 
 }

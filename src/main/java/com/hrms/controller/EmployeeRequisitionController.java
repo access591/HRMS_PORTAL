@@ -30,7 +30,7 @@ import com.hrms.model.Employee;
 import com.hrms.model.CommonUtil;
 import com.hrms.model.MenuModule;
 import com.hrms.model.EmployeeRequisition;
-import com.hrms.model.EmployeeRequisitionCreationDto;
+//import com.hrms.model.EmployeeRequisitionCreationDto;
 import com.hrms.model.EmployeeRequisitionDetail;
 import com.hrms.service.DepartmentService;
 import com.hrms.service.DesignationService;
@@ -79,23 +79,27 @@ public class EmployeeRequisitionController {
 			model.addAttribute("departmentList", departmentList);
 		}
 		
+	
 		
 		
 		List<EmployeeRequisitionDetail> emp = new ArrayList<EmployeeRequisitionDetail>();
-		EmployeeRequisition req = new EmployeeRequisition();
+		EmployeeRequisition eReq = new EmployeeRequisition();
 		
-		EmployeeRequisitionDetail e = new EmployeeRequisitionDetail();
-		for(int i=0;i<2;i++) {
-			
-			emp.add(e);
+		List<EmployeeRequisition> requisition = employeeRequisitionService.getAllEmployeeRequisition();
+		if(requisition != null) {
+			model.addAttribute("requisition", requisition);
 		}
-		req.setEmployeRequisitionDetail(emp);
+		
+		System.out.println("requisition size : "+ requisition.size());
+		
+		
+		eReq.setEmployeRequisitionDetail(emp);
 		System.out.println("lenths =====" + emp.size());
-		model.addAttribute("req", req);
-		model.addAttribute("length", emp.size());
+		model.addAttribute("req", eReq);
+		
 		session.setAttribute("username", session.getAttribute("username"));
 		session.setAttribute("userlogin", userCode);
-		return pageMappingService.PageRequestMapping(reqPage, pageNo);
+		return "employeeRequisition";
 	}
 	
 	
@@ -104,25 +108,20 @@ public class EmployeeRequisitionController {
 			HttpSession session,RedirectAttributes redirectAttributes) {
 		
 		String insertedBY = (String) session.getAttribute("userlogin");
-		System.out.println("save employee requisition method  : "+
-					employeeRequisition.getEmployeRequisitionDetail().get(0).getDesigCode());
-		System.out.println("save employee requisition method  : "+
-				employeeRequisition.getEmployeRequisitionDetail().get(1).getDesigCode());
-		
-		System.out.println("save employee requisition method  : " + employeeRequisition.getRemarks());
-		//EmployeeRequisitionDetail e = new EmployeeRequisitionDetail();
+	
 		List<EmployeeRequisitionDetail> re = new ArrayList<EmployeeRequisitionDetail>();
 		EmployeeRequisitionDetail e = new EmployeeRequisitionDetail();
-		
-		for(int i =0;i<employeeRequisition.getEmployeRequisitionDetail().size();i++) {
+		for(int i=0;i<employeeRequisition.getEmployeRequisitionDetail().size();i++) {
 			
 			e = employeeRequisition.getEmployeRequisitionDetail().get(i);
-			
 			e.setEmployeeRequisition(employeeRequisition);
-			re.add(e);
+			re.add(e);	
 			
-
 		}
+		
+		employeeRequisition.setEmployeRequisitionDetail(re);
+		
+		
 		employeeRequisitionService.addEmployeeRequisition(employeeRequisition);
 		session.setAttribute("userlogin", insertedBY);
 
@@ -144,8 +143,33 @@ public class EmployeeRequisitionController {
 		return "editEmployeeRequisition";
 	}
 	
+	@PostMapping(value = {"updateRequisition"})
+	public String updateRequisition(@ModelAttribute("req") EmployeeRequisition employeeRequisition,
+			Model model) {
+		System.out.println("=====================>");
+		
+		employeeRequisitionService.updateEmployeeRequisition(employeeRequisition);;
+		//requisition.getEmployeRequisitionDetail()
+		
+		
+		//if(requisition != null) {
+		//	model.addAttribute("req", requisition);
+		//}
+		//System.out.println("employee requisition id : "+ reqCode);
+		return "redirect:editEmployeeRequisition";
+	}
 	
-	//editEmployeeRequisition.html
+	
+	@GetMapping(value = {"deleteRequisition/{id}"})
+	public String deleteRequisition(@PathVariable("id") String reqCode, Model model, HttpSession session) {
+		System.out.println("=====================>");
+		
+		employeeRequisitionService.removeEmployeeRequisition(reqCode);
+		
+		System.out.println("employee requisition id : "+ reqCode);
+		session.setAttribute("username", session.getAttribute("username"));
+		return "redirect:/employeeRequisition";
+	}
 	
 	
 	

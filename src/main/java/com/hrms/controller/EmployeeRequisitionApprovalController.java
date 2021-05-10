@@ -56,15 +56,28 @@ public class EmployeeRequisitionApprovalController {
 			listCommonUtil.add(commonUtill);
 		}//editEmployeeRequisition.html
 		
-		if(listCommonUtil != null) {
+		if(listCommonUtil != null) {  
 			model.addAttribute("listCommonUtil", listCommonUtil);
 		}
 		
+		List<EmployeeRequisition> approvalReq = employeeRequisitionService.findEmployeeReqByStatusY();
+		if(approvalReq != null) {
+			model.addAttribute("approved", approvalReq);
+		}
 		session.setAttribute("username", session.getAttribute("username"));
-
+		   
 		return "employeeRequisitionApproval";
 		
 		//return pageMappingService.PageRequestMapping(reqPage, pageno);
+	}
+	
+	
+	@GetMapping("approveRequisition/{id}")
+	public String approveRequisition(@PathVariable("id") String reqCode) {
+		
+		System.out.println("hiiiiiii" + reqCode);
+		employeeRequisitionService.approvedByReqCode(reqCode);
+		return "redirect:/employeeRequisitionApproval";
 	}
 	
 	

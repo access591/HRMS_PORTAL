@@ -88,13 +88,16 @@ body {
 															</td>
 
 															<td>
-																<select>
+																<select name="">
 																	<option value="A">Approve</option>
 																	<option value="C">cancel</option>
 																</select>>
 															</td>
 															
-															<td><a th:href="@{editRequisition/{id}(id=${commonUtil.reqCode})}" class="btn btn-primary"><em class="fa fa-edit"></em></a>
+															<td>
+															
+															
+															<a th:href="@{approveRequisition/{id}(id=${commonUtil.reqCode})}" class="btn btn-primary"><em class="fa fa-check"></em></a>
 															</td>
 														</tr>
 													
@@ -107,12 +110,43 @@ body {
 												<input type="submit" class="btn btn-primary" value="Submit">
 												<button type="reset" class="btn btn-primary" value="Reset">Reset</button>
 											</div>
-											<a id="add_row" class="fa pull-right btn btn-default ">Add
-												Row</a><a id='delete_row' class="fa pull-right btn btn-default">Delete
-												Row</a>
+											
 										</div>
 									</div>
 								</div>
+								
+								
+								<div class="col-12">
+							<div class="card">
+								<div class="card-header"></div>
+								<div class="card-body">
+									<table id="datatables"  class="table table-striped display" style="width: 100%">
+										<thead>
+											<tr>
+												<th>Req Code</th>
+												<th>Req. Date</th>
+												<th>Priority</th>
+												<th>Till Date</th>
+												<th>Remarks</th>
+												
+											</tr>
+										</thead>
+										<tbody>
+											<tr th:each="leave : ${approved}">
+												<td th:text="${leave.reqCode}"></td>
+												<td th:text="${leave.reqDate}"></td>
+												<td th:text="${leave.reqPriority}"></td>
+												<td th:text="${leave.reqTill}"></td>
+												<td th:text="${leave.remarks}"></td>
+												
+												
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+							
+							
 							</div>
 
 						</div>

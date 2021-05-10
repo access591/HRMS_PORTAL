@@ -2,6 +2,7 @@ package com.hrms.model;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -23,7 +24,7 @@ public class EmployeeRequisitionDetail {
 	@Column(name="REQDETAILCODE")
 	private Long reqDetailCode;
 	
-	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "REQ_CODE", nullable = false)
 	private EmployeeRequisition employeeRequisition;
 	
