@@ -3,6 +3,9 @@ package com.hrms.service;
 
 import java.util.List;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +16,8 @@ import com.hrms.repository.MedicalReimbursementDao;
 public class MedicalReimbursementServiceImpl implements MedicalReimbursementService  {
 @Autowired
 MedicalReimbursementDao medicalReimbursementDao;
-
+@Autowired
+SessionFactory sessionfactory;
 @Override
 public boolean addMedicalReimbursement(MedicalReimbursement m2) {
 	
@@ -32,6 +36,27 @@ public List<MedicalReimbursement> getAllMedicalReimbursement() {
 public MedicalReimbursement findByIdMedicalReimbursementMaster(String id) {
 	System.out.println("id>>>>>>>>>>>>>>>>>>>>>>>>>>"+id);
 	return this.medicalReimbursementDao.findById(id);
+	
+}
+
+@Override
+public void removeMedicalReimbursement(String id) {
+	
+	Session session = sessionfactory.openSession();
+	Object o = session.get(MedicalReimbursement.class, id);
+	MedicalReimbursement e = (MedicalReimbursement) o;
+	Transaction tx = session.beginTransaction();
+	session.delete(e);
+	tx.commit();
+	session.close();
+	
+
+	
+}
+
+@Override
+public void updateMedicalReimbursement(MedicalReimbursement medicalReimbursement) {
+	// TODO Auto-generated method stub
 	
 }
 }

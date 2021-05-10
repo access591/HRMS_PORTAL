@@ -21,7 +21,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.hrms.model.Department;
 import com.hrms.model.Employee;
+import com.hrms.model.Leave;
 import com.hrms.model.Loan;
 import com.hrms.model.MedicalReimbursement;
 import com.hrms.model.MedicalReimbursementDetail;
@@ -52,6 +54,8 @@ public class MedicalReimbursementController {
 		List<Employee> listEmployee = employeeService.getAllEmployees();
 		model.addAttribute("listEmployee", listEmployee);
 		
+		List<MedicalReimbursementDetail> listMedicalReimbursementDetail=medicalReimbursementDetailsService.getAllMedicalReimbursementDetails();
+		model.addAttribute("listMedicalReimbursementDetail", listMedicalReimbursementDetail);
 		String userCode = (String) session.getAttribute("username");
 		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
 		if (modules != null) {
@@ -176,6 +180,9 @@ public class MedicalReimbursementController {
 
 		
 	}
+	
+	
+	
 	@GetMapping("/viewMedicalReimbursement")
 	String viewMedicalReimbursement(Model model, HttpSession session) {
 		
@@ -183,6 +190,8 @@ public class MedicalReimbursementController {
 		model.addAttribute("listEmployee", listEmployee);
 		List<MedicalReimbursement>listMedicalReimbursement=medicalReimbursementService.getAllMedicalReimbursement();
 		model.addAttribute("listMedicalReimbursement", listMedicalReimbursement);
+		List<MedicalReimbursementDetail> listMedicalReimbursementDetail=medicalReimbursementDetailsService.getAllMedicalReimbursementDetails();
+		model.addAttribute("listMedicalReimbursementDetail", listMedicalReimbursementDetail);
 		String userCode = (String) session.getAttribute("username");
 		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
 		if (modules != null) {
@@ -192,6 +201,51 @@ public class MedicalReimbursementController {
 		
 	}
 
+	
+	@GetMapping(value = { "/deleteMedicalReimbursement/{id}" })
+	public String deleteEmployee(@PathVariable("id") String id, Model model,
+			HttpSession session) {
+		try {
+			
+			medicalReimbursementService.removeMedicalReimbursement(id);
+			session.setAttribute("username", session.getAttribute("username"));
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	
+		return "redirect:/viewMedicalReimbursement";
+	}
+	
+	
+	@GetMapping(value = {"/editMedicalReimbursement/{id}"})
+	public String editMedicalReimbursement(@PathVariable("id")String id,  Model model,HttpSession session)
+	 { 
+		List<Employee> listEmployee = employeeService.getAllEmployees();
+		model.addAttribute("listEmployee", listEmployee);
+		
+		MedicalReimbursement medicalReimbursementEdit =	medicalReimbursementService.findByIdMedicalReimbursementMaster(id);
+		  model.addAttribute("medicalReimbursementEdit", medicalReimbursementEdit);
+
+	   
+	    return "editMedicalReimbursement";
+	}
+	
+	/*
+	 * @GetMapping("/updateMedicalReimbursement") String
+	 * updateMedicalReimbursement(Model model, HttpSession session) {
+	 * 
+	 * List<Employee> listEmployee = employeeService.getAllEmployees();
+	 * model.addAttribute("listEmployee", listEmployee);
+	 * List<MedicalReimbursement>listMedicalReimbursement=
+	 * medicalReimbursementService.getAllMedicalReimbursement();
+	 * model.addAttribute("listMedicalReimbursement", listMedicalReimbursement);
+	 * String userCode = (String) session.getAttribute("username"); List<MenuModule>
+	 * modules = moduleService.getAllModulesList(userCode); if (modules != null) {
+	 * model.addAttribute("modules", modules); } return "editMedicalReimbursement";
+	 * 
+	 * }
+	 */
 	 @CrossOrigin
 	    @GetMapping("/medicalReimbursementViewDetails/{id}")
 	    public ResponseEntity<MedicalReimbursementUtil> getMedicalReimbursementById(@PathVariable(value = "id") String id) {
@@ -219,6 +273,16 @@ public class MedicalReimbursementController {
 	        return ResponseEntity.ok().body(medicalReimbursement);
 	    }
 	
+	 @PostMapping("/updateMedicalReimbursement")
+	  public String updateLeave(@ModelAttribute("leaveupdate") MedicalReimbursement medicalReimbursement, Model model) {
+	 
+		  this.medicalReimbursementService.updateMedicalReimbursement(medicalReimbursement);
+	    	  
+		  
+			return "redirect:/viewMedicalReimbursement";
+	  }
+	 
+	 
 	}
 
 
