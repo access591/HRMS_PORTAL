@@ -13,4 +13,6 @@ public interface MedicalReimbursementService {
 	MedicalReimbursement findByIdMedicalReimbursementMaster(String id);
 	void removeMedicalReimbursement(String id);
 
+	void updateMedicalReimbursement(MedicalReimbursement medicalReimbursement);
+
 }

@@ -21,7 +21,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.hrms.model.Department;
 import com.hrms.model.Employee;
+import com.hrms.model.Leave;
 import com.hrms.model.Loan;
 import com.hrms.model.MedicalReimbursement;
 import com.hrms.model.MedicalReimbursementDetail;
@@ -184,7 +186,8 @@ public class MedicalReimbursementController {
 	@GetMapping("/viewMedicalReimbursement")
 	String viewMedicalReimbursement(Model model, HttpSession session) {
 		
-		
+		List<Employee> listEmployee = employeeService.getAllEmployees();
+		model.addAttribute("listEmployee", listEmployee);
 		List<MedicalReimbursement>listMedicalReimbursement=medicalReimbursementService.getAllMedicalReimbursement();
 		model.addAttribute("listMedicalReimbursement", listMedicalReimbursement);
 		List<MedicalReimbursementDetail> listMedicalReimbursementDetail=medicalReimbursementDetailsService.getAllMedicalReimbursementDetails();
@@ -214,6 +217,19 @@ public class MedicalReimbursementController {
 		return "redirect:/viewMedicalReimbursement";
 	}
 	
+	
+	@GetMapping(value = {"/editMedicalReimbursement/{id}"})
+	public String editMedicalReimbursement(@PathVariable("id")String id,  Model model,HttpSession session)
+	 { 
+		List<Employee> listEmployee = employeeService.getAllEmployees();
+		model.addAttribute("listEmployee", listEmployee);
+		
+		MedicalReimbursement medicalReimbursementEdit =	medicalReimbursementService.findByIdMedicalReimbursementMaster(id);
+		  model.addAttribute("medicalReimbursementEdit", medicalReimbursementEdit);
+
+	   
+	    return "editMedicalReimbursement";
+	}
 	
 	/*
 	 * @GetMapping("/updateMedicalReimbursement") String
@@ -257,7 +273,14 @@ public class MedicalReimbursementController {
 	        return ResponseEntity.ok().body(medicalReimbursement);
 	    }
 	
+	 @PostMapping("/updateMedicalReimbursement")
+	  public String updateLeave(@ModelAttribute("leaveupdate") MedicalReimbursement medicalReimbursement, Model model) {
 	 
+		  this.medicalReimbursementService.updateMedicalReimbursement(medicalReimbursement);
+	    	  
+		  
+			return "redirect:/viewMedicalReimbursement";
+	  }
 	 
 	 
 	}

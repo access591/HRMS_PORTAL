@@ -178,6 +178,28 @@ public class MedicalReimbursement implements Serializable {
 		this.approvalDate = approvalDate;
 	}
 
+	public MedicalReimbursement(Date dateOfSlip, Employee empCode, Date claimingDate, String nameOfPerson,
+			String empRelation, String treatmentType, String treatDescription, String medIndOut, String approvedBy,
+			String approvalStatus, Date approvalDate, List<MedicalReimbursementDetail> medicalReimbursementDetail) {
+		super();
+		this.dateOfSlip = dateOfSlip;
+		this.empCode = empCode;
+		this.claimingDate = claimingDate;
+		this.nameOfPerson = nameOfPerson;
+		this.empRelation = empRelation;
+		this.treatmentType = treatmentType;
+		this.treatDescription = treatDescription;
+		this.medIndOut = medIndOut;
+		this.approvedBy = approvedBy;
+		this.approvalStatus = approvalStatus;
+		this.approvalDate = approvalDate;
+		this.medicalReimbursementDetail = medicalReimbursementDetail;
+	}
+
+	public MedicalReimbursement() {
+		super();
+	}
+
 	
 	
 	
