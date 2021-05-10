@@ -17,6 +17,8 @@ body {
 .uppercase {
 	text-transform: uppercase;
 }
+
+
 </style>
 <script>
 	window.dataLayer = window.dataLayer || [];
@@ -136,7 +138,24 @@ body {
 								<div class="card">
 									<div class="card-header"></div>
 									<div class="card-body">
+									
+									<input id="_cr" name="_cr" type="hidden"value="1">
+									
 										<div id="validation-step-3">
+
+											<div class="col-sm-12" align="right">
+												
+
+
+
+												<a id="add_row" class="fa fa-plus" aria-hidden="true"
+													style="font-size: 24px; color: #001080"></a>&nbsp;&nbsp;&nbsp;
+												<a id='delete_row' class="fa fa-trash"
+													style="font-size: 24px; color: #399490fc"
+													aria-hidden="true"></a>
+											</div>
+
+<div class="table-responsive">
 											<table id="example" aria-describedby="example"
 												class="table table-striped display" style="width: 100%">
 												<thead>
@@ -160,16 +179,16 @@ body {
 													</tr>
 												</thead>
 												<tbody>
-													<tr id="templateRow"
-														th:each="row, stat :${req.employeRequisitionDetail}">
+													<tr id="addr0">
 
 
 														<td><input type="text" style="width: 130px;"
-															id="desigCode"
-															th:field="*{employeRequisitionDetail[__${stat.index}__].desigCode}"></td>
+															id="desigCode0"
+															name="employeRequisitionDetail[0].desigCode"></td>
 
-														<td><select id="designationName"
-															name="designationName" onchange="selectDesignation()">
+														<td><select id="designationName0"
+															name="employeRequisitionDetail[0].designationName"
+															onchange="selectDesignation()">
 																<option value=" ">Select</option>
 
 
@@ -178,75 +197,70 @@ body {
 
 
 														<td><select id="location"
-															th:field="*{employeRequisitionDetail[__${stat.index}__].location}">
+															name="employeRequisitionDetail[0].location">
 																<option value=" ">Select</option>
 																<option value="court">Court</option>
 																<option value="department">Department</option>
 														</select></td>
 
 														<td><select id="sex"
-															th:field="*{employeRequisitionDetail[__${stat.index}__].sex}">
+															name="employeRequisitionDetail[0].sex">
 																<option value=" ">Select</option>
 																<option value="male">Male</option>
 																<option value="female">Female</option>
 														</select></td>
 
-														<td><input name="ageFrom" type="text"
-															style="width: 130px;" id="ageFrom"
-															th:field="*{employeRequisitionDetail[__${stat.index}__].ageFrom}"></td>
+														<td><input name="employeRequisitionDetail[0].ageFrom"
+															type="text" style="width: 130px;" id="ageFrom"></td>
 
-														<td><input name="ageTo" type="text"
-															style="width: 130px;" id="ageTo"
-															th:field="*{employeRequisitionDetail[__${stat.index}__].ageTo}"></td>
+														<td><input name="employeRequisitionDetail[0].ageTo"
+															type="text" style="width: 130px;" id="ageTo"></td>
 
-														<td><input name="acadQuali" type="text"
-															style="width: 130px;" id="accademicQualificatio"
-															th:field="*{employeRequisitionDetail[__${stat.index}__].acadQuali}"></td>
+														<td><input
+															name="employeRequisitionDetail[0].acadQuali" type="text"
+															style="width: 130px;" id="accademicQualificatio"></td>
 
-														<td><input name="techQuali" type="text"
-															style="width: 130px;" id="technicalQualification"
-															th:field="*{employeRequisitionDetail[__${stat.index}__].techQuali}"></td>
+														<td><input
+															name="employeRequisitionDetail[0].techQuali" type="text"
+															style="width: 130px;" id="technicalQualification"></td>
 
-														<td><input name="minExperience" type="text"
-															style="width: 130px;" id="expMinMonth"
-															th:field="*{employeRequisitionDetail[__${stat.index}__].minExperience}"></td>
+														<td><input
+															name="employeRequisitionDetail[0].minExperience"
+															type="text" style="width: 130px;" id="expMinMonth"></td>
 
-														<td><input name="maxExperience" type="text"
-															style="width: 130px;" id="expMaxMonth"
-															th:field="*{employeRequisitionDetail[__${stat.index}__].maxExperience}"></td>
+														<td><input
+															name="employeRequisitionDetail[0].maxExperience"
+															type="text" style="width: 130px;" id="expMaxMonth"></td>
 
-														<td><input name="vacanncyType" type="text"
-															style="width: 130px;" id="vacancyType"
-															th:field="*{employeRequisitionDetail[__${stat.index}__].vacanncyType}"></td>
+														<td><input
+															name="employeRequisitionDetail[0].vacanncyType"
+															type="text" style="width: 130px;" id="vacancyType"></td>
 
-														<td><input name="totalVacancy" type="text"
-															style="width: 130px;" id="totalvacancy"
-															th:field="*{employeRequisitionDetail[__${stat.index}__].totalVacancy}"></td>
+														<td><input
+															name="employeRequisitionDetail[0].totalVacancy"
+															type="text" style="width: 130px;" id="totalvacancy"></td>
 
-														<td><input name="salaryFrom" type="text"
-															style="width: 130px;" id="salaryFrom"
-															th:field="*{employeRequisitionDetail[__${stat.index}__].salaryFrom}"></td>
+														<td><input
+															name="employeRequisitionDetail[0].salaryFrom" type="text"
+															style="width: 130px;" id="salaryFrom"></td>
 
-														<td><input name="salaryTo" type="text"
-															style="width: 130px;" id="salaryTo"
-															th:field="*{employeRequisitionDetail[__${stat.index}__].salaryTo}"></td>
+														<td><input
+															name="employeRequisitionDetail[0].salaryTo" type="text"
+															style="width: 130px;" id="salaryTo"></td>
 
-														<td><input name="remarks" type="text"
-															style="width: 130px;" id="detail"
-															th:field="*{employeRequisitionDetail[__${stat.index}__].remarks}"></td>
+														<td><input name="employeRequisitionDetail[0].remarks"
+															type="text" style="width: 130px;" id="detail"></td>
 
-														<td>
-													
-														</td>
+														<td></td>
 													</tr>
-
-
-<!--{id}(id=*{employeRequisitionDetail[__${stat.index}__].reqDetailCode}) -->
-												</tbody>
+													<tr id='addr1' />
 													
+												</tbody>
+
 											</table>
+											</div>
 										</div>
-<input type="hidden" id="hidden_field" th:value="${length}" />
+										<input type="hidden" id="hidden_field" th:value="${length}" />
 									</div>
 
 								</div>
@@ -257,6 +271,45 @@ body {
 
 						</div>
 					</form>
+					
+					
+					<div class="col-12">
+							<div class="card">
+								<div class="card-header"></div>
+								<div class="card-body">
+									<table id="datatables"  class="table table-striped display" style="width: 100%">
+										<thead>
+											<tr>
+												<th>Req Code</th>
+												<th>Req. Date</th>
+												<th>Priority</th>
+												<th>Till Date</th>
+												<th>Remarks</th>
+												<th>Action</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr th:each="leave : ${requisition}">
+												<td th:text="${leave.reqCode}"></td>
+												<td th:text="${leave.reqDate}"></td>
+												<td th:text="${leave.reqPriority}"></td>
+												<td th:text="${leave.reqTill}"></td>
+												<td th:text="${leave.remarks}"></td>
+												
+												<td><a th:href="@{editRequisition/{id}(id=${leave.reqCode})}" class="btn btn-primary"><em class="fa fa-eye"></em></a>
+															
+															
+													<a th:href="@{deleteRequisition/{id}(id=${leave.reqCode})}" class="btn btn-primary"><em class="fa fa-check"></em></a>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+						
+						
+						
 				</div>
 			</main>
 			<footer class="footer">
@@ -265,12 +318,7 @@ body {
 		</div>
 	</div>
 	<script>
-		document.getElementById('applyDate').value = new Date().toISOString()
-				.substring(0, 10);
-		document.getElementById('from_date').value = new Date().toISOString()
-				.substring(0, 10);
-		document.getElementById('to_date').value = new Date().toISOString()
-				.substring(0, 10);
+		
 	</script>
 
 	<script>
@@ -284,7 +332,7 @@ body {
 			});
 		});
 
-		var size = "";
+		var counter = '0';
 		function changeDepartment() {
 
 			//set dept code value 
@@ -295,7 +343,7 @@ body {
 					.getElementById("departmentDropdown").value;
 			console.log("select category : " + selecteDepartmentValue);
 			//$('#employeeName').append($('<option>', {value:0, text:'Select Employee'}));
-			var x = document.getElementById("designationName");
+			var x = document.getElementById("designationName0");
 			console.log("x value : " + x);
 
 			var length = x.options.length;
@@ -315,8 +363,7 @@ body {
 						console.log(obj);
 						console.log("console.log size :" + obj.length);
 						//console.log("employee name : " +obj[0].empName)
-						$('select[name="designationName"]').prop("disabled",
-								false);
+						//$('select[name="designationName"'+counter+'"]').prop("disabled",false);
 						// $('select[name="employeeName"]').html(obj.empName);
 
 						for(var i=0;i<document.getElementById("hidden_field").value;i++){
@@ -331,8 +378,8 @@ body {
 									$('#employeeName').append($('<option>', {
 										value : i,
 										text : item.empName
-									}));
-									$('#designationName'+i).append(
+									}));//employeRequisitionDetail[0].designationName
+									$('#designationName"+counter+"').append(
 											$('<option>').val(this.desigCode)
 													.text(this.desgName));
 								});
@@ -351,18 +398,93 @@ body {
 
 		function selectDesignation() {
 			console.log("designation selection");
-			var designationCode = document.getElementById("designationName").value;
+			var designationCode = document.getElementById("designationName"+counter).value;
 			console.log("desihnation code " + designationCode);
-			document.getElementById("desigCode").value = designationCode;
+			document.getElementById("desigCode"+counter).value = designationCode;
 		}
+		
+		
+		
+		
+	
 	</script>
 
+<script>
+
+//add row 
+
+$(document).ready(function(){
+	console.log("click function...");
+	var i=1;
+	counter = i;
+	$("#add_row").click(function(){
+	$('#addr'+i).html("<td><input type='text' style='width: 130px;'id='desigCode"+i+"'name='employeRequisitionDetail["+i+"].desigCode'></td>"+
+			
+			"<td><select id='designationName"+i+"'name='employeRequisitionDetail["+i+"].designationName'onchange='selectDesignation()'><option value=''>Select</option></select></td>"+
+	
+			"<td><select id='location'name='employeRequisitionDetail["+i+"].location'><option value=' '>Select</option><option value='court'>Court</option><option value='department'>Department</option></select></td>"+
+			"<td><select id='sex'name='employeRequisitionDetail["+i+"].sex'><option value=''>Select</option><option value='male'>Male</option><option value='female'>Female</option></select></td>"+
+			"<td><input type='text' style='width: 130px;'id='ageFrom'name='employeRequisitionDetail["+i+"].ageFrom'></td>"+
+			" </td><td><input type='text' style='width: 130px;'id='desigCode'name='employeRequisitionDetail["+i+"].ageTo'></td>"+
+
+			"<td><input type='text' style='width: 130px;'id='acadQuali'name='employeRequisitionDetail["+i+"].acadQuali'></td>"+
+			"<td><input type='text' style='width: 130px;'id='techQuali'name='employeRequisitionDetail["+i+"].techQuali'></td>"+
+			"<td><input type='text' style='width: 130px;'id='minExperience'name='employeRequisitionDetail["+i+"].minExperience'></td>"+
+			"<td><input type='text' style='width: 130px;'id='maxExpierence'name='employeRequisitionDetail["+i+"].maxExperience'></td>"+
+			"<td><input type='text' style='width: 130px;'id='vacanncyType'name='employeRequisitionDetail["+i+"].vacanncyType'></td>"+
+			"<td><input type='text' style='width: 130px;'id='totalVacancy'name='employeRequisitionDetail["+i+"].totalvacancy'></td>"+
+			"<td><input type='text' style='width: 130px;'id='salaryFrom'name='employeRequisitionDetail["+i+"].salaryFrom'></td>"+
+			"<td><input type='text' style='width: 130px;'id='salaryTo'name='employeRequisitionDetail["+i+"].salaryTo'></td>"+
+			"<td><input type='text' style='width: 130px;'id='remarks'name='employeRequisitionDetail["+i+"].remarks'></td>");
+
+	$('#example').append('<tr id="addr'+(i+1)+'"></tr>');
+	$('#_cr').val(i+1);
+	i++; 
+});
+	
+	$("#delete_row").click(function(){
+	 	 if(i>1){
+			 $("#addr"+(i-1)).html('');
+			 $('#_cr').val(i - 1);
+			 i--;
+			 }
+		 });
+
+
+});
+
+</script>
 
 
 	<script>
 		$(function() {
-			// Datatables basic
+			// Datatables basic 
 			$('#datatables-basic').DataTable({
+				responsive : true
+			});
+			// Datatables with Buttons
+			var datatablesButtons = $('#datatables-buttons')
+					.DataTable(
+							{
+								deferRender : true,
+								scrollCollapse : true,
+								scroller : false,
+								responsive : true,
+								lengthMenu : [
+										[ 10, 20, 30, -1 ],
+										[ '10 rows', '20 rows', '30 rows',
+												'Show all' ] ],
+								buttons : []
+							});
+			datatablesButtons.buttons().container().appendTo(
+					"#datatables-buttons_wrapper .col-md-6:eq(0)")
+		});
+	</script>
+
+<script>
+		$(function() {
+			// Datatables basic
+			$('#datatables').DataTable({
 				responsive : true
 			});
 			// Datatables with Buttons
@@ -387,5 +509,6 @@ body {
 
 
 </body>
+
 
 </html>

@@ -56,7 +56,8 @@ public class EmployeeRequisition {
 	 @Column(name="STATUS")
 	 private String status = "N";
 	 
-	 @OneToMany(mappedBy="employeeRequisition",cascade = CascadeType.ALL)
+	 @OneToMany(mappedBy="employeeRequisition",cascade = CascadeType.ALL,
+		        orphanRemoval = true)
 	 private List<EmployeeRequisitionDetail> employeRequisitionDetail;
 
 	 
