@@ -38,8 +38,14 @@ public class MediclaimApprovalController {
 		}
 		List<MedicalReimbursement> listMedicalReimbursement =  medicalReimbursementService.getAllMedicalReimbursement();
 		model.addAttribute("listMedicalReimbursement", listMedicalReimbursement);
-		List<MedicalReimbursementDetail> listMedicalReimbursementDetail=medicalReimbursementDetailsService.getAllMedicalReimbursementDetails();
-		model.addAttribute("listMedicalReimbursementDetail", listMedicalReimbursementDetail);
+		
+		
+		
+		for(int i=0;i<listMedicalReimbursement.size();i++) {
+			 List<MedicalReimbursementDetail> listMedicalReimbursementDetail= medicalReimbursementDetailsService.getAllMedicalReimbursementDetailBYslipNO(listMedicalReimbursement.get(i).getSlipNo());
+			 model.addAttribute("listMedicalReimbursementDetail", listMedicalReimbursementDetail);
+			 
+		}
 		
 		session.setAttribute("username", session.getAttribute("username"));
 		

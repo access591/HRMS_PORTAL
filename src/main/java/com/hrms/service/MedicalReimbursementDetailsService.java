@@ -9,5 +9,6 @@ public interface MedicalReimbursementDetailsService {
 	boolean addMedicalReimbursementDetails(MedicalReimbursementDetail m4);
 
 	List<MedicalReimbursementDetail> getAllMedicalReimbursementDetails();
-
+	List<MedicalReimbursementDetail> getAllMedicalReimbursementDetailBYslipNO(String slipNo);
+	
 }
