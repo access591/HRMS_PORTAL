@@ -146,16 +146,24 @@ public class EmployeeRequisitionController {
 	@PostMapping(value = {"updateRequisition"})
 	public String updateRequisition(@ModelAttribute("req") EmployeeRequisition employeeRequisition,
 			Model model) {
-		System.out.println("=====================>");
+		/*
+		 * System.out.println("=====================>");
+		 * 
+		 * 
+		 * List<EmployeeRequisitionDetail> re = new
+		 * ArrayList<EmployeeRequisitionDetail>(); EmployeeRequisitionDetail e = new
+		 * EmployeeRequisitionDetail(); for(int
+		 * i=0;i<employeeRequisition.getEmployeRequisitionDetail().size();i++) {
+		 * 
+		 * e = employeeRequisition.getEmployeRequisitionDetail().get(i);
+		 * e.setEmployeeRequisition(employeeRequisition); re.add(e);
+		 * 
+		 * }
+		 */
 		
-		employeeRequisitionService.updateEmployeeRequisition(employeeRequisition);;
-		//requisition.getEmployeRequisitionDetail()
+		//employeeRequisition.setEmployeRequisitionDetail(re);
 		
-		
-		//if(requisition != null) {
-		//	model.addAttribute("req", requisition);
-		//}
-		//System.out.println("employee requisition id : "+ reqCode);
+		this.employeeRequisitionService.updateEmployeeRequisition(employeeRequisition);
 		return "redirect:editEmployeeRequisition";
 	}
 	
@@ -169,6 +177,21 @@ public class EmployeeRequisitionController {
 		System.out.println("employee requisition id : "+ reqCode);
 		session.setAttribute("username", session.getAttribute("username"));
 		return "redirect:/employeeRequisition";
+	}
+	
+	
+	@GetMapping(value = {"viewRequisition/{id}"})
+	public String viewRequisition(@PathVariable("id") String reqCode,@ModelAttribute("req") EmployeeRequisition employeeRequisition,
+			Model model) {
+		System.out.println("=====================>");
+		
+		EmployeeRequisition requisition = employeeRequisitionService.findEmployeeRequisitiondById(reqCode);
+		//requisition.getEmployeRequisitionDetail()
+		if(requisition != null) {
+			model.addAttribute("req", requisition);
+		}
+		System.out.println("employee requisition id : "+ reqCode);
+		return "viewEmployeeRequisition";
 	}
 	
 	
@@ -203,8 +226,9 @@ public class EmployeeRequisitionController {
 		return designationService.getAllDesignations().size();
 	}
 	
-	
-	
-	
-	
 }
+	
+	
+	
+	
+	

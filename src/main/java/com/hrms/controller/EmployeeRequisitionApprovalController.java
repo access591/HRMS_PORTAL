@@ -76,6 +76,7 @@ public class EmployeeRequisitionApprovalController {
 	public String approveRequisition(@PathVariable("id") String reqCode) {
 		
 		System.out.println("hiiiiiii" + reqCode);
+		//System.out.println("hiiiiiii" + name);
 		employeeRequisitionService.approvedByReqCode(reqCode);
 		return "redirect:/employeeRequisitionApproval";
 	}

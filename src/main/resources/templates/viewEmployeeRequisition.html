@@ -17,6 +17,14 @@ body {
 .uppercase {
 	text-transform: uppercase;
 }
+
+
+    input:read-only  {
+        background-color: #FFFFFF;
+    }
+
+
+
 </style>
 <script>
 	window.dataLayer = window.dataLayer || [];
@@ -67,14 +75,14 @@ body {
 												<div class="form-group">
 													<label> Requisition Code </label> <label style="color: red">*</label>
 													<input class="form-control" id="reqCode" name="reqCode"
-														th:field="*{reqCode}" />
+														th:field="*{reqCode}" readonly style="background-color:#FFFFFF" />
 												</div>
 											</div>
 											<div class="col-12 col-lg-6">
 												<div class="form-group">
 													<label> Requisition Date </label> <label style="color: red">*</label>
 													<input class="form-control" type="date" id="" value=""
-														th:field="*{reqDate}" />
+														th:field="*{reqDate}" readonly style="background-color:#FFFFFF"/>
 												</div>
 											</div>
 										</div>
@@ -84,13 +92,13 @@ body {
 												<div class="form-group">
 													<label> Department Code </label> <label style="color: red">*</label>
 													<input type="text" class="form-control" id="departmentId"
-														value="" th:field="*{deptCode}">
+														value="" th:field="*{deptCode}" readonly style="background-color:#FFFFFF">
 												</div>
 											</div>
 											<div class="col-12 col-lg-6">
 												<label class="form-label">Department Name</label> <label
 													style="color: red">*</label><input type="text" class="form-control" id="departmentId"
-														value="" th:field="*{deptCode}">
+														value="" th:field="*{deptCode}" readonly style="background-color:#FFFFFF">
 											</div>
 										</div>
 										<div class="row">
@@ -98,13 +106,13 @@ body {
 												<div class="form-group">
 													<label> Requisition Priorty </label> <label
 														style="color: red">*</label> <input type="text" class="form-control" id="reqPriority"
-														value="" th:field="*{reqPriority}">
+														value="" th:field="*{reqPriority}" readonly style="background-color:#FFFFFF">
 												</div>
 											</div>
 											<div class="col-12 col-lg-6">
 												<label class="form-label">Requisition Fulfill Date</label> <label
 													style="color: red">*</label> <input type="date"
-													class="form-control" th:field="*{reqTill}">
+													class="form-control" th:field="*{reqTill}" readonly style="background-color:#FFFFFF">
 											</div>
 										</div>
 										<div class="row">
@@ -112,7 +120,7 @@ body {
 												<label class="form-label">Remarks</label> <label
 													style="color: red">*</label> <input type="text"
 													class="form-control" id="leaveDepartmentName" value=""
-													th:field="*{remarks}">
+													th:field="*{remarks}" readonly style="background-color:#FFFFFF">
 											</div>
 
 										</div>
@@ -154,70 +162,70 @@ body {
 														th:each="row, stat :${req.employeRequisitionDetail}">
 
 
-														<td><input type="text" style="width: 130px;"
+														<td><input type="text" 
 															id="desigCode"
-															th:field="*{employeRequisitionDetail[__${stat.index}__].desigCode}"></td>
+															th:field="*{employeRequisitionDetail[__${stat.index}__].desigCode}"readonly style="width: 130px;background-color:#FFFFFF"></td>
 
-														<td><input type="text" style="width: 130px;"
+														<td><input type="text"
 															id="desigCode"
-															th:field="*{employeRequisitionDetail[__${stat.index}__].desigCode}"></td>
+															th:field="*{employeRequisitionDetail[__${stat.index}__].desigCode}" readonly style="width: 130px;background-color:#FFFFFF"></td>
 
 
 														
 
 
 
-														<td><input type="text" style="width: 130px;"
+														<td><input type="text" 
 															id="location"
-															th:field="*{employeRequisitionDetail[__${stat.index}__].location}"></td>
+															th:field="*{employeRequisitionDetail[__${stat.index}__].location}"readonly style="width: 130px;background-color:#FFFFFF"></td>
 
-														<td><input type="text" style="width: 130px;"
+														<td><input type="text" 
 															id="sex"
-															th:field="*{employeRequisitionDetail[__${stat.index}__].sex}"></td>
+															th:field="*{employeRequisitionDetail[__${stat.index}__].sex}"readonly style="width: 130px;background-color:#FFFFFF"></td>
 
 														<td><input name="ageFrom" type="text"
-															style="width: 130px;" id="ageFrom"
-															th:field="*{employeRequisitionDetail[__${stat.index}__].ageFrom}"></td>
+															 id="ageFrom"
+															th:field="*{employeRequisitionDetail[__${stat.index}__].ageFrom}"readonly style="width: 130px;background-color:#FFFFFF"></td>
 
 														<td><input name="ageTo" type="text"
-															style="width: 130px;" id="ageTo"
-															th:field="*{employeRequisitionDetail[__${stat.index}__].ageTo}"></td>
+															 id="ageTo"
+															th:field="*{employeRequisitionDetail[__${stat.index}__].ageTo}"readonly style="width: 130px;background-color:#FFFFFF"></td>
 
 														<td><input name="acadQuali" type="text"
-															style="width: 130px;" id="accademicQualificatio"
-															th:field="*{employeRequisitionDetail[__${stat.index}__].acadQuali}"></td>
+															 id="accademicQualificatio"
+															th:field="*{employeRequisitionDetail[__${stat.index}__].acadQuali}"readonly style="width: 130px;background-color:#FFFFFF"></td>
 
 														<td><input name="techQuali" type="text"
-															style="width: 130px;" id="technicalQualification"
-															th:field="*{employeRequisitionDetail[__${stat.index}__].techQuali}"></td>
+															 id="technicalQualification"
+															th:field="*{employeRequisitionDetail[__${stat.index}__].techQuali}"readonly style="width: 130px;background-color:#FFFFFF"></td>
 
 														<td><input name="minExperience" type="text"
-															style="width: 130px;" id="expMinMonth"
-															th:field="*{employeRequisitionDetail[__${stat.index}__].minExperience}"></td>
+															 id="expMinMonth"
+															th:field="*{employeRequisitionDetail[__${stat.index}__].minExperience}"readonly style="width: 130px;background-color:#FFFFFF"></td>
 
 														<td><input name="maxExperience" type="text"
-															style="width: 130px;" id="expMaxMonth"
-															th:field="*{employeRequisitionDetail[__${stat.index}__].maxExperience}"></td>
+															 id="expMaxMonth"
+															th:field="*{employeRequisitionDetail[__${stat.index}__].maxExperience}"readonly style="width: 130px;background-color:#FFFFFF"></td>
 
 														<td><input name="vacanncyType" type="text"
-															style="width: 130px;" id="vacancyType"
-															th:field="*{employeRequisitionDetail[__${stat.index}__].vacanncyType}"></td>
+															 id="vacancyType"
+															th:field="*{employeRequisitionDetail[__${stat.index}__].vacanncyType}"readonly style="width: 130px;background-color:#FFFFFF"></td>
 
 														<td><input name="totalVacancy" type="text"
-															style="width: 130px;" id="totalvacancy"
-															th:field="*{employeRequisitionDetail[__${stat.index}__].totalVacancy}"></td>
+															 id="totalvacancy"
+															th:field="*{employeRequisitionDetail[__${stat.index}__].totalVacancy}"readonly style="width: 130px;background-color:#FFFFFF"></td>
 
 														<td><input name="salaryFrom" type="text"
-															style="width: 130px;" id="salaryFrom"
-															th:field="*{employeRequisitionDetail[__${stat.index}__].salaryFrom}"></td>
+															 id="salaryFrom"
+															th:field="*{employeRequisitionDetail[__${stat.index}__].salaryFrom}"readonly style="width: 130px;background-color:#FFFFFF"></td>
 
 														<td><input name="salaryTo" type="text"
-															style="width: 130px;" id="salaryTo"
-															th:field="*{employeRequisitionDetail[__${stat.index}__].salaryTo}"></td>
+															 id="salaryTo"
+															th:field="*{employeRequisitionDetail[__${stat.index}__].salaryTo}"readonly style="width: 130px;background-color:#FFFFFF"></td>
 
 														<td><input name="remarks" type="text"
-															style="width: 130px;" id="detail"
-															th:field="*{employeRequisitionDetail[__${stat.index}__].remarks}"></td>
+															 id="detail"
+															th:field="*{employeRequisitionDetail[__${stat.index}__].remarks}"readonly style="width: 130px;background-color:#FFFFFF"></td>
 
 														<td>
 													
@@ -235,10 +243,25 @@ body {
 
 								</div>
 							</div>
-							<button type="submit" class="btn btn-primary">Apply</button>
-							<button type="reset" class="btn btn-primary" value="Reset">Reset</button>
+							<div class="dropdown">
+														<button class="btn btn-primary dropdown-toggle"
+															type="button" data-toggle="dropdown" >
+															Approved Action 
+														</button>
+														<ul class="dropdown-menu">
+															<li><a href="@{approveRequisition/{id}/(id=${req.reqCode})}">Approved</a></li>
+															<li><a href="#">No</a></li>
+															
+														</ul>
+													</div> 
+													
+						
+							<p></p>
+							<button class="btn btn-primary">Back</button>
 
-
+													
+													
+													
 						</div>
 					</form>
 				</div>
