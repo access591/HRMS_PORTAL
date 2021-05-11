@@ -63,15 +63,17 @@ body {
 									<table id="datatables-buttons" class="table table-striped display" style="width:100%"aria-describedby="example">
 										<thead>
 											<tr >
-												<th scope="col"rowspan="3">SLip Number</th>
-												<th scope="col"rowspan="3">Slip Date</th>
-												<th scope="col"rowspan="3">Employee Code</th>
-												<th scope="col"rowspan="3">Employee Name </th>
-												<th scope="col"colspan="3" style="text-align:center">Current Period  Details </th>
-												<th scope="col"rowspan="3">Amount </th>
-												<th scope="col"rowspan="3">Approval Status </th>
+												<th scope="col"rowspan="2">Slip Number</th>
+												<th scope="col"rowspan="2">Slip Date</th>
+												<th scope="col"rowspan="2">Employee Code</th>
+												<th scope="col"rowspan="2">Employee Name </th>
+												<th scope="col"colspan="2" style="text-align:center">Current Period  Details </th>
+												
+												<th scope="col"rowspan="2">Approval Status </th>
+													<th scope="col"rowspan="2">View  </th>
+												
 											</tr >
-											<tr style="background-color:#e6e6e6;"> <th>Limit</th> <th>Availed</th> <th>Balance</th> </tr>
+											<tr style="background-color:#e6e6e6;"> <th>Un availed</th> <th>Availed</th> </tr>
 
 
 										</thead>
@@ -94,17 +96,27 @@ body {
 										<p th:each="category : ${listMedicalReimbursementDetail}"  th:text="${category.passedAmount}"></p>
 										
 										</td>
-										<td></td>
-										<td></td>
+										
+										
 										<td>
-										
-										
-                            <th:if test="%{status == 'Inactive'}">
-                                <a  class="btn btn-success" title="InActive"><i class="fa fa-power-off"></i></a>
-			                 </th:if>
-                            <th:if test="%{status == 'Active'}">
-                            <a class="btn btn-success" title="Active"><i class="fa fa-check"></i></a>
-			    </th:if>  
+
+													<div class="dropdown">
+														<button class="btn btn-primary dropdown-toggle"
+															type="button" data-toggle="dropdown">
+															Approved Action 
+														</button>
+														<ul class="dropdown-menu">
+															<li><a href="#">Approved</a></li>
+															<li><a href="#">No</a></li>
+															
+														</ul>
+													</div> <!-- <a class="btn btn-success" title="Active"><i class="fa fa-check"></i></a> -->
+                           
+                            
+			             
+                            </td>
+                            <td>
+                               <a th:href="@{/viewMedicalReimbursement/{id}/(id=${student.slipNo})}"class="btn btn-success"><em class="fa fa-eye"></em></a>
                             </td>
 										
 									

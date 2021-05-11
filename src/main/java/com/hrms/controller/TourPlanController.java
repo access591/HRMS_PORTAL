@@ -12,10 +12,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.hrms.model.Award;
+import com.hrms.model.Department;
 import com.hrms.model.Designation;
 import com.hrms.model.Employee;
 import com.hrms.model.MenuModule;
 import com.hrms.model.TourPlan;
+import com.hrms.service.DepartmentService;
 import com.hrms.service.DesignationService;
 import com.hrms.service.EmployeeService;
 import com.hrms.service.ModuleService;
@@ -27,7 +29,8 @@ public class TourPlanController {
 	
 	int pageno = 51;
 	String reqPage = "/tourPlan";
-	
+	@Autowired
+	DepartmentService departmentService;
 	@Autowired PageMappingService pageMappingService;
 	@Autowired private ModuleService moduleService;
 	@Autowired private EmployeeService employeeService;
@@ -43,6 +46,8 @@ public class TourPlanController {
 		if (modules != null) {
 			model.addAttribute("modules", modules);
 		}
+		List<Department> listDepartment = departmentService.getAllDepartments();
+		model.addAttribute("listDepartment", listDepartment);
 		List<Employee> listEmployee = employeeService.getAllEmployees();
 		if(listEmployee != null) {
 			model.addAttribute("listEmployee" , listEmployee);

@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"lang="en">
+
+<script type="text/javascript" th:src="@{/js/settings.js}"></script>
+<script type="text/javascript" th:src="@{/js/app.js}"></script>
+<link rel="stylesheet" type="text/css" th:href="@{/css/modern.css}" />
+<script  src="https://www.googletagmanager.com/gtag/js?id=UA-120946860-7"></script>
+
+
+<style>
+
+
+body {
+	opacity: 0;
+}
+.uppercase {
+  text-transform: uppercase;
+}
+
+#loading {
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  position: fixed;
+  display: block;
+  opacity: 0.7;
+  background-color: #676565;
+  z-index: 99;
+  text-align: center;
+}
+
+#loading-image {
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  z-index: 100;
+}
+</style>
+<script>
+	window.dataLayer = window.dataLayer || [];
+	function gtag() {
+		dataLayer.push(arguments);
+	}
+	 gtag('js', new Date());
+
+	gtag('config', 'UA-120946860-7');
+</script>
+<head>
+<meta charset="utf-8" />
+<title>HRMS</title>
+</head>
+ 
+<body>
+
+<div class="wrapper">
+<nav id="sidebar" class="sidebar">
+ <div th:replace="/fragments/sidebar :: div"></div>
+ </nav>
+ 		
+		<div class="main">
+		<div th:replace="/fragments/header ::div"></div>
+		<main class="content">
+		<div class="container-fluid">
+
+					<div class="header">
+						<h1 class="header-title">
+							Personal
+						</h1>
+						
+					
+					</div>
+					<div class="row">
+							<div class="col-12">
+							<div class="card">
+								<div class="card-header">
+									<h5 class="card-title">Tour Claim </h5>
+								<div class="alert-outline">
+									<div th:if="${message}" th:text="${message}" style="color: red">
+									</div> 
+									</div>	
+								</div>
+								<div class="card-body">
+									<div class="form-row">
+												<div class="form-group sm col-md-4">
+												
+													<label class="form-label">Tour Id <span
+														class="text-danger">*</span>
+													</label> <input name="empCode" type="text" id="empCode"
+														class="form-control"readonly>
+												</div>
+											<div class="form-group sm col-md-4">
+											       <label class="form-label">Tour Claim Date
+											       <span class="text-danger">*</span></label>
+							                 <input  type="text"id="empName"name="empName" title="Name"onkeyup="sync()"maxlength="50" pattern="^[a-zA-Z\s]*$" class="form-control required">
+										     </div>
+										     	
+											<div class="form-group sm col-md-4">
+													<label class="form-label">Employee Code</label>
+												<label style="color: red">*</label>
+												<select class="form-control select2"onchange="myFunction()" name="empCode"id="empCode" required aria-required="true">
+												 <option value="">Select Employee</option>
+												<option th:each="e :${listEmployee}"th:value="${e.getEmpCode()}" th:text="${e.getEmpName()}"></option>
+											     	</select>
+
+												</div>
+												
+												
+								</div>
+									<div class="form-row">
+												<div class="form-group sm col-md-4">
+												<label class="form-label">Designation</label> <span
+														class="text-danger">*</span> <select
+														class="form-control required" name="designationCode" id="designationCode">
+														<option value="">Select Type</option>
+														<option th:each="des :${listDesignation}" th:value="${des.getDesgCode()}" th:text="${des.getDesgName()}"></option>
+														
+													</select>
+												
+												</div>
+												
+												<div class="form-group sm col-md-4">
+												<label class="form-label">Department</label> <span
+														class="text-danger">*</span> <select
+														class="form-control required" name="designationCode" id="designationCode">
+														<option value="">Select Type</option>
+														<option th:each="des :${listDesignation}" th:value="${des.getDesgCode()}" th:text="${des.getDesgName()}"></option>
+														
+													</select>
+												
+												</div>
+													<div class="form-group sm col-md-4">
+												<label class="form-label">Tour Plan Id</label> <span
+														class="text-danger">*</span> <select
+														class="form-control required" name="designationCode" id="designationCode">
+														<option value="">Select Type</option>
+														<option th:each="des :${listDesignation}" th:value="${des.getDesgCode()}" th:text="${des.getDesgName()}"></option>
+														
+													</select>
+												
+												</div>
+												
+												</div>
+												
+												
+												<div class="form-row">
+												
+												<div class="form-group sm col-md-4">
+											       <label class="form-label">Tour Plan Date</label>
+											       <span class="text-danger">*</span>
+											       <input  type="text"id="empDob"name="empDob"  class="form-control required">
+											      </div>
+											      
+											      <div class="form-group sm col-md-4">
+											       <label class="form-label">Start Place</label>
+											       <span class="text-danger">*</span>
+											       <input  type="text"id="startPlace"name="startPlace"  class="form-control required">
+											      </div>
+											      <div class="form-group sm col-md-4">
+											       <label class="form-label">Visit Place </label>
+											       <span class="text-danger">*</span>
+											       <input  type="text"id="visitPlace"name="visitPlace"  class="form-control required">
+											      </div>
+												</div>
+												
+													<div class="form-row">
+													 <div class="form-group sm col-md-4">
+											       <label class="form-label">Advance Paid </label>
+											       <span class="text-danger">*</span>
+											       <input  type="text"id="advPaid"name="advPaid"  class="form-control required">
+											      </div>
+											       <div class="form-group sm col-md-4">
+											       <label class="form-label">Visit Purpose </label>
+											       <span class="text-danger">*</span>
+											       <input  type="text"id="visitPlace"name="visitPlace"  class="form-control required">
+											      </div>
+													
+													
+													</div>
+												
+												
+												
+							</div>
+						</div>
+	              <div class="col-12">
+		<form id="smartwizard-validation" enctype="multipart/form-data" class="wizard wizard-primary" th:action="@{/saveEmployee}" th:object="${employees}" method="post">
+		
+			<ul>
+			<li><a href="#validation-step-1"><br /><small>Traveling Expenses</small></a></li>
+			<li><a href="#validation-step-2"><br /><small>Conveyance  Expenses </small></a></li>
+			<li><a href="#validation-step-3"><br /><small>Staying Expenses </small></a></li>
+
+								</ul>
+								<div>
+								
+                         <div id="validation-step-1">
+									     
+										<div class="form-row">
+												<div class="form-group sm col-md-4">
+												
+													<label class="form-label">From Date <span
+														class="text-danger">*</span>
+													</label> <input name="frmDate" type="text" id="frmDate"
+														class="form-control">
+												</div>
+											<div class="form-group sm col-md-4">
+											       <label class="form-label">From Time
+											       <span class="text-danger">*</span></label>
+							                 <input  type="text"id="frmTim"name="frmTim" title="Name"onkeyup="sync()"maxlength="50" pattern="^[a-zA-Z\s]*$" class="form-control required">
+										     </div>
+										     	
+											<div class="form-group sm col-md-4">
+													<label class="form-label">Start place <span
+														class="text-danger">*</span>
+													</label> <input name="employeePayeeCode" type="text" id="employeePayeeCode" pattern="\d{1,10}" title="Only digits"maxlength="10" 
+														class="form-control required">
+												</div>
+												</div>
+												
+												
+												
+											<div class="form-row">	
+											<div class="form-group sm col-md-4">
+												
+													<label class="form-label">To Date <span
+														class="text-danger">*</span>
+													</label> <input name="toDate" type="text" id="toDate"
+														class="form-control">
+												</div>
+												<div class="form-group sm col-md-4">
+											       <label class="form-label">To Time
+											       <span class="text-danger">*</span></label>
+							                 <input  type="text"id="frmTim"name="frmTim" title="Name"onkeyup="sync()"maxlength="50" pattern="^[a-zA-Z\s]*$" class="form-control required">
+										     </div>
+											
+											
+												 <div class="form-group sm col-md-4">
+													<label class="form-label">Mode</label> <span
+														class="text-danger">*</span> <select
+														class="form-control required" name="designationCode" id="designationCode">
+														<option value="">Select Type</option>
+														<option  th:Value="taxi">Taxi</option>
+														<option  th:Value="car">Car</option>
+														<option  th:Value="bus">Bus</option>
+														<option  th:Value="train">Train</option>
+														
+														
+													</select>
+												  </div>
+											</div>	
+											
+											
+											
+												<div class="form-row">	
+												    	
+											<div class="form-group sm col-md-4">
+													<label class="form-label">Total Amount Expenses  <span
+														class="text-danger">*</span>
+													</label> <input name="employeePayeeCode" type="text" id="employeePayeeCode" pattern="\d{1,10}" title="Only digits"maxlength="10" 
+														class="form-control required">
+												</div>
+												</div>
+												
+												
+												
+												
+										
+											
+										
+													
+												
+												
+												
+
+										
+									
+						          	</div>
+									<div id="validation-step-2">
+							
+										<div class="form-row">
+										<div class="form-group sm col-md-4">
+											<label class="form-label">Transfer
+											
+												</label>
+							                   <input  type="text"id="transfer"name="transfer" title="Transfer" maxlength="30"class="form-control ">
+										</div> 
+										
+										<div class="form-group sm col-md-4">
+											<label class="form-label">Order No.
+											
+												</label>
+							           <input  type="text"id="orderNo"name="orderNo" title="Order No."maxlength="30" class="form-control ">
+										</div>
+										 <div class="form-group sm col-md-4">
+												<label class="form-label">Order Date</label>
+												
+												<input  type="text" id="orderDate" name="orderDate" class="form-control">
+										          </div>
+										</div>
+											
+											<div class="form-row">
+											<div class="form-group sm col-md-4">
+													<label class="form-label">Under Rule 7</label>  <select
+														class="form-control" name="underRule7" id="underRule7">
+														<option value="">Select Type</option>
+														<option value="Y">YES</option>
+														<option value="N"selected="selected">NO</option>
+														
+													</select>
+												</div>
+												<div class="form-group sm col-md-4">
+													<label class="form-label">Under Rule 8</label>
+													<select class="form-control" name="underRule8" id="underRule8">
+														<option value="">Select Type</option>
+														<option value="Y">YES</option>
+														<option value="N"selected="selected">NO</option>
+														
+													</select>
+												</div>
+													<div class="form-group sm col-md-4">
+											       <label class="form-label">Qualification
+											       <span class="text-danger">*</span></label>
+							                 <input  type="text"id="qualification"name="qualification" title="Qualification"maxlength="40" pattern="^[a-zA-Z\s]*$" class="form-control required">
+										     </div>
+												
+													
+											</div>
+											
+											   <div class="form-row">
+											  <div class="form-group sm col-md-4">
+											       <label class="form-label">Email
+											      </label>
+							                 <input  type="text"id="email"name="email" title="Email"pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" class="form-control">
+										     </div>
+										       	
+												 <div class="form-group sm col-md-4">
+													<label class="form-label">Gender</label> <span
+														class="text-danger">*</span> <select
+														class="form-control required" name="gender" id="gender">
+														<option value="">Select Type</option>
+														<option value="M">MALE</option>
+														<option value="F">FEMALE</option>
+														
+													</select>
+												</div>
+												  	<div class="form-group sm col-md-4">
+													<label class="form-label">Martial Status</label> <span
+														class="text-danger">*</span> <select
+														class="form-control required" name="martialStatus" id="martialStatus">
+														<option value="">Select Type</option>
+														<option value="MARRIED">MARRIED</option>
+														<option value="UNMARRIED ">UNMARRIED  </option>
+														
+													</select>
+												</div>
+												
+											</div>
+											
+											
+											<div class="form-row">
+										
+										    
+										     <div class="form-group sm col-md-4">
+											       <label class="form-label"> Primary Mobile Number
+											      </label>
+							                 <input  type="text"id="mobileNumber1"name="mobileNumber1" title="Mobile Number1"maxlength="10" class="form-control">
+										     </div>
+										      <div class="form-group sm col-md-4">
+											       <label class="form-label">Mobile Number
+											      </label>
+							                 <input  type="text"id="mobileNumber2"name="mobileNumber2" title="Mobile Number 2"maxlength="10" class="form-control">
+										     </div>
+										     
+										    
+											    <div class="form-group sm col-md-4">
+											       <label class="form-label">Telephone No
+											      </label>
+							                 <input  type="text"id="telephone"name="telephone" title="Telephone No"maxlength="12" class="form-control ">
+										     </div>
+										     
+									
+										    
+											</div>
+											
+											
+										
+											
+											
+												<div class="form-row">
+											<div class="form-group sm col-md-4">
+											       <label class="form-label">Add Charge
+											      </label>
+							                 <input  type="text"id="addCharge"name="addCharge" title="Add Charge" class="form-control">
+										     </div>
+										      	<div class="form-group sm col-md-4">
+													<label class="form-label">On Additional Charge</label>  
+													<select class="form-control" name="onAdditionalCharge" id="onAdditionalCharge">
+														<option value="">Select Type</option>
+														<option value="YES">YES</option>
+														<option value="NO"selected="selected">NO</option>
+														
+													</select>
+												</div>
+												 	
+												 	 <div class="form-group sm col-md-4">
+											       <label class="form-label">Leave Account</label>
+											      <input  type="text"id="leaveAccount"name="leaveAccount"maxlength="250" title="Ltc"class="form-control " >
+											      </div>
+											</div>
+											
+											
+											
+										  <div class="form-row">
+											  
+											  
+										        <div class="form-group sm col-md-4">
+											       <label class="form-label">City 
+											       <span class="text-danger">*</span></label>
+										             <select
+														class="form-control required" name="cityCode" id="cityCode"onchange="myFunctionCity()">
+															<option value="">Select City</option>
+														<option th:each="lc :${CityList}" th:value="${lc.getCityCode()}" th:text="${lc.getCityName()}">Select  City</option>
+													
+													 </select> 
+										   
+										     </div>
+											  
+											    <div class="form-group sm col-md-4">
+											       <label class="form-label">State 
+											       <span class="text-danger">*</span></label>
+										              <select
+														class="form-control required" name="stateCode" id="stateCode" onchange="myFunctionState()">
+														<option value="">Select State</option>
+														<option  th:each="ls :${listState}"th:value="${ls.getStateCode()}" th:text="${ls.getStateName()}">Select  State</option>
+														
+													 </select> 
+										    
+										     </div>
+										     <div class="form-group sm col-md-4">
+											       <label class="form-label">Country 
+											       <span class="text-danger">*</span></label>
+										              <select
+														class="form-control required" name="countryCode" id="countryCode">
+														<option value="">Select Country</option>
+														<option th:each="lco :${listCountry}" th:value="${lco.getCountryCode()}" th:text="${lco.getCountryName()}">Select  Country Type</option>
+														
+													 </select> 
+										     </div>
+											  
+										    
+										       
+											</div>
+											
+											 <div class="form-row">
+											 <div class="form-group sm col-md-4">
+											       <label class="form-label">Primary Address
+											       <span class="text-danger">*</span></label>
+							                 <input  type="text"id="address1"name="address1" title="Address1"onkeyup="syncAddress()"maxlength="200" class="form-control required">
+										     </div>
+										     <div class="form-group sm col-md-4">
+											       <label class="form-label">Address
+											       </label>
+							                 <input  type="text"id="address2"name="address2" title="Address2"maxlength="200" class="form-control ">
+										     </div>
+										     <div class="form-group sm col-md-4">
+											       <label class="form-label">Pin Code
+											       <span class="text-danger">*</span></label>
+							                 <input  type="text"id="pinCode"name="pinCode" title="Pin Code"maxlength="6" class="form-control required">
+										     </div>
+											 </div>
+											 
+											  
+											  
+											  
+											    <div class="form-row">
+											     <div class="form-group sm col-md-4">
+											      <label class="form-label">Promotion</label>
+											      <input  type="text"id="promotion"name="promotion" maxlength="250" title="Promotion" class="form-control ">
+											     </div>
+											      <div class="form-group sm col-md-4">
+											      <label class="form-label">ACP</label>
+											      <input  type="text"id="acp"name="acp" title="Acp"maxlength="250" class="form-control ">
+											     </div>
+											      <div class="form-group sm col-md-4">
+											      <label class="form-label">APR</label>
+											      <input  type="text"id="apr"name="apr" maxlength="250"title="Apr"class="form-control " >
+											     </div>
+											     
+											      </div>
+											       <div class="form-row">
+											      <div class="form-group sm col-md-4">
+											      <label class="form-label">ACR</label>
+											      <input  type="text"id="acr"name="acr" title="Acr" maxlength="250"class="form-control ">
+											      </div>
+											      <div class="form-group sm col-md-4">
+											      <label class="form-label">Training</label>
+											      <input  type="text"id="training"name="training" maxlength="250"title="Training"class="form-control " >
+											     </div>
+											      <div class="form-group sm col-md-4">
+											      <label class="form-label">LTC</label>
+											      <input  type="text"id="ltc"name="ltc" title="" maxlength="250"class="form-control ">
+											       </div>
+											      </div>
+											       <div class="form-row">
+											      
+											       <div class="form-group sm col-md-4">
+											       <label class="form-label">Awards</label>
+											      <input  type="text"id="empAwards"name="empAwards"maxlength="250" title="Awards"class="form-control " >
+											     </div>
+											      <div class="form-group sm col-md-4">
+											      <label class="form-label">On Deputation</label>
+											       <select onchange="changetextbox();"
+														class="form-control " name="onDeputation" id="onDeputation">
+														<option value="">Select Type</option>
+														<option value="Y">YES</option>
+														<option value="N"selected>NO</option>
+													</select>
+											      </div>
+											       <div class="form-group sm col-md-4">
+											        <label class="form-label">Deputation</label>
+											       <input  type="text"id="empDeputation"name="empDeputation"maxlength="250" title="Deputation"class="form-control " >
+											       </div>
+											      </div>
+											      
+											       <div class="form-row">
+											       
+											        <div class="form-group sm col-md-4">
+											        <label class="form-label">Previous Postings</label>
+											       <input  type="text"id="previousPostings"name="previousPostings"maxlength="250" title="Previous Postings"class="form-control " >
+											       </div>
+											       <div class="form-group sm col-md-4">
+											       <label class="form-label">Expired</label>
+											     <select
+														class="form-control " name="expired" id="expired">
+														<option value="">Select Type</option>
+														<option value="Y">YES</option>
+														<option value="N"selected>NO</option>
+														
+													</select>
+											     
+											      </div>
+											      </div>
+											      
+											     
+											    
+
+									</div>
+
+
+									<div id="validation-step-3">
+									 
+									  <div class="form-row">
+									  
+									  <div class="form-group sm col-md-4">
+											   <label class="form-label">Arms Code   </label>
+											      
+							                 <input  type="text"id="armsCode"name="armsCode"  class="form-control"readonly>
+										     </div>
+									  
+									  
+									              <div class="form-group sm col-md-4">
+											       <label class="form-label"> Name
+											       </label>
+							                 <input  type="text"id="name"name="name" maxlength="40"title=" Name"  pattern="^[a-zA-Z\s]*$"class="form-control">
+										     </div>
+									  
+										       <div class="form-group sm col-md-4">
+											       <label class="form-label">Father Name
+											       </label>
+							                 <input  type="text"id="fatherName"name="fatherName" maxlength="40"title="Father Name"  pattern="^[a-zA-Z\s]*$"class="form-control">
+										     </div>
+										      
+										     
+										     
+									  </div>
+									  
+									   <div class="form-row">
+									     <div class="form-group sm col-md-4">
+											       <label class="form-label">City District
+											       <span class="text-danger">*</span></label>
+							                 <input  type="text"id="district"name="district"maxlength="40" title="District" pattern="^[a-zA-Z\s]*$" class="form-control required">
+										     </div>
+										       <div class="form-group sm col-md-4">
+											       <label class="form-label">State
+											       <span class="text-danger">*</span></label>
+							                 <input  type="text"id="state"name="state" title="State" maxlength="30"pattern="^[a-zA-Z\s]*$" class="form-control required">
+										     </div>
+										      <div class="form-group sm col-md-4">
+											       <label class="form-label">Address
+											       <span class="text-danger">*</span></label>
+							                 <input  type="text"id="addressArms"name="addressArms"maxlength="60" title="Address" class="form-control required">
+										     </div>
+										     
+										     
+										     
+										    
+									  </div>
+									  
+									   <div class="form-row">
+									      <div class="form-group sm col-md-4">
+											       <label class="form-label">DOI
+											       <span class="text-danger">*</span></label>
+							                 <input  type="text"id="doi"name="doi" title="DOI"maxlength="45" class="form-control required">
+										     </div>
+										       <div class="form-group sm col-md-4">
+											       <label class="form-label">DOV
+											       <span class="text-danger">*</span></label>
+							                 <input  type="text"id="dov"name="dov" title="DOV"maxlength="45" class="form-control required">
+										     </div>
+										       <div class="form-group sm col-md-4">
+											       <label class="form-label">TOA
+											       <span class="text-danger">*</span></label>
+							                 <input  type="text"id="toa"name="toa" title="TOA"maxlength="45" class="form-control required">
+										     </div>
+										     
+										     
+									  </div>
+									  
+									  
+									    <div class="form-row">
+									        <div class="form-group sm col-md-4">
+											       <label class="form-label">TOP
+											       <span class="text-danger">*</span></label>
+							                 <input  type="text"id="top"name="top" title="TOP"maxlength="45" class="form-control required">
+										     </div>
+										         <div class="form-group sm col-md-4">
+											       <label class="form-label">NOL
+											       <span class="text-danger">*</span></label>
+							                 <input  type="text"id="armsNol"name="armsNol" title="NOL"maxlength="5"pattern="\d{1,5}" class="form-control required">
+										     </div>
+										         <div class="form-group sm col-md-4">
+											       <label class="form-label">LCD
+											       <span class="text-danger">*</span></label>
+							                 <input  type="text"id="lcd"name="lcd" title="LCD" maxlength="45"class="form-control required">
+										     </div>
+										     
+									        
+									    </div>
+									    
+									       <div class="form-row">
+									         <div class="form-group sm col-md-4">
+											       <label class="form-label">Arms Area
+											       <span class="text-danger">*</span></label>
+							                 <input  type="text"id="armsArea"name="armsArea" title="Arms Area" maxlength="60"class="form-control required">
+										     </div>
+									         <div class="form-group sm col-md-4">
+											       <label class="form-label">Dealer Details
+											       <span class="text-danger">*</span></label>
+							                 <input  type="text"id="dealerDetails"name="dealerDetails"maxlength="100" title="Dealer Details" class="form-control required">
+										     </div>
+									       
+									       </div>
+									    
+									     
+									   
+									 <button type="submit" class="btn btn-primary">Save</button>
+										
+                              </div>
+                     
+                     
+                     
+                     
+								</div>
+
+	
+	</form>
+			</div>
+				  <div class="col-12">
+							<div class="card">
+								<div class="card-header">
+								</div>
+								<div class="card-body">
+								<table id="datatables-buttons"aria-describedby="datatables-buttons" class="table table-striped display" style="width:100%">
+										<thead>
+											<!-- <tr>
+												<th scope="col">Employee  Id</th>
+												<th scope="col">Arms Code </th>
+													<th scope="col">Employee Name</th>
+												<th scope="col">Category Name</th>
+												<th scope="col">Department Name</th>
+												<th scope="col">Designation  </th>
+												<th scope="col">employee images</th>
+												<th scope="col">Action</th>
+												
+											</tr> -->
+										</thead>
+										<tbody>
+									
+										
+											  
+										
+										</tbody>
+									
+									</table>
+								</div>
+								
+							</div>
+						</div>
+					</div>
+
+				</div>
+		</main>
+		<footer class="footer">
+		<div th:replace="/fragments/footer :: div"></div>
+		</footer>
+		</div>
+		</div>
+	<script>
+		$(function() {
+
+			$("input[name='empDob']").daterangepicker({
+				singleDatePicker: true,
+			    autoApply: true,
+				locale: {
+		            format: 'DD/MM/YYYY'
+		        },
+				showDropdowns: true
+			});
+			
+		$("input[name='dateOfPosting']").daterangepicker({
+				singleDatePicker: true,
+			    autoApply: true,
+				locale: {
+		            format: 'DD/MM/YYYY'
+		        },
+				showDropdowns: true
+			});
+		$("input[name=\"dateOfJoining\"]").daterangepicker({
+			singleDatePicker: true,
+			   autoApply: true,
+			locale: {
+				format: 'DD/MM/YYYY'
+	        },
+			showDropdowns: true
+		});
+		$("input[name='dateOfRetirement']").daterangepicker({
+			singleDatePicker: true,
+		    autoApply: true,
+			locale: {
+				format: 'DD/MM/YYYY'
+	        },
+			showDropdowns: true
+		});
+		$("input[name='batchYear']").datepicker({
+			
+		    autoApply: true,
+		    format: "yyyy",
+		    autoclose: true,
+		    minViewMode: "years",
+			locale: {
+	            format: 'YYYY'
+	        },
+			showDropdowns: true
+		});
+			
+		
+		$("input[name=\"orderDate\"]").daterangepicker({
+				singleDatePicker: true,
+				   autoApply: true,
+				locale: {
+					format: 'DD/MM/YYYY'
+		        },
+				showDropdowns: true
+			});
+		
+		$("input[name=\"dov\"]").daterangepicker({
+			singleDatePicker: true,
+			   autoApply: true,
+			locale: {
+				format: 'DD/MM/YYYY'
+	        },
+			showDropdowns: true
+		});
+		$("input[name=\"doi\"]").daterangepicker({
+			singleDatePicker: true,
+			   autoApply: true,
+			locale: {
+				format: 'DD/MM/YYYY'
+	        },
+			showDropdowns: true
+		});
+
+
+
+			
+			// Datatables basic
+			$('#datatables-basic').DataTable({
+				responsive: true
+			});
+			// Datatables with Buttons
+			var datatablesButtons = $('#datatables-buttons').DataTable({
+				  deferRender:true,
+		            scrollCollapse: true,
+		            scroller: false,
+				   responsive: true,
+				   lengthMenu :[[10,20,30,-1 ],['10 rows', '20 rows', '30 rows', 'Show all' ] ],
+					buttons :[]
+			});
+			datatablesButtons.buttons().container().appendTo("#datatables-buttons_wrapper .col-md-6:eq(0)")
+		});
+		
+	</script>
+	
+		<script>
+		$(function() {
+			$("#smartwizard-default-primary").smartWizard({
+				theme: "default",
+				showStepURLhash: false
+			});
+
+			
+			// Validation
+			var $validationForm = $("#smartwizard-validation");
+			$validationForm.validate({
+				errorPlacement: function errorPlacement(error, element) {
+					$(element).parents(".form-group").append(
+						error.addClass("invalid-feedback small d-block")
+					)
+				},
+				highlight: function(element) {
+					$(element).addClass("is-invalid");
+				},
+				unhighlight: function(element) {
+					$(element).removeClass("is-invalid");
+				},
+				rules: {
+					"wizard-confirm": {
+						equalTo: "input[name=\"wizard-password\"]"
+					}
+				}
+			});
+			$validationForm.smartWizard({
+					autoAdjustHeight: false,
+					backButtonSupport: false,
+					useURLhash: false,
+					showStepURLhash: false,
+					
+				})
+				.on("leaveStep", function(e, anchorObject, stepNumber, stepDirection) {
+					if (stepDirection === "forward") {
+						return $validationForm.valid();
+					}
+					return true;
+				});
+			/* $validationForm.find(".btn-submit").on("click", function() {
+				if (!$validationForm.valid()) {
+					return;
+				}
+				
+				return false;
+			}); */
+		});
+	</script>
+
+	<script type="text/javascript">
+		function changetextbox() {
+			if (document.getElementById("onDeputation").value === "Y")
+
+			{
+				document.getElementById("empDeputation").disabled = 'true';
+
+			} else {
+
+				document.getElementById("empDeputation").disabled = '';
+			}
+
+		}
+	</script>
+
+
+	<script type='text/javascript'>
+		function preview_image(event) {
+			var reader = new FileReader();
+			reader.onload = function() {
+				var output = document.getElementById('output_image');
+				output.src = reader.result;
+			}
+			reader.readAsDataURL(event.target.files[0]);
+		}
+	</script>
+
+	<script>
+		function sync() {
+			var n1 = document.getElementById('empName');
+			var n2 = document.getElementById('name');
+			n2.value = n1.value;
+		}
+	</script>
+	<script>
+		function syncAddress() {
+			var n1 = document.getElementById('address1');
+			var n2 = document.getElementById('addressArms');
+			n2.value = n1.value;
+		}
+	</script>
+	<script>
+ function myFunctionState(){
+   $('#stateCode').click(function() {
+      	 var name= $('#stateCode option:selected').text();
+      	$('#state').val(name);
+      	}); 
+      }
+      
+</script>
+
+<script>
+ function myFunctionCity(){
+   $('#cityCode').click(function() {
+      	 var name= $('#cityCode option:selected').text();
+      	$('#district').val(name);
+      	}); 
+      }
+      
+</script>
+
+
+
+	<script>
+		$('#loading').show();
+		$.ajax({
+			// Other ajax parameters
+			success : function() {
+				// hiding the image here
+				debugger;
+				$('#loading').hide();
+			}
+		});
+	</script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+
+
+</body>
+</html>
