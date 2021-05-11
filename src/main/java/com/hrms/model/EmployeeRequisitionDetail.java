@@ -1,8 +1,8 @@
 package com.hrms.model;
 
-import java.util.Date;
 
-import javax.persistence.CascadeType;
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -17,7 +17,12 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="EPLOYEE_RQUISITION_DETAIL")
-public class EmployeeRequisitionDetail {
+public class EmployeeRequisitionDetail implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4728476448805913732L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -25,7 +30,7 @@ public class EmployeeRequisitionDetail {
 	private Long reqDetailCode;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "REQ_CODE", nullable = false)
+    @JoinColumn(name = "REQ_CODE",updatable = false)
 	private EmployeeRequisition employeeRequisition;
 	
 	//@Column(name="REQ_DATE")

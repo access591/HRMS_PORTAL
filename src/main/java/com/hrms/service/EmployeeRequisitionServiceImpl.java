@@ -43,22 +43,14 @@ public class EmployeeRequisitionServiceImpl implements EmployeeRequisitionServic
 	}
 
 	@Override
-	public void updateEmployeeRequisition(EmployeeRequisition c) {
+		  	public void updateEmployeeRequisition(EmployeeRequisition c) {
 		
-		System.out.println("employee req code>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> : "+ c.getReqCode());
-		c.setReqCode(c.getReqCode());
-		
-		  Session session = sessionfactory.openSession(); session.beginTransaction();
-		  //employeReq.setReqCode(employeRequisitionDao.getMaxId("REQ"));
-		  EmployeeRequisition req = session.find(EmployeeRequisition.class, c.getReqCode());
-		  req.setEmployeRequisitionDetail(null);
-		  req.setEmployeRequisitionDetail(c.getEmployeRequisitionDetail());
-		  session.merge(c); //session.saveOrUpdate(employeReq);
-		  session.getTransaction().commit(); 
-		  session.clear(); 
-		  session.close();
-		 
-		this.employeRequisitionDao.saveOrUpdate(c);
+		Session session = sessionfactory.openSession();
+		Transaction tx = session.beginTransaction();
+		session.update(c);
+		tx.commit();
+		session.close();
+		//this.employeRequisitionDao.saveOrUpdate(c);
 		
 		
 	}
@@ -66,9 +58,10 @@ public class EmployeeRequisitionServiceImpl implements EmployeeRequisitionServic
 	@Override
 	public void removeEmployeeRequisition(String reqCode) {
 		Session session = sessionfactory.openSession();
+		Transaction tx = session.beginTransaction();
 		Object o = session.get(EmployeeRequisition.class, reqCode);
 		EmployeeRequisition e = (EmployeeRequisition) o;
-		Transaction tx = session.beginTransaction();
+		
 		session.delete(e);
 		tx.commit();
 		session.close();
@@ -98,21 +91,8 @@ public class EmployeeRequisitionServiceImpl implements EmployeeRequisitionServic
 
 	@Override
 	public void approvedByReqCode(String reqCode) {
-		//this.employeRequisitionDao.approvedStatusByReqCode(reqCode);
-		Session session = sessionfactory.openSession();
-		Object o = session.get(EmployeeRequisition.class, reqCode);
+		this.employeRequisitionDao.approvedStatusByReqCode(reqCode);
 		
-		EmployeeRequisition e = (EmployeeRequisition) o;
-		//e.setEmployeRequisitionDetail(null);
-		//e.setEmployeRequisitionDetail(e.getEmployeRequisitionDetail());
-		  
-		e.setStatus("Y");
-		//Transaction tx = session.beginTransaction();
-		//Query query = session.createQuery("UPDATE EmployeeRequisition e set e.status = 'Y' WHERE e.reqCode = :reqCode");
-		//query.setParameter("reqCode", reqCode);
-		//tx.commit();
-		session.update(e);
-		//session.close();
 		
 	}
 

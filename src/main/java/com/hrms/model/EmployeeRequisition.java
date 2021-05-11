@@ -3,6 +3,7 @@ package com.hrms.model;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -14,12 +15,18 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="EMP_REQUI_MASTER")
-public class EmployeeRequisition {
+@Table(name="EMPREQUISITION_MASTER")
+public class EmployeeRequisition implements Serializable {
 	
 	
-	 @Id
-	 @Column(name="REQ_CODE")
+	 /**
+	 * 
+	 */
+	private static final long serialVersionUID = 8223555113108625254L;
+
+	@Id
+	 
+	 @Column(name="REQ_CODE",updatable=false)
 	 private String reqCode;
 	 
 	 @Column(name="REQ_DATE")
