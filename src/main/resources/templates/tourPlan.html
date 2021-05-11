@@ -42,31 +42,29 @@ body {
 						</nav>
 					</div>
 					<div class="row">
-						<div class="col-12">
+						<form id="validation-form" action="#" th:action="@{/saveAward}" th:object="${award}" method="post">
+			           <div class="col-12">
 							<div class="card">
 								<div class="card-header">
-									<h5 class="card-title">Tour Plan </h5>
+									<h5 class="card-title">Tour Plan</h5>
 								<div class="alert-outline">
 									<div th:if="${message}" th:text="${message}" style="color: red">
 									</div> 
 									</div>	
 								</div>
 								<div class="card-body">
-									<form id="validation-form" action="#" th:action="@{/saveTourPlan}" th:object="${tourPlan}" method="POST">
-										
+								
 										<div class="row">
-											<div class="col-12 col-lg-2">
-												<div class="form-group">
-											  <label> Employee Code </label>
-											  		<label style="color: red">*</label>	 
-											   <input
-														type="text" class="form-control" readonly  id="emp_code" name="empCode">
-												</div>
-												
-											</div>
-											
-											
 											<div class="col-12 col-lg-6">
+												<div class="form-group">
+										
+											  <label>Tour Plan Id </label>
+											  		<label style="color: red">*</label>
+											  	 
+											   <input
+														type="text" class="form-control" id="id" name="id" readonly="readonly">
+												</div>
+											<div class="form-group">
 												<label class="form-label">Select Employee</label>
 												<label style="color: red">*</label>
 												<select
@@ -80,45 +78,8 @@ body {
 												</select>
 												<input type="hidden" name="empName" value="" id="hiddenField"> 
 										   	</div>
-										   	
-										   	
-										</div>
-										
-										
-										<div class="row">
-											<div class="col-12 col-lg-2">
-												<div class="form-group">
-											  <label> Department Code </label>
-											  		<label style="color: red">*</label>	 
-											   <input
-														type="text" class="form-control" readonly  id="department_code" name="deptCode">
-												</div>
-												
-											</div>
-											<div class="col-12 col-lg-6">
-											<div class="form-group">
-											<label class="form-label"> Department Name</label>
-											<label style="color: red">*</label>
-											 <input type="text" class="form-control" readonly id="department_name" name="deptName">
-										</div>
-											</div>
-										</div>
-										
-										
-										
-										<div class="row">
-											<div class="col-12 col-lg-2">
-												<div class="form-group">
-											  <label> Designation Code </label>
-											  		<label style="color: red">*</label>	 
-											   <input
-														type="text" class="form-control" readonly id="designation_code" name="">
-												</div>
-												
-											</div>
-											<div class="col-12 col-lg-6">
-											<div class="form-group">
-											<label class="form-label"> Designation Name</label>
+										   	<div class="form-group">
+											<label class="form-label"> Designation Code</label>
 											<label style="color: red">*</label>
 											 <select
 													class="form-control" id="designation_name"
@@ -130,51 +91,32 @@ body {
 
 												</select>
 										</div>
-											</div>
-										</div>
 										
-										
-										<div class="row">
-											<div class="col-12 col-lg-3">
-												<div class="form-group">
+										<div class="form-group">
 											  <label> Tour Start Date and Time </label>
 											  		<label style="color: red">*</label>	 
 											   <input
 														type="date" class="form-control" id="id" name="tourStartDate">
 												</div>
+										
+									
 												
 											</div>
-											<div class="col-12 col-lg-3">
-											<div class="form-group">
-											<label class="form-label"> Tour End Date and Time</label>
-											<label style="color: red">*</label>
-											 <input type="date" class="form-control " maxlength="25" title=" Award Name" id="awardName" name="tourEndDate" >
-										</div>
-											</div>
-										</div>
-										
-										
-										<div class="row">
-											<div class="col-12 col-lg-3">
-												<div class="form-group">
-											  <label> Tour Plan Id </label>
-											  		<label style="color: red">*</label>	 
-											   <input
-														type="text" class="form-control" id="id" name="tourPlanId">
-												</div>
-												
-											</div>
-											<div class="col-12 col-lg-3">
+											<div class="col-12 col-lg-6">
 											<div class="form-group">
 											<label class="form-label"> Tour Plan Date</label>
 											<label style="color: red">*</label>
 											 <input type="date" class="form-control " id="" name="tourPlanDAte">
 										</div>
-											</div>
-										</div>
 										
-										<div class="row">
-											<div class="col-12 col-lg-3">
+										<div class="form-group">
+											  <label> Department Code </label>
+											  		<label style="color: red">*</label>	 
+											  <select
+													class="form-control"  id="deptCode" name="deptCode">
+														   </select>
+												</div>
+												
 												<div class="form-group">
 											  <label> Mobile Number </label>
 											  		<label style="color: red">*</label>	 
@@ -182,19 +124,21 @@ body {
 														type="text" class="form-control" id="id" name="mobile">
 												</div>
 												
-											</div>
-											
+													<div class="form-group">
+											<label class="form-label"> Tour End Date and Time</label>
+											<label style="color: red">*</label>
+											 <input type="date" class="form-control " maxlength="25" title=" Award Name" id="awardName" name="tourEndDate" >
 										</div>
-										
-										
-										
+											
+											</div>
+										</div>
 										<button type="submit" class="btn btn-primary">Save</button>
 								 <button type="reset"class="btn btn-primary" value="Reset">Reset</button>
-									</form>
+									
 								</div>
 							</div>
-						</div>
-	      <div class="col-12">
+						</div>						
+	                  <div class="col-12">
 							<div class="card">
 								<div class="card-header">
 								</div>
@@ -226,7 +170,9 @@ body {
 								
 							</div>
 						</div>
+					</form>
 					</div>
+					
 				</div>
 
 			</main>
@@ -243,7 +189,7 @@ body {
 	        "scrollX": true,
 	        deferRender:true,
 	        lengthChange: false,
-	    	buttons: ['copy', 'csv', 'excel', 'pdf', 'print'],
+	    	buttons: [],
             scrollCollapse: true,
             
 	    } );
