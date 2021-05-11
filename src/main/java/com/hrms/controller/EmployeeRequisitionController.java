@@ -180,6 +180,21 @@ public class EmployeeRequisitionController {
 	}
 	
 	
+	@GetMapping(value = {"viewRequisition/{id}"})
+	public String viewRequisition(@PathVariable("id") String reqCode,@ModelAttribute("req") EmployeeRequisition employeeRequisition,
+			Model model) {
+		System.out.println("=====================>");
+		
+		EmployeeRequisition requisition = employeeRequisitionService.findEmployeeRequisitiondById(reqCode);
+		//requisition.getEmployeRequisitionDetail()
+		if(requisition != null) {
+			model.addAttribute("req", requisition);
+		}
+		System.out.println("employee requisition id : "+ reqCode);
+		return "viewEmployeeRequisition";
+	}
+	
+	
 	
 	
 	

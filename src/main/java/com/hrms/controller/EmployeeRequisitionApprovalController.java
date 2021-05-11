@@ -77,7 +77,7 @@ public class EmployeeRequisitionApprovalController {
 		
 		System.out.println("hiiiiiii" + reqCode);
 		//System.out.println("hiiiiiii" + name);
-		//employeeRequisitionService.approvedByReqCode(reqCode);
+		employeeRequisitionService.approvedByReqCode(reqCode);
 		return "redirect:/employeeRequisitionApproval";
 	}
 	

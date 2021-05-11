@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<script type="text/javascript" th:src="@{/js/settings.js}"></script>
+<script type="text/javascript" th:src="@{/js/app.js}"></script>
+<link rel="stylesheet" type="text/css" th:href="@{/css/modern.css}" />
+<script type="text/javascript" th:src="@{/js/ajax_leaveRequest.js}"></script>
+<script src="https://www.googletagmanager.com/gtag/js?id=UA-120946860-7"></script>
+
+
+
+
+<style>
+body {
+	opacity: 0;
+}
+
+.uppercase {
+	text-transform: uppercase;
+}
+</style>
+<script>
+	window.dataLayer = window.dataLayer || [];
+	function gtag() {
+		dataLayer.push(arguments);
+	}
+	gtag('js', new Date());
+
+	gtag('config', 'UA-120946860-7');
+</script>
+
+<head>
+<meta charset="utf-8" />
+<title>HRMS</title>
+</head>
+
+<body>
+	<div class="wrapper">
+		<nav id="sidebar" class="sidebar" aria-label="Site sidebar">
+			<div th:replace="/fragments/sidebar :: div"></div>
+		</nav>
+		<div class="main">
+			<div th:replace="/fragments/header ::div"></div>
+			<main class="content">
+				<div class="container-fluid">
+					<div class="header">
+						<h1 class="header-title">HRMS</h1>
+						<nav aria-label="breadcrumb"></nav>
+					</div>
+					<form action="#" th:action="@{/updateRequisition}"
+						 method="post">
+						<div class="row">
+							<div class="col-12">
+								<div class="card">
+									<div class="card-header">
+										<h5 class="card-title">Employee Requisition Advertisement</h5>
+										<div class="alert-outline">
+											<div th:if="${message}" th:text="${message}"
+												style="color: red"></div>
+										</div>
+									</div>
+
+									<div class="card-body">
+
+
+										
+										<div class="container">
+										
+										<div class="row">
+											<div class="col-12 col-lg-6">
+												<div class="form-group">
+													<label> Advertisement Code </label> <label
+														style="color: red">*</label> <input type="text" class="form-control" id="reqPriority"
+														value="" >
+												</div>
+											</div>
+											<div class="col-12 col-lg-6">
+												<label class="form-label">Advertisement Date</label> <label
+													style="color: red">*</label> <input type="date"
+													class="form-control" >
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-12 col-lg-6">
+												<label class="form-label">Remarks</label> <label
+													style="color: red">*</label> <input type="text"
+													class="form-control" id="leaveDepartmentName" value=""
+													>
+											</div>
+
+										</div>
+
+
+									</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="col-12">
+								<div class="card">
+									<div class="card-header"></div>
+									<div class="card-body">
+										<div id="validation-step-3">
+										
+										<div class="col-sm-12" align="right">
+												
+
+
+
+												<a id="add_row" class="fa fa-plus" aria-hidden="true"
+													style="font-size: 24px; color: #001080"></a>&nbsp;&nbsp;&nbsp;
+												<a id='delete_row' class="fa fa-trash"
+													style="font-size: 24px; color: #399490fc"
+													aria-hidden="true"></a>
+											</div>
+											
+											
+											<table id="example" aria-describedby="example"
+												class="table table-striped display" style="width: 100%">
+												<thead>
+													<tr>
+														<th style="width: 130px;">Requisition Code</th>
+														<th style="width: 130px;">Requisition Date</th>
+														<th style="width: 130px;">Media Type</th>
+														<th style="width: 130px;">Media Name</th>
+														<th style="width: 130px;">Amount</th>
+														<th style="width: 130px;">Details</th>
+														
+														
+													</tr>
+												</thead>
+												<tbody>
+													<tr id="templateRow">
+
+
+														<td><select id="reqCode">
+																<option value=" ">Select Requisition Code</option>
+																<option value="court">Code-1</option>
+																<option value="department">Code-2</option>
+														</select>
+														</td>
+
+														<td><input type="text" style="width: 130px;"
+															id="reqDate"
+															></td>
+
+
+														
+
+
+
+														<td><select id="media">
+																<option value=" ">Media Type</option>
+																<option value="court">Media-1</option>
+																<option value="department">Media-2</option>
+														</select>
+														</td>
+														
+														<td><input name="ageTo" type="text"
+															style="width: 130px;" id="mediaName"
+															></td>
+
+														<td><input type="text" style="width: 130px;"
+															id="amount"
+															></td>
+
+														<td><input name="ageFrom" type="text"
+															style="width: 130px;" id="details"
+															></td>
+
+														
+
+														
+													</tr>
+
+
+<!--{id}(id=*{employeRequisitionDetail[__${stat.index}__].reqDetailCode}) -->
+												</tbody>
+													
+											</table>
+										</div>
+<input type="hidden" id="hidden_field" th:value="${length}" />
+									</div>
+
+								</div>
+							</div>
+							<button type="submit" class="btn btn-primary">Apply</button>
+							<button type="reset" class="btn btn-primary" value="Reset">Reset</button>
+
+
+						</div>
+					</form>
+				</div>
+			</main>
+			<footer class="footer">
+				<div th:replace="/fragments/footer :: div"></div>
+			</footer>
+		</div>
+	</div>
+	
+
+	
+
+
+	<script>
+	
+	$(document).ready(function() {
+		$('#example').DataTable({
+			"scrollY" : 200,
+			"scrollX" : true,
+			deferRender : true,
+			scrollCollapse : true,
+
+		});
+	});
+	
+	
+	
+		$(function() {
+			// Datatables basic
+			$('#datatables-basic').DataTable({
+				responsive : true
+			});
+			// Datatables with Buttons
+			var datatablesButtons = $('#datatables-buttons')
+					.DataTable(
+							{
+								deferRender : true,
+								scrollCollapse : true,
+								scroller : false,
+								responsive : true,
+								lengthMenu : [
+										[ 10, 20, 30, -1 ],
+										[ '10 rows', '20 rows', '30 rows',
+												'Show all' ] ],
+								buttons : []
+							});
+			datatablesButtons.buttons().container().appendTo(
+					"#datatables-buttons_wrapper .col-md-6:eq(0)")
+		});
+		
+		
+		
+		
+		
+		$(document).ready(function(){
+			console.log("click function...");
+			var i=1;
+			counter = i;//<option value=" ">Select Requisition Code</option>
+			$("#add_row").click(function(){
+			$('#addr'+i).html(
+					
+					"<td><select id='designationName"+i+"'name='employeRequisitionDetail["+i+"].designationName'onchange='selectDesignation()'><option value=''>Select Requisition Code</option><option value=''>Code-1</option><option value=''>Code-2</option></select></td>"+
+					"<td><input type='text' style='width: 130px;'id='desigCode"+i+"'name='employeRequisitionDetail["+i+"].desigCode'></td>"+
+					"<td><select id='sex'name='employeRequisitionDetail["+i+"].sex'><option value=''>Media Type</option><option value='media-1'>Media-1</option><option value='female'>Media-2</option></select></td>"+
+					"<td><input type='text' style='width: 130px;'id='ageFrom'name='employeRequisitionDetail["+i+"].ageFrom'></td>"+
+					
+					"<td><input type='text' style='width: 130px;'id='ageFrom'name='employeRequisitionDetail["+i+"].ageFrom'></td>"+
+					" </td><td><input type='text' style='width: 130px;'id='desigCode'name='employeRequisitionDetail["+i+"].ageTo'></td>"
+
+					);
+
+			$('#example').append('<tr id="addr'+(i+1)+'"></tr>');
+			$('#_cr').val(i+1);
+			i++; 
+		});
+			
+			$("#delete_row").click(function(){
+			 	 if(i>1){
+					 $("#addr"+(i-1)).html('');
+					 $('#_cr').val(i - 1);
+					 i--;
+					 }
+				 });
+
+
+		});
+
+	</script>
+
+
+
+
+</body>
+
+</html>
