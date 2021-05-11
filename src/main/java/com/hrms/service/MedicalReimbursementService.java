@@ -15,4 +15,6 @@ public interface MedicalReimbursementService {
 
 	void updateMedicalReimbursement(MedicalReimbursement medicalReimbursement);
 
+	void approvedByMrId(String slipNo);
+
 }

@@ -61,4 +61,10 @@ public void updateMedicalReimbursement(MedicalReimbursement medicalReimbursement
 	this.medicalReimbursementDao.saveOrUpdate(medicalReimbursement);
 	
 }
+
+@Override
+public void approvedByMrId(String slipNo) {
+	this.medicalReimbursementDao.approvedByMrId(slipNo);
+	
+}
 }

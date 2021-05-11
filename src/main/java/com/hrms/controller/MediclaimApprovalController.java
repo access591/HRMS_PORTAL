@@ -67,5 +67,14 @@ public class MediclaimApprovalController {
 	   
 	    return "viewMedicalReimbursement";
 	}
+	
+	@GetMapping("approveMedicalReimbursement/{id}")
+	public String approveRequisition(@PathVariable("id") String slipNo) {
+		
+		
+		medicalReimbursementService.approvedByMrId(slipNo);
+		return "redirect:/mediclaimApproval";
+	}
+	
 
 }
