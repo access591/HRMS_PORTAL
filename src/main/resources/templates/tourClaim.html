@@ -67,7 +67,7 @@ $(document).ready(function(){
 			 calculateSum(),calculateSumtotalPassing(),calculateSumtotalgovt()
 			 }
 		 });
-   
+   var i=1;
    $("#tab2_AddRow").click(function(){
 	    $('#addrtabsecond'+i).html("<td><input name='medStDr"+i+"' type='Date'  class='form-control txt input-md'/> "+
 	    		"</td><td><input  name='caseMemoNo"+i+"' type='text' placeholder='Case Memo No'  class='form-control input-md'>"+
@@ -94,6 +94,29 @@ $(document).ready(function(){
 	
    
   
+   var i=1;
+   
+   $("#tab3_AddRow").click(function(){
+	    $('#addrowthired'+i).html("<td><input name='medStDr"+i+"' type='text'  class='form-control  input-md'/> "+
+	    		"</td><td><input  name='caseMemoNo"+i+"' type='Date' placeholder='Case Memo No'  class='form-control input-md'>"+
+	    		"</td><td><input  name='passedAmount"+i+"' type='text' placeholder='Expenses'  class='pas form-control input-md'></td>"+
+	    		"");
+
+	    $('#tab3').append('<tr id="addrowthired'+(i+1)+'"></tr>');
+	    $('#_cr3').val(i+1);
+	    
+	    i++; 
+	});
+   
+   
+   $("#tab3_delete").click(function(){
+	  	 if(i>1){
+			 $("#addrowthired"+(i-1)).html('');
+			 $('#_cr3').val(i - 1);
+			 i--;
+			 calculateSum(),calculateSumtotalPassing(),calculateSumtotalgovt()
+			 }
+		 });
    
 function calculateSum() {
 
@@ -513,93 +536,57 @@ $("table").on("keyup", ".govt", function () {
 								<!-- <a id="add_row" class="fa pull-right btn btn-default ">Add Row</a><a id='delete_row' class="fa pull-right btn btn-default">Delete Row</a>	 -->
 							            </div>
 									</div>
-												
-															
-											
-											
-											
-										
-										
-											
-											
-											
-											
-										  
-											 
-											  
-											  
-											  
-											 
-											      
-											      
-											     
-											    
-
+							
 									</div>
 
-
+<!-- third ta>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>.. -->
 									<div id="validation-step-3">
-									 
-									  <div class="form-row">
-									  
-									  <div class="form-group sm col-md-4">
-											   <label class="form-label">Arms Code   </label>
-											      
-							                 <input  type="text"id="armsCode"name="armsCode"  class="form-control"readonly>
-										     </div>
-									  
-									  
-									              <div class="form-group sm col-md-4">
-											       <label class="form-label"> Name
-											       </label>
-							                 <input  type="text"id="name"name="name" maxlength="40"title=" Name"  pattern="^[a-zA-Z\s]*$"class="form-control">
-										     </div>
-									  
-										       <div class="form-group sm col-md-4">
-											       <label class="form-label">Father Name
-											       </label>
-							                 <input  type="text"id="fatherName"name="fatherName" maxlength="40"title="Father Name"  pattern="^[a-zA-Z\s]*$"class="form-control">
-										     </div>
-										      
-										     
-										     
-									  </div>
-									  
-									   <div class="form-row">
-									     <div class="form-group sm col-md-4">
-											       <label class="form-label">City District
-											       <span class="text-danger">*</span></label>
-							                 <input  type="text"id="district"name="district"maxlength="40" title="District" pattern="^[a-zA-Z\s]*$" class="form-control required">
-										     </div>
-										       <div class="form-group sm col-md-4">
-											       <label class="form-label">State
-											       <span class="text-danger">*</span></label>
-							                 <input  type="text"id="state"name="state" title="State" maxlength="30"pattern="^[a-zA-Z\s]*$" class="form-control required">
-										     </div>
-										      <div class="form-group sm col-md-4">
-											       <label class="form-label">Address
-											       <span class="text-danger">*</span></label>
-							                 <input  type="text"id="addressArms"name="addressArms"maxlength="60" title="Address" class="form-control required">
-										     </div>
-										     
-										     
-										     
-										    
-									  </div>
-									  
-									 
-									  
-									  
-									   
-									    
-									    
-									     
-									   
+				<div class="form-row">
+				<div class="card">
+								<div class="card-header">
+								</div>
+								<div class="card-body">
+								<input id="_cr3" name="_cr3" type="text"value="1">
+								
+								
+								
+								<div class="col-sm-12" align="right">
+								<a id="tab3_AddRow" class="fa fa-plus" aria-hidden="true"style="font-size:28px;color:#001080"></a>&nbsp;&nbsp;&nbsp;
+								<a id='tab3_delete'class="fa fa-trash" style="font-size:28px;color:#399490fc"aria-hidden="true"></a>	
+								</div>
+								<table id="tab3" class="table table-striped display"
+															style="width: 100%" aria-describedby="datatables-buttons">
+															<thead>
+																<tr>
+																	<th>Days</th>
+																	<th>Stay Date.</th>
+																	<th>Expenses</th>
+
+																</tr>
+															</thead>
+															<tbody>
+																<tr id='addrowthired0'>
+																
+																<td><input type="text" name='caseMemoNo0'placeholder='Days' class="form-control" /></td>
+													         	<td><input type="Date" name='medStDr0'placeholder='Stay Date.' class="form-control" value="" /></td>
+														
+														
+														<td><input type="text" name='caseMemoNo0'placeholder='Expenses' class="form-control" /></td>
+														
+
+																	
+																</tr>
+																<tr id='addrowthired1'></tr>
+
+															</tbody>
+															
+														</table>
+								</div>
+								
+							     </div>
+									</div>
 									 <button type="submit" class="btn btn-primary">Save</button>
-										
                               </div>
-                     
-                     
                      
                      
 								</div>
@@ -607,37 +594,8 @@ $("table").on("keyup", ".govt", function () {
 	
 	</form>
 			</div>
-				  <div class="col-12">
-							<div class="card">
-								<div class="card-header">
-								</div>
-								<div class="card-body">
-								<table id="datatables-buttons"aria-describedby="datatables-buttons" class="table table-striped display" style="width:100%">
-										<thead>
-											<!-- <tr>
-												<th scope="col">Employee  Id</th>
-												<th scope="col">Arms Code </th>
-													<th scope="col">Employee Name</th>
-												<th scope="col">Category Name</th>
-												<th scope="col">Department Name</th>
-												<th scope="col">Designation  </th>
-												<th scope="col">employee images</th>
-												<th scope="col">Action</th>
-												
-											</tr> -->
-										</thead>
-										<tbody>
-									
-										
-											  
-										
-										</tbody>
-									
-									</table>
-								</div>
-								
-							</div>
-						</div>
+				 
+	</div>
 					</div>
 
 				</div>
