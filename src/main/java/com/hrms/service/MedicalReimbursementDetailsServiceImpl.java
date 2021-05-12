@@ -50,7 +50,7 @@ public class MedicalReimbursementDetailsServiceImpl  implements MedicalReimburse
 		Session s=sessionFactory.openSession();
 		//List dicalReimbursementDetail = null;
 		try {
-			  String sql ="SELECT E.REMARKS,E.MED_ST_DR_NAME, E.INS_DATE, E.INS_BY,E.GOVT_EXMPT_AMT,E.CASHMEMO_NO,E.CASHMEMO_DATE, E.SR_NO,SUM(E.AMOUNT)AMOUNT,SUM(E.PASSED_AMT)PASSED_AMT,E.SLIP_NO FROM MEDICLAIM_DETAILS E where E.SLIP_NO= :slipNo";
+			  String sql ="SELECT DISTINCT  E.REMARKS,E.MED_ST_DR_NAME, E.INS_DATE, E.INS_BY,E.GOVT_EXMPT_AMT,E.CASHMEMO_NO,E.CASHMEMO_DATE, E.SR_NO,SUM(E.AMOUNT)AMOUNT,SUM(E.PASSED_AMT)PASSED_AMT,E.SLIP_NO FROM MEDICLAIM_DETAILS E where E.SLIP_NO= :slipNo";
 			  
 			  SQLQuery query = s.createSQLQuery(sql); 
 			  query.setParameter("slipNo", slipNo);
