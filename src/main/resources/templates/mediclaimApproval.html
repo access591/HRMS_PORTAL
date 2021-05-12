@@ -106,8 +106,8 @@ body {
 															Approved Action 
 														</button>
 														<ul class="dropdown-menu">
-															<li><a th:href="@{/approveMedicalReimbursement/{id}/(id=${student.slipNo})}">Approved</a></li>
-															<li><a href="#">No</a></li>
+															<li><a class="dropdown-item"th:href="@{/approveMedicalReimbursement/{id}/(id=${student.slipNo})}">Approved</a></li>
+															<li><a  class="dropdown-item active" href="#"> Not Approved </a></li>
 															
 														</ul>
 													</div> <!-- <a class="btn btn-success" title="Active"><i class="fa fa-check"></i></a> -->
