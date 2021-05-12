@@ -119,7 +119,9 @@ body {
 														<th scope="col">Employee Name</th>
 														<th scope="col">Department Name</th>
 														
-														<th scope="col">Approval</th>
+														<th scope="col">Approval Status </th>
+												        <th scope="col">View  </th>
+												
 													
 
 													</tr>
@@ -133,12 +135,21 @@ body {
 														<td Scope="col">Department Name</td>
 														
 														<td>
-															
-															
-															<a  class="btn btn-primary"><em class="fa fa-check"></em></a>
-															</td>
-														
 
+													<div class="dropdown">
+														<button class="btn btn-primary dropdown-toggle"
+															type="button" data-toggle="dropdown">
+															Approved Action 
+														</button>
+														<ul class="dropdown-menu">
+															<li><a class="dropdown-item"href="">Approved</a></li>
+															<li><a  class="dropdown-item active" href="#"> Not Approved </a></li>
+														</ul>
+													</div> 
+                           							  </td>
+                            <td>
+                               <a href=""class="btn btn-success"><em class="fa fa-eye"></em></a>
+                            </td>
 													</tr>
 
 													</tbody>
