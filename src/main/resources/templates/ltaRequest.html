@@ -37,126 +37,8 @@ body {
   z-index: 100;
 }
 </style>
-<script>
-$(document).ready(function(){
-
-    var i=1;
-   $("#add_row").click(function(){
-    $('#addr'+i).html("<td><input name='locDate"+i+"' type='Date'  class='form-control txt input-md'/> "+
-    		"</td><td><input  name='startPlace"+i+"' type='text' placeholder='Start Place'  class='form-control input-md'>"+
-    		"</td><td><input  name='vistPlace"+i+"' type='text'  placeholder='Visit Place'class='form-control input-md'>"+
-    		"</td><td><input  name='purposeOfVist"+i+"' type='text' placeholder='Purpose Of Vist'  class='pas form-control input-md'></td>"+
-    		
-    		"<td><select class=' form-control input-md' id='modeOfTravel0'name='modeOfTravel["+i+"].modeOfTravel'><option value=' '>Select</option><option value='taxi'>Taxi</option><option value='car'>Car</option></select></td>"+
-    		
-    		"<td><input  name='distanceKm"+i+"' type='text' placeholder='Distance In Km'  class='form-control input-md'></td>"+
-    		"<td><input  name='ltaRate"+i+"' type='text' placeholder='Lta Rate'  class='form-control input-md'></td>"+
-    		"<td><input  name='actualAmount"+i+"' type='text' placeholder='Actual Amount'  class='form-control input-md'></td>"+
-    		"<td><input  name='claimedAmount"+i+"' type='text' placeholder='claimed Amount '  class='form-control input-md'></td>"+
-    		
-    		
-    		"");
-
-    $('#tab1').append('<tr id="addr'+(i+1)+'"></tr>');
-    $('#_cr').val(i+1);
-    
-    i++; 
-});
-   
-   
-   $("#delete_row").click(function(){
-	  	 if(i>1){
-			 $("#addr"+(i-1)).html('');
-			 $('#_cr2').val(i - 1);
-			 i--;
-			 calculateSum(),calculateSumtotalPassing(),calculateSumtotalgovt()
-			 }
-		 });
-   
-   
-  
-  
-   
-   
-  
-function calculateSum() {
-
-    var sum = 0;
-    //iterate through each textboxes and add the values
-    $(".txt").each(function () {
-
-        //add only if the value is number
-        if (!isNaN(this.value) && this.value.length != 0) {
-            sum += parseFloat(this.value);
-        }
-
-    });
-    //.toFixed() method will roundoff the final sum to 2 decimal places
-   var fds=sum;
-   //$("#").html(sum.toFixed(2));
-   $("#sum").val(sum);
-    
-}
-
-$("table").on("keyup", ".txt", function () {
-    calculateSum();
-});
 
 
-function calculateSumtotalPassing() {
-
-    var sum = 0;
-    //iterate through each textboxes and add the values
-    $(".pas").each(function () {
-
-        //add only if the value is number
-        if (!isNaN(this.value) && this.value.length != 0) {
-            sum += parseFloat(this.value);
-        }
-
-    });
-    //.toFixed() method will roundoff the final sum to 2 decimal places
-   var fds=sum;
-   //$("#").html(sum.toFixed(2));
-   $("#totalPassing").val(sum);
-    
-}
-
-$("table").on("keyup", ".pas", function () {
-	calculateSumtotalPassing();
-});
-
-
-
-
-function calculateSumtotalgovt() {
-
-    var sum = 0;
-    //iterate through each textboxes and add the values
-    $(".govt").each(function () {
-
-        //add only if the value is number
-        if (!isNaN(this.value) && this.value.length != 0) {
-            sum += parseFloat(this.value);
-        }
-
-    });
-    //.toFixed() method will roundoff the final sum to 2 decimal places
-   var fds=sum;
-   //$("#").html(sum.toFixed(2));
-   $("#totalGovtExt").val(sum);
-    
-}
-
-$("table").on("keyup", ".govt", function () {
-	calculateSumtotalgovt();
-});
-
-
-
-});
-
-</script>
 <script>
 
 
@@ -199,7 +81,7 @@ $("table").on("keyup", ".govt", function () {
 							<div class="col-12">
 							<div class="card">
 								<div class="card-header">
-									<h5 class="card-title">Local Conveyance  </h5>
+									<h5 class="card-title">LTA Request  </h5>
 								<div class="alert-outline">
 									<div th:if="${message}" th:text="${message}" style="color: red">
 									</div> 
@@ -295,7 +177,7 @@ $("table").on("keyup", ".govt", function () {
 	                     
 	  <!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->                   
 	                     
-	                     
+	                </div>     
 					</div>
 </form>
 				</div>
