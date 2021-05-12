@@ -58,18 +58,42 @@ $(document).ready(function(){
     i++; 
 });
    
- 
-
-	
    
    $("#delete_row").click(function(){
-  	 if(i>1){
-		 $("#addr"+(i-1)).html('');
-		 $('#_cr').val(i - 1);
-		 i--;
-		 calculateSum(),calculateSumtotalPassing(),calculateSumtotalgovt()
-		 }
-	 });
+	  	 if(i>1){
+			 $("#addr"+(i-1)).html('');
+			 $('#_cr2').val(i - 1);
+			 i--;
+			 calculateSum(),calculateSumtotalPassing(),calculateSumtotalgovt()
+			 }
+		 });
+   
+   $("#tab2_AddRow").click(function(){
+	    $('#addrtabsecond'+i).html("<td><input name='medStDr"+i+"' type='Date'  class='form-control txt input-md'/> "+
+	    		"</td><td><input  name='caseMemoNo"+i+"' type='text' placeholder='Case Memo No'  class='form-control input-md'>"+
+	    		"</td><td><input  name='caseMemoDate"+i+"' type='Date'class='form-control input-md'>"+
+	    		"</td><td><input  name='passedAmount"+i+"' type='text' placeholder='Vist Place'  class='pas form-control input-md'></td>"+
+	    		"<td><select class=' form-control input-md' id='govtexemptionAmount'name='govtexemptionAmount["+i+"].govtexemptionAmount'><option value=' '>Select</option><option value='taxi'>Taxi</option><option value='car'>Car</option></select></td>"+
+	    		"<td><input  name='remark"+i+"' type='text' placeholder='Amount'  class='form-control input-md'></td>"+
+	    		
+	    		"");
+
+	    $('#tab2').append('<tr id="addrtabsecond'+(i+1)+'"></tr>');
+	    $('#_cr2').val(i+1);
+	    
+	    i++; 
+	});
+   $("#tab2_delete").click(function(){
+	  	 if(i>1){
+			 $("#addrtabsecond"+(i-1)).html('');
+			 $('#_cr2').val(i - 1);
+			 i--;
+			 calculateSum(),calculateSumtotalPassing(),calculateSumtotalgovt()
+			 }
+		 });
+	
+   
+  
    
 function calculateSum() {
 
@@ -382,18 +406,19 @@ $("table").on("keyup", ".govt", function () {
 															<tr>
 																<td colspan="4"></td>
 
-																<td>
-																	<!-- <div class="form-group ">  
+					<td>
+					<div class="form-group ">  
 					<label class="form-label">Total Amount</label>
 					<input type="text" id="sum" name='totalAmount' placeholder='Total Amount' class="form-control"/>
 					</div>
 					</td>
-					<td>
-					<input type="text" id="totalPassing" name='totalPassing'  class="form-control"/>
-					</td>
-					<td>
-					<input type="text" id="totalGovtExt" name='totalGovtExt' class="form-control"/>
-					</td> -->
+					
+					
+					
+					
+																
+																
+																
 																<td></td>
 
 															</tr>
@@ -412,12 +437,12 @@ $("table").on("keyup", ".govt", function () {
 							
 										
 											
-								<div class="form-row">
+				<div class="form-row">
 								<div class="card">
 								<div class="card-header">
 								</div>
 								<div class="card-body">
-								<input id="_cr" name="_cr" type="hidden"value="1">
+								<input id="_cr2" name="_cr2" type="text"value="1">
 								<div class="col-sm-12" align="right">
 							<!-- 	<a th:href="@{/viewMedicalReimbursement}">
 								<em  class="fa fa-eye" style="font-size:28px"> 
@@ -425,43 +450,34 @@ $("table").on("keyup", ".govt", function () {
 								
 								
 								
-								<a id="add_row" class="fa fa-plus" aria-hidden="true"style="font-size:28px;color:#001080"></a>&nbsp;&nbsp;&nbsp;
-								<a id='delete_row'class="fa fa-trash" style="font-size:28px;color:#399490fc"aria-hidden="true"></a>	
+								<a id="tab2_AddRow" class="fa fa-plus" aria-hidden="true"style="font-size:28px;color:#001080"></a>&nbsp;&nbsp;&nbsp;
+								<a id='tab2_delete'class="fa fa-trash" style="font-size:28px;color:#399490fc"aria-hidden="true"></a>	
 								</div>
-														<table id="tab1" class="table table-striped display"
+														<table id="tab2" class="table table-striped display"
 															style="width: 100%" aria-describedby="datatables-buttons">
 															<thead>
 																<tr>
 																	<th>From Date</th>
 																	<th>Start Place.</th>
 																	<th>To Date.</th>
-																	
 																	<th>Visit Place</th>
+
 																	<th>Mode Of Travel</th>
 
-																	<th>Ticket No</th>
-																	<th>Company Paid</th>
-																	<th>Self Paid</th>
+																	<th>Amount</th>
+																	
 
 
 																</tr>
 															</thead>
 															<tbody>
-																<tr id='addr0'>
+																<tr id='addrtabsecond0'>
 
-																	<td><input type="Date" name='medStDr0'
-																		placeholder='Name' class="form-control" value="" /></td>
-																	<td><input type="text" name='caseMemoNo0'
-																		placeholder='Start Place' class="form-control" /></td>
-																	<td><input type="Date" name='caseMemoDate0'
-																		placeholder='Case Memo Date' class="form-control" /></td>
-																	<td><input type="text" name='calmlAmount0'
-																		placeholder='end Place' class="form-control txt" /></td>
-
-																	<td><input type="text" name='passedAmount0'
-																		placeholder='Vist palce' class="form-control pas" /></td>
-																	<td><select class="form-control required"
-																		name="govtexemptionAmount0" id="govtexemptionAmount0">
+														<td><input type="Date" name='medStDr0'placeholder='Name' class="form-control" value="" /></td>
+														<td><input type="text" name='caseMemoNo0'placeholder='Start Place' class="form-control" /></td>
+														<td><input type="Date" name='caseMemoDate0'placeholder='Case Memo Date' class="form-control" /></td>
+														<td><input type="text" name='passedAmount0'placeholder='Vist palce' class="form-control pas" /></td>
+														<td><select class="form-control required"name="govtexemptionAmount0" id="govtexemptionAmount0">
 																			<option value="">Select Type</option>
 																			<option th:Value="taxi">Taxi</option>
 																			<option th:Value="car">Car</option>
@@ -469,33 +485,36 @@ $("table").on("keyup", ".govt", function () {
 																			<option th:Value="train">Train</option>
 																	</select></td>
 
-
 																	<td><input type="text" name='remark0'
-																		placeholder='Ticket No' class="form-control" /></td>
+																		placeholder='Amount' class="form-control" /></td>
 
 
-																	<td><input type="text" name='compPaid0'
-																		placeholder='Company Paid' class="form-control" /></td>
-																	<td><input type="text" name='selfPaid0'
-																		placeholder='Self Paid' class="form-control" /></td>
+																	
 																</tr>
-																<tr id='addr1'></tr>
+																<tr id='addrtabsecond1'></tr>
 
 															</tbody>
 															<tr>
-																<td colspan="4"></td>
+																<td colspan="5"></td>
 
 																<td>
-																	
+					<div class="form-group ">  
+					<label class="form-label">Total Amount</label>
+					<input type="text" id="sum" name='totalAmount' placeholder='Total Amount' class="form-control"/>
+					</div>
+					</td>
+			
 																<td></td>
 
 															</tr>
 
 														</table>
 													</div>
-							
+								<!-- <a id="add_row" class="fa pull-right btn btn-default ">Add Row</a><a id='delete_row' class="fa pull-right btn btn-default">Delete Row</a>	 -->
 							            </div>
-									</div>			
+									</div>
+												
+															
 											
 											
 											
