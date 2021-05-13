@@ -1,5 +1,6 @@
 package com.hrms.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -39,18 +40,26 @@ public class MediclaimApprovalController {
 		List<MedicalReimbursement> listMedicalReimbursement =  medicalReimbursementService.getAllMedicalReimbursement();
 		model.addAttribute("listMedicalReimbursement", listMedicalReimbursement);
 		
+		 List<MedicalReimbursementDetail> listMedicalR=new ArrayList<MedicalReimbursementDetail>();
 		
-		
-		for(int i=0;i<listMedicalReimbursement.size();i++) {
-			 List<MedicalReimbursementDetail> listMedicalReimbursementDetail= medicalReimbursementDetailsService.getAllMedicalReimbursementDetailBYslipNO(listMedicalReimbursement.get(i).getSlipNo());
-			 model.addAttribute("listMedicalReimbursementDetail", listMedicalReimbursementDetail);
-			 
+		try {
+			for(int i=0;i<listMedicalReimbursement.size();i++) {
+				listMedicalR= medicalReimbursementDetailsService.getAllMedicalReimbursementDetailBYslipNO(listMedicalReimbursement.get(i).getSlipNo());
+				 
+				 model.addAttribute("listMedicalReimbursementDetail", listMedicalR);
+				 session.setAttribute("username", session.getAttribute("username"));
+				 
+			}
+		} catch (Exception e) {
+	
+			e.printStackTrace();
 		}
 		
-		session.setAttribute("username", session.getAttribute("username"));
+		return 	"mediclaimApproval";
 		
 		
-	return 	"mediclaimApproval";
+		
+	
 	}
 	
 	

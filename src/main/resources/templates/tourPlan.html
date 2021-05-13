@@ -41,8 +41,9 @@ body {
 						<nav aria-label="breadcrumb">
 						</nav>
 					</div>
+					<form id="validation-form" action="#" th:action="@{/saveTourPlan}" th:object="${tourPlan}" method="post">
 					<div class="row">
-						<form id="validation-form" action="#" th:action="@{/saveAward}" th:object="${award}" method="post">
+						
 			           <div class="col-12">
 							<div class="card">
 								<div class="card-header">
@@ -138,41 +139,62 @@ body {
 								</div>
 							</div>
 						</div>						
-	                  <div class="col-12">
-							<div class="card">
-								<div class="card-header">
+	                     <div class="col-12">
+	                     	<div class="card">
+	                      <div class="card-header">
 								</div>
 								<div class="card-body">
-								<table id="example" class="table table-striped display" style="width:100%"aria-describedby="example">
-										<thead>
-											<tr>
-												<th scope="col"> Start Place </th>
-												<th scope="col">End PLace </th>
-												<th scope="col">From Date</th>
-												<th scope="col">To Date</th>
-												<th scope="col">Purpose/Task to be done</th>
-											</tr>
-										</thead>
-										<tbody>
-											<tr>
-												<td><input type="text"></td>
-												<td><input type="text"></td>
-												<td><input type="date"></td>
-												<td><input type="date"></td>
-												<td><input type="text"></td>
-												
-												
-											</tr>
-										</tbody>
-									
-									</table>
+								<input id="_cr" name="_cr" type="hidden"value="1">
+								<div class="col-sm-12" align="right">
+								<a id="add_row" class="fa fa-plus" aria-hidden="true"style="font-size:28px;color:#001080"></a>&nbsp;&nbsp;&nbsp;
+								<a id='delete_row'class="fa fa-trash" style="font-size:28px;color:#399490fc"aria-hidden="true"></a>	
+								</div>
+								<table id="tab1" class="table table-striped display"
+															style="width: 100%" aria-describedby="datatables-buttons">
+															<thead>
+																<tr>
+																	
+																	<th>Start Place.</th>
+																	<th>End Place</th>
+                                                                    <th>From Date</th>
+																	<th>To Date</th>
+																	<th>Purpose/Task to be done</th>
+																	
+																	
+																	
+																	
+
+
+																</tr>
+															</thead>
+															<tbody>
+																<tr id='addr0'>
+
+																	<td><input type="text" name='startPlace0'placeholder='Start Place' class="form-control" value="" /></td>
+																	<td><input type="text" name='endPlace0'placeholder='End  Place' class="form-control" /></td>
+																	<td><input type="Date" name='fromDate0'placeholder='From Date' class="form-control" /></td>
+																	<td><input type="Date" name='toDate0'placeholder='To Date' class="form-control" /></td>
+																	<td><input type="text" name='purposeTask0'placeholder='Purpose/Task to be done' class="form-control" /></td>
+														
+																</tr>
+																<tr id='addr1'></tr>
+
+															</tbody>
+															
+
+														</table>
+								
+								
 								</div>
 								
-							</div>
-						</div>
-					</form>
-					</div>
+								
+	                     
+	                     
+	                     </div>
+	                     </div>
 					
+					</div>
+					</form>
 				</div>
 
 			</main>
@@ -200,104 +222,121 @@ body {
 	
 	</script>
 	
-	<script>
-	
-	function leaveEmployeDisplay(){
-		
-		 var d = document.getElementById("employeeNameDropDown");
-		 
-		var dValue = document.getElementById("employeeNameDropDown").value;
-		
-		console.log(" d value is :"+ dValue );
-	   
-		 var displayItem = d.options[d.selectedIndex].text;
-		 
-		 document.getElementById("hiddenField").value = displayItem;
-		 
-		document.getElementById("emp_code").value = dValue;
-		
-	    console.log(displayItem);
+<script>
+$(document).ready(function(){
 
-	    ajaxRequestLeave(dValue);
-	}
-	
-	function desigNation(){
-		var field = document.getElementById("designation_name");
-		var val = document.getElementById("designation_name").value;
-		var displayItem = field.options[field.selectedIndex].text;
-		document.getElementById("designation_code").value = val;
-		console.log("fields value : "+ field);
-		console.log(" val value : "+ val);
-		console.log("display Item : "+ displayItem);
-	}
-	
+    var i=1;
+   $("#add_row").click(function(){
+    $('#addr'+i).html("<td><input name='startPlace"+i+"' type='text'  placeholder='Start Place'  class='form-control txt input-md'/> "+
+    		"</td><td><input  name='endPlace"+i+"' type='text' placeholder='end Place'  class='form-control input-md'>"+
+    		"</td><td><input  name='fromDate"+i+"' type='Date'  placeholder='From Date'class='form-control input-md'>"+
+    		"</td><td><input  name='toDate"+i+"' type='Date' placeholder='Purpose Of Vist'  class='pas form-control input-md'></td>"+
+    		"<td><input  name='purposeTask"+i+"' type='text' placeholder='Purpose/Task to be done'  class='form-control input-md'></td>"+
+    		"");
+
+    $('#tab1').append('<tr id="addr'+(i+1)+'"></tr>');
+    $('#_cr').val(i+1);
+    
+    i++; 
+});
+   
+   
+   $("#delete_row").click(function(){
+	  	 if(i>1){
+			 $("#addr"+(i-1)).html('');
+			 $('#_cr2').val(i - 1);
+			 i--;
+			 calculateSum(),calculateSumtotalPassing(),calculateSumtotalgovt()
+			 }
+		 });
+   
+   
+  
+  
+   
+   
+  
+function calculateSum() {
+
+    var sum = 0;
+    //iterate through each textboxes and add the values
+    $(".txt").each(function () {
+
+        //add only if the value is number
+        if (!isNaN(this.value) && this.value.length != 0) {
+            sum += parseFloat(this.value);
+        }
+
+    });
+    //.toFixed() method will roundoff the final sum to 2 decimal places
+   var fds=sum;
+   //$("#").html(sum.toFixed(2));
+   $("#sum").val(sum);
+    
+}
+
+$("table").on("keyup", ".txt", function () {
+    calculateSum();
+});
 
 
-	function ajaxRequestLeave(val){
-		var empCode = val;
-	    console.log("ajax request : "+ empCode);
-	    const xhr = new XMLHttpRequest();
-	    xhr.open('POST','empPayDetail/'+empCode,true);
-	    xhr.getResponseHeader('content-type','application/json');
-	    xhr.onload = function(){
-	        if(this.status===200){
-	            let obj = JSON.parse(this.responseText);
-	            console.log(obj);
+function calculateSumtotalPassing() {
 
-				var deptCode = obj.departmentCode;
-				
-				console.log(" depARTMENT CODE :"+	deptCode);
-				
-				$('#department_code').val( obj.departmentCode); 
-				
-				ajaxRequestForDepartmentLeave(deptCode);
-	        }
-	        else{
-	            console.error("some error occured");
-	        }
-		
-	    }
-	    xhr.send();
-	}
+    var sum = 0;
+    //iterate through each textboxes and add the values
+    $(".pas").each(function () {
 
-	function ajaxRequestForDepartmentLeave(val){
-		var deptCode = val;
-	    console.log("ajax request : "+ deptCode);
-	    var xhr1 = new XMLHttpRequest();
-	    xhr1.open('POST','getdepartment/'+deptCode,true);
-	    xhr1.getResponseHeader('content-type','application/json');
-		xhr1.response = 'json';
-	    xhr1.onload = function(){
-	        if(this.status===200){
-			
-				console.log("successfull");
-	             let obj1 = JSON.parse(this.responseText);
-	            console.log(obj1);
+        //add only if the value is number
+        if (!isNaN(this.value) && this.value.length != 0) {
+            sum += parseFloat(this.value);
+        }
 
-				$('#department_name').val(obj1.deptName); 
-	        }
-	        else{
-	            console.error("some error occured");
-	        }
-	    }
-	    xhr1.send();
-	}
+    });
+    //.toFixed() method will roundoff the final sum to 2 decimal places
+   var fds=sum;
+   //$("#").html(sum.toFixed(2));
+   $("#totalPassing").val(sum);
+    
+}
+
+$("table").on("keyup", ".pas", function () {
+	calculateSumtotalPassing();
+});
+
+
+
+
+function calculateSumtotalgovt() {
+
+    var sum = 0;
+    //iterate through each textboxes and add the values
+    $(".govt").each(function () {
+
+        //add only if the value is number
+        if (!isNaN(this.value) && this.value.length != 0) {
+            sum += parseFloat(this.value);
+        }
+
+    });
+    //.toFixed() method will roundoff the final sum to 2 decimal places
+   var fds=sum;
+   //$("#").html(sum.toFixed(2));
+   $("#totalGovtExt").val(sum);
+    
+}
+
+$("table").on("keyup", ".govt", function () {
+	calculateSumtotalgovt();
+});
+
+
+
+});
+
+</script>
 	
-	</script>
 	
 	
-	
-		<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.bootstrap4.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
-    <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.print.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.colVis.min.js"></script>
    
 
 		
