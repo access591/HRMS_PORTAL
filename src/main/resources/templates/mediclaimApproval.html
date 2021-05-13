@@ -79,25 +79,14 @@ body {
 										</thead>
 										<tbody>
 										<tr th:each = "student : ${listMedicalReimbursement}">
+										<th:block th:each="u, rowStat : ${listMedicalReimbursementDetail}" th:if="${student.slipNo}">
 										<td th:text="${student.slipNo}" ></td>
-										
 										<td  th:text="${student.dateOfSlip}"></td>
-										
 										<td  th:text="${student.empCode.empCode}"></td>
-										
 										<td th:text="${student.empCode.empName}"></td>
-										
-										
-										<td>
-										<p th:each="category :${listMedicalReimbursementDetail}"  th:text="${category.calmlAmount}"></p>
+										<td th:text="${u.calmlAmount}"></td>
+										<td th:text="${u.passedAmount}">
 										</td>
-										
-										<td>
-										<p th:each="category :${listMedicalReimbursementDetail}"  th:text="${category.passedAmount}"></p>
-										
-										</td>
-										
-										
 										<td>
 
 													<div class="dropdown">
@@ -119,7 +108,7 @@ body {
                                <a th:href="@{/viewMedicalReimbursement/{id}/(id=${student.slipNo})}"class="btn btn-success"><em class="fa fa-eye"></em></a>
                             </td>
 										
-									
+									</th:block>
 										
 										</tr>
 										
