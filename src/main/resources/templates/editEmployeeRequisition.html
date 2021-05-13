@@ -90,7 +90,7 @@ body {
 											<div class="col-12 col-lg-6">
 												<label class="form-label">Department Name</label> <label
 													style="color: red">*</label><input type="text" class="form-control" id="departmentId"
-														value="" th:field="*{deptCode}">
+														value="">
 											</div>
 										</div>
 										<div class="row">
@@ -159,8 +159,7 @@ body {
 															th:field="*{employeRequisitionDetail[__${stat.index}__].desigCode}"></td>
 
 														<td><input type="text" style="width: 130px;"
-															id="desigCode"
-															th:field="*{employeRequisitionDetail[__${stat.index}__].desigCode}"></td>
+															id="desigCode"></td>
 
 
 														
@@ -235,8 +234,8 @@ body {
 
 								</div>
 							</div>
-							<button type="submit" class="btn btn-primary">Apply</button>
-							<button type="reset" class="btn btn-primary" value="Reset">Reset</button>
+							<button type="submit" class="btn btn-primary">Update</button>
+							<button type="reset" class="btn btn-primary">Back</button>
 
 
 						</div>

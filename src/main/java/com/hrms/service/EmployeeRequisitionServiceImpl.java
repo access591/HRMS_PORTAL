@@ -43,12 +43,16 @@ public class EmployeeRequisitionServiceImpl implements EmployeeRequisitionServic
 	}
 
 	@Override
-		  	public void updateEmployeeRequisition(EmployeeRequisition c) {
+	public void updateEmployeeRequisition(EmployeeRequisition c) {
 		
 		Session session = sessionfactory.openSession();
-		Transaction tx = session.beginTransaction();
-		session.update(c);
-		tx.commit();
+		//Transaction tx = session.beginTransaction();
+		EmployeeRequisition emp = session.find(EmployeeRequisition.class, c.getReqCode());
+		emp.getEmployeRequisitionDetail().clear();;
+		emp.setEmployeRequisitionDetail(c.getEmployeRequisitionDetail());
+		emp.getEmployeRequisitionDetail().addAll(c.getEmployeRequisitionDetail());
+		session.update(emp);
+		//tx.commit();
 		session.close();
 		//this.employeRequisitionDao.saveOrUpdate(c);
 		
