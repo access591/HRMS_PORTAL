@@ -146,22 +146,23 @@ public class EmployeeRequisitionController {
 	@PostMapping(value = {"updateRequisition"})
 	public String updateRequisition(@ModelAttribute("req") EmployeeRequisition employeeRequisition,
 			Model model) {
-		/*
-		 * System.out.println("=====================>");
-		 * 
-		 * 
-		 * List<EmployeeRequisitionDetail> re = new
-		 * ArrayList<EmployeeRequisitionDetail>(); EmployeeRequisitionDetail e = new
-		 * EmployeeRequisitionDetail(); for(int
-		 * i=0;i<employeeRequisition.getEmployeRequisitionDetail().size();i++) {
-		 * 
-		 * e = employeeRequisition.getEmployeRequisitionDetail().get(i);
-		 * e.setEmployeeRequisition(employeeRequisition); re.add(e);
-		 * 
-		 * }
-		 */
 		
-		//employeeRequisition.setEmployeRequisitionDetail(re);
+		  System.out.println("=====================>");
+		  
+		  
+		  List<EmployeeRequisitionDetail> re = new
+		  ArrayList<EmployeeRequisitionDetail>(); EmployeeRequisitionDetail e = new EmployeeRequisitionDetail(); 
+		  for(int i=0;i<employeeRequisition.getEmployeRequisitionDetail().size();i++) {
+		  
+		  e = employeeRequisition.getEmployeRequisitionDetail().get(i);
+		  e.setEmployeeRequisition(employeeRequisition); 
+		  re.add(e);
+		  //employeeRequisition.getEmployeRequisitionDetail().add(e);
+		  
+		  }
+		 
+		
+		employeeRequisition.setEmployeRequisitionDetail(re); 
 		
 		this.employeeRequisitionService.updateEmployeeRequisition(employeeRequisition);
 		return "redirect:editEmployeeRequisition";

@@ -332,7 +332,10 @@ body {
 			});
 		});
 
-		var counter = '0';
+		
+
+		var size = "";
+		var idIndex=0;
 		function changeDepartment() {
 
 			//set dept code value 
@@ -343,13 +346,13 @@ body {
 					.getElementById("departmentDropdown").value;
 			console.log("select category : " + selecteDepartmentValue);
 			//$('#employeeName').append($('<option>', {value:0, text:'Select Employee'}));
-			var x = document.getElementById("designationName0");
+			var x = document.getElementById("designationName'+idIndex+'");
 			console.log("x value : " + x);
 
-			var length = x.options.length;
-			for (i = length - 1; i >= 1; i--) {
-				x.options[i] = null;
-			}
+			//var length = x.options.length;
+			//for (i = length - 1; i >= 1; i--) {
+			//	x.options[i] = null;
+			//}
 
 			if (selecteDepartmentValue !== ""
 					|| document.getElementById("selecteDepartmentValue").selected == false) {
@@ -363,12 +366,10 @@ body {
 						console.log(obj);
 						console.log("console.log size :" + obj.length);
 						//console.log("employee name : " +obj[0].empName)
-						//$('select[name="designationName"'+counter+'"]').prop("disabled",false);
-						// $('select[name="employeeName"]').html(obj.empName);
+						$('select[name="designationName"]').prop("disabled",
+								false);
+						//$('select[name="employeeName"]').html(obj.empName);
 
-						for(var i=0;i<document.getElementById("hidden_field").value;i++){
-							
-						}
 						$.each(obj,
 								function(i, item) {
 									console.log(" i " + i + " item : "
@@ -378,11 +379,14 @@ body {
 									$('#employeeName').append($('<option>', {
 										value : i,
 										text : item.empName
-									}));//employeRequisitionDetail[0].designationName
-									$('#designationName"+counter+"').append(
+									}));
+									console.log("dbIndex value is : "+ idIndex);
+									$('#designationName'+idIndex).append(
 											$('<option>').val(this.desigCode)
 													.text(this.desgName));
 								});
+						
+						
 
 					} else {
 						console.error("some error occured");
@@ -398,9 +402,10 @@ body {
 
 		function selectDesignation() {
 			console.log("designation selection");
-			var designationCode = document.getElementById("designationName"+counter).value;
+			var designationCode = document.getElementById("designationName"+idIndex).value;
 			console.log("desihnation code " + designationCode);
-			document.getElementById("desigCode"+counter).value = designationCode;
+			document.getElementById("desigCode"+idIndex).value = designationCode;
+			
 		}
 		
 		
@@ -416,13 +421,14 @@ body {
 $(document).ready(function(){
 	console.log("click function...");
 	var i=1;
-	counter = i;
-	$("#add_row").click(function(){
-	$('#addr'+i).html("<td><input type='text' style='width: 130px;'id='desigCode"+i+"'name='employeRequisitionDetail["+i+"].desigCode'></td>"+
-			
-			"<td><select id='designationName"+i+"'name='employeRequisitionDetail["+i+"].designationName'onchange='selectDesignation()'><option value=''>Select</option></select></td>"+
 	
-			"<td><select id='location'name='employeRequisitionDetail["+i+"].location'><option value=' '>Select</option><option value='court'>Court</option><option value='department'>Department</option></select></td>"+
+	console.log("idINdexin add buttton function" + idIndex);
+	$("#add_row").click(function(){
+		idIndex++;
+	$('#addr'+i).html("<td><input type='text' style='width: 130px;'id='desigCode"+idIndex+"'name='employeRequisitionDetail["+i+"].desigCode'></td>"+
+			
+			"<td><select id='designationName"+idIndex+"'name='employeRequisitionDetail["+i+"].designationName'onchange='selectDesignation()'><option value=''>Select</option></select></td>"+
+			"<td><select id='location'name='employeRequisitionDetail["+i+"].location'><option value=''>Select</option><option value='court'>Court</option><option value='department'>Department</option></select></td>"+
 			"<td><select id='sex'name='employeRequisitionDetail["+i+"].sex'><option value=''>Select</option><option value='male'>Male</option><option value='female'>Female</option></select></td>"+
 			"<td><input type='text' style='width: 130px;'id='ageFrom'name='employeRequisitionDetail["+i+"].ageFrom'></td>"+
 			" </td><td><input type='text' style='width: 130px;'id='desigCode'name='employeRequisitionDetail["+i+"].ageTo'></td>"+
@@ -440,6 +446,9 @@ $(document).ready(function(){
 	$('#example').append('<tr id="addr'+(i+1)+'"></tr>');
 	$('#_cr').val(i+1);
 	i++; 
+	
+	changeDepartment();
+	
 });
 	
 	$("#delete_row").click(function(){
@@ -447,6 +456,7 @@ $(document).ready(function(){
 			 $("#addr"+(i-1)).html('');
 			 $('#_cr').val(i - 1);
 			 i--;
+			 idIndex--;
 			 }
 		 });
 
@@ -458,33 +468,8 @@ $(document).ready(function(){
 
 	<script>
 		$(function() {
-			// Datatables basic 
-			$('#datatables-basic').DataTable({
-				responsive : true
-			});
-			// Datatables with Buttons
-			var datatablesButtons = $('#datatables-buttons')
-					.DataTable(
-							{
-								deferRender : true,
-								scrollCollapse : true,
-								scroller : false,
-								responsive : true,
-								lengthMenu : [
-										[ 10, 20, 30, -1 ],
-										[ '10 rows', '20 rows', '30 rows',
-												'Show all' ] ],
-								buttons : []
-							});
-			datatablesButtons.buttons().container().appendTo(
-					"#datatables-buttons_wrapper .col-md-6:eq(0)")
-		});
-	</script>
-
-<script>
-		$(function() {
 			// Datatables basic
-			$('#datatables').DataTable({
+			$('#datatables-basic').DataTable({
 				responsive : true
 			});
 			// Datatables with Buttons
@@ -509,6 +494,5 @@ $(document).ready(function(){
 
 
 </body>
-
 
 </html>
