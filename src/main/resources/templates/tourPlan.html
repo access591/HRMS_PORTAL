@@ -63,28 +63,25 @@ body {
 											  		<label style="color: red">*</label>
 											  	 
 											   <input
-														type="text" class="form-control" id="id" name="id" readonly="readonly">
+														type="text" class="form-control" id="tourPlanId" name="tourPlanId" readonly="readonly">
 												</div>
 											<div class="form-group">
 												<label class="form-label">Select Employee</label>
 												<label style="color: red">*</label>
 												<select
-													class="form-control" id="employeeNameDropDown"
-													onchange="leaveEmployeDisplay()" >
+													class="form-control" id="empCode"name="empCode'">
 													<option value="">Select Employee</option>
 													<option th:each="employee: ${listEmployee}"
 														th:text="${employee.empName}" 
 														th:value=" ${employee.empCode}"></option>
 
 												</select>
-												<input type="hidden" name="empName" value="" id="hiddenField"> 
+												
 										   	</div>
 										   	<div class="form-group">
 											<label class="form-label"> Designation Code</label>
 											<label style="color: red">*</label>
-											 <select
-													class="form-control" id="designation_name"
-													onchange="desigNation()" >
+											 <select class="form-control" id="desgCode"name="desgCode">
 													<option value="">Designation</option>
 													<option th:each="designation : ${listDesignation}"
 														th:text="${designation.desgName}" 
@@ -97,7 +94,7 @@ body {
 											  <label> Tour Start Date and Time </label>
 											  		<label style="color: red">*</label>	 
 											   <input
-														type="date" class="form-control" id="id" name="tourStartDate">
+														type="date" class="form-control" id="tourStartDate" name="tourStartDate">
 												</div>
 										
 									
@@ -107,15 +104,16 @@ body {
 											<div class="form-group">
 											<label class="form-label"> Tour Plan Date</label>
 											<label style="color: red">*</label>
-											 <input type="date" class="form-control " id="" name="tourPlanDAte">
+											 <input type="date" class="form-control " id="tourPlanDate" name="tourPlanDate">
 										</div>
 										
 										<div class="form-group">
-											  <label> Department Code </label>
-											  		<label style="color: red">*</label>	 
-											  <select
-													class="form-control"  id="deptCode" name="deptCode">
-														   </select>
+											  <label class="form-label">Department</label>
+												<label style="color: red">*</label>
+												<select class="form-control select2" name="departmentCode"id="departmentCode" required aria-required="true">
+												 <option value="">Select Department</option>
+												<option th:each="dep :${listDepartment}" th:value="${dep.getDepartmentCode()}" th:text="${dep.getDeptName()}"></option>
+											     	</select>
 												</div>
 												
 												<div class="form-group">
@@ -128,7 +126,7 @@ body {
 													<div class="form-group">
 											<label class="form-label"> Tour End Date and Time</label>
 											<label style="color: red">*</label>
-											 <input type="date" class="form-control " maxlength="25" title=" Award Name" id="awardName" name="tourEndDate" >
+											 <input type="date" class="form-control " maxlength="25" title=" Award Name" id="tourEndDate" name="tourEndDate" >
 										</div>
 											
 											</div>
@@ -173,7 +171,7 @@ body {
 																	<td><input type="text" name='endPlace0'placeholder='End  Place' class="form-control" /></td>
 																	<td><input type="Date" name='fromDate0'placeholder='From Date' class="form-control" /></td>
 																	<td><input type="Date" name='toDate0'placeholder='To Date' class="form-control" /></td>
-																	<td><input type="text" name='purposeTask0'placeholder='Purpose/Task to be done' class="form-control" /></td>
+																	<td><input type="text" name='purpose0'placeholder='Purpose/Task to be done' class="form-control" /></td>
 														
 																</tr>
 																<tr id='addr1'></tr>
@@ -234,7 +232,7 @@ $(document).ready(function(){
     		"</td><td><input  name='endPlace"+i+"' type='text' placeholder='end Place'  class='form-control input-md'>"+
     		"</td><td><input  name='fromDate"+i+"' type='Date'  placeholder='From Date'class='form-control input-md'>"+
     		"</td><td><input  name='toDate"+i+"' type='Date' placeholder='Purpose Of Vist'  class='pas form-control input-md'></td>"+
-    		"<td><input  name='purposeTask"+i+"' type='text' placeholder='Purpose/Task to be done'  class='form-control input-md'></td>"+
+    		"<td><input  name='purpose"+i+"' type='text' placeholder='Purpose/Task to be done'  class='form-control input-md'></td>"+
     		"");
 
     $('#tab1').append('<tr id="addr'+(i+1)+'"></tr>');
