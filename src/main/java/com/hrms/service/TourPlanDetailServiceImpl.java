@@ -1,5 +1,8 @@
 package com.hrms.service;
 
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.hrms.repository.TourPlanDetailDao;
@@ -9,11 +12,21 @@ import com.hrms.model.TourPlanDetails;
 public class TourPlanDetailServiceImpl implements TourPlanDetailService{
 	@Autowired
 	TourPlanDetailDao TourPlanDetailDao;
+	@Autowired
+	SessionFactory sessionFactory;
 	@Override
 	public boolean addTourPlanDetail(TourPlanDetails tourPlanDetail) {
+		
+		
+		Session s=sessionFactory.openSession();
+		s.beginTransaction();
+		
 		// TODO Auto-generated method stub
-		this.TourPlanDetailDao.saveOrUpdate(tourPlanDetail);
-		return false;
+		s.save(tourPlanDetail);
+		s.getTransaction().commit();
+		s.clear();
+		s.close();
+		return true;
 	}
 
 }
