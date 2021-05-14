@@ -47,8 +47,9 @@ public class EmployeeRequisitionApprovalController {
 		
 		List<CommonUtil> listCommonUtil = new ArrayList<CommonUtil>();
 		List<EmployeeRequisition> listEmployeeReq = employeeRequisitionService.findEmployeeReqByStatusN();
+		Department department = departmentService.findDepartmentById(listEmployeeReq.get(0).getDeptCode());
 		for(int i=0;i<listEmployeeReq.size();i++) {
-			Department department = departmentService.findDepartmentById(listEmployeeReq.get(i).getDeptCode());
+			
 			EmployeeRequisition em = listEmployeeReq.get(i);
 			CommonUtil commonUtill = new CommonUtil(department.getDeptName(),em.getReqCode(),em.getReqDate(),
 					em.getReqPriority(),em.getReqApprover(),em.getRemarks(),em.getInsBy(),em.getInsDate(),
