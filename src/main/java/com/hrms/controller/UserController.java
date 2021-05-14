@@ -58,6 +58,7 @@ public class UserController {
 			String id=login.getUserCode();
 			UserEntity userRecord = userService.findDataById(id);
 			session.setAttribute("uuuuu",userRecord.getUserName());
+			session.setAttribute("USER_NAME",userRecord.getUserName());
 			session.setAttribute("user_desg",userRecord.getDesgName());
 		session.setAttribute("username",login.getUserCode());
 		String userCode= (String)session.getAttribute("username");
