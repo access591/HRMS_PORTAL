@@ -88,18 +88,26 @@ body {
 															</td>
 
 															<td>
-																<select name="">
-																	<option value="A">Approve</option>
-																	<option value="C">cancel</option>
-																</select>>
+																<div class="dropdown show">
+  <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+   Action
+  </a>
+
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+    <a class="dropdown-item" th:href="@{approveRequisition/{id}/(id=${commonUtil.reqCode})}">Approve</a>
+    <a class="dropdown-item" href="#">Cancel</a>
+    
+  </div>
+</div>
 															</td>
 															
 															<td>
-															 <!--  <a th:href="@{/deleteMedicalReimbursement/{id}/{id2} (id=${student.slipNo},id2=${category.srNo})}"><em class="fa fa-times"></em></a> 
-															   <a th:href="@{/deleteMedicalReimbursement/{id}/{id2}(id=${student.slipNo},id2=${name})}"><em class="fa fa-times"></em></a> -->
-															<a th:href="@{viewRequisition/{id}(id=${commonUtil.reqCode})}" class="btn btn-primary"><em class="fa fa-eye"></em></a>
+															
+															
+
+															 <a th:href="@{viewRequisition/{id}(id=${commonUtil.reqCode})}" class="btn btn-primary"><em class="fa fa-eye"></em></a>
 													
-															<a th:href="@{approveRequisition/{id}/(id=${commonUtil.reqCode})}" class="btn btn-primary"><em class="fa fa-check"></em></a>
+															<!-- <a th:href="@{approveRequisition/{id}/(id=${commonUtil.reqCode})}" class="btn btn-primary"><em class="fa fa-check"></em></a> -->
 															</td>
 														</tr>
 													
@@ -118,7 +126,7 @@ body {
 								
 								
 								<div class="col-12">
-								<h4>Approved Status</h4>
+								<h6>Approved Status</h6>
 							<div class="card">
 								<div class="card-header"></div>
 								<div class="card-body">
@@ -130,6 +138,7 @@ body {
 												<th>Priority</th>
 												<th>Till Date</th>
 												<th>Remarks</th>
+												<th>Status</th>
 												
 											</tr>
 										</thead>
@@ -140,6 +149,7 @@ body {
 												<td th:text="${leave.reqPriority}"></td>
 												<td th:text="${leave.reqTill}"></td>
 												<td th:text="${leave.remarks}"></td>
+												<td th:text="Approved"></td>
 												
 												
 											</tr>

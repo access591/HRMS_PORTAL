@@ -46,7 +46,7 @@ body {
 						<h1 class="header-title">HRMS</h1>
 						<nav aria-label="breadcrumb"></nav>
 					</div>
-					<form action="#" th:action="@{/saveAdvertisement}" th:object="${reqAdvertisement}"	
+					<form action="#" th:action="@{/updateAdvertisement}" th:object="${reqAdvt}"	
 						 method="post">
 						 
 						<div class="row">
@@ -71,7 +71,7 @@ body {
 												<div class="form-group">
 													<label> Advertisement Code </label> <label
 														style="color: red">*</label> <input type="text" class="form-control" 
-														th:field="*{advtCode}" >
+														th:field="*{advtCode}" readonly>
 												</div>
 											</div>
 											<div class="col-12 col-lg-6">
@@ -130,29 +130,27 @@ body {
 													</tr>
 												</thead>
 												<tbody>
-													<tr id="addr0">
+													<tr th:each="row, stat :${reqAdvt.listReqAdvertisementDetail}">
 
 
-														<td><select id="reqCode" class="form-control">
-																<option value=" ">Select ReqCode</option>
-																<option 
-																th:each="employeeReq : ${listEmployeeRequisition}"
-																th:text="${employeeReq.reqCode}" th:value="${employeeReq.reqCode}"></option>
+														<td><input th:field="*{listReqAdvertisementDetail[__${stat.index}__].reqCode}" class="form-control" readonly>
 																
-														</select>
+																
+																
+														
 														
 														
 														</td>
 
 														<td><input type="date" style="width: 130px;"
-															name="listReqAdvertisementDetail[0].reqDate"class="form-control"></td>
+															th:field="*{listReqAdvertisementDetail[__${stat.index}__].reqDate}"class="form-control"></td>
 
 
 														
 
 
 
-														<td><select id="media" name="listReqAdvertisementDetail[0].mediaType" class="form-control">
+														<td><select id="media" th:field="*{listReqAdvertisementDetail[__${stat.index}__].mediaType}" class="form-control">
 																<option value=" ">Media Type</option>
 																<option value="court">Media-1</option>
 																<option value="department">Media-2</option>
@@ -160,22 +158,22 @@ body {
 														</td>
 														
 														<td><input type="text"
-															style="width: 130px;" id="mediaName" name="listReqAdvertisementDetail[0].mediaName"
+															style="width: 130px;" id="mediaName" th:field="*{listReqAdvertisementDetail[__${stat.index}__].mediaName}"
 															class="form-control"></td>
 
 														<td><input type="text" style="width: 130px;"
-															id="amount" name="listReqAdvertisementDetail[0].advtAmount"
+															id="amount" th:field="*{listReqAdvertisementDetail[__${stat.index}__].advtAmount}"
 															class="form-control"></td>
 
 														<td><input type="text"
-															style="width: 130px;" id="details" name="listReqAdvertisementDetail[0].remarks"
+															style="width: 130px;" id="details" th:field="*{listReqAdvertisementDetail[__${stat.index}__].remarks}"
 															class="form-control"></td>
 
 														
 
 														
 													</tr>
-													<tr id="addr1"></tr>
+													
 
 
 
@@ -188,8 +186,8 @@ body {
 
 								</div>
 							</div>
-							&nbsp&nbsp&nbsp<button type="submit" class="btn btn-primary">Apply</button>
-							&nbsp&nbsp&nbsp<button type="reset" class="btn btn-primary" value="Reset">Reset</button>
+							&nbsp&nbsp&nbsp<button type="submit" class="btn btn-primary">Update</button>
+							&nbsp&nbsp&nbsp<button type="reset" class="btn btn-primary" value="Reset">Cancel</button>
 
 
 						</div>
@@ -197,38 +195,7 @@ body {
 				</div>
 				
 				
-				<div class="col-12">
-							<div class="card">
-								<div class="card-header">
-								</div>
-								<div class="card-body">
-								<table id="example" class="table table-striped display" style="width:100%"aria-describedby="example">
-										<thead>
-											<tr>
-												<th scope="col"> Advertisement Code </th>
-												<th scope="col">Advertisement Date </th>
-												<th scope="col">remarks</th>
-												<th scope="col">Action</th>
-											</tr>
-										</thead>
-										<tbody>
-											<tr  th:each="list : ${listReqAdvertisement}">
-												<td th:text="${list.advtCode}"></td>
-												<td th:text="${list.advtDate}"></td>
-												<td th:text="${list.remarks}"></td>
-												<td>
-												<a th:href="@{editAdvertisement/{id}(id=${list.advtCode})}"><em class="align-middle fas fa-fw fa-pen"></em></a>
-												<a th:href="@{/deleteAdvertisement/{id}(id=${list.advtCode})}" onclick="return confirm('Are you sure?')"><em class="align-middle fas fa-fw fa-trash"></em></a>
-												
-												 </td>
-											</tr>
-										</tbody>
-									
-									</table>
-								</div>
-								
-							</div>
-						</div>
+				
 						
 						
 			</main>
@@ -283,38 +250,7 @@ body {
 		
 		
 		
-		$(document).ready(function(){
-			console.log("click function...");
-			var i=1;
-			counter = i;//<option value=" ">Select Requisition Code</option>
-			$("#add_row").click(function(){
-			$('#addr'+i).html(
-					
-					"<td><select id='reqCode' name='listReqAdvertisementDetail["+i+"].reqCode' class='form-control'><option value=''>Select Req Code</option><option th:each='employeeReq : ${listEmployeeRequisition}'th:text='${employeeReq.reqCode}' th:value='${employeeReq.reqCode}'></option></select></td>"+
-					"<td><input type='Date' style='width: 130px;'id='reqDate"+i+"'name='listReqAdvertisementDetail["+i+"].reqDate'class='form-control'></td>"+
-					"<td><select id='mediaType'name='listReqAdvertisementDetail["+i+"].mediaType' class='form-control'><option value=''>Media Type</option><option value='media-1'>Media-1</option><option value='female'>Media-2</option></select></td>"+
-					"<td><input type='text' style='width: 130px;'id='mediaName'name='listReqAdvertisementDetail["+i+"].mediaName' class='form-control'></td>"+
-					
-					"<td><input type='text' style='width: 130px;'id='advtAmount'name='listReqAdvertisementDetail["+i+"].advtAmount' class='form-control'></td>"+
-					" </td><td><input type='text' style='width: 130px;'id='remarks'name='listReqAdvertisementDetail["+i+"].remarks' class='form-control'></td>"
-
-					);
-
-			$('#example').append('<tr id="addr'+(i+1)+'"></tr>');
-			$('#_cr').val(i+1);
-			i++; 
-		});
-			
-			$("#delete_row").click(function(){
-			 	 if(i>1){
-					 $("#addr"+(i-1)).html('');
-					 $('#_cr').val(i - 1);
-					 i--;
-					 }
-				 });
-
-
-		});
+		
 
 	</script>
 

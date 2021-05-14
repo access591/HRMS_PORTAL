@@ -2,6 +2,8 @@ package com.hrms.service;
 
 import java.util.List;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.hrms.model.ReqAdvertisementDetail;
@@ -10,9 +12,15 @@ import com.hrms.repository.ReqAdvertisementDetailDao;
 public class ReqAdvertisementDetailServiceIpml implements ReqAdvertisementDetailService{
 
 	@Autowired ReqAdvertisementDetailDao reqAdvertisementDetailDao;
+	@Autowired SessionFactory sessionFactory;
 	@Override
 	public void addActivity(ReqAdvertisementDetail reqAdvertisementDetail) {
-		this.reqAdvertisementDetailDao.saveOrUpdate(reqAdvertisementDetail);
+		//this.reqAdvertisementDetailDao.saveOrUpdate(reqAdvertisementDetail);
+		Session session = sessionFactory.openSession();
+	    session.beginTransaction();
+	    session.save(reqAdvertisementDetail);
+	    session.getTransaction().commit();
+		
 		
 	}
 
