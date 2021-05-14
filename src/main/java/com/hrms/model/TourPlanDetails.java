@@ -1,7 +1,7 @@
 package com.hrms.model;
 
 import java.io.Serializable;
-import java.util.Date;
+
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,7 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 @Entity(name="TOUR_PLAN_DT")
-public class TourPlanApprovalDetails implements Serializable {
+public class TourPlanDetails implements Serializable {
 
 	/**
 	 * 
@@ -34,9 +34,9 @@ private String  startPlace;
 @Column(name = "END_PLACE")
 private String  endPlace;
 @Column(name = "FROM_DT")
-private Date  fromDate;
+private String  fromDate;
 @Column(name = "TO_DATE")
-private Date  toDate;
+private String  toDate;
 @Column(name = "PURPOSE")
 private String  purpose;
 
@@ -64,16 +64,16 @@ public String getEndPlace() {
 public void setEndPlace(String endPlace) {
 	this.endPlace = endPlace;
 }
-public Date getFromDate() {
+public String getFromDate() {
 	return fromDate;
 }
-public void setFromDate(Date fromDate) {
+public void setFromDate(String fromDate) {
 	this.fromDate = fromDate;
 }
-public Date getToDate() {
+public String getToDate() {
 	return toDate;
 }
-public void setToDate(Date toDate) {
+public void setToDate(String toDate) {
 	this.toDate = toDate;
 }
 public String getPurpose() {
