@@ -1,6 +1,7 @@
 package com.hrms.controller;
 
 
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,12 +20,15 @@ import com.hrms.model.Designation;
 import com.hrms.model.Employee;
 import com.hrms.model.MenuModule;
 import com.hrms.model.TourPlan;
+
+import com.hrms.model.TourPlanDetails;
 import com.hrms.model.TourPlanUtil;
 import com.hrms.service.DepartmentService;
 import com.hrms.service.DesignationService;
 import com.hrms.service.EmployeeService;
 import com.hrms.service.ModuleService;
 import com.hrms.service.PageMappingService;
+import com.hrms.service.TourPlanDetailService;
 import com.hrms.service.TourPlanService;
 
 @Controller
@@ -43,7 +47,8 @@ public class TourPlanController {
     DesignationService designationService;
 	@Autowired 
 	TourPlanService tourPlanService;
-	
+	@Autowired
+	TourPlanDetailService tourPlanDetailService;
 
 	@GetMapping("/tourPlan")
 	public String tourPlan(Model model, HttpSession session) {
@@ -72,7 +77,7 @@ public class TourPlanController {
 	public String saveTourPlan(@ModelAttribute("tourPlan")TourPlanUtil u, Model model, HttpSession session,HttpServletRequest request) {
 		String insertedBY = (String) session.getAttribute("USER_NAME");
 		TourPlan tourPlan=new TourPlan();
-		//TourPlanApprovalDetails TourPlanApprovalDe=new TourPlanApprovalDetails();
+		TourPlanDetails tourPlanDetail=new TourPlanDetails();
 		Employee emp = new Employee();
 		emp.setEmpCode(u.getEmpCode());
 		Department dept = new Department();
@@ -92,6 +97,91 @@ public class TourPlanController {
 		tourPlan.setInsBy(insertedBY);
 
 		tourPlanService.addTourPlan(tourPlan);
+		String tid=tourPlan.getTourPlanId();
+		Date tdate=tourPlan.getTourPlanDate();
+		 int flag = 0;
+	   		int counter = 1;
+			try {
+				
+				
+				boolean insertStatusMR = false;
+				counter = Integer.parseInt(request.getParameter("_cr"));
+				System.out.println("counter::::::::::::::::::::" + counter);
+				
+			
+				for (int i =0; i < counter; i++) 
+				{
+					System.out.println("for loop run time>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+					if (request.getParameter("startPlace" + i) != null) {
+						tourPlanDetail.setStartPlace(request.getParameter("startPlace" + i));
+					} else {
+						tourPlanDetail.setStartPlace("" + i);
+					}
+					
+					if(request.getParameter("endPlace" + i) != null) {
+						tourPlanDetail.setEndPlace(request.getParameter("endPlace" + i));
+					} else {
+						tourPlanDetail.setEndPlace("" + i);
+					}
+					
+				
+					if(request.getParameter("fromDate" + i) != null) {
+						tourPlanDetail.setFromDate(request.getParameter("fromDate" + i));
+					} else {
+						tourPlanDetail.setFromDate("" + i);
+					}
+					
+					if(request.getParameter("toDate" + i) != null) {
+						tourPlanDetail.setToDate(request.getParameter("toDate" + i));
+					} else {
+						tourPlanDetail.setToDate("" + i);
+					}
+					
+					
+					if(request.getParameter("purpose" + i) != null) {
+						tourPlanDetail.setPurpose(request.getParameter("purpose" + i));
+					} else {
+						tourPlanDetail.setPurpose("" + i);
+					}
+					
+				
+					
+				
+					tourPlan.setTourPlanId(tid);
+					tourPlan.setTourPlanDate(tdate);
+					tourPlanDetail.setTourPlanId(tourPlan);
+					tourPlanDetail.setTourPlanDate(tourPlan);
+					
+					insertStatusMR= tourPlanDetailService.addTourPlanDetail(tourPlanDetail);
+					
+					if (insertStatusMR) {
+						System.out.println("Counter" + flag);
+						flag++;
+
+					}
+					
+				}
+				
+				
+				if (flag > 0) {
+					session.setAttribute("Message", "Data added successfully.");
+					
+				} else {
+					System.out.println("Enter into  failure part :");
+					
+				}
+
+			
+			} catch (Exception e) {
+				
+				
+				e.printStackTrace();
+			}
+		
+		
+		
+		
+		
 		session.setAttribute("username", session.getAttribute("username"));
 
 		return "redirect:/tourPlan";
