@@ -67,7 +67,7 @@ public class EmployeeRequisitionApprovalController {
 		}
 		session.setAttribute("username", session.getAttribute("username"));
 		   
-		return "EmployeeRequisitionApproval";//EmployeeRequisitionApproval.html
+		return "employeeRequisitionApproval";
 		
 		//return pageMappingService.PageRequestMapping(reqPage, pageno);
 	}
