@@ -70,36 +70,25 @@ public class TourPlanController {
 	
 	@PostMapping("/saveTourPlan")
 	public String saveTourPlan(@ModelAttribute("tourPlan")TourPlanUtil u, Model model, HttpSession session,HttpServletRequest request) {
-		String insertedBY = (String) session.getAttribute("uuu");
+		String insertedBY = (String) session.getAttribute("USER_NAME");
 		TourPlan tourPlan=new TourPlan();
 		//TourPlanApprovalDetails TourPlanApprovalDe=new TourPlanApprovalDetails();
-		 
-		
-		Employee emp=new Employee();
-		 emp.setEmpCode(u.getEmpCode());
-		 
-		 Department dept=new Department();
-		 dept.setDepartmentCode(u.getDepartmentCode());
-		 Designation des= new Designation();
-		 des.setDesgCode(u.getDesgCode());
-		 
-		 
-		 
-			/* tourPlan.setTourPlanDate(u.getTourPlanDate()); */
-		 tourPlan.setEmpCode(emp);
-		 tourPlan.setDepartmentCode(dept);
-		 tourPlan.setDesgCode(des);
-		 tourPlan.setMobNumber(u.getMobNumber());
-		 
-		 
-		 
-	
-			  tourPlan.setTourStartDate(u.getTourStartDate());
-			  tourPlan.setTourEndDate(u.getTourEndDate());
-			 
-		 tourPlan.setInsBy(insertedBY);
-		
-		
+		Employee emp = new Employee();
+		emp.setEmpCode(u.getEmpCode());
+		Department dept = new Department();
+		dept.setDepartmentCode(u.getDepartmentCode());
+		Designation des = new Designation();
+		des.setDesgCode(u.getDesgCode());
+		tourPlan.setEmpCode(emp);
+		tourPlan.setDepartmentCode(dept);
+		tourPlan.setDesgCode(des);
+		tourPlan.setMobNumber(u.getMobNumber());
+
+		tourPlan.setTourStartDate(u.getTourStartDate());
+		tourPlan.setTourEndDate(u.getTourEndDate());
+
+		tourPlan.setInsBy(insertedBY);
+
 		tourPlan.setInsBy(insertedBY);
 
 		tourPlanService.addTourPlan(tourPlan);
