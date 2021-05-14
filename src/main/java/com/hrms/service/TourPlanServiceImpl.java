@@ -15,6 +15,8 @@ public class TourPlanServiceImpl implements TourPlanService{
 
 	@Override
 	public void addTourPlan(TourPlan tourPlan) {
+		
+		tourPlan.setTourPlanId(tourPlanDao.getMaxId("TPL"));
 		this.tourPlanDao.saveOrUpdate(tourPlan);
 		
 	}

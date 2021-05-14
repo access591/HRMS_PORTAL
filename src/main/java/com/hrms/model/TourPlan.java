@@ -2,12 +2,15 @@ package com.hrms.model;
 
 
 import java.io.Serializable;
+
 import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.Size;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 
 
@@ -25,23 +28,27 @@ public class TourPlan implements Serializable {
 	@Column(name = "TOUR_PLAN_DT")
 	private Date tourPlanDate;
 	
+
+
 	@ManyToOne
-	@JoinColumn(name ="EMP_CODE")
+	@JoinColumn(name = "EMPLOYEE_CODE",updatable = false)
 	private Employee empCode;
+
+	
 	@ManyToOne
-	@JoinColumn(name ="DEPT_CODE")
+	@JoinColumn(name ="DEPT_CODE",updatable = false)
 	private Department departmentCode ;
 	@ManyToOne
-	@JoinColumn(name ="DESG_CODE")
+	@JoinColumn(name ="DESG_CODE",updatable = false)
 	private Designation desgCode;
 	
 	@Column(name = "TOUR_START_DT")
-	private Date tourStartDate;
+	private String tourStartDate;
 	
-    @Column(name = "MOB_NO")
-	private int  mobNo;
+    @Column(name = "MOB_NUMBER")
+	private String  mobNumber;
     @Column(name = "TOUR_END_DT")
-	private Date  tourEndDate;
+	private String  tourEndDate;
 	
     @Column(name = "APPROVED_BY")
 	private String  approvedBy ;   
@@ -90,27 +97,28 @@ public class TourPlan implements Serializable {
 		this.departmentCode = departmentCode;
 	}
 
-	public Date getTourStartDate() {
+	public String getTourStartDate() {
 		return tourStartDate;
 	}
 
-	public void setTourStartDate(Date tourStartDate) {
+	public void setTourStartDate(String tourStartDate) {
 		this.tourStartDate = tourStartDate;
 	}
 
-	public int getMobNo() {
-		return mobNo;
+	
+	public String getMobNumber() {
+		return mobNumber;
 	}
 
-	public void setMobNo(int mobNo) {
-		this.mobNo = mobNo;
+	public void setMobNumber(String mobNumber) {
+		this.mobNumber = mobNumber;
 	}
 
-	public Date getTourEndDate() {
+	public String getTourEndDate() {
 		return tourEndDate;
 	}
 
-	public void setTourEndDate(Date tourEndDate) {
+	public void setTourEndDate(String tourEndDate) {
 		this.tourEndDate = tourEndDate;
 	}
 

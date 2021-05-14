@@ -41,9 +41,8 @@ body {
 						<nav aria-label="breadcrumb">
 						</nav>
 					</div>
-					<form id="validation-form" action="#" th:action="@{/saveTourPlan}" th:object="${tourPlan}" method="post">
+					<form id="validation-form" action="#"  th:action="@{/saveTourPlan}" th:object="${tourPlan}" method="post">
 					<div class="row">
-						
 			           <div class="col-12">
 							<div class="card">
 								<div class="card-header">
@@ -58,26 +57,25 @@ body {
 										<div class="row">
 											<div class="col-12 col-lg-6">
 												<div class="form-group">
-										
 											  <label>Tour Plan Id </label>
-											  		<label style="color: red">*</label>
-											  	 
-											   <input
-														type="text" class="form-control" id="tourPlanId" name="tourPlanId" readonly="readonly">
+											  	<label style="color: red">*</label>
+											   <input type="text" class="form-control" id="tourPlanId" name="tourPlanId" readonly="readonly">
 												</div>
-											<div class="form-group">
-												<label class="form-label">Select Employee</label>
-												<label style="color: red">*</label>
-												<select
-													class="form-control" id="empCode"name="empCode'">
-													<option value="">Select Employee</option>
-													<option th:each="employee: ${listEmployee}"
-														th:text="${employee.empName}" 
-														th:value=" ${employee.empCode}"></option>
-
+											
+											
+										<div class="form-group">
+											<label class="form-label"> Employee  Code</label>
+											<label style="color: red">*</label>
+											 <select class="form-control" id="empCode"name="empCode">
+													<option value="">select Employee</option>
+													<option th:each="r :${listEmployee}" th:value="${r.empCode}" th:text="${r.empName}"></option>
 												</select>
-												
-										   	</div>
+										</div>
+											
+											
+											
+											
+											
 										   	<div class="form-group">
 											<label class="form-label"> Designation Code</label>
 											<label style="color: red">*</label>
@@ -94,7 +92,7 @@ body {
 											  <label> Tour Start Date and Time </label>
 											  		<label style="color: red">*</label>	 
 											   <input
-														type="date" class="form-control" id="tourStartDate" name="tourStartDate">
+														type="datetime-local" class="form-control" id="tourStartDate" name="tourStartDate">
 												</div>
 										
 									
@@ -104,7 +102,7 @@ body {
 											<div class="form-group">
 											<label class="form-label"> Tour Plan Date</label>
 											<label style="color: red">*</label>
-											 <input type="date" class="form-control " id="tourPlanDate" name="tourPlanDate">
+											 <input type="text" class="form-control " id="tourPlanDate" name="tourPlanDate">
 										</div>
 										
 										<div class="form-group">
@@ -118,15 +116,14 @@ body {
 												
 												<div class="form-group">
 											  <label> Mobile Number </label>
-											  		<label style="color: red">*</label>	 
-											   <input
-														type="text" class="form-control" id="id" name="mobile">
+											  	<label style="color: red">*</label>	 
+											   <input type="tel" class="form-control" id="mobNumber" maxlength="11" name="mobNumber">
 												</div>
 												
 													<div class="form-group">
 											<label class="form-label"> Tour End Date and Time</label>
 											<label style="color: red">*</label>
-											 <input type="date" class="form-control " maxlength="25" title=" Award Name" id="tourEndDate" name="tourEndDate" >
+											 <input type="datetime-local" class="form-control " maxlength="25" title="Tour End Date and Time " id="tourEndDate" name="tourEndDate" >
 										</div>
 											
 											</div>
@@ -329,7 +326,14 @@ function calculateSumtotalgovt() {
 $("table").on("keyup", ".govt", function () {
 	calculateSumtotalgovt();
 });
-
+$("input[name='tourPlanDate']").daterangepicker({
+	singleDatePicker: true,
+    autoApply: true,
+	locale: {
+        format: 'DD/MM/YYYY'
+    },
+	showDropdowns: true
+});
 
 
 });
