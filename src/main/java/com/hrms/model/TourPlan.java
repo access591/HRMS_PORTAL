@@ -28,9 +28,12 @@ public class TourPlan implements Serializable {
 	@ManyToOne
 	@JoinColumn(name ="EMP_CODE")
 	private Employee empCode;
-	
+	@ManyToOne
 	@JoinColumn(name ="DEPT_CODE")
-	private Department dept_code ;
+	private Department departmentCode ;
+	@ManyToOne
+	@JoinColumn(name ="DESG_CODE")
+	private Designation desgCode;
 	
 	@Column(name = "TOUR_START_DT")
 	private Date tourStartDate;
@@ -80,11 +83,11 @@ public class TourPlan implements Serializable {
 	}
 
 	public Department getDept_code() {
-		return dept_code;
+		return departmentCode;
 	}
 
-	public void setDept_code(Department dept_code) {
-		this.dept_code = dept_code;
+	public void setDept_code(Department departmentCode) {
+		this.departmentCode = departmentCode;
 	}
 
 	public Date getTourStartDate() {
@@ -149,6 +152,22 @@ public class TourPlan implements Serializable {
 
 	public void setInsDate(Date insDate) {
 		this.insDate = insDate;
+	}
+
+	public Department getDepartmentCode() {
+		return departmentCode;
+	}
+
+	public void setDepartmentCode(Department departmentCode) {
+		this.departmentCode = departmentCode;
+	}
+
+	public Designation getDesgCode() {
+		return desgCode;
+	}
+
+	public void setDesgCode(Designation desgCode) {
+		this.desgCode = desgCode;
 	}
 	
 }
