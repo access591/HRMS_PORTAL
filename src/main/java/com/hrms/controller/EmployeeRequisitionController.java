@@ -122,6 +122,8 @@ public class EmployeeRequisitionController {
 		employeeRequisition.setEmployeRequisitionDetail(re);
 		
 		
+		
+		
 		employeeRequisitionService.addEmployeeRequisition(employeeRequisition);
 		session.setAttribute("userlogin", insertedBY);
 
