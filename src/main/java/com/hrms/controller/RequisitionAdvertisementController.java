@@ -97,14 +97,18 @@ public class RequisitionAdvertisementController {
 		List<ReqAdvertisementDetail> listReqAdvertisementDetail = new ArrayList<ReqAdvertisementDetail>();
 		ReqAdvertisementDetail reqAdvtDetail = new ReqAdvertisementDetail();
 		
-		for(int i =0;i<reqAdvertisement.getListReqAdvertisementDetail().size();i++) {
-			reqAdvtDetail = reqAdvertisement.getListReqAdvertisementDetail().get(i);
-			reqAdvtDetail.setReqAdvertisement(reqAdvertisement);
-			listReqAdvertisementDetail.add(reqAdvtDetail);
-			
-		}
+//		for(int i =0;i<reqAdvertisement.getListReqAdvertisementDetail().size();i++) {
+//			reqAdvtDetail = reqAdvertisement.getListReqAdvertisementDetail().get(i);
+//			reqAdvtDetail.setReqAdvertisement(reqAdvertisement);
+//			listReqAdvertisementDetail.add(reqAdvtDetail);
+//			
+//		}
+//		
+//		reqAdvertisement.getListReqAdvertisementDetail().addAll(listReqAdvertisementDetail);
 		
-		reqAdvertisement.getListReqAdvertisementDetail().addAll(listReqAdvertisementDetail);
+		for(ReqAdvertisementDetail eDetail : reqAdvertisement.getListReqAdvertisementDetail()) {
+			eDetail.setReqAdvertisement(reqAdvertisement); 
+		}
 		
 		reqAdvertisementService.addActivity(reqAdvertisement);
 		System.out.println("working===========");
