@@ -1,164 +1,154 @@
 package com.hrms.model;
 
 
+import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Column;
 
-@Entity(name="TOUR_PLAN")
-public class TourPlan {
-	
+
+@Entity(name="TOUR_PLAN_MAST")
+public class TourPlan implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7748536710350573569L;
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	private Long id;
-	
-	private String empCode;
-	private String empName;
-	private String deptCode;
+	@Column(name = "TOUR_PLAN_ID")
 	private String tourPlanId;
-	private String fyCode = null;
-	private String cCode = null;
-	private String approvedBy;
-	private String mobile;
 	
-	private String tourPlanDate = null;
+	@Column(name = "TOUR_PLAN_DT")
+	private Date tourPlanDate;
 	
-	private String tourStartDate;
-	private String tourEndDate;
+	@ManyToOne
+	@JoinColumn(name ="EMP_CODE")
+	private Employee empCode;
 	
-	@Column(updatable = false)
-	private String Udate;
+	@JoinColumn(name ="DEPT_CODE")
+	private Department dept_code ;
 	
-	private String approvedStatus = "N";
+	@Column(name = "TOUR_START_DT")
+	private Date tourStartDate;
 	
-	@Column(name = "INS_BY",updatable = false)
+    @Column(name = "MOB_NO")
+	private int  mobNo;
+    @Column(name = "TOUR_END_DT")
+	private Date  tourEndDate;
+	
+    @Column(name = "APPROVED_BY")
+	private String  approvedBy ;   
+	
+	@Column(name = "APPROVAL_STATUS")
+	private String  approvalStatus ;
+	
+	@Column(name = "APPROVAL_DATE")
+	private Date approvalDate ;
+
+	@Column(name = "INS_BY", updatable = false)
 	private String insBy;
-		
-	@Column(name = "INS_DATE",updatable = false)
-	private Date insDate =new Date();
-		
-	@Column(name = "UPD_BY",insertable = false)
-	private String updBy;
-		
-	@Column(name = "UPD_DATE",insertable = false)
-	private Date  updDate = new Date();
-		
-	
-	public String getInsBy() {
-		return insBy;
-	}
-	public void setInsBy(String insBy) {
-		this.insBy = insBy;
-	}
-	public Date getInsDate() {
-		return insDate;
-	}
-	public void setInsDate(Date insDate) {
-		this.insDate = insDate;
-	}
-	public String getUpdBy() {
-		return updBy;
-	}
-	public void setUpdBy(String updBy) {
-		this.updBy = updBy;
-	}
-	public Date getUpdDate() {
-		return updDate;
-	}
-	public void setUpdDate(Date updDate) {
-		this.updDate = updDate;
-	}
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
-	}
-	public String getEmpCode() {
-		return empCode;
-	}
-	public void setEmpCode(String empCode) {
-		this.empCode = empCode;
-	}
-	public String getEmpName() {
-		return empName;
-	}
-	public void setEmpName(String empName) {
-		this.empName = empName;
-	}
-	public String getDeptCode() {
-		return deptCode;
-	}
-	public void setDeptCode(String deptCode) {
-		this.deptCode = deptCode;
-	}
+
+	@Column(name = "INS_DATE", updatable = false)
+	private Date insDate = new Date();
+
 	public String getTourPlanId() {
 		return tourPlanId;
 	}
+
 	public void setTourPlanId(String tourPlanId) {
 		this.tourPlanId = tourPlanId;
 	}
-	public String getFyCode() {
-		return fyCode;
+
+	public Date getTourPlanDate() {
+		return tourPlanDate;
 	}
-	public void setFyCode(String fyCode) {
-		this.fyCode = fyCode;
+
+	public void setTourPlanDate(Date tourPlanDate) {
+		this.tourPlanDate = tourPlanDate;
 	}
-	public String getcCode() {
-		return cCode;
+
+	public Employee getEmpCode() {
+		return empCode;
 	}
-	public void setcCode(String cCode) {
-		this.cCode = cCode;
+
+	public void setEmpCode(Employee empCode) {
+		this.empCode = empCode;
 	}
+
+	public Department getDept_code() {
+		return dept_code;
+	}
+
+	public void setDept_code(Department dept_code) {
+		this.dept_code = dept_code;
+	}
+
+	public Date getTourStartDate() {
+		return tourStartDate;
+	}
+
+	public void setTourStartDate(Date tourStartDate) {
+		this.tourStartDate = tourStartDate;
+	}
+
+	public int getMobNo() {
+		return mobNo;
+	}
+
+	public void setMobNo(int mobNo) {
+		this.mobNo = mobNo;
+	}
+
+	public Date getTourEndDate() {
+		return tourEndDate;
+	}
+
+	public void setTourEndDate(Date tourEndDate) {
+		this.tourEndDate = tourEndDate;
+	}
+
 	public String getApprovedBy() {
 		return approvedBy;
 	}
+
 	public void setApprovedBy(String approvedBy) {
 		this.approvedBy = approvedBy;
 	}
-	public String getMobile() {
-		return mobile;
-	}
-	public void setMobile(String mobile) {
-		this.mobile = mobile;
-	}
-	public String getTourPlanDate() {
-		return tourPlanDate;
-	}
-	public void setTourPlanDate(String tourPlanDate) {
-		this.tourPlanDate = tourPlanDate;
-	}
-	public String getTourStartDate() {
-		return tourStartDate;
-	}
-	public void setTourStartDate(String tourStartDate) {
-		this.tourStartDate = tourStartDate;
-	}
-	public String getTourEndDate() {
-		return tourEndDate;
-	}
-	public void setTourEndDate(String tourEndDate) {
-		this.tourEndDate = tourEndDate;
-	}
-	public String getUdate() {
-		return Udate;
-	}
-	public void setUdate(String udate) {
-		Udate = udate;
-	}
-	public String getApprovedStatus() {
-		return approvedStatus;
-	}
-	public void setApprovedStatus(String approvedStatus) {
-		this.approvedStatus = approvedStatus;
-	}
-	
-	
-	
-	
 
+	public String getApprovalStatus() {
+		return approvalStatus;
+	}
+
+	public void setApprovalStatus(String approvalStatus) {
+		this.approvalStatus = approvalStatus;
+	}
+
+	public Date getApprovalDate() {
+		return approvalDate;
+	}
+
+	public void setApprovalDate(Date approvalDate) {
+		this.approvalDate = approvalDate;
+	}
+
+	public String getInsBy() {
+		return insBy;
+	}
+
+	public void setInsBy(String insBy) {
+		this.insBy = insBy;
+	}
+
+	public Date getInsDate() {
+		return insDate;
+	}
+
+	public void setInsDate(Date insDate) {
+		this.insDate = insDate;
+	}
+	
 }

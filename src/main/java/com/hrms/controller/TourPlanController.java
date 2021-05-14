@@ -65,9 +65,7 @@ public class TourPlanController {
 	public String saveAward(@ModelAttribute("tourPlan") TourPlan tourPlan, Model model, HttpSession session) {
 		String insertedBY = (String) session.getAttribute("userlogin");
 		tourPlan.setInsBy(insertedBY);
-		
-		System.out.println("current user : "+ tourPlan.getEmpName());
-		
+
 		tourPlanService.addTourPlan(tourPlan);
 		session.setAttribute("username", session.getAttribute("username"));
 
