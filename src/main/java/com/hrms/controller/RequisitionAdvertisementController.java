@@ -93,6 +93,7 @@ public class RequisitionAdvertisementController {
 	public String saveAdvertisement(@ModelAttribute("reqAdvertisement")ReqAdvertisement reqAdvertisement,
 			HttpSession session,RedirectAttributes redirectAttributes) {
 		
+		System.out.println("save Advertisement module");
 		List<ReqAdvertisementDetail> listReqAdvertisementDetail = new ArrayList<ReqAdvertisementDetail>();
 		ReqAdvertisementDetail reqAdvtDetail = new ReqAdvertisementDetail();
 		
