@@ -1,7 +1,9 @@
 package com.hrms.controller;
 
+
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,12 +13,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.hrms.model.Award;
+
 import com.hrms.model.Department;
 import com.hrms.model.Designation;
 import com.hrms.model.Employee;
 import com.hrms.model.MenuModule;
 import com.hrms.model.TourPlan;
+import com.hrms.model.TourPlanUtil;
 import com.hrms.service.DepartmentService;
 import com.hrms.service.DesignationService;
 import com.hrms.service.EmployeeService;
@@ -32,14 +35,18 @@ public class TourPlanController {
 	@Autowired
 	DepartmentService departmentService;
 	@Autowired PageMappingService pageMappingService;
-	@Autowired private ModuleService moduleService;
-	@Autowired private EmployeeService employeeService;
-	@Autowired private DesignationService designationService;
-	@Autowired private TourPlanService tourPlanService;
+	@Autowired 
+	ModuleService moduleService;
+	@Autowired 
+	 EmployeeService employeeService;
+	@Autowired
+    DesignationService designationService;
+	@Autowired 
+	TourPlanService tourPlanService;
 	
 
 	@GetMapping("/tourPlan")
-	public String salaryGeneration(Model model, HttpSession session) {
+	public String tourPlan(Model model, HttpSession session) {
 		
 		String userCode = (String) session.getAttribute("username");
 		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
@@ -48,29 +55,57 @@ public class TourPlanController {
 		}
 		List<Department> listDepartment = departmentService.getAllDepartments();
 		model.addAttribute("listDepartment", listDepartment);
-		List<Employee> listEmployee = employeeService.getAllEmployees();
-		if(listEmployee != null) {
-			model.addAttribute("listEmployee" , listEmployee);
-		}
+		
+		List<Employee> lrt = employeeService.getAllEmployees();
+		model.addAttribute("listEmployee", lrt);
+		
+	
 		List<Designation> listDesignation = designationService.getAllDesignations();
-		if(listDesignation != null) {
-			model.addAttribute("listDesignation", listDesignation);
-		}
+		model.addAttribute("listDesignation", listDesignation);
+	
 		session.setAttribute("username", session.getAttribute("username"));
-		return pageMappingService.PageRequestMapping(reqPage, pageno);
+		return "tourPlan";
 	}  
 	
 	
 	@PostMapping("/saveTourPlan")
-	public String saveAward(@ModelAttribute("tourPlan") TourPlan tourPlan, Model model, HttpSession session) {
-		String insertedBY = (String) session.getAttribute("userlogin");
+	public String saveTourPlan(@ModelAttribute("tourPlan")TourPlanUtil u, Model model, HttpSession session,HttpServletRequest request) {
+		String insertedBY = (String) session.getAttribute("uuu");
+		TourPlan tourPlan=new TourPlan();
+		//TourPlanApprovalDetails TourPlanApprovalDe=new TourPlanApprovalDetails();
+		 
+		
+		Employee emp=new Employee();
+		 emp.setEmpCode(u.getEmpCode());
+		 
+		 Department dept=new Department();
+		 dept.setDepartmentCode(u.getDepartmentCode());
+		 Designation des= new Designation();
+		 des.setDesgCode(u.getDesgCode());
+		 
+		 
+		 
+			/* tourPlan.setTourPlanDate(u.getTourPlanDate()); */
+		 tourPlan.setEmpCode(emp);
+		 tourPlan.setDepartmentCode(dept);
+		 tourPlan.setDesgCode(des);
+		 tourPlan.setMobNumber(u.getMobNumber());
+		 
+		 
+		 
+	
+			  tourPlan.setTourStartDate(u.getTourStartDate());
+			  tourPlan.setTourEndDate(u.getTourEndDate());
+			 
+		 tourPlan.setInsBy(insertedBY);
+		
+		
 		tourPlan.setInsBy(insertedBY);
 
 		tourPlanService.addTourPlan(tourPlan);
 		session.setAttribute("username", session.getAttribute("username"));
 
-		return "redirect:" + pageMappingService.PageRequestMapping(reqPage, pageno);
-
+		return "redirect:/tourPlan";
 	}
 
 }

@@ -1,12 +1,13 @@
 package com.hrms.model;
 
+
 import java.util.Date;
 public class TourPlanUtil {
 	
 	
 	private String tourPlanId;
 	
-	private Date tourPlanDate;
+	private String tourPlanDate;
 	
 	private String empCode;
 	
@@ -14,11 +15,11 @@ public class TourPlanUtil {
 	
 	private String desgCode;
 	
-	private int  mobNo;
+	private String  mobNumber;
  
-	private Date  tourEndDate;
+	private String  tourEndDate;
 	
-	private Date tourStartDate;
+	private String tourStartDate;
 	
 	private String  approvedBy ;   
 	private String  approvalStatus ;
@@ -45,11 +46,11 @@ public class TourPlanUtil {
 		this.tourPlanId = tourPlanId;
 	}
 
-	public Date getTourPlanDate() {
+	public String getTourPlanDate() {
 		return tourPlanDate;
 	}
 
-	public void setTourPlanDate(Date tourPlanDate) {
+	public void setTourPlanDate(String tourPlanDate) {
 		this.tourPlanDate = tourPlanDate;
 	}
 
@@ -77,27 +78,28 @@ public class TourPlanUtil {
 		this.desgCode = desgCode;
 	}
 
-	public int getMobNo() {
-		return mobNo;
+	
+	public String getMobNumber() {
+		return mobNumber;
 	}
 
-	public void setMobNo(int mobNo) {
-		this.mobNo = mobNo;
+	public void setMobNumber(String mobNumber) {
+		this.mobNumber = mobNumber;
 	}
 
-	public Date getTourEndDate() {
+	public String getTourEndDate() {
 		return tourEndDate;
 	}
 
-	public void setTourEndDate(Date tourEndDate) {
+	public void setTourEndDate(String tourEndDate) {
 		this.tourEndDate = tourEndDate;
 	}
 
-	public Date getTourStartDate() {
+	public String getTourStartDate() {
 		return tourStartDate;
 	}
 
-	public void setTourStartDate(Date tourStartDate) {
+	public void setTourStartDate(String tourStartDate) {
 		this.tourStartDate = tourStartDate;
 	}
 
