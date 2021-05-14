@@ -19,7 +19,7 @@ public class ReqAdvertisement {
 	private String advtCode;
 	
 	@Column(name="ADVT_DATE")
-	private Date advtDate;
+	private String advtDate;
 	
 	@Column(name="REMARKS")
 	private String remarks;
@@ -42,11 +42,11 @@ public class ReqAdvertisement {
 		this.advtCode = advtCode;
 	}
 
-	public Date getAdvtDate() {
+	public String getAdvtDate() {
 		return advtDate;
 	}
 
-	public void setAdvtDate(Date advtDate) {
+	public void setAdvtDate(String advtDate) {
 		this.advtDate = advtDate;
 	}
 

@@ -49,12 +49,11 @@ public class EmployeeRequisitionServiceImpl implements EmployeeRequisitionServic
 		//Transaction tx = session.beginTransaction();
 		EmployeeRequisition emp = session.find(EmployeeRequisition.class, c.getReqCode());
 		emp.getEmployeRequisitionDetail().clear();;
-		emp.setEmployeRequisitionDetail(c.getEmployeRequisitionDetail());
+		//emp.setEmployeRequisitionDetail(c.getEmployeRequisitionDetail());
 		emp.getEmployeRequisitionDetail().addAll(c.getEmployeRequisitionDetail());
-		session.update(emp);
-		//tx.commit();
-		session.close();
-		//this.employeRequisitionDao.saveOrUpdate(c);
+		session.beginTransaction();
+		session.merge(emp);
+		session.getTransaction().commit();
 		
 		
 	}

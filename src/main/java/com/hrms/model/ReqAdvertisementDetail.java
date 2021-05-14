@@ -24,11 +24,11 @@ public class ReqAdvertisementDetail {
 	
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "ADVRT_CODE",updatable = false)
+    @JoinColumn(name = "ADVRT_CODE")
 	private ReqAdvertisement reqAdvertisement;
 	
 	@Column(name="ADVRT_DATE")
-	private Date advtDate;
+	private String advtDate;
 	
 	@Column(name="MEDIA_TYPE")
 	private String mediaType;
@@ -64,11 +64,11 @@ public class ReqAdvertisementDetail {
 		this.reqAdvertisement = reqAdvertisement;
 	}
 
-	public Date getAdvtDate() {
+	public String getAdvtDate() {
 		return advtDate;
 	}
 
-	public void setAdvtDate(Date advtDate) {
+	public void setAdvtDate(String advtDate) {
 		this.advtDate = advtDate;
 	}
 

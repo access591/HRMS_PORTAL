@@ -149,23 +149,12 @@ public class EmployeeRequisitionController {
 		
 		  System.out.println("=====================>");
 		  
-		  
-		  List<EmployeeRequisitionDetail> re = new
-		  ArrayList<EmployeeRequisitionDetail>(); EmployeeRequisitionDetail e = new EmployeeRequisitionDetail(); 
-		  for(int i=0;i<employeeRequisition.getEmployeRequisitionDetail().size();i++) {
-		  
-		  e = employeeRequisition.getEmployeRequisitionDetail().get(i);
-		  e.setEmployeeRequisition(employeeRequisition); 
-		  re.add(e);
-		  //employeeRequisition.getEmployeRequisitionDetail().add(e);
-		  
-		  }
-		 
-		
-		employeeRequisition.setEmployeRequisitionDetail(re); 
+		for(EmployeeRequisitionDetail eDetail : employeeRequisition.getEmployeRequisitionDetail()) {
+			eDetail.setEmployeeRequisition(employeeRequisition);
+		}
 		
 		this.employeeRequisitionService.updateEmployeeRequisition(employeeRequisition);
-		return "redirect:editEmployeeRequisition";
+		return "redirect:employeeRequisition";
 	}
 	
 	

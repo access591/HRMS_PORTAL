@@ -69,7 +69,7 @@ body {
 												<div class="form-group">
 													<label> Requisition Code </label> <label style="color: red">*</label>
 													<input class="form-control" id="" value=""
-														th:field="*{reqCode}" />
+														th:field="*{reqCode}" readonly />
 												</div>
 											</div>
 											<div class="col-12 col-lg-6">
@@ -86,7 +86,7 @@ body {
 												<div class="form-group">
 													<label> Department Code </label> <label style="color: red">*</label>
 													<input type="text" class="form-control" id="departmentId"
-														value="" th:field="*{deptCode}">
+														value="" th:field="*{deptCode}" readonly>
 												</div>
 											</div>
 											<div class="col-12 col-lg-6">
@@ -184,7 +184,7 @@ body {
 
 														<td><input type="text" style="width: 130px;"
 															id="desigCode0"
-															name="employeRequisitionDetail[0].desigCode"></td>
+															name="employeRequisitionDetail[0].desigCode" readonly></td>
 
 														<td><select id="designationName0"
 															name="employeRequisitionDetail[0].designationName"
