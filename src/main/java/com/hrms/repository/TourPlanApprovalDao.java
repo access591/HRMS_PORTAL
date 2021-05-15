@@ -1,10 +1,11 @@
-package com.hrms.service;
+package com.hrms.repository;
 
 import java.util.List;
 
+import com.hrms.dao.GenericDao;
 import com.hrms.model.TourPlan;
 
-public interface TourPlanApprovalService {
+public interface TourPlanApprovalDao extends GenericDao<TourPlan>{
 
 	List<TourPlan> getAllTourPlan();
 
