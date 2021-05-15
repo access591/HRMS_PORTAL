@@ -1,6 +1,8 @@
 package com.hrms.controller;
 
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -77,7 +79,7 @@ public class TourPlanController {
 	
 	
 	@PostMapping("/saveTourPlan")
-	public String saveTourPlan(@ModelAttribute("tourPlan")TourPlanUtil u, Model model, HttpSession session,HttpServletRequest request) {
+	public String saveTourPlan(@ModelAttribute("tourPlan")TourPlanUtil u, Model model, HttpSession session,HttpServletRequest request) throws ParseException {
 		String insertedBY = (String) session.getAttribute("USER_NAME");
 		TourPlan tourPlan=new TourPlan();
 		TourPlanDetails tourPlanDetail=new TourPlanDetails();
@@ -91,6 +93,9 @@ public class TourPlanController {
 		tourPlan.setDepartmentCode(dept);
 		tourPlan.setDesgCode(des);
 		
+		
+		Date date1=new SimpleDateFormat("dd/MM/yyyy").parse(u.getTourPlanDate());  
+		tourPlan.setTourPlanDate(date1);
 		tourPlan.setMobNumber(u.getMobNumber());
 		tourPlan.setTourStartDate(u.getTourStartDate());
 		tourPlan.setTourEndDate(u.getTourEndDate());

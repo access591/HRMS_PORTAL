@@ -9,7 +9,12 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.Size;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 
@@ -24,7 +29,8 @@ public class TourPlan implements Serializable {
 	@Id
 	@Column(name = "TOUR_PLAN_ID")
 	private String tourPlanId;
-	
+	@DateTimeFormat(pattern ="yyyy-mm-dd")
+	@Temporal(TemporalType.DATE)
 	@Column(name = "TOUR_PLAN_DT")
 	private Date tourPlanDate;
 	
