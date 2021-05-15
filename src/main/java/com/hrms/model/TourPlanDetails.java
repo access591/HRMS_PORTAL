@@ -22,10 +22,10 @@ private static final long serialVersionUID = 8658800224712878231L;
 @GeneratedValue(strategy = GenerationType.IDENTITY)
 private long id;
 @ManyToOne
-@JoinColumn(name = "TOUR_PLAN_ID")
+@JoinColumn(name = "TOUR_PLAN_ID",updatable = false)
 private TourPlan  tourPlanId;
 @ManyToOne
-@JoinColumn(name = "TOUR_PLAN_DT")
+@JoinColumn(name = "TOUR_PLAN_DT",updatable = false)
 private TourPlan  tourPlanDate;
 
 @Column(name = "START_PLACE")
@@ -40,6 +40,12 @@ private String  toDate;
 @Column(name = "PURPOSE")
 private String  purpose;
 
+public long getId() {
+	return id;
+}
+public void setId(long id) {
+	this.id = id;
+}
 public TourPlan getTourPlanId() {
 	return tourPlanId;
 }

@@ -94,10 +94,13 @@ public class TourPlanController {
 		tourPlan.setEmpCode(emp);
 		tourPlan.setDepartmentCode(dept);
 		tourPlan.setDesgCode(des);
+       
+	
+         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(u.getTourPlanDate()); 
 		
+		String date = simpleDateFormat.format(new Date());
 		
-		Date date1=new SimpleDateFormat("dd/MM/yyyy").parse(u.getTourPlanDate());  
-		tourPlan.setTourPlanDate(date1);
+		tourPlan.setTourPlanDate(u.getTourPlanDate());
 		tourPlan.setMobNumber(u.getMobNumber());
 		tourPlan.setTourStartDate(u.getTourStartDate());
 		tourPlan.setTourEndDate(u.getTourEndDate());
@@ -108,7 +111,7 @@ public class TourPlanController {
 
 		tourPlanService.addTourPlan(tourPlan);
 		String tid=tourPlan.getTourPlanId();
-		Date tdate=tourPlan.getTourPlanDate();
+		String tdate=u.getTourPlanDate();
 		 int flag = 0;
 	   		int counter = 1;
 			try {
@@ -217,4 +220,28 @@ public class TourPlanController {
 	    return "editTourPlan";
 	}
 
+	@PostMapping("/updateTourPlan")
+	  public String updateTourPlan(@ModelAttribute("tourPlanEdit") TourPlan tourPlan, Model model) throws ParseException {
+		
+		
+		  this.tourPlanService.updateTourPlan(tourPlan);
+	    	  
+		  
+		  return "redirect:/tourPlan";
+	  }
+
+	@GetMapping(value = { "/deleteTourPlan/{id}" })
+public String deleteTourPlan(@PathVariable("id") String id, Model model,
+		HttpSession session) {
+	try {
+		
+		tourPlanService.removeTourPlan(id);
+		session.setAttribute("username", session.getAttribute("username"));
+
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
+
+	return "redirect:/tourPlan";
+}
 }
