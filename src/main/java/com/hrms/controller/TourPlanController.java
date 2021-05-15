@@ -217,4 +217,20 @@ public class TourPlanController {
 	    return "editTourPlan";
 	}
 
+	
+
+	@GetMapping(value = { "/deleteTourPlan/{id}" })
+public String deleteTourPlan(@PathVariable("id") String id, Model model,
+		HttpSession session) {
+	try {
+		
+		tourPlanService.removeTourPlan(id);
+		session.setAttribute("username", session.getAttribute("username"));
+
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
+
+	return "redirect:/tourPlan";
+}
 }
