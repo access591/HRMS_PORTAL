@@ -58,6 +58,9 @@ public class TourPlanController {
 		if (modules != null) {
 			model.addAttribute("modules", modules);
 		}
+		
+		List<TourPlan> ListTourPlan=tourPlanService.getAllTourPlan();
+		model.addAttribute("ListTourPlan", ListTourPlan);
 		List<Department> listDepartment = departmentService.getAllDepartments();
 		model.addAttribute("listDepartment", listDepartment);
 		
@@ -87,11 +90,11 @@ public class TourPlanController {
 		tourPlan.setEmpCode(emp);
 		tourPlan.setDepartmentCode(dept);
 		tourPlan.setDesgCode(des);
+		
 		tourPlan.setMobNumber(u.getMobNumber());
-
 		tourPlan.setTourStartDate(u.getTourStartDate());
 		tourPlan.setTourEndDate(u.getTourEndDate());
-
+		tourPlan.setApprovalStatus("N");
 		tourPlan.setInsBy(insertedBY);
 
 		tourPlan.setInsBy(insertedBY);
