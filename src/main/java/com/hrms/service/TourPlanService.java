@@ -9,7 +9,7 @@ public interface TourPlanService {
 
 	public void addTourPlan(TourPlan tourPlan);
 	List<TourPlan>getAllTourPlan();
-	TourPlan findTourPlanById(Long id);
 	public void updateTourPlan(TourPlan c);
 	public void removeTourPlan(Long id);
+	public TourPlan findByIdTourPlan(String id);
 }

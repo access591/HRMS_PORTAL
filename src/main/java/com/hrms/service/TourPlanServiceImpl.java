@@ -27,12 +27,7 @@ public class TourPlanServiceImpl implements TourPlanService{
 		return this.tourPlanDao.findAll();
 	}
 
-	@Override
-	public TourPlan findTourPlanById(Long id) {
-		
-		return this.tourPlanDao.findById(0);
-	}
-
+	
 	@Override
 	public void updateTourPlan(TourPlan c) {
 		this.tourPlanDao.saveOrUpdate(c);
@@ -45,8 +40,9 @@ public class TourPlanServiceImpl implements TourPlanService{
 		
 	}
 
-	
-	
-	
+	@Override
+	public TourPlan findByIdTourPlan(String id) {
+		return this.tourPlanDao.findById(id);
+	}
 
 }
