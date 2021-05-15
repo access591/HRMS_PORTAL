@@ -41,7 +41,7 @@ body {
 						<nav aria-label="breadcrumb">
 						</nav>
 					</div>
-					<form id="validation-form" action="#"  th:action="@{/saveTourPlan}" th:object="${tourPlan}" method="post">
+					<form id="validation-form" action="#"  th:action="@{/saveTourPlan}" th:object="${tourPlanEdit}" method="post">
 					<div class="row">
 			           <div class="col-12">
 							<div class="card">
@@ -59,14 +59,14 @@ body {
 												<div class="form-group">
 											  <label>Tour Plan Id </label>
 											  	<label style="color: red">*</label>
-											   <input type="text" class="form-control" id="tourPlanId" name="tourPlanId" readonly="readonly">
+											   <input type="text" class="form-control" id="tourPlanId"th:field="*{tourPlanId}" name="tourPlanId" readonly="readonly">
 												</div>
 											
 											
 										<div class="form-group">
 											<label class="form-label"> Employee  Code</label>
 											<label style="color: red">*</label>
-											 <select class="form-control" id="empCode"name="empCode">
+											 <select class="form-control" id="empCode"name="empCode"th:field="*{empCode.empCode}">
 													<option value=""> Employee Name</option>
 													<option th:each="r :${listEmployee}" th:value="${r.empCode}" th:text="${r.empName}"></option>
 												</select>
@@ -79,7 +79,7 @@ body {
 										   	<div class="form-group">
 											<label class="form-label"> Designation </label>
 											<label style="color: red">*</label>
-											 <select class="form-control" id="desgCode"name="desgCode">
+											 <select class="form-control" id="desgCode"name="desgCode"th:field="*{desgCode.desgCode}">
 													<option value="">Designation</option>
 													<option th:each="designation : ${listDesignation}"
 														th:text="${designation.desgName}" 
@@ -180,56 +180,11 @@ body {
 	                     
 					
 					</div>
-					<button type="submit" class="btn btn-primary">Save</button>&nbsp;
-	                     &nbsp;
-					<button type="reset"class="btn btn-primary" value="Reset">Reset</button>
+					<input type="submit" class="btn btn-primary" value="Submit">
+							 <button type="submit"class="btn btn-primary" value="cancel">Cancel</button>	
 					</form>
 				</div>
-<div class="col-12">
-							<div class="card">
-								<div class="card-header">
-								</div>
-								<div class="card-body">
-									<table id="datatables-buttons" class="table table-striped display" style="width:100%"aria-describedby="example">
-										<thead>
-											<tr >
-												<th scope="col">Tour Plan Id</th>
-												<th scope="col">Employee Name</th>
-												<th scope="col">Department</th>
-												<th scope="col">Designation</th>
-												<!-- <th scope="col">Tour Pan Date </th> -->
-												
-												<th scope="col">Action </th>
-											</tr >
-											
 
-
-										</thead>
-										<tbody>
-										<tr th:each = "tourPlan : ${ListTourPlan}">
-										<td th:text="${tourPlan.tourPlanId}" ></td>
-										<td th:text="${tourPlan.empCode.empName}"></td>
-										<td  th:text="${tourPlan.departmentCode.deptName}"></td>
-										<td  th:text="${tourPlan.desgCode.desgName}"></td>
-									<!-- 	<td  th:text="${tourPlan.tourPlanDate}"></td> -->
-										  <td>
-										  <a th:href="@{/editTourPlan/{id}/(id=${tourPlan.tourPlanId})}"><em class="fa fa-edit"></em></a>
-										  
-										     <a th:href="@{/editTourPlan/{id}/(id=${tourPlan.tourPlanId})}"onclick="return confirm('Are you sure?')"><em class="fa fa-times"></em></a>
-									
-									
-										</td>  
-									
-										</tr>
-									
-									
-										</tbody>
-									
-									</table>
-								</div>
-								
-							</div>
-						</div>
 			</main>
 
 		<footer class="footer">

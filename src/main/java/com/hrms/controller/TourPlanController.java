@@ -14,12 +14,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 
 import com.hrms.model.Department;
 import com.hrms.model.Designation;
 import com.hrms.model.Employee;
+import com.hrms.model.MedicalReimbursement;
 import com.hrms.model.MenuModule;
 import com.hrms.model.TourPlan;
 
@@ -193,6 +195,26 @@ public class TourPlanController {
 		session.setAttribute("username", session.getAttribute("username"));
 
 		return "redirect:/tourPlan";
+	}
+	
+	@GetMapping(value = {"/editTourPlan/{id}"})
+	public String editTourPlan(@PathVariable("id")String id,  Model model,HttpSession session)
+	 { 
+		List<Department> listDepartment = departmentService.getAllDepartments();
+		model.addAttribute("listDepartment", listDepartment);
+		
+		List<Employee> lrt = employeeService.getAllEmployees();
+		model.addAttribute("listEmployee", lrt);
+		
+	
+		List<Designation> listDesignation = designationService.getAllDesignations();
+		model.addAttribute("listDesignation", listDesignation);
+		
+		TourPlan tourPlanEdit =	tourPlanService.findByIdTourPlan(id);
+		  model.addAttribute("tourPlanEdit", tourPlanEdit);
+
+	   
+	    return "editTourPlan";
 	}
 
 }

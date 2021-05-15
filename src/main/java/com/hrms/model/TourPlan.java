@@ -4,11 +4,13 @@ package com.hrms.model;
 import java.io.Serializable;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Size;
@@ -33,7 +35,9 @@ public class TourPlan implements Serializable {
 	@Temporal(TemporalType.DATE)
 	@Column(name = "TOUR_PLAN_DT")
 	private Date tourPlanDate;
-	
+	 @OneToMany(mappedBy="tourPlanId",cascade = CascadeType.ALL,
+		        orphanRemoval = true)
+	List<TourPlanDetails> medicalReimbursementDetail;
 
 
 	@ManyToOne
@@ -182,6 +186,40 @@ public class TourPlan implements Serializable {
 
 	public void setDesgCode(Designation desgCode) {
 		this.desgCode = desgCode;
+	}
+
+	public List<TourPlanDetails> getMedicalReimbursementDetail() {
+		return medicalReimbursementDetail;
+	}
+
+	public void setMedicalReimbursementDetail(List<TourPlanDetails> medicalReimbursementDetail) {
+		this.medicalReimbursementDetail = medicalReimbursementDetail;
+	}
+
+	public TourPlan(String tourPlanId, Date tourPlanDate, List<TourPlanDetails> medicalReimbursementDetail,
+			Employee empCode, Department departmentCode, Designation desgCode, String tourStartDate, String mobNumber,
+			String tourEndDate, String approvedBy, String approvalStatus, Date approvalDate, String insBy,
+			Date insDate) {
+		super();
+		this.tourPlanId = tourPlanId;
+		this.tourPlanDate = tourPlanDate;
+		this.medicalReimbursementDetail = medicalReimbursementDetail;
+		this.empCode = empCode;
+		this.departmentCode = departmentCode;
+		this.desgCode = desgCode;
+		this.tourStartDate = tourStartDate;
+		this.mobNumber = mobNumber;
+		this.tourEndDate = tourEndDate;
+		this.approvedBy = approvedBy;
+		this.approvalStatus = approvalStatus;
+		this.approvalDate = approvalDate;
+		this.insBy = insBy;
+		this.insDate = insDate;
+	}
+
+	public TourPlan() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 	
 }
