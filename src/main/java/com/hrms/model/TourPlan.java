@@ -37,7 +37,7 @@ public class TourPlan implements Serializable {
 	private Date tourPlanDate;
 	 @OneToMany(mappedBy="tourPlanId",cascade = CascadeType.ALL,
 		        orphanRemoval = true)
-	List<TourPlanDetails> medicalReimbursementDetail;
+	List<TourPlanDetails> tourPlanDetail;
 
 
 	@ManyToOne
@@ -188,22 +188,24 @@ public class TourPlan implements Serializable {
 		this.desgCode = desgCode;
 	}
 
-	public List<TourPlanDetails> getMedicalReimbursementDetail() {
-		return medicalReimbursementDetail;
+	
+
+	public List<TourPlanDetails> getTourPlanDetail() {
+		return tourPlanDetail;
 	}
 
-	public void setMedicalReimbursementDetail(List<TourPlanDetails> medicalReimbursementDetail) {
-		this.medicalReimbursementDetail = medicalReimbursementDetail;
+	public void setTourPlanDetail(List<TourPlanDetails> tourPlanDetail) {
+		this.tourPlanDetail = tourPlanDetail;
 	}
 
-	public TourPlan(String tourPlanId, Date tourPlanDate, List<TourPlanDetails> medicalReimbursementDetail,
+	public TourPlan(String tourPlanId, Date tourPlanDate, List<TourPlanDetails> tourPlanDetail,
 			Employee empCode, Department departmentCode, Designation desgCode, String tourStartDate, String mobNumber,
 			String tourEndDate, String approvedBy, String approvalStatus, Date approvalDate, String insBy,
 			Date insDate) {
 		super();
 		this.tourPlanId = tourPlanId;
 		this.tourPlanDate = tourPlanDate;
-		this.medicalReimbursementDetail = medicalReimbursementDetail;
+		this.tourPlanDetail = tourPlanDetail;
 		this.empCode = empCode;
 		this.departmentCode = departmentCode;
 		this.desgCode = desgCode;

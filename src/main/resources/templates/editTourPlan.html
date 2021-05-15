@@ -92,7 +92,7 @@ body {
 											  <label> Tour Start Date and Time </label>
 											  		<label style="color: red">*</label>	 
 											   <input
-														type="datetime-local" class="form-control" id="tourStartDate" name="tourStartDate">
+														type="datetime-local" class="form-control" th:field="*{tourStartDate}"id="tourStartDate" name="tourStartDate">
 												</div>
 										
 									
@@ -108,7 +108,7 @@ body {
 										<div class="form-group">
 											  <label class="form-label">Department</label>
 												<label style="color: red">*</label>
-												<select class="form-control select2" name="departmentCode"id="departmentCode" required aria-required="true">
+												<select class="form-control select2" name="departmentCode"id="departmentCode" th:field="*{departmentCode.departmentCode}" required aria-required="true">
 												 <option value=""> Department Name</option>
 												<option th:each="dep :${listDepartment}" th:value="${dep.getDepartmentCode()}" th:text="${dep.getDeptName()}"></option>
 											     	</select>
@@ -117,13 +117,13 @@ body {
 												<div class="form-group">
 											  <label> Mobile Number </label>
 											  
-											   <input type="tel" class="form-control" id="mobNumber" maxlength="11" name="mobNumber">
+											   <input type="tel" class="form-control" id="mobNumber" maxlength="11" th:field="*{mobNumber}"name="mobNumber">
 												</div>
 												
 													<div class="form-group">
 											<label class="form-label"> Tour End Date and Time</label>
 											<label style="color: red">*</label>
-											 <input type="datetime-local" class="form-control " maxlength="25" title="Tour End Date and Time " id="tourEndDate" name="tourEndDate" >
+											 <input type="datetime-local" class="form-control " maxlength="25"th:field="*{tourEndDate}" title="Tour End Date and Time " id="tourEndDate" name="tourEndDate" >
 										</div>
 											
 											</div>
@@ -156,13 +156,13 @@ body {
 																</tr>
 															</thead>
 															<tbody>
-																<tr id='addr0'>
+																<tr id='addr0'th:each="row, stat :${tourPlanEdit.tourPlanDetail}">
 
-																	<td><input type="text" name='startPlace0'placeholder='Start Place' class="form-control" value="" /></td>
-																	<td><input type="text" name='endPlace0'placeholder='End  Place' class="form-control" /></td>
-																	<td><input type="Date" name='fromDate0'placeholder='From Date' class="form-control" /></td>
-																	<td><input type="Date" name='toDate0'placeholder='To Date' class="form-control" /></td>
-																	<td><input type="text" name='purpose0'placeholder='Purpose/Task to be done' class="form-control" /></td>
+																	<td><input type="text" name='startPlace0'placeholder='Start Place' class="form-control" th:field="*{tourPlanDetail[__${stat.index}__].startPlace}" /></td>
+																	<td><input type="text" name='endPlace0'placeholder='End  Place' class="form-control" th:field="*{tourPlanDetail[__${stat.index}__].endPlace}" /></td>
+																	<td><input type="Date" name='fromDate0'placeholder='From Date' class="form-control"  th:value="*{tourPlanDetail[__${stat.index}__].fromDate}"/></td>
+																	<td><input type="Date" name='toDate0'placeholder='To Date' class="form-control" th:value="*{tourPlanDetail[__${stat.index}__].toDate}" /></td>
+																	<td><input type="text" name='purpose0'placeholder='Purpose/Task to be done' class="form-control"  th:field="*{tourPlanDetail[__${stat.index}__].purpose}"/></td>
 														
 																</tr>
 																<tr id='addr1'></tr>
