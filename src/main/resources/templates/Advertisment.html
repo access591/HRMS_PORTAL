@@ -133,11 +133,11 @@ body {
 													<tr id="addr0">
 
 
-														<td><select id="reqCode" class="form-control">
+														<td><select id="reqCode" class="form-control" name="listReqAdvertisementDetail[0].reqCode">
 																<option value=" ">Select ReqCode</option>
 																<option 
 																th:each="employeeReq : ${listEmployeeRequisition}"
-																th:text="${employeeReq.reqCode}" th:value="${employeeReq.reqCode}"></option>
+																th:text="${employeeReq.reqCode}" ></option>
 																
 														</select>
 														
@@ -290,7 +290,7 @@ body {
 			$("#add_row").click(function(){
 			$('#addr'+i).html(
 					
-					"<td><select id='reqCode' name='listReqAdvertisementDetail["+i+"].reqCode' class='form-control'><option value=''>Select Req Code</option><option th:each='employeeReq : ${listEmployeeRequisition}'th:text='${employeeReq.reqCode}' th:value='${employeeReq.reqCode}'></option></select></td>"+
+					"<td><select id='reqCode' name='listReqAdvertisementDetail["+i+"].reqCode' class='form-control'><option value=''>Select Req Code</option><option th:each='employeeReq : ${listEmployeeRequisition}'th:text='${employeeReq.reqCode}'></option></select></td>"+
 					"<td><input type='Date' style='width: 130px;'id='reqDate"+i+"'name='listReqAdvertisementDetail["+i+"].reqDate'class='form-control'></td>"+
 					"<td><select id='mediaType'name='listReqAdvertisementDetail["+i+"].mediaType' class='form-control'><option value=''>Media Type</option><option value='media-1'>Media-1</option><option value='female'>Media-2</option></select></td>"+
 					"<td><input type='text' style='width: 130px;'id='mediaName'name='listReqAdvertisementDetail["+i+"].mediaName' class='form-control'></td>"+
