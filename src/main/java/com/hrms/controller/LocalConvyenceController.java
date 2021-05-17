@@ -2,6 +2,7 @@ package com.hrms.controller;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -56,11 +57,25 @@ public class LocalConvyenceController {
 		  model.addAttribute("listEmployee", listEmployee);
 		
 		  List<LocalConvyence> listOfLoc = localConvyenceService.getAlllocalConvyence();
+		  List<LocalConvyenceUtil> listLocalConvyenceUtil = new ArrayList<LocalConvyenceUtil>();
 		  for (int i = 0; i < listOfLoc.size(); i++) {
-			    System.out.println("List Record>>>>>>>>>>>>>>"+listOfLoc.get(i).getLocalConvId());
-			}
+			    
+			    String empCode = listOfLoc.get(i).getEmpCode().getEmpCode();
+			    LocalConvyenceUtil lc = new LocalConvyenceUtil();
+			    Employee employee = employeeService.findEmployeeById(empCode);
+			    Department department = departmentService.findDepartmentById(employee.getDepartmentCode());
+			    Designation designation = designationService.findDesignationById(employee.getDesignationCode());
+			    
+			    lc.setLocalConvId(listOfLoc.get(i).getLocalConvId());
+			    lc.setDeptName(department.getDeptName());
+			    lc.setDesgName(designation.getDesgName());
+			    lc.setEmpName(employee.getEmpName());
+			   
+			    listLocalConvyenceUtil.add(lc);
+			    
+		  }  
 		  
-		  model.addAttribute("listOfLoc", listOfLoc);
+		  model.addAttribute("listOfLoc", listLocalConvyenceUtil);
 		  
 		  String userCode= (String)session.getAttribute("username");
 		List<MenuModule> modules = moduleService.getAllModulesList(userCode);

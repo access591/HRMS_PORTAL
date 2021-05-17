@@ -354,8 +354,7 @@ $("table").on("keyup", ".pas", function () {
 	                     &nbsp;
 					<button type="reset"class="btn btn-primary" value="Reset">Reset</button>
 </form>
-				</div>
-				<div class="col-12">
+	<div class="col-12">
 							<div class="card">
 								<div class="card-header">
 								</div>
@@ -378,9 +377,9 @@ $("table").on("keyup", ".pas", function () {
 										<tbody>
 										<tr th:each = "listOfloc : ${listOfLoc}">
 										<td th:text="${listOfloc.localConvId}" ></td>
-										<td th:text="${listOfloc.empCode.empName}"></td>
-										<td  th:text="${listOfloc.empCode.departmentCode}"></td>
-										<td  th:text="${listOfloc.empCode.designationCode}"></td>
+										<td th:text="${listOfloc.empName}"></td>
+										<td  th:text="${listOfloc.deptName}"></td>
+										<td  th:text="${listOfloc.desgName}"></td>
 									<!-- 	<td  th:text="${tourPlan.tourPlanDate}"></td> -->
 										  <td>
 										  <a th:href="@{/editLocalConveyance/{id}/(id=${listOfloc.localConvId})}"><em class="fa fa-edit"></em></a>
@@ -400,6 +399,8 @@ $("table").on("keyup", ".pas", function () {
 								
 							</div>
 						</div>
+				</div>
+			
 		</main>
 		<footer class="footer">
 		<div th:replace="/fragments/footer :: div"></div>
