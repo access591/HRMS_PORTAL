@@ -8,6 +8,7 @@ public interface InterviewMasterService {
 	
 	public void addInterviewMaster(InterviewMaster interviewMaster );
 	public List<InterviewMaster> getAllInterviewMaster();
-	public InterviewMaster getApplicantInfoByApplicantCode();
+	public void interviewFinalapproval(String applicantCode,String interviewCode,String finalApprovalStatus );
+	
 
 }

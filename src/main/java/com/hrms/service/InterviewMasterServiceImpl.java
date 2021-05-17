@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,11 +36,26 @@ public class InterviewMasterServiceImpl implements InterviewMasterService{
 	}
 
 	@Override
-	public InterviewMaster getApplicantInfoByApplicantCode() {
+	public void interviewFinalapproval(String applicantCode, String interviewCode, String finalApprovalStatus) {
+		
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
+		//InterviewMaster im = session.find(InterviewMaster.class, interviewCode);
+		Query<InterviewMaster> query = session.createQuery("from InterviewMaster i where i.interviewCode = :interviewCode"
+										+ " and "
+										+"i.applicantCode = :applicantCode", InterviewMaster.class);
+		query.setParameter("interviewCode", interviewCode);
+		query.setParameter("applicantCode", applicantCode);
 		
-		return null;
+		InterviewMaster im = query.getSingleResult();
+		im.setSelectionStatus(finalApprovalStatus);
+		
+		session.merge(im);
+		session.getTransaction().commit();
+		session.close();
+		
+		
 	}
 
+	
 }
