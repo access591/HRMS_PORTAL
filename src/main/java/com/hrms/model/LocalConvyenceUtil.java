@@ -2,6 +2,8 @@ package com.hrms.model;
 
 import java.util.Date;
 
+import javax.persistence.Column;
+
 
 public class LocalConvyenceUtil {
 	private String  empCode;
@@ -17,9 +19,85 @@ public class LocalConvyenceUtil {
 	private Date localConvDate;
 	private int totalClaim;
 	private int totalPas;
+  
+	// DETAIL ========================================
+	private Date  locDate;
+	
+	private String  startPlace;
+	
+	private String  vistPlace;
+	
+	private String  purposeOfVist;
+	
+	private String  modeOfTravel;
+	
+	private String  distanceKm;
+	
+	private String  ltaRate;
+	
+	private String  actualAmount;
+	
+	private String  claimedAmount;
 	
 	
 	
+	
+	
+	
+	public Date getLocDate() {
+		return locDate;
+	}
+	public void setLocDate(Date locDate) {
+		this.locDate = locDate;
+	}
+	public String getStartPlace() {
+		return startPlace;
+	}
+	public void setStartPlace(String startPlace) {
+		this.startPlace = startPlace;
+	}
+	public String getVistPlace() {
+		return vistPlace;
+	}
+	public void setVistPlace(String vistPlace) {
+		this.vistPlace = vistPlace;
+	}
+	public String getPurposeOfVist() {
+		return purposeOfVist;
+	}
+	public void setPurposeOfVist(String purposeOfVist) {
+		this.purposeOfVist = purposeOfVist;
+	}
+	public String getModeOfTravel() {
+		return modeOfTravel;
+	}
+	public void setModeOfTravel(String modeOfTravel) {
+		this.modeOfTravel = modeOfTravel;
+	}
+	public String getDistanceKm() {
+		return distanceKm;
+	}
+	public void setDistanceKm(String distanceKm) {
+		this.distanceKm = distanceKm;
+	}
+	public String getLtaRate() {
+		return ltaRate;
+	}
+	public void setLtaRate(String ltaRate) {
+		this.ltaRate = ltaRate;
+	}
+	public String getActualAmount() {
+		return actualAmount;
+	}
+	public void setActualAmount(String actualAmount) {
+		this.actualAmount = actualAmount;
+	}
+	public String getClaimedAmount() {
+		return claimedAmount;
+	}
+	public void setClaimedAmount(String claimedAmount) {
+		this.claimedAmount = claimedAmount;
+	}
 	public Date getLocalConvDate() {
 		return localConvDate;
 	}
