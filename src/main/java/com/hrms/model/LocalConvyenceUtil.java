@@ -1,5 +1,8 @@
 package com.hrms.model;
 
+import java.util.Date;
+
+
 public class LocalConvyenceUtil {
 	private String  empCode;
 	private String  empName;
@@ -11,6 +14,30 @@ public class LocalConvyenceUtil {
 	private String  empPayCode;
 	private String  fatherHusband;
 	private String localConvId;
+	private Date localConvDate;
+	private int totalClaim;
+	private int totalPas;
+	
+	
+	
+	public Date getLocalConvDate() {
+		return localConvDate;
+	}
+	public void setLocalConvDate(Date localConvDate) {
+		this.localConvDate = localConvDate;
+	}
+	public int getTotalClaim() {
+		return totalClaim;
+	}
+	public void setTotalClaim(int totalClaim) {
+		this.totalClaim = totalClaim;
+	}
+	public int getTotalPas() {
+		return totalPas;
+	}
+	public void setTotalPas(int totalPas) {
+		this.totalPas = totalPas;
+	}
 	public String getEmpCode() {
 		return empCode;
 	}
