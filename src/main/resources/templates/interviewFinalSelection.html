@@ -74,7 +74,7 @@ body {
 											</div> -->
 											
 										
-											<table id="example1"
+											<table 
 												class="table table-striped table-bordered table-sm" style="width: 100%">
 												<thead>
 													<tr>
@@ -93,28 +93,76 @@ body {
 													</tr>
 												</thead>
 												<tbody>
-													<tr id="addr0">
+													<tr th:each="interFinal : ${interviewFinalSelection}">
 
 
-														<td><input type="text" class="form-control"></td>
+														<td><label th:text="${interFinal.interviewCode}"></label></td>
 
-														<td><input type="text" class="form-control"></td>
+														<td><label th:text="${#dates.format(new java.util.Date(interFinal.interviewDate), 'dd-MMM-yy')}"></label></td>
 
-														<td><input type="text" class="form-control"></td>
+														<td><label th:text="${interFinal.applicantCode}"></label></td>
 
-														<td><input type="text" class="form-control"></td>
+														<td><label th:text="${interFinal.applicantName}"></label></td>
 														
-														<td style="text-align:center;"><input type="checkbox"style="zoom:1.5;"></td>
+														<td><label th:text="${#dates.format(new java.util.Date(interFinal.applicantDate), 'dd-MMM-yy')}"></label></td>
 														
-														<td><input type="text" class="form-control"></td>
+														<td><label th:text="${interFinal.currentCtc}"></label></td>
 
-														<td><input type="text" class="form-control"></td>
+														<td><label th:text="${interFinal.expectedCtc}"></label></td>
 
-														<td><input type="text" class="form-control"></td>
+														<td><label th:text="${interFinal.ovarAllRating}"></label></td>
 
-														<td><input type="text" class="form-control"></td>
 														
-														<td><input type="text" class="form-control"></td>
+														
+														<td th:if="${interFinal.selectionStatus == 'Selected'}"><div class="dropdown show">
+															  <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+															  			>
+															   Selected
+															  </a>
+															
+															  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+															    <a class="dropdown-item" th:href="@{/interviewFileApproval/{applicantCode}/{interviewCode}/{finalApprovalStatus}/
+															    				(applicantCode=${interFinal.applicantCode},interviewCode=${interFinal.interviewCode},finalApprovalStatus=${'Selected'})}">Selected</a>
+															    <a class="dropdown-item" th:href="@{/interviewFileApproval/{applicantCode}/{interviewCode}/{finalApprovalStatus}/
+															    					(applicantCode=${interFinal.applicantCode},interviewCode=${interFinal.interviewCode},finalApprovalStatus=${'Rejected'})}">Rejected</a>
+															    
+															  </div>
+														</div></td>
+														
+														<td th:if="${interFinal.selectionStatus == 'Rejected'}"><div class="dropdown show">
+															  <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+															  			>
+															   Rejected
+															  </a>
+															
+															  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+															    <a class="dropdown-item" th:href="@{/interviewFileApproval/{applicantCode}/{interviewCode}/{finalApprovalStatus}/
+															    				(applicantCode=${interFinal.applicantCode},interviewCode=${interFinal.interviewCode},finalApprovalStatus=${'Selected'})}">Selected</a>
+															    <a class="dropdown-item" th:href="@{/interviewFileApproval/{applicantCode}/{interviewCode}/{finalApprovalStatus}/
+															    					(applicantCode=${interFinal.applicantCode},interviewCode=${interFinal.interviewCode},finalApprovalStatus=${'Rejected'})}">Rejected</a>
+															    
+															  </div>
+														</div></td>
+														
+														
+														
+														<td th:if="${interFinal.selectionStatus == ''}"><div class="dropdown show">
+															  <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+															  			>
+															   Action
+															  </a>
+															
+															  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+															    <a class="dropdown-item" th:href="@{/interviewFileApproval/{applicantCode}/{interviewCode}/{finalApprovalStatus}/
+															    				(applicantCode=${interFinal.applicantCode},interviewCode=${interFinal.interviewCode},finalApprovalStatus=${'Selected'})}">Selected</a>
+															    <a class="dropdown-item" th:href="@{/interviewFileApproval/{applicantCode}/{interviewCode}/{finalApprovalStatus}/
+															    					(applicantCode=${interFinal.applicantCode},interviewCode=${interFinal.interviewCode},finalApprovalStatus=${'Rejected'})}">Rejected</a>
+															    
+															  </div>
+														</div></td>
+														
+														
+														<td></td>
 
 														
 														
@@ -123,149 +171,15 @@ body {
 													</tr>
 													<!-- <tr id='addr1' /> -->
 													
-													<tr id="addr0">
-
-
-														<td><input type="text" class="form-control"></td>
-
-														<td><input type="text" class="form-control"></td>
-
-														<td><input type="text" class="form-control"></td>
-
-														<td><input type="text" class="form-control"></td>
-														
-														<td style="text-align:center;"><input type="checkbox"style="zoom:1.5;"></td>
-														
-														<td><input type="text" class="form-control"></td>
-
-														<td><input type="text" class="form-control"></td>
-
-														<td><input type="text" class="form-control"></td>
-
-														<td><input type="text" class="form-control"></td>
-														
-														<td><input type="text" class="form-control"></td>
-
-														
-														
-
-														
-													</tr>
 													
-													<tr id="addr0">
-
-
-														<td><input type="text" class="form-control"></td>
-
-														<td><input type="text" class="form-control"></td>
-
-														<td><input type="text" class="form-control"></td>
-
-														<td><input type="text" class="form-control"></td>
-														
-														<td style="text-align:center;"><input type="checkbox"style="zoom:1.5;"></td>
-														
-														<td><input type="text" class="form-control"></td>
-
-														<td><input type="text" class="form-control"></td>
-
-														<td><input type="text" class="form-control"></td>
-
-														<td><input type="text" class="form-control"></td>
-														
-														<td><input type="text" class="form-control"></td>
-
-														
-														
-
-														
-													</tr>
 													
-													<tr id="addr0">
-
-
-														<td><input type="text" class="form-control"></td>
-
-														<td><input type="text" class="form-control"></td>
-
-														<td><input type="text" class="form-control"></td>
-
-														<td><input type="text" class="form-control"></td>
-														
-														<td style="text-align:center;"><input type="checkbox"style="zoom:1.5;"></td>
-														
-														<td><input type="text" class="form-control"></td>
-
-														<td><input type="text" class="form-control"></td>
-
-														<td><input type="text" class="form-control"></td>
-
-														<td><input type="text" class="form-control"></td>
-														
-														<td><input type="text" class="form-control"></td>
-
-														
-														
-
-														
-													</tr>
 													
-													<tr id="addr0">
+													
+												
+													
+													
 
-
-														<td><input type="text" class="form-control"></td>
-
-														<td><input type="text" class="form-control"></td>
-
-														<td><input type="text" class="form-control"></td>
-
-														<td><input type="text" class="form-control"></td>
-														
-														<td style="text-align:center;"><input type="checkbox"style="zoom:1.5;"></td>
-														
-														<td><input type="text" class="form-control"></td>
-
-														<td><input type="text" class="form-control"></td>
-
-														<td><input type="text" class="form-control"></td>
-
-														<td><input type="text" class="form-control"></td>
-														
-														<td><input type="text" class="form-control"></td>
-
-														
-														
-
-														
-													</tr>
-													<tr id="addr0">
-
-
-														<td><input type="text" class="form-control"></td>
-
-														<td><input type="text" class="form-control"></td>
-
-														<td><input type="text" class="form-control"></td>
-
-														<td><input type="text" class="form-control"></td>
-														
-														<td style="text-align:center;"><input type="checkbox"style="zoom:1.5;"></td>
-														
-														<td><input type="text" class="form-control"></td>
-
-														<td><input type="text" class="form-control"></td>
-
-														<td><input type="text" class="form-control"></td>
-
-														<td><input type="text" class="form-control"></td>
-														
-														<td><input type="text" class="form-control"></td>
-
-														
-														
-
-														
-													</tr>
+													
 												</tbody>
 
 											</table>

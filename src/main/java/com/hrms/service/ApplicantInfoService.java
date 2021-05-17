@@ -10,5 +10,6 @@ public interface ApplicantInfoService {
 	public void addApplicantInfo(ApplicantInfo applicantInfo);
 	public List<ApplicantInfo> getAllApplicantInfo();
 	public ApplicantInfo getApplicantInfoByApplicantCode(String applicantCode);
+	public void updateApplicantInfoInterviewStatus(String applicant,String interviewStatus);
 
 }

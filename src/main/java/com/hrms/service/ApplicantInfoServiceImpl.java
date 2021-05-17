@@ -57,6 +57,18 @@ public class ApplicantInfoServiceImpl implements ApplicantInfoService{
 		return query.uniqueResult();
 	}
 
+	@Override
+	public void updateApplicantInfoInterviewStatus(String applicantCode, String interviewStatus) {
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+		ApplicantInfo applicantInfo = session.find(ApplicantInfo.class, applicantCode);
+		applicantInfo.setInterStatus(interviewStatus);
+		session.merge(applicantInfo);
+		session.getTransaction().commit();
+		session.close();
+		
+	}
+
 	
 	
 	

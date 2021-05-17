@@ -82,9 +82,7 @@ body {
 														<th>Application Date</th>
 														<th>Applicant Name</th>
 														<th>Applicant Sex</th>
-														<th>Earlier Application Status</th>
-														<th>Earlier Application Code</th>
-														<th>Earlier Application Name</th>
+														
 														<th>Designation Code</th>
 														<th>Designation Name</th>
 														<th>Status</th>
@@ -103,15 +101,11 @@ body {
 
 														<td><label class="form-control" th:text="${interviewApproval.applicantSex}"></label></td>
 														
-														<td style="text-align:center;"><input type="checkbox"style="zoom:1.5;"></td>
-														
-														<td><input type="text" class="form-control" th:text="${interviewApproval.earlierApplicationName}"></td>
+													
 
-														<td><input type="text" class="form-control" th:text="${interviewApproval.earlierApplicationCode}"></td>
+														<td><label class="form-control" th:text="${interviewApproval.designationCode}"></label></td>
 
-														<td><input type="text" class="form-control" th:text="${interviewApproval.designationCode}"></td>
-
-														<td><input type="text" class="form-control" th:text="${interviewApproval.designationName}"></td>
+														<td><label class="form-control" th:text="${interviewApproval.designationName}"></label></td>
 														
 														<td>
 															    <div class="btn-group">
@@ -129,32 +123,10 @@ body {
   															
   														</td>
 
-														<td><a href="#"><i class="fas fa-eye"></i></a></td>	
+														<td><a th:href="@{viewApplicantInfo/{applicantCode}/(applicantCode=${interviewApproval.applicantCode})}"><i class="fas fa-eye"></i></a></td>	
 													</tr>
 												
-													<tr>
-														<td><input type="text" class="form-control"></td>
-
-														<td><input type="text" class="form-control"></td>
-
-														<td><input type="text" class="form-control"></td>
-
-														<td><input type="text" class="form-control"></td>
-														
-														<td style="text-align:center;"><input type="checkbox"style="zoom:1.5;"></td>
-														
-														<td><input type="text" class="form-control"></td>
-
-														<td><input type="text" class="form-control"></td>
-
-														<td><input type="text" class="form-control"></td>
-
-														<td><input type="text" class="form-control"></td>
-														
-														<td><input type="text" class="form-control"></td>
-
-														<td><a href="#"><i class="fas fa-eye"></i></a></td>	
-													</tr>
+													
 													<!-- <tr id='addr1' /> -->
 													
 												</tbody>
