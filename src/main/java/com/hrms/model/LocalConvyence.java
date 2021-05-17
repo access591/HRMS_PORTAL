@@ -2,12 +2,15 @@ package com.hrms.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 @Entity
 @Table(name = "EMP_LOCAL_RMBSMT")
@@ -51,6 +54,10 @@ public class LocalConvyence implements Serializable{
 	
 	@Column(name = "FILL_DATE", updatable = false)
 	private Date filDate = new Date();
+	
+	 @OneToMany(mappedBy="localConvId",cascade = CascadeType.ALL,
+		        orphanRemoval = true)
+	List<LocalConvyenceDetail> localConvyenceDetail;
 
 	public String getLocalConvId() {
 		return localConvId;
@@ -138,6 +145,36 @@ public class LocalConvyence implements Serializable{
 
 	public void setFilDate(Date filDate) {
 		this.filDate = filDate;
+	}
+
+	public List<LocalConvyenceDetail> getLocalConvyenceDetail() {
+		return localConvyenceDetail;
+	}
+
+	public void setLocalConvyenceDetail(List<LocalConvyenceDetail> localConvyenceDetail) {
+		this.localConvyenceDetail = localConvyenceDetail;
+	}
+
+	public LocalConvyence(String localConvId, Date localConvDate, int totalClaim, int totalPas, Employee empCode,
+			String approvedBy, String approvalStatus, Date approvalDate, String insBy, Date insDate, Date filDate,
+			List<LocalConvyenceDetail> localConvyenceDetail) {
+		super();
+		this.localConvId = localConvId;
+		this.localConvDate = localConvDate;
+		this.totalClaim = totalClaim;
+		this.totalPas = totalPas;
+		this.empCode = empCode;
+		this.approvedBy = approvedBy;
+		this.approvalStatus = approvalStatus;
+		this.approvalDate = approvalDate;
+		this.insBy = insBy;
+		this.insDate = insDate;
+		this.filDate = filDate;
+		this.localConvyenceDetail = localConvyenceDetail;
+	}
+
+	public LocalConvyence() {
+		super();
 	}
 	
 	
