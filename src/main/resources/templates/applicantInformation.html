@@ -84,9 +84,9 @@ body {
 								<div class="card-body"></div>
 
 								<div class="col-12">
-									<form id="smartwizard-validation" enctype="multipart/form-data"
-										class="wizard wizard-primary" th:action="@{/saveEmployee}"
-										th:object="${employees}" method="post">
+									<form id="smartwizard-validation"
+										class="wizard wizard-primary" th:action="@{/saveApplicantInfo}"
+										th:object="${applicantInfo}" method="post">
 
 										<ul>
 											<li><a href="#validation-step-1"><br /> <small>Applicant
@@ -109,28 +109,23 @@ body {
 
 																<label class="form-label">Application Code <span
 																	class="text-danger">*</span>
-																</label> <input name="frmDate" type="text" id="frmDate"
-																	title="From Date" class="form-control ">
+																</label> <input type="text" th:field="*{applicantCode}" readonly
+																class="form-control ">
 															</div>
 															<div class="form-group sm col-md-4">
 																<label class="form-label">Application Date <span
-																	class="text-danger">*</span></label> <input type="time"
-																	id="frmTim" name="frmTim" title="From Time"
-																	onkeyup="sync()" maxlength="50" pattern="^[a-zA-Z\s]*$"
-																	class="form-control ">
+																	class="text-danger">*</span></label> <input type="date"
+																	class="form-control" th:field="*{applicantDate}">
 															</div>
 
 															<div class="form-group sm col-md-4">
 																<label class="form-label">Advertisement Code <span
 																	class="text-danger">*</span>
-																</label> <select
-																	class="form-control " name="designationCode"
-																	id="designationCode">
+																</label> <select class="form-control " id="advtCode" onchange="reqCodeByDate()" th:field="*{advtCode}">
 																	<option value="">Select Advertisement Code</option>
-																	<option th:Value="taxi">code 1</option>
-																	<option th:Value="car">code-2</option>
-																	<option th:Value="bus">code -3</option>
-																	<option th:Value="train">code-4</option>
+																	<option th:each="reqAdvertisement, stat : ${listReqAdvertisement}"
+																		th:text="${reqAdvertisement.advtCode}" th:value="${reqAdvertisement.advtCode}" >code 1</option>
+																	
 
 
 																</select>
@@ -144,14 +139,12 @@ body {
 
 																<label class="form-label">Advertisement Date <span
 																	class="text-danger">*</span>
-																</label> <input name="toDate" type="text" id="toDate"
-																	title="To Date" class="form-control ">
+																</label> <input  class="form-control " id="advtDate" th:field="*{advtDate}">
 															</div>
 															<div class="form-group sm col-md-4">
 																<label class="form-label">Applicant Name <span
-																	class="text-danger">*</span></label> <input type="time"
-																	id="frmTim" name="frmTim" title="To Time"
-																	class="form-control ">
+																	class="text-danger">*</span></label> <input type="text"
+																	class="form-control " th:field="*{applicantName}">
 															</div>
 
 
@@ -159,12 +152,11 @@ body {
 																<label class="form-label">Designation Code</label> <span
 																	class="text-danger">*</span> <select
 																	class="form-control " name="designationCode"
-																	id="designationCode">
+																	id="designationCode" th:field="*{desigCode}">
 																	<option value="">Select Designation</option>
-																	<option th:Value="taxi">code 1</option>
-																	<option th:Value="car">code-2</option>
-																	<option th:Value="bus">code -3</option>
-																	<option th:Value="train">code-4</option>
+																	<option th:each="designation : ${listDesignation}"
+																		th:text="${designation.desgCode}" th:value="${designation.desgCode}"></option>
+																	
 
 
 																</select>
@@ -179,9 +171,7 @@ body {
 																<label class="form-label">Father Name <span
 																	class="text-danger">*</span>
 																</label> <input name="employeePayeeCode" type="text"
-																	id="employeePayeeCode" pattern="\d{1,10}"
-																	title="Only digits" maxlength="10"
-																	class="form-control ">
+																	class="form-control " th:field="*{fatherName}">
 															</div>
 
 															<div class="form-group sm col-md-4">
@@ -189,10 +179,10 @@ body {
 																	class="text-danger">*</span>
 																</label> <select
 																	class="form-control " name="designationCode"
-																	id="designationCode">
+																	id="designationCode"th:field="*{sex}">
 																	<option value="">Select</option>
-																	<option th:Value="taxi">Male</option>
-																	<option th:Value="car">Female</option>
+																	<option th:Value="Male">Male</option>
+																	<option th:Value="Female">Female</option>
 																	
 
 
@@ -205,7 +195,7 @@ body {
 																	class="text-danger">*</span>
 																</label> <select
 																	class="form-control " name="designationCode"
-																	id="designationCode">
+																	id="designationCode" th:field="*{maritalStatus}">
 																	<option value="">Select</option>
 																	<option th:Value="taxi">Married</option>
 																	<option th:Value="car">Unmarried</option>
@@ -240,8 +230,8 @@ body {
 
 																<label class="form-label">Address <span
 																	class="text-danger">*</span>
-																</label> <input name="frmDate" type="text" id="frmDate"
-																	title="From Date" class="form-control ">
+																</label> <input name="frmDate" type="text"
+																 class="form-control " th:field="*{corrAdd}">
 															</div>
 															
 														</div>
@@ -253,8 +243,8 @@ body {
 
 																<label class="form-label">Address2 <span
 																	class="text-danger">*</span>
-																</label> <input name="toDate" type="text" id="toDate"
-																	title="To Date" class="form-control ">
+																</label> <input name="toDate" type="text" 
+																	th:field="*{corrAdd2}" class="form-control ">
 															</div>
 															
 														</div>
@@ -268,7 +258,7 @@ body {
 																	class="text-danger">*</span>
 																</label> <select
 																	class="form-control " name="designationCode"
-																	id="designationCode">
+																	id="designationCode" th:field="*{corrCity}">
 																	<option value="">Select City</option>
 																	<option th:Value="taxi">city1</option>
 																	<option th:Value="car">city2</option>
@@ -290,9 +280,7 @@ body {
 																<label class="form-label">State <span
 																	class="text-danger">*</span>
 																</label> <input name="employeePayeeCode" type="text"
-																	id="employeePayeeCode" pattern="\d{1,10}"
-																	title="Only digits" maxlength="10"
-																	class="form-control ">
+																	class="form-control " th:field="*{corrState}">
 															</div>
 
 															
@@ -306,9 +294,7 @@ body {
 																<label class="form-label">Contact No <span
 																	class="text-danger">*</span>
 																</label> <input name="employeePayeeCode" type="text"
-																	id="employeePayeeCode" pattern="\d{1,10}"
-																	title="Only digits" maxlength="10"
-																	class="form-control ">
+																	class="form-control " th:field="*{corrStdPhone}">
 															</div>
 
 															
@@ -327,8 +313,8 @@ body {
 
 																<label class="form-label">Address <span
 																	class="text-danger">*</span>
-																</label> <input name="frmDate" type="text" id="frmDate"
-																	title="From Date" class="form-control ">
+																</label> <input name="frmDate" type="text"
+																	 class="form-control "th:field="*{permAdd}">
 															</div>
 															
 														</div>
@@ -340,8 +326,8 @@ body {
 
 																<label class="form-label">Address2 <span
 																	class="text-danger">*</span>
-																</label> <input name="toDate" type="text" id="toDate"
-																	title="To Date" class="form-control ">
+																</label> <input name="toDate" type="text"
+																	th:field="*{permAdd2}" class="form-control ">
 															</div>
 															
 														</div>
@@ -354,8 +340,7 @@ body {
 																<label class="form-label">City <span
 																	class="text-danger">*</span>
 																</label> <select
-																	class="form-control " name="designationCode"
-																	id="designationCode">
+																	class="form-control "th:field="*{permCity}">
 																	<option value="">Select City</option>
 																	<option th:Value="taxi">city1</option>
 																	<option th:Value="car">city2</option>
@@ -377,9 +362,7 @@ body {
 																<label class="form-label">State <span
 																	class="text-danger">*</span>
 																</label> <input name="employeePayeeCode" type="text"
-																	id="employeePayeeCode" pattern="\d{1,10}"
-																	title="Only digits" maxlength="10"
-																	class="form-control ">
+																	class="form-control " th:field="*{permState}">
 															</div>
 
 															
@@ -393,8 +376,7 @@ body {
 																<label class="form-label">Contact No <span
 																	class="text-danger">*</span>
 																</label> <input name="employeePayeeCode" type="text"
-																	id="employeePayeeCode" pattern="\d{1,10}"
-																	title="Only digits" maxlength="10"
+																	th:field="*{permStdPhone}"
 																	class="form-control ">
 															</div>
 
@@ -432,8 +414,7 @@ body {
 																<label class="form-label">Hindi <span
 																	class="text-danger">*</span>
 																</label> <select
-																	class="form-control " name="designationCode"
-																	id="designationCode">
+																	class="form-control " th:field="*{langHindi}">
 																	<option value="">Select</option>
 																	<option th:Value="taxi">Read</option>
 																	<option th:Value="car">Write</option>
@@ -454,8 +435,7 @@ body {
 																<label class="form-label">English <span
 																	class="text-danger">*</span>
 																</label> <select
-																	class="form-control " name="designationCode"
-																	id="designationCode">
+																	class="form-control "th:field="*{langEnglish}">
 																	<option value="">Select</option>
 																	<option th:Value="taxi">Read</option>
 																	<option th:Value="car">Write</option>
@@ -476,8 +456,8 @@ body {
 
 																<label class="form-label">Name <span
 																	class="text-danger">*</span>
-																</label> <input name="frmDate" type="text" id="frmDate"
-																	title="From Date" class="form-control ">
+																</label> <input name="frmDate" type="text" 
+																	th:field="*{langOtherName}" class="form-control ">
 															</div>
 															
 														</div>
@@ -490,8 +470,7 @@ body {
 																<label class="form-label">Fluency <span
 																	class="text-danger">*</span>
 																</label> <select
-																	class="form-control " name="designationCode"
-																	id="designationCode">
+																	class="form-control "th:field="*{langOthersRw}">
 																	
 																	<option th:Value="taxi">Fluency</option>
 																	
@@ -519,8 +498,7 @@ body {
 																<label class="form-label">Academic <span
 																	class="text-danger">*</span>
 																</label> <select
-																	class="form-control " name="designationCode"
-																	id="designationCode">
+																	class="form-control " th:field="*{acadQuali}">
 																	<option value="">Choose</option>
 																	<option th:Value="taxi">Bachelor</option>
 																	<option th:Value="car">Master</option>
@@ -539,8 +517,8 @@ body {
 
 																<label class="form-label">Technical <span
 																	class="text-danger">*</span>
-																</label> <input name="toDate" type="text" id="toDate"
-																	title="To Date" class="form-control ">
+																</label> <input name="toDate" type="text"
+																		th:field="*{techQuali}" class="form-control ">
 															</div>
 															
 														</div>
@@ -572,8 +550,7 @@ body {
 																<label class="form-label">Reference Mode <span
 																	class="text-danger">*</span>
 																</label> <select
-																	class="form-control " name="designationCode"
-																	id="designationCode">
+																	class="form-control " th:field="*{modeOfRef}">
 																	<option value="">Select</option>
 																	<option th:Value="taxi">News</option>
 																	<option th:Value="taxi">News</option>
@@ -584,18 +561,24 @@ body {
 															</div>
 															<div class="form-group sm col-md-4">
 																<label class="form-label">Employee Code <span
-																	class="text-danger">*</span></label> <input type="time"
-																	id="frmTim" name="frmTim" title="From Time"
-																	onkeyup="sync()" maxlength="50" pattern="^[a-zA-Z\s]*$"
-																	class="form-control ">
-															</div>
+																	class="text-danger">*</span></label> 
+																	<select th:field="*{empCode}" class="form-control">
+																		<option value="">Select Employee Code</option>
+																		<option th:each="employee : ${listEmployee}"
+																			th:text="${employee.empCode}" th:value="${employee.empCode}"></option>
+																	</select>
+																	
+															</div> 
+															
+															
+															
+															
 
 															<div class="form-group sm col-md-4">
 																<label class="form-label">Hobbies <span
 																	class="text-danger">*</span>
-																</label> <input name="employeePayeeCode" type="text"
-																	id="employeePayeeCode" maxlength="50"
-																	title="Start place" class="form-control ">
+																</label> <input type="text"th:field="*{hobbies}"
+																	class="form-control ">
 															</div>
 														</div>
 
@@ -606,22 +589,19 @@ body {
 
 																<label class="form-label">Current CTC <span
 																	class="text-danger">*</span>
-																</label> <input name="toDate" type="text" id="toDate"
-																	title="To Date" class="form-control ">
+																</label> <input name="toDate" type="text"th:field="*{currentCtc}"
+																class="form-control ">
 															</div>
 															<div class="form-group sm col-md-4">
 																<label class="form-label">Expected CTC <span
-																	class="text-danger">*</span></label> <input type="time"
-																	id="frmTim" name="frmTim" title="To Time"
+																	class="text-danger">*</span></label> <input type="text"th:field="*{expectedCtc}"
 																	class="form-control ">
 															</div>
 
 
 															<div class="form-group sm col-md-4">
 																<label class="form-label">Reason for Leaving</label> <span
-																	class="text-danger">*</span> <input type="time"
-																	id="frmTim" name="frmTim" title="From Time"
-																	onkeyup="sync()" maxlength="50" pattern="^[a-zA-Z\s]*$"
+																	class="text-danger">*</span> <input type="text" th:field="*{reasonToLeave}"
 																	class="form-control ">
 															</div>
 														</div>
@@ -670,15 +650,15 @@ body {
 													<tr id="addr0">
 
 
-														<td><input type="text" class="form-control"></td>
+														<td><input type="text" class="form-control" name="applicantExpDetail[0].companyName"></td>
 
-														<td><input type="text" class="form-control"></td>
+														<td><input type="text" class="form-control" name="applicantExpDetail[0].lastSalary"></td>
 
 
 
-														<td><input type="text" class="form-control"></td>
+														<td><input type="text" class="form-control" name="applicantExpDetail[0].expInMonth"></td>
 
-														<td><input type="text" class="form-control"></td>
+														<td><input type="text" class="form-control" name="applicantExpDetail[0].workProfile"></td>
 
 														
 													</tr>
@@ -726,79 +706,40 @@ body {
 			</footer>
 		</div>
 	</div>
+	
+	<script>
+	function reqCodeByDate(){
+		var advtValue = document.getElementById("advtCode").value;
+		//document.getElementById("reqDate").value = dValue;
+		
+	    const xhr = new XMLHttpRequest();
+	    xhr.open('GET','getAdvtDate/'+advtValue,true);
+	    xhr.getResponseHeader('content-type','application/json');
+	    xhr.onload = function(){
+	        if(this.status===200){
+	            //let obj = JSON.parse(this.responseText);
+	            console.log(this.responseText);
+
+				
+				
+				//console.log(" depARTMENT CODE :"+	deptCode);
+				
+				$('#advtDate').val(this.responseText); 
+				
+				
+	        }
+	        else{
+	            console.error("some error occured");
+	        }
+		
+	    }
+	    xhr.send();
+	}
+	</script>
+	
+	
 	<script>
 		$(function() {
-
-			$("input[name='empDob']").daterangepicker({
-				singleDatePicker : true,
-				autoApply : true,
-				locale : {
-					format : 'DD/MM/YYYY'
-				},
-				showDropdowns : true
-			});
-
-			$("input[name='dateOfPosting']").daterangepicker({
-				singleDatePicker : true,
-				autoApply : true,
-				locale : {
-					format : 'DD/MM/YYYY'
-				},
-				showDropdowns : true
-			});
-			$("input[name=\"dateOfJoining\"]").daterangepicker({
-				singleDatePicker : true,
-				autoApply : true,
-				locale : {
-					format : 'DD/MM/YYYY'
-				},
-				showDropdowns : true
-			});
-			$("input[name='dateOfRetirement']").daterangepicker({
-				singleDatePicker : true,
-				autoApply : true,
-				locale : {
-					format : 'DD/MM/YYYY'
-				},
-				showDropdowns : true
-			});
-			$("input[name='batchYear']").datepicker({
-
-				autoApply : true,
-				format : "yyyy",
-				autoclose : true,
-				minViewMode : "years",
-				locale : {
-					format : 'YYYY'
-				},
-				showDropdowns : true
-			});
-
-			$("input[name=\"orderDate\"]").daterangepicker({
-				singleDatePicker : true,
-				autoApply : true,
-				locale : {
-					format : 'DD/MM/YYYY'
-				},
-				showDropdowns : true
-			});
-
-			$("input[name=\"dov\"]").daterangepicker({
-				singleDatePicker : true,
-				autoApply : true,
-				locale : {
-					format : 'DD/MM/YYYY'
-				},
-				showDropdowns : true
-			});
-			$("input[name=\"doi\"]").daterangepicker({
-				singleDatePicker : true,
-				autoApply : true,
-				locale : {
-					format : 'DD/MM/YYYY'
-				},
-				showDropdowns : true
-			});
 
 			// Datatables basic
 			$('#datatables-basic').DataTable({
@@ -862,13 +803,7 @@ body {
 						}
 						return true;
 					});
-			/* $validationForm.find(".btn-submit").on("click", function() {
-				if (!$validationForm.valid()) {
-					return;
-				}
-				
-				return false;
-			}); */
+			
 		});
 	</script>
 
@@ -888,62 +823,9 @@ body {
 	</script>
 
 
-	<script type='text/javascript'>
-		function preview_image(event) {
-			var reader = new FileReader();
-			reader.onload = function() {
-				var output = document.getElementById('output_image');
-				output.src = reader.result;
-			}
-			reader.readAsDataURL(event.target.files[0]);
-		}
-	</script>
+	
 
-	<script>
-		function sync() {
-			var n1 = document.getElementById('empName');
-			var n2 = document.getElementById('name');
-			n2.value = n1.value;
-		}
-	</script>
-	<script>
-		function syncAddress() {
-			var n1 = document.getElementById('address1');
-			var n2 = document.getElementById('addressArms');
-			n2.value = n1.value;
-		}
-	</script>
-	<script>
-		function myFunctionState() {
-			$('#stateCode').click(function() {
-				var name = $('#stateCode option:selected').text();
-				$('#state').val(name);
-			});
-		}
-	</script>
-
-	<script>
-		function myFunctionCity() {
-			$('#cityCode').click(function() {
-				var name = $('#cityCode option:selected').text();
-				$('#district').val(name);
-			});
-		}
-	</script>
-
-
-
-	<script>
-		$('#loading').show();
-		$.ajax({
-			// Other ajax parameters
-			success : function() {
-				// hiding the image here
-				debugger;
-				$('#loading').hide();
-			}
-		});
-	</script>
+	
 	
 	<script>
 	
@@ -953,10 +835,10 @@ body {
 		counter = i;
 		$("#add_row").click(function(){
 		$('#addr'+i).html(
-				"<td><input type='text' class='form-control' id='totalVacancy'name='employeRequisitionDetail["+i+"].totalvacancy'></td>"+
-				"<td><input type='text' class='form-control' id='salaryFrom'name='employeRequisitionDetail["+i+"].salaryFrom'></td>"+
-				"<td><input type='text' class='form-control' id='salaryTo'name='employeRequisitionDetail["+i+"].salaryTo'></td>"+
-				"<td><input type='text' class='form-control' id='remarks'name='employeRequisitionDetail["+i+"].remarks'></td>");
+				"<td><input type='text' class='form-control' name='applicantExpDetail["+i+"].companyName'></td>"+
+				"<td><input type='text' class='form-control' name='applicantExpDetail["+i+"].lastSalary'></td>"+
+				"<td><input type='text' class='form-control' name='applicantExpDetail["+i+"].expInMonth'></td>"+
+				"<td><input type='text' class='form-control' name='applicantExpDetail["+i+"].workProfile'></td>");
 
 		$('#example').append('<tr id="addr'+(i+1)+'"></tr>');
 		$('#_cr').val(i+1);
@@ -992,10 +874,11 @@ body {
 	</script>
 	
 	
+	
+	
 	<script type="text/javascript"
 		src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
-	<link rel="stylesheet"
-		href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css" />
 
 
 </body>

@@ -11,5 +11,6 @@ public interface ReqAdvertisementDetailService {
 	ReqAdvertisementDetail findReqAdvertisementById(String id);
 	public void updateReqAdvertisement(ReqAdvertisementDetail a);
 	public void removeReqAdvertisement(Long id);
+	
 
 }

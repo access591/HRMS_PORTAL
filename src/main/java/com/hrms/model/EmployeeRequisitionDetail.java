@@ -2,6 +2,7 @@ package com.hrms.model;
 
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -33,8 +34,8 @@ public class EmployeeRequisitionDetail implements Serializable{
     @JoinColumn(name = "REQ_CODE",updatable = false)
 	private EmployeeRequisition employeeRequisition;
 	
-	//@Column(name="REQ_DATE")
-	//private Date reqDate;
+	@Column(name="REQ_DATE")
+	private Date reqDate;
 	
 	@Column(name="DESIG_CODE")
 	private String desigCode;
@@ -250,6 +251,14 @@ public class EmployeeRequisitionDetail implements Serializable{
 
 	public void setSalaryTo(int salaryTo) {
 		this.salaryTo = salaryTo;
+	}
+
+	public Date getReqDate() {
+		return reqDate;
+	}
+
+	public void setReqDate(Date reqDate) {
+		this.reqDate = reqDate;
 	}
 	
 	

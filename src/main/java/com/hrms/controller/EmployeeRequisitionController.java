@@ -61,6 +61,9 @@ public class EmployeeRequisitionController {
                 new CustomDateEditor(dateFormatter, true));
         binder.registerCustomEditor(Date.class, "reqTill",
                 new CustomDateEditor(dateFormatter, true));
+//        binder.registerCustomEditor(Date.class, "reqDate",
+//                new CustomDateEditor(dateFormatter, true));
+       
     }
 	
 	
@@ -114,6 +117,7 @@ public class EmployeeRequisitionController {
 		for(int i=0;i<employeeRequisition.getEmployeRequisitionDetail().size();i++) {
 			
 			e = employeeRequisition.getEmployeRequisitionDetail().get(i);
+			e.setReqDate(employeeRequisition.getReqDate());
 			e.setEmployeeRequisition(employeeRequisition);
 			re.add(e);	
 			

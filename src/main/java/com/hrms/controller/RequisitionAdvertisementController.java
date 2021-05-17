@@ -93,18 +93,11 @@ public class RequisitionAdvertisementController {
 	public String saveAdvertisement(@ModelAttribute("reqAdvertisement")ReqAdvertisement reqAdvertisement,
 			HttpSession session,RedirectAttributes redirectAttributes) {
 		
-		System.out.println("save Advertisement module");
+		System.out.println("save Advertisement module==>>" + 
+							reqAdvertisement.getListReqAdvertisementDetail().get(0).getReqCode());;
 		List<ReqAdvertisementDetail> listReqAdvertisementDetail = new ArrayList<ReqAdvertisementDetail>();
 		ReqAdvertisementDetail reqAdvtDetail = new ReqAdvertisementDetail();
 		
-//		for(int i =0;i<reqAdvertisement.getListReqAdvertisementDetail().size();i++) {
-//			reqAdvtDetail = reqAdvertisement.getListReqAdvertisementDetail().get(i);
-//			reqAdvtDetail.setReqAdvertisement(reqAdvertisement);
-//			listReqAdvertisementDetail.add(reqAdvtDetail);
-//			
-//		}
-//		
-//		reqAdvertisement.getListReqAdvertisementDetail().addAll(listReqAdvertisementDetail);
 		
 		for(ReqAdvertisementDetail eDetail : reqAdvertisement.getListReqAdvertisementDetail()) {
 			eDetail.setReqAdvertisement(reqAdvertisement); 
