@@ -51,8 +51,8 @@ $(document).ready(function(){
     		
     		"<td><input  name='distanceKm"+i+"' type='text' placeholder='Distance In Km'  class='form-control input-md'></td>"+
     		"<td><input  name='ltaRate"+i+"' type='text' placeholder='Lta Rate'  class='form-control input-md'></td>"+
-    		"<td><input  name='actualAmount"+i+"' type='text' placeholder='Actual Amount'  class='form-control input-md'></td>"+
-    		"<td><input  name='claimedAmount"+i+"' type='text' placeholder='claimed Amount '  class='form-control input-md'></td>"+
+    		"<td><input  name='actualAmount"+i+"' type='text' placeholder='Actual Amount'  class=' txt form-control input-md'></td>"+
+    		"<td><input  name='claimedAmount"+i+"' type='text' placeholder='claimed Amount '  class='pas form-control input-md'></td>"+
     		
     		
     		"");
@@ -69,7 +69,7 @@ $(document).ready(function(){
 			 $("#addr"+(i-1)).html('');
 			 $('#_cr2').val(i - 1);
 			 i--;
-			 calculateSum(),calculateSumtotalPassing(),calculateSumtotalgovt()
+			 calculateSum(),calculateSumtotalPassing()
 			 }
 		 });
    
@@ -94,7 +94,7 @@ function calculateSum() {
     //.toFixed() method will roundoff the final sum to 2 decimal places
    var fds=sum;
    //$("#").html(sum.toFixed(2));
-   $("#sum").val(sum);
+   $("#totalClaim").val(sum);
     
 }
 
@@ -118,7 +118,7 @@ function calculateSumtotalPassing() {
     //.toFixed() method will roundoff the final sum to 2 decimal places
    var fds=sum;
    //$("#").html(sum.toFixed(2));
-   $("#totalPassing").val(sum);
+   $("#totalPas").val(sum);
     
 }
 
@@ -129,28 +129,6 @@ $("table").on("keyup", ".pas", function () {
 
 
 
-function calculateSumtotalgovt() {
-
-    var sum = 0;
-    //iterate through each textboxes and add the values
-    $(".govt").each(function () {
-
-        //add only if the value is number
-        if (!isNaN(this.value) && this.value.length != 0) {
-            sum += parseFloat(this.value);
-        }
-
-    });
-    //.toFixed() method will roundoff the final sum to 2 decimal places
-   var fds=sum;
-   //$("#").html(sum.toFixed(2));
-   $("#totalGovtExt").val(sum);
-    
-}
-
-$("table").on("keyup", ".govt", function () {
-	calculateSumtotalgovt();
-});
 
 
 
@@ -339,31 +317,32 @@ $("table").on("keyup", ".govt", function () {
 
 																	<td><input type="text" name='distanceKm0'placeholder='Distance In Km' class="form-control" /></td>
 																	<td><input type="text" name='ltaRate0'placeholder='Lta Rate' class="form-control" /></td>
-																	<td><input type="text" name='actualAmount0'placeholder='Actual Amount' class="form-control" /></td>
-																	<td><input type="text" name='claimedAmount0'placeholder='Claimed  Amount' class="form-control" /></td>
+																	<td><input type="text" name='actualAmount0'placeholder='Actual Amount' class="form-control txt" /></td>
+																	<td><input type="text" name='claimedAmount0'placeholder='Claimed  Amount' class="form-control pas" /></td>
 																</tr>
 																<tr id='addr1'></tr>
 
 															</tbody>
-															<tr>
-																<td colspan="4"></td>
-
+															
+															
+																<tr>
+				<td colspan="6"></td>
+				
 					<td>
-					<div class="form-group ">  
 					<label class="form-label">Total Amount</label>
-					<input type="text" id="sum" name='totalAmount' placeholder='Total Amount' class="form-control"/>
-					</div>
+					</td>
+					<td>
+					<input type="text" id="totalClaim" name='totalClaim' placeholder='Total Claim' class="form-control"/>
+					</td>
+					<td>
+					<input type="text" id="totalPas" name='totalPas' placeholder='Total Pas' class="form-control"/>
 					</td>
 					
+					<td>
 					
+					</td>
 					
-					
-																
-																
-																
-																<td></td>
-
-															</tr>
+					</tr>
 
 														</table>
 								
@@ -436,15 +415,9 @@ $("table").on("keyup", ".govt", function () {
 	            let obj = JSON.parse(this.responseText);
 	            console.log(obj);
 	            $('#empName').val(obj.empName);
-	            
 	            $('#deptName').val(obj.deptName);
 	            $('#desgName').val(obj.desgName);
 	            $('#empPayCode').val(obj.empPayCode);
-	            
-	            
-	            
-				
-				
 	        }
 	        else{
 	            console.error("some error occured");
@@ -454,7 +427,8 @@ $("table").on("keyup", ".govt", function () {
 	    xhr.send();
 	}
 
-	
+
+
 	
 	</script>
 	
