@@ -1,0 +1,13 @@
+package com.hrms.service;
+
+import java.util.List;
+
+import com.hrms.model.InterviewMaster;
+
+public interface InterviewMasterService {
+	
+	public void addInterviewMaster(InterviewMaster interviewMaster );
+	public List<InterviewMaster> getAllInterviewMaster();
+	public InterviewMaster getApplicantInfoByApplicantCode();
+
+}
