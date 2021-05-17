@@ -355,6 +355,51 @@ $("table").on("keyup", ".pas", function () {
 					<button type="reset"class="btn btn-primary" value="Reset">Reset</button>
 </form>
 				</div>
+				<div class="col-12">
+							<div class="card">
+								<div class="card-header">
+								</div>
+								<div class="card-body">
+									<table id="datatables-buttons" class="table table-striped display" style="width:100%"aria-describedby="example">
+										<thead>
+											<tr >
+												<th scope="col">Local Conveyance id </th>
+												<th scope="col">Employee Name</th>
+												<th scope="col">Department</th>
+												<th scope="col">Designation</th>
+												<!-- <th scope="col">Tour Pan Date </th> -->
+												
+												<th scope="col">Action </th>
+											</tr >
+											
+
+
+										</thead>
+										<tbody>
+										<tr th:each = "listOfloc : ${listOfLoc}">
+										<td th:text="${listOfloc.localConvId}" ></td>
+										<td th:text="${listOfloc.empCode.empName}"></td>
+										<td  th:text="${listOfloc.empCode.departmentCode}"></td>
+										<td  th:text="${listOfloc.empCode.designationCode}"></td>
+									<!-- 	<td  th:text="${tourPlan.tourPlanDate}"></td> -->
+										  <td>
+										  <a th:href="@{/editTourPlan/{id}/(id=${listOfloc.localConvId})}"><em class="fa fa-edit"></em></a>
+										  
+										     <a th:href="@{/deleteTourPlan/{id}/(id=${listOfloc.localConvId})}"onclick="return confirm('Are you sure?')"><em class="fa fa-times"></em></a>
+									
+									
+										</td>  
+									
+										</tr>
+									
+									
+										</tbody>
+									
+									</table>
+								</div>
+								
+							</div>
+						</div>
 		</main>
 		<footer class="footer">
 		<div th:replace="/fragments/footer :: div"></div>

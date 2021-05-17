@@ -1,6 +1,8 @@
 package com.hrms.controller;
 
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -49,12 +51,18 @@ public class LocalConvyenceController {
 	
 	@GetMapping("/localConvyence")
 	public String localConvyence(Model model,HttpSession session) {
-
+		LocalConvyenceUtil u=new LocalConvyenceUtil();
 		  List<Employee> listEmployee = employeeService.getAllEmployees();
 		  model.addAttribute("listEmployee", listEmployee);
 		
-	 
-		String userCode= (String)session.getAttribute("username");
+		  List<LocalConvyence> listOfLoc = localConvyenceService.getAlllocalConvyence();
+		  for (int i = 0; i < listOfLoc.size(); i++) {
+			    System.out.println("List Record>>>>>>>>>>>>>>"+listOfLoc.get(i).getLocalConvId());
+			}
+		  
+		  model.addAttribute("listOfLoc", listOfLoc);
+		  
+		  String userCode= (String)session.getAttribute("username");
 		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
 		if (modules != null) {
 			model.addAttribute("modules", modules);
@@ -100,7 +108,7 @@ public class LocalConvyenceController {
 		localConvyenceService.addlocalConvyence(lc);
 		
 		String localCVid=lc.getLocalConvId();
-		//String tdate=u.getTourPlanDate();
+		Date lcDate=localCon.getLocalConvDate();
 		 int flag = 0;
 	   		int counter = 1;
 			try {
@@ -135,13 +143,15 @@ public class LocalConvyenceController {
 						ld.setPurposeOfVist("" + i);
 					}
 					
-					/*
-					 * if(request.getParameter("fromDate" + i) != null) {
-					 * ld.setFromDate(request.getParameter("fromDate" + i)); } else {
-					 * ld.setFromDate("" + i); }
-					 */
 					
-					
+					  if(request.getParameter("locDate" + i) != null) {
+						  
+						  String sDate1=request.getParameter("locDate" + i);
+						  Date date1=new SimpleDateFormat("yyyy-MM-dd").parse(sDate1);  
+
+						  ld.setLocDate(date1);
+					  } 
+
 					if(request.getParameter("modeOfTravel" + i) != null) {
 						ld.setModeOfTravel(request.getParameter("modeOfTravel" + i));
 					} else {
@@ -155,9 +165,33 @@ public class LocalConvyenceController {
 						ld.setDistanceKm("" + i);
 					}
 					
-				
+					if(request.getParameter("ltaRate" + i) != null) {
+						ld.setDistanceKm(request.getParameter("ltaRate" + i));
+					} else {
+						ld.setDistanceKm("" + i);
+					}
 					
+					if(request.getParameter("actualAmount" + i) != null) {
+						ld.setDistanceKm(request.getParameter("actualAmount" + i));
+					} else {
+						ld.setDistanceKm("" + i);
+					}
+					
+					if(request.getParameter("claimedAmount" + i) != null) {
+						ld.setDistanceKm(request.getParameter("claimedAmount" + i));
+					} else {
+						ld.setDistanceKm("" + i);
+					}
+					
+					
+					
+			
+				lc.setLocalConvId(localCVid);
+				lc.setLocalConvDate(lcDate);
 				
+				ld.setLocalConvId(lc);
+				ld.setEmpCode(emp);	
+				ld.setLocalConvDate(lc);
 					/*
 					 * tourPlan.setTourPlanId(tid); tourPlan.setTourPlanDate(tdate);
 					 * tourPlanDetail.setTourPlanId(tourPlan);
