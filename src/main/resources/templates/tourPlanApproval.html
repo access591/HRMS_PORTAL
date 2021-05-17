@@ -89,22 +89,20 @@ body {
 								<!--  card body start  -->
 								<div class="card-body">
 
-									<div class="row">
+									<!-- <div class="row">
 										<div class="col-12 col-lg-6">
 											<div class="form-group">
 												<label class="form-label"> Employee Code  </label> <label
-													style="color: red">*</label> <select id="deptName"
-													class="form-control" name="deptName"
+													style="color: red">*</label> <select id="deptName"class="form-control" name="deptName"
 													onchange="getAllLeaveRequestBydepartment()">
 													<option value=" ">Select</option>
-													<option th:each="department:${listDepartment}"
-														th:text="${department.deptName}"
+													<option th:each="department:${ListTourPlan}"th:text="${department.deptName}"
 														th:value="${department.departmentCode}"></option>
 												</select>
 											</div>
 										</div>
 									</div>
-
+ -->
 
 									<!-- from  -->
 									<form>
@@ -128,11 +126,11 @@ body {
 												</thead>
 												
 													<tbody>
-														<tr>
-														<td scope="col">Tour Plan Id</td>
-														<td scope="col">Tour Plan Date</td>
-														<td scope="col">Employee Name</td>
-														<td Scope="col">Department Name</td>
+														<tr th:each="tour:${ListTourPlan}">
+														<td th:text="${tour.tourPlanId}">Tour Plan Id</td>
+														<td th:text="${tour.tourPlanDate}">Tour Plan Date</td>
+														<td th:text="${tour.empCode.empName}">Employee Name</td>
+														<td th:text="${tour.departmentCode.deptName}">Department Name</td>
 														
 														<td>
 
@@ -142,13 +140,13 @@ body {
 															Approved Action 
 														</button>
 														<ul class="dropdown-menu">
-															<li><a class="dropdown-item"href="">Approved</a></li>
+															<li><a class="dropdown-item"th:href="@{/approvedTourPlan/{id}/(id=${tour.tourPlanId})}">Approved</a></li>
 															<li><a  class="dropdown-item active" href="#"> Not Approved </a></li>
 														</ul>
 													</div> 
                            							  </td>
                             <td>
-                               <a href=""class="btn btn-success"><em class="fa fa-eye"></em></a>
+                               <a th:href="@{/viewTourPlan/{id}/(id=${tour.tourPlanId})}"class="btn btn-success"><em class="fa fa-eye"></em></a>
                             </td>
 													</tr>
 
@@ -336,29 +334,6 @@ body {
 		
 		
 	</script>
-	<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-	<script
-		src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-	<script
-		src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
-	<script
-		src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>
-	<script
-		src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.bootstrap4.min.js"></script>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
-	<script
-		src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js"></script>
-	<script
-		src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.print.min.js"></script>
-	<script
-		src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.colVis.min.js"></script>
-
-
-
+	
 </body>
 </html>
