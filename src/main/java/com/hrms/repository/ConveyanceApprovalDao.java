@@ -9,4 +9,6 @@ public interface ConveyanceApprovalDao extends GenericDao<LocalConvyence>{
 
 	List<LocalConvyence> getAllLocalConveyance();
 
+	void approvedByLocalConvyenceId(String id);
+
 }

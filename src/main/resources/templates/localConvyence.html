@@ -271,78 +271,78 @@ $("table").on("keyup", ".pas", function () {
 								<a id="add_row" class="fa fa-plus" aria-hidden="true"style="font-size:28px;color:#001080"></a>&nbsp;&nbsp;&nbsp;
 								<a id='delete_row'class="fa fa-trash" style="font-size:28px;color:#399490fc"aria-hidden="true"></a>	
 								</div>
-								<table id="tab1" class="table table-striped display"
-															style="width: 100%" aria-describedby="datatables-buttons">
-															<thead>
-																<tr>
-																	<th>Date</th>
-																	<th>Start Place.</th>
-																	<th>Visit Place</th>
-                                                                    <th>Purpose Of Visit</th>
-																	<th>Mode Of Travel</th>
+										<table id="tab1" class="table table-striped display"
+											style="width: 100%" aria-describedby="datatables-buttons">
+											<thead>
+												<tr>
+													<th>Date</th>
+													<th>Start Place.</th>
+													<th>Visit Place</th>
+													<th>Purpose Of Visit</th>
+													<th>Mode Of Travel</th>
 
-																	<th>Distance In Km</th>
-																	<th>Lta Rate</th>
-																	<th>Actual Amount </th>
-																   <th>Claimed  Amount </th>
-																	
-																	
-																	
+													<th>Distance In Km</th>
+													<th>Lta Rate</th>
+													<th>Actual Amount</th>
+													<th>Claimed Amount</th>
 
 
-																</tr>
-															</thead>
-															<tbody>
-																<tr id='addr0'>
-
-																	<td><input type="Date" name='locDate0'placeholder='Date' class="form-control" value="" /></td>
-																	<td><input type="text" name='startPlace0'placeholder='Start Place' class="form-control" /></td>
-																	<td><input type="text" name='vistPlace0'placeholder='Start Place' class="form-control" /></td>
-																	<td><input type="text" name='purposeOfVist0'placeholder='Purpose Of Vist' class="form-control" /></td>
-																	
-																	<td><select class="form-control required"
-																		name="modeOfTravel0" id="modeOfTravel0">
-																			<option value="">Select Type</option>
-																			<option th:Value="taxi">Taxi</option>
-																			<option th:Value="car">Car</option>
-																			<option th:Value="bus">Bus</option>
-																			<option th:Value="train">Train</option>
-																	</select></td>
 
 
-																	<td><input type="text" name='distanceKm0'placeholder='Distance In Km' class="form-control" /></td>
-																	<td><input type="text" name='ltaRate0'placeholder='Lta Rate' class="form-control" /></td>
-																	<td><input type="text" name='actualAmount0'placeholder='Actual Amount' class="form-control txt" /></td>
-																	<td><input type="text" name='claimedAmount0'placeholder='Claimed  Amount' class="form-control pas" /></td>
-																</tr>
-																<tr id='addr1'></tr>
 
-															</tbody>
-															
-															
-																<tr>
-				<td colspan="6"></td>
-				
-					<td>
-					<label class="form-label">Total Amount</label>
-					</td>
-					<td>
-					<input type="text" id="totalClaim" name='totalClaim' placeholder='Total Claim' class="form-control"/>
-					</td>
-					<td>
-					<input type="text" id="totalPas" name='totalPas' placeholder='Total Pas' class="form-control"/>
-					</td>
-					
-					<td>
-					
-					</td>
-					
-					</tr>
+												</tr>
+											</thead>
+											<tbody>
+												<tr id='addr0'>
 
-														</table>
-								
-								
-								</div>
+													<td><input type="Date" name='locDate0'
+														placeholder='Date' class="form-control" value="" /></td>
+													<td><input type="text" name='startPlace0'
+														placeholder='Start Place' class="form-control" /></td>
+													<td><input type="text" name='vistPlace0'
+														placeholder='Start Place' class="form-control" /></td>
+													<td><input type="text" name='purposeOfVist0'
+														placeholder='Purpose Of Vist' class="form-control" /></td>
+
+													<td><select class="form-control required"
+														name="modeOfTravel0" id="modeOfTravel0">
+															<option value="">Select Type</option>
+															<option th:Value="taxi">Taxi</option>
+															<option th:Value="car">Car</option>
+															<option th:Value="bus">Bus</option>
+															<option th:Value="train">Train</option>
+													</select></td>
+
+
+													<td><input type="text" name='distanceKm0'
+														placeholder='Distance In Km' class="form-control" /></td>
+													<td><input type="text" name='ltaRate0'
+														placeholder='Lta Rate' class="form-control" /></td>
+													<td><input type="text" name='actualAmount0'
+														placeholder='Actual Amount' class="form-control txt" /></td>
+													<td><input type="text" name='claimedAmount0'
+														placeholder='Claimed  Amount' class="form-control pas" /></td>
+												</tr>
+												<tr id='addr1'></tr>
+
+											</tbody>
+
+
+											<tr>
+												<td colspan="6"></td>
+
+												<td><label class="form-label">Total Amount</label></td>
+												<td><input type="text" id="totalClaim"name='totalClaim' placeholder='Total Claim'class="form-control" /></td>
+												<td><input type="text" id="totalPas" name='totalPas'placeholder='Total Pas' class="form-control" /></td>
+
+												<td></td>
+
+											</tr>
+
+										</table>
+
+
+									</div>
 								
 								
 	                     
@@ -354,6 +354,7 @@ $("table").on("keyup", ".pas", function () {
 	                     &nbsp;
 					<button type="reset"class="btn btn-primary" value="Reset">Reset</button>
 </form>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	<div class="col-12">
 							<div class="card">
 								<div class="card-header">
