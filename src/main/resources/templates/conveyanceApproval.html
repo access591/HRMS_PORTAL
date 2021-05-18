@@ -66,7 +66,7 @@ body {
 												<th scope="col"> Local Conveyance Id</th>
 												<th scope="col">Employee Name </th>
 											    <th scope="col">Employee Pay Code </th>
-												<th scope="col">Father Husband Name </th>
+											
 												<th scope="col">Designation Of The Employee</th>
 												<th scope="col">Department Of Employee </th>
 												<th scope="col">Amount Passed </th>
@@ -78,18 +78,18 @@ body {
 
 										</thead>
 										<tbody>
-										<tr>
+										<tr th:each="lc:${listLocalConveyance}">
 										
 										
+					
+										<td th:text="${lc.localConvId}"></td>
+										<td  th:text="${lc.localConvId}"></td>
+										<td  th:text="${lc.localConvId}"></td>
 										
-										<td>Local Conveyance Id</td>
-										<td>Employee Name</td>
-										<td>Employee Pay Code</td>
-										<td>Father Husband Name</td>
 										
-										<td>Designation Of The Employee</td>
-										<td>Department Of Employee </td>
-										<td scope="col">Amount Passed </td>
+										<td th:text="${lc.localConvId}" ></td>
+										<td th:text="${lc.localConvId}"></td>
+										<td th:text="${lc.localConvId}"> </td>
 										<td>
 
 													<div class="dropdown">
@@ -98,7 +98,7 @@ body {
 															Approved Action 
 														</button>
 														<ul class="dropdown-menu">
-															<li><a class="dropdown-item"href="">Approved</a></li>
+															<li><a class="dropdown-item"th:href="@{/approvedLocalConv/{id}/(id=${lc.localConvId})}">Approved</a></li>
 															<li><a  class="dropdown-item active" href="#"> Not Approved </a></li>
 														</ul>
 													</div> 

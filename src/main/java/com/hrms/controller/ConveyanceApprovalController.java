@@ -9,13 +9,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import com.hrms.model.LocalConvyence;
 import com.hrms.model.MenuModule;
+import com.hrms.service.ConveyanceApprovalService;
 import com.hrms.service.ModuleService;
 
 @Controller
 public class ConveyanceApprovalController {
 	@Autowired
 	private ModuleService moduleService;
+	@Autowired
+	private ConveyanceApprovalService conveyanceApprovalService;
 	@GetMapping("/conveyanceApproval")
 	public String conveyanceApproval(Model model, HttpSession session) {
 
@@ -25,6 +29,12 @@ public class ConveyanceApprovalController {
 		if (modules != null) {
 			model.addAttribute("modules", modules);
 		}
+		
+		  List<LocalConvyence>localConvyenceList=conveyanceApprovalService.getAllLocalConveyance();
+	
+		  
+		  model.addAttribute("listLocalConveyance", localConvyenceList);
+		 
 		session.setAttribute("username", session.getAttribute("username"));
 		 return "conveyanceApproval";
 	}
