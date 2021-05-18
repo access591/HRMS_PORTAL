@@ -13,6 +13,8 @@ public interface LocalConvyenceService {
 	List<LocalConvyence> getAlllocalConvyence();
 
 	LocalConvyence findByIdLocalConvyence(String id);
+
+	void updateLocalConvyence(LocalConvyence localConvyence);
 	
 
 }

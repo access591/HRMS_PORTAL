@@ -27,6 +27,7 @@ import com.hrms.model.LocalConvyence;
 import com.hrms.model.LocalConvyenceDetail;
 import com.hrms.model.LocalConvyenceUtil;
 import com.hrms.model.MenuModule;
+
 import com.hrms.service.DepartmentService;
 import com.hrms.service.DesignationService;
 import com.hrms.service.EmployeeService;
@@ -259,6 +260,31 @@ public class LocalConvyenceController {
 
 	   
 	    return "editLocalConvyence";
+	}
+	
+	
+	@PostMapping("/updateLocalConvyence")
+	  public String updateLocalConvyence(@ModelAttribute("localConvyenceEdit") LocalConvyence localConvyence, Model model) throws ParseException {
+		
+		
+		  this.localConvyenceService.updateLocalConvyence(localConvyence);
+		  
+		  return "redirect:/localConvyence";
+	  }
+	
+	
+	@GetMapping(value = { "/deleteLocalConveyance/{id}" })
+	public String deleteLocalConveyance(@PathVariable("id") String id, Model model,HttpSession session) {
+		try {
+			
+			localConvyenceService.removelocalConvyence(id);
+			session.setAttribute("username", session.getAttribute("username"));
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return "redirect:/localConvyence";
 	}
 	
 }

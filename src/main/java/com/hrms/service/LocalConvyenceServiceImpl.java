@@ -54,4 +54,10 @@ SessionFactory sessionfactory;
 		return this.localConvyenceDao.findById(id);
 	}
 
+	@Override
+	public void updateLocalConvyence(LocalConvyence localConvyence) {
+
+		this.localConvyenceDao.saveOrUpdate(localConvyence);
+	}
+
 }
