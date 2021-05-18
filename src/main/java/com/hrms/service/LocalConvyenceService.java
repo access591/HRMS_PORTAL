@@ -11,6 +11,8 @@ public interface LocalConvyenceService {
 	void removelocalConvyence(String id);
 
 	List<LocalConvyence> getAlllocalConvyence();
+
+	LocalConvyence findByIdLocalConvyence(String id);
 	
 
 }
