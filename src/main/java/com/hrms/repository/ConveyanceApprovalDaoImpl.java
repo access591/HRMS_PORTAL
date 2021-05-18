@@ -5,6 +5,7 @@ import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -31,6 +32,19 @@ public class ConveyanceApprovalDaoImpl extends AbstractGenericDao<LocalConvyence
 			e.printStackTrace();
 		}
 		return null;
+	}
+	@Override
+	public void approvedByLocalConvyenceId(String id) {
+		Session session = this.sessionFactory.openSession();
+		Query query = session.createQuery("UPDATE LocalConvyence e set e.approvalStatus =:approvalStatus WHERE e.localConvId= :id" );
+		query.setParameter("approvalStatus", "Y");
+		query.setParameter("id", id);
+		Transaction tx = session.beginTransaction();
+		int result = query.executeUpdate();
+		tx.commit();
+		session.close();
+		System.out.println("result : "+ result);
+		
 	}
 
 }

@@ -17,5 +17,11 @@ ConveyanceApprovalDao conveyanceApprovalDao;
 		List<LocalConvyence>listLocalConveyance=conveyanceApprovalDao.getAllLocalConveyance();
 		return listLocalConveyance;
 	}
+	
+	@Override
+	public void approvedByLocalConvyenceId(String id) {
+		this.conveyanceApprovalDao.approvedByLocalConvyenceId(id);
+		
+	}
 
 }

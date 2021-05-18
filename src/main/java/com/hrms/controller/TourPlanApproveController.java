@@ -61,7 +61,7 @@ public class TourPlanApproveController {
 	@GetMapping("approvedTourPlan/{id}")
 	public String approvedTourPlan(@PathVariable("id") String id) {
 		tourPlanApprovalService.approvedByTourPlanId(id);
-		return "redirect:/mediclaimApproval";
+		return "redirect:/tourPlanApproval";
 	}
 	
 	
