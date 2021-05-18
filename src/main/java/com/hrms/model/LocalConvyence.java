@@ -27,10 +27,10 @@ public class LocalConvyence implements Serializable{
 	@Column(name ="LOCAL_CONV_DT")
 	private Date localConvDate;
 	
-	@Column(name ="TOTAL_CLAIM")
+	@Column(name ="TOTAL_CLAIM",updatable = false)
 	private int totalClaim;
 	
-	@Column(name ="TOTAL_PASS")
+	@Column(name ="TOTAL_PASS",updatable = false)
 	private int totalPas;
 	
 	@ManyToOne
