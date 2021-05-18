@@ -31,7 +31,7 @@ public class MedicalReimbursementDetail implements Serializable {
 	@Column(name = "CASHMEMO_NO")
 	private String caseMemoNo;
 	
-	@Column(name = "CASHMEMO_DATE")
+	@Column(name = "CASHMEMO_DATE", updatable = false)
 	private String caseMemoDate;
 	
 	@Column(name = "AMOUNT")
