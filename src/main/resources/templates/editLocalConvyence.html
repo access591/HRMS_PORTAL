@@ -265,12 +265,7 @@ $("table").on("keyup", ".pas", function () {
 								</div>
 								<div class="card-body">
 								<input id="_cr" name="_cr" type="hidden"value="1">
-								<div class="col-sm-12" align="right">
-							
 								
-								<a id="add_row" class="fa fa-plus" aria-hidden="true"style="font-size:28px;color:#001080"></a>&nbsp;&nbsp;&nbsp;
-								<a id='delete_row'class="fa fa-trash" style="font-size:28px;color:#399490fc"aria-hidden="true"></a>	
-								</div>
 								<table id="tab1" class="table table-striped display"
 															style="width: 100%" aria-describedby="datatables-buttons">
 															<thead>
@@ -296,12 +291,12 @@ $("table").on("keyup", ".pas", function () {
 															<tbody>
 																<tr id='addr0'th:each="row, stat :${localConvyenceEdit.localConvyenceDetail}">
  																	 <td><input type="text" name='id0'placeholder='Start Place' class="form-control" th:field="*{localConvyenceDetail[__${stat.index}__].id}" readonly /></td>
-																	<td><input type="Date" name='locDate0'placeholder='Date' class="form-control" th:value="*{localConvyenceDetail[__${stat.index}__].locDate}" /></td>
+																	<td><input type="text" name='locDate0'placeholder='Date' class="assigned_date form-control"th:field="*{localConvyenceDetail[__${stat.index}__].locDate}" /></td>
 																	<td><input type="text" name='startPlace0'placeholder='Start Place' class="form-control" th:field="*{localConvyenceDetail[__${stat.index}__].startPlace}"/></td>
 																	<td><input type="text" name='vistPlace0'placeholder='visit Place' class="form-control" th:field="*{localConvyenceDetail[__${stat.index}__].vistPlace}"/></td>
 																	<td><input type="text" name='purposeOfVist0'placeholder='Purpose Of Vist' class="form-control"th:field="*{localConvyenceDetail[__${stat.index}__].purposeOfVist}" /></td>
 																	
-																	<td><select class="form-control required"
+																	<td><select class="form-control"
 																		name="modeOfTravel0" id="modeOfTravel0"th:field="*{localConvyenceDetail[__${stat.index}__].modeOfTravel}">
 																			<option value="">Select Type</option>
 																			<option th:Value="taxi">Taxi</option>
@@ -360,11 +355,11 @@ $("table").on("keyup", ".pas", function () {
 			
 			
 		
-			$("input[name='Date']").daterangepicker({
+			$(".assigned_date").daterangepicker({
 				singleDatePicker: true,
 			    autoApply: true,
 				locale: {
-		            format: 'YYYY/MM/DD'
+					 format: 'YYYY/MM/DD'
 		        },
 				showDropdowns: true
 			});
