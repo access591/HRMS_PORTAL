@@ -65,8 +65,7 @@ body {
 											<tr >
 												<th scope="col"> Local Conveyance Id</th>
 												<th scope="col">Employee Name </th>
-											    <th scope="col">Employee Pay Code </th>
-											
+
 												<th scope="col">Designation Of The Employee</th>
 												<th scope="col">Department Of Employee </th>
 												<th scope="col">Amount Passed </th>
@@ -79,17 +78,17 @@ body {
 										</thead>
 										<tbody>
 										<tr th:each="lc:${listLocalConveyance}">
-										
+										<td th:text="${lc.localConvId}" ></td>
 										
 					
-										<td th:text="${lc.localConvId}"></td>
-										<td  th:text="${lc.localConvId}"></td>
-										<td  th:text="${lc.localConvId}"></td>
+										<td th:text="${lc.empName}"></td>
+										<td  th:text="${lc.deptName}"></td>
+										<td  th:text="${lc.desgName}"></td>
 										
 										
-										<td th:text="${lc.localConvId}" ></td>
-										<td th:text="${lc.localConvId}"></td>
-										<td th:text="${lc.localConvId}"> </td>
+										
+										
+										<td th:text="${lc.totalPas}"> </td>
 										<td>
 
 													<div class="dropdown">
@@ -104,7 +103,7 @@ body {
 													</div> 
                            							  </td>
                             <td>
-                               <a href=""class="btn btn-success"><em class="fa fa-eye"></em></a>
+                               <a th:href="@{/viewLocalConv/{id}/(id=${lc.localConvId})}"class="btn btn-success"><em class="fa fa-eye"></em></a>
                             </td>
 										</tr>
 										
