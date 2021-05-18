@@ -7,7 +7,7 @@ public class TourPlanUtil {
 	
 	private String tourPlanId;
 	
-	private String tourPlanDate;
+	private Date tourPlanDate;
 	
 	private String empCode;
 	
@@ -46,11 +46,11 @@ public class TourPlanUtil {
 		this.tourPlanId = tourPlanId;
 	}
 
-	public String getTourPlanDate() {
+	public Date getTourPlanDate() {
 		return tourPlanDate;
 	}
 
-	public void setTourPlanDate(String tourPlanDate) {
+	public void setTourPlanDate(Date tourPlanDate) {
 		this.tourPlanDate = tourPlanDate;
 	}
 

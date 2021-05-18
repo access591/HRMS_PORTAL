@@ -35,7 +35,7 @@ public class TourPlan implements Serializable {
 	private String tourPlanId;
 	
 	@Column(name = "TOUR_PLAN_DT")
-	private String tourPlanDate;
+	private Date tourPlanDate;
 	 @OneToMany(mappedBy="tourPlanId",cascade = CascadeType.ALL,
 		        orphanRemoval = true)
 	List<TourPlanDetails> tourPlanDetail;
@@ -84,11 +84,11 @@ public class TourPlan implements Serializable {
 		this.tourPlanId = tourPlanId;
 	}
 
-	public String getTourPlanDate() {
+	public Date getTourPlanDate() {
 		return tourPlanDate;
 	}
 
-	public void setTourPlanDate(String tourPlanDate) {
+	public void setTourPlanDate(Date tourPlanDate) {
 		this.tourPlanDate = tourPlanDate;
 	}
 
@@ -199,7 +199,7 @@ public class TourPlan implements Serializable {
 		this.tourPlanDetail = tourPlanDetail;
 	}
 
-	public TourPlan(String tourPlanId, String tourPlanDate, List<TourPlanDetails> tourPlanDetail,
+	public TourPlan(String tourPlanId, Date tourPlanDate, List<TourPlanDetails> tourPlanDetail,
 			Employee empCode, Department departmentCode, Designation desgCode, String tourStartDate, String mobNumber,
 			String tourEndDate, String approvedBy, String approvalStatus, Date approvalDate, String insBy,
 			Date insDate) {

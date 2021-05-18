@@ -96,9 +96,12 @@ public class TourPlanController {
 		tourPlan.setDesgCode(des);
        
 	
-         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(u.getTourPlanDate()); 
+		/*
+		 * SimpleDateFormat simpleDateFormat = new
+		 * SimpleDateFormat(u.getTourPlanDate());
+		 */
 		
-		String date = simpleDateFormat.format(new Date());
+		//String date = simpleDateFormat.format(new Date());
 		
 		tourPlan.setTourPlanDate(u.getTourPlanDate());
 		tourPlan.setMobNumber(u.getMobNumber());
@@ -111,7 +114,7 @@ public class TourPlanController {
 
 		tourPlanService.addTourPlan(tourPlan);
 		String tid=tourPlan.getTourPlanId();
-		String tdate=u.getTourPlanDate();
+		Date tdate=u.getTourPlanDate();
 		 int flag = 0;
 	   		int counter = 1;
 			try {
