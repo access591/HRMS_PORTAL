@@ -171,7 +171,7 @@ $("table").on("keyup", ".pas", function () {
 						
 					
 					</div>
-					<form id="validation-form" action="#"  th:action="@{/saveLocalConvyence}" th:object="${localConvyence}" method="post">
+					<form id="validation-form" action="#"  th:action="@{/updateLocalConvyence}" th:object="${localConvyenceEdit}" method="post">
 					<div class="row">
 					
 							<div class="col-12">
@@ -189,14 +189,14 @@ $("table").on("keyup", ".pas", function () {
 												
 													<label class="form-label">Local Conveyance id <span
 														class="text-danger">*</span>
-													</label> <input name="nn" type="text" id="nn"
+													</label> <input name="localConvId" type="text" id="localConvId"th:field="*{localConvId}"
 														class="form-control"readonly>
 												</div>
 												
 												<div class="form-group sm col-md-4">
 													<label class="form-label">Employee Code</label>
 												<label style="color: red">*</label>
-												<select class="form-control select2" name="empCode" id="empCode" onchange="myFunctionEmpCode()" required aria-required="true">
+												<select class="form-control select2" name="empCode" id="empCode" onchange="myFunctionEmpCode()" th:field="*{empCode.empCode}"required aria-required="true">
 												 <option value="">Select Employee</option>
 												<option th:each="e :${listEmployee}"th:value="${e.getEmpCode()}" th:text="${e.getEmpName()}"></option>
 											     	</select>
@@ -204,7 +204,7 @@ $("table").on("keyup", ".pas", function () {
 												</div>
 											<div class="form-group sm col-md-4">
 											 <label class="form-label">Employee Name  </label>
-							                 <input  type="text"id="empName"name="empName" title="Name" class="form-control" readonly>
+							                 <input  type="text"id="empName"name="empName" title="Name" class="form-control" th:field="*{empCode.empName}"readonly>
 										     </div>
 										     	
 											
@@ -212,7 +212,7 @@ $("table").on("keyup", ".pas", function () {
 												
 								</div>
 								
-									<div class="form-row">
+									<!-- <div class="form-row">
 									
 									
 									<div class="form-group sm col-md-4">
@@ -221,12 +221,12 @@ $("table").on("keyup", ".pas", function () {
 							                 <input  type="text"id="empPayCode"name="empPayCode" title="empPayCode" class="form-control"readonly>
 										     </div>
 										     
-										     	<!-- <div class="form-group sm col-md-4">
+										     	<div class="form-group sm col-md-4">
 											       <label class="form-label">Father /Husband 
 											       <span class="text-danger">*</span></label>
 							                 <input  type="text"id="fatHus"name="fatHus" title="Name"maxlength="50" pattern="^[a-zA-Z\s]*$" class="form-control required">
 										     </div>
-										      -->
+										     
 										     <div class="form-group sm col-md-4">
 												<label class="form-label">Department</label> 
 												
@@ -240,7 +240,7 @@ $("table").on("keyup", ".pas", function () {
 														<input Type=text class="form-control required" name="desgName" id="desgName"readonly>
 										
 												</div>
-												</div>
+												</div> -->
 												<div class="form-row">
 												
 												
@@ -275,6 +275,7 @@ $("table").on("keyup", ".pas", function () {
 															style="width: 100%" aria-describedby="datatables-buttons">
 															<thead>
 																<tr>
+																<th>id</th>
 																	<th>Date</th>
 																	<th>Start Place.</th>
 																	<th>Visit Place</th>
@@ -293,15 +294,15 @@ $("table").on("keyup", ".pas", function () {
 																</tr>
 															</thead>
 															<tbody>
-																<tr id='addr0'>
-
-																	<td><input type="Date" name='locDate0'placeholder='Date' class="form-control" value="" /></td>
-																	<td><input type="text" name='startPlace0'placeholder='Start Place' class="form-control" /></td>
-																	<td><input type="text" name='vistPlace0'placeholder='Start Place' class="form-control" /></td>
-																	<td><input type="text" name='purposeOfVist0'placeholder='Purpose Of Vist' class="form-control" /></td>
+																<tr id='addr0'th:each="row, stat :${localConvyenceEdit.localConvyenceDetail}">
+ 																	 <td><input type="text" name='id0'placeholder='Start Place' class="form-control" th:field="*{localConvyenceDetail[__${stat.index}__].id}" readonly /></td>
+																	<td><input type="Date" name='locDate0'placeholder='Date' value=""min="1997-01-01" max="2030-12-31" class="form-control" th:value="*{localConvyenceDetail[__${stat.index}__].locDate}" /></td>
+																	<td><input type="text" name='startPlace0'placeholder='Start Place' class="form-control" th:field="*{localConvyenceDetail[__${stat.index}__].startPlace}"/></td>
+																	<td><input type="text" name='vistPlace0'placeholder='visit Place' class="form-control" th:field="*{localConvyenceDetail[__${stat.index}__].vistPlace}"/></td>
+																	<td><input type="text" name='purposeOfVist0'placeholder='Purpose Of Vist' class="form-control"th:field="*{localConvyenceDetail[__${stat.index}__].purposeOfVist}" /></td>
 																	
 																	<td><select class="form-control required"
-																		name="modeOfTravel0" id="modeOfTravel0">
+																		name="modeOfTravel0" id="modeOfTravel0"th:field="*{localConvyenceDetail[__${stat.index}__].modeOfTravel}">
 																			<option value="">Select Type</option>
 																			<option th:Value="taxi">Taxi</option>
 																			<option th:Value="car">Car</option>
@@ -310,34 +311,17 @@ $("table").on("keyup", ".pas", function () {
 																	</select></td>
 
 
-																	<td><input type="text" name='distanceKm0'placeholder='Distance In Km' class="form-control" /></td>
-																	<td><input type="text" name='ltaRate0'placeholder='Lta Rate' class="form-control" /></td>
-																	<td><input type="text" name='actualAmount0'placeholder='Actual Amount' class="form-control txt" /></td>
-																	<td><input type="text" name='claimedAmount0'placeholder='Claimed  Amount' class="form-control pas" /></td>
+																	<td><input type="text" name='distanceKm0'placeholder='Distance In Km' class="form-control"th:field="*{localConvyenceDetail[__${stat.index}__].distanceKm}" /></td>
+																	<td><input type="text" name='ltaRate0'placeholder='Lta Rate' class="form-control"th:field="*{localConvyenceDetail[__${stat.index}__].ltaRate}" /></td>
+																	<td><input type="text" name='actualAmount0'placeholder='Actual Amount' class="form-control txt"th:field="*{localConvyenceDetail[__${stat.index}__].actualAmount}" /></td>
+																	<td><input type="text" name='claimedAmount0'placeholder='Claimed  Amount' class="form-control pas" th:field="*{localConvyenceDetail[__${stat.index}__].claimedAmount}"/></td>
 																</tr>
 																<tr id='addr1'></tr>
 
 															</tbody>
 															
 															
-																<tr>
-				<td colspan="6"></td>
-				
-					<td>
-					<label class="form-label">Total Amount</label>
-					</td>
-					<td>
-					<input type="text" id="totalClaim" name='totalClaim' placeholder='Total Claim' class="form-control"/>
-					</td>
-					<td>
-					<input type="text" id="totalPas" name='totalPas' placeholder='Total Pas' class="form-control"/>
-					</td>
-					
-					<td>
-					
-					</td>
-					
-					</tr>
+															
 
 														</table>
 								
@@ -350,55 +334,10 @@ $("table").on("keyup", ".pas", function () {
 	                     </div>
 	                     </div>
 					</div>
-					<button type="submit" class="btn btn-primary">Save</button>&nbsp;
-	                     &nbsp;
-					<button type="reset"class="btn btn-primary" value="Reset">Reset</button>
+					<input type="submit" class="btn btn-primary" value="Submit">
+							 <button type="submit"class="btn btn-primary" value="cancel">Cancel</button>	
 </form>
-	<div class="col-12">
-							<div class="card">
-								<div class="card-header">
-								</div>
-								<div class="card-body">
-									<table id="datatables-buttons" class="table table-striped display" style="width:100%"aria-describedby="example">
-										<thead>
-											<tr >
-												<th scope="col">Local Conveyance id </th>
-												<th scope="col">Employee Name</th>
-												<th scope="col">Department</th>
-												<th scope="col">Designation</th>
-												<!-- <th scope="col">Tour Pan Date </th> -->
-												
-												<th scope="col">Action </th>
-											</tr >
-											
 
-
-										</thead>
-										<tbody>
-										<tr th:each = "listOfloc : ${listOfLoc}">
-										<td th:text="${listOfloc.localConvId}" ></td>
-										<td th:text="${listOfloc.empName}"></td>
-										<td  th:text="${listOfloc.deptName}"></td>
-										<td  th:text="${listOfloc.desgName}"></td>
-									<!-- 	<td  th:text="${tourPlan.tourPlanDate}"></td> -->
-										  <td>
-										  <a th:href="@{/editLocalConvyence/{id}/(id=${listOfloc.localConvId})}"><em class="fa fa-edit"></em></a>
-										  
-										     <a th:href="@{/deleteLocalConveyance/{id}/(id=${listOfloc.localConvId})}"onclick="return confirm('Are you sure?')"><em class="fa fa-times"></em></a>
-									
-									
-										</td>  
-									
-										</tr>
-									
-									
-										</tbody>
-									
-									</table>
-								</div>
-								
-							</div>
-						</div>
 				</div>
 			
 		</main>
@@ -419,9 +358,17 @@ $("table").on("keyup", ".pas", function () {
 				showDropdowns: true
 			});
 			
-	
+			
 		
-
+			$("input[name='Date']").daterangepicker({
+				singleDatePicker: true,
+			    autoApply: true,
+				locale: {
+		            format: 'YYYY/MM/DD'
+		        },
+				showDropdowns: true
+			});
+			
 
 
 			

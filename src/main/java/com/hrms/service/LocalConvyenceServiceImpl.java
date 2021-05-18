@@ -47,4 +47,11 @@ SessionFactory sessionfactory;
 		this.localConvyenceDao.delete(id);
 		
 	}
+	
+
+	@Override
+	public LocalConvyence findByIdLocalConvyence(String id) {
+		return this.localConvyenceDao.findById(id);
+	}
+
 }

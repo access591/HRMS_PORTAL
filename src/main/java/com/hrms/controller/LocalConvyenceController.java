@@ -27,7 +27,6 @@ import com.hrms.model.LocalConvyence;
 import com.hrms.model.LocalConvyenceDetail;
 import com.hrms.model.LocalConvyenceUtil;
 import com.hrms.model.MenuModule;
-
 import com.hrms.service.DepartmentService;
 import com.hrms.service.DesignationService;
 import com.hrms.service.EmployeeService;
@@ -181,21 +180,21 @@ public class LocalConvyenceController {
 					}
 					
 					if(request.getParameter("ltaRate" + i) != null) {
-						ld.setDistanceKm(request.getParameter("ltaRate" + i));
+						ld.setLtaRate(request.getParameter("ltaRate" + i));
 					} else {
-						ld.setDistanceKm("" + i);
+						ld.setLtaRate("" + i);
 					}
 					
 					if(request.getParameter("actualAmount" + i) != null) {
-						ld.setDistanceKm(request.getParameter("actualAmount" + i));
+						ld.setActualAmount(request.getParameter("actualAmount" + i));
 					} else {
-						ld.setDistanceKm("" + i);
+						ld.setActualAmount("" + i);
 					}
 					
 					if(request.getParameter("claimedAmount" + i) != null) {
-						ld.setDistanceKm(request.getParameter("claimedAmount" + i));
+						ld.setClaimedAmount(request.getParameter("claimedAmount" + i));
 					} else {
-						ld.setDistanceKm("" + i);
+						ld.setClaimedAmount("" + i);
 					}
 					
 					
@@ -249,6 +248,17 @@ public class LocalConvyenceController {
 		return "redirect:/localConvyence";
 	}
 	
- 
+	@GetMapping(value = {"/editLocalConvyence/{id}"})
+	public String editLocalConvyence(@PathVariable("id")String id,  Model model,HttpSession session)
+	 { 
+		List<Employee> lrt = employeeService.getAllEmployees();
+		model.addAttribute("listEmployee", lrt);
+		
+		LocalConvyence localConvyenceEdit =	localConvyenceService.findByIdLocalConvyence(id);
+		  model.addAttribute("localConvyenceEdit", localConvyenceEdit);
+
+	   
+	    return "editLocalConvyence";
+	}
 	
 }
