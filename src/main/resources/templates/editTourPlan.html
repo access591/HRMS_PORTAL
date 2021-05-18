@@ -102,7 +102,7 @@ body {
 											<div class="form-group">
 											<label class="form-label"> Tour Plan Date</label>
 											<label style="color: red">*</label>
-											 <input type="text" class="form-control " id="tourPlanDate" name="tourPlanDate">
+											 <input type="text" class="form-control " id="tourPlanDate"th:field="*{tourPlanDate}" name="tourPlanDate">
 										</div>
 										
 										<div class="form-group">
@@ -317,7 +317,7 @@ $("input[name='tourPlanDate']").daterangepicker({
 	singleDatePicker: true,
     autoApply: true,
 	locale: {
-        format: 'DD/MM/YYYY'
+        format: 'YYYY/MM/DD'
     },
 	showDropdowns: true
 });
