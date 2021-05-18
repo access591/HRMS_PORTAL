@@ -452,7 +452,7 @@ $("table").on("keyup", ".pas", function () {
 		 var empCode= document.getElementById('empCode').value
 	    console.log("ajax request : "+ empCode);
 	    const xhr = new XMLHttpRequest();
-	    xhr.open('GET','/viewEmployeeDetails/'+empCode,true);
+	    xhr.open('GET','./viewEmployeeDetails/'+empCode,true);
 	    xhr.getResponseHeader('content-type','application/json');
 	    xhr.onload = function(){
 	        if(this.status===200){
