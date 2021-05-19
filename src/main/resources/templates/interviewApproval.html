@@ -95,7 +95,7 @@ body {
 												<tr th:each="interviewApproval : ${listInterviewApprovalUtil}">
 														<td><label class="form-control" th:text="${interviewApproval.applicantCode}"></label></td>
 
-														<td><label class="form-control" th:text="${#dates.format(new java.util.Date(interviewApproval.applicantDate), 'dd-MMM-yy')}"></label></td>
+														<td><label class="form-control" th:text="${interviewApproval.applicantDate}"></label></td>
 
 														<td><label class="form-control" th:text="${interviewApproval.applicantName}"></label></td>
 

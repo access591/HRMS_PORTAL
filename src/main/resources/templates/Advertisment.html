@@ -222,7 +222,7 @@ body {
 										<tbody>
 											<tr  th:each="list : ${listReqAdvertisement}">
 												<td th:text="${list.advtCode}"></td>
-												<td th:text="${#dates.format(new java.util.Date(list.advtDate), 'dd-MMM-yy')}"></td>
+												<td th:text="${list.advtDate}"></td>
 												<td th:text="${list.remarks}"></td>
 												<td>
 												<a th:href="@{editAdvertisement/{id}(id=${list.advtCode})}"><em class="align-middle fas fa-fw fa-pen"></em></a>
