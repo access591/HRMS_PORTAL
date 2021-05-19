@@ -22,5 +22,19 @@ LtaRequestDao ltaRequestDao;
 		List<LtaRequest> ltaList= ltaRequestDao.findAll() ;
 		return ltaList;
 	}
+	@Override
+	public void removeLTAReques(String id) {
+		this.ltaRequestDao.delete(id);
+		
+	}
+	@Override
+	public LtaRequest findByIdLta(String id) {
+				return ltaRequestDao.findById(id);
+	}
+	@Override
+	public void updateLtaRequest(LtaRequest ltaRequest) {
+		
+		this.ltaRequestDao.saveOrUpdate(ltaRequest);		
+	}
 
 }

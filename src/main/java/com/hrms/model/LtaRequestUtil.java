@@ -4,7 +4,7 @@ import java.util.Date;
 
 
 public class LtaRequestUtil {
-
+	private String ltaCode;
 	private String  empCode;
 	private Date appDate;
 	//------------------------------------
@@ -99,6 +99,14 @@ public class LtaRequestUtil {
 
 	public void setRemarks(String remarks) {
 		this.remarks = remarks;
+	}
+
+	public String getLtaCode() {
+		return ltaCode;
+	}
+
+	public void setLtaCode(String ltaCode) {
+		this.ltaCode = ltaCode;
 	}
 	
 	
