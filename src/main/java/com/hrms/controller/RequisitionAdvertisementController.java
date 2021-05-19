@@ -101,6 +101,7 @@ public class RequisitionAdvertisementController {
 		
 		for(ReqAdvertisementDetail eDetail : reqAdvertisement.getListReqAdvertisementDetail()) {
 			eDetail.setReqAdvertisement(reqAdvertisement); 
+			eDetail.setAdvtDate(reqAdvertisement.getAdvtDate());
 		}
 		
 		reqAdvertisementService.addActivity(reqAdvertisement);
@@ -122,14 +123,14 @@ public class RequisitionAdvertisementController {
 		
 		ReqAdvertisement req = reqAdvertisementService.findReqAdvertisementById(reqCode);
 		if(req != null) {
-			model.addAttribute("reqAdvt", req);
+			model.addAttribute("reqAdvertisement", req);
 		}
 		System.out.println("employee requisition id : "+ reqCode);
 		return "editAdvertisement";  //editAdvertisement.html
 	}
 	
 	@PostMapping(value = {"updateAdvertisement"})
-	public String updateAdvertisement(@ModelAttribute("reqAdvt")ReqAdvertisement reqAdvertisement,
+	public String updateAdvertisement(@ModelAttribute("reqAdvertisement")ReqAdvertisement reqAdvertisement,
 			Model model) {
 		
 		  System.out.println("=====================>");

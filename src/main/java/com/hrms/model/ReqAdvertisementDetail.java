@@ -28,7 +28,7 @@ public class ReqAdvertisementDetail {
 	private ReqAdvertisement reqAdvertisement;
 	
 	@Column(name="ADVRT_DATE")
-	private String advtDate;
+	private Date advtDate;
 	
 	@Column(name="MEDIA_TYPE")
 	private String mediaType;
@@ -64,11 +64,11 @@ public class ReqAdvertisementDetail {
 		this.reqAdvertisement = reqAdvertisement;
 	}
 
-	public String getAdvtDate() {
+	public Date getAdvtDate() {
 		return advtDate;
 	}
 
-	public void setAdvtDate(String advtDate) {
+	public void setAdvtDate(Date advtDate) {
 		this.advtDate = advtDate;
 	}
 
