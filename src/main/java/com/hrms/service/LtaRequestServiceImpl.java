@@ -1,5 +1,7 @@
 package com.hrms.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +16,11 @@ LtaRequestDao ltaRequestDao;
 		ltaRequest.setLtaCode(ltaRequestDao.getMaxId("LTA"));
 		this.ltaRequestDao.saveOrUpdate(ltaRequest);
 				
+	}
+	@Override
+	public List<LtaRequest> getAllLTARequest() {
+		List<LtaRequest> ltaList= ltaRequestDao.findAll() ;
+		return ltaList;
 	}
 
 }

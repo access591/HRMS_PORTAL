@@ -35,6 +35,8 @@ public class LtaRequestController {
 
 		List<Employee> lrt = employeeService.getAllEmployees();
 		model.addAttribute("listEmployee", lrt);
+		List<LtaRequest> listLtaRequest = ltaRequest.getAllLTARequest();
+		model.addAttribute("listLtaRequest", listLtaRequest);
 		String userCode = (String) session.getAttribute("username");
 		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
 		if (modules != null) {

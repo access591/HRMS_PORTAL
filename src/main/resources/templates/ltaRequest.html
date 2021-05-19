@@ -191,25 +191,27 @@ body {
 									<table id="datatables-buttons" class="table table-striped display" style="width:100%"aria-describedby="example">
 										<thead>
 											<tr>
-												<th scope="col">Department Code</th>
-												<th scope="col">Department Name </th>
-												<th scope="col">HOD</th>
-												<th scope="col">Status</th>
+												<th scope="col">LTA ID</th>
+												<th scope="col">Employee Name </th>
+												<th scope="col">Appointment Date</th>
+												<th scope="col">Availed Date</th>
+												<th scope="col">Remarks</th>
 												<th scope="col">Action</th>
 											</tr>
 										</thead>
 										<tbody>
-											<!-- <tr  th:each="listdepartment : ${listDepartment}">
-												<td th:text="${listdepartment.departmentCode}"></td>
-												<td th:text="${listdepartment.deptName}"></td>
-												<td th:text="${listdepartment?.empCode?.empName}"></td>
+											<tr  th:each="listLta : ${listLtaRequest}">
+												<td th:text="${listLta.ltaCode}"></td>
 												
-												<td th:text="${listdepartment.active}"></td>
+												<td th:text="${listLta?.empCode?.empName}"></td>
+												<td th:text="${#dates.format(listLta.appDate,'dd-MMM-yyyy')}"></td>
+												<td th:text="${#dates.format(listLta.whenAvailed,'dd-MMM-yyyy')}"></td>
+												<td th:text="${listLta.remarks}"></td>
 												
-												<td><a th:href="@{/editDepartment/{id}(id=${listdepartment.departmentCode})}"><em class="fa fa-edit"></em></a>
-												<a th:href="@{/deleteDepartment/{id}(id=${listdepartment.departmentCode})}" onclick="return confirm('Are you sure?')"><em class="fa fa-times"></em></a>
+												<td><a th:href="@{/editLtaRequest/{id}(id=${listLta.ltaCode})}"><em class="fa fa-edit"></em></a>
+												<a th:href="@{/deleteLtaRequest/{id}(id=${listLta.ltaCode})}" onclick="return confirm('Are you sure?')"><em class="fa fa-times"></em></a>
 												</td>
-											</tr> -->
+											</tr> 
 										</tbody>
 									
 									</table>
