@@ -25,7 +25,7 @@ public class LeaveGrant  implements Serializable{
 	@JoinColumn(name = "EMPLOYEE_CODE", nullable = false)
 	private Employee empCode;
 	@ManyToOne
-	@JoinColumn(name = "LEV_CODE", nullable = false)
+	@JoinColumn(name = "LEAVE_CODE", nullable = false)
 	private Leave levCode;
 
 	@Column(name = "NO_OF_LEAVES_GRANTED")
