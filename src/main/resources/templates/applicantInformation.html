@@ -152,7 +152,7 @@ body {
 																	id="designationCode" th:field="*{desigCode}">
 																	<option value="">Select Designation</option>
 																	<option th:each="designation : ${listDesignation}"
-																		th:text="${designation.desgCode}" th:value="${designation.desgCode}"></option>
+																		th:text="${designation.desgName}" th:value="${designation.desgCode}"></option>
 																	
 
 
@@ -191,8 +191,8 @@ body {
 																	class="form-control " name="designationCode"
 																	id="designationCode" th:field="*{maritalStatus}">
 																	<option value="">Select</option>
-																	<option th:Value="taxi">Married</option>
-																	<option th:Value="car">Unmarried</option>
+																	<option th:Value="Married">Married</option>
+																	<option th:Value="Unmarried">Unmarried</option>
 																	
 
 
@@ -251,10 +251,9 @@ body {
 																	class="form-control " name="designationCode"
 																	id="designationCode" th:field="*{corrCity}">
 																	<option value="">Select City</option>
-																	<option th:Value="taxi">city1</option>
-																	<option th:Value="car">city2</option>
-																	<option th:Value="bus">city3</option>
-																	<option th:Value="train">city4</option>
+																	<option th:Value="City1">city1</option>
+																	<option th:Value="City2">city2</option>
+																	<option th:Value="City3">city3</option>
 
 
 																</select>
@@ -328,10 +327,10 @@ body {
 																</label> <select
 																	class="form-control "th:field="*{permCity}">
 																	<option value="">Select City</option>
-																	<option th:Value="taxi">city1</option>
-																	<option th:Value="car">city2</option>
-																	<option th:Value="bus">city3</option>
-																	<option th:Value="train">city4</option>
+																	<option th:Value="City1">city1</option>
+																	<option th:Value="City2">city2</option>
+																	<option th:Value="City3">city3</option>
+																	
 
 
 																</select>
@@ -399,9 +398,9 @@ body {
 																</label> <select
 																	class="form-control " th:field="*{langHindi}">
 																	<option value="">Select</option>
-																	<option th:Value="taxi">Read</option>
-																	<option th:Value="car">Write</option>
-																	<option th:Value="bus">Both</option>
+																	<option th:Value="Read">Read</option>
+																	<option th:Value="Write">Write</option>
+																	<option th:Value="Both">Both</option>
 																	
 
 
@@ -419,9 +418,9 @@ body {
 																</label> <select
 																	class="form-control "th:field="*{langEnglish}">
 																	<option value="">Select</option>
-																	<option th:Value="taxi">Read</option>
-																	<option th:Value="car">Write</option>
-																	<option th:Value="bus">Both</option>
+																	<option th:Value="Read">Read</option>
+																	<option th:Value="Write">Write</option>
+																	<option th:Value="Both">Both</option>
 																	
 
 
@@ -452,7 +451,7 @@ body {
 																</label> <select
 																	class="form-control "th:field="*{langOthersRw}">
 																	
-																	<option th:Value="taxi">Fluency</option>
+																	<option th:Value="Fluency">Fluency</option>
 																	
 
 
@@ -479,8 +478,8 @@ body {
 																</label> <select
 																	class="form-control " th:field="*{acadQuali}">
 																	<option value="">Choose</option>
-																	<option th:Value="taxi">Bachelor</option>
-																	<option th:Value="car">Master</option>
+																	<option th:Value="Bachelor">Bachelor</option>
+																	<option th:Value="Master">Master</option>
 																	
 
 
@@ -530,8 +529,8 @@ body {
 																	class="text-danger">*</span></label> <select
 																	class="form-control " th:field="*{modeOfRef}">
 																	<option value="">Select</option>
-																	<option th:Value="taxi">News</option>
-																	<option th:Value="taxi">News</option>
+																	<option th:Value="News">News</option>
+																	<option th:Value="Magzine">Magzine</option>
 																	
 
 

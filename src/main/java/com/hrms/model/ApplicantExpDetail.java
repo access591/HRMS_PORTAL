@@ -24,20 +24,20 @@ public class ApplicantExpDetail {
 	@Column(name= "Appli_Exp_Detailid")
 	private Long appliExpDetailId;
 	
-	@Column(name="")
+	@Column(name="COMPANY_NAME")
 	private String companyName;
 	
-	@Column(name="")
+	@Column(name="LAST_SALARY")
 	private Long lastSalary;
 	
-	@Column(name="")
+	@Column(name="EXP_IN_MONTH")
 	private int expInMonth;
 	
-	@Column(name="")
+	@Column(name="WORK_PROFILE")
 	private String workProfile;
 	
 	@Temporal(TemporalType.DATE)
-	@Column(name="")
+	@Column(name="APPLICANT_DATE")
 	private Date applicantDate;
 	
 	@ManyToOne(fetch = FetchType.LAZY)

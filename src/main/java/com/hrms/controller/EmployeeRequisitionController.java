@@ -153,7 +153,7 @@ public class EmployeeRequisitionController {
 	public String updateRequisition(@ModelAttribute("req") EmployeeRequisition employeeRequisition,
 			Model model) {
 		
-		  System.out.println("=====================>");
+		  System.out.println("=====================>update employee Requisition");
 		  
 		for(EmployeeRequisitionDetail eDetail : employeeRequisition.getEmployeRequisitionDetail()) {
 			eDetail.setEmployeeRequisition(employeeRequisition);

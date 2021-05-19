@@ -127,13 +127,16 @@ public class InterviewController {
 	
 	
 	@ResponseBody
-	@GetMapping("getApplicantDate/{id}")
-	public ApplicantInfo getRequisitionDateByAdvtCode(@PathVariable("id")String advtCode) {
+	@GetMapping("getApplicantDate/{applicantCode}")
+	public Date getRequisitionDateByAdvtCode(@PathVariable("applicantCode")String applicantCode) {
 		//get advt code and advt date from Advertisement
-		ApplicantInfo applicantInfo = applicantInfoService.getApplicantInfoByApplicantCode(advtCode);
+		
+		System.out.println("applicant Code : " + applicantCode);
+		ApplicantInfo applicantInfo = applicantInfoService.getApplicantInfoByApplicantCode(applicantCode);
 		//String advtDate = reqAdvertisement.getAdvtDate();
 		System.out.println("======>>"+ applicantInfo.getApplicantDate());
-		return applicantInfo;
+		//System.out.println("response is : "+ )
+		return applicantInfo.getApplicantDate();
 	}
 	
 	
@@ -219,7 +222,7 @@ public class InterviewController {
 	//	INTERVIEW FINAL SELECTION
 	
 	@GetMapping("interviewFinalSelection")
-	public String interviewFinalSelection(Model model,HttpSession session) {
+	public String interviewFinalSelection(Model model,HttpSession session) throws Exception {
 		
 		String userCode = (String) session.getAttribute("username");
 		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
@@ -240,8 +243,24 @@ public class InterviewController {
 			ifs.setApplicantDate(interView.getApplicantDate());
 			ifs.setOvarAllRating(interView.getOverAllRating());
 			
-			if(interView.getSelectionStatus() != null || interView.getSelectionStatus() != "") {
+			//System.out.println("selection status : "+ interView.getSelectionStatus());
+			
+			if(interView.getSelectionStatus() == null) {
+				ifs.setSelectionStatus("0");
+				System.out.println("11111111111nulllll111111111");
+				
+				
+			}
+			
+			else if(interView.getSelectionStatus().length() == 0) {
+				ifs.setSelectionStatus("0");
+				System.out.println("11111111111111111111");
+				
+			}
+			else {
+				
 				ifs.setSelectionStatus(interView.getSelectionStatus());
+				System.out.println("0000000000000");
 			}
 			
 			
