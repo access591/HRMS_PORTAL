@@ -204,8 +204,8 @@ body {
 												<td th:text="${listLta.ltaCode}"></td>
 												
 												<td th:text="${listLta?.empCode?.empName}"></td>
-												<td th:text="${#dates.format(listLta.appDate,'dd-MMM-yyyy')}"></td>
-												<td th:text="${#dates.format(listLta.whenAvailed,'dd-MMM-yyyy')}"></td>
+												<td th:text="${#dates.format(new java.util.Date(listLta.appDate),'dd-MMM-yyyy')}"></td>
+												<td th:text="${#dates.format(new java.util.Date(listLta.whenAvailed),'dd-MMM-yyyy')}"></td>
 												<td th:text="${listLta.remarks}"></td>
 												
 												<td><a th:href="@{/editLtaRequest/{id}(id=${listLta.ltaCode})}"><em class="fa fa-edit"></em></a>
