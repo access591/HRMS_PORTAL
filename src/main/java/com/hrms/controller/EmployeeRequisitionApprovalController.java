@@ -46,20 +46,31 @@ public class EmployeeRequisitionApprovalController {
 		
 		
 		List<CommonUtil> listCommonUtil = new ArrayList<CommonUtil>();
-		List<EmployeeRequisition> listEmployeeReq = employeeRequisitionService.findEmployeeReqByStatusN();
+		//List<EmployeeRequisition> listEmployeeReq = employeeRequisitionService.findEmployeeReqByStatusN();
+		List<EmployeeRequisition> listEmployeeReq = employeeRequisitionService.getAllEmployeeRequisition();
 		
 		for(int i=0;i<listEmployeeReq.size();i++) {
-			Department department = departmentService.findDepartmentById(listEmployeeReq.get(0).getDeptCode());
-			EmployeeRequisition em = listEmployeeReq.get(i);
-			CommonUtil commonUtill = new CommonUtil(department.getDeptName(),em.getReqCode(),em.getReqDate(),
-					em.getReqPriority(),em.getReqApprover(),em.getRemarks(),em.getInsBy(),em.getInsDate(),
-					em.getReqTill(),em.getApproveDate(),em.getStatus());
-			listCommonUtil.add(commonUtill);
+			Department department;
+			try {
+				department = departmentService.findDepartmentById(listEmployeeReq.get(i).getDeptCode());
+				EmployeeRequisition em = listEmployeeReq.get(i);
+				CommonUtil commonUtill = new CommonUtil(department.getDeptName(),em.getReqCode(),em.getReqDate(),
+						em.getReqPriority(),em.getReqApprover(),em.getRemarks(),em.getInsBy(),em.getInsDate(),
+						em.getReqTill(),em.getApproveDate(),em.getStatus());
+				commonUtill.setStatus(em.getStatus());
+				listCommonUtil.add(commonUtill);
+			}
+			catch(Exception e) {
+				e.printStackTrace();
+			}
+			
+			
+			
 		}//editEmployeeRequisition.html
 		
-		if(listCommonUtil != null) {  
-			model.addAttribute("listCommonUtil", listCommonUtil);
-		}
+		
+		model.addAttribute("listCommonUtil", listCommonUtil);
+	
 		
 		List<EmployeeRequisition> approvalReq = employeeRequisitionService.findEmployeeReqByStatusY();
 		if(approvalReq != null) {
@@ -73,14 +84,14 @@ public class EmployeeRequisitionApprovalController {
 	}
 	
 	
-	@GetMapping("approveRequisition/{id}")
-	public String approveRequisition(@PathVariable("id") String reqCode) {
+	@GetMapping("approveRequisition/{id}/{status}")
+	public String approveRequisition(@PathVariable("id") String reqCode,@PathVariable("status") String approvalStatus) {
 		
 		System.out.println("hiiiiiii" + reqCode);
 		//System.out.println("hiiiiiii" + name);
 		
 		
-		employeeRequisitionService.approvedByReqCode(reqCode);
+		employeeRequisitionService.approvedByReqCodeAndStatus(reqCode,approvalStatus);
 		return "redirect:/employeeRequisitionApproval";
 	}
 	

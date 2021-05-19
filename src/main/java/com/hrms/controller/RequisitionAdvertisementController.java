@@ -47,8 +47,8 @@ public class RequisitionAdvertisementController {
     public void customizeBinding (WebDataBinder binder) {
         SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
         dateFormatter.setLenient(false);
-//        binder.registerCustomEditor(Date.class, "advtDate",
-//                                    new CustomDateEditor(dateFormatter, true));
+        binder.registerCustomEditor(Date.class, "advtDate",
+                                    new CustomDateEditor(dateFormatter, true));
         
     }
 	

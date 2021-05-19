@@ -88,30 +88,7 @@ public class LeaveRequestController {
 		}
 
 		  System.out.println("joninig begin..");
-		 // System.out.println(" user entity code : "+ userEntity.getEmpCode());
-		  //List<LeaveGrant> leaveGrant = leaveGrantService.findLeaveGrantByEmpCode(userEntity.getEmpCode());
-		  
-		  //System.out.println( "leave grant size" + leaveGrant.size());
-		  //if(leaveGrant.size() == 3) {
-			// model.addAttribute("casual", leaveGrant.get(0).getLeaveAvailed());
-			// model.addAttribute("sick", leaveGrant.get(1).getLeaveAvailed());
-			// model.addAttribute("sick1", leaveGrant.get(2).getLeaveAvailed());
-		  //}
-		  //if(leaveGrant.size() == 2) {
-			//	 model.addAttribute("casual", leaveGrant.get(0).getLeaveAvailed());
-			//	 model.addAttribute("sick", leaveGrant.get(1).getLeaveAvailed());
-			//	 model.addAttribute("sick1","0");
-			//  }
-		 // if(leaveGrant.size() == 1) {
-		//		 model.addAttribute("casual", leaveGrant.get(0).getLeaveAvailed());
-		//		 model.addAttribute("sick", "0");
-		//		 model.addAttribute("sick1", "0");
-		//	  }
-		 // else {
-		//.addAttribute("casual", "0");
-		//		 model.addAttribute("sick", "0");
-		//		 model.addAttribute("sick1", "0"); 
-		 // }
+		
 
 		session.setAttribute("username" , userCode);
 		return pageMappingService.PageRequestMapping(reqPage, pageno);
@@ -137,8 +114,7 @@ public class LeaveRequestController {
 	@GetMapping(value = { "/viewLeaveRequest/{id}" })
 	public String viewLeaveRequestByEmpId(@PathVariable("id")String leaveRequestId,
 						Model model,HttpSession session) {
-		int pagenoView = 61;
-		String reqPageView = "/viewLeaveRequest";
+		
 		
 		
 		
@@ -154,7 +130,7 @@ public class LeaveRequestController {
 		}
 		model.addAttribute("header", "View Leave Request");
 		model.addAttribute("myhref", "leaveRequest");
-		return pageMappingService.PageRequestMapping(reqPageView, pagenoView);
+		return "viewLeaveRequest";
 	}
 	
 	@GetMapping(value = { "/deleteLeaveRequest/{id}" })

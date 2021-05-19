@@ -119,12 +119,12 @@ body {
 												class="table table-striped display" style="width: 100%">
 												<thead>
 													<tr>
-														<th style="width: 130px;">Requisition Code</th>
-														<th style="width: 130px;">Requisition Date</th>
-														<th style="width: 130px;">Media Type</th>
-														<th style="width: 130px;">Media Name</th>
-														<th style="width: 130px;">Amount</th>
-														<th style="width: 130px;">Details</th>
+														<th class="text-center">Requisition Code</th>
+														<th class="text-center">Requisition Date</th>
+														<th class="text-center">Media Type</th>
+														<th class="text-center">Media Name</th>
+														<th class="text-center">Amount</th>
+														<th class="text-center">Details</th>
 														
 														
 													</tr>
@@ -133,7 +133,7 @@ body {
 													<tr th:each="row, stat :${reqAdvt.listReqAdvertisementDetail}">
 
 
-														<td><input th:field="*{listReqAdvertisementDetail[__${stat.index}__].reqCode}" class="form-control" readonly>
+														<td><input th:field="*{listReqAdvertisementDetail[__${stat.index}__].reqCode}"class="form-control text-center" readonly>
 																
 																
 																
@@ -142,15 +142,15 @@ body {
 														
 														</td>
 
-														<td><input type="date" style="width: 130px;"
-															th:field="*{listReqAdvertisementDetail[__${stat.index}__].reqDate}"class="form-control"></td>
+														<td><input type="date" class="form-control text-center"
+															th:field="*{listReqAdvertisementDetail[__${stat.index}__].reqDate}"></td>
 
 
 														
 
 
 
-														<td><select id="media" th:field="*{listReqAdvertisementDetail[__${stat.index}__].mediaType}" class="form-control">
+														<td><select id="media" th:field="*{listReqAdvertisementDetail[__${stat.index}__].mediaType}" class="form-control text-center" style="width:150px;">
 																<option value=" ">Media Type</option>
 																<option value="court">Media-1</option>
 																<option value="department">Media-2</option>
@@ -158,16 +158,16 @@ body {
 														</td>
 														
 														<td><input type="text"
-															style="width: 130px;" id="mediaName" th:field="*{listReqAdvertisementDetail[__${stat.index}__].mediaName}"
-															class="form-control"></td>
+															class="form-control text-center" id="mediaName" th:field="*{listReqAdvertisementDetail[__${stat.index}__].mediaName}"
+															></td>
 
-														<td><input type="text" style="width: 130px;"
+														<td><input type="text" class="form-control text-center"
 															id="amount" th:field="*{listReqAdvertisementDetail[__${stat.index}__].advtAmount}"
-															class="form-control"></td>
+															></td>
 
 														<td><input type="text"
-															style="width: 130px;" id="details" th:field="*{listReqAdvertisementDetail[__${stat.index}__].remarks}"
-															class="form-control"></td>
+															class="form-control text-center" id="details" th:field="*{listReqAdvertisementDetail[__${stat.index}__].remarks}"
+															></td>
 
 														
 
@@ -187,7 +187,11 @@ body {
 								</div>
 							</div>
 							&nbsp&nbsp&nbsp<button type="submit" class="btn btn-primary">Update</button>
-							&nbsp&nbsp&nbsp<button type="reset" class="btn btn-primary" value="Reset">Cancel</button>
+							&nbsp&nbsp&nbsp<input
+    							onclick="window.history.go(-1); return false;"
+    							type="submit"
+    							value="Back"
+							/>
 
 
 						</div>

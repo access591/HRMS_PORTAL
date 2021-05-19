@@ -19,6 +19,7 @@ body {
 }
 
 
+
 </style>
 <script>
 	window.dataLayer = window.dataLayer || [];
@@ -67,15 +68,15 @@ body {
 										<div class="row">
 											<div class="col-12 col-lg-6">
 												<div class="form-group">
-													<label> Requisition Code </label> <label style="color: red">*</label>
+													<label> Requisition Code </label>
 													<input class="form-control" id="" value=""
 														th:field="*{reqCode}" readonly />
 												</div>
 											</div>
 											<div class="col-12 col-lg-6">
 												<div class="form-group">
-													<label> Requisition Date </label> <label style="color: red">*</label>
-													<input class="form-control" type="date" id="" value=""
+													<label> Requisition Date </label> 
+													<input class="form-control" type="date" id="theDate" value=""
 														th:field="*{reqDate}" />
 												</div>
 											</div>
@@ -84,7 +85,7 @@ body {
 										<div class="row">
 											<div class="col-12 col-lg-6">
 												<div class="form-group">
-													<label> Department Code </label> <label style="color: red">*</label>
+													<label> Department Code </label> 
 													<input type="text" class="form-control" id="departmentId"
 														value="" th:field="*{deptCode}" readonly>
 												</div>
@@ -107,22 +108,21 @@ body {
 														style="color: red">*</label> <select
 														class="form-control select2" id="leave_type_id"
 														th:field="*{reqPriority}">
-														<option value="">Select</option>
-														<option value="low">Low</option>
-														<option value="high">High</option>
+														<option value=""disabled>Please Select</option>
+														<option th:value="Low" th:text="Low">Low</option>
+														<option th:value="High" th:text="High">High</option>
 													</select>
 												</div>
 											</div>
 											<div class="col-12 col-lg-6">
 												<label class="form-label">Requisition Fulfill Date</label> <label
-													style="color: red">*</label> <input type="date"
+													style="color: red">*</label> <input type="date" id="theDate2"
 													class="form-control" th:field="*{reqTill}">
 											</div>
 										</div>
 										<div class="row">
 											<div class="col-12 col-lg-6">
-												<label class="form-label">Remarks</label> <label
-													style="color: red">*</label> <input type="text"
+												<label class="form-label">Remarks</label>  <input type="text"
 													class="form-control" id="leaveDepartmentName" value=""
 													th:field="*{remarks}">
 											</div>
@@ -160,34 +160,34 @@ body {
 												class="table table-striped display" style="width: 100%">
 												<thead>
 													<tr>
-														<th style="width: 130px;">Designation Code</th>
-														<th style="width: 130px;">Designation Name</th>
-														<th style="width: 130px;">Location</th>
-														<th style="width: 130px;">Sex</th>
-														<th style="width: 130px;">Age(From)</th>
-														<th style="width: 130px;">Age(To)</th>
-														<th style="width: 130px;">Academic Qualification</th>
-														<th style="width: 130px;">Technical Qualification</th>
-														<th style="width: 130px;">Exp.in month(Min)</th>
-														<th style="width: 130px;">MaExp.in month(Max)x</th>
-														<th style="width: 130px;">Vacancy Type</th>
-														<th style="width: 130px;">Total Vacancies</th>
-														<th style="width: 130px;">Salary From</th>
-														<th style="width: 130px;">Salary To</th>
-														<th style="width: 130px;">Detail</th>
-														<th style="width: 130px;">Action</th>
+														<th class="text-center"style="width: 90px;">Designation Code</th>
+														<th class="text-center"style="width: 130px;">Designation Name</th>
+														<th class="text-center"style="width: 100px;">Location</th>
+														<th class="text-center"style="width: 90px;">Sex</th>
+														<th class="text-center"style="width: 90px;">Age(From)</th>
+														<th class="text-center"style="width: 90px;">Age(To)</th>
+														<th class="text-center"style="width: 10px;">Academic Qualification</th>
+														<th class="text-center"style="width: 120px;">Technical Qualification</th>
+														<th class="text-center"style="width: 90px;">Experience in month(Min)</th>
+														<th class="text-center"style="width: 90px;">Experience in month(Max)</th>
+														<th class="text-center"style="width: 120px;">Vacancy Type</th>
+														<th class="text-center"style="width: 90px;">Total Vacancies</th>
+														<th class="text-center"style="width: 90px;">Salary From</th>
+														<th class="text-center"style="width: 90px;">Salary To</th>
+														<th class="text-center"style="width: 120px;">Detail</th>
+														
 													</tr>
 												</thead>
 												<tbody>
 													<tr id="addr0">
 
 
-														<td><input type="text" style="width: 130px;"
+														<td><input type="text" style="width: 90px;"
 															id="desigCode0"
-															name="employeRequisitionDetail[0].desigCode" readonly></td>
+															name="employeRequisitionDetail[0].desigCode" readonly required></td>
 
-														<td><select id="designationName0"
-															name="employeRequisitionDetail[0].designationName"
+														<td><select id="designationName0" style="width: 130px;"
+															name="employeRequisitionDetail[0].designationName" required
 															onchange="selectDesignation()">
 																<option value=" ">Select</option>
 
@@ -196,60 +196,65 @@ body {
 
 
 
-														<td><select id="location"
-															name="employeRequisitionDetail[0].location">
+														<td><select id="location" style="width: 100px;"
+															name="employeRequisitionDetail[0].location" required>
 																<option value=" ">Select</option>
-																<option value="court">Court</option>
-																<option value="department">Department</option>
+																<option value="Court">Court</option>
+																<option value="Department">Department</option>
 														</select></td>
 
-														<td><select id="sex"
-															name="employeRequisitionDetail[0].sex">
+														<td><select id="sex" style="width: 90px;"
+															name="employeRequisitionDetail[0].sex" required>
 																<option value=" ">Select</option>
-																<option value="male">Male</option>
-																<option value="female">Female</option>
+																<option value="Male">Male</option>
+																<option value="Female">Female</option>
 														</select></td>
 
-														<td><input name="employeRequisitionDetail[0].ageFrom"
-															type="text" style="width: 130px;" id="ageFrom"></td>
+														<td><input name="employeRequisitionDetail[0].ageFrom" 
+															type="text" style="width: 90px;" id="ageFrom" required></td>
 
 														<td><input name="employeRequisitionDetail[0].ageTo"
-															type="text" style="width: 130px;" id="ageTo"></td>
+															type="text" style="width: 90px;" id="ageTo" required></td>
 
 														<td><input
 															name="employeRequisitionDetail[0].acadQuali" type="text"
-															style="width: 130px;" id="accademicQualificatio"></td>
+															style="width: 120px;" id="accademicQualificatio" required></td>
 
 														<td><input
 															name="employeRequisitionDetail[0].techQuali" type="text"
-															style="width: 130px;" id="technicalQualification"></td>
+															style="width: 120px;" id="technicalQualification" required></td>
 
 														<td><input
 															name="employeRequisitionDetail[0].minExperience"
-															type="text" style="width: 130px;" id="expMinMonth"></td>
+															type="text" style="width: 90px;" id="expMinMonth" required></td>
 
 														<td><input
 															name="employeRequisitionDetail[0].maxExperience"
-															type="text" style="width: 130px;" id="expMaxMonth"></td>
+															type="text" style="width: 90px;" id="expMaxMonth" required></td>
+
+														<td>
+															<select id="vacancyType" style="width: 120px;"
+															name="employeRequisitionDetail[0].vacanncyType" required>
+																<option value=" ">Select</option>
+																<option value="Fresher">Fresher</option>
+																<option value="Experience">Experience</option>
+														</select>
+														</td>
 
 														<td><input
-															name="employeRequisitionDetail[0].vacanncyType"
-															type="text" style="width: 130px;" id="vacancyType"></td>
-
-														<td><input
-															name="employeRequisitionDetail[0].totalVacancy"
-															type="text" style="width: 130px;" id="totalvacancy"></td>
+															name="employeRequisitionDetail[0].totalVacancy" 
+															type="text" style="width: 90px;" id="totalvacancy" required></td>
 
 														<td><input
 															name="employeRequisitionDetail[0].salaryFrom" type="text"
-															style="width: 130px;" id="salaryFrom"></td>
+															style="width: 120px;" id="salaryFrom" required></td>
 
 														<td><input
 															name="employeRequisitionDetail[0].salaryTo" type="text"
-															style="width: 130px;" id="salaryTo"></td>
+															style="width: 120px;" id="salaryTo" required></td>
 
 														<td><input name="employeRequisitionDetail[0].remarks"
-															type="text" style="width: 130px;" id="detail"></td>
+															type="text" style="width: 120px;" id="detail" required></td>
 
 														<td></td>
 													</tr>
@@ -265,11 +270,12 @@ body {
 
 								</div>
 							</div>
-							<button type="submit" class="btn btn-primary">Apply</button>
-							<button type="reset" class="btn btn-primary" value="Reset">Reset</button>
+							&nbsp&nbsp&nbsp<button type="submit" class="btn btn-primary">Submit</button>
+							&nbsp<button type="reset" class="btn btn-primary" value="Reset">Reset</button>
 
 
 						</div>
+						<p></p>
 					</form>
 					
 					
@@ -280,26 +286,46 @@ body {
 									<table id="datatables"  class="table table-striped display" style="width: 100%">
 										<thead>
 											<tr>
-												<th>Req Code</th>
-												<th>Req. Date</th>
-												<th>Priority</th>
-												<th>Till Date</th>
-												<th>Remarks</th>
-												<th>Action</th>
+												<th class="text-center">Req Code</th>
+												<th class="text-center">Req. Date</th>
+												<th class="text-center">Priority</th>
+												<th class="text-center">Till Date</th>
+												<th class="text-center">Remarks</th>
+												<th class="text-center">Status</th>
+												<th class="text-center">Action</th>
 											</tr>
 										</thead>
 										<tbody>
 											<tr th:each="leave : ${requisition}">
-												<td th:text="${leave.reqCode}"></td>
-												<td th:text="${leave.reqDate}"></td>
-												<td th:text="${leave.reqPriority}"></td>
-												<td th:text="${leave.reqTill}"></td>
-												<td th:text="${leave.remarks}"></td>
+												<td class="text-center" th:text="${leave.reqCode}"></td>
+												<td class="text-center" th:text="${leave.reqDate}"></td>
+												<td class="text-center" th:text="${leave.reqPriority}"></td>
+												<td class="text-center" th:text="${leave.reqTill}"></td>
+												<td class="text-center" th:text="${leave.remarks}"></td>
 												
-												<td><a th:href="@{editRequisition/{id}(id=${leave.reqCode})}" class="btn btn-primary"><em class="fa fa-eye"></em></a>
-															
-															
-													<a th:href="@{deleteRequisition/{id}(id=${leave.reqCode})}" class="btn btn-primary"><em class="fa fa-check"></em></a>
+												<th:block th:switch="${leave.status}">
+													<td th:case="'Y'" class="text-center">Approved</td>
+													<td th:case="'C'" class="text-center">Cancel</td>
+													<td th:case="'N'" class="text-center">Pending</td>
+												</th:block>
+												
+												<td class="text-center">
+													<th:block th:switch="${leave.status}">
+														<div th:case="'Y'">
+															<a th:href="@{viewRequisition/{id}(id=${leave.reqCode})}" class="btn btn-primary"><em class="fa fa-edit"></em></a>		
+															<a th:href="@{deleteRequisition/{id}(id=${leave.reqCode})}" onclick="return confirm('Are you sure?')" class="btn btn-primary"><em class="fa fa-times"></em></a>
+														</div>
+														<div th:case="'N'">
+															<a th:href="@{editRequisition/{id}(id=${leave.reqCode})}" class="btn btn-primary"><em class="fa fa-edit"></em></a>		
+														<a th:href="@{deleteRequisition/{id}(id=${leave.reqCode})}" onclick="return confirm('Are you sure?')" class="btn btn-primary"><em class="fa fa-times"></em></a>
+														</div>
+														<div th:case="'C'">
+															<a th:href="@{viewRequisition/{id}(id=${leave.reqCode})}" class="btn btn-primary"><em class="fa fa-edit"></em></a>		
+														<a th:href="@{deleteRequisition/{id}(id=${leave.reqCode})}" onclick="return confirm('Are you sure?')" class="btn btn-primary"><em class="fa fa-times"></em></a>
+														</div>
+														
+													</th:block>
+													
 												</td>
 											</tr>
 										</tbody>
@@ -413,6 +439,32 @@ body {
 		
 	
 	</script>
+	
+	<script>
+	$(document).ready(function(){
+		  var date = new Date();
+
+		  var day = ("0" + date.getDate()).slice(-2); var month = ("0" + (date.getMonth() + 1)).slice(-2);
+
+		  var today = date.getFullYear()+"-"+(month)+"-"+(day) ;
+		  
+		  $('#theDate').val(today);
+		  
+		});
+	
+	$(document).ready(function(){
+		  var date = new Date();
+
+		  var day = ("0" + date.getDate()).slice(-2); var month = ("0" + (date.getMonth() + 1)).slice(-2);
+
+		  var today = date.getFullYear()+"-"+(month)+"-"+(day) ;
+		  
+		  $('#theDate2').val(today);
+		  
+		});
+
+		
+	</script>
 
 <script>
 
@@ -425,23 +477,23 @@ $(document).ready(function(){
 	console.log("idINdexin add buttton function" + idIndex);
 	$("#add_row").click(function(){
 		idIndex++;
-	$('#addr'+i).html("<td><input type='text' style='width: 130px;'id='desigCode"+idIndex+"'name='employeRequisitionDetail["+i+"].desigCode'></td>"+
+	$('#addr'+i).html("<td><input type='text' style='width: 90px;'id='desigCode"+idIndex+"'name='employeRequisitionDetail["+i+"].desigCode' required></td>"+
 			
-			"<td><select id='designationName"+idIndex+"'name='employeRequisitionDetail["+i+"].designationName'onchange='selectDesignation()'><option value=''>Select</option></select></td>"+
-			"<td><select id='location'name='employeRequisitionDetail["+i+"].location'><option value=''>Select</option><option value='court'>Court</option><option value='department'>Department</option></select></td>"+
-			"<td><select id='sex'name='employeRequisitionDetail["+i+"].sex'><option value=''>Select</option><option value='male'>Male</option><option value='female'>Female</option></select></td>"+
-			"<td><input type='text' style='width: 130px;'id='ageFrom'name='employeRequisitionDetail["+i+"].ageFrom'></td>"+
-			" </td><td><input type='text' style='width: 130px;'id='desigCode'name='employeRequisitionDetail["+i+"].ageTo'></td>"+
+			"<td><select style='width: 130px;' id='designationName"+idIndex+"'name='employeRequisitionDetail["+i+"].designationName'onchange='selectDesignation()' required><option value=''>Select</option></select></td>"+
+			"<td><select id='location'name='employeRequisitionDetail["+i+"].location' required><option value=''>Select</option><option value='court'>Court</option><option value='department'>Department</option></select></td>"+
+			"<td><select style='width: 90px;' id='sex'name='employeRequisitionDetail["+i+"].sex' required><option value=''>Select</option><option value='male'>Male</option><option value='female'>Female</option></select></td>"+
+			"<td><input type='text' style='width: 90px;'id='ageFrom'name='employeRequisitionDetail["+i+"].ageFrom' required></td>"+
+			" </td><td><input type='text' style='width: 90px;'id='desigCode'name='employeRequisitionDetail["+i+"].ageTo' required></td>"+
 
-			"<td><input type='text' style='width: 130px;'id='acadQuali'name='employeRequisitionDetail["+i+"].acadQuali'></td>"+
-			"<td><input type='text' style='width: 130px;'id='techQuali'name='employeRequisitionDetail["+i+"].techQuali'></td>"+
-			"<td><input type='text' style='width: 130px;'id='minExperience'name='employeRequisitionDetail["+i+"].minExperience'></td>"+
-			"<td><input type='text' style='width: 130px;'id='maxExpierence'name='employeRequisitionDetail["+i+"].maxExperience'></td>"+
-			"<td><input type='text' style='width: 130px;'id='vacanncyType'name='employeRequisitionDetail["+i+"].vacanncyType'></td>"+
-			"<td><input type='text' style='width: 130px;'id='totalVacancy'name='employeRequisitionDetail["+i+"].totalvacancy'></td>"+
-			"<td><input type='text' style='width: 130px;'id='salaryFrom'name='employeRequisitionDetail["+i+"].salaryFrom'></td>"+
-			"<td><input type='text' style='width: 130px;'id='salaryTo'name='employeRequisitionDetail["+i+"].salaryTo'></td>"+
-			"<td><input type='text' style='width: 130px;'id='remarks'name='employeRequisitionDetail["+i+"].remarks'></td>");
+			"<td><input type='text' style='width: 120px;'id='acadQuali'name='employeRequisitionDetail["+i+"].acadQuali' required></td>"+
+			"<td><input type='text' style='width: 120px;'id='techQuali'name='employeRequisitionDetail["+i+"].techQuali' required></td>"+
+			"<td><input type='text' style='width: 90px;'id='minExperience'name='employeRequisitionDetail["+i+"].minExperience' required></td>"+
+			"<td><input type='text' style='width: 90px;'id='maxExpierence'name='employeRequisitionDetail["+i+"].maxExperience' required></td>"+
+			"<td><select style='width: 120px;id='vacanncyType' name='employeRequisitionDetail["+i+"].vacanncyType' required><option value=''>Select</option><option value='Fresher'>Fresher</option><option value='Experience'>Experience</option></select></td>"+
+			"<td><input type='text' style='width: 90px;'id='totalVacancy'name='employeRequisitionDetail["+i+"].totalvacancy' required></td>"+
+			"<td><input type='text' style='width: 120px;'id='salaryFrom'name='employeRequisitionDetail["+i+"].salaryFrom' required></td>"+
+			"<td><input type='text' style='width: 120px;'id='salaryTo'name='employeRequisitionDetail["+i+"].salaryTo' required></td>"+
+			"<td><input type='text' style='width: 120px;'id='remarks'name='employeRequisitionDetail["+i+"].remarks' required></td>");
 
 	$('#example').append('<tr id="addr'+(i+1)+'"></tr>');
 	$('#_cr').val(i+1);

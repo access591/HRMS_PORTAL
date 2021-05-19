@@ -104,9 +104,9 @@ public class ApplicantInformationController {
 	public String getRequisitionDateByAdvtCode(@PathVariable("id")String advtCode) {
 		//get advt code and advt date from Advertisement
 		ReqAdvertisement reqAdvertisement = reqAdvertisementService.findReqAdvertisementById(advtCode);
-		String advtDate = reqAdvertisement.getAdvtDate();
+		Date advtDate = reqAdvertisement.getAdvtDate();
 		System.out.println("======>>"+ advtDate);
-		return advtDate;
+		return advtDate.toString();
 	}
 	
 	@InitBinder("applicantInfo")

@@ -23,5 +23,8 @@ public interface EmployeeRequisitionService {
 	void removeEmployeeRequisition(String id);
 	
 	void approvedByReqCode(String reqCode);
+	
+	void approvedByReqCodeAndStatus(String reqCode,String requisitionApproval);
+
 
 }

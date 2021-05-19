@@ -17,6 +17,13 @@ body {
 .uppercase {
 	text-transform: uppercase;
 }
+
+.dropdown-menu {
+  min-width:250px;
+}
+
+
+
 </style>
 <script>
 	window.dataLayer = window.dataLayer || [];
@@ -69,9 +76,9 @@ body {
 										<div class="row">
 											<div class="col-12 col-lg-6">
 												<div class="form-group">
-													<label> Advertisement Code </label> <label
-														style="color: red">*</label> <input type="text" class="form-control" 
-														th:field="*{advtCode}" >
+													<label> Advertisement Code </label>
+													 <input type="text" class="form-control" 
+														th:field="*{advtCode}" readonly>
 												</div>
 											</div>
 											<div class="col-12 col-lg-6">
@@ -82,8 +89,8 @@ body {
 										</div>
 										<div class="row">
 											<div class="col-12 col-lg-6">
-												<label class="form-label">Remarks</label> <label
-													style="color: red">*</label> <input type="text"
+												<label class="form-label">Remarks</label>
+												 <input type="text"
 													class="form-control" th:field="*{remarks}"
 													>
 											</div>
@@ -119,12 +126,13 @@ body {
 												class="table table-striped display" style="width: 100%">
 												<thead>
 													<tr>
-														<th style="width: 130px;">Requisition Code</th>
-														<th style="width: 130px;">Requisition Date</th>
-														<th style="width: 130px;">Media Type</th>
-														<th style="width: 130px;">Media Name</th>
-														<th style="width: 130px;">Amount</th>
-														<th style="width: 130px;">Details</th>
+														<th class="text-center">Requisition Code</th>
+														<th class="text-center" >Requisition Date</th>
+														<th class="text-center">Media Type</th>
+														<th class="text-center">Media Name<label
+													style="color: red">*</label></th>
+														<th class="text-center">Amount</th>
+														<th class="text-center">Details</th>
 														
 														
 													</tr>
@@ -133,7 +141,7 @@ body {
 													<tr id="addr0">
 
 
-														<td><select id="reqCode" class="form-control" name="listReqAdvertisementDetail[0].reqCode">
+														<td><select class="form-control" style="width:auto;" id="reqCode" name="listReqAdvertisementDetail[0].reqCode">
 																<option value=" ">Select ReqCode</option>
 																<option 
 																th:each="employeeReq : ${listEmployeeRequisition}"
@@ -144,32 +152,32 @@ body {
 														
 														</td>
 
-														<td><input type="date" style="width: 130px;"
-															name="listReqAdvertisementDetail[0].reqDate"class="form-control"></td>
+														<td><input type="date" class="form-control text-center"
+															name="listReqAdvertisementDetail[0].reqDate"></td>
 
 
 														
 
 
 
-														<td><select id="media" name="listReqAdvertisementDetail[0].mediaType" class="form-control">
+														<td><select class="form-control text-center" style="width:150px;" id="media" name="listReqAdvertisementDetail[0].mediaType">
 																<option value=" ">Media Type</option>
-																<option value="court">Media-1</option>
-																<option value="department">Media-2</option>
+																<option value="News Paper">News Paper</option>
+																<option value="Cable TV">Cable TV</option>
+																<option value="Magzine">Magzine</option>
+																<option value="TV Channel">TV Channel</option>
+																<option value="Others">Others</option>
 														</select>
 														</td>
 														
 														<td><input type="text"
-															style="width: 130px;" id="mediaName" name="listReqAdvertisementDetail[0].mediaName"
-															class="form-control"></td>
+															class="form-control text-center" id="mediaName" name="listReqAdvertisementDetail[0].mediaName"></td>
 
-														<td><input type="text" style="width: 130px;"
-															id="amount" name="listReqAdvertisementDetail[0].advtAmount"
-															class="form-control"></td>
+														<td><input type="text" class="form-control text-center"
+															id="amount" name="listReqAdvertisementDetail[0].advtAmount"></td>
 
 														<td><input type="text"
-															style="width: 130px;" id="details" name="listReqAdvertisementDetail[0].remarks"
-															class="form-control"></td>
+															class="form-control text-center" id="details" name="listReqAdvertisementDetail[0].remarks"></td>
 
 														
 
@@ -188,7 +196,7 @@ body {
 
 								</div>
 							</div>
-							&nbsp&nbsp&nbsp<button type="submit" class="btn btn-primary">Apply</button>
+							&nbsp&nbsp&nbsp<button type="submit" class="btn btn-primary">Submit</button>
 							&nbsp&nbsp&nbsp<button type="reset" class="btn btn-primary" value="Reset">Reset</button>
 
 
@@ -207,14 +215,14 @@ body {
 											<tr>
 												<th scope="col"> Advertisement Code </th>
 												<th scope="col">Advertisement Date </th>
-												<th scope="col">remarks</th>
+												<th scope="col">Remarks</th>
 												<th scope="col">Action</th>
 											</tr>
 										</thead>
 										<tbody>
 											<tr  th:each="list : ${listReqAdvertisement}">
 												<td th:text="${list.advtCode}"></td>
-												<td th:text="${list.advtDate}"></td>
+												<td th:text="${#dates.format(new java.util.Date(list.advtDate), 'dd-MMM-yy')}"></td>
 												<td th:text="${list.remarks}"></td>
 												<td>
 												<a th:href="@{editAdvertisement/{id}(id=${list.advtCode})}"><em class="align-middle fas fa-fw fa-pen"></em></a>
@@ -290,9 +298,12 @@ body {
 			$("#add_row").click(function(){
 			$('#addr'+i).html(
 					
-					"<td><select id='reqCode' name='listReqAdvertisementDetail["+i+"].reqCode' class='form-control'><option value=''>Select Req Code</option><option th:each='employeeReq : ${listEmployeeRequisition}'th:text='${employeeReq.reqCode}'></option></select></td>"+
-					"<td><input type='Date' style='width: 130px;'id='reqDate"+i+"'name='listReqAdvertisementDetail["+i+"].reqDate'class='form-control'></td>"+
-					"<td><select id='mediaType'name='listReqAdvertisementDetail["+i+"].mediaType' class='form-control'><option value=''>Media Type</option><option value='media-1'>Media-1</option><option value='female'>Media-2</option></select></td>"+
+					"<td><select id='reqCode' name='listReqAdvertisementDetail["+i+"].reqCode' class='form-control' style='width:auto;'><option value=''>Select Req Code</option><option th:each='employeeReq : ${listEmployeeRequisition}'th:text='${employeeReq.reqCode}'></option></select></td>"+
+					"<td><input type='Date' id='reqDate"+i+"'name='listReqAdvertisementDetail["+i+"].reqDate'class='form-control text-center'></td>"+
+					"<td><select id='mediaType'name='listReqAdvertisementDetail["+i+"].mediaType' class='form-control' style='width:150px;'>"+
+					
+					"<option value=''>Media Type</option><option value='News Paper'>News Paper</option><option value='Cable TV'>Cable TV</option><option value='Magzine'>Magzine</option><option value='TV Channel'>TV Channel</option><option value='Others'>Others</option></select></td>"+
+					
 					"<td><input type='text' style='width: 130px;'id='mediaName'name='listReqAdvertisementDetail["+i+"].mediaName' class='form-control'></td>"+
 					
 					"<td><input type='text' style='width: 130px;'id='advtAmount'name='listReqAdvertisementDetail["+i+"].advtAmount' class='form-control'></td>"+

@@ -9,6 +9,8 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name="M_EMPREQ_ADVERTISEMENT")
@@ -18,8 +20,9 @@ public class ReqAdvertisement {
 	@Column(name="ADVT_CODE")
 	private String advtCode;
 	
+	@Temporal(TemporalType.DATE)
 	@Column(name="ADVT_DATE")
-	private String advtDate;
+	private Date advtDate;
 	
 	@Column(name="REMARKS")
 	private String remarks;
@@ -42,11 +45,11 @@ public class ReqAdvertisement {
 		this.advtCode = advtCode;
 	}
 
-	public String getAdvtDate() {
+	public Date getAdvtDate() {
 		return advtDate;
 	}
 
-	public void setAdvtDate(String advtDate) {
+	public void setAdvtDate(Date advtDate) {
 		this.advtDate = advtDate;
 	}
 
