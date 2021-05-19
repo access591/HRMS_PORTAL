@@ -16,11 +16,11 @@ import com.hrms.repository.EmployeeRequisitionDao;
 public class EmployeeRequisitionServiceImpl implements EmployeeRequisitionService{
 
 	@Autowired EmployeeRequisitionDao employeRequisitionDao;
-	@Autowired SessionFactory sessionfactory;
+	@Autowired SessionFactory sessionFactory;
 	//@Autowired
 	@Override
 	public void addEmployeeRequisition(EmployeeRequisition employeReq) {
-		Session session = sessionfactory.openSession();
+		Session session = sessionFactory.openSession();
 	    session.beginTransaction();
 	    employeReq.setReqCode(employeRequisitionDao.getMaxId("REQ"));
 	    session.save(employeReq);
@@ -45,7 +45,7 @@ public class EmployeeRequisitionServiceImpl implements EmployeeRequisitionServic
 	@Override
 	public void updateEmployeeRequisition(EmployeeRequisition c) {
 		
-		Session session = sessionfactory.openSession();
+		Session session = sessionFactory.openSession();
 		//Transaction tx = session.beginTransaction();
 		EmployeeRequisition emp = session.find(EmployeeRequisition.class, c.getReqCode());
 		emp.getEmployeRequisitionDetail().clear();;
@@ -60,7 +60,7 @@ public class EmployeeRequisitionServiceImpl implements EmployeeRequisitionServic
 
 	@Override
 	public void removeEmployeeRequisition(String reqCode) {
-		Session session = sessionfactory.openSession();
+		Session session = sessionFactory.openSession();
 		Transaction tx = session.beginTransaction();
 		Object o = session.get(EmployeeRequisition.class, reqCode);
 		EmployeeRequisition e = (EmployeeRequisition) o;
@@ -96,6 +96,18 @@ public class EmployeeRequisitionServiceImpl implements EmployeeRequisitionServic
 	public void approvedByReqCode(String reqCode) {
 		this.employeRequisitionDao.approvedStatusByReqCode(reqCode);
 		
+		
+	}
+
+	@Override
+	public void approvedByReqCodeAndStatus(String reqCode, String requisitionApproval) {
+		
+		Session session = sessionFactory.openSession();
+		EmployeeRequisition em = session.find(EmployeeRequisition.class, reqCode);
+		em.setStatus(requisitionApproval);
+		session.merge(em);
+		session.beginTransaction().commit();
+		session.close();
 		
 	}
 

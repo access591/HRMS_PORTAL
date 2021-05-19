@@ -87,18 +87,46 @@ body {
 															<td th:text="${commonUtil.reqTill}">
 															</td>
 
-															<td>
+															<td th:if="${commonUtil.status == 'Y'}">
 																<div class="dropdown show">
-  <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-   Action
-  </a>
-
-  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-    <a class="dropdown-item" th:href="@{approveRequisition/{id}/(id=${commonUtil.reqCode})}">Approve</a>
-    <a class="dropdown-item" href="#">Cancel</a>
-    
-  </div>
-</div>
+																  <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+																   Approved
+																  </a>
+																
+																  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+																    <a class="dropdown-item" th:href="@{approveRequisition/{id}/{requisitionStatus}/(id=${commonUtil.reqCode},requisitionStatus=${'Y'})}">Approve</a>
+																    <a class="dropdown-item" th:href="@{approveRequisition/{id}/{requisitionStatus}/(id=${commonUtil.reqCode},requisitionStatus=${'C'})}">Cancel</a>
+																    
+																  </div>
+																</div>
+															</td>
+															
+															<td th:if="${commonUtil.status == 'N'}">
+																<div class="dropdown show">
+																  <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+																    &nbsp &nbspAction&nbsp &nbsp
+																  </a>
+																
+																  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+																    <a class="dropdown-item" th:href="@{approveRequisition/{id}/{requisitionStatus}/(id=${commonUtil.reqCode},requisitionStatus=${'Y'})}">Approve</a>
+																    <a class="dropdown-item" th:href="@{approveRequisition/{id}/{requisitionStatus}/(id=${commonUtil.reqCode},requisitionStatus=${'C'})}">Cancel</a>
+																    
+																  </div>
+																</div>
+															</td>
+															
+															<td th:if="${commonUtil.status == 'C'}">
+																<div class="dropdown show">
+																  <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+																    &nbsp &nbspCancel &nbsp &nbsp
+																  </a>
+																
+																  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+																    <a class="dropdown-item" th:href="@{approveRequisition/{id}/{requisitionStatus}/(id=${commonUtil.reqCode},requisitionStatus=${'Y'})}">Approve</a>
+																    <a class="dropdown-item" th:href="@{approveRequisition/{id}/{requisitionStatus}/(id=${commonUtil.reqCode},requisitionStatus=${'C'})}">Cancel</a>
+																    
+																  </div>
+																</div>
 															</td>
 															
 															<td>
@@ -125,41 +153,7 @@ body {
 								</div>
 								
 								
-								<div class="col-12">
-								<h6>Approved Status</h6>
-							<div class="card">
-								<div class="card-header"></div>
-								<div class="card-body">
-									<table id="datatables"  class="table table-striped display" style="width: 100%">
-										<thead>
-											<tr>
-												<th>Req Code</th>
-												<th>Req. Date</th>
-												<th>Priority</th>
-												<th>Till Date</th>
-												<th>Remarks</th>
-												<th>Status</th>
-												
-											</tr>
-										</thead>
-										<tbody>
-											<tr th:each="leave : ${approved}">
-												<td th:text="${leave.reqCode}"></td>
-												<td th:text="${leave.reqDate}"></td>
-												<td th:text="${leave.reqPriority}"></td>
-												<td th:text="${leave.reqTill}"></td>
-												<td th:text="${leave.remarks}"></td>
-												<td th:text="Approved"></td>
-												
-												
-											</tr>
-										</tbody>
-									</table>
-								</div>
-							</div>
-							
-							
-							</div>
+								
 
 						</div>
 					</div>

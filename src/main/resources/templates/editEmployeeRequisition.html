@@ -65,14 +65,14 @@ body {
 										<div class="row">
 											<div class="col-12 col-lg-6">
 												<div class="form-group">
-													<label> Requisition Code </label> <label style="color: red">*</label>
+													<label> Requisition Code </label> 
 													<input class="form-control" id="reqCode" name="reqCode"
 														th:field="*{reqCode}" readonly/>
 												</div>
 											</div>
 											<div class="col-12 col-lg-6">
 												<div class="form-group">
-													<label> Requisition Date </label> <label style="color: red">*</label>
+													<label> Requisition Date </label> 
 													<input class="form-control" type="date" id="" value=""
 														th:field="*{reqDate}" />
 												</div>
@@ -82,23 +82,29 @@ body {
 										<div class="row">
 											<div class="col-12 col-lg-6">
 												<div class="form-group">
-													<label> Department Code </label> <label style="color: red">*</label>
+													<label> Department Code </label> 
 													<input type="text" class="form-control" id="departmentId"
 														value="" th:field="*{deptCode}" readonly>
 												</div>
 											</div>
 											<div class="col-12 col-lg-6">
-												<label class="form-label">Department Name</label> <label
-													style="color: red">*</label><input type="text" class="form-control" id="departmentId"
+												<label class="form-label">Department Name</label> <input type="text" class="form-control" id="departmentId"
 														value="" readonly>
 											</div>
 										</div>
 										<div class="row">
 											<div class="col-12 col-lg-6">
 												<div class="form-group">
-													<label> Requisition Priorty </label> <label
-														style="color: red">*</label> <input type="text" class="form-control" id="reqPriority"
-														value="" th:field="*{reqPriority}">
+													<label> Requisition Priorty </label>  
+													<select class="form-control" id="reqPriority"
+														 >
+														 <option disabled>Please Select</option>
+														 <option value="High">High</option>
+														 <option value="Low">Low</option>
+														 
+														 </select>
+														 
+													
 												</div>
 											</div>
 											<div class="col-12 col-lg-6">
@@ -235,7 +241,13 @@ body {
 								</div>
 							</div>
 							<button type="submit" class="btn btn-primary">Update</button>
-							<button type="reset" class="btn btn-primary">Back</button>
+							<input
+    							action="action"
+    							onclick="window.history.go(-1); return false;"
+    							type="submit"
+    							value="Back"
+							/>
+
 
 
 						</div>
