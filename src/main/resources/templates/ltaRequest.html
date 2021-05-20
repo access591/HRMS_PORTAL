@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"lang="en">
+
+<script type="text/javascript" th:src="@{/js/settings.js}"></script>
+<script type="text/javascript" th:src="@{/js/app.js}"></script>
+<link rel="stylesheet" type="text/css" th:href="@{/css/modern.css}" />
+<script  src="https://www.googletagmanager.com/gtag/js?id=UA-120946860-7"></script>
+
+
+<style>
+
+
+body {
+	opacity: 0;
+}
+.uppercase {
+  text-transform: uppercase;
+}
+
+#loading {
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  position: fixed;
+  display: block;
+  opacity: 0.7;
+  background-color: #676565;
+  z-index: 99;
+  text-align: center;
+}
+
+#loading-image {
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  z-index: 100;
+}
+</style>
+
+
+<script>
+
+
+
+	window.dataLayer = window.dataLayer || [];
+	function gtag() {
+		dataLayer.push(arguments);
+	}
+	 gtag('js', new Date());
+
+	gtag('config', 'UA-120946860-7');
+</script>
+<head>
+<meta charset="utf-8" />
+<title>HRMS</title>
+</head>
+ 
+<body>
+
+<div class="wrapper">
+<nav id="sidebar" class="sidebar">
+ <div th:replace="/fragments/sidebar :: div"></div>
+ </nav>
+ 		
+		<div class="main">
+		<div th:replace="/fragments/header ::div"></div>
+		<main class="content">
+		<div class="container-fluid">
+
+					<div class="header">
+						<h1 class="header-title">
+							Personal
+						</h1>
+						
+					
+					</div>
+					
+					<div class="row">
+					
+							<div class="col-12">
+							<div class="card">
+								<div class="card-header">
+									<h5 class="card-title">LTA Request  </h5>
+								<div class="alert-outline">
+									<div th:if="${message}" th:text="${message}" style="color: red">
+									</div> 
+									</div>	
+								</div>
+								<div class="card-body">
+								<form id="validation-form" action="#"th:action="@{/saveLtaRequest}" th:object="${LtaRequest}" method="post" >
+									<div class="form-row">
+												
+												<div class="form-group sm col-md-4">
+													<label class="form-label">Employee Code</label>
+												<label style="color: red">*</label>
+												<select class="form-control select2"onchange="myFunction()" name="empCode"id="empCode" required aria-required="true">
+												 <option value="">Select Employee</option>
+												<option th:each="e :${listEmployee}"th:value="${e.getEmpCode()}" th:text="${e.getEmpName()}"></option>
+											     	</select>
+
+												</div>
+												
+												
+											<div class="form-group sm col-md-4">
+											       <label class="form-label">Employee Name 
+											       <span class="text-danger">*</span></label>
+							                 <input  type="text"id="empName"name="empName" title=" Employee Name" class="form-control " readonly>
+										     </div>
+										     	
+										     	
+										     	<div class="form-group sm col-md-4">
+											       <label class="form-label">Appointment   Date
+											       <span class="text-danger">*</span></label>
+							                 <input  type="text"id="appDate"name="appDate" title="Name"onkeyup="sync()" class="form-control required">
+										     </div>
+											
+												
+												
+								</div>
+								
+									<div class="form-row">
+									
+									<div class="form-group sm col-md-4">
+											       <label class="form-label">Eligibility   Date
+											      </label>
+							                 <input  type="text"id="eligibilityDate"name="eligibilityDate" title="Eligibility   Date" class="form-control required">
+										     </div>
+										     
+										     
+										     	<div class="form-group sm col-md-4">
+											       <label class="form-label">When Due
+											       </label>
+							                 <input  type="text"id="whenDue"name="whenDue" title="When Due" class="form-control required">
+										     </div>
+										     
+										     
+										     
+										     
+												<div class="form-group sm col-md-4">
+											       <label class="form-label">When Available
+											      </label>
+							                 <input  type="text"id="whenAvailed"name="whenAvailed" title="When Available" class="form-control required">
+										     </div>
+												</div>
+												<div class="form-row">
+												
+												<div class="form-group sm col-md-4">
+											       <label class="form-label">Leave From
+											      </label>
+							                 <input  type="text"id="leaveFrom"name="leaveFrom" title="leave From" class="form-control required">
+										     </div>
+												
+												
+												<div class="form-group sm col-md-4">
+											       <label class="form-label">Leave To
+											      </label>
+							                 <input  type="text"id="leaveTo"name="leaveTo" title="Leave TO" class="form-control required">
+										     </div>
+												
+												<div class="form-group sm col-md-4">
+											       <label class="form-label">Amount
+											      </label>
+							                 <input  type="text"id="adavance"name="adavance" title="Amount" class="form-control required">
+										     </div>
+							</div>
+							
+							<div class="form-row">
+							<div class="form-group sm col-md-4">
+											       <label class="form-label">Remarks
+											      </label>
+							                 <input  type="text"id="remarks"name="remarks" title="remarks" class="form-control required">
+										     </div>
+							</div>
+							<button type="submit" class="btn btn-primary">Save</button>
+								 <button type="reset"class="btn btn-primary" value="Reset">Reset</button>
+								 </form>
+						      </div>
+	                      </div>
+	                     
+	                     
+	  <!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->                   
+	                     
+	                </div>     
+					
+						<div class="col-12">
+							<div class="card">
+								<div class="card-header">
+								</div>
+								<div class="card-body">
+									<table id="datatables-buttons" class="table table-striped display" style="width:100%"aria-describedby="example">
+										<thead>
+											<tr>
+												<th scope="col">LTA ID</th>
+												<th scope="col">Employee Name </th>
+												<th scope="col">Appointment Date</th>
+												<th scope="col">Availed Date</th>
+												<th scope="col">Remarks</th>
+												<th scope="col">Action</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr  th:each="listLta : ${listLtaRequest}">
+												<td th:text="${listLta.ltaCode}"></td>
+												
+												<td th:text="${listLta?.empCode?.empName}"></td>
+												<td th:text="${#dates.format(listLta.appDate,'dd-MM-yyyy')}"></td>
+												<td th:text="${#dates.format(listLta.whenAvailed,'dd-MM-yyyy')}"></td>
+												<td th:text="${listLta.remarks}"></td>
+												
+												<td><a th:href="@{/editLtaRequest/{id}(id=${listLta.ltaCode})}"><em class="fa fa-edit"></em></a>
+												<a th:href="@{/deleteLtaRequest/{id}(id=${listLta.ltaCode})}" onclick="return confirm('Are you sure?')"><em class="fa fa-times"></em></a>
+												</td>
+											</tr> 
+										</tbody>
+									
+									</table>
+								</div>
+								
+							</div>
+						</div>
+					
+					
+					</div>
+         
+				</div>
+		</main>
+		<footer class="footer">
+		<div th:replace="/fragments/footer :: div"></div>
+		</footer>
+		</div>
+		</div>
+	<script>
+		$(function() {
+
+			$("input[name='appDate']").daterangepicker({
+				singleDatePicker: true,
+			    autoApply: true,
+				locale: {
+		            format: 'YYYY/MM/DD'
+		        },
+				showDropdowns: true
+			});
+			
+		$("input[name='eligibilityDate']").daterangepicker({
+				singleDatePicker: true,
+			    autoApply: true,
+				locale: {
+					 format: 'YYYY/MM/DD'
+		        },
+				showDropdowns: true
+			});
+		$("input[name=\"whenDue\"]").daterangepicker({
+			singleDatePicker: true,
+			   autoApply: true,
+			locale: {
+				 format: 'YYYY/MM/DD'
+	        },
+			showDropdowns: true
+		});
+		$("input[name='whenAvailed']").daterangepicker({
+			singleDatePicker: true,
+		    autoApply: true,
+			locale: {
+				 format: 'YYYY/MM/DD'
+	        },
+			showDropdowns: true
+		});
+		$("input[name='leaveFrom']").daterangepicker({
+			singleDatePicker: true,
+		    autoApply: true,
+			locale: {
+				 format: 'YYYY/MM/DD'
+	        },
+			showDropdowns: true
+		});
+			
+		
+		$("input[name='leaveTo']").daterangepicker({
+				singleDatePicker: true,
+				   autoApply: true,
+				locale: {
+					 format: 'YYYY/MM/DD'
+		        },
+				showDropdowns: true
+			});
+		
+		$("input[name=\"dov\"]").daterangepicker({
+			singleDatePicker: true,
+			   autoApply: true,
+			locale: {
+				 format: 'YYYY/MM/DD'
+	        },
+			showDropdowns: true
+		});
+		$("input[name=\"doi\"]").daterangepicker({
+			singleDatePicker: true,
+			   autoApply: true,
+			locale: {
+				format: 'DD/MM/YYYY'
+	        },
+			showDropdowns: true
+		});
+
+
+
+			
+			// Datatables basic
+			$('#datatables-basic').DataTable({
+				responsive: true
+			});
+			// Datatables with Buttons
+			var datatablesButtons = $('#datatables-buttons').DataTable({
+				  deferRender:true,
+		            scrollCollapse: true,
+		            scroller: false,
+				   responsive: true,
+				   lengthMenu :[[10,20,30,-1 ],['10 rows', '20 rows', '30 rows', 'Show all' ] ],
+					buttons :[]
+			});
+			datatablesButtons.buttons().container().appendTo("#datatables-buttons_wrapper .col-md-6:eq(0)")
+		});
+		
+	</script>
+	
+		
+
+
+
+
+<script>
+ function myFunction(){
+   $('#empCode').click(function() {
+      	 var name= $('#empCode option:selected').text();
+      	$('#empName').val(name);
+      	}); 
+      }
+      
+</script>
+
+
+
+	<script>
+		$('#loading').show();
+		$.ajax({
+			// Other ajax parameters
+			success : function() {
+				// hiding the image here
+				debugger;
+				$('#loading').hide();
+			}
+		});
+	</script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+
+
+</body>
+</html>

@@ -2,12 +2,15 @@ package com.hrms.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 @Entity
 @Table(name = "MEDICLAIM_MASTER")
@@ -35,10 +38,10 @@ public class MedicalReimbursement implements Serializable {
 	@Column(name = "SLIP_DATE")
 	private Date dateOfSlip;
 	@ManyToOne
-	@JoinColumn(name = "EMPLOYEE_CODE", nullable = false)
+	@JoinColumn(name = "EMPLOYEE_CODE",updatable = false)
 	private Employee empCode;
 
-	@Column(name = "MONTH")
+	@Column(name = "CLAIMING_DATE")
 	private Date claimingDate;
 
 	@Column(name = "NAME_OF_PERSON")
@@ -55,10 +58,31 @@ public class MedicalReimbursement implements Serializable {
 	@Column(name = "MED_IND_OUT")
 	private String medIndOut;
 	
+	@Column(name = "APPROVED_BY")
+	private String  approvedBy ;   
+	
+	@Column(name = "APPROVAL_STATUS")
+	private String  approvalStatus ;
+	
+	@Column(name = "APPROVAL_DATE")
+	private Date approvalDate ;
+	
+	 @OneToMany(mappedBy="slipNo",cascade = CascadeType.ALL,
+		        orphanRemoval = true)
+	List<MedicalReimbursementDetail> medicalReimbursementDetail;
+	
 	//>>>>>>>>>>>>>>>>>>>>>>>>>second Step Start>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 	
 	public String getSlipNo() {
 		return slipNo;
+	}
+
+	public List<MedicalReimbursementDetail> getMedicalReimbursementDetail() {
+		return medicalReimbursementDetail;
+	}
+
+	public void setMedicalReimbursementDetail(List<MedicalReimbursementDetail> medicalReimbursementDetail) {
+		this.medicalReimbursementDetail = medicalReimbursementDetail;
 	}
 
 	public void setSlipNo(String slipNo) {
@@ -129,6 +153,52 @@ public class MedicalReimbursement implements Serializable {
 		this.medIndOut = medIndOut;
 	}
 //...............................................
+
+	public String getApprovedBy() {
+		return approvedBy;
+	}
+
+	public void setApprovedBy(String approvedBy) {
+		this.approvedBy = approvedBy;
+	}
+
+	public String getApprovalStatus() {
+		return approvalStatus;
+	}
+
+	public void setApprovalStatus(String approvalStatus) {
+		this.approvalStatus = approvalStatus;
+	}
+
+	public Date getApprovalDate() {
+		return approvalDate;
+	}
+
+	public void setApprovalDate(Date approvalDate) {
+		this.approvalDate = approvalDate;
+	}
+
+	public MedicalReimbursement(Date dateOfSlip, Employee empCode, Date claimingDate, String nameOfPerson,
+			String empRelation, String treatmentType, String treatDescription, String medIndOut, String approvedBy,
+			String approvalStatus, Date approvalDate, List<MedicalReimbursementDetail> medicalReimbursementDetail) {
+		super();
+		this.dateOfSlip = dateOfSlip;
+		this.empCode = empCode;
+		this.claimingDate = claimingDate;
+		this.nameOfPerson = nameOfPerson;
+		this.empRelation = empRelation;
+		this.treatmentType = treatmentType;
+		this.treatDescription = treatDescription;
+		this.medIndOut = medIndOut;
+		this.approvedBy = approvedBy;
+		this.approvalStatus = approvalStatus;
+		this.approvalDate = approvalDate;
+		this.medicalReimbursementDetail = medicalReimbursementDetail;
+	}
+
+	public MedicalReimbursement() {
+		super();
+	}
 
 	
 	

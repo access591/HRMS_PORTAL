@@ -71,6 +71,7 @@ public class EmployeeController {
 	CountryService countryService;
 	
 	
+	
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
 /**
  * get All employee Details page 
@@ -104,17 +105,18 @@ public class EmployeeController {
 			Department d=departmentService.findDepartmentById(listEmployee2.get(i).getDepartmentCode());
 			Designation desig = designationService.findDesignationById(listEmployee2.get(i).getDesignationCode());
 			ArmsLicenseDetails arms= armsLicenseService.findArmsByEmpEmpCode(listEmployee2.get(i).getEmpCode());
-			
+			Category cat=categoryService.findCategoryByCatId(listEmployee2.get(i).getCategoryCode());
 	
 			
 			
 			          empl = new EmployeeUtil(listEmployee2.get(i).getEmpCode(),
 					                arms.getArmsCode(),
 					  				listEmployee2.get(i).getEmpName(),
-					  				listEmployee2.get(i).getCategoryCode(),
-					  				d.getDeptName(),desig.getDesgName(),
+					  				cat.getCategoryName(),
+					  				d.getDeptName(),
+					  				desig.getDesgName(),
 					  				listEmployee2.get(i).getImageProfile());
-			                       listEmployeeUtil.add(empl);
+			                        listEmployeeUtil.add(empl);
 			                       
 			                   
 			 

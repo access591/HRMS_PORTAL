@@ -1,164 +1,228 @@
 package com.hrms.model;
 
 
+import java.io.Serializable;
+
 import java.util.Date;
+import java.util.List;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.constraints.Size;
 
-@Entity(name="TOUR_PLAN")
-public class TourPlan {
-	
+import org.springframework.format.annotation.DateTimeFormat;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+
+
+@Entity
+@Table(name="TOUR_PLAN_MAST")
+public class TourPlan implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7748536710350573569L;
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	private Long id;
-	
-	private String empCode;
-	private String empName;
-	private String deptCode;
+	@Column(name = "TOUR_PLAN_ID")
 	private String tourPlanId;
-	private String fyCode = null;
-	private String cCode = null;
-	private String approvedBy;
-	private String mobile;
 	
-	private String tourPlanDate = null;
+	@Column(name = "TOUR_PLAN_DT")
+	private Date tourPlanDate;
+	 @OneToMany(mappedBy="tourPlanId",cascade = CascadeType.ALL,
+		        orphanRemoval = true)
+	List<TourPlanDetails> tourPlanDetail;
+
+
+	@ManyToOne
+	@JoinColumn(name = "EMPLOYEE_CODE",updatable = false)
+	private Employee empCode;
+
 	
+	@ManyToOne
+	@JoinColumn(name ="DEPT_CODE",updatable = false)
+	private Department departmentCode ;
+	@ManyToOne
+	@JoinColumn(name ="DESG_CODE",updatable = false)
+	private Designation desgCode;
+	
+	@Column(name = "TOUR_START_DT")
 	private String tourStartDate;
-	private String tourEndDate;
 	
-	@Column(updatable = false)
-	private String Udate;
+    @Column(name = "MOB_NUMBER")
+	private String  mobNumber;
+    @Column(name = "TOUR_END_DT")
+	private String  tourEndDate;
 	
-	private String approvedStatus = "N";
+    @Column(name = "APPROVED_BY")
+	private String  approvedBy ;   
 	
-	@Column(name = "INS_BY",updatable = false)
+	@Column(name = "APPROVAL_STATUS")
+	private String  approvalStatus ;
+	
+	@Column(name = "APPROVAL_DATE")
+	private Date approvalDate ;
+
+	@Column(name = "INS_BY", updatable = false)
 	private String insBy;
-		
-	@Column(name = "INS_DATE",updatable = false)
-	private Date insDate =new Date();
-		
-	@Column(name = "UPD_BY",insertable = false)
-	private String updBy;
-		
-	@Column(name = "UPD_DATE",insertable = false)
-	private Date  updDate = new Date();
-		
-	
-	public String getInsBy() {
-		return insBy;
-	}
-	public void setInsBy(String insBy) {
-		this.insBy = insBy;
-	}
-	public Date getInsDate() {
-		return insDate;
-	}
-	public void setInsDate(Date insDate) {
-		this.insDate = insDate;
-	}
-	public String getUpdBy() {
-		return updBy;
-	}
-	public void setUpdBy(String updBy) {
-		this.updBy = updBy;
-	}
-	public Date getUpdDate() {
-		return updDate;
-	}
-	public void setUpdDate(Date updDate) {
-		this.updDate = updDate;
-	}
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
-	}
-	public String getEmpCode() {
-		return empCode;
-	}
-	public void setEmpCode(String empCode) {
-		this.empCode = empCode;
-	}
-	public String getEmpName() {
-		return empName;
-	}
-	public void setEmpName(String empName) {
-		this.empName = empName;
-	}
-	public String getDeptCode() {
-		return deptCode;
-	}
-	public void setDeptCode(String deptCode) {
-		this.deptCode = deptCode;
-	}
+
+	@Column(name = "INS_DATE", updatable = false)
+	private Date insDate = new Date();
+
 	public String getTourPlanId() {
 		return tourPlanId;
 	}
+
 	public void setTourPlanId(String tourPlanId) {
 		this.tourPlanId = tourPlanId;
 	}
-	public String getFyCode() {
-		return fyCode;
-	}
-	public void setFyCode(String fyCode) {
-		this.fyCode = fyCode;
-	}
-	public String getcCode() {
-		return cCode;
-	}
-	public void setcCode(String cCode) {
-		this.cCode = cCode;
-	}
-	public String getApprovedBy() {
-		return approvedBy;
-	}
-	public void setApprovedBy(String approvedBy) {
-		this.approvedBy = approvedBy;
-	}
-	public String getMobile() {
-		return mobile;
-	}
-	public void setMobile(String mobile) {
-		this.mobile = mobile;
-	}
-	public String getTourPlanDate() {
+
+	public Date getTourPlanDate() {
 		return tourPlanDate;
 	}
-	public void setTourPlanDate(String tourPlanDate) {
+
+	public void setTourPlanDate(Date tourPlanDate) {
 		this.tourPlanDate = tourPlanDate;
 	}
+
+	public Employee getEmpCode() {
+		return empCode;
+	}
+
+	public void setEmpCode(Employee empCode) {
+		this.empCode = empCode;
+	}
+
+	public Department getDept_code() {
+		return departmentCode;
+	}
+
+	public void setDept_code(Department departmentCode) {
+		this.departmentCode = departmentCode;
+	}
+
 	public String getTourStartDate() {
 		return tourStartDate;
 	}
+
 	public void setTourStartDate(String tourStartDate) {
 		this.tourStartDate = tourStartDate;
 	}
+
+	
+	public String getMobNumber() {
+		return mobNumber;
+	}
+
+	public void setMobNumber(String mobNumber) {
+		this.mobNumber = mobNumber;
+	}
+
 	public String getTourEndDate() {
 		return tourEndDate;
 	}
+
 	public void setTourEndDate(String tourEndDate) {
 		this.tourEndDate = tourEndDate;
 	}
-	public String getUdate() {
-		return Udate;
+
+	public String getApprovedBy() {
+		return approvedBy;
 	}
-	public void setUdate(String udate) {
-		Udate = udate;
+
+	public void setApprovedBy(String approvedBy) {
+		this.approvedBy = approvedBy;
 	}
-	public String getApprovedStatus() {
-		return approvedStatus;
+
+	public String getApprovalStatus() {
+		return approvalStatus;
 	}
-	public void setApprovedStatus(String approvedStatus) {
-		this.approvedStatus = approvedStatus;
+
+	public void setApprovalStatus(String approvalStatus) {
+		this.approvalStatus = approvalStatus;
 	}
-	
-	
-	
+
+	public Date getApprovalDate() {
+		return approvalDate;
+	}
+
+	public void setApprovalDate(Date approvalDate) {
+		this.approvalDate = approvalDate;
+	}
+
+	public String getInsBy() {
+		return insBy;
+	}
+
+	public void setInsBy(String insBy) {
+		this.insBy = insBy;
+	}
+
+	public Date getInsDate() {
+		return insDate;
+	}
+
+	public void setInsDate(Date insDate) {
+		this.insDate = insDate;
+	}
+
+	public Department getDepartmentCode() {
+		return departmentCode;
+	}
+
+	public void setDepartmentCode(Department departmentCode) {
+		this.departmentCode = departmentCode;
+	}
+
+	public Designation getDesgCode() {
+		return desgCode;
+	}
+
+	public void setDesgCode(Designation desgCode) {
+		this.desgCode = desgCode;
+	}
+
 	
 
+	public List<TourPlanDetails> getTourPlanDetail() {
+		return tourPlanDetail;
+	}
+
+	public void setTourPlanDetail(List<TourPlanDetails> tourPlanDetail) {
+		this.tourPlanDetail = tourPlanDetail;
+	}
+
+	public TourPlan(String tourPlanId, Date tourPlanDate, List<TourPlanDetails> tourPlanDetail,
+			Employee empCode, Department departmentCode, Designation desgCode, String tourStartDate, String mobNumber,
+			String tourEndDate, String approvedBy, String approvalStatus, Date approvalDate, String insBy,
+			Date insDate) {
+		super();
+		this.tourPlanId = tourPlanId;
+		this.tourPlanDate = tourPlanDate;
+		this.tourPlanDetail = tourPlanDetail;
+		this.empCode = empCode;
+		this.departmentCode = departmentCode;
+		this.desgCode = desgCode;
+		this.tourStartDate = tourStartDate;
+		this.mobNumber = mobNumber;
+		this.tourEndDate = tourEndDate;
+		this.approvedBy = approvedBy;
+		this.approvalStatus = approvalStatus;
+		this.approvalDate = approvalDate;
+		this.insBy = insBy;
+		this.insDate = insDate;
+	}
+
+	public TourPlan() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	
 }

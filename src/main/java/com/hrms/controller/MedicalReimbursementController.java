@@ -1,18 +1,30 @@
 package com.hrms.controller;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.hrms.model.Department;
 import com.hrms.model.Employee;
+import com.hrms.model.Leave;
+import com.hrms.model.Loan;
 import com.hrms.model.MedicalReimbursement;
 import com.hrms.model.MedicalReimbursementDetail;
 import com.hrms.model.MedicalReimbursementUtil;
@@ -32,12 +44,18 @@ public class MedicalReimbursementController {
 	MedicalReimbursementService medicalReimbursementService;
 	@Autowired
 	MedicalReimbursementDetailsService medicalReimbursementDetailsService;
+	
+	
+
 	@GetMapping("/medicalReimbursement")
 	public String medicalReimbursement(Model model, HttpSession session) {
-		
+		List<MedicalReimbursement> listMedicalReimbursement =  medicalReimbursementService.getAllMedicalReimbursement();
+		model.addAttribute("listMedicalReimbursement", listMedicalReimbursement);
 		List<Employee> listEmployee = employeeService.getAllEmployees();
 		model.addAttribute("listEmployee", listEmployee);
 		
+		List<MedicalReimbursementDetail> listMedicalReimbursementDetail=medicalReimbursementDetailsService.getAllMedicalReimbursementDetails();
+		model.addAttribute("listMedicalReimbursementDetail", listMedicalReimbursementDetail);
 		String userCode = (String) session.getAttribute("username");
 		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
 		if (modules != null) {
@@ -165,6 +183,114 @@ public class MedicalReimbursementController {
 	
 	
 	
+	/*
+	 * @GetMapping("/viewMedicalReimbursement") String
+	 * viewMedicalReimbursement(Model model, HttpSession session) {
+	 * 
+	 * List<Employee> listEmployee = employeeService.getAllEmployees();
+	 * model.addAttribute("listEmployee", listEmployee);
+	 * List<MedicalReimbursement>listMedicalReimbursement=
+	 * medicalReimbursementService.getAllMedicalReimbursement();
+	 * model.addAttribute("listMedicalReimbursement", listMedicalReimbursement);
+	 * List<MedicalReimbursementDetail>
+	 * listMedicalReimbursementDetail=medicalReimbursementDetailsService.
+	 * getAllMedicalReimbursementDetails();
+	 * model.addAttribute("listMedicalReimbursementDetail",
+	 * listMedicalReimbursementDetail); String userCode = (String)
+	 * session.getAttribute("username"); List<MenuModule> modules =
+	 * moduleService.getAllModulesList(userCode); if (modules != null) {
+	 * model.addAttribute("modules", modules); } return "viewMedicalReimbursement";
+	 * 
+	 * }
+	 */
+
+	
+	@GetMapping(value = { "/deleteMedicalReimbursement/{id}" })
+	public String deleteEmployee(@PathVariable("id") String id, Model model,
+			HttpSession session) {
+		try {
+			
+			medicalReimbursementService.removeMedicalReimbursement(id);
+			session.setAttribute("username", session.getAttribute("username"));
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	
+		return "redirect:/medicalReimbursement";
+	}
+	
+
+	
+	
+	
+	
+	
+	@GetMapping(value = {"/editMedicalReimbursement/{id}"})
+	public String editMedicalReimbursement(@PathVariable("id")String id,  Model model,HttpSession session)
+	 { 
+		List<Employee> listEmployee = employeeService.getAllEmployees();
+		model.addAttribute("listEmployee", listEmployee);
+		
+		MedicalReimbursement medicalReimbursementEdit =	medicalReimbursementService.findByIdMedicalReimbursementMaster(id);
+		  model.addAttribute("medicalReimbursementEdit", medicalReimbursementEdit);
+
+	   
+	    return "editMedicalReimbursement";
+	}
+	
+	/*
+	 * @GetMapping("/updateMedicalReimbursement") String
+	 * updateMedicalReimbursement(Model model, HttpSession session) {
+	 * 
+	 * List<Employee> listEmployee = employeeService.getAllEmployees();
+	 * model.addAttribute("listEmployee", listEmployee);
+	 * List<MedicalReimbursement>listMedicalReimbursement=
+	 * medicalReimbursementService.getAllMedicalReimbursement();
+	 * model.addAttribute("listMedicalReimbursement", listMedicalReimbursement);
+	 * String userCode = (String) session.getAttribute("username"); List<MenuModule>
+	 * modules = moduleService.getAllModulesList(userCode); if (modules != null) {
+	 * model.addAttribute("modules", modules); } return "editMedicalReimbursement";
+	 * 
+	 * }
+	 */
+	 @CrossOrigin
+	    @GetMapping("/medicalReimbursementViewDetails/{id}")
+	    public ResponseEntity<MedicalReimbursementUtil> getMedicalReimbursementById(@PathVariable(value = "id") String id) {
+		 Employee e= new Employee();
+		 MedicalReimbursementUtil medicalReimbursement=new MedicalReimbursementUtil();
+		 MedicalReimbursement m1 = medicalReimbursementService.findByIdMedicalReimbursementMaster(id);
+		
+		 SimpleDateFormat format2 = new SimpleDateFormat("dd/MM/yyyy");
+		 Date abc=m1.getDateOfSlip();
+		  String formatedDate = format2.format(abc);
+		 
+		 System.out.println("date of slip >>>>>>>>>>>>>>>"+formatedDate);
+		 
+		 medicalReimbursement.setDateOfSlip(m1.getDateOfSlip());
+		 
+		 medicalReimbursement.setNameOfPerson(m1.getNameOfPerson());
+		
+		 medicalReimbursement.setEmpCode(m1.getEmpCode().getEmpCode());
+	
+		 MedicalReimbursementDetail m4=new MedicalReimbursementDetail();
+		 
+		 if(medicalReimbursement == null) {
+	            return ResponseEntity.notFound().build();
+	        }
+	        return ResponseEntity.ok().body(medicalReimbursement);
+	    }
+	
+	 @PostMapping("/updateMedicalReimbursement")
+	  public String updateLeave(@ModelAttribute("leaveupdate") MedicalReimbursement medicalReimbursement, Model model) {
+	 
+		  this.medicalReimbursementService.updateMedicalReimbursement(medicalReimbursement);
+	    	  
+		  
+			return "redirect:/medicalReimbursement";
+	  }
+	 
+	 
 	}
 
 

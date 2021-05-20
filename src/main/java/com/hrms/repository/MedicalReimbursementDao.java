@@ -5,4 +5,6 @@ import com.hrms.model.MedicalReimbursement;
 
 public interface MedicalReimbursementDao extends GenericDao<MedicalReimbursement> {
 
+	void approvedByMrId(String slipNo);
+
 }

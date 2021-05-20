@@ -15,6 +15,131 @@ body {
   text-transform: uppercase;
 }
 </style>
+
+
+<script>
+$(document).ready(function(){
+
+    var i=1;
+   $("#add_row").click(function(){
+    $('#addr'+i).html("<td>"+ (i+1) +"</td><td><input name='medStDr"+i+"' type='text' placeholder='Name' class='form-control txt input-md'/> </td><td><input  name='caseMemoNo"+i+"' type='text' placeholder='Case Memo No'  class='form-control input-md'></td><td><input  name='caseMemoDate"+i+"' type='Date' placeholder='Case Memo Date'  class='form-control input-md'></td><td><input  name='calmlAmount"+i+"' type='text'placeholder='Calming Amount'  class='txt form-control input-md'></td><td><input  name='passedAmount"+i+"' type='text' placeholder='Passed Amount'  class='pas form-control input-md'></td><td><input  name='govtexemptionAmount"+i+"' type='text' placeholder='govt Exemption Amount'  class='govt form-control input-md'></td><td><input  name='remark"+i+"' type='text' placeholder='Remark'  class='form-control input-md'></td>");
+
+    $('#datatables-buttons').append('<tr id="addr'+(i+1)+'"></tr>');
+    $('#_cr').val(i+1);
+    
+    i++; 
+});
+   
+ 
+
+	
+   
+   $("#delete_row").click(function(){
+  	 if(i>1){
+		 $("#addr"+(i-1)).html('');
+		 $('#_cr').val(i - 1);
+		 i--;
+		 calculateSum(),calculateSumtotalPassing(),calculateSumtotalgovt()
+		 }
+	 });
+   
+  
+   
+   function calculateRow(row) {
+	    var price = +row.find('input[name^="passedAmount"]').val();
+	    alert(price);
+
+	}
+   function calculateGrandTotal() {
+	    var grandTotal = 0;
+	    $("datatables-buttons").find('input[name^="passedAmount"]').each(function () {
+	        grandTotal += +$(this).val();
+	    });
+	    $("#grandtotal").text(grandTotal.toFixed(2));
+	    
+	    alert(grandTotal);
+
+	}
+
+
+function calculateSum() {
+
+    var sum = 0;
+    //iterate through each textboxes and add the values
+    $(".txt").each(function () {
+
+        //add only if the value is number
+        if (!isNaN(this.value) && this.value.length != 0) {
+            sum += parseFloat(this.value);
+        }
+
+    });
+    //.toFixed() method will roundoff the final sum to 2 decimal places
+   var fds=sum;
+   //$("#").html(sum.toFixed(2));
+   $("#sum").val(sum);
+    
+}
+
+$("table").on("keyup", ".txt", function () {
+    calculateSum();
+});
+
+
+function calculateSumtotalPassing() {
+
+    var sum = 0;
+    //iterate through each textboxes and add the values
+    $(".pas").each(function () {
+
+        //add only if the value is number
+        if (!isNaN(this.value) && this.value.length != 0) {
+            sum += parseFloat(this.value);
+        }
+
+    });
+    //.toFixed() method will roundoff the final sum to 2 decimal places
+   var fds=sum;
+   //$("#").html(sum.toFixed(2));
+   $("#totalPassing").val(sum);
+    
+}
+
+$("table").on("keyup", ".pas", function () {
+	calculateSumtotalPassing();
+});
+
+
+
+
+function calculateSumtotalgovt() {
+
+    var sum = 0;
+    //iterate through each textboxes and add the values
+    $(".govt").each(function () {
+
+        //add only if the value is number
+        if (!isNaN(this.value) && this.value.length != 0) {
+            sum += parseFloat(this.value);
+        }
+
+    });
+    //.toFixed() method will roundoff the final sum to 2 decimal places
+   var fds=sum;
+   //$("#").html(sum.toFixed(2));
+   $("#totalGovtExt").val(sum);
+    
+}
+
+$("table").on("keyup", ".govt", function () {
+	calculateSumtotalgovt();
+});
+
+
+
+});
+
+</script>
 <script>
 	window.dataLayer = window.dataLayer || [];
 	function gtag() {
@@ -42,6 +167,7 @@ body {
 						<nav aria-label="breadcrumb">
 						</nav>
 					</div>
+					
 					<div class="row">
 					<form id="validation-form" action="#" th:action="@{/saveMedicalReimbursement}" th:object="${medicalReimbursement}" method="POST">
 						<div class="col-12">
@@ -108,7 +234,7 @@ body {
 											<div class="form-group ">
 													<label class="form-label">Claiming Date</label> <span
 														class="text-danger">*</span> 
-														<input class="form-control required" type="text"id="claimingDate"name="claimingDate"required aria-required="true"/>
+														<input class="form-control required" type="text" id="claimingDate"name="claimingDate"required aria-required="true"/>
 
 												</div>
 
@@ -159,12 +285,22 @@ body {
 								</div>
 							</div>
 						</div>
-	      <div class="col-12">
+	                   <div class="col-12">
 							<div class="card">
 								<div class="card-header">
 								</div>
 								<div class="card-body">
 								<input id="_cr" name="_cr" type="text"value="1">
+								<div class="col-sm-12" align="right">
+							<!-- 	<a th:href="@{/viewMedicalReimbursement}">
+								<em  class="fa fa-eye" style="font-size:28px"> 
+								</em></a>&nbsp;&nbsp;&nbsp; -->
+								
+								
+								
+								<a id="add_row" class="fa fa-plus" aria-hidden="true"style="font-size:28px;color:#001080"></a>&nbsp;&nbsp;&nbsp;
+								<a id='delete_row'class="fa fa-trash" style="font-size:28px;color:#399490fc"aria-hidden="true"></a>	
+								</div>
 								<table id="datatables-buttons" class="table table-striped display" style="width:100%"aria-describedby="datatables-buttons">
 												<thead>
 					<tr><th >
@@ -212,14 +348,14 @@ body {
 						<input type="Date" name='caseMemoDate0' placeholder='Case Memo Date' class="form-control"/>
 						</td>
 						<td>
-						<input type="text" name='calmlAmount0' placeholder='Claiming Amount' class="form-control"/>
+						<input type="text" name='calmlAmount0' placeholder='Claiming Amount' class="form-control txt"/>
 						</td>
 						
 						<td>
-						<input type="text" name='passedAmount0' placeholder='Passed Amount' class="form-control"/>
+						<input type="text" name='passedAmount0' placeholder='Passed Amount' class="form-control pas"/>
 						</td>
 						<td>
-						<input type="text" name='govtexemptionAmount0' placeholder='Govt exemption Amount' class="form-control"/>
+						<input type="text" name='govtexemptionAmount0' placeholder='Govt exemption Amount' class="form-control govt "/>
 						</td>
 						
 						
@@ -236,14 +372,14 @@ body {
 					<td>
 					 <div class="form-group ">  
 					<label class="form-label">Total Amount</label>
-					<input type="text" name='totalAmount' placeholder='Total Amount' class="form-control"/>
+					<input type="text" id="sum" name='totalAmount' placeholder='Total Amount' class="form-control"/>
 					</div>
 					</td>
 					<td>
-					<input type="text" name='totalPassing'  class="form-control"/>
+					<input type="text" id="totalPassing" name='totalPassing'  class="form-control"/>
 					</td>
 					<td>
-					<input type="text" name='totalGovtExt' class="form-control"/>
+					<input type="text" id="totalGovtExt" name='totalGovtExt' class="form-control"/>
 					</td>
 					<td>
 					
@@ -254,13 +390,66 @@ body {
 			</table>	 <input type="submit" class="btn btn-primary" value="Submit">
 								 <button type="reset"class="btn btn-primary" value="Reset">Reset</button>	
 								</div>
-								<a id="add_row" class="fa pull-right btn btn-default ">Add Row</a><a id='delete_row' class="fa pull-right btn btn-default">Delete Row</a>	
+								<!-- <a id="add_row" class="fa pull-right btn btn-default ">Add Row</a><a id='delete_row' class="fa pull-right btn btn-default">Delete Row</a>	 -->
 							</div>
 							
 						</div>
 						
-						</form>
+					</form>
 					</div>
+							<div class="col-12">
+							<div class="card">
+								<div class="card-header">
+								</div>
+								<div class="card-body">
+									<table id="datatables-buttons" class="table table-striped display" style="width:100%"aria-describedby="example">
+										<thead>
+											<tr >
+												<th scope="col">SLip Number</th>
+												<th scope="col">Slip Date</th>
+												<th scope="col">Employee Code</th>
+												<th scope="col">Employee Name </th>
+												<th scope="col">Action </th>
+											</tr >
+											
+
+
+										</thead>
+										<tbody>
+									
+										<tr th:each = "student : ${listMedicalReimbursement}">
+									
+										<td th:text="${student.slipNo}" ></td>
+										
+										<td  th:text="${student.dateOfSlip}"></td>
+										
+										<td  th:text="${student.empCode.empCode}"></td>
+										
+										<td th:text="${student.empCode.empName}"></td>
+										
+								
+									
+									
+										  <td>
+										  <a th:href="@{/editMedicalReimbursement/{id}/(id=${student.slipNo})}"><em class="fa fa-edit"></em></a>
+										  
+										     <a th:href="@{/deleteMedicalReimbursement/{id}/(id=${student.slipNo})}"onclick="return confirm('Are you sure?')"><em class="fa fa-times"></em></a>
+									
+									
+										</td>  
+									
+										</tr>
+									
+									
+										</tbody>
+									
+									</table>
+								</div>
+								
+							</div>
+						</div>
+						
+				
 				</div>
 
 			</main>
@@ -268,6 +457,7 @@ body {
 		<footer class="footer">
 		<div th:replace="/fragments/footer :: div"></div>
 		</footer>
+		
 		</div>
 		</div>
 		<script>
@@ -299,56 +489,46 @@ body {
 		showDropdowns: true
 	});
 	
+
 	</script>
 	
 <script>
-$(document).ready(function(){
-
-    var i=1;
-   $("#add_row").click(function(){
-    $('#addr'+i).html("<td>"+ (i+1) +"</td><td><input name='medStDr"+i+"' type='text' placeholder='Name' class='form-control input-md'/> </td><td><input  name='caseMemoNo"+i+"' type='text' placeholder='Case Memo No'  class='form-control input-md'></td><td><input  name='caseMemoDate"+i+"' type='Date' placeholder='Case Memo Date'  class='form-control input-md'></td><td><input  name='calmlAmount"+i+"' type='text' onkeyup='syncAddress()' placeholder='Calming Amount'  class='form-control input-md'></td><td><input  name='passedAmount"+i+"' type='text' placeholder='Passed Amount'  class='form-control input-md'></td><td><input  name='govtexemptionAmount"+i+"' type='text' placeholder='govt Exemption Amount'  class='form-control input-md'></td><td><input  name='remark"+i+"' type='text' placeholder='Remark'  class='form-control input-md'></td>");
-
-    $('#datatables-buttons').append('<tr id="addr'+(i+1)+'"></tr>');
-    $('#_cr').val(i+1);
-    i++; 
-});
-   
- 
-
+		$(function() {
+			// Datatables basic
+			$('#datatables').DataTable({
+				responsive: true
+			});
+			// Datatables with Buttons
+			var datatablesButtons = $('#datatables-buttons').DataTable({
+				  deferRender:true,
+		            scrollCollapse: true,
+		            scroller: false,
+				   responsive: true,
+				   lengthMenu :[[10,20,30,-1 ],['10 rows', '20 rows', '30 rows', 'Show all' ] ],
+					buttons :[]
+			});
+			datatablesButtons.buttons().container().appendTo("#datatables-buttons_wrapper .col-md-6:eq(0)")
+		});
+	</script>
 	
-   
-   $("#delete_row").click(function(){
-  	 if(i>1){
-		 $("#addr"+(i-1)).html('');
-		 $('#_cr').val(i - 1);
-		 i--;
-		 }
-	 });
-   
-  
-   
-   function calculateRow(row) {
-	    var price = +row.find('input[name^="passedAmount"]').val();
-	    alert(price);
-
-	}
-   function calculateGrandTotal() {
-	    var grandTotal = 0;
-	    $("datatables-buttons").find('input[name^="passedAmount"]').each(function () {
-	        grandTotal += +$(this).val();
-	    });
-	    $("#grandtotal").text(grandTotal.toFixed(2));
-	    
-	    alert(grandTotal);
-
-	}
-});
-
-
-
-
-
-</script>
+<script>
+		$(function() {
+			// Datatables basic
+			$('#datatables-basic').DataTable({
+				responsive: true
+			});
+			// Datatables with Buttons
+			var datatablesButtons = $('#datatables-buttons').DataTable({
+				  deferRender:true,
+		            scrollCollapse: true,
+		            scroller: false,
+				   responsive: true,
+				   lengthMenu :[[10,20,30,-1 ],['10 rows', '20 rows', '30 rows', 'Show all' ] ],
+					buttons :[]
+			});
+			datatablesButtons.buttons().container().appendTo("#datatables-buttons_wrapper .col-md-6:eq(0)")
+		});
+	</script>
 <!-- <script>
 function syncAddress()
 {
@@ -361,6 +541,6 @@ function syncAddress()
 }
 </script> -->
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-		
+				
 </body>
 </html>
