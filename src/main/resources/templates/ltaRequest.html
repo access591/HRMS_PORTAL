@@ -204,8 +204,8 @@ body {
 												<td th:text="${listLta.ltaCode}"></td>
 												
 												<td th:text="${listLta?.empCode?.empName}"></td>
-												<td th:text="${listLta.appDate}"></td>
-												<td th:text="${listLta.whenAvailed}"></td>
+												<td th:text="${#dates.format(listLta.appDate,'dd-MM-yyyy')}"></td>
+												<td th:text="${#dates.format(listLta.whenAvailed,'dd-MM-yyyy')}"></td>
 												<td th:text="${listLta.remarks}"></td>
 												
 												<td><a th:href="@{/editLtaRequest/{id}(id=${listLta.ltaCode})}"><em class="fa fa-edit"></em></a>
@@ -237,7 +237,7 @@ body {
 				singleDatePicker: true,
 			    autoApply: true,
 				locale: {
-		            format: 'DD/MM/YYYY'
+		            format: 'YYYY/MM/DD'
 		        },
 				showDropdowns: true
 			});
@@ -246,7 +246,7 @@ body {
 				singleDatePicker: true,
 			    autoApply: true,
 				locale: {
-		            format: 'DD/MM/YYYY'
+					 format: 'YYYY/MM/DD'
 		        },
 				showDropdowns: true
 			});
@@ -254,7 +254,7 @@ body {
 			singleDatePicker: true,
 			   autoApply: true,
 			locale: {
-				format: 'DD/MM/YYYY'
+				 format: 'YYYY/MM/DD'
 	        },
 			showDropdowns: true
 		});
@@ -262,7 +262,7 @@ body {
 			singleDatePicker: true,
 		    autoApply: true,
 			locale: {
-				format: 'DD/MM/YYYY'
+				 format: 'YYYY/MM/DD'
 	        },
 			showDropdowns: true
 		});
@@ -270,7 +270,7 @@ body {
 			singleDatePicker: true,
 		    autoApply: true,
 			locale: {
-				format: 'DD/MM/YYYY'
+				 format: 'YYYY/MM/DD'
 	        },
 			showDropdowns: true
 		});
@@ -280,7 +280,7 @@ body {
 				singleDatePicker: true,
 				   autoApply: true,
 				locale: {
-					format: 'DD/MM/YYYY'
+					 format: 'YYYY/MM/DD'
 		        },
 				showDropdowns: true
 			});
@@ -289,7 +289,7 @@ body {
 			singleDatePicker: true,
 			   autoApply: true,
 			locale: {
-				format: 'DD/MM/YYYY'
+				 format: 'YYYY/MM/DD'
 	        },
 			showDropdowns: true
 		});
