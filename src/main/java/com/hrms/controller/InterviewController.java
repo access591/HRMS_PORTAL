@@ -69,10 +69,27 @@ public class InterviewController {
 		List<ApplicantInfo> listApplicantInfo1 = applicantInfoService.getAllApplicantInfo();
 		List<ApplicantInfo> listApplicantInfo = new ArrayList<ApplicantInfo>();
 		for(int i=0;i<listApplicantInfo1.size();i++) {
-			
-			if(listApplicantInfo1.get(i).getInterStatus().startsWith("F")) {
-				listApplicantInfo.add(listApplicantInfo1.get(i));
+			System.out.println("error handling inter status  : "+listApplicantInfo1.get(i).getInterStatus());
+			if(listApplicantInfo1.get(i).getInterStatus() == null) {
+				//ifs.setSelectionStatus("0");
+				System.out.println("11111111111nulllll111111111");
+				
+				
 			}
+			
+			else if(listApplicantInfo1.get(i).getInterStatus().length() == 0) {
+				//ifs.setSelectionStatus("0");
+				System.out.println("11111111111111111111");
+				
+			}
+			else {
+				
+				if(listApplicantInfo1.get(i).getInterStatus().startsWith("F")) {
+					listApplicantInfo.add(listApplicantInfo1.get(i));
+				}
+			}
+			
+			
 			
 		}
 		if(listApplicantInfo != null) {
