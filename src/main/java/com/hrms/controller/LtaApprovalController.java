@@ -9,17 +9,24 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import com.hrms.model.LtaRequest;
 import com.hrms.model.MenuModule;
+import com.hrms.service.LtaApprovalService;
 import com.hrms.service.ModuleService;
 @Controller
 public class LtaApprovalController {
 	@Autowired
 	private ModuleService moduleService;
+	@Autowired
+	LtaApprovalService ltaApprovalService;
 	@GetMapping("/ltaApproval")
 	public String ltaApproval(Model model, HttpSession session) {
 
 	
 		String userCode = (String) session.getAttribute("username");
+		
+		List<LtaRequest>listLtaApproval=ltaApprovalService.getAllLtaApproval();
+		model.addAttribute("listLtaApproval", listLtaApproval);
 		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
 		if (modules != null) {
 			model.addAttribute("modules", modules);
