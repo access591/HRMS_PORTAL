@@ -83,7 +83,7 @@ body {
 											</div>
 											<div class="col-12 col-lg-6">
 												<label class="form-label">Advertisement Date</label> <label
-													style="color: red">*</label> <input type="date" th:field="*{advtDate}"
+													style="color: red">*</label> <input type="date" th:field="*{advtDate}" id="theDate"
 													class="form-control" >
 											</div>
 										</div>
@@ -152,7 +152,7 @@ body {
 														
 														</td>
 
-														<td><input type="date" class="form-control text-center"
+														<td><input type="date" id="theDate2" class="form-control text-center"
 															name="listReqAdvertisementDetail[0].reqDate"></td>
 
 
@@ -288,8 +288,7 @@ body {
 		});
 		
 		
-		
-		
+			
 		
 		$(document).ready(function(){
 			console.log("click function...");
@@ -327,6 +326,32 @@ body {
 
 		});
 
+	</script>	
+	
+	<script>
+	$(document).ready(function(){
+		  var date = new Date();
+
+		  var day = ("0" + date.getDate()).slice(-2); var month = ("0" + (date.getMonth() + 1)).slice(-2);
+
+		  var today = date.getFullYear()+"-"+(month)+"-"+(day) ;
+		  
+		  $('#theDate').val(today);
+		  
+		});
+	
+	$(document).ready(function(){
+		  var date = new Date();
+
+		  var day = ("0" + date.getDate()).slice(-2); var month = ("0" + (date.getMonth() + 1)).slice(-2);
+
+		  var today = date.getFullYear()+"-"+(month)+"-"+(day) ;
+		  
+		  $('#theDate2').val(today);
+		  
+		});
+
+		
 	</script>
 
 
