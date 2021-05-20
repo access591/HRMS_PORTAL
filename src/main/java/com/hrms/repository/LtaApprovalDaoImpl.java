@@ -11,32 +11,38 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.hrms.dao.AbstractGenericDao;
-import com.hrms.model.LocalConvyence;
+import com.hrms.model.LtaRequest;
 @Repository
-public class ConveyanceApprovalDaoImpl extends AbstractGenericDao<LocalConvyence> implements ConveyanceApprovalDao {
+public class LtaApprovalDaoImpl extends AbstractGenericDao<LtaRequest> implements LtaApprovalDao{
 	@Autowired SessionFactory sessionFactory;
+
+
+
 	@Override
-	public List<LocalConvyence> getAllLocalConveyance() {
-	//	String T="N";
+	public List<LtaRequest> getAllLtaApproval() {
 		try {
 			Session session = this.sessionFactory.openSession();
 			session.beginTransaction();
-			Query<LocalConvyence> query = session.createQuery("from LocalConvyence e where e.approvalStatus ='N'",LocalConvyence.class);
+			Query<LtaRequest>query = session.createQuery("from LtaRequest  e where e.approvalStatus ='N'",LtaRequest.class);
 			
-			List<LocalConvyence> localConvyenceList = query.getResultList();
+			List<LtaRequest> listLtaApproval = query.getResultList();
 			session.getTransaction().commit();
 			
-			return localConvyenceList;
+			return listLtaApproval;
 		} catch (HibernateException e) {
 			
 			e.printStackTrace();
 		}
 		return null;
-	}
+
+}
+
+
+
 	@Override
-	public void approvedByLocalConvyenceId(String id) {
+	public void approvedLtaRequestById(String id) {
 		Session session = this.sessionFactory.openSession();
-		Query query = session.createQuery("UPDATE LocalConvyence e set e.approvalStatus =:approvalStatus WHERE e.localConvId= :id" );
+		Query query = session.createQuery("UPDATE LtaRequest e set e.approvalStatus =:approvalStatus WHERE e.ltaCode= :id" );
 		query.setParameter("approvalStatus", "Y");
 		query.setParameter("id", id);
 		Transaction tx = session.beginTransaction();
@@ -46,5 +52,5 @@ public class ConveyanceApprovalDaoImpl extends AbstractGenericDao<LocalConvyence
 		System.out.println("result : "+ result);
 		
 	}
-
 }
+
