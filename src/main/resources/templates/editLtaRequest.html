@@ -88,31 +88,29 @@ body {
 									</div>	
 								</div>
 								<div class="card-body">
-								<form id="validation-form" action="#"th:action="@{/saveLtaRequest}" th:object="${LtaRequest}" method="post" >
+								<form id="validation-form" action="#"th:action="@{/updateLtaRequest}" th:object="${LtaRequest}" method="post" >
 									<div class="form-row">
+									
+									<div class="form-group sm col-md-4">
+											       <label class="form-label">LTA ID
+											       <span class="text-danger">*</span></label>
+							                 <input  type="text"id="ltaCode"name="ltaCode"  th:value="${ltaRequestEdit.ltaCode}"class="form-control " readonly>
+										     </div>
 												
 												<div class="form-group sm col-md-4">
 													<label class="form-label">Employee Code</label>
 												<label style="color: red">*</label>
-												<select class="form-control select2"onchange="myFunction()" name="empCode"id="empCode" required aria-required="true">
+												<select class="form-control select2"  name="empCode" id="empCode"  required aria-required="true"disabled>
 												 <option value="">Select Employee</option>
-												<option th:each="e :${listEmployee}"th:value="${e.getEmpCode()}" th:text="${e.getEmpName()}"></option>
+												<option th:each="e :${listEmployee}" th:value="${e.getEmpCode()}" th:text="${e.getEmpName()}" th:field="${ltaRequestEdit.empCode.empCode}"></option>
 											     	</select>
 
 												</div>
-												
-												
-											<div class="form-group sm col-md-4">
-											       <label class="form-label">Employee Name 
-											       <span class="text-danger">*</span></label>
-							                 <input  type="text"id="empName"name="empName" title=" Employee Name" class="form-control " readonly>
-										     </div>
 										     	
-										     	
-										     	<div class="form-group sm col-md-4">
+										     <div class="form-group sm col-md-4">
 											       <label class="form-label">Appointment   Date
 											       <span class="text-danger">*</span></label>
-							                 <input  type="text"id="appDate"name="appDate" title="Name"onkeyup="sync()" class="form-control required">
+							                 <input  type="text"id="appDate"name="appDate" th:field="${ltaRequestEdit.appDate}" class="form-control required">
 										     </div>
 											
 												
@@ -124,14 +122,14 @@ body {
 									<div class="form-group sm col-md-4">
 											       <label class="form-label">Eligibility   Date
 											       <span class="text-danger">*</span></label>
-							                 <input  type="text"id="eligibilityDate"name="eligibilityDate" title="Eligibility   Date" class="form-control required">
+							                 <input  type="text"id="eligibilityDate"name="eligibilityDate" th:field="${ltaRequestEdit.eligibilityDate}" class="form-control required">
 										     </div>
 										     
 										     
 										     	<div class="form-group sm col-md-4">
 											       <label class="form-label">When Due
 											       <span class="text-danger">*</span></label>
-							                 <input  type="text"id="whenDue"name="whenDue" title="When Due" class="form-control required">
+							                 <input  type="text"id="whenDue"name="whenDue" title="When Due" th:field="${ltaRequestEdit.whenDue}" class="form-control required">
 										     </div>
 										     
 										     
@@ -140,7 +138,7 @@ body {
 												<div class="form-group sm col-md-4">
 											       <label class="form-label">When Available
 											       <span class="text-danger">*</span></label>
-							                 <input  type="text"id="whenAvailed"name="whenAvailed" title="When Available" class="form-control required">
+							                 <input  type="text"id="whenAvailed"name="whenAvailed" title="When Available" th:field="${ltaRequestEdit.whenAvailed}" class="form-control required">
 										     </div>
 												</div>
 												<div class="form-row">
@@ -148,20 +146,20 @@ body {
 												<div class="form-group sm col-md-4">
 											       <label class="form-label">Leave From
 											       <span class="text-danger">*</span></label>
-							                 <input  type="text"id="leaveFrom"name="leaveFrom" title="leave From" class="form-control required">
+							                 <input  type="text"id="leaveFrom"name="leaveFrom" th:field="${ltaRequestEdit.leaveFrom}" title="leave From" class="form-control required">
 										     </div>
 												
 												
 												<div class="form-group sm col-md-4">
 											       <label class="form-label">Leave To
 											       <span class="text-danger">*</span></label>
-							                 <input  type="text"id="leaveTo"name="leaveTo" title="Leave TO" class="form-control required">
+							                 <input  type="text"id="leaveTo"name="leaveTo" th:field="${ltaRequestEdit.leaveFrom}" title="Leave TO" class="form-control required">
 										     </div>
 												
 												<div class="form-group sm col-md-4">
 											       <label class="form-label">Amount
 											       <span class="text-danger">*</span></label>
-							                 <input  type="text"id="adavance"name="adavance" title="Amount" class="form-control required">
+							                 <input  type="text"id="adavance"name="adavance" title="Amount" th:field="${ltaRequestEdit.adavance}" class="form-control required">
 										     </div>
 							</div>
 							
@@ -169,11 +167,11 @@ body {
 							<div class="form-group sm col-md-4">
 											       <label class="form-label">Remarks
 											       <span class="text-danger">*</span></label>
-							                 <input  type="text"id="remarks"name="remarks" title="remarks" class="form-control required">
+							                 <input  type="text"id="remarks"name="remarks" title="remarks" th:field="${ltaRequestEdit.remarks}" class="form-control required">
 										     </div>
 							</div>
 							<button type="submit" class="btn btn-primary">Save</button>
-								 <button type="reset"class="btn btn-primary" value="Reset">Reset</button>
+								<button type="submit"class="btn btn-primary" value="cancel">Cancel</button>
 								 </form>
 						      </div>
 	                      </div>
@@ -183,42 +181,6 @@ body {
 	                     
 	                </div>     
 					
-						<div class="col-12">
-							<div class="card">
-								<div class="card-header">
-								</div>
-								<div class="card-body">
-									<table id="datatables-buttons" class="table table-striped display" style="width:100%"aria-describedby="example">
-										<thead>
-											<tr>
-												<th scope="col">LTA ID</th>
-												<th scope="col">Employee Name </th>
-												<th scope="col">Appointment Date</th>
-												<th scope="col">Availed Date</th>
-												<th scope="col">Remarks</th>
-												<th scope="col">Action</th>
-											</tr>
-										</thead>
-										<tbody>
-											<tr  th:each="listLta : ${listLtaRequest}">
-												<td th:text="${listLta.ltaCode}"></td>
-												
-												<td th:text="${listLta?.empCode?.empName}"></td>
-												<td th:text="${#dates.format(listLta.appDate,'dd-MM-yyyy')}"></td>
-												<td th:text="${#dates.format(listLta.whenAvailed,'dd-MM-yyyy')}"></td>
-												<td th:text="${listLta.remarks}"></td>
-												
-												<td><a th:href="@{/editLtaRequest/{id}(id=${listLta.ltaCode})}"><em class="fa fa-edit"></em></a>
-												<a th:href="@{/deleteLtaRequest/{id}(id=${listLta.ltaCode})}" onclick="return confirm('Are you sure?')"><em class="fa fa-times"></em></a>
-												</td>
-											</tr> 
-										</tbody>
-									
-									</table>
-								</div>
-								
-							</div>
-						</div>
 					
 					
 					</div>
@@ -246,7 +208,7 @@ body {
 				singleDatePicker: true,
 			    autoApply: true,
 				locale: {
-					 format: 'YYYY/MM/DD'
+					  format: 'YYYY/MM/DD'
 		        },
 				showDropdowns: true
 			});
@@ -254,7 +216,7 @@ body {
 			singleDatePicker: true,
 			   autoApply: true,
 			locale: {
-				 format: 'YYYY/MM/DD'
+				  format: 'YYYY/MM/DD'
 	        },
 			showDropdowns: true
 		});
@@ -262,7 +224,7 @@ body {
 			singleDatePicker: true,
 		    autoApply: true,
 			locale: {
-				 format: 'YYYY/MM/DD'
+				  format: 'YYYY/MM/DD'
 	        },
 			showDropdowns: true
 		});
@@ -270,7 +232,7 @@ body {
 			singleDatePicker: true,
 		    autoApply: true,
 			locale: {
-				 format: 'YYYY/MM/DD'
+				  format: 'YYYY/MM/DD'
 	        },
 			showDropdowns: true
 		});
@@ -280,7 +242,7 @@ body {
 				singleDatePicker: true,
 				   autoApply: true,
 				locale: {
-					 format: 'YYYY/MM/DD'
+					  format: 'YYYY/MM/DD'
 		        },
 				showDropdowns: true
 			});
@@ -289,7 +251,7 @@ body {
 			singleDatePicker: true,
 			   autoApply: true,
 			locale: {
-				 format: 'YYYY/MM/DD'
+				  format: 'YYYY/MM/DD'
 	        },
 			showDropdowns: true
 		});
@@ -297,7 +259,7 @@ body {
 			singleDatePicker: true,
 			   autoApply: true,
 			locale: {
-				format: 'DD/MM/YYYY'
+				  format: 'YYYY/MM/DD'
 	        },
 			showDropdowns: true
 		});
@@ -352,8 +314,6 @@ body {
 		});
 	</script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
-
 
 </body>
 </html>
