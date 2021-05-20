@@ -74,7 +74,7 @@ body {
 						
 					
 					</div>
-					<form id="validation-form" action="#" >
+					<form id="validation-form" action="#" th:action="@{/saveLoanRequest}" th:object="${LoanRequest}" method="post">
 					<div class="row">
 					
 							<div class="col-12">
@@ -92,18 +92,18 @@ body {
 												<div class="form-group sm col-md-4">
 											       <label class="form-label">Application NO.
 											       <span class="text-danger">*</span></label>
-							                 <input  type="text"id="empName"name="empName" title="Name"onkeyup="sync()"maxlength="50" pattern="^[a-zA-Z\s]*$" class="form-control required">
+							                 <input  type="text"id="appNo"name="appNo" class="form-control"disabled="disabled">
 										     </div>
 												
 												<div class="form-group sm col-md-4">
 											       <label class="form-label">Application   Date
 											       <span class="text-danger">*</span></label>
-							                 <input  type="text"id="empDob"name="empDob" title="Eligibility   Date" class="form-control required">
+							                 <input  type="text"id="appDate"name="appDate" title="Eligibility   Date" class="form-control required">
 										     </div>
-										     <div class="form-group sm col-md-4">
+										    	<div class="form-group sm col-md-4">
 													<label class="form-label">Employee Code</label>
 												<label style="color: red">*</label>
-												<select class="form-control select2"onchange="myFunction()" name="empCode"id="empCode" required aria-required="true">
+												<select class="form-control select2" name="empCode" id="empCode" onchange="myFunctionEmpCode()" required aria-required="true">
 												 <option value="">Select Employee</option>
 												<option th:each="e :${listEmployee}"th:value="${e.getEmpCode()}" th:text="${e.getEmpName()}"></option>
 											     	</select>
@@ -120,42 +120,44 @@ body {
 									<div class="form-group sm col-md-4">
 											       <label class="form-label">Employee Pay Code 
 											       <span class="text-danger">*</span></label>
-							                 <input  type="text"id="EmpPayCode"name="EmpPayCode" title="Eligibility   Date" class="form-control required">
+							                 <input  type="text"id="empPayCode"name="empPayCode" title="Eligibility   Date" class="form-control required">
 										     </div>
 										     
-										     <div class="form-group sm col-md-4">
+										     <!-- <div class="form-group sm col-md-4">
 											       <label class="form-label">Father /Husband 
 											       </label>
 							                 <input  type="text"id="fatHus"name="fatHus" title="Name"maxlength="50" pattern="^[a-zA-Z\s]*$" class="form-control">
 										     </div>
-												
+												 -->
 												<div class="form-group sm col-md-4">
 												<label class="form-label">Designation</label>
 												
-												<input  type="text"id="designation"name="designation" title="Designation"maxlength="50" pattern="^[a-zA-Z\s]*$" class="form-control">
+												<input  type="text"id="desgName"name="desgName" title="Designation"maxlength="50" pattern="^[a-zA-Z\s]*$" class="form-control">
 													
 												
 												</div>
+												
+															<div class="form-group sm col-md-4">
+												<label class="form-label">Department</label> 
+												<input  type="text"id="deptName"name="deptName" title="Department"maxlength="50" pattern="^[a-zA-Z\s]*$" class="form-control">
+												</div>
+												
 												</div>
 												
 												
 												<div class="form-row">
 												
-												<div class="form-group sm col-md-4">
-												<label class="form-label">Department</label> 
-												<input  type="text"id="department"name="department" title="Department"maxlength="50" pattern="^[a-zA-Z\s]*$" class="form-control">
-												</div>
-												
+									
 												<div class="form-group sm col-md-4">
 											       <label class="form-label">Loan Type
-											       <span class="text-danger">*</span></label>
+											      </label>
 												<select class="form-control required"
-																		name="modeOfTravel0" id="modeOfTravel0">
+																		name="loanType" id="loanType">
 																			<option value="">Select Type</option>
-																			<option th:Value="home">Home</option>
-																			<option th:Value="personal">personal </option>
-																			<option th:Value="Car">Car</option>
-																			<option th:Value="twoWheeler">Two-Wheeler</option>
+																			<option th:Value="H">Home</option>
+																			<option th:Value="P">personal </option>
+																			<option th:Value="T">Car</option>
+																			<option th:Value="W">Two-Wheeler</option>
 																	</select>
 												
 												</div>
@@ -163,13 +165,18 @@ body {
 												<label class="form-label">Loan Code</label>
 												 <span class="text-danger">*</span> 
 												 <select
-														class="form-control required" name="designationCode" id="designationCode">
+														class="form-control required" name="loanCode" id="loanCode">
 														<option value="">Select Type</option>
-														<option th:each="des :${listDesignation}" th:value="${des.getDesgCode()}" th:text="${des.getDesgName()}"></option>
+														<option th:each="lo :${listLoan}" th:value="${lo.getLoanCode()}" th:text="${lo.getLoanName()}"></option>
 														
 													</select>
 												
 												</div>
+												<div class="form-group sm col-md-4">
+											       <label class="form-label">Effective Schedule Date
+											       <span class="text-danger">*</span></label>
+							                 <input  type="text"id="effScheduleDate"name="effScheduleDate" title="Eligibility   Date" class="form-control required">
+										     </div>
 												
 												</div>
 												
@@ -179,31 +186,28 @@ body {
 												
 						<div class="form-row">
 
-										<div class="form-group sm col-md-4">
+										<!-- <div class="form-group sm col-md-4">
 												<label class="form-label">Max Limit For Such Loan
 												 <span class="text-danger">*</span></label> 
 												 <input type="text" id="amount" name="amount" title="Amount" class="form-control required">
-											</div>
-											<div class="form-group sm col-md-4">
-												<label class="form-label">Amount Required
-												 <span class="text-danger">*</span></label> 
-												 <input type="text" id="amount" name="amount" title="Amount" class="form-control required">
-											</div>
+											</div> -->
 											
 												
-												<div class="form-group sm col-md-4">
-											       <label class="form-label">Effective Schedule Date
-											       <span class="text-danger">*</span></label>
-							                 <input  type="text"id="empDob"name="empDob" title="Eligibility   Date" class="form-control required">
-										     </div>
+												
 
 										</div>
 										
 										<div class="form-row">
 										<div class="form-group sm col-md-4">
+												<label class="form-label">Amount Required
+												 <span class="text-danger">*</span></label> 
+												 <input type="text" id="amountRequired" name="amountRequired" title="Amount" class="form-control required">
+											</div>
+											
+										<div class="form-group sm col-md-4">
 												<label class="form-label">Loan To be Return In 
 												 <span class="text-danger">*</span></label> 
-												 <input type="text" id="amount" name="amount" title="Amount" class="form-control required">
+												 <input type="text" id="amountSanctioned" name="amountSanctioned" title="Amount" class="form-control required">
 											</div>
 											
 											<div class="form-group sm col-md-4">
@@ -212,8 +216,8 @@ body {
 												<select class="form-control required"
 																		name="modeOfTravel0" id="modeOfTravel0">
 																			<option value="">Select Type</option>
-																			<option th:Value="approved">Approved </option>
-																			<option th:Value="unapproved ">Un Approved </option>
+																			<option th:Value="A">Approved </option>
+																			<option th:Value="U ">Un Approved </option>
 																			
 																	</select>
 												
@@ -240,7 +244,7 @@ body {
 	<script>
 		$(function() {
 
-			$("input[name='empDob']").daterangepicker({
+			$("input[name='appDate']").daterangepicker({
 				singleDatePicker: true,
 			    autoApply: true,
 				locale: {
@@ -249,7 +253,7 @@ body {
 				showDropdowns: true
 			});
 			
-		$("input[name='dateOfPosting']").daterangepicker({
+		$("input[name='effScheduleDate']").daterangepicker({
 				singleDatePicker: true,
 			    autoApply: true,
 				locale: {
@@ -334,7 +338,35 @@ body {
 	</script>
 	
 		
+<script>
+	function myFunctionEmpCode(){
+/* 		 var empCode= $('#empCode option:selected').value; */
+		 var empCode= document.getElementById('empCode').value
+	    console.log("ajax request : "+ empCode);
+	    const xhr = new XMLHttpRequest();
+	    xhr.open('GET','./viewEmployeeDetailsLoan/'+empCode,true);
+	    xhr.getResponseHeader('content-type','application/json');
+	    xhr.onload = function(){
+	        if(this.status===200){
+	            let obj = JSON.parse(this.responseText);
+	            console.log(obj);
+	            $('#empName').val(obj.empName);
+	            $('#deptName').val(obj.deptName);
+	            $('#desgName').val(obj.desgName);
+	            $('#empPayCode').val(obj.empPayCode);
+	        }
+	        else{
+	            console.error("some error occured");
+	        }
+		
+	    }
+	    xhr.send();
+	}
 
+
+
+	
+	</script>
 
 
 

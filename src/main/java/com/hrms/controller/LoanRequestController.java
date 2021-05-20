@@ -8,18 +8,48 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.hrms.model.Department;
+import com.hrms.model.Designation;
+import com.hrms.model.Employee;
+import com.hrms.model.Loan;
+import com.hrms.model.LoanApplication;
+import com.hrms.model.LoanApplicationUtil;
+import com.hrms.model.LocalConvyenceUtil;
+import com.hrms.model.LtaRequest;
+import com.hrms.model.LtaRequestUtil;
 import com.hrms.model.MenuModule;
+import com.hrms.service.DepartmentService;
+import com.hrms.service.DesignationService;
+import com.hrms.service.EmployeeService;
+import com.hrms.service.LoanMaterService;
+import com.hrms.service.LoanRequestService;
 import com.hrms.service.ModuleService;
 
 @Controller
 public class LoanRequestController {
 	@Autowired
 	private ModuleService moduleService;
+	@Autowired
+	EmployeeService employeeService;
+	@Autowired
+	DepartmentService  departmentService;
+	@Autowired
+	LoanMaterService loanMaterService;
+	@Autowired
+	DesignationService designationService;
+	@Autowired
+	LoanRequestService loanRequestService;
 	@GetMapping("/loanRequest")
 	public String loanApplication(Model model, HttpSession session) {
-
-	
+		List<Loan> listLoan = loanMaterService.getAllLoans();
+		model.addAttribute("listLoan", listLoan);
+		 List<Employee> listEmployee = employeeService.getAllEmployees();
+		  model.addAttribute("listEmployee", listEmployee);
 		String userCode = (String) session.getAttribute("username");
 		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
 		if (modules != null) {
@@ -28,4 +58,62 @@ public class LoanRequestController {
 		session.setAttribute("username", session.getAttribute("username"));
 		 return "/loanRequest";
 	}
+	
+	
+
+	//@CrossOrigin
+	@ResponseBody
+    @GetMapping("/viewEmployeeDetailsLoan/{id}")
+    public LoanApplicationUtil  getLocalConvyenceById(@PathVariable(value = "id") String id) {
+		Employee e = employeeService.findEmployeeById(id);
+		
+
+		
+		Department d = departmentService.findDepartmentById(e.getDepartmentCode());
+		Designation des=designationService.findDesignationById(e.getDesignationCode());
+		LoanApplicationUtil l=new LoanApplicationUtil(e.getEmpName(),d.getDeptName(),
+				des.getDesgName()
+				,e.getEmployeePayeeCode());
+		
+        return l;
+    }
+
+	
+	@PostMapping("/saveLoanRequest")
+	public String saveLoanRequest(@ModelAttribute("LoanRequest")LoanApplicationUtil loanAppUtil, Model model, HttpSession session) {
+		LoanApplication loanRequest = new LoanApplication();
+		Employee emp = new Employee();
+		emp.setEmpCode(loanAppUtil.getEmpCode());
+		loanRequest.setEmpCode(emp);
+
+		Loan lo = new Loan();
+		lo.setLoanCode(loanAppUtil.getLoanCode());
+		loanRequest.setLoanCode(lo);
+		String insertedBY = (String) session.getAttribute("USER_NAME");
+
+		loanRequest.setInsBy(insertedBY);
+		loanRequest.setApprovalStatus("N");
+
+		loanRequest.setAppDate(loanAppUtil.getAppDate());
+
+		loanRequest.setLoanType(loanAppUtil.getLoanType());
+
+		loanRequest.setEffScheduleDate(loanAppUtil.getEffScheduleDate());
+
+		loanRequest.setAmountRequired(loanAppUtil.getAmountRequired());
+
+		loanRequest.setAmountSanctioned(loanAppUtil.getAmountSanctioned());
+
+		loanRequest.setLoanStatus(loanAppUtil.getLoanStatus());
+	
+
+		this.loanRequestService.addLoanRequest(loanRequest);
+
+		session.setAttribute("username", session.getAttribute("username"));
+
+		return "redirect:/loanRequest";
+
+	}
+	
+	
 }
