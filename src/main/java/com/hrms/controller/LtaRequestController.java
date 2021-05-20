@@ -69,7 +69,7 @@ public class LtaRequestController {
 		
 		ltaRequest.setAdavance(ltaRequestUtil.getAdavance());
 		ltaRequest.setRemarks(ltaRequestUtil.getRemarks());
-		
+		ltaRequest.setApprovalStatus("N");
 
 		this.ltaRequestService.addLtaRequest(ltaRequest);
 

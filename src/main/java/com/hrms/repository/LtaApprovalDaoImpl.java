@@ -5,6 +5,7 @@ import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -22,12 +23,12 @@ public class LtaApprovalDaoImpl extends AbstractGenericDao<LtaRequest> implement
 		try {
 			Session session = this.sessionFactory.openSession();
 			session.beginTransaction();
-			Query<LtaRequest> query = session.createQuery("from LtaRequest  e where e.approvalStatus ='N'",LtaRequest.class);
+			Query<LtaRequest>query = session.createQuery("from LtaRequest  e where e.approvalStatus ='N'",LtaRequest.class);
 			
-			List<LtaRequest> localConvyenceList = query.getResultList();
+			List<LtaRequest> listLtaApproval = query.getResultList();
 			session.getTransaction().commit();
 			
-			return localConvyenceList;
+			return listLtaApproval;
 		} catch (HibernateException e) {
 			
 			e.printStackTrace();
@@ -35,5 +36,21 @@ public class LtaApprovalDaoImpl extends AbstractGenericDao<LtaRequest> implement
 		return null;
 
 }
+
+
+
+	@Override
+	public void approvedLtaRequestById(String id) {
+		Session session = this.sessionFactory.openSession();
+		Query query = session.createQuery("UPDATE LtaRequest e set e.approvalStatus =:approvalStatus WHERE e.ltaCode= :id" );
+		query.setParameter("approvalStatus", "Y");
+		query.setParameter("id", id);
+		Transaction tx = session.beginTransaction();
+		int result = query.executeUpdate();
+		tx.commit();
+		session.close();
+		System.out.println("result : "+ result);
+		
+	}
 }
 

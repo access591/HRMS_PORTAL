@@ -8,4 +8,6 @@ public interface LtaApprovalService {
 
 	List<LtaRequest> getAllLtaApproval();
 
+	void approvedLtaRequestById(String id);
+
 }

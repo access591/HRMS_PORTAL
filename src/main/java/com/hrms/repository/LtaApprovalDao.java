@@ -9,4 +9,6 @@ public interface LtaApprovalDao extends GenericDao<LtaRequest> {
 
 	List<LtaRequest> getAllLtaApproval();
 
+	void approvedLtaRequestById(String id);
+
 }

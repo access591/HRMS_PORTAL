@@ -17,5 +17,10 @@ LtaApprovalDao ltaApprovalDao;
 		List<LtaRequest>listLtaApproval=ltaApprovalDao.getAllLtaApproval();
 		return listLtaApproval;
 	}
+	@Override
+	public void approvedLtaRequestById(String id) {
+		this.ltaApprovalDao.approvedLtaRequestById(id);
+		
+	}
 
 }
