@@ -11,7 +11,7 @@ public class Program1 {
 	private String programType;
 	private String programHrefName;
 	private String activeYn;
-	private String seqProgram;
+	private int seqProgram;
 	
 	
 	public String getProgramCode() {
@@ -44,10 +44,10 @@ public class Program1 {
 	public void setActiveYn(String activeYn) {
 		this.activeYn = activeYn;
 	}
-	public String getSeqProgram() {
+	public int getSeqProgram() {
 		return seqProgram;
 	}
-	public void setSeqProgram(String seqProgram) {
+	public void setSeqProgram(int seqProgram) {
 		this.seqProgram = seqProgram;
 	}
 	public String getSubModuleCode() {
