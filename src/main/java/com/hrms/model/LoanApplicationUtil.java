@@ -15,7 +15,7 @@ public class LoanApplicationUtil {
 	//-----------------------------------
 	private String appNo;
 	private Date appDate;
-	
+	private String loanName;
 	private String loanCode;
 	private String loanType;
 	
@@ -160,9 +160,18 @@ public class LoanApplicationUtil {
 
 	
 
+	public String getLoanName() {
+		return loanName;
+	}
+
+	public void setLoanName(String loanName) {
+		this.loanName = loanName;
+	}
+
+	
 	public LoanApplicationUtil(String empCode, String empName, String departmentCode, String deptName, String desgCode,
-			String desgName, String empPayCode, String appNo, Date appDate, String loanCode, String loanType,
-			String loanStatus, String amountRequired, Date effScheduleDate, String amountSanctioned) {
+			String desgName, String empPayCode, String appNo, Date appDate, String loanName, String loanCode,
+			String loanType, String loanStatus, String amountRequired, Date effScheduleDate, String amountSanctioned) {
 		super();
 		this.empCode = empCode;
 		this.empName = empName;
@@ -173,6 +182,7 @@ public class LoanApplicationUtil {
 		this.empPayCode = empPayCode;
 		this.appNo = appNo;
 		this.appDate = appDate;
+		this.loanName = loanName;
 		this.loanCode = loanCode;
 		this.loanType = loanType;
 		this.loanStatus = loanStatus;

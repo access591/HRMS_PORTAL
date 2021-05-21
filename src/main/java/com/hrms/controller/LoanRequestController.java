@@ -93,7 +93,6 @@ public class LoanRequestController {
 		lo.setLoanCode(loanAppUtil.getLoanCode());
 		loanRequest.setLoanCode(lo);
 		String insertedBY = (String) session.getAttribute("USER_NAME");
-
 		loanRequest.setInsBy(insertedBY);
 		loanRequest.setApprovalStatus("N");
 
