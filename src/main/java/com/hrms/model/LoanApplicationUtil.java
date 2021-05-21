@@ -13,7 +13,7 @@ public class LoanApplicationUtil {
 	private String desgName;
 	private String  empPayCode;
 	//-----------------------------------
-	
+	private String appNo;
 	private Date appDate;
 	
 	private String loanCode;
@@ -34,6 +34,14 @@ public class LoanApplicationUtil {
 		this.deptName = deptName2;
 		this.desgName = desgName2;
 		this.empPayCode = employeePayeeCode;
+	}
+
+	public String getAppNo() {
+		return appNo;
+	}
+
+	public void setAppNo(String appNo) {
+		this.appNo = appNo;
 	}
 
 	public String getEmpCode() {
@@ -150,9 +158,11 @@ public class LoanApplicationUtil {
 		this.amountSanctioned = amountSanctioned;
 	}
 
+	
+
 	public LoanApplicationUtil(String empCode, String empName, String departmentCode, String deptName, String desgCode,
-			String desgName, String empPayCode, Date appDate, String loanCode, String loanType, String loanStatus,
-			String amountRequired, Date effScheduleDate, String amountSanctioned) {
+			String desgName, String empPayCode, String appNo, Date appDate, String loanCode, String loanType,
+			String loanStatus, String amountRequired, Date effScheduleDate, String amountSanctioned) {
 		super();
 		this.empCode = empCode;
 		this.empName = empName;
@@ -161,6 +171,7 @@ public class LoanApplicationUtil {
 		this.desgCode = desgCode;
 		this.desgName = desgName;
 		this.empPayCode = empPayCode;
+		this.appNo = appNo;
 		this.appDate = appDate;
 		this.loanCode = loanCode;
 		this.loanType = loanType;
