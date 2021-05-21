@@ -56,7 +56,7 @@ public class Program implements Serializable {
 	private Module pModuleCode;
 
 	@Column(name = "SEQ_NO")
-	private String seqProgram;
+	private int seqProgram;
 	
 	public String getProgramCode() {
 		return programCode;
@@ -132,11 +132,11 @@ public class Program implements Serializable {
 		this.updatedDate = updatedDate;
 	}
 
-	public String getSeqProgram() {
+	public int getSeqProgram() {
 		return seqProgram;
 	}
 
-	public void setSeqProgram(String seqProgram) {
+	public void setSeqProgram(int seqProgram) {
 		this.seqProgram = seqProgram;
 	}
 
