@@ -124,7 +124,7 @@ body {
 
 												<div class="form-group">
 													<label>Sequence No</label> 
-													<input type="text" class="form-control" th:value="${programEdit.seqProgram}" id="seqProgram" name="seqProgram"required>
+													<input type="text" class="form-control" th:value="${programEdit.seqProgram}" id="seqProgram" pattern="\d{1,3}"maxlength="3" name="seqProgram"required>
 												</div>
 
 											</div>
