@@ -35,7 +35,7 @@ public class LoanApplication  implements Serializable{
 	private String loanType;
 	
 	@ManyToOne
-	@JoinColumn(name ="LOAN_CODE",updatable = false)
+	@JoinColumn(name ="LOAN_CODE")
 	private Loan loanCode;
 	
 	@Size(max =1)
