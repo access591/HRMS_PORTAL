@@ -10,11 +10,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.hrms.model.MenuModule;
+import com.hrms.service.LoanApprovalService;
 import com.hrms.service.ModuleService;
 @Controller
 public class LoanApprovalController {
 	@Autowired
 	private ModuleService moduleService;
+	@Autowired
+	LoanApprovalService loanApprovalService;
 	@GetMapping("/loanApproval")
 	public String loanApproval(Model model, HttpSession session) {
 
@@ -27,5 +30,7 @@ public class LoanApprovalController {
 		session.setAttribute("username", session.getAttribute("username"));
 		 return "/loanApproval";
 	}
-
+	
+	
+	
 }
