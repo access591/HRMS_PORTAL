@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.hrms.ReportUtil;
 import com.hrms.model.Designation;
 import com.hrms.model.Employee;
+import com.hrms.model.LtaRequest;
 import com.hrms.model.MenuModule;
 import com.hrms.model.Module;
 import com.hrms.model.TourPlan;
@@ -33,6 +34,7 @@ import com.hrms.service.EmployeeService;
 import com.hrms.service.LeaveGrantRegisterService;
 import com.hrms.service.LeaveRequestService;
 import com.hrms.service.LeaveService;
+import com.hrms.service.LtaRequestService;
 import com.hrms.service.ModuleService;
 import com.hrms.service.TourPlanService;
 import com.hrms.util.TourClaimReportUtil;
@@ -47,6 +49,7 @@ public class ReportCommonController {
 	@Autowired LeaveDetailService leaveDetailService;
 	@Autowired DesignationService designationService;
 	@Autowired ModuleService moduleService;
+	@Autowired LtaRequestService ltaRequestService;
 	
 	@Autowired TourPlanService tourPlanService;
 	
@@ -155,9 +158,10 @@ public class ReportCommonController {
 	}
 	
 	@PostMapping("generateTourClaim")
-	public String genrateTourClaim(@ModelAttribute("object") TourPlan tourPlan,
+	public String genrateTourClaim(@ModelAttribute("object") TourPlan tourPlan,HttpSession session,
 			@RequestParam("empName") String empCode,HttpServletRequest req,HttpServletResponse res) {
 		
+		String userCode = (String) session.getAttribute("username");
 		System.out.println("employee type/name : "+ empCode);
 		if(!empCode.equals("ALL"))
 		{
@@ -200,7 +204,8 @@ public class ReportCommonController {
 					}
 					
 				}else {
-					System.out.println("null pointer exception");
+					session.setAttribute("username",userCode);
+					return "redirect:/tourclaimPage";
 				}
 				
 				
@@ -213,7 +218,8 @@ public class ReportCommonController {
 			
 		}
 		
-		return "redirect:tourClaimReports";
+		session.setAttribute("username",userCode);
+		return "redirect:/tourclaimPage";
 		
 	}
 	
@@ -236,6 +242,29 @@ public class ReportCommonController {
 		}
 		model.addAttribute("object" , new TourPlan());
 		return "LocalClaimReport"; //tourClaimReports.html
+	}
+	
+	
+//LTA REPORTS
+	
+	@GetMapping("ltaReport")  //LtaReport.html
+	public String ltaReportPage(Model model,HttpSession session) {
+		
+		String userCode = (String) session.getAttribute("username");
+		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
+		if (modules != null) {
+			model.addAttribute("modules", modules);
+		}
+		
+		//ltaRequestService
+		model.addAttribute("ltaRequest", new LtaRequest());
+		return "LtaReport";
+	}
+	
+	@GetMapping("createLtaReport")  //LtaReport.html
+	public String createLtReport(Model model,HttpSession session) {
+		
+		return "LtaReport";
 	}
 	
 	
