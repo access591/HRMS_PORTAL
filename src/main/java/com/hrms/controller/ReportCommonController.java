@@ -24,6 +24,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.hrms.ReportUtil;
 import com.hrms.model.Designation;
 import com.hrms.model.Employee;
+import com.hrms.model.MenuModule;
+import com.hrms.model.Module;
 import com.hrms.model.TourPlan;
 import com.hrms.reports.TourClaimReport;
 import com.hrms.service.DesignationService;
@@ -31,6 +33,7 @@ import com.hrms.service.EmployeeService;
 import com.hrms.service.LeaveGrantRegisterService;
 import com.hrms.service.LeaveRequestService;
 import com.hrms.service.LeaveService;
+import com.hrms.service.ModuleService;
 import com.hrms.service.TourPlanService;
 import com.hrms.util.TourClaimReportUtil;
 
@@ -43,6 +46,7 @@ public class ReportCommonController {
 	@Autowired LeaveService leaveService;
 	@Autowired LeaveDetailService leaveDetailService;
 	@Autowired DesignationService designationService;
+	@Autowired ModuleService moduleService;
 	
 	@Autowired TourPlanService tourPlanService;
 	
@@ -134,11 +138,19 @@ public class ReportCommonController {
 	@GetMapping("tourclaimPage")
 	public String tourClaimReport(Model model,HttpSession session) {
 		
+		String userCode = (String) session.getAttribute("username");
+		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
+		if (modules != null) {
+			model.addAttribute("modules", modules);
+		}
+
+		
 		List<Employee> listEmployee = employeeService.getAllEmployees();
 		if(listEmployee != null) {
 			model.addAttribute("listEmployee", listEmployee);
 		}
 		model.addAttribute("object" , new TourPlan());
+		session.setAttribute("username",userCode);
 		return "tourClaimReports"; //tourClaimReports.html
 	}
 	
@@ -212,6 +224,12 @@ public class ReportCommonController {
 	@GetMapping("localclaimPage")
 	public String localClaimReport(Model model,HttpSession session) {
 		
+		String userCode = (String) session.getAttribute("username");
+		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
+		if (modules != null) {
+			model.addAttribute("modules", modules);
+		}
+
 		List<Employee> listEmployee = employeeService.getAllEmployees();
 		if(listEmployee != null) {
 			model.addAttribute("listEmployee", listEmployee);

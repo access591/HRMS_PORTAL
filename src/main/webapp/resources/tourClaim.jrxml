@@ -42,6 +42,7 @@
 		<field name="endPlace" class="java.lang.String"/>
 		<field name="claimAmt" class="java.lang.String"/>
 		<field name="passAmt" class="java.lang.String"/>
+		<field name="tourClaimDate" class="java.lang.String"/>
 	</subDataset>
 	<parameter name="Parameter1" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource">
 		<defaultValueExpression><![CDATA[$P{Parameter1}]]></defaultValueExpression>
@@ -89,12 +90,12 @@
 					<datasetRun subDataset="Dataset1" uuid="0c5232a3-b5c4-43c3-a363-41144258c943">
 						<dataSourceExpression><![CDATA[$P{Parameter1}]]></dataSourceExpression>
 					</datasetRun>
-					<jr:column width="90" uuid="e15980a5-ad7e-4c51-8362-0f4f7c2c7fb0">
+					<jr:column width="80" uuid="e15980a5-ad7e-4c51-8362-0f4f7c2c7fb0">
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column1"/>
 						<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
 							<property name="com.jaspersoft.studio.unit.width" value="px"/>
 							<staticText>
-								<reportElement mode="Opaque" x="0" y="0" width="90" height="30" forecolor="#FCF7F7" backcolor="#1F1717" uuid="361e5d1d-820a-44e4-aa0c-3ea2b760ce2e">
+								<reportElement mode="Opaque" x="0" y="0" width="80" height="30" forecolor="#FCF7F7" backcolor="#1F1717" uuid="361e5d1d-820a-44e4-aa0c-3ea2b760ce2e">
 									<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 								</reportElement>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -104,18 +105,19 @@
 							</staticText>
 						</jr:columnHeader>
 						<jr:detailCell style="Table_TD" height="30">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
 							<textField>
-								<reportElement x="0" y="0" width="90" height="30" uuid="c608c55e-4d52-435f-912d-ade1aa3e65a3"/>
+								<reportElement x="0" y="0" width="80" height="30" uuid="76f6a65f-64f8-4ad6-8492-9478d0fe90df"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle"/>
 								<textFieldExpression><![CDATA[$F{tourClaimId}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="90" uuid="dbdec5c1-31b9-412a-a258-41a8e681aa70">
+					<jr:column width="80" uuid="dbdec5c1-31b9-412a-a258-41a8e681aa70">
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column2"/>
 						<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
 							<staticText>
-								<reportElement mode="Opaque" x="0" y="0" width="90" height="30" forecolor="#FCF7F7" backcolor="#1F1717" uuid="1c5e0d88-9708-4664-928e-ae47fd2d4b8c"/>
+								<reportElement mode="Opaque" x="0" y="0" width="80" height="30" forecolor="#FCF7F7" backcolor="#1F1717" uuid="1c5e0d88-9708-4664-928e-ae47fd2d4b8c"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font size="12"/>
 								</textElement>
@@ -125,18 +127,39 @@
 						<jr:detailCell style="Table_TD" height="30">
 							<property name="com.jaspersoft.studio.unit.width" value="px"/>
 							<textField>
-								<reportElement x="0" y="0" width="90" height="30" uuid="abb63f0d-7661-4b9b-a840-5ce87de1ced0"/>
+								<reportElement x="0" y="0" width="80" height="30" uuid="4e982618-ad3a-424b-b8c9-f2662ded1874"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle"/>
 								<textFieldExpression><![CDATA[$F{tourPlanId}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="90" uuid="baa56d53-e6f4-40db-a443-c2cf9a967d88">
+					<jr:column width="80" uuid="baa56d53-e6f4-40db-a443-c2cf9a967d88">
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column3"/>
 						<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
 							<property name="com.jaspersoft.studio.unit.width" value="px"/>
 							<staticText>
-								<reportElement mode="Opaque" x="0" y="0" width="90" height="30" forecolor="#FCF7F7" backcolor="#1F1717" uuid="e9a5164f-6318-4f3e-a3b4-0ff6810df6a0">
+								<reportElement mode="Opaque" x="0" y="0" width="80" height="30" forecolor="#FCF7F7" backcolor="#1F1717" uuid="5d736c44-92c0-44ea-acfa-34e7038cbb00">
+									<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+								</reportElement>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="12"/>
+								</textElement>
+								<text><![CDATA[Tour Plan Date]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="80" height="30" uuid="f90d60cc-d094-41cf-8b16-e8a3d1fd33cb"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{tourClaimDate}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="80" uuid="cf97c9c6-5a85-4e96-987e-8ad73caf84c0">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column4"/>
+						<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement mode="Opaque" x="0" y="0" width="80" height="30" forecolor="#FCF7F7" backcolor="#1F1717" uuid="bb2e48bf-47c4-4427-91e8-7244ef68afd1">
 									<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 								</reportElement>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -146,19 +169,18 @@
 							</staticText>
 						</jr:columnHeader>
 						<jr:detailCell style="Table_TD" height="30">
-							<property name="com.jaspersoft.studio.unit.width" value="px"/>
 							<textField>
-								<reportElement x="0" y="0" width="90" height="30" uuid="348907e3-0e7f-45d3-bac3-4866df8848e3"/>
+								<reportElement x="0" y="0" width="80" height="30" uuid="ee60006d-2fe9-4e54-ad4d-74ee6d10e639"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle"/>
 								<textFieldExpression><![CDATA[$F{empCode}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="90" uuid="cf97c9c6-5a85-4e96-987e-8ad73caf84c0">
-						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column4"/>
+					<jr:column width="80" uuid="b612f9ab-ca5f-42cb-97ce-67e50ddc0de7">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column5"/>
 						<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
 							<staticText>
-								<reportElement mode="Opaque" x="0" y="0" width="90" height="30" forecolor="#FCF7F7" backcolor="#1F1717" uuid="a6ce02a4-050e-44ec-bff3-de8be9445b04">
+								<reportElement mode="Opaque" x="0" y="0" width="80" height="30" forecolor="#FCF7F7" backcolor="#1F1717" uuid="92f632b0-9a75-45aa-a336-004066e2c73d">
 									<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 								</reportElement>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -168,19 +190,18 @@
 							</staticText>
 						</jr:columnHeader>
 						<jr:detailCell style="Table_TD" height="30">
-							<property name="com.jaspersoft.studio.unit.width" value="px"/>
 							<textField>
-								<reportElement x="0" y="0" width="90" height="30" uuid="84f53eab-0d23-4c66-a1fa-b15c6751e7dd"/>
+								<reportElement x="0" y="0" width="80" height="30" uuid="7104431c-af2b-4e02-b28b-4da175f8effe"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle"/>
 								<textFieldExpression><![CDATA[$F{empName}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="90" uuid="b612f9ab-ca5f-42cb-97ce-67e50ddc0de7">
-						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column5"/>
+					<jr:column width="80" uuid="b2a2b182-210b-4b0e-bd37-420c91e70f16">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column6"/>
 						<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
 							<staticText>
-								<reportElement mode="Opaque" x="0" y="0" width="90" height="30" forecolor="#FCF7F7" backcolor="#1F1717" uuid="dd5c9176-5377-408f-b36e-02656f6470ee">
+								<reportElement mode="Opaque" x="0" y="0" width="80" height="30" forecolor="#FCF7F7" backcolor="#1F1717" uuid="4cdc2969-de2b-4a8a-9ad1-c9f8caa152dc">
 									<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 								</reportElement>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -190,19 +211,18 @@
 							</staticText>
 						</jr:columnHeader>
 						<jr:detailCell style="Table_TD" height="30">
-							<property name="com.jaspersoft.studio.unit.width" value="px"/>
 							<textField>
-								<reportElement x="0" y="0" width="90" height="30" uuid="5d1798bd-9a3e-4749-8eee-f53cccea61de"/>
+								<reportElement x="0" y="0" width="80" height="30" uuid="bb819b3f-23b3-40b8-a66d-7de8ea72f3f0"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle"/>
 								<textFieldExpression><![CDATA[$F{desigName}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="90" uuid="b2a2b182-210b-4b0e-bd37-420c91e70f16">
-						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column6"/>
+					<jr:column width="80" uuid="a4fbcf9c-d25b-4cab-855c-63e313339230">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column7"/>
 						<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
 							<staticText>
-								<reportElement mode="Opaque" x="0" y="0" width="90" height="30" forecolor="#FCF7F7" backcolor="#1F1717" uuid="c5e5829e-5aa0-41c6-8a3c-217dd3ccae8d">
+								<reportElement mode="Opaque" x="0" y="0" width="80" height="30" forecolor="#FCF7F7" backcolor="#1F1717" uuid="0bb93ffc-e93c-4490-94d2-3571bd88cda9">
 									<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 								</reportElement>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -212,19 +232,18 @@
 							</staticText>
 						</jr:columnHeader>
 						<jr:detailCell style="Table_TD" height="30">
-							<property name="com.jaspersoft.studio.unit.width" value="px"/>
 							<textField>
-								<reportElement x="0" y="0" width="90" height="30" uuid="a71cfd5e-39cf-4047-936b-88c9326faf53"/>
+								<reportElement x="0" y="0" width="80" height="30" uuid="5f50602a-3c62-45da-9915-8fd769ac1f37"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle"/>
 								<textFieldExpression><![CDATA[$F{startPlace}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="90" uuid="a4fbcf9c-d25b-4cab-855c-63e313339230">
-						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column7"/>
+					<jr:column width="80" uuid="80eff743-fae1-45df-9295-09bc46964f42">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column8"/>
 						<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
 							<staticText>
-								<reportElement mode="Opaque" x="0" y="0" width="90" height="30" forecolor="#FCF7F7" backcolor="#1F1717" uuid="8b4d73b3-afd2-4276-936f-3f162c3b7a0d">
+								<reportElement mode="Opaque" x="0" y="0" width="80" height="30" forecolor="#FCF7F7" backcolor="#1F1717" uuid="5d93f2b0-fc8b-4880-bef8-767b17c36c01">
 									<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 								</reportElement>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -234,19 +253,18 @@
 							</staticText>
 						</jr:columnHeader>
 						<jr:detailCell style="Table_TD" height="30">
-							<property name="com.jaspersoft.studio.unit.width" value="px"/>
 							<textField>
-								<reportElement x="0" y="0" width="90" height="30" uuid="c98de10f-a5c1-47e7-9135-1ebe6b5fa6bc"/>
+								<reportElement x="0" y="0" width="80" height="30" uuid="d632277a-b379-4f19-99d7-0640a8564095"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle"/>
 								<textFieldExpression><![CDATA[$F{endPlace}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="90" uuid="80eff743-fae1-45df-9295-09bc46964f42">
-						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column8"/>
+					<jr:column width="80" uuid="a2489692-7bd2-4f8e-a914-fc1b79fd8ae5">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column9"/>
 						<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
 							<staticText>
-								<reportElement mode="Opaque" x="0" y="0" width="90" height="30" forecolor="#FCF7F7" backcolor="#1F1717" uuid="c4708851-be45-4cba-96ed-5e15f56ed749">
+								<reportElement mode="Opaque" x="0" y="0" width="80" height="30" forecolor="#FCF7F7" backcolor="#1F1717" uuid="05490ef2-89ba-4967-8e06-4bb0c2931012">
 									<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 								</reportElement>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -258,17 +276,18 @@
 						<jr:detailCell style="Table_TD" height="30">
 							<property name="com.jaspersoft.studio.unit.width" value="px"/>
 							<textField>
-								<reportElement x="0" y="0" width="90" height="30" uuid="e4701e59-ca4d-4684-bee4-40f55f20f31b"/>
+								<reportElement x="0" y="0" width="80" height="30" uuid="fb336d56-d50a-42e1-9680-6fea41921a39"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle"/>
 								<textFieldExpression><![CDATA[$F{claimAmt}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="80" uuid="a2489692-7bd2-4f8e-a914-fc1b79fd8ae5">
-						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column9"/>
+					<jr:column width="80" uuid="0c95aedf-0550-4f88-9b08-a6bee708647f">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column10"/>
 						<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
 							<staticText>
-								<reportElement mode="Opaque" x="0" y="0" width="80" height="30" forecolor="#FCF7F7" backcolor="#1F1717" uuid="fbe8ff29-36df-4c3f-ba2c-7fdc334dc2f9">
+								<reportElement mode="Opaque" x="0" y="0" width="80" height="30" forecolor="#FCF7F7" backcolor="#1F1717" uuid="9bf666cb-87fb-48b5-af04-ed2697b34a87">
 									<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 								</reportElement>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -279,7 +298,7 @@
 						</jr:columnHeader>
 						<jr:detailCell style="Table_TD" height="30">
 							<textField>
-								<reportElement x="0" y="0" width="80" height="30" uuid="e3ce4465-d9c5-4a97-9da6-1612cfeb448e"/>
+								<reportElement x="0" y="0" width="80" height="30" uuid="e4270fff-0f3b-4fc6-a366-8ff2d7e81b5f"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle"/>
 								<textFieldExpression><![CDATA[$F{passAmt}]]></textFieldExpression>
 							</textField>

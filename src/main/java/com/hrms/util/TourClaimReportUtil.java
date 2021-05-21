@@ -1,5 +1,7 @@
 package com.hrms.util;
 
+import java.util.Date;
+
 public class TourClaimReportUtil {
 	
 	private String tourClaimId;
@@ -11,6 +13,7 @@ public class TourClaimReportUtil {
 	private String endPlace;
 	private String claimAmt;
 	private String passAmt;
+	private Date tourClaimDate;
 	
 	public TourClaimReportUtil() {
 		super();
@@ -87,6 +90,14 @@ public class TourClaimReportUtil {
 
 	public void setPassAmt(String passAmt) {
 		this.passAmt = passAmt;
+	}
+
+	public Date getTourClaimDate() {
+		return tourClaimDate;
+	}
+
+	public void setTourClaimDate(Date tourClaimDate) {
+		this.tourClaimDate = tourClaimDate;
 	}
 	
 	
