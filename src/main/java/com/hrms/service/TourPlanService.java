@@ -2,6 +2,7 @@ package com.hrms.service;
 
 import java.util.List;
 
+import com.hrms.model.Employee;
 import com.hrms.model.TourPlan;
 
 
@@ -12,4 +13,5 @@ public interface TourPlanService {
 	public void updateTourPlan(TourPlan c);
 	public void removeTourPlan(String id);
 	public TourPlan findByIdTourPlan(String id);
+	public List<TourPlan> findTourPlanByEmpCode(String  employee);
 }

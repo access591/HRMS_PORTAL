@@ -5,6 +5,7 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -21,10 +22,12 @@ private static final long serialVersionUID = 8658800224712878231L;
 @Id
 @GeneratedValue(strategy = GenerationType.IDENTITY)
 private long id;
-@ManyToOne
+
+@ManyToOne(fetch = FetchType.LAZY)
 @JoinColumn(name = "TOUR_PLAN_ID",updatable = false)
 private TourPlan  tourPlanId;
-@ManyToOne
+
+@ManyToOne(fetch = FetchType.LAZY)
 @JoinColumn(name = "TOUR_PLAN_DT",updatable = false)
 private TourPlan  tourPlanDate;
 

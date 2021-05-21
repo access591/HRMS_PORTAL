@@ -2,12 +2,16 @@ package com.hrms.service;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.hrms.model.Employee;
 import com.hrms.model.MedicalReimbursement;
 import com.hrms.model.TourPlan;
 import com.hrms.repository.TourPlanDao;
@@ -56,6 +60,38 @@ public class TourPlanServiceImpl implements TourPlanService{
 	@Override
 	public TourPlan findByIdTourPlan(String id) {
 		return this.tourPlanDao.findById(id);
+	}
+
+	
+	@Override
+	public List<TourPlan> findTourPlanByEmpCode(String empCode) {
+		
+		Session session = sessionfactory.openSession();
+		
+		try {
+			session.beginTransaction();
+			
+//			Query<TourPlan> query  = session.createQuery("select t from TourPlan t left join t.empCode e "
+//					+ "where e.empCode = :empCode",TourPlan.class);
+					
+			Query<TourPlan> query  = session.createQuery("from TourPlan t left join fetch t.empCode e "
+					+ " inner join fetch t.tourPlanDetail "
+					+ "where e.empCode = :empCode",TourPlan.class);
+			
+			query.setParameter("empCode", empCode);
+			List<TourPlan> tr = query.getResultList();
+			session.getTransaction().commit();
+			session.close();
+			System.out.println("list result : " + tr.get(0).getEmpCode().getEmpName());
+			System.out.println("list result : " + tr.get(0).getMobNumber());
+			return tr;
+		}catch(Exception e) {
+			System.out.println("tour plan service impl");
+			e.printStackTrace();
+		}
+		
+		
+		return null;
 	}
 
 }
