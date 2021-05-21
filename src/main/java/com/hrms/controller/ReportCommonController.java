@@ -22,9 +22,11 @@ import com.hrms.service.LeaveDetailService;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hrms.ReportUtil;
+import com.hrms.model.Designation;
 import com.hrms.model.Employee;
 import com.hrms.model.TourPlan;
 import com.hrms.reports.TourClaimReport;
+import com.hrms.service.DesignationService;
 import com.hrms.service.EmployeeService;
 import com.hrms.service.LeaveGrantRegisterService;
 import com.hrms.service.LeaveRequestService;
@@ -40,6 +42,7 @@ public class ReportCommonController {
 	@Autowired EmployeeService employeeService;
 	@Autowired LeaveService leaveService;
 	@Autowired LeaveDetailService leaveDetailService;
+	@Autowired DesignationService designationService;
 	
 	@Autowired TourPlanService tourPlanService;
 	
@@ -127,7 +130,7 @@ public class ReportCommonController {
 		
 	}
 	
-	
+//TOUR CLAIM REPORT	
 	@GetMapping("tourclaimPage")
 	public String tourClaimReport(Model model,HttpSession session) {
 		
@@ -163,13 +166,22 @@ public class ReportCommonController {
 					
 					for(int i=0;i<listTourPlan1.get(0).getTourPlanDetail().size();i++) {
 						
+						Designation desig = null;
 						TourClaimReportUtil tr = new TourClaimReportUtil();
 						
 						System.out.println("claim id : "+listTourPlan.get(i).getTourPlanDetail().get(i).getEndPlace());
 						tr.setTourPlanId(listTourPlan1.get(0).getTourPlanId());
 						tr.setEmpCode(listTourPlan1.get(0).getEmpCode().getEmpCode());
 						tr.setEmpName(listTourPlan1.get(0).getEmpCode().getEmpName());
-						tr.setDesigName("designame");
+						
+						try {
+							desig = designationService.findDesignationById(listTourPlan1.get(0).getDesgCode().getDesgCode());
+							tr.setDesigName(desig.getDesgName());
+							
+						}catch(Exception e) {
+							System.out.println("generate tour claim");
+							e.printStackTrace();
+						}
 						tr.setStartPlace(listTourPlan1.get(0).getTourPlanDetail().get(i).getStartPlace());
 						tr.setEndPlace(listTourPlan1.get(0).getTourPlanDetail().get(i).getEndPlace());
 						ltr.add(tr);
@@ -191,6 +203,21 @@ public class ReportCommonController {
 		
 		return "redirect:tourClaimReports";
 		
+	}
+	
+	
+	
+//LOCAL CLAIM REORT
+	
+	@GetMapping("localclaimPage")
+	public String localClaimReport(Model model,HttpSession session) {
+		
+		List<Employee> listEmployee = employeeService.getAllEmployees();
+		if(listEmployee != null) {
+			model.addAttribute("listEmployee", listEmployee);
+		}
+		model.addAttribute("object" , new TourPlan());
+		return "LocalClaimReport"; //tourClaimReports.html
 	}
 	
 	
