@@ -1,8 +1,12 @@
 package com.hrms.service;
 
-import java.sql.Date;
+
+import java.util.Date;
 import java.util.List;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +18,8 @@ import com.hrms.repository.LeaveRequestDao;
 public class LeaveRequestServiceImpl implements LeaveRequestService{
 
 	@Autowired LeaveRequestDao leaveRequestDao;
+	@Autowired SessionFactory sessionFactory;
+	
 	@Override
 	public List<LeaveRequest> findAllByEmpCode(String empCode) {
 		
@@ -22,13 +28,35 @@ public class LeaveRequestServiceImpl implements LeaveRequestService{
 	}
 	@Override
 	public void addLeave(LeaveRequest leaveRequest) {
+		
+		if(leaveRequest.getRequestType().equals("single")) {
+			leaveRequest.setToDate(leaveRequest.getFromDate());
+		}
 		this.leaveRequestDao.saveOrUpdate(leaveRequest);
 		
 	}
 	@Override
 	public List<LeaveRequest> getAllLeaves() {
 		//System.out.println("DAO MODEL : "+this.leaveRequestDao.findAll().get(1).getEmpName());
-		return this.leaveRequestDao.findAll();
+		System.out.println("hii getAll leaves ");
+		try {
+			
+			Session session = sessionFactory.openSession();
+			Query<LeaveRequest> query = session.createQuery("from LeaveRequest lr inner join fetch lr.employee e"
+					+ " inner join fetch lr.leave lv ",LeaveRequest.class);
+			
+			List<LeaveRequest> leaveRequest = query.getResultList();
+			
+			System.out.println("hii getAll leaves "+ leaveRequest.size());
+			
+			return leaveRequest;
+			
+		}catch(Exception e) {
+			System.out.println("error occured in gt All leaves ");
+			e.printStackTrace();
+		}
+		return null;
+		//return this.leaveRequestDao.findAll();
 	}
 	
 	@Override
@@ -69,6 +97,10 @@ public class LeaveRequestServiceImpl implements LeaveRequestService{
 	public LeaveRequest findByToDate(Date date) {
 		// TODO Auto-generated method stub
 		return this.leaveRequestDao.findByToDate(date);
+	}
+	@Override
+	public List<LeaveRequest> getEmployeeByStatusN() {
+		return this.leaveRequestDao.getEmployeeByStatusN();
 	}
 
 }

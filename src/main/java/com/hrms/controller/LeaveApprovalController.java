@@ -51,7 +51,7 @@ public class LeaveApprovalController {
 		String userCode = (String) session.getAttribute("username");
 		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
 		List<Department> listDepartment = departmentService.getAllDepartments();
-		List<LeaveRequest> listLeaveApproval = leaveRequestService.getEmployeeByStatusY();
+		List<LeaveRequest> listLeaveApproval = leaveRequestService.getEmployeeByStatusN();
 
 		if(listLeaveApproval != null) {
 			model.addAttribute("listLeaveApproval" , listLeaveApproval);
@@ -65,7 +65,7 @@ public class LeaveApprovalController {
 
 		session.setAttribute("username", session.getAttribute("username"));
 
-		return pageMappingService.PageRequestMapping(reqPage, pageno);
+		return "leaveApproval";
 	}
 	
 	
@@ -97,19 +97,28 @@ public class LeaveApprovalController {
 	}
 	
 	
-	@ResponseBody
-	@GetMapping("/approveLeaveRequest/{leaveRequestId}")
-	public void approveLeaveRequest(@PathVariable("leaveRequestId") String leaveid, Model model ,HttpSession session) {
+	//@ResponseBody
+	@GetMapping("/approveLeaveRequest/{leaveRequestId}/{status}")
+	public String approveLeaveRequest(@PathVariable("leaveRequestId") String leaveid, @PathVariable("status") String status,
+			Model model ,HttpSession session) {
 		
 		String userCode = (String) session.getAttribute("username");
 		LeaveRequest leaveRequest = leaveRequestService.findLeaveRequestById(Long.valueOf(leaveid));
 		
 		System.out.println("leave request approval : "+ leaveRequest);
 		
-		leaveRequest.setStatus("Y");
-		leaveRequest.setApproevedBy("Rahul");
-		leaveRequest.setApprovedDate(new Date().toString());
-		leaveRequestService.updateLeaveRequest(leaveRequest);   
+		if(status.equals("Y")) {
+			leaveRequest.setStatus("Y");
+			leaveRequest.setApproevedBy(userCode);
+			leaveRequest.setApprovedDate(new Date().toString());
+			
+		}else {
+			leaveRequest.setStatus("C");
+			leaveRequest.setCancelBy(userCode);
+			leaveRequest.setCancelDate(new Date().toString());
+		}
+		
+		leaveRequestService.updateLeaveRequest(leaveRequest);  
 		
 		List<LeaveRequest> listLeaveApproval = leaveRequestService.getEmployeeByStatusY();
 		if(listLeaveApproval != null) {
@@ -120,7 +129,7 @@ public class LeaveApprovalController {
 		
 		leaveApproval(model, session);
 		
-		//return null;
+		return "redirect:/leaveApproval";
 	}
 	
 	
@@ -144,7 +153,7 @@ public class LeaveApprovalController {
 		LeaveRequest leaveRequest = this.leaveRequestService.findLeaveRequestById(Long.parseLong(leaveRequestId));
 		
 		if(leaveRequest != null) {
-			model.addAttribute("leaveDetail", leaveRequest);
+			model.addAttribute("leaveRequest", leaveRequest);
 		}
 		List<MenuModule> modules = moduleService.getAllModulesList(session.getAttribute("username").toString());
 		if (modules != null) {
@@ -152,7 +161,7 @@ public class LeaveApprovalController {
 		}
 		model.addAttribute("header", "View Leave Approval");
 		model.addAttribute("myhref", "leaveApproval");
-		return pageMappingService.PageRequestMapping(reqPageView, pagenoView);
+		return "viewLeaveRequest";
 	}
 	
 	

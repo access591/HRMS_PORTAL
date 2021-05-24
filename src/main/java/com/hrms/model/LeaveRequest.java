@@ -36,17 +36,29 @@ public class LeaveRequest implements Serializable  {
 	private Long leaveRequestId;
 	
 	
-	@Column(name = "EMP_CODE")
-	private String empCode;
+//	@Column(name = "EMP_CODE")
+//	private String empCode;
+	
+	@ManyToOne
+	@JoinColumn(name = "EMP_CODE")
+	private Employee employee;
 
 	
-	@Column(name = "DEPT_CODE",length=50)
-	private String deptCode;
+//	@Column(name = "DEPT_CODE",length=50)
+//	private String deptCode;
+	
+	@ManyToOne
+	@JoinColumn(name = "DEPT_CODE")
+	private Department department;
 	
 
 	
-	@Column(name = "LEAVE_CODE")  
-	private String leaveCode;
+//	@Column(name = "LEAVE_CODE")  
+//	private String leaveCode;
+
+	@ManyToOne
+	@JoinColumn(name = "LEAVE_CODE")
+	private Leave leave;
 	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "TO_DATE")  
@@ -65,7 +77,7 @@ public class LeaveRequest implements Serializable  {
 	
 	//@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "APPLY_DATE")
-	private String applyDate;
+	private Date applyDate;
 	
 	@Column(name = "APPROVE_DATE",length=100)
 	private String approvedDate;
@@ -132,28 +144,35 @@ public class LeaveRequest implements Serializable  {
 
 	
 
-	public String getEmpCode() {
-		return empCode;
-	}
+//	public String getEmpCode() {
+//		return empCode;
+//	}
+//
+//	public void setEmpCode(String empCode) {
+//		this.empCode = empCode;
+//	}
+//
+//	public String getDeptCode() {
+//		return deptCode;
+//	}
+//
+//	public void setDeptCode(String deptCode) {
+//		this.deptCode = deptCode;
+//	}
+//
+//	public String getLeaveCode() {
+//		return leaveCode;
+//	}
+//
+//	public void setLeaveCode(String leaveCode) {
+//		this.leaveCode = leaveCode;
+//	}
+	
+	
 
-	public void setEmpCode(String empCode) {
-		this.empCode = empCode;
-	}
 
-	public String getDeptCode() {
-		return deptCode;
-	}
-
-	public void setDeptCode(String deptCode) {
-		this.deptCode = deptCode;
-	}
-
-	public String getLeaveCode() {
-		return leaveCode;
-	}
-
-	public void setLeaveCode(String leaveCode) {
-		this.leaveCode = leaveCode;
+	public Employee getEmployee() {
+		return employee;
 	}
 
 	public Date getToDate() {
@@ -162,6 +181,26 @@ public class LeaveRequest implements Serializable  {
 
 	public void setToDate(Date toDate) {
 		this.toDate = toDate;
+	}
+
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
+	}
+
+	public Department getDepartment() {
+		return department;
+	}
+
+	public void setDepartment(Department department) {
+		this.department = department;
+	}
+
+	public Leave getLeave() {
+		return leave;
+	}
+
+	public void setLeave(Leave leave) {
+		this.leave = leave;
 	}
 
 	public Date getFromDate() {
@@ -188,11 +227,11 @@ public class LeaveRequest implements Serializable  {
 		this.toDateType = toDateType;
 	}
 
-	public String getApplyDate() {
+	public Date getApplyDate() {
 		return applyDate;
 	}
 
-	public void setApplyDate(String applyDate) {
+	public void setApplyDate(Date applyDate) {
 		this.applyDate = applyDate;
 	}
 

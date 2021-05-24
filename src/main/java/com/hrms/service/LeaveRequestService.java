@@ -1,6 +1,6 @@
 package com.hrms.service;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
 
@@ -12,7 +12,7 @@ public interface LeaveRequestService {
 	
 	public void addLeave(LeaveRequest leaveRequest);
 	List<LeaveRequest> getAllLeaves();
-	//LeaveRequest findLeaveRequestById(String id);
+	
 	public void updateLeaveRequest(LeaveRequest d);
 	public void removeLeaveRequest(Long id);
 	List<LeaveRequest> findByEmpCodeAndApplyDate(String empCode, String applyDate);
@@ -20,6 +20,7 @@ public interface LeaveRequestService {
 
 	LeaveRequest findLeaveRequestById(long id);
 	List<LeaveRequest> getEmployeeByStatusY();
+	List<LeaveRequest> getEmployeeByStatusN();
 	List<LeaveRequest> findByEmpBetweenDate(String empCode, Date toDate, Date fromDate);
 	 LeaveRequest findByToDate(Date date);
 }

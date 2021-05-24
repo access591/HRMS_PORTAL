@@ -29,10 +29,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.hrms.ReportUtil;
 import com.hrms.model.Designation;
 import com.hrms.model.Employee;
+import com.hrms.model.LocalConvyenceDetail;
 import com.hrms.model.LtaRequest;
 import com.hrms.model.MenuModule;
 import com.hrms.model.Module;
 import com.hrms.model.TourPlan;
+import com.hrms.reports.LocalClaimReport;
 import com.hrms.reports.LtaReport;
 import com.hrms.reports.TourClaimReport;
 import com.hrms.service.DesignationService;
@@ -40,6 +42,7 @@ import com.hrms.service.EmployeeService;
 import com.hrms.service.LeaveGrantRegisterService;
 import com.hrms.service.LeaveRequestService;
 import com.hrms.service.LeaveService;
+import com.hrms.service.LocalConvyenceDetailService;
 import com.hrms.service.LtaRequestService;
 import com.hrms.service.ModuleService;
 import com.hrms.service.TourPlanService;
@@ -57,6 +60,8 @@ public class ReportCommonController {
 	@Autowired DesignationService designationService;
 	@Autowired ModuleService moduleService;
 	@Autowired LtaRequestService ltaRequestService;
+	@Autowired LocalConvyenceDetailService localConvyenceDetailService;
+	@Autowired LocalClaimReport localClaimReport;
 	
 	@Autowired TourPlanService tourPlanService;
 	
@@ -261,8 +266,20 @@ public class ReportCommonController {
 		if(listEmployee != null) {
 			model.addAttribute("listEmployee", listEmployee);
 		}
-		model.addAttribute("object" , new TourPlan());
+		//model.addAttribute("object" , new TourPlan());
 		return "LocalClaimReport"; //tourClaimReports.html
+	}
+	
+	@PostMapping("localClaimReport")
+	public String createLocalClaimReport(@RequestParam("empName") String empName, Model model,HttpSession session,
+			HttpServletRequest req,HttpServletResponse res) {
+		
+		System.out.println("empName is : " + empName);
+		List<LocalConvyenceDetail> listLocalConvyenceDetail = localConvyenceDetailService.findLocalConvyenceDetailByEmpCode(empName);
+		
+		localClaimReport.localClaimReport(res, req, listLocalConvyenceDetail);
+		return null;
+		
 	}
 	
 	

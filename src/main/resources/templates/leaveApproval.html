@@ -1,363 +1,164 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"lang="en">
 
 <script type="text/javascript" th:src="@{/js/settings.js}"></script>
 <script type="text/javascript" th:src="@{/js/app.js}"></script>
 <link rel="stylesheet" type="text/css" th:href="@{/css/modern.css}" />
-<script src="https://www.googletagmanager.com/gtag/js?id=UA-120946860-7"></script>
+<script  src="https://www.googletagmanager.com/gtag/js?id=UA-120946860-7"></script>
 <style>
+
+table.dataTable thead .sorting:after,
+table.dataTable thead .sorting:before,
+table.dataTable thead .sorting_asc:after,
+table.dataTable thead .sorting_asc:before,
+table.dataTable thead .sorting_asc_disabled:after,
+table.dataTable thead .sorting_asc_disabled:before,
+table.dataTable thead .sorting_desc:after,
+table.dataTable thead .sorting_desc:before,
+table.dataTable thead .sorting_desc_disabled:after,
+table.dataTable thead .sorting_desc_disabled:before {
+bottom: .5em;
+}
+
 body {
 	opacity: 0;
 }
-
 .uppercase {
-	text-transform: uppercase;
+  text-transform: uppercase;
 }
-</style>
-<script>
-	window.dataLayer = window.dataLayer || [];
-	function gtag() {
-		dataLayer.push(arguments);
-	}
-	gtag('js', new Date());
 
-	gtag('config', 'UA-120946860-7');
-</script>
+</style>
+
 <head>
 <meta charset="utf-8" />
 <title>HRMS</title>
 </head>
-
 <body>
-
-	<div class="wrapper">
-
-
-		<!--  nav start -->
-		<nav id="sidebar" class="sidebar">
-			<div th:replace="/fragments/sidebar :: div"></div>
-		</nav>
-		<!-- nav end  -->
-
-
-		<!-- main start here  -->
+<div class="wrapper">
+<nav id="sidebar" class="sidebar"aria-label="Site sidebar">
+ <div th:replace="/fragments/sidebar :: div"></div>
+ </nav>
 		<div class="main">
-
 			<div th:replace="/fragments/header ::div"></div>
-
-			<!-- content div start  -->
 			<main class="content">
-
-				<!-- container div start -->
 				<div class="container-fluid">
-
-
-					<!-- header div  -->
 					<div class="header">
-						<h1 class="header-title">Master</h1>
-
-						<nav aria-label="breadcrumb"></nav>
+						<h1 class="header-title"> HRMS</h1>
+						<nav aria-label="breadcrumb">
+						</nav>
 					</div>
-					<!-- header div end  -->
-
-
-					<!-- main row div  -->
 					<div class="row">
-
-						<!-- div column start  -->
 						<div class="col-12">
-
-							<!-- card start  -->
 							<div class="card">
-
-								<!-- card header  -->
 								<div class="card-header">
-
-									<h5 class="card-title">Leave Approval</h5>
-
-									<!-- div start  -->
-									<div class="alert-outline">
-										<div th:if="${message}" th:text="${message}"
-											style="color: red"></div>
-									</div>
-									<!-- div end -->
-
+									<h5 class="card-title">Leave Request Approval </h5>
+								<div class="alert-outline">
+									<div th:if="${message}" th:text="${message}" style="color: red">
+									</div> 
+									</div>	
 								</div>
-								<!-- card header end  -->
-
-
-								<!--  card body start  -->
 								<div class="card-body">
-
-									<div class="row">
-										<div class="col-12 col-lg-6">
-											<div class="form-group">
-												<label class="form-label"> Department </label> <label
-													style="color: red">*</label> <select id="deptName"
-													class="form-control" name="deptName"
-													onchange="getAllLeaveRequestBydepartment()">
-													<option value=" ">Select</option>
-													<option th:each="department:${listDepartment}"
-														th:text="${department.deptName}"
-														th:value="${department.departmentCode}"></option>
-												</select>
-											</div>
-										</div>
-									</div>
-
-
-									<!-- from  -->
-									<form>
-
-										<div id="validation-step-3">
-											<table id="itemList" aria-describedby="example"
-												class="table table-striped display" style="width: 100%">
+									<form id="validation-form" action="#"  method="post">
+										
+											<table 
+												class="table table-striped table-bordered table-sm" style="width: 100%">
 												<thead>
 													<tr>
+														<th class="text-center">Employee Code</th>
+														<th class="text-center">Employee Name</th>
+														<th class="text-center">Department</th>
 														
-														<th scope="col">Employee Code</th>
-														<th scope="col">Employee Name</th>
+														<th class="text-center">From Date</th>
+														<th class="text-center">To Date</th>
+														<th class="text-center">Total Leave</th>
+														<th class="text-center">Approval</th>
+														<th class="text-center">Details</th>
 														
-														<th scope="col">Department</th>
-														<th scope="col">Designation</th>
-														
-														<th scope="col">From Date</th>
-														<th scope="col">To Date</th>
-														<th scope="col">Approval</th>
-														<th scope="col">Detail</th>
-
 													</tr>
 												</thead>
+												<tbody>
 												
-													<tbody>
+												<tr th:each="leaveRequestapproval : ${listLeaveApproval}">
+														<td><label class="form-control text-center" th:text="${leaveRequestapproval.employee.empCode}"></label></td>
 
-													</tbody>
+														<td><label class="form-control text-center" th:text="${leaveRequestapproval.employee.empName}"></label></td>
+
+														<td><label class="form-control text-center" th:text="${leaveRequestapproval.department.deptName}"></label></td>
+
+														<td><label class="form-control text-center" th:text="${leaveRequestapproval.fromDate}"></label></td>
+
+														<td><label class="form-control text-center" th:text="${leaveRequestapproval.toDate}"></label></td>
+														<td><label class="form-control text-center" th:text="${leaveRequestapproval.leaveFor}"></label></td>
+														
+														<td>
+													<div class="btn-group">
+														  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+														    Approval
+														  </button>
+														  <div class="dropdown-menu">
+														    <a class="dropdown-item" th:href="@{/approveLeaveRequest/{leaveRequestId}/{status}/(leaveRequestId=${leaveRequestapproval.leaveRequestId},status=${'Y'})}">Approved</a>
+														    <a class="dropdown-item" th:href="@{/approveLeaveRequest/{leaveRequestId}/{status}/(leaveRequestId=${leaveRequestapproval.leaveRequestId},status=${'C'})}">Cancel</a>
+														   
+														    
+														    <!-- th:href="@{/approveInterview/{applicantCode}/{interviewStatus}/(applicantCode=${interviewApproval.applicantCode},interviewStatus=${'Forward'})}" -->
+														  </div>
+													</div> 
+  															
+  														</td>
+
+														<td class="text-center"><a class="btn btn-primary" th:href="@{/viewLeaveApproval/{id}(id=${leaveRequestapproval.leaveRequestId})}"><i class="fas fa-eye fa-sm"></i></a></td>
+													</tr>
 												
+													
+													<!-- <tr id='addr1' /> -->
+													
+												</tbody>
 
 											</table>
-										</div>
+											
+										
+										
 									</form>
-
-
-									<!-- form end  -->
-
-
-								</div>
-
-								<!-- card body end  -->
-							</div>
-							<!-- card end  -->
-						</div>
-
-						<!-- div card end -->
-
-<div class="col-12">
-							<div class="card">
-								<div class="card-header"></div>
-								<div class="card-body">
-									<table id="example" class="table table-striped display" style="width: 100%">
-										<thead>
-											<tr>
-												<th>id</th>
-												
-												<th>Name</th>
-												<th>Approved Date</th>
-												<th>Approved By</th>
-												<th>Action</th>
-											</tr>
-										</thead>
-										<tbody>
-											<tr th:each="leave : ${listLeaveApproval}">
-												<td th:text="${leave.empCode}"></td>
-												<td >testing</td>
-												<td th:text="${leave.approvedDate}"></td>
-												<td th:text="${leave.approevedBy}"></td>
-												
-												<td>
-													<a th:href="@{/viewLeaveApproval/{id}
-															(id=${leave.leaveRequestId})}"><em
-															class="align-middle fas fa-fw fa-pen"></em></a>
-													<a th:href="@{/deleteLeaveApproval/{id}(id=${leave.leaveRequestId})}"
-														onclick="return confirm('Are you sure?')"><em
-															class="align-middle fas fa-fw fa-trash"></em></a>
-													
-												</td>
-											</tr>
-										</tbody>
-									</table>
 								</div>
 							</div>
 						</div>
-
-
+	      
 					</div>
-					<!-- container div end  -->
-
 				</div>
-
-				<!-- content div  end  -->
 
 			</main>
 
-			<!-- main close  -->
-
-			<footer class="footer">
-				<div th:replace="/fragments/footer :: div"></div>
-			</footer>
+		<footer class="footer">
+		<div th:replace="/fragments/footer :: div"></div>
+		</footer>
 		</div>
-	</div>
+		</div>
 	
 	
 	
 	<script>
-	
-		$(document).ready(
-				function() {
-					var datatablesButtons = $('#example').DataTable({
-						"scrollY" : 200,
-						"scrollX" : true,
-						deferRender : true,
-						lengthChange : false,
-						buttons : [ 'copy', 'csv', 'excel', 'pdf', 'print' ],
-						scrollCollapse : true,
-
-					});
-
-					datatablesButtons.buttons().container().appendTo(
-							"#example_wrapper .col-md-6:eq(0)")
-
-				});
-
-		
-		let obj = "";
-		var leaveRequestId = "";
-		var leaveApplyDate = "";
-		var leaveEmpCode = "";
-		 
-		
-		//get record by department
-		function getAllLeaveRequestBydepartment() {
-
-			var table = document.getElementById("itemList");
-			
-			deleteRows();
-			//wait(2000);
-			
-			
-			var deptValue = document.getElementById("deptName").value;
-			console.log("dept value is : "+deptValue);
-
-			const xhr = new XMLHttpRequest();
-			xhr.open('GET', '/leaverequest/' + deptValue);
-			xhr.getResponseHeader('content-type', 'application/json');
-
-			xhr.onload = function() {
-				if (this.status === 200) {
-					obj = JSON.parse(this.responseText);
-					//console.log(obj[0].deptCode);
-					
-					console.log(obj);
-					
-					for(var i=0;i<obj.length;i++){
-						var rows = "";
-						leaveRequestId = obj[i].leaveRequestId;
-						leaveEmpCode = obj[i].empCode;
-						leaveApplyDate = obj[i].applyDate;
-						//fromDate = obj[i].fromDate.split("T");
-						//toDate = obj[i].toDate.split("T");
-						console.log("leave approval to date :  "+ obj[i].toDate )
-						
-						rows += "<tr><td>"
-								+ obj[i].empCode  + "</td><td>" + obj[i].empName
-								+ "</td><td>" + obj[i].deptName + "</td><td>"
-								+ "NULL"  + "</td><td>" +obj[i].fromDate + "</td><td>" + obj[i].toDate + "</td>"
-								+ "<td>" 
-								+ "<a href='#' onclick='approveLeaveRequest()'>Approve</a>" 
-								+ "</td><td>" 
-								+ "<a href=/viewLeaveApproval/" +leaveRequestId+"/  "
-								+">View</a>" + "</td></tr>";
-								
-						$(rows).appendTo("#itemList tbody");
-					}
-					
-				} else {
-					console.error("some error occured");
-				}
-
-			}
-
-			xhr.send();
-		}
-		
-		function viewLeaveRequest(){
-			
-			href = "viewLeaveRequest/'+leaveEmpCode+"/"+leaveApplyDate";
-		}
-		
-		
-		
-		function approveLeaveRequest(){
-			console.log("calling");
-			var leaveRequest = "";
-			console.log("leave request id : " + leaveRequestId);
-			const xhr = new XMLHttpRequest();
-			xhr.open('GET', 'approveLeaveRequest/' + leaveRequestId);
-			xhr.getResponseHeader('content-type', 'application/json');
-
-			xhr.onload = function() {
-				if (this.status === 200) {
-					console.log("successfull");
-					getAllLeaveRequestBydepartment();
-				} else {
-					console.error("some error occured in approval");
-				}
-			}
-			xhr.send();
-		}
-		
-		
-		function deleteRows(){
-			
-			for(var i=0;i<obj.length;i++){
-				var table = document.getElementById('itemList');
-				var rowCount = table.rows.length;
-				if(rowCount > '1'){
-					var row = table.deleteRow(rowCount-1);
-					rowCount--;
-				}
-				
-			}
-			
-		}
-		
-		
-		
-		
-		
+	$(document).ready(function () {
+		$('#example1').DataTable({
+		"scrollY": "200px",
+		"scrollCollapse": true, 
+		});
+		$('.dataTables_length').addClass('bs-select');
+		});
 	</script>
-	<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-	<script
-		src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-	<script
-		src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
-	<script
-		src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>
-	<script
-		src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.bootstrap4.min.js"></script>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
-	<script
-		src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js"></script>
-	<script
-		src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.print.min.js"></script>
-	<script
-		src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.colVis.min.js"></script>
+	
+		<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.bootstrap4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.print.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.colVis.min.js"></script>
+   
 
-
-
+		
 </body>
 </html>

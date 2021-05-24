@@ -22,12 +22,15 @@ public class LocalConvyenceDetail implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
+	
 	@ManyToOne
 	@JoinColumn(name = "LOCAL_CONV_ID",updatable = false)
 	private LocalConvyence localConvId;
+	
 	@ManyToOne
 	@JoinColumn(name ="LOCAL_CONV_DT",updatable = false)
 	private LocalConvyence localConvDate;
+	
 	@ManyToOne
 	@JoinColumn(name = "EMPLOYEE_CODE",updatable = false)
 	private Employee empCode;

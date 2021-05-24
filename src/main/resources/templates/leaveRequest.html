@@ -67,7 +67,7 @@
 												<div class="form-group">
 													<label> Employee id </label> <label style="color: red">*</label>
 													<input class="form-control" id="leaveRequestEmpId" value=""
-														name="empCode" readonly />
+														th:field="*{employee.empCode}" readonly />
 												</div>
 											</div>
 											<div class="col-12 col-lg-6">
@@ -89,7 +89,7 @@
 												<div class="form-group">
 													<label> Dept Code </label> <label style="color: red">*</label>
 													<input type="text" class="form-control" id="leaveDepartmentId"
-														value="" name="deptCode" readonly>
+														value="" th:field="*{department.departmentCode}" readonly>
 												</div>
 											</div>
 											<div class="col-12 col-lg-6">
@@ -103,7 +103,7 @@
 											<div class="col-12 col-lg-6">
 												<div class="form-group">
 													<label> Type of Leave </label> <label style="color: red">*</label>
-													<select class="form-control select2" id="leave_type_id" name="requestType"
+													<select class="form-control select2" id="leave_type_id" th:field="*{requestType}"
 														onchange = "leaveTypeFun()">
 														<option value="">Select</option>
 														<option value="single">Single</option>
@@ -114,21 +114,22 @@
 											<div class="col-12 col-lg-6">
 												<label class="form-label">Apply Date</label>
 												<label style="color: red">*</label>
-												<input type="date" class="form-control" id='applyDate' name='applyDate'>
+												<input type="date" class="form-control" id='applyDate' th:field="*{applyDate}">
 											</div>
 										</div>
 										<div class="row">
 											<div class="col-12 col-lg-6">
 												<label class="form-label">From Date</label>
 												<label style="color: red">*</label>
-												<input type="date" id="from_date" class="form-control" name="fromDate"
+												<input type="date" id="from_date" class="form-control" th:field="*{fromDate}"
 												onchange = "getFromDate(this.value)">
 											</div>
 											<div class="col-12 col-lg-6">
 												<label class="form-label">To Date</label>
 												<label style="color: red">*</label>
-												<input type="date" class="form-control" id="to_date" name="toDate" 
-												onchange="getToDate(this.value)">
+												
+												<input type="date" id="to_date" class="form-control" th:field="*{toDate}"
+												onchange = "getToDate(this.value)">
 											</div>
 										</div>
 										
@@ -137,7 +138,7 @@
 											<div class="col-12 col-lg-6">
 												<label class="form-label">From Type </label>
 												<label style="color: red">*</label>
-												<select class="form-control" name='fromDateType' id="from_date_type"
+												<select class="form-control" th:field="*{fromDateType}" id="from_date_type"
 													onchange="fromDayTypeValue(this.value)">
 													<option value=" f">Full</option>
 													<option value="fh">first Half</option>
@@ -148,7 +149,7 @@
 											<div class="col-12 col-lg-6">
 												<label class="form-label">To Type </label>
 												<label style="color: red">*</label>
-												<select class="form-control" name='toDateType' id="to_date_type"
+												<select class="form-control" th:field="*{toDateType}" id="to_date_type"
 													onchange="toDayTypeValue(this.value)">
 													<option value="f">Full</option>
 													<option value="fh">first Half</option>
@@ -162,7 +163,7 @@
 										
 											<div class="col-12 col-lg-6">
 												<label class="form-label">Leave type</label>
-												<select class="form-control"  name ="leaveCode"
+												<select class="form-control"  th:field="*{leave.levCode}"
 													>
 													<option value="">Leave Type</option>
 													<option th:each="leave : ${listLeave}"
@@ -175,7 +176,7 @@
 												<div class="form-group">
 													<label> Leave(days) </label> <label style="color: red">*</label>
 													<input type="text" id="leave_for" class="form-control"
-														name='leaveFor' readonly>
+														th:field="*{leaveFor}" readonly>
 												</div>
 											</div>
 											
@@ -185,7 +186,7 @@
 											<div class="col-12 col-lg-6">
 												<div class="form-group">
 													<label> Reason </label> <label style="color: red">*</label>
-													<input type="text" class="form-control" name='reason'>
+													<input type="text" class="form-control" th:field="*{reason}">
 												</div>
 											</div>
 										</div>
@@ -247,8 +248,8 @@
 										</thead>
 										<tbody>
 											<tr th:each="leave : ${listRequest}">
-												<td th:text="${leave.empCode}"></td>
-												<td >testing</td>
+												<td th:text="${leave.employee.empCode}"></td>
+												<td th:text="${leave.employee.empName}">testing</td>
 												<td th:text="${leave.applyDate}"></td>
 												<td th:text="${leave.reason}"></td>
 												
@@ -279,9 +280,9 @@
 	
 	
 	
-		document.getElementById('applyDate').value = new Date().toISOString().substring(0, 10);
+		/* document.getElementById('applyDate').value = new Date().toISOString().substring(0, 10);
 		document.getElementById('from_date').value = new Date().toISOString().substring(0, 10);
-		document.getElementById('to_date').value = new Date().toISOString().substring(0, 10);
+		document.getElementById('to_date').value = new Date().toISOString().substring(0, 10); */
 		$(function () {
 
 			
@@ -356,7 +357,7 @@
 		            scrollCollapse: true,
 		            scroller: false,
 				   responsive: true,
-				   lengthMenu :[[10,20,30,-1 ],['10 rows', '20 rows', '30 rows', 'Show all' ] ],
+				   lengthMenu :[[5,10,15,-1 ],['5 rows', '10 rows', '15 rows', 'Show all' ] ],
 					buttons :[]
 			});
 			datatablesButtons.buttons().container().appendTo("#datatables-buttons_wrapper .col-md-6:eq(0)")
