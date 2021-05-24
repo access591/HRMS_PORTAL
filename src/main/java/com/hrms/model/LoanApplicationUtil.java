@@ -2,6 +2,8 @@ package com.hrms.model;
 
 import java.util.Date;
 
+import javax.persistence.Column;
+
 
 public class LoanApplicationUtil {
 	
@@ -29,6 +31,27 @@ public class LoanApplicationUtil {
 	
 	private String amountSanctioned;
 
+	
+	//*****************************
+	private String chequeNo;
+	
+	
+	private Date chequeDate;
+	
+	
+	private int chequeAmount;
+	
+	
+	private String bankName;
+	
+	private int interestRate;
+	
+	
+	private int noOfInstallments;
+	
+	//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+	
+	
 	public LoanApplicationUtil(String empName2, String deptName2, String desgName2, String employeePayeeCode) {
 		this.empName = empName2;
 		this.deptName = deptName2;
@@ -169,6 +192,54 @@ public class LoanApplicationUtil {
 	}
 
 	
+	public String getChequeNo() {
+		return chequeNo;
+	}
+
+	public void setChequeNo(String chequeNo) {
+		this.chequeNo = chequeNo;
+	}
+
+	public Date getChequeDate() {
+		return chequeDate;
+	}
+
+	public void setChequeDate(Date chequeDate) {
+		this.chequeDate = chequeDate;
+	}
+
+	public int getChequeAmount() {
+		return chequeAmount;
+	}
+
+	public void setChequeAmount(int chequeAmount) {
+		this.chequeAmount = chequeAmount;
+	}
+
+	public String getBankName() {
+		return bankName;
+	}
+
+	public void setBankName(String bankName) {
+		this.bankName = bankName;
+	}
+
+	public int getInterestRate() {
+		return interestRate;
+	}
+
+	public void setInterestRate(int interestRate) {
+		this.interestRate = interestRate;
+	}
+
+	public int getNoOfInstallments() {
+		return noOfInstallments;
+	}
+
+	public void setNoOfInstallments(int noOfInstallments) {
+		this.noOfInstallments = noOfInstallments;
+	}
+
 	public LoanApplicationUtil(String empCode, String empName, String departmentCode, String deptName, String desgCode,
 			String desgName, String empPayCode, String appNo, Date appDate, String loanName, String loanCode,
 			String loanType, String loanStatus, String amountRequired, Date effScheduleDate, String amountSanctioned) {
