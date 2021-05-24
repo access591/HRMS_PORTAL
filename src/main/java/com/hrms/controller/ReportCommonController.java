@@ -1,6 +1,8 @@
 package com.hrms.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -8,9 +10,12 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,6 +33,7 @@ import com.hrms.model.LtaRequest;
 import com.hrms.model.MenuModule;
 import com.hrms.model.Module;
 import com.hrms.model.TourPlan;
+import com.hrms.reports.LtaReport;
 import com.hrms.reports.TourClaimReport;
 import com.hrms.service.DesignationService;
 import com.hrms.service.EmployeeService;
@@ -37,6 +43,7 @@ import com.hrms.service.LeaveService;
 import com.hrms.service.LtaRequestService;
 import com.hrms.service.ModuleService;
 import com.hrms.service.TourPlanService;
+import com.hrms.util.LtaReportUtil;
 import com.hrms.util.TourClaimReportUtil;
 
 @Controller
@@ -55,9 +62,23 @@ public class ReportCommonController {
 	
 	@Autowired TourClaimReport tourClaimReport;
 	
+	@Autowired LtaReport ltaReport;
+	
 
 	@Autowired
 	ReportUtil reportUtil;
+	
+	@InitBinder("ltaRequest")
+    public void customizeBinding (WebDataBinder binder) {
+        SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
+        dateFormatter.setLenient(false);
+        binder.registerCustomEditor(Date.class, "leaveFrom",
+                                    new CustomDateEditor(dateFormatter, true));
+        binder.registerCustomEditor(Date.class, "leaveTo",
+                new CustomDateEditor(dateFormatter, true));
+        
+       
+    }
 
 	@GetMapping(value = { "/reportEmployee" })
 	public String reportEmployee(Model model, HttpSession session, HttpServletRequest request,
@@ -256,15 +277,61 @@ public class ReportCommonController {
 			model.addAttribute("modules", modules);
 		}
 		
-		//ltaRequestService
+		try {
+			List<LtaRequest> listLtaRequest = ltaRequestService.getAllLTARequest();
+			model.addAttribute("listLtaRequest", listLtaRequest);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
 		model.addAttribute("ltaRequest", new LtaRequest());
 		return "LtaReport";
 	}
 	
-	@GetMapping("createLtaReport")  //LtaReport.html
-	public String createLtReport(Model model,HttpSession session) {
+	@PostMapping("createLtaReport")  //LtaReport.html
+	public String createLtReport(@ModelAttribute("ltaRequest") LtaRequest ltaRequest , Model model,HttpSession session,
+			HttpServletRequest req,HttpServletResponse res) {
 		
-		return "LtaReport";
+		System.out.println("lta request : "+ltaRequest.getEmpCode().getEmpCode());
+		System.out.println("lta request : "+ltaRequest.getLeaveFrom());
+		System.out.println("lta request : "+ltaRequest.getLeaveTo());
+		
+		List<LtaRequest> listLtarequest = null; 
+		List<LtaReportUtil> listLtaReport = new ArrayList<LtaReportUtil>(); 
+		
+		if(!ltaRequest.getEmpCode().getEmpCode().equals("ALL")) {
+			listLtarequest = ltaRequestService.findLtaByFromLeaveDateToLeave(ltaRequest.getLeaveFrom(), 
+					ltaRequest.getLeaveTo(), ltaRequest.getEmpCode().getEmpCode());
+			
+			LtaReportUtil reportUtil;
+			
+			for(LtaRequest lt : listLtarequest) {
+				
+				reportUtil = new LtaReportUtil(lt.getEmpCode().getEmpCode(),lt.getEmpCode().getEmpName(),
+						lt.getAppDate(),lt.getEligibilityDate(),lt.getLeaveAvailed(),lt.getLeaveFrom(),
+						lt.getLeaveTo());
+				listLtaReport.add(reportUtil);
+			}
+		}
+		else {
+			listLtarequest = ltaRequestService.findAllLtaByFromLeaveDateToLeave(ltaRequest.getLeaveFrom(), 
+					ltaRequest.getLeaveTo());
+			
+			LtaReportUtil reportUtil;
+			
+			for(LtaRequest lt : listLtarequest) {
+				
+				reportUtil = new LtaReportUtil(lt.getEmpCode().getEmpCode(),lt.getEmpCode().getEmpName(),
+						lt.getAppDate(),lt.getEligibilityDate(),lt.getLeaveAvailed(),lt.getLeaveFrom(),
+						lt.getLeaveTo());
+				listLtaReport.add(reportUtil);
+			}
+		}
+		
+		ltaReport.ltaReport(res, req, listLtaReport,ltaRequest.getLeaveFrom(),ltaRequest.getLeaveTo());
+		
+		//return "redirect:ltaReport";
+		return null;
 	}
 	
 	

@@ -45,7 +45,7 @@ body {
 						
 							<div class="card" style="border-radius: 2.2rem">
 								<div class="card-header">
-									<h5 class="card-title">Local Claim Report</h5>
+									<h5 class="card-title">LTA Report</h5>
 									<div class="alert-outline">
 										<div th:if="${message}" th:text="${message}"
 											style="color: red"></div>
@@ -58,8 +58,7 @@ body {
 
 
 											<div class="col-12 col-lg-6">
-												<label class="form-label">Employee Code</label> <label
-													style="color: red">*</label> 
+												<label class="form-label">Employee Code</label> 
 													<input type="text" class="form-control" readonly>
 											</div>
 											
@@ -68,12 +67,12 @@ body {
 													<label class="form-label">Employee Name</label> <label
 														style="color: red">*</label> <select
 														class="form-control select2" id="employeeName"
-														name="empName" >
+														th:field="*{empCode.empCode}">
 														<option value=''>--Select Employee--</option>
 														<option value='ALL'>All</option>
-														<option th:each="employee : ${listEmployee}"
-															th:text="${employee.empName}"
-															th:value="${employee.empCode}"></option>
+														<option th:each="employee : ${listLtaRequest}"
+															th:text="${employee.empCode.empName}"
+															th:value="${employee.empCode.empCode}"></option>
 														
 
 
@@ -89,16 +88,16 @@ body {
 											
 											
 											<div class="col-12 col-lg-6">
-												<label class="form-label">From Type</label> <label
+												<label class="form-label">From Date</label> <label
 													style="color: red">*</label> 
-													<input type="date" class="form-control" >
+													<input type="date" class="form-control"th:field="*{leaveFrom}" >
 
 											</div>
 											
 											<div class="col-12 col-lg-6">
-												<label class="form-label">To Type</label> <label
+												<label class="form-label">To Date</label> <label
 													style="color: red">*</label> 
-													<input type="date" class="form-control">
+													<input type="date" class="form-control" th:field="*{leaveTo}">
 
 											</div>
 
