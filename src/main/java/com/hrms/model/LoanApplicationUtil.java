@@ -49,6 +49,26 @@ public class LoanApplicationUtil {
 	
 	private int noOfInstallments;
 	
+	
+	//..................................
+	
+	private String instNo;
+	
+
+	
+	private String instDate;
+	
+
+
+	private String instPaid;
+	
+
+	
+	private String instAmt;
+	
+
+	
+	private String instPaidDate;
 	//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 	
 	
@@ -238,6 +258,46 @@ public class LoanApplicationUtil {
 
 	public void setNoOfInstallments(int noOfInstallments) {
 		this.noOfInstallments = noOfInstallments;
+	}
+
+	public String getInstNo() {
+		return instNo;
+	}
+
+	public void setInstNo(String instNo) {
+		this.instNo = instNo;
+	}
+
+	public String getInstDate() {
+		return instDate;
+	}
+
+	public void setInstDate(String instDate) {
+		this.instDate = instDate;
+	}
+
+	public String getInstPaid() {
+		return instPaid;
+	}
+
+	public void setInstPaid(String instPaid) {
+		this.instPaid = instPaid;
+	}
+
+	public String getInstAmt() {
+		return instAmt;
+	}
+
+	public void setInstAmt(String instAmt) {
+		this.instAmt = instAmt;
+	}
+
+	public String getInstPaidDate() {
+		return instPaidDate;
+	}
+
+	public void setInstPaidDate(String instPaidDate) {
+		this.instPaidDate = instPaidDate;
 	}
 
 	public LoanApplicationUtil(String empCode, String empName, String departmentCode, String deptName, String desgCode,
