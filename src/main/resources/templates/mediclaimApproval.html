@@ -81,7 +81,7 @@ body {
 										<tr th:each = "student : ${listMedicalReimbursement}">
 										<th:block th:each="u, rowStat : ${listMedicalReimbursementDetail}" th:if="${student.slipNo}">
 										<td th:text="${student.slipNo}" ></td>
-										<td  th:text="${student.dateOfSlip}"></td>
+										<td  th:text="${#dates.format(student.dateOfSlip,'dd-MM-yyyy')}"></td>
 										<td  th:text="${student.empCode.empCode}"></td>
 										<td th:text="${student.empCode.empName}"></td>
 										<td th:text="${u.calmlAmount}"></td>
