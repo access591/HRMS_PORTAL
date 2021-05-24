@@ -31,25 +31,25 @@ public class LoanApplication  implements Serializable{
 	private Employee empCode;
 	
 	@Size(max =1)
-	@Column(name="LOAN_TYPE")
+	@Column(name="LOAN_TYPE",updatable = false)
 	private String loanType;
 	
 	@ManyToOne
-	@JoinColumn(name ="LOAN_CODE")
+	@JoinColumn(name ="LOAN_CODE",updatable = false)
 	private Loan loanCode;
 	
 	@Size(max =1)
-	@Column(name="LOAN_STATUS")
+	@Column(name="LOAN_STATUS",updatable = false)
 	private String loanStatus;
 	
-	@Column(name="AMOUNT_REQUIRED")
+	@Column(name="AMOUNT_REQUIRED",updatable = false)
 	private String amountRequired;
 	
-	@Column(name="EFF_SCHEDULE_DATE")
+	@Column(name="EFF_SCHEDULE_DATE",updatable = false)
 	private Date effScheduleDate;
 	
 	 
-	@Column(name="AMOUNT_SANCTIONED")
+	@Column(name="AMOUNT_SANCTIONED",updatable = false)
 	private String amountSanctioned;
 	
 	//*****************************
