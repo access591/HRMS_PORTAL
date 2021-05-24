@@ -96,8 +96,6 @@ body {
 												<div class="form-group sm col-md-4">
 											       <label class="form-label">Application NO.
 											       <span class="text-danger">*</span></label>
-							                
-										 
 										   <select class="form-control select2" name="appNo" id="appNo" onchange="myFunctionEmpCode()" required aria-required="true">
 												 <option value="">Select Employee</option>
 												<option th:each="l :${listloanApplication}"th:value="${l.getAppNo()}" th:text="${l.getAppNo()}"></option>
@@ -108,12 +106,12 @@ body {
 												<div class="form-group sm col-md-4">
 											       <label class="form-label">Application   Date
 											       <span class="text-danger">*</span></label>
-							                 <input  type="text"id="appDate"name="appDate" title="Eligibility   Date" class="form-control required">
+							                 <input  type="text" id="appDate" name="appDate" title="Application   Date" class="form-control" disabled>
 										     </div>
 										     <div class="form-group sm col-md-4">
 													<label class="form-label">Employee Code</label>
 												<label style="color: red">*</label>
-												<select class="form-control select2" name="empCode" id="empCode"  required aria-required="true">
+												<select class="form-control select2" name="empCode" id="empCode"disabled>
 												 <option value="">Select Employee</option>
 												<option th:each="e :${listEmployee}"th:value="${e.getEmpCode()}" th:text="${e.getEmpName()}"></option>
 											     	</select>
@@ -130,7 +128,7 @@ body {
 									<div class="form-group sm col-md-4">
 											 <label class="form-label">Employee Name
 											       <span class="text-danger">*</span></label>
-							                 <input  type="text"id="empName"name="empName" title="Eligibility   Date" class="form-control required">
+							                 <input  type="text"id="empName"name="empName" title="Eligibility   Date" class="form-control required"disabled>
 										     </div>
 									
 									
@@ -138,13 +136,13 @@ body {
 									<div class="form-group sm col-md-4">
 											 <label class="form-label">Employee Pay Code 
 											       <span class="text-danger">*</span></label>
-							                 <input  type="text"id="empPayCode"name="empPayCode" title="Eligibility   Date" class="form-control required">
+							                 <input  type="text"id="empPayCode"name="empPayCode" title="Eligibility   Date" class="form-control required"disabled>
 										     </div>
 										     
 										     <div class="form-group sm col-md-4">
 											       <label class="form-label">Department 
 											       </label>
-							                 <input  type="text"id="deptName"name="deptName" title="Name"maxlength="50" pattern="^[a-zA-Z\s]*$" class="form-control">
+							                 <input  type="text"id="deptName"name="deptName" title="Name"maxlength="50" pattern="^[a-zA-Z\s]*$" class="form-control"disabled>
 										     </div>
 												
 												</div>
@@ -154,9 +152,9 @@ body {
 												
 												<div class="form-group sm col-md-4">
 												<label class="form-label">Designation</label>
-												<input  type="text"id="desgName"name="desgName" title="Designation"class="form-control">
+												<input  type="text"id="desgName"name="desgName" title="Designation"class="form-control"disabled>
 												</div>
-													<div class="form-group sm col-md-4">
+													<!-- <div class="form-group sm col-md-4">
 											       <label class="form-label">loan Advance
 											       <span class="text-danger">*</span></label>
 												<select class="form-control required"
@@ -165,18 +163,23 @@ body {
 																			
 																	</select>
 												
-												</div>
+												</div> -->
 													<div class="form-group sm col-md-4">
 												<label class="form-label">Loan Code</label>
 												 <span class="text-danger">*</span> 
 												 <select
-														class="form-control required" name="loanCode" id="loanCode">
+														class="form-control required" name="loanCode" id="loanCode"disabled>
 														<option value="">Select Type</option>
 														<option th:each="lo :${listLoan}"th:value="${lo.getLoanCode()}" th:text="${lo.getLoanName()}"></option>
 														
 													</select>
 												
 												</div>
+												<div class="form-group sm col-md-4">
+												<label class="form-label">Amount Required
+												 <span class="text-danger">*</span></label> 
+												 <input type="text" id="amountRequired" name="amountRequired" title="Amount" class="form-control required"disabled>
+											</div>
 												</div>
 												
 												
@@ -184,22 +187,18 @@ body {
 												
 												
 					       	       <div class="form-row">
-                                		  <div class="form-group sm col-md-4">
-												<label class="form-label">Amount Required
-												 <span class="text-danger">*</span></label> 
-												 <input type="text" id="amountRequired" name="amountRequired" title="Amount" class="form-control required">
-											</div>
+                                		  
 											
 											
-										  <div class="form-group sm col-md-4">
-											       <label class="form-label">Number Of Installments <span class="text-danger">*</span> 
+                                         <div class="form-group sm col-md-4">
+									 		       <label class="form-label">Number Of Installments <span class="text-danger">*</span> 
 											       </label>
-							                 <input  type="text"id="fatHus"name="fatHus" title="Name"maxlength="50" pattern="^[a-zA-Z\s]*$" class="form-control">
+							                 <input  type="text"id="noOfInstallments"name="noOfInstallments" title="Number Of Installments"maxlength="50" pattern="^[a-zA-Z\s]*$" class="form-control">
 										     </div>
 										      <div class="form-group sm col-md-4">
 											       <label class="form-label">Effective Schedule Date
 											       <span class="text-danger">*</span></label>
-							                 <input  type="text"id="effScheduleDate"name="effScheduleDate" title="Eligibility   Date" class="form-control required">
+							                 <input  type="text"id="effScheduleDate"name="effScheduleDate" title="Eligibility   Date" class="form-control required"disabled>
 										     </div>
 											
 											
@@ -236,17 +235,17 @@ body {
 								 <div class="form-group sm col-md-4">
 												<label class="form-label">Amount Sanctioned
 												 <span class="text-danger">*</span></label> 
-												 <input type="text" id="amount" name="amount" title="Amount" class="form-control required">
+												 <input type="text" id="amountSanctioned" name="amountSanctioned" title="Amount" class="form-control"disabled>
 											</div>
 											 <div class="form-group sm col-md-4">
 												<label class="form-label">Cheque No
 												 <span class="text-danger">*</span></label> 
-												 <input type="text" id="amount" name="amount" title="Amount" class="form-control required">
+												 <input type="text" id="chequeNo " name="chequeNo" title="Cheque No" class="form-control required">
 											</div>
 											   <div class="form-group sm col-md-4">
 											       <label class="form-label">Cheque Date
 											       <span class="text-danger">*</span></label>
-							                 <input  type="text"id="empDob"name="empDob" title="Eligibility   Date" class="form-control required">
+							                 <input  type="text"id="chequeDate"name="chequeDate" title="Eligibility   Date" class="form-control required">
 										     </div>
 								</div>
 								
@@ -254,25 +253,25 @@ body {
 								 <div class="form-group sm col-md-4">
 												<label class="form-label">Cheque Amount 
 												 <span class="text-danger">*</span></label> 
-												 <input type="text" id="amount" name="amount" title="Amount" class="form-control required">
+												 <input type="text" id="chequeAmount" name="chequeAmount" title=" Cheque Amount" class="form-control required">
 											</div>
 											 <div class="form-group sm col-md-4">
 												<label class="form-label">Bank Name
 												 <span class="text-danger">*</span></label> 
-												 <input type="text" id="amount" name="amount" title="Amount" class="form-control required">
+												 <input type="text" id="bankName" name="bankName" title="Bank Name" class="form-control required">
 											</div>
 											
 											
 											 <div class="form-group sm col-md-4">
 												<label class="form-label">Interest (in %)
 												 <span class="text-danger">*</span></label> 
-												 <input type="text" id="amount" name="amount" title="Amount" class="form-control required">
+												 <input type="text" id="interestRate" name="interestRate" title="Interest Rate" class="form-control required">
 											</div>
 								
 								</div>
 								
 									<div class="form-row">
-									<div class="form-group sm col-md-4">
+									<!-- <div class="form-group sm col-md-4">
 												<label class="form-label">Deduction Code</label>
 												 <span class="text-danger">*</span> 
 												 <select
@@ -282,15 +281,15 @@ body {
 														
 													</select>
 												
-												</div>
+												</div> -->
 												<div class="form-group sm col-md-4">
 											       <label class="form-label">Status
 											       <span class="text-danger">*</span></label>
 												<select class="form-control required"
-																		name="modeOfTravel0" id="modeOfTravel0">
+																		name="loanStatus" id="loanStatus"disabled>
 																			<option value="">Select Type</option>
-																			<option th:Value="approved">Approved </option>
-																			<option th:Value="unapproved ">Un Approved </option>
+																			<option th:Value="Y">Approved </option>
+																			<option th:Value="N">Un Approved </option>
 																			
 																	</select>
 												
@@ -334,16 +333,12 @@ body {
 															</thead>
 															<tbody>
 																<tr id='addr0'>
-
-																
-																	<td><input type="text" name='startPlace0'placeholder='Installment No' class="form-control" /></td>
-																		<td><input type="Date" name='locDate0'placeholder='Installment Date' class="form-control" value="" /></td>
-																	<td><input type="text" name='vistPlace0'placeholder='Installment Amount' class="form-control" /></td>
-																	<td><input type="text" name='purposeOfVist0'placeholder='Installment Paid' class="form-control" /></td>
-																
-																	<td><input type="Date" name='locDate0'placeholder='Date of Adjustment' class="form-control" value="" /></td>
-
-																	<td><input type="text" name='distanceKm0'placeholder='Balance' class="form-control" /></td>
+																	<td><input type="text" name='instNo0'placeholder='Installment No' class="form-control" /></td>
+																	<td><input type="Date" name='instDate0'placeholder='Installment Date' class="form-control" value="" /></td>
+																	<td><input type="text" name='instAmt0'placeholder='Installment Amount' class="form-control" /></td>
+																	<td><input type="text" name='instPaid0'placeholder='Installment Paid' class="form-control" /></td>
+																	<td><input type="Date" name='instPaidDate0'placeholder='Date of Adjustment' class="form-control" value="" /></td>
+																	<td><input type="text" name='ltaRate0'placeholder='Balance' class="form-control" /></td>
 																	
 																</tr>
 																<tr id='addr1'></tr>
@@ -396,62 +391,15 @@ body {
 		        },
 				showDropdowns: true
 			});
-		$("input[name=\"dateOfJoining\"]").daterangepicker({
+		$("input[name=\"chequeDate\"]").daterangepicker({
 			singleDatePicker: true,
 			   autoApply: true,
 			locale: {
-				format: 'DD/MM/YYYY'
+				format: 'YYYY/MM/DD'
 	        },
 			showDropdowns: true
 		});
-		$("input[name='dateOfRetirement']").daterangepicker({
-			singleDatePicker: true,
-		    autoApply: true,
-			locale: {
-				format: 'DD/MM/YYYY'
-	        },
-			showDropdowns: true
-		});
-		$("input[name='batchYear']").datepicker({
-			
-		    autoApply: true,
-		    format: "yyyy",
-		    autoclose: true,
-		    minViewMode: "years",
-			locale: {
-	            format: 'YYYY'
-	        },
-			showDropdowns: true
-		});
-			
 		
-		$("input[name=\"orderDate\"]").daterangepicker({
-				singleDatePicker: true,
-				   autoApply: true,
-				locale: {
-					format: 'DD/MM/YYYY'
-		        },
-				showDropdowns: true
-			});
-		
-		$("input[name=\"dov\"]").daterangepicker({
-			singleDatePicker: true,
-			   autoApply: true,
-			locale: {
-				format: 'DD/MM/YYYY'
-	        },
-			showDropdowns: true
-		});
-		$("input[name=\"doi\"]").daterangepicker({
-			singleDatePicker: true,
-			   autoApply: true,
-			locale: {
-				format: 'DD/MM/YYYY'
-	        },
-			showDropdowns: true
-		});
-
-
 
 			
 			// Datatables basic
@@ -477,14 +425,12 @@ $(document).ready(function(){
 
     var i=1;
    $("#add_row").click(function(){
-    $('#addr'+i).html("<td><input name='locDate"+i+"' type='text'placeholder='Installment No'  class='form-control txt input-md'/> "+
-    		"</td><td><input  name='startPlace"+i+"' type='Date' placeholder='Installment Date'  class='form-control input-md'>"+
-    		"</td><td><input  name='vistPlace"+i+"' type='text'  placeholder='Installment Amount'class='form-control input-md'>"+
-    		"</td><td><input  name='purposeOfVist"+i+"' type='text' placeholder='Installment Paid'  class='pas form-control input-md'></td>"+
+    $('#addr'+i).html("<td><input name='instNo"+i+"' type='text'placeholder='Installment No'  class='form-control txt input-md'/> "+
+    		"</td><td><input  name='instDate"+i+"' type='Date' placeholder='Installment Date'  class='form-control input-md'>"+
+    		"</td><td><input  name='instAmt"+i+"' type='text'  placeholder='Installment Amount'class='form-control input-md'>"+
+    		"</td><td><input  name='instPaid"+i+"' type='text' placeholder='Installment Paid'  class='pas form-control input-md'></td>"+
     		
-    	
-    		
-    		"<td><input  name='distanceKm"+i+"' type='Date' placeholder='Date of Adjustment'  class='form-control input-md'></td>"+
+    		"<td><input  name='instPaidDate"+i+"' type='Date' placeholder='Date of Adjustment'  class='form-control input-md'></td>"+
     		"<td><input  name='ltaRate"+i+"' type='text' placeholder='Balance'  class='form-control input-md'></td>"+
     		
     		
@@ -607,6 +553,8 @@ $("table").on("keyup", ".govt", function () {
 	            let obj = JSON.parse(this.responseText);
 	            console.log(obj);
 	            
+	            $('#loanStatus').val(obj.loanStatus);
+	            $('#amountSanctioned').val(obj.amountSanctioned);
 	            $('#amountRequired').val(obj.amountRequired);
 	            $('#effScheduleDate').val(obj.effScheduleDate);
 	            $('#appDate').val(obj.appDate);

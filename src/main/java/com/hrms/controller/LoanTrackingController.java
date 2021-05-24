@@ -79,7 +79,8 @@ public class LoanTrackingController {
 		l.setAppDate(loanApp.getAppDate());
 		l.setEffScheduleDate(loanApp.getEffScheduleDate());
 		l.setAmountRequired(loanApp.getAmountRequired());
-		
+		l.setAmountSanctioned(loanApp.getAmountSanctioned());
+		l.setLoanStatus(loanApp.getLoanStatus());
         return l;
     }
 }

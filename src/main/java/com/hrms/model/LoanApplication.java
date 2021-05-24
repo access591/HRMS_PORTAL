@@ -52,7 +52,25 @@ public class LoanApplication  implements Serializable{
 	@Column(name="AMOUNT_SANCTIONED")
 	private String amountSanctioned;
 	
+	//*****************************
+	@Column(name="CHEQUE_NO")
+	private String chequeNo;
 	
+	@Column(name="CHEQUE_DATE")
+	private Date chequeDate;
+	
+	@Column(name="CHEQUE_AMT")
+	private int chequeAmount;
+	
+	@Column(name="BANK_NAME")
+	private String bankName;
+	@Column(name="INTEREST_RATE")
+	private int interestRate;
+	
+	@Column(name="NO_OF_INSTALLMENTS")
+	private int noOfInstallments;
+	
+	//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 	
 	@Column(name = "APPROVED_BY")
 	private String  approvedBy ;   
@@ -170,6 +188,54 @@ public class LoanApplication  implements Serializable{
 
 	public void setInsDate(Date insDate) {
 		this.insDate = insDate;
+	}
+
+	public String getChequeNo() {
+		return chequeNo;
+	}
+
+	public void setChequeNo(String chequeNo) {
+		this.chequeNo = chequeNo;
+	}
+
+	public Date getChequeDate() {
+		return chequeDate;
+	}
+
+	public void setChequeDate(Date chequeDate) {
+		this.chequeDate = chequeDate;
+	}
+
+	public int getChequeAmount() {
+		return chequeAmount;
+	}
+
+	public void setChequeAmount(int chequeAmount) {
+		this.chequeAmount = chequeAmount;
+	}
+
+	public String getBankName() {
+		return bankName;
+	}
+
+	public void setBankName(String bankName) {
+		this.bankName = bankName;
+	}
+
+	public int getInterestRate() {
+		return interestRate;
+	}
+
+	public void setInterestRate(int interestRate) {
+		this.interestRate = interestRate;
+	}
+
+	public int getNoOfInstallments() {
+		return noOfInstallments;
+	}
+
+	public void setNoOfInstallments(int noOfInstallments) {
+		this.noOfInstallments = noOfInstallments;
 	}
 
 	

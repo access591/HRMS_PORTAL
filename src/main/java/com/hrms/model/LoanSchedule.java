@@ -32,20 +32,26 @@ public class LoanSchedule implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "APP_DATE",updatable = false)
 	private LoanApplication appDate;
+	
 
 	@Column(name = "INST_NO")
 	private int instNo;
+	
 
 	@Column(name = "INST_DATE")
 	private Date instDate;
+	
 
 	@Column(name = "INST_PAID")
 	private int instPaid;
+	
 
 	@Column(name = "INST_AMT")
 	private int instAmt;
+	
 
 	@Column(name = "INST_PAID_DATE")
 	private Date instPaidDate;
+	
 	
 }
