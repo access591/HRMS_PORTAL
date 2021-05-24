@@ -1,7 +1,7 @@
 package com.hrms.repository;
 
-import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -12,7 +12,6 @@ import org.springframework.stereotype.Repository;
 
 import com.hrms.dao.AbstractGenericDao;
 import com.hrms.model.LeaveRequest;
-import com.hrms.model.Module;
 
 
 @Repository
@@ -27,21 +26,21 @@ public class LeaveRequestDaoImpl extends AbstractGenericDao<LeaveRequest> implem
 		System.out.println(" leave request dao Impl model ");
 		List<LeaveRequest> leaverequestByEmpCode = new ArrayList<LeaveRequest>();
 		try {
-			final Session session = this.sessionFactory.getCurrentSession();
+			Session session = this.sessionFactory.getCurrentSession();
 			
-			String hql = "FROM LeaveRequest E WHERE E.empCode = :empCode";
-			Query query = session.createQuery(hql);
+			String hql = "FROM LeaveRequest l left join fetch l.employee E WHERE E.empCode = :empCode";
+			Query<LeaveRequest> query = session.createQuery(hql,LeaveRequest.class);
 			query.setParameter("empCode" , empCode);
-			List results = query.list();
+			leaverequestByEmpCode = query.getResultList();
 		
-			leaverequestByEmpCode = results;
 			System.out.println("leave request dao impl is completed");
+			return leaverequestByEmpCode;
 		} catch (Exception e) {
 			System.out.println("exception block in leaveRequestDaoImpl model ");
 			 e.printStackTrace();
 		}
 
-		return leaverequestByEmpCode;  
+		return null;  
 		
 	}
 
@@ -112,6 +111,16 @@ public class LeaveRequestDaoImpl extends AbstractGenericDao<LeaveRequest> implem
 		query.setParameter("date", date);
 		List<LeaveRequest> list = query.list();
 		return list.get(0);
+	}
+
+
+	@Override
+	public List<LeaveRequest> getEmployeeByStatusN() {
+		Session session = this.sessionFactory.getCurrentSession();
+		String hql = "from LeaveRequest e where e.status = 'N'";
+		Query query = session.createQuery(hql);
+		List result = query.list();
+		return result;
 	}
 
 

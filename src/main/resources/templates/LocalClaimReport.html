@@ -53,7 +53,7 @@ body {
 								</div>
 								<div class="card-body">
 									<form id="validation-form" action="#"
-										th:action="@{/generateTourClaim}" th:object="${object}" method="post">
+										th:action="@{/localClaimReport}" method="post">
 										<div class="row">
 
 
@@ -88,19 +88,19 @@ body {
 
 											
 											
-											<div class="col-12 col-lg-6">
+											<!-- <div class="col-12 col-lg-6">
 												<label class="form-label">From Type</label> <label
 													style="color: red">*</label> 
-													<input type="date" class="form-control" th:field="*{tourStartDate}">
+													<input type="date" class="form-control" >
 
 											</div>
 											
 											<div class="col-12 col-lg-6">
 												<label class="form-label">To Type</label> <label
 													style="color: red">*</label> 
-													<input type="date" class="form-control" th:field="*{tourEndDate}">
+													<input type="date" class="form-control">
 
-											</div>
+											</div> -->
 
 
 										</div>

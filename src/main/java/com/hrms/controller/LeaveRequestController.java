@@ -1,13 +1,18 @@
 package com.hrms.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -46,8 +51,25 @@ public class LeaveRequestController {
 	@Autowired
 	private ModuleService moduleService;
 	
+	@InitBinder("leaveRequest")
+    public void customizeBinding (WebDataBinder binder) {
+        SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
+        dateFormatter.setLenient(false);
+        binder.registerCustomEditor(Date.class, "applyDate",
+                                    new CustomDateEditor(dateFormatter, true));
+        binder.registerCustomEditor(Date.class, "toDate",
+                new CustomDateEditor(dateFormatter, true));
+        
+        binder.registerCustomEditor(Date.class, "fromDate",
+                new CustomDateEditor(dateFormatter, true));
+       
+//        binder.registerCustomEditor(Date.class, "reqDate",
+//                new CustomDateEditor(dateFormatter, true));
+       
+    }
+	
 	@GetMapping("/leaveRequest")
-	public String empPayDetail(Model model, HttpSession session) {
+	public String empPayDetail(@ModelAttribute("leaveRequest")LeaveRequest leaveRequest,Model model, HttpSession session) {
 		
 		System.out.println("leave request controller");
 		List<Employee> listEmployee = employeeService.getAllEmployees();
@@ -62,12 +84,6 @@ public class LeaveRequestController {
 		}
 		
 		UserEntity userEntity = userService.findUserById(userCode); 
-		
-		
-		
-		List<LeaveRequest> listLeaveRequestByEmpCode =
-		  leaveRequestService.findAllByEmpCode( userEntity.getEmpCode());
-		 
 		
 		List<LeaveRequest> listLeaveRequest = leaveRequestService.getAllLeaves();
 		
@@ -87,7 +103,7 @@ public class LeaveRequestController {
 			model.addAttribute("modules", modules);
 		}
 
-		  System.out.println("joninig begin..");
+		  
 		
 
 		session.setAttribute("username" , userCode);
@@ -100,8 +116,11 @@ public class LeaveRequestController {
 		String insertedBY = (String) session.getAttribute("userlogin");
 		System.out.println("inserted by :"+ insertedBY);
 		
-		System.out.println("leave from date : " + leaveRequest.getEmpCode());
-		System.out.println("leave to date : " + leaveRequest.getLeaveCode());
+		System.out.println("leave to date======> : " + leaveRequest.getToDate());
+		System.out.println("leave to date======> : " + leaveRequest.getFromDate());
+		System.out.println("leave to date======> : " + leaveRequest.getEmployee().getEmpCode());
+		System.out.println("leave to date======> : " + leaveRequest.getLeave().getLevCode());
+		//System.out.println("leave to date : " + leaveRequest.getLeaveCode());
 		leaveRequestService.addLeave(leaveRequest);
 		
 		session.setAttribute("username", session.getAttribute("username"));
@@ -122,7 +141,7 @@ public class LeaveRequestController {
 		LeaveRequest leaveRequest = this.leaveRequestService.findLeaveRequestById(Long.parseLong(leaveRequestId));
 		
 		if(leaveRequest != null) {
-			model.addAttribute("leaveDetail", leaveRequest);
+			model.addAttribute("leaveRequest", leaveRequest);
 		}
 		List<MenuModule> modules = moduleService.getAllModulesList(session.getAttribute("username").toString());
 		if (modules != null) {

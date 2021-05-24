@@ -75,7 +75,7 @@ public class LeveReportController {
 		}
 		session.setAttribute("username", session.getAttribute("username"));
 
-		return pageMappingService.PageRequestMapping(reqPageOfLeaveRegister, pageNoLeaveRegister);  
+		return "leaveRegister";  
 		
 	}
 	
@@ -114,7 +114,7 @@ public class LeveReportController {
 		}
 		session.setAttribute("username", session.getAttribute("username"));
 
-		return pageMappingService.PageRequestMapping(reqPageOfLeaveRequestDetailReport, pageNoOfLeaveRequestDetailReport);  
+		return "leaveRequestReport";  
 		
 	}
 	
@@ -128,9 +128,21 @@ public class LeveReportController {
 		
 		System.out.println("leave type is : "+ empName);
 		
-		//List<LeaveDetail> listLeaveDetail = leaveDetailService.getAllLeaveDetails();
+		String empCode = empName;
+		
 		List<Employee> listEmployee = employeeService.getAllEmployees();
 		String reportFileName = "LeaveDetail";
+		
+		List<LeaveRequest> listLeave = leaveRequestService.findAllByEmpCode(empCode);
+		
+		
+		
+		System.out.println("list leave size : "+listLeave.size());
+		
+		List<LeaveRequest> leaveDataSource = new ArrayList<LeaveRequest>();
+		LeaveRequest lv = listLeave.get(0);
+		leaveDataSource.add(lv);
+		
 		
 		reportUtil.leaveRequestReport(response,request,reportFileName,listEmployee);
 		return pageMappingService.PageRequestMapping(reqPageOfLeaveRequestDetailReport, pageNoOfLeaveRequestDetailReport);  
@@ -196,22 +208,22 @@ public class LeveReportController {
 		for(int i = 0;i<listLeaveRequest.size();i++) 
 		 {
 			
-			 Leave leave = leaveService.findLeaveById(listLeaveRequest.get(i).getLeaveCode());
-			 Employee employee = employeeService.findEmployeeById(listLeaveRequest.get(i).getEmpCode());
-			 Department department = departmentService.findDepartmentById(listLeaveRequest.get(i).getDeptCode());
+			 //Leave leave = leaveService.findLeaveById(listLeaveRequest.get(i).getLeaveCode());
+			 //Employee employee = employeeService.findEmployeeById(listLeaveRequest.get(i).getEmpCode());
+			 //Department department = departmentService.findDepartmentById(listLeaveRequest.get(i).getDeptCode());
 			 
-			 empLvRe = new CommonUtil(employee.getEmpName(),department.getDeptName(),
-					 leave.getLevType(),listLeaveRequest.get(i).getToDate().toString(),listLeaveRequest.get(i).getFromDate().toString(),
-					 listLeaveRequest.get(i).getApplyDate().toString(),listLeaveRequest.get(i).getApproevedBy(),listLeaveRequest.get(i).getReason(),
-					 listLeaveRequest.get(i).getLeaveFor());
+//			 empLvRe = new CommonUtil(employee.getEmpName(),department.getDeptName(),
+//					 leave.getLevType(),listLeaveRequest.get(i).getToDate().toString(),listLeaveRequest.get(i).getFromDate().toString(),
+//					 listLeaveRequest.get(i).getApplyDate().toString(),listLeaveRequest.get(i).getApproevedBy(),listLeaveRequest.get(i).getReason(),
+//					 listLeaveRequest.get(i).getLeaveFor());
 			 
-			 empLeaveRequest.add(empLvRe);
+			 //empLeaveRequest.add(empLvRe);
 			 System.out.println("return for block i value : "+ i);
 		} 
 		System.out.println("return for block"  + empLeaveRequest.size());
 		 String reportName = "LeaveTransaction";  
 		 reportUtil.leaveTransactionPdfReportByEmp(req, res, reportName, empLeaveRequest);
-		 System.out.println("size : " +listLeaveRequest.get(0).getDeptCode());
+		 //System.out.println("size : " +listLeaveRequest.get(0).getDeptCode());
 		 return pageMappingService.PageRequestMapping(reqpageOfleaveRequestTransactionReport, pageNoLeaveTransactionReport);
 	 }
 	 

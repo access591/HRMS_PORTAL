@@ -44,9 +44,9 @@ public class ReportUtil {
 		
 		System.out.println("list leave size : "+listLeave.size());
 		
-		List<LeaveRequest> leaveDataSource = new ArrayList<LeaveRequest>();
-		LeaveRequest lv = listLeave.get(0);
-		leaveDataSource.add(lv);
+		//List<LeaveRequest> leaveDataSource = new ArrayList<LeaveRequest>();
+		//LeaveRequest lv = listLeave.get(0);
+		//leaveDataSource.add(lv);
 		// System.out.println("leave request : "+leaveRequest);
 
 		String sourceFileName = request.getSession().getServletContext()  
@@ -59,7 +59,8 @@ public class ReportUtil {
 					.getRealPath("/resources/" + reportFileName + ".jasper");
 			JRBeanCollectionDataSource beanColDataSource = new JRBeanCollectionDataSource(sourceData);
 
-			JRBeanCollectionDataSource leaveRequest = new JRBeanCollectionDataSource(leaveDataSource);
+			//JRBeanCollectionDataSource leaveRequest = new JRBeanCollectionDataSource(leaveDataSource);
+			JRBeanCollectionDataSource leaveRequest = new JRBeanCollectionDataSource(listLeave);
 
 			HashMap<String, Object> map = new HashMap<String, Object>();
 

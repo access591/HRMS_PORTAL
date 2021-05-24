@@ -1,7 +1,10 @@
 package com.hrms.service;
 
+import java.util.List;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,6 +34,25 @@ public class LocalConvyenceDetailServiceImpl implements LocalConvyenceDetailServ
 		s.clear();
 		s.close();
 		return true;
+	}
+
+	@Override
+	public List<LocalConvyenceDetail> findLocalConvyenceDetailByEmpCode(String empCode) {
+		
+		try {
+			Session session = sessionFactory.openSession();
+			Query<LocalConvyenceDetail> query = session.createQuery("from LocalConvyenceDetail lcd inner join "
+					+ "fetch lcd.localConvId lc inner join fetch lcd.empCode e where e.empCode = :empCode", LocalConvyenceDetail.class);
+			query.setParameter("empCode", empCode);
+			
+			List<LocalConvyenceDetail> listLocalConvyenceDetail = query.getResultList();
+			System.out.println("listLocalConvyenceDetail : "+ listLocalConvyenceDetail.size());
+			return listLocalConvyenceDetail;
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return null;
 	}
 
 }
