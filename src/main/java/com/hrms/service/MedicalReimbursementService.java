@@ -17,4 +17,6 @@ public interface MedicalReimbursementService {
 
 	void approvedByMrId(String slipNo);
 
+	List<MedicalReimbursement> getAllMedicalReimbursementApproval();
+
 }

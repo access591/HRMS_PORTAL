@@ -1,5 +1,8 @@
 package com.hrms.repository;
 
+import java.util.List;
+
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -8,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.hrms.dao.AbstractGenericDao;
+
 import com.hrms.model.MedicalReimbursement;
 
 @Repository
@@ -25,6 +29,23 @@ public class MedicalReimbursementDaoImp  extends AbstractGenericDao<MedicalReimb
 		session.close();
 		System.out.println("result : "+ result);
 		
+	}
+	@Override
+	public List<MedicalReimbursement> getAllMedicalReimbursementApproval() {
+		try {
+			Session session = this.sessionFactory.openSession();
+			session.beginTransaction();
+			Query<MedicalReimbursement>query = session.createQuery("from MedicalReimbursement  e where e.approvalStatus ='N'",MedicalReimbursement.class);
+			
+			List<MedicalReimbursement> listMdApproval = query.getResultList();
+			session.getTransaction().commit();
+			
+			return listMdApproval;
+		} catch (HibernateException e) {
+			
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 }
