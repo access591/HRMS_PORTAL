@@ -195,6 +195,17 @@ public class LoanApplicationUtil {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+
+	public LoanApplicationUtil(String empCode2, String empName2, String deptName2, String desgName2,
+			String employeePayeeCode) {
+		this.empCode = empCode2;
+		this.empName = empName2;
+		
+		this.deptName = deptName2;
+	
+		this.desgName = desgName2;
+		this.empPayCode = employeePayeeCode;
+	}
 	
 	
 
