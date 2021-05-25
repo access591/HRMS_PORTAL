@@ -42,16 +42,16 @@ $(document).ready(function(){
 
     var i=1;
    $("#add_row").click(function(){
-    $('#addr'+i).html("<td><input name='medStDr"+i+"' type='Date'  class='form-control txt input-md'/> "+
-    		"</td><td><input  name='caseMemoNo"+i+"' type='text' placeholder='Case Memo No'  class='form-control input-md'>"+
-    		"</td><td><input  name='caseMemoDate"+i+"' type='Date'class='form-control input-md'>"+
-    		"</td><td><input  name='passedAmount"+i+"' type='text' placeholder='Vist Place'  class='pas form-control input-md'></td>"+
+    $('#addr'+i).html("<td><input name='fromDate"+i+"' type='Date'  class='form-control  input-md'/> "+
+    		"</td><td><input  name='startPlace"+i+"' type='text' placeholder='Start Place'  class='form-control input-md'>"+
+    		"</td><td><input  name='toDate"+i+"' type='Date'class='form-control input-md'>"+
+    		"</td><td><input  name='visitPlace"+i+"' type='text' placeholder='Vist Place'  class='form-control input-md'></td>"+
     		
     		"<td><select class=' form-control input-md' id='modeOfTravel'name='modeOfTravel"+i+"'><option value=' '>Select</option><option value='taxi'>Taxi</option><option value='car'>Car</option></select></td>"+
     		
-    		"<td><input  name='remark"+i+"' type='text' placeholder='Ticket No'  class='form-control input-md'></td>"+
-    		"<td><input  name='compPaid"+i+"' type='text' placeholder='Company Paid'  class='form-control input-md'></td>"+
-    		"<td><input  name='selfPaid"+i+"' type='text' placeholder='Self Paid'  class='form-control input-md'></td>"+
+    		"<td><input  name='ticketNo"+i+"' type='text' placeholder='Ticket No'  class='form-control input-md'></td>"+
+    		"<td><input  name='paidCompany"+i+"' type='text' placeholder='Company Paid'  class='txt form-control input-md'></td>"+
+    		"<td><input  name='paidSelf"+i+"' type='text' placeholder='Self Paid'  class='pas form-control input-md'></td>"+
     		"");
 
     $('#tab1').append('<tr id="addr'+(i+1)+'"></tr>');
@@ -66,7 +66,7 @@ $(document).ready(function(){
 			 $("#addr"+(i-1)).html('');
 			 $('#_cr2').val(i - 1);
 			 i--;
-			 calculateSum(),calculateSumtotalPassing(),calculateSumtotalgovt()
+			 calculateSum(),calculateSumtotalPassing()
 			 }
 		 });
    
@@ -142,12 +142,13 @@ function calculateSum() {
     //.toFixed() method will roundoff the final sum to 2 decimal places
    var fds=sum;
    //$("#").html(sum.toFixed(2));
-   $("#sum").val(sum);
+   $("#totalClaim").val(sum);
     
 }
 
 $("table").on("keyup", ".txt", function () {
     calculateSum();
+	totaltravalex();
 });
 
 
@@ -169,18 +170,31 @@ function calculateSumtotalPassing() {
     //.toFixed() method will roundoff the final sum to 2 decimal places
    var fds=sum;
    //$("#").html(sum.toFixed(2));
-   $("#totalPassing").val(sum);
+   $("#totalPas").val(sum);
     
 }
 
 $("table").on("keyup", ".pas", function () {
 	calculateSumtotalPassing();
+	totaltravalex();
 });
 
 
 
+function totaltravalex()
+{
+	var totalClaim =parseInt($('#totalClaim').val()); 
+	 var totalPas =parseInt($('#totalPas').val()); 
+	var t3=totalClaim+totalPas;
+	$('#totalTravel').val(t3);
+
+	
+	}
+
 
 });
+
+
 
 </script>
 <script>
@@ -381,44 +395,50 @@ $("table").on("keyup", ".pas", function () {
 															<tbody>
 																<tr id='addr0'>
 
-																	<td><input type="Date" name='medStDr0'
-																		placeholder='Name' class="form-control" value="" /></td>
-																	<td><input type="text" name='caseMemoNo0'
+																	<td><input type="Date" name='fromDate0'
+																		placeholder='From Date' class="form-control" value="" /></td>
+																	<td>
+																	
+																	
+																	<input type="text" name='startPlace0'
 																		placeholder='Start Place' class="form-control" /></td>
-																	<td><input type="Date" name='caseMemoDate0'
-																		placeholder='Case Memo Date' class="form-control" /></td>
+																	
+																	
+																	
+																	<td><input type="Date" name='toDate0'
+																		placeholder='To Date' class="form-control" /></td>
 																	
 
-																	<td><input type="text" name='passedAmount0'
-																		placeholder='Vist palce' class="form-control pas" /></td>
-																	<td><select class="form-control "
-																		name="govtexemptionAmount0" id="govtexemptionAmount0">
+																	<td><input type="text" name='visitPlace0'placeholder='Vist palce' class="form-control pas" /></td>
+																		<td>
+																		<select class="form-control"name="modeOfTravel0" id="modeOfTravel0">
 																			<option value="">Select Type</option>
 																			<option th:Value="taxi">Taxi</option>
 																			<option th:Value="car">Car</option>
 																			<option th:Value="bus">Bus</option>
 																			<option th:Value="train">Train</option>
-																	</select></td>
+													</select></td>
 
 
-																	<td><input type="text" name='remark0'
+																	<td><input type="text" name='ticketNo0'
 																		placeholder='Ticket No' class="form-control" /></td>
 
 
-																	<td><input type="text" name='compPaid0'
-																		placeholder='Company Paid' class="form-control" /></td>
-																	<td><input type="text" name='selfPaid0'
-																		placeholder='Self Paid' class="form-control" /></td>
+																	<td><input type="text" name='paidCompany0'
+																		placeholder='Company Paid' class="form-control txt" /></td>
+																	<td><input type="text" name='paidSelf0'
+																		placeholder='Self Paid' class="form-control pas " /></td>
 																</tr>
 																<tr id='addr1'></tr>
 
 															</tbody>
 													<tr>
-												<td colspan="5"></td>
+												<td colspan="4"></td>
 
 												<td><label class="form-label">Total Amount</label></td>
+													<td><input type="text" id="totalTravel"name='totalTravel' placeholder='Total Claim'class="form-control " /></td>
 												<td><input type="text" id="totalClaim"name='totalClaim' placeholder='Total Claim'class="form-control" /></td>
-												<td><input type="text" id="totalPas" name='totalPas'placeholder='Total Pas' class="form-control" /></td>
+												<td><input type="text" id="totalPas" name='totalPas'placeholder='Total Pas' class="form-control " /></td>
 
 												<td></td>
 
