@@ -233,6 +233,7 @@ function totaltravalex()
 						
 					
 					</div>
+						<form id="validation-form" action="#"  th:action="@{/saveTourClaim}" th:object="${tourClaim}" method="post">
 					<div class="row">
 							<div class="col-12">
 							<div class="card">
@@ -249,19 +250,21 @@ function totaltravalex()
 												
 													<label class="form-label">Tour Id <span
 														class="text-danger">*</span>
-													</label> <input name="empCode" type="text" id="empCode"
+													</label> <input name="tourClaimId" type="text" id="tourClaimId"
 														class="form-control"readonly>
 												</div>
+												
+												
 											<div class="form-group sm col-md-4">
 											       <label class="form-label">Tour Claim Date
 											       <span class="text-danger">*</span></label>
-							                 <input  type="text"id="empName"name="empName" title="Name"onkeyup="sync()"maxlength="50" pattern="^[a-zA-Z\s]*$" class="form-control required">
+							                 <input  type="text"id="tourClaimDate"name="tourClaimDate" class="form-control required">
 										     </div>
 										     	
 											<div class="form-group sm col-md-4">
 													<label class="form-label">Employee Code</label>
 												<label style="color: red">*</label>
-												<select class="form-control select2"onchange="myFunction()" name="empCode"id="empCode" required aria-required="true">
+												<select class="form-control select2" name="empCode" id="empCode" onchange="myFunctionEmpCode()" required aria-required="true">
 												 <option value="">Select Employee</option>
 												<option th:each="e :${listEmployee}"th:value="${e.getEmpCode()}" th:text="${e.getEmpName()}"></option>
 											     	</select>
@@ -271,33 +274,24 @@ function totaltravalex()
 												
 								</div>
 									<div class="form-row">
-												<div class="form-group sm col-md-4">
-												<label class="form-label">Designation</label> <span
-														class="text-danger">*</span> <select
-														class="form-control required" name="designationCode" id="designationCode">
-														<option value="">Select Type</option>
-														<option th:each="des :${listDesignation}" th:value="${des.getDesgCode()}" th:text="${des.getDesgName()}"></option>
-														
-													</select>
+										<div class="form-group sm col-md-4">
+												<label class="form-label">Designation</label>
+												
+												<input  type="text"id="desgName"name="desgName" title="Designation"maxlength="50" pattern="^[a-zA-Z\s]*$" class="form-control">
+													
 												
 												</div>
 												
-												<div class="form-group sm col-md-4">
-												<label class="form-label">Department</label> <span
-														class="text-danger">*</span> <select
-														class="form-control required" name="designationCode" id="designationCode">
-														<option value="">Select Type</option>
-														<option th:each="des :${listDesignation}" th:value="${des.getDesgCode()}" th:text="${des.getDesgName()}"></option>
-														
-													</select>
-												
+															<div class="form-group sm col-md-4">
+												<label class="form-label">Department</label> 
+												<input  type="text"id="deptName"name="deptName" title="Department"maxlength="50" pattern="^[a-zA-Z\s]*$" class="form-control">
 												</div>
 													<div class="form-group sm col-md-4">
 												<label class="form-label">Tour Plan Id</label> <span
 														class="text-danger">*</span> <select
-														class="form-control required" name="designationCode" id="designationCode">
+														class="form-control" name="tourPlanId" id="tourPlanId" required>
 														<option value="">Select Type</option>
-														<option th:each="des :${listDesignation}" th:value="${des.getDesgCode()}" th:text="${des.getDesgName()}"></option>
+														<option th:each="TourPL :${ListTourPlan}" th:value="${TourPL.getTourPlanId()}" th:text="${TourPL.getTourPlanId()}"></option>
 														
 													</select>
 												
@@ -311,31 +305,31 @@ function totaltravalex()
 												<div class="form-group sm col-md-4">
 											       <label class="form-label">Tour Plan Date</label>
 											       <span class="text-danger">*</span>
-											       <input  type="text"id="empDob"name="empDob"  class="form-control required">
+											       <input  type="text"id="tourPlanDate"name="tourPlanDate"  class="form-control required">
 											      </div>
 											      
 											      <div class="form-group sm col-md-4">
 											       <label class="form-label">Start Place</label>
-											       <span class="text-danger">*</span>
-											       <input  type="text"id="startPlace"name="startPlace"  class="form-control required">
+											       
+											       <input  type="text"id="startPlace"name="startPlace"  class="form-control">
 											      </div>
 											      <div class="form-group sm col-md-4">
 											       <label class="form-label">Visit Place </label>
-											       <span class="text-danger">*</span>
-											       <input  type="text"id="visitPlace"name="visitPlace"  class="form-control required">
+											      
+											       <input  type="text"id="visitPlace"name="visitPlace"  class="form-control">
 											      </div>
 												</div>
 												
 													<div class="form-row">
 													 <div class="form-group sm col-md-4">
 											       <label class="form-label">Advance Paid </label>
-											       <span class="text-danger">*</span>
-											       <input  type="text"id="advPaid"name="advPaid"  class="form-control required">
+											    
+											       <input  type="text"id="advancePaid"name="advancePaid"  class="form-control">
 											      </div>
 											       <div class="form-group sm col-md-4">
 											       <label class="form-label">Visit Purpose </label>
-											       <span class="text-danger">*</span>
-											       <input  type="text"id="visitPlace"name="visitPlace"  class="form-control required">
+											     
+											       <input  type="text"id="visitPurpose"name="visitPurpose"  class="form-control">
 											      </div>
 													
 													
@@ -346,7 +340,7 @@ function totaltravalex()
 							</div>
 						</div>
 	              <div class="col-12">
-		<form id="smartwizard-validation" enctype="multipart/form-data" class="wizard wizard-primary" th:action="@{/saveEmployee}" th:object="${employees}" method="post">
+		<div id="smartwizard">
 		
 			<ul>
 			<li><a href="#validation-step-1"><br /><small>Traveling Expenses</small></a></li>
@@ -498,7 +492,7 @@ function totaltravalex()
 														<td><input type="text" name='caseMemoNo0'placeholder='Start Place' class="form-control" /></td>
 														<td><input type="Date" name='caseMemoDate0'placeholder='Case Memo Date' class="form-control" /></td>
 														<td><input type="text" name='passedAmount0'placeholder='Vist palce' class="form-control pas" /></td>
-														<td><select class="form-control required"name="govtexemptionAmount0" id="govtexemptionAmount0">
+														<td><select class="form-control"name="govtexemptionAmount0" id="govtexemptionAmount0">
 																			<option value="">Select Type</option>
 																			<option th:Value="taxi">Taxi</option>
 																			<option th:Value="car">Car</option>
@@ -590,12 +584,12 @@ function totaltravalex()
 								</div>
 
 	
-	</form>
+	</div>
 			</div>
 				 
 	</div>
 					</div>
-
+</form>
 				</div>
 		</main>
 		<footer class="footer">
@@ -606,20 +600,20 @@ function totaltravalex()
 	<script>
 		$(function() {
 
-			$("input[name='empDob']").daterangepicker({
+			$("input[name='tourPlanDate']").daterangepicker({
 				singleDatePicker: true,
 			    autoApply: true,
 				locale: {
-		            format: 'DD/MM/YYYY'
+		            format: 'YYYY/MM/DD'
 		        },
 				showDropdowns: true
 			});
 			
-		$("input[name='dateOfPosting']").daterangepicker({
+		$("input[name='tourClaimDate']").daterangepicker({
 				singleDatePicker: true,
 			    autoApply: true,
 				locale: {
-		            format: 'DD/MM/YYYY'
+		            format: 'YYYY/MM/DD'
 		        },
 				showDropdowns: true
 			});
@@ -700,54 +694,13 @@ function totaltravalex()
 	</script>
 	
 		<script>
-		$(function() {
-			$("#smartwizard-default-primary").smartWizard({
-				theme: "default",
-				showStepURLhash: false
-			});
+		$(document).ready(function(){
 
-			
-			// Validation
-			var $validationForm = $("#smartwizard-validation");
-			$validationForm.validate({
-				errorPlacement: function errorPlacement(error, element) {
-					$(element).parents(".form-group").append(
-						error.addClass("invalid-feedback small d-block")
-					)
-				},
-				highlight: function(element) {
-					$(element).addClass("is-invalid");
-				},
-				unhighlight: function(element) {
-					$(element).removeClass("is-invalid");
-				},
-				rules: {
-					"wizard-confirm": {
-						equalTo: "input[name=\"wizard-password\"]"
-					}
-				}
+			  // SmartWizard initialize
+			  $('#smartwizard').smartWizard();
+			  $('#smartwizard').smartWizard("loader", "show");
+
 			});
-			$validationForm.smartWizard({
-					autoAdjustHeight: false,
-					backButtonSupport: false,
-					useURLhash: false,
-					showStepURLhash: false,
-					
-				})
-				.on("leaveStep", function(e, anchorObject, stepNumber, stepDirection) {
-					if (stepDirection === "forward") {
-						return $validationForm.valid();
-					}
-					return true;
-				});
-			/* $validationForm.find(".btn-submit").on("click", function() {
-				if (!$validationForm.valid()) {
-					return;
-				}
-				
-				return false;
-			}); */
-		});
 	</script>
 
 	<script type="text/javascript">
@@ -811,6 +764,35 @@ function totaltravalex()
       
 </script>
 
+<script>
+	function myFunctionEmpCode(){
+/* 		 var empCode= $('#empCode option:selected').value; */
+		 var empCode= document.getElementById('empCode').value
+	    console.log("ajax request : "+ empCode);
+	    const xhr = new XMLHttpRequest();
+	    xhr.open('GET','./viewEmployeeTourClaim/'+empCode,true);
+	    xhr.getResponseHeader('content-type','application/json');
+	    xhr.onload = function(){
+	        if(this.status===200){
+	            let obj = JSON.parse(this.responseText);
+	            console.log(obj);
+	          
+	            $('#deptName').val(obj.deptName);
+	            $('#desgName').val(obj.desgName);
+	          
+	        }
+	        else{
+	            console.error("some error occured");
+	        }
+		
+	    }
+	    xhr.send();
+	}
+
+
+
+	
+	</script>
 
 
 	<script>
