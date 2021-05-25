@@ -46,9 +46,7 @@ $(document).ready(function(){
     		"</td><td><input  name='startPlace"+i+"' type='text' placeholder='Start Place'  class='form-control input-md'>"+
     		"</td><td><input  name='toDate"+i+"' type='Date'class='form-control input-md'>"+
     		"</td><td><input  name='visitPlace"+i+"' type='text' placeholder='Vist Place'  class='form-control input-md'></td>"+
-    		
     		"<td><select class=' form-control input-md' id='modeOfTravel'name='modeOfTravel"+i+"'><option value=' '>Select</option><option value='taxi'>Taxi</option><option value='car'>Car</option></select></td>"+
-    		
     		"<td><input  name='ticketNo"+i+"' type='text' placeholder='Ticket No'  class='form-control input-md'></td>"+
     		"<td><input  name='paidCompany"+i+"' type='text' placeholder='Company Paid'  class='txt form-control input-md'></td>"+
     		"<td><input  name='paidSelf"+i+"' type='text' placeholder='Self Paid'  class='pas form-control input-md'></td>"+
@@ -64,10 +62,11 @@ $(document).ready(function(){
    $("#delete_row").click(function(){
 	  	 if(i>1){
 			 $("#addr"+(i-1)).html('');
-			 $('#_cr2').val(i - 1);
+			 $('#_cr').val(i - 1);
 			 i--;
-			 calculateSum(),calculateSumtotalPassing()
+			 calculateSum(),calculateSumtotalPassing(),totaltravalex()
 			 }
+	  	
 		 });
    
    
@@ -324,7 +323,7 @@ function totaltravalex()
 													 <div class="form-group sm col-md-4">
 											       <label class="form-label">Advance Paid </label>
 											    
-											       <input  type="text"id="advancePaid"name="advancePaid"  class="form-control">
+											       <input  type="text"id="advancePaid"name="advancePaid"  class="form-control"value="0">
 											      </div>
 											       <div class="form-group sm col-md-4">
 											       <label class="form-label">Visit Purpose </label>
@@ -430,7 +429,7 @@ function totaltravalex()
 												<td colspan="4"></td>
 
 												<td><label class="form-label">Total Amount</label></td>
-													<td><input type="text" id="totalTravel"name='totalTravel' placeholder='Total Claim'class="form-control " /></td>
+													<td><input type="text" id="totalTravel"name='totalTravel' value='0' placeholder='Total Claim'class="form-control " /></td>
 												<td><input type="text" id="totalClaim"name='totalClaim' placeholder='Total Claim'class="form-control" /></td>
 												<td><input type="text" id="totalPas" name='totalPas'placeholder='Total Pas' class="form-control " /></td>
 
