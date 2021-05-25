@@ -46,7 +46,9 @@ $(document).ready(function(){
     		"</td><td><input  name='caseMemoNo"+i+"' type='text' placeholder='Case Memo No'  class='form-control input-md'>"+
     		"</td><td><input  name='caseMemoDate"+i+"' type='Date'class='form-control input-md'>"+
     		"</td><td><input  name='passedAmount"+i+"' type='text' placeholder='Vist Place'  class='pas form-control input-md'></td>"+
-    		"<td><select class=' form-control input-md' id='govtexemptionAmount'name='govtexemptionAmount["+i+"].govtexemptionAmount'><option value=' '>Select</option><option value='taxi'>Taxi</option><option value='car'>Car</option></select></td>"+
+    		
+    		"<td><select class=' form-control input-md' id='modeOfTravel'name='modeOfTravel"+i+"'><option value=' '>Select</option><option value='taxi'>Taxi</option><option value='car'>Car</option></select></td>"+
+    		
     		"<td><input  name='remark"+i+"' type='text' placeholder='Ticket No'  class='form-control input-md'></td>"+
     		"<td><input  name='compPaid"+i+"' type='text' placeholder='Company Paid'  class='form-control input-md'></td>"+
     		"<td><input  name='selfPaid"+i+"' type='text' placeholder='Self Paid'  class='form-control input-md'></td>"+
@@ -67,56 +69,63 @@ $(document).ready(function(){
 			 calculateSum(),calculateSumtotalPassing(),calculateSumtotalgovt()
 			 }
 		 });
-   var i=1;
+   
+   
+   var J=1;
+   
    $("#tab2_AddRow").click(function(){
-	    $('#addrtabsecond'+i).html("<td><input name='medStDr"+i+"' type='Date'  class='form-control txt input-md'/> "+
-	    		"</td><td><input  name='caseMemoNo"+i+"' type='text' placeholder='Case Memo No'  class='form-control input-md'>"+
-	    		"</td><td><input  name='caseMemoDate"+i+"' type='Date'class='form-control input-md'>"+
-	    		"</td><td><input  name='passedAmount"+i+"' type='text' placeholder='Vist Place'  class='pas form-control input-md'></td>"+
-	    		"<td><select class=' form-control input-md' id='govtexemptionAmount'name='govtexemptionAmount["+i+"].govtexemptionAmount'><option value=' '>Select</option><option value='taxi'>Taxi</option><option value='car'>Car</option></select></td>"+
-	    		"<td><input  name='remark"+i+"' type='text' placeholder='Amount'  class='form-control input-md'></td>"+
+	    $('#addrtabsecond'+J).html("<td><input name='medStDr"+J+"' type='Date'  class='form-control txt input-md'/> "+
+	    		"</td><td><input  name='caseMemoNo"+J+"' type='text' placeholder='Case Memo No'  class='form-control input-md'>"+
+	    		"</td><td><input  name='caseMemoDate"+J+"' type='Date'class='form-control input-md'>"+
+	    		"</td><td><input  name='passedAmount"+J+"' type='text' placeholder='Vist Place'  class='pas form-control input-md'></td>"+
+	    		"<td><select class=' form-control input-md' id='modeOfTravel'name='modeOfTravel"+i+"'><option value=' '>Select</option><option value='taxi'>Taxi</option><option value='car'>Car</option></select></td>"+
+	    		"<td><input  name='remark"+J+"' type='text' placeholder='Amount'  class='form-control input-md'></td>"+
 	    		
 	    		"");
 
-	    $('#tab2').append('<tr id="addrtabsecond'+(i+1)+'"></tr>');
-	    $('#_cr2').val(i+1);
+	    $('#tab2').append('<tr id="addrtabsecond'+(J+1)+'"></tr>');
+	    $('#_cr2').val(J+1);
 	    
-	    i++; 
+	    J++; 
 	});
    $("#tab2_delete").click(function(){
-	  	 if(i>1){
-			 $("#addrtabsecond"+(i-1)).html('');
-			 $('#_cr2').val(i - 1);
-			 i--;
-			 calculateSum(),calculateSumtotalPassing(),calculateSumtotalgovt()
+	  	 if(J>1){
+			 $("#addrtabsecond"+(J-1)).html('');
+			 $('#_cr2').val(J - 1);
+			 J--;
+			 
 			 }
 		 });
 	
    
   
-   var i=1;
+   var K=1;
    
    $("#tab3_AddRow").click(function(){
-	    $('#addrowthired'+i).html("<td><input name='medStDr"+i+"' type='text'  class='form-control  input-md'/> "+
-	    		"</td><td><input  name='caseMemoNo"+i+"' type='Date' placeholder='Case Memo No'  class='form-control input-md'>"+
-	    		"</td><td><input  name='passedAmount"+i+"' type='text' placeholder='Expenses'  class='pas form-control input-md'></td>"+
+	    $('#addrowthired'+K).html("<td><input name='medStDr"+K+"' type='text'  class='form-control  input-md'/> "+
+	    		"</td><td><input  name='caseMemoNo"+K+"' type='Date' placeholder='Case Memo No'  class='form-control input-md'>"+
+	    		"</td><td><input  name='passedAmount"+K+"' type='text' placeholder='Expenses'  class='pas form-control input-md'></td>"+
 	    		"");
 
-	    $('#tab3').append('<tr id="addrowthired'+(i+1)+'"></tr>');
-	    $('#_cr3').val(i+1);
+	    $('#tab3').append('<tr id="addrowthired'+(K+1)+'"></tr>');
+	    $('#_cr3').val(K+1);
 	    
-	    i++; 
+	    K++; 
 	});
    
    
    $("#tab3_delete").click(function(){
 	  	 if(i>1){
-			 $("#addrowthired"+(i-1)).html('');
-			 $('#_cr3').val(i - 1);
-			 i--;
-			 calculateSum(),calculateSumtotalPassing(),calculateSumtotalgovt()
+			 $("#addrowthired"+(K-1)).html('');
+			 $('#_cr3').val(K - 1);
+			 K--;
+			
 			 }
 		 });
+   
+   
+   
+   
    
 function calculateSum() {
 
@@ -142,6 +151,9 @@ $("table").on("keyup", ".txt", function () {
 });
 
 
+
+
+
 function calculateSumtotalPassing() {
 
     var sum = 0;
@@ -165,31 +177,6 @@ $("table").on("keyup", ".pas", function () {
 	calculateSumtotalPassing();
 });
 
-
-
-
-function calculateSumtotalgovt() {
-
-    var sum = 0;
-    //iterate through each textboxes and add the values
-    $(".govt").each(function () {
-
-        //add only if the value is number
-        if (!isNaN(this.value) && this.value.length != 0) {
-            sum += parseFloat(this.value);
-        }
-
-    });
-    //.toFixed() method will roundoff the final sum to 2 decimal places
-   var fds=sum;
-   //$("#").html(sum.toFixed(2));
-   $("#totalGovtExt").val(sum);
-    
-}
-
-$("table").on("keyup", ".govt", function () {
-	calculateSumtotalgovt();
-});
 
 
 
@@ -362,7 +349,7 @@ $("table").on("keyup", ".govt", function () {
 								<div class="card-header">
 								</div>
 								<div class="card-body">
-								<input id="_cr" name="_cr" type="hidden"value="1">
+								<input id="_cr" name="_cr" type="text"value="1">
 								<div class="col-sm-12" align="right">
 							<!-- 	<a th:href="@{/viewMedicalReimbursement}">
 								<em  class="fa fa-eye" style="font-size:28px"> 
@@ -404,7 +391,7 @@ $("table").on("keyup", ".govt", function () {
 
 																	<td><input type="text" name='passedAmount0'
 																		placeholder='Vist palce' class="form-control pas" /></td>
-																	<td><select class="form-control required"
+																	<td><select class="form-control "
 																		name="govtexemptionAmount0" id="govtexemptionAmount0">
 																			<option value="">Select Type</option>
 																			<option th:Value="taxi">Taxi</option>
@@ -426,25 +413,16 @@ $("table").on("keyup", ".govt", function () {
 																<tr id='addr1'></tr>
 
 															</tbody>
-															<tr>
-																<td colspan="4"></td>
+													<tr>
+												<td colspan="5"></td>
 
-					<td>
-					<div class="form-group ">  
-					<label class="form-label">Total Amount</label>
-					<input type="text" id="sum" name='totalAmount' placeholder='Total Amount' class="form-control"/>
-					</div>
-					</td>
-					
-					
-					
-					
-																
-																
-																
-																<td></td>
+												<td><label class="form-label">Total Amount</label></td>
+												<td><input type="text" id="totalClaim"name='totalClaim' placeholder='Total Claim'class="form-control" /></td>
+												<td><input type="text" id="totalPas" name='totalPas'placeholder='Total Pas' class="form-control" /></td>
 
-															</tr>
+												<td></td>
+
+											</tr>
 
 														</table>
 													</div>
