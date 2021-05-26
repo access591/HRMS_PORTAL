@@ -31,6 +31,7 @@ public class LocalClaimReport {
 				.getRealPath("resources/" + reportFileName + ".jrxml");
 
 		try {
+		String a="xyz";
 
 			JasperCompileManager.compileReportToFile(sourceFileName);
 			sourceFileName = request.getSession().getServletContext()
@@ -41,7 +42,7 @@ public class LocalClaimReport {
 
 			map.put("Parameter1", beanColDataSource);
 			
-			map.put("createdby ", "rahul");
+			map.put("createdby",a);
 			
 
 
