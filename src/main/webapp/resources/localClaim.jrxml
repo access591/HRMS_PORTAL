@@ -66,6 +66,10 @@
 				</textElement>
 				<text><![CDATA[Local Claim Detail]]></text>
 			</staticText>
+			<textField>
+				<reportElement x="700" y="30" width="100" height="30" uuid="0258b172-5681-454e-8f57-ea04dc2f92bc"/>
+				<textFieldExpression><![CDATA[$P{createdby}]]></textFieldExpression>
+			</textField>
 		</band>
 	</title>
 	<pageHeader>
