@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.hrms.model.ConveyanceExpenses;
 import com.hrms.model.Department;
 import com.hrms.model.Designation;
 import com.hrms.model.Employee;
@@ -26,6 +27,7 @@ import com.hrms.model.TourClaim;
 import com.hrms.model.TourClaimUtil;
 import com.hrms.model.TourPlan;
 import com.hrms.model.TravelingExpenses;
+import com.hrms.service.ConveyanceExpensesService;
 import com.hrms.service.DepartmentService;
 import com.hrms.service.DesignationService;
 import com.hrms.service.EmployeeService;
@@ -50,6 +52,9 @@ public class TourClaimController {
 	TourPlanService tourPlanService;
 	@Autowired
 	TravelingExpensesService travelingExpensesService;
+	@Autowired
+	ConveyanceExpensesService conveyanceExpensesService;
+	
 	@GetMapping("/tourClaim")
 	public String tourClaim(Model model, HttpSession session) {
 
@@ -74,6 +79,8 @@ public class TourClaimController {
 		String insertedBY = (String) session.getAttribute("USER_NAME");
 		TourClaim tourClaim= new TourClaim();
 		TravelingExpenses travExp=new TravelingExpenses();
+		ConveyanceExpenses convExp=new ConveyanceExpenses();
+		
 		Employee emp = new Employee();
 		emp.setEmpCode(tourClaimUtil.getEmpCode());
 		tourClaim.setEmpCode(emp);
@@ -185,8 +192,86 @@ public class TourClaimController {
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
+		// second Counter Start Here >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 		
+		try {
+			boolean insertStatusMR = false;
+			counter = Integer.parseInt(request.getParameter("_cr2"));
+			System.out.println("counter::::::::::::::::::::" + counter);
+			for (int i =0; i < counter; i++) 
+			{
+			
+				
+				if (request.getParameter("startPlace" + i) != null) {
+					convExp.setStartPlace(request.getParameter("startPlace" + i));
+				} else {
+					convExp.setStartPlace("" + i);
+				}
 
+				if (request.getParameter("visitPlace" + i) != null) {
+					convExp.setVisitPlace(request.getParameter("visitPlace" + i));
+				} else {
+					convExp.setVisitPlace("" + i);
+				}
+
+				if (request.getParameter("fromDate" + i) != null) {
+					String sDate1 = request.getParameter("fromDate" + i);
+					Date date1 = new SimpleDateFormat("yyyy-MM-dd").parse(sDate1);
+					convExp.setFromDate(date1);
+				}
+
+				if (request.getParameter("toDate" + i) != null) {
+					String sDate1 = request.getParameter("toDate" + i);
+					Date date1 = new SimpleDateFormat("yyyy-MM-dd").parse(sDate1);
+					convExp.setToDate(date1);
+				}
+
+				if (request.getParameter("modeOfTravel" + i) != null) {
+					convExp.setModeOfTravel(request.getParameter("modeOfTravel" + i));
+				} else {
+					convExp.setModeOfTravel("" + i);
+				}
+					
+				
+				if(request.getParameter("convExpAmount" + i) != null) {
+					convExp.setConvExpAmount(Integer.parseInt(request.getParameter("convExpAmount" + i)));
+				} else {
+					convExp.setConvExpAmount(0 + i);
+				}
+				
+				
+				
+				tourClaim.setTourClaimId(tourcId);
+				tourClaim.setTourClaimDate(tourCdate);
+				convExp.setTourClaimId(tourClaim);
+				convExp.setTourClaimDate(tourClaim);
+				convExp.setEmpCode(emp);
+				
+				
+				insertStatusMR= conveyanceExpensesService.addConveyanceExpenses(convExp);
+				
+			if (insertStatusMR) {
+				System.out.println("Counter" + flag);
+				flag++;
+
+			}
+			
+		}
+		
+		
+		if (flag > 0) {
+			session.setAttribute("Message", "Data added successfully.");
+			
+		} else {
+			System.out.println("Enter into  failure part :");
+			
+		}
+
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
 		session.setAttribute("username", session.getAttribute("username"));
 
 		return "redirect:/tourClaim";
