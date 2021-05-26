@@ -92,27 +92,32 @@ body {
 									<div class="form-row">
 												
 												<div class="form-group sm col-md-4">
-													<label class="form-label">Employee Code</label>
+													<label class="form-label">Employee Name</label>
 												<label style="color: red">*</label>
 												<select class="form-control select2"onchange="myFunction()" name="empCode"id="empCode" required aria-required="true">
 												 <option value="">Select Employee</option>
-												<option th:each="e :${listEmployee}"th:value="${e.getEmpCode()}" th:text="${e.getEmpName()}"></option>
+												<option th:each="e :${listEmployee}" th:value="${e.getEmpCode()}" th:text="${e.getEmpName()}"></option>
 											     	</select>
 
 												</div>
 												
-												
+										<!-- 		
 											<div class="form-group sm col-md-4">
 											       <label class="form-label">Employee Name 
-											       <span class="text-danger">*</span></label>
+											   </label>
 							                 <input  type="text"id="empName"name="empName" title=" Employee Name" class="form-control " readonly>
 										     </div>
-										     	
+										     	 -->
 										     	
 										     	<div class="form-group sm col-md-4">
 											       <label class="form-label">Appointment   Date
-											       <span class="text-danger">*</span></label>
+											      </label>
 							                 <input  type="text"id="appDate"name="appDate" title="Name"onkeyup="sync()" class="form-control required">
+										     </div>
+										     <div class="form-group sm col-md-4">
+											       <label class="form-label">Eligibility   Date
+											      </label>
+							                 <input  type="text"id="eligibilityDate"name="eligibilityDate" title="Eligibility   Date" class="form-control required">
 										     </div>
 											
 												
@@ -121,11 +126,7 @@ body {
 								
 									<div class="form-row">
 									
-									<div class="form-group sm col-md-4">
-											       <label class="form-label">Eligibility   Date
-											      </label>
-							                 <input  type="text"id="eligibilityDate"name="eligibilityDate" title="Eligibility   Date" class="form-control required">
-										     </div>
+									
 										     
 										     
 										     	<div class="form-group sm col-md-4">
@@ -142,6 +143,12 @@ body {
 											      </label>
 							                 <input  type="text"id="whenAvailed"name="whenAvailed" title="When Available" class="form-control required">
 										     </div>
+										     
+										     <div class="form-group sm col-md-4">
+											       <label class="form-label">Amount
+											      </label>
+							                 <input  type="text"id="adavance"name="adavance" title="Amount" class="form-control required">
+										     </div>
 												</div>
 												<div class="form-row">
 												
@@ -157,21 +164,21 @@ body {
 											      </label>
 							                 <input  type="text"id="leaveTo"name="leaveTo" title="Leave TO" class="form-control required">
 										     </div>
-												
-												<div class="form-group sm col-md-4">
-											       <label class="form-label">Amount
-											      </label>
-							                 <input  type="text"id="adavance"name="adavance" title="Amount" class="form-control required">
-										     </div>
+										     
+										     
+										     
+											<div class="form-group sm col-md-4">
+											    
+							 <label class="form-label">Remarks</label>
+						 
+							<textarea class="form-control" rows="2" id="remarks" name="remarks" title="remarks" placeholder="Textarea"></textarea>
 							</div>
 							
-							<div class="form-row">
-							<div class="form-group sm col-md-4">
-											       <label class="form-label">Remarks
-											      </label>
-							                 <input  type="text"id="remarks"name="remarks" title="remarks" class="form-control required">
-										     </div>
+							
+							
 							</div>
+												
+				
 							<button type="submit" class="btn btn-primary">Save</button>
 								 <button type="reset"class="btn btn-primary" value="Reset">Reset</button>
 								 </form>
@@ -233,76 +240,40 @@ body {
 	<script>
 		$(function() {
 
-			$("input[name='appDate']").daterangepicker({
+			$("input[name='appDate']").datepicker({
 				singleDatePicker: true,
-			    autoApply: true,
-				locale: {
-		            format: 'YYYY/MM/DD'
-		        },
-				showDropdowns: true
+				 format: 'yyyy-mm-dd',
+				
 			});
 			
-		$("input[name='eligibilityDate']").daterangepicker({
-				singleDatePicker: true,
-			    autoApply: true,
-				locale: {
-					 format: 'YYYY/MM/DD'
-		        },
-				showDropdowns: true
-			});
-		$("input[name=\"whenDue\"]").daterangepicker({
+		$("input[name='eligibilityDate']").datepicker({
 			singleDatePicker: true,
-			   autoApply: true,
-			locale: {
-				 format: 'YYYY/MM/DD'
-	        },
-			showDropdowns: true
+			 format: 'yyyy-mm-dd',
 		});
-		$("input[name='whenAvailed']").daterangepicker({
+		$("input[name=\"whenDue\"]").datepicker({
 			singleDatePicker: true,
-		    autoApply: true,
-			locale: {
-				 format: 'YYYY/MM/DD'
-	        },
-			showDropdowns: true
+			 format: 'yyyy-mm-dd',
 		});
-		$("input[name='leaveFrom']").daterangepicker({
+		
+		
+		$("input[name='whenAvailed']").datepicker({
 			singleDatePicker: true,
-		    autoApply: true,
-			locale: {
-				 format: 'YYYY/MM/DD'
-	        },
-			showDropdowns: true
-		});
+			 format: 'yyyy-mm-dd',
 			
-		
-		$("input[name='leaveTo']").daterangepicker({
-				singleDatePicker: true,
-				   autoApply: true,
-				locale: {
-					 format: 'YYYY/MM/DD'
-		        },
-				showDropdowns: true
-			});
-		
-		$("input[name=\"dov\"]").daterangepicker({
-			singleDatePicker: true,
-			   autoApply: true,
-			locale: {
-				 format: 'YYYY/MM/DD'
-	        },
-			showDropdowns: true
 		});
-		$("input[name=\"doi\"]").daterangepicker({
+		
+		$("input[name='leaveFrom']").datepicker({
 			singleDatePicker: true,
-			   autoApply: true,
-			locale: {
-				format: 'DD/MM/YYYY'
-	        },
-			showDropdowns: true
+			 format: 'yyyy-mm-dd',
+			
 		});
-
-
+		$("input[name='leaveTo']").datepicker({
+			singleDatePicker: true,
+			 format: 'yyyy-mm-dd',
+			
+		});
+		
+	
 
 			
 			// Datatables basic
