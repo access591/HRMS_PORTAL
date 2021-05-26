@@ -73,25 +73,27 @@ $(document).ready(function(){
    var J=1;
    
    $("#tab2_AddRow").click(function(){
+	  
 	    $('#addrtabsecond'+J).html("<td><input name='medStDr"+J+"' type='Date'  class='form-control txt input-md'/> "+
-	    		"</td><td><input  name='caseMemoNo"+J+"' type='text' placeholder='Case Memo No'  class='form-control input-md'>"+
-	    		"</td><td><input  name='caseMemoDate"+J+"' type='Date'class='form-control input-md'>"+
-	    		"</td><td><input  name='passedAmount"+J+"' type='text' placeholder='Vist Place'  class='pas form-control input-md'></td>"+
-	    		"<td><select class=' form-control input-md' id='modeOfTravel'name='modeOfTravel"+i+"'><option value=' '>Select</option><option value='taxi'>Taxi</option><option value='car'>Car</option></select></td>"+
-	    		"<td><input  name='remark"+J+"' type='text' placeholder='Amount'  class='form-control input-md'></td>"+
-	    		
+	    		"</td><td><input  name='startPlace"+J+"' type='text' placeholder='Start Place'  class='form-control input-md'>"+
+	    		"</td><td><input  name='toDate"+J+"' type='Date'class='form-control input-md'>"+
+	    		"</td><td><input  name='visitPlace"+J+"' type='text' placeholder='Vist Place'  class='form-control input-md'></td>"+
+	    		"<td><select class=' form-control input-md' id='modeOfTravel'name='modeOfTravel"+J+"'><option value=' '>Select</option><option value='taxi'>Taxi</option><option value='car'>Car</option></select></td>"+
+	    		"<td><input  name='convExpAmount"+J+"' type='text' placeholder='Amount'  class='nbt form-control input-md'></td>"+
 	    		"");
-
 	    $('#tab2').append('<tr id="addrtabsecond'+(J+1)+'"></tr>');
 	    $('#_cr2').val(J+1);
 	    
 	    J++; 
 	});
+   var J=1;
    $("#tab2_delete").click(function(){
+	  
 	  	 if(J>1){
 			 $("#addrtabsecond"+(J-1)).html('');
 			 $('#_cr2').val(J - 1);
 			 J--;
+			 conveysm()
 			 
 			 }
 		 });
@@ -124,6 +126,33 @@ $(document).ready(function(){
    
    
    
+   function conveysm() {
+
+       var sum = 0;
+       //iterate through each textboxes and add the values
+       $(".nbt").each(function () {
+
+           //add only if the value is number
+           if (!isNaN(this.value) && this.value.length != 0) {
+               sum += parseFloat(this.value);
+           }
+
+       });
+       //.toFixed() method will roundoff the final sum to 2 decimal places
+      var fds=sum;
+      //$("#").html(sum.toFixed(2));
+      $("#totalConv").val(sum);
+       
+   }
+
+   $("table").on("keyup", ".nbt", function () {
+	   conveysm();
+   
+   });
+
+
+
+ 
    
    
 function calculateSum() {
@@ -388,20 +417,12 @@ function totaltravalex()
 															<tbody>
 																<tr id='addr0'>
 
-																	<td><input type="Date" name='fromDate0'
-																		placeholder='From Date' class="form-control" value="" /></td>
+																	<td><input type="Date" name='fromDate0'placeholder='From Date' class="form-control" value="" /></td>
 																	<td>
-																	
-																	
-																	<input type="text" name='startPlace0'
-																		placeholder='Start Place' class="form-control" /></td>
-																	
-																	
-																	
-																	<td><input type="Date" name='toDate0'
-																		placeholder='To Date' class="form-control" /></td>
-																	
-
+																	<input type="text" name='startPlace0'placeholder='Start Place' class="form-control" />
+																	</td>
+																	<td><input type="Date" name='toDate0'placeholder='To Date' class="form-control" />
+																	</td>
 																	<td><input type="text" name='visitPlace0'placeholder='Vist palce' class="form-control pas" /></td>
 																		<td>
 																		<select class="form-control"name="modeOfTravel0" id="modeOfTravel0">
@@ -487,20 +508,24 @@ function totaltravalex()
 															<tbody>
 																<tr id='addrtabsecond0'>
 
-														<td><input type="Date" name='medStDr0'placeholder='Name' class="form-control" value="" /></td>
-														<td><input type="text" name='caseMemoNo0'placeholder='Start Place' class="form-control" /></td>
-														<td><input type="Date" name='caseMemoDate0'placeholder='Case Memo Date' class="form-control" /></td>
-														<td><input type="text" name='passedAmount0'placeholder='Vist palce' class="form-control pas" /></td>
-														<td><select class="form-control"name="govtexemptionAmount0" id="govtexemptionAmount0">
+															<td><input type="Date" name='fromDate0'placeholder='From Date' class="form-control" value="" /></td>
+																	<td>
+																	<input type="text" name='startPlace0'placeholder='Start Place' class="form-control" />
+																	</td>
+																	<td><input type="Date" name='toDate0'placeholder='To Date' class="form-control" />
+																	</td>
+																	<td><input type="text" name='visitPlace0'placeholder='Vist palce' class="form-control pas" /></td>
+																		<td>
+																		<select class="form-control"name="modeOfTravel0" id="modeOfTravel0">
 																			<option value="">Select Type</option>
 																			<option th:Value="taxi">Taxi</option>
 																			<option th:Value="car">Car</option>
 																			<option th:Value="bus">Bus</option>
 																			<option th:Value="train">Train</option>
-																	</select></td>
+													</select></td>
 
-																	<td><input type="text" name='remark0'
-																		placeholder='Amount' class="form-control" /></td>
+																	<td>
+																	<input type="text" name='convExpAmount0'placeholder='Amount' class="form-control nbt" /></td>
 
 
 																	
@@ -514,7 +539,7 @@ function totaltravalex()
 																<td>
 					<div class="form-group ">  
 					<label class="form-label">Total Amount</label>
-					<input type="text" id="sum" name='totalAmount' placeholder='Total Amount' class="form-control"/>
+					<input type="text" id="totalConv" name='totalConv' value='0' placeholder='Total Amount' class="form-control"/>
 					</div>
 					</td>
 			
@@ -616,62 +641,6 @@ function totaltravalex()
 		        },
 				showDropdowns: true
 			});
-		$("input[name=\"dateOfJoining\"]").daterangepicker({
-			singleDatePicker: true,
-			   autoApply: true,
-			locale: {
-				format: 'DD/MM/YYYY'
-	        },
-			showDropdowns: true
-		});
-		$("input[name='dateOfRetirement']").daterangepicker({
-			singleDatePicker: true,
-		    autoApply: true,
-			locale: {
-				format: 'DD/MM/YYYY'
-	        },
-			showDropdowns: true
-		});
-		$("input[name='batchYear']").datepicker({
-			
-		    autoApply: true,
-		    format: "yyyy",
-		    autoclose: true,
-		    minViewMode: "years",
-			locale: {
-	            format: 'YYYY'
-	        },
-			showDropdowns: true
-		});
-			
-		
-		$("input[name=\"orderDate\"]").daterangepicker({
-				singleDatePicker: true,
-				   autoApply: true,
-				locale: {
-					format: 'DD/MM/YYYY'
-		        },
-				showDropdowns: true
-			});
-		
-		$("input[name=\"dov\"]").daterangepicker({
-			singleDatePicker: true,
-			   autoApply: true,
-			locale: {
-				format: 'DD/MM/YYYY'
-	        },
-			showDropdowns: true
-		});
-		$("input[name=\"doi\"]").daterangepicker({
-			singleDatePicker: true,
-			   autoApply: true,
-			locale: {
-				format: 'DD/MM/YYYY'
-	        },
-			showDropdowns: true
-		});
-
-
 
 			
 			// Datatables basic
@@ -806,7 +775,6 @@ function totaltravalex()
 		});
 	</script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
 
 
 </body>
