@@ -180,7 +180,7 @@ $("table").on("keyup", ".pas", function () {
 							<div class="col-12">
 							<div class="card">
 								<div class="card-header">
-									<h5 class="card-title">Attendance Register</h5>
+									<h5 class="card-title">Over Time Register</h5>
 								<div class="alert-outline">
 									<div th:if="${message}" th:text="${message}" style="color: red">
 									</div> 
@@ -193,15 +193,7 @@ $("table").on("keyup", ".pas", function () {
 											       <span class="text-danger">*</span>
 											       <input  type="text"id="localConvDate"name="localConvDate"  class="form-control required">
 											      </div>
-												<div class="form-group sm col-md-4">
-													<label class="form-label">Reg Code</label>
-												<label style="color: red">*</label>
-												<select class="form-control select2" name="empCode" id="empCode" onchange="myFunctionEmpCode()" required aria-required="true">
-												 <option value="">Select Employee</option>
-												<option th:each="e :${listEmployee}"th:value="${e.getEmpCode()}" th:text="${e.getEmpName()}"></option>
-											     	</select>
-
-												</div>
+												
 										
 										
 										<div class="form-group sm col-md-4">
@@ -212,10 +204,8 @@ $("table").on("keyup", ".pas", function () {
 												<option th:each="e :${listEmployee}"th:value="${e.getEmpCode()}" th:text="${e.getEmpName()}"></option>
 											     	</select>
 												</div>
-								</div>
-								
-									<div class="form-row">
-										<div class="form-group sm col-md-4">
+												
+												<div class="form-group sm col-md-4">
 										<label class="form-label">Employee </label>
 												<label style="color: red">*</label>
 												<select class="form-control select2" name="empCode" id="empCode" onchange="myFunctionEmpCode()" required aria-required="true">
@@ -224,6 +214,10 @@ $("table").on("keyup", ".pas", function () {
 											     	</select>
 
 												</div>
+								</div>
+								
+									<div class="form-row">
+										
 										     	
 										   
 												</div>
@@ -246,65 +240,51 @@ $("table").on("keyup", ".pas", function () {
 										<table id="example" class="table table-striped display" style="width:100%"aria-describedby="example">
 											<thead>
 												<tr>
-													<th>Dept. Name</th>
+													<th>Emp Code </th>
 													<th>Employee Name.</th>
-													<th>Father Name</th>
 													<th>Designation</th>
-													<th>Status</th>
-													<th>Shift</th>
-													<th>Shift In</th>
-													<th>Shift Out</th>
-													<th>Status</th>
-													<th>Actual Time In </th>
-													<th>Actual Time Out </th>
-													<th>Over Time </th>
-													<th>Status</th>
+													<th>Over Time Rate </th>
+													<th>Time In</th>
+													<th>time Out</th>
+													<th>Overtime Hours</th>
+													<th>Esi Apply </th>
+													<th>Remark </th>
+													
 													
 												</tr>
 											</thead>
 											<tbody>
 												<tr id='addr0'>
 
-													<td><input type="text" name='locDate0'
-														placeholder='Dept' class="form-control" value="" /></td>
-													<td><input type="text" name='startPlace0'
-														placeholder='emp Name' class="form-control" /></td>
-													<td><input type="text" name='vistPlace0'
-														placeholder='f Name' class="form-control" /></td>
-													<td><input type="text" name='purposeOfVist0'
-														placeholder='Desi ' class="form-control" /></td>
 
 													<td><select class="form-control select2"
 														name="modeOfTravel0" id="modeOfTravel0">
 															<option value="">Select Type</option>
 														
 													</select></td>
+													<td><input type="text" name='startPlace0'
+														placeholder='emp Name' class="form-control" /></td>
+
+													<td><input type="text" name='locDate0'
+														placeholder='desi' class="form-control" value="" /></td>
+													
+													<td><input type="text" name='vistPlace0'
+														placeholder='f Name' class="form-control" /></td>
+													<td><input type="text" name='purposeOfVist0'
+														placeholder='Desi ' class="form-control" /></td>
+
+													
 
 
 													<td><input type="text" name='distanceKm0'
 														placeholder='Shift' class="form-control" /></td>
 													<td><input type="text" name='ltaRate0'
 														placeholder='Shift In' class="form-control" /></td>
-													<td><input type="text" name='actualAmount0'
+													<td> <input type="checkbox" id="vehicle1" name="esi0" value="Bike"/></td>
+														
+														<td><input type="text" name='actualAmount0'
 														placeholder='Shift Out' class="form-control txt" /></td>
-													<td><select class="form-control select2"
-														name="modeOfTravel0" id="modeOfTravel0">
-															<option value="">Select Type</option>
 														
-													</select></td>
-														<td><input type="text" name='actualAmount0'
-														placeholder='Actual Time' class="form-control txt" /></td>
-														
-														<td><input type="text" name='actualAmount0'
-														placeholder='Actual Time out' class="form-control txt" /></td>
-														<td><input type="text" name='actualAmount0'
-														placeholder='over time' class="form-control txt" /></td>
-														
-														<td><select class="form-control select2"
-														name="modeOfTravel0" id="modeOfTravel0">
-															<option value="">Select Type</option>
-														
-													</select></td>
 												</tr>
 												<tr id='addr1'></tr>
 
