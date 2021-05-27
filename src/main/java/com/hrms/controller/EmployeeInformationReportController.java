@@ -31,6 +31,8 @@ import com.hrms.model.Designation;
 import com.hrms.model.Employee;
 import com.hrms.model.CommonUtil;
 import com.hrms.model.MenuModule;
+import com.hrms.reports.EmployeeJoiningLetter;
+import com.hrms.reports.EmployeeOfferLetter;
 import com.hrms.service.CategoryService;
 import com.hrms.service.DepartmentService;
 import com.hrms.service.DesignationService;
@@ -58,6 +60,10 @@ public class EmployeeInformationReportController {
 	@Autowired CategoryService categoryService;
 	@Autowired DesignationService designationService;
 	@Autowired DepartmentService departmentService;
+	
+	
+	@Autowired EmployeeOfferLetter employeeOfferLetter;
+	@Autowired EmployeeJoiningLetter employeeJoiningLetter;
 
 //	Gradation / Employee controlller
 	
@@ -292,10 +298,7 @@ public class EmployeeInformationReportController {
 											HttpServletResponse response) throws IOException {
 		
 		String userCode = (String) session.getAttribute("username");
-//		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
-//		if (modules != null) {
-//			model.addAttribute("modules", modules);
-//		}
+
 		System.out.println("report type value : "+reportType);
 		System.out.println("employee code value : "+empCode); 
 		
@@ -319,12 +322,13 @@ public class EmployeeInformationReportController {
 		
 		String reportFileName = null;
 		if(reportType.equals("J")) {
-			reportFileName = "joining";
-			reportUtil.employeeJoiningLetter2(req, response, reportFileName, em);
+			reportFileName = "joiningLetter";
+			//reportUtil.employeeJoiningLetter2(req, response, reportFileName, em);
+			employeeJoiningLetter.employeeJoiningLetter(req, response, reportFileName, em);
 		}
 		else {
-			reportFileName = "OfferLetterNew";
-			reportUtil.dummyOfferLetter(req, response, reportFileName, em);
+			reportFileName = "OfferLetter";
+			employeeOfferLetter.employeeOfferLetter(req, response, reportFileName, em);
 		}
 		
 		 
@@ -332,6 +336,6 @@ public class EmployeeInformationReportController {
 		
 		session.setAttribute("username", session.getAttribute("username"));
 
-		return pageMappingService.PageRequestMapping(joiningLetterPage, joiningLetterPageNo);
+		return null;
 	}
 }
