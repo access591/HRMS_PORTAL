@@ -84,8 +84,8 @@ body {
 											 <select class="form-control select2" id="leave_name" name="leaveType">
 														<option value="">Select Leave Type</option>
 														
-														<option th:each="leaveType: ${listLeaveDetail}"
-														th:text="${leaveType.leaveType}" th:value=" leaveType.lvCode">
+														<option th:each="leave : ${listLeave}"
+														th:text="${leave.levType}" th:value="${leave.levCode}">
 													</option>		
 													</select>
 													

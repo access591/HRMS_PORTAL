@@ -23,5 +23,7 @@ public interface LeaveDetailService {
 			List<LeaveDetail> dataList);
 	
 	public LeaveDetail findLeaveDetailByLvCode(String lvCode);
+	
+	public List<LeaveDetail> findLeaveDetailByLeaveType(String leaveType);
 
 }

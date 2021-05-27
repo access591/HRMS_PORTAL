@@ -83,11 +83,11 @@ public class LeaveRequestDaoImpl extends AbstractGenericDao<LeaveRequest> implem
 		
 		List<LeaveRequest> listLeaveRequest = null;
 		try {
-		Session session = sessionFactory.getCurrentSession();
+		Session session = sessionFactory.openSession();
 		
-		String qu = "FROM LeaveRequest\r\n"
-				+ "WHERE ( FROM_DATE >=:fromDate and TO_DATE <=:toDate ) and  EMP_CODE =:empCode";
-		Query query = session.createQuery(qu);
+		String qu = "FROM LeaveRequest l inner join fetch l.employee e "
+				+ "WHERE l.fromDate >=:fromDate and l.toDate <=:toDate and  e.empCode =:empCode";
+		Query<LeaveRequest> query = session.createQuery(qu,LeaveRequest.class);
 		
 		System.out.println("query set : = " + query.toString());
 		query.setParameter("fromDate", fromDate);
@@ -96,7 +96,9 @@ public class LeaveRequestDaoImpl extends AbstractGenericDao<LeaveRequest> implem
 		listLeaveRequest = query.list();
 		return listLeaveRequest;
 		}catch(Exception e) {
+			System.out.println("findByEmpBetweenDate error ");
 			e.printStackTrace();
+			
 		}
 		
 		return listLeaveRequest;
