@@ -130,7 +130,7 @@ public class LeveReportController {
 		
 		String empCode = empName;
 		
-		List<Employee> listEmployee = employeeService.getAllEmployees();
+		
 		String reportFileName = "LeaveDetail";
 		
 		List<LeaveRequest> listLeave = leaveRequestService.findAllByEmpCode(empCode);
@@ -139,17 +139,16 @@ public class LeveReportController {
 		
 		System.out.println("list leave size : "+listLeave.size());
 		
-		List<LeaveRequest> leaveDataSource = new ArrayList<LeaveRequest>();
-		LeaveRequest lv = listLeave.get(0);
-		leaveDataSource.add(lv);
+//		List<LeaveRequest> leaveDataSource = new ArrayList<LeaveRequest>();
+//		LeaveRequest lv = listLeave.get(0);
+//		leaveDataSource.add(lv);
 		
 		
-		reportUtil.leaveRequestReport(response,request,reportFileName,listEmployee);
-		return pageMappingService.PageRequestMapping(reqPageOfLeaveRequestDetailReport, pageNoOfLeaveRequestDetailReport);  
+		reportUtil.leaveRequestReport(response,request,reportFileName,listLeave);
+		return null;
 	}
 	
-	
-	
+		
 	/* leave Transaction detail report */
 	
 	@GetMapping("/leaveTransactionReport")
