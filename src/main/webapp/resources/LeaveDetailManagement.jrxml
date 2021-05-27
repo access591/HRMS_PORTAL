@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 6.16.0.final using JasperReports Library version 6.16.0-48579d909b7943b64690c65c71e07e0b80981928  -->
+<!-- Created with Jaspersoft Studio version 6.17.0.final using JasperReports Library version 6.17.0-6d93193241dd8cc42629e188b94f9e0bc5722efd  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="LeaveDetailManagement" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f628b165-c661-4916-a41b-30e5f80443f4">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<style name="Table_TH" mode="Opaque" backcolor="#F0F8FF">
@@ -77,7 +77,7 @@
 	<detail>
 		<band height="260" splitType="Stretch">
 			<componentElement>
-				<reportElement x="-10" y="60" width="575" height="200" uuid="b9992ed2-b62f-4b2e-98cc-5df0d7bd93d5">
+				<reportElement mode="Transparent" x="-10" y="60" width="575" height="200" forecolor="#FFFFFF" backcolor="#080000" uuid="b9992ed2-b62f-4b2e-98cc-5df0d7bd93d5">
 					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
 					<property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
 					<property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
@@ -91,7 +91,7 @@
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column1"/>
 						<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
 							<staticText>
-								<reportElement x="0" y="0" width="60" height="30" uuid="4acf3ddf-d26e-4311-8cb9-5d2030dc3f19"/>
+								<reportElement mode="Opaque" x="0" y="0" width="60" height="30" forecolor="#FFFFFF" backcolor="#030000" uuid="4acf3ddf-d26e-4311-8cb9-5d2030dc3f19"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font size="11"/>
 								</textElement>
@@ -110,7 +110,7 @@
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column2"/>
 						<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
 							<staticText>
-								<reportElement x="0" y="0" width="70" height="30" uuid="ab88e1ee-151b-4109-8b1d-6d5d34f2df65"/>
+								<reportElement mode="Opaque" x="0" y="0" width="70" height="30" forecolor="#FFFFFF" backcolor="#080000" uuid="ab88e1ee-151b-4109-8b1d-6d5d34f2df65"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font size="12"/>
 								</textElement>
@@ -129,7 +129,7 @@
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column3"/>
 						<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
 							<staticText>
-								<reportElement x="0" y="0" width="70" height="30" uuid="67273792-d1c6-4364-9093-56d1be1750e7"/>
+								<reportElement mode="Opaque" x="0" y="0" width="70" height="30" forecolor="#FFFFFF" backcolor="#080000" uuid="67273792-d1c6-4364-9093-56d1be1750e7"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font size="12"/>
 								</textElement>
@@ -148,7 +148,7 @@
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column4"/>
 						<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
 							<staticText>
-								<reportElement x="0" y="0" width="70" height="30" uuid="be58a91d-01dd-417b-b968-f2bf526882be"/>
+								<reportElement mode="Opaque" x="0" y="0" width="70" height="30" forecolor="#FFFFFF" backcolor="#080000" uuid="be58a91d-01dd-417b-b968-f2bf526882be"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font size="12"/>
 								</textElement>
@@ -167,7 +167,7 @@
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column5"/>
 						<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
 							<staticText>
-								<reportElement x="0" y="0" width="70" height="30" uuid="d2167ddb-5c8b-43e9-b7d1-4e026f609365"/>
+								<reportElement mode="Opaque" x="0" y="0" width="70" height="30" forecolor="#FFFFFF" backcolor="#080000" uuid="d2167ddb-5c8b-43e9-b7d1-4e026f609365"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font size="12"/>
 								</textElement>
@@ -186,7 +186,7 @@
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column6"/>
 						<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
 							<staticText>
-								<reportElement x="0" y="0" width="70" height="30" uuid="ea10cc0b-72a5-41df-9e60-bc710f4d7518"/>
+								<reportElement mode="Opaque" x="0" y="0" width="70" height="30" forecolor="#FFFFFF" backcolor="#080000" uuid="ea10cc0b-72a5-41df-9e60-bc710f4d7518"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font size="12"/>
 								</textElement>
@@ -205,7 +205,7 @@
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column7"/>
 						<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
 							<staticText>
-								<reportElement x="0" y="0" width="60" height="30" uuid="8c9f0f40-1e81-4a94-9594-83b0546b0995"/>
+								<reportElement mode="Opaque" x="0" y="0" width="60" height="30" forecolor="#FFFFFF" backcolor="#080000" uuid="8c9f0f40-1e81-4a94-9594-83b0546b0995"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font size="11"/>
 								</textElement>
@@ -224,7 +224,7 @@
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column8"/>
 						<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
 							<staticText>
-								<reportElement x="0" y="0" width="50" height="30" uuid="b8889bc6-5ec6-4643-9c93-c0f347e6f806"/>
+								<reportElement mode="Opaque" x="0" y="0" width="50" height="30" forecolor="#FFFFFF" backcolor="#080000" uuid="b8889bc6-5ec6-4643-9c93-c0f347e6f806"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font size="11"/>
 								</textElement>
@@ -243,7 +243,7 @@
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column9"/>
 						<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
 							<staticText>
-								<reportElement x="0" y="0" width="50" height="30" uuid="87417534-611d-4ce6-be61-985821d71e07"/>
+								<reportElement mode="Opaque" x="0" y="0" width="50" height="30" forecolor="#FFFFFF" backcolor="#080000" uuid="87417534-611d-4ce6-be61-985821d71e07"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font size="11"/>
 								</textElement>

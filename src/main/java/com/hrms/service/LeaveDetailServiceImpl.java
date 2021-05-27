@@ -9,6 +9,9 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -33,6 +36,8 @@ import net.sf.jasperreports.export.SimpleXlsxReportConfiguration;
 public class LeaveDetailServiceImpl  implements LeaveDetailService{
 	@Autowired
 	LeaveDetailDao leaveDetailDao;
+	
+	@Autowired SessionFactory sessionFactory;
 	
 	@Override
 	public void addLeaveDetail(LeaveDetail leaveDetail) {
@@ -123,6 +128,24 @@ public class LeaveDetailServiceImpl  implements LeaveDetailService{
 	public LeaveDetail findLeaveDetailByLvCode(String lvCode) {
 		
 		return this.leaveDetailDao.findLeaveDetailByLvCode(lvCode);
+	}
+
+	@Override
+	public List<LeaveDetail> findLeaveDetailByLeaveType(String leaveType) {
+		
+		try {
+			Session session = sessionFactory.openSession();
+			Query<LeaveDetail> query = session.createQuery("from LeaveDetail ld where ld.leaveType = :leaveType",LeaveDetail.class);
+			query.setParameter("leaveType", leaveType);
+			
+			List<LeaveDetail> list = query.getResultList();
+			
+			return list;
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return null;
 	}
 
 }

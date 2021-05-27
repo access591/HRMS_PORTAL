@@ -205,7 +205,7 @@ public class EmployeeInformationReportController {
 
 		session.setAttribute("username", session.getAttribute("username"));
 
-		return pageMappingService.PageRequestMapping(birthAniversaryPage, birthAniversaryPageNo);
+		return "birthAnniversary";
 	}
 	
 	@PostMapping("/createbirtAnnReport")
@@ -223,10 +223,17 @@ public class EmployeeInformationReportController {
 		
 		List<CommonUtil> em = new ArrayList<CommonUtil>();
 		CommonUtil empl;
-		List<Employee> employeeList = employeeService.findByDateOfJoiningMonth( Integer.parseInt(month.toString()));
+		List<Employee> employeeList ;
+		
+		if(month.equals("All")) {
+			employeeList = employeeService.getAllEmployees();
+		}else {
+			employeeList = employeeService.findByDateOfJoiningMonth( Integer.parseInt(month.toString()));
+		}
 		
 		if(reportType.equals("B")) {
 			for(int i =0 ;i<employeeList.size();i++) {
+				
 				Department department = departmentService.findDepartmentById(employeeList.get(i).getDepartmentCode());
 				
 				empl = new CommonUtil(employeeList.get(i).getEmpCode(),employeeList.get(i).getEmpName(),
@@ -253,7 +260,7 @@ public class EmployeeInformationReportController {
 		
 		session.setAttribute("username", session.getAttribute("username"));
 
-		return pageMappingService.PageRequestMapping(birthAniversaryPage, birthAniversaryPageNo);
+		return "birthAnniversary";
 	}
 	
 	
@@ -275,37 +282,54 @@ public class EmployeeInformationReportController {
 
 		session.setAttribute("username", session.getAttribute("username"));
 
-		return pageMappingService.PageRequestMapping(joiningLetterPage, joiningLetterPageNo);
+		return "joining_offerLetter"; //joining_offerLetter.html
 	}
 	
 	
 	@PostMapping("/createJoinOfferLetter")
 	public String createJoiningOfferLetter(@RequestParam("empName")String empCode,@RequestParam("reportType")String reportType,
 											Model model, HttpSession session,HttpServletRequest req,
-											HttpServletResponse response) {
+											HttpServletResponse response) throws IOException {
 		
 		String userCode = (String) session.getAttribute("username");
-		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
-		if (modules != null) {
-			model.addAttribute("modules", modules);
-		}
+//		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
+//		if (modules != null) {
+//			model.addAttribute("modules", modules);
+//		}
 		System.out.println("report type value : "+reportType);
-		System.out.println("month value : "+empCode); 
+		System.out.println("employee code value : "+empCode); 
 		
 		List<CommonUtil> em = new ArrayList<CommonUtil>();
 		CommonUtil empl;
 		
-		Employee employee = employeeService.findEmployeeById(empCode);
+		try {
+			Employee employee = employeeService.findEmployeeById(empCode);
+			
+			if(employee != null) {
+				Department department = departmentService.findDepartmentById(employee.getDepartmentCode());
+				Designation designation = designationService.findDesignationById(employee.getDesignationCode());
+				empl = new CommonUtil(employee.getEmpName(),
+						department.getDeptName(),designation.getDesgName());
+				em.add(empl);
+			}
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 		
-		Department department = departmentService.findDepartmentById(employee.getDepartmentCode());
-		Designation designation = designationService.findDesignationById(employee.getDesignationCode());
+		String reportFileName = null;
+		if(reportType.equals("J")) {
+			reportFileName = "joining";
+			reportUtil.employeeJoiningLetter2(req, response, reportFileName, em);
+		}
+		else {
+			reportFileName = "OfferLetterNew";
+			reportUtil.dummyOfferLetter(req, response, reportFileName, em);
+		}
 		
-		empl = new CommonUtil(employee.getEmpName(),
-										department.getDeptName(),designation.getDesgName());
-		em.add(empl);
-		String reportFileName = "EmployeeJoiningLetter";
+		 
 		
-		reportUtil.employeeJoiningLetter(req, response, reportFileName, em);
+		
 		session.setAttribute("username", session.getAttribute("username"));
 
 		return pageMappingService.PageRequestMapping(joiningLetterPage, joiningLetterPageNo);

@@ -275,7 +275,15 @@ public class ReportCommonController {
 			HttpServletRequest req,HttpServletResponse res) {
 		
 		System.out.println("empName is : " + empName);
-		List<LocalConvyenceDetail> listLocalConvyenceDetail = localConvyenceDetailService.findLocalConvyenceDetailByEmpCode(empName);
+		
+		List<LocalConvyenceDetail> listLocalConvyenceDetail;
+		if(empName.equals("ALL")) {
+			listLocalConvyenceDetail = localConvyenceDetailService.findLocalConvyenceDetailByEmpCode(empName);
+		}
+		else {
+			listLocalConvyenceDetail = localConvyenceDetailService.findAllLocalConvyenceDetail();
+		}
+		
 		
 		localClaimReport.localClaimReport(res, req, listLocalConvyenceDetail);
 		return null;

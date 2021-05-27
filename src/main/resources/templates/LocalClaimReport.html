@@ -70,7 +70,7 @@ body {
 														class="form-control select2" id="employeeName"
 														name="empName" >
 														<option value=''>--Select Employee--</option>
-														<option value='ALL'>All</option>
+														
 														<option th:each="employee : ${listEmployee}"
 															th:text="${employee.empName}"
 															th:value="${employee.empCode}"></option>
