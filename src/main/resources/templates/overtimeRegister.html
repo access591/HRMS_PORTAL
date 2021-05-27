@@ -42,13 +42,13 @@ $(document).ready(function(){
 
     var i=1;
    $("#add_row").click(function(){
-    $('#addr'+i).html("<td><input name='empCode"+i+"' type='text'placeholder='Employee Code'/> "+
+    $('#addr'+i).html("<td><input name='empCode"+i+"' size='10' type='text'placeholder='Employee Code'/> "+
     		"</td><td><input  name='empName"+i+"' type='text' placeholder='Employee Name'/>"+
     		"</td><td><input  name='vistPlace"+i+"' type='text'  placeholder='Designation'/>"+
-    		"</td><td><input  name='purposeOfVist"+i+"' type='text' placeholder='Over Time Rate'/></td>"+
-    		"</td><td><input  name='purposeOfVist"+i+"' type='time' placeholder='Time In'/></td>"+
-    		"<td><input  name='distanceKm"+i+"' type='time' placeholder='time Out'/></td>"+
-    		"<td><input  name='distanceKm"+i+"' type='text' placeholder='Overtime Hours'/></td>"+
+    		"</td><td><input  name='purposeOfVist"+i+"'size='8' type='text' placeholder='Over Time Rate'/></td>"+
+    		"</td><td><input  name='purposeOfVist"+i+"' type='time' placeholder='Time In'size='6'/></td>"+
+    		"<td><input  name='distanceKm"+i+"' type='time' placeholder='time Out'size='6'/></td>"+
+    		"<td><input  name='distanceKm"+i+"' type='text' placeholder='Overtime Hours'size='5'/></td>"+
     		"<td><input  name='ltaRate"+i+"' type='checkbox' class='form-control input'/></td>"+
     		"<td><input  name='distanceKm"+i+"' type='text' placeholder='Remark'/></td>"+
     		"");
@@ -182,7 +182,7 @@ $("table").on("keyup", ".pas", function () {
 								<div class="card-body">
 									<div class="form-row">
 												<div class="form-group sm col-md-4">
-											       <label class="form-label">Date</label>
+											       <label class="form-label">Over Time Date</label>
 											       <span class="text-danger">*</span>
 											       <input  type="text"id="localConvDate"name="localConvDate"  class="form-control required">
 											      </div>
@@ -248,13 +248,13 @@ $("table").on("keyup", ".pas", function () {
 											<tbody>
 												<tr id='addr0'>
 
-													<td><input type="text" name='empCode0'placeholder='Employee Code' /></td>
-													<td><input type="text" name='empName0'placeholder='Employee Name'  /></td>
+													<td><input type="text" name='empCode0'placeholder='Employee Code'size='10' /></td>
+													<td><input type="text" name='empName0'placeholder='Employee Name' /></td>
 													<td><input type="text" name='desiName0'placeholder='Designation'  value="" /></td>
-													<td><input type="text" name='fName0'placeholder='Over Time Rate'  /></td>
-													<td><input type="time" name='timeIn0'placeholder='Time In '  /></td>
-													<td><input type="time" name='timeOut0'placeholder='time Out'  /></td>
-													<td><input type="text" name='hoursR0'placeholder='Overtime Hours'  /></td>
+													<td><input type="text" name='fName0'placeholder='Over Time Rate' size='8' /></td>
+													<td><input type="time" name='timeIn0'placeholder='Time In 'size='6'  /></td>
+													<td><input type="time" name='timeOut0'placeholder='time Out'size='6'  /></td>
+													<td><input type="text" name='hoursR0'placeholder='Overtime Hours' size='5' /></td>
 														
 													<td> <input type="checkbox" id="vehicle1" name="esi0" class="form-control"value="Bike"/></td>
 														
