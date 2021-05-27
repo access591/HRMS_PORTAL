@@ -43,14 +43,26 @@ $(document).ready(function(){
     var i=1;
    $("#add_row").click(function(){
     $('#addr'+i).html("<td><input name='empCode"+i+"' size='10' type='text'placeholder='Employee Code'/> "+
+    		
     		"</td><td><input  name='empName"+i+"' type='text' placeholder='Employee Name'/>"+
+    		
     		"</td><td><input  name='vistPlace"+i+"' type='text'  placeholder='Designation'/>"+
+    		
     		"</td><td><input  name='purposeOfVist"+i+"'size='8' type='text' placeholder='Over Time Rate'/></td>"+
-    		"</td><td><input  name='purposeOfVist"+i+"' type='time' placeholder='Time In'size='6'/></td>"+
-    		"<td><input  name='distanceKm"+i+"' type='time' placeholder='time Out'size='6'/></td>"+
-    		"<td><input  name='distanceKm"+i+"' type='text' placeholder='Overtime Hours'size='5'/></td>"+
-    		"<td><input  name='ltaRate"+i+"' type='checkbox' class='form-control input'/></td>"+
-    		"<td><input  name='distanceKm"+i+"' type='text' placeholder='Remark'/></td>"+
+    		
+    		"</td><td><input  name='purposeOfVist"+i+"' type='text' placeholder='In Hours'size='6'/></td>"+
+    		
+    		"<td><input  name='distanceKm"+i+"' type='text' placeholder='Over Time' size='6'/></td>"+
+    		
+    		"<td><input  name='distanceKm"+i+"' type='text' placeholder='ESI Amount'size='5'/></td>"+
+    		
+    		"<td><input  name='ltaRate"+i+"' type='text' placeholder='Amount After'size='5'/></td>"+
+    		
+    		"<td><input  name='distanceKm"+i+"' type='text' placeholder='Payable Amount'size='5'/></td>"+
+    		
+    		"<td><select class='form-control input-md' id='modeOfTravel'name='modeOfTravel"+i+"'><option value=' '>Select</option><option value='Day'>Day</option><option value='Night'>Night</option></select></td>"+
+    		
+    		
     		"");
 
     $('#example').append('<tr id="addr'+(i+1)+'"></tr>');
@@ -173,7 +185,7 @@ $("table").on("keyup", ".pas", function () {
 							<div class="col-12">
 							<div class="card">
 								<div class="card-header">
-									<h5 class="card-title">Over Time Register</h5>
+									<h5 class="card-title">Monthly Overtime Evaluation</h5>
 								<div class="alert-outline">
 									<div th:if="${message}" th:text="${message}" style="color: red">
 									</div> 
@@ -234,32 +246,42 @@ $("table").on("keyup", ".pas", function () {
 										<table id="example" aria-describedby="example" class="table" style="width:100%">
 											<thead>
 												<tr>
-													<th>Employee Code </th>
-													<th>Employee Name.</th>
-													<th>Designation</th>
-													<th>Over Time Rate </th>
-													<th>Time In</th>
-													<th>time Out</th>
-													<th>Overtime Hours</th>
-													<th>Esi Apply </th>
-													<th>Remark </th>
+													<th scope="col" rowspan="4">Employee Code </th>
+													<th scope="col"  rowspan="4">Employee Name.</th>
+													<th  scope="col" rowspan="4">Father Name</th>
+													<th scope="col" rowspan="4">Over Time Rate </th>
+													<th scope="col" colspan="4" style="text-align:center">ESI Applicable </th>
+													<th scope="col" rowspan="4">payable Amount </th>
+													<th scope="col" rowspan="4">Status </th>
 												</tr>
+												<tr style="background-color:#e6e6e6;">
+												<th>Over Time(In Hours)</th>
+													<th>Over Time Amount</th>
+													<th>ESI Amount</th>
+													<th>Amount After Deduction </th>
+												
+												</tr>
+												
 											</thead>
 											<tbody>
 												<tr id='addr0'>
 
 													<td><input type="text" name='empCode0'placeholder='Employee Code'size='10' /></td>
 													<td><input type="text" name='empName0'placeholder='Employee Name' /></td>
-													<td><input type="text" name='desiName0'placeholder='Designation'  value="" /></td>
+													<td><input type="text" name='fName0'placeholder='FName'  value="" /></td>
 													<td><input type="text" name='fName0'placeholder='Over Time Rate' size='8' /></td>
-													<td><input type="time" name='timeIn0'placeholder='Time In 'size='6'  /></td>
-													<td><input type="time" name='timeOut0'placeholder='time Out'size='6'  /></td>
-													<td><input type="text" name='hoursR0'placeholder='Overtime Hours' size='5' /></td>
+													
+													
+													<td><input type="text" name='timeIn0'placeholder='In Hours 'size='6'  /></td>
+													<td><input type="text" name='timeOut0'placeholder='Over Time Amount'size='6'  /></td>
+													<td><input type="text" name='hoursR0'placeholder='ESI Amount' size='5' /></td>
+													<td><input type="text" name='hoursR0'placeholder='Amount After Deduction' size='5' /></td>
+													<td><input type="text" name='remark0'placeholder='payable Amount'size='5'/></td>	
+												<td><select name="modeOfTravel0" id="modeOfTravel0">
+															<option value="">Select Type</option>
+													</select></td>
 														
-													<td> <input type="checkbox" id="vehicle1" name="esi0" class="form-control"value="Bike"/></td>
-														
-														<td><input type="text" name='remark0'
-														placeholder='Remarks'/></td>
+													
 														
 												</tr>
 												<tr id='addr1'></tr>
@@ -297,8 +319,6 @@ $("table").on("keyup", ".pas", function () {
 												<th scope="col">Employee Name</th>
 												<th scope="col">Department</th>
 												<th scope="col">Designation</th>
-												<th scope="col">Tour Pan Date </th>
-												
 												<th scope="col">Action </th>
 											</tr >
 											
@@ -306,7 +326,7 @@ $("table").on("keyup", ".pas", function () {
 
 										</thead>
 										<tbody>
-										<tr th:each = "listOfloc : ${listOfLoc}">
+										<!-- <tr th:each = "listOfloc : ${listOfLoc}">
 										<td th:text="${listOfloc.localConvId}" ></td>
 										<td th:text="${listOfloc.empName}"></td>
 										<td  th:text="${listOfloc.deptName}"></td>
@@ -320,7 +340,7 @@ $("table").on("keyup", ".pas", function () {
 									
 										</td>  
 									
-										</tr>
+										</tr> -->
 									
 									
 										</tbody>
