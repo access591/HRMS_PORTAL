@@ -55,4 +55,21 @@ public class LocalConvyenceDetailServiceImpl implements LocalConvyenceDetailServ
 		return null;
 	}
 
+	@Override
+	public List<LocalConvyenceDetail> findAllLocalConvyenceDetail() {
+		try {
+			Session session = sessionFactory.openSession();
+			Query<LocalConvyenceDetail> query = session.createQuery("from LocalConvyenceDetail", LocalConvyenceDetail.class);
+			
+			
+			List<LocalConvyenceDetail> listLocalConvyenceDetail = query.getResultList();
+			System.out.println("listLocalConvyenceDetail : "+ listLocalConvyenceDetail.size());
+			return listLocalConvyenceDetail;
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+
 }

@@ -9,5 +9,7 @@ public interface LocalConvyenceDetailService {
 	boolean addTourPlanDetail(LocalConvyenceDetail localConvyenceDetail);
 	
 	public List<LocalConvyenceDetail> findLocalConvyenceDetailByEmpCode(String empCode);
+	
+	public List<LocalConvyenceDetail> findAllLocalConvyenceDetail();
 
 }
