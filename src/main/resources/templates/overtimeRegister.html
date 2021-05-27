@@ -42,22 +42,15 @@ $(document).ready(function(){
 
     var i=1;
    $("#add_row").click(function(){
-    $('#addr'+i).html("<td><input name='Dept"+i+"' type='text'  class='form-control txt input-md'/> "+
-    		"</td><td><input  name='startPlace"+i+"' type='text' placeholder='name'  class='form-control input-md'>"+
-    		"</td><td><input  name='vistPlace"+i+"' type='text'  placeholder='F Name'class='form-control input-md'>"+
-    		"</td><td><input  name='purposeOfVist"+i+"' type='text' placeholder='Desi'  class='pas form-control input-md'></td>"+
-    		
-    		"<td><select class=' form-control input-md' id='modeOfTravel'name='modeOfTravel"+i+"'><option value=' '>Select</option><option value='Day'>Day</option><option value='Night'>Night</option></select></td>"+
-    		"<td><input  name='distanceKm"+i+"' type='text' placeholder='Shift In'  class='form-control input-md'></td>"+
-    		"<td><input  name='distanceKm"+i+"' type='text' placeholder='Shift In'  class='form-control input-md'></td>"+
-    		"<td><input  name='ltaRate"+i+"' type='text' placeholder='Shift Out'  class='form-control input-md'></td>"+
-    		"<td><select class=' form-control input-md' id='modeOfTravel'name='modeOfTravel"+i+"'><option value=' '>Select</option><option value='Day'>Day</option><option value='Night'>Night</option></select></td>"+
-    		"<td><input  name='distanceKm"+i+"' type='text' placeholder='Shift In'  class='form-control input-md'></td>"+
-    		"<td><input  name='ltaRate"+i+"' type='text' placeholder='Shift Out'  class='form-control input-md'></td>"+
-    		"<td><input  name='actualAmount"+i+"' type='text' placeholder='Over Time'  class=' txt form-control input-md'></td>"+
-    		"<td><select class=' form-control input-md' id='modeOfTravel'name='modeOfTravel"+i+"'><option value=' '>Select</option><option value='Day'>Day</option><option value='Night'>Night</option></select></td>"+
-    		
-    		
+    $('#addr'+i).html("<td><input name='empCode"+i+"' type='text'placeholder='Employee Code'/> "+
+    		"</td><td><input  name='empName"+i+"' type='text' placeholder='Employee Name'/>"+
+    		"</td><td><input  name='vistPlace"+i+"' type='text'  placeholder='Designation'/>"+
+    		"</td><td><input  name='purposeOfVist"+i+"' type='text' placeholder='Over Time Rate'/></td>"+
+    		"</td><td><input  name='purposeOfVist"+i+"' type='time' placeholder='Time In'/></td>"+
+    		"<td><input  name='distanceKm"+i+"' type='time' placeholder='time Out'/></td>"+
+    		"<td><input  name='distanceKm"+i+"' type='text' placeholder='Overtime Hours'/></td>"+
+    		"<td><input  name='ltaRate"+i+"' type='checkbox' class='form-control input'/></td>"+
+    		"<td><input  name='distanceKm"+i+"' type='text' placeholder='Remark'/></td>"+
     		"");
 
     $('#example').append('<tr id="addr'+(i+1)+'"></tr>');
@@ -237,10 +230,11 @@ $("table").on("keyup", ".pas", function () {
 								<a id="add_row" class="fa fa-plus" aria-hidden="true"style="font-size:28px;color:#001080"></a>&nbsp;&nbsp;&nbsp;
 								<a id='delete_row'class="fa fa-trash" style="font-size:28px;color:#399490fc"aria-hidden="true"></a>	
 								</div>
-										<table id="example" class="table table-striped display" style="width:100%"aria-describedby="example">
+								<div class="table-responsive">
+										<table id="example" aria-describedby="example" class="table" style="width:100%">
 											<thead>
 												<tr>
-													<th>Emp Code </th>
+													<th>Employee Code </th>
 													<th>Employee Name.</th>
 													<th>Designation</th>
 													<th>Over Time Rate </th>
@@ -249,41 +243,23 @@ $("table").on("keyup", ".pas", function () {
 													<th>Overtime Hours</th>
 													<th>Esi Apply </th>
 													<th>Remark </th>
-													
-													
 												</tr>
 											</thead>
 											<tbody>
 												<tr id='addr0'>
 
-
-													<td><select class="form-control select2"
-														name="modeOfTravel0" id="modeOfTravel0">
-															<option value="">Select Type</option>
+													<td><input type="text" name='empCode0'placeholder='Employee Code' /></td>
+													<td><input type="text" name='empName0'placeholder='Employee Name'  /></td>
+													<td><input type="text" name='desiName0'placeholder='Designation'  value="" /></td>
+													<td><input type="text" name='fName0'placeholder='Over Time Rate'  /></td>
+													<td><input type="time" name='timeIn0'placeholder='Time In '  /></td>
+													<td><input type="time" name='timeOut0'placeholder='time Out'  /></td>
+													<td><input type="text" name='hoursR0'placeholder='Overtime Hours'  /></td>
 														
-													</select></td>
-													<td><input type="text" name='startPlace0'
-														placeholder='emp Name' class="form-control" /></td>
-
-													<td><input type="text" name='locDate0'
-														placeholder='desi' class="form-control" value="" /></td>
-													
-													<td><input type="text" name='vistPlace0'
-														placeholder='f Name' class="form-control" /></td>
-													<td><input type="text" name='purposeOfVist0'
-														placeholder='Desi ' class="form-control" /></td>
-
-													
-
-
-													<td><input type="text" name='distanceKm0'
-														placeholder='Shift' class="form-control" /></td>
-													<td><input type="text" name='ltaRate0'
-														placeholder='Shift In' class="form-control" /></td>
-													<td> <input type="checkbox" id="vehicle1" name="esi0" value="Bike"/></td>
+													<td> <input type="checkbox" id="vehicle1" name="esi0" class="form-control"value="Bike"/></td>
 														
-														<td><input type="text" name='actualAmount0'
-														placeholder='Shift Out' class="form-control txt" /></td>
+														<td><input type="text" name='remark0'
+														placeholder='Remarks'/></td>
 														
 												</tr>
 												<tr id='addr1'></tr>
@@ -294,7 +270,7 @@ $("table").on("keyup", ".pas", function () {
 											
 
 										</table>
-
+</div>
 
 									</div>
 								
@@ -309,7 +285,7 @@ $("table").on("keyup", ".pas", function () {
 					<button type="reset"class="btn btn-primary" value="Reset">Reset</button>
 </form>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	<div class="col-12">
+<div class="col-12">
 							<div class="card">
 								<div class="card-header">
 								</div>
@@ -321,7 +297,7 @@ $("table").on("keyup", ".pas", function () {
 												<th scope="col">Employee Name</th>
 												<th scope="col">Department</th>
 												<th scope="col">Designation</th>
-												<!-- <th scope="col">Tour Pan Date </th> -->
+												<th scope="col">Tour Pan Date </th>
 												
 												<th scope="col">Action </th>
 											</tr >
@@ -335,7 +311,7 @@ $("table").on("keyup", ".pas", function () {
 										<td th:text="${listOfloc.empName}"></td>
 										<td  th:text="${listOfloc.deptName}"></td>
 										<td  th:text="${listOfloc.desgName}"></td>
-									<!-- 	<td  th:text="${tourPlan.tourPlanDate}"></td> -->
+										<td  th:text="${tourPlan.tourPlanDate}"></td>
 										  <td>
 										  <a th:href="@{/editLocalConvyence/{id}/(id=${listOfloc.localConvId})}"><em class="fa fa-edit"></em></a>
 										  

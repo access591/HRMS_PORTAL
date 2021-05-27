@@ -243,7 +243,8 @@ $("table").on("keyup", ".pas", function () {
 								<a id="add_row" class="fa fa-plus" aria-hidden="true"style="font-size:28px;color:#001080"></a>&nbsp;&nbsp;&nbsp;
 								<a id='delete_row'class="fa fa-trash" style="font-size:28px;color:#399490fc"aria-hidden="true"></a>	
 								</div>
-										<table id="example" class="table table-striped display" style="width:100%"aria-describedby="example">
+								<div class="table-responsive">
+											<table id="example" aria-describedby="example" class="table" style="width:100%">
 											<thead>
 												<tr>
 													<th>Dept. Name</th>
@@ -265,45 +266,25 @@ $("table").on("keyup", ".pas", function () {
 											<tbody>
 												<tr id='addr0'>
 
-													<td><input type="text" name='locDate0'
-														placeholder='Dept' class="form-control" value="" /></td>
-													<td><input type="text" name='startPlace0'
-														placeholder='emp Name' class="form-control" /></td>
-													<td><input type="text" name='vistPlace0'
-														placeholder='f Name' class="form-control" /></td>
-													<td><input type="text" name='purposeOfVist0'
-														placeholder='Desi ' class="form-control" /></td>
-
-													<td><select class="form-control select2"
-														name="modeOfTravel0" id="modeOfTravel0">
+													<td><input type="text" name='locDate0'placeholder='Dept' /></td>
+													<td><input type="text" name='startPlace0'placeholder='emp Name'  /></td>
+													<td><input type="text" name='vistPlace0'placeholder='f Name' /></td>
+													<td><input type="text" name='purposeOfVist0'placeholder='Desi'/></td>
+													<td><select name="modeOfTravel0" id="modeOfTravel0">
 															<option value="">Select Type</option>
-														
 													</select></td>
 
-
-													<td><input type="text" name='distanceKm0'
-														placeholder='Shift' class="form-control" /></td>
-													<td><input type="text" name='ltaRate0'
-														placeholder='Shift In' class="form-control" /></td>
-													<td><input type="text" name='actualAmount0'
-														placeholder='Shift Out' class="form-control txt" /></td>
-													<td><select class="form-control select2"
-														name="modeOfTravel0" id="modeOfTravel0">
+													<td><input type="text" name='distanceKm0'placeholder='Shift' /></td>
+													<td><input type="text" name='ltaRate0'placeholder='Shift In'  /></td>
+													<td><input type="text" name='actualAmount0'placeholder='Shift Out' /></td>
+													<td><select name="modeOfTravel0" id="modeOfTravel0">
 															<option value="">Select Type</option>
-														
 													</select></td>
-														<td><input type="text" name='actualAmount0'
-														placeholder='Actual Time' class="form-control txt" /></td>
-														
-														<td><input type="text" name='actualAmount0'
-														placeholder='Actual Time out' class="form-control txt" /></td>
-														<td><input type="text" name='actualAmount0'
-														placeholder='over time' class="form-control txt" /></td>
-														
-														<td><select class="form-control select2"
-														name="modeOfTravel0" id="modeOfTravel0">
+												 <td><input type="text" name='actualAmount0'placeholder='Actual Time'/></td>
+											    <td><input type="text" name='actualAmount0'placeholder='Actual Time out'/></td>
+												<td><input type="text" name='actualAmount0'placeholder='over time' /></td>
+												<td><select name="modeOfTravel0" id="modeOfTravel0">
 															<option value="">Select Type</option>
-														
 													</select></td>
 												</tr>
 												<tr id='addr1'></tr>
@@ -314,7 +295,7 @@ $("table").on("keyup", ".pas", function () {
 											
 
 										</table>
-
+</div>
 
 									</div>
 								
