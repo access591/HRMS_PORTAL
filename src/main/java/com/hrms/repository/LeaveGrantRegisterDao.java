@@ -7,5 +7,5 @@ import com.hrms.model.LeaveGrant;
 
 public interface LeaveGrantRegisterDao  extends GenericDao<LeaveGrant>{
 
-	public List findLeaveGrantByEmp(String empCode);
+	public List<LeaveGrant> findLeaveGrantByEmp(String empCode);
 }

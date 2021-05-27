@@ -17,15 +17,15 @@ public class LeaveGrantRegisterDaoImpl extends AbstractGenericDao<LeaveGrant> im
 	@Autowired SessionFactory sessionFactory;
 	
 	@Override
-	public List findLeaveGrantByEmp(String empCode) {
+	public List<LeaveGrant> findLeaveGrantByEmp(String empCode) {
 
 		Session session = getSession();
 		String hql = "from M_LEAVE_GRANT l where l.empCode=:empCode";
-		Query query = session.createQuery(hql);
+		Query<LeaveGrant> query = session.createQuery(hql,LeaveGrant.class);
 		query.setParameter("empCode", empCode);
 		System.out.println("size session factory : " + query.list().size());
 
-		List leaveGrant = null;
+		List<LeaveGrant> leaveGrant = null;
 		if (query.list().size() >= 1) {
 			leaveGrant = query.list();
 
