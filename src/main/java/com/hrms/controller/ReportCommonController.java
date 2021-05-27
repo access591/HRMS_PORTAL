@@ -126,28 +126,6 @@ public class ReportCommonController {
 		session.setAttribute("username", session.getAttribute("username"));
 		return null;
 	}
-
-	// leave management report
-	@ResponseBody
-	@GetMapping("/testing")
-	public List<?> testing(HttpServletRequest request, HttpServletResponse response) {
-
-		System.out.println("in testing block ");
-		String reportFileName = "LeaveDetail";
-		List<Employee> arrayList = employeeService.getAllEmployees();
-		System.out.println("last index of leave request" +arrayList.size());
-		return reportUtil.leaveRequestReport(response, request, reportFileName, arrayList);
-	}
-
-	// leave detail report
-
-	@ResponseBody
-	@GetMapping("/leaveDetailReport")
-	public void leaveDetailReport(HttpServletRequest request, HttpServletResponse response) {
-
-		System.out.println("leave detail report");
-		//reportUtil.leavedetailReport(request, response);
-	}
 	
 	
 	@ResponseBody

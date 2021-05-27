@@ -148,7 +148,7 @@ public class LeveReportController {
 //		leaveDataSource.add(lv);
 		
 		
-		reportUtil.leaveRequestReport(response,request,reportFileName,listLeave);
+		reportUtil.leaveRequestReport(response,request,reportFileName,listLeave,empName);
 		return null;
 	}
 	
