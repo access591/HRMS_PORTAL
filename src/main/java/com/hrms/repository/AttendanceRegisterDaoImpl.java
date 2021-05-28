@@ -3,8 +3,8 @@ package com.hrms.repository;
 import org.springframework.stereotype.Repository;
 
 import com.hrms.dao.AbstractGenericDao;
-import com.hrms.model.AttendanceRegister;
+import com.hrms.model.AttendenceRegister;
 
 @Repository
-public class AttendanceRegisterDaoImpl extends AbstractGenericDao<AttendanceRegister> implements AttendanceRegisterDao {
+public class AttendanceRegisterDaoImpl extends AbstractGenericDao<AttendenceRegister> implements AttendanceRegisterDao {
 }
