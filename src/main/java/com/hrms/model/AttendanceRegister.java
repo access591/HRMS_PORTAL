@@ -67,8 +67,6 @@ public class AttendanceRegister implements Serializable {
 	@Column(name ="OVERFLOW_HRS")
 	private  int  OverFlowHrs;
 	
-	@Column(name ="EMPLOYEE_PAYEE_CODE")
-	private String   employeePayeeCode;
 	
 	
 	  
@@ -213,13 +211,11 @@ public class AttendanceRegister implements Serializable {
 	public void setInsDate(Date insDate) {
 		this.insDate = insDate;
 	}
-
-	public String getEmployeePayeeCode() {
-		return employeePayeeCode;
-	}
-
-	public void setEmployeePayeeCode(String employeePayeeCode) {
-		this.employeePayeeCode = employeePayeeCode;
-	}
-		
+	
+	
+	
+	           
+	        
+	
+	
 }
