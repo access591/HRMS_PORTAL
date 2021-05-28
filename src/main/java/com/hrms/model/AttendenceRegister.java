@@ -36,11 +36,9 @@ public class AttendenceRegister {
 	@JoinColumn(name = "EMP_CODE")
 	private Employee employee;
 
-	@Column(name = "EMP_WORKER_TYPE")
-	private String empWorkerType;
+	
 
-	@Column(name = "WORKER_CODE")
-	private String workerCode;
+	
 
 	@Column(name = "SHIFT_CODE")
 	private String shiftCode;
@@ -132,22 +130,7 @@ public class AttendenceRegister {
 		this.employee = employee;
 	}
 
-	public String getEmpWorkerType() {
-		return empWorkerType;
-	}
-
-	public void setEmpWorkerType(String empWorkerType) {
-		this.empWorkerType = empWorkerType;
-	}
-
-	public String getWorkerCode() {
-		return workerCode;
-	}
-
-	public void setWorkerCode(String workerCode) {
-		this.workerCode = workerCode;
-	}
-
+	
 	public String getShiftCode() {
 		return shiftCode;
 	}
