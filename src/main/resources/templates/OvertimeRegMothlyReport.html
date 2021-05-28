@@ -56,23 +56,54 @@ body {
 										th:action="@{/createOvertimeMonthly}" method="post">
 										<div class="row">
 
-
 											<div class="col-12 col-lg-6">
-												<label class="form-label">Employee Code</label> 
+												<div class="form-group">
+													<label class="form-label">Select Month</label> <label
+														style="color: red">*</label> <select
+														class="form-control select2" id="employeeName"
+														name="month">
+														<option value=''>--Select Month--</option>
+														<option value="0">All</option>
+														<option value='1'>Janaury</option>
+														<option value='2'>February</option>
+														<option value='3'>March</option>
+														<option value='4'>April</option>
+														<option value='5'>May</option>
+														<option value='6'>June</option>
+														<option value='7'>July</option>
+														<option value='8'>August</option>
+														<option value='9'>September</option>
+														<option value='10'>October</option>
+														<option value='11'>November</option>
+														<option value='12'>December</option>
+
+
+													</select>
+
+
+
+												</div>
+											</div>
+											</div>
+										
+
+											<div class="row">
+											<div class="col-12 col-lg-6">
+												<label class="form-label">Department Code</label> 
 													<input type="text" class="form-control" readonly>
 											</div>
 											
 											<div class="col-12 col-lg-6">
 												<div class="form-group">
-													<label class="form-label">Employee Name</label> <label
+													<label class="form-label">Department Name</label> <label
 														style="color: red">*</label> <select
-														class="form-control select2" id="employeeName"
+														class="form-control select2" id="" name="deptCode"
 														>
-														<option value=''>--Select Employee--</option>
+														<option value=''>--Select Department--</option>
 														<option value='ALL'>All</option>
-														<!-- <option th:each="employee : ${listLtaRequest}"
-															th:text="${employee.empCode.empName}"
-															th:value="${employee.empCode.empCode}"></option> -->
+														<option th:each="department : ${listDepartment}"
+															th:text="${department.deptName}"
+															th:value="${department.departmentCode}"></option> 
 														
 
 
@@ -83,26 +114,14 @@ body {
 												</div>
 											</div>
 
-
-
-											
-											
-											<div class="col-12 col-lg-6">
-												<label class="form-label">From Date</label> <label
-													style="color: red">*</label> 
-													<input type="date" class="form-control" >
-
-											</div>
-											
-											<div class="col-12 col-lg-6">
-												<label class="form-label">To Date</label> <label
-													style="color: red">*</label> 
-													<input type="date" class="form-control">
-
-											</div>
-
-
 										</div>
+
+											
+											
+											
+
+
+										
 
 										<p></p>
 										<!-- <Button type="submit">Generate Pdf</Button> -->
