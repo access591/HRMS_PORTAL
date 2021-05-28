@@ -45,17 +45,10 @@ $(document).ready(function(){
     $('#addr'+i).html("<td><select class=' form-control input-md' id='modeOfTravel'name='modeOfTravel"+i+"'><option value=' '>Select</option></select></td>"+
     		"</td><td><input  name='startPlace"+i+"' type='text' placeholder='Name'  class='form-control input-md'>"+
     		"</td><td><input  name='vistPlace"+i+"' type='text'  placeholder='Father Name'class='form-control input-md'>"+
-    		"</td><td><input  name='purposeOfVist"+i+"' type='text' placeholder='Desi'  class='pas form-control input-md'></td>"+
+    		"</td><td><input  name='purposeOfVist"+i+"' type='text' placeholder='Employee Pay Code'  class='pas form-control input-md'></td>"+
     		
     	
-    		"<td><input  name='distanceKm"+i+"' type='text' placeholder='Shift In'  class='form-control input-md'></td>"+
-    		"<td><input  name='distanceKm"+i+"' type='text' placeholder='Shift In'  class='form-control input-md'></td>"+
-    		"<td><input  name='ltaRate"+i+"' type='text' placeholder='Shift Out'  class='form-control input-md'></td>"+
-    		"<td><select class=' form-control input-md' id='modeOfTravel'name='modeOfTravel"+i+"'><option value=' '>Select</option><option value='Day'>Day</option><option value='Night'>Night</option></select></td>"+
-    		"<td><input  name='distanceKm"+i+"' type='text' placeholder='Shift In'  class='form-control input-md'></td>"+
-    		"<td><input  name='ltaRate"+i+"' type='text' placeholder='Shift Out'  class='form-control input-md'></td>"+
-    		"<td><input  name='actualAmount"+i+"' type='text' placeholder='Over Time'  class=' txt form-control input-md'></td>"+
-    		"<td><select class=' form-control input-md' id='modeOfTravel'name='modeOfTravel"+i+"'><option value=' '>Select</option><option value='Day'>Day</option><option value='Night'>Night</option></select></td>"+
+    		"<td><input  name='distanceKm"+i+"' type='text' placeholder='Status'  class='form-control input-md'></td>"+
     		
     		
     		"");
@@ -301,23 +294,24 @@ $("table").on("keyup", ".pas", function () {
 												<label class="form-label">Employee Father Name </label>
 												<input Type="text" class="form-control " name="empName" id="empName" onchange="myFunctionEmpCode()" required aria-required="true">
 												</div>
+													
+													
 													<div class="form-group sm col-md-4">
-												<label class="form-label">Employee Pay Code  </label>
-												<input Type="text" class="form-control " name="empName" id="empName" onchange="myFunctionEmpCode()" required aria-required="true">
-												</div>
-													</div>
-											<div class="form-row">
-												
-												<div class="form-group sm col-md-4">
 											       <label class="form-label">Status </label>
 											       <textarea class="form-control" name="Status" id="Status" Style=" resize: none;" rows="1" placeholder="Status"></textarea>
 											      </div>
 													</div>
-											
+										
+											<button type="submit" class="btn btn-primary">Save</button>&nbsp;
+	                     &nbsp;
+					<button type="reset"class="btn btn-primary" value="Reset">Reset</button>	
 						      </div>
+						      
 	                      </div>
 	                      </div>
-	         <!--             <div class="col-12">
+	                      
+	                      
+	                <!--      <div class="col-12">
 	                     	<div class="card">
 	                      <div class="card-header">
 								</div>
@@ -369,9 +363,9 @@ $("table").on("keyup", ".pas", function () {
 	                     </div>
 	                     </div> -->
 					</div>
-					<button type="submit" class="btn btn-primary">Save</button>&nbsp;
+				<!-- 	<button type="submit" class="btn btn-primary">Save</button>&nbsp;
 	                     &nbsp;
-					<button type="reset"class="btn btn-primary" value="Reset">Reset</button>
+					<button type="reset"class="btn btn-primary" value="Reset">Reset</button> -->
 </form>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	<div class="col-12">
