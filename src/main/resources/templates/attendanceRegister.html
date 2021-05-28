@@ -40,7 +40,7 @@ body {
 <script>
 $(document).ready(function(){
 
-    var i=1;
+  /*   var i=1;
    $("#add_row").click(function(){
     $('#addr'+i).html("<td><input name='deptName"+i+"' type='text'  class='form-control txt input-md'/> "+
     		"</td><td><input  name='empName"+i+"' type='text' placeholder='name'  class='form-control input-md'>"+
@@ -66,18 +66,19 @@ $(document).ready(function(){
     i++; 
 });
    
-   
+    */
   
    
    
-   $("#delete_row").click(function(){
+  /*  $("#delete_row").click(function(){
+	   
 	  	 if(i>1){
 			 $("#addr"+(i-1)).html('');
 			 $('#_cr2').val(i - 1);
 			 i--;
-			 calculateSum(),calculateSumtotalPassing()
+			 
 			 }
-		 });
+		 }); */
    
    
   
@@ -268,9 +269,9 @@ $("table").on("keyup", ".pas", function () {
 											<tbody>
 												<tr id='addr0' >
 
-													<td><input type="text" id="deptName" name='deptName0'placeholder='Dept' /></td>
-													<td><input type="text" id="empName"name='empName0'placeholder='emp Name'  /></td>
-													<td><input type="text" id="desgName"name='desgName0'placeholder='desgName'/></td>
+													<td><input type="text" id="deptName0" name='deptName0'placeholder='Dept' /></td>
+													<td><input type="text" id="empName0"name='empName0'placeholder='emp Name'  /></td>
+													<td><input type="text" id="desgName0"name='desgName0'placeholder='desgName'/></td>
 													
 													<td><select name="modeOfTravel0" id="modeOfTravel0">
 															<option value="">Select Type</option>
@@ -419,29 +420,58 @@ $("table").on("keyup", ".pas", function () {
 
 	<script>
 	function myFunctionDeptCode(){
-/* 		 var empCode= $('#empCode option:selected').value; */
+		
+		$("example > tbody:last").children().remove();
 		 var deptCode= document.getElementById('department').value
 	    console.log("ajax request : "+ empCode);
+		 
 	    const xhr = new XMLHttpRequest();
 	    xhr.open('GET','./viewEmployeeDetailsBydepartment/'+deptCode,true);
 	    xhr.getResponseHeader('content-type','application/json');
 	    xhr.onload = function(){
+	    	 
 	        if(this.status===200){
 	            let obj = JSON.parse(this.responseText);
 	            console.log(obj);
 	            var i;
 	            for (i = 0; i < obj.length; i++) {
-	            	 $('#deptName').val(obj[i].deptName);
-	 	            $('#empName').val(obj[i].empName);
-	 	            $('#desgName').val(obj[i].desgName);	
+	            	 $('#deptName'+i).val(obj[i].deptName);
+	 	            $('#empName'+i).val(obj[i].empName);
+	 	            $('#desgName'+i).val(obj[i].desgName);	
 	 	          // $('#example').append('<tr id="addr'+(i+1)+'"></tr>');
 	 	          //$('#_cr').val(i+1);
-	 	          	xyz()
-	 	          	i++;
+	 	          console.log( "'í'"+i);
+	 	          	
+	 	          
+	 	     if( i>0){
+		  
+		    $('#addr'+i).html("<td><input  id='deptName"+i+"' type='text'  class='form-control txt input-md'/> "+
+		    		"</td><td><input  id='empName"+i+"' type='text' placeholder='name'  class='form-control input-md'>"+
+		    		"</td><td><input  id='desgName"+i+"' type='text'  placeholder='Desi'class='form-control input-md'>"+
+		    		"<td><select class=' form-control input-md' id='modeOfTravel'name='modeOfTravel"+i+"'><option value=' '>Select</option><option value='Day'>Day</option><option value='Night'>Night</option></select></td>"+
+		    		"<td><input  name='shift"+i+"' type='text' placeholder='Shift '  class='form-control input-md'></td>"+
+		    		"<td><input  name='shiftIn"+i+"' type='text' placeholder='ShiftIn'  class='form-control input-md'></td>"+
+		    "");
+	 	         
+	 		   $('#deptName'+i).val(obj[i].deptName);
+	            $('#empName'+i).val(obj[i].empName);
+	            $('#desgName'+i).val(obj[i].desgName);
+	            
+	            $('#example').append('<tr id="addr'+(i+1)+'"></tr>');
+	 		    $('#_cr').val(i+1);
+	 	          
+	            }
 	            }
 	            
-	            
-	           
+	            $("#delete_row").click(function(){
+	         	   
+	       	  	 if(i>1){
+	       			 $("#addr"+(i-1)).html('');
+	       			 $('#_cr').val(i - 1);
+	       			 i--;
+	       			 
+	       			 }
+	       		 });
 	            
 	           /*  $('#empName').val(obj.empName);
 	            $('#departmentCode').val(obj.departmentCode);
@@ -461,11 +491,11 @@ $("table").on("keyup", ".pas", function () {
 	}
 
 
-	 function xyz()
+	/*  function xyz()
 	   {
 		alert("hello");
-		   var i=1;
-		   $("#add_row").click(function(){
+		   var i=1
+		  
 		    $('#addr'+i).html("<td><input id='deptName' name='deptName"+i+"' type='text'  class='form-control txt input-md'/> "+
 		    		"</td><td><input  name='empName"+i+"' type='text' placeholder='name'  class='form-control input-md'>"+
 		    		"</td><td><input  name='desgName"+i+"' type='text'  placeholder='Desi'class='form-control input-md'>"+
@@ -487,9 +517,9 @@ $("table").on("keyup", ".pas", function () {
 		    $('#_cr').val(i+1);
 		    
 		    i++;  
-	   });
+	   
 	   }
-
+ */
 	
 	
 	</script>
@@ -506,7 +536,7 @@ $("table").on("keyup", ".pas", function () {
 			// Other ajax parameters
 			success : function() {
 				// hiding the image here
-				debugger;
+				//debugger;
 				$('#loading').hide();
 			}
 		});
