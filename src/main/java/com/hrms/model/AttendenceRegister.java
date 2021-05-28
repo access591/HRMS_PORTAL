@@ -1,5 +1,6 @@
 package com.hrms.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -16,7 +17,12 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "ATTENDENCE_REGISTER")
-public class AttendenceRegister {
+public class AttendenceRegister implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7539699469165343324L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
