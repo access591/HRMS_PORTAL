@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 6.16.0.final using JasperReports Library version 6.16.0-48579d909b7943b64690c65c71e07e0b80981928  -->
+<!-- Created with Jaspersoft Studio version 6.17.0.final using JasperReports Library version 6.17.0-6d93193241dd8cc42629e188b94f9e0bc5722efd  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="OvertimeDateWise" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="55001167-9f9b-4981-b8a9-1e4f4b4a22c8">
 	<style name="Table_TH" mode="Opaque" backcolor="#F0F8FF">
 		<box>
@@ -32,7 +32,15 @@
 		<queryString>
 			<![CDATA[]]>
 		</queryString>
+		<field name="overTimeDate" class="java.lang.String"/>
+		<field name="employee.empCode" class="java.lang.String"/>
+		<field name="overTimeRate" class="java.lang.String"/>
+		<field name="timeIn" class="java.lang.String"/>
+		<field name="timeOut" class="java.lang.String"/>
+		<field name="overTime" class="java.lang.String"/>
+		<field name="status" class="java.lang.String"/>
 	</subDataset>
+	<parameter name="Parameter1" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
@@ -79,8 +87,8 @@
 					<property name="com.jaspersoft.studio.table.style.detail" value="Table_TD"/>
 				</reportElement>
 				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
-					<datasetRun subDataset="Dataset1" uuid="303cea51-d1d1-4a08-bd37-fa23660ff4f6">
-						<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.JREmptyDataSource()]]></dataSourceExpression>
+					<datasetRun subDataset="Dataset1" uuid="2d7f8fbb-e020-46eb-9554-22e3b8b3c0de">
+						<dataSourceExpression><![CDATA[$P{Parameter1}]]></dataSourceExpression>
 					</datasetRun>
 					<jr:column width="65" uuid="ca7b9751-b1ca-4751-8f3b-2cea0b00449a">
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column1"/>
@@ -102,7 +110,13 @@
 								<text><![CDATA[Date]]></text>
 							</staticText>
 						</jr:columnHeader>
-						<jr:detailCell style="Table_TD" height="30"/>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="65" height="30" uuid="3dd6f4ad-2e25-48dd-acb5-6a187fef8b8a"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{overTimeDate}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
 					</jr:column>
 					<jr:column width="65" uuid="0a30250e-952c-4a78-8cbf-61679d375cbc">
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column3"/>
@@ -113,7 +127,13 @@
 								<text><![CDATA[EmpCode]]></text>
 							</staticText>
 						</jr:columnHeader>
-						<jr:detailCell style="Table_TD" height="30"/>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="65" height="30" uuid="d1cc5868-b757-4411-ba9f-5d480aa09775"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{employee.empCode}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
 					</jr:column>
 					<jr:column width="65" uuid="a1cb0157-3a1e-44ac-89aa-6941d36d2609">
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column4"/>
@@ -157,7 +177,13 @@
 								<text><![CDATA[Basic Rate]]></text>
 							</staticText>
 						</jr:columnHeader>
-						<jr:detailCell style="Table_TD" height="30"/>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="65" height="30" uuid="66f6a12b-0329-4ed8-a5ae-6411eb638547"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{overTimeRate}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
 					</jr:column>
 					<jr:column width="65" uuid="8eb01952-5a50-46f6-8c5d-2ad43fdafef0">
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column8"/>
@@ -168,7 +194,13 @@
 								<text><![CDATA[Actual Time IN]]></text>
 							</staticText>
 						</jr:columnHeader>
-						<jr:detailCell style="Table_TD" height="30"/>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="65" height="30" uuid="b9feb50e-0626-4084-94ea-f9e5457b887e"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{timeIn}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
 					</jr:column>
 					<jr:column width="65" uuid="98784403-bd42-41d2-addc-1cb082751798">
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column9"/>
@@ -179,7 +211,13 @@
 								<text><![CDATA[Actual Time Out]]></text>
 							</staticText>
 						</jr:columnHeader>
-						<jr:detailCell style="Table_TD" height="30"/>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="65" height="30" uuid="a9abe386-3d7a-4502-9cbf-bbfccaae5358"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{timeOut}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
 					</jr:column>
 					<jr:column width="65" uuid="0c248042-98fb-4ca2-94de-e19198142cd1">
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column10"/>
@@ -190,7 +228,13 @@
 								<text><![CDATA[Overtime Hrs]]></text>
 							</staticText>
 						</jr:columnHeader>
-						<jr:detailCell style="Table_TD" height="30"/>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="65" height="30" uuid="1dea088e-35e0-4da8-a495-6fd30502dab1"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{overTime}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
 					</jr:column>
 					<jr:column width="65" uuid="b4f96e12-05f2-471a-a377-10f4f0fcc09e">
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column11"/>
@@ -212,7 +256,13 @@
 								<text><![CDATA[Remarks]]></text>
 							</staticText>
 						</jr:columnHeader>
-						<jr:detailCell style="Table_TD" height="30"/>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="65" height="30" uuid="e1cdeca0-4a0a-437a-a0e3-a3c95b3e5740"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{status}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
 					</jr:column>
 				</jr:table>
 			</componentElement>
