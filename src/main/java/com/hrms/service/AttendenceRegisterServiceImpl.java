@@ -74,4 +74,18 @@ public class AttendenceRegisterServiceImpl implements AttendenceRegisterService{
 		return null;
 	}
 
-}
+	@Override
+	public boolean addAttendenceRegister(AttendenceRegister attn) {
+		Session s=sessionFactory.openSession();
+		s.beginTransaction();
+		
+		// TODO Auto-generated method stub
+		s.save(attn);
+		s.getTransaction().commit();
+		s.clear();
+		s.close();
+		return true;
+	}
+	}
+
+

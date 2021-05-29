@@ -12,4 +12,6 @@ public interface AttendenceRegisterService {
 	public List<AttendenceRegister> findAttendenceByDeptBetweenDate(String deptCode,Date FromDate,Date toDate);
 	
 	public List<AttendenceRegister> findAllAttendenceBetweenDate(Date FromDate,Date toDate);
+
+	public boolean addAttendenceRegister(AttendenceRegister attn);
 }
