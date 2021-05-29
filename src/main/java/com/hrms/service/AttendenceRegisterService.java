@@ -20,4 +20,6 @@ public interface AttendenceRegisterService {
 
 	public AttendenceRegister findAttendenceRegisterByEmpCode(String empCode);
 
+	public void removeAttendanceRegister(long id);
+
 }

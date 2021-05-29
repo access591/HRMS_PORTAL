@@ -93,7 +93,6 @@ public class AttendenceRegisterServiceImpl implements AttendenceRegisterService{
 		// TODO Auto-generated method stub
 		return attendenceRegisterDao.findAll();
 	}
-	}
 
 
 	public AttendenceRegister findAttendenceRegisterByEmpCode(String empCode) {
@@ -113,6 +112,12 @@ public class AttendenceRegisterServiceImpl implements AttendenceRegisterService{
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+	@Override
+	public void removeAttendanceRegister(long id) {
+		// TODO Auto-generated method stub
+		this.attendenceRegisterDao.delete(id);
 	}
 
 }
