@@ -19,7 +19,7 @@ body {
 	function gtag() {
 		dataLayer.push(arguments);
 	}
-	 gtag('js', new Date());
+	gtag('js', new Date());
 
 	gtag('config', 'UA-120946860-7');
 </script>
@@ -42,10 +42,11 @@ body {
 					</div>
 					<div class="row">
 						<div class="col-12">
-						
+
 							<div class="card" style="border-radius: 2.2rem">
 								<div class="card-header">
-									<h5 class="card-title">Overtime Register Date-Wise Report</h5>
+									<h5 class="card-title">Overtime Register Date-wise
+										Report</h5>
 									<div class="alert-outline">
 										<div th:if="${message}" th:text="${message}"
 											style="color: red"></div>
@@ -58,22 +59,38 @@ body {
 
 
 											<div class="col-12 col-lg-6">
-												<label class="form-label">Employee Code</label> 
-													<input type="text" class="form-control" readonly>
+												<div class="form-group">
+													<label class="form-label">Select Department</label> <label
+														style="color: red">*</label> <select
+														class="form-control select2" id="select_department"
+														onchange="changeDepartment()" name="deptCode">
+														<option value=''>--Select--</option>
+														<option value='ALL'>All</option>
+														<option th:each="department : ${listDepartment}"
+															th:text="${department.deptName}"
+															th:value="${department.departmentCode}"></option>
+
+
+
+													</select>
+
+
+
+												</div>
 											</div>
-											
+
 											<div class="col-12 col-lg-6">
 												<div class="form-group">
 													<label class="form-label">Employee Name</label> <label
 														style="color: red">*</label> <select
 														class="form-control select2" id="employeeName"
-														>
-														<option value=''>--Select Employee--</option>
+														name="empCode">
+														<option value=''>--All--</option>
 														<option value='ALL'>All</option>
 														<!-- <option th:each="employee : ${listLtaRequest}"
 															th:text="${employee.empCode.empName}"
 															th:value="${employee.empCode.empCode}"></option> -->
-														
+
 
 
 													</select>
@@ -85,19 +102,19 @@ body {
 
 
 
-											
-											
+
+
 											<div class="col-12 col-lg-6">
 												<label class="form-label">From Date</label> <label
-													style="color: red">*</label> 
-													<input type="date" class="form-control" >
+													style="color: red">*</label> <input type="date" name="fromDate"
+													class="form-control">
 
 											</div>
-											
+
 											<div class="col-12 col-lg-6">
 												<label class="form-label">To Date</label> <label
-													style="color: red">*</label> 
-													<input type="date" class="form-control">
+													style="color: red">*</label> <input type="date" name="toDate"
+													class="form-control">
 
 											</div>
 
@@ -108,7 +125,7 @@ body {
 										<!-- <Button type="submit">Generate Pdf</Button> -->
 										<Button type="submit">Generate Sheet</Button>
 
-										<!-- <a href="#" th:href="@{employeeExcel}">Download Excel Sheet</a> -->
+										<!-- <a href="#" th:href="@{/createAttendenceDatewise(param1="'+name+'")}">Download Excel Sheet</a>  -->
 
 										<!-- <Button id = "generate_pdf_button" onclick="generatePdfFunction()">Generate Pdf</Button> -->
 									</form>
@@ -135,50 +152,111 @@ body {
 		$(function() {
 			// Datatables basic
 			$('#datatables-basic').DataTable({
-				responsive: true
+				responsive : true
 			});
 			// Datatables with Buttons
-			var datatablesButtons = $('#datatables-buttons').DataTable({
-				  deferRender:true,
-		            scrollCollapse: true,
-		            scroller: false,
-				   responsive: true,
-				   lengthMenu :[[10,20,30,-1 ],['10 rows', '20 rows', '30 rows', 'Show all' ] ],
-					buttons :[]
-			});
-			datatablesButtons.buttons().container().appendTo("#datatables-buttons_wrapper .col-md-6:eq(0)")
+			var datatablesButtons = $('#datatables-buttons')
+					.DataTable(
+							{
+								deferRender : true,
+								scrollCollapse : true,
+								scroller : false,
+								responsive : true,
+								lengthMenu : [
+										[ 10, 20, 30, -1 ],
+										[ '10 rows', '20 rows', '30 rows',
+												'Show all' ] ],
+								buttons : []
+							});
+			datatablesButtons.buttons().container().appendTo(
+					"#datatables-buttons_wrapper .col-md-6:eq(0)")
 		});
 	</script>
 
+	<script>
+		function changeDepartment() {
+
+			var selectedDepartmentValue = document
+					.getElementById("select_department").value;
+			console.log("select departmentvalue  : " + selectedDepartmentValue);
+			//$('#employeeName').append($('<option>', {value:0, text:'Select Employee'}));
+
+			var x = document.getElementById("employeeName");
+			console.log("x value : " + x);
+
+			var length = x.options.length;
+			for (i = length - 1; i >= 1; i--) {
+				x.options[i] = null;
+			}
+
+			if (selectedDepartmentValue !== ""
+					|| document.getElementById("select_department").selected == false) {
+				const xhr = new XMLHttpRequest();
+				xhr.open('GET', 'getEmployeeByDeptCode/'
+						+ selectedDepartmentValue, true);
+				xhr.getResponseHeader('content-type', 'application/json');
+				xhr.onload = function() {
+					if (this.status === 200) {
+						let obj = JSON.parse(this.responseText);
+						console.log(obj);
+
+						console.log("employee name : " + obj[0].empName)
+						$('select[name="employeeName"]')
+								.prop("disabled", false);
+						// $('select[name="employeeName"]').html(obj.empName);
+
+						$.each(obj, function(i, item) {
+							console.log(" i " + i + " item : " + item.empName);
+							// $('#employeeName').append($('<option>', {value:i, text:item.empName}));
+							$('#employeeName').append(
+									$('<option>').val(this.empCode).text(
+											this.empName));
+						});
+
+					} else {
+						console.error("some error occured");
+					}
+
+				}
+				xhr.send();
+			} else {
+				$('select[name="employeeName"]').prop("disabled", true);
+			}
+
+		}
+	</script>
 
 	<script>
-	
-	function generatePdfFunction(){
-		
-		var designationName = document.getElementById("designation_name").value;
-		
-		console.log(" designation name : "+ designationName);
-	
-		
-	   
-	    const xhr = new XMLHttpRequest();
-	    xhr.open('POST','employeeDetailPdf/'+designationName,true);
-	    xhr.getResponseHeader('content-type','application/json');
-	    xhr.onload = function(){
-        if(this.status===200){ 
-        	let obj = JSON.parse(this.responseText);
- 	        console.log(obj);
-			
-	     }
-	     else{
-		      console.error("some error occured");
-	  }
-			
-	}
-	  xhr.send();
-		
+		function generatePdfFunction() {
 
-}	
+			var designationName = document.getElementById("designation_name").value;
+
+			console.log(" designation name : " + designationName);
+
+			const xhr = new XMLHttpRequest();
+			xhr.open('POST', 'employeeDetailPdf/' + designationName, true);
+			xhr.getResponseHeader('content-type', 'application/json');
+			xhr.onload = function() {
+				if (this.status === 200) {
+					let obj = JSON.parse(this.responseText);
+					console.log(obj);
+
+				} else {
+					console.error("some error occured");
+				}
+
+			}
+			xhr.send();
+
+		}
+	</script>
+	
+	<script type="text/javascript">
+		$(document).ready(
+			function(){
+				
+			}		
+		)
 	</script>
 </body>
 </html>

@@ -89,3 +89,24 @@ public class AttendenceRegisterServiceImpl implements AttendenceRegisterService{
 	}
 
 
+	public AttendenceRegister findAttendenceRegisterByEmpCode(String empCode) {
+		
+		try {
+			Session session = sessionFactory.openSession();
+			Query<AttendenceRegister> query = session.createQuery("from AttendenceRegister a inner join fetch a.employee e "
+					+ "where e.empCode = :empCode", AttendenceRegister.class);
+			
+			query.setParameter("empCode", empCode);
+			
+			AttendenceRegister result = query.getSingleResult();
+			System.out.println("result : ");
+			return result;
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+}
+
