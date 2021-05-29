@@ -5,11 +5,13 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hrms.model.AttendenceRegister;
+import com.hrms.model.MedicalReimbursement;
 import com.hrms.repository.AttendenceRegisterDao;
 
 @Service
@@ -115,9 +117,16 @@ public class AttendenceRegisterServiceImpl implements AttendenceRegisterService{
 	}
 
 	@Override
-	public void removeAttendanceRegister(long id) {
-		// TODO Auto-generated method stub
-		this.attendenceRegisterDao.delete(id);
+	public void removeAttendanceRegister(int id) {
+		Session session = sessionFactory.openSession();
+		Object o = session.get(AttendenceRegister.class, id);
+		AttendenceRegister e = (AttendenceRegister) o;
+		Transaction tx = session.beginTransaction();
+		session.delete(e);
+		tx.commit();
+		session.close();
+		
+	
 	}
 
 }

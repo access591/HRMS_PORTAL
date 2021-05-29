@@ -225,9 +225,9 @@ public class AttendanceRegisterController {
 		
 		
 		@GetMapping(value = { "/deleteAttendanceRegister/{id}" })
-		public String deleteAttendanceRegister(@PathVariable("id") long id, Model model, HttpSession session) {
+		public String deleteAttendanceRegister(@PathVariable("id")int id , Model model, HttpSession session) {
 
-			this.attendenceRegisterService.removeAttendanceRegister(id);
+		attendenceRegisterService.removeAttendanceRegister(id);
 
 			session.setAttribute("username", session.getAttribute("username"));
 			return "redirect:/attendanceRegister";
