@@ -141,18 +141,19 @@ body {
 													<tr id="addr0">
 
 
-														<td><select class="form-control" style="width:auto;" id="reqCode" name="listReqAdvertisementDetail[0].reqCode">
+														<td><select class="form-control" style="width:auto;" id="reqCode" name="listReqAdvertisementDetail[0].reqCode"
+																onchange="selectDateByReqCode()">
 																<option value=" ">Select ReqCode</option>
 																<option 
 																th:each="employeeReq : ${listEmployeeRequisition}"
-																th:text="${employeeReq.reqCode}" ></option>
+																th:text="${employeeReq.reqCode}" th:value="${employeeReq.reqDate}"></option>
 																
 														</select>
 														
 														
 														</td>
 
-														<td><input type="date" id="theDate2" class="form-control text-center"
+														<td><input type="date" id="reqDate0" class="form-control text-center"
 															name="listReqAdvertisementDetail[0].reqDate"></td>
 
 
@@ -250,7 +251,7 @@ body {
 	
 
 
-	<script>
+	<script th:inline="javascript">
 	
 	$(document).ready(function() {
 		$('#example').DataTable({
@@ -352,6 +353,15 @@ body {
 		});
 
 		
+	</script>
+	
+	<script>
+		function selectDateByReqCode(){
+			var selectReqCode = document.getElementById("reqCode").value;
+			console.log("selectReqCode value : "+selectReqCode);
+			document.getElementById("reqDate0").value = selectReqCode;
+			
+		}
 	</script>
 
 

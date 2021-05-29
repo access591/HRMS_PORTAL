@@ -69,7 +69,7 @@ public class RequisitionAdvertisementController {
 			model.addAttribute("modules", modules);
 		}
 		
-		List<EmployeeRequisition> listEmployeeRequisition = employeeRequisitionService.findEmployeeReqByStatusN();
+		List<EmployeeRequisition> listEmployeeRequisition = employeeRequisitionService.findEmployeeReqByStatusY();
 		if(listEmployeeRequisition != null) {
 			model.addAttribute("listEmployeeRequisition", listEmployeeRequisition);
 			

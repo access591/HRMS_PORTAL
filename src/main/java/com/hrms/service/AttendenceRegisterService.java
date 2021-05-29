@@ -14,4 +14,6 @@ public interface AttendenceRegisterService {
 	public List<AttendenceRegister> findAllAttendenceBetweenDate(Date FromDate,Date toDate);
 
 	public AttendenceRegister findAttendenceRegisterByEmpCode(String empCode);
+	
+	public List<AttendenceRegister> findAttendenceByEmpStatusAbsent(String empCode);
 }
