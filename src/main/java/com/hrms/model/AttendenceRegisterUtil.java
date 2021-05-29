@@ -19,7 +19,7 @@ public class AttendenceRegisterUtil {
 	private String desgCode;
 	private String desgName;
 	private String  empPayCode;
-	
+	private int  id;
 	
 	
 	
@@ -31,12 +31,12 @@ public class AttendenceRegisterUtil {
 	private String status;
 
 	
-	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
-	private DateTime timeIn;
+	
+	private String timeIn;
 
 
-	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
-	private DateTime timeOut;
+	
+	private String timeOut;
 
 	
 	private String insBy;
@@ -48,10 +48,10 @@ public class AttendenceRegisterUtil {
 	private String compunsantaryL;
 
 	
-	private Date aTimeIn;
+	private String aTimeIn;
 
 	
-	private Date aTimeOut;
+	private String aTimeOut;
 
 	
 	private String overTime;
@@ -178,24 +178,9 @@ public class AttendenceRegisterUtil {
 	}
 
 
-	public DateTime getTimeIn() {
-		return timeIn;
-	}
+	
 
-
-	public void setTimeIn(DateTime timeIn) {
-		this.timeIn = timeIn;
-	}
-
-
-	public DateTime getTimeOut() {
-		return timeOut;
-	}
-
-
-	public void setTimeOut(DateTime timeOut) {
-		this.timeOut = timeOut;
-	}
+	
 
 
 	public String getInsBy() {
@@ -227,25 +212,6 @@ public class AttendenceRegisterUtil {
 		this.compunsantaryL = compunsantaryL;
 	}
 
-
-	public Date getaTimeIn() {
-		return aTimeIn;
-	}
-
-
-	public void setaTimeIn(Date aTimeIn) {
-		this.aTimeIn = aTimeIn;
-	}
-
-
-	public Date getaTimeOut() {
-		return aTimeOut;
-	}
-
-
-	public void setaTimeOut(Date aTimeOut) {
-		this.aTimeOut = aTimeOut;
-	}
 
 
 	public String getOverTime() {
@@ -328,11 +294,69 @@ public class AttendenceRegisterUtil {
 	}
 
 
+
+
+
+	public int getId() {
+		return id;
+	}
+
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+
+	public String getTimeIn() {
+		return timeIn;
+	}
+
+
+	public void setTimeIn(String timeIn) {
+		this.timeIn = timeIn;
+	}
+
+
+	public String getTimeOut() {
+		return timeOut;
+	}
+
+
+	public void setTimeOut(String timeOut) {
+		this.timeOut = timeOut;
+	}
+
+
+	public String getaTimeIn() {
+		return aTimeIn;
+	}
+
+
+	public void setaTimeIn(String aTimeIn) {
+		this.aTimeIn = aTimeIn;
+	}
+
+
+	public String getaTimeOut() {
+		return aTimeOut;
+	}
+
+
+	public void setaTimeOut(String aTimeOut) {
+		this.aTimeOut = aTimeOut;
+	}
+
+
+	public AttendenceRegisterUtil() {
+		super();
+	}
+
+
 	public AttendenceRegisterUtil(Date attendenceDate, String empCode, String empName, String departmentCode,
-			String deptName, String desgCode, String desgName, String empPayCode, String shiftCode, String status,
-			DateTime timeIn, DateTime timeOut, String insBy, Date insDate, String compunsantaryL, Date aTimeIn,
-			Date aTimeOut, String overTime, String status2, String overTimeStatus, String overTime2, String regCode,
-			String employeePayeCode, String overFlowHrs, String statusTemp) {
+			String deptName, String desgCode, String desgName, String empPayCode, int id, String shiftCode,
+			String status, String timeIn, String timeOut, String insBy, Date insDate, String compunsantaryL,
+			String aTimeIn, String aTimeOut, String overTime, String status2, String overTimeStatus, String overTime2,
+			String regCode, String employeePayeCode, String overFlowHrs, String statusTemp) {
 		super();
 		this.attendenceDate = attendenceDate;
 		this.empCode = empCode;
@@ -342,6 +366,7 @@ public class AttendenceRegisterUtil {
 		this.desgCode = desgCode;
 		this.desgName = desgName;
 		this.empPayCode = empPayCode;
+		this.id = id;
 		this.shiftCode = shiftCode;
 		this.status = status;
 		this.timeIn = timeIn;
@@ -359,11 +384,6 @@ public class AttendenceRegisterUtil {
 		this.employeePayeCode = employeePayeCode;
 		this.overFlowHrs = overFlowHrs;
 		this.statusTemp = statusTemp;
-	}
-
-
-	public AttendenceRegisterUtil() {
-		super();
 	}
 
 

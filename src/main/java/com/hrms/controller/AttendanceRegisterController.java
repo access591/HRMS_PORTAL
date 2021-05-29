@@ -23,7 +23,6 @@ import com.hrms.model.AttendenceRegisterUtil;
 import com.hrms.model.Department;
 import com.hrms.model.Designation;
 import com.hrms.model.Employee;
-
 import com.hrms.model.MenuModule;
 import com.hrms.service.AttendenceRegisterService;
 import com.hrms.service.DepartmentService;
@@ -55,6 +54,32 @@ public class AttendanceRegisterController {
 		if (modules != null) {
 			model.addAttribute("modules", modules);
 		}
+		
+		List<AttendenceRegister> listAttendanceR = attendenceRegisterService.getAllAttendenceRegister();
+		List<AttendenceRegisterUtil> listAttendenceRegisterUtil = new ArrayList<AttendenceRegisterUtil>();
+		  for (int i = 0; i < listAttendanceR.size(); i++) {
+			  String empCode = listAttendanceR.get(i).getEmployee().getEmpCode();
+			  AttendenceRegisterUtil attreg=new AttendenceRegisterUtil();
+			     Employee employee = employeeService.findEmployeeById(empCode);
+			    Department department = departmentService.findDepartmentById(employee.getDepartmentCode());
+			    Designation designation = designationService.findDesignationById(employee.getDesignationCode());
+			    
+			    attreg.setId(listAttendanceR.get(i).getId());
+			    attreg.setAttendenceDate(listAttendanceR.get(i).getAttendenceDate());
+			    attreg.setaTimeIn(listAttendanceR.get(i).getaTimeIn());
+			    attreg.setaTimeOut(listAttendanceR.get(i).getaTimeOut());
+			    attreg.setEmpName(employee.getEmpName());
+			    attreg.setDeptName(department.getDeptName());
+			    attreg.setDesgName(designation.getDesgName());
+			    
+			    listAttendenceRegisterUtil.add(attreg);
+			    
+			    model.addAttribute("attendReg", listAttendenceRegisterUtil); 
+			    
+			    
+		  }
+		  
+		
 		session.setAttribute("username", session.getAttribute("username"));
 		return "attendanceRegister";
 	}
@@ -167,13 +192,8 @@ public class AttendanceRegisterController {
 					attn.setStatus("" + i);
 				}
 				
-				
-				/*
-				 * tourClaim.setTourClaimId(tourcId); tourClaim.setTourClaimDate(tourCdate);
-				 * travExp.setTourClaimId(tourClaim); travExp.setTourClaimDate(tourClaim);
-				 * travExp.setEmpCode(emp);
-				 */
-				  attn.setInsBy(insertedBY);
+				attn.setAttendenceDate(u.getAttendenceDate());
+				attn.setInsBy(insertedBY);
 			insertStatusMR= attendenceRegisterService.addAttendenceRegister(attn);
 				
 			if (insertStatusMR) {

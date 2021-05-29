@@ -10,12 +10,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hrms.model.AttendenceRegister;
+import com.hrms.repository.AttendenceRegisterDao;
 
 @Service
 public class AttendenceRegisterServiceImpl implements AttendenceRegisterService{
 
 	@Autowired SessionFactory sessionFactory;
-	
+	@Autowired AttendenceRegisterDao attendenceRegisterDao;
 	@Override
 	public List<AttendenceRegister> findAttendenceByEmpCodeBetweenDate(String empCode,Date fromDate,Date toDate) {
 		
@@ -85,6 +86,12 @@ public class AttendenceRegisterServiceImpl implements AttendenceRegisterService{
 		s.clear();
 		s.close();
 		return true;
+	}
+
+	@Override
+	public List<AttendenceRegister> getAllAttendenceRegister() {
+		// TODO Auto-generated method stub
+		return attendenceRegisterDao.findAll();
 	}
 	}
 

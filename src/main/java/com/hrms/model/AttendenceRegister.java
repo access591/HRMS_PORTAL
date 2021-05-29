@@ -12,8 +12,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import org.exolab.castor.types.DateTime;
-import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "ATTENDENCE_REGISTER")
