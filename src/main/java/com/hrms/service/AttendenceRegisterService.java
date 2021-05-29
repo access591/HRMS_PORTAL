@@ -16,6 +16,8 @@ public interface AttendenceRegisterService {
 
 	public boolean addAttendenceRegister(AttendenceRegister attn);
 
+	public List<AttendenceRegister> getAllAttendenceRegister();
+
 	public AttendenceRegister findAttendenceRegisterByEmpCode(String empCode);
 
 }

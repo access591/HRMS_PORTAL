@@ -1,5 +1,8 @@
 package com.hrms.repository;
 
-public class AttendenceRegisterDao {
+import com.hrms.dao.GenericDao;
+import com.hrms.model.AttendenceRegister;
+
+public interface AttendenceRegisterDao extends GenericDao<AttendenceRegister> {
 
 }
