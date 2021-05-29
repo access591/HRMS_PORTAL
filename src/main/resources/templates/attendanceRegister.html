@@ -40,34 +40,6 @@ body {
 <script>
 $(document).ready(function(){
 
-  /*   var i=1;
-   $("#add_row").click(function(){
-    $('#addr'+i).html("<td><input name='deptName"+i+"' type='text'  class='form-control txt input-md'/> "+
-    		"</td><td><input  name='empName"+i+"' type='text' placeholder='name'  class='form-control input-md'>"+
-    		"</td><td><input  name='desgName"+i+"' type='text'  placeholder='Desi'class='form-control input-md'>"+
-    		
-    		
-    		"<td><select class=' form-control input-md' id='modeOfTravel'name='modeOfTravel"+i+"'><option value=' '>Select</option><option value='Day'>Day</option><option value='Night'>Night</option></select></td>"+
-    		"<td><input  name='distanceKm"+i+"' type='text' placeholder='Shift In'  class='form-control input-md'></td>"+
-    		"<td><input  name='distanceKm"+i+"' type='text' placeholder='Shift In'  class='form-control input-md'></td>"+
-    		"<td><input  name='ltaRate"+i+"' type='text' placeholder='Shift Out'  class='form-control input-md'></td>"+
-    		"<td><select class=' form-control input-md' id='modeOfTravel'name='modeOfTravel"+i+"'><option value=' '>Select</option><option value='Day'>Day</option><option value='Night'>Night</option></select></td>"+
-    		"<td><input  name='distanceKm"+i+"' type='text' placeholder='Shift In'  class='form-control input-md'></td>"+
-    		"<td><input  name='ltaRate"+i+"' type='text' placeholder='Shift Out'  class='form-control input-md'></td>"+
-    		"<td><input  name='actualAmount"+i+"' type='text' placeholder='Over Time'  class=' txt form-control input-md'></td>"+
-    		"<td><select class=' form-control input-md' id='modeOfTravel'name='modeOfTravel"+i+"'><option value=' '>Select</option><option value='Day'>Day</option><option value='Night'>Night</option></select></td>"+
-    		
-    		
-    		"");
-
-    $('#example').append('<tr id="addr'+(i+1)+'"></tr>');
-    $('#_cr').val(i+1);
-    
-    i++; 
-});
-   
-    */
-  
    
    
   /*  $("#delete_row").click(function(){
@@ -80,63 +52,6 @@ $(document).ready(function(){
 			 }
 		 }); */
    
-   
-  
-  
-   
-   
-  
-function calculateSum() {
-
-    var sum = 0;
-    //iterate through each textboxes and add the values
-    $(".txt").each(function () {
-
-        //add only if the value is number
-        if (!isNaN(this.value) && this.value.length != 0) {
-            sum += parseFloat(this.value);
-        }
-
-    });
-    //.toFixed() method will roundoff the final sum to 2 decimal places
-   var fds=sum;
-   //$("#").html(sum.toFixed(2));
-   $("#totalClaim").val(sum);
-    
-}
-
-$("table").on("keyup", ".txt", function () {
-    calculateSum();
-});
-
-
-function calculateSumtotalPassing() {
-
-    var sum = 0;
-    //iterate through each textboxes and add the values
-    $(".pas").each(function () {
-
-        //add only if the value is number
-        if (!isNaN(this.value) && this.value.length != 0) {
-            sum += parseFloat(this.value);
-        }
-
-    });
-    //.toFixed() method will roundoff the final sum to 2 decimal places
-   var fds=sum;
-   //$("#").html(sum.toFixed(2));
-   $("#totalPas").val(sum);
-    
-}
-
-$("table").on("keyup", ".pas", function () {
-	calculateSumtotalPassing();
-});
-
-
-
-
-
 
 
 });
@@ -178,7 +93,7 @@ $("table").on("keyup", ".pas", function () {
 						
 					
 					</div>
-					<form id="validation-form" action="#"  th:action="@{/saveLocalConvyence}" th:object="${localConvyence}" method="post">
+					<form id="validation-form" action="#"  th:action="@{/saveAttendenceRegister}" th:object="${attendenceRegister}" method="post">
 				              	<div class="row">
 					
 							<div class="col-12">
@@ -192,33 +107,33 @@ $("table").on("keyup", ".pas", function () {
 								</div>
 								<div class="card-body">
 									<div class="form-row">
-												<div class="form-group sm col-md-4">
+												<div class="form-group sm col-md-6">
 											       <label class="form-label">Date</label>
 											       <span class="text-danger">*</span>
-											       <input  type="text"id="localConvDate"name="localConvDate"  class="form-control required">
+											       <input  type="text"id="attendenceDate"name="attendenceDate"  class="form-control required">
 											      </div>
-												<div class="form-group sm col-md-4">
+												<!-- <div class="form-group sm col-md-4">
 													<label class="form-label">Reg Code</label>
 												<label style="color: red">*</label>
-												<select class="form-control select2" name="empCode" id="empCode" onchange="myFunctionEmpCode()" required aria-required="true">
+												<select class="form-control select2" name="regCode" id="regCode" required aria-required="true">
 												 <option value="">Select Employee</option>
 												<option th:each="e :${listEmployee}"th:value="${e.getEmpCode()}" th:text="${e.getEmpName()}"></option>
 											     	</select>
 
-												</div>
+												</div> -->
 										
 										
-										<div class="form-group sm col-md-4">
+										<div class="form-group sm col-md-6">
 													<label class="form-label">Department Code </label>
 												<label style="color: red">*</label>
 												<select class="form-control select2" name="department" id="department" onchange="myFunctionDeptCode()" required aria-required="true">
-												 <option value="">Select Employee</option>
+												 <option value="">Select Department</option>
 												<option th:each="d :${listDepartment}"th:value="${d.getDepartmentCode()}" th:text="${d.getDeptName()}"></option>
 											     	</select>
 												</div>
 								</div>
 								
-									<div class="form-row">
+									<!-- <div class="form-row">
 										<div class="form-group sm col-md-4">
 										<label class="form-label">Employee </label>
 												<label style="color: red">*</label>
@@ -230,7 +145,7 @@ $("table").on("keyup", ".pas", function () {
 												</div>
 										     	
 										   
-												</div>
+												</div> -->
 											
 						      </div>
 	                      </div>
@@ -244,13 +159,15 @@ $("table").on("keyup", ".pas", function () {
 								<div class="col-sm-12" align="right">
 							
 								
-								<a id="add_row" class="fa fa-plus" aria-hidden="true"style="font-size:28px;color:#001080"></a>&nbsp;&nbsp;&nbsp;
+							<!-- 	<a id="add_row" class="fa fa-plus" aria-hidden="true"style="font-size:28px;color:#001080"></a>&nbsp;&nbsp;&nbsp; -->
 								<a id='delete_row'class="fa fa-trash" style="font-size:28px;color:#399490fc"aria-hidden="true"></a>	
 								</div>
 								<div class="table-responsive">
 											<table id="example" aria-describedby="example" class="table" style="width:100%">
 											<thead>
 												<tr>
+											        <th>xx</th>
+											        <th>yy</th>
 													<th>Dept. Name</th>
 													<th>Employee Name.</th>
 													<th>Designation</th>
@@ -268,26 +185,34 @@ $("table").on("keyup", ".pas", function () {
 											</thead>
 											<tbody>
 												<tr id='addr0' >
-
+												
+													<td><input type="text" id="deptCode0" name='deptCode0'placeholder='dept Code' /></td>
+													<td><input type="text" id="empCode0" name='empCode0'placeholder='Emp Code' /></td>
 													<td><input type="text" id="deptName0" name='deptName0'placeholder='Dept' /></td>
 													<td><input type="text" id="empName0"name='empName0'placeholder='emp Name'  /></td>
 													<td><input type="text" id="desgName0"name='desgName0'placeholder='desgName'/></td>
 													
-													<td><select name="modeOfTravel0" id="modeOfTravel0">
+													<td><select name="status0" id="status0">
 															<option value="">Select Type</option>
+															<option value="A">A</option>
+															<option value="B">B</option>
 													</select></td>
 
-													<td><input type="text" name='distanceKm0'placeholder='Shift' /></td>
-													<td><input type="text" name='ltaRate0'placeholder='Shift In'  /></td>
-													<td><input type="text" name='actualAmount0'placeholder='Shift Out' /></td>
-													<td><select name="modeOfTravel0" id="modeOfTravel0">
+													<td><input type="text" name='shiftCode0'placeholder='Shift' /></td>
+													<td><input type="time" name='timeIn0'placeholder='Shift In'  /></td>
+													<td><input type="time" name='timeOut0'placeholder='Shift Out' /></td>
+													<td><select name="status20" id="status20">
 															<option value="">Select Type</option>
+															<option value="A">A</option>
+															<option value="B">B</option>
 													</select></td>
-												 <td><input type="text" name='actualAmount0'placeholder='Actual Time'/></td>
-											    <td><input type="text" name='actualAmount0'placeholder='Actual Time out'/></td>
-												<td><input type="text" name='actualAmount0'placeholder='over time' /></td>
-												<td><select name="modeOfTravel0" id="modeOfTravel0">
+												 <td><input type="time" name='aTimeIn0'placeholder='Actual Time'/></td>
+											    <td><input type="time" name=' aTimeOut0'placeholder='Actual Time out'/></td>
+												<td><input type="text" name='overTime0'placeholder='over time' /></td>
+												<td><select name="statusTemp0" id="statusTemp0">
 															<option value="">Select Type</option>
+															<option value="A">A</option>
+															<option value="B">B</option>
 													</select></td>
 												</tr>
 												<tr id='addr1'></tr>
@@ -371,11 +296,11 @@ $("table").on("keyup", ".pas", function () {
 	<script>
 		$(function() {
 
-			$("input[name='localConvDate']").daterangepicker({
+			$("input[name='attendenceDate']").daterangepicker({
 				singleDatePicker: true,
 			    autoApply: true,
 				locale: {
-		            format: 'DD/MM/YYYY'
+		            format: 'YYYY/MM/DD'
 		        },
 				showDropdowns: true
 			});
@@ -420,11 +345,11 @@ $("table").on("keyup", ".pas", function () {
 
 	<script>
 	function myFunctionDeptCode(){
-		
-		$("example > tbody:last").children().remove();
+		  
+		//$("example > tbody:last").children().remove();
 		 var deptCode= document.getElementById('department').value
-	    console.log("ajax request : "+ empCode);
-		 
+	    console.log("ajax request : "+ deptCode);
+		//  $("#example tr").remove();  
 	    const xhr = new XMLHttpRequest();
 	    xhr.open('GET','./viewEmployeeDetailsBydepartment/'+deptCode,true);
 	    xhr.getResponseHeader('content-type','application/json');
@@ -433,8 +358,16 @@ $("table").on("keyup", ".pas", function () {
 	        if(this.status===200){
 	            let obj = JSON.parse(this.responseText);
 	            console.log(obj);
+	         
+	           // $('#example tr').slice(1).remove()
 	            var i;
+	           
 	            for (i = 0; i < obj.length; i++) {
+	            	
+	            	
+	            	
+	            	 $('#deptCode'+i).val(obj[i].departmentCode);
+	            	 $('#empCode'+i).val(obj[i].empCode);
 	            	 $('#deptName'+i).val(obj[i].deptName);
 	 	            $('#empName'+i).val(obj[i].empName);
 	 	            $('#desgName'+i).val(obj[i].desgName);	
@@ -445,14 +378,23 @@ $("table").on("keyup", ".pas", function () {
 	 	          
 	 	     if( i>0){
 		  
-		    $('#addr'+i).html("<td><input  id='deptName"+i+"' type='text'  class='form-control txt input-md'/> "+
+		    $('#addr'+i).html("<td><input  id='deptCode"+i+"' type='text'  class='form-control txt input-md'/> "+
+		    		"<td><input  id='empCode"+i+"' type='text'  class='form-control txt input-md'/> "+
+		    		"<td><input  id='deptName"+i+"' type='text'  class='form-control txt input-md'/> "+
 		    		"</td><td><input  id='empName"+i+"' type='text' placeholder='name'  class='form-control input-md'>"+
 		    		"</td><td><input  id='desgName"+i+"' type='text'  placeholder='Desi'class='form-control input-md'>"+
 		    		"<td><select class=' form-control input-md' id='modeOfTravel'name='modeOfTravel"+i+"'><option value=' '>Select</option><option value='Day'>Day</option><option value='Night'>Night</option></select></td>"+
-		    		"<td><input  name='shift"+i+"' type='text' placeholder='Shift '  class='form-control input-md'></td>"+
-		    		"<td><input  name='shiftIn"+i+"' type='text' placeholder='ShiftIn'  class='form-control input-md'></td>"+
-		    "");
-	 	         
+		    		"<td><input  name='shiftCode"+i+"' type='text' placeholder='Shift '  class='form-control input-md'></td>"+
+		    		"<td><input  name='timeIn"+i+"' type='time' placeholder='Shift In'  class='form-control input-md'></td>"+
+		    		"<td><input  name='timeOut"+i+"' type='time' placeholder='ShiftIn'  class='form-control input-md'></td>"+
+		    		"<td><select class=' form-control input-md' id='modeOfTravel'name='modeOfTravel"+i+"'><option value=' '>Select</option><option value='Day'>Day</option><option value='Night'>Night</option></select></td>"+
+		    		"<td><input  name='aTimeIn"+i+"' type='time' placeholder='Actual Time In'  class='form-control input-md'></td>"+
+		    		"<td><input  name='aTimeOut"+i+"' type='time' placeholder='Actual Time Out'  class='form-control input-md'></td>"+
+		    		"<td><input  name='overTime"+i+"' type='text' placeholder='Over Time '  class='form-control input-md'></td>"+
+		    		"<td><select class=' form-control input-md' id='modeOfTravel'name='modeOfTravel"+i+"'><option value=' '>Select</option><option value='Day'>Day</option><option value='Night'>Night</option></select></td>"+
+		    		"");
+			 $('#deptCode'+i).val(obj[i].departmentCode);
+		        $('#empCode'+i).val(obj[i].empCode);
 	 		   $('#deptName'+i).val(obj[i].deptName);
 	            $('#empName'+i).val(obj[i].empName);
 	            $('#desgName'+i).val(obj[i].desgName);
@@ -461,8 +403,9 @@ $("table").on("keyup", ".pas", function () {
 	 		    $('#_cr').val(i+1);
 	 	          
 	            }
+	 	  
 	            }
-	            
+	          
 	            $("#delete_row").click(function(){
 	         	   
 	       	  	 if(i>1){
@@ -491,35 +434,7 @@ $("table").on("keyup", ".pas", function () {
 	}
 
 
-	/*  function xyz()
-	   {
-		alert("hello");
-		   var i=1
-		  
-		    $('#addr'+i).html("<td><input id='deptName' name='deptName"+i+"' type='text'  class='form-control txt input-md'/> "+
-		    		"</td><td><input  name='empName"+i+"' type='text' placeholder='name'  class='form-control input-md'>"+
-		    		"</td><td><input  name='desgName"+i+"' type='text'  placeholder='Desi'class='form-control input-md'>"+
-		    		
-		    		"<td><select class=' form-control input-md' id='modeOfTravel'name='modeOfTravel"+i+"'><option value=' '>Select</option><option value='Day'>Day</option><option value='Night'>Night</option></select></td>"+
-		    		"<td><input  name='distanceKm"+i+"' type='text' placeholder='Shift In'  class='form-control input-md'></td>"+
-		    		"<td><input  name='distanceKm"+i+"' type='text' placeholder='Shift In'  class='form-control input-md'></td>"+
-		    		"<td><input  name='ltaRate"+i+"' type='text' placeholder='Shift Out'  class='form-control input-md'></td>"+
-		    		"<td><select class=' form-control input-md' id='modeOfTravel'name='modeOfTravel"+i+"'><option value=' '>Select</option><option value='Day'>Day</option><option value='Night'>Night</option></select></td>"+
-		    		"<td><input  name='distanceKm"+i+"' type='text' placeholder='Shift In'  class='form-control input-md'></td>"+
-		    		"<td><input  name='ltaRate"+i+"' type='text' placeholder='Shift Out'  class='form-control input-md'></td>"+
-		    		"<td><input  name='actualAmount"+i+"' type='text' placeholder='Over Time'  class=' txt form-control input-md'></td>"+
-		    		"<td><select class=' form-control input-md' id='modeOfTravel'name='modeOfTravel"+i+"'><option value=' '>Select</option><option value='Day'>Day</option><option value='Night'>Night</option></select></td>"+
-		    		
-		    		
-		    		"");
-
-		    $('#example').append('<tr id="addr'+(i+1)+'"></tr>');
-		    $('#_cr').val(i+1);
-		    
-		    i++;  
-	   
-	   }
- */
+	
 	
 	
 	</script>

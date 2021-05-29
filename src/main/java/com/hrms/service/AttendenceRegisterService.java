@@ -13,5 +13,9 @@ public interface AttendenceRegisterService {
 	
 	public List<AttendenceRegister> findAllAttendenceBetweenDate(Date FromDate,Date toDate);
 
+
+	public boolean addAttendenceRegister(AttendenceRegister attn);
+
 	public AttendenceRegister findAttendenceRegisterByEmpCode(String empCode);
+
 }

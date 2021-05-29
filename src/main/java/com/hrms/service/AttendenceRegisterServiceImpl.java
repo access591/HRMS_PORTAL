@@ -75,6 +75,20 @@ public class AttendenceRegisterServiceImpl implements AttendenceRegisterService{
 	}
 
 	@Override
+	public boolean addAttendenceRegister(AttendenceRegister attn) {
+		Session s=sessionFactory.openSession();
+		s.beginTransaction();
+		
+		// TODO Auto-generated method stub
+		s.save(attn);
+		s.getTransaction().commit();
+		s.clear();
+		s.close();
+		return true;
+	}
+	}
+
+
 	public AttendenceRegister findAttendenceRegisterByEmpCode(String empCode) {
 		
 		try {
@@ -95,3 +109,4 @@ public class AttendenceRegisterServiceImpl implements AttendenceRegisterService{
 	}
 
 }
+
