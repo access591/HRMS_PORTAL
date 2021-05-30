@@ -92,13 +92,13 @@ body {
 												<div class="form-group">
 													<label> Department Code </label> 
 													<input type="text" class="form-control" id="departmentId"
-														value="" th:field="*{deptCode}" readonly style="background-color:#FFFFFF">
+														value="" th:field="*{departmet.departmentCode}" readonly style="background-color:#FFFFFF">
 												</div>
 											</div>
 											<div class="col-12 col-lg-6">
 												<label class="form-label">Department Name</label> 
 												<input type="text" class="form-control" id="departmentId"
-														value="" th:field="*{deptCode}" readonly style="background-color:#FFFFFF">
+														value="" th:field="*{departmet.deptName}" readonly style="background-color:#FFFFFF">
 											</div>
 										</div>
 										<div class="row">
@@ -164,11 +164,11 @@ body {
 
 														<td><input type="text" 
 															id="desigCode"
-															th:field="*{employeRequisitionDetail[__${stat.index}__].desigCode}"readonly style="width: 130px;background-color:#FFFFFF"></td>
+															th:field="*{employeRequisitionDetail[__${stat.index}__].designation.desgCode}"readonly style="width: 130px;background-color:#FFFFFF"></td>
 
 														<td><input type="text"
 															id="desigCode"
-															th:field="*{employeRequisitionDetail[__${stat.index}__].desigCode}" readonly style="width: 130px;background-color:#FFFFFF"></td>
+															th:field="*{employeRequisitionDetail[__${stat.index}__].designation.desgName}" readonly style="width: 130px;background-color:#FFFFFF"></td>
 
 
 														

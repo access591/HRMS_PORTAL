@@ -146,7 +146,7 @@ body {
 																<option value=" ">Select ReqCode</option>
 																<option 
 																th:each="employeeReq : ${listEmployeeRequisition}"
-																th:text="${employeeReq.reqCode}" th:value="${employeeReq.reqDate}"></option>
+																th:text="${employeeReq.reqCode}" th:value="${employeeReq.reqCode}"></option>
 																
 														</select>
 														
@@ -359,9 +359,31 @@ body {
 		function selectDateByReqCode(){
 			var selectReqCode = document.getElementById("reqCode").value;
 			console.log("selectReqCode value : "+selectReqCode);
-			document.getElementById("reqDate0").value = selectReqCode;
 			
+			
+				const xhr = new XMLHttpRequest();
+				xhr.open('GET', 'getRequisitionByReqCode/' + selectReqCode,
+						true);
+				xhr.getResponseHeader('content-type', 'application/json');
+				xhr.onload = function() {
+					if (this.status === 200) {
+						let obj = JSON.parse(this.responseText);
+						console.log(obj);
+						document.getElementById("reqDate0").value = obj.reqDate;
+						
+						
+
+					} else {
+						console.error("some error occured");
+					}
+
+				}
+				xhr.send();
+			
+
 		}
+			
+		
 	</script>
 
 

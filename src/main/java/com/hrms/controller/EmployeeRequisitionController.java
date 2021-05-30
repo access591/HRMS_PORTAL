@@ -141,6 +141,15 @@ public class EmployeeRequisitionController {
 		System.out.println("=====================>");
 		
 		EmployeeRequisition requisition = employeeRequisitionService.findEmployeeRequisitiondById(reqCode);
+		System.out.println("requisition detail : "+ requisition.getReqCode());
+		
+		System.out.println("requisition detail : "+requisition.getEmployeRequisitionDetail().size());
+		
+		System.out.println("requisition detail : "+requisition.getEmployeRequisitionDetail().get(0).getAgeFrom());
+		
+		//System.out.println("desgnation through requisition : " + requisition.getEmployeRequisitionDetail().get(0).getDesignation().getDesgCode());
+		
+
 		//requisition.getEmployeRequisitionDetail()
 		if(requisition != null) {
 			model.addAttribute("req", requisition);
@@ -155,8 +164,11 @@ public class EmployeeRequisitionController {
 		
 		  System.out.println("=====================>update employee Requisition");
 		  
+		ArrayList<EmployeeRequisitionDetail> employeeRequisitionDetail = new ArrayList<EmployeeRequisitionDetail>();
+		
 		for(EmployeeRequisitionDetail eDetail : employeeRequisition.getEmployeRequisitionDetail()) {
 			eDetail.setEmployeeRequisition(employeeRequisition);
+			employeeRequisitionDetail.add(eDetail);
 		}
 		
 		this.employeeRequisitionService.updateEmployeeRequisition(employeeRequisition);

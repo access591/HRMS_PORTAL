@@ -52,9 +52,9 @@ public class EmployeeRequisitionApprovalController {
 		for(int i=0;i<listEmployeeReq.size();i++) {
 			Department department;
 			try {
-				department = departmentService.findDepartmentById(listEmployeeReq.get(i).getDeptCode());
+				//department = departmentService.findDepartmentById(listEmployeeReq.get(i).getDeptCode());
 				EmployeeRequisition em = listEmployeeReq.get(i);
-				CommonUtil commonUtill = new CommonUtil(department.getDeptName(),em.getReqCode(),em.getReqDate(),
+				CommonUtil commonUtill = new CommonUtil(em.getDepartmet().getDeptName() ,em.getReqCode(),em.getReqDate(),
 						em.getReqPriority(),em.getReqApprover(),em.getRemarks(),em.getInsBy(),em.getInsDate(),
 						em.getReqTill(),em.getApproveDate(),em.getStatus());
 				commonUtill.setStatus(em.getStatus());

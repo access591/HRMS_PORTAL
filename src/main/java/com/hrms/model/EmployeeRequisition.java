@@ -3,6 +3,8 @@ package com.hrms.model;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -11,6 +13,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -33,8 +37,10 @@ public class EmployeeRequisition implements Serializable {
 	 @Temporal(TemporalType.DATE)
 	 private Date reqDate;
 	 
-	 @Column(name="DEPT_CODE")
-	 private String deptCode;
+	 
+	 @ManyToOne
+	 @JoinColumn(name="DEPT_CODE")
+	 private Department departmet;
 	 
 	 @Column(name="REQ_PRIORITY")
 	 private String reqPriority;
@@ -68,6 +74,7 @@ public class EmployeeRequisition implements Serializable {
 	 private List<EmployeeRequisitionDetail> employeRequisitionDetail;
 
 	 
+	@JsonManagedReference
 	public List<EmployeeRequisitionDetail> getEmployeRequisitionDetail() {
 		return employeRequisitionDetail;
 	}
@@ -87,12 +94,15 @@ public class EmployeeRequisition implements Serializable {
 	public void setReqDate(Date reqDate) {
 		this.reqDate = reqDate;
 	}
-	public String getDeptCode() {
-		return deptCode;
+	
+	
+	public Department getDepartmet() {
+		return departmet;
 	}
-	public void setDeptCode(String deptCode) {
-		this.deptCode = deptCode;
+	public void setDepartmet(Department departmet) {
+		this.departmet = departmet;
 	}
+	
 	public String getReqPriority() {
 		return reqPriority;
 	}

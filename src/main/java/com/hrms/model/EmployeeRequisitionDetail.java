@@ -14,6 +14,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 
 
 @Entity
@@ -37,8 +39,9 @@ public class EmployeeRequisitionDetail implements Serializable{
 	@Column(name="REQ_DATE")
 	private Date reqDate;
 	
-	@Column(name="DESIG_CODE")
-	private String desigCode;
+	@ManyToOne
+	@JoinColumn(name="DESIG_CODE")
+	private Designation designation;
 	
 	@Column(name="LOCATION")
 	private String location;
@@ -95,7 +98,7 @@ public class EmployeeRequisitionDetail implements Serializable{
 		super();
 		
 		//this.reqDate = reqDate;
-		this.desigCode = desigCode;
+		
 		this.location = location;
 		this.sex = sex;
 		this.ageFrom = ageFrom;
@@ -113,6 +116,15 @@ public class EmployeeRequisitionDetail implements Serializable{
 	}
 	
 	
+	
+
+	public Designation getDesignation() {
+		return designation;
+	}
+
+	public void setDesignation(Designation designation) {
+		this.designation = designation;
+	}
 
 	public Long getReqDetailCode() {
 		return reqDetailCode;
@@ -124,7 +136,7 @@ public class EmployeeRequisitionDetail implements Serializable{
 
 	
 	
-	
+	@JsonBackReference
 	public EmployeeRequisition getEmployeeRequisition() {
 		return employeeRequisition;
 	}
@@ -133,13 +145,7 @@ public class EmployeeRequisitionDetail implements Serializable{
 		this.employeeRequisition = employeeRequisition;
 	}
 
-	public String getDesigCode() {
-		return desigCode;
-	}
-
-	public void setDesigCode(String desigCode) {
-		this.desigCode = desigCode;
-	}
+	
 
 	public String getLocation() {
 		return location;

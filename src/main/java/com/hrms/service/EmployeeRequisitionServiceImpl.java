@@ -37,9 +37,14 @@ public class EmployeeRequisitionServiceImpl implements EmployeeRequisitionServic
 	}
 
 	@Override
-	public EmployeeRequisition findEmployeeRequisitiondById(String empCode) {
+	public EmployeeRequisition findEmployeeRequisitiondById(String reqCode) {
 		
-		return this.employeRequisitionDao.findById(empCode);
+		Session session = sessionFactory.openSession();
+		Query<EmployeeRequisition> query = session.createQuery("from EmployeeRequisition e where e.reqCode = :reqCode", EmployeeRequisition.class);
+		query.setParameter("reqCode", reqCode);
+		EmployeeRequisition er = query.getSingleResult();
+		return er;
+		//return this.employeRequisitionDao.findById(reqCode);
 	}
 
 	@Override
@@ -48,11 +53,12 @@ public class EmployeeRequisitionServiceImpl implements EmployeeRequisitionServic
 		Session session = sessionFactory.openSession();
 		//Transaction tx = session.beginTransaction();
 		EmployeeRequisition emp = session.find(EmployeeRequisition.class, c.getReqCode());
-		emp.getEmployeRequisitionDetail().clear();;
+		emp.getEmployeRequisitionDetail().clear();
 		//emp.setEmployeRequisitionDetail(c.getEmployeRequisitionDetail());
 		emp.getEmployeRequisitionDetail().addAll(c.getEmployeRequisitionDetail());
+		
 		session.beginTransaction();
-		session.merge(emp);
+		session.merge(c);
 		session.getTransaction().commit();
 		
 		

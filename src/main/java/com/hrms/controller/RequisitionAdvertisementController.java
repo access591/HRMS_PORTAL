@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hrms.model.EmployeeRequisition;
@@ -143,6 +144,15 @@ public class RequisitionAdvertisementController {
 		  reqAdvertisementService.updateReqAdvertisement(reqAdvertisement);
 		
 		return "redirect:advertisment";
+	}
+	
+	@ResponseBody
+	@GetMapping("getRequisitionByReqCode/{reqCode}")
+	public EmployeeRequisition getEmployeeRequisitionByReqCode(@PathVariable("reqCode") String reqCode) {
+		
+		return employeeRequisitionService.findEmployeeRequisitiondById(reqCode);
+		
+
 	}
 
 }
