@@ -116,6 +116,18 @@ public class EmpMontOvertimeRegisterImpl implements EmpMontOvertimeRegister{
 		s.close();
 		return true;
 	}
+
+	@Override
+	public List<EmpMonOvertime> getAllMontOvertimeRegister() {
+		// TODO Auto-generated method stub
+		return empMontOvertimeDao.findAll();
+	}
+
+	@Override
+	public void removeMonthOverTimeRegister(long id) {
+	this.empMontOvertimeDao.delete(id);
+		
+	}
 	
 	//SELECT e FROM Employee e WHERE MONTH(e.oTimeMonth) = :month
 

@@ -298,26 +298,27 @@ $("table").on("keyup", ".pas", function () {
 												<th scope="col">Employee Name</th>
 												<th scope="col">Department</th>
 												<th scope="col">Designation</th>
+												<th scope="col">Over Time Date</th>
 												<th scope="col">Action </th>
 											</tr>
-
 										</thead>
 										<tbody>
-										<!-- <tr th:each = "listOfloc : ${listOfLoc}">
-										<td th:text="${listOfloc.localConvId}" ></td>
-										<td th:text="${listOfloc.empName}"></td>
-										<td  th:text="${listOfloc.deptName}"></td>
-										<td  th:text="${listOfloc.desgName}"></td>
-										<td  th:text="${tourPlan.tourPlanDate}"></td>
+											<tr th:each = "ovr : ${overRegEval}">
+										<td th:text="${ovr.id}" ></td>
+										<td th:text="${ovr.empName}"></td>
+										<td  th:text="${ovr.deptName}"></td>
+										<td  th:text="${ovr.desgName}"></td>
+										<td  th:text="${#dates.format(ovr.oTimeMonth,'dd-MM-yyyy')}"></td>
 										  <td>
-										  <a th:href="@{/editLocalConvyence/{id}/(id=${listOfloc.localConvId})}"><em class="fa fa-edit"></em></a>
+										<!--   <a th:href="@{/editLocalConvyence/{id}/(id=${ovr.id})}"><em class="fa fa-edit"></em></a> -->
 										  
-										     <a th:href="@{/deleteLocalConveyance/{id}/(id=${listOfloc.localConvId})}"onclick="return confirm('Are you sure?')"><em class="fa fa-times"></em></a>
+										     <a th:href="@{/deleteMonthOverTime/{id}/(id=${ovr.id})}"onclick="return confirm('Are you sure?')"><em class="fa fa-times"></em></a>
 									
 									
 										</td>  
 									
-										</tr> -->
+										</tr>
+									
 									
 									
 										</tbody>

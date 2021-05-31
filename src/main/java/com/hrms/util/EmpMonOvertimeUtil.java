@@ -20,7 +20,7 @@ public class EmpMonOvertimeUtil {
 	private String oTimeRate;
 	private String payableAmt;
 	private String status;
-	
+	private long id;
 	
 	
 	
@@ -83,6 +83,12 @@ public class EmpMonOvertimeUtil {
 	}
 	public void setDesgName(String desgName) {
 		this.desgName = desgName;
+	}
+	public long getId() {
+		return id;
+	}
+	public void setId(long id) {
+		this.id = id;
 	}
 	
 }
