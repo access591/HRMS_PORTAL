@@ -28,19 +28,18 @@ public class OvertimeRegister {
 	private Date overTimeDate;
 	
 	@Column(name="TIME_IN")
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private Date timeIN;
+	
+	private String timeIN;
 	
 	@Column(name="TIME_OUT")
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private Date timeOut;
+	private String timeOut;
 	
-	@Column(name="INS_BY")
+	@Column(name = "INS_BY", updatable = false)
 	private String insBy;
-	
-	@Column(name="INS_DATE")
-	private Date insDate;
-	
+
+	@Column(name = "INS_DATE", updatable = false)
+	private Date insDate = new Date();
+
 	@Column(name="ESI_YN")
 	private String esiYn;
 	
@@ -87,21 +86,6 @@ public class OvertimeRegister {
 		this.overTimeDate = overTimeDate;
 	}
 
-	public Date getTimeIN() {
-		return timeIN;
-	}
-
-	public void setTimeIN(Date timeIN) {
-		this.timeIN = timeIN;
-	}
-
-	public Date getTimeOut() {
-		return timeOut;
-	}
-
-	public void setTimeOut(Date timeOut) {
-		this.timeOut = timeOut;
-	}
 
 	public String getInsBy() {
 		return insBy;
@@ -157,6 +141,22 @@ public class OvertimeRegister {
 
 	public void setOverTime(String overTime) {
 		this.overTime = overTime;
+	}
+
+	public String getTimeIN() {
+		return timeIN;
+	}
+
+	public void setTimeIN(String timeIN) {
+		this.timeIN = timeIN;
+	}
+
+	public String getTimeOut() {
+		return timeOut;
+	}
+
+	public void setTimeOut(String timeOut) {
+		this.timeOut = timeOut;
 	}
 	
 	
