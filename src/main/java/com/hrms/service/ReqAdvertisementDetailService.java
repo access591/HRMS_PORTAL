@@ -12,5 +12,6 @@ public interface ReqAdvertisementDetailService {
 	public void updateReqAdvertisement(ReqAdvertisementDetail a);
 	public void removeReqAdvertisement(Long id);
 	
+	
 
 }

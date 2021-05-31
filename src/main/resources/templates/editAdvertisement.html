@@ -133,7 +133,7 @@ body {
 													<tr th:each="row, stat :${reqAdvertisement.listReqAdvertisementDetail}">
 
 
-														<td><input th:field="*{listReqAdvertisementDetail[__${stat.index}__].reqCode}"class="form-control text-center" readonly>
+														<td><input th:field="*{listReqAdvertisementDetail[__${stat.index}__].employeeRequisition.reqCode}"class="form-control text-center" readonly>
 																
 																
 																

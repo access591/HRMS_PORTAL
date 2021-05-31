@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hrms.model.EmployeeRequisition;
@@ -69,7 +70,7 @@ public class RequisitionAdvertisementController {
 			model.addAttribute("modules", modules);
 		}
 		
-		List<EmployeeRequisition> listEmployeeRequisition = employeeRequisitionService.findEmployeeReqByStatusN();
+		List<EmployeeRequisition> listEmployeeRequisition = employeeRequisitionService.findEmployeeReqByStatusY();
 		if(listEmployeeRequisition != null) {
 			model.addAttribute("listEmployeeRequisition", listEmployeeRequisition);
 			
@@ -92,11 +93,6 @@ public class RequisitionAdvertisementController {
 	@PostMapping("saveAdvertisement")
 	public String saveAdvertisement(@ModelAttribute("reqAdvertisement")ReqAdvertisement reqAdvertisement,
 			HttpSession session,RedirectAttributes redirectAttributes) {
-		
-		System.out.println("save Advertisement module==>>" + 
-							reqAdvertisement.getListReqAdvertisementDetail().get(0).getReqCode());;
-		List<ReqAdvertisementDetail> listReqAdvertisementDetail = new ArrayList<ReqAdvertisementDetail>();
-		ReqAdvertisementDetail reqAdvtDetail = new ReqAdvertisementDetail();
 		
 		
 		for(ReqAdvertisementDetail eDetail : reqAdvertisement.getListReqAdvertisementDetail()) {
@@ -143,6 +139,15 @@ public class RequisitionAdvertisementController {
 		  reqAdvertisementService.updateReqAdvertisement(reqAdvertisement);
 		
 		return "redirect:advertisment";
+	}
+	
+	@ResponseBody
+	@GetMapping("getRequisitionByReqCode/{reqCode}")
+	public EmployeeRequisition getEmployeeRequisitionByReqCode(@PathVariable("reqCode") String reqCode) {
+		
+		return employeeRequisitionService.findEmployeeRequisitiondById(reqCode);
+		
+
 	}
 
 }

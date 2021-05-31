@@ -87,7 +87,7 @@ body {
 												<div class="form-group">
 													<label> Department Code </label> 
 													<input type="text" class="form-control" id="departmentId"
-														value="" th:field="*{deptCode}" readonly>
+														value="" th:field="*{departmet.departmentCode}" readonly>
 												</div>
 											</div>
 											<div class="col-12 col-lg-6">
@@ -184,10 +184,10 @@ body {
 
 														<td><input type="text" style="width: 90px;"
 															id="desigCode0"
-															name="employeRequisitionDetail[0].desigCode" readonly required></td>
+															name="employeRequisitionDetail[0].designation.desgCode" readonly required></td>
 
 														<td><select id="designationName0" style="width: 130px;"
-															name="employeRequisitionDetail[0].designationName" required
+															name="employeRequisitionDetail[0].designation.desgName" required
 															onchange="selectDesignation()">
 																<option value=" ">Select</option>
 
@@ -312,16 +312,16 @@ body {
 												<td class="text-center">
 													<th:block th:switch="${leave.status}">
 														<div th:case="'Y'">
-															<a th:href="@{viewRequisition/{id}(id=${leave.reqCode})}" class="btn btn-primary"><em class="fa fa-edit"></em></a>		
-															<a th:href="@{deleteRequisition/{id}(id=${leave.reqCode})}" onclick="return confirm('Are you sure?')" class="btn btn-primary"><em class="fa fa-times"></em></a>
+															<a th:href="@{viewRequisition/{id}(id=${leave.reqCode})}"><em class="fa fa-edit"></em></a>		
+															<a th:href="@{deleteRequisition/{id}(id=${leave.reqCode})}" onclick="return confirm('Are you sure?')"><em class="fa fa-times"></em></a>
 														</div>
 														<div th:case="'N'">
-															<a th:href="@{editRequisition/{id}(id=${leave.reqCode})}" class="btn btn-primary"><em class="fa fa-edit"></em></a>		
-														<a th:href="@{deleteRequisition/{id}(id=${leave.reqCode})}" onclick="return confirm('Are you sure?')" class="btn btn-primary"><em class="fa fa-times"></em></a>
+															<a th:href="@{editRequisition/{id}(id=${leave.reqCode})}"><em class="fa fa-edit"></em></a>		
+														<a th:href="@{deleteRequisition/{id}(id=${leave.reqCode})}" onclick="return confirm('Are you sure?')"><em class="fa fa-times"></em></a>
 														</div>
 														<div th:case="'C'">
-															<a th:href="@{viewRequisition/{id}(id=${leave.reqCode})}" class="btn btn-primary"><em class="fa fa-edit"></em></a>		
-														<a th:href="@{deleteRequisition/{id}(id=${leave.reqCode})}" onclick="return confirm('Are you sure?')" class="btn btn-primary"><em class="fa fa-times"></em></a>
+															<a th:href="@{viewRequisition/{id}(id=${leave.reqCode})}"><em class="fa fa-edit"></em></a>		
+														<a th:href="@{deleteRequisition/{id}(id=${leave.reqCode})}" onclick="return confirm('Are you sure?')"><em class="fa fa-times"></em></a>
 														</div>
 														
 													</th:block>

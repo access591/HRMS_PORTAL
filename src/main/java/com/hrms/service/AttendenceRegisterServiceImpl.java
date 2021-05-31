@@ -117,6 +117,24 @@ public class AttendenceRegisterServiceImpl implements AttendenceRegisterService{
 	}
 
 	@Override
+	public List<AttendenceRegister> findAttendenceByEmpStatusAbsent(String empCode) {
+		try {
+			Session session = sessionFactory.openSession();
+			Query<AttendenceRegister> query = session.createQuery("from AttendenceRegister a inner join fetch a.employee e "
+					+ "where e.empCode = :empCode and a.status= :status", AttendenceRegister.class);
+			
+			query.setParameter("empCode", empCode);
+			query.setParameter("status", "Absent");
+			
+			List<AttendenceRegister> result = query.getResultList();
+			System.out.println("result : "+result.size());
+			return result;
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+
 	public void removeAttendanceRegister(int id) {
 		Session session = sessionFactory.openSession();
 		Object o = session.get(AttendenceRegister.class, id);
@@ -127,6 +145,7 @@ public class AttendenceRegisterServiceImpl implements AttendenceRegisterService{
 		session.close();
 		
 	
+
 	}
 
 }

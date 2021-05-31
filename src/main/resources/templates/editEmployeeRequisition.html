@@ -84,12 +84,12 @@ body {
 												<div class="form-group">
 													<label> Department Code </label> 
 													<input type="text" class="form-control" id="departmentId"
-														value="" th:field="*{deptCode}" readonly>
+														value="" th:field="*{departmet.departmentCode}" readonly>
 												</div>
 											</div>
 											<div class="col-12 col-lg-6">
 												<label class="form-label">Department Name</label> <input type="text" class="form-control" id="departmentId"
-														value="" readonly>
+														value="" th:field="*{departmet.deptName}" readonly>
 											</div>
 										</div>
 										<div class="row">
@@ -97,8 +97,8 @@ body {
 												<div class="form-group">
 													<label> Requisition Priorty </label>  
 													<select class="form-control" id="reqPriority"
-														 >
-														 <option disabled>Please Select</option>
+														 th:field="*{reqPriority}">
+														 <option value="" disabled>Please Select</option>
 														 <option value="High">High</option>
 														 <option value="Low">Low</option>
 														 
@@ -160,25 +160,32 @@ body {
 														th:each="row, stat :${req.employeRequisitionDetail}">
 
 
-														<td><input type="text" style="width: 130px;"
+														<td><input type="text" 
 															id="desigCode"
-															th:field="*{employeRequisitionDetail[__${stat.index}__].desigCode}" readonly></td>
+															th:field="*{employeRequisitionDetail[__${stat.index}__].designation.desgCode}"readonly style="width: 130px;background-color:#FFFFFF"></td>
 
-														<td><input type="text" style="width: 130px;"
-															id="desigCode" readonly></td>
+														<td><input type="text"
+															id="desigCode"
+															th:field="*{employeRequisitionDetail[__${stat.index}__].designation.desgName}" readonly style="width: 130px;background-color:#FFFFFF"></td>
 
+														<td><select id="location" style="width: 130px;"
+															th:field="*{employeRequisitionDetail[__${stat.index}__].location}" required>
+																<option value=" ">Select</option>
+																<option value="Court">Court</option>
+																<option value="Department">Department</option>
+														</select></td>
+														
+														<td><select id="sex" style="width: 130px;"
+															th:field="*{employeRequisitionDetail[__${stat.index}__].sex}" required>
+																<option value=" ">Select</option>
+																<option value="Male">Male</option>
+																<option value="Female">Female</option>
+														</select></td>
+
+
+										
 
 														
-
-
-
-														<td><input type="text" style="width: 130px;"
-															id="location"
-															th:field="*{employeRequisitionDetail[__${stat.index}__].location}"></td>
-
-														<td><input type="text" style="width: 130px;"
-															id="sex"
-															th:field="*{employeRequisitionDetail[__${stat.index}__].sex}"></td>
 
 														<td><input name="ageFrom" type="text"
 															style="width: 130px;" id="ageFrom"
@@ -204,9 +211,15 @@ body {
 															style="width: 130px;" id="expMaxMonth"
 															th:field="*{employeRequisitionDetail[__${stat.index}__].maxExperience}"></td>
 
-														<td><input name="vacanncyType" type="text"
-															style="width: 130px;" id="vacancyType"
-															th:field="*{employeRequisitionDetail[__${stat.index}__].vacanncyType}"></td>
+														<td>
+															<select id="vacancyType" style="width: 130px;"
+															th:field="*{employeRequisitionDetail[__${stat.index}__].vacanncyType}" required>
+																<option value=" ">Select</option>
+																<option value="Fresher">Fresher</option>
+																<option value="Experience">Experience</option>
+														</select>
+														</td>
+														
 
 														<td><input name="totalVacancy" type="text"
 															style="width: 130px;" id="totalvacancy"

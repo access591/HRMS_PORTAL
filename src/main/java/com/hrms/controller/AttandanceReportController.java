@@ -67,7 +67,7 @@ public class AttandanceReportController {
 		return "AttendanceRegMothlyReport";
 	}
 	
-	
+	//pending 
 	@PostMapping("createAttendenceMonthly")
 	public String createAttendenceMonthly(@RequestParam("deptCode") String deptCode,
 			@RequestParam("empCode") String empCode,HttpServletRequest request,HttpServletResponse response) {
@@ -75,7 +75,7 @@ public class AttandanceReportController {
 		System.out.println("department code is : " + deptCode);
 		System.out.println("employee code is : " + empCode);
 		
-		//pending 
+		
 		//get record behalf of deptcode and empCode
 		if(deptCode.equals("ALL")) {
 			System.out.println("All record");
@@ -265,6 +265,44 @@ public class AttandanceReportController {
 	
 	
 	
+	
+	// ABSENTISM EMPLOYEE WISE REPORT CONTROLLER   
+	
+	@GetMapping("absentismEmployeePage")
+	public String absentismEmployeeWiseReportPage(Model model , HttpSession session) {
+		
+		String userCode = (String) session.getAttribute("username");
+		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
+		if (modules != null) {
+			model.addAttribute("modules", modules);
+		}
+		List<Department> listDepartment = departmentService.getAllDepartments();
+		if(listDepartment != null) {
+			model.addAttribute("listDepartment", listDepartment);
+		}
+		
+		
+		return "absentismEmployee";
+	}
+	
+	//PENDING
+	@PostMapping("createAbsentEmployeeReport")
+	public String createAbsentEmployeeWiseReport(@RequestParam("deptCode") String deptCode
+			,@RequestParam("empCode") String empCode
+			,@RequestParam("fromDate") Date fromDate
+			,@RequestParam("toDate") String toDate) {
+		System.out.println("employee code : "+ empCode);
+		System.out.println("department code : "+ deptCode);
+		System.out.println("from date : "+ fromDate);
+		System.out.println("to date : "+ toDate);
+		
+		
+		if(!empCode.equals("null") && !empCode.equals("")) {
+			
+		}
+		
+		return "redirect:/absentismEmployeePage";
+	}
 	
 	@ResponseBody
 	@GetMapping("getEmployeeByDeptCode/{deptCode}")
