@@ -1,9 +1,12 @@
 package com.hrms.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -13,10 +16,18 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name="EMP_MON_OVERTIME")
-public class EmpMonOvertime {
+public class EmpMonOvertime implements Serializable {
+
 	
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6303266266695918699L;
+
 	@Id
-	private Long id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long id;
 	
 	@ManyToOne
 	@JoinColumn(name = "EMP_CODE")
@@ -25,44 +36,29 @@ public class EmpMonOvertime {
 	@Column(name="OTIME_MONTH")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date oTimeMonth;
-	
-	@Column(name="ACTUAL_OTIME")
-	private String actualOTime;
-	
-	@Column(name="ESI_OTIME")
-	private String esiOTime;
-	
-	@Column(name="NON_ESI_OTIME")
-	private String nonEsiOtime;
-	
-	@Column(name="BASIC")
-	private String basic;
-	
+
 	@Column(name="OTIME_RATE")
 	private String oTimeRate;
+
+	@Column(name="PAYABLE_AMT")
+	private String payableAmt;
 	
-	@Column(name="ESI_OTIME_AMT")
-	private String esiOtimeAmt;
-	
-	@Column(name="NON_ESI_OTIME_AMT")
-	private String nonEsiOtimeAmt;
 	
 	@Column(name="STATUS")
 	private String status;
 	
-	
-	@Column(name="INST_BY")
+	@Column(name = "INS_BY", updatable = false)
 	private String insBy;
-	
-	@Column(name="INS_DATE")
-	private Date insDate = new Date();
-	
-	@Column(name="ESI_AMT")
-	private String esiAmt;
 
-	public EmpMonOvertime() {
-		super();
-		// TODO Auto-generated constructor stub
+	@Column(name = "INS_DATE", updatable = false)
+	private Date insDate = new Date();
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
 	}
 
 	public Employee getEmployee() {
@@ -81,38 +77,6 @@ public class EmpMonOvertime {
 		this.oTimeMonth = oTimeMonth;
 	}
 
-	public String getActualOTime() {
-		return actualOTime;
-	}
-
-	public void setActualOTime(String actualOTime) {
-		this.actualOTime = actualOTime;
-	}
-
-	public String getEsiOTime() {
-		return esiOTime;
-	}
-
-	public void setEsiOTime(String esiOTime) {
-		this.esiOTime = esiOTime;
-	}
-
-	public String getNonEsiOtime() {
-		return nonEsiOtime;
-	}
-
-	public void setNonEsiOtime(String nonEsiOtime) {
-		this.nonEsiOtime = nonEsiOtime;
-	}
-
-	public String getBasic() {
-		return basic;
-	}
-
-	public void setBasic(String basic) {
-		this.basic = basic;
-	}
-
 	public String getoTimeRate() {
 		return oTimeRate;
 	}
@@ -121,20 +85,12 @@ public class EmpMonOvertime {
 		this.oTimeRate = oTimeRate;
 	}
 
-	public String getEsiOtimeAmt() {
-		return esiOtimeAmt;
+	public String getPayableAmt() {
+		return payableAmt;
 	}
 
-	public void setEsiOtimeAmt(String esiOtimeAmt) {
-		this.esiOtimeAmt = esiOtimeAmt;
-	}
-
-	public String getNonEsiOtimeAmt() {
-		return nonEsiOtimeAmt;
-	}
-
-	public void setNonEsiOtimeAmt(String nonEsiOtimeAmt) {
-		this.nonEsiOtimeAmt = nonEsiOtimeAmt;
+	public void setPayableAmt(String payableAmt) {
+		this.payableAmt = payableAmt;
 	}
 
 	public String getStatus() {
@@ -160,29 +116,5 @@ public class EmpMonOvertime {
 	public void setInsDate(Date insDate) {
 		this.insDate = insDate;
 	}
-
-	public String getEsiAmt() {
-		return esiAmt;
-	}
-
-	public void setEsiAmt(String esiAmt) {
-		this.esiAmt = esiAmt;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
 	
-	
-	
-	
-	
-	
-	
-	
-
 }

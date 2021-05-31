@@ -42,26 +42,15 @@ $(document).ready(function(){
 
     var i=1;
    $("#add_row").click(function(){
-    $('#addr'+i).html("<td><input name='empCode"+i+"' size='10' type='text'placeholder='Employee Code'/> "+
+    $('#addr'+i).html("<td><input name='empCode"+i+"' size='10' type='text'placeholder='Employee Code'/></td>"+
     		
-    		"</td><td><input  name='empName"+i+"' type='text' placeholder='Employee Name'/>"+
+    		"<td><input  name='empName"+i+"' type='text' placeholder='Employee Name'/></td>"+
     		
-    		"</td><td><input  name='vistPlace"+i+"' type='text'  placeholder='Designation'/>"+
+    		"<td><input  name='vistPlace"+i+"' type='text'  placeholder='OverTime Rate'size='10'/></td>"+
     		
-    		"</td><td><input  name='purposeOfVist"+i+"'size='8' type='text' placeholder='Over Time Rate'/></td>"+
+    		"<td><input  name='payAb"+i+"' type='text' placeholder='Payable Amount'size='10'/></td>"+
     		
-    		"</td><td><input  name='purposeOfVist"+i+"' type='text' placeholder='In Hours'size='6'/></td>"+
-    		
-    		"<td><input  name='distanceKm"+i+"' type='text' placeholder='Over Time' size='6'/></td>"+
-    		
-    		"<td><input  name='distanceKm"+i+"' type='text' placeholder='ESI Amount'size='5'/></td>"+
-    		
-    		"<td><input  name='ltaRate"+i+"' type='text' placeholder='Amount After'size='5'/></td>"+
-    		
-    		"<td><input  name='distanceKm"+i+"' type='text' placeholder='Payable Amount'size='5'/></td>"+
-    		
-    		"<td><select class='form-control input-md' id='modeOfTravel'name='modeOfTravel"+i+"'><option value=' '>Select</option><option value='Day'>Day</option><option value='Night'>Night</option></select></td>"+
-    		
+    		"<td><select class='form-control input-md' id='modeOfTravel'name='modeOfTravel"+i+"'><option value=' '>Select</option><option value='Y'>Yes</option><option value='N'>No</option></select></td>"+
     		
     		"");
 
@@ -179,7 +168,7 @@ $("table").on("keyup", ".pas", function () {
 						
 					
 					</div>
-					<form id="validation-form" action="#"  th:action="@{/saveLocalConvyence}" th:object="${localConvyence}" method="post">
+					<form id="validation-form" action="#"  th:action="@{/saveOvertimeEvaluation}" th:object="${monthOverTimeRegister}" method="post">
 				              	<div class="row">
 					
 							<div class="col-12">
@@ -196,7 +185,7 @@ $("table").on("keyup", ".pas", function () {
 												<div class="form-group sm col-md-4">
 											       <label class="form-label">Over Time Date</label>
 											       <span class="text-danger">*</span>
-											       <input  type="text"id="localConvDate"name="localConvDate"  class="form-control required">
+											       <input  type="text"id="oTimeMonth"name="oTimeMonth"  class="form-control required">
 											      </div>
 												
 										
@@ -204,9 +193,9 @@ $("table").on("keyup", ".pas", function () {
 										<div class="form-group sm col-md-4">
 													<label class="form-label">Department Code </label>
 												<label style="color: red">*</label>
-												<select class="form-control select2" name="empCode" id="empCode" onchange="myFunctionEmpCode()" required aria-required="true">
+												<select class="form-control select2" name="departmentCode" id="departmentCode" onchange="myFunctionDeptCode()" required aria-required="true">
 												 <option value="">Select Employee</option>
-												<option th:each="e :${listEmployee}"th:value="${e.getEmpCode()}" th:text="${e.getEmpName()}"></option>
+												<option th:each="e :${listDepartment}"th:value="${e.getDepartmentCode()}" th:text="${e.getDeptName()}"></option>
 											     	</select>
 												</div>
 												
@@ -215,7 +204,7 @@ $("table").on("keyup", ".pas", function () {
 												<label style="color: red">*</label>
 												<select class="form-control select2" name="empCode" id="empCode" onchange="myFunctionEmpCode()" required aria-required="true">
 												 <option value="">Select Employee</option>
-												<option th:each="e :${listEmployee}"th:value="${e.getEmpCode()}" th:text="${e.getEmpName()}"></option>
+												
 											     	</select>
 
 												</div>
@@ -246,39 +235,29 @@ $("table").on("keyup", ".pas", function () {
 										<table id="example" aria-describedby="example" class="table" style="width:100%">
 											<thead>
 												<tr>
-													<th scope="col" rowspan="4">Employee Code </th>
-													<th scope="col"  rowspan="4">Employee Name.</th>
-													<th  scope="col" rowspan="4">Father Name</th>
-													<th scope="col" rowspan="4">Over Time Rate </th>
-													<th scope="col" colspan="4" style="text-align:center">ESI Applicable </th>
-													<th scope="col" rowspan="4">payable Amount </th>
-													<th scope="col" rowspan="4">Status </th>
+													<th scope="col">Employee Code </th>
+													<th scope="col" >Employee Name.</th>
+											         <th scope="col">Designation</th>
+													<th scope="col">Over Time Rate </th>
+													<th scope="col" >payable Amount </th>
+													<th scope="col" >Status </th>
 												</tr>
-												<tr style="background-color:#e6e6e6;">
-												<th>Over Time(In Hours)</th>
-													<th>Over Time Amount</th>
-													<th>ESI Amount</th>
-													<th>Amount After Deduction </th>
 												
-												</tr>
 												
 											</thead>
 											<tbody>
 												<tr id='addr0'>
 
-													<td><input type="text" name='empCode0'placeholder='Employee Code'size='10' /></td>
-													<td><input type="text" name='empName0'placeholder='Employee Name' /></td>
-													<td><input type="text" name='fName0'placeholder='FName'  value="" /></td>
-													<td><input type="text" name='fName0'placeholder='Over Time Rate' size='8' /></td>
-													
-													
-													<td><input type="text" name='timeIn0'placeholder='In Hours 'size='6'  /></td>
-													<td><input type="text" name='timeOut0'placeholder='Over Time Amount'size='6'  /></td>
-													<td><input type="text" name='hoursR0'placeholder='ESI Amount' size='5' /></td>
-													<td><input type="text" name='hoursR0'placeholder='Amount After Deduction' size='5' /></td>
-													<td><input type="text" name='remark0'placeholder='payable Amount'size='5'/></td>	
-												<td><select name="modeOfTravel0" id="modeOfTravel0">
+												<td><input type="text" id='empCode2' name='empCode0'placeholder='Employee Code'size='10' /></td>
+													<td><input type="text"id='empName' name='empName0'placeholder='Employee Name' /></td>
+													<td><input type="text" id='desgName'name='desiName0'placeholder='Designation'  value="" /></td>
+													<td><input type="text" name='oTimeRate0'placeholder='Over Time Rate'size='10'/></td>
+													<td><input type="text" name='payableAmt0'placeholder='payable Amount'size='10'/></td>	
+												
+												<td><select class='form-control input-md' name="status0" id="status0">
 															<option value="">Select Type</option>
+															<option value="Y">Yes</option>
+															<option value="N">No</option>
 													</select></td>
 														
 													
@@ -314,15 +293,13 @@ $("table").on("keyup", ".pas", function () {
 								<div class="card-body">
 									<table id="datatables-buttons" class="table table-striped display" style="width:100%"aria-describedby="example">
 										<thead>
-											<tr >
+											<tr>
 												<th scope="col">id </th>
 												<th scope="col">Employee Name</th>
 												<th scope="col">Department</th>
 												<th scope="col">Designation</th>
 												<th scope="col">Action </th>
-											</tr >
-											
-
+											</tr>
 
 										</thead>
 										<tbody>
@@ -363,7 +340,7 @@ $("table").on("keyup", ".pas", function () {
 	<script>
 		$(function() {
 
-			$("input[name='localConvDate']").daterangepicker({
+			$("input[name='oTimeMonth']").daterangepicker({
 				singleDatePicker: true,
 			    autoApply: true,
 				locale: {
@@ -410,7 +387,7 @@ $("table").on("keyup", ".pas", function () {
 
 	
 
-	<script>
+	<!-- <script>
 	function myFunctionEmpCode(){
 /* 		 var empCode= $('#empCode option:selected').value; */
 		 var empCode= document.getElementById('empCode').value
@@ -438,10 +415,119 @@ $("table").on("keyup", ".pas", function () {
 
 
 	
-	</script>
+	</script> -->
 	
 
+	<script>
+	function myFunctionDeptCode(){
+/* 		 var empCode= $('#empCode option:selected').value; */
+		 var departmentCode= document.getElementById('departmentCode').value
+	    console.log("ajax request : "+ departmentCode);
+	    const xhr = new XMLHttpRequest();
+	    xhr.open('GET','./viewMonthOverTimeRegisterBydepartment/'+departmentCode,true);
+	    xhr.getResponseHeader('content-type','application/json');
+	    xhr.onload = function(){
+	        if(this.status===200){
+	            let obj = JSON.parse(this.responseText);
+	            console.log(obj);
+	            
+	            $('#empCode').empty();
+	            $('#empCode').append(
+						$('<option>').val("").text("Select Employee"));
+					
+	            $('#empName').val(obj.empName);
+	            $('#empCode').val(obj.empCode);
+	            
+	            $.each(obj,
+						function(i, item) {
+							/* console.log(" i " + i + " item : "
+									+ item.empCode);
+							console.log(" i " + i + " item : "
+									+ item.empName); */
+							
+							
+							$('#empCode').append(
+							$('<option>').val(this.empCode).text(this.empName));
+						});
+	        }
+	        else{
+	            console.error("some error occured");
+	        }
+		
+	    }
+	    xhr.send();
+	}
 
+	</script>
+			<script>
+	function myFunctionEmpCode(){
+		  
+		 var empCode= document.getElementById('empCode').value
+	    console.log("ajax request : "+ empCode);
+	
+	    const xhr = new XMLHttpRequest();
+	    xhr.open('GET','./viewMonthOverTimeRegisterByEmployee/'+empCode,true);
+	    xhr.getResponseHeader('content-type','application/json');
+	    xhr.onload = function(){
+	    	 
+	        if(this.status===200){
+	            let obj = JSON.parse(this.responseText);
+	            console.log(obj);
+	         
+	           // $('#example tr').slice(1).remove()
+	            var i=0;
+	 
+	            	 $('#empCode2').val(obj.empCode);
+	 	            $('#empName').val(obj.empName);
+	 	            $('#desgName').val(obj.desgName);	
+	 	       
+	 	        
+	 	      
+	 	     if( i>0){
+		  
+		    $('#addr'+i).html("<td><input id='empCode2"+i+"' name='empCode"+i+"' size='10' type='text'placeholder='Employee Code'/> "+
+		    		"</td><td><input   id='empName"+i+"'name='empName"+i+"' type='text' placeholder='Employee Name'/>"+
+		    		"</td><td><input  id='desgName"+i+"'name='desgName"+i+"' type='text'  placeholder='Designation'/>"+
+		    		
+		    		"");
+
+		        $('#empCode2"+i+"').val(obj.empCode);
+	            $('#empName"+i+"').val(obj.empName);
+	            $('#desgName"+i+"').val(obj.desgName);
+	            
+	            
+	            
+	            $('#example').append('<tr id="addr'+(i+1)+'"></tr>');
+	 		    $('#_cr').val(i+1);
+	 	          
+	            }
+	 	  
+	       
+	            $("#delete_row").click(function(){
+	         	   
+	       	  	 if(i>1){
+	       			 $("#addr"+(i-1)).html('');
+	       			 $('#_cr').val(i - 1);
+	       			 i--;
+	       			 
+	       			 }
+	       		 });
+	            
+	        
+	        }
+	        else{
+	            console.error("some error occured");
+	        }
+		
+	    }
+	    xhr.send();
+	}
+
+
+	
+	
+	
+	</script>
 
 
 
