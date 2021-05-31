@@ -4,11 +4,14 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.hrms.model.ReqAdvertisementDetail;
 import com.hrms.repository.ReqAdvertisementDetailDao;
 
+@Service
 public class ReqAdvertisementDetailServiceIpml implements ReqAdvertisementDetailService{
 
 	@Autowired ReqAdvertisementDetailDao reqAdvertisementDetailDao;
@@ -47,5 +50,7 @@ public class ReqAdvertisementDetailServiceIpml implements ReqAdvertisementDetail
 		this.reqAdvertisementDetailDao.delete(id);
 		
 	}
+
+	
 
 }

@@ -42,8 +42,9 @@ public class ReqAdvertisementDetail {
 	@Column(name="REMARKS")
 	private String remarks;
 	
-	@Column(name="REQ_CODE")
-	private String reqCode;
+	@ManyToOne
+	@JoinColumn(name="REQ_CODE")
+	private EmployeeRequisition employeeRequisition;
 	
 	@Column(name="REQ_DATE")
 	private String reqDate;
@@ -104,12 +105,15 @@ public class ReqAdvertisementDetail {
 		this.remarks = remarks;
 	}
 
-	public String getReqCode() {
-		return reqCode;
+	
+	
+
+	public EmployeeRequisition getEmployeeRequisition() {
+		return employeeRequisition;
 	}
 
-	public void setReqCode(String reqCode) {
-		this.reqCode = reqCode;
+	public void setEmployeeRequisition(EmployeeRequisition employeeRequisition) {
+		this.employeeRequisition = employeeRequisition;
 	}
 
 	public String getReqDate() {

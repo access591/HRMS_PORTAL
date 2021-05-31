@@ -24,13 +24,16 @@ import com.hrms.model.ApplicantExpDetail;
 import com.hrms.model.ApplicantInfo;
 import com.hrms.model.Designation;
 import com.hrms.model.Employee;
+import com.hrms.model.EmployeeRequisition;
 import com.hrms.model.MenuModule;
 import com.hrms.model.ReqAdvertisement;
 import com.hrms.model.ReqAdvertisementDetail;
 import com.hrms.service.ApplicantInfoService;
 import com.hrms.service.DesignationService;
+import com.hrms.service.EmployeeRequisitionService;
 import com.hrms.service.EmployeeService;
 import com.hrms.service.ModuleService;
+import com.hrms.service.ReqAdvertisementDetailService;
 import com.hrms.service.RequisitionAdvertisementService;
 
 @Controller
@@ -42,6 +45,8 @@ public class ApplicantInformationController {
 	@Autowired ApplicantInfoService applicantInfoService;
 	@Autowired DesignationService designationService;
 	@Autowired EmployeeService employeeService;
+	@Autowired ReqAdvertisementDetailService reqAdvertisementDetailService;
+	@Autowired EmployeeRequisitionService employeeRequisitionService;
 	
 	
 	
@@ -62,9 +67,17 @@ public class ApplicantInformationController {
 		}
 			
 
-		List<Designation> listDesignation = designationService.getAllDesignations();
-		if(listDesignation != null) {
-			model.addAttribute("listDesignation", listDesignation);
+		List<EmployeeRequisition> listEmployeeRequisition1 = employeeRequisitionService.findEmployeeReqByStatusY();
+		if(listEmployeeRequisition1 != null) {
+			
+			List<EmployeeRequisition> listEmployeeRequisition = new ArrayList<EmployeeRequisition>(); 
+			for(EmployeeRequisition e : listEmployeeRequisition1) {
+				if(!listEmployeeRequisition.contains(e.getDepartmet().getDeptName())) {
+					listEmployeeRequisition.add(e);
+				}
+			}
+			//System.out.println("list employee requisition department : "+ listEmployeeRequisition.get(0).getDepartmet().getDeptName());
+			model.addAttribute("listEmployeeRequisition", listEmployeeRequisition);
 		}
 		
 		List<Employee> listEmployee = employeeService.getAllEmployees();
