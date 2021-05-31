@@ -50,7 +50,7 @@ public class AttendenceReport {
 			
 			//map.put("createdby ", "rahul");
 			
-
+			
 
 			JasperReport report = (JasperReport) JRLoader.loadObjectFromFile(sourceFileName);
 			JasperPrint jasperPrint = JasperFillManager.fillReport(report, map, new JREmptyDataSource());
@@ -261,8 +261,12 @@ public class AttendenceReport {
 			try {
 				AttendenceRegister attendence = attendenceRegisterService.findAttendenceRegisterByEmpCode(sourceData.get(i).getEmployee().getEmpCode());
 				over.setDeptName(attendence.getDepartment().getDeptName());
-				over.setaTimeIn(attendence.getaTimeIn());
-				over.setaTimeOut(attendence.getaTimeOut());
+				
+				
+			//	over.setaTimeIn(attendence.getaTimeIn());
+			//	over.setaTimeOut(attendence.getaTimeOut());
+				
+				
 				over.setOverFlowHrs(attendence.getOverFlowHrs());
 			}catch(Exception e) {
 				e.printStackTrace();
