@@ -3,6 +3,7 @@ package com.hrms.service;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -93,7 +94,7 @@ public class ModuleServiceImpl implements ModuleService {
 		String smCode = subModule.getSubModuleCode();
 		System.out.println("Program module  User Code Test" + ucode);
 		List<Program> programs = moduleDao.getAllProgramList(moduleCode, smCode, ucode);
-		Map<String, String> programMap = new HashMap<String, String>();
+		LinkedHashMap<String, String> programMap = new LinkedHashMap<String, String>();
 		for (Program program : programs) {
 			String name = program.getProgramName();
 			String href = program.getProgramHrefName();

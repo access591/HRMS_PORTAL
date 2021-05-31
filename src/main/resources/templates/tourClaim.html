@@ -42,14 +42,14 @@ $(document).ready(function(){
 
     var i=1;
    $("#add_row").click(function(){
-    $('#addr'+i).html("<td><input name='medStDr"+i+"' type='Date'  class='form-control txt input-md'/> "+
-    		"</td><td><input  name='caseMemoNo"+i+"' type='text' placeholder='Case Memo No'  class='form-control input-md'>"+
-    		"</td><td><input  name='caseMemoDate"+i+"' type='Date'class='form-control input-md'>"+
-    		"</td><td><input  name='passedAmount"+i+"' type='text' placeholder='Vist Place'  class='pas form-control input-md'></td>"+
-    		"<td><select class=' form-control input-md' id='govtexemptionAmount'name='govtexemptionAmount["+i+"].govtexemptionAmount'><option value=' '>Select</option><option value='taxi'>Taxi</option><option value='car'>Car</option></select></td>"+
-    		"<td><input  name='remark"+i+"' type='text' placeholder='Ticket No'  class='form-control input-md'></td>"+
-    		"<td><input  name='compPaid"+i+"' type='text' placeholder='Company Paid'  class='form-control input-md'></td>"+
-    		"<td><input  name='selfPaid"+i+"' type='text' placeholder='Self Paid'  class='form-control input-md'></td>"+
+    $('#addr'+i).html("<td><input name='fromDate"+i+"' type='Date'  class='form-control  input-md'/> "+
+    		"</td><td><input  name='startPlace"+i+"' type='text' placeholder='Start Place'  class='form-control input-md'>"+
+    		"</td><td><input  name='toDate"+i+"' type='Date'class='form-control input-md'>"+
+    		"</td><td><input  name='visitPlace"+i+"' type='text' placeholder='Vist Place'  class='form-control input-md'></td>"+
+    		"<td><select class=' form-control input-md' id='modeOfTravel'name='modeOfTravel"+i+"'><option value=' '>Select</option><option value='taxi'>Taxi</option><option value='car'>Car</option></select></td>"+
+    		"<td><input  name='ticketNo"+i+"' type='text' placeholder='Ticket No'  class='form-control input-md'></td>"+
+    		"<td><input  name='paidCompany"+i+"' type='text' placeholder='Company Paid'  class='txt form-control input-md'></td>"+
+    		"<td><input  name='paidSelf"+i+"' type='text' placeholder='Self Paid'  class='pas form-control input-md'></td>"+
     		"");
 
     $('#tab1').append('<tr id="addr'+(i+1)+'"></tr>');
@@ -62,61 +62,98 @@ $(document).ready(function(){
    $("#delete_row").click(function(){
 	  	 if(i>1){
 			 $("#addr"+(i-1)).html('');
-			 $('#_cr2').val(i - 1);
+			 $('#_cr').val(i - 1);
 			 i--;
-			 calculateSum(),calculateSumtotalPassing(),calculateSumtotalgovt()
+			 calculateSum(),calculateSumtotalPassing(),totaltravalex()
 			 }
+	  	
 		 });
-   var i=1;
+   
+   
+   var J=1;
+   
    $("#tab2_AddRow").click(function(){
-	    $('#addrtabsecond'+i).html("<td><input name='medStDr"+i+"' type='Date'  class='form-control txt input-md'/> "+
-	    		"</td><td><input  name='caseMemoNo"+i+"' type='text' placeholder='Case Memo No'  class='form-control input-md'>"+
-	    		"</td><td><input  name='caseMemoDate"+i+"' type='Date'class='form-control input-md'>"+
-	    		"</td><td><input  name='passedAmount"+i+"' type='text' placeholder='Vist Place'  class='pas form-control input-md'></td>"+
-	    		"<td><select class=' form-control input-md' id='govtexemptionAmount'name='govtexemptionAmount["+i+"].govtexemptionAmount'><option value=' '>Select</option><option value='taxi'>Taxi</option><option value='car'>Car</option></select></td>"+
-	    		"<td><input  name='remark"+i+"' type='text' placeholder='Amount'  class='form-control input-md'></td>"+
-	    		
+	  
+	    $('#addrtabsecond'+J).html("<td><input name='medStDr"+J+"' type='Date'  class='form-control txt input-md'/> "+
+	    		"</td><td><input  name='startPlace"+J+"' type='text' placeholder='Start Place'  class='form-control input-md'>"+
+	    		"</td><td><input  name='toDate"+J+"' type='Date'class='form-control input-md'>"+
+	    		"</td><td><input  name='visitPlace"+J+"' type='text' placeholder='Vist Place'  class='form-control input-md'></td>"+
+	    		"<td><select class=' form-control input-md' id='modeOfTravel'name='modeOfTravel"+J+"'><option value=' '>Select</option><option value='taxi'>Taxi</option><option value='car'>Car</option></select></td>"+
+	    		"<td><input  name='convExpAmount"+J+"' type='text' placeholder='Amount'  class='nbt form-control input-md'></td>"+
 	    		"");
-
-	    $('#tab2').append('<tr id="addrtabsecond'+(i+1)+'"></tr>');
-	    $('#_cr2').val(i+1);
+	    $('#tab2').append('<tr id="addrtabsecond'+(J+1)+'"></tr>');
+	    $('#_cr2').val(J+1);
 	    
-	    i++; 
+	    J++; 
 	});
+   var J=1;
    $("#tab2_delete").click(function(){
-	  	 if(i>1){
-			 $("#addrtabsecond"+(i-1)).html('');
-			 $('#_cr2').val(i - 1);
-			 i--;
-			 calculateSum(),calculateSumtotalPassing(),calculateSumtotalgovt()
+	  
+	  	 if(J>1){
+			 $("#addrtabsecond"+(J-1)).html('');
+			 $('#_cr2').val(J - 1);
+			 J--;
+			 conveysm()
+			 
 			 }
 		 });
 	
    
   
-   var i=1;
+   var K=1;
    
    $("#tab3_AddRow").click(function(){
-	    $('#addrowthired'+i).html("<td><input name='medStDr"+i+"' type='text'  class='form-control  input-md'/> "+
-	    		"</td><td><input  name='caseMemoNo"+i+"' type='Date' placeholder='Case Memo No'  class='form-control input-md'>"+
-	    		"</td><td><input  name='passedAmount"+i+"' type='text' placeholder='Expenses'  class='pas form-control input-md'></td>"+
+	    $('#addrowthired'+K).html("<td><input name='medStDr"+K+"' type='text'  class='form-control  input-md'/> "+
+	    		"</td><td><input  name='caseMemoNo"+K+"' type='Date' placeholder='Case Memo No'  class='form-control input-md'>"+
+	    		"</td><td><input  name='passedAmount"+K+"' type='text' placeholder='Expenses'  class='pas form-control input-md'></td>"+
 	    		"");
 
-	    $('#tab3').append('<tr id="addrowthired'+(i+1)+'"></tr>');
-	    $('#_cr3').val(i+1);
+	    $('#tab3').append('<tr id="addrowthired'+(K+1)+'"></tr>');
+	    $('#_cr3').val(K+1);
 	    
-	    i++; 
+	    K++; 
 	});
    
    
    $("#tab3_delete").click(function(){
 	  	 if(i>1){
-			 $("#addrowthired"+(i-1)).html('');
-			 $('#_cr3').val(i - 1);
-			 i--;
-			 calculateSum(),calculateSumtotalPassing(),calculateSumtotalgovt()
+			 $("#addrowthired"+(K-1)).html('');
+			 $('#_cr3').val(K - 1);
+			 K--;
+			
 			 }
 		 });
+   
+   
+   
+   function conveysm() {
+
+       var sum = 0;
+       //iterate through each textboxes and add the values
+       $(".nbt").each(function () {
+
+           //add only if the value is number
+           if (!isNaN(this.value) && this.value.length != 0) {
+               sum += parseFloat(this.value);
+           }
+
+       });
+       //.toFixed() method will roundoff the final sum to 2 decimal places
+      var fds=sum;
+      //$("#").html(sum.toFixed(2));
+      $("#totalConv").val(sum);
+       
+   }
+
+   $("table").on("keyup", ".nbt", function () {
+	   conveysm();
+   
+   });
+
+
+
+ 
+   
    
 function calculateSum() {
 
@@ -133,13 +170,17 @@ function calculateSum() {
     //.toFixed() method will roundoff the final sum to 2 decimal places
    var fds=sum;
    //$("#").html(sum.toFixed(2));
-   $("#sum").val(sum);
+   $("#totalClaim").val(sum);
     
 }
 
 $("table").on("keyup", ".txt", function () {
     calculateSum();
+	totaltravalex();
 });
+
+
+
 
 
 function calculateSumtotalPassing() {
@@ -157,43 +198,31 @@ function calculateSumtotalPassing() {
     //.toFixed() method will roundoff the final sum to 2 decimal places
    var fds=sum;
    //$("#").html(sum.toFixed(2));
-   $("#totalPassing").val(sum);
+   $("#totalPas").val(sum);
     
 }
 
 $("table").on("keyup", ".pas", function () {
 	calculateSumtotalPassing();
+	totaltravalex();
 });
 
 
 
+function totaltravalex()
+{
+	var totalClaim =parseInt($('#totalClaim').val()); 
+	 var totalPas =parseInt($('#totalPas').val()); 
+	var t3=totalClaim+totalPas;
+	$('#totalTravel').val(t3);
 
-function calculateSumtotalgovt() {
-
-    var sum = 0;
-    //iterate through each textboxes and add the values
-    $(".govt").each(function () {
-
-        //add only if the value is number
-        if (!isNaN(this.value) && this.value.length != 0) {
-            sum += parseFloat(this.value);
-        }
-
-    });
-    //.toFixed() method will roundoff the final sum to 2 decimal places
-   var fds=sum;
-   //$("#").html(sum.toFixed(2));
-   $("#totalGovtExt").val(sum);
-    
-}
-
-$("table").on("keyup", ".govt", function () {
-	calculateSumtotalgovt();
-});
-
+	
+	}
 
 
 });
+
+
 
 </script>
 <script>
@@ -232,6 +261,7 @@ $("table").on("keyup", ".govt", function () {
 						
 					
 					</div>
+						<form id="validation-form" action="#"  th:action="@{/saveTourClaim}" th:object="${tourClaim}" method="post">
 					<div class="row">
 							<div class="col-12">
 							<div class="card">
@@ -248,19 +278,21 @@ $("table").on("keyup", ".govt", function () {
 												
 													<label class="form-label">Tour Id <span
 														class="text-danger">*</span>
-													</label> <input name="empCode" type="text" id="empCode"
+													</label> <input name="tourClaimId" type="text" id="tourClaimId"
 														class="form-control"readonly>
 												</div>
+												
+												
 											<div class="form-group sm col-md-4">
 											       <label class="form-label">Tour Claim Date
 											       <span class="text-danger">*</span></label>
-							                 <input  type="text"id="empName"name="empName" title="Name"onkeyup="sync()"maxlength="50" pattern="^[a-zA-Z\s]*$" class="form-control required">
+							                 <input  type="text"id="tourClaimDate"name="tourClaimDate" class="form-control required">
 										     </div>
 										     	
 											<div class="form-group sm col-md-4">
 													<label class="form-label">Employee Code</label>
 												<label style="color: red">*</label>
-												<select class="form-control select2"onchange="myFunction()" name="empCode"id="empCode" required aria-required="true">
+												<select class="form-control select2" name="empCode" id="empCode" onchange="myFunctionEmpCode()" required aria-required="true">
 												 <option value="">Select Employee</option>
 												<option th:each="e :${listEmployee}"th:value="${e.getEmpCode()}" th:text="${e.getEmpName()}"></option>
 											     	</select>
@@ -270,33 +302,24 @@ $("table").on("keyup", ".govt", function () {
 												
 								</div>
 									<div class="form-row">
-												<div class="form-group sm col-md-4">
-												<label class="form-label">Designation</label> <span
-														class="text-danger">*</span> <select
-														class="form-control required" name="designationCode" id="designationCode">
-														<option value="">Select Type</option>
-														<option th:each="des :${listDesignation}" th:value="${des.getDesgCode()}" th:text="${des.getDesgName()}"></option>
-														
-													</select>
+										<div class="form-group sm col-md-4">
+												<label class="form-label">Designation</label>
+												
+												<input  type="text"id="desgName"name="desgName" title="Designation"maxlength="50" pattern="^[a-zA-Z\s]*$" class="form-control">
+													
 												
 												</div>
 												
-												<div class="form-group sm col-md-4">
-												<label class="form-label">Department</label> <span
-														class="text-danger">*</span> <select
-														class="form-control required" name="designationCode" id="designationCode">
-														<option value="">Select Type</option>
-														<option th:each="des :${listDesignation}" th:value="${des.getDesgCode()}" th:text="${des.getDesgName()}"></option>
-														
-													</select>
-												
+															<div class="form-group sm col-md-4">
+												<label class="form-label">Department</label> 
+												<input  type="text"id="deptName"name="deptName" title="Department"maxlength="50" pattern="^[a-zA-Z\s]*$" class="form-control">
 												</div>
 													<div class="form-group sm col-md-4">
 												<label class="form-label">Tour Plan Id</label> <span
 														class="text-danger">*</span> <select
-														class="form-control required" name="designationCode" id="designationCode">
+														class="form-control" name="tourPlanId" id="tourPlanId" required>
 														<option value="">Select Type</option>
-														<option th:each="des :${listDesignation}" th:value="${des.getDesgCode()}" th:text="${des.getDesgName()}"></option>
+														<option th:each="TourPL :${ListTourPlan}" th:value="${TourPL.getTourPlanId()}" th:text="${TourPL.getTourPlanId()}"></option>
 														
 													</select>
 												
@@ -310,31 +333,31 @@ $("table").on("keyup", ".govt", function () {
 												<div class="form-group sm col-md-4">
 											       <label class="form-label">Tour Plan Date</label>
 											       <span class="text-danger">*</span>
-											       <input  type="text"id="empDob"name="empDob"  class="form-control required">
+											       <input  type="text"id="tourPlanDate"name="tourPlanDate"  class="form-control required">
 											      </div>
 											      
 											      <div class="form-group sm col-md-4">
 											       <label class="form-label">Start Place</label>
-											       <span class="text-danger">*</span>
-											       <input  type="text"id="startPlace"name="startPlace"  class="form-control required">
+											       
+											       <input  type="text"id="startPlace"name="startPlace"  class="form-control">
 											      </div>
 											      <div class="form-group sm col-md-4">
 											       <label class="form-label">Visit Place </label>
-											       <span class="text-danger">*</span>
-											       <input  type="text"id="visitPlace"name="visitPlace"  class="form-control required">
+											      
+											       <input  type="text"id="visitPlace"name="visitPlace"  class="form-control">
 											      </div>
 												</div>
 												
 													<div class="form-row">
 													 <div class="form-group sm col-md-4">
 											       <label class="form-label">Advance Paid </label>
-											       <span class="text-danger">*</span>
-											       <input  type="text"id="advPaid"name="advPaid"  class="form-control required">
+											    
+											       <input  type="text"id="advancePaid"name="advancePaid"  class="form-control"value="0">
 											      </div>
 											       <div class="form-group sm col-md-4">
 											       <label class="form-label">Visit Purpose </label>
-											       <span class="text-danger">*</span>
-											       <input  type="text"id="visitPlace"name="visitPlace"  class="form-control required">
+											     
+											       <input  type="text"id="visitPurpose"name="visitPurpose"  class="form-control">
 											      </div>
 													
 													
@@ -345,7 +368,7 @@ $("table").on("keyup", ".govt", function () {
 							</div>
 						</div>
 	              <div class="col-12">
-		<form id="smartwizard-validation" enctype="multipart/form-data" class="wizard wizard-primary" th:action="@{/saveEmployee}" th:object="${employees}" method="post">
+		<div id="smartwizard">
 		
 			<ul>
 			<li><a href="#validation-step-1"><br /><small>Traveling Expenses</small></a></li>
@@ -362,7 +385,7 @@ $("table").on("keyup", ".govt", function () {
 								<div class="card-header">
 								</div>
 								<div class="card-body">
-								<input id="_cr" name="_cr" type="hidden"value="1">
+								<input id="_cr" name="_cr" type="text"value="1">
 								<div class="col-sm-12" align="right">
 							<!-- 	<a th:href="@{/viewMedicalReimbursement}">
 								<em  class="fa fa-eye" style="font-size:28px"> 
@@ -394,57 +417,46 @@ $("table").on("keyup", ".govt", function () {
 															<tbody>
 																<tr id='addr0'>
 
-																	<td><input type="Date" name='medStDr0'
-																		placeholder='Name' class="form-control" value="" /></td>
-																	<td><input type="text" name='caseMemoNo0'
-																		placeholder='Start Place' class="form-control" /></td>
-																	<td><input type="Date" name='caseMemoDate0'
-																		placeholder='Case Memo Date' class="form-control" /></td>
-																	
-
-																	<td><input type="text" name='passedAmount0'
-																		placeholder='Vist palce' class="form-control pas" /></td>
-																	<td><select class="form-control required"
-																		name="govtexemptionAmount0" id="govtexemptionAmount0">
+																	<td><input type="Date" name='fromDate0'placeholder='From Date' class="form-control" value="" /></td>
+																	<td>
+																	<input type="text" name='startPlace0'placeholder='Start Place' class="form-control" />
+																	</td>
+																	<td><input type="Date" name='toDate0'placeholder='To Date' class="form-control" />
+																	</td>
+																	<td><input type="text" name='visitPlace0'placeholder='Vist palce' class="form-control" /></td>
+																		<td>
+																		<select class="form-control"name="modeOfTravel0" id="modeOfTravel0">
 																			<option value="">Select Type</option>
 																			<option th:Value="taxi">Taxi</option>
 																			<option th:Value="car">Car</option>
 																			<option th:Value="bus">Bus</option>
 																			<option th:Value="train">Train</option>
-																	</select></td>
+													</select></td>
 
 
-																	<td><input type="text" name='remark0'
+																	<td><input type="text" name='ticketNo0'
 																		placeholder='Ticket No' class="form-control" /></td>
 
 
-																	<td><input type="text" name='compPaid0'
-																		placeholder='Company Paid' class="form-control" /></td>
-																	<td><input type="text" name='selfPaid0'
-																		placeholder='Self Paid' class="form-control" /></td>
+																	<td><input type="text" name='paidCompany0'
+																		placeholder='Company Paid' class="form-control txt" /></td>
+																	<td><input type="text" name='paidSelf0'
+																		placeholder='Self Paid' class="form-control pas " /></td>
 																</tr>
 																<tr id='addr1'></tr>
 
 															</tbody>
-															<tr>
-																<td colspan="4"></td>
+													<tr>
+												<td colspan="4"></td>
 
-					<td>
-					<div class="form-group ">  
-					<label class="form-label">Total Amount</label>
-					<input type="text" id="sum" name='totalAmount' placeholder='Total Amount' class="form-control"/>
-					</div>
-					</td>
-					
-					
-					
-					
-																
-																
-																
-																<td></td>
+												<td><label class="form-label">Total Amount</label></td>
+													<td><input type="text" id="totalTravel"name='totalTravel' value='0' placeholder='Total Claim'class="form-control " /></td>
+												<td><input type="text" id="totalClaim"name='totalClaim' placeholder='Total Claim'class="form-control" /></td>
+												<td><input type="text" id="totalPas" name='totalPas'placeholder='Total Pas' class="form-control " /></td>
 
-															</tr>
+												<td></td>
+
+											</tr>
 
 														</table>
 													</div>
@@ -496,20 +508,24 @@ $("table").on("keyup", ".govt", function () {
 															<tbody>
 																<tr id='addrtabsecond0'>
 
-														<td><input type="Date" name='medStDr0'placeholder='Name' class="form-control" value="" /></td>
-														<td><input type="text" name='caseMemoNo0'placeholder='Start Place' class="form-control" /></td>
-														<td><input type="Date" name='caseMemoDate0'placeholder='Case Memo Date' class="form-control" /></td>
-														<td><input type="text" name='passedAmount0'placeholder='Vist palce' class="form-control pas" /></td>
-														<td><select class="form-control required"name="govtexemptionAmount0" id="govtexemptionAmount0">
+															<td><input type="Date" name='fromDate0'placeholder='From Date' class="form-control" value="" /></td>
+																	<td>
+																	<input type="text" name='startPlace0'placeholder='Start Place' class="form-control" />
+																	</td>
+																	<td><input type="Date" name='toDate0'placeholder='To Date' class="form-control" />
+																	</td>
+																	<td><input type="text" name='visitPlace0'placeholder='Vist palce' class="form-control" /></td>
+																		<td>
+																		<select class="form-control"name="modeOfTravel0" id="modeOfTravel0">
 																			<option value="">Select Type</option>
 																			<option th:Value="taxi">Taxi</option>
 																			<option th:Value="car">Car</option>
 																			<option th:Value="bus">Bus</option>
 																			<option th:Value="train">Train</option>
-																	</select></td>
+													</select></td>
 
-																	<td><input type="text" name='remark0'
-																		placeholder='Amount' class="form-control" /></td>
+																	<td>
+																	<input type="text" name='convExpAmount0'placeholder='Amount' class="form-control nbt" /></td>
 
 
 																	
@@ -523,7 +539,7 @@ $("table").on("keyup", ".govt", function () {
 																<td>
 					<div class="form-group ">  
 					<label class="form-label">Total Amount</label>
-					<input type="text" id="sum" name='totalAmount' placeholder='Total Amount' class="form-control"/>
+					<input type="text" id="totalConv" name='totalConv' value='0' placeholder='Total Amount' class="form-control"/>
 					</div>
 					</td>
 			
@@ -592,12 +608,12 @@ $("table").on("keyup", ".govt", function () {
 								</div>
 
 	
-	</form>
+	</div>
 			</div>
 				 
 	</div>
 					</div>
-
+</form>
 				</div>
 		</main>
 		<footer class="footer">
@@ -608,79 +624,23 @@ $("table").on("keyup", ".govt", function () {
 	<script>
 		$(function() {
 
-			$("input[name='empDob']").daterangepicker({
+			$("input[name='tourPlanDate']").daterangepicker({
 				singleDatePicker: true,
 			    autoApply: true,
 				locale: {
-		            format: 'DD/MM/YYYY'
+		            format: 'YYYY/MM/DD'
 		        },
 				showDropdowns: true
 			});
 			
-		$("input[name='dateOfPosting']").daterangepicker({
+		$("input[name='tourClaimDate']").daterangepicker({
 				singleDatePicker: true,
 			    autoApply: true,
 				locale: {
-		            format: 'DD/MM/YYYY'
+		            format: 'YYYY/MM/DD'
 		        },
 				showDropdowns: true
 			});
-		$("input[name=\"dateOfJoining\"]").daterangepicker({
-			singleDatePicker: true,
-			   autoApply: true,
-			locale: {
-				format: 'DD/MM/YYYY'
-	        },
-			showDropdowns: true
-		});
-		$("input[name='dateOfRetirement']").daterangepicker({
-			singleDatePicker: true,
-		    autoApply: true,
-			locale: {
-				format: 'DD/MM/YYYY'
-	        },
-			showDropdowns: true
-		});
-		$("input[name='batchYear']").datepicker({
-			
-		    autoApply: true,
-		    format: "yyyy",
-		    autoclose: true,
-		    minViewMode: "years",
-			locale: {
-	            format: 'YYYY'
-	        },
-			showDropdowns: true
-		});
-			
-		
-		$("input[name=\"orderDate\"]").daterangepicker({
-				singleDatePicker: true,
-				   autoApply: true,
-				locale: {
-					format: 'DD/MM/YYYY'
-		        },
-				showDropdowns: true
-			});
-		
-		$("input[name=\"dov\"]").daterangepicker({
-			singleDatePicker: true,
-			   autoApply: true,
-			locale: {
-				format: 'DD/MM/YYYY'
-	        },
-			showDropdowns: true
-		});
-		$("input[name=\"doi\"]").daterangepicker({
-			singleDatePicker: true,
-			   autoApply: true,
-			locale: {
-				format: 'DD/MM/YYYY'
-	        },
-			showDropdowns: true
-		});
-
-
 
 			
 			// Datatables basic
@@ -702,54 +662,13 @@ $("table").on("keyup", ".govt", function () {
 	</script>
 	
 		<script>
-		$(function() {
-			$("#smartwizard-default-primary").smartWizard({
-				theme: "default",
-				showStepURLhash: false
-			});
+		$(document).ready(function(){
 
-			
-			// Validation
-			var $validationForm = $("#smartwizard-validation");
-			$validationForm.validate({
-				errorPlacement: function errorPlacement(error, element) {
-					$(element).parents(".form-group").append(
-						error.addClass("invalid-feedback small d-block")
-					)
-				},
-				highlight: function(element) {
-					$(element).addClass("is-invalid");
-				},
-				unhighlight: function(element) {
-					$(element).removeClass("is-invalid");
-				},
-				rules: {
-					"wizard-confirm": {
-						equalTo: "input[name=\"wizard-password\"]"
-					}
-				}
+			  // SmartWizard initialize
+			  $('#smartwizard').smartWizard();
+			  $('#smartwizard').smartWizard("loader", "show");
+
 			});
-			$validationForm.smartWizard({
-					autoAdjustHeight: false,
-					backButtonSupport: false,
-					useURLhash: false,
-					showStepURLhash: false,
-					
-				})
-				.on("leaveStep", function(e, anchorObject, stepNumber, stepDirection) {
-					if (stepDirection === "forward") {
-						return $validationForm.valid();
-					}
-					return true;
-				});
-			/* $validationForm.find(".btn-submit").on("click", function() {
-				if (!$validationForm.valid()) {
-					return;
-				}
-				
-				return false;
-			}); */
-		});
 	</script>
 
 	<script type="text/javascript">
@@ -813,6 +732,35 @@ $("table").on("keyup", ".govt", function () {
       
 </script>
 
+<script>
+	function myFunctionEmpCode(){
+/* 		 var empCode= $('#empCode option:selected').value; */
+		 var empCode= document.getElementById('empCode').value
+	    console.log("ajax request : "+ empCode);
+	    const xhr = new XMLHttpRequest();
+	    xhr.open('GET','./viewEmployeeTourClaim/'+empCode,true);
+	    xhr.getResponseHeader('content-type','application/json');
+	    xhr.onload = function(){
+	        if(this.status===200){
+	            let obj = JSON.parse(this.responseText);
+	            console.log(obj);
+	          
+	            $('#deptName').val(obj.deptName);
+	            $('#desgName').val(obj.desgName);
+	          
+	        }
+	        else{
+	            console.error("some error occured");
+	        }
+		
+	    }
+	    xhr.send();
+	}
+
+
+
+	
+	</script>
 
 
 	<script>
@@ -827,7 +775,6 @@ $("table").on("keyup", ".govt", function () {
 		});
 	</script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
 
 
 </body>

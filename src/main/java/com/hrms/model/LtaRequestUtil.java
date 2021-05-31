@@ -7,8 +7,26 @@ public class LtaRequestUtil {
 	private String ltaCode;
 	private String  empCode;
 	private Date appDate;
+	private String empName;
+	private String deptName;
 	//------------------------------------
 	
+	public String getEmpName() {
+		return empName;
+	}
+
+	public String getDeptName() {
+		return deptName;
+	}
+
+	public void setDeptName(String deptName) {
+		this.deptName = deptName;
+	}
+
+	public void setEmpName(String empName) {
+		this.empName = empName;
+	}
+
 	private Date eligibilityDate;
 	
 	

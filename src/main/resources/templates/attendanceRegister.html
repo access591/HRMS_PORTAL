@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"lang="en">
+
+<script type="text/javascript" th:src="@{/js/settings.js}"></script>
+<script type="text/javascript" th:src="@{/js/app.js}"></script>
+<link rel="stylesheet" type="text/css" th:href="@{/css/modern.css}" />
+<script  src="https://www.googletagmanager.com/gtag/js?id=UA-120946860-7"></script>
+
+
+<style>
+
+
+body {
+	opacity: 0;
+}
+.uppercase {
+  text-transform: uppercase;
+}
+
+#loading {
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  position: fixed;
+  display: block;
+  opacity: 0.7;
+  background-color: #676565;
+  z-index: 99;
+  text-align: center;
+}
+
+#loading-image {
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  z-index: 100;
+}
+</style>
+
+<script>
+
+
+
+	window.dataLayer = window.dataLayer || [];
+	function gtag() {
+		dataLayer.push(arguments);
+	}
+	 gtag('js', new Date());
+
+	gtag('config', 'UA-120946860-7');
+</script>
+<head>
+<meta charset="utf-8" />
+<title>HRMS</title>
+</head>
+ 
+<body>
+
+<div class="wrapper">
+<nav id="sidebar" class="sidebar">
+ <div th:replace="/fragments/sidebar :: div"></div>
+ </nav>
+ 		
+		<div class="main">
+		<div th:replace="/fragments/header ::div"></div>
+		<main class="content">
+		<div class="container-fluid">
+
+					<div class="header">
+						<h1 class="header-title">
+							Personal
+						</h1>
+						
+					
+					</div>
+					<form id="validation-form" action="#"  th:action="@{/saveAttendenceRegister}" th:object="${attendenceRegister}" method="post">
+				              	<div class="row">
+					
+							<div class="col-12">
+							<div class="card">
+								<div class="card-header">
+									<h5 class="card-title">Attendance Register</h5>
+								<div class="alert-outline">
+									<div th:if="${message}" th:text="${message}" style="color: red">
+									</div> 
+									</div>	
+								</div>
+								<div class="card-body">
+									<div class="form-row">
+												<div class="form-group sm col-md-6">
+											       <label class="form-label">Date</label>
+											       <span class="text-danger">*</span>
+											       <input  type="text"id="attendenceDate"name="attendenceDate"  class="form-control required">
+											      </div>
+												<!-- <div class="form-group sm col-md-4">
+													<label class="form-label">Reg Code</label>
+												<label style="color: red">*</label>
+												<select class="form-control select2" name="regCode" id="regCode" required aria-required="true">
+												 <option value="">Select Employee</option>
+												<option th:each="e :${listEmployee}"th:value="${e.getEmpCode()}" th:text="${e.getEmpName()}"></option>
+											     	</select>
+
+												</div> -->
+										
+										
+										<div class="form-group sm col-md-6">
+													<label class="form-label">Department Code </label>
+												<label style="color: red">*</label>
+												<select class="form-control select2" name="department" id="department" onchange="myFunctionDeptCode()" required aria-required="true">
+												 <option value="">Select Department</option>
+												<option th:each="d :${listDepartment}"th:value="${d.getDepartmentCode()}" th:text="${d.getDeptName()}"></option>
+											     	</select>
+												</div>
+								</div>
+								
+									<!-- <div class="form-row">
+										<div class="form-group sm col-md-4">
+										<label class="form-label">Employee </label>
+												<label style="color: red">*</label>
+												<select class="form-control select2" name="empCode" id="empCode" onchange="myFunctionEmpCode()" required aria-required="true">
+												 <option value="">Select Employee</option>
+												<option th:each="e :${listEmployee}"th:value="${e.getEmpCode()}" th:text="${e.getEmpName()}"></option>
+											     	</select>
+
+												</div>
+										     	
+										   
+												</div> -->
+											
+						      </div>
+	                      </div>
+	                      </div>
+	                     <div class="col-12">
+	                     	<div class="card">
+	                      <div class="card-header">
+								</div>
+								<div class="card-body">
+								<input id="_cr" name="_cr" type="text"value="1">
+								<div class="col-sm-12" align="right">
+							
+								
+							<!-- 	<a id="add_row" class="fa fa-plus" aria-hidden="true"style="font-size:28px;color:#001080"></a>&nbsp;&nbsp;&nbsp; -->
+								<a id='delete_row'class="fa fa-trash" style="font-size:28px;color:#399490fc"aria-hidden="true"></a>	
+								</div>
+								<div class="table-responsive">
+											<table id="example" aria-describedby="example" class="table" style="width:100%">
+											<thead>
+												<tr>
+											        <th> </th>
+											        <th> </th>
+													<th>Dept. Name</th>
+													<th>Employee Name.</th>
+													<th>Designation</th>
+													<th>Status</th>
+													<th>Shift</th>
+													<th>Shift In</th>
+													<th>Shift Out</th>
+													<th>Status</th>
+													<th>Actual Time In </th>
+													<th>Actual Time Out </th>
+													<th>Over Time </th>
+													<th>Status</th>
+													
+												</tr>
+											</thead>
+											<tbody>
+												<tr id='addr0' >
+												
+													<td><input type="hidden" id="deptCode0" name='deptCode0'placeholder='dept Code' /></td>
+													<td><input type="hidden" id="empCode0" name='empCode0'placeholder='Emp Code' /></td>
+													<td><input type="text" id="deptName0" name='deptName0'placeholder='Dept' /></td>
+													<td><input type="text" id="empName0"name='empName0'placeholder='emp Name'  /></td>
+													<td><input type="text" id="desgName0"name='desgName0'placeholder='desgName'/></td>
+													
+													<td><select name="status0" id="status0">
+															<option value="">Select Type</option>
+															<option value="A">A</option>
+															<option value="B">B</option>
+													</select></td>
+
+													<td><input type="text" name='shiftCode0'placeholder='Shift' /></td>
+													<td><input type="time" name='timeIn0'placeholder='Shift In'  /></td>
+													<td><input type="time" name='timeOut0'placeholder='Shift Out' /></td>
+													<td><select name="status20" id="status20">
+															<option value="">Select Type</option>
+															<option value="A">A</option>
+															<option value="B">B</option>
+													</select></td>
+												 <td><input type="time" name='aTimeIn0'placeholder='Actual Time'/></td>
+											    <td><input type="time" name=' aTimeOut0'placeholder='Actual Time out'/></td>
+												<td><input type="text" name='overTime0'placeholder='over time' /></td>
+												<td><select name="statusTemp0" id="statusTemp0">
+															<option value="">Select Type</option>
+															<option value="A">A</option>
+															<option value="B">B</option>
+													</select></td>
+												</tr>
+												<tr id='addr1'></tr>
+
+											</tbody>
+
+
+											
+
+										</table>
+</div>
+
+									</div>
+								
+								
+	                     
+	                     
+	                     </div>
+	                     </div>
+					</div>
+					<button type="submit" class="btn btn-primary">Save</button>&nbsp;
+	                     &nbsp;
+					<button type="reset"class="btn btn-primary" value="Reset">Reset</button>
+</form>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<div class="col-12">
+							<div class="card">
+								<div class="card-header">
+								</div>
+								<div class="card-body">
+									<table id="datatables-buttons" class="table table-striped display" style="width:100%"aria-describedby="example">
+										<thead>
+											<tr >
+												<th scope="col">Id </th>
+												<th scope="col">Employee Name</th>
+												<th scope="col">Department</th>
+												<th scope="col">Designation</th>
+												<th scope="col">Attendance Date </th> 
+												<th scope="col">Actual Time In </th> 
+												<th scope="col">Actual Time Out </th> 
+												
+												
+												<th scope="col">Action </th>
+											</tr >
+
+										</thead>
+									 <tbody>
+										<tr th:each = "att : ${attendReg}">
+										<td th:text="${att.id}" ></td>
+										<td th:text="${att.empName}"></td>
+										<td  th:text="${att.deptName}"></td>
+										<td  th:text="${att.desgName}"></td>
+										<td  th:text="${#dates.format(att.attendenceDate,'dd-MM-yyyy')}"></td>
+										
+										  <td  th:text="${att.aTimeIn}"></td>
+										  <td  th:text="${att.aTimeOut}"></td>
+										  <td>
+										<!--   <a th:href="@{/editAttendanceRegister/{id}/(id=${att.id})}"><em class="fa fa-edit"></em></a> -->
+										  
+										     <a th:href="@{/deleteAttendanceRegister/{id}/(id=${att.id})}"onclick="return confirm('Are you sure?')"><em class="fa fa-times"></em></a>
+									
+									
+										</td>  
+									
+										</tr>
+									
+									
+										</tbody>
+									
+									</table>
+								</div>
+								
+							</div>
+						</div>
+				</div>
+			
+		</main>
+		<footer class="footer">
+		<div th:replace="/fragments/footer :: div"></div>
+		</footer>
+		</div>
+		</div>
+	<script>
+		$(function() {
+
+			$("input[name='attendenceDate']").daterangepicker({
+				singleDatePicker: true,
+			    autoApply: true,
+				locale: {
+		            format: 'YYYY/MM/DD'
+		        },
+				showDropdowns: true
+			});
+			
+	
+		
+
+
+
+			
+			// Datatables basic
+			$('#datatables-basic').DataTable({
+				responsive: true
+			});
+			// Datatables with Buttons
+			var datatablesButtons = $('#datatables-buttons').DataTable({
+				  deferRender:true,
+		            scrollCollapse: true,
+		            scrollX: true,
+				   responsive: true,
+				   lengthMenu :[[10,20,30,-1 ],['10 rows', '20 rows', '30 rows', 'Show all' ] ],
+					buttons :[]
+			});
+			datatablesButtons.buttons().container().appendTo("#datatables-buttons_wrapper .col-md-6:eq(0)")
+		});
+		
+	</script>
+			
+		<script>
+	$(document).ready(function() {
+	    $('#example').DataTable( {
+	        "scrollY": 200,
+	        "scrollX": true,
+	        deferRender:true,
+            scrollCollapse: true,
+            
+	    } );
+	} );
+	</script>
+
+	
+
+	<script>
+	function myFunctionDeptCode(){
+		  
+	
+		 var deptCode= document.getElementById('department').value
+	    console.log("ajax request : "+ deptCode);
+	
+	    const xhr = new XMLHttpRequest();
+	    xhr.open('GET','./viewEmployeeDetailsBydepartment/'+deptCode,true);
+	    xhr.getResponseHeader('content-type','application/json');
+	    xhr.onload = function(){
+	    	 
+	        if(this.status===200){
+	            let obj = JSON.parse(this.responseText);
+	            console.log(obj);
+	         
+	           // $('#example tr').slice(1).remove()
+	            var i;
+	           
+	            for (i = 0; i < obj.length; i++) {
+	            	
+	            	
+	            	
+	            	 $('#deptCode'+i).val(obj[i].departmentCode);
+	            	 $('#empCode'+i).val(obj[i].empCode);
+	            	 $('#deptName'+i).val(obj[i].deptName);
+	 	            $('#empName'+i).val(obj[i].empName);
+	 	            $('#desgName'+i).val(obj[i].desgName);	
+	 	          // $('#example').append('<tr id="addr'+(i+1)+'"></tr>');
+	 	          //$('#_cr').val(i+1);
+	 	          console.log( "'í'"+i);
+	 	          	
+	 	          
+	 	     if( i>0){
+		  
+		    $('#addr'+i).html("<td><input  id='deptCode"+i+"' type='hidden'/> "+
+		    		"<td><input  id='empCode"+i+"' type='hidden'/> "+
+		    		"<td><input  id='deptName"+i+"' type='text'/> "+
+		    		"</td><td><input  id='empName"+i+"' type='text' placeholder='name'>"+
+		    		"</td><td><input  id='desgName"+i+"' type='text'  placeholder='Desi'>"+
+		    		"<td><select class=' form-control input-md' id='modeOfTravel'name='modeOfTravel"+i+"'><option value=' '>Select</option><option value='Day'>Day</option><option value='Night'>Night</option></select></td>"+
+		    		"<td><input  name='shiftCode"+i+"' type='text' placeholder='Shift '></td>"+
+		    		"<td><input  name='timeIn"+i+"' type='time' placeholder='Shift In'></td>"+
+		    		"<td><input  name='timeOut"+i+"' type='time' placeholder='ShiftIn'></td>"+
+		    		"<td><select class=' form-control input-md' id='modeOfTravel'name='modeOfTravel"+i+"'><option value=' '>Select</option><option value='Day'>Day</option><option value='Night'>Night</option></select></td>"+
+		    		"<td><input  name='aTimeIn"+i+"' type='time' placeholder='Actual Time In'></td>"+
+		    		"<td><input  name='aTimeOut"+i+"' type='time' placeholder='Actual Time Out'></td>"+
+		    		"<td><input  name='overTime"+i+"' type='text' placeholder='Over Time '></td>"+
+		    		"<td><select class=' form-control input-md' id='modeOfTravel'name='modeOfTravel"+i+"'><option value=' '>Select</option><option value='Day'>Day</option><option value='Night'>Night</option></select></td>"+
+		    		"");
+			 $('#deptCode'+i).val(obj[i].departmentCode);
+		        $('#empCode'+i).val(obj[i].empCode);
+	 		   $('#deptName'+i).val(obj[i].deptName);
+	            $('#empName'+i).val(obj[i].empName);
+	            $('#desgName'+i).val(obj[i].desgName);
+	            
+	            $('#example').append('<tr id="addr'+(i+1)+'"></tr>');
+	 		    $('#_cr').val(i+1);
+	 	          
+	            }
+	 	  
+	            }
+	          
+	            $("#delete_row").click(function(){
+	         	   
+	       	  	 if(i>1){
+	       			 $("#addr"+(i-1)).html('');
+	       			 $('#_cr').val(i - 1);
+	       			 i--;
+	       			 
+	       			 }
+	       		 });
+	            
+	        
+	        }
+	        else{
+	            console.error("some error occured");
+	        }
+		
+	    }
+	    xhr.send();
+	}
+
+
+	
+	
+	
+	</script>
+	
+
+
+
+
+
+
+	<script>
+		$('#loading').show();
+		$.ajax({
+			// Other ajax parameters
+			success : function() {
+				// hiding the image here
+				//debugger;
+				$('#loading').hide();
+			}
+		});
+	</script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+
+</body>
+</html>

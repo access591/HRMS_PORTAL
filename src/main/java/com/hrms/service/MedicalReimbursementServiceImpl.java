@@ -67,4 +67,10 @@ public void approvedByMrId(String slipNo) {
 	this.medicalReimbursementDao.approvedByMrId(slipNo);
 	
 }
+
+@Override
+public List<MedicalReimbursement> getAllMedicalReimbursementApproval() {
+	List<MedicalReimbursement> listMedicalReimbursementAp = medicalReimbursementDao.getAllMedicalReimbursementApproval();
+	return listMedicalReimbursementAp;
+}
 }

@@ -80,7 +80,7 @@ public class MedicalReimbursementController {
 		 m2.setTreatmentType(medicalReimbursement.getTreatmentType());
 		 m2.setTreatDescription(medicalReimbursement.getTreatDescription());
 		 m2.setClaimingDate(medicalReimbursement.getClaimingDate());
-		 
+		 m2.setApprovalStatus("N");
 		 medicalReimbursementService.addMedicalReimbursement(m2);
 		
            String slipNo=m2.getSlipNo();

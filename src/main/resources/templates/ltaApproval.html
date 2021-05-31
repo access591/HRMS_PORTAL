@@ -63,7 +63,7 @@ body {
 									<table id="datatables-buttons" class="table table-striped display" style="width:100%"aria-describedby="example">
 										<thead>
 											<tr >
-												<th scope="col"> Employee Code</th>
+												<th scope="col"> LTA Code</th>
 												<th scope="col">Employee Name </th>
 											    <th scope="col">Department Name </th>
 											    
@@ -81,33 +81,33 @@ body {
 
 										</thead>
 										<tbody>
-										<tr>
-										
-										
-										
-										<td scope="col"> Employee Code</td>
-												<td scope="col">Employee Name </td>
-											    <td scope="col">Department Name </td>
-												<td scope="col">Appointment Date </td>
-												<td scope="col">Availed Date</td>
-												<td scope="col">Remark </td>
-										<td>
+										<tr th:each="lts : ${listLtaApproval}">
 
-													<div class="dropdown">
-														<button class="btn btn-primary dropdown-toggle"
-															type="button" data-toggle="dropdown">
-															Approved Action 
-														</button>
+
+
+												<td th:text="${lts.ltaCode}"></td>
+												<td th:text="${lts.empName}"></td>
+												<td th:text="${lts.deptName}"></td>
+												<td th:text="${#dates.format(lts.appDate,'dd-MM-yyyy')}"></td>
+												<td th:text="${#dates.format(lts.whenAvailed,'dd-MM-yyyy')}"></td>
+												<td th:text="${lts.remarks}"></td>
+
+												<td>
+
+											 <div class="dropdown">
+												<button class="btn btn-primary dropdown-toggle"type="button" data-toggle="dropdown">Approved
+															Action</button>
 														<ul class="dropdown-menu">
-															<li><a class="dropdown-item"href="">Approved</a></li>
-															<li><a  class="dropdown-item active" href="#"> Not Approved </a></li>
+															<li><a class="dropdown-item"
+																th:href="@{/approvedLtaRequest/{id}/(id=${lts.ltaCode})}">Approved</a></li>
+															<li><a class="dropdown-item active" href="#">
+																	Not Approved </a></li>
 														</ul>
-													</div> 
-                           							  </td>
-                            <td>
-                               <a href=""class="btn btn-success"><em class="fa fa-eye"></em></a>
-                            </td>
-										</tr>
+													</div>
+												</td>
+												<td><a th:href="@{/viewLtaRequest/{id}/(id=${lts.ltaCode})}"
+													class="btn btn-success"><em class="fa fa-eye"></em></a></td>
+											</tr>
 										
 										
 										</tbody>

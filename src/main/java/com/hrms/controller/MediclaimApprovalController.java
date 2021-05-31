@@ -37,7 +37,7 @@ public class MediclaimApprovalController {
 		if (modules != null) {
 			model.addAttribute("modules", modules);
 		}
-		List<MedicalReimbursement> listMedicalReimbursement =  medicalReimbursementService.getAllMedicalReimbursement();
+		List<MedicalReimbursement> listMedicalReimbursement =  medicalReimbursementService.getAllMedicalReimbursementApproval();
 		model.addAttribute("listMedicalReimbursement", listMedicalReimbursement);
 		
 		 List<MedicalReimbursementDetail> listMedicalR=new ArrayList<MedicalReimbursementDetail>();

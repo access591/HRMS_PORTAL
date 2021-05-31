@@ -40,6 +40,7 @@ body {
 						</nav>
 					</div>
 					<div class="row">
+						
 						<div class="col-12">
 							<div class="card">
 								<div class="card-header">
@@ -51,27 +52,6 @@ body {
 
 								</div>
 								<div class="card-body">
-							<div class="col-12 col-lg-6">
-											<div class="form-group">
-												<label class="form-label"> Department </label> <label
-													style="color: red">*</label> <select id="deptName"
-													class="form-control" name="deptName"
-													onchange="getAllLeaveRequestBydepartment()">
-													<option value=" ">Select</option>
-													<option th:each="department:${listDepartment}"
-														th:text="${department.deptName}"
-														th:value="${department.departmentCode}"></option>
-												</select>
-											</div>
-										</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-12">
-							<div class="card">
-								<div class="card-header">
-								</div>
-								<div class="card-body">
 									<table id="example" class="table table-striped display" style="width:100%"aria-describedby="example">
 										<thead>
 											<tr >
@@ -80,58 +60,45 @@ body {
 											    <th scope="col">Employee  Code </th>
 												<th scope="col">Employee Name </th>
 												<th scope="col">Employee Pay Code </th>
-												<th scope="col">Father/Husband Name Pay Code </th>
+												
 												<th scope="col">Designation</th>
 												<th scope="col">Loan Head </th>
 												<th scope="col">Amount Required </th>
-												
+											
 												<th scope="col">WEF Date </th>
-												<th scope="col">App. cheque No </th>
-												<th scope="col"> Cheque Date </th>
-												<th scope="col"> Cheque Amount </th>
-												<th scope="col"> Bank Name </th>
-												<th scope="col"> Ded. </th>
+											
 												<th scope="col">Approval Status </th>
 												        <th scope="col">View  </th>
 											</tr>
 
 										</thead>
 										<tbody>
-										<tr>
-										
-										
-										
-										<th scope="col">App. No.</th>
-												<td>App.Date </td>
-											    <td>Employee  Code </td>
-												<td>Employee Name </td>
-												<td>Employee Pay Code </td>
-												<td>Father/Husband Name Pay Code </td>
-												<td>Designation</td>
-												<td>Loan Head </td>
-												<td>Amount Required </td>
-												<td>WEF Date </td>
-												<td>App. cheque No </td>
-												<td> Cheque Date </td>
-												<td> Cheque Amount </td>
-												<td> Bank Name </td>
-												<td> Ded. </td>
-										<td>
+										<tr  th:each="listloan:${listofloanApproval}">
+										        <td th:text="${listloan.appNo}"></td>
+												<td th:text="${#dates.format(listloan.appDate,'dd-MM-yyyy')}"> </td>
+											    <td th:text="${listloan.empCode}"> </td>
+												<td th:text="${listloan.empName}"> </td>
+												<td th:text="${listloan.empPayCode}"> </td>
+												<td th:text="${listloan.desgName}"></td>
+												<td th:text="${listloan.loanName}"> </td>
+												<td th:text="${listloan.amountRequired}"> </td>
+												<td th:text="${#dates.format(listloan.effScheduleDate,'dd-MM-yyyy')}"></td>
+												
+											<td>
 
-													<div class="dropdown">
-														<button class="btn btn-primary dropdown-toggle"
-															type="button" data-toggle="dropdown">
-															Approved Action 
-														</button>
+											 <div class="dropdown">
+												<button class="btn btn-primary dropdown-toggle"type="button" data-toggle="dropdown">Approved
+															Action</button>
 														<ul class="dropdown-menu">
-															<li><a class="dropdown-item"href="">Approved</a></li>
-															<li><a  class="dropdown-item active" href="#"> Not Approved </a></li>
+															<li><a class="dropdown-item"
+																th:href="@{/approvedLoanRequest/{id}/(id=${listloan.appNo})}">Approved</a></li>
+															<li><a class="dropdown-item active" href="#">
+																	Not Approved </a></li>
 														</ul>
-													</div> 
-                           							  </td>
-                            <td>
-                               <a href=""class="btn btn-success"><em class="fa fa-eye"></em></a>
-                            </td>
+													</div>
+												</td>
+												<td><a th:href="@{/viewLoanRequest/{id}/(id=${listloan.appNo})}"
+													class="btn btn-success"><em class="fa fa-eye"></em></a></td>
 										</tr>
 										
 										

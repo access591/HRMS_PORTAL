@@ -421,7 +421,7 @@ $("table").on("keyup", ".govt", function () {
 									
 										<td th:text="${student.slipNo}" ></td>
 										
-										<td  th:text="${student.dateOfSlip}"></td>
+										<td  th:text="${#dates.format(student.dateOfSlip,'dd-MM-yyyy')}"></td>
 										
 										<td  th:text="${student.empCode.empCode}"></td>
 										
@@ -474,7 +474,7 @@ $("table").on("keyup", ".govt", function () {
 		singleDatePicker: true,
 	    autoApply: true,
 		locale: {
-            format: 'DD/MM/YYYY'
+            format: 'YYYY/MM/DD'
         },
 		showDropdowns: true
 	});
@@ -484,7 +484,7 @@ $("table").on("keyup", ".govt", function () {
 		singleDatePicker: true,
 	    autoApply: true,
 		locale: {
-            format: 'DD/MM/YYYY'
+            format: 'YYYY/MM/DD'
         },
 		showDropdowns: true
 	});

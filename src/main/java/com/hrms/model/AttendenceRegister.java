@@ -1,5 +1,6 @@
 package com.hrms.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -11,12 +12,15 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import org.exolab.castor.types.DateTime;
-import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "ATTENDENCE_REGISTER")
-public class AttendenceRegister {
+public class AttendenceRegister implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7539699469165343324L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,23 +29,12 @@ public class AttendenceRegister {
 
 	@Column(name = "ATTENDENCEDATE")
 	private Date attendenceDate;
-
-	
 	@ManyToOne
 	@JoinColumn(name = "DEPT_CODE")
 	private Department department;
-
-	
 	@ManyToOne
 	@JoinColumn(name = "EMP_CODE")
 	private Employee employee;
-
-	@Column(name = "EMP_WORKER_TYPE")
-	private String empWorkerType;
-
-	@Column(name = "WORKER_CODE")
-	private String workerCode;
-
 	@Column(name = "SHIFT_CODE")
 	private String shiftCode;
 
@@ -49,12 +42,14 @@ public class AttendenceRegister {
 	private String status;
 
 	@Column(name = "TIME_IN")
-	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
-	private DateTime timeIn;
+	
+	private String timeIn;
 
 	@Column(name = "TIME_OUT")
-	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
-	private DateTime timeOut;
+	
+	private String timeOut;
+	
+	
 
 	@Column(name = "INS_BY")
 	private String insBy;
@@ -66,16 +61,21 @@ public class AttendenceRegister {
 	private String compunsantaryL;
 
 	@Column(name = "A_TIME_IN")
-	private Date aTimeIn;
+	private String aTimeIn;
 
 	@Column(name = "A_TIME_OUT")
-	private Date aTimeOut;
+	private String aTimeOut;
 
 	@Column(name = "OVER_TIME")
 	private String overTime;
+	
+	
+	
+	
 
 	@Column(name = "STATUS2")
 	private String status2;
+	
 
 	@Column(name = "OVER_TIME_STATUS")
 	private String overTimeStatus;
@@ -132,21 +132,6 @@ public class AttendenceRegister {
 		this.employee = employee;
 	}
 
-	public String getEmpWorkerType() {
-		return empWorkerType;
-	}
-
-	public void setEmpWorkerType(String empWorkerType) {
-		this.empWorkerType = empWorkerType;
-	}
-
-	public String getWorkerCode() {
-		return workerCode;
-	}
-
-	public void setWorkerCode(String workerCode) {
-		this.workerCode = workerCode;
-	}
 
 	public String getShiftCode() {
 		return shiftCode;
@@ -164,21 +149,7 @@ public class AttendenceRegister {
 		this.status = status;
 	}
 
-	public DateTime getTimeIn() {
-		return timeIn;
-	}
 
-	public void setTimeIn(DateTime timeIn) {
-		this.timeIn = timeIn;
-	}
-
-	public DateTime getTimeOut() {
-		return timeOut;
-	}
-
-	public void setTimeOut(DateTime timeOut) {
-		this.timeOut = timeOut;
-	}
 
 	public String getInsBy() {
 		return insBy;
@@ -204,19 +175,37 @@ public class AttendenceRegister {
 		this.compunsantaryL = compunsantaryL;
 	}
 
-	public Date getaTimeIn() {
+	
+
+	public String getTimeIn() {
+		return timeIn;
+	}
+
+	public void setTimeIn(String timeIn) {
+		this.timeIn = timeIn;
+	}
+
+	public String getTimeOut() {
+		return timeOut;
+	}
+
+	public void setTimeOut(String timeOut) {
+		this.timeOut = timeOut;
+	}
+
+	public String getaTimeIn() {
 		return aTimeIn;
 	}
 
-	public void setaTimeIn(Date aTimeIn) {
+	public void setaTimeIn(String aTimeIn) {
 		this.aTimeIn = aTimeIn;
 	}
 
-	public Date getaTimeOut() {
+	public String getaTimeOut() {
 		return aTimeOut;
 	}
 
-	public void setaTimeOut(Date aTimeOut) {
+	public void setaTimeOut(String aTimeOut) {
 		this.aTimeOut = aTimeOut;
 	}
 

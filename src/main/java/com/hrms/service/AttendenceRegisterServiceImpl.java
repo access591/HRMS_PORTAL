@@ -5,17 +5,20 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hrms.model.AttendenceRegister;
+import com.hrms.model.MedicalReimbursement;
+import com.hrms.repository.AttendenceRegisterDao;
 
 @Service
 public class AttendenceRegisterServiceImpl implements AttendenceRegisterService{
 
 	@Autowired SessionFactory sessionFactory;
-	
+	@Autowired AttendenceRegisterDao attendenceRegisterDao;
 	@Override
 	public List<AttendenceRegister> findAttendenceByEmpCodeBetweenDate(String empCode,Date fromDate,Date toDate) {
 		
@@ -75,6 +78,25 @@ public class AttendenceRegisterServiceImpl implements AttendenceRegisterService{
 	}
 
 	@Override
+	public boolean addAttendenceRegister(AttendenceRegister attn) {
+		Session s=sessionFactory.openSession();
+		s.beginTransaction();
+		
+		// TODO Auto-generated method stub
+		s.save(attn);
+		s.getTransaction().commit();
+		s.clear();
+		s.close();
+		return true;
+	}
+
+	@Override
+	public List<AttendenceRegister> getAllAttendenceRegister() {
+		// TODO Auto-generated method stub
+		return attendenceRegisterDao.findAll();
+	}
+
+
 	public AttendenceRegister findAttendenceRegisterByEmpCode(String empCode) {
 		
 		try {
@@ -112,6 +134,19 @@ public class AttendenceRegisterServiceImpl implements AttendenceRegisterService{
 			e.printStackTrace();
 		}
 		return null;
+
+	public void removeAttendanceRegister(int id) {
+		Session session = sessionFactory.openSession();
+		Object o = session.get(AttendenceRegister.class, id);
+		AttendenceRegister e = (AttendenceRegister) o;
+		Transaction tx = session.beginTransaction();
+		session.delete(e);
+		tx.commit();
+		session.close();
+		
+	
+
 	}
 
 }
+

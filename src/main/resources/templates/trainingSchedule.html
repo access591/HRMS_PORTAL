@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"lang="en">
+
+<script type="text/javascript" th:src="@{/js/settings.js}"></script>
+<script type="text/javascript" th:src="@{/js/app.js}"></script>
+<link rel="stylesheet" type="text/css" th:href="@{/css/modern.css}" />
+<script  src="https://www.googletagmanager.com/gtag/js?id=UA-120946860-7"></script>
+
+<style>
+
+
+body {
+	opacity: 0;
+}
+.uppercase {
+  text-transform: uppercase;
+}
+
+#loading {
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  position: fixed;
+  display: block;
+  opacity: 0.7;
+  background-color: #676565;
+  z-index: 99;
+  text-align: center;
+}
+
+#loading-image {
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  z-index: 100;
+}
+</style>
+
+
+<script>
+
+
+
+	window.dataLayer = window.dataLayer || [];
+	function gtag() {
+		dataLayer.push(arguments);
+	}
+	 gtag('js', new Date());
+
+	gtag('config', 'UA-120946860-7');
+</script>
+<head>
+<meta charset="utf-8" />
+<title>HRMS</title>
+</head>
+ 
+<body>
+
+<div class="wrapper">
+<nav id="sidebar" class="sidebar">
+ <div th:replace="/fragments/sidebar :: div"></div>
+ </nav>
+ 		
+		<div class="main">
+		<div th:replace="/fragments/header ::div"></div>
+		<main class="content">
+		<div class="container-fluid">
+
+					<div class="header">
+						<h1 class="header-title">
+							Personal
+						</h1>
+						
+					
+					</div>
+				
+					<div class="row">
+					
+							<div class="col-12">
+							<div class="card">
+								<div class="card-header">
+									<h5 class="card-title">Training Schedule  </h5>
+								<div class="alert-outline">
+									<div th:if="${message}" th:text="${message}" style="color: red">
+									</div> 
+									</div>	
+								</div>
+								<div class="card-body">
+									<form id="validation-form" action="#" th:action="@{/saveLoanRequest}" th:object="${LoanRequest}" method="post">
+									<div class="form-row">
+												
+												<div class="form-group sm col-md-4">
+											       <label class="form-label">Training Schedule Code
+											       <span class="text-danger">*</span></label>
+							                 <input  type="text"id="appNo"name="appNo" class="form-control"disabled="disabled">
+										     </div>
+												
+												<div class="form-group sm col-md-4">
+											       <label class="form-label">Training Schedule  Date
+											       <span class="text-danger">*</span></label>
+							                 <input  type="text"id="appDate"name="appDate" title="Eligibility   Date" class="form-control required">
+										     </div>
+										    	<div class="form-group sm col-md-4">
+													<label class="form-label">Training Requisition Code</label>
+												<label style="color: red">*</label>
+												<select class="form-control select2" name="empCode" id="empCode" onchange="myFunctionEmpCode()" required aria-required="true">
+												 <option value="">Select </option>
+												<option th:each="e :${listEmployee}"th:value="${e.getEmpCode()}" th:text="${e.getEmpName()}"></option>
+											     	</select>
+
+												</div>
+										     
+											
+												
+												
+								</div>
+								
+									<div class="form-row">
+									
+									<div class="form-group sm col-md-4">
+											       <label class="form-label">Training Requisition Date
+											       <span class="text-danger">*</span></label>
+							                 <input  type="text"id="appDate"name="appDate" title="Eligibility   Date" class="form-control required">
+										     </div>
+										     
+										    
+												<div class="form-group sm col-md-4">
+													<label class="form-label">Topic Serial No</label>
+												<label style="color: red">*</label>
+												<select class="form-control select2" name="empCode" id="empCode" onchange="myFunctionEmpCode()" required aria-required="true">
+												 <option value="">Select </option>
+												<option th:each="e :${listEmployee}"th:value="${e.getEmpCode()}" th:text="${e.getEmpName()}"></option>
+											     	</select>
+
+												</div>
+												<div class="form-group sm col-md-4">
+													<label class="form-label">Employee  Code (If Trainer)</label>
+												<label style="color: red">*</label>
+												<select class="form-control select2" name="empCode" id="empCode" onchange="myFunctionEmpCode()" required aria-required="true">
+												 <option value="">Select Employee</option>
+												<option th:each="e :${listEmployee}"th:value="${e.getEmpCode()}" th:text="${e.getEmpName()}"></option>
+											     	</select>
+
+												</div>
+												
+												</div>
+												
+												
+												<div class="form-row">
+												
+									
+												<div class="form-group sm col-md-4">
+											       <label class="form-label">Trainer Name</label>
+												<input Type=text class="form-control required"name="loanType" id="loanType">
+												</div>
+												
+												
+												<div class="form-group sm col-md-4">
+											       <label class="form-label">Trainer  Date
+											       <span class="text-danger">*</span></label>
+							                 <input  type="text"id="effScheduleDate"name="effScheduleDate" title="Eligibility   Date" class="form-control required">
+										     </div>
+										     <div class="form-group sm col-md-4">
+											       <label class="form-label">Trainer End Date
+											     </label>
+							                 <input  type="text"id="effScheduleDate"name="effScheduleDate" title="Eligibility   Date" class="form-control">
+										     </div>
+												
+												</div>
+												
+												
+												
+												
+												
+						<div class="form-row">
+
+										<!-- <div class="form-group sm col-md-4">
+												<label class="form-label">Max Limit For Such Loan
+												 <span class="text-danger">*</span></label> 
+												 <input type="text" id="amount" name="amount" title="Amount" class="form-control required">
+											</div> -->
+											
+												
+												
+
+										</div>
+										
+										<div class="form-row">
+										<div class="form-group sm col-md-4">
+												<label class="form-label">Training Agency Name
+												 </label> 
+												 <input type="text" id="amountRequired" name="amountRequired" title="Training Agency Name" class="form-control required">
+											</div>
+										</div>
+										
+										
+							<button type="submit" class="btn btn-primary">Save</button>
+								 <button type="reset"class="btn btn-primary" value="Reset">Reset</button>
+						     
+						      </form>
+						      </div>
+						  
+	                      </div>
+	                        
+	                </div>   
+	                
+	                
+	                  	<div class="col-12">
+							<div class="card">
+								<div class="card-header">
+								</div>
+								<div class="card-body">
+									<table id="datatables-buttons" class="table table-striped display" style="width:100%"aria-describedby="example">
+										<thead>
+											<tr>
+												<th scope="col">Training Schedule Code</th>
+												<th scope="col">Training Schedule  Date</th>
+												<th scope="col">Employee Name </th>
+												
+												<th scope="col">Trainer Name </th>
+												<th scope="col">Trainer Date  </th>
+												<th scope="col">Training Agency Name</th>
+												<th scope="col">Action</th>
+											</tr>
+										</thead>
+										<tbody>
+											<!-- <tr  th:each="listLoanReq : ${listloanApplication}">
+												<td th:text="${listLoanReq.appNo}"></td>
+												
+												<td th:text="${listLoanReq?.empCode?.empName}"></td>
+												<td th:text="${#dates.format(listLoanReq.appDate,'dd-MM-yyyy')}"></td>
+												<td th:text="${listLoanReq.loanCode.loanName}"></td>
+												<td th:text="${listLoanReq.amountRequired}"></td>
+												
+												<td><a th:href="@{/editLoanRequest/{id}(id=${listLoanReq.appNo})}"><em class="fa fa-edit"></em></a>
+												<a th:href="@{/deleteLoanRequest/{id}(id=${listLoanReq.appNo})}" onclick="return confirm('Are you sure?')"><em class="fa fa-times"></em></a>
+												</td>
+											</tr>  -->
+										</tbody>
+									
+									</table>
+								</div>
+								
+							</div>
+						</div>
+	                
+	                
+	                
+	                
+					</div>
+
+				</div>
+		</main>
+		<footer class="footer">
+		<div th:replace="/fragments/footer :: div"></div>
+		</footer>
+		</div>
+		</div>
+	<script>
+		$(function() {
+
+			$("input[name='appDate']").daterangepicker({
+				singleDatePicker: true,
+			    autoApply: true,
+				locale: {
+		            format: 'YYYY/MM/DD'
+		        },
+				showDropdowns: true
+			});
+			
+		$("input[name='effScheduleDate']").daterangepicker({
+				singleDatePicker: true,
+			    autoApply: true,
+				locale: {
+		            format: 'YYYY/MM/DD'
+		        },
+				showDropdowns: true
+			});
+		$("input[name=\"dateOfJoining\"]").daterangepicker({
+			singleDatePicker: true,
+			   autoApply: true,
+			locale: {
+				format: 'DD/MM/YYYY'
+	        },
+			showDropdowns: true
+		});
+		$("input[name='dateOfRetirement']").daterangepicker({
+			singleDatePicker: true,
+		    autoApply: true,
+			locale: {
+				format: 'DD/MM/YYYY'
+	        },
+			showDropdowns: true
+		});
+		$("input[name='batchYear']").datepicker({
+			
+		    autoApply: true,
+		    format: "yyyy",
+		    autoclose: true,
+		    minViewMode: "years",
+			locale: {
+	            format: 'YYYY'
+	        },
+			showDropdowns: true
+		});
+			
+		
+		$("input[name=\"orderDate\"]").daterangepicker({
+				singleDatePicker: true,
+				   autoApply: true,
+				locale: {
+					format: 'DD/MM/YYYY'
+		        },
+				showDropdowns: true
+			});
+		
+		$("input[name=\"dov\"]").daterangepicker({
+			singleDatePicker: true,
+			   autoApply: true,
+			locale: {
+				format: 'DD/MM/YYYY'
+	        },
+			showDropdowns: true
+		});
+		$("input[name=\"doi\"]").daterangepicker({
+			singleDatePicker: true,
+			   autoApply: true,
+			locale: {
+				format: 'DD/MM/YYYY'
+	        },
+			showDropdowns: true
+		});
+
+
+
+			
+			// Datatables basic
+			$('#datatables-basic').DataTable({
+				responsive: true
+			});
+			// Datatables with Buttons
+			var datatablesButtons = $('#datatables-buttons').DataTable({
+				  deferRender:true,
+		            scrollCollapse: true,
+		            scroller: false,
+				   responsive: true,
+				   lengthMenu :[[10,20,30,-1 ],['10 rows', '20 rows', '30 rows', 'Show all' ] ],
+					buttons :[]
+			});
+			datatablesButtons.buttons().container().appendTo("#datatables-buttons_wrapper .col-md-6:eq(0)")
+		});
+		
+	</script>
+	
+		
+
+
+
+
+
+
+	<script>
+		$('#loading').show();
+		$.ajax({
+			// Other ajax parameters
+			success : function() {
+				// hiding the image here
+				debugger;
+				$('#loading').hide();
+			}
+		});
+	</script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+
+
+</body>
+</html>

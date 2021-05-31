@@ -21,7 +21,7 @@ public class ConveyanceApprovalDaoImpl extends AbstractGenericDao<LocalConvyence
 		try {
 			Session session = this.sessionFactory.openSession();
 			session.beginTransaction();
-			Query<LocalConvyence> query = session.createQuery("from LocalConvyence e where e.approvalStatus ='n'",LocalConvyence.class);
+			Query<LocalConvyence> query = session.createQuery("from LocalConvyence e where e.approvalStatus ='N'",LocalConvyence.class);
 			
 			List<LocalConvyence> localConvyenceList = query.getResultList();
 			session.getTransaction().commit();
