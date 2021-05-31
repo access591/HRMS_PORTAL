@@ -192,9 +192,9 @@ $("table").on("keyup", ".pas", function () {
 										<div class="form-group sm col-md-4">
 													<label class="form-label">Department Code </label>
 												<label style="color: red">*</label>
-												<select class="form-control select2" name="empCode" id="empCode" onchange="myFunctionEmpCode()" required aria-required="true">
+												<select class="form-control select2" name="departmentCode" id="departmentCode" onchange="myFunctionDeptCode()" required aria-required="true">
 												 <option value="">Select Employee</option>
-												<option th:each="e :${listEmployee}"th:value="${e.getEmpCode()}" th:text="${e.getEmpName()}"></option>
+												<option th:each="e :${listDepartment}"th:value="${e.getDepartmentCode()}" th:text="${e.getDeptName()}"></option>
 											     	</select>
 												</div>
 												
@@ -203,7 +203,7 @@ $("table").on("keyup", ".pas", function () {
 												<label style="color: red">*</label>
 												<select class="form-control select2" name="empCode" id="empCode" onchange="myFunctionEmpCode()" required aria-required="true">
 												 <option value="">Select Employee</option>
-												<option th:each="e :${listEmployee}"th:value="${e.getEmpCode()}" th:text="${e.getEmpName()}"></option>
+												
 											     	</select>
 
 												</div>
@@ -255,9 +255,13 @@ $("table").on("keyup", ".pas", function () {
 													<td><input type="time" name='timeIn0'placeholder='Time In 'size='6'  /></td>
 													<td><input type="time" name='timeOut0'placeholder='time Out'size='6'  /></td>
 													<td><input type="text" name='hoursR0'placeholder='Overtime Hours' size='5' /></td>
-														
-													<td> <input type="checkbox" id="vehicle1" name="esi0" class="form-control"value="Bike"/></td>
-														
+
+														<td><select  id="esiYn"name="esiYn">
+																<option value="">Select Esi</option>
+																<option value="">Yes</option>
+																<option value="">No</option>
+														</select></td>
+
 														<td><input type="text" name='remark0'
 														placeholder='Remarks'/></td>
 														
@@ -292,7 +296,7 @@ $("table").on("keyup", ".pas", function () {
 								<div class="card-body">
 									<table id="datatables-buttons" class="table table-striped display" style="width:100%"aria-describedby="example">
 										<thead>
-											<tr >
+											<tr>
 												<th scope="col">id </th>
 												<th scope="col">Employee Name</th>
 												<th scope="col">Department</th>
@@ -300,7 +304,7 @@ $("table").on("keyup", ".pas", function () {
 												<th scope="col">Tour Pan Date </th>
 												
 												<th scope="col">Action </th>
-											</tr >
+											</tr>
 											
 
 
@@ -391,21 +395,34 @@ $("table").on("keyup", ".pas", function () {
 	
 
 	<script>
-	function myFunctionEmpCode(){
+	function myFunctionDeptCode(){
 /* 		 var empCode= $('#empCode option:selected').value; */
-		 var empCode= document.getElementById('empCode').value
-	    console.log("ajax request : "+ empCode);
+		 var departmentCode= document.getElementById('departmentCode').value
+	    console.log("ajax request : "+ departmentCode);
 	    const xhr = new XMLHttpRequest();
-	    xhr.open('GET','./viewEmployeeDetails/'+empCode,true);
+	    xhr.open('GET','./viewOverTimeRegisterBydepartment/'+departmentCode,true);
 	    xhr.getResponseHeader('content-type','application/json');
 	    xhr.onload = function(){
 	        if(this.status===200){
 	            let obj = JSON.parse(this.responseText);
 	            console.log(obj);
+	            
+	            $('#empCode').empty();
 	            $('#empName').val(obj.empName);
-	            $('#deptName').val(obj.deptName);
-	            $('#desgName').val(obj.desgName);
-	            $('#empPayCode').val(obj.empPayCode);
+	            $('#empCode').val(obj.empCode);
+	            
+	            $.each(obj,
+						function(i, item) {
+							console.log(" i " + i + " item : "
+									+ item.empCode);
+							console.log(" i " + i + " item : "
+									+ item.empName);
+							$('#empCode').append(
+									$('<option>').val(this.empCode)
+											.text(this.empName));
+						});
+				
+	           
 	        }
 	        else{
 	            console.error("some error occured");
@@ -415,16 +432,7 @@ $("table").on("keyup", ".pas", function () {
 	    xhr.send();
 	}
 
-
-
-	
 	</script>
-	
-
-
-
-
-
 
 	<script>
 		$('#loading').show();
@@ -432,7 +440,7 @@ $("table").on("keyup", ".pas", function () {
 			// Other ajax parameters
 			success : function() {
 				// hiding the image here
-				debugger;
+				//debugger;
 				$('#loading').hide();
 			}
 		});
