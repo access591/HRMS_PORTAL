@@ -18,8 +18,14 @@ public class OvertimeRegisterUtil {
 	private String status;
 	private String overTime;
 	private Date overTimeDate;
+	private long id;
 	
-	
+	public long getId() {
+		return id;
+	}
+	public void setId(Long long1) {
+		this.id = long1;
+	}
 	public String getEmpCode() {
 		return empCode;
 	}
