@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-
+import com.hrms.model.AttendenceRegisterUtil;
 import com.hrms.model.Department;
 import com.hrms.model.Designation;
 import com.hrms.model.Employee;
@@ -52,6 +52,37 @@ public class OvertimeRegisterController {
 		if (modules != null) {
 			model.addAttribute("modules", modules);
 		}
+		
+		List<OvertimeRegister> listOverTimeR = overtimeRegisterService.getAllOvertimeRegister();
+		List<OvertimeRegisterUtil>listOverTime= new ArrayList<OvertimeRegisterUtil>();
+		  for (int i = 0; i < listOverTimeR.size(); i++) {
+			  
+			  String empCode = listOverTimeR.get(i).getEmployee().getEmpCode();
+			  OvertimeRegisterUtil ovTime=new OvertimeRegisterUtil();
+			  
+			  Employee employee = employeeService.findEmployeeById(empCode);
+			  Department department = departmentService.findDepartmentById(employee.getDepartmentCode());
+			  Designation designation = designationService.findDesignationById(employee.getDesignationCode());
+			    
+			  ovTime.setEmpName(employee.getEmpName());
+			  ovTime.setDeptName(department.getDeptName());
+			  ovTime.setDesgName(designation.getDesgName());
+			  
+			  ovTime.setId(listOverTimeR.get(i).getId());
+			  ovTime.setOverTimeDate(listOverTimeR.get(i).getOverTimeDate());
+			  ovTime.setEsiYn(listOverTimeR.get(i).getEsiYn());
+			  ovTime.setOverTime(listOverTimeR.get(i).getOverTime());
+			  ovTime.setRemarks(listOverTimeR.get(i).getRemarks());
+			  ovTime.setTimeIN(listOverTimeR.get(i).getTimeIN());
+			  ovTime.setTimeOut(listOverTimeR.get(i).getTimeOut());
+			  listOverTime.add(ovTime);
+			  model.addAttribute("overReg", listOverTime); 
+			  
+			  
+		  }
+		  
+		
+		
 		return "overtimeRegister";
 
 	}
@@ -200,4 +231,15 @@ public class OvertimeRegisterController {
 
 		return "redirect:/overtimeRegister";
 		}
+	
+	
+	
+	@GetMapping(value = { "/deleteOverTime/{id}" })
+	public String deleteOverTime(@PathVariable("id")long id , Model model, HttpSession session) {
+
+		overtimeRegisterService.removeOverTimeRegister(id);
+
+		session.setAttribute("username", session.getAttribute("username"));
+		return "redirect:/overtimeRegister";
+	}
 }
