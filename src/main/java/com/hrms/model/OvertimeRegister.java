@@ -1,9 +1,12 @@
 package com.hrms.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -13,49 +16,61 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name="OVERTIME_REGISTER")
-public class OvertimeRegister {
+public class OvertimeRegister implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4594103379739344593L;
+
 	@Id
-	@Column(name="ID")
-	private Long id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long id;
 	
 	@ManyToOne
 	@JoinColumn(name = "EMP_CODE")
 	private Employee employee;
 	
+	
 	@Column(name="OVER_TIME_DATE")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date overTimeDate;
 	
-	@Column(name="TIME_IN")
 	
+	
+	
+	@Column(name="TIME_IN")
 	private String timeIN;
 	
 	@Column(name="TIME_OUT")
 	private String timeOut;
+
+	@Column(name="ESI_YN")
+	private String esiYn;
 	
+	
+	
+	@Column(name="OVERTIME_RATE")
+	private String overTimeRate;
+	
+	
+	@Column(name="REMARKS")
+	private String remarks;
+	
+	
+	@Column(name="STATUS")
+	private String status;
+	
+	
+	@Column(name="OVERTIME")
+	private String overTime;
+	
+
 	@Column(name = "INS_BY", updatable = false)
 	private String insBy;
 
 	@Column(name = "INS_DATE", updatable = false)
 	private Date insDate = new Date();
-
-	@Column(name="ESI_YN")
-	private String esiYn;
-	
-	@Column(name="OVERTIME_RATE")
-	private String overTimeRate;
-	
-	@Column(name="REMARKS")
-	private String remarks;
-	
-	@Column(name="STATUS")
-	private String status;
-	
-	@Column(name="OVERTIME")
-	private String overTime;
-
-	
 	
 	public OvertimeRegister() {
 		super();

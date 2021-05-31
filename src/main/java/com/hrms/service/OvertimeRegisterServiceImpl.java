@@ -37,4 +37,17 @@ public class OvertimeRegisterServiceImpl implements OvertimeRegisterService{
 		return null;
 	}
 
+	@Override
+	public boolean addOvertimeRegister(OvertimeRegister overReg) {
+		Session s=sessionFactory.openSession();
+		s.beginTransaction();
+		
+		// TODO Auto-generated method stub
+		s.save(overReg);
+		s.getTransaction().commit();
+		s.clear();
+		s.close();
+		return true;
+	}
+
 }
