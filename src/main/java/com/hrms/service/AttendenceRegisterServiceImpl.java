@@ -133,7 +133,8 @@ public class AttendenceRegisterServiceImpl implements AttendenceRegisterService{
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
-		return null;
+	return null;
+	}
 
 	public void removeAttendanceRegister(int id) {
 		Session session = sessionFactory.openSession();
