@@ -103,19 +103,25 @@ public class MonthlyOvertimeEvaluationController {
 	
 	@ResponseBody
     @GetMapping("/viewMonthOverTimeRegisterByEmployee/{id}")
-    public EmpMonOvertimeUtil  viewOverTimeRegisterByEmployee(@PathVariable(value = "id") String id,Model model,HttpSession session) {
+    public List<EmpMonOvertimeUtil>  viewOverTimeRegisterByEmployee(@PathVariable(value = "id") String id,Model model,HttpSession session) {
 		// Department d=departmentService.findDepartmentById(id);
-		Employee employee = employeeService.findEmployeeById(id);
-		String empCode = employee.getEmpCode();
-		System.out.println(">>>>>>>>xxxxxx>>>>>>>>>>>>>>>>>>" + empCode);
-		EmpMonOvertimeUtil listEmp = new EmpMonOvertimeUtil();
 
-		Designation designation = designationService.findDesignationById(employee.getDesignationCode());
-		listEmp.setDesgName(designation.getDesgName());
-		listEmp.setEmpCode(employee.getEmpCode());
-		listEmp.setEmpName(employee.getEmpName());
-
-		return listEmp;
+		List<Employee> employee = employeeService.findByempCode(id);
+		List<EmpMonOvertimeUtil> lisOver = new ArrayList<EmpMonOvertimeUtil>();
+		
+		
+		for (int i = 0; i < employee.size(); i++) {
+			String empCode = employee.get(i).getEmpCode();	
+			EmpMonOvertimeUtil listEmp = new EmpMonOvertimeUtil();
+			Designation designation = designationService.findDesignationById(employee.get(i).getDesignationCode());
+			listEmp.setDesgName(designation.getDesgName());
+			listEmp.setEmpCode(employee.get(i).getEmpCode());
+			listEmp.setEmpName(employee.get(i).getEmpName());
+			lisOver.add(listEmp);
+			
+		}
+		
+		return lisOver;
 
     }
 	
