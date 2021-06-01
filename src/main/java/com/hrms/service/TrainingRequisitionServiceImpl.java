@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -63,6 +64,23 @@ public class TrainingRequisitionServiceImpl implements TrainingRequistionService
 		session.merge(tr);
 		session.getTransaction().commit();
 		
+	}
+
+	@Override
+	public List<TrainingRequisition> findTrainingRequisitionByStatusY() {
+		
+		try {
+			Session session = sessionFactory.openSession();
+			Query<TrainingRequisition> query = session.createQuery("from TrainingRequisition tr where "
+					+ "tr.trReqStatus = :status", TrainingRequisition.class);
+			query.setParameter("status", "Y");
+			List<TrainingRequisition> result = query.getResultList();
+			
+			return result;
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 	
 	
