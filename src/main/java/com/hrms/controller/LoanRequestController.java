@@ -19,9 +19,7 @@ import com.hrms.model.Employee;
 import com.hrms.model.Loan;
 import com.hrms.model.LoanApplication;
 import com.hrms.model.LoanApplicationUtil;
-import com.hrms.model.LocalConvyenceUtil;
-import com.hrms.model.LtaRequest;
-import com.hrms.model.LtaRequestUtil;
+
 import com.hrms.model.MenuModule;
 import com.hrms.service.DepartmentService;
 import com.hrms.service.DesignationService;

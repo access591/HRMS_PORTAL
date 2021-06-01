@@ -13,10 +13,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import com.hrms.model.Department;
 import com.hrms.model.Employee;
-import com.hrms.model.LocalConvyence;
-import com.hrms.model.LocalConvyenceUtil;
+
 import com.hrms.model.LtaRequest;
-import com.hrms.model.LtaRequestUtil;
+import com.hrms.util.LtaRequestUtil;
 import com.hrms.model.MenuModule;
 import com.hrms.service.DepartmentService;
 import com.hrms.service.EmployeeService;

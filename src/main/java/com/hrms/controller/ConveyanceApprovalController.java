@@ -15,7 +15,7 @@ import com.hrms.model.Department;
 import com.hrms.model.Designation;
 import com.hrms.model.Employee;
 import com.hrms.model.LocalConvyence;
-import com.hrms.model.LocalConvyenceUtil;
+import com.hrms.util.LocalConvyenceUtil;
 import com.hrms.model.MenuModule;
 import com.hrms.model.TourPlan;
 import com.hrms.service.ConveyanceApprovalService;
