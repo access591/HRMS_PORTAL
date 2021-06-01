@@ -126,27 +126,64 @@ body {
 												</thead>
 												
 													<tbody>
-														<tr> <!--  th:each="tour:${ListTourPlan}" -->
-														<td>Requisition Code</td>
-														<td >Requisition  Date</td>
-														<td >Department Code</td>
-														<td>Department Name</td>
+														<tr th:each="trainingRequistion : ${listTrainingRequisition}" > <!--  th:each="tour:${ListTourPlan}" -->
+														<td th:text="${trainingRequistion.trReqCode}">Requisition Code</td>
+														<td th:text="${trainingRequistion.trReqDate}">Requisition  Date</td>
+														<td th:text="${trainingRequistion.department.departmentCode}">Department Code</td>
+														<td th:text="${trainingRequistion.department.deptName}">Department Name</td>
 														
-														<td>
+														
+														<td th:if="${trainingRequistion.trReqStatus == 'Y'}">
+																<div class="dropdown show">
+																  <a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+																   Approved
+																  </a>
+																
+																  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+																    <a class="dropdown-item" th:href="@{approveTrainingRequisition/{id}/{requisitionStatus}/(id=${trainingRequistion.trReqCode},requisitionStatus=${'Y'})}">Approve</a>
+																    <a class="dropdown-item" th:href="@{approveTrainingRequisition/{id}/{requisitionStatus}/(id=${trainingRequistion.trReqCode},requisitionStatus=${'C'})}">Cancel</a>
+																    
+																  </div>
+																</div>
+															</td>
+															
+															<td th:if="${trainingRequistion.trReqStatus == 'C'}">
+																<div class="dropdown show">
+																  <a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+																    &nbsp &nbspCancel&nbsp &nbsp
+																  </a>
+																
+																  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+																    <a class="dropdown-item" th:href="@{approveTrainingRequisition/{id}/{requisitionStatus}/(id=${trainingRequistion.trReqCode},requisitionStatus=${'Y'})}">Approve</a>
+																    <a class="dropdown-item" th:href="@{approveTrainingRequisition/{id}/{requisitionStatus}/(id=${trainingRequistion.trReqCode},requisitionStatus=${'C'})}">Cancel</a>
+																    
+																  </div>
+																</div>
+															</td>
+															
+															<td th:if="${trainingRequistion.trReqStatus == 'N'}">
+																<div class="dropdown show">
+																  <a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+																    &nbsp&nbspPending&nbsp&nbsp
+																  </a>
+																
+																  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+																    <a class="dropdown-item" th:href="@{approveTrainingRequisition/{id}/{requisitionStatus}/(id=${trainingRequistion.trReqCode},requisitionStatus=${'Y'})}">Approve</a>
+																    <a class="dropdown-item" th:href="@{approveTrainingRequisition/{id}/{requisitionStatus}/(id=${trainingRequistion.trReqCode},requisitionStatus=${'C'})}">Cancel</a>
+																    
+																  </div>
+																</div>
+															</td>
 
-													<div class="dropdown">
-														<button class="btn btn-primary dropdown-toggle"
-															type="button" data-toggle="dropdown">
-															Approved Action 
-														</button>
-														<ul class="dropdown-menu">
-															<li><a class="dropdown-item"href="">Approved</a></li>
-															<li><a  class="dropdown-item active" href="#"> Not Approved </a></li>
-														</ul>
-													</div> 
-                           							  </td>
-                            <td>
-                               <a href=""class="btn btn-success"><em class="fa fa-eye"></em></a>
+													
+                            <td th:if="${trainingRequistion.trReqStatus == 'N'}">
+                               <a th:href="@{editTrainingRequisition/{id}/(id=${trainingRequistion.trReqCode})}" class="btn btn-primary"><em class="fa fa-eye"></em></a>
+                            </td>
+                            <td th:if="${trainingRequistion.trReqStatus == 'Y'}">
+                               <a th:href="@{viewTrainingRequisition/{id}/(id=${trainingRequistion.trReqCode})}" class="btn btn-primary"><em class="fa fa-eye"></em></a>
+                            </td>
+                            <td th:if="${trainingRequistion.trReqStatus == 'C'}">
+                               <a th:href="@{viewTrainingRequisition/{id}/(id=${trainingRequistion.trReqCode})}" class="btn btn-primary"><em class="fa fa-eye"></em></a>
                             </td>
 													</tr>
 
