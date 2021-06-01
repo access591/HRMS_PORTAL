@@ -17,6 +17,7 @@ public class TrainingRegisterDetails implements Serializable {
 
 	/**
 	 * 
+	 * 
 	 */
 	private static final long serialVersionUID = -6290645706436649061L;
 	@Id
@@ -26,15 +27,14 @@ public class TrainingRegisterDetails implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "TR_SCH_CODE")
 	private TrainingRegister trSchCode;
-	
-	
+
 	@ManyToOne
 	@JoinColumn(name = "TR_REG_DATE")
 	private TrainingRegister trRegCode;
 	
 	@ManyToOne
 	@JoinColumn(name = "EMPLOYEE_CODE")
-	private Employee  empCode;
+	private Employee  employee;
 	
 	
 	@Column(name = "EMP_FEEDBACK")

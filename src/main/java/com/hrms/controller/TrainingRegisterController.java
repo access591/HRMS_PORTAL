@@ -11,10 +11,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import com.hrms.model.MenuModule;
 import com.hrms.service.ModuleService;
+import com.hrms.service.TrainingRegisterDetailsService;
+import com.hrms.service.TrainingRegisterService;
 @Controller
 public class TrainingRegisterController {
 	@Autowired
 	private ModuleService moduleService;
+	
+	@Autowired
+	TrainingRegisterDetailsService trainingRegisterDetailsService;
+	@Autowired
+	TrainingRegisterService trainingRegisterService;
+	
 
 	@GetMapping("/trainingRegister")
 	public String trainingRegister(Model model, HttpSession session) {
