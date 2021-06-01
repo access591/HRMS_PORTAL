@@ -22,7 +22,7 @@ import com.hrms.model.Designation;
 import com.hrms.model.Employee;
 import com.hrms.model.Loan;
 import com.hrms.model.LoanApplication;
-import com.hrms.model.LoanApplicationUtil;
+import com.hrms.util.LoanApplicationUtil;
 import com.hrms.model.LoanSchedule;
 
 import com.hrms.model.MenuModule;

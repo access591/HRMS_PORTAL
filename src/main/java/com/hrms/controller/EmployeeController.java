@@ -31,7 +31,7 @@ import com.hrms.model.Country;
 import com.hrms.model.Department;
 import com.hrms.model.Designation;
 import com.hrms.model.Employee;
-import com.hrms.model.EmployeeUtil;
+import com.hrms.util.EmployeeUtil;
 import com.hrms.model.MenuModule;
 import com.hrms.model.State;
 import com.hrms.service.ArmsLicenseService;
