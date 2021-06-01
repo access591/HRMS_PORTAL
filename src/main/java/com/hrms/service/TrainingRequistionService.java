@@ -11,6 +11,6 @@ public interface TrainingRequistionService {
 	public void trainingRequisitionApproval(String trReqCode,String  status);
 	public TrainingRequisition findById(String trReqCode);
 	public void updateTrainingRequisition(TrainingRequisition trainingRequisition);
-	//pulic List<TrainingRequisition> findTrainingRequisitionByStatusY()
+	public List<TrainingRequisition> findTrainingRequisitionByStatusY();
 
 }
