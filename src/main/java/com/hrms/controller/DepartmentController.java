@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hrms.model.Department;
-import com.hrms.model.DepartmentUtiliy;
+import com.hrms.util.DepartmentUtiliy;
 import com.hrms.model.Employee;
 import com.hrms.model.MenuModule;
 import com.hrms.service.DepartmentService;

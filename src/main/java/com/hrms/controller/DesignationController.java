@@ -20,7 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hrms.model.Category;
 import com.hrms.model.Designation;
-import com.hrms.model.DesignationUtil;
+import com.hrms.util.DesignationUtil;
 import com.hrms.model.MenuModule;
 import com.hrms.service.CategoryService;
 import com.hrms.service.DesignationService;
