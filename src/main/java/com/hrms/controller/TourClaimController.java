@@ -23,6 +23,7 @@ import com.hrms.model.Designation;
 import com.hrms.model.Employee;
 
 import com.hrms.model.MenuModule;
+import com.hrms.model.StayingExpenses;
 import com.hrms.model.TourClaim;
 import com.hrms.model.TourClaimUtil;
 import com.hrms.model.TourPlan;
@@ -32,6 +33,7 @@ import com.hrms.service.DepartmentService;
 import com.hrms.service.DesignationService;
 import com.hrms.service.EmployeeService;
 import com.hrms.service.ModuleService;
+import com.hrms.service.StayingExpensesService;
 import com.hrms.service.TourClaimService;
 import com.hrms.service.TourPlanService;
 import com.hrms.service.TravelingExpensesService;
@@ -54,6 +56,8 @@ public class TourClaimController {
 	TravelingExpensesService travelingExpensesService;
 	@Autowired
 	ConveyanceExpensesService conveyanceExpensesService;
+	@Autowired
+	StayingExpensesService stayingExpensesService;
 	
 	@GetMapping("/tourClaim")
 	public String tourClaim(Model model, HttpSession session) {
@@ -80,7 +84,7 @@ public class TourClaimController {
 		TourClaim tourClaim= new TourClaim();
 		TravelingExpenses travExp=new TravelingExpenses();
 		ConveyanceExpenses convExp=new ConveyanceExpenses();
-		
+		StayingExpenses  stayingExpenses=new StayingExpenses();
 		Employee emp = new Employee();
 		emp.setEmpCode(tourClaimUtil.getEmpCode());
 		tourClaim.setEmpCode(emp);
@@ -271,7 +275,69 @@ public class TourClaimController {
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
+		//third counter
 		
+		try {
+			boolean insertStatusMR = false;
+			counter = Integer.parseInt(request.getParameter("_cr3"));
+			System.out.println("counter::::::::::::::::::::" + counter);
+			for (int i =0; i < counter; i++) 
+			{
+			
+				
+				if (request.getParameter("noDays" + i) != null) {
+					stayingExpenses.setNoDays(request.getParameter("noDays" + i));
+				} else {
+					stayingExpenses.setNoDays("" + i);
+				}
+
+				if (request.getParameter("stayDate" + i) != null) {
+					String sDate1 = request.getParameter("stayDate" + i);
+					Date date1 = new SimpleDateFormat("yyyy-MM-dd").parse(sDate1);
+					stayingExpenses.setStayDate(date1);
+				}
+				
+				if(request.getParameter("ataAmt" + i) != null) {
+					stayingExpenses.setAtaAmt(request.getParameter("ataAmt" + i));
+				} else {
+					stayingExpenses.setAtaAmt("" + i);
+				}
+				
+				tourClaim.setTourClaimId(tourcId);
+				tourClaim.setTourClaimDate(tourCdate);
+				stayingExpenses.setTourClaimId(tourClaim);
+				stayingExpenses.setTourClaimDate(tourClaim);
+				stayingExpenses.setEmpCode(emp);
+				
+				
+				insertStatusMR= stayingExpensesService.addStayingExpenses(stayingExpenses);
+				
+			if (insertStatusMR) {
+				System.out.println("Counter" + flag);
+				flag++;
+
+			}
+			
+		}
+		
+		
+		if (flag > 0) {
+			session.setAttribute("Message", "Data added successfully.");
+			
+		} else {
+			System.out.println("Enter into  failure part :");
+			
+		}
+
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+		
+		
+		
+		//end 3 counter
 		session.setAttribute("username", session.getAttribute("username"));
 
 		return "redirect:/tourClaim";
