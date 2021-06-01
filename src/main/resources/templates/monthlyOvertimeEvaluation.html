@@ -37,11 +37,36 @@ body {
   z-index: 100;
 }
 </style>
+
+<script>
+
+function demo()
+{  var i=0;
+	  $('#addr'+i).html("<td><input name='empCode"+i+"' size='10' type='text'placeholder='Employee Code'/></td>"+
+	    		
+	    		"<td><input  name='empName"+i+"' type='text' placeholder='Employee Name'/></td>"+
+	    		
+	    		"<td><input  name='vistPlace"+i+"' type='text'  placeholder='OverTime Rate'size='10'/></td>"+
+	    		
+	    		"<td><input  name='payAb"+i+"' type='text' placeholder='Payable Amount'size='10'/></td>"+
+	    		
+	    		"<td><select class='form-control input-md' id='modeOfTravel'name='modeOfTravel"+i+"'><option value=' '>Select</option><option value='Y'>Yes</option><option value='N'>No</option></select></td>"+
+	    		
+	    		"");
+
+	    $('#example').append('<tr id="addr'+(i+1)+'"></tr>');
+	    $('#_cr').val(i+1);
+	
+	i++;
+	
+	}
+
+</script>
 <script>
 $(document).ready(function(){
-
+	/* 
     var i=1;
-   $("#add_row").click(function(){
+   $("#empCode").click(function(){
     $('#addr'+i).html("<td><input name='empCode"+i+"' size='10' type='text'placeholder='Employee Code'/></td>"+
     		
     		"<td><input  name='empName"+i+"' type='text' placeholder='Employee Name'/></td>"+
@@ -59,7 +84,7 @@ $(document).ready(function(){
     
     i++; 
 });
-   
+    */
    
    $("#delete_row").click(function(){
 	  	 if(i>1){
@@ -248,9 +273,9 @@ $("table").on("keyup", ".pas", function () {
 											<tbody>
 												<tr id='addr0'>
 
-												<td><input type="text" id='empCode2' name='empCode0'placeholder='Employee Code'size='10' /></td>
-													<td><input type="text"id='empName' name='empName0'placeholder='Employee Name' /></td>
-													<td><input type="text" id='desgName'name='desiName0'placeholder='Designation'  value="" /></td>
+												<td><input type="text" id='empCode20' name='empCode0'placeholder='Employee Code'size='10' /></td>
+													<td><input type="text"id='empName0' name='empName0'placeholder='Employee Name' /></td>
+													<td><input type="text" id='desgName0'name='desiName0'placeholder='Designation'  value="" /></td>
 													<td><input type="text" name='oTimeRate0'placeholder='Over Time Rate'size='10'/></td>
 													<td><input type="text" name='payableAmt0'placeholder='payable Amount'size='10'/></td>	
 												
@@ -475,33 +500,42 @@ $("table").on("keyup", ".pas", function () {
 	            let obj = JSON.parse(this.responseText);
 	            console.log(obj);
 	         
-	           // $('#example tr').slice(1).remove()
-	            var i=0;
-	 
-	            	 $('#empCode2').val(obj.empCode);
-	 	            $('#empName').val(obj.empName);
-	 	            $('#desgName').val(obj.desgName);	
-	 	       
-	 	        
+	            
+		          
+	             for (i = 0; i < obj.length; i++) {
+	            	
+	            	 $('#empCode2'+i).val(obj[i].empCode);
+	 	            $('#empName'+i).val(obj[i].empName);
+	 	            $('#desgName'+i).val(obj[i].desgName);	
+	 	          // $('#example').append('<tr id="addr'+(i+1)+'"></tr>');
+	 	          //$('#_cr').val(i+1);
+	 	          console.log( "'í'"+i);
 	 	      
-	 	     if( i>0){
-		  
-		    $('#addr'+i).html("<td><input id='empCode2"+i+"' name='empCode"+i+"' size='10' type='text'placeholder='Employee Code'/> "+
-		    		"</td><td><input   id='empName"+i+"'name='empName"+i+"' type='text' placeholder='Employee Name'/>"+
-		    		"</td><td><input  id='desgName"+i+"'name='desgName"+i+"' type='text'  placeholder='Designation'/>"+
-		    		
-		    		"");
+	 	 	    
+	 	          	
+	            } 
+	            
+	           /*  if( i>0){
+	  	 		  
+		 		    $('#addr'+i).html("<td><input id='empCode2"+i+"' name='empCode"+i+"' size='10' type='text'placeholder='Employee Code'/> "+
+		 		    		"</td><td><input   id='empName"+i+"'name='empName"+i+"' type='text' placeholder='Employee Name'/>"+
+		 		    		"</td><td><input  id='desgName"+i+"'name='desgName"+i+"' type='text'  placeholder='Designation'/>"+
+		 		    		
+		 		    		"");
 
-		        $('#empCode2"+i+"').val(obj.empCode);
-	            $('#empName"+i+"').val(obj.empName);
-	            $('#desgName"+i+"').val(obj.desgName);
-	            
-	            
-	            
-	            $('#example').append('<tr id="addr'+(i+1)+'"></tr>');
-	 		    $('#_cr').val(i+1);
-	 	          
-	            }
+		 		        $('#empCode2"+i+"').val(obj.empCode);
+		 	            $('#empName"+i+"').val(obj.empName);
+		 	            $('#desgName"+i+"').val(obj.desgName);
+		 	            
+		 	            
+		 	            
+		 	            $('#example').append('<tr id="addr'+(i+1)+'"></tr>');
+		 	 		    $('#_cr').val(i+1);
+		 	 	          
+		 	            }
+	 	        */
+	 	        
+	 	
 	 	  
 	       
 	            $("#delete_row").click(function(){

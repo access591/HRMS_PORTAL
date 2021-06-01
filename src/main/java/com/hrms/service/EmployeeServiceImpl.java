@@ -75,5 +75,11 @@ public class EmployeeServiceImpl implements EmployeeService {
 		return this.employeeDao.findByDepartmentCode(deptCode);
 	}
 
+	@Override
+	public List<Employee> findByempCode(String empCode) {
+		
+		return employeeDao.findByIdList(empCode);
+	}
+
 
 }
