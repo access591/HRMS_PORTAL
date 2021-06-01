@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 
 import com.hrms.dao.AbstractGenericDao;
 import com.hrms.model.Employee;
-import com.hrms.model.EmployeeUtil;
+import com.hrms.util.EmployeeUtil;
 import com.hrms.model.Module;
 @Repository
 public class EmployeeDaoImpl  extends AbstractGenericDao<Employee> implements EmployeeDao{

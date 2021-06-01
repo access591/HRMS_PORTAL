@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hrms.model.Employee;
-import com.hrms.model.EmployeeUtil;
+import com.hrms.util.EmployeeUtil;
 import com.hrms.repository.EmployeeDao;
 
 

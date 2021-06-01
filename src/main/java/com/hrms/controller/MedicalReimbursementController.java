@@ -21,13 +21,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.hrms.model.Department;
 import com.hrms.model.Employee;
-import com.hrms.model.Leave;
-import com.hrms.model.Loan;
+
 import com.hrms.model.MedicalReimbursement;
 import com.hrms.model.MedicalReimbursementDetail;
-import com.hrms.model.MedicalReimbursementUtil;
+import com.hrms.util.MedicalReimbursementUtil;
 import com.hrms.model.MenuModule;
 import com.hrms.service.EmployeeService;
 import com.hrms.service.MedicalReimbursementDetailsService;

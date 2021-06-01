@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.hrms.model.Employee;
 import com.hrms.model.Leave;
 import com.hrms.model.LeaveGrant;
-import com.hrms.model.LeaveGrantUtil;
+import com.hrms.util.LeaveGrantUtil;
 import com.hrms.model.MenuModule;
 import com.hrms.service.EmployeeService;
 import com.hrms.service.LeaveGrantRegisterService;

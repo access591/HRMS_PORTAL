@@ -4,7 +4,7 @@ import java.util.List;
 
 
 import com.hrms.model.Employee;
-import com.hrms.model.EmployeeUtil;
+import com.hrms.util.EmployeeUtil;
 
 public interface EmployeeService {
 	public void addEmployee(Employee employee);
