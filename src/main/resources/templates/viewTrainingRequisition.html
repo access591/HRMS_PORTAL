@@ -71,7 +71,7 @@ $(document).ready(function(){
    $("#tab2_AddRow").click(function(){
 	  
 	    $('#addrtabsecond'+J).html("<td><select class=' form-control input-md' id='modeOfTravel'name='listTransactionReqEmployeeDetail["+i+"].employee.empCode'><option value=' '>Select</option></select></td>"+
-	    		"</td><td><input id='empName["+i+"]' name='listTransactionReqEmployeeDetail["+i+"].employee.empName' type='text' placeholder='Name'  class='form-control input-md'>"+
+	    		"</td><td><input  name='listTransactionReqEmployeeDetail["+i+"].employee.empName' type='text' placeholder='Name'  class='form-control input-md'>"+
 	    		"</td><td><input  name='listTransactionReqEmployeeDetail["+i+"].topicSrlNo' type='text' placeholder='Pay Code'  class='form-control input-md'></td>"+
 	    		"<td><input type='text' placeholder='Father Name'  class='nbt form-control input-md'></td>"+
 	    		"");
@@ -168,7 +168,7 @@ $(document).ready(function(){
 											<div class="form-group sm col-md-4">
 													<label class="form-label">Department Code</label>
 												<label style="color: red">*</label>
-												<select class="form-control select2" id="departmentDropdown" onchange="changeDepartment()" th:field="*{department.departmentCode}" >
+												<select class="form-control select2" id="empCode" onchange="myFunctionEmpCode()" th:field="*{department.departmentCode}" >
 												 <option value="">Select Department</option>
 												<option th:each="e :${listDepartment}"th:value="${e.departmentCode}" th:text="${e.deptName}"></option>
 											     	</select>
@@ -213,15 +213,7 @@ $(document).ready(function(){
 								<div class="card-header">
 								</div>
 								<div class="card-body">
-								<input id="_cr" name="_cr" type="text"value="1">
-								<div class="col-sm-12" align="right">
-							
 								
-								
-								
-								<a id="add_row" class="fa fa-plus" aria-hidden="true"style="font-size:28px;color:#001080"></a>&nbsp;&nbsp;&nbsp;
-								<a id='delete_row'class="fa fa-trash" style="font-size:28px;color:#399490fc"aria-hidden="true"></a>	
-								</div>
 														<div class="table-responsive">
 											<table id="example" aria-describedby="example" class="table" style="width:100%">
 															<thead>
@@ -237,18 +229,21 @@ $(document).ready(function(){
 																</tr>
 															</thead>
 															<tbody>
-																<tr id='addr0'>
+																<tr th:each="row,stat : ${trainingRequisition.listTransactionRequisitionDetail}">
 
 
 																	<td><input type="text" placeholder='Topic Details ' 
-																			name="listTransactionRequisitionDetail[0].topicDetail" class="form-control" />
+																			th:field="*{listTransactionRequisitionDetail[__${stat.index}__].topicDetail}"
+																			 class="form-control" />
 																	</td>
 																	<td><input type="date" placeholder='Topic Date' 
-																				name="listTransactionRequisitionDetail[0].trDate" class="form-control" />
+																			th:field="*{listTransactionRequisitionDetail[__${stat.index}__].trDate}"
+																				 class="form-control" />
 																	</td>
 																		<td>
 																		<select class="form-control" id="modeOfTravel0"
-																				name="listTransactionRequisitionDetail[0].prioity">
+																			th:field="*{listTransactionRequisitionDetail[__${stat.index}__].prioity}"
+																				>
 																			<option value="">Select Type</option>
 																			<option th:Value="H">High</option>
 																			<option th:Value="M">Medium</option>
@@ -256,12 +251,12 @@ $(document).ready(function(){
 												                         </select></td>
 
 
-																	<td><input type="text" placeholder='Remark' class="form-control" 
-																			name="listTransactionRequisitionDetail[0].remarks" /></td>
+																	<td><input type="text" placeholder='Remark' class="form-control"
+																	th:field="*{listTransactionRequisitionDetail[__${stat.index}__].remarks}" 
+																			 /></td>
 
 																</tr>
-																<tr id='addr1'></tr>
-
+																
 															</tbody>
 													
 
@@ -284,17 +279,8 @@ $(document).ready(function(){
 								<div class="card">
 								
 								<div class="card-body">
-								<input id="_cr2" name="_cr2" type="text"value="1">
-								<div class="col-sm-12" align="right">
-							<!-- 	<a th:href="@{/viewMedicalReimbursement}">
-								<em  class="fa fa-eye" style="font-size:28px"> 
-								</em></a>&nbsp;&nbsp;&nbsp; -->
 								
 								
-								
-								<a id="tab2_AddRow" class="fa fa-plus" aria-hidden="true"style="font-size:28px;color:#001080"></a>&nbsp;&nbsp;&nbsp;
-								<a id='tab2_delete'class="fa fa-trash" style="font-size:28px;color:#399490fc"aria-hidden="true"></a>	
-								</div>
 											<div class="table-responsive">
 											<table id="example2" aria-describedby="example" class="table" style="width:100%">
 															<thead>
@@ -308,31 +294,41 @@ $(document).ready(function(){
 																</tr>
 															</thead>
 															<tbody>
-																<tr id='addrtabsecond0'>
+																<tr th:each="row,stat : ${trainingRequisition.listTransactionReqEmployeeDetail}">
 																		<td>
-																		<select class="form-control"name="listTransactionReqEmployeeDetail[0].employee.empCode"
-																				id="empName0">
-																			<option value="">Select Employee</option>
+																		<select class="form-control"
+																				th:field="*{listTransactionReqEmployeeDetail[__${stat.index}__].employee.empCode}">
 																			
+																			<option value="">Select Type</option>
+																			<option th:each="employee : ${listEmployee}"
+																			th:text="${employee.empName}" th:value="${employee.empCode}">Select Type</option>
 													                   </select></td>
 														
 																	<td>
-																	<input type="text" placeholder='Name' class="form-control" /></td>
+																	<input type="text" placeholder='Name' class="form-control" 
+																				th:field="*{listTransactionReqEmployeeDetail[__${stat.index}__].employee.empName}"/></td>
 																	<td>
-																	<input type="text" name="listTransactionReqEmployeeDetail[0].topicSrlNo" placeholder='Pay Code' class="form-control" /></td>
+																	<input type="text" name="listTransactionReqEmployeeDetail[0].topicSrlNo" placeholder='Pay Code' 
+																		th:field="*{listTransactionReqEmployeeDetail[__${stat.index}__].employee.employeePayeeCode}"class="form-control" /></td>
 
 																	<td>
-																	<input type="text" placeholder='Father Name' class="form-control" /></td>
+																	<input type="text" placeholder='Father Name' 
+																			class="form-control" /></td>
 																	
 																</tr>
-																<tr id='addrtabsecond1'></tr>
+																
 
 															</tbody>
 															
 
 														</table>
 														</div>
-																 <button type="submit" class="btn btn-primary">Save</button>
+																<input
+    							
+    							onclick="window.history.go(-2); return false;"
+    							type="submit" class="btn btn-success"
+    							value="Back"
+							/>
 													</div>
 								<!-- <a id="add_row" class="fa pull-right btn btn-default ">Add Row</a><a id='delete_row' class="fa pull-right btn btn-default">Delete Row</a>	 -->
 							           
@@ -449,13 +445,13 @@ $(document).ready(function(){
 		}
 	</script>
 
-	<!-- <script>
+	<script>
 		function sync() {
 			var n1 = document.getElementById('empName');
 			var n2 = document.getElementById('name');
 			n2.value = n1.value;
 		}
-	</script> -->
+	</script>
 	<script>
 		function syncAddress() {
 			var n1 = document.getElementById('address1');
@@ -513,76 +509,6 @@ $(document).ready(function(){
 	
 	</script>
 
-	<script>
-	var size = "";
-	var idIndex=0;
-	function changeDepartment() {
-
-		//set dept code value 
-		
-
-		var selecteDepartmentValue = document
-				.getElementById("departmentDropdown").value;
-		console.log("select category : " + selecteDepartmentValue);
-		//$('#employeeName').append($('<option>', {value:0, text:'Select Employee'}));
-		var x = document.getElementById("empName'+idIndex+'");
-		console.log("x value : " + x);
-
-		//var length = x.options.length;
-		//for (i = length - 1; i >= 1; i--) {
-		//	x.options[i] = null;
-		//}
-
-		if (selecteDepartmentValue !== ""
-				|| document.getElementById("selecteDepartmentValue").selected == false) {
-			const xhr = new XMLHttpRequest();
-			xhr.open('GET', 'getEmployeeByDeptCode/' + selecteDepartmentValue,
-					true);
-			xhr.getResponseHeader('content-type', 'application/json');
-			xhr.onload = function() {
-				if (this.status === 200) {
-					let obj = JSON.parse(this.responseText);
-					console.log(obj);
-					console.log("console.log size :" + obj.length);
-					//console.log("employee name : " +obj[0].empName)
-					/* $('select[name="designationName"]').prop("disabled",
-							false); */
-					//$('select[name="employeeName"]').html(obj.empName);
-					$('#empName'+idIndex).empty();
-					$('#empName'+idIndex).append(
-							$('<option>').val('')
-									.text('Select Employee'));
-					
-					$.each(obj,
-							function(i, item) {
-								console.log(" i " + i + " item : "
-										+ item.empCode);
-								console.log(" i " + i + " item : "
-										+ item.empName);
-								/* $('#employeeName').append($('<option>', {
-									value : i,
-									text : item.empName
-								})); */
-								console.log("dbIndex value is : "+ idIndex);
-								$('#empName'+idIndex).append(
-										$('<option>').val(this.empCode)
-												.text(this.empName));
-							});
-					
-					
-
-				} else {
-					console.error("some error occured");
-				}
-
-			}
-			xhr.send();
-		} else {
-			$('select[name="empName"]').prop("disabled", true);
-		}
-
-	}
-	</script>
 
 	<script>
 		$('#loading').show();
