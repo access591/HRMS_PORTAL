@@ -22,15 +22,9 @@ public class TrainingRegisterDetails implements Serializable {
 	private static final long serialVersionUID = -6290645706436649061L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	@Column(name = "TR_DETAIL_ID")
+	private  long  id;
 	
-	@ManyToOne
-	@JoinColumn(name = "TR_REG_CODE")
-	private TrainingRegister trainingRegister;
-
-	@ManyToOne
-	@JoinColumn(name = "TR_REG_DATE")
-	private TrainingRegister trRegDate;
 	
 	@ManyToOne
 	@JoinColumn(name = "EMPLOYEE_CODE")
@@ -48,26 +42,6 @@ public class TrainingRegisterDetails implements Serializable {
 
 	public void setId(long id) {
 		this.id = id;
-	}
-
-
-	public TrainingRegister getTrainingRegister() {
-		return trainingRegister;
-	}
-
-
-	public void setTrainingRegister(TrainingRegister trainingRegister) {
-		this.trainingRegister = trainingRegister;
-	}
-
-
-	public TrainingRegister getTrRegDate() {
-		return trRegDate;
-	}
-
-
-	public void setTrRegDate(TrainingRegister trRegDate) {
-		this.trRegDate = trRegDate;
 	}
 
 

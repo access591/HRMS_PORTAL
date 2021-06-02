@@ -2,9 +2,12 @@ package com.hrms.service;
 
 import java.util.List;
 
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 
 import com.hrms.model.TrainingRegister;
 import com.hrms.repository.TrainingRegisterDao;
@@ -13,7 +16,7 @@ import com.hrms.repository.TrainingRegisterDao;
 public class TrainingRegisterServiceImpl implements TrainingRegisterService {
 	@Autowired
 	TrainingRegisterDao trainingRegisterDao;
-
+	@Autowired SessionFactory sessionFactory;
 	@Override
 	public void addTrainingRegister(TrainingRegister trainingRegister) {
 		trainingRegister.setTrRegCode(trainingRegisterDao.getMaxId("TRC"));
@@ -33,7 +36,12 @@ public class TrainingRegisterServiceImpl implements TrainingRegisterService {
 
 	@Override
 	public void updateTrainingRegister(TrainingRegister t) {
-		this.trainingRegisterDao.saveOrUpdate(t);
+	
+		Session session = sessionFactory.openSession();
+		TrainingRegister em = session.load(TrainingRegister.class, t.getTrRegCode());
+		Transaction tx = session.beginTransaction();	
+		em = (TrainingRegister) session.merge(t);
+		tx.commit();
 
 	}
 

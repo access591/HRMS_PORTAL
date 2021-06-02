@@ -46,11 +46,7 @@ $(document).ready(function(){
     		"</td><td><input  name='startPlace"+i+"' type='text' placeholder='Name'  class='form-control input-md'>"+
     		"</td><td><input  name='vistPlace"+i+"' type='text'  placeholder='Father Name'class='form-control input-md'>"+
     		"</td><td><input  name='purposeOfVist"+i+"' type='text' placeholder='Employee Pay Code'  class='pas form-control input-md'></td>"+
-    		
-    	
     		"<td><input  name='distanceKm"+i+"' type='text' placeholder='Status'  class='form-control input-md'></td>"+
-    		
-    		
     		"");
 
     $('#example').append('<tr id="addr'+(i+1)+'"></tr>');
@@ -167,7 +163,7 @@ $("table").on("keyup", ".pas", function () {
 						
 					
 					</div>
-					<form id="validation-form" action="#"  th:action="@{/saveTrainingRegister}" th:object="${trainingRegister}" method="post">
+					<form id="validation-form" action="#" th:action="@{/updateTrainingRegister}" th:object="${trainingRegister}" method="post">
 				              	<div class="row">
 					
 							<div class="col-12">
@@ -192,8 +188,7 @@ $("table").on("keyup", ".pas", function () {
 												<div class="form-group sm col-md-4">
 											       <label class="form-label">Training Register  Date
 											       <span class="text-danger">*</span></label>
-							               <input type="date"th:field="*{trRegDate}"class="form-control">
-							           <!--       <input  type="Date"id="trRegDate"th:field="*{trRegDate}"title=" Date" class="form-control required"> -->
+							                 <input  type="date"id="trRegDate"th:field="*{trRegDate}"title=" Date" class="form-control required">
 										     </div>
 										    	<div class="form-group sm col-md-4">
 													<label class="form-label">Schedule Code</label>
@@ -224,8 +219,10 @@ $("table").on("keyup", ".pas", function () {
 
 
 											<div class="form-group sm col-md-4">
-												<label class="form-label">Time From </label> 
-											 <input Type="time"	class="form-control "th:field="*{trTimeFrom}" id="trTimeFrom">
+												<label class="form-label">Time From </label> <label
+													style="color: red">*</label> <input Type="time"
+													class="form-control "th:field="*{trTimeFrom}" id="trTimeFrom"
+													required aria-required="true">
 
 
 											</div>
@@ -294,7 +291,7 @@ $("table").on("keyup", ".pas", function () {
 													</div>
 										
 											<button type="submit" class="btn btn-primary">Save</button>&nbsp;
-	                     &nbsp;
+
 					<button type="reset"class="btn btn-primary" value="Reset">Reset</button>	
 						      </div>
 						      
@@ -302,108 +299,11 @@ $("table").on("keyup", ".pas", function () {
 	                      </div>
 	                      
 	                      
-	                <!--      <div class="col-12">
-	                     	<div class="card">
-	                      <div class="card-header">
-								</div>
-								<div class="card-body">
-								<input id="_cr" name="_cr" type="hidden"value="1">
-								<div class="col-sm-12" align="right">
-								
-								<a id="add_row" class="fa fa-plus" aria-hidden="true"style="font-size:28px;color:#001080"></a>&nbsp;&nbsp;&nbsp;
-								<a id='delete_row'class="fa fa-trash" style="font-size:28px;color:#399490fc"aria-hidden="true"></a>	
-								</div>
-								<div class="table-responsive">
-											<table id="example" aria-describedby="example" class="table" style="width:100%">
-											<thead>
-												<tr>
-													<th>Employee Code.</th>
-													<th>Employee Name.</th>
-													<th>Father Name</th>
-													<th>Employee Pay Code</th>
-													<th>Status</th>
-													
-													
-												</tr>
-											</thead>
-											<tbody>
-												<tr id='addr0'>
-	                                            <td><select name="modeOfTravel0" id="modeOfTravel0"><option value="">Select Type</option>
-													</select></td>
-													<td><input type="text" name='startPlace0'placeholder='Employee Name'  /></td>
-													<td><input type="text" name='vistPlace0'placeholder='Father Name' /></td>
-													<td><input type="text" name='purposeOfVist0'placeholder='Employee Pay Code'/></td>
-													<td><input type="text" name='actualAmount0'placeholder='Status' /></td>
-												
-												</tr>
-												<tr id='addr1'></tr>
-
-											</tbody>
-
-
-											
-
-										</table>
-</div>
-
-									</div>
-								
-								
-	                     
-	                     
-	                     </div>
-	                     </div> -->
+	             
 					</div>
-				<!-- 	<button type="submit" class="btn btn-primary">Save</button>&nbsp;
-	                     &nbsp;
-					<button type="reset"class="btn btn-primary" value="Reset">Reset</button> -->
+			
 </form>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	<div class="col-12">
-							<div class="card">
-								<div class="card-header">
-								</div>
-								<div class="card-body">
-									<table id="datatables-buttons" class="table table-striped display" style="width:100%"aria-describedby="example">
-										<thead>
-											<tr >
-												<th scope="col">Training Register Code </th>
-												<th scope="col">Training Date</th>
-												
-												<th scope="col">Time From </th>
-												<th scope="col">Time To</th>
-												<!-- <th scope="col">Tour Pan Date </th> -->
-												<th scope="col">Action </th>
-											</tr >
-											
 
-
-										</thead>
-										<tbody>
-										  <tr th:each = "listOfloc:${listTrainingRegister}">
-										<td th:text="${listOfloc.trRegCode}"></td>
-										<td th:text="${#dates.format(listOfloc.trRegDate,'dd-MM-yyyy')}"></td>
-										<td  th:text="${listOfloc.trTimeFrom}"></td>
-										<td  th:text="${listOfloc.trTimeTO}"></td>
-									
-										  <td>
-										  <a th:href="@{/editTrainingRegister/{id}/(id=${listOfloc.trRegCode})}"><em class="fa fa-edit"></em></a>
-										  
-										     <a th:href="@{/deleteTrainingRegister/{id}/(id=${listOfloc.trRegCode})}"onclick="return confirm('Are you sure?')"><em class="fa fa-times"></em></a>
-									
-									
-										</td>  
-									
-										</tr> 
-									
-									
-										</tbody>
-									
-									</table>
-								</div>
-								
-							</div>
-						</div>
 				</div>
 			
 		</main>
@@ -483,7 +383,6 @@ $("table").on("keyup", ".pas", function () {
 	        if(this.status===200){
 	            let obj = JSON.parse(this.responseText);
 	            console.log(obj);
-	            console.log("ajax xx : "+ obj.trSchDate);
 	            $('#trSchDate').val(obj.trSchDate);
 	            $('#topicSrlNo').val(obj.topicSrlNo);
 	            $('#trainer').val(obj.trainer);

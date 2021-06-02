@@ -2,12 +2,16 @@ package com.hrms.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 @Entity
 @Table(name = "TR_REGISTER_MASTER")
@@ -26,7 +30,7 @@ public class TrainingRegister implements Serializable {
 	
 	@ManyToOne
 	@JoinColumn(name = "TR_SCH_CODE")
-	private TrainingSchedule trSchCode;
+	private TrainingSchedule trScheduleCode;
 	
 	
 	@Column(name = "TR_SCH_DATE")
@@ -36,11 +40,11 @@ public class TrainingRegister implements Serializable {
 	@Column(name = "TOPIC_SRL_NO")
 	private String topicSrlNo;
 	
-	@Column(name = "TR_DATE_FROM")
-	private Date trDateFrom;
+	@Column(name = "TR_TIME_FROM")
+	private String  trTimeFrom;
 	
-	@Column(name = "TR_DATE_TO")
-	private Date trDateTO;
+	@Column(name = "TR_TIME__TO")
+	private String trTimeTO;
 	
 	
 	@Column(name = "TRAINER_CODE")
@@ -65,7 +69,14 @@ public class TrainingRegister implements Serializable {
 
 	@Column(name = "INS_DATE", updatable = false)
 	private Date insDate = new Date();
+	
+	
+@OneToOne(cascade = CascadeType.ALL)
+@JoinColumn(name="TR_DETAIL_ID")
+TrainingRegisterDetails trainingRegisterDetails;
 
+	
+	
 	public String getTrRegCode() {
 		return trRegCode;
 	}
@@ -82,12 +93,13 @@ public class TrainingRegister implements Serializable {
 		this.trRegDate = trRegDate;
 	}
 
-	public TrainingSchedule getTrSchCode() {
-		return trSchCode;
+	
+	public TrainingSchedule getTrScheduleCode() {
+		return trScheduleCode;
 	}
 
-	public void setTrSchCode(TrainingSchedule trSchCode) {
-		this.trSchCode = trSchCode;
+	public void setTrScheduleCode(TrainingSchedule trScheduleCode) {
+		this.trScheduleCode = trScheduleCode;
 	}
 
 	public Date getTrSchDate() {
@@ -106,20 +118,22 @@ public class TrainingRegister implements Serializable {
 		this.topicSrlNo = topicSrlNo;
 	}
 
-	public Date getTrDateFrom() {
-		return trDateFrom;
+
+
+	public String getTrTimeFrom() {
+		return trTimeFrom;
 	}
 
-	public void setTrDateFrom(Date trDateFrom) {
-		this.trDateFrom = trDateFrom;
+	public void setTrTimeFrom(String trTimeFrom) {
+		this.trTimeFrom = trTimeFrom;
 	}
 
-	public Date getTrDateTO() {
-		return trDateTO;
+	public String getTrTimeTO() {
+		return trTimeTO;
 	}
 
-	public void setTrDateTO(Date trDateTO) {
-		this.trDateTO = trDateTO;
+	public void setTrTimeTO(String trTimeTO) {
+		this.trTimeTO = trTimeTO;
 	}
 
 	public String getTrainerCode() {
@@ -177,6 +191,16 @@ public class TrainingRegister implements Serializable {
 	public void setInsDate(Date insDate) {
 		this.insDate = insDate;
 	}
+
+	public TrainingRegisterDetails getTrainingRegisterDetails() {
+		return trainingRegisterDetails;
+	}
+
+	public void setTrainingRegisterDetails(TrainingRegisterDetails trainingRegisterDetails) {
+		this.trainingRegisterDetails = trainingRegisterDetails;
+	}
+
+
 
 
 	
