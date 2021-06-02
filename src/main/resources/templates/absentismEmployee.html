@@ -85,7 +85,7 @@ body {
 														class="form-control select2" id="employeeName"
 														name="empCode">
 														<option value=''>--Select Employee--</option>
-														<!-- <option value='ALL'>All</option> -->
+														
 														<!-- <option th:each="employee : ${listLtaRequest}"
 															th:text="${employee.empCode.empName}"
 															th:value="${employee.empCode.empCode}"></option> -->
@@ -194,6 +194,7 @@ function changeDepartment(){
 	            console.log("employee name : " +obj[0].empName)
 	            $('select[name="employeeName"]').prop("disabled", false);
                // $('select[name="employeeName"]').html(obj.empName);
+               $('#employeeName').append($('<option>').val("ALL").text("ALL"));
                 
                 $.each(obj, function(i, item) {
                 	console.log(" i " +i+ " item : "+item.empName);

@@ -26,6 +26,7 @@ import com.hrms.model.Employee;
 import com.hrms.model.MenuModule;
 import com.hrms.model.Module;
 import com.hrms.model.OvertimeRegister;
+import com.hrms.reports.AbsentiReport;
 import com.hrms.reports.AttendenceReport;
 import com.hrms.service.AttendenceRegisterService;
 import com.hrms.service.DepartmentService;
@@ -46,6 +47,7 @@ public class AttandanceReportController {
 	@Autowired AttendenceRegisterService attendenceRegisterService;
 	@Autowired OvertimeRegisterService overtimeRegisterService;
 	@Autowired EmpMontOvertimeRegister empMontOvertimeRegister;
+	@Autowired AbsentiReport absentiReport;
 
 // Attendance Register Mothly Report 
 
@@ -70,7 +72,9 @@ public class AttandanceReportController {
 	//pending 
 	@PostMapping("createAttendenceMonthly")
 	public String createAttendenceMonthly(@RequestParam("deptCode") String deptCode,
-			@RequestParam("empCode") String empCode,HttpServletRequest request,HttpServletResponse response) {
+			@RequestParam("empCode") String empCode,
+			@RequestParam("fromDate") Date fromDate,@RequestParam("toDate") Date toDate,
+			HttpServletRequest request,HttpServletResponse response) {
 		
 		System.out.println("department code is : " + deptCode);
 		System.out.println("employee code is : " + empCode);
@@ -79,21 +83,28 @@ public class AttandanceReportController {
 		//get record behalf of deptcode and empCode
 		if(deptCode.equals("ALL")) {
 			System.out.println("All record");
+			List<AttendenceRegister> listAttendenceRegister = attendenceRegisterService
+					.findAllAttendenceBetweenDate(fromDate, toDate);
+			attendenceReport.attendenceMontlyReport(response, request, listAttendenceRegister,
+					fromDate,toDate,empCode,deptCode);
+			
+			
 		}
 		else if(!deptCode.equals("ALL") && (empCode.equals(null)|| empCode.equals(""))) {
 			System.out.println("find data by department ");
+			List<AttendenceRegister> listAttendenceRegister = attendenceRegisterService.findAttendenceByDeptBetweenDate(deptCode, fromDate, toDate);
+			attendenceReport.attendenceMontlyReport(response, request, listAttendenceRegister,
+					fromDate,toDate,empCode,deptCode);
 		}
 		else if(!deptCode.equals("ALL") && (!empCode.equals(null)||empCode.equals(""))) {
 			System.out.println("find data by emp ");
+			List<AttendenceRegister> listAttendenceRegister = attendenceRegisterService.findAttendenceByEmpCodeBetweenDate(empCode, fromDate, toDate);
+			attendenceReport.attendenceMontlyReport(response, request, listAttendenceRegister,
+					fromDate,toDate,empCode,deptCode);
 		}
 		else {
 			return "redirect:AttendanceRegMothlyReport";
 		}
-		
-		
-		//call attendence report method
-		attendenceReport.attendenceMontlyReport(response, request, new ArrayList());
-		
 		
 		return "null";
 	}
@@ -133,6 +144,7 @@ public class AttandanceReportController {
 		
 		if(deptCode.equals("") && empCode.equals("")) {
 			System.out.println("All record : ");
+			empCode = "ALL";
 			List<AttendenceRegister> listAttendenceRegister = attendenceRegisterService
 					.findAllAttendenceBetweenDate(fromDate, toDate);
 			attendenceReport.createAttendenceReportDatewise(response, request, listAttendenceRegister);
@@ -285,19 +297,32 @@ public class AttandanceReportController {
 		return "absentismEmployee";
 	}
 	
-	//PENDING
+	
 	@PostMapping("createAbsentEmployeeReport")
-	public String createAbsentEmployeeWiseReport(@RequestParam("deptCode") String deptCode
+	public String createAbsentEmployeeWiseReport(@RequestParam("deptCode") String deptCode,HttpServletRequest request,
+			HttpServletResponse response
 			,@RequestParam("empCode") String empCode
 			,@RequestParam("fromDate") Date fromDate
-			,@RequestParam("toDate") String toDate) {
+			,@RequestParam("toDate") Date toDate) {
+		
 		System.out.println("employee code : "+ empCode);
 		System.out.println("department code : "+ deptCode);
 		System.out.println("from date : "+ fromDate);
 		System.out.println("to date : "+ toDate);
 		
 		
-		if(!empCode.equals("null") && !empCode.equals("")) {
+		if(!deptCode.equals("null") && empCode.equals("ALL")) {
+			System.out.println("all employee record by department");
+			List<AttendenceRegister> listAttendenceRegister = attendenceRegisterService
+										.findAttendenceStatusByDeptCode(deptCode, fromDate, toDate);
+			absentiReport.createAbsentiReport(response, request, listAttendenceRegister,fromDate,toDate,
+					deptCode);
+		}
+		else if(!deptCode.equals("null") && !empCode.equals("ALL")) {
+			System.out.println("single record by emp ");
+			List<AttendenceRegister> listAttendenceRegister = attendenceRegisterService.findAttendenceByEmpStatusAbsent(empCode);
+			absentiReport.createAbsentiReport(response, request, listAttendenceRegister,fromDate,toDate,
+					deptCode);
 			
 		}
 		
