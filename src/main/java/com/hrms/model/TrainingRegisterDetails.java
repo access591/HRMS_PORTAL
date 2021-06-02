@@ -25,12 +25,12 @@ public class TrainingRegisterDetails implements Serializable {
 	private long id;
 	
 	@ManyToOne
-	@JoinColumn(name = "TR_SCH_CODE")
-	private TrainingRegister trSchCode;
+	@JoinColumn(name = "TR_REG_CODE")
+	private TrainingRegister trainingRegister;
 
 	@ManyToOne
 	@JoinColumn(name = "TR_REG_DATE")
-	private TrainingRegister trRegCode;
+	private TrainingRegister trRegDate;
 	
 	@ManyToOne
 	@JoinColumn(name = "EMPLOYEE_CODE")
@@ -39,6 +39,56 @@ public class TrainingRegisterDetails implements Serializable {
 	
 	@Column(name = "EMP_FEEDBACK")
 	private  String  empFeedback;
+
+
+	public long getId() {
+		return id;
+	}
+
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+
+	public TrainingRegister getTrainingRegister() {
+		return trainingRegister;
+	}
+
+
+	public void setTrainingRegister(TrainingRegister trainingRegister) {
+		this.trainingRegister = trainingRegister;
+	}
+
+
+	public TrainingRegister getTrRegDate() {
+		return trRegDate;
+	}
+
+
+	public void setTrRegDate(TrainingRegister trRegDate) {
+		this.trRegDate = trRegDate;
+	}
+
+
+	public Employee getEmployee() {
+		return employee;
+	}
+
+
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
+	}
+
+
+	public String getEmpFeedback() {
+		return empFeedback;
+	}
+
+
+	public void setEmpFeedback(String empFeedback) {
+		this.empFeedback = empFeedback;
+	}
 	
 	
 	  

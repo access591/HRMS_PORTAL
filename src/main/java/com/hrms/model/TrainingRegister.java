@@ -6,6 +6,8 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 @Entity
 @Table(name = "TR_REGISTER_MASTER")
@@ -16,8 +18,15 @@ public class TrainingRegister implements Serializable {
 	private static final long serialVersionUID = 6960632326976412838L;
 	
 	@Id
-	@Column(name = "TR_SCH_CODE")
-	private String trSchCode;
+	@Column(name = "TR_REG_CODE")
+	private String trRegCode;
+
+	@Column(name = "TR_REG_DATE")
+	private Date trRegDate;
+	
+	@ManyToOne
+	@JoinColumn(name = "TR_SCH_CODE")
+	private TrainingSchedule trSchCode;
 	
 	
 	@Column(name = "TR_SCH_DATE")
@@ -26,16 +35,6 @@ public class TrainingRegister implements Serializable {
 	
 	@Column(name = "TOPIC_SRL_NO")
 	private String topicSrlNo;
-	
-	
-	@Column(name = "TR_REG_CODE")
-	private String trRegCode;
-	
-	   
-	@Column(name = "TR_REG_DATE")
-	private Date trRegDate;
-	
-	
 	
 	@Column(name = "TR_DATE_FROM")
 	private Date trDateFrom;
@@ -67,11 +66,27 @@ public class TrainingRegister implements Serializable {
 	@Column(name = "INS_DATE", updatable = false)
 	private Date insDate = new Date();
 
-	public String getTrSchCode() {
+	public String getTrRegCode() {
+		return trRegCode;
+	}
+
+	public void setTrRegCode(String trRegCode) {
+		this.trRegCode = trRegCode;
+	}
+
+	public Date getTrRegDate() {
+		return trRegDate;
+	}
+
+	public void setTrRegDate(Date trRegDate) {
+		this.trRegDate = trRegDate;
+	}
+
+	public TrainingSchedule getTrSchCode() {
 		return trSchCode;
 	}
 
-	public void setTrSchCode(String trSchCode) {
+	public void setTrSchCode(TrainingSchedule trSchCode) {
 		this.trSchCode = trSchCode;
 	}
 
@@ -89,22 +104,6 @@ public class TrainingRegister implements Serializable {
 
 	public void setTopicSrlNo(String topicSrlNo) {
 		this.topicSrlNo = topicSrlNo;
-	}
-
-	public String getTrRegCode() {
-		return trRegCode;
-	}
-
-	public void setTrRegCode(String trRegCode) {
-		this.trRegCode = trRegCode;
-	}
-
-	public Date getTrRegDate() {
-		return trRegDate;
-	}
-
-	public void setTrRegDate(Date trRegDate) {
-		this.trRegDate = trRegDate;
 	}
 
 	public Date getTrDateFrom() {
@@ -178,7 +177,8 @@ public class TrainingRegister implements Serializable {
 	public void setInsDate(Date insDate) {
 		this.insDate = insDate;
 	}
-	  
+
+
 	
 
 }
