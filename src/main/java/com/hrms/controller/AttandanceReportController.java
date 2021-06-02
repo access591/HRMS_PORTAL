@@ -310,6 +310,10 @@ public class AttandanceReportController {
 		}
 		else if(!deptCode.equals("null") && !empCode.equals("ALL")) {
 			System.out.println("single record by emp ");
+			List<AttendenceRegister> listAttendenceRegister = attendenceRegisterService.findAttendenceByEmpStatusAbsent(empCode);
+			absentiReport.createAbsentiReport(response, request, listAttendenceRegister,fromDate,toDate,
+					deptCode);
+			
 		}
 		
 		return "redirect:/absentismEmployeePage";
