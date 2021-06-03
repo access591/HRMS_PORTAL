@@ -17,14 +17,14 @@ public class ArmsLicenseDaoImpl  extends AbstractGenericDao<ArmsLicenseDetails> 
 	@Override
 	public  ArmsLicenseDetails findArmsByEmpEmpCode(String empCode) {
 		
-		Session session = this.sessionFactory.getCurrentSession();
-		Query query = session.createQuery("from ArmsLicenseDetails e where e.empCode=:empCode");
-		query.setParameter("empCode",empCode);
-		List<ArmsLicenseDetails> employeeList = query.list();
-		
-		if(employeeList!=null)
-		{
-		return employeeList.get(0);
+		try {
+			Session session = this.sessionFactory.getCurrentSession();
+			Query<ArmsLicenseDetails> query = session.createQuery("from ArmsLicenseDetails e where e.empCode=:empCode",ArmsLicenseDetails.class);
+			query.setParameter("empCode",empCode);
+			ArmsLicenseDetails employeeList = query.getSingleResult();
+			return employeeList;
+		}catch(Exception e) {
+			e.printStackTrace();
 		}
 		
 		return null;
