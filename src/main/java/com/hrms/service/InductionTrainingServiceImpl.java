@@ -1,5 +1,7 @@
 package com.hrms.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +15,11 @@ InductionTrainingDao inductionTraining;
 	public void addInductionTraining(InductionTraining induct) {
 		this.inductionTraining.saveOrUpdate(induct);
 		
+	}
+	@Override
+	public List<InductionTraining> getAllInductioTraining() {
+		List<InductionTraining> listInduction=inductionTraining.findAll();
+		return listInduction;
 	}
 
 }

@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hrms.model.Department;
-
+import com.hrms.model.Designation;
 import com.hrms.model.Employee;
 import com.hrms.model.InductionTraining;
 import com.hrms.model.InductionTrainingDetail;
@@ -57,6 +57,26 @@ public class InductionTrainingController {
 		if (modules != null) {
 			model.addAttribute("modules", modules);
 		}
+		List<InductionTraining>listInduction=inductionTrainingService.getAllInductioTraining();
+		List<InductionTrainingUtil> listInductionTrainingUtil = new ArrayList<InductionTrainingUtil>();
+		
+		  for (int i = 0; i < listInduction.size(); i++) {
+		String empCode = listInduction.get(i).getEmpCode().getEmpCode(); 
+		InductionTrainingUtil iuy= new InductionTrainingUtil();
+		Employee employee = employeeService.findEmployeeById(empCode);
+		Department department = departmentService.findDepartmentById(employee.getDepartmentCode());
+		Designation designation = designationService.findDesignationById(employee.getDesignationCode());
+		
+		iuy.setId(listInduction.get(i).getId());
+		 iuy.setDeptName(department.getDeptName());
+		 iuy.setDesgName(designation.getDesgName());
+		 iuy.setEmpName(employee.getEmpName());
+		 listInductionTrainingUtil.add(iuy);
+		    model.addAttribute("listInduct",listInductionTrainingUtil);
+			  
+		  }
+		
+		
 		return "inductionTraining";
 
 	}
@@ -185,11 +205,7 @@ public class InductionTrainingController {
 				
 				e.printStackTrace();
 			}
-		
-		
-		
-		
-		
+
 		
 		session.setAttribute("username", session.getAttribute("username"));
 
