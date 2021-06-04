@@ -211,4 +211,20 @@ public class InductionTrainingController {
 
 		return "redirect:/inductionTraining";
 	}
+	
+	
+	@GetMapping(value = { "/deleteInductionTraining/{id}" })
+	public String deleteLocalConveyance(@PathVariable("id") long id, Model model,HttpSession session) {
+		try {
+			
+			inductionTrainingService.removeInductionTr(id);
+			session.setAttribute("username", session.getAttribute("username"));
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return "redirect:/inductionTraining";
+	}
+	
 }

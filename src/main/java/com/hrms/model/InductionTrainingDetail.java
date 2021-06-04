@@ -21,6 +21,7 @@ public class InductionTrainingDetail  implements Serializable {
 	private static final long serialVersionUID = 2614057709105003896L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "IN_DETAIL_ID")
 	private long id;
 	@ManyToOne
 	@JoinColumn(name = "EMPLOYEE_CODE",updatable = false)
@@ -35,6 +36,9 @@ public class InductionTrainingDetail  implements Serializable {
 
 	@Column(name = "TRAINING_DATE")
 	private Date trainingDate;
+	@ManyToOne
+	@JoinColumn(name = "id",updatable=false)
+	private InductionTraining  inductionTraining;
 
 	@Column(name = "DURATION")
 	private String duration;
