@@ -167,7 +167,7 @@ $("table").on("keyup", ".pas", function () {
 						
 					
 					</div>
-					<form id="validation-form" action="#"  th:action="@{/saveLocalConvyence}" th:object="${localConvyence}" method="post">
+					<form id="validation-form" action="#"  th:action="@{/saveInductionTraining}" th:object="${inductionTraining}" method="post">
 				              	<div class="row">
 					
 							<div class="col-12">
@@ -182,17 +182,16 @@ $("table").on("keyup", ".pas", function () {
 								<div class="card-body">
 								
 								<div class="form-row">
-											<div class="form-group sm col-md-4">
-											  <label class="form-label">Department Code </label>
+										<div class="form-group sm col-md-6">
+													<label class="form-label">Department Code </label>
 												<label style="color: red">*</label>
-												<select class="form-control select2" name="empCode" id="empCode" onchange="myFunctionEmpCode()" required aria-required="true">
-												 <option value="">Select </option>
-												<option th:each="e :${listEmployee}"th:value="${e.getEmpCode()}" th:text="${e.getEmpName()}"></option>
+												<select class="form-control select2" name="departmentCode" id="departmentCode" onchange="myFunctionDeptCode()" required aria-required="true">
+												 <option value="">Select Employee</option>
+												<option th:each="e :${listDepartment}"th:value="${e.getDepartmentCode()}" th:text="${e.getDeptName()}"></option>
 											     	</select>
-
-												</div>	
+												</div>
 											
-										    	<div class="form-group sm col-md-4">
+										    	<div class="form-group sm col-md-6">
 													<label class="form-label">Employee Code</label>
 												<label style="color: red">*</label>
 												<select class="form-control select2" name="empCode" id="empCode" onchange="myFunctionEmpCode()" required aria-required="true">
@@ -203,100 +202,52 @@ $("table").on("keyup", ".pas", function () {
 												</div>
 										     
 										
-												<div class="form-group sm col-md-4">
-													<label class="form-label">Department Name  </label>
-												<label style="color: red">*</label>
-												<input Type="text" class="form-control " name="deptName" id="empCode" required aria-required="true">
-												
-											     
-												</div>
 												
 												
 								</div>
-									<div class="form-row">
-												
-												<div class="form-group sm col-md-4">
-													<label class="form-label">Contact Person Code </label>
-												<label style="color: red">*</label>
-												<select class="form-control select2" name="empCode" id="empCode" onchange="myFunctionEmpCode()" required aria-required="true">
-												 <option value="">Select </option>
-												<option th:each="e :${listEmployee}"th:value="${e.getEmpCode()}" th:text="${e.getEmpName()}"></option>
-											     	</select>
-
-												</div>
 										
-										
-										<div class="form-group sm col-md-4">
-										<label class="form-label">Contact Person Name </label>
-										<input Type="text" class="form-control " name="empCode" id="empCode"  required aria-required="true">
-										</div>
-											<div class="form-group sm col-md-4">
-										<label class="form-label">Induction Date </label>
-										<label style="color: red">*</label>
-										<input Type="text" class="form-control " name="localConvDate" id="localConvDate" required aria-required="true">
-										</div>
-								</div>
-								
-				
-				
-													<div class="form-row">
-												
-												
-												
-										<div class="form-group sm col-md-4">
-												<label class="form-label">Duration</label>
-												<select class="form-control Select"name="modeOfTravel0" id="modeOfTravel0">
-												<option value="">Select Type</option>
-												<option th:Value="1">1St Half </option>
-												<option th:Value="2">2nd Half</option>
-												<option th:Value="3">Full day</option>
-													</select>
-												</div>
-										
-													</div>
-										
-											<button type="submit" class="btn btn-primary">Save</button>&nbsp;
-	                     &nbsp;
-					<button type="reset"class="btn btn-primary" value="Reset">Reset</button>	
 						      </div>
 						      
 	                      </div>
 	                      </div>
 	                      
 	                      
-	                <!--      <div class="col-12">
+	                     <div class="col-12">
 	                     	<div class="card">
 	                      <div class="card-header">
 								</div>
 								<div class="card-body">
 								<input id="_cr" name="_cr" type="hidden"value="1">
-								<div class="col-sm-12" align="right">
 								
-								<a id="add_row" class="fa fa-plus" aria-hidden="true"style="font-size:28px;color:#001080"></a>&nbsp;&nbsp;&nbsp;
-								<a id='delete_row'class="fa fa-trash" style="font-size:28px;color:#399490fc"aria-hidden="true"></a>	
-								</div>
 								<div class="table-responsive">
 											<table id="example" aria-describedby="example" class="table" style="width:100%">
 											<thead>
 												<tr>
-													<th>Employee Code.</th>
-													<th>Employee Name.</th>
-													<th>Father Name</th>
-													<th>Employee Pay Code</th>
-													<th>Status</th>
+													<th>Department Code.</th>
+													<th>Department Name.</th>
+													<th>Contact Person</th>
+													<th>Induction Date</th>
+													<th>Duration</th>
 													
 													
 												</tr>
 											</thead>
 											<tbody>
 												<tr id='addr0'>
-	                                            <td><select name="modeOfTravel0" id="modeOfTravel0"><option value="">Select Type</option>
+	                                           
+	                                            
+	                                          
+													<td><input type="text" id="departmentCode2" name='departmentCode20'placeholder='Department Code '  /></td>
+													<td><input type="text" id="deptName" name='deptName0'placeholder='department  Name'  /></td>
+
+													<td><input type="text" name='contPerson0'placeholder='Contact Person'/></td>
+													<td><input type="date" name='trainingDate0'placeholder='Duration' /></td>
+												 <td> <select class="form-control Select"name="duration0" id="duration0">
+												<option value="">Select Type</option>
+												<option th:Value="1">1St Half </option>
+												<option th:Value="2">2nd Half</option>
+												<option th:Value="3">Full day</option>
 													</select></td>
-													<td><input type="text" name='startPlace0'placeholder='Employee Name'  /></td>
-													<td><input type="text" name='vistPlace0'placeholder='Father Name' /></td>
-													<td><input type="text" name='purposeOfVist0'placeholder='Employee Pay Code'/></td>
-													<td><input type="text" name='actualAmount0'placeholder='Status' /></td>
-												
 												</tr>
 												<tr id='addr1'></tr>
 
@@ -314,11 +265,11 @@ $("table").on("keyup", ".pas", function () {
 	                     
 	                     
 	                     </div>
-	                     </div> -->
+	                     </div>
 					</div>
-				<!-- 	<button type="submit" class="btn btn-primary">Save</button>&nbsp;
+					<button type="submit" class="btn btn-primary">Save</button>&nbsp;
 	                     &nbsp;
-					<button type="reset"class="btn btn-primary" value="Reset">Reset</button> -->
+					<button type="reset"class="btn btn-primary" value="Reset">Reset</button> 
 </form>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	<div class="col-12">
@@ -456,8 +407,97 @@ $("table").on("keyup", ".pas", function () {
 	</script>
 	
 
+<script>
+	function myFunctionDeptCode(){
+/* 		 var empCode= $('#empCode option:selected').value; */
+		 var departmentCode= document.getElementById('departmentCode').value
+	    console.log("ajax request : "+ departmentCode);
+	    const xhr = new XMLHttpRequest();
+	    xhr.open('GET','./viewInductionBydepartment/'+departmentCode,true);
+	    xhr.getResponseHeader('content-type','application/json');
+	    xhr.onload = function(){
+	        if(this.status===200){
+	            let obj = JSON.parse(this.responseText);
+	            console.log(obj);
+	            
+	            $('#empCode').empty();
+	            $('#empCode').append(
+						$('<option>').val("").text("Select Employee"));
+					
+	            $('#empName').val(obj.empName);
+	            $('#empCode').val(obj.empCode);
+	            
+	            $.each(obj,
+						function(i, item) {
+							/* console.log(" i " + i + " item : "
+									+ item.empCode);
+							console.log(" i " + i + " item : "
+									+ item.empName); */
+							
+							
+							$('#empCode').append(
+							$('<option>').val(this.empCode).text(this.empName));
+						});
+	        }
+	        else{
+	            console.error("some error occured");
+	        }
+		
+	    }
+	    xhr.send();
+	}
+
+	</script>
+		<script>
+	function myFunctionEmpCode(){
+		  
+		 var empCode= document.getElementById('empCode').value
+	    console.log("ajax request : "+ empCode);
+	
+	    const xhr = new XMLHttpRequest();
+	    xhr.open('GET','./viewinductionByEmployee/'+empCode,true);
+	    xhr.getResponseHeader('content-type','application/json');
+	    xhr.onload = function(){
+	    	 
+	        if(this.status===200){
+	            let obj = JSON.parse(this.responseText);
+	            console.log(obj);
+	         
+	           // $('#example tr').slice(1).remove()
+	            var i=0;
+	 
+	            	 $('#departmentCode2').val(obj.departmentCode);
+	 	            $('#deptName').val(obj.deptName);
+	 	           
+	 	       
+	 	        
+	 	 
+	       
+	            $("#delete_row").click(function(){
+	         	   
+	       	  	 if(i>1){
+	       			 $("#addr"+(i-1)).html('');
+	       			 $('#_cr').val(i - 1);
+	       			 i--;
+	       			 
+	       			 }
+	       		 });
+	            
+	        
+	        }
+	        else{
+	            console.error("some error occured");
+	        }
+		
+	    }
+	    xhr.send();
+	}
 
 
+	
+	
+	
+	</script>
 
 
 
