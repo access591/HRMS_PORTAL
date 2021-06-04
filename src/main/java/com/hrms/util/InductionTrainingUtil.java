@@ -13,7 +13,7 @@ public class InductionTrainingUtil {
 	private String desgCode;
 	private String desgName;
 	private String  empPayCode;
-	
+	private long id;
 	
 
 
@@ -79,6 +79,13 @@ public class InductionTrainingUtil {
 	}
 	public void setEmpPayCode(String empPayCode) {
 		this.empPayCode = empPayCode;
+	}
+	
+	public long getId() {
+		return id;
+	}
+	public void setId(long id) {
+		this.id = id;
 	}
 	public InductionTrainingUtil(String empCode, String empName, String departmentCode, String deptName,
 			String desgCode, String desgName, String empPayCode) {
