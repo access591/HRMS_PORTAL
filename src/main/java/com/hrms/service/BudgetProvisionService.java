@@ -10,5 +10,6 @@ public interface BudgetProvisionService {
 	public List<BudgetProvision> getAllBudgetProvision();
 	public BudgetProvision findByBudgetProvisionId(Long budgitProvisionId);
 	public void updateBudgetProvision(BudgetProvision budgetProvision);
+	public void removeBudgetProvision(Long budgetId);
 
 }

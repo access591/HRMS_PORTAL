@@ -102,7 +102,15 @@ public class BudgetProvisionController {
 		return "redirect:budgetprovisionpage";
 	}
 	
-	
+	@GetMapping(value = {"deleteBudgetProvision/{id}"})
+	public String deleteBudgetProvision(@PathVariable("id") String orderTrackingId, Model model, HttpSession session) {
+		System.out.println("=====================>");
+		
+		budgetProvisionService.removeBudgetProvision(Long.parseLong(orderTrackingId));
+		
+		session.setAttribute("username", session.getAttribute("username"));
+		return "redirect:/budgetprovisionpage";
+	}
 	
 	
 	@Autowired ArmsReport armsReport;

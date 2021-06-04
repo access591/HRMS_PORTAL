@@ -54,9 +54,10 @@ body {
 								</div>
 								<div class="card-body">
 									<form id="validation-form" action="#"
-										th:action="@{/saveOrderIssueTracking}" th:object="${orderIssueTracking}" method="post"
+										th:action="@{/updateOrderTracking}" th:object="${orderIssueTracking}" method="post"
 											enctype="multipart/form-data">
 										<div class="row">
+										<input type="hidden" th:field="*{orderTrackingId}">
 
 											<div class="col-12 col-lg-4">
 												<label class="form-label">Date of Issue</label> <label
@@ -133,8 +134,13 @@ body {
 
 										<p></p>
 										<!-- <Button type="submit">Generate Pdf</Button> -->
-										<Button type="submit" class="btn btn-primary">Submit</Button>
-										<Button type="reset" class="btn btn-primary">Reset</Button>
+										<Button type="submit" class="btn btn-primary">Update</Button>
+										<input
+    							
+    							onclick="window.history.go(-1); return false;"
+    							type="submit" class="btn btn-primary"
+    							value="Back"
+							/>
 
 										
 									</form>
@@ -151,42 +157,7 @@ body {
 				</div>
 				
 				
-				<div class="col-12">
-							<div class="card">
-								<div class="card-header">
-								</div>
-								<div class="card-body">
-								<table id="datatables-buttons" class="table table-striped display" style="width:100%"aria-describedby="datatables-buttons">
-										<thead>
-											<tr>
-												<th class="text-center">Date of Issue</th>
-												<th class="text-center">Order Number</th>
-												<th class="text-center">Order Title</th>
-												<th class="text-center">Order Description</th>
-												<th class="text-center">File Name</th>
-												<th class="text-center">Action</th>
-												
-											</tr>
-										</thead>
-										<tbody>
-											<tr th:each="order : ${listOrderIssueTracking}">
-												<td class="text-center" th:text="${order.orderTrackingDate}">10/098/90-12</td>
-												<td class="text-center" th:text="${order.orderNumber}">Computer</td>
-												<td class="text-center" th:text="${order.orderTitle}">10000</td>
-												<td class="text-center" th:text="${order.orderDescription}">10000</td>
-												<td class="text-center" th:text="${order.orderFileName}">10000</td>
-												<td><a th:href="@{/editOrderTracking/{id}(id=${order.orderTrackingId})}"><em class="fa fa-edit"></em></a>
-												<a th:href="@{/deleteOrderTracking/{id}(id=${order.orderTrackingId})}" onclick="return confirm('Are you sure?')"><em class="fa fa-times"></em></a>
-												</td>
-											</tr>
-										</tbody>
-									
-									</table>
-								</div>
-								
-							</div>
-						</div>
-
+				
 			</main>
 
 			<footer class="footer">

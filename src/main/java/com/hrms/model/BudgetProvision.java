@@ -12,38 +12,54 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="BUDGET_PROVISION")
+@Table(name = "T_BUDGET")
 public class BudgetProvision {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="BUDGET_PROVISION_ID")
+	@Column(name = "BUDGET_ID")
 	private Long budgetProvisionId;
-	
-	@Column(name="BUDGET_HEAD")
+
+	@Column(name = "BUDGET_HEAD",length = 50)
 	private String budgetHead;
-	
+
 	@ManyToOne
-	@JoinColumn(name="DEPT_CODE")
+	@JoinColumn(name = "DEPT_CODE")
 	private Department department;
-	
-	@Column(name="EXPENDITURE_PURPOSE")
+
+	@Column(name = "EXPEN_PURPOSE",length = 200)
 	private String expenditurePurpose;
-	
-	@Column(name="FILE_NO")
+
+	@Column(name = "FILE_NO",length = 100)
 	private String fileNo;
-	
-	@Column(name="DATE_OF_SANCTION")
+
+	@Column(name = "SANCTION_DATE")
 	private Date dateOfSanction;
-	
-	@Column(name="EXPENDITURE_AMOUNT")
-	private String 	expenditureAmount;
-	
-	@Column(name="BALANCE_AMOUNT")
-	private String balanceAmount;
-	
-	@Column(name="YEARLY_FIX_AMOUNT")
-	private String yearlyFixAmount;
+
+	@Column(name = "EXPEND_AMOUNT",length = 20)
+	private Long expenditureAmount;
+
+	@Column(name = "BAL_AMOUNT",length = 20)
+	private Long balanceAmount;
+
+	@Column(name = "YR_FIX_AMOUNT",length = 20)
+	private int yearlyFixAmount;
+
+	@Column(name = "FIN_YEAR")
+	private Date budgetYear;
+
+
+	@Column(name = "INS_BY", updatable = false,length = 50)
+	private String insBy;
+
+	@Column(name = "INS_DATE", updatable = false,length = 6)
+	private Date insDate = new Date();
+
+	@Column(name = "UPD_BY", insertable = false,length = 50)
+	private String updBy;
+
+	@Column(name = "UPD_DATE", insertable = false,length = 6)
+	private Date updDate = new Date();
 
 	public BudgetProvision() {
 		super();
@@ -98,33 +114,69 @@ public class BudgetProvision {
 		this.dateOfSanction = dateOfSanction;
 	}
 
-	public String getExpenditureAmount() {
+	public Long getExpenditureAmount() {
 		return expenditureAmount;
 	}
 
-	public void setExpenditureAmount(String expenditureAmount) {
+	public void setExpenditureAmount(Long expenditureAmount) {
 		this.expenditureAmount = expenditureAmount;
 	}
 
-	public String getBalanceAmount() {
+	public Long getBalanceAmount() {
 		return balanceAmount;
 	}
 
-	public void setBalanceAmount(String balanceAmount) {
+	public void setBalanceAmount(Long balanceAmount) {
 		this.balanceAmount = balanceAmount;
 	}
 
-	public String getYearlyFixAmount() {
+	public int getYearlyFixAmount() {
 		return yearlyFixAmount;
 	}
 
-	public void setYearlyFixAmount(String yearlyFixAmount) {
+	public void setYearlyFixAmount(int yearlyFixAmount) {
 		this.yearlyFixAmount = yearlyFixAmount;
 	}
-	
-	
-	
-	
-	
 
+	public Date getBudgetYear() {
+		return budgetYear;
+	}
+
+	public void setBudgetYear(Date budgetYear) {
+		this.budgetYear = budgetYear;
+	}
+
+	public String getInsBy() {
+		return insBy;
+	}
+
+	public void setInsBy(String insBy) {
+		this.insBy = insBy;
+	}
+
+	public Date getInsDate() {
+		return insDate;
+	}
+
+	public void setInsDate(Date insDate) {
+		this.insDate = insDate;
+	}
+
+	public String getUpdBy() {
+		return updBy;
+	}
+
+	public void setUpdBy(String updBy) {
+		this.updBy = updBy;
+	}
+
+	public Date getUpdDate() {
+		return updDate;
+	}
+
+	public void setUpdDate(Date updDate) {
+		this.updDate = updDate;
+	}
+
+	
 }

@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hrms.model.BudgetProvision;
+import com.hrms.model.OrderIssueTracking;
 
 @Service
 public class BudgetProvisionServiceImpl implements BudgetProvisionService {
@@ -83,6 +84,19 @@ public class BudgetProvisionServiceImpl implements BudgetProvisionService {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	@Override
+	public void removeBudgetProvision(Long budgetId) {
+		Session session = sessionFactory.openSession();
+		Transaction tx = session.beginTransaction();
+		Object o = session.get(BudgetProvision.class, budgetId);
+		BudgetProvision e = (BudgetProvision) o;
+		
+		session.delete(e);
+		tx.commit();
+		session.close();
+		
 	}
 
 }
