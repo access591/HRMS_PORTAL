@@ -1,5 +1,6 @@
 package com.hrms.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -13,10 +14,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.hrms.model.Category;
 import com.hrms.model.Department;
 import com.hrms.model.Designation;
 import com.hrms.model.Employee;
-
+import com.hrms.model.LocalConvyence;
 import com.hrms.model.MenuModule;
 
 import com.hrms.model.StaffPostingDuties;
@@ -51,8 +53,30 @@ public class StaffPostingDutiesController {
 		if (modules != null) {
 			model.addAttribute("modules", modules);
 		}
-		  List<Employee> listEmployee = employeeService.getAllEmployees();
+		 List<Employee> listEmployee = employeeService.getAllEmployees();
 		  model.addAttribute("listEmployee", listEmployee);
+		
+		  List<StaffPostingDuties> listOfstaffDuties = staffPostingDutiesService.getAllStaffPostingDuties();
+		  
+		  List<SaffPostingDutiesUtil> listSaffPostingDutiesUtil=new ArrayList<SaffPostingDutiesUtil>();
+		  for (int i = 0; i < listOfstaffDuties.size(); i++) {
+			  String empCode = listOfstaffDuties.get(i).getEmpCode().getEmpCode();
+			  SaffPostingDutiesUtil listofutil=new SaffPostingDutiesUtil();
+			  Employee employee = employeeService.findEmployeeById(empCode);
+			    Department department = departmentService.findDepartmentById(employee.getDepartmentCode());
+			    Designation designation = designationService.findDesignationById(employee.getDesignationCode());
+			    listofutil.setJobCode(listOfstaffDuties.get(i).getJobCode());
+			    listofutil.setDeptName(department.getDeptName());
+			    listofutil.setDesgName(designation.getDesgName());
+			    listofutil.setEmpName(employee.getEmpName());
+			    listSaffPostingDutiesUtil.add(listofutil);
+			    model.addAttribute("listStaffDuties",listSaffPostingDutiesUtil);
+			  
+			  
+			  
+		  }
+		  
+		  
 		  session.setAttribute("username",session.getAttribute("username"));
 		  return"staffPostingDuties"; 
 	}
@@ -90,7 +114,56 @@ public class StaffPostingDutiesController {
 			
 		
 		}
-	
+		
+		
+		
+		@GetMapping(value = { "/editStaffPostingDuties/{id}" })
+		public String editStaffPostingDuties(@PathVariable("id") String id, Model model, HttpSession session) {
+			
+			List<Employee> listEmployee = employeeService.getAllEmployees();
+			  model.addAttribute("listEmployee", listEmployee);
+			  
+			  StaffPostingDuties staffPostingDutiesEdit = staffPostingDutiesService.StaffPostingDutieById(id);
+			model.addAttribute("staffPostingDutiesEdit", staffPostingDutiesEdit);
+
+			session.setAttribute("username", session.getAttribute("username"));
+			 return "editStaffPostingDuties";
+		}
+		
+		@PostMapping("/updateStaffDuties")
+		public String updateStaffDuties(@ModelAttribute("saffPostingDuties") SaffPostingDutiesUtil ux, Model model,HttpSession session) {
+			
+			StaffPostingDuties staffduties=new StaffPostingDuties();
+			Employee emp = new Employee();
+			emp.setEmpCode(ux.getEmpCode());
+			staffduties.setEmpCode(emp);
+			staffduties.setPositionCode(ux.getPositionCode());
+			staffduties.setJobDesc(ux.getJobDesc());
+			staffduties.setJobCode(ux.getJobCode());
+			this.staffPostingDutiesService.UpdateStaffPostingDuties(staffduties);
+			
+
+			session.setAttribute("username", session.getAttribute("username"));
+			return "redirect:/staffPostingDuties";
+			
+		
+		}
+		
+		
+		
+		/**
+		 * Delete Staff
+		 * @param id
+		 * @param model
+		 * @param session
+		 * @return
+		 */
+			@GetMapping(value = { "/deleteStaffPostingDuties/{id}" })
+			public String deleteStaffDuties(@PathVariable("id") String id, Model model, HttpSession session) {
+				this.staffPostingDutiesService.removestaffDuties(id);
+				session.setAttribute("username", session.getAttribute("username"));
+				return "redirect:/staffPostingDuties";
+			}
 		
 
 }

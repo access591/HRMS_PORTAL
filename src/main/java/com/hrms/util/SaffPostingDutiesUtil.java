@@ -11,6 +11,8 @@ public class SaffPostingDutiesUtil {
 	private String  empPayCode;
 	private String positionCode;
 	private String dutiesDesc;
+	private String JobCode;
+	
 	public SaffPostingDutiesUtil(String empName2, String deptName2, String desgName2, String employeePayeeCode) {
 
 		this.empName = empName2;
@@ -18,6 +20,23 @@ public class SaffPostingDutiesUtil {
 		this.desgName = desgName2;
 		this.empPayCode = employeePayeeCode;
 	}
+	
+	
+	
+
+	public String getJobCode() {
+		return JobCode;
+	}
+
+
+
+
+	public void setJobCode(String jobCode) {
+		JobCode = jobCode;
+	}
+
+
+
 
 	public String getEmpCode() {
 		return empCode;
@@ -100,9 +119,11 @@ public class SaffPostingDutiesUtil {
 	}
 
 
+
+
 	public SaffPostingDutiesUtil(String empCode, String empName, String departmentCode, String deptName,
-			String desgCode, String desgName, String jobDesc, String empPayCode, String positionCode,
-			String dutiesDesc) {
+			String desgCode, String desgName, String jobDesc, String empPayCode, String positionCode, String dutiesDesc,
+			String jobCode) {
 		super();
 		this.empCode = empCode;
 		this.empName = empName;
@@ -114,7 +135,11 @@ public class SaffPostingDutiesUtil {
 		this.empPayCode = empPayCode;
 		this.positionCode = positionCode;
 		this.dutiesDesc = dutiesDesc;
+		JobCode = jobCode;
 	}
+
+
+
 
 	public SaffPostingDutiesUtil() {
 		super();
