@@ -8,6 +8,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -101,6 +102,27 @@ public class OrderIssueTrackingServiceImpl implements OrderIssueTrackingService{
 		}
 		
 		
+	}
+
+	@Override
+	public OrderIssueTracking findOrderIssueTrackingByIssuedby(String empCode) {
+		try {
+			Session session = sessionFactory.openSession();
+			System.out.println("session exist or not : " + sessionFactory.isOpen());
+			Transaction tx = session.beginTransaction();
+			Query<OrderIssueTracking> query = session.createQuery("from OrderIssueTracking o "
+					+ "left join fetch o.employee e where e.empCode = :empCode", OrderIssueTracking.class);
+			
+			query.setParameter("empCode", empCode);
+			OrderIssueTracking result = query.getSingleResult();
+			tx.commit();
+			session.close();
+			return result;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 }

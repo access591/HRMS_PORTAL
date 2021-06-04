@@ -18,13 +18,17 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.hrms.model.BudgetProvision;
 import com.hrms.model.Department;
+import com.hrms.model.Employee;
 import com.hrms.model.MenuModule;
 import com.hrms.reports.ArmsReport;
+import com.hrms.reports.BudgetReport;
 import com.hrms.service.BudgetProvisionService;
 import com.hrms.service.DepartmentService;
+import com.hrms.service.EmployeeService;
 import com.hrms.service.ModuleService;
 
 @Controller
@@ -33,6 +37,7 @@ public class BudgetProvisionController {
 	@Autowired private ModuleService moduleService;
 	@Autowired DepartmentService departmentService;
 	@Autowired BudgetProvisionService budgetProvisionService;
+	@Autowired EmployeeService employeeService;
 	
 	
 	@InitBinder("budgetProvision")
@@ -121,5 +126,42 @@ public class BudgetProvisionController {
 		return "orderIssueTracking";
 		
 	}
+	
+	@GetMapping("budgetReport")
+	public String viewBudgetReport(Model model,HttpSession session) {
+		
+		String userCode = (String) session.getAttribute("username");
+		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
+		if (modules != null) {
+			model.addAttribute("modules", modules);
+		}
+		
+		List<Department> departmentList = departmentService.getAllDepartments();
+		if (departmentList != null) {
+			model.addAttribute("departmentList", departmentList);
+		}
+		return "budgetReport";
+	}
+	
+	@Autowired BudgetReport budgetReport;
+	@PostMapping("createbudgetreport")
+	public String createBudgetReport(@RequestParam("deptCode")String deptCode,
+			HttpServletResponse response, HttpServletRequest request) {
+		
+	
+		if(deptCode.equals("ALL")) {
+			List<BudgetProvision> budgetProvision = budgetProvisionService.getAllBudgetProvision();
+			System.out.println("budget list : ====>"+ budgetProvision.get(0).getBudgetHead());
+			budgetReport.createBudgetReport(response, request, budgetProvision, "All");
+		}else {
+			
+		}
+		
+		return null;
+	}
+	
+	
+	
+	
 
 }

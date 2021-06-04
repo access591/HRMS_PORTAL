@@ -11,4 +11,6 @@ public interface OrderIssueTrackingService {
 	public OrderIssueTracking findOrderIssueTrackingById(Long orderIssueTrackingId);
 	public void updateOrderIssueTracking(OrderIssueTracking orderIssueTracking);
 	public void removeOrderIssueTracking(Long orderTrackinId);
+	
+	public OrderIssueTracking findOrderIssueTrackingByIssuedby(String empCode);
 }

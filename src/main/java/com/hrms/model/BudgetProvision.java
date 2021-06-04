@@ -46,7 +46,7 @@ public class BudgetProvision {
 	private int yearlyFixAmount;
 
 	@Column(name = "FIN_YEAR")
-	private Date budgetYear;
+	private Date budgetYear = new Date();
 
 
 	@Column(name = "INS_BY", updatable = false,length = 50)

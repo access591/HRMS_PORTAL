@@ -7,9 +7,12 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +34,8 @@ import com.hrms.model.Department;
 import com.hrms.model.Employee;
 import com.hrms.model.MenuModule;
 import com.hrms.model.OrderIssueTracking;
+import com.hrms.reports.BudgetReport;
+import com.hrms.reports.OrderTrackingReport;
 import com.hrms.service.DepartmentService;
 import com.hrms.service.EmployeeService;
 import com.hrms.service.ModuleService;
@@ -135,6 +140,42 @@ public class OrderIssueTrackingController {
 		
 		session.setAttribute("username", session.getAttribute("username"));
 		return "redirect:orderissuetracking";
+	}
+	
+	
+	@GetMapping("ordertrackreport")
+	public String viewOrderTrackReport(Model model,HttpSession session) {
+		
+		String userCode = (String) session.getAttribute("username");
+		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
+		if (modules != null) {
+			model.addAttribute("modules", modules);
+		}
+		List<Employee> employeeList = employeeService.getAllEmployees();
+		if (employeeList != null) {
+			model.addAttribute("employeeList", employeeList);
+		}
+		
+		return "orderIssuedReport";
+	}
+	
+	@Autowired OrderTrackingReport orderTrackReport;
+	@PostMapping("createordertrackreport")
+	public String createOrderTrackReport(@RequestParam("empCode")String empCode,
+			HttpServletResponse response, HttpServletRequest request) {
+		
+		List<OrderIssueTracking> orderTracking = new ArrayList<OrderIssueTracking>();
+		if(empCode.equals("ALL")) {
+			orderTracking = orderIssueTrackingService.getAllOrderIssueTracking();
+			System.out.println("budget list : ====>"+ orderTracking.get(0).getOrderFileName());
+			orderTrackReport.createOrderTrackReport(response, request, orderTracking, "All");
+		}else {
+			OrderIssueTracking order = orderIssueTrackingService.findOrderIssueTrackingByIssuedby(empCode);
+			orderTracking.add(order);
+			orderTrackReport.createOrderTrackReport(response, request, orderTracking, empCode);
+		}
+		
+		return null;
 	}
 	
 }
