@@ -2,7 +2,9 @@ package com.hrms.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 
@@ -23,6 +26,7 @@ public class InductionTraining implements Serializable {
 	private static final long serialVersionUID = 3128717299783557771L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "INDUCTION_ID")
 	private long id;
 	@ManyToOne
 	@JoinColumn(name = "EMPLOYEE_CODE",updatable = false)
@@ -36,6 +40,16 @@ public class InductionTraining implements Serializable {
 	@Column(name = "INS_DATE", updatable = false)
 	private Date insDate = new Date();
 	
+	@OneToMany(mappedBy="inductionTraining",cascade = CascadeType.ALL,orphanRemoval = true)
+	List<InductionTrainingDetail> inductionTrainingDetail;
+
+	
+	public List<InductionTrainingDetail> getInductionTrainingDetail() {
+		return inductionTrainingDetail;
+	}
+	public void setInductionTrainingDetail(List<InductionTrainingDetail> inductionTrainingDetail) {
+		this.inductionTrainingDetail = inductionTrainingDetail;
+	}
 	public long getId() {
 		return id;
 	}

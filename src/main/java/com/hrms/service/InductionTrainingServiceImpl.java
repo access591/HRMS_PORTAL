@@ -28,7 +28,7 @@ SessionFactory sessionfactory;
 		return listInduction;
 	}
 	@Override
-	public void removeInductionTr(String id) {
+	public void removeInductionTr(Long id) {
 		Session session = sessionfactory.openSession();
 		Object o = session.get(InductionTraining.class, id);
 		InductionTraining e = (InductionTraining) o;

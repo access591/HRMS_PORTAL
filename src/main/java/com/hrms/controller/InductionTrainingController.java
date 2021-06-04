@@ -214,7 +214,7 @@ public class InductionTrainingController {
 	
 	
 	@GetMapping(value = { "/deleteInductionTraining/{id}" })
-	public String deleteLocalConveyance(@PathVariable("id") String id, Model model,HttpSession session) {
+	public String deleteLocalConveyance(@PathVariable("id") long id, Model model,HttpSession session) {
 		try {
 			
 			inductionTrainingService.removeInductionTr(id);

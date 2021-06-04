@@ -10,6 +10,6 @@ public interface InductionTrainingService {
 
 	List<InductionTraining> getAllInductioTraining();
 
-	void removeInductionTr(String id);
+	void removeInductionTr(Long id);
 
 }
