@@ -40,5 +40,10 @@ LoanRequestDao  loanRequestDao;
 	System.out.println("XXX>>>>>>>>>>>>>>>>>>>>>"+ui);
 		this.loanRequestDao.saveOrUpdate(loanRequest);
 	}
+	@Override
+	public List<LoanApplication> findByApprovalLoan(String id) {
+		List<LoanApplication> loanRequest=loanRequestDao.findByApprovalLoan(id);
+		return loanRequest;
+	}
 
 }
