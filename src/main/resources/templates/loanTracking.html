@@ -106,7 +106,7 @@ body {
 												<div class="form-group sm col-md-4">
 											       <label class="form-label">Application   Date
 											       <span class="text-danger">*</span></label>
-							                 <input  type="text" id="appDate" name="appDate" title="Application   Date" class="form-control" disabled>
+							                 <input type="text" th:id="appDate"  name="appDate" title="Application   Date" class="form-control"disabled>
 										     </div>
 										     <div class="form-group sm col-md-4">
 													<label class="form-label">Employee Code</label>
@@ -178,7 +178,7 @@ body {
 												<div class="form-group sm col-md-4">
 												<label class="form-label">Amount Required
 												 <span class="text-danger">*</span></label> 
-												 <input type="text" id="amountRequired" name="amountRequired" title="Amount" class="form-control required"disabled>
+												 <input type="text" id="amountRequired" name="amountRequired" title="Amount" class="form-control required"readonly>
 											</div>
 												</div>
 												
@@ -193,7 +193,7 @@ body {
                                          <div class="form-group sm col-md-4">
 									 		       <label class="form-label">Number Of Installments <span class="text-danger">*</span> 
 											       </label>
-							                 <input  type="text"id="noOfInstallments"name="noOfInstallments" title="Number Of Installments"class="form-control">
+							                 <input  type="text"id="noOfInstallments"name="noOfInstallments" title="Number Of Installments"class="form-control"required aria-required="true">
 										     </div>
 										      <div class="form-group sm col-md-4">
 											       <label class="form-label">Effective Schedule Date
@@ -253,7 +253,7 @@ body {
 								 <div class="form-group sm col-md-4">
 												<label class="form-label">Cheque Amount 
 												 <span class="text-danger">*</span></label> 
-												 <input type="text" id="chequeAmount" name="chequeAmount" title=" Cheque Amount" class="form-control required">
+												 <input type="text" id="chequeAmount" name="chequeAmount" title=" Cheque Amount" class="form-control required"required aria-required="true">
 											</div>
 											 <div class="form-group sm col-md-4">
 												<label class="form-label">Bank Name
@@ -265,7 +265,7 @@ body {
 											 <div class="form-group sm col-md-4">
 												<label class="form-label">Interest (in %)
 												 <span class="text-danger">*</span></label> 
-												 <input type="text" id="interestRate" name="interestRate" title="Interest Rate" class="form-control required">
+												 <input type="text" id="interestRate" name="interestRate" title="Interest Rate" class="form-control required"required aria-required="true">
 											</div>
 								
 								</div>
@@ -374,23 +374,9 @@ body {
 	<script>
 		$(function() {
 
-			$("input[name='appDate']").daterangepicker({
-				singleDatePicker: true,
-			    autoApply: true,
-				locale: {
-		            format: 'YYYY-MM-DD'
-		        },
-				showDropdowns: true
-			});
+		
 			
-		$("input[name='effScheduleDate']").daterangepicker({
-				singleDatePicker: true,
-			    autoApply: true,
-				locale: {
-		            format: 'YYYY-MM-DD'
-		        },
-				showDropdowns: true
-			});
+	
 		$("input[name=\"chequeDate\"]").daterangepicker({
 			singleDatePicker: true,
 			   autoApply: true,
@@ -552,12 +538,16 @@ $("table").on("keyup", ".govt", function () {
 	        if(this.status===200){
 	            let obj = JSON.parse(this.responseText);
 	            console.log(obj);
+	            var date=obj.appDate;
 	            
+	            var appDate = (new Date(date)).toISOString().split('T')[0]; 
+	            var effS=obj.effScheduleDate;
+	            var effScheduleDate=(new Date(effS)).toISOString().split('T')[0]; 
 	            $('#approvalStatus').val(obj.approvalStatus);
 	            $('#amountSanctioned').val(obj.amountSanctioned);
 	            $('#amountRequired').val(obj.amountRequired);
-	            $('#effScheduleDate').val(obj.effScheduleDate);
-	            $('#appDate').val(obj.appDate);
+	            $('#effScheduleDate').val(effScheduleDate);
+	            $('#appDate').val(appDate);
 	            $('#loanCode').val(obj.loanCode);
 	            $('#empCode').val(obj.empCode);
 	            $('#empName').val(obj.empName);
