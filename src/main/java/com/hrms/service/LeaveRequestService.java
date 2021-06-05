@@ -8,19 +8,24 @@ import com.hrms.model.LeaveRequest;
 
 public interface LeaveRequestService {
 
-	List<LeaveRequest> findAllByEmpCode(String empCode);
+	public List<LeaveRequest> findAllByEmpCode(String empCode);
 	
 	public void addLeave(LeaveRequest leaveRequest);
-	List<LeaveRequest> getAllLeaves();
+	public List<LeaveRequest> getAllLeaves();
 	
 	public void updateLeaveRequest(LeaveRequest d);
 	public void removeLeaveRequest(Long id);
-	List<LeaveRequest> findByEmpCodeAndApplyDate(String empCode, String applyDate);
+	public List<LeaveRequest> findByEmpCodeAndApplyDate(String empCode, String applyDate);
 	public List<LeaveRequest> findAllByDeptCodeAndStatusN(String deptCode);
 
-	LeaveRequest findLeaveRequestById(long id);
-	List<LeaveRequest> getEmployeeByStatusY();
-	List<LeaveRequest> getEmployeeByStatusN();
-	List<LeaveRequest> findByEmpBetweenDate(String empCode, Date toDate, Date fromDate);
-	 LeaveRequest findByToDate(Date date);
+	public LeaveRequest findLeaveRequestById(long id);
+	public List<LeaveRequest> getEmployeeByStatusY();
+	public List<LeaveRequest> getEmployeeByStatusN();
+	public List<LeaveRequest> findByEmpBetweenDate(String empCode, Date toDate, Date fromDate);
+	public LeaveRequest findByToDate(Date date);
+	public List<LeaveRequest> findAllApproveLeaveRequestBetweenDate(Date fromDate,Date toDate);
+	public List<LeaveRequest> findApproveLeaveRequestByEmpBetweenDate(Date fromDate,Date toDate,
+			String empCode);
+	public List<LeaveRequest> findAllApproveLeaveRequestByDeptBetweenDate(Date fromDate,Date toDate,
+			String deptCode);
 }

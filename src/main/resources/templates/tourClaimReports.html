@@ -62,8 +62,7 @@ body {
 													<label class="form-label">Employee Name</label> <label
 														style="color: red">*</label> <select
 														class="form-control select2" id="employeeName"
-														name="empName" >
-														<option value=''>--Select Employee--</option>
+														name="empName" required> 														<option value=''>--Select Employee--</option>
 														<option value='ALL'>All</option>
 														<option th:each="employee : ${listEmployee}"
 															th:text="${employee.empName}"
@@ -87,14 +86,14 @@ body {
 											<div class="col-12 col-lg-6">
 												<label class="form-label">From Date</label> <label
 													style="color: red">*</label> 
-													<input type="date" class="form-control" th:field="*{tourStartDate}">
+													<input type="date" class="form-control" th:field="*{tourStartDate}" required>
 
 											</div>
 											
 											<div class="col-12 col-lg-6">
 												<label class="form-label">To Date</label> <label
 													style="color: red">*</label> 
-													<input type="date" class="form-control" th:field="*{tourEndDate}">
+													<input type="date" class="form-control" th:field="*{tourEndDate}" required>
 
 											</div>
 
