@@ -203,14 +203,14 @@ body {
 										<div class="form-group sm col-md-4">
 												<label class="form-label">Amount Required
 												 <span class="text-danger">*</span></label> 
-								 <input type="text" id="amountRequired" name="amountRequired"class="form-control"oninvalid="this.setCustomValidity('Please Enter Amount Required')"
+								 <input type="text" id="amountRequired" name="amountRequired" maxlength="15" class="form-control"oninvalid="this.setCustomValidity('Please Enter Amount Required')"
  oninput="setCustomValidity('')" required aria-required="true">
 											</div>
 											
 										<div class="form-group sm col-md-4">
 												<label class="form-label">Loan(To be Return In) 
 												 <span class="text-danger">*</span></label> 
-												 <input type="text" id="amountSanctioned" name="amountSanctioned" class="form-control" title="loan to be return"oninvalid="this.setCustomValidity('Please Enter Loan(To be Return In)')"
+												 <input type="text" id="amountSanctioned" maxlength="12" name="amountSanctioned" class="form-control" title="loan to be return"oninvalid="this.setCustomValidity('Please Enter Loan(To be Return In)')"
  oninput="setCustomValidity('')"  required aria-required="true">
 											</div>
 											
