@@ -57,6 +57,8 @@ public class LoanTrackingController {
 		  model.addAttribute("listEmployee", listEmployee);
 		
 			List<Loan> listLoan = loanMaterService.getAllLoans();
+			
+			
 			model.addAttribute("listLoan", listLoan);
 		String userCode = (String) session.getAttribute("username");
 		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
@@ -65,7 +67,14 @@ public class LoanTrackingController {
 		}
 		session.setAttribute("username", session.getAttribute("username"));
 		List<LoanApplication> listloanApplication=loanRequestService.getAllRequest();
-		model.addAttribute("listloanApplication", listloanApplication);
+		
+		for (int i = 0; i < listloanApplication.size(); i++) {
+			String empCode = listloanApplication.get(i).getAppNo();
+			List<LoanApplication> loanApp=loanRequestService.findByApprovalLoan(empCode);
+			model.addAttribute("listloanApplication", loanApp);
+		   }
+	
+	
 		
 		 return "/loanTracking";
 	}

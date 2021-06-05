@@ -13,4 +13,6 @@ public interface LoanRequestService {
 	public void removeLoanRequest(String id);
 	LoanApplication findByIdLoanReq(String id);
 	void updateLoanRequest(LoanApplication ltaRequest);
+
+	List<LoanApplication> findByApprovalLoan(String id);
 }
