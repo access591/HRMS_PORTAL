@@ -193,7 +193,7 @@ $("table").on("keyup", ".govt", function () {
 											
 											
 											<div class="form-group">
-											  <label>Slip No </label>
+											  <label>Slip Number  </label>
 											  
 											   <input type="text" class="form-control" id="slipNo" name="slipNo" readonly >
 												</div>
@@ -308,7 +308,7 @@ $("table").on("keyup", ".govt", function () {
 										<table id="datatables-buttons" aria-describedby="example" class="table" style="width:100%">
 												<thead>
 					<tr><th scope="col">Sr No</th>
-						<th scope="col"> Medical Store Doctor</th>
+						<th scope="col">Medical Store/ Doctor</th>
 						<th scope="col"> Cash Memo NO. </th>
 						<th scope="col"> Cash Memo Date.</th>
 						<th scope="col"> Claiming Amount</th>
@@ -465,23 +465,17 @@ $("table").on("keyup", ".govt", function () {
 	            
 		    } );
 	});
-	$("input[name='dateOfSlip']").daterangepicker({
+	$("input[name='dateOfSlip']").datepicker({
 		singleDatePicker: true,
-	    autoApply: true,
-		locale: {
-            format: 'YYYY/MM/DD'
-        },
-		showDropdowns: true
+		 format: 'yyyy/mm/dd',
+		
 	});
 	
 	
-	$("input[name='claimingDate']").daterangepicker({
+	$("input[name='claimingDate']").datepicker({
 		singleDatePicker: true,
-	    autoApply: true,
-		locale: {
-            format: 'YYYY/MM/DD'
-        },
-		showDropdowns: true
+		 format: 'yyyy/mm/dd',
+		
 	});
 	
 
