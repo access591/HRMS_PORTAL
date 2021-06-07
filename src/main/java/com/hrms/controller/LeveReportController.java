@@ -150,14 +150,25 @@ public class LeveReportController {
 
 		if (deptCode.equals("ALL")) {
 			System.out.println("All record");
-			List<LeaveRequest> leaveRequestList = leaveRequestService.findAllApproveLeaveRequestBetweenDate(fromDate,
-					toDate);
+//			List<LeaveRequest> leaveRequestList = leaveRequestService.findAllApproveLeaveRequestBetweenDate(fromDate,
+//					toDate);
+			List<LeaveRequest> leaveRequestList  = leaveRequestService.findAllLeaveRequestBetweenDate(fromDate, toDate);
 			leaveReport.leaveRequestReport(response, request, reportFileName, leaveRequestList, "ALL");
-		} else if (!deptCode.equals("ALL") && (empCode.equals(null) || empCode.equals(""))) {
+		} 
+		
+		else if (!deptCode.equals("ALL") && (empCode.equals(null) || empCode.equals(""))) {
 			System.out.println("find data by department ");
-		} else if (!deptCode.equals("ALL") && !empCode.equals(null) || empCode.equals("")) {
+			List<LeaveRequest> leaveRequestList = leaveRequestService.findAllLeaveRequestByDeptBetweenDate(fromDate, toDate, deptCode);
+			leaveReport.leaveRequestReport(response, request, reportFileName, leaveRequestList, "ALL");
+		} 
+		
+		else if (!deptCode.equals("ALL") && !empCode.equals(null) || !empCode.equals("")) {
 			System.out.println("find data by emp ");
-		} else {
+			List<LeaveRequest> leaveRequestList = leaveRequestService.findAllLeaveRequestbyEmpBetweenDate(fromDate, toDate, empCode);
+			leaveReport.leaveRequestReport(response, request, reportFileName, leaveRequestList, "ALL");
+		} 
+		
+		else {
 			return "redirect:AttendanceRegMothlyReport";
 		}
 

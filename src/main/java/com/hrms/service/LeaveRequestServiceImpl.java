@@ -184,4 +184,79 @@ public class LeaveRequestServiceImpl implements LeaveRequestService {
 		return null;
 	}
 
+	@Override
+	public List<LeaveRequest> findAllLeaveRequestBetweenDate(Date fromDate, Date toDate) {
+		try {
+
+			Session session = sessionFactory.openSession();
+			Query<LeaveRequest> query = session.createQuery(
+					"from LeaveRequest lr inner join fetch lr.employee e" + " inner join fetch lr.leave lv "
+							+ "where lr.fromDate>=:fromDate and lr.toDate<:toDate",
+					LeaveRequest.class);
+			
+			query.setParameter("fromDate", fromDate);
+			query.setParameter("toDate", toDate);
+
+			List<LeaveRequest> leaveRequest = query.getResultList();
+
+			System.out.println("hii getAll leaves " + leaveRequest.size());
+
+			return leaveRequest;
+
+		} catch (Exception e) {
+			System.out.println("error occured in gt All leaves ");
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	@Override
+	public List<LeaveRequest> findAllLeaveRequestByDeptBetweenDate(Date fromDate, Date toDate, String deptCode) {
+		try {
+
+			Session session = sessionFactory.openSession();
+			Query<LeaveRequest> query = session.createQuery(
+					"from LeaveRequest lr inner join fetch lr.employee e" + " inner join fetch lr.department d "
+							+ "where lr.fromDate>=:fromDate and lr.toDate<:toDate and d.departmentCode = :deptCode",
+					LeaveRequest.class);
+			query.setParameter("fromDate", fromDate);
+			query.setParameter("toDate", toDate);
+			query.setParameter("deptCode", deptCode);
+
+			List<LeaveRequest> leaveRequest = query.getResultList();
+
+			System.out.println("hii getAll leaves " + leaveRequest.size());
+
+			return leaveRequest;
+
+		} catch (Exception e) {
+			System.out.println("error occured in gt All leaves ");
+			e.printStackTrace();
+		}
+		return null;
+
+	}
+
+	@Override
+	public List<LeaveRequest> findAllLeaveRequestbyEmpBetweenDate(Date fromDate, Date toDate, String empCode) {
+		try {
+			Session session = sessionFactory.openSession();
+			Query<LeaveRequest> query = session.createQuery("from LeaveRequest l left join fetch "
+					+ "l.employee e "
+					+ "where l.fromDate>=:fromDate and l.toDate<=:toDate and"
+					+ " e.empCode = :empCode", LeaveRequest.class);
+			query.setParameter("fromDate", fromDate);
+			query.setParameter("toDate", toDate);
+			query.setParameter("empCode", empCode);
+			
+			List<LeaveRequest> result = query.getResultList();
+			System.out.println("leave request size====>"+result.size());
+			return result;
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 }

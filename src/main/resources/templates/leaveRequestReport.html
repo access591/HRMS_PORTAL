@@ -62,7 +62,7 @@ body {
 													<label class="form-label">Select Department</label> <label
 														style="color: red">*</label> <select
 														class="form-control select2" id="select_department"
-														onchange="changeDepartment()" name="deptCode">
+														onchange="changeDepartment()" name="deptCode" required>
 														<option value=''>--Select--</option>
 														<option value='ALL'>All</option>
 														<option th:each="department : ${departmentList}"
@@ -106,14 +106,14 @@ body {
 											<div class="col-12 col-lg-6">
 												<label class="form-label">From Date</label> <label
 													style="color: red">*</label> <input type="date" name="fromDate"
-													class="form-control">
+													class="form-control" required>
 
 											</div>
 
 											<div class="col-12 col-lg-6">
 												<label class="form-label">To Date</label> <label
 													style="color: red">*</label> <input type="date" name="toDate"
-													class="form-control">
+													class="form-control" required>
 
 											</div>
 

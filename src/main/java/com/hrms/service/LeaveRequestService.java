@@ -28,4 +28,10 @@ public interface LeaveRequestService {
 			String empCode);
 	public List<LeaveRequest> findAllApproveLeaveRequestByDeptBetweenDate(Date fromDate,Date toDate,
 			String deptCode);
+	
+	
+	public List<LeaveRequest> findAllLeaveRequestBetweenDate(Date fromDate,Date toDate);
+	public List<LeaveRequest> findAllLeaveRequestByDeptBetweenDate(Date fromDate,Date toDate,String deptCode);
+	public List<LeaveRequest> findAllLeaveRequestbyEmpBetweenDate(Date fromDate,Date toDate,String empCode);
+	
 }
