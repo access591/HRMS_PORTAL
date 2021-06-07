@@ -99,7 +99,7 @@ public class LeaveRequest implements Serializable  {
 	@Column(name = "CANCEL_BY",length=20)
 	private String cancelBy;
 	
-	@Column(name = "CANCEL_DATE",length=20)
+	@Column(name = "CANCEL_DATE",length=100)
 	private String cancelDate;
 	
 	

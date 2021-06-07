@@ -106,15 +106,22 @@ public class LeaveApprovalController {
 		LeaveRequest leaveRequest = leaveRequestService.findLeaveRequestById(Long.valueOf(leaveid));
 		
 		System.out.println("leave request approval : "+ leaveRequest);
+		String activeUser = "";
+		try {
+			UserEntity user = userService.findDataById(userCode);
+			activeUser = user.getUserName();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 		
 		if(status.equals("Y")) {
 			leaveRequest.setStatus("Y");
-			leaveRequest.setApproevedBy(userCode);
+			leaveRequest.setApproevedBy(activeUser);
 			leaveRequest.setApprovedDate(new Date().toString());
 			
 		}else {
 			leaveRequest.setStatus("C");
-			leaveRequest.setCancelBy(userCode);
+			leaveRequest.setCancelBy(activeUser);
 			leaveRequest.setCancelDate(new Date().toString());
 		}
 		

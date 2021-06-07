@@ -1,6 +1,5 @@
 package com.hrms.controller;
 
-
 import java.sql.Date;
 import java.util.ArrayList;
 
@@ -29,6 +28,8 @@ import com.hrms.model.Leave;
 import com.hrms.model.LeaveDetail;
 import com.hrms.model.LeaveRequest;
 import com.hrms.model.MenuModule;
+import com.hrms.model.UserEntity;
+import com.hrms.reports.LeaveReport;
 import com.hrms.service.DepartmentService;
 import com.hrms.service.DesignationService;
 import com.hrms.service.EmployeeService;
@@ -37,219 +38,237 @@ import com.hrms.service.LeaveRequestService;
 import com.hrms.service.LeaveService;
 import com.hrms.service.ModuleService;
 import com.hrms.service.PageMappingService;
+import com.hrms.service.UserService;
 
 @Controller
 public class LeveReportController {
-	
-	int pageNoLeaveRegister = 55;  
+
+	int pageNoLeaveRegister = 55;
 	String reqPageOfLeaveRegister = "/leaveRegister";
-	
+
 	int pageNoOfLeaveRequestDetailReport = 56;
-	String reqPageOfLeaveRequestDetailReport =  "/leaveRequestReport";
-	
+	String reqPageOfLeaveRequestDetailReport = "/leaveRequestReport";
+
 	int pageNoLeaveTransactionReport = 57;
 	String reqpageOfleaveRequestTransactionReport = "/leaveTransactionReport";
-	
-	@Autowired private ModuleService moduleService;
-	@Autowired PageMappingService pageMappingService;//leaveRegister.html
-	@Autowired ReportUtil reportUtil;
-	@Autowired LeaveDetailService leaveDetailService;
-	@Autowired EmployeeService employeeService;
-	@Autowired DesignationService designationService; 
-	@Autowired DepartmentService departmentService;
-	@Autowired LeaveRequestService leaveRequestService;
-	@Autowired LeaveService leaveService;
-	@Autowired CommonUtil employeeLeaveRequest;
-	
+
+	@Autowired
+	private ModuleService moduleService;
+	@Autowired
+	PageMappingService pageMappingService;// leaveRegister.html
+	@Autowired
+	ReportUtil reportUtil;
+	@Autowired
+	LeaveDetailService leaveDetailService;
+	@Autowired
+	EmployeeService employeeService;
+	@Autowired
+	DesignationService designationService;
+	@Autowired
+	DepartmentService departmentService;
+	@Autowired
+	LeaveRequestService leaveRequestService;
+	@Autowired
+	LeaveService leaveService;
+	@Autowired
+	CommonUtil employeeLeaveRequest;
+	@Autowired UserService userService;
+
+	@Autowired
+	LeaveReport leaveReport;
+
 	@GetMapping("/leaveRegister")
-	public String viewLeaveRegisterReport(Model model,HttpSession session,HttpServletRequest request, HttpServletResponse response) {
-		
-		
+	public String viewLeaveRegisterReport(Model model, HttpSession session, HttpServletRequest request,
+			HttpServletResponse response) {
+
 		String userCode = (String) session.getAttribute("username");
 		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
 		if (modules != null) {
 			model.addAttribute("modules", modules);
 		}
-		
+
 		List<Leave> listLeave = leaveService.getAllLeaves();
-		
-		
-		if(listLeave != null) {
-			model.addAttribute("listLeave" , listLeave);
+
+		if (listLeave != null) {
+			model.addAttribute("listLeave", listLeave);
 		}
 		session.setAttribute("username", session.getAttribute("username"));
 
-		return "leaveRegister";  
-		
+		return "leaveRegister";
+
 	}
-	
-	
-	
+
 	@PostMapping("/leaveDetailPdf")
-	public String leaveDetailPdf(@RequestParam("leaveType") String leaveType , Model model, 
-			HttpSession session,HttpServletRequest request,HttpServletResponse response) {
-		
-		System.out.println("leave type is : "+ leaveType);
-		
+	public String leaveDetailPdf(@RequestParam("leaveType") String leaveType, Model model, HttpSession session,
+			HttpServletRequest request, HttpServletResponse response) {
+
+		System.out.println("leave type is : " + leaveType);
+
 		List<LeaveDetail> listLeaveDetail = leaveDetailService.findLeaveDetailByLeaveType(leaveType);
-		System.out.println("listLeaveDetail size : "+ listLeaveDetail.size());
-		reportUtil.leaveRegisterReport(request,response,listLeaveDetail);
+		System.out.println("listLeaveDetail size : " + listLeaveDetail.size());
+		reportUtil.leaveRegisterReport(request, response, listLeaveDetail);
 		return null;
 	}
-	
-	
-	
+
 	/* leave request report */
-	
+
 	@GetMapping("/leaveRequestReport")
-	public String viewLeaveRequestDetailReport(Model model,HttpSession session,HttpServletRequest request, HttpServletResponse response) {
-		
+	public String viewLeaveRequestDetailReport(Model model, HttpSession session, HttpServletRequest request,
+			HttpServletResponse response) {
+
 		System.out.println("leave request report - 1");
-		
+
 		String userCode = (String) session.getAttribute("username");
 		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
 		if (modules != null) {
 			model.addAttribute("modules", modules);
 		}
-		
+
 		List<Employee> listEmployee = employeeService.getAllEmployees();
-		if(listEmployee != null) {
+		if (listEmployee != null) {
 			model.addAttribute("listEmployee", listEmployee);
+		}
+
+		List<Department> departmentList = departmentService.getAllDepartments();
+		System.out.println("department service======>" + departmentList.size());
+		if (departmentList != null) {
+			model.addAttribute("departmentList", departmentList);
 		}
 		session.setAttribute("username", session.getAttribute("username"));
 
-		return "leaveRequestReport";  
-		
+		return "leaveRequestReport";
+
 	}
-	
-	
+
 	@PostMapping("/createleaveRequestReport")
-	public String leaveRequestReport(@RequestParam("empName") String empName , Model model, 
-			HttpSession session,HttpServletRequest request,HttpServletResponse response) {
-		
-		
+	public String leaveRequestReport(@RequestParam("deptCode") String deptCode, @RequestParam("empCode") String empCode,
+			@RequestParam("fromDate") Date fromDate, @RequestParam("toDate") Date toDate, Model model,
+			HttpSession session, HttpServletRequest request, HttpServletResponse response) {
+
 		System.out.println("leave request report - 2");
-		
-		System.out.println("leave type is : "+ empName);
-		
-		String empCode = empName;
-		
-		
 		String reportFileName = "LeaveDetail";
+
+		if (deptCode.equals("ALL")) {
+			System.out.println("All record");
+//			List<LeaveRequest> leaveRequestList = leaveRequestService.findAllApproveLeaveRequestBetweenDate(fromDate,
+//					toDate);
+			List<LeaveRequest> leaveRequestList  = leaveRequestService.findAllLeaveRequestBetweenDate(fromDate, toDate);
+			leaveReport.leaveRequestReport(response, request, reportFileName, leaveRequestList, "ALL");
+		} 
 		
+		else if (!deptCode.equals("ALL") && (empCode.equals(null) || empCode.equals(""))) {
+			System.out.println("find data by department ");
+			List<LeaveRequest> leaveRequestList = leaveRequestService.findAllLeaveRequestByDeptBetweenDate(fromDate, toDate, deptCode);
+			leaveReport.leaveRequestReport(response, request, reportFileName, leaveRequestList, "ALL");
+		} 
+		
+		else if (!deptCode.equals("ALL") && !empCode.equals(null) || !empCode.equals("")) {
+			System.out.println("find data by emp ");
+			List<LeaveRequest> leaveRequestList = leaveRequestService.findAllLeaveRequestbyEmpBetweenDate(fromDate, toDate, empCode);
+			leaveReport.leaveRequestReport(response, request, reportFileName, leaveRequestList, "ALL");
+		} 
+		
+		else {
+			return "redirect:AttendanceRegMothlyReport";
+		}
+
 		List<LeaveRequest> listLeave = leaveRequestService.findAllByEmpCode(empCode);
-		
-		
-		
-		System.out.println("list leave size : "+listLeave.size());
-		
+
+		// System.out.println("list leave size : "+listLeave.size());
+
 //		List<LeaveRequest> leaveDataSource = new ArrayList<LeaveRequest>();
 //		LeaveRequest lv = listLeave.get(0);
 //		leaveDataSource.add(lv);
-		
-		
-		reportUtil.leaveRequestReport(response,request,reportFileName,listLeave,empName);
+
+		// leaveReport.leaveRequestReport(response,request,reportFileName,listLeave,empName);
 		return null;
 	}
-	
-		
+
 	/* leave Transaction detail report */
-	
+
 	@GetMapping("/leaveTransactionReport")
-	public String leaveTransactionReport(Model model,HttpSession session,HttpServletRequest request, HttpServletResponse response) {
-		
+	public String leaveTransactionReport(Model model, HttpSession session, HttpServletRequest request,
+			HttpServletResponse response) {
+
 		String userCode = (String) session.getAttribute("username");
 		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
 		if (modules != null) {
 			model.addAttribute("modules", modules);
 		}
-		
+
 		List<Employee> listEmployee = employeeService.getAllEmployees();
-		if(listEmployee != null) {
+		if (listEmployee != null) {
 			model.addAttribute("listEmployee", listEmployee);
 		}
-		
-		List<Department> listDepartment = departmentService.getAllDepartments();
-		if(listDepartment != null) {
-			model.addAttribute("listDepartment", listDepartment);
+
+		List<Department> departmentList = departmentService.getAllDepartments();
+		if (departmentList != null) {
+			model.addAttribute("departmentList", departmentList);
 		}
-		
+
 		List<Designation> listDesignation = designationService.getAllDesignations();
-		if(listDesignation != null) {
+		if (listDesignation != null) {
 			model.addAttribute("listDesignation", listDesignation);
 		}
-		
+
 //		List<Department> listDpartment = 
 		session.setAttribute("username", session.getAttribute("username"));
 
-	
-		return "leaveTransactionReport";  
+		return "leaveTransactionReport";
 	}
-	
-	
-	
-	 @PostMapping("createleaveTransactionReport") 
-	 public String createLeaveTransactionReport(@RequestParam("employeeName") String employeeName,@RequestParam("fromDate") Date fromDate,
-			 						@RequestParam("toDate")Date toDate , Model model,HttpServletRequest req,HttpServletResponse res) {
-		 
-		 System.out.println("creating Leave transaction Report");
-		 
-		 System.out.println("employee : "+ employeeName);
-		 System.out.println("to date : "+toDate+" From Date : "+ fromDate);
-		 List<Employee> listEmployee = employeeService.getAllEmployees();
-		 if(listEmployee != null) {
-				model.addAttribute("listEmployee", listEmployee);
-		 }
-		 
-		 
-		 List<LeaveRequest> listLeaveRequest = leaveRequestService.findByEmpBetweenDate(employeeName, toDate, fromDate);
-		 
-		 System.out.println("listleave Request size ; "+ listLeaveRequest.size());
-		 //LeaveRequest listLeave = leaveRequestService.findByToDate(toDate);
-		 List<CommonUtil> empLeaveRequest = new ArrayList<CommonUtil>();
-		 //List<MenuModule> empLeaveRequest = null;
-		 CommonUtil empLvRe;
-		 System.out.println("return for block"  + listLeaveRequest.size());
-		for(int i = 0;i<listLeaveRequest.size();i++) 
-		 {
+
+	@PostMapping("createleaveTransactionReport")
+	public String createLeaveTransactionReport(@RequestParam("deptCode") String deptCode,
+			@RequestParam("empCode") String empCode, @RequestParam("fromDate") Date fromDate,
+			@RequestParam("toDate") Date toDate, Model model, HttpSession session, HttpServletRequest request,
+			HttpServletResponse response) {
+
+
+		String userCode = (String) session.getAttribute("username");
+		UserEntity user = userService.findUserById(userCode);
+		String activeUser = user.getUserName();
+		
+
+		if (deptCode.equals("ALL")) {
+			System.out.println("All record");
+			List<LeaveRequest> leaveRequestList = leaveRequestService.findAllApproveLeaveRequestBetweenDate(fromDate,
+					toDate);
+			leaveReport.leaveTransactionPdfReportByEmp(request, response,leaveRequestList,activeUser);
 			
-			System.out.println("leave request department service : "+ listLeaveRequest.get(i).getDepartment().getDeptName());
-			System.out.println("leave request leave code  service : "+ listLeaveRequest.get(i).getLeave().getLevType());
-			System.out.println("leave request leave info service : "+ listLeaveRequest.get(i).getEmployee().getEmpName());
-			
-//			 Leave leave = leaveService.findLeaveById(listLeaveRequest.get(i).getLeaveCode());
-//			 Employee employee = employeeService.findEmployeeById(listLeaveRequest.get(i).getEmpCode());
-//			 Department department = departmentService.findDepartmentById(listLeaveRequest.get(i).getDeptCode());
-//			 
-//			 empLvRe = new CommonUtil(employee.getEmpName(),department.getDeptName(),
-//					 leave.getLevType(),listLeaveRequest.get(i).getToDate().toString(),listLeaveRequest.get(i).getFromDate().toString(),
-//					 listLeaveRequest.get(i).getApplyDate().toString(),listLeaveRequest.get(i).getApproevedBy(),listLeaveRequest.get(i).getReason(),
-//					 listLeaveRequest.get(i).getLeaveFor());
-//			 
-//			 empLeaveRequest.add(empLvRe);
-			 System.out.println("return for block i value : "+ i);
 		} 
-		System.out.println("return for block"  + empLeaveRequest.size());
-		 String reportName = "LeaveTransaction";  
-		 reportUtil.leaveTransactionPdfReportByEmp(req, res, reportName, listLeaveRequest);
-		 //System.out.println("size : " +listLeaveRequest.get(0).getDeptCode());
-		 return pageMappingService.PageRequestMapping(reqpageOfleaveRequestTransactionReport, pageNoLeaveTransactionReport);
-	 }
-	 
-	
+		
+		else if (!deptCode.equals("ALL") && (empCode.equals(null) || empCode.equals(""))) {
+			System.out.println("find data by department ");
+			List<LeaveRequest> leaveRequestList = leaveRequestService.findAllApproveLeaveRequestByDeptBetweenDate(fromDate, toDate, deptCode);
+			leaveReport.leaveTransactionPdfReportByEmp(request, response,leaveRequestList,activeUser);
+		}
+		
+		else if (!deptCode.equals("ALL") && !empCode.equals(null) || empCode.equals("")) {
+			System.out.println("find data by emp ");
+			List<LeaveRequest> leaveRequestList = leaveRequestService.findApproveLeaveRequestByEmpBetweenDate(fromDate, toDate, empCode);
+			leaveReport.leaveTransactionPdfReportByEmp(request, response,leaveRequestList,activeUser);
+		} 
+		
+		else {
+			//return "redirect:AttendanceRegMothlyReport";
+		}
+		
+		session.setAttribute("username", userCode);
+		// System.out.println("size : " +listLeaveRequest.get(0).getDeptCode());
+		return pageMappingService.PageRequestMapping(reqpageOfleaveRequestTransactionReport,
+				pageNoLeaveTransactionReport);
+	}
 
 	@ResponseBody
-	 @GetMapping("getDepartmentByEmpCode/{empCode}")
-	 public Department getDepartmentByEmpCode(@PathVariable("empCode") String empCode) {
-		 System.out.println("Get Department By Emp Code / LeaveTransactionController");
-		 System.out.println("emp code is : " + empCode);
-		 Employee employee = employeeService.findEmployeeById(empCode);
-		 
-		 Department department =departmentService.findDepartmentById(employee.getDepartmentCode());
-		 System.out.println("dePARTMent Service : " + department.getDeptName());
-		 return department;
-	 }
-	 
-	
+	@GetMapping("getDepartmentByEmpCode/{empCode}")
+	public Department getDepartmentByEmpCode(@PathVariable("empCode") String empCode) {
+		System.out.println("Get Department By Emp Code / LeaveTransactionController");
+		System.out.println("emp code is : " + empCode);
+		Employee employee = employeeService.findEmployeeById(empCode);
+
+		Department department = departmentService.findDepartmentById(employee.getDepartmentCode());
+		System.out.println("dePARTMent Service : " + department.getDeptName());
+		return department;
+	}
 
 }
