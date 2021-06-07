@@ -183,10 +183,15 @@ public class StaffPostingDutiesController {
 					  Employee employee = employeeService.findEmployeeById(empCode);
 					    Department department = departmentService.findDepartmentById(employee.getDepartmentCode());
 					    Designation designation = designationService.findDesignationById(employee.getDesignationCode());
+					    
 					    listofutil.setJobCode(listOfstaffDuties.get(i).getJobCode());
 					    listofutil.setDeptName(department.getDeptName());
 					    listofutil.setDesgName(designation.getDesgName());
 					    listofutil.setEmpName(employee.getEmpName());
+					    listofutil.setEmail(employee.getEmail());
+					    listofutil.setMobileNumber(employee.getMobileNumber1());
+					    listofutil.setAddress(employee.getAddress1());
+					    listofutil.setPositionCode(listOfstaffDuties.get(i).getPositionCode());
 					    dataList.add(listofutil);
 					 
 			
