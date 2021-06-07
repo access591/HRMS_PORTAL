@@ -59,7 +59,7 @@ body {
 
 											<div class="col-12 col-lg-6">
 												<label class="form-label">Employee Code</label> 
-													<input type="text" class="form-control" readonly>
+													<input type="text" id="employeeCode" class="form-control" readonly>
 											</div>
 											
 											<div class="col-12 col-lg-6">
@@ -67,7 +67,7 @@ body {
 													<label class="form-label">Employee Name</label> <label
 														style="color: red">*</label> <select
 														class="form-control select2" id="employeeName"
-														th:field="*{empCode.empCode}">
+														th:field="*{empCode.empCode}" onchange="selectEmployee()">
 														<option value=''>--Select Employee--</option>
 														<option value='ALL'>All</option>
 														<option th:each="employee : ${listLtaRequest}"
@@ -153,6 +153,7 @@ body {
 
 	<script>
 	
+	
 	function generatePdfFunction(){
 		
 		var designationName = document.getElementById("designation_name").value;
@@ -179,6 +180,14 @@ body {
 		
 
 }	
+	</script>
+	
+	<script>
+		function selectEmployee(){
+			var employeeCode = document.getElementById("employeeName").value;
+			document.getElementById("employeeCode").value = employeeCode;
+		}
+		
 	</script>
 </body>
 </html>

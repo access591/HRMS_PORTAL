@@ -1,5 +1,6 @@
 package com.hrms.controller;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +20,7 @@ import com.hrms.ReportUtil;
 import com.hrms.model.Designation;
 import com.hrms.model.Employee;
 import com.hrms.model.MenuModule;
+import com.hrms.model.TourClaim;
 import com.hrms.model.TourPlan;
 import com.hrms.reports.LocalClaimReport;
 import com.hrms.reports.LtaReport;
@@ -32,6 +34,7 @@ import com.hrms.service.LeaveService;
 import com.hrms.service.LocalConvyenceDetailService;
 import com.hrms.service.LtaRequestService;
 import com.hrms.service.ModuleService;
+import com.hrms.service.TourClaimService;
 import com.hrms.service.TourPlanService;
 import com.hrms.util.TourClaimReportUtil;
 
@@ -66,6 +69,9 @@ public class ReimbursementReportController {
 	LtaReport ltaReport;
 	@Autowired
 	ReportUtil reportUtil;
+	
+	
+	@Autowired TourClaimService tourClaimService;
 
 //1.TOUR CLAIM REPORT	
 
@@ -89,57 +95,24 @@ public class ReimbursementReportController {
 
 	@PostMapping("generateTourClaim")
 	public String genrateTourClaim(@ModelAttribute("object") TourPlan tourPlan, HttpSession session,
-			@RequestParam("empName") String empCode, HttpServletRequest req, HttpServletResponse res) {
+			@RequestParam("empName") String empCode, HttpServletRequest req, HttpServletResponse res,
+			@RequestParam("fromDate") Date fromDate , @RequestParam("toDate") Date toDate) {
 
 		String userCode = (String) session.getAttribute("username");
 		System.out.println("employee type/name : " + empCode);
+		
 		if (!empCode.equals("ALL")) {
-			List<TourClaimReportUtil> ltr = new ArrayList<TourClaimReportUtil>();
+			List<TourClaim> tourClaim = tourClaimService.findTourClaimByEmpCodeBetweenDate(empCode,fromDate,toDate);
+			//System.out.println("tour claim result : "+ tourClaim.);
+			tourClaimReport.tourClaimReport(res, req, tourClaim);
 
-			try {
+			
 
-				List<TourPlan> listTourPlan = tourPlanService.findTourPlanByEmpCode(empCode);
-				List<TourPlan> listTourPlan1 = new ArrayList<TourPlan>();
-				if (listTourPlan.size() >= 1) {
-					listTourPlan1.add(listTourPlan.get(0));
-
-					for (int i = 0; i < listTourPlan1.get(0).getTourPlanDetail().size(); i++) {
-
-						Designation desig = null;
-						TourClaimReportUtil tr = new TourClaimReportUtil();
-
-						System.out
-								.println("claim id : " + listTourPlan.get(i).getTourPlanDetail().get(i).getEndPlace());
-						tr.setTourPlanId(listTourPlan1.get(0).getTourPlanId());
-						tr.setEmpCode(listTourPlan1.get(0).getEmpCode().getEmpCode());
-						tr.setEmpName(listTourPlan1.get(0).getEmpCode().getEmpName());
-
-						try {
-							desig = designationService
-									.findDesignationById(listTourPlan1.get(0).getDesgCode().getDesgCode());
-							tr.setDesigName(desig.getDesgName());
-
-						} catch (Exception e) {
-							System.out.println("generate tour claim");
-							e.printStackTrace();
-						}
-						tr.setStartPlace(listTourPlan1.get(0).getTourPlanDetail().get(i).getStartPlace());
-						tr.setEndPlace(listTourPlan1.get(0).getTourPlanDetail().get(i).getEndPlace());
-						ltr.add(tr);
-					}
-
-				} else {
-					session.setAttribute("username", userCode);
-					return "redirect:/tourclaimPage";
-				}
-
-			} catch (Exception e) {
-				System.out.println("some joining error ");
-				e.printStackTrace();
-			}
-
-			tourClaimReport.tourClaimReport(res, req, ltr);
-
+		}else {
+			System.out.println("else block?  ");
+			//tourClaimReport.tourClaimReport(res, req, tourClaimList);
+			List<TourClaim> tourClaim = tourClaimService.getAllTourClaimBetweenDate(fromDate, toDate);
+			tourClaimReport.tourClaimReport(res, req, tourClaim);
 		}
 
 		session.setAttribute("username", userCode);
