@@ -11,7 +11,10 @@ public class SaffPostingDutiesUtil {
 	private String  empPayCode;
 	private String positionCode;
 	private String dutiesDesc;
-	private String JobCode;
+	private String jobCode;
+	private String email;
+	private String address;
+	private String mobileNumber;
 	
 	public SaffPostingDutiesUtil(String empName2, String deptName2, String desgName2, String employeePayeeCode) {
 
@@ -21,21 +24,52 @@ public class SaffPostingDutiesUtil {
 		this.empPayCode = employeePayeeCode;
 	}
 	
-	
-	
 
-	public String getJobCode() {
-		return JobCode;
+
+	public String getEmail() {
+		return email;
 	}
 
 
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+
+
+	public String getAddress() {
+		return address;
+	}
+
+
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+
+
+	public String getMobileNumber() {
+		return mobileNumber;
+	}
+
+
+
+	public void setMobileNumber(String mobileNumber) {
+		this.mobileNumber = mobileNumber;
+	}
+
+
+
+	public String getJobCode() {
+		return jobCode;
+	}
 
 
 	public void setJobCode(String jobCode) {
-		JobCode = jobCode;
+		this.jobCode = jobCode;
 	}
-
-
 
 
 	public String getEmpCode() {
@@ -121,9 +155,10 @@ public class SaffPostingDutiesUtil {
 
 
 
+	
 	public SaffPostingDutiesUtil(String empCode, String empName, String departmentCode, String deptName,
 			String desgCode, String desgName, String jobDesc, String empPayCode, String positionCode, String dutiesDesc,
-			String jobCode) {
+			String jobCode, String email, String address, String mobileNumber) {
 		super();
 		this.empCode = empCode;
 		this.empName = empName;
@@ -135,9 +170,11 @@ public class SaffPostingDutiesUtil {
 		this.empPayCode = empPayCode;
 		this.positionCode = positionCode;
 		this.dutiesDesc = dutiesDesc;
-		JobCode = jobCode;
+		this.jobCode = jobCode;
+		this.email = email;
+		this.address = address;
+		this.mobileNumber = mobileNumber;
 	}
-
 
 
 
