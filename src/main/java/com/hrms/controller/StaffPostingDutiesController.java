@@ -3,6 +3,8 @@ package com.hrms.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,11 +16,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.hrms.model.Category;
+
 import com.hrms.model.Department;
 import com.hrms.model.Designation;
 import com.hrms.model.Employee;
-import com.hrms.model.LocalConvyence;
+
+
 import com.hrms.model.MenuModule;
 
 import com.hrms.model.StaffPostingDuties;
@@ -164,6 +167,55 @@ public class StaffPostingDutiesController {
 				session.setAttribute("username", session.getAttribute("username"));
 				return "redirect:/staffPostingDuties";
 			}
+			
+			
+			@GetMapping(value = {"/reporStaffPostingDuties" })
+			public String reporStaffPostingDuties(Model model, HttpSession session, HttpServletRequest request,
+					HttpServletResponse response) {
+				
+				 List<StaffPostingDuties> listOfstaffDuties = staffPostingDutiesService.getAllStaffPostingDuties();
+				
+				 List<SaffPostingDutiesUtil> dataList=new ArrayList<SaffPostingDutiesUtil>();
+				  for (int i = 0; i < listOfstaffDuties.size(); i++) {
+					
+					  String empCode = listOfstaffDuties.get(i).getEmpCode().getEmpCode();
+					  SaffPostingDutiesUtil listofutil=new SaffPostingDutiesUtil();
+					  Employee employee = employeeService.findEmployeeById(empCode);
+					    Department department = departmentService.findDepartmentById(employee.getDepartmentCode());
+					    Designation designation = designationService.findDesignationById(employee.getDesignationCode());
+					    listofutil.setJobCode(listOfstaffDuties.get(i).getJobCode());
+					    listofutil.setDeptName(department.getDeptName());
+					    listofutil.setDesgName(designation.getDesgName());
+					    listofutil.setEmpName(employee.getEmpName());
+					    dataList.add(listofutil);
+					 
+			
+				 
+				 
+				String reportFileName = "";
+
+				String val = null;
+				if (request.getParameter("_ex") != null) {
+					val = request.getParameter("_ex");
+				}
+				if (val.equals("P")) {
+					System.out.println("heloo0000000000" + val);
+
+					reportFileName = "staffPostingDuties_pdf";
+					staffPostingDutiesService.staffPostingDutiesGenratepdf(request, response, reportFileName, dataList);
+				} else if (val.equals("E")) {
+					reportFileName = "bankwisereport_XLS";
+					String filename = "bankwisereport";
+
+				}
+				  }
+				session.setAttribute("username", session.getAttribute("username"));
+				return null;
+
+			}
 		
 
-}
+			}
+			
+
+
