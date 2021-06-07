@@ -167,9 +167,10 @@ $("table").on("keyup", ".govt", function () {
 						<nav aria-label="breadcrumb">
 						</nav>
 					</div>
-					
-					<div class="row">
+			
 					<form id="validation-form" action="#" th:action="@{/saveMedicalReimbursement}" th:object="${medicalReimbursement}" method="POST">
+					<div class="row">
+					
 						<div class="col-12">
 							<div class="card">
 								<div class="card-header">
@@ -187,7 +188,7 @@ $("table").on("keyup", ".govt", function () {
 											
 											<div class="form-group">
 											  <label>Slip No </label>
-											  	<label style="color: red">*</label>
+											  
 											   <input type="text" class="form-control" id="slipNo" name="slipNo" readonly >
 												</div>
 												
@@ -210,7 +211,7 @@ $("table").on("keyup", ".govt", function () {
 														class="form-control required" name="empRelation" id="empRelation">
 														<option value="">Select Relation</option>
 														<option value="S">Self</option>
-														<option value="F">family</option>
+														<option value="F">Family</option>
 														
 														
 													</select>
@@ -292,117 +293,104 @@ $("table").on("keyup", ".govt", function () {
 								<div class="card-body">
 								<input id="_cr" name="_cr" type="text"value="1">
 								<div class="col-sm-12" align="right">
-							<!-- 	<a th:href="@{/viewMedicalReimbursement}">
-								<em  class="fa fa-eye" style="font-size:28px"> 
-								</em></a>&nbsp;&nbsp;&nbsp; -->
-								
-								
-								
 								<a id="add_row" class="fa fa-plus" aria-hidden="true"style="font-size:28px;color:#001080"></a>&nbsp;&nbsp;&nbsp;
 								<a id='delete_row'class="fa fa-trash" style="font-size:28px;color:#399490fc"aria-hidden="true"></a>	
 								</div>
-								<table id="datatables-buttons" class="table table-striped display" style="width:100%"aria-describedby="datatables-buttons">
+								
+								<div class="table-responsive">
+								
+										<table id="datatables-buttons" aria-describedby="example" class="table" style="width:100%">
 												<thead>
-					<tr><th >
-							Sr No
-						</th>
-						<th>
-						 Medical Store Doctor
-						</th>
-						<th >
-						   Cash Memo NO. 
-						</th>
-						<th >
-						  Cash Memo Date. 
-						</th>
-						<th >
-						 Claiming Amount
-						</th>
-						
-						<th >
-						 Passing Amount
-						</th>
-					
-					<th >
-						Govt Exemption  Amount
-						</th>
-						
-					<th >
-						Remark
+					<tr><th scope="col">Sr No</th>
+						<th scope="col"> Medical Store Doctor</th>
+						<th scope="col"> Cash Memo NO. </th>
+						<th scope="col"> Cash Memo Date.</th>
+						<th scope="col"> Claiming Amount</th>
+						<th scope="col">Passing Amount</th>
+				       	<th scope="col">Govt Exemption  Amount</th>
+						<th scope="col">Remark
 						</th>
 					</tr>
 				</thead>
-								 	<tbody>
+				<tbody>
 					<tr id='addr0'>
 						<td>
 						1
 						</td>
 						<td>
-						<input type="text" name='medStDr0'  placeholder='Name' class="form-control" value=""/>
+						<input type="text" name='medStDr0'  placeholder='Name'  value=""/>
 						</td>
 						<td>
 					
-						<input type="text" name='caseMemoNo0' placeholder='CASHMEMO NO' class="form-control"/>
+						<input type="text" name='caseMemoNo0' placeholder='CASHMEMO NO' />
 						</td>
 						<td>
-						<input type="Date" name='caseMemoDate0' placeholder='Case Memo Date' class="form-control"/>
+						<input type="Date" name='caseMemoDate0' placeholder='Case Memo Date'/>
 						</td>
 						<td>
-						<input type="text" name='calmlAmount0' placeholder='Claiming Amount' class="form-control txt"/>
-						</td>
-						
-						<td>
-						<input type="text" name='passedAmount0' placeholder='Passed Amount' class="form-control pas"/>
-						</td>
-						<td>
-						<input type="text" name='govtexemptionAmount0' placeholder='Govt exemption Amount' class="form-control govt "/>
+						<input type="text" name='calmlAmount0' placeholder='Claiming Amount' class="txt"required/>
 						</td>
 						
+						<td>
+						<input type="text" name='passedAmount0' placeholder='Passed Amount' class="pas"required/>
+						</td>
+						<td>
+						<input type="text" name='govtexemptionAmount0' placeholder='Govt exemption Amount' class="govt "required/>
+						</td>
+						
 						
 						<td>
-						<input type="text" name='remark0' placeholder='Remark' class="form-control"/>
+						<input type="text" name='remark0' placeholder='Remark' />
 						</td>
 					</tr>
                     <tr id='addr1'></tr>
                     
 				</tbody>
 				<tr>
-				<td colspan="4"></td>
-				
-					<td>
-					 <div class="form-group ">  
-					<label class="form-label">Total Amount</label>
-					<input type="text" id="sum" name='totalAmount' placeholder='Total Amount' class="form-control"/>
-					</div>
+				<td colspan="3"></td>
+				<td><label class="form-label">Total Amount</label>
+				</td>
+					<td><input type="text" id="sum" name='totalAmount' />
 					</td>
-					<td>
-					<input type="text" id="totalPassing" name='totalPassing'  class="form-control"/>
+					<td><input type="text" id="totalPassing" name='totalPassing' />
 					</td>
-					<td>
-					<input type="text" id="totalGovtExt" name='totalGovtExt' class="form-control"/>
+					<td><input type="text" id="totalGovtExt" name='totalGovtExt'/>
 					</td>
-					<td>
 					
-					</td>
 					
 					</tr>
 				 
-			</table>	 <input type="submit" class="btn btn-primary" value="Submit">
+			</table>
+			</div>
+			
+			
+			</div>
+			</div>
+				</div>
+				<div>
+				 <input type="submit" class="btn btn-primary" value="Submit">
 								 <button type="reset"class="btn btn-primary" value="Reset">Reset</button>	
-								</div>
-								<!-- <a id="add_row" class="fa pull-right btn btn-default ">Add Row</a><a id='delete_row' class="fa pull-right btn btn-default">Delete Row</a>	 -->
-							</div>
+				
+				
+				
+				</div>
+				
 							
-						</div>
 						
 					</form>
-					</div>
+				
+				
+				
+					
+					
 							<div class="col-12">
 							<div class="card">
 								<div class="card-header">
 								</div>
 								<div class="card-body">
-									<table id="datatables-buttons" class="table table-striped display" style="width:100%"aria-describedby="example">
+								<div class="table-responsive">
+								
+								<table id="example" aria-describedby="example" class="table" style="width:100%">
 										<thead>
 											<tr >
 												<th scope="col">SLip Number</th>
@@ -445,31 +433,33 @@ $("table").on("keyup", ".govt", function () {
 									
 									</table>
 								</div>
+								</div>
 								
 							</div>
 						</div>
 						
 				
 				</div>
-
-			</main>
+		</main>
 
 		<footer class="footer">
 		<div th:replace="/fragments/footer :: div"></div>
 		</footer>
 		
+			</div>
 		</div>
-		</div>
+	
 		<script>
 	$(document).ready(function() {
-	    $('#datatables-buttons').DataTable( {
-	        "scrollY": 200,
-	        "scrollX": true,
-	        deferRender:true,
-            scrollCollapse: true,
-            
-	    } );
-	} );
+		
+		 $('#example').DataTable( {
+		      
+		        "scrollX": true,
+		        deferRender:true,
+	            scrollCollapse: true,
+	            
+		    } );
+	});
 	$("input[name='dateOfSlip']").daterangepicker({
 		singleDatePicker: true,
 	    autoApply: true,
