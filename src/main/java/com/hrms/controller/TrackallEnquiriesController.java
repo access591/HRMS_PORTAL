@@ -8,11 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import com.hrms.model.Category;
 import com.hrms.model.Designation;
 import com.hrms.model.Employee;
 import com.hrms.model.MenuModule;
+import com.hrms.model.TrackallEnquiries;
 import com.hrms.service.CategoryService;
 import com.hrms.service.DesignationService;
 import com.hrms.service.EmployeeService;
@@ -50,6 +53,20 @@ public class TrackallEnquiriesController {
 		
 		return "trackallEnquiries";
 		
+	}
+	
+	@PostMapping("/saveTrackallEnquiries")
+	public String saveTrackallEnquiries(@ModelAttribute("trackallEnquiries") TrackallEnquiries trackallEnquiries, Model model, HttpSession session) {
+		
+		String insertedBY = (String) session.getAttribute("userlogin");
+		trackallEnquiries.setInsBy(insertedBY);
+		
+		trackallEnquiriesService.addTrackallEnquiries(trackallEnquiries);
+		
+		session.setAttribute("username", session.getAttribute("username"));
+
+		return "redirect:/staffPostingDuties";
+
 	}
 
 }
