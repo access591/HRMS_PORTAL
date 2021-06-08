@@ -11,12 +11,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import com.hrms.model.MenuModule;
 import com.hrms.service.ModuleService;
+import com.hrms.service.TrackallEnquiriesService;
 
 @Controller
 public class TrackallEnquiriesController {
 	@Autowired
 	private ModuleService moduleService;
-	
+	@Autowired TrackallEnquiriesService trackallEnquiriesService;
 	@GetMapping("/trackallEnquiries")
 	public String trackallEnquiries(Model model, HttpSession session) {
 		String userCode = (String) session.getAttribute("username");
