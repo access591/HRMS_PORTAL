@@ -111,7 +111,7 @@ body {
 													<label class="form-label">Designation Code </label>
 												<label style="color: red">*</label>
 												<select class="form-control select2" name="desgCode.desgCode" id="desgCode.desgCode"  required aria-required="true">
-												 <option value="">Select Employee</option>
+												 <option value="">Select Designation</option>
 												<option th:each="d :${listDesignation}"th:value="${d.getDesgCode()}" th:text="${d.getDesgName()}"></option>
 											     	</select>
 
@@ -124,7 +124,7 @@ body {
 													<label class="form-label">Category Code </label>
 												<label style="color: red">*</label>
 												<select class="form-control select2" name="categoryCode.categoryCode" id="categoryCode.categoryCode"  required aria-required="true">
-												 <option value="">Select Employee</option>
+												 <option value="">Select Category</option>
 												<option th:each="c :${listCategory}"th:value="${c.getCategoryCode()}" th:text="${c.getCategoryName()}"></option>
 											     	</select>
 
@@ -379,19 +379,20 @@ body {
 												<th scope="col">Id</th>
 												<th scope="col">Name</th>
 												<th scope="col">Date Of Birth </th>
-												<!-- <th scope="col">Amount Required</th> -->
+											 <th scope="col">Designation</th> 
+											  <th scope="col">Category</th>
 												<th scope="col">Action</th>
 											</tr>
 										</thead>
 										<tbody>
 											<tr  th:each="listTrackEnq : ${listTrackallEnquiries}">
 												<td th:text="${listTrackEnq.id}"></td>
-												
+
 												<td th:text="${listTrackEnq?.empCode?.empName}"></td>
 												<td th:text="${#dates.format(listTrackEnq.dob,'dd-MM-yyyy')}"></td>
-											<!-- 	<td th:text="${listTrackEnq.loanCode.loanName}"></td>
-												<td th:text="${listTrackEnq.amountRequired}"></td> -->
-												
+												<td th:text="${listTrackEnq?.desgCode?.desgName}"></td>
+												<td th:text="${listTrackEnq.categoryCode?.categoryName}"></td>
+
 												<td>
 												
 												
