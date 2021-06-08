@@ -1,13 +1,18 @@
 package com.hrms.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -34,7 +39,29 @@ public class TrackallEnquiriesController {
 	@Autowired TrackallEnquiriesService trackallEnquiriesService;
 	
 	
-	
+	@InitBinder("trackallEnquiries")
+    public void customizeBinding (WebDataBinder binder) {
+        SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
+        dateFormatter.setLenient(false);
+                binder.registerCustomEditor(Date.class, "dob",new CustomDateEditor(dateFormatter, true));
+				binder.registerCustomEditor(Date.class, "deputationDate", new CustomDateEditor(dateFormatter, true));
+				binder.registerCustomEditor(Date.class, "underRule8Period",new CustomDateEditor(dateFormatter, true));
+				binder.registerCustomEditor(Date.class, "underRule8Date",new CustomDateEditor(dateFormatter, true));
+				binder.registerCustomEditor(Date.class, "vigilanceInqPeriod",new CustomDateEditor(dateFormatter, true));
+				binder.registerCustomEditor(Date.class, "vigilanceInqDate",new CustomDateEditor(dateFormatter, true));
+				binder.registerCustomEditor(Date.class, "suspentionFilePeriod",new CustomDateEditor(dateFormatter, true));
+				binder.registerCustomEditor(Date.class, "suspentionFileDate",new CustomDateEditor(dateFormatter, true));
+				binder.registerCustomEditor(Date.class, "promtionFileDate",new CustomDateEditor(dateFormatter, true));
+				binder.registerCustomEditor(Date.class, "acpFileDate",new CustomDateEditor(dateFormatter, true));
+				binder.registerCustomEditor(Date.class, "arpFileDate",new CustomDateEditor(dateFormatter, true));
+				binder.registerCustomEditor(Date.class, "acrFileDate",new CustomDateEditor(dateFormatter, true));
+				binder.registerCustomEditor(Date.class, "trainingFileDate",new CustomDateEditor(dateFormatter, true));
+				binder.registerCustomEditor(Date.class, "ltcFileDate",new CustomDateEditor(dateFormatter, true));
+				binder.registerCustomEditor(Date.class, "leaveAccFileDate",new CustomDateEditor(dateFormatter, true));
+				binder.registerCustomEditor(Date.class, "awardDate",new CustomDateEditor(dateFormatter, true));
+			
+       
+    }
 	@GetMapping("/trackallEnquiries")
 	public String trackallEnquiries(Model model, HttpSession session) {
 		String userCode = (String) session.getAttribute("username");
@@ -57,16 +84,13 @@ public class TrackallEnquiriesController {
 	
 	@PostMapping("/saveTrackallEnquiries")
 	public String saveTrackallEnquiries(@ModelAttribute("trackallEnquiries") TrackallEnquiries trackallEnquiries, Model model, HttpSession session) {
-		
-		String insertedBY = (String) session.getAttribute("userlogin");
+		String insertedBY = (String) session.getAttribute("USER_NAME");
 		trackallEnquiries.setInsBy(insertedBY);
-		
 		trackallEnquiriesService.addTrackallEnquiries(trackallEnquiries);
-		
 		session.setAttribute("username", session.getAttribute("username"));
-
-		return "redirect:/staffPostingDuties";
+		return "redirect:/trackallEnquiries";
 
 	}
 
+	
 }
