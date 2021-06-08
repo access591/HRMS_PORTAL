@@ -14,11 +14,14 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.hrms.model.Category;
 import com.hrms.model.Designation;
 import com.hrms.model.Employee;
+import com.hrms.model.Loan;
+import com.hrms.model.LtaRequest;
 import com.hrms.model.MenuModule;
 import com.hrms.model.TrackallEnquiries;
 import com.hrms.service.CategoryService;
@@ -77,6 +80,8 @@ public class TrackallEnquiriesController {
 		}
 		List<Designation> listDesignation = designationService.getAllDesignations();
 		model.addAttribute("listDesignation", listDesignation);
+		List<TrackallEnquiries>listTrackallEnquiries=trackallEnquiriesService.getAllTrackallEnquiries();
+		model.addAttribute("listTrackallEnquiries", listTrackallEnquiries);
 		
 		return "trackallEnquiries";
 		
@@ -91,6 +96,44 @@ public class TrackallEnquiriesController {
 		return "redirect:/trackallEnquiries";
 
 	}
+	
+	
+	@GetMapping(value = {"/editTrackallEnquiries/{id}"})
+	public String editLtaRequest(@PathVariable("id")long id,  Model model,HttpSession session)
+	 { 
+		
+		List<Employee> listEmployee = employeeService.getAllEmployees();
+		model.addAttribute("listEmployee", listEmployee);
+		List<Category> listCategory = categoryService.getAllCategory();
+		if(listCategory != null) {
+			model.addAttribute("listCategory" ,listCategory);
+		}
+		List<Designation> listDesignation = designationService.getAllDesignations();
+		model.addAttribute("listDesignation", listDesignation);
+		
+		TrackallEnquiries trackallEnquiriesEdit =trackallEnquiriesService.findByIdTrackallEnq(id);
+		  model.addAttribute("trackallEnquiriesEdit", trackallEnquiriesEdit);
+	   
+	    return "editTrackallEnquiries";
+	}
 
+	@PostMapping("/updateTrackallEnquiries")
+	public String updateTrackallEnquiries(@ModelAttribute("trackallEnquiries")  TrackallEnquiries trackallEnquiries, HttpSession session,Model model) {
+		String updatedBY = (String) session.getAttribute("USER_NAME");
+		trackallEnquiries.setUpdBy(updatedBY);
+		this.trackallEnquiriesService.updateTrackallEnquiries(trackallEnquiries);
+
+		return "redirect:/trackallEnquiries";
+
+	}
+
+	
+	@GetMapping(value = {"/deleteTrackallEnquiries/{id}"})
+	public String deleteTrackallEnquiries(@PathVariable("id")Long id,  Model model,HttpSession session)
+	 { 
+		  this.trackallEnquiriesService.removeTrackallEnquiries(id);
+			return "redirect:/trackallEnquiries";
+
+	}
 	
 }
