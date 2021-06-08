@@ -20,8 +20,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.hrms.model.Category;
 import com.hrms.model.Designation;
 import com.hrms.model.Employee;
-import com.hrms.model.Loan;
-import com.hrms.model.LtaRequest;
+
 import com.hrms.model.MenuModule;
 import com.hrms.model.TrackallEnquiries;
 import com.hrms.service.CategoryService;
