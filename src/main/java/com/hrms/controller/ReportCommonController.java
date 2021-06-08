@@ -199,7 +199,7 @@ public class ReportCommonController {
 		}
 		
 		try {
-			List<LtaRequest> listLtaRequest = ltaRequestService.getAllLTARequest();
+			List<LtaRequest> listLtaRequest = ltaRequestService.getAllDistinctLtaRequest();
 			model.addAttribute("listLtaRequest", listLtaRequest);
 		}catch(Exception e) {
 			e.printStackTrace();

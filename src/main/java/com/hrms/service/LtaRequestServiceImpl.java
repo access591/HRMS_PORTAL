@@ -112,5 +112,26 @@ LtaRequestDao ltaRequestDao;
 		}
 		return null;
 	}
+	@Override
+	public List<LtaRequest> getAllDistinctLtaRequest() {
+		Session session = sessionFactory.openSession();
+		try {
+			
+			session.beginTransaction();
+			
+			Query<LtaRequest> query = session.createQuery("select distinct lt from LtaRequest lt inner join fetch"
+					+ " lt.empCode e"
+						,LtaRequest.class);
+		
+			List<LtaRequest> listLtaRequest = query.getResultList();
+			session.getTransaction().commit();
+			
+			return listLtaRequest;
+		}catch(Exception e) {
+			System.out.println("exception occured in findAllLtaByFromLeaveDateToLeave service");
+			e.printStackTrace();
+		}
+		return null;
+	}
 
 }
