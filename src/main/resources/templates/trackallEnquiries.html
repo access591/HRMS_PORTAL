@@ -111,7 +111,7 @@ body {
 													<label class="form-label">Designation Code </label>
 												<label style="color: red">*</label>
 												<select class="form-control select2" name="desgCode.desgCode" id="desgCode.desgCode"  required aria-required="true">
-												 <option value="">Select Employee</option>
+												 <option value="">Select Designation</option>
 												<option th:each="d :${listDesignation}"th:value="${d.getDesgCode()}" th:text="${d.getDesgName()}"></option>
 											     	</select>
 
@@ -124,7 +124,7 @@ body {
 													<label class="form-label">Category Code </label>
 												<label style="color: red">*</label>
 												<select class="form-control select2" name="categoryCode.categoryCode" id="categoryCode.categoryCode"  required aria-required="true">
-												 <option value="">Select Employee</option>
+												 <option value="">Select Category</option>
 												<option th:each="c :${listCategory}"th:value="${c.getCategoryCode()}" th:text="${c.getCategoryName()}"></option>
 											     	</select>
 
