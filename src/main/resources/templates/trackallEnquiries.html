@@ -89,7 +89,7 @@ body {
 									</div>	
 								</div>
 								<div class="card-body">
-									<form id="validation-form" action="#" th:action="@{/saveTrackallEnquiries}" th:object="${LoanRequest}" method="post">
+									<form id="validation-form" action="#" th:action="@{/saveTrackallEnquiries}" th:object="${trackallEnquiries}" method="post">
 									<div class="form-row">
 												
 												<div class="form-group sm col-md-4">
@@ -101,7 +101,7 @@ body {
 												<div class="form-group sm col-md-4">
 													<label class="form-label">Employee Name</label>
 												<label style="color: red">*</label>
-												<select class="form-control select2" name="empCode" id="empCode"  onchange="myFunctionEmpCode()" required aria-required="true">
+												<select class="form-control select2" name="Employee.empCode" id="Employee.empCode"  onchange="myFunctionEmpCode()" required aria-required="true">
 												 <option value="">Select Employee</option>
 												<option th:each="e :${listEmployee}"th:value="${e.getEmpCode()}" th:text="${e.getEmpName()}"></option>
 											     	</select>
@@ -110,15 +110,12 @@ body {
 										    	<div class="form-group sm col-md-4">
 													<label class="form-label">Designation Code </label>
 												<label style="color: red">*</label>
-												<select class="form-control select2" name="designCode" id="designCode"  required aria-required="true">
+												<select class="form-control select2" name="Designation.designCode" id="Designation.designCode"  required aria-required="true">
 												 <option value="">Select Employee</option>
 												<option th:each="d :${listDesignation}"th:value="${d.getDesgCode()}" th:text="${d.getDesgName()}"></option>
 											     	</select>
 
 												</div>
-										     
-											
-												
 												
 								</div>
 									<div class="form-row">
@@ -126,7 +123,7 @@ body {
 										     <div class="form-group sm col-md-4">
 													<label class="form-label">Category Code </label>
 												<label style="color: red">*</label>
-												<select class="form-control select2" name="categoryCode" id="categoryCode"  required aria-required="true">
+												<select class="form-control select2" name="Category.categoryCode" id="Category.categoryCode"  required aria-required="true">
 												 <option value="">Select Employee</option>
 												<option th:each="c :${listCategory}"th:value="${c.getCategoryCode()}" th:text="${c.getCategoryName()}"></option>
 											     	</select>
