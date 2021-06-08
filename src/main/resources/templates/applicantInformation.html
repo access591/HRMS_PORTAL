@@ -251,9 +251,8 @@ body {
 																	class="form-control " name="designationCode"
 																	id="designationCode" th:field="*{corrCity}">
 																	<option value="">Select City</option>
-																	<option th:Value="City1">city1</option>
-																	<option th:Value="City2">city2</option>
-																	<option th:Value="City3">city3</option>
+																	<option th:each="city : ${cityList}" th:text="${city.cityName}"
+																	th:value="${city.cityCode}"></option>
 
 
 																</select>
@@ -327,9 +326,8 @@ body {
 																</label> <select
 																	class="form-control "th:field="*{permCity}">
 																	<option value="">Select City</option>
-																	<option th:Value="City1">city1</option>
-																	<option th:Value="City2">city2</option>
-																	<option th:Value="City3">city3</option>
+																	<option th:each="city : ${cityList}" th:text="${city.cityName}"
+																	th:value="${city.cityCode}"></option>
 																	
 
 

@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.hrms.model.ApplicantExpDetail;
 import com.hrms.model.ApplicantInfo;
+import com.hrms.model.City;
 import com.hrms.model.Designation;
 import com.hrms.model.Employee;
 import com.hrms.model.EmployeeRequisition;
@@ -29,6 +30,7 @@ import com.hrms.model.MenuModule;
 import com.hrms.model.ReqAdvertisement;
 import com.hrms.model.ReqAdvertisementDetail;
 import com.hrms.service.ApplicantInfoService;
+import com.hrms.service.CityService;
 import com.hrms.service.DesignationService;
 import com.hrms.service.EmployeeRequisitionService;
 import com.hrms.service.EmployeeService;
@@ -47,6 +49,7 @@ public class ApplicantInformationController {
 	@Autowired EmployeeService employeeService;
 	@Autowired ReqAdvertisementDetailService reqAdvertisementDetailService;
 	@Autowired EmployeeRequisitionService employeeRequisitionService;
+	@Autowired CityService cityService;
 	
 	
 	
@@ -69,15 +72,13 @@ public class ApplicantInformationController {
 
 		List<EmployeeRequisition> listEmployeeRequisition1 = employeeRequisitionService.findEmployeeReqByStatusY();
 		if(listEmployeeRequisition1 != null) {
-			
-			List<EmployeeRequisition> listEmployeeRequisition = new ArrayList<EmployeeRequisition>(); 
-			for(EmployeeRequisition e : listEmployeeRequisition1) {
-				if(!listEmployeeRequisition.contains(e.getDepartmet().getDeptName())) {
-					listEmployeeRequisition.add(e);
-				}
-			}
-			//System.out.println("list employee requisition department : "+ listEmployeeRequisition.get(0).getDepartmet().getDeptName());
-			model.addAttribute("listEmployeeRequisition", listEmployeeRequisition);
+			model.addAttribute("listEmployeeRequisition", listEmployeeRequisition1);
+
+		}
+		List<City> cityList = cityService.getAllCities();
+		System.out.println("city list size : "+ cityList.size());
+		if(cityList != null) {
+			model.addAttribute("cityList", cityList);
 		}
 		
 		List<Employee> listEmployee = employeeService.getAllEmployees();
