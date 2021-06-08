@@ -31,7 +31,7 @@ public class TrackallEnquiries implements Serializable {
 
 	@ManyToOne
 	@JoinColumn(name = "DESIGN_CODE",updatable = false)
-	private Designation designCode;
+	private Designation desgCode;
 
 	@ManyToOne
 	@JoinColumn(name = "CATEGORY_CODE",updatable = false)
@@ -158,12 +158,14 @@ public class TrackallEnquiries implements Serializable {
 		this.empCode = empCode;
 	}
 
-	public Designation getDesignCode() {
-		return designCode;
+
+
+	public Designation getDesgCode() {
+		return desgCode;
 	}
 
-	public void setDesignCode(Designation designCode) {
-		this.designCode = designCode;
+	public void setDesgCode(Designation desgCode) {
+		this.desgCode = desgCode;
 	}
 
 	public Category getCategoryCode() {
