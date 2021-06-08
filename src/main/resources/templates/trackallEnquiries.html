@@ -110,9 +110,9 @@ body {
 										    	<div class="form-group sm col-md-4">
 													<label class="form-label">Designation Code </label>
 												<label style="color: red">*</label>
-												<select class="form-control select2" name="designCode" id="designCode"  onchange="myFunctionEmpCode()" required aria-required="true">
+												<select class="form-control select2" name="designCode" id="designCode"  required aria-required="true">
 												 <option value="">Select Employee</option>
-												<option th:each="e :${listEmployee}"th:value="${e.getEmpCode()}" th:text="${e.getEmpName()}"></option>
+												<option th:each="d :${listDesignation}"th:value="${d.getDesgCode()}" th:text="${d.getDesgName()}"></option>
 											     	</select>
 
 												</div>
@@ -126,9 +126,9 @@ body {
 										     <div class="form-group sm col-md-4">
 													<label class="form-label">Category Code </label>
 												<label style="color: red">*</label>
-												<select class="form-control select2" name="categoryCode" id="categoryCode"  onchange="myFunctionEmpCode()" required aria-required="true">
+												<select class="form-control select2" name="categoryCode" id="categoryCode"  required aria-required="true">
 												 <option value="">Select Employee</option>
-												<option th:each="e :${listEmployee}"th:value="${e.getEmpCode()}" th:text="${e.getEmpName()}"></option>
+												<option th:each="c :${listCategory}"th:value="${c.getCategoryCode()}" th:text="${c.getCategoryName()}"></option>
 											     	</select>
 
 												</div>
