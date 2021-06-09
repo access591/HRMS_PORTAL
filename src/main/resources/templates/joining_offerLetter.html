@@ -64,8 +64,8 @@ body {
 														name="empName">
 														<option value=''>--Select Employee--</option>
 														<option th:each="employee : ${employeeList}"
-															th:text="${employee.empName}"
-															th:value="${employee.empCode}"></option>
+															th:text="${employee.applicantCode.applicantName}"
+															th:value="${employee.applicantCode.applicantCode}"></option>
 														
 
 
@@ -99,7 +99,7 @@ body {
 										</div>
 
 										<!-- <Button type="submit">Generate Pdf</Button> -->
-										<Button type="submit" class="btn btn-primary">Download Excel Sheet</Button>
+										<Button type="submit" class="btn btn-primary">Generate Pdf File</Button>
 
 										<!-- <a href="#" th:href="@{employeeExcel}">Download Excel Sheet</a> -->
 

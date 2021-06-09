@@ -185,7 +185,7 @@ public class InterviewController {
 					
 					Designation designation;
 					try {
-						designation = designationService.findDesignationById(listApplicantInfo.get(i).getDesigCode());
+						designation = designationService.findDesignationById(listApplicantInfo.get(i).getDesigCode().getDesgCode());
 						interviewApprovalUtil.setDesignationCode(designation.getDesgCode());
 						interviewApprovalUtil.setDesignationName(designation.getDesgName());
 					}catch(Exception e) {
@@ -256,7 +256,7 @@ public class InterviewController {
 			InterviewFinalSelectionUtil ifs = new InterviewFinalSelectionUtil();
 			ifs.setInterviewCode(interView.getInterviewCode());
 			ifs.setInterviewDate(interView.getInterviewDate());
-			ifs.setApplicantCode(interView.getApplicantCode());
+			ifs.setApplicantCode(interView.getApplicantCode().getApplicantCode());
 			ifs.setApplicantDate(interView.getApplicantDate());
 			ifs.setOvarAllRating(interView.getOverAllRating());
 			
@@ -281,7 +281,7 @@ public class InterviewController {
 			}
 			
 			
-			ApplicantInfo applicantinfo = applicantInfoService.getApplicantInfoByApplicantCode(interView.getApplicantCode());
+			ApplicantInfo applicantinfo = applicantInfoService.getApplicantInfoByApplicantCode(interView.getApplicantCode().getApplicantCode());
 			ifs.setApplicantName(applicantinfo.getApplicantName());
 			ifs.setCurrentCtc(applicantinfo.getCurrentCtc());
 			ifs.setExpectedCtc(applicantinfo.getExpectedCtc());

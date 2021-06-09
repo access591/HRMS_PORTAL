@@ -57,5 +57,22 @@ public class InterviewMasterServiceImpl implements InterviewMasterService{
 		
 	}
 
+	@Override
+	public List<InterviewMaster> getFinalSelection() {
+		
+		try {
+			Session session = sessionFactory.openSession();
+			Query<InterviewMaster> query = session.createQuery("from InterviewMaster i where i.selectionStatus"
+					+ "=:status", InterviewMaster.class);
+			query.setParameter("status", "Selected");
+			List<InterviewMaster> result = query.getResultList();
+			session.close();
+			return result;
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 	
 }

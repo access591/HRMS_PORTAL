@@ -25,18 +25,22 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hrms.EmployeeGradationExcel;
 import com.hrms.ReportUtil;
+import com.hrms.model.ApplicantInfo;
 import com.hrms.model.Category;
 import com.hrms.model.Department;
 import com.hrms.model.Designation;
 import com.hrms.model.Employee;
+import com.hrms.model.InterviewMaster;
 import com.hrms.model.CommonUtil;
 import com.hrms.model.MenuModule;
 import com.hrms.reports.EmployeeJoiningLetter;
 import com.hrms.reports.EmployeeOfferLetter;
+import com.hrms.service.ApplicantInfoService;
 import com.hrms.service.CategoryService;
 import com.hrms.service.DepartmentService;
 import com.hrms.service.DesignationService;
 import com.hrms.service.EmployeeService;
+import com.hrms.service.InterviewMasterService;
 import com.hrms.service.ModuleService;
 import com.hrms.service.PageMappingService;
 
@@ -60,6 +64,9 @@ public class EmployeeInformationReportController {
 	@Autowired CategoryService categoryService;
 	@Autowired DesignationService designationService;
 	@Autowired DepartmentService departmentService;
+	@Autowired InterviewMasterService interviewMasterService;
+	
+	@Autowired ApplicantInfoService applicantInfoService;
 	
 	
 	@Autowired EmployeeOfferLetter employeeOfferLetter;
@@ -281,9 +288,10 @@ public class EmployeeInformationReportController {
 			model.addAttribute("modules", modules);
 		}
 		
-		List<Employee> employeeList = employeeService.getAllEmployees();
-		if(employeeList != null) {
-			model.addAttribute("employeeList", employeeList);
+		List<InterviewMaster> interviewMasterList = interviewMasterService.getFinalSelection();
+				
+		if(interviewMasterList != null) {
+			model.addAttribute("employeeList", interviewMasterList);
 		}
 
 		session.setAttribute("username", session.getAttribute("username"));
@@ -302,34 +310,28 @@ public class EmployeeInformationReportController {
 		System.out.println("report type value : "+reportType);
 		System.out.println("employee code value : "+empCode); 
 		
-		List<CommonUtil> em = new ArrayList<CommonUtil>();
-		CommonUtil empl;
+		
 		
 		try {
-			Employee employee = employeeService.findEmployeeById(empCode);
+			//Employee employee = employeeService.findEmployeeById(empCode);
+			ApplicantInfo applicantInfo = applicantInfoService.getApplicantInfoByApplicantCode(empCode);
 			
-			if(employee != null) {
-				Department department = departmentService.findDepartmentById(employee.getDepartmentCode());
-				Designation designation = designationService.findDesignationById(employee.getDesignationCode());
-				empl = new CommonUtil(employee.getEmpName(),
-						department.getDeptName(),designation.getDesgName());
-				em.add(empl);
+			String reportFileName = null;
+			if(reportType.equals("J")) {
+				reportFileName = "joiningLetter";
+				//reportUtil.employeeJoiningLetter2(req, response, reportFileName, em);
+				employeeJoiningLetter.employeeJoiningLetter(req, response, reportFileName,applicantInfo);
 			}
+			else {
+				reportFileName = "OfferLetter";
+				employeeOfferLetter.employeeOfferLetter(req, response, reportFileName,applicantInfo);
+			}
+			
 			
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
 		
-		String reportFileName = null;
-		if(reportType.equals("J")) {
-			reportFileName = "joiningLetter";
-			//reportUtil.employeeJoiningLetter2(req, response, reportFileName, em);
-			employeeJoiningLetter.employeeJoiningLetter(req, response, reportFileName, em);
-		}
-		else {
-			reportFileName = "OfferLetter";
-			employeeOfferLetter.employeeOfferLetter(req, response, reportFileName, em);
-		}
 		
 		 
 		
