@@ -107,16 +107,18 @@
 					<property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
 					<property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
 					<property name="com.jaspersoft.studio.table.style.detail" value="Table_TD"/>
+					<property name="com.jaspersoft.studio.components.autoresize.proportional" value="true"/>
+					<property name="com.jaspersoft.studio.components.autoresize.next" value="true"/>
 				</reportElement>
 				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
 					<datasetRun subDataset="Dataset" uuid="aab0eee4-bdf3-4857-8d81-750555f3e13e">
 						<dataSourceExpression><![CDATA[$P{ItemDataSource}]]></dataSourceExpression>
 					</datasetRun>
-					<jr:column width="110" uuid="cc55ce4c-2eb5-4c42-86f4-e85a4a19429f">
+					<jr:column width="112" uuid="cc55ce4c-2eb5-4c42-86f4-e85a4a19429f">
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column1"/>
 						<jr:columnHeader style="Table_CH" height="50" rowSpan="1">
 							<staticText>
-								<reportElement x="0" y="0" width="110" height="50" uuid="8f649211-ef07-42b6-9fed-4019d685f8e2"/>
+								<reportElement x="0" y="0" width="112" height="50" uuid="8f649211-ef07-42b6-9fed-4019d685f8e2"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font size="11"/>
 								</textElement>
@@ -125,17 +127,17 @@
 						</jr:columnHeader>
 						<jr:detailCell style="Table_TD" height="30">
 							<textField>
-								<reportElement x="0" y="0" width="110" height="30" uuid="68d2d7c2-35a7-4575-8a0e-98a5fdc3cb55"/>
+								<reportElement x="0" y="0" width="112" height="30" uuid="68d2d7c2-35a7-4575-8a0e-98a5fdc3cb55"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle"/>
 								<textFieldExpression><![CDATA[$F{empCode.empName}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="120" uuid="8e928924-98e3-4acf-9a70-573842e6e74d">
+					<jr:column width="122" uuid="8e928924-98e3-4acf-9a70-573842e6e74d">
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column2"/>
 						<jr:columnHeader style="Table_CH" height="50" rowSpan="1">
 							<staticText>
-								<reportElement x="0" y="0" width="120" height="50" uuid="f789ff37-fefb-4c09-873c-4a0e53185123"/>
+								<reportElement x="0" y="0" width="122" height="50" uuid="f789ff37-fefb-4c09-873c-4a0e53185123"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font size="11"/>
 								</textElement>
@@ -144,17 +146,17 @@
 						</jr:columnHeader>
 						<jr:detailCell style="Table_TD" height="30">
 							<textField>
-								<reportElement x="0" y="0" width="120" height="30" uuid="edafbbfc-ae72-41e7-bf90-d4a87e67b7d4"/>
+								<reportElement x="0" y="0" width="122" height="30" uuid="edafbbfc-ae72-41e7-bf90-d4a87e67b7d4"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle"/>
 								<textFieldExpression><![CDATA[$F{desgCode.desgName}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="120" uuid="8db6510a-4f99-426f-8702-3474bc1715ad">
+					<jr:column width="122" uuid="8db6510a-4f99-426f-8702-3474bc1715ad">
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column3"/>
 						<jr:columnHeader style="Table_CH" height="50" rowSpan="1">
 							<staticText>
-								<reportElement x="0" y="0" width="120" height="50" uuid="568f1373-a37f-4714-be98-b36257c359bf"/>
+								<reportElement x="0" y="0" width="122" height="50" uuid="568f1373-a37f-4714-be98-b36257c359bf"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font size="11"/>
 								</textElement>
@@ -163,17 +165,17 @@
 						</jr:columnHeader>
 						<jr:detailCell style="Table_TD" height="30">
 							<textField>
-								<reportElement x="0" y="0" width="120" height="30" uuid="45f47c13-048b-48d6-97b9-bd5790059572"/>
+								<reportElement x="0" y="0" width="122" height="30" uuid="45f47c13-048b-48d6-97b9-bd5790059572"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle"/>
 								<textFieldExpression><![CDATA[$F{categoryCode.categoryName}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="130" uuid="e77fde05-de79-4846-bb88-adcfa3c85f3f">
+					<jr:column width="131" uuid="e77fde05-de79-4846-bb88-adcfa3c85f3f">
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column4"/>
 						<jr:columnHeader style="Table_CH" height="50" rowSpan="1">
 							<staticText>
-								<reportElement x="0" y="0" width="130" height="50" uuid="c3e10d0d-fdec-49ca-9824-f004de1d95d6"/>
+								<reportElement x="0" y="0" width="131" height="50" uuid="c3e10d0d-fdec-49ca-9824-f004de1d95d6"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font size="11" isBold="true"/>
 								</textElement>
@@ -182,17 +184,17 @@
 						</jr:columnHeader>
 						<jr:detailCell style="Table_TD" height="30">
 							<textField>
-								<reportElement x="0" y="0" width="130" height="30" uuid="cee5b45b-dea2-49e8-89ac-7952006e2be8"/>
+								<reportElement x="0" y="0" width="131" height="30" uuid="cee5b45b-dea2-49e8-89ac-7952006e2be8"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle"/>
 								<textFieldExpression><![CDATA[$F{dob}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="140" uuid="81d5237a-82a0-4aa1-bcc6-df2727d82356">
+					<jr:column width="141" uuid="81d5237a-82a0-4aa1-bcc6-df2727d82356">
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column5"/>
 						<jr:columnHeader style="Table_CH" height="50" rowSpan="1">
 							<staticText>
-								<reportElement x="0" y="0" width="140" height="50" uuid="b72fcc12-c32f-4db8-8b9c-aacbec6846f7"/>
+								<reportElement x="0" y="0" width="141" height="50" uuid="b72fcc12-c32f-4db8-8b9c-aacbec6846f7"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font size="11" isBold="true"/>
 								</textElement>
@@ -201,17 +203,17 @@
 						</jr:columnHeader>
 						<jr:detailCell style="Table_TD" height="30">
 							<textField>
-								<reportElement x="0" y="0" width="140" height="30" uuid="39fe5f67-9eb8-4e96-9820-9a7ecad79db0"/>
+								<reportElement x="0" y="0" width="141" height="30" uuid="39fe5f67-9eb8-4e96-9820-9a7ecad79db0"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle"/>
 								<textFieldExpression><![CDATA[$F{award}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="170" uuid="dce7a8f9-a76d-468d-ae02-719e12782c2f">
+					<jr:column width="172" uuid="dce7a8f9-a76d-468d-ae02-719e12782c2f">
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column6"/>
 						<jr:columnHeader style="Table_CH" height="50" rowSpan="1">
 							<staticText>
-								<reportElement x="0" y="0" width="170" height="50" uuid="96333588-6931-4240-9d66-aee5d8cc7931"/>
+								<reportElement x="0" y="0" width="172" height="50" uuid="96333588-6931-4240-9d66-aee5d8cc7931"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font size="11" isBold="true"/>
 								</textElement>
@@ -220,7 +222,7 @@
 						</jr:columnHeader>
 						<jr:detailCell style="Table_TD" height="30">
 							<textField>
-								<reportElement x="0" y="0" width="170" height="30" uuid="7f6186f7-4aa2-4ab4-afd9-85b5c9f01a05"/>
+								<reportElement x="0" y="0" width="172" height="30" uuid="7f6186f7-4aa2-4ab4-afd9-85b5c9f01a05"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle"/>
 								<textFieldExpression><![CDATA[$F{awardDate}]]></textFieldExpression>
 							</textField>
