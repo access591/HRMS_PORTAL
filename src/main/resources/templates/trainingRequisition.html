@@ -1,115 +1,125 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 
 <script type="text/javascript" th:src="@{/js/settings.js}"></script>
 <script type="text/javascript" th:src="@{/js/app.js}"></script>
 <link rel="stylesheet" type="text/css" th:href="@{/css/modern.css}" />
-<script  src="https://www.googletagmanager.com/gtag/js?id=UA-120946860-7"></script>
+<script src="https://www.googletagmanager.com/gtag/js?id=UA-120946860-7"></script>
 
 
 <style>
-
-
 body {
 	opacity: 0;
 }
+
 .uppercase {
-  text-transform: uppercase;
+	text-transform: uppercase;
 }
 
 #loading {
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  position: fixed;
-  display: block;
-  opacity: 0.7;
-  background-color: #676565;
-  z-index: 99;
-  text-align: center;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	position: fixed;
+	display: block;
+	opacity: 0.7;
+	background-color: #676565;
+	z-index: 99;
+	text-align: center;
 }
 
 #loading-image {
-  position: absolute;
-  top: 25%;
-  left: 50%;
-  z-index: 100;
+	position: absolute;
+	top: 25%;
+	left: 50%;
+	z-index: 100;
 }
 </style>
 <script>
-$(document).ready(function(){
+	$(document)
+			.ready(
+					function() {
 
-    var i=1;
-   $("#add_row").click(function(){
-    $('#addr'+i).html("<td><input name='listTransactionRequisitionDetail["+i+"].topicDetail' type='text' placeholder='Topic Details.'  class='form-control  input-md'/> "+
-    		"</td><td><input  name='listTransactionRequisitionDetail["+i+"].trDate' type='Date' placeholder='Topic Date'  class='form-control input-md'>"+
-    		"<td><select class=' form-control input-md' id='modeOfTravel'name='listTransactionRequisitionDetail["+i+"].priority'><option value=' '>Select Type</option><option value='H'>High</option> <option value='M'>Medium</option><option value='L'>Low</option>  </select></td>"+
-    		"</td><td><input  name='listTransactionRequisitionDetail["+i+"].remarks' type='text' placeholder='Remarks'  class='form-control input-md'></td>"+
-    		"");
+						var i = 1;
+						$("#add_row")
+								.click(
+										function() {
+											$('#addr' + i)
+													.html(
+															"<td><input value='"
+																	+ (i + 1)
+																	+ "' class='form-control'></td>"
+																	+ "<td><input name='listTransactionRequisitionDetail["+i+"].topicDetail' type='text' placeholder='Topic Details.'  class='form-control  input-md'/> </td>"
+																	+ "<td><input  name='listTransactionRequisitionDetail["+i+"].trDate' type='Date' placeholder='Topic Date'  class='form-control input-md'>"
+																	+ "<td><select class=' form-control input-md' id='modeOfTravel'name='listTransactionRequisitionDetail["+i+"].priority'><option value=' '>Select Type</option><option value='H'>High</option> <option value='M'>Medium</option><option value='L'>Low</option>  </select></td>"
+																	+ "</td><td><input  name='listTransactionRequisitionDetail["+i+"].remarks' type='text' placeholder='Remarks'  class='form-control input-md'></td>"
+																	+ "");
 
-    $('#example').append('<tr id="addr'+(i+1)+'"></tr>');
-    $('#_cr').val(i+1);
-    
-    i++; 
-});
-   
-   
-   $("#delete_row").click(function(){
-	  	 if(i>1){
-			 $("#addr"+(i-1)).html('');
-			 $('#_cr').val(i - 1);
-			 i--;
-			
-			 }
-	  	
-		 });
-   
-   
-   var J=1;
-   
-   $("#tab2_AddRow").click(function(){
-	  
-	    $('#addrtabsecond'+J).html("<td><select class=' form-control input-md' id='modeOfTravel'name='listTransactionReqEmployeeDetail["+i+"].employee.empCode'><option value=' '>Select</option></select></td>"+
-	    		"</td><td><input id='empName["+i+"]' name='listTransactionReqEmployeeDetail["+i+"].employee.empName' type='text' placeholder='Name'  class='form-control input-md'>"+
-	    		"</td><td><input  name='listTransactionReqEmployeeDetail["+i+"].topicSrlNo' type='text' placeholder='Pay Code'  class='form-control input-md'></td>"+
-	    		"<td><input type='text' placeholder='Father Name'  class='nbt form-control input-md'></td>"+
-	    		"");
-	    $('#example2').append('<tr id="addrtabsecond'+(J+1)+'"></tr>');
-	    $('#_cr2').val(J+1);
-	    
-	    J++; 
-	});
-   var J=1;
-   $("#tab2_delete").click(function(){
-	  
-	  	 if(J>1){
-			 $("#addrtabsecond"+(J-1)).html('');
-			 $('#_cr2').val(J - 1);
-			 J--;
-			
-			 
-			 }
-		 });
-	
-   
-});
+											$('#example').append(
+													'<tr id="addr' + (i + 1)
+															+ '"></tr>');
+											$('#_cr').val(i + 1);
 
- 
-   
+											i++;
+										});
 
+						$("#delete_row").click(function() {
+							if (i > 1) {
+								$("#addr" + (i - 1)).html('');
+								$('#_cr').val(i - 1);
+								i--;
 
+							}
 
+						});
+
+						var J = 1;
+
+						$("#tab2_AddRow")
+								.click(
+										function() {
+
+											$('#addrtabsecond' + J)
+													.html(
+															"<td><select class=' form-control input-md' id='modeOfTravel'"
+																	+ " name='listTransactionReqEmployeeDetail["
+																	+ i
+																	+ "].employee.empCode' onchange='selectEmploye()' "
+																	+ "><option value=' '>Select</option></select></td>"
+																	+
+
+																	"</td><td><input  name='listTransactionReqEmployeeDetail["+i+"].topicSrlNo' type='text' "+
+	    		"placeholder='Pay Code'  class='form-control input-md'></td>"
+																	+ "<td><input type='text' placeholder='Father Name'  class='nbt form-control input-md'></td>"
+																	+ "");
+											$('#example2').append(
+													'<tr id="addrtabsecond'
+															+ (J + 1)
+															+ '"></tr>');
+											$('#_cr2').val(J + 1);
+
+											J++;
+										});
+						var J = 1;
+						$("#tab2_delete").click(function() {
+
+							if (J > 1) {
+								$("#addrtabsecond" + (J - 1)).html('');
+								$('#_cr2').val(J - 1);
+								J--;
+
+							}
+						});
+
+					});
 </script>
 <script>
-
-
-
 	window.dataLayer = window.dataLayer || [];
 	function gtag() {
 		dataLayer.push(arguments);
 	}
-	 gtag('js', new Date());
+	gtag('js', new Date());
 
 	gtag('config', 'UA-120946860-7');
 </script>
@@ -117,309 +127,423 @@ $(document).ready(function(){
 <meta charset="utf-8" />
 <title>HRMS</title>
 </head>
- 
+
 <body>
 
-<div class="wrapper">
-<nav id="sidebar" class="sidebar">
- <div th:replace="/fragments/sidebar :: div"></div>
- </nav>
- 		
+	<div class="wrapper">
+		<nav id="sidebar" class="sidebar">
+			<div th:replace="/fragments/sidebar :: div"></div>
+		</nav>
+
 		<div class="main">
-		<div th:replace="/fragments/header ::div"></div>
-		<main class="content">
-		<div class="container-fluid">
+			<div th:replace="/fragments/header ::div"></div>
+			<main class="content">
+				<div class="container-fluid">
 
 					<div class="header">
-						<h1 class="header-title">
-							Personal
-						</h1>
-						
-					
+						<h1 class="header-title">Personal</h1>
+
+
 					</div>
-						<form id="validation-form" action="#"  th:action="@{/saveTrainingRequisition}" th:object="${trainingRequisition}" method="post">
-					<div class="row">
+					<form id="validation-form" action="#"
+						th:action="@{/saveTrainingRequisition}"
+						th:object="${trainingRequisition}" method="post">
+						<div class="row">
 							<div class="col-12">
-							<div class="card">
-								<div class="card-header">
-									<h5 class="card-title">Training Requisition </h5>
-								<div class="alert-outline">
-									<div th:if="${message}" th:text="${message}" style="color: red">
-									</div> 
-									</div>	
-								</div>
-								<div class="card-body">
-									<div class="form-row">
-												<div class="form-group sm col-md-4">
-												
-													<label class="form-label">Training Requisition Code <span
-														class="text-danger">*</span>
-													</label> <input name="tourClaimId" type="text" id="tourClaimId"
-														class="form-control" th:field="*{trReqCode}" readonly>
-												</div>
-												
-												
-											<div class="form-group sm col-md-4">
-											       <label class="form-label">Training Requisition Date
-											       <span class="text-danger">*</span></label>
-							                 <input  type="date"id="tourClaimDate"name="tourClaimDate" th:field="*{trReqDate}" class="form-control required">
-										     </div>
-										     	
-											<div class="form-group sm col-md-4">
-													<label class="form-label">Department Code</label>
-												<label style="color: red">*</label>
-												<select class="form-control select2" id="departmentDropdown" onchange="changeDepartment()" th:field="*{department.departmentCode}" >
-												 <option value="">Select Department</option>
-												<option th:each="e :${listDepartment}"th:value="${e.departmentCode}" th:text="${e.deptName}"></option>
-											     	</select>
-
-												</div>
-												
-												
-								</div>
-								
-											
-												
-													<div class="form-row">
-													
-											       <div class="form-group sm col-md-4">
-											       <label class="form-label">Remarks </label>
-											     
-											       <textarea class="form-control" th:field="*{remarks}" name="empCode" id="empCode"Style=" resize: none;" rows="2" placeholder="Remarks"></textarea>
-											      </div>
-													
-													
-													</div>
-												
-												
-												
-							</div>
-						</div>
-	              <div class="col-12">
-		<div id="smartwizard">
-		
-			<ul>
-			<li><a href="#validation-step-1"><br /><small>Topic Details</small></a></li>
-			<li><a href="#validation-step-2"><br /><small>Topic Wise Employees </small></a></li>
-		
-
-								</ul>
-								<div class="form-row">
-								
-                         <div id="validation-step-1">
-									     
-						<div class="form-row">
 								<div class="card">
-								<div class="card-header">
-								</div>
-								<div class="card-body">
-								<input id="_cr" name="_cr" type="text"value="1">
-								<div class="col-sm-12" align="right">
-							
-								
-								
-								
-								<a id="add_row" class="fa fa-plus" aria-hidden="true"style="font-size:28px;color:#001080"></a>&nbsp;&nbsp;&nbsp;
-								<a id='delete_row'class="fa fa-trash" style="font-size:28px;color:#399490fc"aria-hidden="true"></a>	
-								</div>
-														<div class="table-responsive">
-											<table id="example" aria-describedby="example" class="table" style="width:100%">
-															<thead>
-																<tr>
-															
-																	<th>Topic Details.</th>
-																	<th>Topic Date.</th>
-																	<th>Topic priority</th>
-																	<th>Topic Remark</th>
-																	
-
-
-																</tr>
-															</thead>
-															<tbody>
-																<tr id='addr0'>
-
-
-																	<td><input type="text" placeholder='Topic Details ' 
-																			name="listTransactionRequisitionDetail[0].topicDetail" class="form-control" />
-																	</td>
-																	<td><input type="date" placeholder='Topic Date' 
-																				name="listTransactionRequisitionDetail[0].trDate" class="form-control" />
-																	</td>
-																		<td>
-																		<select class="form-control" id="modeOfTravel0"
-																				name="listTransactionRequisitionDetail[0].prioity">
-																			<option value="">Select Type</option>
-																			<option th:Value="H">High</option>
-																			<option th:Value="M">Medium</option>
-																			<option th:Value="L">Low</option>
-												                         </select></td>
-
-
-																	<td><input type="text" placeholder='Remark' class="form-control" 
-																			name="listTransactionRequisitionDetail[0].remarks" /></td>
-
-																</tr>
-																<tr id='addr1'></tr>
-
-															</tbody>
-													
-
-														</table>
-														</div>
-													</div>
-								<!-- <a id="add_row" class="fa pull-right btn btn-default ">Add Row</a><a id='delete_row' class="fa pull-right btn btn-default">Delete Row</a>	 -->
-							            </div>
+									<div class="card-header">
+										<h5 class="card-title">Training Requisition</h5>
+										<div class="alert-outline">
+											<div th:if="${message}" th:text="${message}"
+												style="color: red"></div>
+										</div>
 									</div>
-												
-										
-									
-						          	</div>
-	<!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->					          	
-			<div id="validation-step-2">
-							
-										
-											
-				<div class="form-row">
-								<div class="card">
-								
-								<div class="card-body">
-								<input id="_cr2" name="_cr2" type="text"value="1">
-								<div class="col-sm-12" align="right">
-							<!-- 	<a th:href="@{/viewMedicalReimbursement}">
+									<div class="card-body">
+										<div class="form-row">
+											<div class="form-group sm col-md-4">
+
+												<label class="form-label">Training Requisition Code
+													<span class="text-danger">*</span>
+												</label> <input name="tourClaimId" type="text" id="tourClaimId"
+													class="form-control" th:field="*{trReqCode}" readonly>
+											</div>
+
+
+											<div class="form-group sm col-md-4">
+												<label class="form-label">Training Requisition Date
+													<span class="text-danger">*</span>
+												</label> <input type="date" id="tourClaimDate" name="tourClaimDate"
+													th:field="*{trReqDate}" class="form-control required">
+											</div>
+
+											<div class="form-group sm col-md-4">
+												<label class="form-label">Department Name</label> <label
+													style="color: red">*</label> <select
+													class="form-control select2" id="departmentDropdown"
+													onchange="changeDepartment()"
+													th:field="*{department.departmentCode}">
+													<option value="">Select Department</option>
+													<option th:each="e :${listDepartment}"
+														th:value="${e.departmentCode}" th:text="${e.deptName}"></option>
+												</select>
+
+											</div>
+
+
+										</div>
+
+
+
+										<div class="form-row">
+
+											<div class="form-group sm col-md-4">
+												<label class="form-label">Remarks </label>
+
+												<textarea class="form-control" th:field="*{remarks}"
+													name="empCode" id="empCode" Style="resize: none;" rows="2"
+													placeholder="Remarks"></textarea>
+											</div>
+
+
+										</div>
+
+
+
+									</div>
+								</div>
+								<div class="col-12">
+									<div id="smartwizard">
+
+										<ul>
+											<li><a href="#validation-step-1"><br />
+												<small>Topic Details</small></a></li>
+											<li><a href="#validation-step-2"><br />
+												<small>Topic Wise Employees </small></a></li>
+
+
+										</ul>
+										<div class="form-row">
+
+											<div id="validation-step-1">
+
+												<div class="form-row">
+													<div class="card">
+														<div class="card-header"></div>
+														<div class="card-body">
+
+															<div class="col-sm-12" align="right">
+
+
+
+
+																<a id="add_row" class="fa fa-plus" aria-hidden="true"
+																	style="font-size: 28px; color: #001080"></a>&nbsp;&nbsp;&nbsp;
+																<a id='delete_row' class="fa fa-trash"
+																	style="font-size: 28px; color: #399490fc"
+																	aria-hidden="true"></a>
+															</div>
+															<div class="table-responsive">
+																<table id="example" aria-describedby="example"
+																	class="table" style="width: 100%">
+																	<thead>
+																		<tr>
+																			<th>Sr No</th>
+																			<th>Topic Details.</th>
+																			<th>Topic Date.</th>
+																			<th>Topic priority</th>
+																			<th>Topic Remark</th>
+
+
+
+																		</tr>
+																	</thead>
+																	<tbody>
+																		<tr id='addr0'>
+																			<td><input value="1" class="form-control"></td>
+
+																			<td><input type="text"
+																				placeholder='Topic Details '
+																				name="listTransactionRequisitionDetail[0].topicDetail"
+																				class="form-control" /></td>
+																			<td><input type="date" placeholder='Topic Date'
+																				name="listTransactionRequisitionDetail[0].trDate"
+																				class="form-control" /></td>
+																			<td><select style="width: 130px"
+																				id="modeOfTravel0"
+																				name="listTransactionRequisitionDetail[0].prioity">
+																					<option value="">Select Type</option>
+																					<option th:Value="H">High</option>
+																					<option th:Value="M">Medium</option>
+																					<option th:Value="L">Low</option>
+																			</select></td>
+
+
+																			<td><input type="text" placeholder='Remark'
+																				class="form-control"
+																				name="listTransactionRequisitionDetail[0].remarks" /></td>
+
+																		</tr>
+																		<tr id='addr1'></tr>
+
+																	</tbody>
+
+
+																</table>
+															</div>
+														</div>
+														<!-- <a id="add_row" class="fa pull-right btn btn-default ">Add Row</a><a id='delete_row' class="fa pull-right btn btn-default">Delete Row</a>	 -->
+													</div>
+												</div>
+
+
+
+											</div>
+											<!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+											<div id="validation-step-2">
+
+
+
+												<div class="form-row">
+													<div class="card">
+
+														<div class="card-body">
+															<input id="_cr2" name="_cr2" type="text" value="1">
+															<div class="col-sm-12" align="right">
+																<!-- 	<a th:href="@{/viewMedicalReimbursement}">
 								<em  class="fa fa-eye" style="font-size:28px"> 
 								</em></a>&nbsp;&nbsp;&nbsp; -->
-								
-								
-								
-								<a id="tab2_AddRow" class="fa fa-plus" aria-hidden="true"style="font-size:28px;color:#001080"></a>&nbsp;&nbsp;&nbsp;
-								<a id='tab2_delete'class="fa fa-trash" style="font-size:28px;color:#399490fc"aria-hidden="true"></a>	
-								</div>
-											<div class="table-responsive">
-											<table id="example2" aria-describedby="example" class="table" style="width:100%">
-															<thead>
-																<tr>
-																	<th>Employee Code</th>
-																	<th>Name.</th>
-																	<th>Pay Code.</th>
-																	<th>Father Name</th>
 
 
-																</tr>
-															</thead>
-															<tbody>
-																<tr id='addrtabsecond0'>
-																		<td>
-																		<select class="form-control"name="listTransactionReqEmployeeDetail[0].employee.empCode"
-																				id="empName0">
-																			<option value="">Select Employee</option>
-																			
-													                   </select></td>
-														
-																	<td>
-																	<input type="text" placeholder='Name' class="form-control" /></td>
-																	<td>
-																	<input type="text" name="listTransactionReqEmployeeDetail[0].topicSrlNo" placeholder='Pay Code' class="form-control" /></td>
 
-																	<td>
-																	<input type="text" placeholder='Father Name' class="form-control" /></td>
-																	
-																</tr>
-																<tr id='addrtabsecond1'></tr>
+																<a id="tab2_AddRow" class="fa fa-plus"
+																	aria-hidden="true"
+																	style="font-size: 28px; color: #001080"></a>&nbsp;&nbsp;&nbsp;
+																<a id='tab2_delete' class="fa fa-trash"
+																	style="font-size: 28px; color: #399490fc"
+																	aria-hidden="true"></a>
+															</div>
+															<div class="table-responsive">
+																<table id="example2" aria-describedby="example"
+																	class="table" style="width: 100%">
+																	<thead>
+																		<tr>
+																			<th>Employee Name</th>
 
-															</tbody>
-															
+																			<th>Payee Code.</th>
+																			<th>Father Name</th>
 
-														</table>
+
+																		</tr>
+																	</thead>
+																	<tbody>
+																		<tr id='addrtabsecond0'>
+																			<td><select class="form-control"
+																				name="listTransactionReqEmployeeDetail[0].employee.empCode"
+																				id="empName0" onchange="selectEmploye()">
+																					<option value="">Select Employee</option>
+
+																			</select></td>
+
+
+																			<td><input type="text"
+																				name="listTransactionReqEmployeeDetail[0].topicSrlNo"
+																				placeholder='Pay Code' class="form-control" /></td>
+
+																			<td><input type="text" placeholder='Father Name'
+																				class="form-control" /></td>
+
+																		</tr>
+																		<tr id='addrtabsecond1'></tr>
+
+																	</tbody>
+
+
+																</table>
+															</div>
+															<button type="submit" class="btn btn-primary">Save</button>
 														</div>
-																 <button type="submit" class="btn btn-primary">Save</button>
-													</div>
-								<!-- <a id="add_row" class="fa pull-right btn btn-default ">Add Row</a><a id='delete_row' class="fa pull-right btn btn-default">Delete Row</a>	 -->
-							           
-							           
-							            </div>
-									</div>
-						
-									</div>
+														<!-- <a id="add_row" class="fa pull-right btn btn-default ">Add Row</a><a id='delete_row' class="fa pull-right btn btn-default">Delete Row</a>	 -->
 
-<!-- third ta>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>.. -->
-							
-                     
+
+													</div>
+												</div>
+
+											</div>
+
+											<!-- third ta>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>.. -->
+
+
+										</div>
+
+
+
+										<!-- show records   -->
+
+
+
+									</div>
 								</div>
 
-	
-	</div>
-			</div>
-				 
-	</div>
+							</div>
+						</div>
+					</form>
+
+					<div class="col-12">
+						<div class="card">
+							<div class="card-header"></div>
+							<div class="card-body">
+								<table id="datatables-buttons"
+									class="table table-striped display" style="width: 100%"
+									aria-describedby="example">
+									<thead>
+										<tr>
+											<th class="text-center" scope="col">Training
+												Reaquisition Code</th>
+											<th class="text-center" scope="col">Training Requisition
+												Date</th>
+											<th class="text-center" scope="col">Department</th>
+											<th class="text-center" scope="col">Status</th>
+
+											<th class="text-center" scope="col">Action</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="training : ${listTrainingReqisition}">
+											<td class="text-center" th:text="${training.trReqCode}"></td>
+											<td class="text-center" th:text="${training.trReqDate}"></td>
+											<td class="text-center"
+												th:text="${training.department.deptName}"></td>
+
+
+											<th:block th:switch="${training.trReqStatus}">
+												<td th:case="'Y'" class="text-center">Approved</td>
+												<td th:case="'C'" class="text-center">Cancel</td>
+												<td th:case="'N'" class="text-center">Pending</td>
+											</th:block>
+
+
+											<td class="text-center"><th:block
+													th:switch="${training.trReqStatus}">
+													<div th:case="'Y'">
+														<a
+															th:href="@{/viewTrainingRequisition/{id}(id=${training.trReqCode})}"><em
+															class="fa fa-edit"></em></a> <a
+															th:href="@{/deleteTrainingRequisition/{id}(id=${training.trReqCode})}"
+															onclick="return confirm('Are you sure?')"><em
+															class="fa fa-times"></em></a>
+
+													</div>
+
+													<div th:case="'N'">
+														<a
+															th:href="@{/editTrainingRequisition/{id}(id=${training.trReqCode})}"><em
+															class="fa fa-edit"></em></a> <a
+															th:href="@{/deleteTrainingRequisition/{id}(id=${training.trReqCode})}"
+															onclick="return confirm('Are you sure?')"><em
+															class="fa fa-times"></em></a>
+
+													</div>
+
+													<div th:case="'C'">
+														<a
+															th:href="@{/viewTrainingRequisition/{id}(id=${training.trReqCode})}"><em
+															class="fa fa-edit"></em></a> <a
+															th:href="@{/deleteTrainingRequisition/{id}(id=${training.trReqCode})}"
+															onclick="return confirm('Are you sure?')"><em
+															class="fa fa-times"></em></a>
+
+													</div>
+
+
+												</th:block></td>
+
+											<td></td>
+										</tr>
+									</tbody>
+
+								</table>
+							</div>
+
+						</div>
 					</div>
-</form>
+
 				</div>
-		</main>
-		<footer class="footer">
-		<div th:replace="/fragments/footer :: div"></div>
-		</footer>
+			</main>
+			<footer class="footer">
+				<div th:replace="/fragments/footer :: div"></div>
+			</footer>
 		</div>
-		</div>
-			<script>
-	$(document).ready(function() {
-	    $('#example').DataTable( {
-	        "scrollY": 200,
-	        "scrollX": true,
-	        deferRender:true,
-            scrollCollapse: true,
-            
-	    } );
-	} );
+	</div>
+
+	<script>
+		function selectEmploye() {
+			console.log("click");
+		}
+	</script>
+
+	<script>
+		$(document).ready(function() {
+			$('#example').DataTable({
+				"scrollY" : 200,
+				"scrollX" : true,
+				deferRender : true,
+				scrollCollapse : true,
+
+			});
+		});
 	</script>
 	<script>
 		$(function() {
 
 			$("input[name='tourPlanDate']").daterangepicker({
-				singleDatePicker: true,
-			    autoApply: true,
-				locale: {
-		            format: 'YYYY/MM/DD'
-		        },
-				showDropdowns: true
-			});
-			
-		$("input[name='tourClaimDate']").daterangepicker({
-				singleDatePicker: true,
-			    autoApply: true,
-				locale: {
-		            format: 'YYYY/MM/DD'
-		        },
-				showDropdowns: true
+				singleDatePicker : true,
+				autoApply : true,
+				locale : {
+					format : 'YYYY/MM/DD'
+				},
+				showDropdowns : true
 			});
 
-			
+			$("input[name='tourClaimDate']").daterangepicker({
+				singleDatePicker : true,
+				autoApply : true,
+				locale : {
+					format : 'YYYY/MM/DD'
+				},
+				showDropdowns : true
+			});
+
 			// Datatables basic
 			$('#datatables-basic').DataTable({
-				responsive: true
+				responsive : true
 			});
 			// Datatables with Buttons
-			var datatablesButtons = $('#datatables-buttons').DataTable({
-				  deferRender:true,
-		            scrollCollapse: true,
-		            scroller: false,
-				   responsive: true,
-				   lengthMenu :[[10,20,30,-1 ],['10 rows', '20 rows', '30 rows', 'Show all' ] ],
-					buttons :[]
-			});
-			datatablesButtons.buttons().container().appendTo("#datatables-buttons_wrapper .col-md-6:eq(0)")
+			var datatablesButtons = $('#datatables-buttons')
+					.DataTable(
+							{
+								deferRender : true,
+								scrollCollapse : true,
+								scroller : false,
+								responsive : true,
+								lengthMenu : [
+										[ 10, 20, 30, -1 ],
+										[ '10 rows', '20 rows', '30 rows',
+												'Show all' ] ],
+								buttons : []
+							});
+			datatablesButtons.buttons().container().appendTo(
+					"#datatables-buttons_wrapper .col-md-6:eq(0)")
 		});
-		
 	</script>
-	
-		<script>
-		$(document).ready(function(){
 
-			  // SmartWizard initialize
-			  $('#smartwizard').smartWizard();
-			  $('#smartwizard').smartWizard("loader", "show");
+	<script>
+		$(document).ready(function() {
 
-			});
+			// SmartWizard initialize
+			$('#smartwizard').smartWizard();
+			$('#smartwizard').smartWizard("loader", "show");
+
+		});
 	</script>
 
 	<script type="text/javascript">
@@ -464,112 +588,38 @@ $(document).ready(function(){
 		}
 	</script>
 	<script>
- function myFunctionState(){
-   $('#stateCode').click(function() {
-      	 var name= $('#stateCode option:selected').text();
-      	$('#state').val(name);
-      	}); 
-      }
-      
-</script>
-
-<script>
- function myFunctionCity(){
-   $('#cityCode').click(function() {
-      	 var name= $('#cityCode option:selected').text();
-      	$('#district').val(name);
-      	}); 
-      }
-      
-</script>
-
-<script>
-	function myFunctionEmpCode(){
-/* 		 var empCode= $('#empCode option:selected').value; */
-		 var empCode= document.getElementById('empCode').value
-	    console.log("ajax request : "+ empCode);
-	    const xhr = new XMLHttpRequest();
-	    xhr.open('GET','./viewEmployeeTourClaim/'+empCode,true);
-	    xhr.getResponseHeader('content-type','application/json');
-	    xhr.onload = function(){
-	        if(this.status===200){
-	            let obj = JSON.parse(this.responseText);
-	            console.log(obj);
-	          
-	            $('#deptName').val(obj.deptName);
-	            $('#desgName').val(obj.desgName);
-	          
-	        }
-	        else{
-	            console.error("some error occured");
-	        }
-		
-	    }
-	    xhr.send();
-	}
-
-
-
-	
+		function myFunctionState() {
+			$('#stateCode').click(function() {
+				var name = $('#stateCode option:selected').text();
+				$('#state').val(name);
+			});
+		}
 	</script>
 
 	<script>
-	var size = "";
-	var idIndex=0;
-	function changeDepartment() {
+		function myFunctionCity() {
+			$('#cityCode').click(function() {
+				var name = $('#cityCode option:selected').text();
+				$('#district').val(name);
+			});
+		}
+	</script>
 
-		//set dept code value 
-		
-
-		var selecteDepartmentValue = document
-				.getElementById("departmentDropdown").value;
-		console.log("select category : " + selecteDepartmentValue);
-		//$('#employeeName').append($('<option>', {value:0, text:'Select Employee'}));
-		var x = document.getElementById("empName'+idIndex+'");
-		console.log("x value : " + x);
-
-		//var length = x.options.length;
-		//for (i = length - 1; i >= 1; i--) {
-		//	x.options[i] = null;
-		//}
-
-		if (selecteDepartmentValue !== ""
-				|| document.getElementById("selecteDepartmentValue").selected == false) {
+	<script>
+		function myFunctionEmpCode() {
+			/* 		 var empCode= $('#empCode option:selected').value; */
+			var empCode = document.getElementById('empCode').value
+			console.log("ajax request : " + empCode);
 			const xhr = new XMLHttpRequest();
-			xhr.open('GET', 'getEmployeeByDeptCode/' + selecteDepartmentValue,
-					true);
+			xhr.open('GET', './viewEmployeeTourClaim/' + empCode, true);
 			xhr.getResponseHeader('content-type', 'application/json');
 			xhr.onload = function() {
 				if (this.status === 200) {
 					let obj = JSON.parse(this.responseText);
 					console.log(obj);
-					console.log("console.log size :" + obj.length);
-					//console.log("employee name : " +obj[0].empName)
-					/* $('select[name="designationName"]').prop("disabled",
-							false); */
-					//$('select[name="employeeName"]').html(obj.empName);
-					$('#empName'+idIndex).empty();
-					$('#empName'+idIndex).append(
-							$('<option>').val('')
-									.text('Select Employee'));
-					
-					$.each(obj,
-							function(i, item) {
-								console.log(" i " + i + " item : "
-										+ item.empCode);
-								console.log(" i " + i + " item : "
-										+ item.empName);
-								/* $('#employeeName').append($('<option>', {
-									value : i,
-									text : item.empName
-								})); */
-								console.log("dbIndex value is : "+ idIndex);
-								$('#empName'+idIndex).append(
-										$('<option>').val(this.empCode)
-												.text(this.empName));
-							});
-					
-					
+
+					$('#deptName').val(obj.deptName);
+					$('#desgName').val(obj.desgName);
 
 				} else {
 					console.error("some error occured");
@@ -577,11 +627,71 @@ $(document).ready(function(){
 
 			}
 			xhr.send();
-		} else {
-			$('select[name="empName"]').prop("disabled", true);
 		}
+	</script>
 
-	}
+	<script>
+		var size = "";
+		var idIndex = 0;
+		function changeDepartment() {
+
+			//set dept code value 
+
+			var selecteDepartmentValue = document
+					.getElementById("departmentDropdown").value;
+			console.log("select category : " + selecteDepartmentValue);
+			//$('#employeeName').append($('<option>', {value:0, text:'Select Employee'}));
+			var x = document.getElementById("empName'+idIndex+'");
+			console.log("x value : " + x);
+
+			//var length = x.options.length;
+			//for (i = length - 1; i >= 1; i--) {
+			//	x.options[i] = null;
+			//}
+
+			if (selecteDepartmentValue !== ""
+					|| document.getElementById("selecteDepartmentValue").selected == false) {
+				const xhr = new XMLHttpRequest();
+				xhr.open('GET', 'getEmployeeByDeptCode/'
+						+ selecteDepartmentValue, true);
+				xhr.getResponseHeader('content-type', 'application/json');
+				xhr.onload = function() {
+					if (this.status === 200) {
+						let obj = JSON.parse(this.responseText);
+						console.log(obj);
+						console.log("console.log size :" + obj.length);
+						//console.log("employee name : " +obj[0].empName)
+						/* $('select[name="designationName"]').prop("disabled",
+								false); */
+						//$('select[name="employeeName"]').html(obj.empName);
+						$('#empName' + idIndex).empty();
+						$('#empName' + idIndex).append(
+								$('<option>').val('').text('Select Employee'));
+
+						$.each(obj, function(i, item) {
+							console.log(" i " + i + " item : " + item.empCode);
+							console.log(" i " + i + " item : " + item.empName);
+							/* $('#employeeName').append($('<option>', {
+								value : i,
+								text : item.empName
+							})); */
+							console.log("dbIndex value is : " + idIndex);
+							$('#empName' + idIndex).append(
+									$('<option>').val(this.empCode).text(
+											this.empName));
+						});
+
+					} else {
+						console.error("some error occured");
+					}
+
+				}
+				xhr.send();
+			} else {
+				$('select[name="empName"]').prop("disabled", true);
+			}
+
+		}
 	</script>
 
 	<script>
@@ -595,7 +705,12 @@ $(document).ready(function(){
 			}
 		});
 	</script>
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+
+	<script>
+		document.getElementById("tourClaimDate").valueAsDate = new Date();
+	</script>
+	<script type="text/javascript"
+		src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
 
 
 </body>

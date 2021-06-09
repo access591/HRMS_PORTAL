@@ -177,7 +177,7 @@ body {
 
 													
                             <td th:if="${trainingRequistion.trReqStatus == 'N'}">
-                               <a th:href="@{editTrainingRequisition/{id}/(id=${trainingRequistion.trReqCode})}" class="btn btn-primary"><em class="fa fa-eye"></em></a>
+                               <a th:href="@{viewTrainingRequisition/{id}/(id=${trainingRequistion.trReqCode})}" class="btn btn-primary"><em class="fa fa-eye"></em></a>
                             </td>
                             <td th:if="${trainingRequistion.trReqStatus == 'Y'}">
                                <a th:href="@{viewTrainingRequisition/{id}/(id=${trainingRequistion.trReqCode})}" class="btn btn-primary"><em class="fa fa-eye"></em></a>

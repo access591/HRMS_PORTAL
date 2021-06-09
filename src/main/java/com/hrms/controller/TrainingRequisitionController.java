@@ -69,6 +69,13 @@ public class TrainingRequisitionController {
 		if (listEmployee != null) {
 			model.addAttribute("listEmployee", listEmployee);
 		}
+		
+		List<TrainingRequisition> listTrainingReqisition = trainingRequistionService.getAllTrainingRequisition();
+		if(listTrainingReqisition != null) {
+			model.addAttribute("listTrainingReqisition", listTrainingReqisition);
+		}
+		
+		
 		return "trainingRequisition";  
 
 	}
@@ -88,6 +95,16 @@ public class TrainingRequisitionController {
 		return "redirect:trainingRequisition";
 	}
 	
+	
+	@GetMapping("deleteTrainingRequisition/{id}")
+	public String deleteTrainingRequisition(@PathVariable("id")String trainingRequisitionId) {
+		
+		trainingRequistionService.removeTrainingRequisition(trainingRequisitionId);
+		
+		return "redirect:/trainingRequisition";
+	}
+	
+	
 //	@GetMapping("getEmployeeByDeptCode/{deptCode}")
 //	@ResponseBody
 //	public List<Employee> getDepartmentValue(@PathVariable("deptCode") String deptCode) {
@@ -95,5 +112,16 @@ public class TrainingRequisitionController {
 //		List<Employee> listEmployee = employeeService.getAllEmployees();
 //		return listEmployee;
 //	}
+	
+	
+	@ResponseBody
+	@GetMapping("getTrainingInfoBytrCode/{id}")
+	public TrainingRequisition getTrainingInfo(@PathVariable("id") String trReqCode) {
+		
+		System.out.println("hi ..");
+		TrainingRequisition tr = trainingRequistionService.findById(trReqCode);
+		System.out.println("traininfg requisition : "+ tr.getTrReqDate());
+		return tr;
+	}
 
 }
