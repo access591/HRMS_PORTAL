@@ -45,7 +45,7 @@ public class TrainingRequisitionApproval {
 			model.addAttribute("modules", modules);
 		}
 		
-		List<TrainingRequisition> listTrainingRequisition = trainingRequistionService.getAllTrainingRequisition();
+		List<TrainingRequisition> listTrainingRequisition = trainingRequistionService.findTrainingRequisitionByStatusYAndC();
 		if(listTrainingRequisition != null) {
 			model.addAttribute("listTrainingRequisition", listTrainingRequisition);
 		}
@@ -92,6 +92,7 @@ public class TrainingRequisitionApproval {
 		  
 		  for(TrainingRequisitionDetail t : trainingRequisition.getListTransactionRequisitionDetail()) {
 				t.setTrainingRequisition(trainingRequisition);
+				
 			}
 			for(TrainingReqEmployeeDetail t : trainingRequisition.getListTransactionReqEmployeeDetail()) {
 				t.setTrainingRequisition(trainingRequisition);
