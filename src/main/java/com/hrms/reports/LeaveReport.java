@@ -29,8 +29,7 @@ public class LeaveReport {
 
 	@Autowired
 	LeaveGrantRegisterService leaveGrantService;
-	
-	
+
 //leave management report / leave request report
 
 	public List<?> leaveRequestReport(HttpServletResponse response, HttpServletRequest request, String reportFileName,
@@ -90,55 +89,109 @@ public class LeaveReport {
 		return null;
 
 	}
-	
-	
-	//LEAVE TRASACTION PDF REPORT
-		public void leaveTransactionPdfReportByEmp(HttpServletRequest request, HttpServletResponse response, 
-				List<?> sourceData,String activeUser) {
-			String reportFileName = "LeaveTransaction";
-			System.out.println("leave transaction report...");
-			String sourceFileName = request.getSession().getServletContext()
-					.getRealPath("resources/" + reportFileName + ".jrxml");
-			System.out.println("resources : = "+sourceFileName);
 
-			try {
+	// LEAVE TRASACTION PDF REPORT
+	public void leaveTransactionPdfReportByEmp(HttpServletRequest request, HttpServletResponse response,
+			List<?> sourceData, String activeUser) {
+		String reportFileName = "LeaveTransaction";
+		System.out.println("leave transaction report...");
+		String sourceFileName = request.getSession().getServletContext()
+				.getRealPath("resources/" + reportFileName + ".jrxml");
+		System.out.println("resources : = " + sourceFileName);
 
-				JasperCompileManager.compileReportToFile(sourceFileName);
-				sourceFileName = request.getSession().getServletContext()
-						.getRealPath("/resources/" + reportFileName + ".jasper");
-				JRBeanCollectionDataSource beanColDataSource = new JRBeanCollectionDataSource(sourceData);
+		try {
 
-				HashMap<String, Object> map = new HashMap<String, Object>();
+			JasperCompileManager.compileReportToFile(sourceFileName);
+			sourceFileName = request.getSession().getServletContext()
+					.getRealPath("/resources/" + reportFileName + ".jasper");
+			JRBeanCollectionDataSource beanColDataSource = new JRBeanCollectionDataSource(sourceData);
 
-				map.put("Parameter", beanColDataSource);//Parameter
-				map.put("activeUser", "Run By : "+activeUser);
-				map.put("runDate", "Run Date : "+new Date());
+			HashMap<String, Object> map = new HashMap<String, Object>();
 
-				JasperReport report = (JasperReport) JRLoader.loadObjectFromFile(sourceFileName);
-				JasperPrint jasperPrint = JasperFillManager.fillReport(report, map, new JREmptyDataSource());
+			map.put("Parameter", beanColDataSource);// Parameter
+			map.put("activeUser", "Run By : " + activeUser);
+			map.put("runDate", "Run Date : " + new Date());
 
-				if (jasperPrint != null) {
-					byte[] pdfReport = JasperExportManager.exportReportToPdf(jasperPrint);
-					response.reset();
-					response.setContentType("application/pdf");
-					response.setHeader("Cache-Control", "no-store");
-					response.setHeader("Cache-Control", "private");
-					response.setHeader("Pragma", "no-store");
-					response.setContentLength(pdfReport.length);
-					try {
-						response.getOutputStream().write(pdfReport);
-						response.getOutputStream().flush();
-						response.getOutputStream().close();
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
+			JasperReport report = (JasperReport) JRLoader.loadObjectFromFile(sourceFileName);
+			JasperPrint jasperPrint = JasperFillManager.fillReport(report, map, new JREmptyDataSource());
 
+			if (jasperPrint != null) {
+				byte[] pdfReport = JasperExportManager.exportReportToPdf(jasperPrint);
+				response.reset();
+				response.setContentType("application/pdf");
+				response.setHeader("Cache-Control", "no-store");
+				response.setHeader("Cache-Control", "private");
+				response.setHeader("Pragma", "no-store");
+				response.setContentLength(pdfReport.length);
+				try {
+					response.getOutputStream().write(pdfReport);
+					response.getOutputStream().flush();
+					response.getOutputStream().close();
+				} catch (IOException e) {
+					e.printStackTrace();
 				}
-			} catch (JRException e) {
-				e.printStackTrace();
-			}
-			// return null;
 
+			}
+		} catch (JRException e) {
+			e.printStackTrace();
 		}
+		// return null;
+
+	}
+
+	// leave detail reports / leave register
+	public void leaveRegisterReport(HttpServletRequest request, HttpServletResponse response, List<?> listLeveDetail) {
+
+		System.out.println("hii in leave register util");
+
+		String reportFileName = "LeaveDetailManagement";
+		String sourceFileName = request.getSession().getServletContext()
+				.getRealPath("resources/" + reportFileName + ".jrxml");
+
+		System.out.println("hii in leave register util" + sourceFileName);
+
+		try {
+
+			JasperCompileManager.compileReportToFile(sourceFileName);
+			sourceFileName = request.getSession().getServletContext()
+					.getRealPath("/resources/" + reportFileName + ".jasper");
+			JRBeanCollectionDataSource beanColDataSource = new JRBeanCollectionDataSource(listLeveDetail);
+
+			HashMap<String, Object> map = new HashMap<String, Object>();
+
+			map.put("ItemDataSource", beanColDataSource);
+			System.out.println("hii leave detail reports");
+
+			JasperReport report = (JasperReport) JRLoader.loadObjectFromFile(sourceFileName);
+			JasperPrint jasperPrint = JasperFillManager.fillReport(report, map, new JREmptyDataSource());
+
+			if (jasperPrint != null) {
+				byte[] pdfReport = JasperExportManager.exportReportToPdf(jasperPrint);
+				response.reset();
+				response.setContentType("application/pdf");
+				response.setHeader("Cache-Control", "no-store");
+				response.setHeader("Cache-Control", "private");
+				response.setHeader("Pragma", "no-store");
+				response.setContentLength(pdfReport.length);
+				
+				try {
+					response.getOutputStream().write(pdfReport);
+					response.getOutputStream().flush();
+					response.getOutputStream().close();
+					
+				
+				} catch (IOException e) {
+					e.printStackTrace();
+					System.out.println("exception occured");
+				}
+
+			}
+		} catch (JRException e) {
+			e.printStackTrace();
+			System.out.println("exception occured");
+		}
+		// return null;
+
+	}
 
 }

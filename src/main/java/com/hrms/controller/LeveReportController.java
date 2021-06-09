@@ -26,6 +26,7 @@ import com.hrms.model.Employee;
 import com.hrms.model.CommonUtil;
 import com.hrms.model.Leave;
 import com.hrms.model.LeaveDetail;
+import com.hrms.model.LeaveGrant;
 import com.hrms.model.LeaveRequest;
 import com.hrms.model.MenuModule;
 import com.hrms.model.UserEntity;
@@ -34,6 +35,7 @@ import com.hrms.service.DepartmentService;
 import com.hrms.service.DesignationService;
 import com.hrms.service.EmployeeService;
 import com.hrms.service.LeaveDetailService;
+import com.hrms.service.LeaveGrantRegisterService;
 import com.hrms.service.LeaveRequestService;
 import com.hrms.service.LeaveService;
 import com.hrms.service.ModuleService;
@@ -73,6 +75,7 @@ public class LeveReportController {
 	@Autowired
 	CommonUtil employeeLeaveRequest;
 	@Autowired UserService userService;
+	@Autowired LeaveGrantRegisterService leaveGrantService;
 
 	@Autowired
 	LeaveReport leaveReport;
@@ -86,27 +89,57 @@ public class LeveReportController {
 		if (modules != null) {
 			model.addAttribute("modules", modules);
 		}
-
-		List<Leave> listLeave = leaveService.getAllLeaves();
-
-		if (listLeave != null) {
-			model.addAttribute("listLeave", listLeave);
+		List<Department> departmentList = departmentService.getAllDepartments();
+		System.out.println("department service======>" + departmentList.size());
+		if (departmentList != null) {
+			model.addAttribute("departmentList", departmentList);
 		}
+
+		
 		session.setAttribute("username", session.getAttribute("username"));
 
 		return "leaveRegister";
 
 	}
 
-	@PostMapping("/leaveDetailPdf")
-	public String leaveDetailPdf(@RequestParam("leaveType") String leaveType, Model model, HttpSession session,
+	@PostMapping("/createLeaveRegisterReport")
+	public String leaveDetailPdf(@RequestParam("deptCode") String deptCode, @RequestParam("empCode") String empCode,
+			Model model, HttpSession session,
 			HttpServletRequest request, HttpServletResponse response) {
 
-		System.out.println("leave type is : " + leaveType);
-
-		List<LeaveDetail> listLeaveDetail = leaveDetailService.findLeaveDetailByLeaveType(leaveType);
-		System.out.println("listLeaveDetail size : " + listLeaveDetail.size());
-		reportUtil.leaveRegisterReport(request, response, listLeaveDetail);
+		if (deptCode.equals("ALL")) {
+			System.out.println("All record");
+			
+			List<LeaveGrant> listLeaveGrant = leaveGrantService.getAllLeaveGrants();
+			System.out.println("leave register size : " + listLeaveGrant.size());
+			leaveReport.leaveRegisterReport(request, response, listLeaveGrant);
+			
+			
+			
+		} 
+		
+		else if (!deptCode.equals("ALL") && (empCode.equals(null) || !empCode.equals(""))) {
+			System.out.println("find data by department ");
+			List<LeaveGrant> listLeaveGrant = leaveGrantService.findLeaveGrantByDepartment(deptCode);
+			System.out.println("leave register size : " + listLeaveGrant.size());
+			leaveReport.leaveRegisterReport(request, response, listLeaveGrant);
+			
+		}
+		
+		else if (!deptCode.equals("ALL") && (!empCode.equals(null) || empCode.equals(""))) {
+			System.out.println("find data by emp ");
+			
+			List<LeaveGrant> listLeaveGrant = leaveGrantService.findLeaveGrantByEmployeeName(empCode);
+			System.out.println("leave register size : " + listLeaveGrant.size());
+			leaveReport.leaveRegisterReport(request, response, listLeaveGrant);
+			
+		} 
+		
+		else {
+			//return "redirect:AttendanceRegMothlyReport";
+		}
+		
+		//reportUtil.leaveRegisterReport(request, response, listLeaveDetail);
 		return null;
 	}
 
