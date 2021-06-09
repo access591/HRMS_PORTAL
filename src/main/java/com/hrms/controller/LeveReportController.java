@@ -169,19 +169,10 @@ public class LeveReportController {
 		} 
 		
 		else {
-			return "redirect:AttendanceRegMothlyReport";
+			return "redirect:/leaveRequestReport";
 		}
 
-		List<LeaveRequest> listLeave = leaveRequestService.findAllByEmpCode(empCode);
-
-		// System.out.println("list leave size : "+listLeave.size());
-
-//		List<LeaveRequest> leaveDataSource = new ArrayList<LeaveRequest>();
-//		LeaveRequest lv = listLeave.get(0);
-//		leaveDataSource.add(lv);
-
-		// leaveReport.leaveRequestReport(response,request,reportFileName,listLeave,empName);
-		return null;
+		return "redirect:/leaveRequestReport";
 	}
 
 	/* leave Transaction detail report */
