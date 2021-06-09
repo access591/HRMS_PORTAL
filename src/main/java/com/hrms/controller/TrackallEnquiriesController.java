@@ -4,6 +4,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -135,4 +137,25 @@ public class TrackallEnquiriesController {
 
 	}
 	
+	@GetMapping(value = { "/reportTrackallEnquiries" })
+	public String reportTrackallEnquiries(Model model, HttpSession session, HttpServletRequest request,
+			HttpServletResponse response) {
+
+		List<TrackallEnquiries> dataList = trackallEnquiriesService.getAllTrackallEnquiries();
+		String reportFileName = "";
+		String val = null;
+		if (request.getParameter("_ex") != null) {
+			val = request.getParameter("_ex");
+		}
+		if (val.equals("P")) {
+			reportFileName = "trackallEnquiries_pdf";
+			trackallEnquiriesService.trackallEnquirieGenratepdf(request, response, reportFileName, dataList);
+		} else if (val.equals("E")) {
+
+		}
+		session.setAttribute("username", session.getAttribute("username"));
+		return null;
+
+	}
+
 }
