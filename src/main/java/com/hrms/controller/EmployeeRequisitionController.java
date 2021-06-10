@@ -111,11 +111,17 @@ public class EmployeeRequisitionController {
 			HttpSession session,RedirectAttributes redirectAttributes) {
 		
 		String insertedBY = (String) session.getAttribute("userlogin");
+		
+		System.out.println("========================");
+		/*
+		 * System.out.println("employee requisition detail======>"+employeeRequisition.
+		 * getEmployeRequisitionDetail(). get(1).getDesignation().getDesgName());
+		 */
 	
 		List<EmployeeRequisitionDetail> re = new ArrayList<EmployeeRequisitionDetail>();
-		EmployeeRequisitionDetail e = new EmployeeRequisitionDetail();
+		
 		for(int i=0;i<employeeRequisition.getEmployeRequisitionDetail().size();i++) {
-			
+			EmployeeRequisitionDetail e = new EmployeeRequisitionDetail();
 			e = employeeRequisition.getEmployeRequisitionDetail().get(i);
 			e.setReqDate(employeeRequisition.getReqDate());
 			e.setEmployeeRequisition(employeeRequisition);
@@ -138,7 +144,7 @@ public class EmployeeRequisitionController {
 	@GetMapping(value = {"editRequisition/{id}"})
 	public String editRequisition(@PathVariable("id") String reqCode,@ModelAttribute("req") EmployeeRequisition employeeRequisition,
 			Model model) {
-		System.out.println("=====================>");
+		System.out.println("==========employeeRequisitionCode===========>"+reqCode);
 		
 		EmployeeRequisition requisition = employeeRequisitionService.findEmployeeRequisitiondById(reqCode);
 		System.out.println("requisition detail : "+ requisition.getReqCode());

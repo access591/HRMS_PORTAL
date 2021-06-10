@@ -65,15 +65,15 @@ body {
 										<div class="row">
 											<div class="col-12 col-lg-6">
 												<div class="form-group">
-													<label> Requisition Code </label> 
-													<input class="form-control" id="reqCode" name="reqCode"
-														th:field="*{reqCode}" readonly/>
+													<label> Requisition Code </label> <input
+														class="form-control" id="reqCode" name="reqCode"
+														th:field="*{reqCode}" readonly />
 												</div>
 											</div>
 											<div class="col-12 col-lg-6">
 												<div class="form-group">
-													<label> Requisition Date </label> 
-													<input class="form-control" type="date" id="" value=""
+													<label> Requisition Date </label> <input
+														class="form-control" type="date" id="" value=""
 														th:field="*{reqDate}" />
 												</div>
 											</div>
@@ -82,29 +82,30 @@ body {
 										<div class="row">
 											<div class="col-12 col-lg-6">
 												<div class="form-group">
-													<label> Department Code </label> 
-													<input type="text" class="form-control" id="departmentId"
-														value="" th:field="*{departmet.departmentCode}" readonly>
+													<label> Department Code </label> <input type="text"
+														class="form-control" id="departmentId" value=""
+														th:field="*{departmet.departmentCode}" readonly>
 												</div>
 											</div>
 											<div class="col-12 col-lg-6">
-												<label class="form-label">Department Name</label> <input type="text" class="form-control" id="departmentId"
-														value="" th:field="*{departmet.deptName}" readonly>
+												<label class="form-label">Department Name</label> <input
+													type="text" class="form-control" id="departmentId" value=""
+													th:field="*{departmet.deptName}" readonly>
 											</div>
 										</div>
 										<div class="row">
 											<div class="col-12 col-lg-6">
 												<div class="form-group">
-													<label> Requisition Priorty </label>  
-													<select class="form-control" id="reqPriority"
-														 th:field="*{reqPriority}">
-														 <option value="" disabled>Please Select</option>
-														 <option value="High">High</option>
-														 <option value="Low">Low</option>
-														 
-														 </select>
-														 
-													
+													<label> Requisition Priorty </label> <select
+														class="form-control" id="reqPriority"
+														th:field="*{reqPriority}">
+														<option value="" disabled>Please Select</option>
+														<option value="High">High</option>
+														<option value="Low">Low</option>
+
+													</select>
+
+
 												</div>
 											</div>
 											<div class="col-12 col-lg-6">
@@ -137,22 +138,23 @@ body {
 												class="table table-striped display" style="width: 100%">
 												<thead>
 													<tr>
-														<th style="width: 130px;">Designation Code</th>
-														<th style="width: 130px;">Designation Name</th>
-														<th style="width: 130px;">Location</th>
-														<th style="width: 130px;">Sex</th>
-														<th style="width: 130px;">Age(From)</th>
-														<th style="width: 130px;">Age(To)</th>
-														<th style="width: 130px;">Academic Qualification</th>
-														<th style="width: 130px;">Technical Qualification</th>
-														<th style="width: 130px;">Exp.in month(Min)</th>
-														<th style="width: 130px;">MaExp.in month(Max)x</th>
-														<th style="width: 130px;">Vacancy Type</th>
-														<th style="width: 130px;">Total Vacancies</th>
-														<th style="width: 130px;">Salary From</th>
-														<th style="width: 130px;">Salary To</th>
-														<th style="width: 130px;">Detail</th>
-														<th style="width: 130px;">Action</th>
+														<th class="text-center" style="width: 130px;">Designation Code</th>
+														<th class="text-center" style="width: 130px;">Designation Name</th>
+														<th class="text-center" style="width: 130px;">Location</th>
+														<th class="text-center" style="width: 130px;">Sex</th>
+														<th class="text-center" style="width: 130px;">Age(From)</th>
+														<th class="text-center" style="width: 130px;">Age(To)</th>
+														<th class="text-center" style="width: 130px;">Academic Qualification</th>
+														<th class="text-center" style="width: 130px;">Technical Qualification</th>
+														<th class="text-center" style="width: 130px;">Exp.in month(Min)</th>
+														<th class="text-center" style="width: 130px;">MaExp.in month(Max)x</th>
+														<th class="text-center" style="width: 130px;">Vacancy Type</th>
+														<th class="text-center" style="width: 130px;">Total Vacancies</th>
+														<th class="text-center" style="width: 130px;">Salary From</th>
+														<th class="text-center" style="width: 130px;">Salary To</th>
+														<th class="text-center" style="width: 130px;">Detail</th>
+														<th ></th>
+
 													</tr>
 												</thead>
 												<tbody>
@@ -160,32 +162,34 @@ body {
 														th:each="row, stat :${req.employeRequisitionDetail}">
 
 
-														<td><input type="text" 
-															id="desigCode"
-															th:field="*{employeRequisitionDetail[__${stat.index}__].designation.desgCode}"readonly style="width: 130px;background-color:#FFFFFF"></td>
+														<td><input type="text" id="desigCode"
+															th:field="*{employeRequisitionDetail[__${stat.index}__].designation.desgCode}"
+															readonly style="width: 130px; background-color: #FFFFFF"></td>
 
-														<td><input type="text"
-															id="desigCode"
-															th:field="*{employeRequisitionDetail[__${stat.index}__].designation.desgName}" readonly style="width: 130px;background-color:#FFFFFF"></td>
+														<td><input type="text" id="desigCode"
+															th:field="*{employeRequisitionDetail[__${stat.index}__].designation.desgName}"
+															readonly style="width: 130px; background-color: #FFFFFF"></td>
 
 														<td><select id="location" style="width: 130px;"
-															th:field="*{employeRequisitionDetail[__${stat.index}__].location}" required>
+															th:field="*{employeRequisitionDetail[__${stat.index}__].location}"
+															>
 																<option value=" ">Select</option>
 																<option value="Court">Court</option>
 																<option value="Department">Department</option>
 														</select></td>
-														
+
 														<td><select id="sex" style="width: 130px;"
-															th:field="*{employeRequisitionDetail[__${stat.index}__].sex}" required>
+															th:field="*{employeRequisitionDetail[__${stat.index}__].sex}"
+															>
 																<option value=" ">Select</option>
 																<option value="Male">Male</option>
 																<option value="Female">Female</option>
 														</select></td>
 
 
-										
 
-														
+
+
 
 														<td><input name="ageFrom" type="text"
 															style="width: 130px;" id="ageFrom"
@@ -211,15 +215,14 @@ body {
 															style="width: 130px;" id="expMaxMonth"
 															th:field="*{employeRequisitionDetail[__${stat.index}__].maxExperience}"></td>
 
-														<td>
-															<select id="vacancyType" style="width: 130px;"
-															th:field="*{employeRequisitionDetail[__${stat.index}__].vacanncyType}" required>
+														<td><select id="vacancyType" style="width: 130px;"
+															th:field="*{employeRequisitionDetail[__${stat.index}__].vacanncyType}"
+															required>
 																<option value=" ">Select</option>
 																<option value="Fresher">Fresher</option>
 																<option value="Experience">Experience</option>
-														</select>
-														</td>
-														
+														</select></td>
+
 
 														<td><input name="totalVacancy" type="text"
 															style="width: 130px;" id="totalvacancy"
@@ -237,29 +240,22 @@ body {
 															style="width: 130px;" id="detail"
 															th:field="*{employeRequisitionDetail[__${stat.index}__].remarks}"></td>
 
-														<td>
-													
-														</td>
+														<td></td>
 													</tr>
 
-
-<!--{id}(id=*{employeRequisitionDetail[__${stat.index}__].reqDetailCode}) -->
 												</tbody>
-													
+
 											</table>
 										</div>
-<input type="hidden" id="hidden_field" th:value="${length}" />
+										<input type="hidden" id="hidden_field" th:value="${length}" />
 									</div>
 
 								</div>
 							</div>
-							<button type="submit" class="btn btn-primary">Update</button>
-							<input
-    							action="action"
-    							onclick="window.history.go(-1); return false;"
-    							type="submit"
-    							value="Back"
-							/>
+							 &nbsp &nbsp<button type="submit" class="btn btn-primary">Update</button> &nbsp 
+							<input action="action" class="btn btn-primary"
+								onclick="window.history.go(-1); return false;" type="submit"
+								value="Back" />
 
 
 
@@ -327,8 +323,9 @@ body {
 								false);
 						// $('select[name="employeeName"]').html(obj.empName);
 
-						for(var i=0;i<document.getElementById("hidden_field").value;i++){
-							
+						for (var i = 0; i < document
+								.getElementById("hidden_field").value; i++) {
+
 						}
 						$.each(obj,
 								function(i, item) {
@@ -340,7 +337,7 @@ body {
 										value : i,
 										text : item.empName
 									}));
-									$('#designationName'+i).append(
+									$('#designationName' + i).append(
 											$('<option>').val(this.desigCode)
 													.text(this.desgName));
 								});
