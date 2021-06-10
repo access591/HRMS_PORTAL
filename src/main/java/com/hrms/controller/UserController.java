@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.hrms.EncryptionUtil;
 import com.hrms.model.Login;
 import com.hrms.model.MenuModule;
 import com.hrms.model.Module;
@@ -103,13 +104,15 @@ public class UserController {
 
 		
 		boolean isUserExist = userService.checkUserExistsOrNot(userEntity);
-
+		String pass=EncryptionUtil.encode(userEntity.getUserPass());
+		
 		if (isUserExist) {
 			redirectAttributes.addFlashAttribute("message", "User Code Already exists !  ");
 			redirectAttributes.addFlashAttribute("alertClass", "alert-success");
 			return "redirect:/userMaster";
 		} else {
 			String username= (String)session.getAttribute("uuuuu");
+			userEntity.setUserPass(pass);
 			userEntity.setInsBy(username);
 			userService.addUser(userEntity);
 			session.setAttribute("username", session.getAttribute("username"));
@@ -131,7 +134,8 @@ public class UserController {
 
 	@PostMapping("/upadteUser")
 	public String updateUser(@ModelAttribute("userUpdate") UserEntity u, Model model, HttpSession session) {
-
+		String pass=EncryptionUtil.encode(u.getUserPass());
+		u.setUserPass(pass);
 		String username= (String)session.getAttribute("uuuuu");
 			u.setUpdBy(username);
 		  this.userService.updateUser(u);
