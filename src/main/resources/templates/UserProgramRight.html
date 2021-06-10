@@ -100,7 +100,7 @@ body {
 										   			  <div class="mb-3">
 														<label class="form-label">Program</label>
 															<label style="color: red">*</label>
-													   <select class="form-control select2" name="prgCode"id="prgCode" required aria-required="true">
+													   <select class="form-control select2" name="prgCode.programCode"id="prgCode.programCode" required aria-required="true">
 												    <option value="">Select Program</option>
 													<option   th:each="program: ${programsList}" th:value="${program.getProgramCode()}" th:text="${program.getProgramName()}"></option>
 											     	</select>
@@ -141,7 +141,7 @@ body {
 												<td th:text="${listUserR?.userCode?.userName}"></td>
 												<td th:text="${listUserR?.moduleCode?.moduleName}"></td>
 												<td th:text="${listUserR?.subModuleCode?.subModuleName}"></td>
-												<td th:text="${listUserR.prgCode}"></td>
+												<td th:text="${listUserR?.prgCode?.programName}"></td>
 												
 												<td th:text="${listUserR.active}"></td>
 												<td><a th:href="@{/editUserRights/{id}(id=${listUserR.id})}"><em class="fa fa-edit"></em></a>
