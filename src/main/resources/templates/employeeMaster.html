@@ -359,7 +359,7 @@ body {
 												 <div class="form-group sm col-md-4">
 													<label class="form-label">Gender</label> <span
 														class="text-danger">*</span> <select
-														class="form-control required" name="gender" id="gender">
+														class="form-control required" name="gender" title="Gender" id="gender">
 														<option value="">Select Type</option>
 														<option value="M">MALE</option>
 														<option value="F">FEMALE</option>
@@ -369,7 +369,7 @@ body {
 												  	<div class="form-group sm col-md-4">
 													<label class="form-label">Martial Status</label> <span
 														class="text-danger">*</span> <select
-														class="form-control required" name="martialStatus" id="martialStatus">
+														class="form-control required" name="martialStatus" title="Martial Status" id="martialStatus">
 														<option value="">Select Type</option>
 														<option value="MARRIED">MARRIED</option>
 														<option value="UNMARRIED ">UNMARRIED  </option>
@@ -440,7 +440,7 @@ body {
 											       <label class="form-label">City 
 											       <span class="text-danger">*</span></label>
 										             <select
-														class="form-control required" name="cityCode" id="cityCode"onchange="myFunctionCity()">
+														class="form-control required" name="cityCode" title="City" id="cityCode"onchange="myFunctionCity()">
 															<option value="">Select City</option>
 														<option th:each="lc :${CityList}" th:value="${lc.getCityCode()}" th:text="${lc.getCityName()}">Select  City</option>
 													
@@ -452,7 +452,7 @@ body {
 											       <label class="form-label">State 
 											       <span class="text-danger">*</span></label>
 										              <select
-														class="form-control required" name="stateCode" id="stateCode" onchange="myFunctionState()">
+														class="form-control required" name="stateCode" title="State" id="stateCode" onchange="myFunctionState()">
 														<option value="">Select State</option>
 														<option  th:each="ls :${listState}"th:value="${ls.getStateCode()}" th:text="${ls.getStateName()}">Select  State</option>
 														
@@ -463,7 +463,7 @@ body {
 											       <label class="form-label">Country 
 											       <span class="text-danger">*</span></label>
 										              <select
-														class="form-control required" name="countryCode" id="countryCode">
+														class="form-control required" name="countryCode" id="countryCode" title="Country">
 														<option value="">Select Country</option>
 														<option th:each="lco :${listCountry}" th:value="${lco.getCountryCode()}" th:text="${lco.getCountryName()}">Select  Country Type</option>
 														
@@ -478,7 +478,7 @@ body {
 											 <div class="form-group sm col-md-4">
 											       <label class="form-label">Primary Address
 											       <span class="text-danger">*</span></label>
-							                 <input  type="text"id="address1"name="address1" title="Address1"onkeyup="syncAddress()"maxlength="200" class="form-control required">
+							                 <input  type="text"id="address1"name="address1" title="Primary Address"onkeyup="syncAddress()"maxlength="200" class="form-control required">
 										     </div>
 										     <div class="form-group sm col-md-4">
 											       <label class="form-label">Address
@@ -535,8 +535,8 @@ body {
 											       <select onchange="changetextbox();"
 														class="form-control " name="onDeputation" id="onDeputation">
 														<option value="">Select Type</option>
-														<option value="Y">YES</option>
-														<option value="N"selected>NO</option>
+														<option value="Y">Yes</option>
+														<option value="N"selected>No</option>
 													</select>
 											      </div>
 											       <div class="form-group sm col-md-4">
@@ -600,17 +600,17 @@ body {
 									   <div class="form-row">
 									     <div class="form-group sm col-md-4">
 											       <label class="form-label">City District
-											       <span class="text-danger">*</span></label>
+											       </label>
 							                 <input  type="text"id="district"name="district"maxlength="40" title="District" pattern="^[a-zA-Z\s]*$" class="form-control required">
 										     </div>
 										       <div class="form-group sm col-md-4">
 											       <label class="form-label">State
-											       <span class="text-danger">*</span></label>
+											       </label>
 							                 <input  type="text"id="state"name="state" title="State" maxlength="30"pattern="^[a-zA-Z\s]*$" class="form-control required">
 										     </div>
 										      <div class="form-group sm col-md-4">
 											       <label class="form-label">Address
-											       <span class="text-danger">*</span></label>
+											      </label>
 							                 <input  type="text"id="addressArms"name="addressArms"maxlength="60" title="Address" class="form-control required">
 										     </div>
 										     
@@ -668,8 +668,8 @@ body {
 										     </div>
 									         <div class="form-group sm col-md-4">
 											       <label class="form-label">Dealer Details
-											       <span class="text-danger">*</span></label>
-							                 <input  type="text"id="dealerDetails"name="dealerDetails"maxlength="100" title="Dealer Details" class="form-control required">
+											      </label>
+							                 <input  type="text"id="dealerDetails"name="dealerDetails"maxlength="100" title="Dealer Details" class="form-control">
 										     </div>
 									       
 									       </div>
