@@ -103,7 +103,7 @@ body {
 
 														<td>
 															<select class="form-control text-center" id = "applicantCode" onchange="chooseAppliCode()"
-																name="interviewForm[0].applicantCode" style="width: auto;">
+																name="interviewForm[0].applicantCode.applicantCode" style="width: auto;">
 																<option value="">Select</option>
 																<option th:each="applicantCode : ${listApplicantInfo}"
 																	th:text="${applicantCode.applicantName}" th:value="${applicantCode.applicantCode}"></option>

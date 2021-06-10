@@ -129,20 +129,6 @@ public class InterviewController {
 	}
 	
 	
-	@GetMapping("viewApplicantInfo/{applicantCode}")
-	public String viewApplicantInfo(@PathVariable("applicantCode") String applicantCode , Model model,HttpSession session) {
-		
-		String userCode = (String) session.getAttribute("username");
-		
-		ApplicantInfo applicantInfo = applicantInfoService.getApplicantInfoByApplicantCode(applicantCode);
-		model.addAttribute("applicantInfo", applicantInfo);
-		
-		session.setAttribute("username", userCode);
-		return "viewApplicantInfo";
-	}
-	
-	
-	
 	@ResponseBody
 	@GetMapping("getApplicantDate/{applicantCode}")
 	public Date getRequisitionDateByAdvtCode(@PathVariable("applicantCode")String applicantCode) {
@@ -170,49 +156,9 @@ public class InterviewController {
 		}
 		
 		
-		List<ApplicantInfo> listApplicantInfo = applicantInfoService.getAllApplicantInfo();
-		List<InterviewApprovalUtil> listInterviewApprovalUtil = new ArrayList<InterviewApprovalUtil>();
+		List<ApplicantInfo> listApplicantInfo = applicantInfoService.findApplicantInfoStatusHoldAndPending();
 		
-		
-		
-		try {
-			for(int i=0;i<listApplicantInfo.size();i++) {
-				
-				System.out.println("checking inter status : " + listApplicantInfo.get(i).getInterStatus());
-				if( listApplicantInfo.get(i).getInterStatus()==null || listApplicantInfo.get(i).getInterStatus().equals("") || listApplicantInfo.get(i).getInterStatus().startsWith("H"))
-				{
-					InterviewApprovalUtil interviewApprovalUtil = new InterviewApprovalUtil();
-					
-					Designation designation;
-					try {
-						designation = designationService.findDesignationById(listApplicantInfo.get(i).getDesigCode().getDesgCode());
-						interviewApprovalUtil.setDesignationCode(designation.getDesgCode());
-						interviewApprovalUtil.setDesignationName(designation.getDesgName());
-					}catch(Exception e) {
-						System.out.println("error : find designation");
-						e.printStackTrace();
-					}
-					
-					
-					
-					interviewApprovalUtil.setApplicantCode(listApplicantInfo.get(i).getApplicantCode());
-					interviewApprovalUtil.setApplicantDate(listApplicantInfo.get(i).getApplicantDate());
-					interviewApprovalUtil.setApplicantName(listApplicantInfo.get(i).getApplicantName());
-					interviewApprovalUtil.setApplicantSex(listApplicantInfo.get(i).getSex());
-					
-					listInterviewApprovalUtil.add(interviewApprovalUtil);
-					System.out.println("hiii");
-				}
-				
-				
-			}
-		}catch(Exception e) {
-			System.out.println("for loop error ");
-			e.printStackTrace();
-		}
-		
-		
-		model.addAttribute("listInterviewApprovalUtil",listInterviewApprovalUtil);
+		model.addAttribute("listInterviewApprovalUtil",listApplicantInfo);
 		
 		session.setAttribute("username", userCode);
 		return "interviewApproval";

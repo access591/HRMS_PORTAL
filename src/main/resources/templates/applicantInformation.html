@@ -147,12 +147,12 @@ body {
 
 
 															<div class="form-group sm col-md-4">
-																<label class="form-label">Department Code</label>  <select
+																<label class="form-label">Designation</label>  <select
 																	class="form-control " name="designationCode"
-																	id="designationCode" th:field="*{desigCode}">
-																	<option value="">Select Department</option>
-																	<option th:each="designation : ${listEmployeeRequisition}"
-																		th:text="${designation.departmet.deptName}" th:value="${designation.departmet.departmentCode}"></option>
+																	id="designationCode" th:field="*{desigCode.desgCode}">
+																	<option value="">Select Designation</option>
+																	<option th:each="applicant : ${listEmployeeRequisition}"
+																		th:text="${applicant.designation.desgName}" th:value="${applicant.designation.desgCode}"></option>
 																	
 
 
@@ -257,10 +257,6 @@ body {
 
 																</select>
 															</div>
-
-															
-
-
 														</div>
 														
 														<div class="form-row">
@@ -333,9 +329,6 @@ body {
 
 																</select>
 															</div>
-
-															
-
 
 														</div>
 														
