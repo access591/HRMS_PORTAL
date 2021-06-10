@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -24,8 +26,9 @@ public class UserRights implements Serializable {
 	 @Id
 	 @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
-	@Column(name = "USER_CODE")
-	private String userCode;
+	@ManyToOne
+	@JoinColumn(name = "USER_CODE")
+	private UserEntity userCode;
 	
 	@Column(name = "MODULE_CODE")
 	private String moduleCode;
@@ -58,10 +61,12 @@ public class UserRights implements Serializable {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public String getUserCode() {
+
+	
+	public UserEntity getUserCode() {
 		return userCode;
 	}
-	public void setUserCode(String userCode) {
+	public void setUserCode(UserEntity userCode) {
 		this.userCode = userCode;
 	}
 	public String getModuleCode() {
