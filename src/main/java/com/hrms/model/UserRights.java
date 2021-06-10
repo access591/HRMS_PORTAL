@@ -37,8 +37,9 @@ public class UserRights implements Serializable {
 	@JoinColumn(name = "SUB_MODULE_CODE")
 	private SubModule subModuleCode;
 
-	@Column(name = "PRG_CODE")
-	private String prgCode;
+	@ManyToOne
+	@JoinColumn(name = "PRG_CODE")
+	private Program prgCode;
 
 	@Column(name = "ACTIVE_YN")
 	private String active;
@@ -84,10 +85,11 @@ public class UserRights implements Serializable {
 	public void setSubModuleCode(SubModule subModuleCode) {
 		this.subModuleCode = subModuleCode;
 	}
-	public String getPrgCode() {
+	
+	public Program getPrgCode() {
 		return prgCode;
 	}
-	public void setPrgCode(String prgCode) {
+	public void setPrgCode(Program prgCode) {
 		this.prgCode = prgCode;
 	}
 	public String getActive() {
