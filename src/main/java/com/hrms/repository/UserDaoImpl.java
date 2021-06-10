@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
+import com.hrms.EncryptionUtil;
 import com.hrms.dao.AbstractGenericDao;
 import com.hrms.model.Login;
 import com.hrms.model.UserEntity;
@@ -27,7 +28,7 @@ public class UserDaoImpl extends AbstractGenericDao<UserEntity> implements UserD
 			Criteria criteria = getSession().createCriteria(UserEntity.class);
 			user = (UserEntity) criteria.setFetchMode("Myuser", FetchMode.SELECT)
 					.add(Restrictions.eq("userCode", login.getUserCode()))
-					.add(Restrictions.eq("userPass", login.getUserPassword())).uniqueResult();
+					.add(Restrictions.eq("userPass",EncryptionUtil.encode(login.getUserPassword()))).uniqueResult();
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
 		}
