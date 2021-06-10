@@ -59,13 +59,14 @@ body {
 												<div class="form-group">
 													<label> User Code </label> <label style="color: red">*</label>
 
-												<input type="text" class="form-control" id="userCode"name="userCode" maxlength="12" title="User Code !" required aria-required="true">
+												<input type="text" class="form-control" id="userCode"name="userCode" maxlength="12"  required aria-required="true"
+												 oninvalid="this.setCustomValidity('Please Enter User Code')"oninput="setCustomValidity('')">
 												</div>
 												
 												<div class="form-group">
 											<label class="form-label"> Employee Name</label>
 											<label style="color: red">*</label>
-											 <select class="form-control" id="empCode.empCode"name="empCode.empCode">
+											 <select class="form-control" id="empCode.empCode"name="empCode.empCode" required aria-required="true" >
 													<option value=""> Employee Name</option>
 													<option th:each="r :${listEmployee}" th:value="${r.empCode}" th:text="${r.empName}"></option>
 												</select>
@@ -98,22 +99,16 @@ body {
 														class="form-control" pattern="^[a-zA-Z\s]*$" maxlength="50" 
 													
 														id="userName"   title="User Name!"name="userName" required
-														aria-required="true">
+														aria-required="true" oninvalid="this.setCustomValidity('Please Enter User Name')"oninput="setCustomValidity('')">
 												</div>
 												
-												<div class="form-group">
-													<label class="form-label"> User Designation</label> <label
-														style="color: red">*</label> <input type="text"
-														class="form-control" pattern="^[a-zA-Z\s]*$" maxlength="50" 
-													
-														id="DesgName"   title="User Designation!"name="DesgName" required
-														aria-required="true">
-												</div>
+												
 																					
 												<div class="form-group">
 													<label> User Password </label> <label style="color: red">*</label>
 
-												<input type="text" class="form-control" id="userPass"name="userPass" maxlength="12" title="User Password !" required aria-required="true">
+												<input type="text" class="form-control" id="userPass"name="userPass" maxlength="12" title="User Password !" required aria-required="true"
+												 oninvalid="this.setCustomValidity('Please Enter Password')"oninput="setCustomValidity('')">
 												</div>
 
 											</div>
