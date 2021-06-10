@@ -63,10 +63,13 @@ body {
 												</div>
 												
 												<div class="form-group">
-													<label> Employee Code </label> <label style="color: red">*</label>
-
-												<input type="text" class="form-control" id="empCode"name="empCode" maxlength="12" title="Employee Code !" required aria-required="true">
-												</div>
+											<label class="form-label"> Employee Name</label>
+											<label style="color: red">*</label>
+											 <select class="form-control" id="empCode.empCode"name="empCode.empCode">
+													<option value=""> Employee Name</option>
+													<option th:each="r :${listEmployee}" th:value="${r.empCode}" th:text="${r.empName}"></option>
+												</select>
+										</div>
 			
 												
 
@@ -132,7 +135,7 @@ body {
 									<tr>
 										<th scope="col">User Code</th>
 										<th scope="col">User Name</th>
-										<th scope="col">Emp Code</th>
+										<th scope="col">Employee Name</th>
 										<th scope="col">User Pass</th>
 										<th scope="col">User Active</th>
 										<th scope="col">Action</th>
@@ -142,7 +145,7 @@ body {
 									<tr th:each="user : ${users}">
 										<td th:text="${user.userCode}"></td>
 										<td th:text="${user.userName}"></td>
-										<td th:text="${user.empCode}"></td>
+										<td th:text="${user?.empCode?.empName}"></td>
 										<td th:text="${user.userPass}"></td>
 										<td th:text="${user.userActiveYn}"></td>
 									<td><a th:href="@{/editUser/{id}(id=${user.userCode})}" class="btn btn-primary"><em class="fa fa-edit"></em></a>
