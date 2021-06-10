@@ -17,12 +17,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hrms.EncryptionUtil;
+import com.hrms.model.Employee;
 import com.hrms.model.Login;
 import com.hrms.model.MenuModule;
 import com.hrms.model.Module;
 import com.hrms.model.Program;
 import com.hrms.model.SubModule1;
 import com.hrms.model.UserEntity;
+import com.hrms.service.EmployeeService;
 import com.hrms.service.ModuleService;
 import com.hrms.service.ReCaptchaValidationService;
 import com.hrms.service.SubModuleService;
@@ -38,7 +40,8 @@ public class UserController {
 	
 	@Autowired
 	private SubModuleService subModuleService;
-
+	@Autowired 
+	 EmployeeService employeeService;
 	@Autowired
 	private ReCaptchaValidationService validator;
 
@@ -60,7 +63,7 @@ public class UserController {
 			UserEntity userRecord = userService.findDataById(id);
 			session.setAttribute("uuuuu",userRecord.getUserName());
 			session.setAttribute("USER_NAME",userRecord.getUserName());
-			session.setAttribute("user_desg",userRecord.getDesgName());
+			session.setAttribute("user_desg","surendra");
 		session.setAttribute("username",login.getUserCode());
 		String userCode= (String)session.getAttribute("username");
 		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
@@ -78,7 +81,8 @@ public class UserController {
 	
 	@GetMapping("/userMaster")
 	public String UserMaster(Model model, HttpSession session) {
-
+		List<Employee> lrt = employeeService.getAllEmployees();
+		model.addAttribute("listEmployee", lrt);
 		List<UserEntity> listUsers = userService.getAllUsers();
 		model.addAttribute("users", listUsers);
 		String userCode = (String) session.getAttribute("username");
@@ -124,7 +128,8 @@ public class UserController {
 	
 	@GetMapping(value = { "/editUser/{id}" })
 	public String editUser(@PathVariable("id") String id, Model model, HttpSession session) {
-
+		List<Employee> lrt = employeeService.getAllEmployees();
+		model.addAttribute("listEmployee", lrt);
 		UserEntity userEdit = userService.findUserById(id);
 		model.addAttribute("userEdit", userEdit);
 
