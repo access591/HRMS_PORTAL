@@ -28,6 +28,7 @@ public class UserDaoImpl extends AbstractGenericDao<UserEntity> implements UserD
 			Criteria criteria = getSession().createCriteria(UserEntity.class);
 			user = (UserEntity) criteria.setFetchMode("Myuser", FetchMode.SELECT)
 					.add(Restrictions.eq("userCode", login.getUserCode()))
+					.add(Restrictions.eq("userActiveYn","Y"))
 					.add(Restrictions.eq("userPass",EncryptionUtil.encode(login.getUserPassword()))).uniqueResult();
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
