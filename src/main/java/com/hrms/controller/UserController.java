@@ -128,9 +128,12 @@ public class UserController {
 	
 	@GetMapping(value = { "/editUser/{id}" })
 	public String editUser(@PathVariable("id") String id, Model model, HttpSession session) {
+		
 		List<Employee> lrt = employeeService.getAllEmployees();
 		model.addAttribute("listEmployee", lrt);
 		UserEntity userEdit = userService.findUserById(id);
+		String pass=EncryptionUtil.decode(userEdit.getUserPass());
+		userEdit.setUserPass(pass);
 		model.addAttribute("userEdit", userEdit);
 
 		session.setAttribute("username", session.getAttribute("username"));

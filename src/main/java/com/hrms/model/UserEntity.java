@@ -46,20 +46,11 @@ public class UserEntity implements Serializable{
 
 	@Column(name = "upd_date",insertable = false)
 	private Date updDate=new Date(); 
-	@Column(name ="Desg_Name")
-	private String  desgName;
 	
 	
 
 
-	public String getDesgName() {
-		return desgName;
-	}
-
-	public void setDesgName(String desgName) {
-		this.desgName = desgName;
-	}
-
+	
 	public String getUserCode() {
 		return userCode;
 	}
