@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hrms.EncryptionUtil;
+import com.hrms.ImageUtil;
 import com.hrms.model.Employee;
 import com.hrms.model.Login;
 import com.hrms.model.MenuModule;
@@ -63,10 +64,13 @@ public class UserController {
 			UserEntity userRecord = userService.findDataById(id);
 			session.setAttribute("uuuuu",userRecord.getUserName());
 			session.setAttribute("USER_NAME",userRecord.getUserName());
-			session.setAttribute("user_desg","surendra");
+			session.setAttribute("user_desg",userRecord.getEmpCode().getEmpName());
+			session.setAttribute("User_Profile_Pic",userRecord.getEmpCode().getImageProfile());
 		session.setAttribute("username",login.getUserCode());
 		String userCode= (String)session.getAttribute("username");
 		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
+		//model.addAttribute("imgUtil", new ImageUtil());
+		session.setAttribute("imgUtil", new ImageUtil());
 		model.addAttribute("modules", modules);
 			return "dashboard";
 		} else {
