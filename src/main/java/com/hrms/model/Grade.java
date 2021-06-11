@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
+
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Id;
@@ -18,24 +20,26 @@ public class Grade implements Serializable
 	private static final long serialVersionUID = 633323013185969173L;
 
 	  @Id
+	  @Size(max =15)
 		@Column(name = "GRADE_CODE")
 		private String gradeCode;
-
+	     @Size(max =50)
 		@Column(name = "GARDE_NAME")
 		private String gardeName;
+	     @Size(max =50)
 	    @Column(name = "INS_BY",updatable = false)
 		private String insBy;
 		
 		@Column(name = "INS_DATE",updatable = false)
 		private Date insDate =new Date();
-		
+		@Size(max =50)
 		@Column(name = "UPD_BY",insertable = false)
 		private String updBy;
 		
 		@Column(name = "UPD_DATE",insertable = false)
 		private Date  updDate = new Date();
 		
-		
+		@Size(max =1)
 		@Column(name = "ACTIVE_YN")
 		private String active;
 		
