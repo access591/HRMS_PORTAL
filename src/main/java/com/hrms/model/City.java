@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "M_CITY")
@@ -17,23 +18,24 @@ public class City implements Serializable {
 	 */
 	private static final long serialVersionUID = -4022504081712702959L;
 	@Id
+	@Size(max =15)
 	@Column(name = "CITY_CODE")
 	private String cityCode;
-	
+	@Size(max =50)
 	@Column(name = "CITY_NAME")
 	private String cityName;
-	
+	@Size(max =1)
 	@Column(name = "ACTIVE_YN")
 	private String active;
 	@Column(name = "STATE_CODE")
 	private String stateCode;
-	
+	@Size(max =50)
     @Column(name = "INS_BY",updatable = false)
 	private String insBy;
 	
 	@Column(name = "INS_DATE",updatable = false)
 	private Date insDate =new Date();
-	
+	@Size(max =50)
 	@Column(name = "UPD_BY",insertable = false)
 	private String updBy;
 	
