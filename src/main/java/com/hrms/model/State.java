@@ -31,12 +31,13 @@ public class State implements Serializable{
 	
 	@OneToMany(mappedBy = "stateCode")
 	private List<City> citys;
+	@Size(max =50)
 	@Column(name = "INS_BY", updatable = false)
 	private String insBy;
 
 	@Column(name = "INS_DATE", updatable = false)
 	private Date insDate = new Date();
-
+	@Size(max =50)
 	@Column(name = "UPD_BY", insertable = false)
 	private String updBy;
 
