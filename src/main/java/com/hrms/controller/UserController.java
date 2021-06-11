@@ -64,7 +64,7 @@ public class UserController {
 			UserEntity userRecord = userService.findDataById(id);
 			session.setAttribute("uuuuu",userRecord.getUserName());
 			session.setAttribute("USER_NAME",userRecord.getUserName());
-			session.setAttribute("user_desg",userRecord.getEmpCode().getEmpName());
+			
 			session.setAttribute("User_Profile_Pic",userRecord.getEmpCode().getImageProfile());
 		session.setAttribute("username",login.getUserCode());
 		String userCode= (String)session.getAttribute("username");
@@ -85,6 +85,7 @@ public class UserController {
 	
 	@GetMapping("/userMaster")
 	public String UserMaster(Model model, HttpSession session) {
+		session.setAttribute("imgUtil", new ImageUtil());
 		List<Employee> lrt = employeeService.getAllEmployees();
 		model.addAttribute("listEmployee", lrt);
 		List<UserEntity> listUsers = userService.getAllUsers();
