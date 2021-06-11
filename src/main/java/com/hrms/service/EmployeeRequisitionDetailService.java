@@ -19,4 +19,6 @@ public interface EmployeeRequisitionDetailService {
 	public boolean isEmployeeRequisitionDetailExists(String empCode);
 
 	void removeEmployeeRequisitionDetail(String id);
+	
+	public List<EmployeeRequisitionDetail> findUniqueDesignation();
 }

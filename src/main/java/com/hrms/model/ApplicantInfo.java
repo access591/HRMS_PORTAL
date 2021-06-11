@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -141,9 +142,9 @@ public class ApplicantInfo {
 	private Date dateOfBirth;
 	
 	@Column(name="INTER_STATUS")
-	private String interStatus;
+	private String interStatus = "N";
 	
-	@OneToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name="DESIG_CODE")
 	private Designation desigCode;
 	

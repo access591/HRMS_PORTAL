@@ -11,4 +11,6 @@ public interface InterviewMasterService {
 	public void interviewFinalapproval(String applicantCode,String interviewCode,String finalApprovalStatus );
 	
 	public List<InterviewMaster> getFinalSelection();
+	
+	public InterviewMaster findinterviewMasterById(String interviewCode);
 }

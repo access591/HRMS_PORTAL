@@ -33,7 +33,7 @@ public class InterviewMaster {
 	private Date applicantDate;
 	
 	@Column(name="SELECTION_STATUS")
-	private String selectionStatus;
+	private String selectionStatus = "N";
 	
 	@Column(name="REMARKS")
 	private String remarks;
