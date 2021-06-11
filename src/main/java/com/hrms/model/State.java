@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 @Entity
 @Table(name = "M_STATE")
 public class State implements Serializable{
@@ -18,12 +19,13 @@ public class State implements Serializable{
 	 */
 	private static final long serialVersionUID = -6376128149451393606L;
 	@Id
+	@Size(max =15)
 	@Column(name = "STATE_CODE")
 	private String stateCode;
-	
+	@Size(max =50)
 	@Column(name = "STATE_NAME")
 	private String stateName;
-	
+	@Size(max =1)
 	@Column(name = "ACTIVE_YN")
 	private String active;
 	
