@@ -37,70 +37,7 @@ body {
   z-index: 100;
 }
 </style>
-<script>
-$(document).ready(function(){
 
-    var i=1;
-   $("#add_row").click(function(){
-    $('#addr'+i).html("<td><input name='listTransactionRequisitionDetail["+i+"].topicDetail' type='text' placeholder='Topic Details.'  class='form-control  input-md'/> "+
-    		"</td><td><input  name='listTransactionRequisitionDetail["+i+"].trDate' type='Date' placeholder='Topic Date'  class='form-control input-md'>"+
-    		"<td><select class=' form-control input-md' id='modeOfTravel'name='listTransactionRequisitionDetail["+i+"].priority'><option value=' '>Select Type</option><option value='H'>High</option> <option value='M'>Medium</option><option value='L'>Low</option>  </select></td>"+
-    		"</td><td><input  name='listTransactionRequisitionDetail["+i+"].remarks' type='text' placeholder='Remarks'  class='form-control input-md'></td>"+
-    		"");
-
-    $('#example').append('<tr id="addr'+(i+1)+'"></tr>');
-    $('#_cr').val(i+1);
-    
-    i++; 
-});
-   
-   
-   $("#delete_row").click(function(){
-	  	 if(i>1){
-			 $("#addr"+(i-1)).html('');
-			 $('#_cr').val(i - 1);
-			 i--;
-			
-			 }
-	  	
-		 });
-   
-   
-   var J=1;
-   
-   $("#tab2_AddRow").click(function(){
-	  
-	    $('#addrtabsecond'+J).html("<td><select class=' form-control input-md' id='modeOfTravel'name='listTransactionReqEmployeeDetail["+i+"].employee.empCode'><option value=' '>Select</option></select></td>"+
-	    		"</td><td><input  name='listTransactionReqEmployeeDetail["+i+"].employee.empName' type='text' placeholder='Name'  class='form-control input-md'>"+
-	    		"</td><td><input  name='listTransactionReqEmployeeDetail["+i+"].topicSrlNo' type='text' placeholder='Pay Code'  class='form-control input-md'></td>"+
-	    		"<td><input type='text' placeholder='Father Name'  class='nbt form-control input-md'></td>"+
-	    		"");
-	    $('#example2').append('<tr id="addrtabsecond'+(J+1)+'"></tr>');
-	    $('#_cr2').val(J+1);
-	    
-	    J++; 
-	});
-   var J=1;
-   $("#tab2_delete").click(function(){
-	  
-	  	 if(J>1){
-			 $("#addrtabsecond"+(J-1)).html('');
-			 $('#_cr2').val(J - 1);
-			 J--;
-			
-			 
-			 }
-		 });
-	
-   
-});
-
- 
-   
-
-
-
-</script>
 <script>
 
 
@@ -323,14 +260,14 @@ $(document).ready(function(){
 
 														</table>
 														</div>
-																<!-- <input
+															<input
     							
-    							onclick="window.history.go(-2); return false;"
-    							type="submit" class="btn btn-success"
-    							value="Back"
-							/> -->
+								    							onclick="window.history.go(-2); return false;"
+								    							type="submit" class="btn btn-primary"
+								    							value="Back"
+															/> 
 							
-							 <button type="submit"class="btn btn-primary" value="cancel">Cancel</button>	
+							 <!-- <button type="submit"class="btn btn-primary" value="cancel">Cancel</button>	 -->
 													</div>
 								<!-- <a id="add_row" class="fa pull-right btn btn-default ">Add Row</a><a id='delete_row' class="fa pull-right btn btn-default">Delete Row</a>	 -->
 							           

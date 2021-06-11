@@ -99,7 +99,7 @@ public class TrainingRequisitionServiceImpl implements TrainingRequistionService
 			Session session = sessionFactory.openSession();
 			Query<TrainingRequisition> query = session.createQuery("from TrainingRequisition tr where "
 					+ "tr.trReqStatus = :status1 or tr.trReqStatus=:status2", TrainingRequisition.class);
-			query.setParameter("status1", "C");
+			query.setParameter("status1", "N");
 			query.setParameter("status2", "N");
 			List<TrainingRequisition> result = query.getResultList();
 			
