@@ -30,18 +30,18 @@ public class Module implements Serializable {
 	@Size(max = 1)
 	@Column(name = "ACTIVE_YN")
 	private String active;
-
-	@Column(name = "INS_BY")
+	@Size(max =50)
+	@Column(name = "INS_BY",updatable = false)
 	private String insertedBy;
 
-	@Column(name = "INS_DATE")
-	private Date insertedDate;
-
-	@Column(name = "UPDATE_BY")
+	@Column(name = "INS_DATE",updatable = false)
+	private Date insertedDate=new Date();
+	@Size(max =50)
+	@Column(name = "UPDATE_BY",insertable = false)
 	private String updateBy;
 
-	@Column(name = "UPDATE_DATE")
-	private Date updatedDate;
+	@Column(name = "UPDATE_DATE",insertable = false)
+	private Date updatedDate=new Date();
 	@Size(max =2)
 	@Column(name = "SEQ_NO")
 	private int seqNo;

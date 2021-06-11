@@ -36,13 +36,13 @@ public class UserEntity implements Serializable{
 	@Size(max = 1)
 	@Column(name = "User_active_yn")
 	private String userActiveYn;
-
+	@Size(max =50)
 	@Column(name = "Ins_by",updatable = false)
 	private String insBy;
 
 	@Column(name = "ins_date",updatable = false)
 	private Date insDate= new Date();
-
+	@Size(max =50)
 	@Column(name = "upd_by",insertable = false)
 	private String updBy;
 
