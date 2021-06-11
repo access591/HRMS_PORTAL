@@ -84,7 +84,9 @@ body {
 											 <input type="text" class="form-control" id="moduleName" maxlength="50"  title="Moduel Name" name="moduleName"th:value="${moduleEdit.moduleName}" required aria-required="true">
 										   </div>
 										   	<div class="form-group">
-													<label>Sequence No</label> <input type="text"
+													<label>Sequence No</label>
+													 <label style="color: red">*</label>
+													 <input type="text"
 														class="form-control required" id="seqNo"  name="seqNo" maxlength="2" th:value="${moduleEdit.seqNo}" title="Sequence No" required aria-required="true">
 
 												</div>

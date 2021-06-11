@@ -6,6 +6,8 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -23,9 +25,9 @@ public class UserEntity implements Serializable{
 
 	@Column(name = "User_Name")
 	private String userName;
-
-	@Column(name = "Emp_code")
-	private String empCode;
+	@ManyToOne
+	@JoinColumn(name = "Emp_code")
+	private Employee empCode;
 
 	@Column(name = "User_pass")
 	private String userPass;
@@ -44,20 +46,11 @@ public class UserEntity implements Serializable{
 
 	@Column(name = "upd_date",insertable = false)
 	private Date updDate=new Date(); 
-	@Column(name ="Desg_Name")
-	private String  desgName;
 	
 	
 
 
-	public String getDesgName() {
-		return desgName;
-	}
-
-	public void setDesgName(String desgName) {
-		this.desgName = desgName;
-	}
-
+	
 	public String getUserCode() {
 		return userCode;
 	}
@@ -74,11 +67,12 @@ public class UserEntity implements Serializable{
 		this.userName = userName;
 	}
 
-	public String getEmpCode() {
+	
+	public Employee getEmpCode() {
 		return empCode;
 	}
 
-	public void setEmpCode(String empCode) {
+	public void setEmpCode(Employee empCode) {
 		this.empCode = empCode;
 	}
 

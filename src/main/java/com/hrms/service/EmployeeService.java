@@ -4,7 +4,7 @@ import java.util.List;
 
 
 import com.hrms.model.Employee;
-import com.hrms.model.EmployeeUtil;
+import com.hrms.util.EmployeeUtil;
 
 public interface EmployeeService {
 	public void addEmployee(Employee employee);
@@ -19,7 +19,7 @@ public interface EmployeeService {
 	public List<Employee> getEmployeeByCategoryCode(String categoryCode);
 	public List<Employee> findByDateOfJoiningMonth(int month);
 	public List<Employee> findByDepartmentCode(String deptCode);
-
+	public List<Employee> findByempCode(String empCode);
 
 
 }

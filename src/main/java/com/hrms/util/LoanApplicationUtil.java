@@ -1,4 +1,4 @@
-package com.hrms.model;
+package com.hrms.util;
 
 import java.util.Date;
 
@@ -23,7 +23,7 @@ public class LoanApplicationUtil {
 	
 	private String loanStatus;
 	
-	
+	private String  approvalStatus ;
 	private String amountRequired;
 	
 	
@@ -77,6 +77,14 @@ public class LoanApplicationUtil {
 		this.deptName = deptName2;
 		this.desgName = desgName2;
 		this.empPayCode = employeePayeeCode;
+	}
+
+	public String getApprovalStatus() {
+		return approvalStatus;
+	}
+
+	public void setApprovalStatus(String approvalStatus) {
+		this.approvalStatus = approvalStatus;
 	}
 
 	public String getAppNo() {

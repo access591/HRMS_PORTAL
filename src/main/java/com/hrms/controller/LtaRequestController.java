@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.hrms.model.Employee;
 
 import com.hrms.model.LtaRequest;
-import com.hrms.model.LtaRequestUtil;
+import com.hrms.util.LtaRequestUtil;
 import com.hrms.model.MenuModule;
 import com.hrms.service.EmployeeService;
 import com.hrms.service.LtaRequestService;

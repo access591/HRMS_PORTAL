@@ -9,12 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hrms.model.EmpMonOvertime;
+import com.hrms.repository.EmpMontOvertimeDao;
 
 @Service
 public class EmpMontOvertimeRegisterImpl implements EmpMontOvertimeRegister{
 
 	@Autowired SessionFactory sessionFactory;
-	
+	@Autowired EmpMontOvertimeDao empMontOvertimeDao;
 	@Override
 	public List<EmpMonOvertime> findEmpMontOvertimeByEmpCode(String empCode) {
 		
@@ -101,6 +102,31 @@ public class EmpMontOvertimeRegisterImpl implements EmpMontOvertimeRegister{
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+	@Override
+	public boolean addMontOvertimeRegister(EmpMonOvertime overtimeEval) {
+		Session s=sessionFactory.openSession();
+		s.beginTransaction();
+		
+		// TODO Auto-generated method stub
+		s.save(overtimeEval);
+		s.getTransaction().commit();
+		s.clear();
+		s.close();
+		return true;
+	}
+
+	@Override
+	public List<EmpMonOvertime> getAllMontOvertimeRegister() {
+		// TODO Auto-generated method stub
+		return empMontOvertimeDao.findAll();
+	}
+
+	@Override
+	public void removeMonthOverTimeRegister(long id) {
+	this.empMontOvertimeDao.delete(id);
+		
 	}
 	
 	//SELECT e FROM Employee e WHERE MONTH(e.oTimeMonth) = :month

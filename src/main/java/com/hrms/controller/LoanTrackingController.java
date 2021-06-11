@@ -22,7 +22,7 @@ import com.hrms.model.Designation;
 import com.hrms.model.Employee;
 import com.hrms.model.Loan;
 import com.hrms.model.LoanApplication;
-import com.hrms.model.LoanApplicationUtil;
+import com.hrms.util.LoanApplicationUtil;
 import com.hrms.model.LoanSchedule;
 
 import com.hrms.model.MenuModule;
@@ -57,6 +57,8 @@ public class LoanTrackingController {
 		  model.addAttribute("listEmployee", listEmployee);
 		
 			List<Loan> listLoan = loanMaterService.getAllLoans();
+			
+			
 			model.addAttribute("listLoan", listLoan);
 		String userCode = (String) session.getAttribute("username");
 		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
@@ -65,7 +67,14 @@ public class LoanTrackingController {
 		}
 		session.setAttribute("username", session.getAttribute("username"));
 		List<LoanApplication> listloanApplication=loanRequestService.getAllRequest();
-		model.addAttribute("listloanApplication", listloanApplication);
+		
+		for (int i = 0; i < listloanApplication.size(); i++) {
+			String empCode = listloanApplication.get(i).getAppNo();
+			List<LoanApplication> loanApp=loanRequestService.findByApprovalLoan(empCode);
+			model.addAttribute("listloanApplication", loanApp);
+		   }
+	
+	
 		
 		 return "/loanTracking";
 	}
@@ -89,9 +98,10 @@ public class LoanTrackingController {
 		l.setLoanCode(loanApp.getLoanCode().getLoanCode());
 		l.setAppDate(loanApp.getAppDate());
 		l.setEffScheduleDate(loanApp.getEffScheduleDate());
+		
 		l.setAmountRequired(loanApp.getAmountRequired());
 		l.setAmountSanctioned(loanApp.getAmountSanctioned());
-		l.setLoanStatus(loanApp.getLoanStatus());
+		l.setApprovalStatus(loanApp.getApprovalStatus());
         return l;
     }
 	

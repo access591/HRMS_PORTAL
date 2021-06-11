@@ -1,4 +1,7 @@
 package com.hrms.util;
+
+import java.util.Date;
+
 public class OvertimeRegisterUtil {
 	private String  empCode;
 	private String  empName;
@@ -14,7 +17,15 @@ public class OvertimeRegisterUtil {
 	private String remarks;
 	private String status;
 	private String overTime;
+	private Date overTimeDate;
+	private long id;
 	
+	public long getId() {
+		return id;
+	}
+	public void setId(Long long1) {
+		this.id = long1;
+	}
 	public String getEmpCode() {
 		return empCode;
 	}
@@ -57,6 +68,10 @@ public class OvertimeRegisterUtil {
 	public void setEmpPayCode(String empPayCode) {
 		this.empPayCode = empPayCode;
 	}
+	
+	
+	
+	
 	public String getTimeIN() {
 		return timeIN;
 	}
@@ -98,6 +113,12 @@ public class OvertimeRegisterUtil {
 	}
 	public void setOverTime(String overTime) {
 		this.overTime = overTime;
+	}
+	public Date getOverTimeDate() {
+		return overTimeDate;
+	}
+	public void setOverTimeDate(Date overTimeDate) {
+		this.overTimeDate = overTimeDate;
 	}
 	
 

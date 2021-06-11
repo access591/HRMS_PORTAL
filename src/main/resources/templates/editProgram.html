@@ -76,8 +76,9 @@ body {
 													<label style="color: red">*</label> <label
 														class="form-label">Program Type </label>
 														 <select class="form-control" name="programType" id="programType">
-														<option value="P" th:selected=${programEdit.programType}==P>P</option>
-														<option value="R" th:selected=${programEdit.programType}==R>R</option>
+														  <option value="">Select Type</option>
+														<option value="P" th:selected=${programEdit.programType}==P>Programs</option>
+														<option value="R" th:selected=${programEdit.programType}==R>Reports</option>
 													
 
 													</select>

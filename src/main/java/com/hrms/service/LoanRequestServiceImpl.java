@@ -38,7 +38,13 @@ LoanRequestDao  loanRequestDao;
 	public void updateLoanRequest(LoanApplication loanRequest) {
 	String ui=loanRequest.getAppNo();
 	System.out.println("XXX>>>>>>>>>>>>>>>>>>>>>"+ui);
+	loanRequest.setApprovalStatus("Y");
 		this.loanRequestDao.saveOrUpdate(loanRequest);
+	}
+	@Override
+	public List<LoanApplication> findByApprovalLoan(String id) {
+		List<LoanApplication> loanRequest=loanRequestDao.findByApprovalLoan(id);
+		return loanRequest;
 	}
 
 }

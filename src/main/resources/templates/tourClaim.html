@@ -103,9 +103,9 @@ $(document).ready(function(){
    var K=1;
    
    $("#tab3_AddRow").click(function(){
-	    $('#addrowthired'+K).html("<td><input name='medStDr"+K+"' type='text'  class='form-control  input-md'/> "+
-	    		"</td><td><input  name='caseMemoNo"+K+"' type='Date' placeholder='Case Memo No'  class='form-control input-md'>"+
-	    		"</td><td><input  name='passedAmount"+K+"' type='text' placeholder='Expenses'  class='pas form-control input-md'></td>"+
+	    $('#addrowthired'+K).html("<td><input name='noDays"+K+"' type='text'  class='form-control  input-md'/> "+
+	    		"</td><td><input  name='stayDate"+K+"' type='Date' placeholder='Case Memo No'  class='form-control input-md'>"+
+	    		"</td><td><input  name='ataAmt"+K+"' type='text' placeholder='Expenses'  class='pas form-control input-md'></td>"+
 	    		"");
 
 	    $('#tab3').append('<tr id="addrowthired'+(K+1)+'"></tr>');
@@ -583,11 +583,9 @@ function totaltravalex()
 															<tbody>
 																<tr id='addrowthired0'>
 																
-																<td><input type="text" name='caseMemoNo0'placeholder='Days' class="form-control" /></td>
-													         	<td><input type="Date" name='medStDr0'placeholder='Stay Date.' class="form-control" value="" /></td>
-														
-														
-														<td><input type="text" name='caseMemoNo0'placeholder='Expenses' class="form-control" /></td>
+																<td><input type="text" name='noDays0'placeholder='Days' class="form-control" /></td>
+													         	<td><input type="Date" name='stayDate0'placeholder='Stay Date.' class="form-control" value="" /></td>
+													 	        <td><input type="text" name='ataAmt0'placeholder='Expenses' class="form-control" /></td>
 														
 
 																	
@@ -610,6 +608,10 @@ function totaltravalex()
 	
 	</div>
 			</div>
+			
+			
+			
+	<!-- 	table data you are start here  -->
 				 
 	</div>
 					</div>

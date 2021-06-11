@@ -11,5 +11,8 @@ public interface EmpMontOvertimeRegister {
 	public List<EmpMonOvertime> findAllByDeptCode(String deptCode);
 	public List<EmpMonOvertime> findAllDeptByMonth(int month);
 	public List<EmpMonOvertime> findOvertimeMonthByDeptCodeAndMonth(String deptCode,int month);
+	public boolean addMontOvertimeRegister(EmpMonOvertime overtimeEval);
+	public List<EmpMonOvertime> getAllMontOvertimeRegister();
+	public void removeMonthOverTimeRegister(long id);
 
 }

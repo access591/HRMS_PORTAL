@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -24,17 +26,20 @@ public class UserRights implements Serializable {
 	 @Id
 	 @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
-	@Column(name = "USER_CODE")
-	private String userCode;
+	@ManyToOne
+	@JoinColumn(name = "USER_CODE")
+	private UserEntity userCode;
 	
-	@Column(name = "MODULE_CODE")
-	private String moduleCode;
-	
-	@Column(name = "SUB_MODULE_CODE")
-	private String subModuleCode;
+	@ManyToOne
+	@JoinColumn(name ="MODULE_CODE")
+	private Module moduleCode;
+	@ManyToOne
+	@JoinColumn(name = "SUB_MODULE_CODE")
+	private SubModule subModuleCode;
 
-	@Column(name = "PRG_CODE")
-	private String prgCode;
+	@ManyToOne
+	@JoinColumn(name = "PRG_CODE")
+	private Program prgCode;
 
 	@Column(name = "ACTIVE_YN")
 	private String active;
@@ -58,28 +63,33 @@ public class UserRights implements Serializable {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public String getUserCode() {
+
+	
+	public UserEntity getUserCode() {
 		return userCode;
 	}
-	public void setUserCode(String userCode) {
+	public void setUserCode(UserEntity userCode) {
 		this.userCode = userCode;
 	}
-	public String getModuleCode() {
+
+	public Module getModuleCode() {
 		return moduleCode;
 	}
-	public void setModuleCode(String moduleCode) {
+	public void setModuleCode(Module moduleCode) {
 		this.moduleCode = moduleCode;
 	}
-	public String getSubModuleCode() {
+
+	public SubModule getSubModuleCode() {
 		return subModuleCode;
 	}
-	public void setSubModuleCode(String subModuleCode) {
+	public void setSubModuleCode(SubModule subModuleCode) {
 		this.subModuleCode = subModuleCode;
 	}
-	public String getPrgCode() {
+	
+	public Program getPrgCode() {
 		return prgCode;
 	}
-	public void setPrgCode(String prgCode) {
+	public void setPrgCode(Program prgCode) {
 		this.prgCode = prgCode;
 	}
 	public String getActive() {

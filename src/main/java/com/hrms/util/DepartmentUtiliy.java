@@ -1,4 +1,4 @@
-package com.hrms.model;
+package com.hrms.util;
 
 public class DepartmentUtiliy {
     private String departmentCode;

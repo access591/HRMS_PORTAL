@@ -52,22 +52,22 @@ body {
 
 								</div>
 								<div class="card-body">
-									<table id="example" class="table table-striped display" style="width:100%"aria-describedby="example">
+									<table id="example" class="table table-striped" style="width:100%"aria-describedby="example">
 										<thead>
 											<tr >
-												<th scope="col">App. No.</th>
-												<th scope="col">App.Date </th>
-											    <th scope="col">Employee  Code </th>
-												<th scope="col">Employee Name </th>
-												<th scope="col">Employee Pay Code </th>
-												
+												<th scope="col">Application_No.</th>
+												<th scope="col">Application_Date </th>
+											  <!--   <th scope="col">Employee  Code </th> -->
+												<th scope="col">Employee_Name </th>
+												<th scope="col">Employee_Pay_Code </th>
+													<th scope="col">Department </th>
 												<th scope="col">Designation</th>
-												<th scope="col">Loan Head </th>
-												<th scope="col">Amount Required </th>
+												<th scope="col">Loan_Head </th>
+												<th scope="col">Amount_Required </th>
 											
-												<th scope="col">WEF Date </th>
+												<th scope="col">WEF_Date </th>
 											
-												<th scope="col">Approval Status </th>
+												<th scope="col">Approval_Status </th>
 												        <th scope="col">View  </th>
 											</tr>
 
@@ -76,9 +76,11 @@ body {
 										<tr  th:each="listloan:${listofloanApproval}">
 										        <td th:text="${listloan.appNo}"></td>
 												<td th:text="${#dates.format(listloan.appDate,'dd-MM-yyyy')}"> </td>
-											    <td th:text="${listloan.empCode}"> </td>
+											   <!--  <td th:text="${listloan.empCode}"> </td> -->
 												<td th:text="${listloan.empName}"> </td>
 												<td th:text="${listloan.empPayCode}"> </td>
+												<td th:text="${listloan.deptName}"> </td>
+												
 												<td th:text="${listloan.desgName}"></td>
 												<td th:text="${listloan.loanName}"> </td>
 												<td th:text="${listloan.amountRequired}"> </td>
@@ -87,13 +89,14 @@ body {
 											<td>
 
 											 <div class="dropdown">
-												<button class="btn btn-primary dropdown-toggle"type="button" data-toggle="dropdown">Approved
-															Action</button>
+												<button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action</button>
+															
+															
+															
 														<ul class="dropdown-menu">
-															<li><a class="dropdown-item"
-																th:href="@{/approvedLoanRequest/{id}/(id=${listloan.appNo})}">Approved</a></li>
-															<li><a class="dropdown-item active" href="#">
-																	Not Approved </a></li>
+															<li>
+															<a class="dropdown-item"th:href="@{/approvedLoanRequest/{id}/(id=${listloan.appNo})}">Approved</a></li>
+															<li><a class="dropdown-item active" href="#">Not Approved </a></li>
 														</ul>
 													</div>
 												</td>
@@ -122,7 +125,7 @@ body {
 	<script>
 	$(document).ready(function() {
 	    $('#example').DataTable( {
-	        "scrollY": 200,
+	        "scrollY":500,
 	        "scrollX": true,
 	        deferRender:true,
             scrollCollapse: true,

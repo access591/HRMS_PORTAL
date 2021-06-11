@@ -23,7 +23,7 @@ public class LoanApplication  implements Serializable{
 	@Column(name = "APP_NO")
 	private String appNo;
 	
-	@Column(name="APP_DATE")
+	@Column(name="APP_DATE",updatable = false)
 	private Date appDate;
 	
 	@ManyToOne

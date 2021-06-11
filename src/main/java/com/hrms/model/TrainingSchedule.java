@@ -8,6 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name="TRAINING_SCHEDULE")
@@ -17,6 +19,7 @@ public class TrainingSchedule {
 	@Column(name="TR_SCH_CODE",updatable=false)
 	private String trScheduleCode;
 	
+	@Temporal(TemporalType.DATE)
 	@Column(name="TR_SCH_DATE")
 	private Date trScheduleDate;
 	

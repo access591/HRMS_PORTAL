@@ -16,12 +16,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.hrms.EncryptionUtil;
+import com.hrms.ImageUtil;
+import com.hrms.model.Employee;
 import com.hrms.model.Login;
 import com.hrms.model.MenuModule;
 import com.hrms.model.Module;
 import com.hrms.model.Program;
 import com.hrms.model.SubModule1;
 import com.hrms.model.UserEntity;
+import com.hrms.service.EmployeeService;
 import com.hrms.service.ModuleService;
 import com.hrms.service.ReCaptchaValidationService;
 import com.hrms.service.SubModuleService;
@@ -37,7 +41,8 @@ public class UserController {
 	
 	@Autowired
 	private SubModuleService subModuleService;
-
+	@Autowired 
+	 EmployeeService employeeService;
 	@Autowired
 	private ReCaptchaValidationService validator;
 
@@ -59,10 +64,13 @@ public class UserController {
 			UserEntity userRecord = userService.findDataById(id);
 			session.setAttribute("uuuuu",userRecord.getUserName());
 			session.setAttribute("USER_NAME",userRecord.getUserName());
-			session.setAttribute("user_desg",userRecord.getDesgName());
+			session.setAttribute("user_desg",userRecord.getEmpCode().getEmpName());
+			session.setAttribute("User_Profile_Pic",userRecord.getEmpCode().getImageProfile());
 		session.setAttribute("username",login.getUserCode());
 		String userCode= (String)session.getAttribute("username");
 		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
+		//model.addAttribute("imgUtil", new ImageUtil());
+		session.setAttribute("imgUtil", new ImageUtil());
 		model.addAttribute("modules", modules);
 			return "dashboard";
 		} else {
@@ -77,7 +85,8 @@ public class UserController {
 	
 	@GetMapping("/userMaster")
 	public String UserMaster(Model model, HttpSession session) {
-
+		List<Employee> lrt = employeeService.getAllEmployees();
+		model.addAttribute("listEmployee", lrt);
 		List<UserEntity> listUsers = userService.getAllUsers();
 		model.addAttribute("users", listUsers);
 		String userCode = (String) session.getAttribute("username");
@@ -103,13 +112,15 @@ public class UserController {
 
 		
 		boolean isUserExist = userService.checkUserExistsOrNot(userEntity);
-
+		String pass=EncryptionUtil.encode(userEntity.getUserPass());
+		
 		if (isUserExist) {
 			redirectAttributes.addFlashAttribute("message", "User Code Already exists !  ");
 			redirectAttributes.addFlashAttribute("alertClass", "alert-success");
 			return "redirect:/userMaster";
 		} else {
 			String username= (String)session.getAttribute("uuuuu");
+			userEntity.setUserPass(pass);
 			userEntity.setInsBy(username);
 			userService.addUser(userEntity);
 			session.setAttribute("username", session.getAttribute("username"));
@@ -121,8 +132,12 @@ public class UserController {
 	
 	@GetMapping(value = { "/editUser/{id}" })
 	public String editUser(@PathVariable("id") String id, Model model, HttpSession session) {
-
+		
+		List<Employee> lrt = employeeService.getAllEmployees();
+		model.addAttribute("listEmployee", lrt);
 		UserEntity userEdit = userService.findUserById(id);
+		String pass=EncryptionUtil.decode(userEdit.getUserPass());
+		userEdit.setUserPass(pass);
 		model.addAttribute("userEdit", userEdit);
 
 		session.setAttribute("username", session.getAttribute("username"));
@@ -131,7 +146,8 @@ public class UserController {
 
 	@PostMapping("/upadteUser")
 	public String updateUser(@ModelAttribute("userUpdate") UserEntity u, Model model, HttpSession session) {
-
+		String pass=EncryptionUtil.encode(u.getUserPass());
+		u.setUserPass(pass);
 		String username= (String)session.getAttribute("uuuuu");
 			u.setUpdBy(username);
 		  this.userService.updateUser(u);

@@ -55,8 +55,7 @@ public class LocalConvyence implements Serializable{
 	@Column(name = "FILL_DATE", updatable = false)
 	private Date filDate = new Date();
 	
-	 @OneToMany(mappedBy="localConvId",cascade = CascadeType.ALL,
-		        orphanRemoval = true)
+	@OneToMany(mappedBy="localConvId",cascade = CascadeType.ALL,orphanRemoval = true)
 	List<LocalConvyenceDetail> localConvyenceDetail;
 
 	public String getLocalConvId() {

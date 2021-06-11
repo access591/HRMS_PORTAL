@@ -10,12 +10,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hrms.model.OvertimeRegister;
+import com.hrms.repository.OvertimeRegisterDao;
 
 @Service
 public class OvertimeRegisterServiceImpl implements OvertimeRegisterService{
 
 	@Autowired SessionFactory sessionFactory;
-	
+	@Autowired OvertimeRegisterDao overtimeRegisterDao;
 	@Override
 	public List<OvertimeRegister> findOverTimeRegisterByEmpCodeBetweenDate(String empCode, Date fromDate, Date toDate) {
 		
@@ -35,6 +36,31 @@ public class OvertimeRegisterServiceImpl implements OvertimeRegisterService{
 		}
 		
 		return null;
+	}
+
+	@Override
+	public boolean addOvertimeRegister(OvertimeRegister overReg) {
+		Session s=sessionFactory.openSession();
+		s.beginTransaction();
+		
+		// TODO Auto-generated method stub
+		s.save(overReg);
+		s.getTransaction().commit();
+		s.clear();
+		s.close();
+		return true;
+	}
+
+	@Override
+	public List<OvertimeRegister> getAllOvertimeRegister() {
+
+		return overtimeRegisterDao.findAll();
+	}
+
+	@Override
+	public void removeOverTimeRegister(long id) {
+	this.overtimeRegisterDao.delete(id);
+		
 	}
 
 }
