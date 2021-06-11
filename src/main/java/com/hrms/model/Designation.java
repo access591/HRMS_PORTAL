@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
 /**
  * @author Access surendra
@@ -23,26 +24,28 @@ public class Designation implements Serializable{
 
 	private static final long serialVersionUID = -5996491080389467939L;
 	@Id
+	@Size(max =15)
 	@Column(name = "DESG_CODE")
 	private String desgCode;
-
+	@Size(max =50)
 	@Column(name = "DESG_NAME")
 	private String desgName;
 	@ManyToOne
 	@JoinColumn(name = "CATEG_CODE")
 	private Category categoryCode;
+	@Size(max =50)
     @Column(name = "INS_BY",updatable = false)
 	private String insBy;
 	
 	@Column(name = "INS_DATE",updatable = false)
 	private Date insDate =new Date();
-	
+	@Size(max =50)
 	@Column(name = "UPD_BY",insertable = false)
 	private String updBy;
 	
 	@Column(name = "UPD_DATE",insertable = false)
 	private Date  updDate = new Date();
-
+	@Size(max =1)
 	@Column(name = "ACTIVE_YN")
 	private String active;
 	
