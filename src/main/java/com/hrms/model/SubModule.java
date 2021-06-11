@@ -10,6 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "M_SUB_MODULE")
@@ -18,31 +19,32 @@ public class SubModule implements Serializable {
 	private static final long serialVersionUID = -6851090654306622861L;
 
 	@Id
+	@Size(max = 15)
 	@Column(name = "SUB_MODULE_CODE")
 	private String subModuleCode;
-
+	@Size(max =50)
 	@Column(name = "SUB_MODULE_NAME")
 	private String subModuleName;
 	
 	@ManyToOne
 	@JoinColumn(name = "MODULE_CODE", nullable = false)
 	private Module moduleCode;
-
+	@Size(max =50)
 	@Column(name = "INS_BY")
 	private String insertedBySubModule;
 
 	@Column(name = "INS_DATE")
 	private Date insertedDateSubModule =  new Date();
-
+	@Size(max = 50)
 	@Column(name = "UPDATE_BY")
 	private String updateBySubModule;
 
 	@Column(name = "UPDATE_DATE")
 	private Date updatedDateSubModule = new Date();
-
+	@Size(max =1)
 	@Column(name = "ACTIVE_YN")
 	private String acitveSubModule;
-
+	@Size(max =2)
 	@Column(name = "SEQ_NO")
 	private int seqNoSubModule;
 	@OneToMany(mappedBy = "subModuleCode")

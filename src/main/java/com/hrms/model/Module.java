@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 @Entity
 @Table(name = "M_MODULE")
 public class Module implements Serializable {
@@ -19,13 +20,14 @@ public class Module implements Serializable {
 	private static final long serialVersionUID = 8978451192594112630L;
 
 	@Id
+	@Size(max = 15)
 	@Column(name = "MODULE_CODE")
 	private String moduleCode;
 	
+	@Size(max =50)
 	@Column(name = "MODULE_NAME")
-	
 	private String moduleName;
-
+	@Size(max = 1)
 	@Column(name = "ACTIVE_YN")
 	private String active;
 
@@ -40,11 +42,10 @@ public class Module implements Serializable {
 
 	@Column(name = "UPDATE_DATE")
 	private Date updatedDate;
-
+	@Size(max =2)
 	@Column(name = "SEQ_NO")
 	private int seqNo;
 
-	
 	@OneToMany(mappedBy = "moduleCode")
 	@OrderBy("seqNoSubModule ASC")
 	private List<SubModule> subModules;
@@ -67,13 +68,8 @@ public class Module implements Serializable {
 
 	public void setModulePrograms(List<Program> modulePrograms) {
 		this.modulePrograms = modulePrograms;
-	}
+	}	
 	
-	
-	
-	
-	
-
 	public String getModuleCode() {
 		return moduleCode;
 	}

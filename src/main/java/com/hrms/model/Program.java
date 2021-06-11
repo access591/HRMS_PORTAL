@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 @Entity
 @Table(name = "M_PROGRAM")
 public class Program implements Serializable {
@@ -18,29 +19,28 @@ public class Program implements Serializable {
 	private static final long serialVersionUID = 4543664601105931061L;
 
 	@Id
+	@Size(max =15)
 	@Column(name = "PRG_CODE")
 	private String programCode;
-
+	@Size(max = 50)
 	@Column(name = "PRG_NAME")
 	private String programName;
-
-
-
+	@Size(max = 1)
 	@Column(name = "PRG_TYPE")
 	private String programType;
-
+	@Size(max = 100)
 	@Column(name = "PRG_HREF_NAME")
 	private String programHrefName;
-
+	@Size(max =1)
 	@Column(name = "ACTIVE_YN")
 	private String activeYn;
-
+	@Size(max =50)
 	@Column(name = "INS_BY")
 	private String insertedBy;
 
 	@Column(name = "INS_DATE")
 	private String insertedDate;
-
+	@Size(max =50)
 	@Column(name = "UPDATE_BY")
 	private String updatedBy;
 
@@ -54,7 +54,7 @@ public class Program implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "MODULE_CODE", nullable = false)
 	private Module pModuleCode;
-
+	@Size(max =3)
 	@Column(name = "SEQ_NO")
 	private int seqProgram;
 	
