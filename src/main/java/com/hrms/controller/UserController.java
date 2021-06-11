@@ -85,6 +85,7 @@ public class UserController {
 	
 	@GetMapping("/userMaster")
 	public String UserMaster(Model model, HttpSession session) {
+		session.setAttribute("imgUtil", new ImageUtil());
 		List<Employee> lrt = employeeService.getAllEmployees();
 		model.addAttribute("listEmployee", lrt);
 		List<UserEntity> listUsers = userService.getAllUsers();

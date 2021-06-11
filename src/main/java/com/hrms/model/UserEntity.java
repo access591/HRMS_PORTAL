@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name="Myuser")
@@ -20,18 +21,19 @@ public class UserEntity implements Serializable{
 	private static final long serialVersionUID = -862375354973874455L;
 
 	@Id
+	@Size(max = 15)
 	@Column(name = "User_code")
 	private String userCode;
-
+	@Size(max =80)
 	@Column(name = "User_Name")
 	private String userName;
 	@ManyToOne
 	@JoinColumn(name = "Emp_code")
 	private Employee empCode;
-
+	@Size(max =15)
 	@Column(name = "User_pass")
 	private String userPass;
-
+	@Size(max = 1)
 	@Column(name = "User_active_yn")
 	private String userActiveYn;
 
