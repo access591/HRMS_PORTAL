@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.hrms.ImageUtil;
 import com.hrms.model.Award;
 import com.hrms.model.Insurance;
 import com.hrms.model.MenuModule;
@@ -29,6 +30,7 @@ public class InsuranceController {
 	public String insuranceMaster(Model model,HttpSession session) {
 		
 		String userCode= (String)session.getAttribute("username");
+		session.setAttribute("imgUtil", new ImageUtil());
 		List<Insurance> listInsurance = insuranceService.getAllInsurances();
 		model.addAttribute("listInsurance", listInsurance);
 		List<MenuModule> modules = moduleService.getAllModulesList(userCode);

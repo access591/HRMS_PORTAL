@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.hrms.ImageUtil;
 import com.hrms.model.Category;
 import com.hrms.model.MenuModule;
 import com.hrms.service.CategoryService;
@@ -47,7 +48,7 @@ public class CategoryController {
 		if(listCategory != null) {
 			model.addAttribute("listCategory" ,listCategory);
 		}
-		
+		httpSession.setAttribute("imgUtil", new ImageUtil());
 		httpSession.setAttribute("username", userCode);
 		return pageMappingService.PageRequestMapping(reqPage,pageNo);
 	}

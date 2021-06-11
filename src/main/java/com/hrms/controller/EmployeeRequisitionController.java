@@ -27,6 +27,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.hrms.model.Department;
 import com.hrms.model.Designation;
 import com.hrms.model.Employee;
+import com.hrms.ImageUtil;
 import com.hrms.model.CommonUtil;
 import com.hrms.model.MenuModule;
 import com.hrms.model.EmployeeRequisition;
@@ -70,7 +71,7 @@ public class EmployeeRequisitionController {
 	
 	@GetMapping("employeeRequisition")  
 	public String employeeRequisition(Model model, HttpSession session) {
-
+		session.setAttribute("imgUtil", new ImageUtil());
 		String userCode = (String) session.getAttribute("username");  
 		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
 		if (modules != null) {

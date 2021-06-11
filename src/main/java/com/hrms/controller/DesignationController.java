@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.hrms.ImageUtil;
 import com.hrms.model.Category;
 import com.hrms.model.Designation;
 import com.hrms.util.DesignationUtil;
@@ -57,6 +58,7 @@ public class DesignationController {
 		if (modules != null) {
 			model.addAttribute("modules", modules);
 		}
+		session.setAttribute("imgUtil", new ImageUtil());
 		session.setAttribute("username", session.getAttribute("username"));
 		 return pageMappingService.PageRequestMapping(reqPage,pageno);
 	}

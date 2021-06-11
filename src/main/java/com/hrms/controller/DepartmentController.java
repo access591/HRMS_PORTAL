@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.hrms.ImageUtil;
 import com.hrms.model.Department;
 import com.hrms.util.DepartmentUtiliy;
 import com.hrms.model.Employee;
@@ -51,6 +52,7 @@ public String departmentMaster(Model model,HttpSession session) {
 	List<Department> listDepartment = departmentService.getAllDepartments();
 	model.addAttribute("listDepartment", listDepartment);
 	String userCode= (String)session.getAttribute("username");
+	session.setAttribute("imgUtil", new ImageUtil());
 	List<MenuModule> modules = moduleService.getAllModulesList(userCode);
 	if (modules != null) {
 		model.addAttribute("modules", modules);

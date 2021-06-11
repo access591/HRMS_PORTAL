@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.hrms.ImageUtil;
 import com.hrms.model.Country;
 import com.hrms.model.MenuModule;
 import com.hrms.service.ModuleService;
@@ -39,7 +40,7 @@ public class CountryController {
 	public String countryMaster(Model model, HttpSession session) {
 
 		String userCode = (String) session.getAttribute("username");
-
+		session.setAttribute("imgUtil", new ImageUtil());
 		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
 		if (modules != null) {
 			model.addAttribute("modules", modules);

@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.hrms.ImageUtil;
 import com.hrms.model.AttendenceRegister;
 import com.hrms.model.Department;
 import com.hrms.model.EmpMonOvertime;
@@ -62,7 +63,7 @@ public class AttandanceReportController {
 		if (departmentList != null) {
 			model.addAttribute("departmentList", departmentList);
 		}
-		
+		session.setAttribute("imgUtil", new ImageUtil());
 		session.setAttribute("username", session.getAttribute("username"));
 		return "AttendanceRegMothlyReport";
 	}

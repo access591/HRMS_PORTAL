@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.hrms.ImageUtil;
 import com.hrms.model.MenuModule;
 import com.hrms.model.Module;
 import com.hrms.model.Program;
@@ -56,7 +57,7 @@ public class UserProgramRightController {
 	
 	List<SubModule>subModulesList=subModuleService.getActiveSubModules();
 	model.addAttribute("subModulesList", subModulesList);
-	
+	session.setAttribute("imgUtil", new ImageUtil());
 	List<Program> programsList = programService.getActivePrograms();
 	model.addAttribute("programsList", programsList);
 	
