@@ -16,6 +16,7 @@ import com.hrms.model.MenuModule;
 import com.hrms.service.ModuleService;
 import com.hrms.service.PageMappingService;
 import com.hrms.service.ActivityService;
+import com.hrms.ImageUtil;
 import com.hrms.model.Activities;
 @Controller
 public class ActivityController {
@@ -44,7 +45,7 @@ public class ActivityController {
 		if (modules != null) {
 			model.addAttribute("modules", modules);
 		}
-
+		session.setAttribute("imgUtil", new ImageUtil());
 		return pageMappingService.PageRequestMapping(reqPage, pageno);
 	}
 	/**

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.hrms.ImageUtil;
 import com.hrms.model.Employee;
 import com.hrms.model.Leave;
 import com.hrms.model.LeaveDetail;
@@ -77,7 +78,7 @@ public class LeaveRequestController {
 		System.out.println("testing employe exists : " + listEmployee.get(0).getEmpName());
 		String userCode = (String) session.getAttribute("username");
 		System.out.println("userCode  is : "+ userCode);
-		
+		session.setAttribute("imgUtil", new ImageUtil());
 		List<Leave> listLeave = leaveService.getAllLeaves();
 		if(listLeave != null) {
 			model.addAttribute("listLeave", listLeave);

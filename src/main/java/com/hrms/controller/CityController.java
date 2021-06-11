@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.hrms.ImageUtil;
 import com.hrms.model.City;
 import com.hrms.model.MenuModule;
 import com.hrms.service.CityService;
@@ -45,8 +46,10 @@ public class CityController {
 	@RequestMapping(value="/cityMaster")
     public String productsRedirect(HttpServletRequest request, Model model, HttpSession
     		  session){
-		 String userCode = (String) session.getAttribute("username"); List<MenuModule>
-		 modules = moduleService.getAllModulesList(userCode); if (modules != null) {
+		session.setAttribute("imgUtil", new ImageUtil());
+		 String userCode = (String) session.getAttribute("username"); 
+		 List<MenuModule> modules = moduleService.getAllModulesList(userCode); 
+		 if (modules != null) {
 		 model.addAttribute("modules", modules); } 
 		 
 		 return "redirect:getAllCities";

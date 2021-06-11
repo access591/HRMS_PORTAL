@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.hrms.ImageUtil;
 import com.hrms.model.ApplicantExpDetail;
 import com.hrms.model.ApplicantInfo;
 import com.hrms.model.City;
@@ -95,7 +96,7 @@ public class ApplicantInformationController {
 		if (listEmployee != null) {
 			model.addAttribute("listEmployee", listEmployee);
 		}
-
+		session.setAttribute("imgUtil", new ImageUtil());
 		session.setAttribute("username", session.getAttribute("username"));
 		return "applicantInformation"; // applicantInformation.html
 	}

@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.hrms.ImageUtil;
 import com.hrms.model.AttendenceRegister;
 import com.hrms.util.AttendenceRegisterUtil;
 import com.hrms.model.Department;
@@ -79,7 +80,7 @@ public class AttendanceRegisterController {
 			    
 		  }
 		  
-		
+		  session.setAttribute("imgUtil", new ImageUtil());
 		session.setAttribute("username", session.getAttribute("username"));
 		return "attendanceRegister";
 	}

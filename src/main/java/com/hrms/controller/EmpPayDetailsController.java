@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.hrms.ImageUtil;
 import com.hrms.model.Activities;
 import com.hrms.model.Department;
 import com.hrms.model.Employee;
@@ -71,7 +72,7 @@ public class EmpPayDetailsController {
 		}
 
 		session.setAttribute("username", session.getAttribute("username"));
-
+		session.setAttribute("imgUtil", new ImageUtil());
 		return pageMappingService.PageRequestMapping(reqPage, pageno);
 	}
 

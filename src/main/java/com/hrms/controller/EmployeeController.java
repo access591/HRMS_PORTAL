@@ -145,6 +145,7 @@ public class EmployeeController {
 		if (modules != null) {
 			model.addAttribute("modules", modules);
 		}
+		session.setAttribute("imgUtil", new ImageUtil());
 		session.setAttribute("username", session.getAttribute("username"));
 		ModelAndView modelAndView = new ModelAndView(pageMappingService.PageRequestMapping(reqPage, pageno));
 	   

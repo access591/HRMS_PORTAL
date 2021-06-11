@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.hrms.ImageUtil;
 import com.hrms.model.Leave;
 import com.hrms.model.LeaveDetail;
 import com.hrms.model.MenuModule;
@@ -55,7 +56,7 @@ public class LeaveDetailController {
 		}
 
 		session.setAttribute("username", session.getAttribute("username"));
-
+		session.setAttribute("imgUtil", new ImageUtil());
 		return pageMappingService.PageRequestMapping(reqPage, pageno);
 	}
 

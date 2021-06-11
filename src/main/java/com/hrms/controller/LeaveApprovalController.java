@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.hrms.model.Department;
 import com.hrms.model.Designation;
 import com.hrms.model.Employee;
+import com.hrms.ImageUtil;
 import com.hrms.model.CommonUtil;
 import com.hrms.model.LeaveRequest;
 import com.hrms.model.MenuModule;
@@ -101,7 +102,7 @@ public class LeaveApprovalController {
 	@GetMapping("/approveLeaveRequest/{leaveRequestId}/{status}")
 	public String approveLeaveRequest(@PathVariable("leaveRequestId") String leaveid, @PathVariable("status") String status,
 			Model model ,HttpSession session) {
-		
+		session.setAttribute("imgUtil", new ImageUtil());
 		String userCode = (String) session.getAttribute("username");
 		LeaveRequest leaveRequest = leaveRequestService.findLeaveRequestById(Long.valueOf(leaveid));
 		

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import com.hrms.ImageUtil;
 import com.hrms.model.CommonUtil;
 import com.hrms.model.Department;
 import com.hrms.model.EmployeeRequisition;
@@ -73,7 +74,7 @@ public class EmployeeRequisitionApprovalController {
 			model.addAttribute("approved", approvalReq);
 		}
 		session.setAttribute("username", session.getAttribute("username"));
-		   
+		session.setAttribute("imgUtil", new ImageUtil());
 		return "EmployeeRequisitionApproval"; //EmployeeRequisitionApproval.html
 		
 		//return pageMappingService.PageRequestMapping(reqPage, pageno);

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.hrms.ImageUtil;
 import com.hrms.model.Bank;
 import com.hrms.model.MenuModule;
 import com.hrms.service.BankService;
@@ -50,6 +51,7 @@ public String bankMaster(Model model,HttpSession session) {
 	if (modules != null) {
 		model.addAttribute("modules", modules);
 	}
+	session.setAttribute("imgUtil", new ImageUtil());
 	session.setAttribute("username",session.getAttribute("username"));
 	return pageMappingService.PageRequestMapping(reqPage,pageno);
 	}

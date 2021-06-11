@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.hrms.ImageUtil;
 import com.hrms.model.Award;
 import com.hrms.model.MenuModule;
 import com.hrms.service.ModuleService;
@@ -45,7 +46,7 @@ public class AwardController {
 		}
 
 		session.setAttribute("username", session.getAttribute("username"));
-
+		session.setAttribute("imgUtil", new ImageUtil());
 		return pageMappingService.PageRequestMapping(reqPage, pageno);
 	}
 /**

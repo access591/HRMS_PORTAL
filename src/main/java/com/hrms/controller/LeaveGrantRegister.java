@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.hrms.ImageUtil;
 import com.hrms.model.Employee;
 import com.hrms.model.Leave;
 import com.hrms.model.LeaveGrant;
@@ -41,6 +42,7 @@ public class LeaveGrantRegister {
 		List<LeaveGrant> listLeaveGrant = leaveGrantRegisterService.getAllLeaveGrants();
 		model.addAttribute("listLeaveGrant", listLeaveGrant);
 		String userCode = (String) session.getAttribute("username");
+		session.setAttribute("imgUtil", new ImageUtil());
 		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
 		if (modules != null) {
 			model.addAttribute("modules", modules);
