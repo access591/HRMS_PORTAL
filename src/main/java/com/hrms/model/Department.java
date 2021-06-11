@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
 /**
  * @author Access
@@ -28,23 +29,25 @@ public class Department implements Serializable
 	private static final long serialVersionUID = -4001846236713344340L;
 
 	@Id
+	@Size(max =15)
 	@Column(name = "DEPARTMENT_CODE")
 	private String departmentCode;
-	
+	@Size(max =60)
 	@Column(name = "DEP_NAME")
 	private String deptName;
 	@ManyToOne
 	@JoinColumn(name ="DEPH_Code")
 	private Employee empCode;
-
+	@Size(max =1)
 	@Column(name = "ACTIVE_YN")
 	private String active;
+	@Size(max =50)
     @Column(name = "INS_BY",updatable = false)
 	private String insBy;
 	
 	@Column(name = "INS_DATE",updatable = false)
 	private Date insDate =new Date();
-	
+	@Size(max =50)
 	@Column(name = "UPD_BY",insertable = false)
 	private String updBy;
 	
