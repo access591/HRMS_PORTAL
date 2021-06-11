@@ -1,6 +1,7 @@
 package com.hrms.model;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -34,18 +35,19 @@ public class Program implements Serializable {
 	@Size(max =1)
 	@Column(name = "ACTIVE_YN")
 	private String activeYn;
+	
+	
 	@Size(max =50)
-	@Column(name = "INS_BY")
+	@Column(name = "INS_BY",updatable = false)
 	private String insertedBy;
-
-	@Column(name = "INS_DATE")
-	private String insertedDate;
+	@Column(name = "INS_DATE",updatable = false)
+	private Date insertedDate =new Date();
 	@Size(max =50)
-	@Column(name = "UPDATE_BY")
+	@Column(name = "UPDATE_BY",insertable = false)
 	private String updatedBy;
 
-	@Column(name = "UPDATE_DATE")
-	private String updatedDate;
+	@Column(name = "UPDATE_DATE",insertable = false)
+	private Date updatedDate = new Date();
 
 	@ManyToOne
 	@JoinColumn(name = "SUB_MODULE_CODE", nullable = false)
@@ -108,11 +110,11 @@ public class Program implements Serializable {
 		this.insertedBy = insertedBy;
 	}
 
-	public String getInsertedDate() {
+	public Date getInsertedDate() {
 		return insertedDate;
 	}
 
-	public void setInsertedDate(String insertedDate) {
+	public void setInsertedDate(Date insertedDate) {
 		this.insertedDate = insertedDate;
 	}
 
@@ -124,11 +126,11 @@ public class Program implements Serializable {
 		this.updatedBy = updatedBy;
 	}
 
-	public String getUpdatedDate() {
+	public Date getUpdatedDate() {
 		return updatedDate;
 	}
 
-	public void setUpdatedDate(String updatedDate) {
+	public void setUpdatedDate(Date updatedDate) {
 		this.updatedDate = updatedDate;
 	}
 
