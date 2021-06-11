@@ -8,6 +8,7 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.hrms.model.EmployeeRequisition;
 import com.hrms.model.InterviewMaster;
 import com.hrms.repository.InterviewMasterDao;
 
@@ -40,14 +41,15 @@ public class InterviewMasterServiceImpl implements InterviewMasterService{
 		
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
-		//InterviewMaster im = session.find(InterviewMaster.class, interviewCode);
-		Query<InterviewMaster> query = session.createQuery("from InterviewMaster i where i.interviewCode = :interviewCode"
-										+ " and "
-										+"i.applicantCode = :applicantCode", InterviewMaster.class);
-		query.setParameter("interviewCode", interviewCode);
-		query.setParameter("applicantCode", applicantCode);
+		InterviewMaster im = session.find(InterviewMaster.class, interviewCode);
+//		Query<InterviewMaster> query = session.createQuery("from InterviewMaster i where i.interviewCode = :interviewCode"
+//										+ " and "
+//										+"i.applicantCode = :applicantCode", InterviewMaster.class);
+//		query.setParameter("interviewCode", interviewCode);
+//		query.setParameter("applicantCode", applicantCode);
 		
-		InterviewMaster im = query.getSingleResult();
+//		InterviewMaster im2 = query.getSingleResult();
+		
 		im.setSelectionStatus(finalApprovalStatus);
 		
 		session.merge(im);
@@ -69,6 +71,23 @@ public class InterviewMasterServiceImpl implements InterviewMasterService{
 			session.close();
 			return result;
 		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	@Override
+	public InterviewMaster findinterviewMasterById(String interviewCode) {
+		try {
+			Session session = sessionFactory.openSession();
+			Query<InterviewMaster> query = session.createQuery("from InterviewMaster e where "
+					+ "e.interviewCode = :interviewCode", 
+					InterviewMaster.class);
+			query.setParameter("interviewCode", interviewCode);
+			InterviewMaster er = query.getSingleResult();
+			return er;
+		}catch(Exception e) {
+			System.out.println("========error block");
 			e.printStackTrace();
 		}
 		return null;

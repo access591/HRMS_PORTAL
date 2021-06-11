@@ -193,52 +193,10 @@ public class InterviewController {
 			model.addAttribute("modules", modules);
 		}
 		
-		List<InterviewMaster> listInterviewmaster =  interviewMasterService.getAllInterviewMaster();
+		List<InterviewMaster> listInterviewMaster = interviewMasterService.getAllInterviewMaster();
 		
-		List<InterviewFinalSelectionUtil> interviewFinalSelection = new ArrayList<InterviewFinalSelectionUtil>();
-		for(InterviewMaster interView : listInterviewmaster) {
-			
-			
-			InterviewFinalSelectionUtil ifs = new InterviewFinalSelectionUtil();
-			ifs.setInterviewCode(interView.getInterviewCode());
-			ifs.setInterviewDate(interView.getInterviewDate());
-			ifs.setApplicantCode(interView.getApplicantCode().getApplicantCode());
-			ifs.setApplicantDate(interView.getApplicantDate());
-			ifs.setOvarAllRating(interView.getOverAllRating());
-			
-			//System.out.println("selection status : "+ interView.getSelectionStatus());
-			
-			if(interView.getSelectionStatus() == null) {
-				ifs.setSelectionStatus("0");
-				System.out.println("11111111111nulllll111111111");
-				
-				
-			}
-			
-			else if(interView.getSelectionStatus().length() == 0) {
-				ifs.setSelectionStatus("0");
-				System.out.println("11111111111111111111");
-				
-			}
-			else {
-				
-				ifs.setSelectionStatus(interView.getSelectionStatus());
-				System.out.println("0000000000000");
-			}
-			
-			
-			ApplicantInfo applicantinfo = applicantInfoService.getApplicantInfoByApplicantCode(interView.getApplicantCode().getApplicantCode());
-			ifs.setApplicantName(applicantinfo.getApplicantName());
-			ifs.setCurrentCtc(applicantinfo.getCurrentCtc());
-			ifs.setExpectedCtc(applicantinfo.getExpectedCtc());
-			
-			
-			interviewFinalSelection.add(ifs);
-		}
-		
-		
-		
-		model.addAttribute("interviewFinalSelection", interviewFinalSelection);
+	
+		model.addAttribute("interviewFinalSelection", listInterviewMaster);
 		session.setAttribute("username", userCode);
 		return "interviewFinalSelection";  //interviewFinalSelection.html
 	}
@@ -249,8 +207,28 @@ public class InterviewController {
 										@PathVariable("interviewCode") String interviewCode,HttpSession session) {
 		
 		
+		System.out.println("final approval staus : =====>"+finalApprovalStatus);
+		System.out.println("applicantCode staus : =====>"+applicantCode);
+		System.out.println("Interview Code staus : =====>"+interviewCode);
+		
 		interviewMasterService.interviewFinalapproval(applicantCode, interviewCode, finalApprovalStatus);
 		return "redirect:/interviewFinalSelection";
+	}
+	
+	
+	@GetMapping("viewInterviewDetail/{id}")
+	public String viewInterviewDetail(@ModelAttribute("interviewMaster")InterviewMaster interviewMaster,
+			@PathVariable("id")String inteviewCode,Model model) {
+		
+		System.out.println("interview code ==>"+ inteviewCode);
+		InterviewMaster interviewMaster1 = interviewMasterService.findinterviewMasterById(inteviewCode);
+		
+		if(interviewMaster1 != null) {
+			model.addAttribute("interviewMaster", interviewMaster1);
+		}
+		
+		
+		return "viewInterviewDetail";
 	}
 	
 
