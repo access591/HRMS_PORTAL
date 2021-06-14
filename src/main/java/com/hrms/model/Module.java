@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
 import javax.validation.constraints.Size;
 @Entity
 @Table(name = "M_MODULE")
@@ -42,7 +43,7 @@ public class Module implements Serializable {
 
 	@Column(name = "UPDATE_DATE",insertable = false)
 	private Date updatedDate=new Date();
-	@Size(max =2)
+	
 	@Column(name = "SEQ_NO")
 	private int seqNo;
 

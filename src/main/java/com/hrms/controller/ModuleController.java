@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.hrms.ImageUtil;
 import com.hrms.model.MenuModule;
 import com.hrms.model.Module;
 import com.hrms.service.ModuleService;
@@ -47,6 +48,7 @@ public class ModuleController {
 			if (modules != null) {
 				model.addAttribute("modules", modules);
 			}
+			session.setAttribute("imgUtil", new ImageUtil());
 			session.setAttribute("username", session.getAttribute("username"));
 			return pageMappingService.PageRequestMapping(reqPage, pageno);
 		}
@@ -99,13 +101,19 @@ public class ModuleController {
 	@GetMapping(value = {"/editModule/{id}"})
 	public String editModule(@PathVariable("id")String id,  Model model,HttpSession session)
 	 { 
-		 int editPageNo=20;
+		   int editPageNo=20;
 			String reqPageedit="/editModule";
-		Module moduleEdit = moduleService.findModuleById(id);
-		  model.addAttribute("moduleEdit", moduleEdit);
-
-	    session.setAttribute("username",session.getAttribute("username")); 
-	    return pageMappingService.PageRequestMapping(reqPageedit,editPageNo);
+			String userCode= (String)session.getAttribute("username");
+			if (userCode!=null) {
+			Module moduleEdit = moduleService.findModuleById(id);
+			model.addAttribute("moduleEdit", moduleEdit);
+			session.setAttribute("username", session.getAttribute("username"));
+			return pageMappingService.PageRequestMapping(reqPageedit, editPageNo);
+		}
+			else
+			{
+				 return "redirect:" + "./";
+			}
 	}
 	/**
 	 * Method to Edit Module 	
