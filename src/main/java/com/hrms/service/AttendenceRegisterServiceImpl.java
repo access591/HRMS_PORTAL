@@ -64,7 +64,7 @@ public class AttendenceRegisterServiceImpl implements AttendenceRegisterService{
 			Session session = sessionFactory.openSession();
 			Query<AttendenceRegister> query = session.createQuery("from AttendenceRegister a inner join fetch a.employee e "
 					+ "inner join fetch a.department d "
-					+ "and a.attendenceDate >= :fromDate and a.attendenceDate <=:toDate", AttendenceRegister.class);
+					+ "where a.attendenceDate >= :fromDate and a.attendenceDate <=:toDate", AttendenceRegister.class);
 			
 			query.setParameter("fromDate", FromDate);
 			query.setParameter("toDate", toDate);

@@ -1,8 +1,8 @@
 package com.hrms.reports;
 
 import java.io.IOException;
-import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,8 +32,8 @@ public class ArmsReport {
 	@Autowired
 	ArmsLicenseService armsLicenseService;
 
-	public List<?> createArmsLicensesReport(HttpServletResponse response, HttpServletRequest request,
-			List<?> sourceData) {
+	public List<ArmsLicenseDetails> createArmsLicensesReport(HttpServletResponse response, HttpServletRequest request,
+			List<ArmsLicenseDetails> sourceData) {
 
 		String reportFileName = "ArmsLicenses"; // Parameter1
 		String sourceFileName = request.getSession().getServletContext()
@@ -46,7 +46,7 @@ public class ArmsReport {
 					.getRealPath("/resources/" + reportFileName + ".jasper");
 			JRBeanCollectionDataSource beanColDataSource = new JRBeanCollectionDataSource(sourceData);
 
-			Map<String, Object> parameters = new HashMap<String, Object>();
+			Map<String, Object> parameters = new HashMap<>();
 
 			parameters.put("Parameter1", beanColDataSource);
 
@@ -73,12 +73,12 @@ public class ArmsReport {
 		} catch (JRException e) {
 			e.printStackTrace();
 		}
-		return null;
+		return Collections.<ArmsLicenseDetails>emptyList();
 
 	}
 
 	public void armsReportDataSource(String empCode, HttpServletResponse response, HttpServletRequest request) {
-		List<ArmsLicenseDetails> arms = new ArrayList<ArmsLicenseDetails>();
+		List<ArmsLicenseDetails> arms = new ArrayList<>();
 		ArmsLicenseDetails armsLicenseDetail = armsLicenseService.findArmsByEmpEmpCode(empCode);
 		if(armsLicenseDetail != null)
 			arms.add(armsLicenseDetail);

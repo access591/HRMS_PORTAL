@@ -6,8 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hrms.model.ArmsLicenseDetails;
-import com.hrms.model.Award;
-import com.hrms.model.Employee;
 import com.hrms.repository.ArmsLicenseDao;
 @Service
 public class ArmsLicenseServiceImpl implements ArmsLicenseService {
@@ -26,8 +24,8 @@ public class ArmsLicenseServiceImpl implements ArmsLicenseService {
 	}
 	@Override
 	public List<ArmsLicenseDetails> getAllArmsLicenses() {
-		List<ArmsLicenseDetails> listArmsLicense = armsLicenseDao.findAll();
-		return listArmsLicense;
+		
+		return armsLicenseDao.findAll();
 	}
 	@Override
 	public void updateArmsLicenseService(ArmsLicenseDetails armsLicense) {

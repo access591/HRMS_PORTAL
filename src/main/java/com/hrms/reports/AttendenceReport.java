@@ -31,7 +31,8 @@ import net.sf.jasperreports.engine.util.JRLoader;
 @Component
 public class AttendenceReport {
 	
-	public List<?> attendenceMontlyReport(HttpServletResponse response, HttpServletRequest request, List<?> sourceData
+	public List<?> attendenceMontlyReport(HttpServletResponse response, HttpServletRequest request, 
+			List<?> sourceData
 			,Date fromDate,Date toDate,String empCode,String deptCode) {
 
 		String reportFileName = "AttendanceRegMonthly"; // Parameter1
@@ -85,12 +86,13 @@ public class AttendenceReport {
 	}
 	
 	
-	public List<?> createAttendenceReportDatewise(HttpServletResponse response, HttpServletRequest request, List<?> sourceData) {
+	public List<?> createAttendenceReportDatewise(HttpServletResponse response, HttpServletRequest request, 
+			List<?> sourceData,Date fromDate , Date toDate) {
 
 		String reportFileName = "AttendenceReportDatewise"; // Parameter1
 		
 		String mainYear = "2020-21";
-		String totalDate = "From  : 20/05/2021    To  : 20/06/2021";
+		String totalDate = "From :" +fromDate+" To :"+toDate;
 
 		String sourceFileName = request.getSession().getServletContext()
 				.getRealPath("resources/" + reportFileName + ".jrxml");
