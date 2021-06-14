@@ -1,5 +1,6 @@
 package com.hrms.controller;
 
+import java.lang.ProcessBuilder.Redirect;
 import java.util.List;
 
 
@@ -41,12 +42,19 @@ public class ModuleController {
 		List<Module> modules1 = moduleService.getModules();
 		model.addAttribute("modules1", modules1);
 		String userCode= (String)session.getAttribute("username");
-		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
-		if (modules != null) {
-			model.addAttribute("modules", modules);
+		if (userCode!=null) {
+			List<MenuModule> modules = moduleService.getAllModulesList(userCode);
+			if (modules != null) {
+				model.addAttribute("modules", modules);
+			}
+			session.setAttribute("username", session.getAttribute("username"));
+			return pageMappingService.PageRequestMapping(reqPage, pageno);
 		}
-		session.setAttribute("username", session.getAttribute("username"));
-		  return pageMappingService.PageRequestMapping(reqPage,pageno);
+		else
+		{
+			  return "redirect:" + "./";
+			
+		}
 	}
 
 	/**
