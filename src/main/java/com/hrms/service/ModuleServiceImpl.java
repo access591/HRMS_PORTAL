@@ -134,10 +134,7 @@ public class ModuleServiceImpl implements ModuleService {
 
 	@Override
 	public void updateModule(Module m) {
-		m.setModuleName(m.getModuleName());
-		m.setActive(m.getActive());
-		m.setActive(m.getActive());
-		m.setUpdatedDate(m.getUpdatedDate());
+
 		this.moduleDao.saveOrUpdate(m);
 
 	}
