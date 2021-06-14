@@ -31,10 +31,17 @@ public class EmployeeRequisitionApprovalController {
 	@Autowired DepartmentService departmentService;
 	
 	
+	@ModelAttribute
+	public void commonData(Model model,HttpSession session) {
+		session.setAttribute("username", session.getAttribute("username"));
+		
+	}
+	
+	
 	@GetMapping("employeeRequisitionApproval")
 	public String employeeRequisitionApproval(@ModelAttribute("commonUtil")CommonUtil commonUtil ,Model model, HttpSession session) {
 		
-		//model.addAttribute("listAward", listAward);
+		
 
 		String userCode = (String) session.getAttribute("username");
 		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
@@ -43,13 +50,13 @@ public class EmployeeRequisitionApprovalController {
 		}
 		
 		
-		List<CommonUtil> listCommonUtil = new ArrayList<CommonUtil>();
+		List<CommonUtil> listCommonUtil = new ArrayList<>();
 		List<EmployeeRequisition> listEmployeeReq = employeeRequisitionService.getAllPendingEmployeeRequisition();
 		
 		for(int i=0;i<listEmployeeReq.size();i++) {
-			Department department;
+			
 			try {
-				//department = departmentService.findDepartmentById(listEmployeeReq.get(i).getDeptCode());
+				
 				EmployeeRequisition em = listEmployeeReq.get(i);
 				CommonUtil commonUtill = new CommonUtil(em.getDepartmet().getDeptName() ,em.getReqCode(),em.getReqDate(),
 						em.getReqPriority(),em.getReqApprover(),em.getRemarks(),em.getInsBy(),em.getInsDate(),
@@ -63,7 +70,7 @@ public class EmployeeRequisitionApprovalController {
 			
 			
 			
-		}//editEmployeeRequisition.html
+		}
 		
 		
 		model.addAttribute("listCommonUtil", listEmployeeReq);
@@ -73,19 +80,19 @@ public class EmployeeRequisitionApprovalController {
 		if(approvalReq != null) {
 			model.addAttribute("approved", approvalReq);
 		}
-		session.setAttribute("username", session.getAttribute("username"));
-		session.setAttribute("imgUtil", new ImageUtil());
-		return "EmployeeRequisitionApproval"; //EmployeeRequisitionApproval.html
 		
-		//return pageMappingService.PageRequestMapping(reqPage, pageno);
+		session.setAttribute("imgUtil", new ImageUtil());
+		return "EmployeeRequisitionApproval"; 
+		
+		
 	}
 	
 	
 	@GetMapping("approveRequisition/{id}/{status}")
 	public String approveRequisition(@PathVariable("id") String reqCode,@PathVariable("status") String approvalStatus) {
 		
-		System.out.println("hiiiiiii" + reqCode);
-		//System.out.println("hiiiiiii" + name);
+		
+		
 		
 		
 		employeeRequisitionService.approvedByReqCodeAndStatus(reqCode,approvalStatus);

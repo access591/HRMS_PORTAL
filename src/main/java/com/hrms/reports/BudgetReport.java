@@ -1,7 +1,7 @@
 package com.hrms.reports;
 
 import java.io.IOException;
-import java.sql.Date;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,7 +26,7 @@ import net.sf.jasperreports.engine.util.JRLoader;
 @Component
 public class BudgetReport {
 
-	public List<?> createBudgetReport(HttpServletResponse response, HttpServletRequest request, 
+	public List<BudgetProvision> createBudgetReport(HttpServletResponse response, HttpServletRequest request, 
 			List<BudgetProvision> sourceData,String deptName) {
 
 		String reportFileName = "budgetProvision"; // Parameter1
@@ -43,7 +43,7 @@ public class BudgetReport {
 					.getRealPath("/resources/" + reportFileName + ".jasper");
 			JRBeanCollectionDataSource beanColDataSource = new JRBeanCollectionDataSource(sourceData);
 
-			Map<String, Object> parameters = new HashMap<String, Object>();
+			Map<String, Object> parameters = new HashMap<>();
 
 			parameters.put("Parameter1", beanColDataSource);
 			parameters.put("deptName", deptName1);
@@ -74,7 +74,7 @@ public class BudgetReport {
 			e.printStackTrace();
 		}
 
-		return null;
+		return Collections.emptyList();
 
 
 	}

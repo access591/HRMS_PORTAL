@@ -3,7 +3,6 @@ package com.hrms.reports;
 import java.io.IOException;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Component;
 
 import com.hrms.model.ApplicantInfo;
-import com.hrms.model.CommonUtil;
+
 
 import net.sf.jasperreports.engine.JREmptyDataSource;
 import net.sf.jasperreports.engine.JRException;
@@ -48,16 +47,16 @@ public class EmployeeOfferLetter {
 		
 
 		try {
-			System.out.println("Start compiling!!! ...");
+			
 			JasperCompileManager.compileReportToFile(sourceFileName);
-			System.out.println("Done compiling!!! ...");
+			
 			sourceFileName = request.getSession().getServletContext()
 					.getRealPath("/resources/" + reportFileName + ".jasper");
-			System.out.println("Jasper File Created!!! ...");
+			
 
 			//JRBeanCollectionDataSource beanColDataSource = new JRBeanCollectionDataSource(dataList);
 
-			Map<String, Object> parameters = new HashMap<String, Object>();
+			Map<String, Object> parameters = new HashMap<>();
 			
 			parameters.put("OfferLetter", offerLetter);
 			parameters.put("topDate", topDate);

@@ -22,7 +22,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.hrms.model.BudgetProvision;
 import com.hrms.model.Department;
-import com.hrms.model.Employee;
 import com.hrms.model.MenuModule;
 import com.hrms.reports.ArmsReport;
 import com.hrms.reports.BudgetReport;
@@ -38,6 +37,20 @@ public class BudgetProvisionController {
 	@Autowired DepartmentService departmentService;
 	@Autowired BudgetProvisionService budgetProvisionService;
 	@Autowired EmployeeService employeeService;
+	
+	
+	@ModelAttribute
+	public void commonData(Model model,HttpSession session) {
+		//budget provision page
+		//edit budget provision 
+		//budget report 
+		List<Department> departmentList = departmentService.getAllDepartments();
+		if (departmentList != null) {
+			model.addAttribute("departmentList", departmentList);
+		}
+		String userCode = (String) session.getAttribute("username");
+		session.setAttribute("username", userCode);
+	}
 	
 	
 	@InitBinder("budgetProvision")
@@ -61,15 +74,12 @@ public class BudgetProvisionController {
 		if (modules != null) {
 			model.addAttribute("modules", modules);
 		}
-		List<Department> departmentList = departmentService.getAllDepartments();
-		if (departmentList != null) {
-			model.addAttribute("departmentList", departmentList);
-		}
+		
 		List<BudgetProvision> listBudgetProvision = budgetProvisionService.getAllBudgetProvision();
 		if (listBudgetProvision != null) {
 			model.addAttribute("listBudgetProvision", listBudgetProvision);
 		}
-		session.setAttribute("username", userCode);
+		
 		return "budgetProvision";
 		
 	}
@@ -89,10 +99,7 @@ public class BudgetProvisionController {
 		BudgetProvision b = budgetProvisionService.findByBudgetProvisionId(
 				Long.parseLong(budgetProvisionCode));
 		
-		List<Department> departmentList = departmentService.getAllDepartments();
-		if (departmentList != null) {
-			model.addAttribute("departmentList", departmentList);
-		}
+		
 		
 		if(b != null) {
 			model.addAttribute("budgetProvision", b);
@@ -109,11 +116,10 @@ public class BudgetProvisionController {
 	
 	@GetMapping(value = {"deleteBudgetProvision/{id}"})
 	public String deleteBudgetProvision(@PathVariable("id") String orderTrackingId, Model model, HttpSession session) {
-		System.out.println("=====================>");
+		
 		
 		budgetProvisionService.removeBudgetProvision(Long.parseLong(orderTrackingId));
 		
-		session.setAttribute("username", session.getAttribute("username"));
 		return "redirect:/budgetprovisionpage";
 	}
 	
@@ -136,10 +142,7 @@ public class BudgetProvisionController {
 			model.addAttribute("modules", modules);
 		}
 		
-		List<Department> departmentList = departmentService.getAllDepartments();
-		if (departmentList != null) {
-			model.addAttribute("departmentList", departmentList);
-		}
+		
 		return "budgetReport";
 	}
 	
@@ -151,10 +154,7 @@ public class BudgetProvisionController {
 	
 		if(deptCode.equals("ALL")) {
 			List<BudgetProvision> budgetProvision = budgetProvisionService.getAllBudgetProvision();
-			System.out.println("budget list : ====>"+ budgetProvision.get(0).getBudgetHead());
 			budgetReport.createBudgetReport(response, request, budgetProvision, "All");
-		}else {
-			
 		}
 		
 		return null;

@@ -2,7 +2,6 @@ package com.hrms.reports;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Component;
 
 import com.hrms.model.ApplicantInfo;
-import com.hrms.model.CommonUtil;
+
 
 import net.sf.jasperreports.engine.JREmptyDataSource;
 import net.sf.jasperreports.engine.JRException;
@@ -29,7 +28,7 @@ public class EmployeeJoiningLetter {
 
 	public void employeeJoiningLetter(HttpServletRequest request, HttpServletResponse response, String reportFileName,
 			ApplicantInfo applicantInfo) {
-		System.out.println("Employee Joining report...");
+		
 
 		String joiningLetter = "I , Mr/Ms "+applicantInfo.getApplicantName()+" have Joined HRMS  as "+applicantInfo.getDesigCode().getDesgName()+" Department w.e.f Date 10/03/21 "
 				+ "in accordance with the condition of your LOI Dated.";
@@ -41,16 +40,16 @@ public class EmployeeJoiningLetter {
 		
 
 		try {
-			System.out.println("Start compiling!!! ...");
+			
 			JasperCompileManager.compileReportToFile(sourceFileName);
-			System.out.println("Done compiling!!! ...");
+			
 			sourceFileName = request.getSession().getServletContext()
 					.getRealPath("/resources/" + reportFileName + ".jasper");
-			System.out.println("Jasper File Created!!! ...");
+			
 
 			//JRBeanCollectionDataSource beanColDataSource = new JRBeanCollectionDataSource(dataList);
 
-			Map<String, Object> parameters = new HashMap<String, Object>();
+			Map<String, Object> parameters = new HashMap<>();
 			
 			parameters.put("joiningLetter",joiningLetter);
 			parameters.put("name",applicantInfo.getApplicantName());
