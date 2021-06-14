@@ -1,6 +1,6 @@
 package com.hrms.controller;
 
-import java.util.ArrayList;
+
 import java.util.Date;
 import java.util.List;
 
@@ -14,10 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hrms.model.Department;
-import com.hrms.model.Designation;
-import com.hrms.model.Employee;
 import com.hrms.ImageUtil;
-import com.hrms.model.CommonUtil;
 import com.hrms.model.LeaveRequest;
 import com.hrms.model.MenuModule;
 import com.hrms.model.UserEntity;
@@ -76,29 +73,12 @@ public class LeaveApprovalController {
 	@GetMapping("/leaverequest/{deptCode}")
 	public List<LeaveRequest> getAllLeaveRequestBydept(@PathVariable("deptCode") String deptCode) {
 		 
-		List<LeaveRequest> list = leaveRequestService.findAllByDeptCodeAndStatusN(deptCode);
-		System.out.println("list size : "+ list.size());
-		List<CommonUtil> listEmr = new ArrayList<CommonUtil>();
-		CommonUtil empLvRe;
-		/*for(int i =0;i<list.size();i++) {
-			Employee emp = employeeService.findEmployeeById(list.get(i).getEmpCode());
-			System.out.println("emp loiye detail :"+ emp.getEmpName());
-			Department dept = departmentService.findDepartmentById(emp.getDepartmentCode());
-			System.out.println("department detail : "+ dept.getDeptName());
-			Designation desig = designationService.findDesignationById(emp.getDesignationCode());
-			System.out.println("desig nation : "+ desig.getDesgName());
-			empLvRe = new EmployeeLeaveRequest(emp.getEmpName(),dept.getDeptName(),desig.getDesgName(),list.get(i).getFromDate().toString(),
-					list.get(i).getToDate().toString());
-			listEmr.add(empLvRe);
-			System.out.println("counting : "+ i);
-		}
-		*/
 		return leaveRequestService.findAllByDeptCodeAndStatusN(deptCode);
 		
 	}
 	
 	
-	//@ResponseBody
+	
 	@GetMapping("/approveLeaveRequest/{leaveRequestId}/{status}")
 	public String approveLeaveRequest(@PathVariable("leaveRequestId") String leaveid, @PathVariable("status") String status,
 			Model model ,HttpSession session) {
@@ -154,10 +134,8 @@ public class LeaveApprovalController {
 	@GetMapping(value = { "/viewLeaveApproval/{id}" })
 	public String viewLeaveRequestByEmpId(@PathVariable("id")String leaveRequestId,
 						Model model,HttpSession session) {
-		int pagenoView = 61;
-		String reqPageView = "/viewLeaveRequest";
 		
-		System.out.println("view Leave Approval module : ");
+		
 		LeaveRequest leaveRequest = this.leaveRequestService.findLeaveRequestById(Long.parseLong(leaveRequestId));
 		
 		if(leaveRequest != null) {

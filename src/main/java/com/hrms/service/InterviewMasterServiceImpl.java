@@ -42,13 +42,7 @@ public class InterviewMasterServiceImpl implements InterviewMasterService{
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 		InterviewMaster im = session.find(InterviewMaster.class, interviewCode);
-//		Query<InterviewMaster> query = session.createQuery("from InterviewMaster i where i.interviewCode = :interviewCode"
-//										+ " and "
-//										+"i.applicantCode = :applicantCode", InterviewMaster.class);
-//		query.setParameter("interviewCode", interviewCode);
-//		query.setParameter("applicantCode", applicantCode);
-		
-//		InterviewMaster im2 = query.getSingleResult();
+
 		
 		im.setSelectionStatus(finalApprovalStatus);
 		
