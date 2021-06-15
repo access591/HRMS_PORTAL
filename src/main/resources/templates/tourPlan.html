@@ -139,7 +139,7 @@ body {
 								</div>
 								<div class="card-body">
 								<input id="_cr" name="_cr" type="hidden"value="1">
-								<div class="col-sm-12" align="right">
+								<div class="col-sm-12"  style="text-align: right;">
 								<a id="add_row" class="fa fa-plus" aria-hidden="true"style="font-size:28px;color:#001080"></a>&nbsp;&nbsp;&nbsp;
 								<a id='delete_row'class="fa fa-trash" style="font-size:28px;color:#399490fc"aria-hidden="true"></a>	
 								</div>
@@ -147,11 +147,11 @@ body {
 															style="width: 100%" aria-describedby="datatables-buttons">
 															<thead>
 																<tr>
-																	<th>Start Place.</th>
-																	<th>End Place</th>
-                                                                    <th>From Date</th>
-																	<th>To Date</th>
-																	<th>Purpose/Task to be done</th>
+																	<th scope="col">Start Place.</th>
+																	<th scope="col">End Place</th>
+                                                                    <th scope="col">From Date</th>
+																	<th scope="col">To Date</th>
+																	<th scope="col">Purpose/Task to be done</th>
 
 																</tr>
 															</thead>
@@ -199,7 +199,7 @@ body {
 												<th scope="col">Employee Name</th>
 												<th scope="col">Department</th>
 												<th scope="col">Designation</th>
-												<!-- <th scope="col">Tour Pan Date </th> -->
+											
 												
 												<th scope="col">Action </th>
 											</tr >
@@ -213,7 +213,7 @@ body {
 										<td th:text="${tourPlan.empCode.empName}"></td>
 										<td  th:text="${tourPlan.departmentCode.deptName}"></td>
 										<td  th:text="${tourPlan.desgCode.desgName}"></td>
-									<!-- 	<td  th:text="${tourPlan.tourPlanDate}"></td> -->
+								
 										  <td>
 										  <a th:href="@{/editTourPlan/{id}/(id=${tourPlan.tourPlanId})}"><em class="fa fa-edit"></em></a>
 										  
