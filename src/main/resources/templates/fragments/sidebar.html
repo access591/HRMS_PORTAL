@@ -70,8 +70,7 @@ h5.tittle-w3l span {
 								title="${subModule.getSubModuleName()}"> <span
 									th:text="${subModule.getSubModuleName()}"></span></a>
 								<ul class="list-inline">
-									<li class="open" th:each="entry: ${subModule.getSubPrograms()}">
-										
+									<li  th:each="entry: ${subModule.getSubPrograms()}">
 									 <a th:href="${entry.value}" title="${entry.key}" th:text="${entry.key}"></a>
 									</li>
 								</ul></li>
