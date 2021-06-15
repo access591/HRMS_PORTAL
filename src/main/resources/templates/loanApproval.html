@@ -57,7 +57,7 @@ body {
 											<tr >
 												<th scope="col">Application_No.</th>
 												<th scope="col">Application_Date </th>
-											  <!--   <th scope="col">Employee  Code </th> -->
+											
 												<th scope="col">Employee_Name </th>
 												<th scope="col">Employee_Pay_Code </th>
 													<th scope="col">Department </th>
@@ -76,7 +76,7 @@ body {
 										<tr  th:each="listloan:${listofloanApproval}">
 										        <td th:text="${listloan.appNo}"></td>
 												<td th:text="${#dates.format(listloan.appDate,'dd-MM-yyyy')}"> </td>
-											   <!--  <td th:text="${listloan.empCode}"> </td> -->
+											
 												<td th:text="${listloan.empName}"> </td>
 												<td th:text="${listloan.empPayCode}"> </td>
 												<td th:text="${listloan.deptName}"> </td>
