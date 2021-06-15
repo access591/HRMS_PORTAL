@@ -640,7 +640,7 @@ body {
 												<td th:text="${listemployee.empName}"></td>
 												<td th:text="${listemployee.dateOfJoining}"></td>
 												<td><img th:src="@{'/img/'+${listemployee.empImg}}" alt="Avatar" width="48" height="48"class="rounded-circle mr-2" /> </td>
-												<td><a th:href="@{/editEmployee/{id}(id=${listemployee.empCode})}"><em class="fa fa-edit"></em></a>
+												<td><a th:href="@{/editEmployee/{id}(id=${listemployee.empCode})}"><i class="fa fa-edit"></i></a>
 												<a th:href="@{/deleteEmployee/{id}/{empImg}(id=${listemployee.empCode},empImg=${listemployee.empImg})}" onclick="return confirm('Are you sure?')"><em class="bi bi-trash"></em></a>
 												
 												</td>
