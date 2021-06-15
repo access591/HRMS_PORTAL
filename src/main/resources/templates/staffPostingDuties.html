@@ -124,12 +124,7 @@ body {
 							                 <input  type="text"id="positionCode"name="positionCode" title="Position Code" class="form-control">
 										     </div>
 										     
-										     	<!-- <div class="form-group sm col-md-4">
-											       <label class="form-label">Father /Husband 
-											       <span class="text-danger">*</span></label>
-							                 <input  type="text"id="fatHus"name="fatHus" title="Name"maxlength="50" pattern="^[a-zA-Z\s]*$" class="form-control required">
-										     </div>
-										      -->
+										     
 										     <div class="form-group sm col-md-4">
 												<label class="form-label">Department</label> 
 												
@@ -172,11 +167,11 @@ body {
 	<div class="col-12">
 							<div class="card">
 								<div class="card-header">
-									<div class="col-sm-12" align="right">
+									<div class="col-sm-12" style="text-align: right;">
 										<span class=" btn btn-primary pull-left" id="selectedTREN"
 											style="background-color: rgb(150, 148, 255)"> 
 											<a target="_blank" id="selectedHref" href="/reporStaffPostingDuties"style="color: black;">
-											 <i class="align-middle mr-2 fas fa-fw fa-arrow-circle-down"style="color: rgb(0, 39, 95);"></i> Generate Report
+											 <em class="align-middle mr-2 fas fa-fw fa-arrow-circle-down"style="color: rgb(0, 39, 95);"></em> Generate Report
 										    </a></span> <span> 
 										<select id="reportgenrate" name="reportgenrate"
 											class="custom-select flex-grow-1" style="width: 65px;">
@@ -194,7 +189,7 @@ body {
 												<th scope="col">Employee Name</th>
 												<th scope="col">Department</th>
 												<th scope="col">Designation</th>
-												<!-- <th scope="col">Tour Pan Date </th> -->
+											
 												<th scope="col">Action </th>
 											</tr >
 											
@@ -207,7 +202,7 @@ body {
 										<td th:text="${listOfStaff.empName}"></td>
 										<td  th:text="${listOfStaff.deptName}"></td>
 										<td  th:text="${listOfStaff.desgName}"></td>
-									<!-- 	<td  th:text="${tourPlan.tourPlanDate}"></td> -->
+								
 										  <td>
 										  <a th:href="@{/editStaffPostingDuties/{id}/(id=${listOfStaff.JobCode})}"><em class="fa fa-edit"></em></a>
 										  
