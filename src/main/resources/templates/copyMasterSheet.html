@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"lang="en">
 
 <script type="text/javascript" th:src="@{/js/settings.js}"></script>
 <script type="text/javascript" th:src="@{/js/app.js}"></script>
@@ -33,7 +33,7 @@ body {
 
 
 <!--  nav start -->
-<nav id="sidebar" class="sidebar">
+<nav id="sidebar" class="sidebar" aria-label="Site sidebar">
  <div th:replace="/fragments/sidebar :: div"></div>
 </nav>
 <!-- nav end  -->
@@ -51,42 +51,42 @@ body {
 				<div class="container-fluid">
 				
 				
-				<!-- header div  -->
+			
 					<div class="header">
 						<h1 class="header-title"> Master</h1>
 						
 						<nav aria-label="breadcrumb">
 						</nav>	
 					</div>
-				<!-- header div end  -->
+			
 					
 					
-					<!-- main row div  -->
+					
 					<div class="row">
 					
-						<!-- div column start  -->
+					
 						<div class="col-12">
 						
 							<!-- card start  -->
 							<div class="card">
 							
-							<!-- card header  -->
+						
 								<div class="card-header">
 								
 									<h5 class="card-title">Copy Master Sheet </h5>
 								
-								<!-- div start  -->	
+							
 								<div class="alert-outline">
 									<div th:if="${message}" th:text="${message}" style="color: red">
 									</div> 
 								</div>	
-								<!-- div end -->
+							
 								
 								</div>
-								<!-- card header end  -->
+							
 								
 								
-								<!--  card body start  -->
+							
 								<div class="card-body">
 								
 									<!-- from  -->
@@ -94,7 +94,7 @@ body {
 									
 										
 										
-										<!-- first block  -->
+									
 									<div class="row">
 										<div class="col-md-2"></div>
 
@@ -114,68 +114,32 @@ body {
 											</div>
 										
 										</div>
-										<div class="col-md-2"></div>
+									
 										
 										
 									</div>
-									<!-- first blcck end  -->
+						
 									</form>
 									
 									
-									<!-- form end  -->
+							
 									
 									
 								</div>
 								
-								<!-- card body end  -->
+						
 							</div>
-							<!-- card end  -->
+						
 						</div>
 						
-						<!-- div card end -->
-						
 					
-					<!-- table div satrt  -->	
-	      			<!-- <div class="col-12">
-							<div class="card">
-								<div class="card-header">
-								</div>
-								<div class="card-body">
-								<table id="example" class="table table-striped display" style="width:100%">
-										<thead>
-											<tr>
-												<th> Award id </th>
-												<th>Award Name </th>
-												<th>Status</th>
-												<th>Action</th>
-												
-											</tr>
-										</thead>
-										<tbody>
-											<tr  th:each="listOfAward : ${listAward}">
-												<td th:text="${listOfAward.id}"></td>
-												<td th:text="${listOfAward.awardName}"></td>
-												<td th:text="${listOfAward.active}"></td>
-												<td><a th:href="@{/editAward/{id}(id=${listOfAward.id})}"><i class="align-middle fas fa-fw fa-pen"></i></a>
-												<a th:href="@{/deleteAward/{id}(id=${listOfAward.id})}" onclick="return confirm('Are you sure?')"><i class="align-middle fas fa-fw fa-trash"></i></a>
-												</td>
-											</tr>
-										</tbody>
-									
-									</table>
-								</div>
-								
-							</div>
-						</div> -->
-						
-						<!--table div end   -->
 						
 					</div>
-					<!-- container div end  -->
+				
 					
 				</div>
 				
-				<!-- content div  end  -->
+			
 
 			</main>
 			
