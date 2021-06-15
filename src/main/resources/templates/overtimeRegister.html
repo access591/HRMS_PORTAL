@@ -224,25 +224,20 @@ $("table").on("keyup", ".pas", function () {
 								</div>
 								<div class="card-body">
 								<input id="_cr" name="_cr" type="hidden"value="1">
-								<div class="col-sm-12" align="right">
 							
-								
-							<!-- 	<a id="add_row" class="fa fa-plus" aria-hidden="true"style="font-size:28px;color:#001080"></a>&nbsp;&nbsp;&nbsp;
-								<a id='delete_row'class="fa fa-trash" style="font-size:28px;color:#399490fc"aria-hidden="true"></a>	 -->
-								</div>
 								<div class="table-responsive">
 										<table id="example" aria-describedby="example" class="table" style="width:100%">
 											<thead>
 												<tr>
-													<th>Employee Code </th>
-													<th>Employee Name.</th>
-													<th>Designation</th>
-													<th>Over Time Rate </th>
-													<th>Time In</th>
-													<th>time Out</th>
-													<th>Overtime Hours</th>
-													<th>Esi Apply </th>
-													<th>Remark </th>
+													<th scope="col">Employee Code </th>
+													<th scope="col">Employee Name.</th>
+													<th scope="col">Designation</th>
+													<th scope="col">Over Time Rate </th>
+													<th scope="col">Time In</th>
+													<th scope="col">time Out</th>
+													<th scope="col">Overtime Hours</th>
+													<th scope="col">Esi Apply </th>
+													<th scope="col">Remark </th>
 												</tr>
 											</thead>
 											<tbody>
@@ -317,7 +312,7 @@ $("table").on("keyup", ".pas", function () {
 										
 										<td  th:text="${#dates.format(ovr.overTimeDate,'dd-MM-yyyy')}"></td>
 										  <td>
-										<!--   <a th:href="@{/editLocalConvyence/{id}/(id=${ovr.id})}"><em class="fa fa-edit"></em></a> -->
+										
 										  
 										     <a th:href="@{/deleteOverTime/{id}/(id=${ovr.id})}"onclick="return confirm('Are you sure?')"><em class="fa fa-times"></em></a>
 									
