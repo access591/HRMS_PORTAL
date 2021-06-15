@@ -54,13 +54,15 @@ public class EmployeeGradationExcel {
 		
 		
 	 
-	 String[] columns = {"Employee Code","Employee Name" , "Category Name" ,"Department Name" , "Designation" , 
+	 String[] columns = {"Sr.No","Officer Code","Officer Name" , "Category Name" ,"Department Name" , "Designation" , 
 			 "Ips No", " Batch Year","Payee Code","Home District","Court or Department", 
-			 "Date Of Birth","Present Posting",
+			 "Date Of Birth", "Present Posting",
 			 "Date of Posting",
 			 "Date of Joining","Date of Retirement","Gender",
 			 "Qualification",
-	 		"Aadhar No","Mobile No","Email"};
+	 		"Aadhar No","Mobile No","Office Phone","Email","Under Rule7","Under Rule 8","Vigilance Inquiry"
+	 		,"Suspenction","Promotion","ACP","APR","ACR","Trainig","LTC","Leave Acount","Awards","Deputation",
+	 		"Previous Postings","OnDeputation","Add Charge","OnAdditionalCharge","Remarks","VRS","Expired"};
 		
 		try {
 			Workbook workBook = new XSSFWorkbook();
@@ -100,26 +102,51 @@ public class EmployeeGradationExcel {
 				System.out.println( "department detail : =" +category.getCategoryName());
 				Row row = sheet.createRow(rowIndex++);
 				
-				row.createCell(0).setCellValue(emp.getEmpCode());
-				row.createCell(1).setCellValue(emp.getEmpName());
-				row.createCell(2).setCellValue(category.getCategoryName());
-				row.createCell(3).setCellValue(d.getDeptName());
-				row.createCell(4).setCellValue(desig.getDesgName());
-				row.createCell(5).setCellValue("");
-				row.createCell(6).setCellValue(emp.getBatchYear());
-				row.createCell(7).setCellValue(emp.getEmployeePayeeCode());
+				row.createCell(0).setCellValue(rowIndex); //
+				row.createCell(1).setCellValue(emp.getEmpCode());
+				row.createCell(2).setCellValue(emp.getEmpName());
+				row.createCell(3).setCellValue(category.getCategoryName());
+				row.createCell(4).setCellValue(d.getDeptName());
+				row.createCell(5).setCellValue(desig.getDesgName());
+				row.createCell(6).setCellValue("");
+				row.createCell(7).setCellValue(emp.getBatchYear());
 				row.createCell(8).setCellValue(emp.getEmployeePayeeCode());
-				row.createCell(9).setCellValue(emp.getTypeCourtDepartment());
-				row.createCell(10).setCellValue(emp.getDateOfPosting().toString()); //birth
-				row.createCell(11).setCellValue(emp.getPresentPosting());
-				row.createCell(12).setCellValue(emp.getDateOfPosting().toString());
-				row.createCell(13).setCellValue(emp.getDateOfJoining().toString());
-				row.createCell(14).setCellValue(emp.getDateOfRetirement().toString());
-				row.createCell(15).setCellValue(emp.getGender());
-				row.createCell(16).setCellValue(emp.getQualification());
-				row.createCell(17).setCellValue(emp.getAadharNo());
-				row.createCell(18).setCellValue(emp.getMobileNumber1());
-				row.createCell(19).setCellValue(emp.getEmail());
+				row.createCell(9).setCellValue(emp.getEmployeePayeeCode());
+				row.createCell(10).setCellValue(emp.getTypeCourtDepartment());
+				row.createCell(11).setCellValue(emp.getDateOfPosting().toString()); //birth
+				
+				row.createCell(12).setCellValue(emp.getPresentPosting());
+				row.createCell(13).setCellValue(emp.getDateOfPosting().toString());
+				row.createCell(14).setCellValue(emp.getDateOfJoining().toString());
+				row.createCell(15).setCellValue(emp.getDateOfRetirement().toString());
+				row.createCell(16).setCellValue(emp.getGender());
+				row.createCell(17).setCellValue(emp.getQualification());
+				row.createCell(18).setCellValue(emp.getAadharNo());
+				row.createCell(19).setCellValue(emp.getMobileNumber1());
+				row.createCell(20).setCellValue(emp.getMobileNumber1()); //office phone
+				row.createCell(21).setCellValue(emp.getEmail());
+				
+				row.createCell(22).setCellValue(emp.getUnderRule7()); //add column
+				row.createCell(23).setCellValue(emp.getUnderRule8());
+				row.createCell(24).setCellValue(emp.getVigilanceQuery());
+				row.createCell(25).setCellValue(emp.getSuspention());
+				row.createCell(26).setCellValue(emp.getPromotion());
+				row.createCell(27).setCellValue(emp.getAcp());
+				row.createCell(28).setCellValue(emp.getApr());
+				row.createCell(29).setCellValue(emp.getAcr());
+				row.createCell(30).setCellValue(emp.getTraining());
+				row.createCell(31).setCellValue(emp.getLtc());
+				row.createCell(32).setCellValue(emp.getLeaveAccount());
+				row.createCell(33).setCellValue(emp.getEmpAwards());
+				row.createCell(34).setCellValue(emp.getEmpDeputation());
+				row.createCell(35).setCellValue(emp.getPresentPosting());
+				row.createCell(36).setCellValue(emp.getOnDeputation());
+				row.createCell(36).setCellValue(emp.getAddCharge());
+				row.createCell(36).setCellValue(emp.getOnAdditionalCharge());
+				row.createCell(36).setCellValue("remarks");
+				row.createCell(36).setCellValue(emp.getVrs());
+				row.createCell(36).setCellValue(emp.getExpired());
+				
 				
 				
 				

@@ -73,7 +73,7 @@ body {
 								<!-- card header  -->
 								<div class="card-header">
 
-									<h5 class="card-title">Trainin Requisition Approval</h5>
+									<h5 class="card-title"style="text-decoration: underline;">Training Requisition Approval</h5>
 
 									<!-- div start  -->
 									<div class="alert-outline">
@@ -177,7 +177,7 @@ body {
 
 													
                             <td th:if="${trainingRequistion.trReqStatus == 'N'}">
-                               <a th:href="@{editTrainingRequisition/{id}/(id=${trainingRequistion.trReqCode})}" class="btn btn-primary"><em class="fa fa-eye"></em></a>
+                               <a th:href="@{viewTrainingRequisition/{id}/(id=${trainingRequistion.trReqCode})}" class="btn btn-primary"><em class="fa fa-eye"></em></a>
                             </td>
                             <td th:if="${trainingRequistion.trReqStatus == 'Y'}">
                                <a th:href="@{viewTrainingRequisition/{id}/(id=${trainingRequistion.trReqCode})}" class="btn btn-primary"><em class="fa fa-eye"></em></a>

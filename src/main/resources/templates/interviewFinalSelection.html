@@ -51,7 +51,7 @@ body {
 						<div class="col-12">
 							<div class="card">
 								<div class="card-header">
-									<h5 class="card-title">Interview Final Selection </h5>
+									<h5 class="card-title"style="text-decoration: underline;">Interview Final Selection </h5>
 								<div class="alert-outline">
 									<div th:if="${message}" th:text="${message}" style="color: red">
 									</div> 
@@ -100,46 +100,46 @@ body {
 
 														<td><label th:text="${interFinal.interviewDate}"></label></td>
 
-														<td><label th:text="${interFinal.applicantCode}"></label></td>
+														<td><label th:text="${interFinal.applicantCode.applicantCode}"></label></td>
 
-														<td><label th:text="${interFinal.applicantName}"></label></td>
+														<td><label th:text="${interFinal.applicantCode.applicantName}"></label></td>
 														
-														<td><label th:text="${interFinal.applicantDate}"></label></td>
+														<td><label th:text="${interFinal.applicantCode.applicantDate}"></label></td>
 														
-														<td><label th:text="${interFinal.currentCtc}"></label></td>
+														<td><label th:text="${interFinal.applicantCode.currentCtc}"></label></td>
 
-														<td><label th:text="${interFinal.expectedCtc}"></label></td>
+														<td><label th:text="${interFinal.applicantCode.expectedCtc}"></label></td>
 
-														<td><label th:text="${interFinal.ovarAllRating}"></label></td>
+														<td><label th:text="${interFinal.overAllRating}"></label></td>
 
 														
 														
 														<td th:if="${interFinal.selectionStatus == 'Selected'}"><div class="dropdown show">
-															  <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+															  <a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
 															  			>
 															   Selected
 															  </a>
 															
 															  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
 															    <a class="dropdown-item" th:href="@{/interviewFileApproval/{applicantCode}/{interviewCode}/{finalApprovalStatus}/
-															    				(applicantCode=${interFinal.applicantCode},interviewCode=${interFinal.interviewCode},finalApprovalStatus=${'Selected'})}">Selected</a>
+															    				(applicantCode=${interFinal.applicantCode.applicantCode},interviewCode=${interFinal.interviewCode},finalApprovalStatus=${'Selected'})}">Selected</a>
 															    <a class="dropdown-item" th:href="@{/interviewFileApproval/{applicantCode}/{interviewCode}/{finalApprovalStatus}/
-															    					(applicantCode=${interFinal.applicantCode},interviewCode=${interFinal.interviewCode},finalApprovalStatus=${'Rejected'})}">Rejected</a>
+															    					(applicantCode=${interFinal.applicantCode.applicantCode},interviewCode=${interFinal.interviewCode},finalApprovalStatus=${'Rejected'})}">Rejected</a>
 															    
 															  </div>
 														</div></td>
 														
 														<td th:if="${interFinal.selectionStatus == 'Rejected'}"><div class="dropdown show">
-															  <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+															  <a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
 															  			>
 															   Rejected
 															  </a>
 															
 															  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
 															    <a class="dropdown-item" th:href="@{/interviewFileApproval/{applicantCode}/{interviewCode}/{finalApprovalStatus}/
-															    				(applicantCode=${interFinal.applicantCode},interviewCode=${interFinal.interviewCode},finalApprovalStatus=${'Selected'})}">Selected</a>
+															    				(applicantCode=${interFinal.applicantCode.applicantCode},interviewCode=${interFinal.interviewCode},finalApprovalStatus=${'Selected'})}">Selected</a>
 															    <a class="dropdown-item" th:href="@{/interviewFileApproval/{applicantCode}/{interviewCode}/{finalApprovalStatus}/
-															    					(applicantCode=${interFinal.applicantCode},interviewCode=${interFinal.interviewCode},finalApprovalStatus=${'Rejected'})}">Rejected</a>
+															    					(applicantCode=${interFinal.applicantCode.applicantCode},interviewCode=${interFinal.interviewCode},finalApprovalStatus=${'Rejected'})}">Rejected</a>
 															    
 															  </div>
 														</div></td>
@@ -149,23 +149,23 @@ body {
 														
 														
 														
-														<td th:if="${interFinal.selectionStatus == '0'}"><div class="dropdown show">
-															  <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+														<td th:if="${interFinal.selectionStatus == 'N'}"><div class="dropdown show">
+															  <a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
 															  			>
 															    &nbsp &nbspAction &nbsp 
 															  </a>
 															
 															  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
 															    <a class="dropdown-item" th:href="@{/interviewFileApproval/{applicantCode}/{interviewCode}/{finalApprovalStatus}/
-															    				(applicantCode=${interFinal.applicantCode},interviewCode=${interFinal.interviewCode},finalApprovalStatus=${'Selected'})}">Selected</a>
+															    				(applicantCode=${interFinal.applicantCode.applicantCode},interviewCode=${interFinal.interviewCode},finalApprovalStatus=${'Selected'})}">Selected</a>
 															    <a class="dropdown-item" th:href="@{/interviewFileApproval/{applicantCode}/{interviewCode}/{finalApprovalStatus}/
-															    					(applicantCode=${interFinal.applicantCode},interviewCode=${interFinal.interviewCode},finalApprovalStatus=${'Rejected'})}">Rejected</a>
+															    					(applicantCode=${interFinal.applicantCode.applicantCode},interviewCode=${interFinal.interviewCode},finalApprovalStatus=${'Rejected'})}">Rejected</a>
 															    
 															  </div>
 														</div></td>
 														
 														
-														<td><a th:href="@{viewApplicantInfo/{applicantCode}/(applicantCode=${interFinal.applicantCode})}"><i class="fas fa-eye fa-lg"></i></a></td>
+														<td><a th:href="@{viewInterviewDetail/{applicantCode}/(applicantCode=${interFinal.interviewCode})}"><i class="fas fa-eye fa-lg"></i></a></td>
 
 														
 														

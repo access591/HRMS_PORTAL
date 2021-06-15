@@ -20,4 +20,6 @@ public interface LeaveGrantRegisterService {
 	
 	//created by me (rahul)
 	List<LeaveGrant> findLeaveGrantByEmployeeName(String employeeCode);
+	
+	List<LeaveGrant> findLeaveGrantByDepartment(String deptCode);
 }

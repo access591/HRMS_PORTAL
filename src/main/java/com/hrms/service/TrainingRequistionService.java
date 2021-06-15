@@ -12,5 +12,7 @@ public interface TrainingRequistionService {
 	public TrainingRequisition findById(String trReqCode);
 	public void updateTrainingRequisition(TrainingRequisition trainingRequisition);
 	public List<TrainingRequisition> findTrainingRequisitionByStatusY();
+	public List<TrainingRequisition> findTrainingRequisitionByStatusYAndC();
+	public void removeTrainingRequisition(String trainingRequisitionId);
 
 }

@@ -2,12 +2,13 @@ package com.hrms.model;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -23,15 +24,16 @@ public class InterviewMaster {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date interviewDate;
 	
-	@Column(name="APPLICANT_CODE")
-	private String applicantCode;
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name="APPLICANT_CODE")
+	private ApplicantInfo applicantCode;
 	
 	@Column(name="APPLICANT_DATE")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date applicantDate;
 	
 	@Column(name="SELECTION_STATUS")
-	private String selectionStatus;
+	private String selectionStatus = "N";
 	
 	@Column(name="REMARKS")
 	private String remarks;
@@ -135,13 +137,23 @@ public class InterviewMaster {
 		this.interviewDate = interviewDate;
 	}
 
-	public String getApplicantCode() {
+	
+
+	public ApplicantInfo getApplicantCode() {
 		return applicantCode;
 	}
 
-	public void setApplicantCode(String applicantCode) {
+
+
+
+
+	public void setApplicantCode(ApplicantInfo applicantCode) {
 		this.applicantCode = applicantCode;
 	}
+
+
+
+
 
 	public Date getApplicantDate() {
 		return applicantDate;

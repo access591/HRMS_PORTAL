@@ -130,20 +130,6 @@ public class InterviewController {
 	}
 	
 	
-	@GetMapping("viewApplicantInfo/{applicantCode}")
-	public String viewApplicantInfo(@PathVariable("applicantCode") String applicantCode , Model model,HttpSession session) {
-		
-		String userCode = (String) session.getAttribute("username");
-		
-		ApplicantInfo applicantInfo = applicantInfoService.getApplicantInfoByApplicantCode(applicantCode);
-		model.addAttribute("applicantInfo", applicantInfo);
-		
-		session.setAttribute("username", userCode);
-		return "viewApplicantInfo";
-	}
-	
-	
-	
 	@ResponseBody
 	@GetMapping("getApplicantDate/{applicantCode}")
 	public Date getRequisitionDateByAdvtCode(@PathVariable("applicantCode")String applicantCode) {
@@ -171,49 +157,9 @@ public class InterviewController {
 		}
 		
 		
-		List<ApplicantInfo> listApplicantInfo = applicantInfoService.getAllApplicantInfo();
-		List<InterviewApprovalUtil> listInterviewApprovalUtil = new ArrayList<InterviewApprovalUtil>();
+		List<ApplicantInfo> listApplicantInfo = applicantInfoService.findApplicantInfoStatusHoldAndPending();
 		
-		
-		
-		try {
-			for(int i=0;i<listApplicantInfo.size();i++) {
-				
-				System.out.println("checking inter status : " + listApplicantInfo.get(i).getInterStatus());
-				if( listApplicantInfo.get(i).getInterStatus()==null || listApplicantInfo.get(i).getInterStatus().equals("") || listApplicantInfo.get(i).getInterStatus().startsWith("H"))
-				{
-					InterviewApprovalUtil interviewApprovalUtil = new InterviewApprovalUtil();
-					
-					Designation designation;
-					try {
-						designation = designationService.findDesignationById(listApplicantInfo.get(i).getDesigCode());
-						interviewApprovalUtil.setDesignationCode(designation.getDesgCode());
-						interviewApprovalUtil.setDesignationName(designation.getDesgName());
-					}catch(Exception e) {
-						System.out.println("error : find designation");
-						e.printStackTrace();
-					}
-					
-					
-					
-					interviewApprovalUtil.setApplicantCode(listApplicantInfo.get(i).getApplicantCode());
-					interviewApprovalUtil.setApplicantDate(listApplicantInfo.get(i).getApplicantDate());
-					interviewApprovalUtil.setApplicantName(listApplicantInfo.get(i).getApplicantName());
-					interviewApprovalUtil.setApplicantSex(listApplicantInfo.get(i).getSex());
-					
-					listInterviewApprovalUtil.add(interviewApprovalUtil);
-					System.out.println("hiii");
-				}
-				
-				
-			}
-		}catch(Exception e) {
-			System.out.println("for loop error ");
-			e.printStackTrace();
-		}
-		
-		
-		model.addAttribute("listInterviewApprovalUtil",listInterviewApprovalUtil);
+		model.addAttribute("listInterviewApprovalUtil",listApplicantInfo);
 		
 		session.setAttribute("username", userCode);
 		return "interviewApproval";
@@ -248,52 +194,10 @@ public class InterviewController {
 			model.addAttribute("modules", modules);
 		}
 		
-		List<InterviewMaster> listInterviewmaster =  interviewMasterService.getAllInterviewMaster();
+		List<InterviewMaster> listInterviewMaster = interviewMasterService.getAllInterviewMaster();
 		
-		List<InterviewFinalSelectionUtil> interviewFinalSelection = new ArrayList<InterviewFinalSelectionUtil>();
-		for(InterviewMaster interView : listInterviewmaster) {
-			
-			
-			InterviewFinalSelectionUtil ifs = new InterviewFinalSelectionUtil();
-			ifs.setInterviewCode(interView.getInterviewCode());
-			ifs.setInterviewDate(interView.getInterviewDate());
-			ifs.setApplicantCode(interView.getApplicantCode());
-			ifs.setApplicantDate(interView.getApplicantDate());
-			ifs.setOvarAllRating(interView.getOverAllRating());
-			
-			//System.out.println("selection status : "+ interView.getSelectionStatus());
-			
-			if(interView.getSelectionStatus() == null) {
-				ifs.setSelectionStatus("0");
-				System.out.println("11111111111nulllll111111111");
-				
-				
-			}
-			
-			else if(interView.getSelectionStatus().length() == 0) {
-				ifs.setSelectionStatus("0");
-				System.out.println("11111111111111111111");
-				
-			}
-			else {
-				
-				ifs.setSelectionStatus(interView.getSelectionStatus());
-				System.out.println("0000000000000");
-			}
-			
-			
-			ApplicantInfo applicantinfo = applicantInfoService.getApplicantInfoByApplicantCode(interView.getApplicantCode());
-			ifs.setApplicantName(applicantinfo.getApplicantName());
-			ifs.setCurrentCtc(applicantinfo.getCurrentCtc());
-			ifs.setExpectedCtc(applicantinfo.getExpectedCtc());
-			
-			
-			interviewFinalSelection.add(ifs);
-		}
-		
-		
-		
-		model.addAttribute("interviewFinalSelection", interviewFinalSelection);
+	
+		model.addAttribute("interviewFinalSelection", listInterviewMaster);
 		session.setAttribute("username", userCode);
 		return "interviewFinalSelection";  //interviewFinalSelection.html
 	}
@@ -304,8 +208,28 @@ public class InterviewController {
 										@PathVariable("interviewCode") String interviewCode,HttpSession session) {
 		
 		
+		System.out.println("final approval staus : =====>"+finalApprovalStatus);
+		System.out.println("applicantCode staus : =====>"+applicantCode);
+		System.out.println("Interview Code staus : =====>"+interviewCode);
+		
 		interviewMasterService.interviewFinalapproval(applicantCode, interviewCode, finalApprovalStatus);
 		return "redirect:/interviewFinalSelection";
+	}
+	
+	
+	@GetMapping("viewInterviewDetail/{id}")
+	public String viewInterviewDetail(@ModelAttribute("interviewMaster")InterviewMaster interviewMaster,
+			@PathVariable("id")String inteviewCode,Model model) {
+		
+		System.out.println("interview code ==>"+ inteviewCode);
+		InterviewMaster interviewMaster1 = interviewMasterService.findinterviewMasterById(inteviewCode);
+		
+		if(interviewMaster1 != null) {
+			model.addAttribute("interviewMaster", interviewMaster1);
+		}
+		
+		
+		return "viewInterviewDetail";
 	}
 	
 

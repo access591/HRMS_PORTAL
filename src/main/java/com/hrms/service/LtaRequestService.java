@@ -16,5 +16,6 @@ public interface LtaRequestService {
 	public List<LtaRequest> findAllLtaByEmpCode(String empCode);
 	public List<LtaRequest> findLtaByFromLeaveDateToLeave(Date leaveFrom,Date leaveTo,String empCode);
 	public List<LtaRequest> findAllLtaByFromLeaveDateToLeave(Date leaveFrom,Date leaveTo);
+	public List<LtaRequest> getAllDistinctLtaRequest();
 	
 }

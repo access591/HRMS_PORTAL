@@ -39,11 +39,17 @@ public class EmployeeRequisitionServiceImpl implements EmployeeRequisitionServic
 	@Override
 	public EmployeeRequisition findEmployeeRequisitiondById(String reqCode) {
 		
-		Session session = sessionFactory.openSession();
-		Query<EmployeeRequisition> query = session.createQuery("from EmployeeRequisition e where e.reqCode = :reqCode", EmployeeRequisition.class);
-		query.setParameter("reqCode", reqCode);
-		EmployeeRequisition er = query.getSingleResult();
-		return er;
+		try {
+			Session session = sessionFactory.openSession();
+			Query<EmployeeRequisition> query = session.createQuery("from EmployeeRequisition e where e.reqCode = :reqCode", EmployeeRequisition.class);
+			query.setParameter("reqCode", reqCode);
+			EmployeeRequisition er = query.getSingleResult();
+			return er;
+		}catch(Exception e) {
+			System.out.println("========error block");
+			e.printStackTrace();
+		}
+		return null;
 		//return this.employeRequisitionDao.findById(reqCode);
 	}
 
@@ -115,6 +121,21 @@ public class EmployeeRequisitionServiceImpl implements EmployeeRequisitionServic
 		session.beginTransaction().commit();
 		session.close();
 		
+	}
+
+	@Override
+	public List<EmployeeRequisition> getAllPendingEmployeeRequisition() {
+		
+		try {
+			Session session = sessionFactory.openSession();
+			Query<EmployeeRequisition> query = session.createQuery("from EmployeeRequisition e where e.status = :status", EmployeeRequisition.class);
+			query.setParameter("status", "N");
+			List<EmployeeRequisition> er = query.getResultList();
+			return er;
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 }

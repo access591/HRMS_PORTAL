@@ -60,7 +60,7 @@ body {
 							<div class="col-12">
 								<div class="card">
 									<div class="card-header">
-										<h5 class="card-title">Employee Requisition Advertisement</h5>
+										<h5 class="card-title"style="text-decoration: underline;">Employee Requisition Advertisement</h5>
 										<div class="alert-outline">
 											<div th:if="${message}" th:text="${message}"
 												style="color: red"></div>
@@ -141,7 +141,8 @@ body {
 													<tr id="addr0">
 
 
-														<td><select class="form-control" style="width:auto;" id="reqCode" name="listReqAdvertisementDetail[0].employeeRequisition.reqCode"
+														<td>
+														<select class="form-control" style="width:auto;" id="reqCode" name="listReqAdvertisementDetail[0].employeeRequisition.reqCode"
 																onchange="selectDateByReqCode()">
 																<option value=" ">Select ReqCode</option>
 																<option 
@@ -153,7 +154,7 @@ body {
 														
 														</td>
 
-														<td><input type="date" id="reqDate0" class="form-control text-center"
+														<td><input type="date" id="reqDate0" style="width: 150px;"
 															name="listReqAdvertisementDetail[0].reqDate"></td>
 
 
@@ -161,7 +162,7 @@ body {
 
 
 
-														<td><select class="form-control text-center" style="width:150px;" id="media" name="listReqAdvertisementDetail[0].mediaType">
+														<td><select class="form-control" style="width:auto;"  id="media" name="listReqAdvertisementDetail[0].mediaType">
 																<option value=" ">Media Type</option>
 																<option value="News Paper">News Paper</option>
 																<option value="Cable TV">Cable TV</option>
@@ -172,13 +173,13 @@ body {
 														</td>
 														
 														<td><input type="text"
-															class="form-control text-center" id="mediaName" name="listReqAdvertisementDetail[0].mediaName"></td>
+															class="form-control" id="mediaName" name="listReqAdvertisementDetail[0].mediaName"></td>
 
-														<td><input type="text" class="form-control text-center"
+														<td><input type="text" class="form-control"
 															id="amount" name="listReqAdvertisementDetail[0].advtAmount"></td>
 
 														<td><input type="text"
-															class="form-control text-center" id="details" name="listReqAdvertisementDetail[0].remarks"></td>
+															class="form-control" id="details" name="listReqAdvertisementDetail[0].remarks"></td>
 
 														
 

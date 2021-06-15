@@ -55,7 +55,7 @@ body {
 						<div class="col-12">
 							<div class="card">
 								<div class="card-header">
-									<h5 class="card-title">Interview Details </h5>
+									<h5 class="card-title"style="text-decoration: underline;">Interview Details </h5>
 								<div class="alert-outline">
 									<div th:if="${message}" th:text="${message}" style="color: red">
 									</div> 
@@ -103,7 +103,7 @@ body {
 
 														<td>
 															<select class="form-control text-center" id = "applicantCode" onchange="chooseAppliCode()"
-																name="interviewForm[0].applicantCode" style="width: auto;">
+																name="interviewForm[0].applicantCode.applicantCode" style="width: auto;">
 																<option value="">Select</option>
 																<option th:each="applicantCode : ${listApplicantInfo}"
 																	th:text="${applicantCode.applicantName}" th:value="${applicantCode.applicantCode}"></option>

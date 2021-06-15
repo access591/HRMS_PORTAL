@@ -44,7 +44,7 @@ body {
 						<div class="col-12">
 							<div class="card">
 								<div class="card-header">
-									<h5 class="card-title">Approval Employee Requisition</h5>
+									<h5 class="card-title"style="text-decoration: underline;">Employee Requisition Approval</h5>
 									<div class="alert-outline">
 										<div th:if="${message}" th:text="${message}"
 											style="color: red"></div>
@@ -80,7 +80,7 @@ body {
 															<td th:text="${commonUtil.reqCode}">1</td>
 															<td th:text="${commonUtil.reqDate}"></td>
 															
-															<td th:text="${commonUtil.deptName}"></td>
+															<td th:text="${commonUtil.departmet.deptName}"></td>
 															
 
 															<td th:text="${commonUtil.reqPriority}"></td>
@@ -89,7 +89,7 @@ body {
 
 															<td th:if="${commonUtil.status == 'Y'}">
 																<div class="dropdown show">
-																  <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+																  <a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 																   Approved
 																  </a>
 																
@@ -103,7 +103,7 @@ body {
 															
 															<td th:if="${commonUtil.status == 'N'}">
 																<div class="dropdown show">
-																  <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+																  <a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 																    &nbsp &nbspAction&nbsp &nbsp
 																  </a>
 																
@@ -117,7 +117,7 @@ body {
 															
 															<td th:if="${commonUtil.status == 'C'}">
 																<div class="dropdown show">
-																  <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+																  <a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 																    &nbsp &nbspCancel &nbsp &nbsp
 																  </a>
 																

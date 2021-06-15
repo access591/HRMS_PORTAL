@@ -141,91 +141,9 @@ public class ReportCommonController {
 		
 	}
 	
-//TOUR CLAIM REPORT	
-	@GetMapping("tourclaimPage")
-	public String tourClaimReport(Model model,HttpSession session) {
-		
-		String userCode = (String) session.getAttribute("username");
-		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
-		if (modules != null) {
-			model.addAttribute("modules", modules);
-		}
 
-		
-		List<Employee> listEmployee = employeeService.getAllEmployees();
-		if(listEmployee != null) {
-			model.addAttribute("listEmployee", listEmployee);
-		}
-		model.addAttribute("object" , new TourPlan());
-		session.setAttribute("username",userCode);
-		return "tourClaimReports"; //tourClaimReports.html
-	}
 	
-	@PostMapping("generateTourClaim")
-	public String genrateTourClaim(@ModelAttribute("object") TourPlan tourPlan,HttpSession session,
-			@RequestParam("empName") String empCode,HttpServletRequest req,HttpServletResponse res) {
-		
-		String userCode = (String) session.getAttribute("username");
-		System.out.println("employee type/name : "+ empCode);
-		if(!empCode.equals("ALL"))
-		{
-			List<TourClaimReportUtil> ltr = new ArrayList<TourClaimReportUtil>();
-			
-			try {
-				
-				List<TourPlan> listTourPlan = tourPlanService.findTourPlanByEmpCode(empCode);
-				
-				List<TourPlan> listTourPlan1 = new ArrayList<TourPlan>();
-				
-				
-				
-				if(listTourPlan.size()>=1) {
-					listTourPlan1.add(listTourPlan.get(0));
-					
-					
-					
-					for(int i=0;i<listTourPlan1.get(0).getTourPlanDetail().size();i++) {
-						
-						Designation desig = null;
-						TourClaimReportUtil tr = new TourClaimReportUtil();
-						
-						System.out.println("claim id : "+listTourPlan.get(i).getTourPlanDetail().get(i).getEndPlace());
-						tr.setTourPlanId(listTourPlan1.get(0).getTourPlanId());
-						tr.setEmpCode(listTourPlan1.get(0).getEmpCode().getEmpCode());
-						tr.setEmpName(listTourPlan1.get(0).getEmpCode().getEmpName());
-						
-						try {
-							desig = designationService.findDesignationById(listTourPlan1.get(0).getDesgCode().getDesgCode());
-							tr.setDesigName(desig.getDesgName());
-							
-						}catch(Exception e) {
-							System.out.println("generate tour claim");
-							e.printStackTrace();
-						}
-						tr.setStartPlace(listTourPlan1.get(0).getTourPlanDetail().get(i).getStartPlace());
-						tr.setEndPlace(listTourPlan1.get(0).getTourPlanDetail().get(i).getEndPlace());
-						ltr.add(tr);
-					}
-					
-				}else {
-					session.setAttribute("username",userCode);
-					return "redirect:/tourclaimPage";
-				}
-				
-				
-			}catch(Exception e) {
-				System.out.println("some joining error ");
-				e.printStackTrace();
-			}
-			
-			tourClaimReport.tourClaimReport(res, req, ltr);
-			
-		}
-		
-		session.setAttribute("username",userCode);
-		return "redirect:/tourclaimPage";
-		
-	}
+	
 	
 	
 	
@@ -281,7 +199,7 @@ public class ReportCommonController {
 		}
 		
 		try {
-			List<LtaRequest> listLtaRequest = ltaRequestService.getAllLTARequest();
+			List<LtaRequest> listLtaRequest = ltaRequestService.getAllDistinctLtaRequest();
 			model.addAttribute("listLtaRequest", listLtaRequest);
 		}catch(Exception e) {
 			e.printStackTrace();
