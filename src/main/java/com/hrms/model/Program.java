@@ -56,7 +56,6 @@ public class Program implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "MODULE_CODE", nullable = false)
 	private Module pModuleCode;
-	@Size(max =3)
 	@Column(name = "SEQ_NO")
 	private int seqProgram;
 	
