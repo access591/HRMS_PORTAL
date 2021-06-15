@@ -44,7 +44,6 @@ public class SubModule implements Serializable {
 	@Size(max =1)
 	@Column(name = "ACTIVE_YN")
 	private String acitveSubModule;
-	@Size(max =2)
 	@Column(name = "SEQ_NO")
 	private int seqNoSubModule;
 	@OneToMany(mappedBy = "subModuleCode")
