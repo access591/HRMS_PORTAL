@@ -107,6 +107,7 @@ public class ModuleController {
 			if (userCode!=null) {
 			Module moduleEdit = moduleService.findModuleById(id);
 			model.addAttribute("moduleEdit", moduleEdit);
+			session.setAttribute("imgUtil", new ImageUtil());
 			session.setAttribute("username", session.getAttribute("username"));
 			return pageMappingService.PageRequestMapping(reqPageedit, editPageNo);
 		}
