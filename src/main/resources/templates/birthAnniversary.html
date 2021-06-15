@@ -44,7 +44,7 @@ body {
 						<div class="col-12">
 							<div class="card" style="border-radius: 2.2rem">
 								<div class="card-header">
-									<h5 class="card-title">Birth/Anniversary Report</h5>
+									<h5 class="card-title"style="text-decoration: underline;">Birth/Anniversary Report</h5>
 									<div class="alert-outline">
 										<div th:if="${message}" th:text="${message}"
 											style="color: red"></div>
@@ -61,7 +61,7 @@ body {
 													<label class="form-label">Birth Month</label> <label
 														style="color: red">*</label> <select
 														class="form-control select2" id="employeeName"
-														name="month">
+														name="month" required>
 														<option value=''>--Select Month--</option>
 														<option value="0">All</option>
 														<option value='1'>Janaury</option>
@@ -108,7 +108,7 @@ body {
 										</div>
 
 										<!-- <Button type="submit">Generate Pdf</Button> -->
-										<Button type="submit">Download Excel Sheet</Button>
+										<Button type="submit" class="btn btn-primary">Generate Pdf File</Button>
 
 										<!-- <a href="#" th:href="@{employeeExcel}">Download Excel Sheet</a> -->
 

@@ -42,13 +42,9 @@ public class EmployeeRequisitionApprovalController {
 			model.addAttribute("modules", modules);
 		}
 		
-		//CommonUtil(String deptName, String reqCode, Date reqDate, String reqPriority, String reqApprover,
-		//		String remarks, String insBy, Date insDate, Date reqTill, Date approveDate, String status)
-		
 		
 		List<CommonUtil> listCommonUtil = new ArrayList<CommonUtil>();
-		//List<EmployeeRequisition> listEmployeeReq = employeeRequisitionService.findEmployeeReqByStatusN();
-		List<EmployeeRequisition> listEmployeeReq = employeeRequisitionService.getAllEmployeeRequisition();
+		List<EmployeeRequisition> listEmployeeReq = employeeRequisitionService.getAllPendingEmployeeRequisition();
 		
 		for(int i=0;i<listEmployeeReq.size();i++) {
 			Department department;
@@ -70,7 +66,7 @@ public class EmployeeRequisitionApprovalController {
 		}//editEmployeeRequisition.html
 		
 		
-		model.addAttribute("listCommonUtil", listCommonUtil);
+		model.addAttribute("listCommonUtil", listEmployeeReq);
 	
 		
 		List<EmployeeRequisition> approvalReq = employeeRequisitionService.findEmployeeReqByStatusY();

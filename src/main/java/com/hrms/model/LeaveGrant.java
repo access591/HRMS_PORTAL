@@ -21,9 +21,11 @@ public class LeaveGrant  implements Serializable{
 	@Id
 	@Column(name="LEAVEGRANT_CODE")
 	private String leaveGrantCode;
+	
 	@ManyToOne
 	@JoinColumn(name = "EMPLOYEE_CODE", nullable = false)
 	private Employee empCode;
+	
 	@ManyToOne
 	@JoinColumn(name = "LEAVE_CODE", nullable = false)
 	private Leave levCode;

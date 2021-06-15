@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Component;
 
+import com.hrms.model.ApplicantInfo;
 import com.hrms.model.CommonUtil;
 
 import net.sf.jasperreports.engine.JREmptyDataSource;
@@ -27,13 +28,13 @@ import net.sf.jasperreports.engine.util.JRLoader;
 public class EmployeeJoiningLetter {
 
 	public void employeeJoiningLetter(HttpServletRequest request, HttpServletResponse response, String reportFileName,
-			List<CommonUtil> sourceData) {
+			ApplicantInfo applicantInfo) {
 		System.out.println("Employee Joining report...");
 
-		String joiningLetter = "I , Mr/Ms Anubhav Arora have Joined HRMS  as AREA SALES MANAGER in Sales Department w.e.f Date 10/03/21 "
+		String joiningLetter = "I , Mr/Ms "+applicantInfo.getApplicantName()+" have Joined HRMS  as "+applicantInfo.getDesigCode().getDesgName()+" Department w.e.f Date 10/03/21 "
 				+ "in accordance with the condition of your LOI Dated.";
 
-		String name = "Rahul";
+		
 		
 		String sourceFileName = request.getSession().getServletContext()
 				.getRealPath("resources/" + reportFileName + ".jrxml");
@@ -52,7 +53,7 @@ public class EmployeeJoiningLetter {
 			Map<String, Object> parameters = new HashMap<String, Object>();
 			
 			parameters.put("joiningLetter",joiningLetter);
-			parameters.put("name",name);
+			parameters.put("name",applicantInfo.getApplicantName());
 
 			JasperReport report = (JasperReport) JRLoader.loadObjectFromFile(sourceFileName);
 			JasperPrint jasperPrint = JasperFillManager.fillReport(report, parameters, new JREmptyDataSource());

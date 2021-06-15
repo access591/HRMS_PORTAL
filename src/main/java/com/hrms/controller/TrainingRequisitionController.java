@@ -69,6 +69,13 @@ public class TrainingRequisitionController {
 		if (listEmployee != null) {
 			model.addAttribute("listEmployee", listEmployee);
 		}
+		
+		List<TrainingRequisition> listTrainingReqisition = trainingRequistionService.getAllTrainingRequisition();
+		if(listTrainingReqisition != null) {
+			model.addAttribute("listTrainingReqisition", listTrainingReqisition);
+		}
+		
+		
 		return "trainingRequisition";  
 
 	}
@@ -88,6 +95,58 @@ public class TrainingRequisitionController {
 		return "redirect:trainingRequisition";
 	}
 	
+	
+	@GetMapping("editTrainingRequisition/{id}")
+	public String editTrainingRequisition(@PathVariable("id") String trReqCode,@ModelAttribute("trainingRequisition")TrainingRequisition trainingRequisition
+			,Model model) {
+	
+		List<Department> listDepartment = departmentService.getAllDepartments();
+		if (listDepartment != null) {
+			model.addAttribute("listDepartment", listDepartment);
+		}
+		
+		List<Employee> listEmployee = employeeService.getAllEmployees();
+		if (listEmployee != null) {
+			model.addAttribute("listEmployee", listEmployee);
+		}
+		
+		
+		TrainingRequisition tr = trainingRequistionService.findById(trReqCode);
+		if(tr != null) {
+			model.addAttribute("trainingRequisition", tr);
+		}
+		return "editTrainingRequisition";
+	}
+	
+	@PostMapping(value = {"updateTrainingRequisition"})
+	public String updateTrainingRequisition(@ModelAttribute("trainingRequisition")TrainingRequisition trainingRequisition,
+			Model model) {
+		
+		  System.out.println("=====================>update employee Requisition");
+		  
+		  for(TrainingRequisitionDetail t : trainingRequisition.getListTransactionRequisitionDetail()) {
+				t.setTrainingRequisition(trainingRequisition);
+				
+			}
+			for(TrainingReqEmployeeDetail t : trainingRequisition.getListTransactionReqEmployeeDetail()) {
+				t.setTrainingRequisition(trainingRequisition);
+			}
+			trainingRequistionService.addTrainingRequisition(trainingRequisition);
+		
+		this.trainingRequistionService.updateTrainingRequisition(trainingRequisition);
+		return "redirect:trainingRequisition";
+	}
+	
+	
+	@GetMapping("deleteTrainingRequisition/{id}")
+	public String deleteTrainingRequisition(@PathVariable("id")String trainingRequisitionId) {
+		
+		trainingRequistionService.removeTrainingRequisition(trainingRequisitionId);
+		
+		return "redirect:/trainingRequisition";
+	}
+	
+	
 //	@GetMapping("getEmployeeByDeptCode/{deptCode}")
 //	@ResponseBody
 //	public List<Employee> getDepartmentValue(@PathVariable("deptCode") String deptCode) {
@@ -95,5 +154,16 @@ public class TrainingRequisitionController {
 //		List<Employee> listEmployee = employeeService.getAllEmployees();
 //		return listEmployee;
 //	}
+	
+	
+	@ResponseBody
+	@GetMapping("getTrainingInfoBytrCode/{id}")
+	public TrainingRequisition getTrainingInfo(@PathVariable("id") String trReqCode) {
+		
+		System.out.println("hi ..");
+		TrainingRequisition tr = trainingRequistionService.findById(trReqCode);
+		System.out.println("traininfg requisition : "+ tr.getTrReqDate());
+		return tr;
+	}
 
 }

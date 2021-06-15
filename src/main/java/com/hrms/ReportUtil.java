@@ -47,121 +47,12 @@ public class ReportUtil {
 	
 	
 	
-	// leave management report  / leave request report 
-
-	public List<?> leaveRequestReport(HttpServletResponse response, HttpServletRequest request, String reportFileName,
-			List<?> listLeave,String empCode) {
-
-		List<LeaveGrant> listLeaveGrant = leaveGrantService.findLeaveGrantByEmployeeName(empCode);
-		
-		String sourceFileName = request.getSession().getServletContext()  
-				.getRealPath("resources/" + reportFileName + ".jrxml");
-
-		try {
-
-			JasperCompileManager.compileReportToFile(sourceFileName);
-			sourceFileName = request.getSession().getServletContext()
-					.getRealPath("/resources/" + reportFileName + ".jasper");
-			//JRBeanCollectionDataSource beanColDataSource = new JRBeanCollectionDataSource(sourceData);
-
-			//JRBeanCollectionDataSource leaveGrant = new JRBeanCollectionDataSource(listLeaveGrant);
-			JRBeanCollectionDataSource leaveRequest = new JRBeanCollectionDataSource(listLeave);
-
-			HashMap<String, Object> map = new HashMap<String, Object>();
-
-			//map.put("ItemDataSource", leaveGrant);
-			map.put("leaveRequest", leaveRequest);
-
-			map.put("empName", "Rahul Tiwari");
-			map.put("deptName", "Software");
-			map.put("desig", "Devloper");
-
-			JasperReport report = (JasperReport) JRLoader.loadObjectFromFile(sourceFileName);
-			JasperPrint jasperPrint = JasperFillManager.fillReport(report, map, new JREmptyDataSource());
-
-			if (jasperPrint != null) {
-				byte[] pdfReport = JasperExportManager.exportReportToPdf(jasperPrint);
-				response.reset();
-				response.setContentType("application/pdf");
-				response.setHeader("Cache-Control", "no-store");
-				response.setHeader("Cache-Control", "private");
-				response.setHeader("Pragma", "no-store");
-				
-				response.setContentLength(pdfReport.length);
-				try {
-					response.getOutputStream().write(pdfReport);
-					response.getOutputStream().flush();
-					response.getOutputStream().close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-
-			}
-		} catch (JRException e) {
-			e.printStackTrace();
-		}
-		
-		return null;
-
-	}
-
+	
 	@Autowired
 	LeaveDetailService leaveDetailService;
 
 	
-	// leave detail reports  / leave register
-	public void leaveRegisterReport(HttpServletRequest request, HttpServletResponse response,List<LeaveDetail> listLeveDetail) {
-
-
-		System.out.println("hii in leave register util");
-
-		String reportFileName = "LeaveDetailManagement";
-		String sourceFileName = request.getSession().getServletContext()
-				.getRealPath("resources/" + reportFileName + ".jrxml");
-		
-		System.out.println("hii in leave register util"+sourceFileName);
-
-		try {
-
-			JasperCompileManager.compileReportToFile(sourceFileName);
-			sourceFileName = request.getSession().getServletContext()
-					.getRealPath("/resources/" + reportFileName + ".jasper");
-			JRBeanCollectionDataSource beanColDataSource = new JRBeanCollectionDataSource(listLeveDetail);
-
-			HashMap<String, Object> map = new HashMap<String, Object>();
-
-			map.put("ItemDataSource", beanColDataSource);
-			map.put("Parameter2", "Rahul");
-			map.put("empname", "Rahul");   
-			
-			
-
-			JasperReport report = (JasperReport) JRLoader.loadObjectFromFile(sourceFileName);
-			JasperPrint jasperPrint = JasperFillManager.fillReport(report, map, new JREmptyDataSource());
-
-			if (jasperPrint != null) {
-				byte[] pdfReport = JasperExportManager.exportReportToPdf(jasperPrint);
-				response.reset();
-				response.setContentType("application/pdf");
-				response.setHeader("Cache-Control", "no-store");
-				response.setHeader("Cache-Control", "private");
-				response.setHeader("Pragma", "no-store");
-				response.setContentLength(pdfReport.length);
-				try {
-					response.getOutputStream().write(pdfReport);
-					response.getOutputStream().flush();
-					response.getOutputStream().close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-
-			}
-		} catch (JRException e) {
-			e.printStackTrace();
-		}
-		// return null;
-
-	}
+	
 
 	// Employee gradation information pdf  report
 
@@ -211,51 +102,7 @@ public class ReportUtil {
 	}
 	
 	
-	//LEAVE TRASACTION PDF REPORT
-	public void leaveTransactionPdfReportByEmp(HttpServletRequest request, HttpServletResponse response, String reportFileName,
-			List<?> sourceData) {
-		System.out.println("leave transaction report...");
-		String sourceFileName = request.getSession().getServletContext()
-				.getRealPath("resources/" + reportFileName + ".jrxml");
-		System.out.println("resources : = "+sourceFileName);
-
-		try {
-
-			JasperCompileManager.compileReportToFile(sourceFileName);
-			sourceFileName = request.getSession().getServletContext()
-					.getRealPath("/resources/" + reportFileName + ".jasper");
-			JRBeanCollectionDataSource beanColDataSource = new JRBeanCollectionDataSource(sourceData);
-
-			HashMap<String, Object> map = new HashMap<String, Object>();
-
-			map.put("Parameter", beanColDataSource);//Parameter
-
-			JasperReport report = (JasperReport) JRLoader.loadObjectFromFile(sourceFileName);
-			JasperPrint jasperPrint = JasperFillManager.fillReport(report, map, new JREmptyDataSource());
-
-			if (jasperPrint != null) {
-				byte[] pdfReport = JasperExportManager.exportReportToPdf(jasperPrint);
-				response.reset();
-				response.setContentType("application/pdf");
-				response.setHeader("Cache-Control", "no-store");
-				response.setHeader("Cache-Control", "private");
-				response.setHeader("Pragma", "no-store");
-				response.setContentLength(pdfReport.length);
-				try {
-					response.getOutputStream().write(pdfReport);
-					response.getOutputStream().flush();
-					response.getOutputStream().close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-
-			}
-		} catch (JRException e) {
-			e.printStackTrace();
-		}
-		// return null;
-
-	}
+	
 	
 	//	BIRT AND ANNIVERASARY REPORT
 	public void birthAnniversaryReport(HttpServletRequest request, HttpServletResponse response, String reportFileName,

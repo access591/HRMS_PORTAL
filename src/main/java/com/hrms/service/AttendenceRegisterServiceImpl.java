@@ -64,7 +64,7 @@ public class AttendenceRegisterServiceImpl implements AttendenceRegisterService{
 			Session session = sessionFactory.openSession();
 			Query<AttendenceRegister> query = session.createQuery("from AttendenceRegister a inner join fetch a.employee e "
 					+ "inner join fetch a.department d "
-					+ "and a.timeIn = :fromDate and a.timeOut =:toDate", AttendenceRegister.class);
+					+ "and a.attendenceDate >= :fromDate and a.attendenceDate <=:toDate", AttendenceRegister.class);
 			
 			query.setParameter("fromDate", FromDate);
 			query.setParameter("toDate", toDate);
@@ -148,6 +148,32 @@ public class AttendenceRegisterServiceImpl implements AttendenceRegisterService{
 	
 
 	}
+
+	@Override
+	public List<AttendenceRegister> findAttendenceStatusByDeptCode(String deptCode, Date fromDate, Date toDate) {
+		
+		try {
+			
+			Session session = sessionFactory.openSession();
+			Transaction tx = session.beginTransaction();
+			Query<AttendenceRegister> query = session.createQuery("from AttendenceRegister a inner join fetch a.department e "
+					+ "where e.departmentCode = :deptCode and a.status= :status and a.attendenceDate>=:fromDate and "
+					+ "a.attendenceDate<=:toDate", AttendenceRegister.class);
+			query.setParameter("status", "Y");
+			query.setParameter("deptCode", deptCode);
+			query.setParameter("fromDate", fromDate);
+			query.setParameter("toDate", toDate);
+
+			List<AttendenceRegister> result = query.getResultList();
+			return result;
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	
+	
 
 }
 

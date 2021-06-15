@@ -45,7 +45,7 @@ body {
 						
 							<div class="card" style="border-radius: 2.2rem">
 								<div class="card-header">
-									<h5 class="card-title">Attendance Register Monthly Report</h5>
+									<h5 class="card-title"style="text-decoration: underline;">Attendance Register Monthly Report</h5>
 									<div class="alert-outline">
 										<div th:if="${message}" th:text="${message}"
 											style="color: red"></div>
@@ -99,30 +99,26 @@ body {
 												</div>
 											</div>
 
-
-
-											
-											
-											<!-- <div class="col-12 col-lg-6">
+											<div class="col-12 col-lg-6">
 												<label class="form-label">From Date</label> <label
 													style="color: red">*</label> 
-													<input type="date" class="form-control" >
+													<input type="date" class="form-control" name="fromDate" >
 
 											</div>
 											
 											<div class="col-12 col-lg-6">
 												<label class="form-label">To Date</label> <label
 													style="color: red">*</label> 
-													<input type="date" class="form-control">
+													<input type="date" class="form-control" name="toDate">
 
-											</div> -->
+											</div>
 
 
 										</div>
 
 										<p></p>
 										<!-- <Button type="submit">Generate Pdf</Button> -->
-										<Button type="submit">Generate Sheet</Button>
+										<Button type="submit" class="btn btn-primary">Generate Sheet</Button>
 
 										<!-- <a href="#" th:href="@{employeeExcel}">Download Excel Sheet</a> -->
 

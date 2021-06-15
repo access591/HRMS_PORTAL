@@ -4,10 +4,12 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.hrms.model.EmployeeRequisition;
 import com.hrms.model.TrainingRequisition;
 import com.hrms.repository.TrainingRequisitionDao;
 
@@ -53,16 +55,24 @@ public class TrainingRequisitionServiceImpl implements TrainingRequistionService
 	@Override
 	public void updateTrainingRequisition(TrainingRequisition trainingRequisition) {
 		
-		Session session = sessionFactory.openSession();
-		session.beginTransaction();
-		TrainingRequisition tr = session.find(TrainingRequisition.class, trainingRequisition.getTrReqCode());
-		tr.getListTransactionReqEmployeeDetail().clear();
-		tr.getListTransactionRequisitionDetail().clear();
-		tr.getListTransactionReqEmployeeDetail().addAll(trainingRequisition.getListTransactionReqEmployeeDetail());
-		tr.getListTransactionRequisitionDetail().addAll(trainingRequisition.getListTransactionRequisitionDetail());
+		try {
+			Session session = sessionFactory.openSession();
+			
+			TrainingRequisition tr = session.find(TrainingRequisition.class, trainingRequisition.getTrReqCode());
+			tr.getListTransactionReqEmployeeDetail().clear();
+			tr.getListTransactionRequisitionDetail().clear();
+			
+			tr.getListTransactionReqEmployeeDetail().addAll(trainingRequisition.getListTransactionReqEmployeeDetail());
+			tr.getListTransactionRequisitionDetail().addAll(trainingRequisition.getListTransactionRequisitionDetail());
+			
+			session.beginTransaction();
+			 session.merge(trainingRequisition);
+			session.getTransaction().commit();
+			//session.close();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 		
-		session.merge(tr);
-		session.getTransaction().commit();
 		
 	}
 
@@ -81,6 +91,36 @@ public class TrainingRequisitionServiceImpl implements TrainingRequistionService
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+	@Override
+	public List<TrainingRequisition> findTrainingRequisitionByStatusYAndC() {
+		try {
+			Session session = sessionFactory.openSession();
+			Query<TrainingRequisition> query = session.createQuery("from TrainingRequisition tr where "
+					+ "tr.trReqStatus = :status1 or tr.trReqStatus=:status2", TrainingRequisition.class);
+			query.setParameter("status1", "N");
+			query.setParameter("status2", "N");
+			List<TrainingRequisition> result = query.getResultList();
+			
+			return result;
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	@Override
+	public void removeTrainingRequisition(String trainingRequisitionId) {
+		Session session = sessionFactory.openSession();
+		Transaction tx = session.beginTransaction();
+		Object o = session.get(TrainingRequisition.class, trainingRequisitionId);
+		TrainingRequisition e = (TrainingRequisition) o;
+		
+		session.delete(e);
+		tx.commit();
+		session.close();
+		
 	}
 	
 	

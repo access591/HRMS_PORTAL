@@ -59,14 +59,41 @@ public class ApplicantInfoServiceImpl implements ApplicantInfoService{
 
 	@Override
 	public void updateApplicantInfoInterviewStatus(String applicantCode, String interviewStatus) {
-		Session session = sessionFactory.openSession();
-		session.beginTransaction();
-		ApplicantInfo applicantInfo = session.find(ApplicantInfo.class, applicantCode);
-		applicantInfo.setInterStatus(interviewStatus);
-		session.merge(applicantInfo);
-		session.getTransaction().commit();
-		session.close();
 		
+		try {
+			Session session = sessionFactory.openSession();
+			session.beginTransaction();
+			ApplicantInfo applicantInfo = session.find(ApplicantInfo.class, applicantCode);
+			applicantInfo.setInterStatus(interviewStatus);
+			session.merge(applicantInfo);
+			session.getTransaction().commit();
+			session.close();
+		}catch(Exception e) {
+			System.out.println("error occur in update applicant interview status");
+			e.printStackTrace();
+		}
+		
+		
+	}
+
+	@Override
+	public List<ApplicantInfo> findApplicantInfoStatusHoldAndPending() {
+		
+		try {
+			
+			Session session = sessionFactory.openSession();
+			Query<ApplicantInfo> query = session.createQuery("from ApplicantInfo a "
+					+ "where a.interStatus = :status1"
+					+ " or a.interStatus = :status2",ApplicantInfo.class);
+			query.setParameter("status1", "Hold");
+			query.setParameter("status2", "N");
+			List<ApplicantInfo> result = query.getResultList();
+			
+			return result;
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	

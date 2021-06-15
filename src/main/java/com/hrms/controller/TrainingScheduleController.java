@@ -19,11 +19,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.hrms.model.Employee;
 import com.hrms.model.EmployeeRequisition;
 import com.hrms.model.EmployeeRequisitionDetail;
 import com.hrms.model.MenuModule;
 import com.hrms.model.TrainingRequisition;
 import com.hrms.model.TrainingSchedule;
+import com.hrms.service.EmployeeService;
 import com.hrms.service.ModuleService;
 import com.hrms.service.TrainingRequistionService;
 import com.hrms.service.TrainingScheduleService;
@@ -36,6 +38,7 @@ public class TrainingScheduleController {
 	TrainingRequistionService trainingRequistionService;
 	@Autowired
 	TrainingScheduleService trainingScheduleService;
+	@Autowired EmployeeService employeeService;
 
 	@InitBinder("trainingSchedule")
 	public void customizeBinding(WebDataBinder binder) {
@@ -65,6 +68,13 @@ public class TrainingScheduleController {
 		if (listTrainingSchedule != null) {
 			model.addAttribute("listTrainingSchedule", listTrainingSchedule);
 		}
+		
+		List<Employee> listEmployee = employeeService.getAllEmployees();
+		if (listEmployee != null) {
+			model.addAttribute("listEmployee", listEmployee);
+		}
+		
+		
 		return "trainingSchedule";
 
 	}

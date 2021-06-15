@@ -55,7 +55,7 @@ body {
 							<div class="col-12">
 								<div class="card">
 									<div class="card-header">
-										<h5 class="card-title">Employee Requisition</h5>
+										<h5 class="card-title"style="text-decoration: underline;">Employee Requisition</h5>
 										<div class="alert-outline">
 											<div th:if="${message}" th:text="${message}"
 												style="color: red"></div>
@@ -477,11 +477,11 @@ $(document).ready(function(){
 	console.log("idINdexin add buttton function" + idIndex);
 	$("#add_row").click(function(){
 		idIndex++;
-	$('#addr'+i).html("<td><input type='text' style='width: 90px;'id='desigCode"+idIndex+"'name='employeRequisitionDetail["+i+"].desigCode' required></td>"+
+	$('#addr'+i).html("<td><input type='text' style='width: 90px;'id='desigCode"+idIndex+"'name='employeRequisitionDetail["+i+"].designation.desgCode' required></td>"+
 			
-			"<td><select style='width: 130px;' id='designationName"+idIndex+"'name='employeRequisitionDetail["+i+"].designationName'onchange='selectDesignation()' required><option value=''>Select</option></select></td>"+
-			"<td><select id='location'name='employeRequisitionDetail["+i+"].location' required><option value=''>Select</option><option value='court'>Court</option><option value='department'>Department</option></select></td>"+
-			"<td><select style='width: 90px;' id='sex'name='employeRequisitionDetail["+i+"].sex' required><option value=''>Select</option><option value='male'>Male</option><option value='female'>Female</option></select></td>"+
+			"<td><select style='width: 130px;' id='designationName"+idIndex+"'name='employeRequisitionDetail["+i+"].designation.desgName'onchange='selectDesignation()' required><option value=''>Select</option></select></td>"+
+			"<td><select id='location'name='employeRequisitionDetail["+i+"].location' required><option value=''>Select</option><option value='Court'>Court</option><option value='Department'>Department</option></select></td>"+
+			"<td><select style='width: 90px;' id='sex'name='employeRequisitionDetail["+i+"].sex' required><option value=''>Select</option><option value='Male'>Male</option><option value='Female'>Female</option></select></td>"+
 			"<td><input type='text' style='width: 90px;'id='ageFrom'name='employeRequisitionDetail["+i+"].ageFrom' required></td>"+
 			" </td><td><input type='text' style='width: 90px;'id='desigCode'name='employeRequisitionDetail["+i+"].ageTo' required></td>"+
 

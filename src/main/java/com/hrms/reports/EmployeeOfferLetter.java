@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Component;
 
+import com.hrms.model.ApplicantInfo;
 import com.hrms.model.CommonUtil;
 
 import net.sf.jasperreports.engine.JREmptyDataSource;
@@ -26,19 +27,19 @@ import net.sf.jasperreports.engine.util.JRLoader;
 public class EmployeeOfferLetter {
 
 	public void employeeOfferLetter(HttpServletRequest request, HttpServletResponse response, String reportFileName,
-			List<CommonUtil> sourceData) {
+			ApplicantInfo applicantInfo) {
 
-		String offerLetter = "Sequel to your Application and Interview held on MonthDate 2021,We are pleased to offer you "
-				+ "the position of developer in our organization your appointment will be w.e.f.'\n\n'"
+		String offerLetter = "Sequel to your Application and Interview held on "+applicantInfo.getApplicantDate()+",We are pleased to offer you "
+				+ "the position of"+applicantInfo.getDesigCode().getDesgName()+" in our organization your appointment will be w.e.f.'\n\n'"
 				+ "Your consolidated Salary as agreed is Rs - Per Month (In Words) from the date of your joining. You will be"
 				+ " on probation for a period of 90 days from the date of your appointment where after ,post completion of 90 days your service "
 				+ " with the organization stands confirmed '\n\n'"
 				+ "you are advised to join on MonthDate 2021 after instance of this Offer Letter along with copies of "
 				+ " all your testmonials/Identity proof/ and photographs.";
 
-		String name = "Mr Rahul";
+		String name = applicantInfo.getApplicantName();
 		String role = "Manager Director";
-		String To = "Dear Mr/Ms Rahul";
+		String To = "Dear Mr/Ms "+applicantInfo.getApplicantName();
 		String from = "Mr. Vikash Goel";
 		Date topDate = new Date();
 

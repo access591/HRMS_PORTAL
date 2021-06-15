@@ -25,6 +25,8 @@ public interface EmployeeRequisitionService {
 	void approvedByReqCode(String reqCode);
 	
 	void approvedByReqCodeAndStatus(String reqCode,String requisitionApproval);
+	
+	public List<EmployeeRequisition> getAllPendingEmployeeRequisition();
 
 
 }

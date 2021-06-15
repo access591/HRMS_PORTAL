@@ -93,8 +93,7 @@ body {
 														Information</small></a></li>
 											<li><a href="#validation-step-2"><br /> <small>
 														Experience Detail </small></a></li>
-											<li><a href="#validation-step-3"><br /> <small>applicant
-														Information </small></a></li>
+											
 
 										</ul>
 
@@ -149,18 +148,18 @@ body {
 
 
 															<div class="form-group sm col-md-4">
-																<label class="form-label">Designation Code</label> <span
-																	class="text-danger">*</span> <select
+																<label class="form-label">Designation</label>  <select
 																	class="form-control " name="designationCode"
-																	id="designationCode" th:field="*{desigCode}">
+																	id="designationCode" th:field="*{desigCode.desgCode}">
 																	<option value="">Select Designation</option>
-																	<option th:each="designation : ${listDesignation}"
-																		th:text="${designation.desgCode}" th:value="${designation.desgCode}"></option>
+																	<option th:each="applicant : ${listEmployeeRequisition}"
+																		th:text="${applicant.designation.desgName}" th:value="${applicant.designation.desgCode}"></option>
 																	
 
 
 																</select>
 															</div>
+															
 														</div>
 
 
@@ -175,8 +174,7 @@ body {
 															</div>
 
 															<div class="form-group sm col-md-4">
-																<label class="form-label">Sex <span
-																	class="text-danger">*</span>
+																<label class="form-label">Sex 
 																</label> <select
 																	class="form-control " name="designationCode"
 																	id="designationCode"th:field="*{sex}">
@@ -191,14 +189,13 @@ body {
 
 
 															<div class="form-group sm col-md-4">
-																<label class="form-label">Marital Status <span
-																	class="text-danger">*</span>
+																<label class="form-label">Marital Status 
 																</label> <select
 																	class="form-control " name="designationCode"
 																	id="designationCode" th:field="*{maritalStatus}">
 																	<option value="">Select</option>
-																	<option th:Value="taxi">Married</option>
-																	<option th:Value="car">Unmarried</option>
+																	<option th:Value="Married">Married</option>
+																	<option th:Value="Unmarried">Unmarried</option>
 																	
 
 
@@ -254,24 +251,17 @@ body {
 														<div class="form-row">
 
 															<div class="form-group sm col-md-12">
-																<label class="form-label">City <span
-																	class="text-danger">*</span>
+																<label class="form-label">City 
 																</label> <select
 																	class="form-control " name="designationCode"
 																	id="designationCode" th:field="*{corrCity}">
 																	<option value="">Select City</option>
-																	<option th:Value="taxi">city1</option>
-																	<option th:Value="car">city2</option>
-																	<option th:Value="bus">city3</option>
-																	<option th:Value="train">city4</option>
+																	<option th:each="city : ${cityList}" th:text="${city.cityName}"
+																	th:value="${city.cityCode}"></option>
 
 
 																</select>
 															</div>
-
-															
-
-
 														</div>
 														
 														<div class="form-row">
@@ -337,22 +327,17 @@ body {
 														<div class="form-row">
 
 															<div class="form-group sm col-md-12">
-																<label class="form-label">City <span
-																	class="text-danger">*</span>
+																<label class="form-label">City 
 																</label> <select
 																	class="form-control "th:field="*{permCity}">
 																	<option value="">Select City</option>
-																	<option th:Value="taxi">city1</option>
-																	<option th:Value="car">city2</option>
-																	<option th:Value="bus">city3</option>
-																	<option th:Value="train">city4</option>
+																	<option th:each="city : ${cityList}" th:text="${city.cityName}"
+																	th:value="${city.cityCode}"></option>
+																	
 
 
 																</select>
 															</div>
-
-															
-
 
 														</div>
 														
@@ -411,14 +396,13 @@ body {
 														<div class="form-row">
 															<div class="form-group sm col-md-6">
 
-																<label class="form-label">Hindi <span
-																	class="text-danger">*</span>
+																<label class="form-label">Hindi 
 																</label> <select
 																	class="form-control " th:field="*{langHindi}">
 																	<option value="">Select</option>
-																	<option th:Value="taxi">Read</option>
-																	<option th:Value="car">Write</option>
-																	<option th:Value="bus">Both</option>
+																	<option th:Value="Read">Read</option>
+																	<option th:Value="Write">Write</option>
+																	<option th:Value="Both">Both</option>
 																	
 
 
@@ -426,20 +410,18 @@ body {
 															</div>
 															
 														</div>
-														
 
 
 														<div class="form-row">
 															<div class="form-group sm col-md-6">
 
-																<label class="form-label">English <span
-																	class="text-danger">*</span>
+																<label class="form-label">English 
 																</label> <select
 																	class="form-control "th:field="*{langEnglish}">
 																	<option value="">Select</option>
-																	<option th:Value="taxi">Read</option>
-																	<option th:Value="car">Write</option>
-																	<option th:Value="bus">Both</option>
+																	<option th:Value="Read">Read</option>
+																	<option th:Value="Write">Write</option>
+																	<option th:Value="Both">Both</option>
 																	
 
 
@@ -495,20 +477,19 @@ body {
 														<div class="form-row">
 															<div class="form-group sm col-md-12">
 
-																<label class="form-label">Academic <span
-																	class="text-danger">*</span>
+																<label class="form-label">Academic 
 																</label> <select
 																	class="form-control " th:field="*{acadQuali}">
 																	<option value="">Choose</option>
-																	<option th:Value="taxi">Bachelor</option>
-																	<option th:Value="car">Master</option>
+																	<option th:Value="Bachelor">Bachelor</option>
+																	<option th:Value="Master">Master</option>
 																	
 
 
 																</select>
 															</div>
 															
-														</div>
+														</div> 	
 
 
 
@@ -547,13 +528,13 @@ body {
 														<div class="form-row">
 															<div class="form-group sm col-md-4">
 
-																<label class="form-label">Reference Mode <span
-																	class="text-danger">*</span>
-																</label> <select
+																<label class="form-label">Reference Mode 
+																<span
+																	class="text-danger">*</span></label> <select
 																	class="form-control " th:field="*{modeOfRef}">
 																	<option value="">Select</option>
-																	<option th:Value="taxi">News</option>
-																	<option th:Value="taxi">News</option>
+																	<option th:Value="News">News</option>
+																	<option th:Value="Magzine">Magzine</option>
 																	
 
 
@@ -659,7 +640,12 @@ body {
 											</table>
 											</div>
 											
-											<button class="btn btn-primary">Back</button>
+											<input
+    							
+    							onclick="window.history.go(-2); return false;"
+    							type="submit" class="btn btn-primary"
+    							value="Back"
+							/> 
 											</div>
 
 

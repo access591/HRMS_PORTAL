@@ -1,6 +1,7 @@
 package com.hrms.reports;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -30,10 +31,13 @@ import net.sf.jasperreports.engine.util.JRLoader;
 @Component
 public class AttendenceReport {
 	
-	public List<?> attendenceMontlyReport(HttpServletResponse response, HttpServletRequest request, List<?> sourceData) {
+	public List<?> attendenceMontlyReport(HttpServletResponse response, HttpServletRequest request, List<?> sourceData
+			,Date fromDate,Date toDate,String empCode,String deptCode) {
 
 		String reportFileName = "AttendanceRegMonthly"; // Parameter1
 
+		String deptName1 = "Department Name : "+deptCode;
+		String date = "From: "+fromDate+" To: "+toDate;
 		String sourceFileName = request.getSession().getServletContext()
 				.getRealPath("resources/" + reportFileName + ".jrxml");
 
@@ -46,9 +50,10 @@ public class AttendenceReport {
 
 			HashMap<String, Object> map = new HashMap<String, Object>();
 
-			//map.put("Parameter1", beanColDataSource);
+			map.put("Parameter1", beanColDataSource);
 			
-			//map.put("createdby ", "rahul");
+			map.put("deptName", deptName1);
+			map.put("date", date);
 			
 			
 

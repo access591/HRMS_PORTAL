@@ -20,22 +20,47 @@ public class EmployeeRequisitionDaoImpl extends AbstractGenericDao<EmployeeRequi
 	@Override
 	public List<EmployeeRequisition> findEmployeeReqByStatusN() {
 		
-		Session session = sessionFactory.getCurrentSession();
-		Query query = session.createQuery("from EmployeeRequisition e where e.status = 'N'");
-		List<EmployeeRequisition> listEmployeeReq = query.list();
+		try {
+			Session session = sessionFactory.getCurrentSession();
+			Query<EmployeeRequisition> query = session.createQuery("from EmployeeRequisition "
+					+ "e where e.status = 'N'",EmployeeRequisition.class);
+			List<EmployeeRequisition> listEmployeeReq = query.list();
+			session.close();
+			return listEmployeeReq;
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
 		//session.getTransaction().commit();
-		return listEmployeeReq;
+		return null;
 	}
 	
 	
 	@Override
 	public List<EmployeeRequisition> findEmployeeReqByStatusY() {
 		
-		Session session = sessionFactory.getCurrentSession();
-		Query query = session.createQuery("from EmployeeRequisition e where e.status = 'Y'");
-		List<EmployeeRequisition> listEmployeeReq = query.list();
-		//session.getTransaction().commit();
-		return listEmployeeReq;
+		try {
+			Session session = sessionFactory.getCurrentSession();
+//			Query<EmployeeRequisition> query = session.createQuery("from EmployeeRequisition e "
+//					+ "inner join fetch e.departmet d"
+//					+ " group by d.deptCode where e.status = 'Y'",
+//					EmployeeRequisition.class);
+			
+			Query<EmployeeRequisition> query = session.createQuery("from EmployeeRequisition e "
+					+ "left join fetch e.departmet d where e.status=:status"
+					+ " group by d",
+					EmployeeRequisition.class);
+			
+			query.setParameter("status", "Y");
+			List<EmployeeRequisition> listEmployeeReq = query.getResultList();
+			//session.getTransaction().commit();
+			System.out.println("employee requisition size====>"+listEmployeeReq.size());
+			//session.close();
+			return listEmployeeReq;
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 	
 	

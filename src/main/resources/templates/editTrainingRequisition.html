@@ -285,9 +285,9 @@ $(document).ready(function(){
 											<table id="example2" aria-describedby="example" class="table" style="width:100%">
 															<thead>
 																<tr>
-																	<th>Employee Code</th>
-																	<th>Name.</th>
-																	<th>Pay Code.</th>
+																	<th>Employee Name</th>
+																	
+																	<th>Payee Code.</th>
 																	<th>Father Name</th>
 
 
@@ -304,9 +304,7 @@ $(document).ready(function(){
 																			th:text="${employee.empName}" th:value="${employee.empCode}">Select Type</option>
 													                   </select></td>
 														
-																	<td>
-																	<input type="text" placeholder='Name' class="form-control" 
-																				th:field="*{listTransactionReqEmployeeDetail[__${stat.index}__].employee.empName}"/></td>
+																	
 																	<td>
 																	<input type="text" name="listTransactionReqEmployeeDetail[0].topicSrlNo" placeholder='Pay Code' 
 																		th:field="*{listTransactionReqEmployeeDetail[__${stat.index}__].employee.employeePayeeCode}"class="form-control" /></td>

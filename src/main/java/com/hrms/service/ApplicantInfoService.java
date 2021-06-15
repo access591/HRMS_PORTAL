@@ -11,5 +11,5 @@ public interface ApplicantInfoService {
 	public List<ApplicantInfo> getAllApplicantInfo();
 	public ApplicantInfo getApplicantInfoByApplicantCode(String applicantCode);
 	public void updateApplicantInfoInterviewStatus(String applicant,String interviewStatus);
-
+	public List<ApplicantInfo> findApplicantInfoStatusHoldAndPending();
 }

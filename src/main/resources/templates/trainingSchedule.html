@@ -80,7 +80,7 @@ body {
 							<div class="col-12">
 							<div class="card">
 								<div class="card-header">
-									<h5 class="card-title">Training Schedule  </h5>
+									<h5 class="card-title"style="text-decoration: underline;">Training Schedule  </h5>
 								<div class="alert-outline">
 									<div th:if="${message}" th:text="${message}" style="color: red">
 									</div> 
@@ -92,19 +92,20 @@ body {
 												
 												<div class="form-group sm col-md-4">
 											       <label class="form-label">Training Schedule Code
-											       <span class="text-danger">*</span></label>
+											       </label>
 							                 <input  type="text"th:field="*{trScheduleCode}" class="form-control"disabled="disabled">
 										     </div>
 												
 												<div class="form-group sm col-md-4">
 											       <label class="form-label">Training Schedule  Date
 											       <span class="text-danger">*</span></label>
-							                 <input  type="date" th:field="*{trScheduleDate}"  class="form-control required">
+							                 <input  type="date" th:field="*{trScheduleDate}" id="trScheduleDate"  class="form-control required">
 										     </div>
 										    	<div class="form-group sm col-md-4">
 													<label class="form-label">Training Requisition Code</label>
 												<label style="color: red">*</label>
-												<select class="form-control select2" th:field="*{trainingRequisition.trReqCode}" required aria-required="true">
+												<select class="form-control select2" th:field="*{trainingRequisition.trReqCode}" 
+												required aria-required="true" id="trReqCode" onchange="selectTrainingRequisitionCode()">
 												 <option value="">Select </option>
 												<option th:each="e :${listTrainingRequistion}"th:value="${e.trReqCode}" 
 													th:text="${e.trReqCode}"></option>
@@ -132,10 +133,16 @@ body {
 												<input  type="text"th:field="*{topicSerialNo}" class="form-control required">
 													
 												</div>
+												
 												<div class="form-group sm col-md-4">
-													<label class="form-label">Employee  Code (If Trainer)</label>
-												<label style="color: red">*</label>
-												<input  type="text"th:field="*{trainerCode}" class="form-control required">
+													<label class="form-label">Employee  Name (If Trainer)</label>
+												
+												<select class="form-control select2" th:field="*{trainerCode}"
+												required aria-required="true" id="trainerCode" onchange="selectTrainer()">
+												 <option value="">Select </option>
+												<option th:each="e :${listEmployee}"th:value="${e.empCode}" 
+													th:text="${e.empName}"></option>
+											     	</select>
 
 												</div>
 												
@@ -146,20 +153,20 @@ body {
 												
 									
 												<div class="form-group sm col-md-4">
-											       <label class="form-label">Trainer Name</label>
-												<input Type=text class="form-control required"th:field="*{trainer}">
+											       <label class="form-label">Trainer Code</label>
+												<input Type=text id="trainerName" class="form-control required">
 												</div>
 												
 												
 												<div class="form-group sm col-md-4">
-											       <label class="form-label">Training  Date
+											       <label class="form-label">Training Start Date
 											       <span class="text-danger">*</span></label>
-							                 <input  type="date"id="effScheduleDate"th:field="*{dateFrom}" class="form-control required">
+							                 <input  type="date"id="trainingStartDate" th:field="*{dateFrom}" class="form-control" required>
 										     </div>
 										     <div class="form-group sm col-md-4">
 											       <label class="form-label">Training End Date
 											     </label>
-							                 <input  type="date"th:field="*{dateTo}" class="form-control">
+							                 <input  type="date"th:field="*{dateTo}" class="form-control" required>
 										     </div>
 												
 												</div>
@@ -220,13 +227,14 @@ body {
 											</tr>
 										</thead>
 										<tbody>
+										
 											<tr  th:each="trainingSchedule : ${listTrainingSchedule}">
 												<td th:text="${trainingSchedule.trScheduleCode}"></td>
 												
-												<td th:text="${trainingSchedule.trScheduleDate}"></td>
+												<td th:text="${#dates.format(trainingSchedule.trScheduleDate, 'dd-MMM-yyyy')}"></td>
 												<td th:text="${trainingSchedule.trainer}"></td>
-												<td th:text="${trainingSchedule.dateFrom}"></td>
-												<td th:text="${trainingSchedule.dateTo}"></td>
+												<td th:text="${#dates.format(trainingSchedule.dateFrom, 'dd-MMM-yyyy')}"></td>
+												<td th:text="${#dates.format(trainingSchedule.dateTo, 'dd-MMM-yyyy')}"></td>
 												
 												<td th:text="${trainingSchedule.trainerAgency}"></td>
 												
@@ -254,6 +262,22 @@ body {
 		</footer>
 		</div>
 		</div>
+		
+		<script>
+			document.getElementById("trScheduleDate").valueAsDate = new Date();
+			//document.getElementById("trainingStartDate").min = "1999-01-01";
+			
+			var today = new Date().toISOString().split('T')[0];
+			document.getElementsByName("trainingStartDate")[0].setAttribute('min', today);
+			 
+			function selectTrainer(){
+				var trainerCode = document.getElementById("trainerCode").value;
+				console.log("trainer code : " + trainerCode);
+				document.getElementById("trainerName").value=trainerCode;
+			}
+		</script>
+		
+		
 	<script>
 		$(function() {
 
@@ -350,24 +374,39 @@ body {
 		
 	</script>
 	
-		
-
-
-
-
-
-
 	<script>
-		$('#loading').show();
-		$.ajax({
-			// Other ajax parameters
-			success : function() {
-				// hiding the image here
-				debugger;
-				$('#loading').hide();
+	
+	function selectTrainingRequisitionCode(){
+		console.log("hi ");
+		var trReqCode = document.getElementById('trReqCode').value
+		console.log("ajax request : " + trReqCode);
+		const xhr = new XMLHttpRequest();
+		xhr.open('GET', './getTrainingInfoBytrCode/' + trReqCode, true);
+		xhr.getResponseHeader('content-type', 'application/json');
+		xhr.onload = function() {
+			if (this.status === 200) {
+				
+				let obj = JSON.parse(this.responseText);
+				console.log(obj);
+
+				/* $('#deptName').val(obj.deptName);
+				$('#desgName').val(obj.desgName); */
+
+			} else {
+				console.error("some error occured");
 			}
-		});
-	</script>
+
+		}
+		xhr.send();
+	}
+	</script>	
+
+
+
+
+
+
+	
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
 
 
