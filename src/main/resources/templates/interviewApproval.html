@@ -58,15 +58,15 @@ body {
 											style="width: 100%">
 											<thead>
 												<tr>
-													<th class="text-center">Application Code</th>
-													<th class="text-center">Application Date</th>
-													<th class="text-center">Applicant Name</th>
-													<th class="text-center">Applicant Sex</th>
+													<th scope="col" class="text-center">Application Code</th>
+													<th scope="col" class="text-center">Application Date</th>
+													<th scope="col" class="text-center">Applicant Name</th>
+													<th scope="col" class="text-center">Applicant Sex</th>
 
-													<th class="text-center">Designation Code</th>
-													<th class="text-center">Designation Name</th>
-													<th class="text-center">Status</th>
-													<th class="text-center">View Details</th>
+													<th scope="col" class="text-center">Designation Code</th>
+													<th scope="col" class="text-center">Designation Name</th>
+													<th scope="col" class="text-center">Status</th>
+													<th scope="col" class="text-center">View Details</th>
 
 												</tr>
 											</thead>
@@ -144,12 +144,12 @@ body {
 
 
 													<td class="text-center"><a
-														th:href="@{viewApplicantInfo/{applicantCode}/(applicantCode=${interviewApproval.applicantCode})}"><i
-															class="fas fa-eye fa-lg"></i></a></td>
+														th:href="@{viewApplicantInfo/{applicantCode}/(applicantCode=${interviewApproval.applicantCode})}"><em
+															class="fas fa-eye fa-lg"></em></a></td>
 												</tr>
 
 
-												<!-- <tr id='addr1' /> -->
+												
 
 											</tbody>
 
