@@ -20,7 +20,8 @@ ActivityDao activityDao;
 
 	@Override
 	public List<Activities> getAllActivitys() {
-		List<Activities> listActivity = activityDao.findAll();
+		List<Activities> listActivity=null;
+		listActivity= activityDao.findAll();
 		return listActivity;
 	}
 
