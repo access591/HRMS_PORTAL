@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.hrms.ImageUtil;
 import com.hrms.model.MenuModule;
 import com.hrms.model.State;
 import com.hrms.service.ModuleService;
@@ -21,8 +22,7 @@ import com.hrms.service.StateService;
 @Controller
 public class StateController {
 	
-	int pageno=27;
-	String reqPage="/stateMaster";
+	
 	@Autowired
 	private ModuleService moduleService;
 	@Autowired
@@ -39,14 +39,21 @@ public class StateController {
 	public String stateMaster(Model model, HttpSession session) {
 
 		String userCode = (String) session.getAttribute("username");
+		if(userCode!=null) {
 		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
 		if (modules != null) {
 			model.addAttribute("modules", modules);
 		}
 		List<State> listState = stateService.getAllStates();
 		model.addAttribute("listState", listState);
+		session.setAttribute("imgUtil", new ImageUtil());
 		session.setAttribute("username", session.getAttribute("username"));
-		return pageMappingService.PageRequestMapping(reqPage, pageno);
+		return "stateMaster";
+		}
+		else
+		{
+			  return "redirect:" + "./";	
+		}
 	}
 
 	/**
@@ -67,8 +74,8 @@ public class StateController {
 		model.addAttribute("listState", listState);
 		
 		session.setAttribute("username", session.getAttribute("username"));
-
-		 return "redirect:"+pageMappingService.PageRequestMapping(reqPage,pageno);
+		return"redirect:/stateMaster";
+		
 
 	}
 	/**
@@ -82,14 +89,13 @@ public class StateController {
 	@GetMapping(value = { "/editState/{id}" })
 	public String editState(@PathVariable("id") String id, Model model, HttpSession session) {
 		
-		int editPageNo = 28;
-		String reqPageedit = "/editState";
-		
+	
+		session.setAttribute("imgUtil", new ImageUtil());
 		State stateEdit = stateService.findStateById(id);
 		model.addAttribute("stateEdit", stateEdit);
 		session.setAttribute("username", session.getAttribute("username"));
 		
-		return pageMappingService.PageRequestMapping(reqPageedit, editPageNo);
+		return "editState";
 	}
 	
 	/**
@@ -105,8 +111,8 @@ public class StateController {
 		String updatedBY = (String) session.getAttribute("userlogin");
 		c.setUpdBy(updatedBY);
 		this.stateService.updateState(c);
-
-		return "redirect:/" + pageMappingService.PageRequestMapping(reqPage, pageno);
+		return"redirect:/stateMaster";
+		
 	}
 	
 	/**
@@ -121,7 +127,7 @@ public class StateController {
 		
 		this.stateService.removeState(id);
 		session.setAttribute("username", session.getAttribute("username"));
-		return "redirect:/" + pageMappingService.PageRequestMapping(reqPage, pageno);
+		return"redirect:/stateMaster";
 	}
 }
 
