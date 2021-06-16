@@ -46,13 +46,20 @@ public class CityController {
 	@RequestMapping(value="/cityMaster")
     public String productsRedirect(HttpServletRequest request, Model model, HttpSession
     		  session){
-		session.setAttribute("imgUtil", new ImageUtil());
-		 String userCode = (String) session.getAttribute("username"); 
-		 List<MenuModule> modules = moduleService.getAllModulesList(userCode); 
-		 if (modules != null) {
-		 model.addAttribute("modules", modules); } 
-		 
-		 return "redirect:getAllCities";
+		String userCode = (String) session.getAttribute("username"); 
+		
+		if (userCode!=null) {
+			session.setAttribute("imgUtil", new ImageUtil());
+			List<MenuModule> modules = moduleService.getAllModulesList(userCode);
+			if (modules != null) {
+				model.addAttribute("modules", modules);
+			}
+			return "redirect:getAllCities";
+		}
+		else
+		{
+    return "redirect:" + "./";
+		}
     }
   
 	 @RequestMapping(value = {"getAllCities", "/", "/list"})
@@ -108,7 +115,7 @@ public class CityController {
 		model.addAttribute("listCity", listCity);
 		session.setAttribute("username", session.getAttribute("username"));
 
-		return "redirect:" + pageMappingService.PageRequestMapping(reqPage, pageno);
+		return"redirect:/cityMaster";
 
 	}
 
@@ -121,13 +128,12 @@ public class CityController {
 	 */
 	@GetMapping(value = { "/editCity/{id}" })
 	public String editCity(@PathVariable("id") String id, Model model, HttpSession session) {
-		int editPageNo = 26;
-		String reqPageedit = "/editCity";
+		
 		City cityEdit = cityService.findCityById(id);
 		model.addAttribute("cityEdit", cityEdit);
 		session.setAttribute("username", session.getAttribute("username"));
-
-		return pageMappingService.PageRequestMapping(reqPageedit, editPageNo);
+		session.setAttribute("imgUtil", new ImageUtil());
+		return "editCity";
 	}
 	/**
 	 * Request Mapping  update City 
@@ -144,7 +150,7 @@ public class CityController {
 		city.setUpdBy(updatedBY);
 		this.cityService.updateCity(city);
 
-		return "redirect:/" + pageMappingService.PageRequestMapping(reqPage, pageno);
+		return"redirect:/cityMaster";
 	}
 	
 	/**
