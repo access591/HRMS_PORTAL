@@ -31,7 +31,7 @@ public class MedicalReimbursementDetailsServiceImpl  implements MedicalReimburse
 	s.beginTransaction();
 		m4.setInsDate(new Date());
 		m4.setSrNo(medicalReimbursementDetailsDao.getMaxId("MSR"));
-		//this.medicalReimbursementDetailsDao.saveOrUpdate(m4);
+	
 		s.save(m4);
 		s.getTransaction().commit();
 		s.clear();
@@ -40,30 +40,25 @@ public class MedicalReimbursementDetailsServiceImpl  implements MedicalReimburse
 	}
 	@Override
 	public List<MedicalReimbursementDetail> getAllMedicalReimbursementDetails() {
-		List<MedicalReimbursementDetail> listMedicalReimbursementDetail = medicalReimbursementDetailsDao.findAll();
-		return listMedicalReimbursementDetail;
+		return medicalReimbursementDetailsDao.findAll();
 	}
 	
+	@SuppressWarnings("deprecation")
 	@Override
 	public List<MedicalReimbursementDetail> getAllMedicalReimbursementDetailBYslipNO(String slipNo) {
-		
-		Session s=sessionFactory.openSession();
-		//List dicalReimbursementDetail = null;
+		Session s = sessionFactory.openSession();
 		try {
-			  String sql ="SELECT DISTINCT  E.REMARKS,E.MED_ST_DR_NAME, E.INS_DATE, E.INS_BY,E.GOVT_EXMPT_AMT,E.CASHMEMO_NO,E.CASHMEMO_DATE, E.SR_NO,SUM(E.AMOUNT)AMOUNT,SUM(E.PASSED_AMT)PASSED_AMT,E.SLIP_NO FROM MEDICLAIM_DETAILS E where E.SLIP_NO= :slipNo";
-			  
-			  SQLQuery query = s.createSQLQuery(sql); 
-			  query.setParameter("slipNo", slipNo);
-				
-			  query.addEntity(MedicalReimbursementDetail.class);	
-				
-				
-				
-				return query.list();
-			 
-			
+			String sql = "SELECT DISTINCT  E.REMARKS,E.MED_ST_DR_NAME, E.INS_DATE, E.INS_BY,E.GOVT_EXMPT_AMT,E.CASHMEMO_NO,E.CASHMEMO_DATE, E.SR_NO,SUM(E.AMOUNT)AMOUNT,SUM(E.PASSED_AMT)PASSED_AMT,E.SLIP_NO FROM MEDICLAIM_DETAILS E where E.SLIP_NO= :slipNo";
+			SQLQuery query = s.createSQLQuery(sql);
+			query.setParameter("slipNo", slipNo);
+			query.addEntity(MedicalReimbursementDetail.class);
+			return query.list();
+
 		} catch (Exception e) {
-			
+			e.printStackTrace();
+
+		} finally {
+			s.close();
 		}
 
 		return null;

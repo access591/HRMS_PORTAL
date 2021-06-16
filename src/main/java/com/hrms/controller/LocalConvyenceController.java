@@ -57,7 +57,7 @@ public class LocalConvyenceController {
 		  model.addAttribute("listEmployee", listEmployee);
 		
 		  List<LocalConvyence> listOfLoc = localConvyenceService.getAlllocalConvyence();
-		  List<LocalConvyenceUtil> listLocalConvyenceUtil = new ArrayList<LocalConvyenceUtil>();
+		  List<LocalConvyenceUtil> listLocalConvyenceUtil = new ArrayList<>();
 		  for (int i = 0; i < listOfLoc.size(); i++) {
 			    
 			    String empCode = listOfLoc.get(i).getEmpCode().getEmpCode();
@@ -98,10 +98,8 @@ public class LocalConvyenceController {
 		
 		Department d = departmentService.findDepartmentById(e.getDepartmentCode());
 		Designation des=designationService.findDesignationById(e.getDesignationCode());
-		LocalConvyenceUtil l=new LocalConvyenceUtil(
-					e.getEmpName(),d.getDeptName(),des.getDesgName(),e.getEmployeePayeeCode());
+		return  new LocalConvyenceUtil(e.getEmpName(),d.getDeptName(),des.getDesgName(),e.getEmployeePayeeCode());
 		
-        return l;
     }
 
 	
@@ -207,11 +205,7 @@ public class LocalConvyenceController {
 				ld.setLocalConvId(lc);
 				ld.setEmpCode(emp);	
 				ld.setLocalConvDate(lc);
-					/*
-					 * tourPlan.setTourPlanId(tid); tourPlan.setTourPlanDate(tdate);
-					 * tourPlanDetail.setTourPlanId(tourPlan);
-					 * tourPlanDetail.setTourPlanDate(tourPlan);
-					 */
+					
 					
 					insertStatusMR= localConvyenceDetailService.addTourPlanDetail(ld);
 					
@@ -264,11 +258,17 @@ public class LocalConvyenceController {
 	
 	
 	@PostMapping("/updateLocalConvyence")
-	  public String updateLocalConvyence(@ModelAttribute("localConvyenceEdit") LocalConvyence localConvyence, Model model) throws ParseException {
+	  public String updateLocalConvyence(@ModelAttribute("localConvyenceEdit") LocalConvyence localConvyence, Model model) {
 		
 		
-		  this.localConvyenceService.updateLocalConvyence(localConvyence);
-		  
+		  try {
+			this.localConvyenceService.updateLocalConvyence(localConvyence);
+			  
+			  return "redirect:/localConvyence";
+		} catch (Exception e) {
+		
+			e.printStackTrace();
+		}
 		  return "redirect:/localConvyence";
 	  }
 	
