@@ -16,15 +16,17 @@ public class EmpMontOvertimeRegisterImpl implements EmpMontOvertimeRegister{
 
 	@Autowired SessionFactory sessionFactory;
 	@Autowired EmpMontOvertimeDao empMontOvertimeDao;
+	Session session=null;
 	@Override
 	public List<EmpMonOvertime> findEmpMontOvertimeByEmpCode(String empCode) {
-		
+		Query<EmpMonOvertime> query=null;
+		List<EmpMonOvertime> result=null;		
 		try {
-			Session session = sessionFactory.openSession();
-			Query<EmpMonOvertime> query = session.createQuery("from EmpMonOvertime em inner join fetch em.employee e "
+			 session = sessionFactory.openSession();
+			 query = session.createQuery("from EmpMonOvertime em inner join fetch em.employee e "
 					+ "where e.empCode = :empCode", EmpMonOvertime.class);
 			query.setParameter("empCode", empCode);
-			List<EmpMonOvertime> result = query.getResultList();
+			 result = query.getResultList();
 			return result;
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -38,7 +40,7 @@ public class EmpMontOvertimeRegisterImpl implements EmpMontOvertimeRegister{
 	public List<EmpMonOvertime> findAllEmpMontOvertime() {
 		
 		try {
-			Session session = sessionFactory.openSession();
+		 session = sessionFactory.openSession();
 			Query<EmpMonOvertime> query = session.createQuery("from EmpMonOvertime em inner join fetch em.employee e "
 					, EmpMonOvertime.class);
 			
@@ -54,7 +56,7 @@ public class EmpMontOvertimeRegisterImpl implements EmpMontOvertimeRegister{
 	@Override
 	public List<EmpMonOvertime> findAllByDeptCode(String deptCode) {
 		try {
-			Session session = sessionFactory.openSession();
+		 session = sessionFactory.openSession();
 			Query<EmpMonOvertime> query = session.createQuery("from EmpMonOvertime em inner join fetch em.employee e "
 					+ "where e.departmentCode = :deptCode"
 					, EmpMonOvertime.class);
@@ -71,7 +73,7 @@ public class EmpMontOvertimeRegisterImpl implements EmpMontOvertimeRegister{
 	@Override
 	public List<EmpMonOvertime> findAllDeptByMonth(int month) {
 		try {
-			Session session = sessionFactory.openSession();
+			 session = sessionFactory.openSession();
 			Query<EmpMonOvertime> query = session.createQuery("from EmpMonOvertime em WHERE MONTH(em.oTimeMonth) = :month" 
 					, EmpMonOvertime.class);
 			query.setParameter("month", month);
@@ -88,7 +90,7 @@ public class EmpMontOvertimeRegisterImpl implements EmpMontOvertimeRegister{
 	@Override
 	public List<EmpMonOvertime> findOvertimeMonthByDeptCodeAndMonth(String deptCode, int month) {
 		try {
-			Session session = sessionFactory.openSession();
+			 session = sessionFactory.openSession();
 			Query<EmpMonOvertime> query = session.createQuery("from EmpMonOvertime em "
 					+ "inner join fetch em.employee e WHERE e.departmentCode = :deptCode and MONTH(em.oTimeMonth) = :month" 
 					, EmpMonOvertime.class);
@@ -109,7 +111,7 @@ public class EmpMontOvertimeRegisterImpl implements EmpMontOvertimeRegister{
 		Session s=sessionFactory.openSession();
 		s.beginTransaction();
 		
-		// TODO Auto-generated method stub
+	
 		s.save(overtimeEval);
 		s.getTransaction().commit();
 		s.clear();
@@ -119,7 +121,7 @@ public class EmpMontOvertimeRegisterImpl implements EmpMontOvertimeRegister{
 
 	@Override
 	public List<EmpMonOvertime> getAllMontOvertimeRegister() {
-		// TODO Auto-generated method stub
+	
 		return empMontOvertimeDao.findAll();
 	}
 

@@ -130,7 +130,7 @@ public String updateDepartment(@ModelAttribute("deptupdate") DepartmentUtiliy de
 		   
 		   
 	} catch (Exception e) {
-	
+	System.out.println("exception "+e);
 	}
 	
   	  
