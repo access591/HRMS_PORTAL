@@ -173,7 +173,7 @@ public class UserController {
 	public String logout(HttpSession session) {
 		session.removeAttribute("username");
 		session.invalidate();
-		 return "redirect:" + "./";
+		 return "redirect:/" + "./";
 		
 	}
 	
