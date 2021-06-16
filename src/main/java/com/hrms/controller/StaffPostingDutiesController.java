@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-
+import com.hrms.ImageUtil;
 import com.hrms.model.Department;
 import com.hrms.model.Designation;
 import com.hrms.model.Employee;
@@ -58,10 +58,10 @@ public class StaffPostingDutiesController {
 		}
 		 List<Employee> listEmployee = employeeService.getAllEmployees();
 		  model.addAttribute("listEmployee", listEmployee);
-		
+			session.setAttribute("imgUtil", new ImageUtil());
 		  List<StaffPostingDuties> listOfstaffDuties = staffPostingDutiesService.getAllStaffPostingDuties();
 		  
-		  List<SaffPostingDutiesUtil> listSaffPostingDutiesUtil=new ArrayList<SaffPostingDutiesUtil>();
+		  List<SaffPostingDutiesUtil> listSaffPostingDutiesUtil=new ArrayList<>();
 		  for (int i = 0; i < listOfstaffDuties.size(); i++) {
 			  String empCode = listOfstaffDuties.get(i).getEmpCode().getEmpCode();
 			  SaffPostingDutiesUtil listofutil=new SaffPostingDutiesUtil();
@@ -91,10 +91,9 @@ public class StaffPostingDutiesController {
 			Employee e = employeeService.findEmployeeById(id);
 			Department d = departmentService.findDepartmentById(e.getDepartmentCode());
 			Designation des=designationService.findDesignationById(e.getDesignationCode());
-			SaffPostingDutiesUtil l=new SaffPostingDutiesUtil(
-						e.getEmpName(),d.getDeptName(),des.getDesgName(),e.getEmployeePayeeCode());
+			return new SaffPostingDutiesUtil(e.getEmpName(),d.getDeptName(),des.getDesgName(),e.getEmployeePayeeCode());
 			
-	        return l;
+	      
 	    }
 		
 		@PostMapping("/savestaffDuties")
@@ -172,10 +171,10 @@ public class StaffPostingDutiesController {
 			@GetMapping(value = {"/reporStaffPostingDuties" })
 			public String reporStaffPostingDuties(Model model, HttpSession session, HttpServletRequest request,
 					HttpServletResponse response) {
-				
+				String val = null;
 				 List<StaffPostingDuties> listOfstaffDuties = staffPostingDutiesService.getAllStaffPostingDuties();
-				
-				 List<SaffPostingDutiesUtil> dataList=new ArrayList<SaffPostingDutiesUtil>();
+				 session.setAttribute("username", session.getAttribute("username"));
+				 List<SaffPostingDutiesUtil> dataList=new ArrayList<>();
 				  for (int i = 0; i < listOfstaffDuties.size(); i++) {
 					
 					  String empCode = listOfstaffDuties.get(i).getEmpCode().getEmpCode();
@@ -199,22 +198,27 @@ public class StaffPostingDutiesController {
 				 
 				String reportFileName = "";
 
-				String val = null;
+				
 				if (request.getParameter("_ex") != null) {
 					val = request.getParameter("_ex");
-				}
-				if (val.equals("P")) {
-					System.out.println("heloo0000000000" + val);
+					
+					if (val.equals("P")) {
+						System.out.println("heloo0000000000" + val);
 
-					reportFileName = "staffPostingDuties_pdf";
-					staffPostingDutiesService.staffPostingDutiesGenratepdf(request, response, reportFileName, dataList);
-				} else if (val.equals("E")) {
-					reportFileName = "bankwisereport_XLS";
-					String filename = "bankwisereport";
+						reportFileName = "staffPostingDuties_pdf";
+						staffPostingDutiesService.staffPostingDutiesGenratepdf(request, response, reportFileName, dataList);
+					} else if (val.equals("E")) {
+						//reportFileName = "bankwisereport_XLS";
+						//String filename = "bankwisereport";
 
+					}
+					
+					
+					
 				}
+				
 				  }
-				session.setAttribute("username", session.getAttribute("username"));
+				
 				return null;
 
 			}

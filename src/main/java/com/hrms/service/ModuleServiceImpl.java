@@ -29,8 +29,8 @@ public class ModuleServiceImpl implements ModuleService {
 
 	public List<MenuModule> getAllModules() {
 
-		List<MenuModule> menuModulelist = processModules(moduleDao.findAll());
-		return menuModulelist;
+		return processModules(moduleDao.findAll());
+		
 	}
 
 	@Override
@@ -38,12 +38,12 @@ public class ModuleServiceImpl implements ModuleService {
 
 		login.setUserCode(userCode);
 
-		List<MenuModule> menuModulelist = processModules(moduleDao.getAllModulesList(userCode));
-		return menuModulelist;
+		return processModules(moduleDao.getAllModulesList(userCode));
+		
 	}
 
 	private List<MenuModule> processModules(List<Module> modules) {
-		List<MenuModule> menuModuleList = new ArrayList<MenuModule>();
+		List<MenuModule> menuModuleList = new ArrayList<>();
 
 		for (Module module : modules) {
 
@@ -58,7 +58,7 @@ public class ModuleServiceImpl implements ModuleService {
 	}
 
 	private List<SubModuleProgram> getSubModuleProgramsList(Module module) {
-		List<SubModuleProgram> liSubModulePrograms = new ArrayList<SubModuleProgram>();
+		List<SubModuleProgram> liSubModulePrograms = new ArrayList<>();
 		String ucode = login.getUserCode();
 		String modulecCode = module.getModuleCode();
 		System.out.println("Sub Module User Code " + ucode);
@@ -79,7 +79,7 @@ public class ModuleServiceImpl implements ModuleService {
 
 	private Map<String, String> getModuleProgramMap(Module module) {
 		List<Program> programs = module.getModulePrograms();
-		Map<String, String> programMap = new HashMap<String, String>();
+		Map<String, String> programMap = new HashMap<>();
 		for (Program program : programs) {
 			String name = program.getProgramName();
 			String href = program.getProgramHrefName();
@@ -94,7 +94,7 @@ public class ModuleServiceImpl implements ModuleService {
 		String smCode = subModule.getSubModuleCode();
 		System.out.println("Program module  User Code Test" + ucode);
 		List<Program> programs = moduleDao.getAllProgramList(moduleCode, smCode, ucode);
-		LinkedHashMap<String, String> programMap = new LinkedHashMap<String, String>();
+		LinkedHashMap<String, String> programMap = new LinkedHashMap<>();
 		for (Program program : programs) {
 			String name = program.getProgramName();
 			String href = program.getProgramHrefName();

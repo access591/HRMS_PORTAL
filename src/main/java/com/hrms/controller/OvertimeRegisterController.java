@@ -53,7 +53,7 @@ public class OvertimeRegisterController {
 		}
 		
 		List<OvertimeRegister> listOverTimeR = overtimeRegisterService.getAllOvertimeRegister();
-		List<OvertimeRegisterUtil>listOverTime= new ArrayList<OvertimeRegisterUtil>();
+		List<OvertimeRegisterUtil>listOverTime= new ArrayList<>();
 		  for (int i = 0; i < listOverTimeR.size(); i++) {
 			  
 			  String empCode = listOverTimeR.get(i).getEmployee().getEmpCode();
@@ -92,7 +92,7 @@ public class OvertimeRegisterController {
     public List<OvertimeRegisterUtil>  getLocalConvyenceById(@PathVariable(value = "id") String id,Model model,HttpSession session) {
 		Department d=departmentService.findDepartmentById(id);
 		List<Employee> e = employeeService.findByDepartmentCode(d.getDepartmentCode());
-		  List<OvertimeRegisterUtil> lisOvertimeRegisterUtil = new ArrayList<OvertimeRegisterUtil>();
+		  List<OvertimeRegisterUtil> lisOvertimeRegisterUtil = new ArrayList<>();
 		  for (int i = 0; i < e.size(); i++) 
 		  {
 			  String empCode = e.get(i).getEmpCode();
@@ -109,7 +109,7 @@ public class OvertimeRegisterController {
 	@ResponseBody
     @GetMapping("/viewOverTimeRegisterByEmployee/{id}")
     public OvertimeRegisterUtil  viewOverTimeRegisterByEmployee(@PathVariable(value = "id") String id,Model model,HttpSession session) {
-		//Department d=departmentService.findDepartmentById(id);
+		
 		Employee employee = employeeService.findEmployeeById(id);
 		String empCode = employee.getEmpCode();
 		System.out.println(">>>>>>>>xxxxxx>>>>>>>>>>>>>>>>>>" + empCode);
@@ -128,7 +128,7 @@ public class OvertimeRegisterController {
 	
 	
 	@PostMapping("/saveOverTimeRegister")
-	public String saveAttendenceRegister(@ModelAttribute("overTimeRegister")OvertimeRegisterUtil u, Model model, HttpSession session,HttpServletRequest request) throws ParseException {
+	public String saveAttendenceRegister(@ModelAttribute("overTimeRegister")OvertimeRegisterUtil u, Model model, HttpSession session,HttpServletRequest request)  {
 		String insertedBY = (String) session.getAttribute("USER_NAME");	
 		OvertimeRegister overReg=new OvertimeRegister();
 		 Employee e=new    Employee();		
@@ -224,7 +224,7 @@ public class OvertimeRegisterController {
 
 		
 	} catch (Exception x) {
-		// TODO: handle exception
+		x.printStackTrace();
 	}
 		  session.setAttribute("username", session.getAttribute("username"));
 
