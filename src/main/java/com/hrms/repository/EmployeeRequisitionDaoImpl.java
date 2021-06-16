@@ -20,7 +20,7 @@ public class EmployeeRequisitionDaoImpl extends AbstractGenericDao<EmployeeRequi
 	@Override
 	public List<EmployeeRequisition> findEmployeeReqByStatusN() {
 		
-		Session session = sessionFactory.getCurrentSession();
+		Session session = sessionFactory.openSession();
 		try {
 			
 			session.beginTransaction();
@@ -42,10 +42,12 @@ public class EmployeeRequisitionDaoImpl extends AbstractGenericDao<EmployeeRequi
 	@Override
 	public List<EmployeeRequisition> findEmployeeReqByStatusY() {
 		
-		Session session = sessionFactory.getCurrentSession();
+		List<EmployeeRequisition> result = null ;
+		Session session = sessionFactory.openSession();
+		Transaction tx = null;
 		
 		try {
-			session.beginTransaction();
+			tx = session.beginTransaction();
 			Query<EmployeeRequisition> query = session.createQuery("from EmployeeRequisition e "
 					+ "left join fetch e.departmet d where e.status=:status"
 					+ " group by d",
@@ -53,22 +55,22 @@ public class EmployeeRequisitionDaoImpl extends AbstractGenericDao<EmployeeRequi
 			
 			query.setParameter("status", "Y");
 			
-			session.getTransaction().commit();
+			tx.commit();
 			
-			return query.getResultList();
+			result = query.getResultList();
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {
 			session.close();
 		}
-		return null;
+		return result;
 	}
 	
 	
 	@Override
 	public void approvedStatusByReqCode(String reqCode) {
 		
-		Session session = sessionFactory.getCurrentSession();
+		Session session = sessionFactory.openSession();
 		Query<EmployeeRequisition> query = session.createQuery("UPDATE EmployeeRequisition e set e.status =:status WHERE e.reqCode = :reqCode",EmployeeRequisition.class);
 		query.setParameter("status", "Y");
 		query.setParameter("reqCode", reqCode);

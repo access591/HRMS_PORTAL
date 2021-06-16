@@ -35,19 +35,18 @@ public class EmployeeRequisitionApprovalController {
 	public void commonData(Model model,HttpSession session) {
 		session.setAttribute("username", session.getAttribute("username"));
 		
-	}
-	
-	
-	@GetMapping("employeeRequisitionApproval")
-	public String employeeRequisitionApproval(@ModelAttribute("commonUtil")CommonUtil commonUtil ,Model model, HttpSession session) {
-		
-		
-
 		String userCode = (String) session.getAttribute("username");
 		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
 		if (modules != null) {
 			model.addAttribute("modules", modules);
 		}
+		
+		
+	}
+	
+	
+	@GetMapping("employeeRequisitionApproval")
+	public String employeeRequisitionApproval(@ModelAttribute("commonUtil")CommonUtil commonUtil ,Model model, HttpSession session) {
 		
 		
 		List<CommonUtil> listCommonUtil = new ArrayList<>();

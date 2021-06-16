@@ -33,7 +33,7 @@ public class ArmsReport {
 	ArmsLicenseService armsLicenseService;
 
 	public List<ArmsLicenseDetails> createArmsLicensesReport(HttpServletResponse response, HttpServletRequest request,
-			List<ArmsLicenseDetails> sourceData) {
+			List<ArmsLicenseDetails> sourceData) throws IOException {
 
 		String reportFileName = "ArmsLicenses"; // Parameter1
 		String sourceFileName = request.getSession().getServletContext()
@@ -61,14 +61,11 @@ public class ArmsReport {
 				response.setHeader("Cache-Control", "private");
 				response.setHeader("Pragma", "no-store");
 				response.setContentLength(pdfReport.length);
-				try {
-					response.getOutputStream().write(pdfReport);
-					response.getOutputStream().flush();
-					response.getOutputStream().close();
-				} catch (IOException e) {
 
-					e.printStackTrace();
-				}
+				response.getOutputStream().write(pdfReport);
+				response.getOutputStream().flush();
+				response.getOutputStream().close();
+
 			}
 		} catch (JRException e) {
 			e.printStackTrace();
@@ -77,13 +74,13 @@ public class ArmsReport {
 
 	}
 
-	public void armsReportDataSource(String empCode, HttpServletResponse response, HttpServletRequest request) {
+	public void armsReportDataSource(String empCode, HttpServletResponse response, HttpServletRequest request)
+			throws IOException {
 		List<ArmsLicenseDetails> arms = new ArrayList<>();
 		ArmsLicenseDetails armsLicenseDetail = armsLicenseService.findArmsByEmpEmpCode(empCode);
-		if(armsLicenseDetail != null)
+		if (armsLicenseDetail != null)
 			arms.add(armsLicenseDetail);
 		createArmsLicensesReport(response, request, arms);
 	}
-	
-	 
+
 }

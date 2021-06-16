@@ -29,7 +29,7 @@ import net.sf.jasperreports.engine.util.JRLoader;
 public class AbsentiReport {
 
 	public List<?> createAbsentiReport(HttpServletResponse response, HttpServletRequest request, 
-			List<AttendenceRegister> sourceData,Date from,Date to,String deptName) {
+			List<AttendenceRegister> sourceData,Date from,Date to,String deptName) throws IOException {
 
 		String reportFileName = "absentism"; // Parameter1
 		String deptName1 = "Department Name : "+deptName;
@@ -62,15 +62,11 @@ public class AbsentiReport {
 				response.setHeader("Cache-Control", "private");
 				response.setHeader("Pragma", "no-store");
 				response.setContentLength(pdfReport.length);
-				try {
-					response.getOutputStream().write(pdfReport);
-					response.getOutputStream().flush();
-					response.getOutputStream().close();
-				} catch (IOException e) {
-					
-					e.printStackTrace();
-				}
-
+				
+				response.getOutputStream().write(pdfReport);
+				response.getOutputStream().flush();
+				response.getOutputStream().close();
+				
 			}
 		} catch (JRException e) {
 			e.printStackTrace();

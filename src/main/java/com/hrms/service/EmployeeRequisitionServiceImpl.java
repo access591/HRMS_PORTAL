@@ -47,21 +47,21 @@ public class EmployeeRequisitionServiceImpl implements EmployeeRequisitionServic
 			EmployeeRequisition er = query.getSingleResult();
 			return er;
 		}catch(Exception e) {
-			System.out.println("========error block");
+			
 			e.printStackTrace();
 		}
 		return null;
-		//return this.employeRequisitionDao.findById(reqCode);
+		
 	}
 
 	@Override
 	public void updateEmployeeRequisition(EmployeeRequisition c) {
 		
 		Session session = sessionFactory.openSession();
-		//Transaction tx = session.beginTransaction();
+		
 		EmployeeRequisition emp = session.find(EmployeeRequisition.class, c.getReqCode());
 		emp.getEmployeRequisitionDetail().clear();
-		//emp.setEmployeRequisitionDetail(c.getEmployeRequisitionDetail());
+		
 		emp.getEmployeRequisitionDetail().addAll(c.getEmployeRequisitionDetail());
 		
 		session.beginTransaction();

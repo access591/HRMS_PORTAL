@@ -26,13 +26,13 @@ import net.sf.jasperreports.engine.util.JRLoader;
 @Component
 public class BudgetReport {
 
-	public List<BudgetProvision> createBudgetReport(HttpServletResponse response, HttpServletRequest request, 
-			List<BudgetProvision> sourceData,String deptName) {
+	public List<BudgetProvision> createBudgetReport(HttpServletResponse response, HttpServletRequest request,
+			List<BudgetProvision> sourceData, String deptName) throws IOException {
 
 		String reportFileName = "budgetProvision"; // Parameter1
-		String deptName1 = "Department : "+deptName;
+		String deptName1 = "Department : " + deptName;
 		String year = "2021-22";
-	
+
 		String sourceFileName = request.getSession().getServletContext()
 				.getRealPath("resources/" + reportFileName + ".jrxml");
 
@@ -48,7 +48,7 @@ public class BudgetReport {
 			parameters.put("Parameter1", beanColDataSource);
 			parameters.put("deptName", deptName1);
 			parameters.put("year", year);
-		
+
 			JasperReport report = (JasperReport) JRLoader.loadObjectFromFile(sourceFileName);
 			JasperPrint jasperPrint = JasperFillManager.fillReport(report, parameters, new JREmptyDataSource());
 
@@ -60,14 +60,10 @@ public class BudgetReport {
 				response.setHeader("Cache-Control", "private");
 				response.setHeader("Pragma", "no-store");
 				response.setContentLength(pdfReport.length);
-				try {
-					response.getOutputStream().write(pdfReport);
-					response.getOutputStream().flush();
-					response.getOutputStream().close();
-				} catch (IOException e) {
-					
-					e.printStackTrace();
-				}
+
+				response.getOutputStream().write(pdfReport);
+				response.getOutputStream().flush();
+				response.getOutputStream().close();
 
 			}
 		} catch (JRException e) {
@@ -75,7 +71,6 @@ public class BudgetReport {
 		}
 
 		return Collections.emptyList();
-
 
 	}
 }

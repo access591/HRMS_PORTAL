@@ -44,6 +44,15 @@ public class ApplicantInformationController {
 	@Autowired private EmployeeService employeeService;
 	@Autowired private EmployeeRequisitionDetailService employeeRequisitionDetailService;
 	@Autowired private CityService cityService;
+	
+	
+	
+	@ModelAttribute
+	public void commonData(Model model,HttpSession session) {
+		String userCode = (String) session.getAttribute("username");
+		session.setAttribute("username", userCode);
+		
+	}
 
 	@GetMapping("applicantInformation")
 	public String applicantInformationPage(@ModelAttribute("applicantInfo") ApplicantInfo applicantInfo, Model model,
@@ -86,8 +95,7 @@ public class ApplicantInformationController {
 	@PostMapping("/saveApplicantInfo")
 	public String saveApplicantInfo(@ModelAttribute("applicantInfo") ApplicantInfo applicantInfo, HttpSession session) {
 
-		System.out.println("applicantInfo : " + applicantInfo.getApplicantCode());
-		System.out.println("applicantInfo : " + applicantInfo.getApplicantDate());
+		
 		
 		if (applicantInfo.getApplicantExpDetail() != null) {
 			for (ApplicantExpDetail aDetail : applicantInfo.getApplicantExpDetail()) {
@@ -107,13 +115,6 @@ public class ApplicantInformationController {
 	public String viewApplicantInfo(@PathVariable("applicantCode") String applicantCode, Model model,
 			HttpSession session) throws Exception {
 
-		String userCode = (String) session.getAttribute("username");
-		
-//		if(userCode == null) {
-//			//throw new Exception();
-//			System.out.println("hii");
-//			return "sign-in";  //sign-in.html
-//		}
 
 		List<ReqAdvertisement> listReqAdvertisement = reqAdvertisementService.getAllReqAdvertisement();
 		if (listReqAdvertisement != null) {
@@ -142,17 +143,17 @@ public class ApplicantInformationController {
 		ApplicantInfo applicantInfo = applicantInfoService.getApplicantInfoByApplicantCode(applicantCode);
 		model.addAttribute("applicantInfo", applicantInfo);
 
-		session.setAttribute("username", userCode);
+		
 		return "viewApplicantInfo";
 	}
 
 	@ResponseBody
 	@GetMapping("getAdvtDate/{id}")
 	public String getRequisitionDateByAdvtCode(@PathVariable("id") String advtCode) {
-		// get advt code and advt date from Advertisement
+		
 		ReqAdvertisement reqAdvertisement = reqAdvertisementService.findReqAdvertisementById(advtCode);
 		Date advtDate = reqAdvertisement.getAdvtDate();
-		System.out.println("======>>" + advtDate);
+		
 		return advtDate.toString();
 	}
 

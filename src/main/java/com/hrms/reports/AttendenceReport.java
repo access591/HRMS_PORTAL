@@ -30,33 +30,39 @@ import net.sf.jasperreports.engine.util.JRLoader;
 
 @Component
 public class AttendenceReport {
-	
-	public List<?> attendenceMontlyReport(HttpServletResponse response, HttpServletRequest request, 
-			List<?> sourceData
-			,Date fromDate,Date toDate,String empCode,String deptCode) {
+
+	private static final String JRXML = ".jrxml";
+	private static final String JASPER = ".jasper";
+	private static final String RESOURCES = "resources/";
+	private static final String RESOURCES2 = "/resources/";
+	private static final String CACHE_CONTROL_1 = "no-store";
+	private static final String CACHE_CONTROL_2 = "private";
+	private static final String PRAGMA = "no-store";
+	private static final String CONTENT_TYPE = "application/pdf";
+
+	public List<?> attendenceMontlyReport(HttpServletResponse response, HttpServletRequest request, List<?> sourceData,
+			Date fromDate, Date toDate, String empCode, String deptCode) throws IOException {
 
 		String reportFileName = "AttendanceRegMonthly"; // Parameter1
 
-		String deptName1 = "Department Name : "+deptCode;
-		String date = "From: "+fromDate+" To: "+toDate;
+		String deptName1 = "Department Name : " + deptCode;
+		String date = "From: " + fromDate + " To: " + toDate;
 		String sourceFileName = request.getSession().getServletContext()
-				.getRealPath("resources/" + reportFileName + ".jrxml");
+				.getRealPath(RESOURCES + reportFileName + JRXML);
 
 		try {
 
 			JasperCompileManager.compileReportToFile(sourceFileName);
-			sourceFileName = request.getSession().getServletContext()
-					.getRealPath("/resources/" + reportFileName + ".jasper");
+			sourceFileName = request.getSession().getServletContext().getRealPath(RESOURCES2 + reportFileName + JASPER);
 			JRBeanCollectionDataSource beanColDataSource = new JRBeanCollectionDataSource(sourceData);
 
 			HashMap<String, Object> map = new HashMap<String, Object>();
 
 			map.put("Parameter1", beanColDataSource);
-			
+
 			map.put("deptName", deptName1);
 			map.put("date", date);
-			
-			
+			map.put("empCode", empCode);
 
 			JasperReport report = (JasperReport) JRLoader.loadObjectFromFile(sourceFileName);
 			JasperPrint jasperPrint = JasperFillManager.fillReport(report, map, new JREmptyDataSource());
@@ -64,18 +70,15 @@ public class AttendenceReport {
 			if (jasperPrint != null) {
 				byte[] pdfReport = JasperExportManager.exportReportToPdf(jasperPrint);
 				response.reset();
-				response.setContentType("application/pdf");
-				response.setHeader("Cache-Control", "no-store");
-				response.setHeader("Cache-Control", "private");
-				response.setHeader("Pragma", "no-store");
+				response.setContentType(CONTENT_TYPE);
+				response.setHeader("Cache-Control", CACHE_CONTROL_1);
+				response.setHeader("Cache-Control", CACHE_CONTROL_2);
+				response.setHeader("Pragma", PRAGMA);
 				response.setContentLength(pdfReport.length);
-				try {
-					response.getOutputStream().write(pdfReport);
-					response.getOutputStream().flush();
-					response.getOutputStream().close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
+
+				response.getOutputStream().write(pdfReport);
+				response.getOutputStream().flush();
+				response.getOutputStream().close();
 
 			}
 		} catch (JRException e) {
@@ -84,34 +87,30 @@ public class AttendenceReport {
 		return null;
 
 	}
-	
-	
-	public List<?> createAttendenceReportDatewise(HttpServletResponse response, HttpServletRequest request, 
-			List<?> sourceData,Date fromDate , Date toDate) {
+
+	public List<?> createAttendenceReportDatewise(HttpServletResponse response, HttpServletRequest request,
+			List<?> sourceData, Date fromDate, Date toDate) throws IOException {
 
 		String reportFileName = "AttendenceReportDatewise"; // Parameter1
-		
+
 		String mainYear = "2020-21";
-		String totalDate = "From :" +fromDate+" To :"+toDate;
+		String totalDate = "From :" + fromDate + " To :" + toDate;
 
 		String sourceFileName = request.getSession().getServletContext()
-				.getRealPath("resources/" + reportFileName + ".jrxml");
+				.getRealPath(RESOURCES + reportFileName + JRXML);
 
 		try {
 
 			JasperCompileManager.compileReportToFile(sourceFileName);
-			sourceFileName = request.getSession().getServletContext()
-					.getRealPath("/resources/" + reportFileName + ".jasper");
+			sourceFileName = request.getSession().getServletContext().getRealPath(RESOURCES2 + reportFileName + JASPER);
 			JRBeanCollectionDataSource beanColDataSource = new JRBeanCollectionDataSource(sourceData);
 
 			Map<String, Object> parameters = new HashMap<String, Object>();
 
 			parameters.put("Parameter1", beanColDataSource);
-			
+
 			parameters.put("mainYear", mainYear);
 			parameters.put("totalDate", totalDate);
-			
-
 
 			JasperReport report = (JasperReport) JRLoader.loadObjectFromFile(sourceFileName);
 			JasperPrint jasperPrint = JasperFillManager.fillReport(report, parameters, new JREmptyDataSource());
@@ -119,19 +118,15 @@ public class AttendenceReport {
 			if (jasperPrint != null) {
 				byte[] pdfReport = JasperExportManager.exportReportToPdf(jasperPrint);
 				response.reset();
-				response.setContentType("application/pdf");
-				response.setHeader("Cache-Control", "no-store");
-				response.setHeader("Cache-Control", "private");
-				response.setHeader("Pragma", "no-store");
+				response.setContentType(CONTENT_TYPE);
+				response.setHeader("Cache-Control", CACHE_CONTROL_1);
+				response.setHeader("Cache-Control", CACHE_CONTROL_2);
+				response.setHeader("Pragma", PRAGMA);
 				response.setContentLength(pdfReport.length);
-				try {
-					response.getOutputStream().write(pdfReport);
-					response.getOutputStream().flush();
-					response.getOutputStream().close();
-				} catch (IOException e) {
-					
-					e.printStackTrace();
-				}
+
+				response.getOutputStream().write(pdfReport);
+				response.getOutputStream().flush();
+				response.getOutputStream().close();
 
 			}
 		} catch (JRException e) {
@@ -141,30 +136,24 @@ public class AttendenceReport {
 		return null;
 
 	}
-	
-	
-	
-	public List<?> createOvertimeRegDatewiseReport(HttpServletResponse response, HttpServletRequest request, List<?> sourceData) {
+
+	public List<?> createOvertimeRegDatewiseReport(HttpServletResponse response, HttpServletRequest request,
+			List<?> sourceData) throws IOException {
 
 		String reportFileName = "OvertimeDateWise"; // Parameter1
-	
+
 		String sourceFileName = request.getSession().getServletContext()
-				.getRealPath("resources/" + reportFileName + ".jrxml");
+				.getRealPath(RESOURCES + reportFileName + JRXML);
 
 		try {
 
 			JasperCompileManager.compileReportToFile(sourceFileName);
-			sourceFileName = request.getSession().getServletContext()
-					.getRealPath("/resources/" + reportFileName + ".jasper");
+			sourceFileName = request.getSession().getServletContext().getRealPath(RESOURCES2 + reportFileName + JASPER);
 			JRBeanCollectionDataSource beanColDataSource = new JRBeanCollectionDataSource(sourceData);
 
 			Map<String, Object> parameters = new HashMap<String, Object>();
 
 			parameters.put("Parameter1", beanColDataSource);
-			
-			
-			
-
 
 			JasperReport report = (JasperReport) JRLoader.loadObjectFromFile(sourceFileName);
 			JasperPrint jasperPrint = JasperFillManager.fillReport(report, parameters, new JREmptyDataSource());
@@ -172,19 +161,15 @@ public class AttendenceReport {
 			if (jasperPrint != null) {
 				byte[] pdfReport = JasperExportManager.exportReportToPdf(jasperPrint);
 				response.reset();
-				response.setContentType("application/pdf");
-				response.setHeader("Cache-Control", "no-store");
-				response.setHeader("Cache-Control", "private");
-				response.setHeader("Pragma", "no-store");
+				response.setContentType(CONTENT_TYPE);
+				response.setHeader("Cache-Control", CACHE_CONTROL_1);
+				response.setHeader("Cache-Control", CACHE_CONTROL_2);
+				response.setHeader("Pragma", PRAGMA);
 				response.setContentLength(pdfReport.length);
-				try {
-					response.getOutputStream().write(pdfReport);
-					response.getOutputStream().flush();
-					response.getOutputStream().close();
-				} catch (IOException e) {
-					
-					e.printStackTrace();
-				}
+
+				response.getOutputStream().write(pdfReport);
+				response.getOutputStream().flush();
+				response.getOutputStream().close();
 
 			}
 		} catch (JRException e) {
@@ -193,33 +178,27 @@ public class AttendenceReport {
 
 		return null;
 
-
 	}
-	
-	
-	public List<?> createOvertimeMonthlyReport(HttpServletResponse response, HttpServletRequest request, List<EmpMonOvertime> sourceData) {
+
+	public List<?> createOvertimeMonthlyReport(HttpServletResponse response, HttpServletRequest request,
+			List<EmpMonOvertime> sourceData) throws IOException {
 
 		String reportFileName = "OvertimeMonthly"; // Parameter1
-		
+
 		List<OvertimeMontReportUtil> listData = setValue(sourceData);
 
 		String sourceFileName = request.getSession().getServletContext()
-				.getRealPath("resources/" + reportFileName + ".jrxml");
+				.getRealPath(RESOURCES + reportFileName + JRXML);
 
 		try {
 
 			JasperCompileManager.compileReportToFile(sourceFileName);
-			sourceFileName = request.getSession().getServletContext()
-					.getRealPath("/resources/" + reportFileName + ".jasper");
+			sourceFileName = request.getSession().getServletContext().getRealPath(RESOURCES2 + reportFileName + JASPER);
 			JRBeanCollectionDataSource beanColDataSource = new JRBeanCollectionDataSource(listData);
 
 			HashMap<String, Object> map = new HashMap<String, Object>();
 
 			map.put("Parameter1", beanColDataSource);
-			
-			//map.put("createdby ", "rahul");
-			
-
 
 			JasperReport report = (JasperReport) JRLoader.loadObjectFromFile(sourceFileName);
 			JasperPrint jasperPrint = JasperFillManager.fillReport(report, map, new JREmptyDataSource());
@@ -227,18 +206,15 @@ public class AttendenceReport {
 			if (jasperPrint != null) {
 				byte[] pdfReport = JasperExportManager.exportReportToPdf(jasperPrint);
 				response.reset();
-				response.setContentType("application/pdf");
-				response.setHeader("Cache-Control", "no-store");
-				response.setHeader("Cache-Control", "private");
-				response.setHeader("Pragma", "no-store");
+				response.setContentType(CONTENT_TYPE);
+				response.setHeader("Cache-Control", CACHE_CONTROL_1);
+				response.setHeader("Cache-Control", CACHE_CONTROL_2);
+				response.setHeader("Pragma", PRAGMA);
 				response.setContentLength(pdfReport.length);
-				try {
-					response.getOutputStream().write(pdfReport);
-					response.getOutputStream().flush();
-					response.getOutputStream().close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
+
+				response.getOutputStream().write(pdfReport);
+				response.getOutputStream().flush();
+				response.getOutputStream().close();
 
 			}
 		} catch (JRException e) {
@@ -247,44 +223,37 @@ public class AttendenceReport {
 		return null;
 
 	}
-	
-	
-	
-	//set value for overtime mont repo
-	@Autowired AttendenceRegisterService attendenceRegisterService;
-	
+
+	// set value for overtime mont repo
+	@Autowired
+	AttendenceRegisterService attendenceRegisterService;
+
 	public List<OvertimeMontReportUtil> setValue(List<EmpMonOvertime> sourceData) {
-		
+
 		List<OvertimeMontReportUtil> listOvertimeMontReportUtil = new ArrayList<OvertimeMontReportUtil>();
-		
-		for(int i = 0;i<sourceData.size();i++) {
-			
+
+		for (int i = 0; i < sourceData.size(); i++) {
+
 			OvertimeMontReportUtil over = new OvertimeMontReportUtil();
 			over.setSrNo(String.valueOf(i));
 			over.setoTimeMonth(sourceData.get(i).getoTimeMonth());
 			over.setEmpName(sourceData.get(i).getEmployee().getEmpName());
 			over.setDateOfJoining(sourceData.get(i).getEmployee().getDateOfJoining());
-			
+
 			try {
-				AttendenceRegister attendence = attendenceRegisterService.findAttendenceRegisterByEmpCode(sourceData.get(i).getEmployee().getEmpCode());
+				AttendenceRegister attendence = attendenceRegisterService
+						.findAttendenceRegisterByEmpCode(sourceData.get(i).getEmployee().getEmpCode());
 				over.setDeptName(attendence.getDepartment().getDeptName());
-				
-				
-			//	over.setaTimeIn(attendence.getaTimeIn());
-			//	over.setaTimeOut(attendence.getaTimeOut());
-				
-				
+
 				over.setOverFlowHrs(attendence.getOverFlowHrs());
-			}catch(Exception e) {
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 			listOvertimeMontReportUtil.add(over);
-			
-			
+
 		}
 		return listOvertimeMontReportUtil;
-		
-	}
 
+	}
 
 }

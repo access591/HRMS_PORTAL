@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -42,21 +43,29 @@ public class LeaveApprovalController {
 	@Autowired EmployeeService employeeService;
 	@Autowired DesignationService designationService;
 	
+	
+	@ModelAttribute
+	public void commonData(Model model,HttpSession session) {
+		String userCode = (String) session.getAttribute("username");
+		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
+		if (modules != null) {  
+			model.addAttribute("modules", modules);
+		}
+	}
+	
 	@GetMapping("/leaveApproval")
 	public String leaveApproval(Model model, HttpSession session) {
 
 		System.out.println("leave approval methods");
-		String userCode = (String) session.getAttribute("username");
-		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
+		
+		
 		List<Department> listDepartment = departmentService.getAllDepartments();
 		List<LeaveRequest> listLeaveApproval = leaveRequestService.getEmployeeByStatusN();
 
 		if(listLeaveApproval != null) {
 			model.addAttribute("listLeaveApproval" , listLeaveApproval);
 		}
-		if (modules != null) {  
-			model.addAttribute("modules", modules);
-		}
+		
 		if(listDepartment != null) {
 			model.addAttribute("listDepartment", listDepartment);
 		}

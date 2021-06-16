@@ -88,7 +88,7 @@ public class EmployeeInformationReportController {
 			model.addAttribute("modules", modules);
 		}
 		
-		session.setAttribute("username", session.getAttribute("username"));
+		session.setAttribute("username", userCode);
 	}
 
 //	Gradation / Employee controlller
@@ -120,26 +120,7 @@ public class EmployeeInformationReportController {
 		return null;
 	}
 
-	/*
-	 * @ResponseBody
-	 * 
-	 * @GetMapping("employeeExcel") public ResponseEntity<InputStreamResource>
-	 * empoloyeeExcelReport(HttpServletResponse response) throws IOException{
-	 * 
-	 * 
-	 * 
-	 * ByteArrayInputStream in = employeeGradationExcel.generateExcel();
-	 * 
-	 * HttpHeaders headers = new HttpHeaders(); headers.add("Content-Disposition",
-	 * "attachment ; filename=employee.xlsx");
-	 * 
-	 * 
-	 * return ResponseEntity.ok().headers(headers).body(new
-	 * InputStreamResource(in));
-	 * 
-	 * 
-	 * }
-	 */
+	
 
 	@ResponseBody
 	@GetMapping("getEmployeeByCategory/{categoryName}")
@@ -165,7 +146,7 @@ public class EmployeeInformationReportController {
 		List<Employee> listEmployee = null;
 		List<Employee> listEmployee1 = new ArrayList<>();
 
-		if (categoryType.equals("") || categoryType.equals(null)) {
+		if (categoryType.equals("") || categoryType == null) {
 
 			listEmployee = employeeService.getAllEmployees();
 
@@ -173,7 +154,7 @@ public class EmployeeInformationReportController {
 
 		} else {
 			// all employee of particular department
-			if (employeeType.equals("") || employeeType.equals(null)) {
+			if (employeeType.equals("") || employeeType == null) {
 
 				listEmployee = employeeService.getEmployeeByCategoryCode(categoryType);
 				listEmployee1.addAll(listEmployee);
@@ -270,7 +251,7 @@ public class EmployeeInformationReportController {
 
 		
 
-		return "joining_offerLetter"; // joining_offerLetter.html
+		return "joining_offerLetter"; 
 	}
 
 	@PostMapping("/createJoinOfferLetter")
@@ -279,13 +260,13 @@ public class EmployeeInformationReportController {
 			HttpServletResponse response) throws IOException {
 
 		try {
-			// Employee employee = employeeService.findEmployeeById(empCode);
+			
 			ApplicantInfo applicantInfo = applicantInfoService.getApplicantInfoByApplicantCode(empCode);
 
 			String reportFileName = null;
 			if (reportType.equals("J")) {
 				reportFileName = "joiningLetter";
-				// reportUtil.employeeJoiningLetter2(req, response, reportFileName, em);
+				
 				employeeJoiningLetter.employeeJoiningLetter(req, response, reportFileName, applicantInfo);
 			} else {
 				reportFileName = "OfferLetter";

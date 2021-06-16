@@ -65,7 +65,7 @@ body {
 														onchange="changeDepartment()" name="deptCode">
 														<option value=''>--Select--</option>
 														<option value='ALL'>All</option>
-														<option th:each="department : ${departmentList}"
+														<option th:each="department : ${listDepartment}"
 															th:text="${department.deptName}"
 															th:value="${department.departmentCode}"></option> 
 														

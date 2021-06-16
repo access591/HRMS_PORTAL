@@ -12,7 +12,6 @@ import org.springframework.stereotype.Component;
 
 import com.hrms.model.ApplicantInfo;
 
-
 import net.sf.jasperreports.engine.JREmptyDataSource;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
@@ -26,10 +25,11 @@ import net.sf.jasperreports.engine.util.JRLoader;
 public class EmployeeOfferLetter {
 
 	public void employeeOfferLetter(HttpServletRequest request, HttpServletResponse response, String reportFileName,
-			ApplicantInfo applicantInfo) {
+			ApplicantInfo applicantInfo) throws IOException {
 
-		String offerLetter = "Sequel to your Application and Interview held on "+applicantInfo.getApplicantDate()+",We are pleased to offer you "
-				+ "the position of"+applicantInfo.getDesigCode().getDesgName()+" in our organization your appointment will be w.e.f.'\n\n'"
+		String offerLetter = "Sequel to your Application and Interview held on " + applicantInfo.getApplicantDate()
+				+ ",We are pleased to offer you " + "the position of" + applicantInfo.getDesigCode().getDesgName()
+				+ " in our organization your appointment will be w.e.f.'\n\n'"
 				+ "Your consolidated Salary as agreed is Rs - Per Month (In Words) from the date of your joining. You will be"
 				+ " on probation for a period of 90 days from the date of your appointment where after ,post completion of 90 days your service "
 				+ " with the organization stands confirmed '\n\n'"
@@ -38,26 +38,22 @@ public class EmployeeOfferLetter {
 
 		String name = applicantInfo.getApplicantName();
 		String role = "Manager Director";
-		String To = "Dear Mr/Ms "+applicantInfo.getApplicantName();
+		String To = "Dear Mr/Ms " + applicantInfo.getApplicantName();
 		String from = "Mr. Vikash Goel";
 		Date topDate = new Date();
 
 		String sourceFileName = request.getSession().getServletContext()
 				.getRealPath("resources/" + reportFileName + ".jrxml");
-		
 
 		try {
-			
+
 			JasperCompileManager.compileReportToFile(sourceFileName);
-			
+
 			sourceFileName = request.getSession().getServletContext()
 					.getRealPath("/resources/" + reportFileName + ".jasper");
-			
-
-			//JRBeanCollectionDataSource beanColDataSource = new JRBeanCollectionDataSource(dataList);
 
 			Map<String, Object> parameters = new HashMap<>();
-			
+
 			parameters.put("OfferLetter", offerLetter);
 			parameters.put("topDate", topDate);
 			parameters.put("name", name);
@@ -76,14 +72,10 @@ public class EmployeeOfferLetter {
 				response.setHeader("Cache-Control", "private");
 				response.setHeader("Pragma", "no-store");
 				response.setContentLength(pdfReport.length);
-				try {
-					response.getOutputStream().write(pdfReport);
-					response.getOutputStream().flush();
-					response.getOutputStream().close();
-				} catch (IOException e) {
-					
-					e.printStackTrace();
-				}
+
+				response.getOutputStream().write(pdfReport);
+				response.getOutputStream().flush();
+				response.getOutputStream().close();
 
 			}
 		} catch (JRException e) {

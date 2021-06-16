@@ -52,28 +52,34 @@ public class InterviewController {
 		binder.registerCustomEditor(Date.class, "applicantDate", new CustomDateEditor(dateFormatter, true));
 
 	}
+	
+	@ModelAttribute
+	public void commonData(Model model,HttpSession session) {
+		String userCode = (String) session.getAttribute("username");
+		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
+		if (modules != null) {
+			model.addAttribute("modules", modules);
+		}
+		session.setAttribute("username", userCode);
+	}
 
 	// INTERVIEW DETAILS
 
 	@GetMapping("interviewDetails")
 	public String interviewDetails(Model model, HttpSession session) {
 		session.setAttribute("imgUtil", new ImageUtil());
-		String userCode = (String) session.getAttribute("username");
-		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
-		if (modules != null) {
-			model.addAttribute("modules", modules);
-		}
+		
 		List<ApplicantInfo> listApplicantInfo1 = applicantInfoService.getAllApplicantInfo();
 		List<ApplicantInfo> listApplicantInfo = new ArrayList<>();
 		for (int i = 0; i < listApplicantInfo1.size(); i++) {
 			
 			if (listApplicantInfo1.get(i).getInterStatus() == null) {
-				// ifs.setSelectionStatus("0");
+				
 				
 			}
 
 			else if (listApplicantInfo1.get(i).getInterStatus().length() == 0) {
-				// ifs.setSelectionStatus("0");
+				
 				
 
 			} else {
@@ -92,8 +98,8 @@ public class InterviewController {
 		form.setInterviewForm(im);
 		model.addAttribute("interviewMaster", form);
 
-		session.setAttribute("username", userCode);
-		return "interviewDetails"; // interviewDetails.html
+		
+		return "interviewDetails"; 
 
 	}
 
@@ -129,17 +135,12 @@ public class InterviewController {
 	@GetMapping("interviewApproval")
 	public String interviewApprovalPage(Model model, HttpSession session) {
 
-		String userCode = (String) session.getAttribute("username");
-		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
-		if (modules != null) {
-			model.addAttribute("modules", modules);
-		}
 
 		List<ApplicantInfo> listApplicantInfo = applicantInfoService.findApplicantInfoStatusHoldAndPending();
 
 		model.addAttribute("listInterviewApprovalUtil", listApplicantInfo);
 
-		session.setAttribute("username", userCode);
+		
 		return "interviewApproval";
 	}
 
@@ -160,16 +161,10 @@ public class InterviewController {
 	@GetMapping("interviewFinalSelection")
 	public String interviewFinalSelection(Model model, HttpSession session) throws Exception {
 
-		String userCode = (String) session.getAttribute("username");
-		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
-		if (modules != null) {
-			model.addAttribute("modules", modules);
-		}
-
 		List<InterviewMaster> listInterviewMaster = interviewMasterService.getAllInterviewMaster();
 
 		model.addAttribute("interviewFinalSelection", listInterviewMaster);
-		session.setAttribute("username", userCode);
+		
 		return "interviewFinalSelection"; // interviewFinalSelection.html
 	}
 

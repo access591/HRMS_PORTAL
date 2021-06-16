@@ -74,7 +74,7 @@ public class EmployeeGradationExcel {
 				
 				Employee e = employeeService.findEmployeeById(emp.getEmpCode());
 				Department d = departmentService.findDepartmentById(e.getDepartmentCode());
-				//Department d = departmentService.findDepartmentByEmpCode(emp.getDepartmentCode()).get(0);
+				
 			
 				Designation desig = designationService.findDesignationById(emp.getDesignationCode());
 			

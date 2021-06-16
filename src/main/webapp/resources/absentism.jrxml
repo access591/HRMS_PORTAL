@@ -95,8 +95,8 @@
 					<property name="com.jaspersoft.studio.table.style.detail" value="Table_TD"/>
 				</reportElement>
 				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
-					<datasetRun subDataset="Dataset1" uuid="7d12074f-883d-456d-96c3-c70b835eccab">
-						<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.JREmptyDataSource()]]></dataSourceExpression>
+					<datasetRun subDataset="Dataset1" uuid="5f08640d-0311-414a-b06b-33310cae8d28">
+						<dataSourceExpression><![CDATA[$P{Parameter1}]]></dataSourceExpression>
 					</datasetRun>
 					<jr:column width="112" uuid="b77bc3b5-0441-4aa3-8e82-5c44a7763c2c">
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column1"/>

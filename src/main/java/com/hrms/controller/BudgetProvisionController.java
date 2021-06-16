@@ -1,5 +1,6 @@
 package com.hrms.controller;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -126,7 +127,7 @@ public class BudgetProvisionController {
 	
 	@Autowired ArmsReport armsReport;
 	@GetMapping("armsreport")
-	public String armsLicensesReport(HttpServletResponse response, HttpServletRequest request) {
+	public String armsLicensesReport(HttpServletResponse response, HttpServletRequest request) throws IOException {
 		
 		armsReport.armsReportDataSource("EMP-001", response, request);
 		return "orderIssueTracking";
@@ -149,7 +150,7 @@ public class BudgetProvisionController {
 	@Autowired BudgetReport budgetReport;
 	@PostMapping("createbudgetreport")
 	public String createBudgetReport(@RequestParam("deptCode")String deptCode,
-			HttpServletResponse response, HttpServletRequest request) {
+			HttpServletResponse response, HttpServletRequest request) throws IOException {
 		
 	
 		if(deptCode.equals("ALL")) {
