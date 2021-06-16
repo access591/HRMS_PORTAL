@@ -231,10 +231,7 @@ public class Employee implements Serializable {
 	@Column(name = "UPD_DATE", insertable = false)
 	private Date updDate = new Date();
 
-	/*
-	 * @OneToMany(mappedBy = "armsCode") public List<ArmsLicenseDetails>
-	 * armsLicenseDetails;
-	 */
+	
 	// STEP-2=============23=========end....
 	
 	
@@ -244,14 +241,7 @@ public class Employee implements Serializable {
 	}
 
 
-	/*
-	 * public List<ArmsLicenseDetails> getArmsLicenseDetails() { return
-	 * armsLicenseDetails; }
-	 * 
-	 * 
-	 * public void setArmsLicenseDetails(List<ArmsLicenseDetails>
-	 * armsLicenseDetails) { this.armsLicenseDetails = armsLicenseDetails; }
-	 */
+	
 
 	public void setEmpCode(String empCode) {
 		this.empCode = empCode;

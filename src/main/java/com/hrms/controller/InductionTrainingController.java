@@ -60,7 +60,7 @@ public class InductionTrainingController {
 			model.addAttribute("modules", modules);
 		}
 		List<InductionTraining>listInduction=inductionTrainingService.getAllInductioTraining();
-		List<InductionTrainingUtil> listInductionTrainingUtil = new ArrayList<InductionTrainingUtil>();
+		List<InductionTrainingUtil> listInductionTrainingUtil = new ArrayList<> ();
 		
 		  for (int i = 0; i < listInduction.size(); i++) {
 		String empCode = listInduction.get(i).getEmpCode().getEmpCode(); 
@@ -88,7 +88,7 @@ public class InductionTrainingController {
     public List<InductionTrainingUtil>  getLocalConvyenceById(@PathVariable(value = "id") String id,Model model,HttpSession session) {
 		Department d=departmentService.findDepartmentById(id);
 		List<Employee> e = employeeService.findByDepartmentCode(d.getDepartmentCode());
-		  List<InductionTrainingUtil> lisOvertimeRegisterUtil = new ArrayList<InductionTrainingUtil>();
+		  List<InductionTrainingUtil> lisOvertimeRegisterUtil = new ArrayList<>();
 		  for (int i = 0; i < e.size(); i++) 
 		  {
 			  String empCode = e.get(i).getEmpCode();
@@ -106,7 +106,7 @@ public class InductionTrainingController {
 	@ResponseBody
     @GetMapping("/viewinductionByEmployee/{id}")
     public InductionTrainingUtil  viewOverTimeRegisterByEmployee(@PathVariable(value = "id") String id,Model model,HttpSession session) {
-		//Department d=departmentService.findDepartmentById(id);
+		
 		Employee employee = employeeService.findEmployeeById(id);
 		String empCode = employee.getEmpCode();
 		System.out.println(">>>>>>>>xxxxxx>>>>>>>>>>>>>>>>>>" + empCode);
@@ -130,12 +130,12 @@ public class InductionTrainingController {
 		String insertedBY = (String) session.getAttribute("USER_NAME");
 		InductionTraining induct=new InductionTraining();
 		InductionTrainingDetail inductDetails=new InductionTrainingDetail();
-		Department Dept=new Department(); 
+		Department dept=new Department(); 
 		Employee emp = new Employee();
-		Dept.setDepartmentCode(localCon.getDepartmentCode());
+		dept.setDepartmentCode(localCon.getDepartmentCode());
 		emp.setEmpCode(localCon.getEmpCode());
 		induct.setEmpCode(emp);
-		induct.setDeptCode(Dept);
+		induct.setDeptCode(dept);
 		induct.setInsBy(insertedBY);
 		
 		inductionTrainingService.addInductionTraining(induct);
@@ -180,7 +180,7 @@ public class InductionTrainingController {
 						inductDetails.setDuration("" + i);
 					}
 					inductDetails.setInsBy(insertedBY);  
-					inductDetails.setDeptCode(Dept);
+					inductDetails.setDeptCode(dept);
 					inductDetails.setEmpCode(emp);
 					insertStatusMR = inductionTrainingDetailService.addInductionTrainingDetail(inductDetails);
 

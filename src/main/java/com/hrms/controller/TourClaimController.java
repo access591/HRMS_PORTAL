@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.hrms.ImageUtil;
 import com.hrms.model.ConveyanceExpenses;
 import com.hrms.model.Department;
 import com.hrms.model.Designation;
@@ -62,7 +63,7 @@ public class TourClaimController {
 	@GetMapping("/tourClaim")
 	public String tourClaim(Model model, HttpSession session) {
 
-	
+		session.setAttribute("imgUtil", new ImageUtil());
 		String userCode = (String) session.getAttribute("username");
 		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
 		if (modules != null) {
@@ -70,8 +71,8 @@ public class TourClaimController {
 		}
 		 List<Employee> listEmployee = employeeService.getAllEmployees();
 		  model.addAttribute("listEmployee", listEmployee);
-		  List<TourPlan> ListTourPlan=tourPlanService.getAllTourPlan();
-			model.addAttribute("ListTourPlan", ListTourPlan);
+		  List<TourPlan> listTourPlan=tourPlanService.getAllTourPlan();
+			model.addAttribute("ListTourPlan", listTourPlan);
 			
 		session.setAttribute("username", session.getAttribute("username"));
 		 return "tourClaim";
@@ -194,7 +195,7 @@ public class TourClaimController {
 
 			
 		} catch (Exception e) {
-			// TODO: handle exception
+		e.printStackTrace();
 		}
 		// second Counter Start Here >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 		
@@ -273,7 +274,7 @@ public class TourClaimController {
 
 			
 		} catch (Exception e) {
-			// TODO: handle exception
+		e.printStackTrace();
 		}
 		//third counter
 		
@@ -331,7 +332,7 @@ public class TourClaimController {
 
 			
 		} catch (Exception e) {
-			// TODO: handle exception
+		e.printStackTrace();
 		}
 		
 		
@@ -352,15 +353,11 @@ public class TourClaimController {
     @GetMapping("/viewEmployeeTourClaim/{id}")
     public TourClaimUtil  getempById(@PathVariable(value = "id") String id) {
 		Employee e = employeeService.findEmployeeById(id);
-		
-
-		
 		Department d = departmentService.findDepartmentById(e.getDepartmentCode());
 		Designation des=designationService.findDesignationById(e.getDesignationCode());
-		TourClaimUtil l=new TourClaimUtil(e.getEmpName(),d.getDeptName(),
-				des.getDesgName());
+		return new TourClaimUtil(e.getEmpName(),d.getDeptName(),des.getDesgName());
 		
-        return l;
+       
     }
 
 }
