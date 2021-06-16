@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.hrms.ImageUtil;
 import com.hrms.model.MenuModule;
 import com.hrms.model.Module;
 import com.hrms.model.Program;
@@ -43,23 +44,29 @@ public class ProgramController {
 	 */
 	@GetMapping("/program")
 	public String program(@ModelAttribute Module module, Model model, HttpSession session) {
-		List<Program> listpPrograms = programService.getAllPrograms();
-		model.addAttribute("listpPrograms", listpPrograms);
-
-		List<Module> modulesList = moduleService.getActiveModules();
-		model.addAttribute("modulesList", modulesList);
-
-		List<SubModule> subModulesList = subModuleService.getActiveSubModules();
-		model.addAttribute("subModulesList", subModulesList);
-
 		String userCode = (String) session.getAttribute("username");
-		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
-		if (modules != null) {
-			model.addAttribute("modules", modules);
+		
+		
+		
+		if (userCode!=null) {
+			List<Program> listpPrograms = programService.getAllPrograms();
+			model.addAttribute("listpPrograms", listpPrograms);
+			List<Module> modulesList = moduleService.getActiveModules();
+			model.addAttribute("modulesList", modulesList);
+			List<SubModule> subModulesList = subModuleService.getActiveSubModules();
+			model.addAttribute("subModulesList", subModulesList);
+			session.setAttribute("imgUtil", new ImageUtil());
+			List<MenuModule> modules = moduleService.getAllModulesList(userCode);
+			if (modules != null) {
+				model.addAttribute("modules", modules);
+			}
+			session.setAttribute("username", session.getAttribute("username"));
+			return pageMappingService.PageRequestMapping(reqPage, pageno);
 		}
-		session.setAttribute("username", session.getAttribute("username"));
-
-		return pageMappingService.PageRequestMapping(reqPage, pageno);
+		else
+		{
+		return "redirect:" + "./";	
+		}
 	}
 	/**
 	 * Method to Save Program 	
@@ -114,7 +121,7 @@ public class ProgramController {
 	public String editProgramdata(@PathVariable("id") String id, Model model, HttpSession session) {
 		int editPageNo=24;
 		String reqPageedit="/editProgram";
-		
+		session.setAttribute("imgUtil", new ImageUtil());
 		Program programEdit = programService.findProgramById(id);
 		model.addAttribute("programEdit", programEdit);
 		
