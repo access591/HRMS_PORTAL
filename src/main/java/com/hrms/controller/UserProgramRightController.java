@@ -50,15 +50,19 @@ public class UserProgramRightController {
 	if (userCode!=null) {
 		List<UserRights> listUserRights = userProgramRightService.getAllUserRights();
 		model.addAttribute("listUserRight", listUserRights);
+		
 		List<UserEntity> listUsers = userService.getAllUsers();
 		model.addAttribute("listUsers", listUsers);
+		
 		List<Module> modulesList = moduleService.getActiveModules();
 		model.addAttribute("modulesList", modulesList);
+		
 		List<SubModule> subModulesList = subModuleService.getActiveSubModules();
 		model.addAttribute("subModulesList", subModulesList);
-		session.setAttribute("imgUtil", new ImageUtil());
+		
 		List<Program> programsList = programService.getActivePrograms();
 		model.addAttribute("programsList", programsList);
+		
 		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
 		if (modules != null) {
 			model.addAttribute("modules", modules);
