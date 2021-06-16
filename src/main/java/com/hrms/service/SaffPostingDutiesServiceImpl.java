@@ -47,8 +47,8 @@ public class SaffPostingDutiesServiceImpl implements StaffPostingDutiesService {
 
 	@Override
 	public List<StaffPostingDuties> getAllStaffPostingDuties() {
-		List<StaffPostingDuties> staffPostingDuties = saffPostingDutiesDao.findAll();
-		return staffPostingDuties;
+		return	saffPostingDutiesDao.findAll();
+		
 	}
 
 	@Override
@@ -66,13 +66,13 @@ public class SaffPostingDutiesServiceImpl implements StaffPostingDutiesService {
 	public void staffPostingDutiesGenratepdf(HttpServletRequest request, HttpServletResponse response,
 			String reportFileName, List<SaffPostingDutiesUtil> dataList) {
 		  String sourceFileName =request.getSession().getServletContext().getRealPath("resources/" + reportFileName + ".jrxml");
-		   // String path = jasperFolder+"/resources/Reports" + reportFileName+ ".jrxml");
-		      String GeneratedBy ="";
-	        String GeneratedDates ="";
-	        GeneratedBy = request.getSession().getAttribute("USER_NAME").toString();
+		  
+		      String generatedBy ="";
+	        String generatedDates ="";
+	        generatedBy = request.getSession().getAttribute("USER_NAME").toString();
 	        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm:ss");
 	        LocalDateTime now = LocalDateTime.now();
-	        GeneratedDates = dtf.format(now);
+	        generatedDates = dtf.format(now);
 	        
 		    
 				try {
@@ -84,10 +84,10 @@ public class SaffPostingDutiesServiceImpl implements StaffPostingDutiesService {
 				
 					JRBeanCollectionDataSource beanColDataSource = new JRBeanCollectionDataSource(dataList);
 					
-					Map<String, Object> parameters = new HashMap<String, Object>();
+					Map<String, Object> parameters = new HashMap<>();
 					parameters.put("ItemDataSource", beanColDataSource);
-					parameters.put("GeneratedBy", GeneratedBy);
-			        parameters.put("GeneratedDates", GeneratedDates);
+					parameters.put("GeneratedBy", generatedBy);
+			        parameters.put("GeneratedDates", generatedDates);
 					
 					
 					JasperReport report = (JasperReport) JRLoader
@@ -110,7 +110,7 @@ public class SaffPostingDutiesServiceImpl implements StaffPostingDutiesService {
 							response.getOutputStream().flush();
 							response.getOutputStream().close();
 						} catch (IOException e) {
-							// TODO Auto-generated catch block
+							
 							e.printStackTrace();
 						}
 						

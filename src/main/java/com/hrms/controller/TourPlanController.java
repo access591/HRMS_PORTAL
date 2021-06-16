@@ -1,8 +1,7 @@
 package com.hrms.controller;
 
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+
 import java.util.Date;
 import java.util.List;
 
@@ -21,7 +20,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.hrms.model.Department;
 import com.hrms.model.Designation;
 import com.hrms.model.Employee;
-import com.hrms.model.MedicalReimbursement;
+
 import com.hrms.model.MenuModule;
 import com.hrms.model.TourPlan;
 
@@ -63,8 +62,8 @@ public class TourPlanController {
 			model.addAttribute("modules", modules);
 		}
 		
-		List<TourPlan> ListTourPlan=tourPlanService.getAllTourPlan();
-		model.addAttribute("ListTourPlan", ListTourPlan);
+		List<TourPlan> listTourPlan=tourPlanService.getAllTourPlan();
+		model.addAttribute("ListTourPlan", listTourPlan);
 		List<Department> listDepartment = departmentService.getAllDepartments();
 		model.addAttribute("listDepartment", listDepartment);
 		
@@ -81,7 +80,7 @@ public class TourPlanController {
 	
 	
 	@PostMapping("/saveTourPlan")
-	public String saveTourPlan(@ModelAttribute("tourPlan")TourPlanUtil u, Model model, HttpSession session,HttpServletRequest request) throws ParseException {
+	public String saveTourPlan(@ModelAttribute("tourPlan")TourPlanUtil u, Model model, HttpSession session,HttpServletRequest request) {
 		String insertedBY = (String) session.getAttribute("USER_NAME");
 		TourPlan tourPlan=new TourPlan();
 		TourPlanDetails tourPlanDetail=new TourPlanDetails();
@@ -95,14 +94,6 @@ public class TourPlanController {
 		tourPlan.setDepartmentCode(dept);
 		tourPlan.setDesgCode(des);
        
-	
-		/*
-		 * SimpleDateFormat simpleDateFormat = new
-		 * SimpleDateFormat(u.getTourPlanDate());
-		 */
-		
-		//String date = simpleDateFormat.format(new Date());
-		
 		tourPlan.setTourPlanDate(u.getTourPlanDate());
 		tourPlan.setMobNumber(u.getMobNumber());
 		tourPlan.setTourStartDate(u.getTourStartDate());
@@ -224,7 +215,7 @@ public class TourPlanController {
 	}
 
 	@PostMapping("/updateTourPlan")
-	  public String updateTourPlan(@ModelAttribute("tourPlanEdit") TourPlan tourPlan, Model model) throws ParseException {
+	  public String updateTourPlan(@ModelAttribute("tourPlanEdit") TourPlan tourPlan, Model model){
 		
 		
 		  this.tourPlanService.updateTourPlan(tourPlan);
