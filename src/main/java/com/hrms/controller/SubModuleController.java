@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.hrms.ImageUtil;
 import com.hrms.model.MenuModule;
 import com.hrms.model.SubModule;
 import com.hrms.model.SubModule1;
@@ -43,18 +44,29 @@ public class SubModuleController {
 	 */
 @GetMapping("/subModule")
 	public String submodulePage(Model model,HttpSession session) {
-		List<SubModule> listSubModule = subModuleService.getAllSubModules();
+		
+	String userCode= (String)session.getAttribute("username");
+	if (userCode!=null) {
+	  List<SubModule> listSubModule = subModuleService.getAllSubModules();
 		model.addAttribute("listSubModule", listSubModule);
 		List<Module> modulesList = moduleService.getActiveModules();
 		model.addAttribute("modulesList", modulesList);
-		String userCode= (String)session.getAttribute("username");
+	
 		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
 		if (modules != null) {
 			model.addAttribute("modules", modules);
 		}
+		session.setAttribute("imgUtil", new ImageUtil());
 		session.setAttribute("username", session.getAttribute("username"));
 		 return pageMappingService.PageRequestMapping(reqPage,pageno);
 	}
+	else 
+	{
+		  return "redirect:" + "./";
+	}
+	}
+
+
 /**
  * Method to Save  SubModule 	
  * @param model
