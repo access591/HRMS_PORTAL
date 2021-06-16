@@ -11,5 +11,6 @@ public interface BudgetProvisionService {
 	public BudgetProvision findByBudgetProvisionId(Long budgitProvisionId);
 	public void updateBudgetProvision(BudgetProvision budgetProvision);
 	public void removeBudgetProvision(Long budgetId);
+	public List<BudgetProvision> findBudgetProvisionByDepartment(String deptCode);
 
 }

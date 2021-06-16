@@ -9,6 +9,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -112,6 +113,29 @@ public class BudgetProvisionServiceImpl implements BudgetProvisionService {
 		tx.commit();
 		session.close();
 		
+	}
+
+	@Override
+	public List<BudgetProvision> findBudgetProvisionByDepartment(String deptCode) {
+		
+		Session session = sessionFactory.openSession();
+		Transaction tx = null;
+		try {
+			tx = session.beginTransaction();
+			Query<BudgetProvision> query = session.createQuery("from BudgetProvision b "
+					+ "inner join fetch b.department d where d.departmentCode = :deptCode", BudgetProvision.class);
+			query.setParameter("deptCode", deptCode);
+			
+			tx.commit();
+			
+			
+			return query.getResultList();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			session.close();
+		}
+		return null;
 	}
 
 }

@@ -157,6 +157,16 @@ public class BudgetProvisionController {
 			List<BudgetProvision> budgetProvision = budgetProvisionService.getAllBudgetProvision();
 			budgetReport.createBudgetReport(response, request, budgetProvision, "All");
 		}
+		else {
+			List<BudgetProvision> budgetProvision = budgetProvisionService.findBudgetProvisionByDepartment(deptCode);
+			
+			String deptName = null;
+			if(budgetProvision != null) {
+				deptName = budgetProvision.get(0).getDepartment().getDeptName();
+			}
+			
+			budgetReport.createBudgetReport(response, request, budgetProvision,deptName);
+		}
 		
 		return null;
 	}
