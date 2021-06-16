@@ -1,7 +1,6 @@
 package com.hrms.controller;
 
-import java.util.ArrayList;
-import java.util.Iterator;
+
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -16,15 +15,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hrms.ImageUtil;
-import com.hrms.model.Activities;
-import com.hrms.model.Department;
+
 import com.hrms.model.Employee;
 import com.hrms.model.EmployeePayDetail;
 import com.hrms.model.MenuModule;
 import com.hrms.model.MiscAllowance;
 import com.hrms.service.DepartmentService;
 import com.hrms.service.EmployeePayDetailService;
-//import com.hrms.service.EmployeePayDetailService;
+
 import com.hrms.service.EmployeeService;
 import com.hrms.service.MiscAllowanceDeductionService;
 import com.hrms.service.ModuleService;
@@ -88,26 +86,10 @@ public class EmpPayDetailsController {
 
 
 	@PostMapping("/saveemployepaydetail")
-	public String saveEmployeePaydetail(@ModelAttribute("employeePayDetail") EmployeePayDetail employeePayDetail,
-			HttpSession session, Model model) {
+	public String saveEmployeePaydetail(@ModelAttribute("employeePayDetail") EmployeePayDetail employeePayDetail,HttpSession session, Model model) {
 
 		System.out.println("save employe pay detail " + employeePayDetail);
-	
-		//List<EmployeePayDetail> listEmployeePayDetail = empPayDetailService.getAllEmployeePayDetail();
-
-
-		/*
-		 * List<EmployeePayDetail> checkEmployee = listEmployeePayDetail.stream()
-		 * .filter(EmployeePayDetail e -> )
-		 * 
-		 * System.out.println(" empoloyee pay detail data :" +
-		 * employeePayDetail.getEmpName());
-		 * 
-		 * 
-		 * 
-		 * 
-		 * session.setAttribute("username", session.getAttribute("username"));
-		 */
+		
 		boolean isUserExists = empPayDetailService.isEmployeePayExists(employeePayDetail.getEmpCode());
 		if(isUserExists) {
 			System.out.println( " üser allready exists");
