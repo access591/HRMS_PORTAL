@@ -20,18 +20,21 @@ public class EmployeeRequisitionDaoImpl extends AbstractGenericDao<EmployeeRequi
 	@Override
 	public List<EmployeeRequisition> findEmployeeReqByStatusN() {
 		
+		Session session = sessionFactory.openSession();
 		try {
-			Session session = sessionFactory.getCurrentSession();
+			
+			session.beginTransaction();
 			Query<EmployeeRequisition> query = session.createQuery("from EmployeeRequisition "
 					+ "e where e.status = 'N'",EmployeeRequisition.class);
-			List<EmployeeRequisition> listEmployeeReq = query.list();
-			session.close();
-			return listEmployeeReq;
+			
+			session.getTransaction().commit();
+			return query.list();
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
-		
-		//session.getTransaction().commit();
+		finally {
+			session.close();
+		}
 		return null;
 	}
 	
@@ -39,46 +42,44 @@ public class EmployeeRequisitionDaoImpl extends AbstractGenericDao<EmployeeRequi
 	@Override
 	public List<EmployeeRequisition> findEmployeeReqByStatusY() {
 		
+		List<EmployeeRequisition> result = null ;
+		Session session = sessionFactory.openSession();
+		Transaction tx = null;
+		
 		try {
-			Session session = sessionFactory.getCurrentSession();
-//			Query<EmployeeRequisition> query = session.createQuery("from EmployeeRequisition e "
-//					+ "inner join fetch e.departmet d"
-//					+ " group by d.deptCode where e.status = 'Y'",
-//					EmployeeRequisition.class);
-			
+			tx = session.beginTransaction();
 			Query<EmployeeRequisition> query = session.createQuery("from EmployeeRequisition e "
 					+ "left join fetch e.departmet d where e.status=:status"
 					+ " group by d",
 					EmployeeRequisition.class);
 			
 			query.setParameter("status", "Y");
-			List<EmployeeRequisition> listEmployeeReq = query.getResultList();
-			//session.getTransaction().commit();
-			System.out.println("employee requisition size====>"+listEmployeeReq.size());
-			//session.close();
-			return listEmployeeReq;
+			
+			tx.commit();
+			
+			result = query.getResultList();
 		}catch(Exception e) {
 			e.printStackTrace();
+		}finally {
+			session.close();
 		}
-		return null;
+		return result;
 	}
 	
 	
 	@Override
-	//@Transactional
-    //@Modifying
 	public void approvedStatusByReqCode(String reqCode) {
 		
-		Session session = sessionFactory.getCurrentSession();
-		Query query = session.createQuery("UPDATE EmployeeRequisition e set e.status =:status WHERE e.reqCode = :reqCode" );
+		Session session = sessionFactory.openSession();
+		Query<EmployeeRequisition> query = session.createQuery("UPDATE EmployeeRequisition e set e.status =:status WHERE e.reqCode = :reqCode",EmployeeRequisition.class);
 		query.setParameter("status", "Y");
 		query.setParameter("reqCode", reqCode);
 		Transaction tx = session.beginTransaction();
-		int result = query.executeUpdate();
+		query.executeUpdate();
 		tx.commit();
 		session.close();
-		System.out.println("result : "+ result);
-		//return listEmployeeReq;
+		
+		
 	}
 		
 	
