@@ -30,61 +30,55 @@ public class MediclaimApprovalController {
 	MedicalReimbursementService medicalReimbursementService;
 	@Autowired
 	MedicalReimbursementDetailsService medicalReimbursementDetailsService;
+
 	@GetMapping("/mediclaimApproval")
-	public String mediclaimApproval(Model model, HttpSession session)
-	{
+	public String mediclaimApproval(Model model, HttpSession session) {
 		String userCode = (String) session.getAttribute("username");
 		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
 		if (modules != null) {
 			model.addAttribute("modules", modules);
 		}
-		List<MedicalReimbursement> listMedicalReimbursement =  medicalReimbursementService.getAllMedicalReimbursementApproval();
+		List<MedicalReimbursement> listMedicalReimbursement = medicalReimbursementService
+				.getAllMedicalReimbursementApproval();
 		model.addAttribute("listMedicalReimbursement", listMedicalReimbursement);
-		
-		 List<MedicalReimbursementDetail> listMedicalR=new ArrayList<MedicalReimbursementDetail>();
-		
+
+		List<MedicalReimbursementDetail> listMedicalR = new ArrayList<>();
+
 		try {
-			for(int i=0;i<listMedicalReimbursement.size();i++) {
-				listMedicalR= medicalReimbursementDetailsService.getAllMedicalReimbursementDetailBYslipNO(listMedicalReimbursement.get(i).getSlipNo());
-				 
-				 model.addAttribute("listMedicalReimbursementDetail", listMedicalR);
-				 session.setAttribute("username", session.getAttribute("username"));
-				session.setAttribute("imgUtil", new ImageUtil()); 
+			for (int i = 0; i < listMedicalReimbursement.size(); i++) {
+				listMedicalR = medicalReimbursementDetailsService
+						.getAllMedicalReimbursementDetailBYslipNO(listMedicalReimbursement.get(i).getSlipNo());
+
+				model.addAttribute("listMedicalReimbursementDetail", listMedicalR);
+				session.setAttribute("username", session.getAttribute("username"));
+				session.setAttribute("imgUtil", new ImageUtil());
 			}
 		} catch (Exception e) {
-	
+
 			e.printStackTrace();
 		}
-		
-		return 	"mediclaimApproval";
-		
-		
-		
-	
+
+		return "mediclaimApproval";
+
 	}
-	
-	
-	
-	@GetMapping(value = {"/viewMedicalReimbursement/{id}"})
-	public String viewMedicalReimbursement(@PathVariable("id")String id,  Model model,HttpSession session)
-	 { 
+
+	@GetMapping(value = { "/viewMedicalReimbursement/{id}" })
+	public String viewMedicalReimbursement(@PathVariable("id") String id, Model model, HttpSession session) {
 		List<Employee> listEmployee = employeeService.getAllEmployees();
 		model.addAttribute("listEmployee", listEmployee);
-		
-		MedicalReimbursement medicalReimbursementEdit =	medicalReimbursementService.findByIdMedicalReimbursementMaster(id);
-		  model.addAttribute("medicalReimbursementEdit", medicalReimbursementEdit);
 
-	   
-	    return "viewMedicalReimbursement";
+		MedicalReimbursement medicalReimbursementEdit = medicalReimbursementService
+				.findByIdMedicalReimbursementMaster(id);
+		model.addAttribute("medicalReimbursementEdit", medicalReimbursementEdit);
+
+		return "viewMedicalReimbursement";
 	}
-	
+
 	@GetMapping("approveMedicalReimbursement/{id}")
 	public String approveRequisition(@PathVariable("id") String slipNo) {
-		
-		
+
 		medicalReimbursementService.approvedByMrId(slipNo);
 		return "redirect:/mediclaimApproval";
 	}
-	
 
 }

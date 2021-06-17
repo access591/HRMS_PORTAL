@@ -17,9 +17,10 @@ import com.hrms.model.MedicalReimbursement;
 @Repository
 public class MedicalReimbursementDaoImp  extends AbstractGenericDao<MedicalReimbursement> implements MedicalReimbursementDao{
 	@Autowired SessionFactory sessionFactory;
+	Session session=null;
 	@Override
 	public void approvedByMrId(String slipNo) {
-		Session session = sessionFactory.getCurrentSession();
+		 session = sessionFactory.getCurrentSession();
 		Query query = session.createQuery("UPDATE MedicalReimbursement e set e.approvalStatus =:approvalStatus WHERE e.slipNo = :slipNo" );
 		query.setParameter("approvalStatus", "Y");
 		query.setParameter("slipNo", slipNo);
@@ -33,7 +34,7 @@ public class MedicalReimbursementDaoImp  extends AbstractGenericDao<MedicalReimb
 	@Override
 	public List<MedicalReimbursement> getAllMedicalReimbursementApproval() {
 		try {
-			Session session = this.sessionFactory.openSession();
+			 session = this.sessionFactory.openSession();
 			session.beginTransaction();
 			Query<MedicalReimbursement>query = session.createQuery("from MedicalReimbursement  e where e.approvalStatus ='N'",MedicalReimbursement.class);
 			

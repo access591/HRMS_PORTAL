@@ -17,7 +17,7 @@ public class MasterExceptionController {
 
 	@ExceptionHandler(SQLException.class)
 	public String handleSqlException(HttpServletRequest httpServletRequest, Exception ex) {
-		logger.info("SQLException Occured:: URL=" + httpServletRequest.getRequestURL());
+	
 		return "database_error";
 	}
 
