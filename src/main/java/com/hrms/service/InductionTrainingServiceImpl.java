@@ -24,8 +24,8 @@ SessionFactory sessionfactory;
 	}
 	@Override
 	public List<InductionTraining> getAllInductioTraining() {
-		List<InductionTraining> listInduction=inductionTraining.findAll();
-		return listInduction;
+		return inductionTraining.findAll();
+		 
 	}
 	@Override
 	public void removeInductionTr(Long id) {
