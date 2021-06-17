@@ -35,6 +35,9 @@ public class LeaveGrantRegister {
 	LeaveGrantRegisterService leaveGrantRegisterService;
 	@GetMapping("/leaveGrant")
 	public String leaveGrantRegister(Model model,HttpSession session) {
+		if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
 		List<Employee> listEmployee = employeeService.getAllEmployees();
 		model.addAttribute("listEmployee", listEmployee);
 		List<Leave> listLeave = leaveService.getAllLeaves();

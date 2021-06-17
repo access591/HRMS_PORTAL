@@ -47,6 +47,9 @@ public String bankMaster(Model model,HttpSession session) {
 	List<Bank> listBank = bankService.getAllBanks();
 	model.addAttribute("listBank", listBank);
 	String userCode= (String)session.getAttribute("username");
+	if (session.getAttribute("username") == null) {
+		return "redirect:" + "./";
+	}
 	List<MenuModule> modules = moduleService.getAllModulesList(userCode);
 	if (modules != null) {
 		model.addAttribute("modules", modules);

@@ -39,7 +39,9 @@ public class GradeMaterController {
 	 */
 @GetMapping("/gradeMaster")
 	public String gradeMaster(Model model,HttpSession session) {
-
+	if (session.getAttribute("username") == null) {
+		return "redirect:" + "./";
+	}
 	 List<Grade>listGrade = gradeMaterService.getAllGrades();
 	  model.addAttribute("listGrade", listGrade); 
 		String userCode= (String)session.getAttribute("username");
