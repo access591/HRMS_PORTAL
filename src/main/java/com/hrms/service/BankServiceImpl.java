@@ -21,8 +21,8 @@ public class BankServiceImpl implements BankService {
 
 	@Override
 	public List<Bank> getAllBanks() {
-		List<Bank> listBank = bankDao.findAll();
-		return listBank;
+		return bankDao.findAll();
+		 
 	}
 
 	@Override

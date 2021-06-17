@@ -21,8 +21,8 @@ public class AwardServiceImpl  implements AwardService{
 	@Override
 	public List<Award> getAllAwards() {
 		
-		List<Award> listAward = awardDao.findAll();
-		return listAward;
+		return awardDao.findAll();
+		
 	}
 
 	@Override
