@@ -49,7 +49,9 @@ public class ConveyanceApprovalController {
 		if (modules != null) {
 			model.addAttribute("modules", modules);
 		}
-
+		if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
 		List<LocalConvyence> listOfLoc = conveyanceApprovalService.getAllLocalConveyance();
 		List<LocalConvyenceUtil> listLocalConvyenceUtil = new ArrayList<>();
 		for (int i = 0; i < listOfLoc.size(); i++) {

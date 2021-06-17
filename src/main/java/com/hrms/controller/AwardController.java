@@ -43,6 +43,8 @@ public class AwardController {
 		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
 		if (modules != null) {
 			model.addAttribute("modules", modules);
+		}if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
 		}
 
 		session.setAttribute("username", session.getAttribute("username"));

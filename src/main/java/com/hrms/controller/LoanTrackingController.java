@@ -54,7 +54,12 @@ public class LoanTrackingController {
 	
 	@GetMapping("/loanTracking")
 	public String loanTracking(Model model, HttpSession session) {
-		  List<Employee> listEmployee = employeeService.getAllEmployees();
+		if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
+		
+		
+		List<Employee> listEmployee = employeeService.getAllEmployees();
 		  model.addAttribute("listEmployee", listEmployee);
 		
 			List<Loan> listLoan = loanMaterService.getAllLoans();

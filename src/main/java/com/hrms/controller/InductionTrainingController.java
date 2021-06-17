@@ -51,6 +51,9 @@ public class InductionTrainingController {
 
 	@GetMapping("/inductionTraining")
 	public String inductionTraining(Model model, HttpSession session) {
+		if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
 		List<Department> listDepartment = departmentService.getAllDepartments();
 		model.addAttribute("listDepartment", listDepartment);
 		session.setAttribute("imgUtil", new ImageUtil());

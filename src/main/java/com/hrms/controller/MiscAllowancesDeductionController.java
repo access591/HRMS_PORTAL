@@ -40,6 +40,9 @@ public class MiscAllowancesDeductionController
 @GetMapping("/miscAllowances")
 public String miscAllowances(Model model,HttpSession session) 
 {
+	if (session.getAttribute("username") == null) {
+		return "redirect:" + "./";
+	}
 	 List<MiscAllowance> listMiscAllowanceDeduction = miscAllowanceDeductionService.getAllMiscAllowanceDeduction();
       model.addAttribute("listMiscAllowanceDeduction", listMiscAllowanceDeduction); 
 		String userCode= (String)session.getAttribute("username");

@@ -74,9 +74,7 @@ public class OvertimeRegister implements Serializable {
 	
 	public OvertimeRegister() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
-
 	public Long getId() {
 		return id;
 	}

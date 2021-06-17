@@ -60,7 +60,9 @@ public class AttandanceReportController {
 		if (modules != null) {
 			model.addAttribute("modules", modules);
 		}
-		
+		if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
 		List<Department> departmentList = departmentService.getAllDepartments();
 		if (departmentList != null) {
 			model.addAttribute("departmentList", departmentList);

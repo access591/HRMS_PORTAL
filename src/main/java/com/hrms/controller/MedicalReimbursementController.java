@@ -48,6 +48,10 @@ public class MedicalReimbursementController {
 
 	@GetMapping("/medicalReimbursement")
 	public String medicalReimbursement(Model model, HttpSession session) {
+		if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
+		
 		List<MedicalReimbursement> listMedicalReimbursement =  medicalReimbursementService.getAllMedicalReimbursement();
 		model.addAttribute("listMedicalReimbursement", listMedicalReimbursement);
 		List<Employee> listEmployee = employeeService.getAllEmployees();

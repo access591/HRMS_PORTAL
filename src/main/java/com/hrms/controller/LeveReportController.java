@@ -92,9 +92,14 @@ public class LeveReportController {
 	public String viewLeaveRegisterReport(Model model, HttpSession session, HttpServletRequest request,
 			HttpServletResponse response) {
 
-		if(session.getAttribute("username")==null) {
+		if (session.getAttribute("username") == null) {
 			return "redirect:" + "./";
 		}
+		String userCode = (String) session.getAttribute("username");
+		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
+		if (modules != null) {
+			model.addAttribute("modules", modules);
+
 		
 		List<Department> departmentList = departmentService.getAllDepartments();
 		System.out.println("department service======>" + departmentList.size());
