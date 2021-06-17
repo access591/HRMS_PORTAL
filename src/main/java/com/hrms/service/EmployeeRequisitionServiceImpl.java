@@ -17,15 +17,14 @@ public class EmployeeRequisitionServiceImpl implements EmployeeRequisitionServic
 
 	@Autowired EmployeeRequisitionDao employeRequisitionDao;
 	@Autowired SessionFactory sessionFactory;
-	
-	
+	//@Autowired
 	@Override
 	public void addEmployeeRequisition(EmployeeRequisition employeReq) {
 		Session session = sessionFactory.openSession();
 	    session.beginTransaction();
 	    employeReq.setReqCode(employeRequisitionDao.getMaxId("REQ"));
 	    session.save(employeReq);
-	    
+	    //session.saveOrUpdate(employeReq);
 	    session.getTransaction().commit();
 	    session.clear();
 	    session.close();
@@ -47,21 +46,21 @@ public class EmployeeRequisitionServiceImpl implements EmployeeRequisitionServic
 			EmployeeRequisition er = query.getSingleResult();
 			return er;
 		}catch(Exception e) {
-			
+			System.out.println("========error block");
 			e.printStackTrace();
 		}
 		return null;
-		
+		//return this.employeRequisitionDao.findById(reqCode);
 	}
 
 	@Override
 	public void updateEmployeeRequisition(EmployeeRequisition c) {
 		
 		Session session = sessionFactory.openSession();
-		
+		//Transaction tx = session.beginTransaction();
 		EmployeeRequisition emp = session.find(EmployeeRequisition.class, c.getReqCode());
 		emp.getEmployeRequisitionDetail().clear();
-		
+		//emp.setEmployeRequisitionDetail(c.getEmployeRequisitionDetail());
 		emp.getEmployeRequisitionDetail().addAll(c.getEmployeRequisitionDetail());
 		
 		session.beginTransaction();
@@ -73,28 +72,23 @@ public class EmployeeRequisitionServiceImpl implements EmployeeRequisitionServic
 
 	@Override
 	public void removeEmployeeRequisition(String reqCode) {
-		
-		
 		Session session = sessionFactory.openSession();
-		Transaction tx = null;
+		Transaction tx = session.beginTransaction();
+		Object o = session.get(EmployeeRequisition.class, reqCode);
+		EmployeeRequisition e = (EmployeeRequisition) o;
 		
-		try {
-			tx = session.beginTransaction();
-			Object o = session.get(EmployeeRequisition.class, reqCode);
-			EmployeeRequisition e = (EmployeeRequisition) o;
-			
-			session.delete(e);
-			tx.commit();
-		}catch(Exception e) {
-			e.printStackTrace();
-		}finally {
-			session.close();
-		}
+		session.delete(e);
+		tx.commit();
+		session.close();
+		
+		//Query q = session.createQuery("delete EmployeeRequisition e where e.reqCode = :reqCode");
+		//q.setParameter("reqCode", reqCode);
+		//q.executeUpdate();
 	}
 
 	@Override
 	public boolean isEmployeeRequisitionExists(String empCode) {
-		
+		// TODO Auto-generated method stub
 		return false;
 	}
 
@@ -121,38 +115,25 @@ public class EmployeeRequisitionServiceImpl implements EmployeeRequisitionServic
 	public void approvedByReqCodeAndStatus(String reqCode, String requisitionApproval) {
 		
 		Session session = sessionFactory.openSession();
-		Transaction tx = null;
-	
-		try {
-			tx = session.beginTransaction();
-			EmployeeRequisition em = session.find(EmployeeRequisition.class, reqCode);
-			em.setStatus(requisitionApproval);
-			session.merge(em);
-			tx.commit();
-			
-		}catch(Exception e) {
-			e.printStackTrace();
-		}finally {
-			session.close();
-		}
+		EmployeeRequisition em = session.find(EmployeeRequisition.class, reqCode);
+		em.setStatus(requisitionApproval);
+		session.merge(em);
+		session.beginTransaction().commit();
+		session.close();
 		
 	}
 
 	@Override
 	public List<EmployeeRequisition> getAllPendingEmployeeRequisition() {
 		
-		Session session = sessionFactory.openSession();
-		Transaction tx = null;
 		try {
-			tx = session.beginTransaction();
+			Session session = sessionFactory.openSession();
 			Query<EmployeeRequisition> query = session.createQuery("from EmployeeRequisition e where e.status = :status", EmployeeRequisition.class);
 			query.setParameter("status", "N");
-			tx.commit();
-			return query.getResultList();
+			List<EmployeeRequisition> er = query.getResultList();
+			return er;
 		}catch(Exception e) {
 			e.printStackTrace();
-		}finally {
-			session.close();
 		}
 		return null;
 	}

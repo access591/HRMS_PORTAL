@@ -22,6 +22,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hrms.ImageUtil;
 import com.hrms.model.EmployeeRequisition;
+import com.hrms.model.EmployeeRequisitionDetail;
 import com.hrms.model.MenuModule;
 import com.hrms.model.ReqAdvertisement;
 import com.hrms.model.ReqAdvertisementDetail;
@@ -30,6 +31,7 @@ import com.hrms.service.DesignationService;
 import com.hrms.service.EmployeeRequisitionService;
 import com.hrms.service.EmployeeService;
 import com.hrms.service.ModuleService;
+import com.hrms.service.ReqAdvertisementDetailService;
 import com.hrms.service.RequisitionAdvertisementService;
 
 @Controller
@@ -60,7 +62,10 @@ public class RequisitionAdvertisementController {
 		
 		String userCode = (String) httpSession.getAttribute("username");
 		
-
+//		if(userCode.equals("") || userCode.equals(null)) {
+//			System.out.println("user is not verifyied");
+//			return "Advertisment";
+//		}
 		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
 		if (modules != null) {
 			model.addAttribute("modules", modules);
@@ -72,7 +77,7 @@ public class RequisitionAdvertisementController {
 			
 		}
 		
-		List<ReqAdvertisementDetail> listReqAdvertisementDetail = new ArrayList<>();
+		List<ReqAdvertisementDetail> listReqAdvertisementDetail = new ArrayList<ReqAdvertisementDetail>();
 		ReqAdvertisement reqAdvertiesment = new ReqAdvertisement();
 		reqAdvertiesment.setListReqAdvertisementDetail(listReqAdvertisementDetail);
 		model.addAttribute("reqAdvertisement", reqAdvertiesment);
@@ -97,8 +102,8 @@ public class RequisitionAdvertisementController {
 		}
 		
 		reqAdvertisementService.addActivity(reqAdvertisement);
-		
-		return "redirect:advertisment"; 
+		System.out.println("working===========");
+		return "redirect:advertisment"; //Advertisment.html   
 	}
 	
 	@GetMapping("deleteAdvertisement/{id}")
@@ -117,15 +122,15 @@ public class RequisitionAdvertisementController {
 		if(req != null) {
 			model.addAttribute("reqAdvertisement", req);
 		}
-		
-		return "editAdvertisement";  
+		System.out.println("employee requisition id : "+ reqCode);
+		return "editAdvertisement";  //editAdvertisement.html
 	}
 	
 	@PostMapping(value = {"updateAdvertisement"})
 	public String updateAdvertisement(@ModelAttribute("reqAdvertisement")ReqAdvertisement reqAdvertisement,
 			Model model) {
 		
-		  
+		  System.out.println("=====================>");
 
 		  for(ReqAdvertisementDetail re : reqAdvertisement.getListReqAdvertisementDetail()) {
 			  re.setReqAdvertisement(reqAdvertisement);

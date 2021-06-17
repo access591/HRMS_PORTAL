@@ -98,10 +98,12 @@ body {
 
 										</div>
 
-										
+										<!-- <Button type="submit">Generate Pdf</Button> -->
 										<Button type="submit" class="btn btn-primary">Generate Pdf File</Button>
 
-										
+										<!-- <a href="#" th:href="@{employeeExcel}">Download Excel Sheet</a> -->
+
+										<!-- <Button id = "generate_pdf_button" onclick="generatePdfFunction()">Generate Pdf</Button> -->
 									</form>
 
 
@@ -175,7 +177,22 @@ body {
 
 	
 	
-	
+	/*  $('select[name="select_category"]').on('change', function() {
+	    var selectedCategoryValue = $(this).val();
+	    console.log(" in jquery : categoryId " + selectedCategoryValue);
+
+	     $.ajax({
+	        type: "GET",
+	        url: "getEmployeeByCategory/"+selectedCategoryValue,
+	        data: {selectedCategoryValue : selectedCategoryValue },
+	        success: function (data) {
+	                    //remove disabled from province and change the options
+	                    console.log("response data : " +data.responseText);
+	                    $('select[name="employeeName"]').prop("disabled", false);
+	                    $('select[name="employeeName"]').html(data.response);
+	        }
+	    }); 
+	});  */
 
 	
 	

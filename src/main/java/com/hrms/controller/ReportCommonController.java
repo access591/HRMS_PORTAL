@@ -88,9 +88,9 @@ public class ReportCommonController {
 	@GetMapping(value = { "/reportEmployee" })
 	public String reportEmployee(Model model, HttpSession session, HttpServletRequest request,
 			HttpServletResponse response) {
-		
+		List<Employee> dataList = employeeService.getAllEmployees();
 
-		String reportFileName = null;
+		String reportFileName = "";
 
 		String val = null;
 		if (request.getParameter("_ex") != null) {
@@ -109,9 +109,19 @@ public class ReportCommonController {
 		}
 
 		System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" + val);
-		
+		/*
+		 * if (val.equals("P")) {
+		 * 
+		 * 
+		 * reportFileName = "employee_report";
+		 * employeeService.employeeReportGenratepdf(request, response, reportFileName,
+		 * dataList); } else if (val.equals("E")) { reportFileName =
+		 * "bankwisereport_XLS"; String filename = "bankwisereport";
+		 * 
+		 * }
+		 */
 		reportFileName = "employee_report";
-		
+		//employeeService.employeeReportGenratepdf(request, response, reportFileName, dataList);
 
 		session.setAttribute("username", session.getAttribute("username"));
 		return null;
@@ -125,7 +135,7 @@ public class ReportCommonController {
 		System.out.println("  employee report ");
 		String reportName = "EmployeeReport";	
 		List<Employee> listEmployee = employeeService.getAllEmployees();
-				
+		//System.out.println("employee batch number : "+ listEmployee.get(0).getBatchYear());		
 		System.out.println("list employee : "+ listEmployee);
 		reportUtil.allEmployeeReport(request, response, reportName, listEmployee);
 		
