@@ -8,12 +8,12 @@ import com.hrms.model.AttendenceRegister;
 public interface AttendenceRegisterService {
 	
 	public List<AttendenceRegister> findAttendenceByEmpCodeBetweenDate(String empCode,
-			Date FromDate,Date toDate);
+			Date fromDate,Date toDate);
 	
 	public List<AttendenceRegister> findAttendenceByDeptBetweenDate(String deptCode,
-			Date FromDate,Date toDate);	
+			Date fromDate,Date toDate);	
 	
-	public List<AttendenceRegister> findAllAttendenceBetweenDate(Date FromDate,Date toDate);
+	public List<AttendenceRegister> findAllAttendenceBetweenDate(Date fromDate,Date toDate);
 	public boolean addAttendenceRegister(AttendenceRegister attn);
 	public List<AttendenceRegister> getAllAttendenceRegister();
 	public AttendenceRegister findAttendenceRegisterByEmpCode(String empCode);	

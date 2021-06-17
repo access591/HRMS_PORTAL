@@ -16,12 +16,12 @@ import com.hrms.model.LtaRequest;
 public class LtaApprovalDaoImpl extends AbstractGenericDao<LtaRequest> implements LtaApprovalDao{
 	@Autowired SessionFactory sessionFactory;
 
-
+	Session session=null;
 
 	@Override
 	public List<LtaRequest> getAllLtaApproval() {
 		try {
-			Session session = this.sessionFactory.openSession();
+		 session = this.sessionFactory.openSession();
 			session.beginTransaction();
 			Query<LtaRequest>query = session.createQuery("from LtaRequest  e where e.approvalStatus ='N'",LtaRequest.class);
 			
@@ -41,7 +41,7 @@ public class LtaApprovalDaoImpl extends AbstractGenericDao<LtaRequest> implement
 
 	@Override
 	public void approvedLtaRequestById(String id) {
-		Session session = this.sessionFactory.openSession();
+		session = this.sessionFactory.openSession();
 		Query query = session.createQuery("UPDATE LtaRequest e set e.approvalStatus =:approvalStatus WHERE e.ltaCode= :id" );
 		query.setParameter("approvalStatus", "Y");
 		query.setParameter("id", id);

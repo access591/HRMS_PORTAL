@@ -97,7 +97,7 @@ public class AttendenceRegister implements Serializable{
 
 	public AttendenceRegister() {
 		super();
-		// TODO Auto-generated constructor stub
+	
 	}
 
 	public int getId() {

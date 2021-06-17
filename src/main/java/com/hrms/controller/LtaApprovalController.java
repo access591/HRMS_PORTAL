@@ -44,7 +44,7 @@ public class LtaApprovalController {
 		
 		List<LtaRequest>listLtaApproval=ltaApprovalService.getAllLtaApproval();
 		
-		List<LtaRequestUtil> listOfLtaApproval = new ArrayList<LtaRequestUtil>();
+		List<LtaRequestUtil> listOfLtaApproval = new ArrayList<>();
 		
 		for (int i = 0; i < listLtaApproval.size(); i++) {
 			String empCode = listLtaApproval.get(i).getEmpCode().getEmpCode();
