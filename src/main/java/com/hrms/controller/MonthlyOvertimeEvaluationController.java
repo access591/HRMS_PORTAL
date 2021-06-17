@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.hrms.ImageUtil;
 import com.hrms.model.Department;
 import com.hrms.model.Designation;
 import com.hrms.model.EmpMonOvertime;
@@ -59,7 +60,7 @@ public class MonthlyOvertimeEvaluationController {
 		  for (int i = 0; i < listOverTimeR.size(); i++) {
 			  String empCode = listOverTimeR.get(i).getEmployee().getEmpCode();
 			  EmpMonOvertimeUtil ovTime=new EmpMonOvertimeUtil();
-			  
+				session.setAttribute("imgUtil", new ImageUtil());
 			  
 
 			  Employee employee = employeeService.findEmployeeById(empCode);

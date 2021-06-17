@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-
+import com.hrms.ImageUtil;
 import com.hrms.model.MenuModule;
 import com.hrms.model.SkillCategory;
 import com.hrms.service.ModuleService;
@@ -44,6 +44,7 @@ public class SkillCategoryController {
 		if (modules != null) {
 			model.addAttribute("modules", modules);
 		}
+		session.setAttribute("imgUtil", new ImageUtil());
 		session.setAttribute("username", session.getAttribute("username"));
 		return pageMappingService.PageRequestMapping(reqPage, pageno);
 	}
@@ -82,6 +83,7 @@ public class SkillCategoryController {
 		SkillCategory skillCategoryEdit = skillCategoryService.findSkillCategoryById(id);
 		model.addAttribute("skillCategoryEdit", skillCategoryEdit);
 		session.setAttribute("username", session.getAttribute("username"));
+		session.setAttribute("imgUtil", new ImageUtil());
 		return pageMappingService.PageRequestMapping(reqPageedit, editPageNo);
 	}
 	/**
