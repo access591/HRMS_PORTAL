@@ -31,11 +31,10 @@ public class EmployeeRequisitionApprovalController {
 	@Autowired DepartmentService departmentService;
 	
 	
-	@GetMapping("employeeRequisitionApproval")
-	public String employeeRequisitionApproval(@ModelAttribute("commonUtil")CommonUtil commonUtil ,Model model, HttpSession session) {
+	@ModelAttribute
+	public void commonData(Model model,HttpSession session) {
+		session.setAttribute("username", session.getAttribute("username"));
 		
-		//model.addAttribute("listAward", listAward);
-
 		String userCode = (String) session.getAttribute("username");
 		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
 		if (modules != null) {
@@ -43,24 +42,24 @@ public class EmployeeRequisitionApprovalController {
 		}
 		
 		
-
 	}
 	
 	
 	@GetMapping("employeeRequisitionApproval")
 	public String employeeRequisitionApproval(@ModelAttribute("commonUtil")CommonUtil commonUtil ,Model model, HttpSession session) {
 		
-		if(session.getAttribute("username") == null) {
+		if(session.getAttribute("username")==null) {
 			return "redirect:" + "./";
 		}
 		
-	
+		
+		List<CommonUtil> listCommonUtil = new ArrayList<>();
 		List<EmployeeRequisition> listEmployeeReq = employeeRequisitionService.getAllPendingEmployeeRequisition();
 		
 		for(int i=0;i<listEmployeeReq.size();i++) {
 			
 			try {
-				//department = departmentService.findDepartmentById(listEmployeeReq.get(i).getDeptCode());
+				
 				EmployeeRequisition em = listEmployeeReq.get(i);
 				CommonUtil commonUtill = new CommonUtil(em.getDepartmet().getDeptName() ,em.getReqCode(),em.getReqDate(),
 						em.getReqPriority(),em.getReqApprover(),em.getRemarks(),em.getInsBy(),em.getInsDate(),
@@ -74,7 +73,7 @@ public class EmployeeRequisitionApprovalController {
 			
 			
 			
-		}//editEmployeeRequisition.html
+		}
 		
 		
 		model.addAttribute("listCommonUtil", listEmployeeReq);
@@ -84,23 +83,23 @@ public class EmployeeRequisitionApprovalController {
 		if(approvalReq != null) {
 			model.addAttribute("approved", approvalReq);
 		}
-		session.setAttribute("username", session.getAttribute("username"));
-		session.setAttribute("imgUtil", new ImageUtil());
-		return "EmployeeRequisitionApproval"; //EmployeeRequisitionApproval.html
 		
-		//return pageMappingService.PageRequestMapping(reqPage, pageno);
+		session.setAttribute("imgUtil", new ImageUtil());
+		return "EmployeeRequisitionApproval"; 
+		
+		
 	}
 	
 	
 	@GetMapping("approveRequisition/{id}/{status}")
-	public String approveRequisition(@PathVariable("id") String reqCode,@PathVariable("status") String approvalStatus) {
+	public String approveRequisition(@PathVariable("id") String reqCode,@PathVariable("status") String approvalStatus,
+			HttpSession session) {
 		
-
-		
-		if(session.getAttribute("username") == null) {
+		if(session.getAttribute("username")==null) {
 			return "redirect:" + "./";
 		}
-
+		
+		
 		
 		
 		employeeRequisitionService.approvedByReqCodeAndStatus(reqCode,approvalStatus);
