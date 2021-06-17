@@ -14,8 +14,8 @@ public class LtaApprovalServiceImpl implements LtaApprovalService{
 LtaApprovalDao ltaApprovalDao;
 	@Override
 	public List<LtaRequest> getAllLtaApproval() {
-		List<LtaRequest>listLtaApproval=ltaApprovalDao.getAllLtaApproval();
-		return listLtaApproval;
+		return ltaApprovalDao.getAllLtaApproval();
+	
 	}
 	@Override
 	public void approvedLtaRequestById(String id) {

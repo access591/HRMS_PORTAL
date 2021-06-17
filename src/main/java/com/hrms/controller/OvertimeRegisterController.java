@@ -1,6 +1,6 @@
 package com.hrms.controller;
 
-import java.text.ParseException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.hrms.ImageUtil;
 import com.hrms.model.Department;
 import com.hrms.model.Designation;
 import com.hrms.model.Employee;
@@ -51,7 +52,7 @@ public class OvertimeRegisterController {
 		if (modules != null) {
 			model.addAttribute("modules", modules);
 		}
-		
+		session.setAttribute("imgUtil", new ImageUtil());
 		List<OvertimeRegister> listOverTimeR = overtimeRegisterService.getAllOvertimeRegister();
 		List<OvertimeRegisterUtil>listOverTime= new ArrayList<>();
 		  for (int i = 0; i < listOverTimeR.size(); i++) {

@@ -48,7 +48,9 @@ public class DepartmentController {
 	 */	
 @GetMapping("/departmentMaster")
 public String departmentMaster(Model model,HttpSession session) {
-	
+	if(session.getAttribute("username")==null) {
+		return "redirect:" + "./";
+	}
 	List<Department> listDepartment = departmentService.getAllDepartments();
 	model.addAttribute("listDepartment", listDepartment);
 	String userCode= (String)session.getAttribute("username");

@@ -1,5 +1,6 @@
 package com.hrms.repository;
 
+import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -9,7 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.hrms.dao.AbstractGenericDao;
 import com.hrms.model.ArmsLicenseDetails;
-
+import com.hrms.model.Employee;
 @Repository
 public class ArmsLicenseDaoImpl  extends AbstractGenericDao<ArmsLicenseDetails> implements ArmsLicenseDao {
 	@Autowired SessionFactory sessionFactory;
@@ -20,8 +21,8 @@ public class ArmsLicenseDaoImpl  extends AbstractGenericDao<ArmsLicenseDetails> 
 			Session session = this.sessionFactory.getCurrentSession();
 			Query<ArmsLicenseDetails> query = session.createQuery("from ArmsLicenseDetails e where e.empCode=:empCode",ArmsLicenseDetails.class);
 			query.setParameter("empCode",empCode);
-			
-			return query.getSingleResult();
+			ArmsLicenseDetails employeeList = query.getSingleResult();
+			return employeeList;
 		}catch(Exception e) {
 			e.printStackTrace();
 		}

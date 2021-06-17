@@ -171,7 +171,7 @@ public class LocalConvyenceUtil {
 		this.localConvId = localConvId;
 	}
 	public LocalConvyenceUtil(String empCode, String empName, String departmentCode, String deptName, String desgCode,
-			String desgName, String empPayCode, String fatherHusband, String localConvId) {
+			String desgName, String empPayCode, String localConvId) {
 		super();
 		this.empCode = empCode;
 		this.empName = empName;

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.hrms.ImageUtil;
 import com.hrms.model.MenuModule;
 import com.hrms.model.Shift;
 import com.hrms.service.ModuleService;
@@ -45,7 +46,7 @@ public class ShiftController {
 		if (modules != null) {
 			model.addAttribute("modules", modules);
 		}
-
+		session.setAttribute("imgUtil", new ImageUtil());
 		session.setAttribute("username", session.getAttribute("username"));
 
 		return pageMappingService.PageRequestMapping(reqPage, pageno);
@@ -84,6 +85,7 @@ public class ShiftController {
 	public String editShift(@PathVariable("id") String id, Model model, HttpSession session) {
 		int editPageNo = 40;
 		String reqPageedit = "/editShift";
+		session.setAttribute("imgUtil", new ImageUtil());
 		Shift shiftEdit = shiftService.findShiftById(id);
 		model.addAttribute("shiftEdit", shiftEdit);
 		session.setAttribute("username", session.getAttribute("username"));

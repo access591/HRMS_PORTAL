@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.hrms.ImageUtil;
 import com.hrms.model.MenuModule;
 import com.hrms.model.Section;
 import com.hrms.service.ModuleService;
@@ -51,6 +52,7 @@ public String sectionMaster(Model model,HttpSession session) {
    	if (modules != null) {
    		model.addAttribute("modules", modules);
    	}
+	session.setAttribute("imgUtil", new ImageUtil());
 	session.setAttribute("username",session.getAttribute("username"));
 	 return pageMappingService.PageRequestMapping(reqPage,pageno);
 	}
@@ -95,6 +97,7 @@ public String editsection(@PathVariable("id") String id, Model model, HttpSessio
 	String reqPageedit = "/editSection";
 	Section sectionEdit = sectionService.findSectionById(id);
 	model.addAttribute("sectionEdit", sectionEdit);
+	session.setAttribute("imgUtil", new ImageUtil());
 	return pageMappingService.PageRequestMapping(reqPageedit, editPageNo);
 }
 /**

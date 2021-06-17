@@ -108,6 +108,18 @@ public class InterviewMaster {
 		
 	}
 	
+	
+	
+	
+
+	public InterviewMaster(String interviewCode) {
+		super();
+		this.interviewCode = interviewCode;
+	}
+
+
+
+
 
 	public String getInterviewCode() {
 		return interviewCode;

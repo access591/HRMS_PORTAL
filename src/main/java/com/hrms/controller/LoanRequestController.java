@@ -74,11 +74,11 @@ public class LoanRequestController {
 		
 		Department d = departmentService.findDepartmentById(e.getDepartmentCode());
 		Designation des=designationService.findDesignationById(e.getDesignationCode());
-		LoanApplicationUtil l=new LoanApplicationUtil(e.getEmpName(),d.getDeptName(),
+		 return new LoanApplicationUtil(e.getEmpName(),d.getDeptName(),
 				des.getDesgName()
 				,e.getEmployeePayeeCode());
 		
-        return l;
+      
     }
 
 	
@@ -137,7 +137,7 @@ public class LoanRequestController {
 	try {
 		
 		LoanApplication loanRequest = new LoanApplication();
-		System.out.println("RRRRRR>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"+loanAppUtil.getAppNo());
+		
 		Loan lo = new Loan();
 		lo.setLoanCode(loanAppUtil.getLoanCode());
 		loanRequest.setLoanCode(lo);

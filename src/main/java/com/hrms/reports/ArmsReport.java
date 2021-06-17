@@ -1,8 +1,8 @@
 package com.hrms.reports;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,14 +32,13 @@ public class ArmsReport {
 	@Autowired
 	ArmsLicenseService armsLicenseService;
 
-	public List<ArmsLicenseDetails> createArmsLicensesReport(HttpServletResponse response, HttpServletRequest request,
-			List<ArmsLicenseDetails> sourceData) throws IOException {
+	public List<?> createArmsLicensesReport(HttpServletResponse response, HttpServletRequest request,
+			List<?> sourceData) {
 
 		String reportFileName = "ArmsLicenses"; // Parameter1
 		String sourceFileName = request.getSession().getServletContext()
 				.getRealPath("resources/" + reportFileName + ".jrxml");
 
-		System.out.println("arms licenses report : ");
 		try {
 
 			JasperCompileManager.compileReportToFile(sourceFileName);
@@ -47,7 +46,7 @@ public class ArmsReport {
 					.getRealPath("/resources/" + reportFileName + ".jasper");
 			JRBeanCollectionDataSource beanColDataSource = new JRBeanCollectionDataSource(sourceData);
 
-			Map<String, Object> parameters = new HashMap<>();
+			Map<String, Object> parameters = new HashMap<String, Object>();
 
 			parameters.put("Parameter1", beanColDataSource);
 
@@ -62,26 +61,29 @@ public class ArmsReport {
 				response.setHeader("Cache-Control", "private");
 				response.setHeader("Pragma", "no-store");
 				response.setContentLength(pdfReport.length);
+				try {
+					response.getOutputStream().write(pdfReport);
+					response.getOutputStream().flush();
+					response.getOutputStream().close();
+				} catch (IOException e) {
 
-				response.getOutputStream().write(pdfReport);
-				response.getOutputStream().flush();
-				response.getOutputStream().close();
-
+					e.printStackTrace();
+				}
 			}
 		} catch (JRException e) {
 			e.printStackTrace();
 		}
-		return Collections.<ArmsLicenseDetails>emptyList();
+		return null;
 
 	}
 
-	public void armsReportDataSource(String empCode, HttpServletResponse response, HttpServletRequest request)
-			throws IOException {
-		List<ArmsLicenseDetails> arms = new ArrayList<>();
+	public void armsReportDataSource(String empCode, HttpServletResponse response, HttpServletRequest request) {
+		List<ArmsLicenseDetails> arms = new ArrayList<ArmsLicenseDetails>();
 		ArmsLicenseDetails armsLicenseDetail = armsLicenseService.findArmsByEmpEmpCode(empCode);
-		if (armsLicenseDetail != null)
+		if(armsLicenseDetail != null)
 			arms.add(armsLicenseDetail);
 		createArmsLicensesReport(response, request, arms);
 	}
-
+	
+	 
 }

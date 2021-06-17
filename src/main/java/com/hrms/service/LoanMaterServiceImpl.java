@@ -20,8 +20,8 @@ public class LoanMaterServiceImpl implements LoanMaterService {
 	}
 	@Override
 	public List<Loan> getAllLoans() {
-		List<Loan> listLoan = loanMaterDao.findAll();
-		return listLoan;
+		return loanMaterDao.findAll();
+		
 	}
 
 	@Override

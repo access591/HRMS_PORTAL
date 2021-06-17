@@ -1,6 +1,8 @@
 package com.hrms;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,6 +14,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.hrms.model.CommonUtil;
+import com.hrms.model.Employee;
+import com.hrms.model.LeaveDetail;
+import com.hrms.model.LeaveGrant;
+import com.hrms.model.LeaveRequest;
 import com.hrms.service.EmployeeService;
 import com.hrms.service.LeaveDetailService;
 import com.hrms.service.LeaveGrantRegisterService;
@@ -44,9 +50,7 @@ public class ReportUtil {
 	
 	@Autowired
 	LeaveDetailService leaveDetailService;
-	
-	
-	private String sourceFileName = null;
+
 	
 	
 
@@ -54,10 +58,10 @@ public class ReportUtil {
 
 	public void allEmployeeReport(HttpServletRequest request, HttpServletResponse response, String reportFileName,
 			List<?> sourceData) {
-		
-		sourceFileName = request.getSession().getServletContext()
+		System.out.println("employee report...");
+		String sourceFileName = request.getSession().getServletContext()
 				.getRealPath("resources/" + reportFileName + ".jrxml");
-		
+		System.out.println("resources : = "+sourceFileName);
 
 		try {
 
@@ -66,7 +70,7 @@ public class ReportUtil {
 					.getRealPath("/resources/" + reportFileName + ".jasper");
 			JRBeanCollectionDataSource beanColDataSource = new JRBeanCollectionDataSource(sourceData);
 
-			HashMap<String, Object> map = new HashMap<>();
+			HashMap<String, Object> map = new HashMap<String, Object>();
 
 			map.put("ItemDataSource", beanColDataSource);
 
@@ -93,7 +97,8 @@ public class ReportUtil {
 		} catch (JRException e) {
 			e.printStackTrace();
 		}
-		
+		// return null;
+
 	}
 	
 	
@@ -102,10 +107,11 @@ public class ReportUtil {
 	//	BIRT AND ANNIVERASARY REPORT
 	public void birthAnniversaryReport(HttpServletRequest request, HttpServletResponse response, String reportFileName,
 			List<CommonUtil> sourceData) {
-		
-		sourceFileName = request.getSession().getServletContext()
+		System.out.println("birth anniversary  report...");
+		String sourceFileName = request.getSession().getServletContext()
 				.getRealPath("resources/" + reportFileName + ".jrxml");
-		
+		System.out.println("birth anniversary report path : resources : = "+sourceFileName);
+
 		try {
 
 			JasperCompileManager.compileReportToFile(sourceFileName);
@@ -114,9 +120,9 @@ public class ReportUtil {
 			
 			JRBeanCollectionDataSource beanColDataSource = new JRBeanCollectionDataSource(sourceData);
 
-			HashMap<String, Object> map = new HashMap<>();
+			HashMap<String, Object> map = new HashMap<String, Object>();
 
-			map.put("Parameter1", beanColDataSource);
+			map.put("Parameter1", beanColDataSource);//Parameter
 
 			JasperReport report = (JasperReport) JRLoader.loadObjectFromFile(sourceFileName);
 			JasperPrint jasperPrint = JasperFillManager.fillReport(report, map, new JREmptyDataSource());
@@ -141,7 +147,7 @@ public class ReportUtil {
 		} catch (JRException e) {
 			e.printStackTrace();
 		}
-		
+		// return null;
 
 	}
 	
@@ -153,20 +159,20 @@ public class ReportUtil {
 	
 	public void employeeJoiningLetter(HttpServletRequest request, HttpServletResponse response, String reportFileName,
 			List<CommonUtil> sourceData) {
-		
-		sourceFileName = request.getSession().getServletContext()
+		System.out.println("Employee Joining report...");
+		String sourceFileName = request.getSession().getServletContext()
 				.getRealPath("resources/" + reportFileName + ".jrxml");
-		
+		System.out.println("resources : = "+sourceFileName);
 
 		try {
 
 			JasperReport jasperReport = JasperCompileManager.compileReport(sourceFileName);
 			JRDataSource dataSource = new JREmptyDataSource();
-			Map<String,Object> parameter = new HashMap<>();
+			Map<String,Object> parameter = new HashMap<String,Object>();
 			parameter.put("name",sourceData.get(0).getEmpName());
 			parameter.put("dept", sourceData.get(0).getDeptName());
 			parameter.put("desig", sourceData.get(0).getDesgName());
-			
+			//parameter.put("wef", sourceData.get(0).getDesgName());
 			JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameter,dataSource);
 			JasperExportManager.exportReportToPdfFile(jasperPrint,sourceFileName);
 
@@ -190,7 +196,7 @@ public class ReportUtil {
 		} catch (JRException e) {
 			e.printStackTrace();
 		}
-		
+		// return null;
 
 	}
 	

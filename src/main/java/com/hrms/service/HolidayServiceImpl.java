@@ -22,13 +22,9 @@ public class HolidayServiceImpl implements HolidayService {
 	
 	@Override
 	public List<Holiday> getAllHolidays() {
-		List<Holiday> listHoliday = holidayDao.findAll();
-		return listHoliday;
+		return holidayDao.findAll();
+		 
 	}
-
-
-
-
 	@Override
 	public Holiday findHolidayById(String id) {
 		

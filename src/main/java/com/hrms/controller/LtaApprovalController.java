@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import com.hrms.ImageUtil;
 import com.hrms.model.Department;
 import com.hrms.model.Employee;
 
@@ -43,7 +44,7 @@ public class LtaApprovalController {
 		
 		List<LtaRequest>listLtaApproval=ltaApprovalService.getAllLtaApproval();
 		
-		List<LtaRequestUtil> listOfLtaApproval = new ArrayList<LtaRequestUtil>();
+		List<LtaRequestUtil> listOfLtaApproval = new ArrayList<>();
 		
 		for (int i = 0; i < listLtaApproval.size(); i++) {
 			String empCode = listLtaApproval.get(i).getEmpCode().getEmpCode();
@@ -68,6 +69,7 @@ public class LtaApprovalController {
 		if (modules != null) {
 			model.addAttribute("modules", modules);
 		}
+		session.setAttribute("imgUtil", new ImageUtil());
 		session.setAttribute("username", session.getAttribute("username"));
 		 return "ltaApproval";
 	}
