@@ -332,7 +332,7 @@ public class LoanApplicationUtil {
 
 	public LoanApplicationUtil() {
 		super();
-		// TODO Auto-generated constructor stub
+
 	}
 
 	public LoanApplicationUtil(String empCode2, String empName2, String deptName2, String desgName2,
