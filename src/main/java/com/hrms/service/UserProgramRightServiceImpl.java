@@ -14,9 +14,13 @@ public class UserProgramRightServiceImpl implements UserProgramRightService {
 	UserProgramRightDao userProgramRightDao;
 	@Override
 	public List<UserRights> getAllUserRights() {
+		try {
+			return userProgramRightDao.findAll();
+		} catch (Exception e) {
 		
-		List<UserRights> listUserRights = userProgramRightDao.findAll();
-		return listUserRights;
+			e.printStackTrace();
+		}
+		return null;
 	}
 	@Override
 	public void addUserProgramRight(UserRights userRights) {
