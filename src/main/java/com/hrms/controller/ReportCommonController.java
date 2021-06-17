@@ -88,9 +88,12 @@ public class ReportCommonController {
 	@GetMapping(value = { "/reportEmployee" })
 	public String reportEmployee(Model model, HttpSession session, HttpServletRequest request,
 			HttpServletResponse response) {
-		List<Employee> dataList = employeeService.getAllEmployees();
-
-		String reportFileName = "";
+		
+		if(session.getAttribute("username")==null) {
+			return "redirect:" + "./";
+		}
+		
+		String reportFileName = null;
 
 		String val = null;
 		if (request.getParameter("_ex") != null) {
@@ -109,19 +112,9 @@ public class ReportCommonController {
 		}
 
 		System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" + val);
-		/*
-		 * if (val.equals("P")) {
-		 * 
-		 * 
-		 * reportFileName = "employee_report";
-		 * employeeService.employeeReportGenratepdf(request, response, reportFileName,
-		 * dataList); } else if (val.equals("E")) { reportFileName =
-		 * "bankwisereport_XLS"; String filename = "bankwisereport";
-		 * 
-		 * }
-		 */
+		
 		reportFileName = "employee_report";
-		//employeeService.employeeReportGenratepdf(request, response, reportFileName, dataList);
+		
 
 		session.setAttribute("username", session.getAttribute("username"));
 		return null;
@@ -135,7 +128,7 @@ public class ReportCommonController {
 		System.out.println("  employee report ");
 		String reportName = "EmployeeReport";	
 		List<Employee> listEmployee = employeeService.getAllEmployees();
-		//System.out.println("employee batch number : "+ listEmployee.get(0).getBatchYear());		
+				
 		System.out.println("list employee : "+ listEmployee);
 		reportUtil.allEmployeeReport(request, response, reportName, listEmployee);
 		
@@ -151,6 +144,10 @@ public class ReportCommonController {
 	
 	@GetMapping("localclaimPage")
 	public String localClaimReport(Model model,HttpSession session) {
+		
+		if(session.getAttribute("username")==null) {
+			return "redirect:" + "./";
+		}
 		
 		String userCode = (String) session.getAttribute("username");
 		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
@@ -169,6 +166,10 @@ public class ReportCommonController {
 	@PostMapping("localClaimReport")
 	public String createLocalClaimReport(@RequestParam("empName") String empName, Model model,HttpSession session,
 			HttpServletRequest req,HttpServletResponse res) {
+		
+		if(session.getAttribute("username")==null) {
+			return "redirect:" + "./";
+		}
 		
 		System.out.println("empName is : " + empName);
 		
@@ -192,6 +193,10 @@ public class ReportCommonController {
 	@GetMapping("ltaReport")  //LtaReport.html
 	public String ltaReportPage(Model model,HttpSession session) {
 		
+		if(session.getAttribute("username")==null) {
+			return "redirect:" + "./";
+		}
+		
 		String userCode = (String) session.getAttribute("username");
 		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
 		if (modules != null) {
@@ -212,6 +217,10 @@ public class ReportCommonController {
 	@PostMapping("createLtaReport")  //LtaReport.html
 	public String createLtReport(@ModelAttribute("ltaRequest") LtaRequest ltaRequest , Model model,HttpSession session,
 			HttpServletRequest req,HttpServletResponse res) {
+		
+		if(session.getAttribute("username")==null) {
+			return "redirect:" + "./";
+		}
 		
 		System.out.println("lta request : "+ltaRequest.getEmpCode().getEmpCode());
 		System.out.println("lta request : "+ltaRequest.getLeaveFrom());

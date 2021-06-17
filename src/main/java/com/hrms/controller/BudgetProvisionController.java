@@ -72,6 +72,10 @@ public class BudgetProvisionController {
 	public String budgetProvisionPage(@ModelAttribute("budgetProvision")BudgetProvision budgetProvision,
 			Model model,HttpSession session) {
 		
+		if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
+		
 		String userCode = (String) session.getAttribute("username");
 		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
 		if (modules != null) {
@@ -90,6 +94,10 @@ public class BudgetProvisionController {
 	@PostMapping("saveBudgetProvision")
 	public String saveBudgetProvision(@ModelAttribute("budgetProvision")BudgetProvision budgetProvision,
 			Model model,HttpSession session) {
+		
+		if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
 		budgetProvisionService.saveBudgetProvision(budgetProvision);
 		return "redirect:budgetprovisionpage";
 	}
@@ -97,7 +105,11 @@ public class BudgetProvisionController {
 	@GetMapping("editBudgetProvision/{id}")
 	public String editBudgetProvision(@PathVariable("id")String budgetProvisionCode,
 			@ModelAttribute("budgetProvision")
-							BudgetProvision budgetProvision,Model model) {
+							BudgetProvision budgetProvision,Model model,HttpSession session) {
+		
+		if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
 		
 		BudgetProvision b = budgetProvisionService.findByBudgetProvisionId(
 				Long.parseLong(budgetProvisionCode));
@@ -111,7 +123,12 @@ public class BudgetProvisionController {
 	}
 	
 	@PostMapping("updateBudgetProvision")
-	public String updateBudgetProvision(@ModelAttribute("budgetProvision")BudgetProvision budgetProvision) {
+	public String updateBudgetProvision(@ModelAttribute("budgetProvision")BudgetProvision budgetProvision,
+			HttpSession session) {
+		
+		if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
 		
 		budgetProvisionService.updateBudgetProvision(budgetProvision);
 		return "redirect:budgetprovisionpage";
@@ -120,7 +137,9 @@ public class BudgetProvisionController {
 	@GetMapping(value = {"deleteBudgetProvision/{id}"})
 	public String deleteBudgetProvision(@PathVariable("id") String orderTrackingId, Model model, HttpSession session) {
 		
-		
+		if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
 		budgetProvisionService.removeBudgetProvision(Long.parseLong(orderTrackingId));
 		
 		return "redirect:/budgetprovisionpage";

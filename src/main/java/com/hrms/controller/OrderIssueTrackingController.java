@@ -65,6 +65,12 @@ public class OrderIssueTrackingController {
 	@GetMapping("orderissuetracking")
 	public String orderIssueTrackingPage(@ModelAttribute("orderIssueTracking")OrderIssueTracking orderIssueTracking,
 			Model model,HttpSession session) {
+		
+		if(session.getAttribute("username")==null) {
+			return "redirect:" + "./";
+		}
+		
+		
 		String userCode = (String) session.getAttribute("username");
 		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
 		if (modules != null) {
@@ -89,6 +95,10 @@ public class OrderIssueTrackingController {
 	public String saveOrderIssueTracking(@ModelAttribute("orderIssueTracking")OrderIssueTracking orderIssueTracking,
 			Model model,HttpSession session,@RequestParam("orderFile") MultipartFile orderFile) throws IOException {
 		
+		if(session.getAttribute("username")==null) {
+			return "redirect:" + "./";
+		}
+		
 		orderIssueTracking.setOrderFileName(orderFile.getOriginalFilename());
 //		if(orderFile.isEmpty()) {
 //			System.out.println("file is not found");
@@ -107,6 +117,10 @@ public class OrderIssueTrackingController {
 	public String editOrderIssueTracking(@PathVariable("id")String orderIssueTrackingId,
 			@ModelAttribute("orderIssueTracking")OrderIssueTracking orderIssueTracking
 			,Model model,HttpSession session) {
+		
+		if(session.getAttribute("username")==null) {
+			return "redirect:" + "./";
+		}
 		
 		OrderIssueTracking b = orderIssueTrackingService.findOrderIssueTrackingById(Long.parseLong(orderIssueTrackingId));
 		
@@ -128,7 +142,11 @@ public class OrderIssueTrackingController {
 	
 	@PostMapping("updateOrderTracking")
 	public String updateOrderIssueTracking(@ModelAttribute("orderIssueTracking")OrderIssueTracking orderIssueTracking,
-			@RequestParam("orderFile") MultipartFile orderFile) {
+			@RequestParam("orderFile") MultipartFile orderFile,HttpSession session) {
+		
+		if(session.getAttribute("username")==null) {
+			return "redirect:" + "./";
+		}
 		
 		orderIssueTracking.setOrderFileName(orderFile.getOriginalFilename());
 		orderIssueTrackingService.updateOrderIssueTracking(orderIssueTracking);
@@ -139,6 +157,10 @@ public class OrderIssueTrackingController {
 	public String deleteOrderIssueTracking(@PathVariable("id") String orderTrackingId, Model model, HttpSession session) {
 		System.out.println("=====================>");
 		
+		if(session.getAttribute("username")==null) {
+			return "redirect:" + "./";
+		}
+		
 		orderIssueTrackingService.removeOrderIssueTracking(Long.parseLong(orderTrackingId));
 		
 		session.setAttribute("username", session.getAttribute("username"));
@@ -148,6 +170,10 @@ public class OrderIssueTrackingController {
 	
 	@GetMapping("ordertrackreport")
 	public String viewOrderTrackReport(Model model,HttpSession session) {
+		
+		if(session.getAttribute("username")==null) {
+			return "redirect:" + "./";
+		}
 		
 		String userCode = (String) session.getAttribute("username");
 		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
@@ -165,7 +191,12 @@ public class OrderIssueTrackingController {
 	@Autowired OrderTrackingReport orderTrackReport;
 	@PostMapping("createordertrackreport")
 	public String createOrderTrackReport(@RequestParam("empCode")String empCode,
-			HttpServletResponse response, HttpServletRequest request) {
+			HttpServletResponse response, HttpServletRequest request,
+			HttpSession session) {
+		
+		if(session.getAttribute("username")==null) {
+			return "redirect:" + "./";
+		}
 		
 		List<OrderIssueTracking> orderTracking = new ArrayList<OrderIssueTracking>();
 		if(empCode.equals("ALL")) {
