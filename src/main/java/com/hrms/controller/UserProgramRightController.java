@@ -104,7 +104,7 @@ public String editUserRights(@PathVariable("id")long id,  Model model,HttpSessio
 	
 	List<Module> modulesList = moduleService.getActiveModules();
 	model.addAttribute("modulesList", modulesList);
-	
+	session.setAttribute("imgUtil", new ImageUtil());
 	List<SubModule>subModulesList=subModuleService.getActiveSubModules();
 	model.addAttribute("subModulesList", subModulesList);
 	

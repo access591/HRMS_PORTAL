@@ -1,6 +1,6 @@
 package com.hrms.controller;
 
-import java.util.ArrayList;
+
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -11,16 +11,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 
+import com.hrms.ImageUtil;
 import com.hrms.model.Department;
 import com.hrms.model.Employee;
-import com.hrms.model.EmployeeRequisition;
-import com.hrms.model.EmployeeRequisitionDetail;
 import com.hrms.model.MenuModule;
-import com.hrms.model.TrainingReqEmployeeDetail;
 import com.hrms.model.TrainingRequisition;
-import com.hrms.model.TrainingRequisitionDetail;
 import com.hrms.service.DepartmentService;
 import com.hrms.service.EmployeeService;
 import com.hrms.service.ModuleService;
@@ -44,7 +40,7 @@ public class TrainingRequisitionApproval {
 		if (modules != null) {
 			model.addAttribute("modules", modules);
 		}
-		
+		session.setAttribute("imgUtil", new ImageUtil());
 		List<TrainingRequisition> listTrainingRequisition = trainingRequistionService.findTrainingRequisitionByStatusYAndC();
 		if(listTrainingRequisition != null) {
 			model.addAttribute("listTrainingRequisition", listTrainingRequisition);
