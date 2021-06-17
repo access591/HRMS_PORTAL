@@ -51,7 +51,7 @@ public class ConveyanceApprovalController {
 		}
 
 		List<LocalConvyence> listOfLoc = conveyanceApprovalService.getAllLocalConveyance();
-		List<LocalConvyenceUtil> listLocalConvyenceUtil = new ArrayList<LocalConvyenceUtil>();
+		List<LocalConvyenceUtil> listLocalConvyenceUtil = new ArrayList<>();
 		for (int i = 0; i < listOfLoc.size(); i++) {
 
 			String empCode = listOfLoc.get(i).getEmpCode().getEmpCode();

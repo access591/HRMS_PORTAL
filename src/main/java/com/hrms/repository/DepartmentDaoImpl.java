@@ -3,6 +3,7 @@ import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.FetchMode;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
@@ -30,18 +31,27 @@ public class DepartmentDaoImpl extends AbstractGenericDao<Department> implements
 					.add(Restrictions.eq("deptName", department.getDeptName())).uniqueResult();
 
 		} catch (Exception e) {
-			logger.info("DepartmentDaoImpl.checkDepartmentExists" + e.getMessage());
+			e.printStackTrace();
 		}
 
 		return deptName;
 	}
 	@Override
 	public List<Department> findByDepartmentByDeptCode(String deptCode) {
-		Session session = sessionFactory.getCurrentSession();
-		Query<Department> query = session.createQuery("from Department d where d.empCode = :empCode");
-		query.setParameter("empCode", deptCode);
-		List<Department> department = query.list();
-		return department;
+		Query<Department> query =null;
+		List<Department> department=null;
+		
+		try {
+			Session session = sessionFactory.getCurrentSession();
+			 query = session.createQuery("from Department d where d.empCode = :empCode");
+			query.setParameter("empCode", deptCode);
+			department = query.list();
+			return department;
+		} catch (HibernateException e) {
+
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	
