@@ -40,7 +40,9 @@ public class LoanController {
 	 */
 	@GetMapping("/loanMaster")
 	public String loanMaster(Model model, HttpSession session) {
-
+		if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
 		List<Loan> listLoan = loanMaterService.getAllLoans();
 		model.addAttribute("listLoan", listLoan);
 		String userCode = (String) session.getAttribute("username");

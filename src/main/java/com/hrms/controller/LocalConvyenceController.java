@@ -53,6 +53,9 @@ public class LocalConvyenceController {
 	
 	@GetMapping("/localConvyence")
 	public String localConvyence(Model model,HttpSession session) {
+		if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
 		LocalConvyenceUtil u=new LocalConvyenceUtil();
 		  List<Employee> listEmployee = employeeService.getAllEmployees();
 		  model.addAttribute("listEmployee", listEmployee);

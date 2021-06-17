@@ -45,6 +45,10 @@ public class LoanRequestController {
 	LoanRequestService loanRequestService;
 	@GetMapping("/loanRequest")
 	public String loanApplication(Model model, HttpSession session) {
+		if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
+		
 		List<Loan> listLoan = loanMaterService.getAllLoans();
 		model.addAttribute("listLoan", listLoan);
 		 List<Employee> listEmployee = employeeService.getAllEmployees();
