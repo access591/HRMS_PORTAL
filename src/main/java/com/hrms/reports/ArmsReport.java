@@ -39,6 +39,7 @@ public class ArmsReport {
 		String sourceFileName = request.getSession().getServletContext()
 				.getRealPath("resources/" + reportFileName + ".jrxml");
 
+		System.out.println("arms licenses report : ");
 		try {
 
 			JasperCompileManager.compileReportToFile(sourceFileName);
