@@ -71,7 +71,10 @@ public class LeaveRequestController {
 	
 	@GetMapping("/leaveRequest")
 	public String empPayDetail(@ModelAttribute("leaveRequest")LeaveRequest leaveRequest,Model model, HttpSession session) {
-		if (session.getAttribute("username") == null) {
+
+		
+		if(session.getAttribute("username") == null) {
+
 			return "redirect:" + "./";
 		}
 		System.out.println("leave request controller");
@@ -116,6 +119,11 @@ public class LeaveRequestController {
 	@PostMapping("/saveLeaveRequest")
 	public String saveLeaveRequest(@ModelAttribute("leaveRequest")LeaveRequest leaveRequest,HttpSession session) {
 		
+
+		if(session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
+
 		String insertedBY = (String) session.getAttribute("userlogin");
 		System.out.println("inserted by :"+ insertedBY);
 		
@@ -123,7 +131,7 @@ public class LeaveRequestController {
 		System.out.println("leave to date======> : " + leaveRequest.getFromDate());
 		System.out.println("leave to date======> : " + leaveRequest.getEmployee().getEmpCode());
 		System.out.println("leave to date======> : " + leaveRequest.getLeave().getLevCode());
-		//System.out.println("leave to date : " + leaveRequest.getLeaveCode());
+
 		leaveRequestService.addLeave(leaveRequest);
 		
 		session.setAttribute("username", session.getAttribute("username"));
@@ -137,10 +145,14 @@ public class LeaveRequestController {
 	public String viewLeaveRequestByEmpId(@PathVariable("id")String leaveRequestId,
 						Model model,HttpSession session) {
 		
+
+		if(session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
+
 		
 		
-		
-		//List<LeaveRequest> leaveRequest = this.leaveRequestService.findByEmpCodeAndApplyDate(empCode, applyDate);
+
 		LeaveRequest leaveRequest = this.leaveRequestService.findLeaveRequestById(Long.parseLong(leaveRequestId));
 		
 		if(leaveRequest != null) {
@@ -157,6 +169,10 @@ public class LeaveRequestController {
 	
 	@GetMapping(value = { "/deleteLeaveRequest/{id}" })
 	public String deleteActivity(@PathVariable("id") Long id, Model model, HttpSession session) {
+		
+		if(session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
 		
 		this.leaveRequestService.removeLeaveRequest(id);
 		return "redirect:/"+ pageMappingService.PageRequestMapping(reqPage, pageno);

@@ -2,7 +2,6 @@ package com.hrms.service;
 
 import java.util.List;
 
-import com.hrms.dao.GenericDao;
 import com.hrms.model.ApplicantInfo;
 
 public interface ApplicantInfoService {
