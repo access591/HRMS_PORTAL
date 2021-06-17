@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.hrms.ImageUtil;
 import com.hrms.ReportUtil;
 import com.hrms.model.Designation;
 import com.hrms.model.Employee;
@@ -89,6 +90,7 @@ public class ReimbursementReportController {
 			model.addAttribute("listEmployee", listEmployee);
 		}
 		model.addAttribute("object", new TourPlan());
+		session.setAttribute("imgUtil", new ImageUtil());
 		session.setAttribute("username", userCode);
 		return "tourClaimReports"; // tourClaimReports.html
 	}

@@ -24,7 +24,7 @@ public class LoanMaterDaoImpl extends AbstractGenericDao<Loan> implements LoanMa
 					.add(Restrictions.eq("loanName", loan.getLoanName())).uniqueResult();
 
 		} catch (Exception e) {
-			logger.info("LoanMaterDaoImpl.checkLoanExists" + e.getMessage());
+			e.printStackTrace();
 		}
 
 		return gradeName;

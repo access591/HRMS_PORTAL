@@ -20,8 +20,8 @@ public class DepartmentServiceImpl implements DepartmentService {
 
 	@Override
 	public List<Department> getAllDepartments() {
-		List<Department> listDepartment = departmentDao.findAll();
-		return listDepartment;
+		return departmentDao.findAll();
+		
 	}
 
 	@Override

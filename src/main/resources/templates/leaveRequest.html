@@ -236,16 +236,15 @@
 							<div class="card">
 								<div class="card-header"></div>
 								<div class="card-body">
-									<table id="datatables-buttons"  class="table table-striped display" style="width: 100%"
-									 summary="">
+									<table id="datatables-buttons"  class="table table-striped display" style="width: 100%">
 										<thead>
 											<tr>
-												<th scope="col" class="text-center">Emp Code</th>
-												<th scope="col" class="text-center">Name</th>
-												<th scope="col" class="text-center">Apply Date</th>
-												<th scope="col" class="text-center">Reason</th>
-												<th scope="col" class="text-center">Status</th>
-												<th scope="col" class="text-center">Action</th>
+												<th class="text-center">Emp Code</th>
+												<th class="text-center">Name</th>
+												<th class="text-center">Apply Date</th>
+												<th class="text-center">Reason</th>
+												<th class="text-center">Status</th>
+												<th class="text-center">Action</th>
 											</tr>
 										</thead>
 										<tbody>
@@ -287,12 +286,49 @@
 	
 	
 	
-		
+		/* document.getElementById('applyDate').value = new Date().toISOString().substring(0, 10);
+		document.getElementById('from_date').value = new Date().toISOString().substring(0, 10);
+		document.getElementById('to_date').value = new Date().toISOString().substring(0, 10); */
 		$(function () {
 
 			
 			
-		
+			/* $("input[name='applyDate']").daterangepicker({
+				singleDatePicker: true,
+				autoApply: true,
+				locale: {
+					format: 'DD/MM/YYYY'
+				},
+				showDropdowns: true,
+				minDate:new Date()
+				
+			});
+			
+
+			$("input[name=\"fromDate\"]").daterangepicker({
+				singleDatePicker: true,
+				autoApply: true,
+				locale: {
+					format: 'DD/MM/YYYY'
+				},
+				showDropdowns: true,
+				minDate:new Date()
+			});
+ 
+
+			$("input[name=\"toDate\"]").daterangepicker({
+				singleDatePicker: true,
+				autoApply: true,
+				locale: {
+					format: 'DD/MM/YYYY'
+				},
+				showDropdowns: true
+			}); */
+
+ 			
+			
+			
+
 			$(document).ready(
 				function () {
 					var datatablesButtons = $('#example').DataTable({

@@ -127,7 +127,7 @@ public class StaffPostingDutiesController {
 			  
 			  StaffPostingDuties staffPostingDutiesEdit = staffPostingDutiesService.StaffPostingDutieById(id);
 			model.addAttribute("staffPostingDutiesEdit", staffPostingDutiesEdit);
-
+			session.setAttribute("imgUtil", new ImageUtil());
 			session.setAttribute("username", session.getAttribute("username"));
 			 return "editStaffPostingDuties";
 		}

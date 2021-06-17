@@ -49,8 +49,8 @@ InsuranceDao insuranceDao;
 	@Override
 	public List<Insurance> getAllInsurances() {
 		
-		List<Insurance> listInsurance = insuranceDao.findAll();
-		return listInsurance;
+		return insuranceDao.findAll();
+		 
 	}
 
 }

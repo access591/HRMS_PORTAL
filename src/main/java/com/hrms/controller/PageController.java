@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.hrms.ImageUtil;
 import com.hrms.model.MenuModule;
 import com.hrms.model.UrlDetail;
 import com.hrms.service.ModuleService;
@@ -29,6 +30,7 @@ public class PageController {
 		List<UrlDetail> listUrlDetail = pageMappingService.getAllPages();
 		model.addAttribute("listUrlDetail", listUrlDetail);
 		String userCode = (String) session.getAttribute("username");
+		session.setAttribute("imgUtil", new ImageUtil());
 		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
 		if (modules != null) {
 			model.addAttribute("modules", modules);

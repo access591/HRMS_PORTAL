@@ -2,7 +2,10 @@ package com.hrms;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
@@ -11,6 +14,7 @@ import org.apache.poi.ss.usermodel.IndexedColors;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -26,7 +30,10 @@ import com.hrms.service.EmployeeService;
 
 @Component
 public class EmployeeGradationExcel {
-
+	
+	 private XSSFWorkbook workbook;
+	 private XSSFSheet sheet;
+	 private List<Employee> listEmployee;
 	 @Autowired DepartmentService departmentService;
 	 
 	 @Autowired EmployeeService employeeService;
@@ -34,7 +41,18 @@ public class EmployeeGradationExcel {
 	 @Autowired CategoryService categoryService;
 	 
 	 public ByteArrayInputStream generateExcel(List<Employee> listEmployee) {
-	
+		 
+		 
+		
+		 System.out.println("generated excel reports ");
+		 System.out.println("generaed list source = "+listEmployee.size());
+		
+		
+		
+		
+		
+		
+		
 	 
 	 String[] columns = {"Sr.No","Officer Code","Officer Name" , "Category Name" ,"Department Name" , "Designation" , 
 			 "Ips No", " Batch Year","Payee Code","Home District","Court or Department", 
@@ -66,20 +84,22 @@ public class EmployeeGradationExcel {
 				cell.setCellStyle(headerCellStyle);
 				
 			}
-			
+			System.out.println("reow inde x value ");
 			int rowIndex = 1;
 			
 			for(Employee emp : listEmployee) {
 				
+				System.out.println("single employee : =" +emp.getDepartmentCode());
+				System.out.println("single employee : =" +emp.getDateOfJoining());
 				
 				Employee e = employeeService.findEmployeeById(emp.getEmpCode());
 				Department d = departmentService.findDepartmentById(e.getDepartmentCode());
-				
-			
+				//Department d = departmentService.findDepartmentByEmpCode(emp.getDepartmentCode()).get(0);
+				System.out.println( "department detail : =" +d.getDeptName());
 				Designation desig = designationService.findDesignationById(emp.getDesignationCode());
-			
+				System.out.println( "designation detail : =" +desig.getDesgName());
 				Category category = categoryService.findCategoryByCatId(emp.getCategoryCode());
-				
+				System.out.println( "department detail : =" +category.getCategoryName());
 				Row row = sheet.createRow(rowIndex++);
 				
 				row.createCell(0).setCellValue(rowIndex); //
@@ -132,13 +152,11 @@ public class EmployeeGradationExcel {
 				
 			}
 			workBook.write(out);
-			workBook.close();
 			return new ByteArrayInputStream(out.toByteArray());
 			
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
-		
 		return null;
 		
 		

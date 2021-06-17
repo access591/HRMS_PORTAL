@@ -30,7 +30,7 @@ public class CategoryDaoImpl extends AbstractGenericDao<Category>  implements Ca
 					.add(Restrictions.eq("categoryName", category.getCategoryName())).uniqueResult();
 
 		} catch (Exception e) {
-			logger.info("DepartmentDaoImpl.checkDepartmentExists" + e.getMessage());
+			e.printStackTrace();
 		}
 
 		return desName;

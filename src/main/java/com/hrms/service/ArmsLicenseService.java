@@ -3,7 +3,7 @@ package com.hrms.service;
 import java.util.List;
 
 import com.hrms.model.ArmsLicenseDetails;
-
+import com.hrms.model.Employee;
 
 public interface ArmsLicenseService {
 
@@ -16,7 +16,5 @@ public interface ArmsLicenseService {
 	void updateArmsLicenseService(ArmsLicenseDetails armsLicense);
 	public ArmsLicenseDetails findArmsByEmpEmpCode(String id);
 	void removeArmsLicenseService(String id2);
-	
-	public List<ArmsLicenseDetails> armsLicenseDetailsList();
 
 }

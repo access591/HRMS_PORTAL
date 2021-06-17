@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import com.hrms.ImageUtil;
 import com.hrms.model.MenuModule;
 import com.hrms.service.ModuleService;
 import com.hrms.service.PageMappingService;
@@ -32,7 +33,7 @@ public class SalaryGenerationController {
 		}
 		
 		
-
+		session.setAttribute("imgUtil", new ImageUtil());
 		session.setAttribute("username", session.getAttribute("username"));
 		return pageMappingService.PageRequestMapping(reqPage, pageno);
 	}  

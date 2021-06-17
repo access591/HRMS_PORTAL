@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.hrms.ImageUtil;
 import com.hrms.model.MenuModule;
 import com.hrms.model.MiscAllowance;
 import com.hrms.service.MiscAllowanceDeductionService;
@@ -45,7 +46,7 @@ public String miscAllowances(Model model,HttpSession session)
 		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
   	if (modules != null) {
   		model.addAttribute("modules", modules);
-  	}
+  	}	session.setAttribute("imgUtil", new ImageUtil());
       session.setAttribute("username",session.getAttribute("username"));
       return pageMappingService.PageRequestMapping(reqPage,pageno);
 
@@ -90,7 +91,7 @@ public String editAllowncesDeduction(@PathVariable("id")String id,  Model model,
 		String reqPageedit="/editAllowanceDeduction";
 	MiscAllowance editMiscAllowance = miscAllowanceDeductionService.findMiscAllowanceDeductionById(id);
 	  model.addAttribute("editMiscAllowance", editMiscAllowance);
-
+		session.setAttribute("imgUtil", new ImageUtil());
     session.setAttribute("username",session.getAttribute("username")); 
     return pageMappingService.PageRequestMapping(reqPageedit,editPageNo);
     

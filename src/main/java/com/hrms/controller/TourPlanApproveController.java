@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import com.hrms.ImageUtil;
 import com.hrms.model.Department;
 import com.hrms.model.Designation;
 import com.hrms.model.Employee;
@@ -52,7 +53,7 @@ public class TourPlanApproveController {
 		
 		List<TourPlan> ListTourPlan=tourPlanApprovalService.getAllTourPlan();
 		model.addAttribute("ListTourPlan", ListTourPlan);
-		
+		session.setAttribute("imgUtil", new ImageUtil());
 		session.setAttribute("username", session.getAttribute("username"));
 		return"tourPlanApproval";
 		

@@ -56,7 +56,7 @@ public class LoanApprovalController {
 		
 		
 		List<LoanApplication> listOfLoanApp = loanApprovalService.getAllLoanApproval();
-		List<LoanApplicationUtil>listofloanApproval= new ArrayList<LoanApplicationUtil>();
+		List<LoanApplicationUtil>listofloanApproval= new ArrayList<>();
 		for (int i = 0; i < listOfLoanApp.size(); i++) {
 			String empCode = listOfLoanApp.get(i).getEmpCode().getEmpCode();
 			LoanApplicationUtil lc=new LoanApplicationUtil();

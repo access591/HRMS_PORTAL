@@ -18,7 +18,7 @@ public class InductionTrainingDetailServiceImpl implements InductionTrainingDeta
 		Session s=sessionFactory.openSession();
 		s.beginTransaction();
 		
-		// TODO Auto-generated method stub
+	
 		s.save(inductDetails);
 		s.getTransaction().commit();
 		s.clear();

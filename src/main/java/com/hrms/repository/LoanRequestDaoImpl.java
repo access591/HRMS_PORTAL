@@ -14,10 +14,12 @@ import com.hrms.model.LoanApplication;
 @Repository
 public class LoanRequestDaoImpl extends AbstractGenericDao<LoanApplication> implements LoanRequestDao{
 	@Autowired SessionFactory sessionFactory;
+	Session session=null;
 	@Override
 	public List<LoanApplication> findByApprovalLoan(String id) {
+		
 		try {
-			Session session = this.sessionFactory.openSession();
+			session= this.sessionFactory.openSession();
 			session.beginTransaction();
 			Query<LoanApplication>query = session.createQuery("from LoanApplication  e where e.approvalStatus ='Y'",LoanApplication.class);
 			

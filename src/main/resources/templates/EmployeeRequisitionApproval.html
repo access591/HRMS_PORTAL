@@ -58,20 +58,20 @@ body {
 												
 												<table id="datatables-buttons"
 													class="table table-striped display" style="width: 100%"
-													aria-describedby="datatables-buttons" summary="table">
+													aria-describedby="datatables-buttons">
 													<thead>
 														<tr>
-															<th scope="col">Employee Req Code</th>
-															<th scope="col">Requisition File Date</th>
+															<th>Employee Req Code</th>
+															<th>Requisition File Date</th>
 															
-															<th scope="col">Department Name</th>
-															<th scope="col">Requisition Priority</th>
+															<th>Department Name</th>
+															<th>Requisition Priority</th>
 
-															<th scope="col">Requisition Fulfill Date</th>
+															<th>Requisition Fulfill Date</th>
 
-															<th scope="col">Status</th>
+															<th>Status</th>
 
-															<th scope="col">Action</th>
+															<th>Action</th>
 														</tr>
 													</thead>
 													<tbody>
@@ -135,7 +135,7 @@ body {
 
 															 <a th:href="@{viewRequisition/{id}(id=${commonUtil.reqCode})}" class="btn btn-primary"><em class="fa fa-eye"></em></a>
 													
-															
+															<!-- <a th:href="@{approveRequisition/{id}/(id=${commonUtil.reqCode})}" class="btn btn-primary"><em class="fa fa-check"></em></a> -->
 															</td>
 														</tr>
 													

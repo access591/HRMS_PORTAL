@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.hrms.model.Register;
+import com.hrms.ImageUtil;
 import com.hrms.model.MenuModule;
 import com.hrms.service.ModuleService;
 import com.hrms.service.PageMappingService;
@@ -45,7 +46,7 @@ public class RegisterController {
 
 		List<Register> listRegister = registerService.getAllRegisters();
 		model.addAttribute("listRegister", listRegister);
-
+		session.setAttribute("imgUtil", new ImageUtil());
 		session.setAttribute("username", session.getAttribute("username"));
 
 		return pageMappingService.PageRequestMapping(reqPage, pageno);
@@ -83,7 +84,7 @@ public class RegisterController {
 
 		Register registerEdit = registerService.findRegisterById(id);
 		model.addAttribute("registerEdit", registerEdit);
-
+		session.setAttribute("imgUtil", new ImageUtil());
 		return pageMappingService.PageRequestMapping(reqPageedit, editPageNo);
 	}
 /**

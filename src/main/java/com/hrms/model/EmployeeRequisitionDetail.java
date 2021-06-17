@@ -89,8 +89,31 @@ public class EmployeeRequisitionDetail implements Serializable{
 
 	public EmployeeRequisitionDetail() {
 		super();
+		// TODO Auto-generated constructor stub
 	}
 
+	public EmployeeRequisitionDetail(String reqCode,  String desigCode, String location, String sex,
+			int ageFrom, int ageTo, String acadQuali, String techQuali, int experience, String vacanncyType,
+			int totalVacancy, String remarks, int minExperience, int maxExperience, int salaryFrom, int salaryTo) {
+		super();
+		
+		//this.reqDate = reqDate;
+		
+		this.location = location;
+		this.sex = sex;
+		this.ageFrom = ageFrom;
+		this.ageTo = ageTo;
+		this.acadQuali = acadQuali;
+		this.techQuali = techQuali;
+		this.experience = experience;
+		this.vacanncyType = vacanncyType;
+		this.totalVacancy = totalVacancy;
+		this.remarks = remarks;
+		this.minExperience = minExperience;
+		this.maxExperience = maxExperience;
+		this.salaryFrom = salaryFrom;
+		this.salaryTo = salaryTo;
+	}
 	
 	
 	

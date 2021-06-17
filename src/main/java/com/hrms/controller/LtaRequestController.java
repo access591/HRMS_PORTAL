@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.hrms.ImageUtil;
 import com.hrms.model.Employee;
 
 import com.hrms.model.LtaRequest;
@@ -63,6 +64,7 @@ public class LtaRequestController {
 		if (modules != null) {
 			model.addAttribute("modules", modules);
 		}
+		session.setAttribute("imgUtil", new ImageUtil());
 		session.setAttribute("username", session.getAttribute("username"));
 		 return "ltaRequest";
 	}
@@ -97,7 +99,7 @@ public class LtaRequestController {
 	}
 	@GetMapping(value = {"/editLtaRequest/{id}"})
 	public String editLtaRequest(@PathVariable("id")String id,  Model model,HttpSession session)
-	 { 
+	 { session.setAttribute("imgUtil", new ImageUtil());
 		List<Employee> em = employeeService.getAllEmployees();
 		model.addAttribute("listEmployee", em);
 		
@@ -134,7 +136,7 @@ public class LtaRequestController {
 			   
 			   
 		} catch (Exception e) {
-		
+		e.printStackTrace();
 		}
 		
 	  	  

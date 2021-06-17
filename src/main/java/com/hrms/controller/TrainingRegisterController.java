@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.hrms.ImageUtil;
 import com.hrms.model.City;
 import com.hrms.model.Department;
 
@@ -75,7 +76,7 @@ public class TrainingRegisterController {
 		
 		List<TrainingRegister> listTrainingRegister=trainingRegisterService.getAllTrainingRegisters();
 	    model.addAttribute("listTrainingRegister",listTrainingRegister);
-	    
+	    session.setAttribute("imgUtil", new ImageUtil());
 	   System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxx"+listTrainingRegister);
 		List<Department> listDepartment = departmentService.getAllDepartments();
 		model.addAttribute("listDepartment", listDepartment);
@@ -124,13 +125,13 @@ public class TrainingRegisterController {
 			if (listTrainingSchedule != null) {
 				model.addAttribute("listTrSch", listTrainingSchedule);
 			}
-			
+			session.setAttribute("imgUtil", new ImageUtil());
 			List<Department> listDepartment = departmentService.getAllDepartments();
 			model.addAttribute("listDepartment", listDepartment);
 			List<Employee> listEmployee = employeeService.getAllEmployees();
 			model.addAttribute("listEmployee", listEmployee);
-			TrainingRegister TrainingRegisterEdit = trainingRegisterService.findTrainingRegisterById(id);
-			model.addAttribute("trainingRegister", TrainingRegisterEdit);
+			TrainingRegister trainingRegisterEdit = trainingRegisterService.findTrainingRegisterById(id);
+			model.addAttribute("trainingRegister", trainingRegisterEdit);
 			
 
 			return"editTrainingRegister";

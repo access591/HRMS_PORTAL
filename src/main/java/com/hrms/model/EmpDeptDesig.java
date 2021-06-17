@@ -8,7 +8,7 @@ public class EmpDeptDesig {
 	
 	public EmpDeptDesig() {
 		super();
-		// TODO Auto-generated constructor stub
+		
 	}
 	public EmpDeptDesig(String empName, String deptName, String desgName) {
 		super();

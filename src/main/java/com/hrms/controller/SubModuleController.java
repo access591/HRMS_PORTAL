@@ -128,7 +128,7 @@ public class SubModuleController {
 
 		List<Module> modulesList = moduleService.getActiveModules();
 		model.addAttribute("modulesList", modulesList);
-
+		session.setAttribute("imgUtil", new ImageUtil());
 		session.setAttribute("username", session.getAttribute("username"));
 		return pageMappingService.PageRequestMapping(reqPageedit,editPageNo);
 	}

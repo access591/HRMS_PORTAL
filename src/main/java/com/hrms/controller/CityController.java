@@ -77,7 +77,7 @@ public class CityController {
 	        if(page==null || page < 1 || page > pagedListHolder.getPageCount())page=1;
 
 	        modelAndView.addObject("page", page);
-	        if(page == null || page < 1 || page > pagedListHolder.getPageCount()){
+	        if(page < 1 || page > pagedListHolder.getPageCount()){
 	            pagedListHolder.setPage(0);
 	            modelAndView.addObject("userList", pagedListHolder.getPageList());
 	        }

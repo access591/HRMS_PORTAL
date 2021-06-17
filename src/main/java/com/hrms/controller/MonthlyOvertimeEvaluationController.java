@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.hrms.ImageUtil;
 import com.hrms.model.Department;
 import com.hrms.model.Designation;
 import com.hrms.model.EmpMonOvertime;
@@ -55,11 +56,11 @@ public class MonthlyOvertimeEvaluationController {
 		
 		List<EmpMonOvertime> listOverTimeR = empMontOvertimeRegister.getAllMontOvertimeRegister();
 		
-		List<EmpMonOvertimeUtil>listOverTimeEval= new ArrayList<EmpMonOvertimeUtil>();
+		List<EmpMonOvertimeUtil>listOverTimeEval= new ArrayList<>();
 		  for (int i = 0; i < listOverTimeR.size(); i++) {
 			  String empCode = listOverTimeR.get(i).getEmployee().getEmpCode();
 			  EmpMonOvertimeUtil ovTime=new EmpMonOvertimeUtil();
-			  
+				session.setAttribute("imgUtil", new ImageUtil());
 			  
 
 			  Employee employee = employeeService.findEmployeeById(empCode);
@@ -88,7 +89,7 @@ public class MonthlyOvertimeEvaluationController {
     public List<EmpMonOvertimeUtil>  getLocalConvyenceById(@PathVariable(value = "id") String id,Model model,HttpSession session) {
 		Department d = departmentService.findDepartmentById(id);
 		List<Employee> e = employeeService.findByDepartmentCode(d.getDepartmentCode());
-		List<EmpMonOvertimeUtil> lisOvertimeRegisterUtil = new ArrayList<EmpMonOvertimeUtil>();
+		List<EmpMonOvertimeUtil> lisOvertimeRegisterUtil = new ArrayList<>();
 		for (int i = 0; i < e.size(); i++) {
 			String empCode = e.get(i).getEmpCode();
 			EmpMonOvertimeUtil lc = new EmpMonOvertimeUtil();
@@ -104,14 +105,14 @@ public class MonthlyOvertimeEvaluationController {
 	@ResponseBody
     @GetMapping("/viewMonthOverTimeRegisterByEmployee/{id}")
     public List<EmpMonOvertimeUtil>  viewOverTimeRegisterByEmployee(@PathVariable(value = "id") String id,Model model,HttpSession session) {
-		// Department d=departmentService.findDepartmentById(id);
+		
 
 		List<Employee> employee = employeeService.findByempCode(id);
-		List<EmpMonOvertimeUtil> lisOver = new ArrayList<EmpMonOvertimeUtil>();
+		List<EmpMonOvertimeUtil> lisOver = new ArrayList<>();
 		
 		
 		for (int i = 0; i < employee.size(); i++) {
-			String empCode = employee.get(i).getEmpCode();	
+			
 			EmpMonOvertimeUtil listEmp = new EmpMonOvertimeUtil();
 			Designation designation = designationService.findDesignationById(employee.get(i).getDesignationCode());
 			listEmp.setDesgName(designation.getDesgName());
@@ -126,9 +127,9 @@ public class MonthlyOvertimeEvaluationController {
     }
 	
 	@PostMapping("/saveOvertimeEvaluation")
-	public String saveOvertimeEvaluation(@ModelAttribute("monthOverTimeRegister")EmpMonOvertimeUtil u, Model model, HttpSession session,HttpServletRequest request) throws ParseException {
+	public String saveOvertimeEvaluation(@ModelAttribute("monthOverTimeRegister")EmpMonOvertimeUtil u, Model model, HttpSession session,HttpServletRequest request) {
 		String insertedBY = (String) session.getAttribute("USER_NAME");
-		EmpMonOvertime OvertimeEval = new EmpMonOvertime();
+		EmpMonOvertime overtimeEval = new EmpMonOvertime();
 		Employee e = new Employee();
 		int flag = 0;
 		int counter = 1;
@@ -140,32 +141,32 @@ public class MonthlyOvertimeEvaluationController {
 					System.out.println("counter::::::::::::::::::::" + i);
 
 					if (request.getParameter("oTimeRate" + i) != null) {
-						OvertimeEval.setoTimeRate(request.getParameter("oTimeRate" + i));
+						overtimeEval.setoTimeRate(request.getParameter("oTimeRate" + i));
 					} else {
-						OvertimeEval.setoTimeRate("" + i);
+						overtimeEval.setoTimeRate("" + i);
 					}
 
 					if (request.getParameter("status" + i) != null) {
-						OvertimeEval.setStatus(request.getParameter("status" + i));
+						overtimeEval.setStatus(request.getParameter("status" + i));
 					} else {
-						OvertimeEval.setStatus("" + i);
+						overtimeEval.setStatus("" + i);
 					}
 
 					if (request.getParameter("payableAmt" + i) != null) {
-						OvertimeEval.setPayableAmt(request.getParameter("payableAmt" + i));
+						overtimeEval.setPayableAmt(request.getParameter("payableAmt" + i));
 					} else {
-						OvertimeEval.setPayableAmt("" + i);
+						overtimeEval.setPayableAmt("" + i);
 					}
 
 					if (request.getParameter("empCode" + i) != null) {
 						e.setEmpCode(request.getParameter("empCode" + i));
-						OvertimeEval.setEmployee(e);
+						overtimeEval.setEmployee(e);
 
 					}
 
-					OvertimeEval.setoTimeMonth(u.getoTimeMonth());
-					OvertimeEval.setInsBy(insertedBY);
-					insertStatusMR = empMontOvertimeRegister.addMontOvertimeRegister(OvertimeEval);
+					overtimeEval.setoTimeMonth(u.getoTimeMonth());
+					overtimeEval.setInsBy(insertedBY);
+					insertStatusMR = empMontOvertimeRegister.addMontOvertimeRegister(overtimeEval);
 
 					if (insertStatusMR) {
 						System.out.println("Counter" + flag);
@@ -184,7 +185,7 @@ public class MonthlyOvertimeEvaluationController {
 	}
 
 } catch (Exception x) {
-	// TODO: handle exception
+x.printStackTrace();
 }
 session.setAttribute("username", session.getAttribute("username"));
 
