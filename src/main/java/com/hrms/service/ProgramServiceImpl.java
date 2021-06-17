@@ -53,7 +53,12 @@ public class ProgramServiceImpl implements ProgramService {
 
 	@Override
 	public void removeProgram(String id) {
-		this.programDao.delete(id);
+		try {
+			this.programDao.delete(id);
+		} catch (Exception e) {
+		
+			e.printStackTrace();
+		}
 
 	}
 
