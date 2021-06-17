@@ -25,8 +25,7 @@ public class MiscAllowanceDeductionServiceImpl implements MiscAllowanceDeduction
 	@Override
 	public List<MiscAllowance> getAllMiscAllowanceDeduction() {
 
-		List<MiscAllowance> listMiscAllowanceDeduction = miscAllowanceDeductionDao.findAll();
-		return listMiscAllowanceDeduction;
+		return miscAllowanceDeductionDao.findAll();
 
 	}
 
