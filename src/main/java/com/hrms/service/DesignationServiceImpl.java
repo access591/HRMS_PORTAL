@@ -20,8 +20,8 @@ public class DesignationServiceImpl implements DesignationService {
 
 	@Override
 	public List<Designation> getAllDesignations() {
-		List<Designation> listDesignation = designationDao.findAll();
-		return listDesignation;
+		return designationDao.findAll();
+		 
 	}
 
 	@Override

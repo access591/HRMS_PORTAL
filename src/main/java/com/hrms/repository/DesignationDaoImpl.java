@@ -28,7 +28,7 @@ public class DesignationDaoImpl extends AbstractGenericDao<Designation>  impleme
 					.add(Restrictions.eq("desgName", designation.getDesgName())).uniqueResult();
 
 		} catch (Exception e) {
-			logger.info("DepartmentDaoImpl.checkDepartmentExists" + e.getMessage());
+			e.printStackTrace();
 		}
 
 		return desName;

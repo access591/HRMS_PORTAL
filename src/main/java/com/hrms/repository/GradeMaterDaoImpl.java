@@ -23,7 +23,7 @@ public class GradeMaterDaoImpl extends AbstractGenericDao<Grade> implements Grad
 					.add(Restrictions.eq("gardeName", grade.getGardeName())).uniqueResult();
 
 		} catch (Exception e) {
-			logger.info("GradeMaterDaoImpl.checkGradeExists" + e.getMessage());
+			e.printStackTrace();
 		}
 
 		return gradeName;
