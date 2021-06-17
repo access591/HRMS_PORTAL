@@ -38,7 +38,9 @@ public class CategoryController {
 	public String categoryMaster(Model model,HttpSession httpSession) {
 	
 		String userCode = (String) httpSession.getAttribute("username");
-
+		if (httpSession.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
 		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
 		if (modules != null) {
 			model.addAttribute("modules", modules);

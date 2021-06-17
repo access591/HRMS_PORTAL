@@ -51,6 +51,9 @@ public class AttendanceRegisterController {
 		List<Employee> lrt = employeeService.getAllEmployees();
 		model.addAttribute("listEmployee", lrt);
 		String userCode = (String) session.getAttribute("username");
+		if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
 		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
 		if (modules != null) {
 			model.addAttribute("modules", modules);

@@ -34,7 +34,9 @@ public class CopyMasterSheetController {
 		if (modules != null) {
 			model.addAttribute("modules", modules);
 		}
-
+		if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
 		session.setAttribute("username", session.getAttribute("username"));
 
 		return pageMappingService.PageRequestMapping(reqPage, pageno);

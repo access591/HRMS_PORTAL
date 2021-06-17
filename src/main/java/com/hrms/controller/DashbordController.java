@@ -23,6 +23,9 @@ public class DashbordController {
 	public String getDashBoardData(Model model,HttpSession session) {
 		String userCode= (String)session.getAttribute("username");
 		session.setAttribute("imgUtil", new ImageUtil());
+		if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
 		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
 		if (modules != null) {
 			model.addAttribute("modules", modules);
