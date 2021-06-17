@@ -43,11 +43,22 @@ public class EmployeeRequisitionApprovalController {
 		}
 		
 		
-		List<CommonUtil> listCommonUtil = new ArrayList<CommonUtil>();
+
+	}
+	
+	
+	@GetMapping("employeeRequisitionApproval")
+	public String employeeRequisitionApproval(@ModelAttribute("commonUtil")CommonUtil commonUtil ,Model model, HttpSession session) {
+		
+		if(session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
+		
+	
 		List<EmployeeRequisition> listEmployeeReq = employeeRequisitionService.getAllPendingEmployeeRequisition();
 		
 		for(int i=0;i<listEmployeeReq.size();i++) {
-			Department department;
+			
 			try {
 				//department = departmentService.findDepartmentById(listEmployeeReq.get(i).getDeptCode());
 				EmployeeRequisition em = listEmployeeReq.get(i);
@@ -84,8 +95,12 @@ public class EmployeeRequisitionApprovalController {
 	@GetMapping("approveRequisition/{id}/{status}")
 	public String approveRequisition(@PathVariable("id") String reqCode,@PathVariable("status") String approvalStatus) {
 		
-		System.out.println("hiiiiiii" + reqCode);
-		//System.out.println("hiiiiiii" + name);
+
+		
+		if(session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
+
 		
 		
 		employeeRequisitionService.approvedByReqCodeAndStatus(reqCode,approvalStatus);
