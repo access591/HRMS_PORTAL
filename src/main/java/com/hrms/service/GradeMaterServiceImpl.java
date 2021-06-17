@@ -23,8 +23,8 @@ public class GradeMaterServiceImpl implements GradeMaterService{
 
 	@Override
 	public List<Grade> getAllGrades() {
-		List<Grade> listGrade = gradeMaterDao.findAll();
-		return listGrade;
+		return gradeMaterDao.findAll();
+	
 
 	}
 

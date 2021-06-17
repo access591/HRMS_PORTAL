@@ -82,8 +82,8 @@ public class EmployeeController {
 	@GetMapping("/employeeMaster")
 	public ModelAndView employeeMaster(Model model, HttpSession session) {
    
-		  List<City>CityList =cityService.getAllCities();
-		  model.addAttribute("CityList", CityList);
+		  List<City>cityList =cityService.getAllCities();
+		  model.addAttribute("CityList", cityList);
 		  List<State> listState = stateService.getAllStates();
 		  model.addAttribute("listState", listState);
 		  List<Country> listCountry = countryService.getAllCountrys();
@@ -92,7 +92,7 @@ public class EmployeeController {
 		 List<ArmsLicenseDetails>listArmsLicense=armsLicenseService.getAllArmsLicenses();
 		model.addAttribute("listArmsLicense", listArmsLicense);
 		
-		List<EmployeeUtil> listEmployeeUtil= new ArrayList<EmployeeUtil>();
+		List<EmployeeUtil> listEmployeeUtil= new ArrayList<>();
 		EmployeeUtil empl;
 		List<EmployeeUtil>listEmployee22= employeeService.getAllEmployeesAndArms();
 		
@@ -267,7 +267,7 @@ public class EmployeeController {
 			String empCode= employee.getEmpCode();
 			armsLicense.setEmpCode(empCode);
 			armsLicenseService.addArmsLicenseDetails(armsLicense);
-			log.info("HttpStatus===" + new ResponseEntity<>(HttpStatus.OK));
+			
 			session.setAttribute("username", session.getAttribute("username"));
 		} catch (IOException e) {
 
@@ -290,8 +290,8 @@ public class EmployeeController {
 		int editPageNo = 44;
 		String reqPageedit = "/editEmployee";
 		
-		  List<City>CityList =cityService.getAllCities();
-		  model.addAttribute("CityList", CityList);
+		  List<City>cityList =cityService.getAllCities();
+		  model.addAttribute("CityList", cityList);
 		  List<State> listState = stateService.getAllStates();
 		  model.addAttribute("listState", listState);
 		  List<Country> listCountry = countryService.getAllCountrys();
@@ -405,7 +405,7 @@ public class EmployeeController {
 		
 		//step 2 complete==================================
 		armsLicense.setArmsCode(eutility.getArmsCode());
-		//armsLicense.setEmpCode(eutility.getEmpCode());
+	
 		armsLicense.setName(eutility.getName());
 		armsLicense.setFatherName(eutility.getFatherName());
 		armsLicense.setAddressArms(eutility.getAddressArms());
