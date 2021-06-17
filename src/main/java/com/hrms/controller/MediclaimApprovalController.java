@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import com.hrms.ImageUtil;
 import com.hrms.model.Employee;
 import com.hrms.model.MedicalReimbursement;
 import com.hrms.model.MedicalReimbursementDetail;
@@ -48,7 +49,7 @@ public class MediclaimApprovalController {
 				 
 				 model.addAttribute("listMedicalReimbursementDetail", listMedicalR);
 				 session.setAttribute("username", session.getAttribute("username"));
-				 
+				session.setAttribute("imgUtil", new ImageUtil()); 
 			}
 		} catch (Exception e) {
 	

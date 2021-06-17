@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.hrms.ImageUtil;
 import com.hrms.model.EmployeeRequisition;
 import com.hrms.model.EmployeeRequisitionDetail;
 import com.hrms.model.MenuModule;
@@ -69,7 +70,7 @@ public class RequisitionAdvertisementController {
 		if (modules != null) {
 			model.addAttribute("modules", modules);
 		}
-		
+		httpSession.setAttribute("imgUtil", new ImageUtil());
 		List<EmployeeRequisition> listEmployeeRequisition = employeeRequisitionService.findEmployeeReqByStatusY();
 		if(listEmployeeRequisition != null) {
 			model.addAttribute("listEmployeeRequisition", listEmployeeRequisition);

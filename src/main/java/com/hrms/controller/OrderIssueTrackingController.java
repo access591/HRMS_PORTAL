@@ -29,6 +29,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.hrms.ImageUtil;
 import com.hrms.model.BudgetProvision;
 import com.hrms.model.Department;
 import com.hrms.model.Employee;
@@ -78,6 +79,7 @@ public class OrderIssueTrackingController {
 		if(listOrderIssueTracking != null) {
 			model.addAttribute("listOrderIssueTracking", listOrderIssueTracking);
 		}
+		session.setAttribute("imgUtil", new ImageUtil());
 		session.setAttribute("username", userCode);
 		return "orderIssueTracking";
 		
@@ -104,7 +106,7 @@ public class OrderIssueTrackingController {
 	@GetMapping("editOrderTracking/{id}")
 	public String editOrderIssueTracking(@PathVariable("id")String orderIssueTrackingId,
 			@ModelAttribute("orderIssueTracking")OrderIssueTracking orderIssueTracking
-			,Model model) {
+			,Model model,HttpSession session) {
 		
 		OrderIssueTracking b = orderIssueTrackingService.findOrderIssueTrackingById(Long.parseLong(orderIssueTrackingId));
 		
@@ -120,6 +122,7 @@ public class OrderIssueTrackingController {
 		if (employeeList != null) {
 			model.addAttribute("employeeList", employeeList);
 		}
+		session.setAttribute("imgUtil", new ImageUtil());
 		return "editOrderIssueTracking"; //editBudgetProvision.html
 	}
 	
