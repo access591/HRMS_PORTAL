@@ -21,11 +21,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.hrms.model.ArmsLicenseDetails;
 import com.hrms.model.BudgetProvision;
 import com.hrms.model.Department;
 import com.hrms.model.MenuModule;
 import com.hrms.reports.ArmsReport;
 import com.hrms.reports.BudgetReport;
+import com.hrms.service.ArmsLicenseService;
 import com.hrms.service.BudgetProvisionService;
 import com.hrms.service.DepartmentService;
 import com.hrms.service.EmployeeService;
@@ -126,10 +128,13 @@ public class BudgetProvisionController {
 	
 	
 	@Autowired ArmsReport armsReport;
+	@Autowired ArmsLicenseService armsLicenseService;
+	
 	@GetMapping("armsreport")
 	public String armsLicensesReport(HttpServletResponse response, HttpServletRequest request) throws IOException {
 		
-		armsReport.armsReportDataSource("EMP-001", response, request);
+		List<ArmsLicenseDetails> listArmsReport = armsLicenseService.armsLicenseDetailsList();
+		armsReport.createArmsLicensesReport(response, request, listArmsReport);
 		return "orderIssueTracking";
 		
 	}

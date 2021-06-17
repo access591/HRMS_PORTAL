@@ -179,7 +179,7 @@
 						<jr:detailCell style="Table_TD" height="30">
 							<textField>
 								<reportElement x="0" y="0" width="114" height="30" uuid="3b96989e-bc56-47e4-9602-01a6aa04fe9c"/>
-								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textElement textAlignment="Right" verticalAlignment="Middle"/>
 								<textFieldExpression><![CDATA[$F{expenditureAmount}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
@@ -196,7 +196,7 @@
 						<jr:detailCell style="Table_TD" height="30">
 							<textField>
 								<reportElement x="0" y="0" width="115" height="30" uuid="0c0df5c0-d93b-4baf-84f8-58c3c4de132d"/>
-								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textElement textAlignment="Right" verticalAlignment="Middle"/>
 								<textFieldExpression><![CDATA[$F{balanceAmount}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
