@@ -63,8 +63,7 @@ public class MedicalReimbursementController {
 	}
 	
 	@PostMapping("/saveMedicalReimbursement")
-	String saveLeaveDetail(@ModelAttribute("medicalReimbursement") MedicalReimbursementUtil medicalReimbursement, Model model,
-			HttpSession session,HttpServletRequest request){
+	String saveMedicalReimbursement(@ModelAttribute("medicalReimbursement") MedicalReimbursementUtil medicalReimbursement, Model model,HttpSession session,HttpServletRequest request){
 		
 		 MedicalReimbursement m2=new MedicalReimbursement();
 		 MedicalReimbursementDetail m4=new MedicalReimbursementDetail();
@@ -179,28 +178,7 @@ public class MedicalReimbursementController {
 		
 	}
 	
-	
-	
-	/*
-	 * @GetMapping("/viewMedicalReimbursement") String
-	 * viewMedicalReimbursement(Model model, HttpSession session) {
-	 * 
-	 * List<Employee> listEmployee = employeeService.getAllEmployees();
-	 * model.addAttribute("listEmployee", listEmployee);
-	 * List<MedicalReimbursement>listMedicalReimbursement=
-	 * medicalReimbursementService.getAllMedicalReimbursement();
-	 * model.addAttribute("listMedicalReimbursement", listMedicalReimbursement);
-	 * List<MedicalReimbursementDetail>
-	 * listMedicalReimbursementDetail=medicalReimbursementDetailsService.
-	 * getAllMedicalReimbursementDetails();
-	 * model.addAttribute("listMedicalReimbursementDetail",
-	 * listMedicalReimbursementDetail); String userCode = (String)
-	 * session.getAttribute("username"); List<MenuModule> modules =
-	 * moduleService.getAllModulesList(userCode); if (modules != null) {
-	 * model.addAttribute("modules", modules); } return "viewMedicalReimbursement";
-	 * 
-	 * }
-	 */
+
 
 	
 	@GetMapping(value = { "/deleteMedicalReimbursement/{id}" })
@@ -237,25 +215,11 @@ public class MedicalReimbursementController {
 	    return "editMedicalReimbursement";
 	}
 	
-	/*
-	 * @GetMapping("/updateMedicalReimbursement") String
-	 * updateMedicalReimbursement(Model model, HttpSession session) {
-	 * 
-	 * List<Employee> listEmployee = employeeService.getAllEmployees();
-	 * model.addAttribute("listEmployee", listEmployee);
-	 * List<MedicalReimbursement>listMedicalReimbursement=
-	 * medicalReimbursementService.getAllMedicalReimbursement();
-	 * model.addAttribute("listMedicalReimbursement", listMedicalReimbursement);
-	 * String userCode = (String) session.getAttribute("username"); List<MenuModule>
-	 * modules = moduleService.getAllModulesList(userCode); if (modules != null) {
-	 * model.addAttribute("modules", modules); } return "editMedicalReimbursement";
-	 * 
-	 * }
-	 */
+
 	 @CrossOrigin
 	    @GetMapping("/medicalReimbursementViewDetails/{id}")
 	    public ResponseEntity<MedicalReimbursementUtil> getMedicalReimbursementById(@PathVariable(value = "id") String id) {
-		 Employee e= new Employee();
+		
 		 MedicalReimbursementUtil medicalReimbursement=new MedicalReimbursementUtil();
 		 MedicalReimbursement m1 = medicalReimbursementService.findByIdMedicalReimbursementMaster(id);
 		

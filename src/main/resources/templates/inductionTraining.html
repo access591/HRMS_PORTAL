@@ -223,11 +223,11 @@ $("table").on("keyup", ".pas", function () {
 											<table id="example" aria-describedby="example" class="table" style="width:100%">
 											<thead>
 												<tr>
-													<th>Department Code.</th>
-													<th>Department Name.</th>
-													<th>Contact Person</th>
-													<th>Induction Date</th>
-													<th>Duration</th>
+													<th  scope="col">Department Code.</th>
+													<th  scope="col">Department Name.</th>
+													<th  scope="col">Contact Person</th>
+													<th  scope="col">Induction Date</th>
+													<th  scope="col">Duration</th>
 													
 													
 												</tr>
@@ -284,7 +284,7 @@ $("table").on("keyup", ".pas", function () {
 												<th scope="col">Employee Name </th>
 												<th scope="col">Department Name</th>
 												<th scope="col">Designation</th>
-												<!-- <th scope="col">Tour Pan Date </th> -->
+											
 												<th scope="col">Action </th>
 											</tr >
 											
@@ -299,7 +299,7 @@ $("table").on("keyup", ".pas", function () {
 										<td  th:text="${listOfloc.desgName}"></td>
 									
 										  <td>
-										<!--   <a th:href="@{/editLocalConvyence/{id}/(id=${listOfloc.id})}"><em class="fa fa-edit"></em></a> -->
+									
 										  
 						    <a th:href="@{/deleteInductionTraining/{id}/(id=${listOfloc.id})}"onclick="return confirm('Are you sure?')"><em class="fa fa-times"></em></a>
 									

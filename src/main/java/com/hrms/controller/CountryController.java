@@ -22,8 +22,7 @@ import com.hrms.service.CountryService;
 @Controller
 public class CountryController {
 	
-	int pageno=29;
-	String reqPage="/countryMaster";
+	
 	@Autowired
 	private ModuleService moduleService;
 	@Autowired
@@ -40,16 +39,22 @@ public class CountryController {
 	public String countryMaster(Model model, HttpSession session) {
 
 		String userCode = (String) session.getAttribute("username");
-		session.setAttribute("imgUtil", new ImageUtil());
-		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
-		if (modules != null) {
-			model.addAttribute("modules", modules);
+		if (userCode!=null) {
+			session.setAttribute("imgUtil", new ImageUtil());
+			List<MenuModule> modules = moduleService.getAllModulesList(userCode);
+			if (modules != null) {
+				model.addAttribute("modules", modules);
+			}
+			List<Country> listCountry = countryService.getAllCountrys();
+			model.addAttribute("listCountry", listCountry);
+			session.setAttribute("imgUtil", new ImageUtil());
+			session.setAttribute("username", session.getAttribute("username"));
+			return "countryMaster";
 		}
-		List<Country> listCountry = countryService.getAllCountrys();
-		model.addAttribute("listCountry", listCountry);
-
-
-		return pageMappingService.PageRequestMapping(reqPage, pageno);
+		else
+		{
+			  return "redirect:" + "./";
+		}
 	}
 
 	/**
@@ -70,7 +75,7 @@ public class CountryController {
 		model.addAttribute("listCountry", listCountry);
 		
 
-		 return "redirect:"+pageMappingService.PageRequestMapping(reqPage,pageno);
+		return"redirect:/countryMaster";
 
 	}
 	/**
@@ -84,14 +89,12 @@ public class CountryController {
 	@GetMapping(value = { "/editCountry/{id}" })
 	public String editCountry(@PathVariable("id") String id, Model model, HttpSession session) {
 
-		int editPageNo = 30;
-		String reqPageedit = "/editCountry";
-
+	
 		Country countryEdit = countryService.findCountryById(id);
 		model.addAttribute("countryEdit", countryEdit);
 	
 
-		return pageMappingService.PageRequestMapping(reqPageedit, editPageNo);
+		return "editCountry";
 	}
 
 	/**
@@ -108,7 +111,7 @@ public class CountryController {
 		country.setUpdBy(updatedBY);
 		this.countryService.updateCountry(country);
 
-		return "redirect:/" + pageMappingService.PageRequestMapping(reqPage, pageno);
+		return"redirect:/countryMaster";
 	}
 	
 	/**
@@ -121,6 +124,6 @@ public class CountryController {
 	@GetMapping(value = { "/deleteCountry/{id}" })
 	public String deleteCountry(@PathVariable("id") String id, Model model, HttpSession session) {
 		this.countryService.removeCountry(id);
-		return "redirect:/" + pageMappingService.PageRequestMapping(reqPage, pageno);
+		return"redirect:/countryMaster";
 	}
 }

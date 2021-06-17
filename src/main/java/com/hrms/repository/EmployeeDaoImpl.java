@@ -18,24 +18,31 @@ import com.hrms.model.Module;
 public class EmployeeDaoImpl  extends AbstractGenericDao<Employee> implements EmployeeDao{
 
 	@Autowired SessionFactory sessionFactory;
+	Session session=null;
+	Query query =null;
 	@Override
 	public List<Employee> getEmployeeByDeptCode(String deptCode) {
 		
-		Session session = this.sessionFactory.getCurrentSession();
-		Query query = session.createQuery("from Employee e where e.departmentCode = :deptCode");
-		query.setParameter("deptCode", deptCode);
-		//List list = query.list();
-		return query.list();
+		 try {
+			session = this.sessionFactory.getCurrentSession();
+			 query = session.createQuery("from Employee e where e.departmentCode = :deptCode");
+			query.setParameter("deptCode", deptCode);
+			
+			return query.list();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		 return null; 
 	}
 	@Override
 
 	public List<EmployeeUtil> getAllEmployeesAndArms() {
 		List employeeUtils = null;
-		
+		 String sql=null;
 		try {
-			Session session = this.sessionFactory.getCurrentSession();
-			 String sql =" SELECT  DISTINCT  e.EMPLOYEE_CODE,a.ARMS_CODE,e.EMPLOYEE_NAME,e.CATEGORY_CODE,e.DEPARTMENT_CODE,e.DESIGNATION_CODE,e.EMP_IMG\r\n"
-					+ "				FROM 	M_EMPLOYEE e ,ARMS_LICENSE_DETAILS a where e.EMPLOYEE_CODE= a.EMPLOYEE_CODE";
+			 session = this.sessionFactory.getCurrentSession();
+			  sql =" SELECT  DISTINCT  e.EMPLOYEE_CODE,a.ARMS_CODE,e.EMPLOYEE_NAME,e.CATEGORY_CODE,e.DEPARTMENT_CODE,e.DESIGNATION_CODE,e.EMP_IMG\r\n"
+					+"FROM M_EMPLOYEE e ,ARMS_LICENSE_DETAILS a where e.EMPLOYEE_CODE= a.EMPLOYEE_CODE";
 			
 			 SQLQuery query = getSession().createSQLQuery(sql);
 			  employeeUtils = query.list();
@@ -48,20 +55,25 @@ public class EmployeeDaoImpl  extends AbstractGenericDao<Employee> implements Em
 	}
 
 	public List<Employee> getEmployeeByCategoryCode(String categoryCode) {
-		
-		Session session = this.sessionFactory.getCurrentSession();
-		Query query = session.createQuery("from Employee e where e.categoryCode = :categoryCode ");
-		query.setParameter("categoryCode", categoryCode);
-		List<Employee> employeeList = query.list();
-		return employeeList;
-
+	
+		List<Employee> employeeList=null;
+		 try {
+			session = this.sessionFactory.getCurrentSession();
+			 query = session.createQuery("from Employee e where e.categoryCode = :categoryCode ");
+			query.setParameter("categoryCode", categoryCode);
+			employeeList = query.list();
+			return employeeList;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		 return null;
 	}
 	@Override
 	public List<Employee> findByDateOfJoiningMonth(int month) {
 		
 		try {
-		Session session = this.sessionFactory.getCurrentSession();
-		Query query = session.createQuery("SELECT e FROM Employee e WHERE MONTH(e.dateOfJoining) = :month ");
+		session = this.sessionFactory.getCurrentSession();
+		 query = session.createQuery("SELECT e FROM Employee e WHERE MONTH(e.dateOfJoining) = :month ");
 		query.setParameter("month", month);
 		List result = query.list();
 		return result;
@@ -74,16 +86,16 @@ public class EmployeeDaoImpl  extends AbstractGenericDao<Employee> implements Em
 
 	@Override
 	public List<Employee> findByDepartmentCode(String deptCode) {
-		Session session = this.sessionFactory.getCurrentSession();
-		Query query = session.createQuery("from Employee e where e.departmentCode = :deptCode ");
+		 session = this.sessionFactory.getCurrentSession();
+		 query = session.createQuery("from Employee e where e.departmentCode = :deptCode ");
 		query.setParameter("deptCode", deptCode);
 		List<Employee> employeeList = query.list();
 		return employeeList;
 	}
 	@Override
 	public List<Employee> findByIdList(String empCode) {
-		Session session = this.sessionFactory.getCurrentSession();
-		Query query = session.createQuery("from Employee e where e.empCode = :empCode ");
+	session = this.sessionFactory.getCurrentSession();
+		 query = session.createQuery("from Employee e where e.empCode = :empCode ");
 		query.setParameter("empCode", empCode);
 		List<Employee> employeeList = query.list();
 		return employeeList;

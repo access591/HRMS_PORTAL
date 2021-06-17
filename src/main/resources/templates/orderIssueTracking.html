@@ -100,8 +100,6 @@ body {
 													style="color: red">*</label> <select class="form-control"
 													onchange="changeCategory()" >
 													<option value="">Select Branch</option>
-													<!-- <option th:each="employee : ${employeeList}"
-														th:text="${employee.empName}" th:value="${employee.empCode}"></option> -->
 													<option value="">Branch</option>
 												</select>
 											</div>
@@ -130,8 +128,10 @@ body {
 
 										</div>
 
+
 										<div style="height:25px">
 										</div>
+
 										<Button type="submit" class="btn btn-primary">Submit</Button>
 										<Button type="reset" class="btn btn-primary">Reset</Button>
 
@@ -158,12 +158,12 @@ body {
 								<table id="datatables-buttons" class="table table-striped display" style="width:100%"aria-describedby="datatables-buttons">
 										<thead>
 											<tr>
-												<th class="text-center">Date of Issue</th>
-												<th class="text-center">Order Number</th>
-												<th class="text-center">Order Title</th>
-												<th class="text-center">Order Description</th>
-												<th class="text-center">File Name</th>
-												<th class="text-center">Action</th>
+												<th  scope="col" class="text-center">Date of Issue</th>
+												<th  scope="col" class="text-center">Order Number</th>
+												<th scope="col"  class="text-center">Order Title</th>
+												<th  scope="col" class="text-center">Order Description</th>
+												<th scope="col" class="text-center">File Name</th>
+												<th scope="col" class="text-center">Action</th>
 												
 											</tr>
 										</thead>
