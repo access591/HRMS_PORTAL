@@ -48,6 +48,9 @@ public class EmployeeRequisitionApprovalController {
 	@GetMapping("employeeRequisitionApproval")
 	public String employeeRequisitionApproval(@ModelAttribute("commonUtil")CommonUtil commonUtil ,Model model, HttpSession session) {
 		
+		if(session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
 		
 		List<CommonUtil> listCommonUtil = new ArrayList<>();
 		List<EmployeeRequisition> listEmployeeReq = employeeRequisitionService.getAllPendingEmployeeRequisition();
@@ -91,7 +94,9 @@ public class EmployeeRequisitionApprovalController {
 	public String approveRequisition(@PathVariable("id") String reqCode,@PathVariable("status") String approvalStatus) {
 		
 		
-		
+		if(session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
 		
 		
 		employeeRequisitionService.approvedByReqCodeAndStatus(reqCode,approvalStatus);
