@@ -1,6 +1,6 @@
 package com.hrms.controller;
 
-import java.text.DateFormat;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.hrms.ImageUtil;
 import com.hrms.model.Employee;
 
 import com.hrms.model.MedicalReimbursement;
@@ -59,6 +60,8 @@ public class MedicalReimbursementController {
 		if (modules != null) {
 			model.addAttribute("modules", modules);
 		}
+		session.setAttribute("username", session.getAttribute("username"));
+		session.setAttribute("imgUtil", new ImageUtil());
 		return "medicalReimbursement";
 	}
 	
@@ -204,7 +207,7 @@ public class MedicalReimbursementController {
 	
 	@GetMapping(value = {"/editMedicalReimbursement/{id}"})
 	public String editMedicalReimbursement(@PathVariable("id")String id,  Model model,HttpSession session)
-	 { 
+	 { session.setAttribute("imgUtil", new ImageUtil());
 		List<Employee> listEmployee = employeeService.getAllEmployees();
 		model.addAttribute("listEmployee", listEmployee);
 		

@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.hrms.ImageUtil;
 import com.hrms.model.Department;
 import com.hrms.model.Designation;
 import com.hrms.model.Employee;
@@ -78,6 +79,7 @@ public class LocalConvyenceController {
 		  model.addAttribute("listOfLoc", listLocalConvyenceUtil);
 		  
 		  String userCode= (String)session.getAttribute("username");
+		  session.setAttribute("imgUtil", new ImageUtil());
 		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
 		if (modules != null) {
 			model.addAttribute("modules", modules);
@@ -246,6 +248,7 @@ public class LocalConvyenceController {
 	@GetMapping(value = {"/editLocalConvyence/{id}"})
 	public String editLocalConvyence(@PathVariable("id")String id,  Model model,HttpSession session)
 	 { 
+		session.setAttribute("imgUtil", new ImageUtil());
 		List<Employee> lrt = employeeService.getAllEmployees();
 		model.addAttribute("listEmployee", lrt);
 		
