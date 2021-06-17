@@ -5,7 +5,7 @@ import java.util.Date;
 import org.springframework.stereotype.Component;
 
 
-
+//EmployeeLeaveRequest
 @Component
 public class CommonUtil {
 
@@ -62,7 +62,7 @@ public class CommonUtil {
 
 	public CommonUtil() {
 		super();
-	
+		// TODO Auto-generated constructor stub
 	}
 
 	
@@ -344,9 +344,36 @@ public class CommonUtil {
 		this.cancelDate = cancelDate;
 	}
 
-	
+	public CommonUtil(String empName, String deptName,  String leaveCode, String toDate,
+			String fromDate, String applyDate, 
+			String approevedBy, String reason, String leaveFor) {
+		super();
+		this.empName = empName;
+		this.deptName = deptName;
+		//this.desgName = desgName;
+		this.leaveCode = leaveCode;
+		this.toDate = toDate;
+		this.fromDate = fromDate;
+		//this.fromDateType = fromDateType;
+		//this.toDateType = toDateType;
+		this.applyDate = applyDate;
+		//this.approvedDate = approvedDate;
+		this.approevedBy = approevedBy;
+		//this.shiftCode = shiftCode;
+		this.reason = reason;
+		this.leaveFor = leaveFor;
+		//this.cancelBy = cancelBy;
+		//this.cancelDate = cancelDate;
+	}
 
+	public CommonUtil(String empName2, String deptName2, String desgName2, String fromDate, String toDate) {
+		this.empName = empName2;
+		this.deptName = deptName2;
+		this.desgName = desgName2;
+		this.fromDate = fromDate;
+		this.toDate = toDate;
 	
+	}
 
 
 	public CommonUtil(String empCode2, String empName2, String deptName2, String martialStatus,
@@ -359,10 +386,16 @@ public class CommonUtil {
 	}
 
 
-	
+	public CommonUtil(String departmentCode, String designationCode, Date dateOfJoining) {
+		//this.de
+	}
 
 
-	
+	public CommonUtil(String empName2, String deptName2, String desgName2) {
+		this.empName = empName2;
+		this.deptName = deptName2;
+		this.desgName = desgName2;
+	}
 
 
 	public CommonUtil(String deptName, String reqCode, Date reqDate, String reqPriority, String reqApprover,

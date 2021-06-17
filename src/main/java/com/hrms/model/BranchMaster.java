@@ -37,7 +37,7 @@ public class BranchMaster {
 
 	public BranchMaster() {
 		super();
-		
+		// TODO Auto-generated constructor stub
 	}
 
 	public Long getBranchId() {

@@ -63,7 +63,7 @@ public class BudgetProvision {
 
 	public BudgetProvision() {
 		super();
-		
+		// TODO Auto-generated constructor stub
 	}
 
 	public Long getBudgetProvisionId() {
