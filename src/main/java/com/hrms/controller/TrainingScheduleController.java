@@ -1,7 +1,6 @@
 package com.hrms.controller;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -19,10 +18,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.hrms.ImageUtil;
-import com.hrms.model.Employee;
-import com.hrms.model.EmployeeRequisition;
-import com.hrms.model.EmployeeRequisitionDetail;
+import com.hrms.model.Employee; 
 import com.hrms.model.MenuModule;
 import com.hrms.model.TrainingRequisition;
 import com.hrms.model.TrainingSchedule;
@@ -56,6 +52,10 @@ public class TrainingScheduleController {
 	public String trainingSchedule(@ModelAttribute("trainingSchedule") TrainingSchedule trainingSchedule, Model model,
 			HttpSession session) {
 
+		if(session.getAttribute("username")==null) {
+			return "redirect:" + "./";
+		}
+		
 		String userCode = (String) session.getAttribute("username");
 		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
 		if (modules != null) {
@@ -69,7 +69,7 @@ public class TrainingScheduleController {
 		if (listTrainingSchedule != null) {
 			model.addAttribute("listTrainingSchedule", listTrainingSchedule);
 		}
-		session.setAttribute("imgUtil", new ImageUtil());
+		
 		List<Employee> listEmployee = employeeService.getAllEmployees();
 		if (listEmployee != null) {
 			model.addAttribute("listEmployee", listEmployee);
@@ -84,6 +84,10 @@ public class TrainingScheduleController {
 	public String saveTrainerSchedule(@ModelAttribute("trainingSchedule") TrainingSchedule trainingSchedule,
 			Model model, HttpSession session) {
 
+		if(session.getAttribute("username")==null) {
+			return "redirect:" + "./";
+		}
+		
 		trainingScheduleService.saveTrainingSchedule(trainingSchedule);
 		return "redirect:trainingSchedule";
 
@@ -91,14 +95,19 @@ public class TrainingScheduleController {
 
 	@GetMapping("edittrainingSchedule/{trScheduleCode}")
 	public String editTrainingSchedule(@PathVariable("trScheduleCode") String trScheduleCode,
-			@ModelAttribute("trainingSchedule") TrainingSchedule trainingSchedule, Model model,HttpSession session) {
+			@ModelAttribute("trainingSchedule") TrainingSchedule trainingSchedule, Model model,
+			HttpSession session) {
 
+		if(session.getAttribute("username")==null) {
+			return "redirect:" + "./";
+		}
+		
 		TrainingSchedule trainingSchedule1 = trainingScheduleService.findTrainingScheduleById(trScheduleCode);
 		if (trainingSchedule1 != null) {
 			model.addAttribute("trainingSchedule", trainingSchedule1);
-			System.out.println("=====>training id " + trainingSchedule1.getTrScheduleCode());
+			
 		}
-		session.setAttribute("imgUtil", new ImageUtil());
+
 		List<TrainingRequisition> listTrainingRequistion = trainingRequistionService.findTrainingRequisitionByStatusY();
 		if (listTrainingRequistion != null) {
 			model.addAttribute("listTrainingRequistion", listTrainingRequistion);
@@ -109,23 +118,26 @@ public class TrainingScheduleController {
 
 	@PostMapping(value = {"updateTrainerSchedule"})
 	public String updateTrainingSchedule(@ModelAttribute("trainingSchedule") TrainingSchedule trainingSchedule,
-			Model model,@RequestParam(name="trScheduleCode",required=false) String trScheduleCode) {
+			Model model,@RequestParam(name="trScheduleCode",required=false) String trScheduleCode,
+			HttpSession session) {
 
-		 System.out.println("=====================>update employee Requisition "+
-		 trScheduleCode);
-		System.out.println("=====================>update employee Requisition " + trainingSchedule.getTrainer());
-
+		if(session.getAttribute("username")==null) {
+			return "redirect:" + "./";
+		}
+		
 		trainingScheduleService.updateTrainingSchedule(trainingSchedule);
 		return "redirect:trainingSchedule";
 	}
 
 	@GetMapping(value = { "deleteTrainingSchedule/{id}" })
 	public String deleteTrainingSchedule(@PathVariable("id") String trScheduleCode, Model model, HttpSession session) {
-		System.out.println("=====================>");
-
+		
+		if(session.getAttribute("username")==null) {
+			return "redirect:" + "./";
+		}
+		
 		trainingScheduleService.removeTrainingSchedule(trScheduleCode);
 
-		// System.out.println("employee requisition id : "+ reqCode);
 		session.setAttribute("username", session.getAttribute("username"));
 		return "redirect:/trainingSchedule";
 	}
