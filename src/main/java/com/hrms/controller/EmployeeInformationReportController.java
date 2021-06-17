@@ -97,10 +97,7 @@ public class EmployeeInformationReportController {
 	public String employeeInformation(Model model, HttpSession session) {
 
 		
-		if(session.getAttribute("username")==null) {
-			return "redirect:" + "./";
-		}
-		
+
 		List<Category> listCategory = categoryService.getAllCategory();
 		if (listCategory != null) {
 			model.addAttribute("listCategory", listCategory);
@@ -143,8 +140,6 @@ public class EmployeeInformationReportController {
 	@PostMapping("/createExcelsheet")
 	public ResponseEntity<InputStreamResource> createExcelsheet(HttpServletRequest req, HttpServletResponse re) {
 
-		
-		
 		String categoryType = req.getParameter("select_category");
 		String employeeType = req.getParameter("employeeName");
 
@@ -188,10 +183,7 @@ public class EmployeeInformationReportController {
 	@GetMapping("/birthAnniversary")
 	public String viewBirthAniversaryUi(Model model, HttpSession session) {
 
-		if(session.getAttribute("username")==null) {
-			return "redirect:" + "./";
-		}
-		
+
 		return "birthAnniversary";
 	}
 
@@ -201,10 +193,7 @@ public class EmployeeInformationReportController {
 			HttpServletResponse response) {
 
 		
-		if(session.getAttribute("username")==null) {
-			return "redirect:" + "./";
-		}
-		
+
 		List<CommonUtil> em = new ArrayList<>();
 		CommonUtil empl;
 		List<Employee> employeeList;
@@ -253,10 +242,7 @@ public class EmployeeInformationReportController {
 	public String employeeJoiningReport(Model model, HttpSession session) {
 
 		
-		if(session.getAttribute("username")==null) {
-			return "redirect:" + "./";
-		}
-		
+
 		List<InterviewMaster> interviewMasterList = interviewMasterService.getFinalSelection();
 
 		if (interviewMasterList != null) {
@@ -273,10 +259,6 @@ public class EmployeeInformationReportController {
 			@RequestParam("reportType") String reportType, Model model, HttpSession session, HttpServletRequest req,
 			HttpServletResponse response) throws IOException {
 
-		if(session.getAttribute("username")==null) {
-			return "redirect:" + "./";
-		}
-		
 		try {
 			
 			ApplicantInfo applicantInfo = applicantInfoService.getApplicantInfoByApplicantCode(empCode);

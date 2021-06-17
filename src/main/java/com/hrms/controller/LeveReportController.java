@@ -94,9 +94,6 @@ public class LeveReportController {
 	public String viewLeaveRegisterReport(Model model, HttpSession session, HttpServletRequest request,
 			HttpServletResponse response) {
 
-		if(session.getAttribute("username")==null) {
-			return "redirect:" + "./";
-		}
 		
 		List<Department> departmentList = departmentService.getAllDepartments();
 		System.out.println("department service======>" + departmentList.size());
@@ -114,10 +111,6 @@ public class LeveReportController {
 			Model model, HttpSession session,
 			HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-		if(session.getAttribute("username")==null) {
-			return "redirect:" + "./";
-		}
-		
 		if (deptCode.equals("ALL")) {
 			System.out.println("All record");
 			
@@ -160,10 +153,6 @@ public class LeveReportController {
 	public String viewLeaveRequestDetailReport(Model model, HttpSession session, HttpServletRequest request,
 			HttpServletResponse response) {
 
-		if(session.getAttribute("username")==null) {
-			return "redirect:" + "./";
-		}
-		
 		System.out.println("leave request report - 1");
 
 		
@@ -187,10 +176,6 @@ public class LeveReportController {
 			@RequestParam("fromDate") Date fromDate, @RequestParam("toDate") Date toDate, Model model,
 			HttpSession session, HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-		if(session.getAttribute("username")==null) {
-			return "redirect:" + "./";
-		}
-		
 		System.out.println("leave request report - 2");
 		String reportFileName = "LeaveDetail";
 
@@ -227,9 +212,6 @@ public class LeveReportController {
 	public String leaveTransactionReport(Model model, HttpSession session, HttpServletRequest request,
 			HttpServletResponse response) {
 
-		if(session.getAttribute("username")==null) {
-			return "redirect:" + "./";
-		}
 		
 
 		List<Employee> listEmployee = employeeService.getAllEmployees();
@@ -258,10 +240,7 @@ public class LeveReportController {
 			@RequestParam("toDate") Date toDate, Model model, HttpSession session, HttpServletRequest request,
 			HttpServletResponse response) throws IOException {
 
-		if(session.getAttribute("username")==null) {
-			return "redirect:" + "./";
-		}
-		
+
 		String userCode = (String) session.getAttribute("username");
 		UserEntity user = userService.findUserById(userCode);
 		String activeUser = user.getUserName();

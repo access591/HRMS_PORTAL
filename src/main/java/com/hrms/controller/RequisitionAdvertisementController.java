@@ -33,128 +33,115 @@ import com.hrms.service.RequisitionAdvertisementService;
 
 @Controller
 public class RequisitionAdvertisementController {
-
-	@Autowired
-	ModuleService moduleService;
-	@Autowired
-	DepartmentService departmentService;
-	@Autowired
-	EmployeeService employeeService;
-	@Autowired
-	DesignationService designationService;
-	@Autowired
-	EmployeeRequisitionService employeeRequisitionService;
-	@Autowired
-	RequisitionAdvertisementService reqAdvertisementService;
-
+	
+	@Autowired ModuleService moduleService;
+	@Autowired DepartmentService departmentService;
+	@Autowired EmployeeService employeeService;
+	@Autowired DesignationService designationService;
+	@Autowired EmployeeRequisitionService employeeRequisitionService;
+	@Autowired RequisitionAdvertisementService reqAdvertisementService;
+	
+	
 	@InitBinder("reqAdvertisement")
-	public void customizeBinding(WebDataBinder binder) {
-		SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
-		dateFormatter.setLenient(false);
-		binder.registerCustomEditor(Date.class, "advtDate", new CustomDateEditor(dateFormatter, true));
-
-	}
-
+    public void customizeBinding (WebDataBinder binder) {
+        SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
+        dateFormatter.setLenient(false);
+        binder.registerCustomEditor(Date.class, "advtDate",
+                                    new CustomDateEditor(dateFormatter, true));
+        
+    }
+	
+	
+	
 	@GetMapping("/advertisment")
-	public String advertismentPage(Model model, HttpSession session) {
-
-		if (session.getAttribute("username") == null) {
-			return "redirect:" + "./";
-		}
-
-		String userCode = (String) session.getAttribute("username");
+	public String advertismentPage(
+			Model model, HttpSession httpSession) {
+		
+		String userCode = (String) httpSession.getAttribute("username");
+		
 
 		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
 		if (modules != null) {
 			model.addAttribute("modules", modules);
 		}
-
+		
 		List<EmployeeRequisition> listEmployeeRequisition = employeeRequisitionService.findEmployeeReqByStatusY();
-		if (listEmployeeRequisition != null) {
+		if(listEmployeeRequisition != null) {
 			model.addAttribute("listEmployeeRequisition", listEmployeeRequisition);
-
+			
 		}
-
+		
 		List<ReqAdvertisementDetail> listReqAdvertisementDetail = new ArrayList<>();
 		ReqAdvertisement reqAdvertiesment = new ReqAdvertisement();
 		reqAdvertiesment.setListReqAdvertisementDetail(listReqAdvertisementDetail);
 		model.addAttribute("reqAdvertisement", reqAdvertiesment);
-
+		
 		List<ReqAdvertisement> listReqAdvertisement = reqAdvertisementService.getAllReqAdvertisement();
-		if (listReqAdvertisement != null) {
+		if(listReqAdvertisement != null) {
 			model.addAttribute("listReqAdvertisement", listReqAdvertisement);
 		}
-
+		
 		return "Advertisment";
 	}
-
+	
+	
 	@PostMapping("saveAdvertisement")
-	public String saveAdvertisement(@ModelAttribute("reqAdvertisement") ReqAdvertisement reqAdvertisement,
-			HttpSession session, RedirectAttributes redirectAttributes) {
-
-		if (session.getAttribute("username") == null) {
-			return "redirect:" + "./";
-		}
-
-		for (ReqAdvertisementDetail eDetail : reqAdvertisement.getListReqAdvertisementDetail()) {
-			eDetail.setReqAdvertisement(reqAdvertisement);
+	public String saveAdvertisement(@ModelAttribute("reqAdvertisement")ReqAdvertisement reqAdvertisement,
+			HttpSession session,RedirectAttributes redirectAttributes) {
+		
+		
+		for(ReqAdvertisementDetail eDetail : reqAdvertisement.getListReqAdvertisementDetail()) {
+			eDetail.setReqAdvertisement(reqAdvertisement); 
 			eDetail.setAdvtDate(reqAdvertisement.getAdvtDate());
 		}
-
+		
 		reqAdvertisementService.addActivity(reqAdvertisement);
-
-		return "redirect:advertisment";
+		
+		return "redirect:advertisment"; 
 	}
-
+	
 	@GetMapping("deleteAdvertisement/{id}")
-	public String deleteAdvertisement(@PathVariable("id") String advtCode, RedirectAttributes redirectAttributes,
+	public String deleteAdvertisement(@PathVariable("id") String advtCode,RedirectAttributes redirectAttributes,
 			Model model, HttpSession session) {
-
-		if (session.getAttribute("username") == null) {
-			return "redirect:" + "./";
-		}
-
+	
 		this.reqAdvertisementService.removeReqAdvertisement(advtCode);
 		return "redirect:/advertisment";
 	}
-
-	@GetMapping(value = { "editAdvertisement/{id}" })
-	public String editAdvertisement(@PathVariable("id") String reqCode, Model model, HttpSession session) {
-
-		if (session.getAttribute("username") == null) {
-			return "redirect:" + "./";
-		}
-
+	
+	@GetMapping(value = {"editAdvertisement/{id}"})
+	public String editAdvertisement(@PathVariable("id") String reqCode,
+			Model model) {
+		
 		ReqAdvertisement req = reqAdvertisementService.findReqAdvertisementById(reqCode);
-		if (req != null) {
+		if(req != null) {
 			model.addAttribute("reqAdvertisement", req);
 		}
-
-		return "editAdvertisement";
+		
+		return "editAdvertisement";  
 	}
+	
+	@PostMapping(value = {"updateAdvertisement"})
+	public String updateAdvertisement(@ModelAttribute("reqAdvertisement")ReqAdvertisement reqAdvertisement,
+			Model model) {
+		
+		  
 
-	@PostMapping(value = { "updateAdvertisement" })
-	public String updateAdvertisement(@ModelAttribute("reqAdvertisement") ReqAdvertisement reqAdvertisement,
-			Model model, HttpSession session) {
-
-		if (session.getAttribute("username") == null) {
-			return "redirect:" + "./";
-		}
-
-		for (ReqAdvertisementDetail re : reqAdvertisement.getListReqAdvertisementDetail()) {
-			re.setReqAdvertisement(reqAdvertisement);
-		}
-
-		reqAdvertisementService.updateReqAdvertisement(reqAdvertisement);
-
+		  for(ReqAdvertisementDetail re : reqAdvertisement.getListReqAdvertisementDetail()) {
+			  re.setReqAdvertisement(reqAdvertisement);
+		  }
+		 
+		
+		  reqAdvertisementService.updateReqAdvertisement(reqAdvertisement);
+		
 		return "redirect:advertisment";
 	}
-
+	
 	@ResponseBody
 	@GetMapping("getRequisitionByReqCode/{reqCode}")
 	public EmployeeRequisition getEmployeeRequisitionByReqCode(@PathVariable("reqCode") String reqCode) {
-
+		
 		return employeeRequisitionService.findEmployeeRequisitiondById(reqCode);
+		
 
 	}
 

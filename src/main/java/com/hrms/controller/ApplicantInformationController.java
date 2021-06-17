@@ -33,37 +33,30 @@ import com.hrms.service.EmployeeService;
 import com.hrms.service.ModuleService;
 import com.hrms.service.RequisitionAdvertisementService;
 
+
 @Controller
 public class ApplicantInformationController {
 
-	@Autowired
-	private ModuleService moduleService;
-	@Autowired
-	private RequisitionAdvertisementService reqAdvertisementService;
-	@Autowired
-	private ApplicantInfoService applicantInfoService;
-
-	@Autowired
-	private EmployeeService employeeService;
-	@Autowired
-	private EmployeeRequisitionDetailService employeeRequisitionDetailService;
-	@Autowired
-	private CityService cityService;
-
+	@Autowired private ModuleService moduleService;
+	@Autowired private RequisitionAdvertisementService reqAdvertisementService;
+	@Autowired private ApplicantInfoService applicantInfoService;
+	
+	@Autowired private EmployeeService employeeService;
+	@Autowired private EmployeeRequisitionDetailService employeeRequisitionDetailService;
+	@Autowired private CityService cityService;
+	
+	
+	
 	@ModelAttribute
-	public void commonData(Model model, HttpSession session) {
+	public void commonData(Model model,HttpSession session) {
 		String userCode = (String) session.getAttribute("username");
 		session.setAttribute("username", userCode);
-
+		
 	}
 
 	@GetMapping("applicantInformation")
 	public String applicantInformationPage(@ModelAttribute("applicantInfo") ApplicantInfo applicantInfo, Model model,
 			HttpSession session) {
-
-		if (session.getAttribute("username") == null) {
-			return "redirect:" + "./";
-		}
 
 		String userCode = (String) session.getAttribute("username");
 		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
@@ -80,7 +73,7 @@ public class ApplicantInformationController {
 		List<EmployeeRequisitionDetail> listEmployeeRequisition1 = employeeRequisitionDetailService
 				.findUniqueDesignation();
 		if (listEmployeeRequisition1 != null) {
-
+			
 			model.addAttribute("listEmployeeRequisition", listEmployeeRequisition1);
 
 		}
@@ -102,10 +95,8 @@ public class ApplicantInformationController {
 	@PostMapping("/saveApplicantInfo")
 	public String saveApplicantInfo(@ModelAttribute("applicantInfo") ApplicantInfo applicantInfo, HttpSession session) {
 
-		if (session.getAttribute("username") == null) {
-			return "redirect:" + "./";
-		}
-
+		
+		
 		if (applicantInfo.getApplicantExpDetail() != null) {
 			for (ApplicantExpDetail aDetail : applicantInfo.getApplicantExpDetail()) {
 				aDetail.setApplicantDate(applicantInfo.getApplicantDate());
@@ -124,9 +115,6 @@ public class ApplicantInformationController {
 	public String viewApplicantInfo(@PathVariable("applicantCode") String applicantCode, Model model,
 			HttpSession session) throws Exception {
 
-		if (session.getAttribute("username") == null) {
-			return "redirect:" + "./";
-		}
 
 		List<ReqAdvertisement> listReqAdvertisement = reqAdvertisementService.getAllReqAdvertisement();
 		if (listReqAdvertisement != null) {
@@ -140,7 +128,7 @@ public class ApplicantInformationController {
 			model.addAttribute("listEmployeeRequisition", listEmployeeRequisition1);
 
 		}
-
+		
 		List<City> cityList = cityService.getAllCities();
 		System.out.println("city list size : " + cityList.size());
 		if (cityList != null) {
@@ -155,16 +143,17 @@ public class ApplicantInformationController {
 		ApplicantInfo applicantInfo = applicantInfoService.getApplicantInfoByApplicantCode(applicantCode);
 		model.addAttribute("applicantInfo", applicantInfo);
 
+		
 		return "viewApplicantInfo";
 	}
 
 	@ResponseBody
 	@GetMapping("getAdvtDate/{id}")
 	public String getRequisitionDateByAdvtCode(@PathVariable("id") String advtCode) {
-
+		
 		ReqAdvertisement reqAdvertisement = reqAdvertisementService.findReqAdvertisementById(advtCode);
 		Date advtDate = reqAdvertisement.getAdvtDate();
-
+		
 		return advtDate.toString();
 	}
 
@@ -174,6 +163,7 @@ public class ApplicantInformationController {
 		dateFormatter.setLenient(false);
 		binder.registerCustomEditor(Date.class, "advtDate", new CustomDateEditor(dateFormatter, true));
 		binder.registerCustomEditor(Date.class, "applicantDate", new CustomDateEditor(dateFormatter, true));
+
 
 	}
 

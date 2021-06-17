@@ -56,9 +56,8 @@ public class LeaveApprovalController {
 	@GetMapping("/leaveApproval")
 	public String leaveApproval(Model model, HttpSession session) {
 
-		if(session.getAttribute("username")==null) {
-			return "redirect:" + "./";
-		}
+		System.out.println("leave approval methods");
+		
 		
 		List<Department> listDepartment = departmentService.getAllDepartments();
 		List<LeaveRequest> listLeaveApproval = leaveRequestService.getEmployeeByStatusN();
@@ -83,8 +82,6 @@ public class LeaveApprovalController {
 	@GetMapping("/leaverequest/{deptCode}")
 	public List<LeaveRequest> getAllLeaveRequestBydept(@PathVariable("deptCode") String deptCode) {
 		 
-		
-		
 		return leaveRequestService.findAllByDeptCodeAndStatusN(deptCode);
 		
 	}
@@ -94,11 +91,6 @@ public class LeaveApprovalController {
 	@GetMapping("/approveLeaveRequest/{leaveRequestId}/{status}")
 	public String approveLeaveRequest(@PathVariable("leaveRequestId") String leaveid, @PathVariable("status") String status,
 			Model model ,HttpSession session) {
-		
-		if(session.getAttribute("username")==null) {
-			return "redirect:" + "./";
-		}
-		
 		session.setAttribute("imgUtil", new ImageUtil());
 		String userCode = (String) session.getAttribute("username");
 		LeaveRequest leaveRequest = leaveRequestService.findLeaveRequestById(Long.valueOf(leaveid));
@@ -141,10 +133,6 @@ public class LeaveApprovalController {
 	@GetMapping(value = { "/deleteLeaveApproval/{id}" })
 	public String deleteActivity(@PathVariable("id") Long id, Model model, HttpSession session) {
 		
-		if(session.getAttribute("username")==null) {
-			return "redirect:" + "./";
-		}
-		
 		String userCode = (String) session.getAttribute("username");
 		this.leaveRequestService.removeLeaveRequest(id);
 		session.setAttribute("username", userCode);
@@ -156,9 +144,6 @@ public class LeaveApprovalController {
 	public String viewLeaveRequestByEmpId(@PathVariable("id")String leaveRequestId,
 						Model model,HttpSession session) {
 		
-		if(session.getAttribute("username")==null) {
-			return "redirect:" + "./";
-		}
 		
 		LeaveRequest leaveRequest = this.leaveRequestService.findLeaveRequestById(Long.parseLong(leaveRequestId));
 		
@@ -173,5 +158,12 @@ public class LeaveApprovalController {
 		model.addAttribute("myhref", "leaveApproval");
 		return "viewLeaveRequest";
 	}
+	
+	
+	
+	
+	
+	
+	
 
 }
