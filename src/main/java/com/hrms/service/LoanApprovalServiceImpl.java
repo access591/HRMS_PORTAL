@@ -14,8 +14,8 @@ public class LoanApprovalServiceImpl  implements LoanApprovalService  {
 LoanApprovalDao loanApprovalDao;
 	@Override
 	public List<LoanApplication> getAllLoanApproval() {
-		List<LoanApplication> listLoanApproval=loanApprovalDao.getAllLoanApproval();
-		return listLoanApproval;
+		return loanApprovalDao.getAllLoanApproval();
+		 
 	}
 	@Override
 	public void approvedLoanRequestById(String id) {

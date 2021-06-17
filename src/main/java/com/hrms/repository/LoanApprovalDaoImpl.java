@@ -16,11 +16,11 @@ import com.hrms.model.LoanApplication;
 @Repository
 public class LoanApprovalDaoImpl extends AbstractGenericDao<LoanApplication> implements LoanApprovalDao {
 	@Autowired SessionFactory sessionFactory;
-
+	Session session=null;
 	@Override
 	public List<LoanApplication> getAllLoanApproval() {
 		try {
-			Session session = this.sessionFactory.openSession();
+		session = this.sessionFactory.openSession();
 			session.beginTransaction();
 			Query<LoanApplication>query = session.createQuery("from LoanApplication  e where e.approvalStatus ='N'",LoanApplication.class);
 			
@@ -37,7 +37,7 @@ public class LoanApprovalDaoImpl extends AbstractGenericDao<LoanApplication> imp
 
 	@Override
 	public void approvedLoanRequestById(String id) {
-		Session session = this.sessionFactory.openSession();
+	 session = this.sessionFactory.openSession();
 		Query query = session.createQuery("UPDATE LoanApplication e set e.approvalStatus =:approvalStatus WHERE e.appNo= :id" );
 		query.setParameter("approvalStatus", "Y");
 		query.setParameter("id", id);
