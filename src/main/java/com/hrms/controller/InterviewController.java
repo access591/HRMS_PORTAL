@@ -67,6 +67,12 @@ public class InterviewController {
 
 	@GetMapping("interviewDetails")
 	public String interviewDetails(Model model, HttpSession session) {
+		
+		if(session.getAttribute("username")==null) {
+			return "redirect:" + "./";
+		}
+		
+		
 		session.setAttribute("imgUtil", new ImageUtil());
 		
 		List<ApplicantInfo> listApplicantInfo1 = applicantInfoService.getAllApplicantInfo();
@@ -106,6 +112,10 @@ public class InterviewController {
 	@PostMapping("addInterviewDetail")
 	public String addInterviewDetails(@ModelAttribute("interviewMaster") InterviewForm form, HttpSession session) {
 
+		if(session.getAttribute("username")==null) {
+			return "redirect:" + "./";
+		}
+		
 		
 		if (form.getInterviewForm() != null) {
 			for (int i = 0; i < form.getInterviewForm().size(); i++) {
@@ -135,7 +145,10 @@ public class InterviewController {
 	@GetMapping("interviewApproval")
 	public String interviewApprovalPage(Model model, HttpSession session) {
 
-
+		if(session.getAttribute("username")==null) {
+			return "redirect:" + "./";
+		}
+		
 		List<ApplicantInfo> listApplicantInfo = applicantInfoService.findApplicantInfoStatusHoldAndPending();
 
 		model.addAttribute("listInterviewApprovalUtil", listApplicantInfo);
@@ -146,10 +159,12 @@ public class InterviewController {
 
 	@GetMapping("approveInterview/{applicantCode}/{interviewStatus}")
 	public String approveInterview(@PathVariable("interviewStatus") String interviewStatus,
-			@PathVariable("applicantCode") String applicantCode) {
+			@PathVariable("applicantCode") String applicantCode,HttpSession session) {
 
+		if(session.getAttribute("username")==null) {
+			return "redirect:" + "./";
+		}
 		
-
 		
 		applicantInfoService.updateApplicantInfoInterviewStatus(applicantCode, interviewStatus);
 
@@ -161,6 +176,11 @@ public class InterviewController {
 	@GetMapping("interviewFinalSelection")
 	public String interviewFinalSelection(Model model, HttpSession session) throws Exception {
 
+		if(session.getAttribute("username")==null) {
+			return "redirect:" + "./";
+		}
+		
+		
 		List<InterviewMaster> listInterviewMaster = interviewMasterService.getAllInterviewMaster();
 
 		model.addAttribute("interviewFinalSelection", listInterviewMaster);
@@ -173,15 +193,23 @@ public class InterviewController {
 			@PathVariable("applicantCode") String applicantCode, @PathVariable("interviewCode") String interviewCode,
 			HttpSession session) {
 
-
+		if(session.getAttribute("username")==null) {
+			return "redirect:" + "./";
+		}
+		
 		interviewMasterService.interviewFinalapproval(applicantCode, interviewCode, finalApprovalStatus);
 		return "redirect:/interviewFinalSelection";
 	}
 
 	@GetMapping("viewInterviewDetail/{id}")
 	public String viewInterviewDetail(@ModelAttribute("interviewMaster") InterviewMaster interviewMaster,
-			@PathVariable("id") String inteviewCode, Model model) {
+			@PathVariable("id") String inteviewCode, Model model,
+			HttpSession session) {
 
+		if(session.getAttribute("username")==null) {
+			return "redirect:" + "./";
+		}
+		
 		
 		InterviewMaster interviewMaster1 = interviewMasterService.findinterviewMasterById(inteviewCode);
 

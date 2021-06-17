@@ -52,6 +52,10 @@ public class TrainingScheduleController {
 	public String trainingSchedule(@ModelAttribute("trainingSchedule") TrainingSchedule trainingSchedule, Model model,
 			HttpSession session) {
 
+		if(session.getAttribute("username")==null) {
+			return "redirect:" + "./";
+		}
+		
 		String userCode = (String) session.getAttribute("username");
 		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
 		if (modules != null) {
@@ -80,6 +84,10 @@ public class TrainingScheduleController {
 	public String saveTrainerSchedule(@ModelAttribute("trainingSchedule") TrainingSchedule trainingSchedule,
 			Model model, HttpSession session) {
 
+		if(session.getAttribute("username")==null) {
+			return "redirect:" + "./";
+		}
+		
 		trainingScheduleService.saveTrainingSchedule(trainingSchedule);
 		return "redirect:trainingSchedule";
 
@@ -87,8 +95,13 @@ public class TrainingScheduleController {
 
 	@GetMapping("edittrainingSchedule/{trScheduleCode}")
 	public String editTrainingSchedule(@PathVariable("trScheduleCode") String trScheduleCode,
-			@ModelAttribute("trainingSchedule") TrainingSchedule trainingSchedule, Model model) {
+			@ModelAttribute("trainingSchedule") TrainingSchedule trainingSchedule, Model model,
+			HttpSession session) {
 
+		if(session.getAttribute("username")==null) {
+			return "redirect:" + "./";
+		}
+		
 		TrainingSchedule trainingSchedule1 = trainingScheduleService.findTrainingScheduleById(trScheduleCode);
 		if (trainingSchedule1 != null) {
 			model.addAttribute("trainingSchedule", trainingSchedule1);
@@ -105,15 +118,23 @@ public class TrainingScheduleController {
 
 	@PostMapping(value = {"updateTrainerSchedule"})
 	public String updateTrainingSchedule(@ModelAttribute("trainingSchedule") TrainingSchedule trainingSchedule,
-			Model model,@RequestParam(name="trScheduleCode",required=false) String trScheduleCode) {
+			Model model,@RequestParam(name="trScheduleCode",required=false) String trScheduleCode,
+			HttpSession session) {
 
-
+		if(session.getAttribute("username")==null) {
+			return "redirect:" + "./";
+		}
+		
 		trainingScheduleService.updateTrainingSchedule(trainingSchedule);
 		return "redirect:trainingSchedule";
 	}
 
 	@GetMapping(value = { "deleteTrainingSchedule/{id}" })
 	public String deleteTrainingSchedule(@PathVariable("id") String trScheduleCode, Model model, HttpSession session) {
+		
+		if(session.getAttribute("username")==null) {
+			return "redirect:" + "./";
+		}
 		
 		trainingScheduleService.removeTrainingSchedule(trScheduleCode);
 

@@ -73,10 +73,13 @@ public class LeaveRequestController {
 		
 		String userCode = (String) session.getAttribute("username");
 		
+		
 		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
 		if (modules != null) {
 			model.addAttribute("modules", modules);
 		}
+		
+		
 		
 		session.setAttribute("username" , userCode);
 		
@@ -85,7 +88,10 @@ public class LeaveRequestController {
 	@GetMapping("/leaveRequest")
 	public String empPayDetail(@ModelAttribute("leaveRequest")LeaveRequest leaveRequest,Model model, HttpSession session) {
 		
-		System.out.println("leave request controller");
+		
+		if(session.getAttribute("username")==null) {
+			return "redirect:" + "./";
+		}
 		List<Employee> listEmployee = employeeService.getAllEmployees();
 		
 		
@@ -117,6 +123,9 @@ public class LeaveRequestController {
 	@PostMapping("/saveLeaveRequest")
 	public String saveLeaveRequest(@ModelAttribute("leaveRequest")LeaveRequest leaveRequest,HttpSession session) {
 		
+		if(session.getAttribute("username")==null) {
+			return "redirect:" + "./";
+		}
 		leaveRequestService.addLeave(leaveRequest);
 		return "redirect:" + pageMappingService.PageRequestMapping(reqPage, pageno);
 	}
@@ -127,6 +136,10 @@ public class LeaveRequestController {
 	@GetMapping(value = { "/viewLeaveRequest/{id}" })
 	public String viewLeaveRequestByEmpId(@PathVariable("id")String leaveRequestId,
 						Model model,HttpSession session) {
+		
+		if(session.getAttribute("username")==null) {
+			return "redirect:" + "./";
+		}
 		
 		LeaveRequest leaveRequest = this.leaveRequestService.findLeaveRequestById(Long.parseLong(leaveRequestId));
 		
@@ -141,6 +154,10 @@ public class LeaveRequestController {
 	
 	@GetMapping(value = { "/deleteLeaveRequest/{id}" })
 	public String deleteActivity(@PathVariable("id") Long id, Model model, HttpSession session) {
+		
+		if(session.getAttribute("username")==null) {
+			return "redirect:" + "./";
+		}
 		
 		this.leaveRequestService.removeLeaveRequest(id);
 		return "redirect:/"+ pageMappingService.PageRequestMapping(reqPage, pageno);

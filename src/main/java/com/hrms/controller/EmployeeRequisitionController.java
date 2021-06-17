@@ -68,6 +68,12 @@ public class EmployeeRequisitionController {
 	
 	@GetMapping("employeeRequisition")  
 	public String employeeRequisition(Model model, HttpSession session) {
+		
+		if(session.getAttribute("username")==null) {
+			return "redirect:" + "./";
+		}
+		
+		
 		session.setAttribute("imgUtil", new ImageUtil());
 		String userCode = (String) session.getAttribute("username");  
 		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
@@ -107,6 +113,11 @@ public class EmployeeRequisitionController {
 	public String saveEmployeeRequisition(@ModelAttribute("req") EmployeeRequisition employeeRequisition,
 			HttpSession session,RedirectAttributes redirectAttributes) {
 		
+		
+		if(session.getAttribute("username")==null) {
+			return "redirect:" + "./";
+		}
+		
 		String insertedBY = (String) session.getAttribute("userlogin");
 		
 		
@@ -135,8 +146,12 @@ public class EmployeeRequisitionController {
 	
 	@GetMapping(value = {"editRequisition/{id}"})
 	public String editRequisition(@PathVariable("id") String reqCode,@ModelAttribute("req") EmployeeRequisition employeeRequisition,
-			Model model) {
+			Model model,HttpSession session) {
 	
+		if(session.getAttribute("username")==null) {
+			return "redirect:" + "./";
+		}
+		
 		EmployeeRequisition requisition = employeeRequisitionService.findEmployeeRequisitiondById(reqCode);
 		
 		
@@ -151,9 +166,11 @@ public class EmployeeRequisitionController {
 	
 	@PostMapping(value = {"updateRequisition"})
 	public String updateRequisition(@ModelAttribute("req") EmployeeRequisition employeeRequisition,
-			Model model) {
+			Model model,HttpSession session) {
 		
-		 
+		if(session.getAttribute("username")==null) {
+			return "redirect:" + "./";
+		}
 		  
 		ArrayList<EmployeeRequisitionDetail> employeeRequisitionDetail = new ArrayList<>();
 		
@@ -170,6 +187,9 @@ public class EmployeeRequisitionController {
 	@GetMapping(value = {"deleteRequisition/{id}"})
 	public String deleteRequisition(@PathVariable("id") String reqCode, Model model, HttpSession session) {
 		
+		if(session.getAttribute("username")==null) {
+			return "redirect:" + "./";
+		}
 		
 		employeeRequisitionService.removeEmployeeRequisition(reqCode);
 		
@@ -181,8 +201,12 @@ public class EmployeeRequisitionController {
 	
 	@GetMapping(value = {"viewRequisition/{id}"})
 	public String viewRequisition(@PathVariable("id") String reqCode,@ModelAttribute("req") EmployeeRequisition employeeRequisition,
-			Model model) {
+			Model model,HttpSession session) {
 	
+		if(session.getAttribute("username")==null) {
+			return "redirect:" + "./";
+		}
+		
 		EmployeeRequisition requisition = employeeRequisitionService.findEmployeeRequisitiondById(reqCode);
 		
 		if(requisition != null) {
