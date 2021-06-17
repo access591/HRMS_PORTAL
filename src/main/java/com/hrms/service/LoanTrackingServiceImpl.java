@@ -21,7 +21,7 @@ SessionFactory sessionFactory;
 		Session s=sessionFactory.openSession();
 		s.beginTransaction();
 		
-		// TODO Auto-generated method stub
+		
 		s.save(ls);
 		s.getTransaction().commit();
 		s.clear();
