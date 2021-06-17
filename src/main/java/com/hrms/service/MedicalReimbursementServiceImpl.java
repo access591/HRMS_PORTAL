@@ -28,13 +28,13 @@ public boolean addMedicalReimbursement(MedicalReimbursement m2) {
 
 @Override
 public List<MedicalReimbursement> getAllMedicalReimbursement() {
-	List<MedicalReimbursement> listMedicalReimbursement = medicalReimbursementDao.findAll();
-	return listMedicalReimbursement;
+	return  medicalReimbursementDao.findAll();
+	
 }
 
 @Override
 public MedicalReimbursement findByIdMedicalReimbursementMaster(String id) {
-	System.out.println("id>>>>>>>>>>>>>>>>>>>>>>>>>>"+id);
+	
 	return this.medicalReimbursementDao.findById(id);
 	
 }
@@ -70,7 +70,7 @@ public void approvedByMrId(String slipNo) {
 
 @Override
 public List<MedicalReimbursement> getAllMedicalReimbursementApproval() {
-	List<MedicalReimbursement> listMedicalReimbursementAp = medicalReimbursementDao.getAllMedicalReimbursementApproval();
-	return listMedicalReimbursementAp;
+	return medicalReimbursementDao.getAllMedicalReimbursementApproval();
+	
 }
 }

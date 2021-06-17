@@ -136,7 +136,7 @@ public class LtaRequestController {
 			   
 			   
 		} catch (Exception e) {
-		
+		e.printStackTrace();
 		}
 		
 	  	  
