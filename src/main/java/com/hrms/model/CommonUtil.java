@@ -62,7 +62,7 @@ public class CommonUtil {
 
 	public CommonUtil() {
 		super();
-		// TODO Auto-generated constructor stub
+	
 	}
 
 	
@@ -350,20 +350,18 @@ public class CommonUtil {
 		super();
 		this.empName = empName;
 		this.deptName = deptName;
-		//this.desgName = desgName;
+	
 		this.leaveCode = leaveCode;
 		this.toDate = toDate;
 		this.fromDate = fromDate;
-		//this.fromDateType = fromDateType;
-		//this.toDateType = toDateType;
+		
 		this.applyDate = applyDate;
-		//this.approvedDate = approvedDate;
+		
 		this.approevedBy = approevedBy;
-		//this.shiftCode = shiftCode;
+		
 		this.reason = reason;
 		this.leaveFor = leaveFor;
-		//this.cancelBy = cancelBy;
-		//this.cancelDate = cancelDate;
+		
 	}
 
 	public CommonUtil(String empName2, String deptName2, String desgName2, String fromDate, String toDate) {

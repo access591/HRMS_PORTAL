@@ -15,11 +15,13 @@ import com.hrms.model.LocalConvyence;
 @Repository
 public class ConveyanceApprovalDaoImpl extends AbstractGenericDao<LocalConvyence> implements ConveyanceApprovalDao {
 	@Autowired SessionFactory sessionFactory;
+	
+	Session session=null;
 	@Override
 	public List<LocalConvyence> getAllLocalConveyance() {
-	//	String T="N";
+	
 		try {
-			Session session = this.sessionFactory.openSession();
+			 session = this.sessionFactory.openSession();
 			session.beginTransaction();
 			Query<LocalConvyence> query = session.createQuery("from LocalConvyence e where e.approvalStatus ='N'",LocalConvyence.class);
 			
@@ -35,7 +37,7 @@ public class ConveyanceApprovalDaoImpl extends AbstractGenericDao<LocalConvyence
 	}
 	@Override
 	public void approvedByLocalConvyenceId(String id) {
-		Session session = this.sessionFactory.openSession();
+		 session = this.sessionFactory.openSession();
 		Query query = session.createQuery("UPDATE LocalConvyence e set e.approvalStatus =:approvalStatus WHERE e.localConvId= :id" );
 		query.setParameter("approvalStatus", "Y");
 		query.setParameter("id", id);

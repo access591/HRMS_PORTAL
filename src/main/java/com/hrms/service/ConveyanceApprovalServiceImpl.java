@@ -14,8 +14,8 @@ public class ConveyanceApprovalServiceImpl  implements ConveyanceApprovalService
 ConveyanceApprovalDao conveyanceApprovalDao;
 	@Override
 	public List<LocalConvyence> getAllLocalConveyance() {
-		List<LocalConvyence>listLocalConveyance=conveyanceApprovalDao.getAllLocalConveyance();
-		return listLocalConveyance;
+		return conveyanceApprovalDao.getAllLocalConveyance();
+		
 	}
 	
 	@Override
