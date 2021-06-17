@@ -71,6 +71,10 @@ public class EmployeeRequisitionController {
 	
 	@GetMapping("employeeRequisition")  
 	public String employeeRequisition(Model model, HttpSession session) {
+		
+		if(session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
 		session.setAttribute("imgUtil", new ImageUtil());
 		String userCode = (String) session.getAttribute("username");  
 		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
@@ -111,6 +115,10 @@ public class EmployeeRequisitionController {
 	public String saveEmployeeRequisition(@ModelAttribute("req") EmployeeRequisition employeeRequisition,
 			HttpSession session,RedirectAttributes redirectAttributes) {
 		
+		if(session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
+		
 		String insertedBY = (String) session.getAttribute("userlogin");
 		
 		System.out.println("========================");
@@ -144,8 +152,16 @@ public class EmployeeRequisitionController {
 	
 	@GetMapping(value = {"editRequisition/{id}"})
 	public String editRequisition(@PathVariable("id") String reqCode,@ModelAttribute("req") EmployeeRequisition employeeRequisition,
+
+			Model model,HttpSession session) {
+	
+		if(session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
+
 			Model model) {
-		System.out.println("==========employeeRequisitionCode===========>"+reqCode);
+
+
 		
 		EmployeeRequisition requisition = employeeRequisitionService.findEmployeeRequisitiondById(reqCode);
 		System.out.println("requisition detail : "+ requisition.getReqCode());
@@ -154,10 +170,7 @@ public class EmployeeRequisitionController {
 		
 		System.out.println("requisition detail : "+requisition.getEmployeRequisitionDetail().get(0).getAgeFrom());
 		
-		//System.out.println("desgnation through requisition : " + requisition.getEmployeRequisitionDetail().get(0).getDesignation().getDesgCode());
-		
-
-		//requisition.getEmployeRequisitionDetail()
+	
 		if(requisition != null) {
 			model.addAttribute("req", requisition);
 		}
@@ -167,11 +180,19 @@ public class EmployeeRequisitionController {
 	
 	@PostMapping(value = {"updateRequisition"})
 	public String updateRequisition(@ModelAttribute("req") EmployeeRequisition employeeRequisition,
-			Model model) {
+			Model model,HttpSession session ) {
 		
-		  System.out.println("=====================>update employee Requisition");
+
+		 
+		if(session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
+		ArrayList<EmployeeRequisitionDetail> employeeRequisitionDetail = new ArrayList<>();
+
+	
 		  
 		ArrayList<EmployeeRequisitionDetail> employeeRequisitionDetail = new ArrayList<EmployeeRequisitionDetail>();
+
 		
 		for(EmployeeRequisitionDetail eDetail : employeeRequisition.getEmployeRequisitionDetail()) {
 			eDetail.setEmployeeRequisition(employeeRequisition);
@@ -185,7 +206,12 @@ public class EmployeeRequisitionController {
 	
 	@GetMapping(value = {"deleteRequisition/{id}"})
 	public String deleteRequisition(@PathVariable("id") String reqCode, Model model, HttpSession session) {
-		System.out.println("=====================>");
+
+		
+		if(session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
+
 		
 		employeeRequisitionService.removeEmployeeRequisition(reqCode);
 		
@@ -197,8 +223,16 @@ public class EmployeeRequisitionController {
 	
 	@GetMapping(value = {"viewRequisition/{id}"})
 	public String viewRequisition(@PathVariable("id") String reqCode,@ModelAttribute("req") EmployeeRequisition employeeRequisition,
+
+			Model model,HttpSession session) {
+	
+		if(session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
+		EmployeeRequisition requisition = employeeRequisitionService.findEmployeeRequisitiondById(reqCode);
+
 			Model model) {
-		System.out.println("=====================>");
+
 		
 		EmployeeRequisition requisition = employeeRequisitionService.findEmployeeRequisitiondById(reqCode);
 		//requisition.getEmployeRequisitionDetail()
