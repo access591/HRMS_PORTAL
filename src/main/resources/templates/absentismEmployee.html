@@ -45,7 +45,7 @@ body {
 						
 							<div class="card" style="border-radius: 2.2rem">
 								<div class="card-header">
-									<h5 class="card-title">Absentism Employee Wise Report</h5>
+									<h5 class="card-title" style="text-decoration: underline;">Absentism Employee Wise Report</h5>
 									<div class="alert-outline">
 										<div th:if="${message}" th:text="${message}"
 											style="color: red"></div>
@@ -64,7 +64,7 @@ body {
 														class="form-control select2" id="select_department"
 														onchange="changeDepartment()" name="deptCode">
 														<option value=''>--Select--</option>
-														<!-- <option value='ALL'>All</option> -->
+													
 														<option th:each="department : ${listDepartment}"
 															th:text="${department.deptName}"
 															th:value="${department.departmentCode}"></option> 
@@ -86,9 +86,7 @@ body {
 														name="empCode">
 														<option value=''>--Select Employee--</option>
 														
-														<!-- <option th:each="employee : ${listLtaRequest}"
-															th:text="${employee.empCode.empName}"
-															th:value="${employee.empCode.empCode}"></option> -->
+													
 														
 
 
@@ -121,12 +119,10 @@ body {
 										</div>
 
 										<p></p>
-										<!-- <Button type="submit">Generate Pdf</Button> -->
+										
 										<Button type="submit" class="btn btn-primary">Generate Sheet</Button>
 
-										<!-- <a href="#" th:href="@{employeeExcel}">Download Excel Sheet</a> -->
-
-										<!-- <Button id = "generate_pdf_button" onclick="generatePdfFunction()">Generate Pdf</Button> -->
+							
 									</form>
 
 
@@ -172,7 +168,7 @@ function changeDepartment(){
 	
 	var selectedDepartmentValue = document.getElementById("select_department").value;
 	console.log("select departmentvalue  : " +selectedDepartmentValue);
-	 //$('#employeeName').append($('<option>', {value:0, text:'Select Employee'}));
+	 
 	 
 	 var x = document.getElementById("employeeName");
 	 console.log( "x value : "+ x);
@@ -193,12 +189,12 @@ function changeDepartment(){
 
 	            console.log("employee name : " +obj[0].empName)
 	            $('select[name="employeeName"]').prop("disabled", false);
-               // $('select[name="employeeName"]').html(obj.empName);
+               
                $('#employeeName').append($('<option>').val("ALL").text("ALL"));
                 
                 $.each(obj, function(i, item) {
                 	console.log(" i " +i+ " item : "+item.empName);
-                   // $('#employeeName').append($('<option>', {value:i, text:item.empName}));
+                  
                 	 $('#employeeName').append($('<option>').val(this.empCode).text(this.empName));
                 });
 				

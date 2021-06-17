@@ -87,9 +87,7 @@ body {
 														name="empCode">
 														<option value=''>--All--</option>
 														<option value='ALL'>All</option>
-														<!-- <option th:each="employee : ${listLtaRequest}"
-															th:text="${employee.empCode.empName}"
-															th:value="${employee.empCode.empCode}"></option> -->
+														
 
 
 
@@ -122,12 +120,10 @@ body {
 										</div>
 
 										<p></p>
-										<!-- <Button type="submit">Generate Pdf</Button> -->
+										
 										<Button type="submit" class="btn btn-primary">Generate Sheet</Button>
 
-										<!-- <a href="#" th:href="@{/createAttendenceDatewise(param1="'+name+'")}">Download Excel Sheet</a>  -->
-
-										<!-- <Button id = "generate_pdf_button" onclick="generatePdfFunction()">Generate Pdf</Button> -->
+										
 									</form>
 
 
@@ -179,7 +175,7 @@ body {
 			var selectedDepartmentValue = document
 					.getElementById("select_department").value;
 			console.log("select departmentvalue  : " + selectedDepartmentValue);
-			//$('#employeeName').append($('<option>', {value:0, text:'Select Employee'}));
+			
 
 			var x = document.getElementById("employeeName");
 			console.log("x value : " + x);
@@ -203,11 +199,11 @@ body {
 						console.log("employee name : " + obj[0].empName)
 						$('select[name="employeeName"]')
 								.prop("disabled", false);
-						// $('select[name="employeeName"]').html(obj.empName);
+					
 
 						$.each(obj, function(i, item) {
 							console.log(" i " + i + " item : " + item.empName);
-							// $('#employeeName').append($('<option>', {value:i, text:item.empName}));
+							
 							$('#employeeName').append(
 									$('<option>').val(this.empCode).text(
 											this.empName));

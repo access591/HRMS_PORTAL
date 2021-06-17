@@ -46,7 +46,7 @@ public class ApplicantExpDetail {
 
 	public ApplicantExpDetail() {
 		super();
-		// TODO Auto-generated constructor stub
+		
 	}
 
 	public Long getAppliExpDetailId() {
