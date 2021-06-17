@@ -83,7 +83,9 @@ public class LeveReportController {
 	@GetMapping("/leaveRegister")
 	public String viewLeaveRegisterReport(Model model, HttpSession session, HttpServletRequest request,
 			HttpServletResponse response) {
-
+		if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
 		String userCode = (String) session.getAttribute("username");
 		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
 		if (modules != null) {

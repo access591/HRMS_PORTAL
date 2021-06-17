@@ -33,6 +33,10 @@ public class MediclaimApprovalController {
 
 	@GetMapping("/mediclaimApproval")
 	public String mediclaimApproval(Model model, HttpSession session) {
+		
+		if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
 		String userCode = (String) session.getAttribute("username");
 		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
 		if (modules != null) {

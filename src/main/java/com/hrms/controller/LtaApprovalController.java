@@ -38,7 +38,9 @@ public class LtaApprovalController {
 	
 	@GetMapping("/ltaApproval")
 	public String ltaApproval(Model model, HttpSession session) {
-
+		if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
 	
 		String userCode = (String) session.getAttribute("username");
 		

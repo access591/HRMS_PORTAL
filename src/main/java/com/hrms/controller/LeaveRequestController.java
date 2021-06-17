@@ -71,7 +71,9 @@ public class LeaveRequestController {
 	
 	@GetMapping("/leaveRequest")
 	public String empPayDetail(@ModelAttribute("leaveRequest")LeaveRequest leaveRequest,Model model, HttpSession session) {
-		
+		if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
 		System.out.println("leave request controller");
 		List<Employee> listEmployee = employeeService.getAllEmployees();
 		
