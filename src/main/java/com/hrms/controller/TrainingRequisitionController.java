@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.hrms.ImageUtil;
 import com.hrms.model.Department;
 import com.hrms.model.Employee;
 import com.hrms.model.MenuModule;
@@ -69,7 +70,7 @@ public class TrainingRequisitionController {
 		if (listEmployee != null) {
 			model.addAttribute("listEmployee", listEmployee);
 		}
-		
+		session.setAttribute("imgUtil", new ImageUtil());
 		List<TrainingRequisition> listTrainingReqisition = trainingRequistionService.getAllTrainingRequisition();
 		if(listTrainingReqisition != null) {
 			model.addAttribute("listTrainingReqisition", listTrainingReqisition);
@@ -98,7 +99,7 @@ public class TrainingRequisitionController {
 	
 	@GetMapping("editTrainingRequisition/{id}")
 	public String editTrainingRequisition(@PathVariable("id") String trReqCode,@ModelAttribute("trainingRequisition")TrainingRequisition trainingRequisition
-			,Model model) {
+			,Model model,HttpSession session) {
 	
 		List<Department> listDepartment = departmentService.getAllDepartments();
 		if (listDepartment != null) {
@@ -110,7 +111,7 @@ public class TrainingRequisitionController {
 			model.addAttribute("listEmployee", listEmployee);
 		}
 		
-		
+		session.setAttribute("imgUtil", new ImageUtil());
 		TrainingRequisition tr = trainingRequistionService.findById(trReqCode);
 		if(tr != null) {
 			model.addAttribute("trainingRequisition", tr);

@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.hrms.ImageUtil;
 import com.hrms.model.Category;
 import com.hrms.model.Designation;
 import com.hrms.model.Employee;
@@ -83,7 +84,7 @@ public class TrackallEnquiriesController {
 		model.addAttribute("listDesignation", listDesignation);
 		List<TrackallEnquiries>listTrackallEnquiries=trackallEnquiriesService.getAllTrackallEnquiries();
 		model.addAttribute("listTrackallEnquiries", listTrackallEnquiries);
-		
+		session.setAttribute("imgUtil", new ImageUtil());
 		return "trackallEnquiries";
 		
 	}
@@ -111,7 +112,7 @@ public class TrackallEnquiriesController {
 		}
 		List<Designation> listDesignation = designationService.getAllDesignations();
 		model.addAttribute("listDesignation", listDesignation);
-		
+		session.setAttribute("imgUtil", new ImageUtil());
 		TrackallEnquiries trackallEnquiriesEdit =trackallEnquiriesService.findByIdTrackallEnq(id);
 		  model.addAttribute("trackallEnquiriesEdit", trackallEnquiriesEdit);
 	   

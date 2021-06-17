@@ -18,7 +18,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+
+import com.hrms.ImageUtil;
+import com.hrms.model.Employee;
+import com.hrms.model.EmployeeRequisition;
+import com.hrms.model.EmployeeRequisitionDetail;
+
 import com.hrms.model.Employee; 
+
 import com.hrms.model.MenuModule;
 import com.hrms.model.TrainingRequisition;
 import com.hrms.model.TrainingSchedule;
@@ -65,7 +72,7 @@ public class TrainingScheduleController {
 		if (listTrainingSchedule != null) {
 			model.addAttribute("listTrainingSchedule", listTrainingSchedule);
 		}
-		
+		session.setAttribute("imgUtil", new ImageUtil());
 		List<Employee> listEmployee = employeeService.getAllEmployees();
 		if (listEmployee != null) {
 			model.addAttribute("listEmployee", listEmployee);
@@ -87,14 +94,14 @@ public class TrainingScheduleController {
 
 	@GetMapping("edittrainingSchedule/{trScheduleCode}")
 	public String editTrainingSchedule(@PathVariable("trScheduleCode") String trScheduleCode,
-			@ModelAttribute("trainingSchedule") TrainingSchedule trainingSchedule, Model model) {
+			@ModelAttribute("trainingSchedule") TrainingSchedule trainingSchedule, Model model,HttpSession session) {
 
 		TrainingSchedule trainingSchedule1 = trainingScheduleService.findTrainingScheduleById(trScheduleCode);
 		if (trainingSchedule1 != null) {
 			model.addAttribute("trainingSchedule", trainingSchedule1);
 			
 		}
-
+		session.setAttribute("imgUtil", new ImageUtil());
 		List<TrainingRequisition> listTrainingRequistion = trainingRequistionService.findTrainingRequisitionByStatusY();
 		if (listTrainingRequistion != null) {
 			model.addAttribute("listTrainingRequistion", listTrainingRequistion);
