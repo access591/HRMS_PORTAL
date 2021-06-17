@@ -24,7 +24,7 @@ public class PageMappingDaoImpl extends AbstractGenericDao<UrlDetail>implements 
 	private Logger logger = LoggerFactory.getLogger(PageMappingDaoImpl.class.getName());
 
 	@Override
-	public String PageRequestMapping(String requestMpping, int id) {
+	public String pageRequestMapping(String requestMpping, int id) {
 		String pagname = null;
 		try {
 			Session session = this.sessionFactory.getCurrentSession();
@@ -33,7 +33,7 @@ public class PageMappingDaoImpl extends AbstractGenericDao<UrlDetail>implements 
 					"select PAGE_NAME from URL_DTL where URL_ID=" + id + " and REQ_MAPPING='" + requestMpping + "'")
 					.addScalar("PAGE_NAME", new StringType());
 			List rows = query.list();
-			// urlsp.setPage_name(rows.toString());
+		
 			pagname = rows.get(0).toString();
 			
 		} catch (Exception e) {
