@@ -20,7 +20,7 @@ public class CategoryDaoImpl extends AbstractGenericDao<Category>  implements Ca
 
 	@Override
 	public Category chaeckCategoryExistOrNot(Category category) {
-		Logger logger = LoggerFactory.getLogger(CategoryDaoImpl.class.getName());
+	
 		Category desName = null;
 
 		try {

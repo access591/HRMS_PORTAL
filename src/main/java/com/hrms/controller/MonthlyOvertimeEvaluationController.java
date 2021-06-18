@@ -1,6 +1,6 @@
 package com.hrms.controller;
 
-import java.text.ParseException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,6 +46,9 @@ public class MonthlyOvertimeEvaluationController {
 	
 	@GetMapping("/monthlyOvertimeEvaluation")
 	public String monthlyOvertimeEvaluation(Model model, HttpSession session) {
+		if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
 		List<Department> listDepartment = departmentService.getAllDepartments();
 		model.addAttribute("listDepartment", listDepartment);
 		String userCode = (String) session.getAttribute("username");
@@ -128,6 +131,10 @@ public class MonthlyOvertimeEvaluationController {
 	
 	@PostMapping("/saveOvertimeEvaluation")
 	public String saveOvertimeEvaluation(@ModelAttribute("monthOverTimeRegister")EmpMonOvertimeUtil u, Model model, HttpSession session,HttpServletRequest request) {
+		if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
+		
 		String insertedBY = (String) session.getAttribute("USER_NAME");
 		EmpMonOvertime overtimeEval = new EmpMonOvertime();
 		Employee e = new Employee();
@@ -194,6 +201,10 @@ return "redirect:/monthlyOvertimeEvaluation";
 	//
 	@GetMapping(value = { "/deleteMonthOverTime/{id}" })
 	public String deleteMonthOverTime(@PathVariable("id")long id , Model model, HttpSession session) {
+		if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
+		
 		empMontOvertimeRegister.removeMonthOverTimeRegister(id);
 		session.setAttribute("username", session.getAttribute("username"));
 		return "redirect:/monthlyOvertimeEvaluation";

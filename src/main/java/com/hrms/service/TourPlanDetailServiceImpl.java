@@ -11,7 +11,7 @@ import com.hrms.model.TourPlanDetails;
 @Service
 public class TourPlanDetailServiceImpl implements TourPlanDetailService{
 	@Autowired
-	TourPlanDetailDao TourPlanDetailDao;
+	TourPlanDetailDao tourPlanDetailDao;
 	@Autowired
 	SessionFactory sessionFactory;
 	@Override
@@ -21,7 +21,7 @@ public class TourPlanDetailServiceImpl implements TourPlanDetailService{
 		Session s=sessionFactory.openSession();
 		s.beginTransaction();
 		
-		// TODO Auto-generated method stub
+		
 		s.save(tourPlanDetail);
 		s.getTransaction().commit();
 		s.clear();

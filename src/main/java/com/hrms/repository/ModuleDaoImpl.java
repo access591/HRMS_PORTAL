@@ -3,14 +3,14 @@ import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.FetchMode;
 import org.hibernate.SQLQuery;
-import org.hibernate.Session;
+
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.hrms.dao.AbstractGenericDao;
-import com.hrms.model.Department;
+
 import com.hrms.model.Module;
 import com.hrms.model.Program;
 import com.hrms.model.SubModule;

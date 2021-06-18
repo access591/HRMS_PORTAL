@@ -68,6 +68,10 @@ public class MediclaimApprovalController {
 
 	@GetMapping(value = { "/viewMedicalReimbursement/{id}" })
 	public String viewMedicalReimbursement(@PathVariable("id") String id, Model model, HttpSession session) {
+		if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
+		
 		List<Employee> listEmployee = employeeService.getAllEmployees();
 		model.addAttribute("listEmployee", listEmployee);
 
@@ -79,8 +83,10 @@ public class MediclaimApprovalController {
 	}
 
 	@GetMapping("approveMedicalReimbursement/{id}")
-	public String approveRequisition(@PathVariable("id") String slipNo) {
-
+	public String approveRequisition(@PathVariable("id") String slipNo, HttpSession session) {
+		if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
 		medicalReimbursementService.approvedByMrId(slipNo);
 		return "redirect:/mediclaimApproval";
 	}

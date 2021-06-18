@@ -69,6 +69,9 @@ public class TrackallEnquiriesController {
     }
 	@GetMapping("/trackallEnquiries")
 	public String trackallEnquiries(Model model, HttpSession session) {
+		if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
 		String userCode = (String) session.getAttribute("username");
 		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
 		if (modules != null) {
@@ -91,6 +94,9 @@ public class TrackallEnquiriesController {
 	
 	@PostMapping("/saveTrackallEnquiries")
 	public String saveTrackallEnquiries(@ModelAttribute("trackallEnquiries") TrackallEnquiries trackallEnquiries, Model model, HttpSession session) {
+		if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
 		String insertedBY = (String) session.getAttribute("USER_NAME");
 		trackallEnquiries.setInsBy(insertedBY);
 		trackallEnquiriesService.addTrackallEnquiries(trackallEnquiries);
@@ -103,7 +109,9 @@ public class TrackallEnquiriesController {
 	@GetMapping(value = {"/editTrackallEnquiries/{id}"})
 	public String editLtaRequest(@PathVariable("id")long id,  Model model,HttpSession session)
 	 { 
-		
+		if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
 		List<Employee> listEmployee = employeeService.getAllEmployees();
 		model.addAttribute("listEmployee", listEmployee);
 		List<Category> listCategory = categoryService.getAllCategory();
@@ -121,6 +129,9 @@ public class TrackallEnquiriesController {
 
 	@PostMapping("/updateTrackallEnquiries")
 	public String updateTrackallEnquiries(@ModelAttribute("trackallEnquiries")  TrackallEnquiries trackallEnquiries, HttpSession session,Model model) {
+		if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
 		String updatedBY = (String) session.getAttribute("USER_NAME");
 		trackallEnquiries.setUpdBy(updatedBY);
 		this.trackallEnquiriesService.updateTrackallEnquiries(trackallEnquiries);
@@ -133,6 +144,9 @@ public class TrackallEnquiriesController {
 	@GetMapping(value = {"/deleteTrackallEnquiries/{id}"})
 	public String deleteTrackallEnquiries(@PathVariable("id")Long id,  Model model,HttpSession session)
 	 { 
+		if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
 		  this.trackallEnquiriesService.removeTrackallEnquiries(id);
 			return "redirect:/trackallEnquiries";
 

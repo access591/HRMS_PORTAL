@@ -74,17 +74,15 @@ public class SubModuleController {
  * @return
  */
 	@PostMapping("/saveSubModule")
-	public String saveSubModule(@ModelAttribute("SubModule1") SubModule1 SubModule1, Model model,
+	public String saveSubModule(@ModelAttribute("SubModule1") SubModule subModule, Model model,
 			RedirectAttributes redirectAttributes, HttpSession session) {
-		String insertedBY = (String) session.getAttribute("uuuuu");
+		if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
 		
-		Module module=new Module();
-		SubModule subModule=new SubModule();
-		module.setModuleCode(SubModule1.getModuleCode());
-		subModule.setModuleCode(module);
-		subModule.setSubModuleName(SubModule1.getSubModuleName());
-		subModule.setSeqNoSubModule(SubModule1.getSeqNoSubModule());
-		subModule.setAcitveSubModule(SubModule1.getAcitveSubModule());
+		String insertedBY = (String) session.getAttribute("USER_NAME");
+		
+		
 		subModule.setInsertedBySubModule(insertedBY);
 		boolean isSubModuleExist = subModuleService.checkSubModuleExists(subModule);
 		 
@@ -93,8 +91,8 @@ public class SubModuleController {
 		  redirectAttributes.addFlashAttribute("alertClass", "alert-success"); return
 		  "redirect:"+pageMappingService.PageRequestMapping(reqPage,pageno); }
 		  
-		  else { boolean isSeqExist =
-		  subModuleService.checkSubModuleSeqExists(subModule);
+		  else {
+			  boolean isSeqExist =subModuleService.checkSubModuleSeqExists(subModule);
 		  
 		  if(isSeqExist) 
 		  {
@@ -121,7 +119,10 @@ public class SubModuleController {
 	 */
 	@GetMapping(value = { "/editSubModule/{id}" })
 	public String editsubmodule(@PathVariable("id") String id, Model model, HttpSession session) {
-		  int editPageNo=22;
+		if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}  
+		int editPageNo=22;
 			String reqPageedit="/editSubModule";
 		SubModule subModuleEdit = subModuleService.findSubModuleById(id);
 		model.addAttribute("subModuleEdit", subModuleEdit);
@@ -140,21 +141,14 @@ public class SubModuleController {
 	 * @return
 	 */
 	@PostMapping("/updateSubModule")
-	public String updatesubmodule(@ModelAttribute("submoduleupdate") SubModule1 subModule1, Model model) {
-		Module module=new Module();
-		SubModule subModule=new SubModule();
-		module.setModuleCode(subModule1.getModuleCode());
-		subModule.setModuleCode(module);
-		subModule.setSubModuleCode(subModule1.getSubModuleCode());
-		subModule.setSubModuleName(subModule1.getSubModuleName());
-		subModule.setSeqNoSubModule(subModule1.getSeqNoSubModule());
-		subModule.setAcitveSubModule(subModule1.getAcitveSubModule());
+	public String updatesubmodule(@ModelAttribute("submoduleupdate") SubModule subModule, Model model, HttpSession session) {
 		
-		
-		
+		if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
 		this.subModuleService.updateSubModule(subModule);
 
-		 return "redirect:/"+pageMappingService.PageRequestMapping(reqPage,pageno);
+		return "redirect:/" + pageMappingService.PageRequestMapping(reqPage, pageno);
 
 	}
 
@@ -166,6 +160,10 @@ public class SubModuleController {
 	 */
 	@GetMapping(value = { "/deleteSubModule/{id}" })
 	public String deletesubmodule(@PathVariable("id") String id, Model model, HttpSession session) {
+		if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
+		
 		this.subModuleService.removeSubModule(id);
 		session.setAttribute("username", session.getAttribute("username"));
 		 return "redirect:/"+pageMappingService.PageRequestMapping(reqPage,pageno);

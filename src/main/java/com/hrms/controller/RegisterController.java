@@ -60,6 +60,9 @@ public class RegisterController {
  */
 	@PostMapping("/saveRegister")
 	public String saveRegister(@ModelAttribute("register") Register register, Model model, HttpSession session) {
+		if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
 		String insertedBY = (String) session.getAttribute("userlogin");
 		register.setInsBy(insertedBY);
 		registerService.addRegister(register);
@@ -78,7 +81,9 @@ public class RegisterController {
  */
 	@GetMapping(value = { "/editRegister/{id}" })
 	public String editRegister(@PathVariable("id") String id, Model model, HttpSession session) {
-
+		if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
 		int editPageNo = 32;
 		String reqPageedit = "/editRegister";
 
@@ -96,6 +101,9 @@ public class RegisterController {
  */
 	@PostMapping("/updateRegister")
 	public String updateRegister(@ModelAttribute("register") Register r, Model model, HttpSession session) {
+		if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
 		String updatedBY = (String) session.getAttribute("userlogin");
 		r.setUpdBy(updatedBY);
 		this.registerService.updateRegister(r);
@@ -112,6 +120,9 @@ public class RegisterController {
 	
 	@GetMapping(value = { "/deleteRegister/{id}" })
 	public String deleteRegister(@PathVariable("id") String id, Model model, HttpSession session) {
+		if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
 		this.registerService.removeRegister(id);
 		return "redirect:/" + pageMappingService.PageRequestMapping(reqPage, pageno);
 	}

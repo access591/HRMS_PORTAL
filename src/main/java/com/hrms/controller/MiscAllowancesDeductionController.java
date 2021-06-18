@@ -65,7 +65,9 @@ public String miscAllowances(Model model,HttpSession session)
 @PostMapping("/saveAllowncesDeduction")
  public String saveAllowncesDeduction(@ModelAttribute("miscAllowance") MiscAllowance miscAllowance, Model model,HttpSession session)
  { 
-	
+	if (session.getAttribute("username") == null) {
+		return "redirect:" + "./";
+	}
 	     String insertedBY = (String) session.getAttribute("userlogin");
 	     miscAllowance.setInsBy(insertedBY);
         miscAllowanceDeductionService.addMiscAllowanceDeduction(miscAllowance);
@@ -89,7 +91,9 @@ public String miscAllowances(Model model,HttpSession session)
 
 @GetMapping(value = {"/editAllowanceDeduction/{id}"})
 public String editAllowncesDeduction(@PathVariable("id")String id,  Model model,HttpSession session)
- { 
+ { if (session.getAttribute("username") == null) {
+		return "redirect:" + "./";
+	}
 	 int editPageNo=16;
 		String reqPageedit="/editAllowanceDeduction";
 	MiscAllowance editMiscAllowance = miscAllowanceDeductionService.findMiscAllowanceDeductionById(id);
@@ -108,7 +112,9 @@ public String editAllowncesDeduction(@PathVariable("id")String id,  Model model,
  */
 @PostMapping("/updateAllowanceDeduction")
 public String updateAllowncesDeduction(@ModelAttribute("miscAllowanceUpdate") MiscAllowance miscAllowance, Model model,HttpSession session) {
-
+	if (session.getAttribute("username") == null) {
+		return "redirect:" + "./";
+	}
 	String updatedBY = (String) session.getAttribute("userlogin");
 	miscAllowance.setUpdBy(updatedBY);
 	  this.miscAllowanceDeductionService.updateMiscAllowanceDeduction(miscAllowance);
@@ -124,7 +130,9 @@ public String updateAllowncesDeduction(@ModelAttribute("miscAllowanceUpdate") Mi
  */
 @GetMapping(value = {"/deleteAllowanceDeduction/{id}"})
 public String deleteAllowncesDeduction(@PathVariable("id")String id,  Model model,HttpSession session)
- { 
+ { if (session.getAttribute("username") == null) {
+		return "redirect:" + "./";
+	}
 	  this.miscAllowanceDeductionService.removeMiscAllowanceDeduction(id);
     session.setAttribute("username",session.getAttribute("username")); 
     return "redirect:/"+pageMappingService.PageRequestMapping(reqPage,pageno);

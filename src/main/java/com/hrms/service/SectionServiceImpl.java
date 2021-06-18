@@ -20,8 +20,8 @@ public class SectionServiceImpl implements SectionService {
 
 	@Override
 	public List<Section> getAllSections() {
-		List<Section> listSection = sectionDao.findAll();
-		return listSection;
+		return sectionDao.findAll();
+	
 	}
 
 	@Override

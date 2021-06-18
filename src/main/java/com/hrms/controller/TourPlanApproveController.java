@@ -14,7 +14,7 @@ import com.hrms.ImageUtil;
 import com.hrms.model.Department;
 import com.hrms.model.Designation;
 import com.hrms.model.Employee;
-import com.hrms.model.MedicalReimbursement;
+
 import com.hrms.model.MenuModule;
 import com.hrms.model.TourPlan;
 import com.hrms.service.DepartmentService;
@@ -44,15 +44,17 @@ public class TourPlanApproveController {
 	
 	@GetMapping("/tourPlanApproval")
 	public String tourPlanApproval(Model model, HttpSession session) {
-		
+		if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
 		String userCode = (String) session.getAttribute("username");
 		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
 		if (modules != null) {
 			model.addAttribute("modules", modules);
 		}
 		
-		List<TourPlan> ListTourPlan=tourPlanApprovalService.getAllTourPlan();
-		model.addAttribute("ListTourPlan", ListTourPlan);
+		List<TourPlan> listTourPlan=tourPlanApprovalService.getAllTourPlan();
+		model.addAttribute("ListTourPlan", listTourPlan);
 		session.setAttribute("imgUtil", new ImageUtil());
 		session.setAttribute("username", session.getAttribute("username"));
 		return"tourPlanApproval";
@@ -68,7 +70,9 @@ public class TourPlanApproveController {
 	
 	@GetMapping(value = {"/viewTourPlan/{id}"})
 	public String viewTourPlan(@PathVariable("id")String id,  Model model,HttpSession session)
-	 { 
+	 { 	if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
 		List<Department> listDepartment = departmentService.getAllDepartments();
 		model.addAttribute("listDepartment", listDepartment);
 		

@@ -65,7 +65,9 @@ public class GradeMaterController {
 @PostMapping("/saveGrade")
   public String saveGrade(@ModelAttribute("grade") Grade grade, Model model,HttpSession session,RedirectAttributes redirectAttributes) {
 	boolean isGradeExist = gradeMaterService.checkGradeExists(grade);
-	
+	if (session.getAttribute("username") == null) {
+		return "redirect:" + "./";
+	}
 	if (isGradeExist) {
 	    redirectAttributes.addFlashAttribute("message", "Grade Name Already exists !  ");
 	    redirectAttributes.addFlashAttribute("alertClass", "alert-success");
@@ -87,7 +89,9 @@ public class GradeMaterController {
 public String editGrade(@PathVariable("id")String id,  Model model,HttpSession session)
  { int editPageNo=2;
 	String reqPageedit="/editGrade";
-	
+	if (session.getAttribute("username") == null) {
+		return "redirect:" + "./";
+	}
 	
 	Grade gradeEdit = gradeMaterService.findGradeById(id);
 	  model.addAttribute("gradeEdit", gradeEdit);
@@ -118,7 +122,9 @@ public String updateGradep(@ModelAttribute("gradeupdate") Grade g, Model model) 
 @GetMapping(value = {"/deleteGarde/{id}"})
 public String deletegrade(@PathVariable("id")String id,  Model model,HttpSession session)
  { 
-
+	if (session.getAttribute("username") == null) {
+		return "redirect:" + "./";
+	}
 		 
 	
 	  this.gradeMaterService.removeGrade(id);

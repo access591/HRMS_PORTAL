@@ -1,7 +1,7 @@
 package com.hrms.reports;
 
 import java.io.IOException;
-import java.util.Collections;
+import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,13 +26,13 @@ import net.sf.jasperreports.engine.util.JRLoader;
 @Component
 public class BudgetReport {
 
-	public List<BudgetProvision> createBudgetReport(HttpServletResponse response, HttpServletRequest request,
-			List<BudgetProvision> sourceData, String deptName) throws IOException {
+	public List<?> createBudgetReport(HttpServletResponse response, HttpServletRequest request, 
+			List<BudgetProvision> sourceData,String deptName) {
 
 		String reportFileName = "budgetProvision"; // Parameter1
-		String deptName1 = "Department : " + deptName;
+		String deptName1 = "Department : "+deptName;
 		String year = "2021-22";
-
+	
 		String sourceFileName = request.getSession().getServletContext()
 				.getRealPath("resources/" + reportFileName + ".jrxml");
 
@@ -43,12 +43,12 @@ public class BudgetReport {
 					.getRealPath("/resources/" + reportFileName + ".jasper");
 			JRBeanCollectionDataSource beanColDataSource = new JRBeanCollectionDataSource(sourceData);
 
-			Map<String, Object> parameters = new HashMap<>();
+			Map<String, Object> parameters = new HashMap<String, Object>();
 
 			parameters.put("Parameter1", beanColDataSource);
 			parameters.put("deptName", deptName1);
 			parameters.put("year", year);
-
+		
 			JasperReport report = (JasperReport) JRLoader.loadObjectFromFile(sourceFileName);
 			JasperPrint jasperPrint = JasperFillManager.fillReport(report, parameters, new JREmptyDataSource());
 
@@ -60,17 +60,22 @@ public class BudgetReport {
 				response.setHeader("Cache-Control", "private");
 				response.setHeader("Pragma", "no-store");
 				response.setContentLength(pdfReport.length);
-
-				response.getOutputStream().write(pdfReport);
-				response.getOutputStream().flush();
-				response.getOutputStream().close();
+				try {
+					response.getOutputStream().write(pdfReport);
+					response.getOutputStream().flush();
+					response.getOutputStream().close();
+				} catch (IOException e) {
+					
+					e.printStackTrace();
+				}
 
 			}
 		} catch (JRException e) {
 			e.printStackTrace();
 		}
 
-		return Collections.emptyList();
+		return null;
+
 
 	}
 }

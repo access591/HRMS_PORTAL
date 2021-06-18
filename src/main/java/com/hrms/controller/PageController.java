@@ -27,6 +27,11 @@ public class PageController {
 	
 	@GetMapping("/pageMaster")
 	public String pageMater(Model model, HttpSession session) {
+		
+		if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
+		
 		List<UrlDetail> listUrlDetail = pageMappingService.getAllPages();
 		model.addAttribute("listUrlDetail", listUrlDetail);
 		String userCode = (String) session.getAttribute("username");
@@ -62,7 +67,9 @@ public class PageController {
 
 	@GetMapping(value = { "/editPage/{id}" })
 	public String editUrlDetail(@PathVariable("id") String id, Model model, HttpSession session) {
-
+		if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
 		UrlDetail urlDetailEdit = pageMappingService.findUrlDetailById(id);
 		model.addAttribute("urlDetailEdit", urlDetailEdit);
 
@@ -80,6 +87,10 @@ public class PageController {
 
 	@GetMapping(value = { "/deletePage/{id}" })
 	public String deletePage(@PathVariable("id") String id, Model model, HttpSession session) {
+		
+		if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
 		this.pageMappingService.removePage(id);
 		session.setAttribute("username", session.getAttribute("username"));
 		return "redirect:/pageMaster";

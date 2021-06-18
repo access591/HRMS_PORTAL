@@ -16,9 +16,9 @@ public interface StaffPostingDutiesService {
 
 	List<StaffPostingDuties> getAllStaffPostingDuties();
 
-	StaffPostingDuties StaffPostingDutieById(String id);
+	StaffPostingDuties staffPostingDutieById(String id);
 
-	void UpdateStaffPostingDuties(StaffPostingDuties staffduties);
+	void updateStaffPostingDuties(StaffPostingDuties staffduties);
 
 	void staffPostingDutiesGenratepdf(HttpServletRequest request, HttpServletResponse response, String reportFileName,
 			List<SaffPostingDutiesUtil> dataList);

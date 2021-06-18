@@ -45,7 +45,9 @@ public class LeaveMasterController {
 	 */
 @GetMapping("/leaveMaster")
 public String leaveMaster(Model model,HttpSession session) {
-	
+	if (session.getAttribute("username") == null) {
+		return "redirect:" + "./";
+	}
 	List<Leave> listLeave = leaveService.getAllLeaves();
 	model.addAttribute("listLeave", listLeave);
 	String userCode= (String)session.getAttribute("username");
@@ -66,8 +68,10 @@ public String leaveMaster(Model model,HttpSession session) {
  * @return
  */
 @PostMapping("/saveLeave")
-	public String saveLeave(@ModelAttribute("leave") Leave leave, Model model) {
-	
+	public String saveLeave(@ModelAttribute("leave") Leave leave, Model model,HttpSession session) {
+	if (session.getAttribute("username") == null) {
+		return "redirect:" + "./";
+	}
 			leaveService.addLeave(leave);
 			List<Leave> listLeave = leaveService.getAllLeaves();
 			model.addAttribute("listLeave", listLeave);
@@ -86,6 +90,9 @@ public String leaveMaster(Model model,HttpSession session) {
   @GetMapping(value = {"/editLeave/{id}"})
   public String editleave(@PathVariable("id")String id,  Model model,HttpSession session)
    { 
+	  if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
 	  int editPageNo=12;
 		String reqPageedit="/editLeave";
 	   Leave leaveEdit = leaveService.findLeaveById(id);
@@ -101,8 +108,10 @@ public String leaveMaster(Model model,HttpSession session) {
 	 * @return
 	 */
   @PostMapping("/updateLeave")
-  public String updateLeave(@ModelAttribute("leaveupdate") Leave d, Model model) {
- 
+  public String updateLeave(@ModelAttribute("leaveupdate") Leave d, Model model,HttpSession session) {
+	  if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
 	  this.leaveService.updateLeave(d);
     	  
 	  return "redirect:/"+pageMappingService.PageRequestMapping(reqPage,pageno);

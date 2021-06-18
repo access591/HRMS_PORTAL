@@ -38,7 +38,7 @@ public class LocalClaimReport {
 					.getRealPath("/resources/" + reportFileName + ".jasper");
 			JRBeanCollectionDataSource beanColDataSource = new JRBeanCollectionDataSource(sourceData);
 
-			HashMap<String, Object> map = new HashMap<String, Object>();
+			HashMap<String, Object> map = new HashMap<>();
 
 			map.put("Parameter1", beanColDataSource);
 			

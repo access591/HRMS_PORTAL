@@ -13,10 +13,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.hrms.ImageUtil;
-import com.hrms.model.Award;
+
 import com.hrms.model.Insurance;
 import com.hrms.model.MenuModule;
-import com.hrms.model.Travel;
+
 import com.hrms.service.InsuranceService;
 import com.hrms.service.ModuleService;
 
@@ -46,7 +46,9 @@ public class InsuranceController {
 	
 	@PostMapping("/saveInsurance")
 	public String saveInsurance(@ModelAttribute("insurance") Insurance insurance, Model model, HttpSession session) {
-
+		if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
 		insuranceService.addInsurance(insurance);
 		List<Insurance> listInsurance = insuranceService.getAllInsurances();
 		model.addAttribute("listInsurance", listInsurance);
@@ -57,7 +59,9 @@ public class InsuranceController {
 	}
 	@GetMapping(value = {"/editInsurance/{id}"})
 	public String editInsurance(@PathVariable("id")String id,  Model model,HttpSession session)
-	 { 
+	 { if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
 		  Insurance insuranceEdit = insuranceService.findInsuranceById(id);
 		  model.addAttribute("insuranceEdit", insuranceEdit);
 
@@ -77,6 +81,9 @@ public class InsuranceController {
 	
 	@GetMapping(value = { "/deleteInsurance/{id}" })
 	public String deleteInsurance(@PathVariable("id") String id, Model model, HttpSession session) {
+		if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
 		this.insuranceService.removeInsurance(id);
 		session.setAttribute("username", session.getAttribute("username"));
 		return"redirect:/insuranceMaster";

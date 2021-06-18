@@ -45,6 +45,10 @@ public class LeaveDetailController {
 	 */
 	@GetMapping("/leaveDetailMaster")
 	public String leaveDetailMaster(Model model, HttpSession session) {
+		
+		if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
 		List<LeaveDetail> listLeaveDetail = leaveDetailService.getAllLeaveDetails();
 		model.addAttribute("listLeaveDetail", listLeaveDetail);
 		List<Leave> listLeave = leaveService.getAllLeaves();
@@ -71,7 +75,11 @@ public class LeaveDetailController {
 	@PostMapping("/saveLeaveDetail")
 	public String saveLeaveDetail(@ModelAttribute("leaveDetail") LeaveDetail leaveDetail, Model model,
 			HttpSession session) {
-		String insertedBY = (String) session.getAttribute("userlogin");
+		if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
+		
+		String insertedBY = (String) session.getAttribute("USER_NAME");
 		leaveDetail.setInsBy(insertedBY);
 		leaveDetailService.addLeaveDetail(leaveDetail);
 

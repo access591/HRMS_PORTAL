@@ -97,9 +97,9 @@ body {
 
 														<td><label class="form-control text-center" th:text="${leaveRequestapproval.department.deptName}"></label></td>
 
-														<td><label class="form-control text-center" th:text="${#dates.format(leaveRequestapproval.fromDate, 'dd-MMM-yyyy')}"></label></td>
+														<td><label class="form-control text-center" th:text="${leaveRequestapproval.fromDate}"></label></td>
 
-														<td><label class="form-control text-center" th:text="${#dates.format(leaveRequestapproval.toDate, 'dd-MMM-yyyy')}"></label></td>
+														<td><label class="form-control text-center" th:text="${leaveRequestapproval.toDate}"></label></td>
 														<td><label class="form-control text-center" th:text="${leaveRequestapproval.leaveFor}"></label></td>
 														
 														<td>

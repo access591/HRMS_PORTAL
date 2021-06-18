@@ -63,7 +63,7 @@ body {
 										<div class="form-group" >
 											<label class="form-label">Module</label>
 											<label style="color: red">*</label>
-											<select class="form-control" name="moduleCode"id="moduleCode"  title="Module Name" required aria-required="true">
+											<select class="form-control" name="moduleCode.moduleCode"id="moduleCode.moduleCode"  title="Module Name" required aria-required="true">
 												    <option value="">Select Module</option>
 													<option   th:each="module: ${modulesList}" th:value="${module.getModuleCode()}" th:text="${module.getModuleName()}" th:field="${subModuleEdit.moduleCode.moduleCode}"></option>
 											     </select>

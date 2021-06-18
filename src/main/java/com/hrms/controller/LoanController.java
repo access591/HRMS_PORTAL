@@ -96,7 +96,11 @@ public class LoanController {
 
 	@GetMapping(value = { "/editLoan/{id}" })
 	public String editLoan(@PathVariable("id") String id, Model model, HttpSession session) {
-		 int editPageNo=14;
+		if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
+		
+		int editPageNo=14;
 			String reqPageedit="/editLoan";
 		Loan loanEdit = loanMaterService.findLoanById(id);
 		model.addAttribute("loanEdit", loanEdit);
@@ -113,8 +117,10 @@ public class LoanController {
 	 * @return
 	 */
 	@PostMapping("/updateLoan")
-	public String updateLoan(@ModelAttribute("loanupdate") Loan loan, Model model) {
-
+	public String updateLoan(@ModelAttribute("loanupdate") Loan loan, Model model, HttpSession session) {
+		if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
 		this.loanMaterService.updateLoan(loan);
 
 		return "redirect:"+pageMappingService.PageRequestMapping(reqPage,pageno);

@@ -22,8 +22,8 @@ TravelDao  travelDao;
 	@Override
 	public List<Travel> getAllTravels() {
 	
-		List<Travel> listTravel = travelDao.findAll();
-		return listTravel;
+		return travelDao.findAll();
+		
 	}
 
 	@Override

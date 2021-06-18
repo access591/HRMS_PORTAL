@@ -56,6 +56,9 @@ public class LeaveGrantRegister {
 	
 	@PostMapping("/saveLeaveGrant")
 	public String saveLeaveGrant(@ModelAttribute("leaveGrant")LeaveGrantUtil leaveGrantUtil, Model model, HttpSession session) {
+		if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
 		Employee emp=new Employee();
 		emp.setEmpCode(leaveGrantUtil.getEmpCode());
 		Leave leave=new Leave();
@@ -82,6 +85,10 @@ public class LeaveGrantRegister {
 	@GetMapping(value = {"/editLeaveGrant/{id}"})
 	  public String editdesignation(@PathVariable("id")String id,  Model model,HttpSession session)
 	   { 
+		
+		if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
 		List<Employee> listEmployee = employeeService.getAllEmployees();
 		model.addAttribute("listEmployee", listEmployee);
 		List<Leave> listLeave = leaveService.getAllLeaves();
@@ -95,8 +102,10 @@ public class LeaveGrantRegister {
 	
 	
 	@PostMapping("/updateLeaveGrant")
-	public String updateLeaveGrant(@ModelAttribute("leaveGrant")LeaveGrantUtil leaveGrantUtil , Model model)
-	{
+	public String updateLeaveGrant(@ModelAttribute("leaveGrant")LeaveGrantUtil leaveGrantUtil , Model model,HttpSession session)
+	{if (session.getAttribute("username") == null) {
+		return "redirect:" + "./";
+	}
 		Employee emp=new Employee();
 		emp.setEmpCode(leaveGrantUtil.getEmpCode());
 		Leave leave=new Leave();
@@ -118,7 +127,9 @@ public class LeaveGrantRegister {
 	
 	@GetMapping(value = {"/deleteLeaveGrant/{id}"})
 	public String deleteLeaveGrant(@PathVariable("id")String id,  Model model,HttpSession session)
-	 { 
+	 { if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
 		  this.leaveGrantRegisterService.removeLeaveGrant(id);
 	    session.setAttribute("username",session.getAttribute("username")); 
 	    return"redirect:/leaveGrant";

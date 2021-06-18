@@ -3,17 +3,18 @@ package com.hrms.controller;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-
+import java.util.HashMap;
 import java.util.List;
-
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
-
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -31,6 +32,7 @@ import com.hrms.helper.Message1;
 import com.hrms.model.CommonUtil;
 import com.hrms.model.MenuModule;
 import com.hrms.model.EmployeeRequisition;
+//import com.hrms.model.EmployeeRequisitionCreationDto;
 import com.hrms.model.EmployeeRequisitionDetail;
 import com.hrms.service.DepartmentService;
 import com.hrms.service.DesignationService;
@@ -42,7 +44,7 @@ import com.hrms.service.PageMappingService;
 @Controller
 public class EmployeeRequisitionController {
 	int  pageNo= 71;
-	String reqPage = "employeeRequisition";  
+	String reqPage = "employeeRequisition";  //employeeRequisition.html.html
 	@Autowired ModuleService moduleService;
 	@Autowired PageMappingService pageMappingService;
 	@Autowired DepartmentService departmentService;
@@ -61,7 +63,8 @@ public class EmployeeRequisitionController {
                 new CustomDateEditor(dateFormatter, true));
         binder.registerCustomEditor(Date.class, "reqTill",
                 new CustomDateEditor(dateFormatter, true));
-
+//        binder.registerCustomEditor(Date.class, "reqDate",
+//                new CustomDateEditor(dateFormatter, true));
        
     }
 	
@@ -69,12 +72,6 @@ public class EmployeeRequisitionController {
 	
 	@GetMapping("employeeRequisition")  
 	public String employeeRequisition(Model model, HttpSession session) {
-		
-		if(session.getAttribute("username")==null) {
-			return "redirect:" + "./";
-		}
-		
-		
 		session.setAttribute("imgUtil", new ImageUtil());
 		String userCode = (String) session.getAttribute("username");  
 		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
@@ -90,7 +87,7 @@ public class EmployeeRequisitionController {
 	
 		
 		
-		List<EmployeeRequisitionDetail> emp = new ArrayList<>();
+		List<EmployeeRequisitionDetail> emp = new ArrayList<EmployeeRequisitionDetail>();
 		EmployeeRequisition eReq = new EmployeeRequisition();
 		
 		List<EmployeeRequisition> requisition = employeeRequisitionService.getAllEmployeeRequisition();
@@ -98,10 +95,11 @@ public class EmployeeRequisitionController {
 			model.addAttribute("requisition", requisition);
 		}
 		
+		System.out.println("requisition size : "+ requisition.size());
 		
 		
 		eReq.setEmployeRequisitionDetail(emp);
-		
+		System.out.println("lenths =====" + emp.size());
 		model.addAttribute("req", eReq);
 		
 		session.setAttribute("username", session.getAttribute("username"));
@@ -114,13 +112,8 @@ public class EmployeeRequisitionController {
 	public String saveEmployeeRequisition(@ModelAttribute("req") EmployeeRequisition employeeRequisition,
 			HttpSession session,RedirectAttributes redirectAttributes) {
 		
-		
-		if(session.getAttribute("username")==null) {
-			return "redirect:" + "./";
-		}
-		
 		String insertedBY = (String) session.getAttribute("userlogin");
-		
+
 		try {
 			
 			List<EmployeeRequisitionDetail> re = new ArrayList<>();
@@ -143,44 +136,46 @@ public class EmployeeRequisitionController {
 		}catch(Exception e) {
 			e.printStackTrace();
 			session.setAttribute("message", new Message1("Something went Wrong !!","alert-info"));
+
 			
 		}
 		
 		session.setAttribute("userlogin", insertedBY);
 
-		return "redirect:employeeRequisition"; 
+		return "redirect:employeeRequisition"; //+pageMappingService.PageRequestMapping(reqPage,pageNo)
 	}
 	
 	
 	@GetMapping(value = {"editRequisition/{id}"})
 	public String editRequisition(@PathVariable("id") String reqCode,@ModelAttribute("req") EmployeeRequisition employeeRequisition,
-			Model model,HttpSession session) {
-	
-		if(session.getAttribute("username")==null) {
-			return "redirect:" + "./";
-		}
+			Model model) {
+		System.out.println("==========employeeRequisitionCode===========>"+reqCode);
 		
 		EmployeeRequisition requisition = employeeRequisitionService.findEmployeeRequisitiondById(reqCode);
+		System.out.println("requisition detail : "+ requisition.getReqCode());
 		
+		System.out.println("requisition detail : "+requisition.getEmployeRequisitionDetail().size());
+		
+		System.out.println("requisition detail : "+requisition.getEmployeRequisitionDetail().get(0).getAgeFrom());
+		
+		//System.out.println("desgnation through requisition : " + requisition.getEmployeRequisitionDetail().get(0).getDesignation().getDesgCode());
 		
 
-		
+		//requisition.getEmployeRequisitionDetail()
 		if(requisition != null) {
 			model.addAttribute("req", requisition);
 		}
-		
+		System.out.println("employee requisition id : "+ reqCode);
 		return "editEmployeeRequisition";
 	}
 	
 	@PostMapping(value = {"updateRequisition"})
 	public String updateRequisition(@ModelAttribute("req") EmployeeRequisition employeeRequisition,
-			Model model,HttpSession session) {
+			Model model) {
 		
-		if(session.getAttribute("username")==null) {
-			return "redirect:" + "./";
-		}
+		  System.out.println("=====================>update employee Requisition");
 		  
-		ArrayList<EmployeeRequisitionDetail> employeeRequisitionDetail = new ArrayList<>();
+		ArrayList<EmployeeRequisitionDetail> employeeRequisitionDetail = new ArrayList<EmployeeRequisitionDetail>();
 		
 		for(EmployeeRequisitionDetail eDetail : employeeRequisition.getEmployeRequisitionDetail()) {
 			eDetail.setEmployeeRequisition(employeeRequisition);
@@ -194,14 +189,11 @@ public class EmployeeRequisitionController {
 	
 	@GetMapping(value = {"deleteRequisition/{id}"})
 	public String deleteRequisition(@PathVariable("id") String reqCode, Model model, HttpSession session) {
-		
-		if(session.getAttribute("username")==null) {
-			return "redirect:" + "./";
-		}
+		System.out.println("=====================>");
 		
 		employeeRequisitionService.removeEmployeeRequisition(reqCode);
 		
-		
+		System.out.println("employee requisition id : "+ reqCode);
 		session.setAttribute("username", session.getAttribute("username"));
 		return "redirect:/employeeRequisition";
 	}
@@ -209,18 +201,15 @@ public class EmployeeRequisitionController {
 	
 	@GetMapping(value = {"viewRequisition/{id}"})
 	public String viewRequisition(@PathVariable("id") String reqCode,@ModelAttribute("req") EmployeeRequisition employeeRequisition,
-			Model model,HttpSession session) {
-	
-		if(session.getAttribute("username")==null) {
-			return "redirect:" + "./";
-		}
+			Model model) {
+		System.out.println("=====================>");
 		
 		EmployeeRequisition requisition = employeeRequisitionService.findEmployeeRequisitiondById(reqCode);
-		
+		//requisition.getEmployeRequisitionDetail()
 		if(requisition != null) {
 			model.addAttribute("req", requisition);
 		}
-		
+		System.out.println("employee requisition id : "+ reqCode);
 		return "viewEmployeeRequisition";
 	}
 	
@@ -233,9 +222,9 @@ public class EmployeeRequisitionController {
 	@GetMapping("/designationbydept/{selecteDepartmentValue}")
 	public List<CommonUtil> getDesignationByDepartment(@PathVariable("selecteDepartmentValue") String deptCode) {
 		
-		
+		System.out.println("department value is"+ deptCode);
 		List<Employee> employeeList = employeeService.findByDepartmentCode(deptCode);
-		List<CommonUtil> details = new ArrayList<>();
+		List<CommonUtil> details = new ArrayList<CommonUtil>();
 		CommonUtil empl = new CommonUtil();
 		for(int i =0;i<employeeList.size();i++) {
 			Designation designation = designationService.findDesignationById(employeeList.get(i).getDesignationCode());
@@ -252,7 +241,7 @@ public class EmployeeRequisitionController {
 	@ResponseBody
 	@GetMapping("designationsize")
 	public int getDesignationSize() {
-	
+	System.out.println("ïn designation method");
 		return designationService.getAllDesignations().size();
 	}
 	

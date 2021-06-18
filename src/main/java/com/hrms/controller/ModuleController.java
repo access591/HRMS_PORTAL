@@ -67,7 +67,9 @@ public class ModuleController {
 	 */
 	@PostMapping("/saveModule")
 	  public String saveModule(@ModelAttribute("module") Module module, Model model,HttpSession session,RedirectAttributes redirectAttributes) {
-			
+		if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}	
 		boolean isModuleExist = moduleService.checkModuleExists(module);
 		
 		if (isModuleExist) {
@@ -100,7 +102,9 @@ public class ModuleController {
 	 */
 	@GetMapping(value = {"/editModule/{id}"})
 	public String editModule(@PathVariable("id")String id,  Model model,HttpSession session)
-	 { 
+	 { if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
 		   int editPageNo=20;
 			String reqPageedit="/editModule";
 			String userCode= (String)session.getAttribute("username");
@@ -123,8 +127,10 @@ public class ModuleController {
 	 * @return
 	 */
 	@PostMapping("/updateModule")
-	public String updateModule(@ModelAttribute("moduleupdate") Module m, Model model) {
-
+	public String updateModule(@ModelAttribute("moduleupdate") Module m, Model model,HttpSession session) {
+		if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
 		  this.moduleService.updateModule(m);
 	  	  
 		  return "redirect:/"+pageMappingService.PageRequestMapping(reqPage,pageno);
@@ -137,7 +143,9 @@ public class ModuleController {
 	 */
 	@GetMapping(value = {"/deleteModule/{id}"})
 	public String deleteModule(@PathVariable("id")String id,  Model model,HttpSession session)
-	 { 
+	 { if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
 		  this.moduleService.removeModule(id);
 	    session.setAttribute("username",session.getAttribute("username")); 
 	    return "redirect:/"+pageMappingService.PageRequestMapping(reqPage,pageno);

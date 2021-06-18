@@ -71,7 +71,9 @@ public class MedicalReimbursementController {
 	
 	@PostMapping("/saveMedicalReimbursement")
 	String saveMedicalReimbursement(@ModelAttribute("medicalReimbursement") MedicalReimbursementUtil medicalReimbursement, Model model,HttpSession session,HttpServletRequest request){
-		
+		if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
 		 MedicalReimbursement m2=new MedicalReimbursement();
 		 MedicalReimbursementDetail m4=new MedicalReimbursementDetail();
 		 Employee emp=new Employee();
@@ -242,11 +244,8 @@ public class MedicalReimbursementController {
 		
 		 medicalReimbursement.setEmpCode(m1.getEmpCode().getEmpCode());
 	
-		 MedicalReimbursementDetail m4=new MedicalReimbursementDetail();
-		 
-		 if(medicalReimbursement == null) {
-	            return ResponseEntity.notFound().build();
-	        }
+	
+		
 	        return ResponseEntity.ok().body(medicalReimbursement);
 	    }
 	

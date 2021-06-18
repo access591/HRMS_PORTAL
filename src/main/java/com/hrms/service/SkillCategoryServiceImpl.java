@@ -19,8 +19,8 @@ public class SkillCategoryServiceImpl implements SkillCategoryService {
 
 	@Override
 	public List<SkillCategory> getAllSkillCategorys() {
-		List<SkillCategory> listSkillCategory = skillCategoryDao.findAll();
-		return listSkillCategory;
+		return skillCategoryDao.findAll();
+		
 	}
 
 	@Override

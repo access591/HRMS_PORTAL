@@ -55,7 +55,9 @@ public class TourPlanController {
 
 	@GetMapping("/tourPlan")
 	public String tourPlan(Model model, HttpSession session) {
-		
+		if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
 		String userCode = (String) session.getAttribute("username");
 		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
 		if (modules != null) {
@@ -81,6 +83,9 @@ public class TourPlanController {
 	
 	@PostMapping("/saveTourPlan")
 	public String saveTourPlan(@ModelAttribute("tourPlan")TourPlanUtil u, Model model, HttpSession session,HttpServletRequest request) {
+		if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
 		String insertedBY = (String) session.getAttribute("USER_NAME");
 		TourPlan tourPlan=new TourPlan();
 		TourPlanDetails tourPlanDetail=new TourPlanDetails();
@@ -196,7 +201,9 @@ public class TourPlanController {
 	
 	@GetMapping(value = {"/editTourPlan/{id}"})
 	public String editTourPlan(@PathVariable("id")String id,  Model model,HttpSession session)
-	 { 
+	 { 	if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
 		List<Department> listDepartment = departmentService.getAllDepartments();
 		model.addAttribute("listDepartment", listDepartment);
 		
@@ -215,8 +222,10 @@ public class TourPlanController {
 	}
 
 	@PostMapping("/updateTourPlan")
-	  public String updateTourPlan(@ModelAttribute("tourPlanEdit") TourPlan tourPlan, Model model){
-		
+	  public String updateTourPlan(@ModelAttribute("tourPlanEdit") TourPlan tourPlan, Model model, HttpSession session){
+		if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
 		
 		  this.tourPlanService.updateTourPlan(tourPlan);
 	    	  
@@ -227,6 +236,9 @@ public class TourPlanController {
 	@GetMapping(value = { "/deleteTourPlan/{id}" })
 public String deleteTourPlan(@PathVariable("id") String id, Model model,
 		HttpSession session) {
+		if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
 	try {
 		
 		tourPlanService.removeTourPlan(id);

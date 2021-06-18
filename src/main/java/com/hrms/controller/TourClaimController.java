@@ -62,7 +62,9 @@ public class TourClaimController {
 	
 	@GetMapping("/tourClaim")
 	public String tourClaim(Model model, HttpSession session) {
-
+		if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
 		session.setAttribute("imgUtil", new ImageUtil());
 		String userCode = (String) session.getAttribute("username");
 		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
@@ -81,6 +83,10 @@ public class TourClaimController {
 
 	@PostMapping("/saveTourClaim")
 	public String saveTourClaim(@ModelAttribute("tourClaim")TourClaimUtil tourClaimUtil, Model model, HttpSession session,HttpServletRequest request) throws ParseException {
+		if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
+		
 		String insertedBY = (String) session.getAttribute("USER_NAME");
 		TourClaim tourClaim= new TourClaim();
 		TravelingExpenses travExp=new TravelingExpenses();
