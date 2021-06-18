@@ -44,7 +44,9 @@ public class SectionController {
 	 */	
 @GetMapping("/sectionMaster")
 public String sectionMaster(Model model,HttpSession session) {
-	
+	if (session.getAttribute("username") == null) {
+		return "redirect:" + "./";
+	}
 	List<Section> listSection = sectionService.getAllSections();
 	model.addAttribute("listSection", listSection);
 	String userCode= (String)session.getAttribute("username");
@@ -66,7 +68,10 @@ public String sectionMaster(Model model,HttpSession session) {
  * @return
  */
 @PostMapping("/saveSection")
-	public String saveSection(@ModelAttribute("section") Section section, Model model,RedirectAttributes redirectAttributes) {
+	public String saveSection(@ModelAttribute("section") Section section, Model model,RedirectAttributes redirectAttributes, HttpSession session) {
+	if (session.getAttribute("username") == null) {
+		return "redirect:" + "./";
+	}
 	boolean isModuleExist = sectionService.checkSectionExists(section);	
 	
 	if (isModuleExist) {
@@ -93,6 +98,9 @@ public String sectionMaster(Model model,HttpSession session) {
  */
 @GetMapping(value = { "/editSection/{id}" })
 public String editsection(@PathVariable("id") String id, Model model, HttpSession session) {
+	if (session.getAttribute("username") == null) {
+		return "redirect:" + "./";
+	}
 	int editPageNo = 18;
 	String reqPageedit = "/editSection";
 	Section sectionEdit = sectionService.findSectionById(id);
@@ -108,8 +116,10 @@ public String editsection(@PathVariable("id") String id, Model model, HttpSessio
  * @return
  */
 @PostMapping("/updateSection")
-public String updateSection(@ModelAttribute("sectupdate") Section d, Model model) {
-
+public String updateSection(@ModelAttribute("sectupdate") Section d, Model model, HttpSession session) {
+	if (session.getAttribute("username") == null) {
+		return "redirect:" + "./";
+	}
 	this.sectionService.updateSection(d);
 	return "redirect:/" + pageMappingService.PageRequestMapping(reqPage, pageno);
 }
@@ -122,7 +132,9 @@ public String updateSection(@ModelAttribute("sectupdate") Section d, Model model
  */
 @GetMapping(value = { "/deleteSection/{id}" })
 public String deletesection(@PathVariable("id") String id, Model model, HttpSession session) {
-
+	if (session.getAttribute("username") == null) {
+		return "redirect:" + "./";
+	}
 	this.sectionService.removeSection(id);
 
 	session.setAttribute("username", session.getAttribute("username"));

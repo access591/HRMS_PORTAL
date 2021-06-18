@@ -78,7 +78,9 @@ public class ReimbursementReportController {
 
 	@GetMapping("tourclaimPage")
 	public String tourClaimReport(Model model, HttpSession session) {
-
+		if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
 		String userCode = (String) session.getAttribute("username");
 		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
 		if (modules != null) {
