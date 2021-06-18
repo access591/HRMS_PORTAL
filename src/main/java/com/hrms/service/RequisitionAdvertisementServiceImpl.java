@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,18 +16,24 @@ public class RequisitionAdvertisementServiceImpl implements  RequisitionAdvertis
 
 	@Autowired RequisitionAdvertisementDao requisitionAdvertisementDao;
 	@Autowired SessionFactory sessionFactory;
+	
 	@Override
 	public void addActivity(ReqAdvertisement reqAdvertisement) {
-		//this.requisitionAdvertisementDao.saveOrUpdate(reqAdvertisement);
-		Session session = sessionFactory.openSession();
-	    session.beginTransaction();
-	    reqAdvertisement.setAdvtCode(requisitionAdvertisementDao.getMaxId("ADT"));
-	    session.save(reqAdvertisement);
-	    //session.saveOrUpdate(employeReq);
-	    session.getTransaction().commit();
-	    session.clear();
-	    session.close();
 		
+		Session session = sessionFactory.openSession();
+		Transaction tx = null;
+		try {
+			tx = session.beginTransaction();
+			reqAdvertisement.setAdvtCode(requisitionAdvertisementDao.getMaxId("ADT"));
+		    session.save(reqAdvertisement);
+		    
+		    tx.commit();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			session.close();
+		}
+	    
 	}
 
 	@Override
@@ -43,14 +50,22 @@ public class RequisitionAdvertisementServiceImpl implements  RequisitionAdvertis
 
 	@Override
 	public void updateReqAdvertisement(ReqAdvertisement a) {
-		//this.requisitionAdvertisementDao.saveOrUpdate(a);
+		
 		Session session = sessionFactory.openSession();
-		ReqAdvertisement r = session.find(ReqAdvertisement.class, a.getAdvtCode());
-		r.getListReqAdvertisementDetail().clear();
-		r.getListReqAdvertisementDetail().addAll(a.getListReqAdvertisementDetail());
-		session.beginTransaction();
-		session.merge(a);
-		session.getTransaction().commit();
+		Transaction tx = null;
+		try {
+			tx = session.beginTransaction();
+			ReqAdvertisement r = session.find(ReqAdvertisement.class, a.getAdvtCode());
+			r.getListReqAdvertisementDetail().clear();
+			r.getListReqAdvertisementDetail().addAll(a.getListReqAdvertisementDetail());
+			
+			session.merge(a);
+			tx.commit();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			session.close();
+		}
 		
 	}
 

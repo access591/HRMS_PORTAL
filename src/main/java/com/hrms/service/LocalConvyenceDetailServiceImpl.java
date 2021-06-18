@@ -16,7 +16,7 @@ import com.hrms.repository.LocalConvyenceDetailDao;
 public class LocalConvyenceDetailServiceImpl implements LocalConvyenceDetailService{
 	
 	  @Autowired LocalConvyenceDetailDao localConvyenceDetailDao;
-	  Session session=null;
+	 
 
 	@Autowired
 	SessionFactory sessionFactory;
@@ -28,7 +28,7 @@ public class LocalConvyenceDetailServiceImpl implements LocalConvyenceDetailServ
 		Session s=sessionFactory.openSession();
 		s.beginTransaction();
 		
-		
+		// TODO Auto-generated method stub
 		s.save(localConvyenceDetail);
 		s.getTransaction().commit();
 		s.clear();
@@ -40,7 +40,7 @@ public class LocalConvyenceDetailServiceImpl implements LocalConvyenceDetailServ
 	public List<LocalConvyenceDetail> findLocalConvyenceDetailByEmpCode(String empCode) {
 		
 		try {
-			 session = sessionFactory.openSession();
+			Session session = sessionFactory.openSession();
 			Query<LocalConvyenceDetail> query = session.createQuery("from LocalConvyenceDetail lcd inner join "
 					+ "fetch lcd.localConvId lc inner join fetch lcd.empCode e where e.empCode = :empCode", LocalConvyenceDetail.class);
 			query.setParameter("empCode", empCode);
@@ -58,7 +58,7 @@ public class LocalConvyenceDetailServiceImpl implements LocalConvyenceDetailServ
 	@Override
 	public List<LocalConvyenceDetail> findAllLocalConvyenceDetail() {
 		try {
-			 session = sessionFactory.openSession();
+			Session session = sessionFactory.openSession();
 			Query<LocalConvyenceDetail> query = session.createQuery("from LocalConvyenceDetail", LocalConvyenceDetail.class);
 			
 			
