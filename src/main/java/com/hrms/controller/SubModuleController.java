@@ -74,17 +74,11 @@ public class SubModuleController {
  * @return
  */
 	@PostMapping("/saveSubModule")
-	public String saveSubModule(@ModelAttribute("SubModule1") SubModule1 SubModule1, Model model,
+	public String saveSubModule(@ModelAttribute("SubModule1") SubModule subModule, Model model,
 			RedirectAttributes redirectAttributes, HttpSession session) {
 		String insertedBY = (String) session.getAttribute("uuuuu");
 		
-		Module module=new Module();
-		SubModule subModule=new SubModule();
-		module.setModuleCode(SubModule1.getModuleCode());
-		subModule.setModuleCode(module);
-		subModule.setSubModuleName(SubModule1.getSubModuleName());
-		subModule.setSeqNoSubModule(SubModule1.getSeqNoSubModule());
-		subModule.setAcitveSubModule(SubModule1.getAcitveSubModule());
+		
 		subModule.setInsertedBySubModule(insertedBY);
 		boolean isSubModuleExist = subModuleService.checkSubModuleExists(subModule);
 		 
@@ -93,8 +87,8 @@ public class SubModuleController {
 		  redirectAttributes.addFlashAttribute("alertClass", "alert-success"); return
 		  "redirect:"+pageMappingService.PageRequestMapping(reqPage,pageno); }
 		  
-		  else { boolean isSeqExist =
-		  subModuleService.checkSubModuleSeqExists(subModule);
+		  else {
+			  boolean isSeqExist =subModuleService.checkSubModuleSeqExists(subModule);
 		  
 		  if(isSeqExist) 
 		  {
@@ -140,21 +134,10 @@ public class SubModuleController {
 	 * @return
 	 */
 	@PostMapping("/updateSubModule")
-	public String updatesubmodule(@ModelAttribute("submoduleupdate") SubModule1 subModule1, Model model) {
-		Module module=new Module();
-		SubModule subModule=new SubModule();
-		module.setModuleCode(subModule1.getModuleCode());
-		subModule.setModuleCode(module);
-		subModule.setSubModuleCode(subModule1.getSubModuleCode());
-		subModule.setSubModuleName(subModule1.getSubModuleName());
-		subModule.setSeqNoSubModule(subModule1.getSeqNoSubModule());
-		subModule.setAcitveSubModule(subModule1.getAcitveSubModule());
-		
-		
-		
+	public String updatesubmodule(@ModelAttribute("submoduleupdate") SubModule subModule, Model model) {
 		this.subModuleService.updateSubModule(subModule);
 
-		 return "redirect:/"+pageMappingService.PageRequestMapping(reqPage,pageno);
+		return "redirect:/" + pageMappingService.PageRequestMapping(reqPage, pageno);
 
 	}
 

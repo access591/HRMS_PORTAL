@@ -21,8 +21,8 @@ public class StateServiceImpl  implements StateService{
 
 	@Override
 	public List<State> getAllStates() {
-	List<State> listState = stateDao.findAll();
-		return listState;
+		return stateDao.findAll();
+	
 	}
 
 	@Override

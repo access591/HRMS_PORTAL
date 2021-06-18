@@ -17,7 +17,7 @@ public class StayingExpensesServiceImpl implements StayingExpensesService{
 		Session s=sessionFactory.openSession();
 		s.beginTransaction();
 		
-		// TODO Auto-generated method stub
+		
 		s.save(stayingExpenses);
 		s.getTransaction().commit();
 		s.clear();
