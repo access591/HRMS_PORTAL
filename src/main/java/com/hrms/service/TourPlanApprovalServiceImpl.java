@@ -16,8 +16,8 @@ public class TourPlanApprovalServiceImpl implements TourPlanApprovalService{
 	
 	@Override
 	public List<TourPlan> getAllTourPlan() {
-		List<TourPlan>  listTourPlan=tourPlanApprovalDao.getAllTourPlan();
-		return listTourPlan;
+		return  tourPlanApprovalDao.getAllTourPlan();
+		
 		
 	}
 

@@ -17,6 +17,8 @@ public class TrainingRegisterServiceImpl implements TrainingRegisterService {
 	@Autowired
 	TrainingRegisterDao trainingRegisterDao;
 	@Autowired SessionFactory sessionFactory;
+	TrainingRegister em =null;
+	Session session =null;
 	@Override
 	public void addTrainingRegister(TrainingRegister trainingRegister) {
 		trainingRegister.setTrRegCode(trainingRegisterDao.getMaxId("TRC"));
@@ -25,8 +27,8 @@ public class TrainingRegisterServiceImpl implements TrainingRegisterService {
 
 	@Override
 	public List<TrainingRegister> getAllTrainingRegisters() {
-		List<TrainingRegister> listTrainingRegister = trainingRegisterDao.findAll();
-		return listTrainingRegister;
+		return trainingRegisterDao.findAll();
+
 	}
 
 	@Override
@@ -36,10 +38,10 @@ public class TrainingRegisterServiceImpl implements TrainingRegisterService {
 
 	@Override
 	public void updateTrainingRegister(TrainingRegister t) {
-	
-		Session session = sessionFactory.openSession();
-		TrainingRegister em = session.load(TrainingRegister.class, t.getTrRegCode());
-		Transaction tx = session.beginTransaction();	
+
+		session = sessionFactory.openSession();
+		em = session.load(TrainingRegister.class, t.getTrRegCode());
+		Transaction tx = session.beginTransaction();
 		em = (TrainingRegister) session.merge(t);
 		tx.commit();
 

@@ -15,11 +15,12 @@ import com.hrms.model.TourPlan;
 @Repository
 public class TourPlanApprovalDaoImpl extends  AbstractGenericDao<TourPlan> implements TourPlanApprovalDao {
 	@Autowired SessionFactory sessionFactory;
+	Session session =null;
 	@Override
 	public List<TourPlan> getAllTourPlan() {
-		String T="N";
+		
 		try {
-			Session session = this.sessionFactory.openSession();
+			 session = this.sessionFactory.openSession();
 			session.beginTransaction();
 			Query<TourPlan> query = session.createQuery("from TourPlan e where e.approvalStatus ='N' ",TourPlan.class);
 			
@@ -35,7 +36,7 @@ public class TourPlanApprovalDaoImpl extends  AbstractGenericDao<TourPlan> imple
 	}
 	@Override
 	public void approvedByTourPlanId(String id) {
-		Session session = sessionFactory.getCurrentSession();
+		 session = sessionFactory.getCurrentSession();
 		Query query = session.createQuery("UPDATE TourPlan e set e.approvalStatus =:approvalStatus WHERE e.tourPlanId= :id" );
 		query.setParameter("approvalStatus", "Y");
 		query.setParameter("id", id);
