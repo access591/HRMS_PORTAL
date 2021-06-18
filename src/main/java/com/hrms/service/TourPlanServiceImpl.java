@@ -2,7 +2,7 @@ package com.hrms.service;
 
 import java.util.List;
 
-import javax.transaction.Transactional;
+
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -11,8 +11,6 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.hrms.model.Employee;
-import com.hrms.model.MedicalReimbursement;
 import com.hrms.model.TourPlan;
 import com.hrms.repository.TourPlanDao;
 
@@ -21,7 +19,7 @@ public class TourPlanServiceImpl implements TourPlanService{
 	@Autowired
 	SessionFactory sessionfactory;
 	@Autowired TourPlanDao tourPlanDao;
-
+	Session session=null;
 	@Override
 	public void addTourPlan(TourPlan tourPlan) {
 		
@@ -46,7 +44,7 @@ public class TourPlanServiceImpl implements TourPlanService{
 	@Override
 	public void removeTourPlan(String id) {
 		
-		Session session = sessionfactory.openSession();
+		 session = sessionfactory.openSession();
 		Object o = session.get(TourPlan.class, id);
 		TourPlan e = (TourPlan) o;
 		Transaction tx = session.beginTransaction();
@@ -66,13 +64,11 @@ public class TourPlanServiceImpl implements TourPlanService{
 	@Override
 	public List<TourPlan> findTourPlanByEmpCode(String empCode) {
 		
-		Session session = sessionfactory.openSession();
+		 session = sessionfactory.openSession();
 		
 		try {
 			session.beginTransaction();
-			
-//			Query<TourPlan> query  = session.createQuery("select t from TourPlan t left join t.empCode e "
-//					+ "where e.empCode = :empCode",TourPlan.class);
+
 					
 			Query<TourPlan> query  = session.createQuery("from TourPlan t left join fetch t.empCode e "
 					+ " inner join fetch t.tourPlanDetail "

@@ -51,8 +51,8 @@ public class TourPlanApproveController {
 			model.addAttribute("modules", modules);
 		}
 		
-		List<TourPlan> ListTourPlan=tourPlanApprovalService.getAllTourPlan();
-		model.addAttribute("ListTourPlan", ListTourPlan);
+		List<TourPlan> listTourPlan=tourPlanApprovalService.getAllTourPlan();
+		model.addAttribute("ListTourPlan", listTourPlan);
 		session.setAttribute("imgUtil", new ImageUtil());
 		session.setAttribute("username", session.getAttribute("username"));
 		return"tourPlanApproval";
