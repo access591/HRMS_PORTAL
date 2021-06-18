@@ -100,13 +100,6 @@ public class TourPlan implements Serializable {
 		this.empCode = empCode;
 	}
 
-	public Department getDept_code() {
-		return departmentCode;
-	}
-
-	public void setDept_code(Department departmentCode) {
-		this.departmentCode = departmentCode;
-	}
 
 	public String getTourStartDate() {
 		return tourStartDate;
@@ -222,7 +215,7 @@ public class TourPlan implements Serializable {
 
 	public TourPlan() {
 		super();
-		// TODO Auto-generated constructor stub
+	
 	}
 	
 }
