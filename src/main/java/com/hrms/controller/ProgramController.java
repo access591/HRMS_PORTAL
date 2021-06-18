@@ -75,21 +75,8 @@ public class ProgramController {
 	 * @return
 	 */
 	@PostMapping("/saveProgram")
-	public String saveProgram1(@ModelAttribute("program1") Program1 program1, Model model,
+	public String saveProgram1(@ModelAttribute("program1") Program program, Model model,
 			RedirectAttributes redirectAttributes, HttpSession session) {
-		Module module = new Module();
-		SubModule subModule = new SubModule();
-		Program program = new Program();
-		module.setModuleCode(program1.getpModuleCode());
-		subModule.setSubModuleCode(program1.getSubModuleCode());
-		program.setpModuleCode(module);
-		program.setSubModuleCode(subModule);
-
-		program.setProgramName(program1.getProgramName());
-		program.setProgramType(program1.getProgramType());
-		program.setProgramHrefName(program1.getProgramHrefName());
-		program.setActiveYn(program1.getActiveYn());
-		program.setSeqProgram(program1.getSeqProgram());
 
 		boolean isSubModuleExist = programService.checkProgramExists(program);
 		if (isSubModuleExist) {
@@ -142,27 +129,9 @@ public class ProgramController {
 	 * @return
 	 */
 	@PostMapping("/updateProgram")
-	public String updateProgram(@ModelAttribute("programupdate") Program1 program1, Model model) {
-		Module module = new Module();
-		SubModule subModule = new SubModule();
-		Program program = new Program();
-		module.setModuleCode(program1.getpModuleCode());
-		subModule.setSubModuleCode(program1.getSubModuleCode());
-		program.setpModuleCode(module);
-		program.setSubModuleCode(subModule);
-		program.setProgramCode(program1.getProgramCode());
-		program.setProgramName(program1.getProgramName());
-		program.setProgramType(program1.getProgramType());
-		program.setProgramHrefName(program1.getProgramHrefName());
-		program.setActiveYn(program1.getActiveYn());
-		program.setSeqProgram(program1.getSeqProgram());
-
+	public String updateProgram(@ModelAttribute("programupdate") Program program, Model model) {
 		this.programService.updateProgram(program);
-
-
-
 		return "redirect:/" + pageMappingService.PageRequestMapping(reqPage, pageno);
-
 	}
 
 	/**
