@@ -21,7 +21,7 @@ public class StaffPostingDuties implements Serializable  {
 
 	@Id
 	@Column(name = "JOB_CODE")
-	private String JobCode;
+	private String jobCode;
 	
 	@Column(name = "JOB_DESC")
 	private String jobDesc;
@@ -40,11 +40,11 @@ public class StaffPostingDuties implements Serializable  {
 	private Date insDate = new Date();
 
 	public String getJobCode() {
-		return JobCode;
+		return jobCode;
 	}
 
 	public void setJobCode(String jobCode) {
-		JobCode = jobCode;
+		this.jobCode = jobCode;
 	}
 
 
@@ -88,8 +88,4 @@ public class StaffPostingDuties implements Serializable  {
 	public void setInsDate(Date insDate) {
 		this.insDate = insDate;
 	}
-
-	
-	
-
 }
