@@ -18,7 +18,7 @@ import com.hrms.model.Department;
 @Repository
 public class DepartmentDaoImpl extends AbstractGenericDao<Department> implements DepartmentDao {
 
-	private Logger logger = LoggerFactory.getLogger(DepartmentDaoImpl.class.getName());
+	
 	@Autowired SessionFactory sessionFactory;
 	
 	@Override
