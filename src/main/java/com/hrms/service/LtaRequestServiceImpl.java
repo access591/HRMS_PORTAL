@@ -15,7 +15,7 @@ import com.hrms.repository.LtaRequestDao;
 public class LtaRequestServiceImpl implements LtaRequestService {
 @Autowired
 LtaRequestDao ltaRequestDao;
-Session session=null;
+
 	@Autowired SessionFactory sessionFactory;
 	
 	@Override
@@ -26,8 +26,8 @@ Session session=null;
 	}
 	@Override
 	public List<LtaRequest> getAllLTARequest() {
-		return ltaRequestDao.findAll() ;
-	
+		List<LtaRequest> ltaList= ltaRequestDao.findAll() ;
+		return ltaList;
 	}
 	@Override
 	public void removeLTAReques(String id) {
@@ -48,7 +48,7 @@ Session session=null;
 	@Override
 	public List<LtaRequest> findAllLtaByEmpCode(String empCode) {
 		
-		 session = sessionFactory.openSession();
+		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 		
 		Query<LtaRequest> query = session.createQuery("from LtaRequest l left join fetch "
@@ -64,7 +64,7 @@ Session session=null;
 	@Override
 	public List<LtaRequest> findLtaByFromLeaveDateToLeave(Date leaveFrom, Date leaveTo,String empCode) {
 		
-	 session = sessionFactory.openSession();
+		Session session = sessionFactory.openSession();
 		try {
 			
 			session.beginTransaction();
@@ -90,7 +90,7 @@ Session session=null;
 	@Override
 	public List<LtaRequest> findAllLtaByFromLeaveDateToLeave(Date leaveFrom, Date leaveTo) {
 		
-		session = sessionFactory.openSession();
+		Session session = sessionFactory.openSession();
 		try {
 			
 			session.beginTransaction();
@@ -114,7 +114,7 @@ Session session=null;
 	}
 	@Override
 	public List<LtaRequest> getAllDistinctLtaRequest() {
-	 session = sessionFactory.openSession();
+		Session session = sessionFactory.openSession();
 		try {
 			
 			session.beginTransaction();
