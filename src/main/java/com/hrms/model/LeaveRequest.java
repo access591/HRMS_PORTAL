@@ -14,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+
 import org.springframework.format.annotation.DateTimeFormat;
 
 
@@ -41,6 +42,7 @@ public class LeaveRequest implements Serializable  {
 	
 	@ManyToOne
 	@JoinColumn(name = "EMP_CODE")
+	
 	private Employee employee;
 
 	

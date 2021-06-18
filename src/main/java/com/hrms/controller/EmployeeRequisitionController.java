@@ -28,6 +28,7 @@ import com.hrms.model.Department;
 import com.hrms.model.Designation;
 import com.hrms.model.Employee;
 import com.hrms.ImageUtil;
+import com.hrms.helper.Message1;
 import com.hrms.model.CommonUtil;
 import com.hrms.model.MenuModule;
 import com.hrms.model.EmployeeRequisition;
@@ -112,30 +113,33 @@ public class EmployeeRequisitionController {
 			HttpSession session,RedirectAttributes redirectAttributes) {
 		
 		String insertedBY = (String) session.getAttribute("userlogin");
-		
-		System.out.println("========================");
-		/*
-		 * System.out.println("employee requisition detail======>"+employeeRequisition.
-		 * getEmployeRequisitionDetail(). get(1).getDesignation().getDesgName());
-		 */
-	
-		List<EmployeeRequisitionDetail> re = new ArrayList<EmployeeRequisitionDetail>();
-		
-		for(int i=0;i<employeeRequisition.getEmployeRequisitionDetail().size();i++) {
-			EmployeeRequisitionDetail e = new EmployeeRequisitionDetail();
-			e = employeeRequisition.getEmployeRequisitionDetail().get(i);
-			e.setReqDate(employeeRequisition.getReqDate());
-			e.setEmployeeRequisition(employeeRequisition);
-			re.add(e);	
+
+		try {
+			
+			List<EmployeeRequisitionDetail> re = new ArrayList<>();
+			
+			for(int i=0;i<employeeRequisition.getEmployeRequisitionDetail().size();i++) {
+				EmployeeRequisitionDetail e = new EmployeeRequisitionDetail();
+				e = employeeRequisition.getEmployeRequisitionDetail().get(i);
+				e.setReqDate(employeeRequisition.getReqDate());
+				e.setEmployeeRequisition(employeeRequisition);
+				re.add(e);	
+				
+			}
+			
+			employeeRequisition.setEmployeRequisitionDetail(re);
+			employeeRequisitionService.addEmployeeRequisition(employeeRequisition);
+			
+			session.setAttribute("message",new Message1("Data has been Successfully added","alert-primary"));
+			
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+			session.setAttribute("message", new Message1("Something went Wrong !!","alert-info"));
+
 			
 		}
 		
-		employeeRequisition.setEmployeRequisitionDetail(re);
-		
-		
-		
-		
-		employeeRequisitionService.addEmployeeRequisition(employeeRequisition);
 		session.setAttribute("userlogin", insertedBY);
 
 		return "redirect:employeeRequisition"; //+pageMappingService.PageRequestMapping(reqPage,pageNo)

@@ -78,29 +78,31 @@ public class LeveReportController {
 	@Autowired
 	LeaveReport leaveReport;
 
-	@GetMapping("/leaveRegister")
-	public String viewLeaveRegisterReport(Model model, HttpSession session, HttpServletRequest request,
-			HttpServletResponse response) {
-		if (session.getAttribute("username") == null) {
-			return "redirect:" + "./";
-		}
-		String userCode = (String) session.getAttribute("username");
-		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
-		if (modules != null) {
-			model.addAttribute("modules", modules);
-		}
-		List<Department> departmentList = departmentService.getAllDepartments();
-		System.out.println("department service======>" + departmentList.size());
-		if (departmentList != null) {
-			model.addAttribute("departmentList", departmentList);
-		}
 
-		
-		session.setAttribute("username", session.getAttribute("username"));
+//	@GetMapping("/leaveRegister")
+//	public String viewLeaveRegisterReport(Model model, HttpSession session, HttpServletRequest request,
+//			HttpServletResponse response) {
+//
+//		if (session.getAttribute("username") == null) {
+//			return "redirect:" + "./";
+//		}
+//		String userCode = (String) session.getAttribute("username");
+//		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
+//		if (modules != null) {
+//			model.addAttribute("modules", modules);
+//
+//		
+//		List<Department> departmentList = departmentService.getAllDepartments();
+//		System.out.println("department service======>" + departmentList.size());
+//		if (departmentList != null) {
+//			model.addAttribute("departmentList", departmentList);
+//		}
+//
+//
+//		return "leaveRegister";
+//
+//	}
 
-		return "leaveRegister";
-
-	}
 
 	@PostMapping("/createLeaveRegisterReport")
 	public String leaveDetailPdf(@RequestParam("deptCode") String deptCode, @RequestParam("empCode") String empCode,

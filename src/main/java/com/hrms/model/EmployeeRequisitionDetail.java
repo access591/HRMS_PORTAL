@@ -80,10 +80,10 @@ public class EmployeeRequisitionDetail implements Serializable{
 	private int maxExperience;
 	
 	@Column(name="SALARY_FROM")   
-	private int salaryFrom;
+	private String salaryFrom;
 	
 	@Column(name="SALARY_TO")
-	private int salaryTo;
+	private String salaryTo;
 	
 	
 
@@ -94,7 +94,7 @@ public class EmployeeRequisitionDetail implements Serializable{
 
 	public EmployeeRequisitionDetail(String reqCode,  String desigCode, String location, String sex,
 			int ageFrom, int ageTo, String acadQuali, String techQuali, int experience, String vacanncyType,
-			int totalVacancy, String remarks, int minExperience, int maxExperience, int salaryFrom, int salaryTo) {
+			int totalVacancy, String remarks, int minExperience, int maxExperience, String salaryFrom, String salaryTo) {
 		super();
 		
 		//this.reqDate = reqDate;
@@ -243,19 +243,19 @@ public class EmployeeRequisitionDetail implements Serializable{
 		this.maxExperience = maxExperience;
 	}
 
-	public int getSalaryFrom() {
+	public String getSalaryFrom() {
 		return salaryFrom;
 	}
 
-	public void setSalaryFrom(int salaryFrom) {
+	public void setSalaryFrom(String salaryFrom) {
 		this.salaryFrom = salaryFrom;
 	}
 
-	public int getSalaryTo() {
+	public String getSalaryTo() {
 		return salaryTo;
 	}
 
-	public void setSalaryTo(int salaryTo) {
+	public void setSalaryTo(String salaryTo) {
 		this.salaryTo = salaryTo;
 	}
 
