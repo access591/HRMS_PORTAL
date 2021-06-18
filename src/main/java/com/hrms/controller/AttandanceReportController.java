@@ -78,7 +78,7 @@ public class AttandanceReportController {
 		if(session.getAttribute("username")==null) {
 			return "redirect:" + "./";
 		}
-
+		
 		session.setAttribute("imgUtil", new ImageUtil());
 		return "AttendanceRegMothlyReport";
 	}
