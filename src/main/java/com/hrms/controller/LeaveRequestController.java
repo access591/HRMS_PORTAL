@@ -20,11 +20,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.hrms.ImageUtil;
 import com.hrms.model.Employee;
 import com.hrms.model.Leave;
-import com.hrms.model.LeaveDetail;
-import com.hrms.model.LeaveGrant;
 import com.hrms.model.LeaveRequest;
 import com.hrms.model.MenuModule;
-import com.hrms.model.UserEntity;
 import com.hrms.service.EmployeeService;
 import com.hrms.service.LeaveDetailService;
 import com.hrms.service.LeaveGrantRegisterService;
@@ -64,29 +61,49 @@ public class LeaveRequestController {
         binder.registerCustomEditor(Date.class, "fromDate",
                 new CustomDateEditor(dateFormatter, true));
        
-//        binder.registerCustomEditor(Date.class, "reqDate",
-//                new CustomDateEditor(dateFormatter, true));
        
     }
 	
+	
+	@ModelAttribute
+	public void commonData(Model model , HttpSession session) {
+		
+		String userCode = (String) session.getAttribute("username");
+		
+		
+		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
+		if (modules != null) {
+			model.addAttribute("modules", modules);
+		}
+		
+		
+		
+		session.setAttribute("username" , userCode);
+		
+	}
+	
 	@GetMapping("/leaveRequest")
 	public String empPayDetail(@ModelAttribute("leaveRequest")LeaveRequest leaveRequest,Model model, HttpSession session) {
+
 		if (session.getAttribute("username") == null) {
+
+
+
+		
+		if(session.getAttribute("username")==null) {
+
 			return "redirect:" + "./";
 		}
-		System.out.println("leave request controller");
 		List<Employee> listEmployee = employeeService.getAllEmployees();
 		
-		System.out.println("testing employe exists : " + listEmployee.get(0).getEmpName());
-		String userCode = (String) session.getAttribute("username");
-		System.out.println("userCode  is : "+ userCode);
+		
 		session.setAttribute("imgUtil", new ImageUtil());
 		List<Leave> listLeave = leaveService.getAllLeaves();
 		if(listLeave != null) {
 			model.addAttribute("listLeave", listLeave);
 		}
 		
-		UserEntity userEntity = userService.findUserById(userCode); 
+		
 		
 		List<LeaveRequest> listLeaveRequest = leaveRequestService.getAllLeaves();
 		
@@ -100,22 +117,15 @@ public class LeaveRequestController {
 		{
 			model.addAttribute("listEmployee" , listEmployee);
 		}
+	
 		
-		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
-		if (modules != null) {
-			model.addAttribute("modules", modules);
-		}
-
-		  
-		
-
-		session.setAttribute("username" , userCode);
 		return pageMappingService.PageRequestMapping(reqPage, pageno);
 	}
 	
 	@PostMapping("/saveLeaveRequest")
 	public String saveLeaveRequest(@ModelAttribute("leaveRequest")LeaveRequest leaveRequest,HttpSession session) {
 		
+
 		String insertedBY = (String) session.getAttribute("userlogin");
 		System.out.println("inserted by :"+ insertedBY);
 		
@@ -124,9 +134,12 @@ public class LeaveRequestController {
 		System.out.println("leave to date======> : " + leaveRequest.getEmployee().getEmpCode());
 		System.out.println("leave to date======> : " + leaveRequest.getLeave().getLevCode());
 		//System.out.println("leave to date : " + leaveRequest.getLeaveCode());
+
+		if(session.getAttribute("username")==null) {
+			return "redirect:" + "./";
+		}
+
 		leaveRequestService.addLeave(leaveRequest);
-		
-		session.setAttribute("username", session.getAttribute("username"));
 		return "redirect:" + pageMappingService.PageRequestMapping(reqPage, pageno);
 	}
 	
@@ -137,19 +150,23 @@ public class LeaveRequestController {
 	public String viewLeaveRequestByEmpId(@PathVariable("id")String leaveRequestId,
 						Model model,HttpSession session) {
 		
+
 		
 		
 		
 		//List<LeaveRequest> leaveRequest = this.leaveRequestService.findByEmpCodeAndApplyDate(empCode, applyDate);
+
+		if(session.getAttribute("username")==null) {
+			return "redirect:" + "./";
+		}
+		
+
 		LeaveRequest leaveRequest = this.leaveRequestService.findLeaveRequestById(Long.parseLong(leaveRequestId));
 		
 		if(leaveRequest != null) {
 			model.addAttribute("leaveRequest", leaveRequest);
 		}
-		List<MenuModule> modules = moduleService.getAllModulesList(session.getAttribute("username").toString());
-		if (modules != null) {
-			model.addAttribute("modules", modules);
-		}
+		
 		model.addAttribute("header", "View Leave Request");
 		model.addAttribute("myhref", "leaveRequest");
 		return "viewLeaveRequest";
@@ -158,6 +175,12 @@ public class LeaveRequestController {
 	@GetMapping(value = { "/deleteLeaveRequest/{id}" })
 	public String deleteActivity(@PathVariable("id") Long id, Model model, HttpSession session) {
 		
+
+		if(session.getAttribute("username")==null) {
+			return "redirect:" + "./";
+		}
+		
+
 		this.leaveRequestService.removeLeaveRequest(id);
 		return "redirect:/"+ pageMappingService.PageRequestMapping(reqPage, pageno);
 	}

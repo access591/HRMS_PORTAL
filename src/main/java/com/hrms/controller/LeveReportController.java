@@ -24,8 +24,6 @@ import com.hrms.model.Department;
 import com.hrms.model.Designation;
 import com.hrms.model.Employee;
 import com.hrms.model.CommonUtil;
-import com.hrms.model.Leave;
-import com.hrms.model.LeaveDetail;
 import com.hrms.model.LeaveGrant;
 import com.hrms.model.LeaveRequest;
 import com.hrms.model.MenuModule;

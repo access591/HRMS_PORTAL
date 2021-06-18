@@ -20,9 +20,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.hrms.ImageUtil;
 import com.hrms.model.EmployeeRequisition;
-import com.hrms.model.EmployeeRequisitionDetail;
 import com.hrms.model.MenuModule;
 import com.hrms.model.ReqAdvertisement;
 import com.hrms.model.ReqAdvertisementDetail;
@@ -31,123 +29,132 @@ import com.hrms.service.DesignationService;
 import com.hrms.service.EmployeeRequisitionService;
 import com.hrms.service.EmployeeService;
 import com.hrms.service.ModuleService;
-import com.hrms.service.ReqAdvertisementDetailService;
 import com.hrms.service.RequisitionAdvertisementService;
 
 @Controller
 public class RequisitionAdvertisementController {
-	
-	@Autowired ModuleService moduleService;
-	@Autowired DepartmentService departmentService;
-	@Autowired EmployeeService employeeService;
-	@Autowired DesignationService designationService;
-	@Autowired EmployeeRequisitionService employeeRequisitionService;
-	@Autowired RequisitionAdvertisementService reqAdvertisementService;
-	
-	
+
+	@Autowired
+	ModuleService moduleService;
+	@Autowired
+	DepartmentService departmentService;
+	@Autowired
+	EmployeeService employeeService;
+	@Autowired
+	DesignationService designationService;
+	@Autowired
+	EmployeeRequisitionService employeeRequisitionService;
+	@Autowired
+	RequisitionAdvertisementService reqAdvertisementService;
+
 	@InitBinder("reqAdvertisement")
-    public void customizeBinding (WebDataBinder binder) {
-        SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
-        dateFormatter.setLenient(false);
-        binder.registerCustomEditor(Date.class, "advtDate",
-                                    new CustomDateEditor(dateFormatter, true));
-        
-    }
-	
-	
-	
+	public void customizeBinding(WebDataBinder binder) {
+		SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
+		dateFormatter.setLenient(false);
+		binder.registerCustomEditor(Date.class, "advtDate", new CustomDateEditor(dateFormatter, true));
+
+	}
+
 	@GetMapping("/advertisment")
-	public String advertismentPage(
-			Model model, HttpSession httpSession) {
-		
-		String userCode = (String) httpSession.getAttribute("username");
-		
-//		if(userCode.equals("") || userCode.equals(null)) {
-//			System.out.println("user is not verifyied");
-//			return "Advertisment";
-//		}
+	public String advertismentPage(Model model, HttpSession session) {
+
+		if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
+
+		String userCode = (String) session.getAttribute("username");
+
 		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
 		if (modules != null) {
 			model.addAttribute("modules", modules);
 		}
-		httpSession.setAttribute("imgUtil", new ImageUtil());
+
 		List<EmployeeRequisition> listEmployeeRequisition = employeeRequisitionService.findEmployeeReqByStatusY();
-		if(listEmployeeRequisition != null) {
+		if (listEmployeeRequisition != null) {
 			model.addAttribute("listEmployeeRequisition", listEmployeeRequisition);
-			
+
 		}
-		
-		List<ReqAdvertisementDetail> listReqAdvertisementDetail = new ArrayList<ReqAdvertisementDetail>();
+
+		List<ReqAdvertisementDetail> listReqAdvertisementDetail = new ArrayList<>();
 		ReqAdvertisement reqAdvertiesment = new ReqAdvertisement();
 		reqAdvertiesment.setListReqAdvertisementDetail(listReqAdvertisementDetail);
 		model.addAttribute("reqAdvertisement", reqAdvertiesment);
-		
+
 		List<ReqAdvertisement> listReqAdvertisement = reqAdvertisementService.getAllReqAdvertisement();
-		if(listReqAdvertisement != null) {
+		if (listReqAdvertisement != null) {
 			model.addAttribute("listReqAdvertisement", listReqAdvertisement);
 		}
-		
+
 		return "Advertisment";
 	}
-	
-	
+
 	@PostMapping("saveAdvertisement")
-	public String saveAdvertisement(@ModelAttribute("reqAdvertisement")ReqAdvertisement reqAdvertisement,
-			HttpSession session,RedirectAttributes redirectAttributes) {
-		
-		
-		for(ReqAdvertisementDetail eDetail : reqAdvertisement.getListReqAdvertisementDetail()) {
-			eDetail.setReqAdvertisement(reqAdvertisement); 
+	public String saveAdvertisement(@ModelAttribute("reqAdvertisement") ReqAdvertisement reqAdvertisement,
+			HttpSession session, RedirectAttributes redirectAttributes) {
+
+		if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
+
+		for (ReqAdvertisementDetail eDetail : reqAdvertisement.getListReqAdvertisementDetail()) {
+			eDetail.setReqAdvertisement(reqAdvertisement);
 			eDetail.setAdvtDate(reqAdvertisement.getAdvtDate());
 		}
-		
+
 		reqAdvertisementService.addActivity(reqAdvertisement);
-		System.out.println("working===========");
-		return "redirect:advertisment"; //Advertisment.html   
+
+		return "redirect:advertisment";
 	}
-	
+
 	@GetMapping("deleteAdvertisement/{id}")
-	public String deleteAdvertisement(@PathVariable("id") String advtCode,RedirectAttributes redirectAttributes,
+	public String deleteAdvertisement(@PathVariable("id") String advtCode, RedirectAttributes redirectAttributes,
 			Model model, HttpSession session) {
-	
+
+		if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
+
 		this.reqAdvertisementService.removeReqAdvertisement(advtCode);
 		return "redirect:/advertisment";
 	}
-	
-	@GetMapping(value = {"editAdvertisement/{id}"})
-	public String editAdvertisement(@PathVariable("id") String reqCode,
-			Model model) {
-		
+
+	@GetMapping(value = { "editAdvertisement/{id}" })
+	public String editAdvertisement(@PathVariable("id") String reqCode, Model model, HttpSession session) {
+
+		if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
+
 		ReqAdvertisement req = reqAdvertisementService.findReqAdvertisementById(reqCode);
-		if(req != null) {
+		if (req != null) {
 			model.addAttribute("reqAdvertisement", req);
 		}
-		System.out.println("employee requisition id : "+ reqCode);
-		return "editAdvertisement";  //editAdvertisement.html
-	}
-	
-	@PostMapping(value = {"updateAdvertisement"})
-	public String updateAdvertisement(@ModelAttribute("reqAdvertisement")ReqAdvertisement reqAdvertisement,
-			Model model) {
-		
-		  System.out.println("=====================>");
 
-		  for(ReqAdvertisementDetail re : reqAdvertisement.getListReqAdvertisementDetail()) {
-			  re.setReqAdvertisement(reqAdvertisement);
-		  }
-		 
-		
-		  reqAdvertisementService.updateReqAdvertisement(reqAdvertisement);
-		
+		return "editAdvertisement";
+	}
+
+	@PostMapping(value = { "updateAdvertisement" })
+	public String updateAdvertisement(@ModelAttribute("reqAdvertisement") ReqAdvertisement reqAdvertisement,
+			Model model, HttpSession session) {
+
+		if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
+
+		for (ReqAdvertisementDetail re : reqAdvertisement.getListReqAdvertisementDetail()) {
+			re.setReqAdvertisement(reqAdvertisement);
+		}
+
+		reqAdvertisementService.updateReqAdvertisement(reqAdvertisement);
+
 		return "redirect:advertisment";
 	}
-	
+
 	@ResponseBody
 	@GetMapping("getRequisitionByReqCode/{reqCode}")
 	public EmployeeRequisition getEmployeeRequisitionByReqCode(@PathVariable("reqCode") String reqCode) {
-		
+
 		return employeeRequisitionService.findEmployeeRequisitiondById(reqCode);
-		
 
 	}
 
