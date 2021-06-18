@@ -66,12 +66,12 @@ public class TrackallEnquiriesServiceImpl implements TrackallEnquiriesService {
 			String reportFileName, List<TrackallEnquiries> dataList) {
 		 String sourceFileName =request.getSession().getServletContext().getRealPath("resources/" + reportFileName + ".jrxml");
 		   
-		     String GeneratedBy ="";
-	        String GeneratedDates ="";
-	        GeneratedBy = request.getSession().getAttribute("USER_NAME").toString();
+		     String generatedBy ="";
+	        String generatedDates ="";
+	        generatedBy = request.getSession().getAttribute("USER_NAME").toString();
 	        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm:ss");
 	        LocalDateTime now = LocalDateTime.now();
-	        GeneratedDates = dtf.format(now);
+	        generatedDates = dtf.format(now);
 		    
 				try {
 					System.out.println("Start compiling!!! ...");
@@ -82,10 +82,10 @@ public class TrackallEnquiriesServiceImpl implements TrackallEnquiriesService {
 				
 					JRBeanCollectionDataSource beanColDataSource = new JRBeanCollectionDataSource(dataList);
 					
-					Map<String, Object> parameters = new HashMap<String, Object>();
+					Map<String, Object> parameters = new HashMap<>();
 					parameters.put("ItemDataSource", beanColDataSource);
-					parameters.put("GeneratedBy", GeneratedBy);
-			        parameters.put("GeneratedDates", GeneratedDates);
+					parameters.put("GeneratedBy", generatedBy);
+			        parameters.put("GeneratedDates", generatedDates);
 					
 					
 					JasperReport report = (JasperReport) JRLoader
@@ -108,7 +108,7 @@ public class TrackallEnquiriesServiceImpl implements TrackallEnquiriesService {
 							response.getOutputStream().flush();
 							response.getOutputStream().close();
 						} catch (IOException e) {
-							// TODO Auto-generated catch block
+							
 							e.printStackTrace();
 						}
 						

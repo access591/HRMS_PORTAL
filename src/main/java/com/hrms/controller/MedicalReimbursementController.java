@@ -242,11 +242,8 @@ public class MedicalReimbursementController {
 		
 		 medicalReimbursement.setEmpCode(m1.getEmpCode().getEmpCode());
 	
-		 MedicalReimbursementDetail m4=new MedicalReimbursementDetail();
-		 
-		 if(medicalReimbursement == null) {
-	            return ResponseEntity.notFound().build();
-	        }
+	
+		
 	        return ResponseEntity.ok().body(medicalReimbursement);
 	    }
 	
