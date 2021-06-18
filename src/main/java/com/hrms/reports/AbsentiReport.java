@@ -2,6 +2,7 @@ package com.hrms.reports;
 
 import java.io.IOException;
 import java.sql.Date;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,6 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Component;
+
+import com.hrms.model.AttendenceRegister;
+import com.hrms.model.LeaveRequest;
 
 import net.sf.jasperreports.engine.JREmptyDataSource;
 import net.sf.jasperreports.engine.JRException;
@@ -25,7 +29,7 @@ import net.sf.jasperreports.engine.util.JRLoader;
 public class AbsentiReport {
 
 	public List<?> createAbsentiReport(HttpServletResponse response, HttpServletRequest request, 
-			List<?> sourceData,Date from,Date to,String deptName) {
+			List<AttendenceRegister> sourceData,Date from,Date to,String deptName) throws IOException {
 
 		String reportFileName = "absentism"; // Parameter1
 		String deptName1 = "Department Name : "+deptName;
@@ -58,21 +62,17 @@ public class AbsentiReport {
 				response.setHeader("Cache-Control", "private");
 				response.setHeader("Pragma", "no-store");
 				response.setContentLength(pdfReport.length);
-				try {
-					response.getOutputStream().write(pdfReport);
-					response.getOutputStream().flush();
-					response.getOutputStream().close();
-				} catch (IOException e) {
-					
-					e.printStackTrace();
-				}
-
+				
+				response.getOutputStream().write(pdfReport);
+				response.getOutputStream().flush();
+				response.getOutputStream().close();
+				
 			}
 		} catch (JRException e) {
 			e.printStackTrace();
 		}
 
-		return null;
+		return Collections.<Integer>emptyList();
 
 
 	}
