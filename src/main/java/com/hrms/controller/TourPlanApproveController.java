@@ -44,7 +44,9 @@ public class TourPlanApproveController {
 	
 	@GetMapping("/tourPlanApproval")
 	public String tourPlanApproval(Model model, HttpSession session) {
-		
+		if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
 		String userCode = (String) session.getAttribute("username");
 		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
 		if (modules != null) {
@@ -68,7 +70,9 @@ public class TourPlanApproveController {
 	
 	@GetMapping(value = {"/viewTourPlan/{id}"})
 	public String viewTourPlan(@PathVariable("id")String id,  Model model,HttpSession session)
-	 { 
+	 { 	if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
 		List<Department> listDepartment = departmentService.getAllDepartments();
 		model.addAttribute("listDepartment", listDepartment);
 		

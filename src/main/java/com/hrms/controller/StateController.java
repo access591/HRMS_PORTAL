@@ -65,8 +65,10 @@ public class StateController {
 	 */
 	@PostMapping("/saveState")
 	public String saveState(@ModelAttribute("state") State state, Model model, HttpSession session) {
-		
-		String insertedBY = (String) session.getAttribute("userlogin");
+		if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
+		String insertedBY = (String) session.getAttribute("USER_NAME");
 		state.setInsBy(insertedBY);
 		stateService.addState(state);
 
@@ -89,7 +91,9 @@ public class StateController {
 	@GetMapping(value = { "/editState/{id}" })
 	public String editState(@PathVariable("id") String id, Model model, HttpSession session) {
 		
-	
+		if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
 		session.setAttribute("imgUtil", new ImageUtil());
 		State stateEdit = stateService.findStateById(id);
 		model.addAttribute("stateEdit", stateEdit);
@@ -107,8 +111,10 @@ public class StateController {
 	 */
 	@PostMapping("/updateState")
 	public String updateState(@ModelAttribute("city") State c, Model model, HttpSession session) {
-		
-		String updatedBY = (String) session.getAttribute("userlogin");
+		if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
+		String updatedBY = (String) session.getAttribute("USER_NAME");
 		c.setUpdBy(updatedBY);
 		this.stateService.updateState(c);
 		return"redirect:/stateMaster";
@@ -124,7 +130,9 @@ public class StateController {
 	 */
 	@GetMapping(value = { "/deleteState/{id}" })
 	public String deleteState(@PathVariable("id") String id, Model model, HttpSession session) {
-		
+		if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
 		this.stateService.removeState(id);
 		session.setAttribute("username", session.getAttribute("username"));
 		return"redirect:/stateMaster";

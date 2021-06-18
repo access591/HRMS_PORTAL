@@ -36,6 +36,10 @@ public class SkillCategoryController {
 	 */
 	@GetMapping("/skillCategoryMaster")
 	public String skillCategoryMaster(Model model, HttpSession session) {
+		
+		if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
 		List<SkillCategory> listSkillCategory = skillCategoryService.getAllSkillCategorys();
 		model.addAttribute("listSkillCategory", listSkillCategory);
 		
@@ -57,7 +61,10 @@ public class SkillCategoryController {
  */
 	@PostMapping("/saveSkillCategory")
 	public String saveCity(@ModelAttribute("skillCategory") SkillCategory sc, Model model, HttpSession session) {
-		String insertedBY = (String) session.getAttribute("userlogin");
+		if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
+		String insertedBY = (String) session.getAttribute("USER_NAME");
 		sc.setInsBy(insertedBY);
 		skillCategoryService.addSkillCategory(sc);
 		List<SkillCategory> listSkillCategory = skillCategoryService.getAllSkillCategorys();
@@ -77,6 +84,10 @@ public class SkillCategoryController {
 	 */
 	@GetMapping(value = { "/editSkillCategory/{id}" })
 	public String editSkillCategory(@PathVariable("id") String id, Model model, HttpSession session) {
+		if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
+		
 		int editPageNo =36;
 		String reqPageedit ="/editSkillCategory";
 		
@@ -95,7 +106,11 @@ public class SkillCategoryController {
 	 */
 	@PostMapping("/updateSkillCategory")
 	public String updateCity(@ModelAttribute("skillCategory") SkillCategory sc, Model model, HttpSession session) {
-		String updatedBY = (String) session.getAttribute("userlogin");
+		if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
+		
+		String updatedBY = (String) session.getAttribute("USER_NAME");
 		sc.setUpdBy(updatedBY);
 		this.skillCategoryService.updateSkillCategory(sc);
 		return "redirect:/"+ pageMappingService.PageRequestMapping(reqPage, pageno);
@@ -110,6 +125,10 @@ public class SkillCategoryController {
 	 */
 	@GetMapping(value = { "/deleteSkillCategory/{id}" })
 	public String deleteSkillCategory(@PathVariable("id") String id, Model model, HttpSession session) {
+		if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
+		
 		this.skillCategoryService.removeSkillCategory(id);
 		session.setAttribute("username", session.getAttribute("username"));
 		return "redirect:/"+ pageMappingService.PageRequestMapping(reqPage, pageno);
