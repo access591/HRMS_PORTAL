@@ -125,7 +125,7 @@ public class StaffPostingDutiesController {
 			List<Employee> listEmployee = employeeService.getAllEmployees();
 			  model.addAttribute("listEmployee", listEmployee);
 			  
-			  StaffPostingDuties staffPostingDutiesEdit = staffPostingDutiesService.StaffPostingDutieById(id);
+			  StaffPostingDuties staffPostingDutiesEdit = staffPostingDutiesService.staffPostingDutieById(id);
 			model.addAttribute("staffPostingDutiesEdit", staffPostingDutiesEdit);
 			session.setAttribute("imgUtil", new ImageUtil());
 			session.setAttribute("username", session.getAttribute("username"));
@@ -142,7 +142,7 @@ public class StaffPostingDutiesController {
 			staffduties.setPositionCode(ux.getPositionCode());
 			staffduties.setJobDesc(ux.getJobDesc());
 			staffduties.setJobCode(ux.getJobCode());
-			this.staffPostingDutiesService.UpdateStaffPostingDuties(staffduties);
+			this.staffPostingDutiesService.updateStaffPostingDuties(staffduties);
 			
 
 			session.setAttribute("username", session.getAttribute("username"));

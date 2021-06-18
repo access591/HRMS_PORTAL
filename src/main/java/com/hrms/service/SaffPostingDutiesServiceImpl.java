@@ -52,12 +52,12 @@ public class SaffPostingDutiesServiceImpl implements StaffPostingDutiesService {
 	}
 
 	@Override
-	public StaffPostingDuties StaffPostingDutieById(String id) {
+	public StaffPostingDuties staffPostingDutieById(String id) {
 		return saffPostingDutiesDao.findById(id);
 	}
 
 	@Override
-	public void UpdateStaffPostingDuties(StaffPostingDuties staffduties) {
+	public void updateStaffPostingDuties(StaffPostingDuties staffduties) {
 		this.saffPostingDutiesDao.saveOrUpdate(staffduties);
 		
 	}
