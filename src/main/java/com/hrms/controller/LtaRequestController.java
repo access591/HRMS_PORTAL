@@ -74,6 +74,10 @@ public class LtaRequestController {
 	
 	@PostMapping("/saveLtaRequest")
 	public String saveLtaRequest(@ModelAttribute("LtaRequest") LtaRequestUtil ltaRequestUtil, Model model, HttpSession session) {
+		if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
+		
 		LtaRequest ltaRequest=new LtaRequest();
 		Employee emp = new Employee();
 		emp.setEmpCode(ltaRequestUtil.getEmpCode());

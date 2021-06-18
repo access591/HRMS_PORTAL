@@ -130,6 +130,9 @@ public class InductionTrainingController {
 	
 	@PostMapping("/saveInductionTraining")
 	public String saveInductionTraining(@ModelAttribute("inductionTraining")InductionTrainingUtil localCon, Model model, HttpSession session,HttpServletRequest request) throws ParseException {
+		if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
 		String insertedBY = (String) session.getAttribute("USER_NAME");
 		InductionTraining induct=new InductionTraining();
 		InductionTrainingDetail inductDetails=new InductionTrainingDetail();
@@ -220,6 +223,10 @@ public class InductionTrainingController {
 	
 	@GetMapping(value = { "/deleteInductionTraining/{id}" })
 	public String deleteLocalConveyance(@PathVariable("id") long id, Model model,HttpSession session) {
+		if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
+		
 		try {
 			
 			inductionTrainingService.removeInductionTr(id);

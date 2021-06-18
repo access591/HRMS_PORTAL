@@ -110,6 +110,11 @@ public class LocalConvyenceController {
 	
 	@PostMapping("/saveLocalConvyence")
 	public String saveLocalConvyence(@ModelAttribute("localConvyence")LocalConvyenceUtil localCon, Model model, HttpSession session,HttpServletRequest request) throws ParseException {
+		
+		if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
+		
 		String insertedBY = (String) session.getAttribute("USER_NAME");
 		LocalConvyence lc=new LocalConvyence();
 		LocalConvyenceDetail ld=new LocalConvyenceDetail();
@@ -250,7 +255,9 @@ public class LocalConvyenceController {
 	
 	@GetMapping(value = {"/editLocalConvyence/{id}"})
 	public String editLocalConvyence(@PathVariable("id")String id,  Model model,HttpSession session)
-	 { 
+	 { 	if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
 		session.setAttribute("imgUtil", new ImageUtil());
 		List<Employee> lrt = employeeService.getAllEmployees();
 		model.addAttribute("listEmployee", lrt);
@@ -264,8 +271,10 @@ public class LocalConvyenceController {
 	
 	
 	@PostMapping("/updateLocalConvyence")
-	  public String updateLocalConvyence(@ModelAttribute("localConvyenceEdit") LocalConvyence localConvyence, Model model) {
-		
+	  public String updateLocalConvyence(@ModelAttribute("localConvyenceEdit") LocalConvyence localConvyence, Model model,HttpSession session) {
+		if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
 		
 		  try {
 			this.localConvyenceService.updateLocalConvyence(localConvyence);
@@ -281,8 +290,12 @@ public class LocalConvyenceController {
 	
 	@GetMapping(value = { "/deleteLocalConveyance/{id}" })
 	public String deleteLocalConveyance(@PathVariable("id") String id, Model model,HttpSession session) {
+		if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
+
 		try {
-			
+
 			localConvyenceService.removelocalConvyence(id);
 			session.setAttribute("username", session.getAttribute("username"));
 

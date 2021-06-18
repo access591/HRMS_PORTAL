@@ -88,6 +88,10 @@ public class LoanRequestController {
 	
 	@PostMapping("/saveLoanRequest")
 	public String saveLoanRequest(@ModelAttribute("LoanRequest")LoanApplicationUtil loanAppUtil, Model model, HttpSession session) {
+	
+		if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
 		LoanApplication loanRequest = new LoanApplication();
 		Employee emp = new Employee();
 		emp.setEmpCode(loanAppUtil.getEmpCode());
@@ -123,6 +127,9 @@ public class LoanRequestController {
 	@GetMapping(value = {"/editLoanRequest/{id}"})
 	public String editLoanRequest(@PathVariable("id")String id,  Model model,HttpSession session)
 	 { 
+		if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
 		List<Employee> em = employeeService.getAllEmployees();
 		model.addAttribute("listEmployee", em);
 		List<Loan> listLoan = loanMaterService.getAllLoans();
@@ -137,7 +144,9 @@ public class LoanRequestController {
 	
 	@PostMapping("/updateLoanRequest")
 	public String updateLoanRequest(@ModelAttribute("LoanRequest") LoanApplicationUtil loanAppUtil, Model model, HttpSession session) {
-	
+		if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
 	try {
 		
 		LoanApplication loanRequest = new LoanApplication();
@@ -166,7 +175,9 @@ public class LoanRequestController {
 	
 	@GetMapping(value = {"/deleteLoanRequest/{id}"})
 	public String deleteLoanRequest(@PathVariable("id")String id,  Model model,HttpSession session)
-	 { 
+	 { 	if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
 		  this.loanRequestService.removeLoanRequest(id);
 		  return "redirect:/loanRequest";
 
