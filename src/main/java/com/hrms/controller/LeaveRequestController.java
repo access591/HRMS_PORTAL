@@ -118,7 +118,7 @@ public class LeaveRequestController {
 			model.addAttribute("listEmployee" , listEmployee);
 		}
 	
-		
+		}
 		return pageMappingService.PageRequestMapping(reqPage, pageno);
 	}
 	
@@ -184,17 +184,6 @@ public class LeaveRequestController {
 		this.leaveRequestService.removeLeaveRequest(id);
 		return "redirect:/"+ pageMappingService.PageRequestMapping(reqPage, pageno);
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	
 }
