@@ -57,7 +57,7 @@ public class LeaveRequestServiceImpl implements LeaveRequestService {
 			return leaveRequest;
 
 		} catch (Exception e) {
-			
+			System.out.println("error occured in gt All leaves ");
 			e.printStackTrace();
 		}
 		return null;
@@ -107,7 +107,7 @@ public class LeaveRequestServiceImpl implements LeaveRequestService {
 
 	@Override
 	public LeaveRequest findByToDate(Date date) {
-		
+		// TODO Auto-generated method stub
 		return this.leaveRequestDao.findByToDate(date);
 	}
 
@@ -230,7 +230,7 @@ public class LeaveRequestServiceImpl implements LeaveRequestService {
 			return leaveRequest;
 
 		} catch (Exception e) {
-			
+			System.out.println("error occured in gt All leaves ");
 			e.printStackTrace();
 		}
 		return null;

@@ -3,10 +3,8 @@ package com.hrms.service;
 
 import java.util.List;
 
-import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,22 +24,11 @@ public class ApplicantInfoServiceImpl implements ApplicantInfoService{
 	public void addApplicantInfo(ApplicantInfo applicantInfo) {
 		
 		Session session = sessionFactory.openSession();
-		Transaction tx = null;
-		try {
-			tx = session.beginTransaction();
-			applicantInfo.setApplicantCode(this.applicantInfoDao.getMaxId("APP"));
-			session.save(applicantInfo);
-			tx.commit();
-		}catch(HibernateException e) {
-			if(tx != null)
-				tx.rollback();
-			e.printStackTrace();
-			
-		}finally {
-			session.close();
-		}
-		
-		
+		session.beginTransaction();
+		applicantInfo.setApplicantCode(this.applicantInfoDao.getMaxId("APP"));
+		session.save(applicantInfo);
+		session.getTransaction().commit();
+		session.close();
 	}
 
 	@Override
@@ -49,21 +36,12 @@ public class ApplicantInfoServiceImpl implements ApplicantInfoService{
 		
 		List<ApplicantInfo> list = null;
 		Session session = sessionFactory.openSession();
-		Transaction tx = null;
+		session.beginTransaction();
 		
-		try {
-			tx = session.beginTransaction();
-			Query<ApplicantInfo> query = session.createQuery("From ApplicantInfo",ApplicantInfo.class);
-			list = query.getResultList();
-			tx.commit();
-		}catch(HibernateException e) {
-			if(tx != null)
-				tx.rollback();
-			e.printStackTrace();
-			
-		}finally {
-			session.close();
-		}
+		Query<ApplicantInfo> query = session.createQuery("From ApplicantInfo",ApplicantInfo.class);
+		
+		list = query.getResultList();
+
 		return list;
 	}
 
@@ -71,50 +49,28 @@ public class ApplicantInfoServiceImpl implements ApplicantInfoService{
 	public ApplicantInfo getApplicantInfoByApplicantCode(String applicantCode) {
 		
 		Session session = sessionFactory.openSession();
-		Transaction tx = null;
-		ApplicantInfo result = null;
-		try {
-			
-			tx = session.beginTransaction();
-			Query<ApplicantInfo> query = session.createQuery("From ApplicantInfo a where a.applicantCode = :applicantCode",ApplicantInfo.class);
-			query.setParameter("applicantCode", applicantCode);
-			result = query.uniqueResult();
-			tx.commit();
-			
-		}catch(HibernateException e) {
-			if(tx != null)
-				tx.rollback();
-			e.printStackTrace();
-		}finally {
-			session.close();
-		}
+		session.beginTransaction();
 		
-		return result;
+		Query<ApplicantInfo> query = session.createQuery("From ApplicantInfo a where a.applicantCode = :applicantCode",ApplicantInfo.class);
+		query.setParameter("applicantCode", applicantCode);
+		session.getTransaction().commit();
+		return query.uniqueResult();
 	}
 
 	@Override
 	public void updateApplicantInfoInterviewStatus(String applicantCode, String interviewStatus) {
 		
-		Session session = sessionFactory.openSession();
-		Transaction tx = null;
 		try {
-			
-			tx = session.beginTransaction();
+			Session session = sessionFactory.openSession();
+			session.beginTransaction();
 			ApplicantInfo applicantInfo = session.find(ApplicantInfo.class, applicantCode);
 			applicantInfo.setInterStatus(interviewStatus);
 			session.merge(applicantInfo);
-			tx.commit();
-			
+			session.getTransaction().commit();
+			session.close();
 		}catch(Exception e) {
-			
-			if (tx!=null)
-				tx.rollback();
-	         e.printStackTrace(); 
 			System.out.println("error occur in update applicant interview status");
 			e.printStackTrace();
-		}
-		finally {
-			session.close();
 		}
 		
 		
@@ -123,31 +79,21 @@ public class ApplicantInfoServiceImpl implements ApplicantInfoService{
 	@Override
 	public List<ApplicantInfo> findApplicantInfoStatusHoldAndPending() {
 		
-		Session session = sessionFactory.openSession();
-		Transaction tx = null;
-		List<ApplicantInfo> result = null;
-		
 		try {
-			tx = session.beginTransaction();
 			
+			Session session = sessionFactory.openSession();
 			Query<ApplicantInfo> query = session.createQuery("from ApplicantInfo a "
 					+ "where a.interStatus = :status1"
 					+ " or a.interStatus = :status2",ApplicantInfo.class);
 			query.setParameter("status1", "Hold");
 			query.setParameter("status2", "N");
-			result  = query.getResultList();
-			tx.commit();
+			List<ApplicantInfo> result = query.getResultList();
 			
-			
+			return result;
 		}catch(Exception e) {
-			if (tx!=null)
-				tx.rollback();
-	         e.printStackTrace(); 
+			e.printStackTrace();
 		}
-		finally {
-			session.close();
-		}
-		return result;
+		return null;
 	}
 
 	

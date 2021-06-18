@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,20 +18,11 @@ public class ReqAdvertisementDetailServiceIpml implements ReqAdvertisementDetail
 	@Autowired SessionFactory sessionFactory;
 	@Override
 	public void addActivity(ReqAdvertisementDetail reqAdvertisementDetail) {
-		
+		//this.reqAdvertisementDetailDao.saveOrUpdate(reqAdvertisementDetail);
 		Session session = sessionFactory.openSession();
-		Transaction tx = null;
-		try {
-			 tx = session.beginTransaction();
-			 session.save(reqAdvertisementDetail);
-			 tx.commit();
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
-		finally {
-			session.close();
-		}
-	   
+	    session.beginTransaction();
+	    session.save(reqAdvertisementDetail);
+	    session.getTransaction().commit();
 		
 		
 	}

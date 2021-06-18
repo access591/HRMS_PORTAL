@@ -1,6 +1,5 @@
 package com.hrms.service;
 
-import java.util.Collections;
 import java.util.List;
 
 import javax.persistence.criteria.CriteriaBuilder;
@@ -9,11 +8,11 @@ import javax.persistence.criteria.CriteriaQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hrms.model.BudgetProvision;
+import com.hrms.model.OrderIssueTracking;
 
 @Service
 public class BudgetProvisionServiceImpl implements BudgetProvisionService {
@@ -24,9 +23,10 @@ public class BudgetProvisionServiceImpl implements BudgetProvisionService {
 	@Override
 	public void saveBudgetProvision(BudgetProvision budgetProvision) {
 
-		Session session = sessionFactory.openSession();
+		System.out.println("session exist or not : " + sessionFactory.isOpen());
 		try {
-			
+			Session session = sessionFactory.openSession();
+			System.out.println("session exist or not : " + sessionFactory.isOpen());
 			Transaction tx = session.beginTransaction();
 
 			session.save(budgetProvision);
@@ -35,37 +35,31 @@ public class BudgetProvisionServiceImpl implements BudgetProvisionService {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-		}finally {
-			session.close();
 		}
+		System.out.println("session exist or not : " + sessionFactory.isOpen());
 	}
 
 	@Override
 	public List<BudgetProvision> getAllBudgetProvision() {
-		
-		Session session = sessionFactory.openSession();
-		try  {
+		try (Session session = sessionFactory.openSession()) {
 
 			CriteriaBuilder builder = session.getCriteriaBuilder();
 			CriteriaQuery<BudgetProvision> criteria = builder.createQuery(BudgetProvision.class);
 			criteria.from(BudgetProvision.class);
-			
-			return session.createQuery(criteria).getResultList();
+			List<BudgetProvision> entityList = session.createQuery(criteria).getResultList();
+
+			return entityList;
 		} catch (Exception e) {
 			e.printStackTrace();
-			
-		}finally {
-			session.close();
 		}
-		return Collections.emptyList();
+		return null;
 	}
 
 	@Override
 	public BudgetProvision findByBudgetProvisionId(Long budgitProvisionId) {
 
-		Session session = sessionFactory.openSession();
 		try {
-			
+			Session session = sessionFactory.openSession();
 			Transaction tx = session.beginTransaction();
 			BudgetProvision budgetProvision = session.find(BudgetProvision.class, budgitProvisionId);
 			tx.commit();
@@ -73,32 +67,22 @@ public class BudgetProvisionServiceImpl implements BudgetProvisionService {
 			return budgetProvision;
 		} catch (Exception e) {
 			e.printStackTrace();
-		}finally {
-			session.close();
 		}
 		return null;
 	}
 
 	@Override
 	public void updateBudgetProvision(BudgetProvision budgetProvision) {
-		
-		Session session = sessionFactory.openSession();
-		Transaction tx = null;
-		
 		try {
-			
-			tx = session.beginTransaction();
-			session.find(BudgetProvision.class, budgetProvision.getBudgetProvisionId());
+			Session session = sessionFactory.openSession();
+			Transaction tx = session.beginTransaction();
+			BudgetProvision b = session.find(BudgetProvision.class, budgetProvision.getBudgetProvisionId());
 
-			session.merge(budgetProvision);
+			b = (BudgetProvision) session.merge(budgetProvision);
 			tx.commit();
-			
-		} catch (Exception e) {
-			if (tx!=null) 
-				tx.rollback();
-			e.printStackTrace();
-		}finally {
 			session.close();
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 	
@@ -113,29 +97,6 @@ public class BudgetProvisionServiceImpl implements BudgetProvisionService {
 		tx.commit();
 		session.close();
 		
-	}
-
-	@Override
-	public List<BudgetProvision> findBudgetProvisionByDepartment(String deptCode) {
-		
-		Session session = sessionFactory.openSession();
-		Transaction tx = null;
-		try {
-			tx = session.beginTransaction();
-			Query<BudgetProvision> query = session.createQuery("from BudgetProvision b "
-					+ "inner join fetch b.department d where d.departmentCode = :deptCode", BudgetProvision.class);
-			query.setParameter("deptCode", deptCode);
-			
-			tx.commit();
-			
-			
-			return query.getResultList();
-		}catch(Exception e) {
-			e.printStackTrace();
-		}finally {
-			session.close();
-		}
-		return null;
 	}
 
 }

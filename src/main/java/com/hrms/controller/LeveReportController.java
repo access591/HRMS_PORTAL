@@ -1,6 +1,5 @@
 package com.hrms.controller;
 
-import java.io.IOException;
 import java.sql.Date;
 import java.util.ArrayList;
 
@@ -80,20 +79,10 @@ public class LeveReportController {
 
 	@Autowired
 	LeaveReport leaveReport;
-	
-	@ModelAttribute
-	public void commonData(Model model , HttpSession session) {
-		String userCode = (String) session.getAttribute("username");
-		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
-		if (modules != null) {
-			model.addAttribute("modules", modules);
-		}
-	}
 
 	@GetMapping("/leaveRegister")
 	public String viewLeaveRegisterReport(Model model, HttpSession session, HttpServletRequest request,
 			HttpServletResponse response) {
-
 		if (session.getAttribute("username") == null) {
 			return "redirect:" + "./";
 		}
@@ -101,14 +90,15 @@ public class LeveReportController {
 		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
 		if (modules != null) {
 			model.addAttribute("modules", modules);
-
-		
+		}
 		List<Department> departmentList = departmentService.getAllDepartments();
 		System.out.println("department service======>" + departmentList.size());
 		if (departmentList != null) {
 			model.addAttribute("departmentList", departmentList);
 		}
 
+		
+		session.setAttribute("username", session.getAttribute("username"));
 
 		return "leaveRegister";
 
@@ -117,12 +107,8 @@ public class LeveReportController {
 	@PostMapping("/createLeaveRegisterReport")
 	public String leaveDetailPdf(@RequestParam("deptCode") String deptCode, @RequestParam("empCode") String empCode,
 			Model model, HttpSession session,
-			HttpServletRequest request, HttpServletResponse response) throws IOException {
+			HttpServletRequest request, HttpServletResponse response) {
 
-		if(session.getAttribute("username")==null) {
-			return "redirect:" + "./";
-		}
-		
 		if (deptCode.equals("ALL")) {
 			System.out.println("All record");
 			
@@ -134,7 +120,7 @@ public class LeveReportController {
 			
 		} 
 		
-		else if (!deptCode.equals("ALL") && (empCode == null || !empCode.equals(""))) {
+		else if (!deptCode.equals("ALL") && (empCode.equals(null) || !empCode.equals(""))) {
 			System.out.println("find data by department ");
 			List<LeaveGrant> listLeaveGrant = leaveGrantService.findLeaveGrantByDepartment(deptCode);
 			System.out.println("leave register size : " + listLeaveGrant.size());
@@ -142,7 +128,7 @@ public class LeveReportController {
 			
 		}
 		
-		else if (!deptCode.equals("ALL") && (empCode != null || empCode.equals(""))) {
+		else if (!deptCode.equals("ALL") && (!empCode.equals(null) || empCode.equals(""))) {
 			System.out.println("find data by emp ");
 			
 			List<LeaveGrant> listLeaveGrant = leaveGrantService.findLeaveGrantByEmployeeName(empCode);
@@ -165,13 +151,14 @@ public class LeveReportController {
 	public String viewLeaveRequestDetailReport(Model model, HttpSession session, HttpServletRequest request,
 			HttpServletResponse response) {
 
-		if(session.getAttribute("username")==null) {
-			return "redirect:" + "./";
-		}
-		
 		System.out.println("leave request report - 1");
 
-		
+		String userCode = (String) session.getAttribute("username");
+		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
+		if (modules != null) {
+			model.addAttribute("modules", modules);
+		}
+
 		List<Employee> listEmployee = employeeService.getAllEmployees();
 		if (listEmployee != null) {
 			model.addAttribute("listEmployee", listEmployee);
@@ -182,7 +169,8 @@ public class LeveReportController {
 		if (departmentList != null) {
 			model.addAttribute("departmentList", departmentList);
 		}
-		
+		session.setAttribute("username", session.getAttribute("username"));
+
 		return "leaveRequestReport";
 
 	}
@@ -190,12 +178,8 @@ public class LeveReportController {
 	@PostMapping("/createleaveRequestReport")
 	public String leaveRequestReport(@RequestParam("deptCode") String deptCode, @RequestParam("empCode") String empCode,
 			@RequestParam("fromDate") Date fromDate, @RequestParam("toDate") Date toDate, Model model,
-			HttpSession session, HttpServletRequest request, HttpServletResponse response) throws IOException {
+			HttpSession session, HttpServletRequest request, HttpServletResponse response) {
 
-		if(session.getAttribute("username")==null) {
-			return "redirect:" + "./";
-		}
-		
 		System.out.println("leave request report - 2");
 		String reportFileName = "LeaveDetail";
 
@@ -207,13 +191,13 @@ public class LeveReportController {
 			leaveReport.leaveRequestReport(response, request, reportFileName, leaveRequestList, "ALL");
 		} 
 		
-		else if (!deptCode.equals("ALL") && (empCode == null || empCode.equals(""))) {
+		else if (!deptCode.equals("ALL") && (empCode.equals(null) || empCode.equals(""))) {
 			System.out.println("find data by department ");
 			List<LeaveRequest> leaveRequestList = leaveRequestService.findAllLeaveRequestByDeptBetweenDate(fromDate, toDate, deptCode);
 			leaveReport.leaveRequestReport(response, request, reportFileName, leaveRequestList, "ALL");
 		} 
 		
-		else if (!deptCode.equals("ALL") && (empCode != null || !empCode.equals(""))) {
+		else if (!deptCode.equals("ALL") && !empCode.equals(null) || !empCode.equals("")) {
 			System.out.println("find data by emp ");
 			List<LeaveRequest> leaveRequestList = leaveRequestService.findAllLeaveRequestbyEmpBetweenDate(fromDate, toDate, empCode);
 			leaveReport.leaveRequestReport(response, request, reportFileName, leaveRequestList, "ALL");
@@ -232,10 +216,11 @@ public class LeveReportController {
 	public String leaveTransactionReport(Model model, HttpSession session, HttpServletRequest request,
 			HttpServletResponse response) {
 
-		if(session.getAttribute("username")==null) {
-			return "redirect:" + "./";
+		String userCode = (String) session.getAttribute("username");
+		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
+		if (modules != null) {
+			model.addAttribute("modules", modules);
 		}
-		
 
 		List<Employee> listEmployee = employeeService.getAllEmployees();
 		if (listEmployee != null) {
@@ -252,7 +237,8 @@ public class LeveReportController {
 			model.addAttribute("listDesignation", listDesignation);
 		}
 
-
+//		List<Department> listDpartment = 
+		session.setAttribute("username", session.getAttribute("username"));
 
 		return "leaveTransactionReport";
 	}
@@ -261,12 +247,9 @@ public class LeveReportController {
 	public String createLeaveTransactionReport(@RequestParam("deptCode") String deptCode,
 			@RequestParam("empCode") String empCode, @RequestParam("fromDate") Date fromDate,
 			@RequestParam("toDate") Date toDate, Model model, HttpSession session, HttpServletRequest request,
-			HttpServletResponse response) throws IOException {
+			HttpServletResponse response) {
 
-		if(session.getAttribute("username")==null) {
-			return "redirect:" + "./";
-		}
-		
+
 		String userCode = (String) session.getAttribute("username");
 		UserEntity user = userService.findUserById(userCode);
 		String activeUser = user.getUserName();
@@ -280,13 +263,13 @@ public class LeveReportController {
 			
 		} 
 		
-		else if (!deptCode.equals("ALL") && (empCode == null || empCode.equals(""))) {
+		else if (!deptCode.equals("ALL") && (empCode.equals(null) || empCode.equals(""))) {
 			System.out.println("find data by department ");
 			List<LeaveRequest> leaveRequestList = leaveRequestService.findAllApproveLeaveRequestByDeptBetweenDate(fromDate, toDate, deptCode);
 			leaveReport.leaveTransactionPdfReportByEmp(request, response,leaveRequestList,activeUser);
 		}
 		
-		else if (!deptCode.equals("ALL") && empCode != null || empCode.equals("")) {
+		else if (!deptCode.equals("ALL") && !empCode.equals(null) || empCode.equals("")) {
 			System.out.println("find data by emp ");
 			List<LeaveRequest> leaveRequestList = leaveRequestService.findApproveLeaveRequestByEmpBetweenDate(fromDate, toDate, empCode);
 			leaveReport.leaveTransactionPdfReportByEmp(request, response,leaveRequestList,activeUser);
@@ -305,7 +288,8 @@ public class LeveReportController {
 	@ResponseBody
 	@GetMapping("getDepartmentByEmpCode/{empCode}")
 	public Department getDepartmentByEmpCode(@PathVariable("empCode") String empCode) {
-		
+		System.out.println("Get Department By Emp Code / LeaveTransactionController");
+		System.out.println("emp code is : " + empCode);
 		Employee employee = employeeService.findEmployeeById(empCode);
 
 		Department department = departmentService.findDepartmentById(employee.getDepartmentCode());
