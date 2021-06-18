@@ -9,7 +9,6 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.hrms.model.EmployeeRequisition;
 import com.hrms.model.TrainingSchedule;
 import com.hrms.repository.TrainingScheduleDao;
 
@@ -36,41 +35,62 @@ public class TrainingScheduleServiceImpl implements TrainingScheduleService{
 	public TrainingSchedule findTrainingScheduleById(String trReqCode) {
 		
 		Session session = sessionFactory.openSession();
-		Query<TrainingSchedule> query = session.createQuery("from TrainingSchedule e where e.trScheduleCode = :trReqCode", TrainingSchedule.class);
-		query.setParameter("trReqCode", trReqCode);
-		TrainingSchedule er = query.getSingleResult();
-		return er;
-		//return null;
+		Transaction tx = null;
+		try {
+			tx = session.beginTransaction();
+			Query<TrainingSchedule> query = session.createQuery("from TrainingSchedule e where e.trScheduleCode = :trReqCode", TrainingSchedule.class);
+			query.setParameter("trReqCode", trReqCode);
+			tx.commit();
+			return query.getSingleResult();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			session.close();
+		}
+		
+		return null;
 	}
 	
 	@Override
 	public void removeTrainingSchedule(String trReqCode) {
 		Session session = sessionFactory.openSession();
-		Transaction tx = session.beginTransaction();
-		Object o = session.get(TrainingSchedule.class, trReqCode);
-		TrainingSchedule e = (TrainingSchedule) o;
+		Transaction tx = null;
 		
-		session.delete(e);
-		tx.commit();
-		session.close();
-		
-		//Query q = session.createQuery("delete EmployeeRequisition e where e.reqCode = :reqCode");
-		//q.setParameter("reqCode", reqCode);
-		//q.executeUpdate();
+		try {
+			tx = session.beginTransaction();
+			Object o = session.get(TrainingSchedule.class, trReqCode);
+			TrainingSchedule e = (TrainingSchedule) o;
+			
+			session.delete(e);
+			tx.commit();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			session.close();
+		}
+	
 	}
 	
 	@Override
 	public void updateTrainingSchedule(TrainingSchedule trainingSchedule) {
 		
-		System.out.println("TrainingSchedule : "+ trainingSchedule.getTrScheduleCode());
 		Session session = sessionFactory.openSession();
+		Transaction tx = null;
+		try {
+			tx = session.beginTransaction();
+			session.load(TrainingSchedule.class, trainingSchedule.getTrScheduleCode());
+			
+			session.merge(trainingSchedule);
+			tx.commit();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			session.close();
+		}
 		
 			
-			//session.beginTransaction();
-		TrainingSchedule em = session.load(TrainingSchedule.class, trainingSchedule.getTrScheduleCode());
-		Transaction tx = session.beginTransaction();	
-		em = (TrainingSchedule) session.merge(trainingSchedule);
-		tx.commit();
+		
+		
 		
 			
 			
