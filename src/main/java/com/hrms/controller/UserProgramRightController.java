@@ -79,7 +79,9 @@ public class UserProgramRightController {
 
 @PostMapping("/saveUserRights")
 public String userProgramRightSave(@ModelAttribute("UserRights") UserRights userRights, Model model,HttpSession session,RedirectAttributes redirectAttributes) {
-
+	if(session.getAttribute("username")==null) {
+		return "redirect:" + "./";
+	}
 	boolean isUserRightsExist = userProgramRightService.checkUserRightsExists(userRights);
 	
 	if (isUserRightsExist) {
@@ -99,6 +101,9 @@ return"redirect:/userProgramRights";
 @GetMapping(value = {"/editUserRights/{id}"})
 public String editUserRights(@PathVariable("id")long id,  Model model,HttpSession session)
  { 
+	if(session.getAttribute("username")==null) {
+		return "redirect:" + "./";
+	}
 	List<UserEntity> listUsers = userService.getAllUsers();
 	model.addAttribute("listUsers", listUsers);	
 	
@@ -120,8 +125,10 @@ public String editUserRights(@PathVariable("id")long id,  Model model,HttpSessio
 }
 
 @PostMapping("/updateUserRights")
-public String upadteUserRight(@ModelAttribute("UserRights") UserRights ur, Model model)
-{
+public String upadteUserRight(@ModelAttribute("UserRights") UserRights ur, Model model,HttpSession session)
+{      if(session.getAttribute("username")==null) {
+	      return "redirect:" + "./";
+         }
 	  this.userProgramRightService.updateUserRights(ur);
 	  return"redirect:/userProgramRights";
 	
@@ -129,7 +136,9 @@ public String upadteUserRight(@ModelAttribute("UserRights") UserRights ur, Model
 
 @GetMapping(value = {"/deleteUserRights/{id}"})
 public String deleteUserRights(@PathVariable("id")Long id,  Model model,HttpSession session)
- { 
+ {  if(session.getAttribute("username")==null) {
+     return "redirect:" + "./";
+ }
 	  this.userProgramRightService.removeUserProgramRight(id);
     session.setAttribute("username",session.getAttribute("username")); 
     return"redirect:/userProgramRights";
