@@ -51,6 +51,10 @@ public class StaffPostingDutiesController {
 	
 	@GetMapping("/staffPostingDuties")
 	public String staffPostingDuties(Model model,HttpSession session) {
+		if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
+		
 		String userCode = (String) session.getAttribute("username");
 		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
 		if (modules != null) {
@@ -98,7 +102,9 @@ public class StaffPostingDutiesController {
 		
 		@PostMapping("/savestaffDuties")
 		public String savestaffDuties(@ModelAttribute("saffPostingDuties") SaffPostingDutiesUtil ux, Model model,HttpSession session) {
-			
+			if (session.getAttribute("username") == null) {
+				return "redirect:" + "./";
+			}
 			StaffPostingDuties staffduties=new StaffPostingDuties();
 			Employee emp = new Employee();
 			emp.setEmpCode(ux.getEmpCode());
@@ -121,7 +127,9 @@ public class StaffPostingDutiesController {
 		
 		@GetMapping(value = { "/editStaffPostingDuties/{id}" })
 		public String editStaffPostingDuties(@PathVariable("id") String id, Model model, HttpSession session) {
-			
+			if (session.getAttribute("username") == null) {
+				return "redirect:" + "./";
+			}
 			List<Employee> listEmployee = employeeService.getAllEmployees();
 			  model.addAttribute("listEmployee", listEmployee);
 			  
@@ -134,7 +142,9 @@ public class StaffPostingDutiesController {
 		
 		@PostMapping("/updateStaffDuties")
 		public String updateStaffDuties(@ModelAttribute("saffPostingDuties") SaffPostingDutiesUtil ux, Model model,HttpSession session) {
-			
+			if (session.getAttribute("username") == null) {
+				return "redirect:" + "./";
+			}
 			StaffPostingDuties staffduties=new StaffPostingDuties();
 			Employee emp = new Employee();
 			emp.setEmpCode(ux.getEmpCode());
@@ -162,6 +172,9 @@ public class StaffPostingDutiesController {
 		 */
 			@GetMapping(value = { "/deleteStaffPostingDuties/{id}" })
 			public String deleteStaffDuties(@PathVariable("id") String id, Model model, HttpSession session) {
+				if (session.getAttribute("username") == null) {
+					return "redirect:" + "./";
+				}
 				this.staffPostingDutiesService.removestaffDuties(id);
 				session.setAttribute("username", session.getAttribute("username"));
 				return "redirect:/staffPostingDuties";

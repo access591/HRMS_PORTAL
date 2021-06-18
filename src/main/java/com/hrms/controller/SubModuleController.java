@@ -76,7 +76,11 @@ public class SubModuleController {
 	@PostMapping("/saveSubModule")
 	public String saveSubModule(@ModelAttribute("SubModule1") SubModule subModule, Model model,
 			RedirectAttributes redirectAttributes, HttpSession session) {
-		String insertedBY = (String) session.getAttribute("uuuuu");
+		if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
+		
+		String insertedBY = (String) session.getAttribute("USER_NAME");
 		
 		
 		subModule.setInsertedBySubModule(insertedBY);
@@ -115,7 +119,10 @@ public class SubModuleController {
 	 */
 	@GetMapping(value = { "/editSubModule/{id}" })
 	public String editsubmodule(@PathVariable("id") String id, Model model, HttpSession session) {
-		  int editPageNo=22;
+		if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}  
+		int editPageNo=22;
 			String reqPageedit="/editSubModule";
 		SubModule subModuleEdit = subModuleService.findSubModuleById(id);
 		model.addAttribute("subModuleEdit", subModuleEdit);
@@ -134,7 +141,11 @@ public class SubModuleController {
 	 * @return
 	 */
 	@PostMapping("/updateSubModule")
-	public String updatesubmodule(@ModelAttribute("submoduleupdate") SubModule subModule, Model model) {
+	public String updatesubmodule(@ModelAttribute("submoduleupdate") SubModule subModule, Model model, HttpSession session) {
+		
+		if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
 		this.subModuleService.updateSubModule(subModule);
 
 		return "redirect:/" + pageMappingService.PageRequestMapping(reqPage, pageno);
@@ -149,6 +160,10 @@ public class SubModuleController {
 	 */
 	@GetMapping(value = { "/deleteSubModule/{id}" })
 	public String deletesubmodule(@PathVariable("id") String id, Model model, HttpSession session) {
+		if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
+		
 		this.subModuleService.removeSubModule(id);
 		session.setAttribute("username", session.getAttribute("username"));
 		 return "redirect:/"+pageMappingService.PageRequestMapping(reqPage,pageno);

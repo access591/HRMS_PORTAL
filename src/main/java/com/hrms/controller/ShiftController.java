@@ -39,6 +39,9 @@ public class ShiftController {
 	 */
 	@GetMapping("/shiftMaster")
 	public String shiftMaster(Model model, HttpSession session) {
+		if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
 		List<Shift> listShift = shiftService.getAllShifts();
 		model.addAttribute("listShift", listShift);
 		String userCode = (String) session.getAttribute("username");
@@ -62,7 +65,10 @@ public class ShiftController {
 	 */
 	@PostMapping("/saveShift")
 	public String saveShift(@ModelAttribute("shift") Shift shift, Model model, HttpSession session) {
-		String insertedBY = (String) session.getAttribute("userlogin");
+		if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
+		String insertedBY = (String) session.getAttribute("USER_NAME");
 		shift.setInsBy(insertedBY);
 		shiftService.addShift(shift);
 		List<Shift> listShift = shiftService.getAllShifts();
@@ -83,6 +89,9 @@ public class ShiftController {
 	 */
 	@GetMapping(value = { "/editShift/{id}" })
 	public String editShift(@PathVariable("id") String id, Model model, HttpSession session) {
+		if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
 		int editPageNo = 40;
 		String reqPageedit = "/editShift";
 		session.setAttribute("imgUtil", new ImageUtil());
@@ -103,7 +112,11 @@ public class ShiftController {
 	 */
 	@PostMapping("/updateShift")
 	public String updateShift(@ModelAttribute("shift") Shift s, Model model, HttpSession session) {
-		String updatedBY = (String) session.getAttribute("userlogin");
+		if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
+		
+		String updatedBY = (String) session.getAttribute("USER_NAME");
 		s.setUpdBy(updatedBY);
 		this.shiftService.updateShift(s);
 
@@ -120,6 +133,9 @@ public class ShiftController {
 	 */
 	@GetMapping(value = { "/deleteShift/{id}" })
 	public String deleteShift(@PathVariable("id") String id, Model model, HttpSession session) {
+		if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
 		this.shiftService.removeShift(id);
 		session.setAttribute("username", session.getAttribute("username"));
 		return "redirect:/" + pageMappingService.PageRequestMapping(reqPage, pageno);
