@@ -16,8 +16,8 @@ public class SubModuleServiceImpl  implements SubModuleService{
 	@Override
 	public List<SubModule> getAllSubModules() {
 
-		List<SubModule> listSubModule = subModuleDao.findAll();
-		return listSubModule;
+		return subModuleDao.findAll();
+	
 
 	}
 

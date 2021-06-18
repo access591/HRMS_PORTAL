@@ -17,7 +17,7 @@ public class TourClaimReportUtil {
 	
 	public TourClaimReportUtil() {
 		super();
-		// TODO Auto-generated constructor stub
+		
 	}
 
 	public String getTourClaimId() {

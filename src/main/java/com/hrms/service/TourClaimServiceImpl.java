@@ -17,7 +17,7 @@ public class TourClaimServiceImpl implements TourClaimService {
 	@Autowired
 	TourClaimDao tourClaimDao;
 	@Autowired SessionFactory sessionFactory;
-	
+	Session session =null;
 
 	@Override
 	public void AddTourClaim(TourClaim tourClaim) {
@@ -31,14 +31,12 @@ public class TourClaimServiceImpl implements TourClaimService {
 
 		try {
 			
-			Session session = sessionFactory.openSession();
+			 session = sessionFactory.openSession();
 			Query<TourClaim> query = session.createQuery("from TourClaim tr where tr.tourClaimDate>=:fromDate and "
 					+ "tr.tourClaimDate<=:toDate", TourClaim.class);
 			query.setParameter("fromDate", fromDate);
 			query.setParameter("toDate", toDate);
-			
-			List<TourClaim> result = query.getResultList();
-			return result;
+			return query.getResultList();
 			
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -51,15 +49,15 @@ public class TourClaimServiceImpl implements TourClaimService {
 	public List<TourClaim> findTourClaimByEmpCodeBetweenDate(String empCode,Date fromDate,Date toDate) {
 		
 		try {
-			Session session = sessionFactory.openSession();
+			 session = sessionFactory.openSession();
 			Query<TourClaim> query = session.createQuery("from TourClaim t inner join fetch t.empCode e"
 					+ " where e.empCode=:empCode and t.tourClaimDate>=:fromDate and "
 					+ "t.tourClaimDate<=:toDate",TourClaim.class);
 			query.setParameter("empCode", empCode);
 			query.setParameter("fromDate", fromDate);
 			query.setParameter("toDate", toDate);
-			List<TourClaim> tourClaimList = query.getResultList();
-			return tourClaimList;
+			return query.getResultList();
+			
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
