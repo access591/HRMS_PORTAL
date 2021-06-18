@@ -39,12 +39,10 @@ public class UserController {
 	@Autowired
 	private ModuleService moduleService;
 	
-	@Autowired
-	private SubModuleService subModuleService;
+
 	@Autowired 
 	 EmployeeService employeeService;
-	@Autowired
-	private ReCaptchaValidationService validator;
+
 
 	@GetMapping("/")
 	public String index(Model model) {
@@ -53,25 +51,22 @@ public class UserController {
 
 	@PostMapping("/loginUser")
 	public String loginUser(@ModelAttribute("user") Login login, Model model,
-			@RequestParam(name = "g-recaptcha-response") String captcha,HttpSession session) {
+			@RequestParam(name = "g-recaptcha-response") String captcha, HttpSession session) {
 		boolean isUserExist = userService.checkUserExists(login);
 		if (isUserExist /* && validator.validateCaptcha(captcha) */ ) {
-			
-			
-			
-			
-			String id=login.getUserCode();
+
+			String id = login.getUserCode();
 			UserEntity userRecord = userService.findDataById(id);
-			session.setAttribute("uuuuu",userRecord.getUserName());
-			session.setAttribute("USER_NAME",userRecord.getUserName());
-			
-			session.setAttribute("User_Profile_Pic",userRecord.getEmpCode().getImageProfile());
-		session.setAttribute("username",login.getUserCode());
-		String userCode= (String)session.getAttribute("username");
-		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
-	
-		session.setAttribute("imgUtil", new ImageUtil());
-		model.addAttribute("modules", modules);
+			session.setAttribute("uuuuu", userRecord.getUserName());
+			session.setAttribute("USER_NAME", userRecord.getUserName());
+
+			session.setAttribute("User_Profile_Pic", userRecord.getEmpCode().getImageProfile());
+			session.setAttribute("username", login.getUserCode());
+			String userCode = (String) session.getAttribute("username");
+			List<MenuModule> modules = moduleService.getAllModulesList(userCode);
+
+			session.setAttribute("imgUtil", new ImageUtil());
+			model.addAttribute("modules", modules);
 			return "dashboard";
 		} else {
 			model.addAttribute("message", "Please Verify Captcha");
@@ -79,12 +74,14 @@ public class UserController {
 		}
 	}
 
-
 	
 
 	
 	@GetMapping("/userMaster")
 	public String userMaster(Model model, HttpSession session) {
+		if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
 		session.setAttribute("imgUtil", new ImageUtil());
 		List<Employee> lrt = employeeService.getAllEmployees();
 		model.addAttribute("listEmployee", lrt);
@@ -110,7 +107,9 @@ public class UserController {
 	@PostMapping("/saveUser")
 	public String saveUser(@ModelAttribute("user") UserEntity userEntity, Model model, HttpSession session,
 			RedirectAttributes redirectAttributes) {
-
+		if(session.getAttribute("username")==null) {
+			return "redirect:" + "./";
+		}
 		
 		boolean isUserExist = userService.checkUserExistsOrNot(userEntity);
 		String pass=EncryptionUtil.encode(userEntity.getUserPass());
@@ -133,7 +132,9 @@ public class UserController {
 	
 	@GetMapping(value = { "/editUser/{id}" })
 	public String editUser(@PathVariable("id") String id, Model model, HttpSession session) {
-		
+		if(session.getAttribute("username")==null) {
+			return "redirect:" + "./";
+		}
 		List<Employee> lrt = employeeService.getAllEmployees();
 		model.addAttribute("listEmployee", lrt);
 		UserEntity userEdit = userService.findUserById(id);
@@ -147,9 +148,13 @@ public class UserController {
 
 	@PostMapping("/upadteUser")
 	public String updateUser(@ModelAttribute("userUpdate") UserEntity u, Model model, HttpSession session) {
+		if(session.getAttribute("username")==null) {
+			return "redirect:" + "./";
+		}
+		
 		String pass=EncryptionUtil.encode(u.getUserPass());
 		u.setUserPass(pass);
-		String username= (String)session.getAttribute("uuuuu");
+		String username= (String)session.getAttribute("USER_NAME");
 			u.setUpdBy(username);
 		  this.userService.updateUser(u);
 	  	  
@@ -179,6 +184,9 @@ public class UserController {
 	
 	@GetMapping("/dashboard")
 	public String dashBoardMethod(Model model,HttpSession session) {
+		if(session.getAttribute("username")==null) {
+			return "redirect:" + "./";
+		}
 		String userCode = (String) session.getAttribute("username");
 		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
 		if (modules != null) {

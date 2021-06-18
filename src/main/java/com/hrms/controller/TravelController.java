@@ -44,6 +44,9 @@ public class TravelController {
 	@GetMapping("/travelDetails")
 	public String travelDetailsMaster(Model model, HttpSession session) {
 		
+		if(session.getAttribute("username")==null) {
+			return "redirect:" + "./";
+		}
 		List<Travel> listTravel = travelService.getAllTravels();
 		model.addAttribute("listTravel", listTravel);
 
@@ -68,7 +71,9 @@ public class TravelController {
  */
 	@PostMapping("/saveTravel")
 	public String saveTravel(@ModelAttribute("travel") Travel travel, Model model, HttpSession session) {
-
+		if(session.getAttribute("username")==null) {
+			return "redirect:" + "./";
+		}
 		travelService.addTravel(travel);
 		List<Travel> listTravel = travelService.getAllTravels();
 		model.addAttribute("listTravel", listTravel);
@@ -86,6 +91,10 @@ public class TravelController {
 	 */
 	@GetMapping(value = {"/editTravel/{id}"})
 	public String editTravel(@PathVariable("id") String id, Model model, HttpSession session) {
+		if(session.getAttribute("username")==null) {
+			return "redirect:" + "./";
+		}
+		
 		int editPageNo = 42;
 		String reqPageedit = "/editTravel";
 		
@@ -120,6 +129,9 @@ public class TravelController {
  */
 	@GetMapping(value = { "/deleteTravel/{id}" })
 	public String deleteTravel(@PathVariable("id") String id, Model model, HttpSession session) {
+		if(session.getAttribute("username")==null) {
+			return "redirect:" + "./";
+		}
 		this.travelService.removeTravel(id);
 		session.setAttribute("username", session.getAttribute("username"));
 		return "redirect:/" + pageMappingService.PageRequestMapping(reqPage, pageno);

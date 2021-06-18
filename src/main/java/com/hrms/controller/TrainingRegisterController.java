@@ -41,14 +41,10 @@ public class TrainingRegisterController {
 	private ModuleService moduleService;
 	@Autowired
 	DepartmentService departmentService;
-	@Autowired
-	TrainingRegisterDetailsService trainingRegisterDetailsService;
-	@Autowired
-	TrainingRegisterService trainingRegisterService;
-	@Autowired
-	TrainingScheduleService trainingScheduleService;
-	@Autowired
-	EmployeeService employeeService;
+	@Autowired TrainingRegisterDetailsService trainingRegisterDetailsService;
+	@Autowired TrainingRegisterService trainingRegisterService;
+	@Autowired TrainingScheduleService trainingScheduleService;
+	@Autowired EmployeeService employeeService;
 
 	@InitBinder("trainingRegister")
     public void customizeBinding (WebDataBinder binder) {
@@ -62,7 +58,10 @@ public class TrainingRegisterController {
 	
 	@GetMapping("/trainingRegister")
 	public String trainingRegister(@ModelAttribute("trainingRegister")TrainingRegister trainingRegister, Model model, HttpSession session) {
-
+		if(session.getAttribute("username")==null) {
+			return "redirect:" + "./";
+		}
+		
 		String userCode = (String) session.getAttribute("username");
 		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
 		if (modules != null) {
@@ -77,12 +76,12 @@ public class TrainingRegisterController {
 		List<TrainingRegister> listTrainingRegister=trainingRegisterService.getAllTrainingRegisters();
 	    model.addAttribute("listTrainingRegister",listTrainingRegister);
 	    session.setAttribute("imgUtil", new ImageUtil());
-	   System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxx"+listTrainingRegister);
+	  
 		List<Department> listDepartment = departmentService.getAllDepartments();
 		model.addAttribute("listDepartment", listDepartment);
+		
 		List<Employee> listEmployee = employeeService.getAllEmployees();
 		model.addAttribute("listEmployee", listEmployee);
-		
 		
 		return "trainingRegister";
 
@@ -113,6 +112,9 @@ public class TrainingRegisterController {
 	  
 		@PostMapping("/saveTrainingRegister")
 		public String saveTrainingRegister(@ModelAttribute("trainingRegister")TrainingRegister trainingRegister, Model model, HttpSession session) {
+			if(session.getAttribute("username")==null) {
+				return "redirect:" + "./";
+			}
 			trainingRegisterService.addTrainingRegister(trainingRegister);
 			session.setAttribute("username", session.getAttribute("username"));
 			return "redirect:/trainingRegister";
@@ -139,17 +141,22 @@ public class TrainingRegisterController {
 		
 		
 		
-		@PostMapping(value = {"updateTrainingRegister"})
-		public String updateTrainingRegister(@ModelAttribute("trainingRegister")TrainingRegister trainingRegister,
-				Model model,@RequestParam(name="trRegCode",required=false) String trRegCode) {
-System.out.println( "xx>>>>>>>>>>>>>>>>>>>>>"+trainingRegister.getTrRegCode());
+		@PostMapping(value = { "updateTrainingRegister" })
+		public String updateTrainingRegister(@ModelAttribute("trainingRegister") TrainingRegister trainingRegister,
+				Model model, @RequestParam(name = "trRegCode", required = false) String trRegCode, HttpSession session) {
+			
+			if(session.getAttribute("username")==null) {
+				return "redirect:" + "./";
+			}
 			trainingRegisterService.updateTrainingRegister(trainingRegister);
 			return "redirect:/trainingRegister";
 		}
 		
-		
 		@GetMapping(value = { "/deleteTrainingRegister/{id}" })
 		public String deleteTrainingRegister(@PathVariable("id") String id, Model model,HttpSession session) {
+			if(session.getAttribute("username")==null) {
+				return "redirect:" + "./";
+			}
 			try {
 				
 				trainingRegisterService.removeTrainingRegister(id);
