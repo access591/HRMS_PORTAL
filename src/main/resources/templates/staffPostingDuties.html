@@ -92,7 +92,7 @@ body {
 												
 													<label class="form-label">Job Code <span
 														class="text-danger">*</span>
-													</label> <input name="JobCode" type="text" id="JobCode"
+													</label> <input name="jobCode" type="text" id="jobCode"
 														class="form-control"readonly>
 												</div>
 												
@@ -198,15 +198,15 @@ body {
 										</thead>
 										<tbody>
 										<tr th:each = "listOfStaff : ${listStaffDuties}">
-										<td th:text="${listOfStaff.JobCode}" ></td>
+										<td th:text="${listOfStaff.jobCode}" ></td>
 										<td th:text="${listOfStaff.empName}"></td>
 										<td  th:text="${listOfStaff.deptName}"></td>
 										<td  th:text="${listOfStaff.desgName}"></td>
 								
 										  <td>
-										  <a th:href="@{/editStaffPostingDuties/{id}/(id=${listOfStaff.JobCode})}"><em class="fa fa-edit"></em></a>
+										  <a th:href="@{/editStaffPostingDuties/{id}/(id=${listOfStaff.jobCode})}"><em class="fa fa-edit"></em></a>
 										  
-										     <a th:href="@{/deleteStaffPostingDuties/{id}/(id=${listOfStaff.JobCode})}"onclick="return confirm('Are you sure?')"><em class="fa fa-times"></em></a>
+										     <a th:href="@{/deleteStaffPostingDuties/{id}/(id=${listOfStaff.jobCode})}"onclick="return confirm('Are you sure?')"><em class="fa fa-times"></em></a>
 									
 									
 										</td>  

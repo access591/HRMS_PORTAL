@@ -85,6 +85,9 @@ public class LeaveRequestController {
 	@GetMapping("/leaveRequest")
 	public String empPayDetail(@ModelAttribute("leaveRequest")LeaveRequest leaveRequest,Model model, HttpSession session) {
 
+		if (session.getAttribute("username") == null) {
+
+
 
 		
 		if(session.getAttribute("username")==null) {
@@ -122,9 +125,20 @@ public class LeaveRequestController {
 	@PostMapping("/saveLeaveRequest")
 	public String saveLeaveRequest(@ModelAttribute("leaveRequest")LeaveRequest leaveRequest,HttpSession session) {
 		
+
+		String insertedBY = (String) session.getAttribute("userlogin");
+		System.out.println("inserted by :"+ insertedBY);
+		
+		System.out.println("leave to date======> : " + leaveRequest.getToDate());
+		System.out.println("leave to date======> : " + leaveRequest.getFromDate());
+		System.out.println("leave to date======> : " + leaveRequest.getEmployee().getEmpCode());
+		System.out.println("leave to date======> : " + leaveRequest.getLeave().getLevCode());
+		//System.out.println("leave to date : " + leaveRequest.getLeaveCode());
+
 		if(session.getAttribute("username")==null) {
 			return "redirect:" + "./";
 		}
+
 		leaveRequestService.addLeave(leaveRequest);
 		return "redirect:" + pageMappingService.PageRequestMapping(reqPage, pageno);
 	}
@@ -136,10 +150,17 @@ public class LeaveRequestController {
 	public String viewLeaveRequestByEmpId(@PathVariable("id")String leaveRequestId,
 						Model model,HttpSession session) {
 		
+
+		
+		
+		
+		//List<LeaveRequest> leaveRequest = this.leaveRequestService.findByEmpCodeAndApplyDate(empCode, applyDate);
+
 		if(session.getAttribute("username")==null) {
 			return "redirect:" + "./";
 		}
 		
+
 		LeaveRequest leaveRequest = this.leaveRequestService.findLeaveRequestById(Long.parseLong(leaveRequestId));
 		
 		if(leaveRequest != null) {
@@ -154,10 +175,12 @@ public class LeaveRequestController {
 	@GetMapping(value = { "/deleteLeaveRequest/{id}" })
 	public String deleteActivity(@PathVariable("id") Long id, Model model, HttpSession session) {
 		
+
 		if(session.getAttribute("username")==null) {
 			return "redirect:" + "./";
 		}
 		
+
 		this.leaveRequestService.removeLeaveRequest(id);
 		return "redirect:/"+ pageMappingService.PageRequestMapping(reqPage, pageno);
 	}

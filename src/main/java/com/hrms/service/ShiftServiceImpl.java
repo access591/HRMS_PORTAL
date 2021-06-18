@@ -22,8 +22,8 @@ ShiftDao shiftDao;
 	@Override
 	public List<Shift> getAllShifts() {
 	
-		List<Shift> listShift = shiftDao.findAll();
-		return listShift;
+		return shiftDao.findAll();
+		
 	}
 
 	@Override
