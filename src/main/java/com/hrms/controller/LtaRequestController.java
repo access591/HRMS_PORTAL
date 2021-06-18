@@ -54,7 +54,9 @@ public class LtaRequestController {
 	
 	@GetMapping("/ltaRequest")
 	public String ltaRequest(Model model, HttpSession session) {
-
+		if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
 		List<Employee> lrt = employeeService.getAllEmployees();
 		model.addAttribute("listEmployee", lrt);
 		List<LtaRequest> listLtaRequest = ltaRequestService.getAllLTARequest();

@@ -23,8 +23,8 @@ public class RegisterServiceImpl implements RegisterService {
 
 	@Override
 	public List<Register> getAllRegisters() {
-		List<Register> listRegister = registerDao.findAll();
-		return listRegister;
+		return registerDao.findAll();
+		
 	}
 
 	@Override

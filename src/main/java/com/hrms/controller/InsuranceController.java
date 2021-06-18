@@ -28,7 +28,9 @@ public class InsuranceController {
 	InsuranceService insuranceService;
 	@GetMapping("/insuranceMaster")
 	public String insuranceMaster(Model model,HttpSession session) {
-		
+		if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
 		String userCode= (String)session.getAttribute("username");
 		session.setAttribute("imgUtil", new ImageUtil());
 		List<Insurance> listInsurance = insuranceService.getAllInsurances();

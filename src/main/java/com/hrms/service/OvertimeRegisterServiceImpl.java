@@ -17,11 +17,13 @@ public class OvertimeRegisterServiceImpl implements OvertimeRegisterService{
 
 	@Autowired SessionFactory sessionFactory;
 	@Autowired OvertimeRegisterDao overtimeRegisterDao;
+	Session session=null;
+	
 	@Override
 	public List<OvertimeRegister> findOverTimeRegisterByEmpCodeBetweenDate(String empCode, Date fromDate, Date toDate) {
 		
 		try {
-			Session session = sessionFactory.openSession();
+			 session = sessionFactory.openSession();
 			Query<OvertimeRegister> query = session.createQuery("from OvertimeRegister o "
 					+ "inner join fetch o.employee e where e.empCode = :empCode and "
 					+ "o.timeIN = :fromDate and o.timeOut = :toDate", OvertimeRegister.class);
@@ -43,7 +45,7 @@ public class OvertimeRegisterServiceImpl implements OvertimeRegisterService{
 		Session s=sessionFactory.openSession();
 		s.beginTransaction();
 		
-		// TODO Auto-generated method stub
+	
 		s.save(overReg);
 		s.getTransaction().commit();
 		s.clear();

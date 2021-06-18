@@ -51,7 +51,9 @@ public class EmpPayDetailsController {
 
 	@GetMapping("/empPayDetail")
 	public String empPayDetail(Model model, HttpSession session) {
-
+		if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
 		List<MiscAllowance> listMiscAllowanceDeduction = miscAllowanceDeductionService.getAllMiscAllowanceDeduction();
 		model.addAttribute("listMiscAllowanceDeduction", listMiscAllowanceDeduction);
 		List<Employee> listEmployee = employeeService.getAllEmployees();

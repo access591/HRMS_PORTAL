@@ -95,7 +95,7 @@ public class ProgramController {
 		if (isSubModuleExist) {
 			redirectAttributes.addFlashAttribute("message", " Program Already exists !");
 			redirectAttributes.addFlashAttribute("alertClass", "alert-success");
-			// return "redirect:/program";
+		
 			return "redirect:" + pageMappingService.PageRequestMapping(reqPage, pageno);
 		}
 
@@ -107,7 +107,7 @@ public class ProgramController {
 			model.addAttribute("listpPrograms", listpPrograms);
 			session.setAttribute("username", session.getAttribute("username"));
 		}
-		// return "redirect:/program";
+	
 		return "redirect:" + pageMappingService.PageRequestMapping(reqPage, pageno);
 
 	}
@@ -132,7 +132,7 @@ public class ProgramController {
 		model.addAttribute("subModulesList", subModulesList);
 
 		session.setAttribute("username", session.getAttribute("username"));
-		//return "/editProgram";
+		
 		return pageMappingService.PageRequestMapping(reqPageedit,editPageNo);
 	}
 	/**
@@ -159,7 +159,7 @@ public class ProgramController {
 
 		this.programService.updateProgram(program);
 
-		// return "redirect:/program";
+
 
 		return "redirect:/" + pageMappingService.PageRequestMapping(reqPage, pageno);
 
@@ -177,7 +177,7 @@ public String deleteprogram(@PathVariable("id")String id,  Model model,HttpSessi
 { 
 	  this.programService.removeProgram(id);
    session.setAttribute("username",session.getAttribute("username")); 
-  // return "redirect:/program";
+ 
    return "redirect:/"+pageMappingService.PageRequestMapping(reqPage,pageno);
 
 }

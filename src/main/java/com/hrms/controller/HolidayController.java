@@ -40,6 +40,9 @@ public class HolidayController
 	 */
 	@GetMapping("/HolidayMaster")	
 	public String departmentMaster(Model model,HttpSession session) {
+		if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
 		List<Holiday>listHoliday = holidayService.getAllHolidays();
 		model.addAttribute("listHoliday", listHoliday); 
 		String userCode= (String)session.getAttribute("username");

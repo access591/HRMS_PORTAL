@@ -48,12 +48,15 @@ public class DesignationController {
 	 */
 	@GetMapping("/designationMaster")
 	public String designationMaster(Model model, HttpSession session) {
-
+		if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
 		List<Designation> listDesignation = designationService.getAllDesignations();
 		model.addAttribute("listDesignation", listDesignation);
 		List<Category> listCategory = categoryService.getAllCategory();
 		model.addAttribute("listCategory" ,listCategory);
 		String userCode = (String) session.getAttribute("username");
+		
 		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
 		if (modules != null) {
 			model.addAttribute("modules", modules);

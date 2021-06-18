@@ -17,14 +17,14 @@ public class PageMappingServiceImpl implements PageMappingService {
 	@Override
 	public String PageRequestMapping(String requestMpping, int id) {
 
-		return pageMappingDao.PageRequestMapping(requestMpping, id);
+		return pageMappingDao.pageRequestMapping(requestMpping, id);
 
 	}
 
 	@Override
 	public List<UrlDetail> getAllPages() {
-		List<UrlDetail> listUrlDetail = pageMappingDao.findAll();
-		return listUrlDetail;
+		return pageMappingDao.findAll();
+	
 	}
 
 	@Override
