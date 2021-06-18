@@ -79,8 +79,12 @@ public class EmployeeController {
  * @return
  */
 	@GetMapping("/employeeMaster")
-	public ModelAndView employeeMaster(Model model, HttpSession session) {
-   
+	public String employeeMaster(Model model, HttpSession session) {
+		
+		if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
+
 		  List<City>cityList =cityService.getAllCities();
 		  model.addAttribute("CityList", cityList);
 		  List<State> listState = stateService.getAllStates();
@@ -146,12 +150,12 @@ public class EmployeeController {
 		}
 		session.setAttribute("imgUtil", new ImageUtil());
 		session.setAttribute("username", session.getAttribute("username"));
-		ModelAndView modelAndView = new ModelAndView(pageMappingService.PageRequestMapping(reqPage, pageno));
-	   
-		modelAndView.addObject("imgUtil", new ImageUtil());
-	 modelAndView.addObject("listEmployee", listEmployee);
 		
-	    return modelAndView;
+	   
+		model.addAttribute("imgUtil", new ImageUtil());
+		model.addAttribute("listEmployee", listEmployee);
+		
+		 return pageMappingService.PageRequestMapping(reqPage,pageno);
 	
 	}
 /**
@@ -165,6 +169,9 @@ public class EmployeeController {
 	@PostMapping("/saveEmployee")
 	public String employeeMasterSave(@ModelAttribute("employees")EmployeeUtil eutility , Model model, HttpSession session,@RequestParam("image") MultipartFile file,HttpServletRequest request)
 	{
+		if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
 		ArmsLicenseDetails armsLicense =new ArmsLicenseDetails();
 		Employee employee=new Employee();
 		employee.setEmpName(eutility.getEmpName());
@@ -288,14 +295,16 @@ public class EmployeeController {
 	public String editEmployee(@PathVariable("id") String id,@PathVariable("id2") String id2, Model model, HttpSession session) {
 		int editPageNo = 44;
 		String reqPageedit = "/editEmployee";
-		
+		if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
 		  List<City>cityList =cityService.getAllCities();
 		  model.addAttribute("CityList", cityList);
 		  List<State> listState = stateService.getAllStates();
 		  model.addAttribute("listState", listState);
 		  List<Country> listCountry = countryService.getAllCountrys();
 		  model.addAttribute("listCountry", listCountry);
-		
+		  session.setAttribute("imgUtil", new ImageUtil());
 		
 		List<Category> listCategory = categoryService.getAllCategory();
 		model.addAttribute("listCategory" ,listCategory);
@@ -322,6 +331,9 @@ public class EmployeeController {
  */
 	@PostMapping("/updateEmployee")
 	public String updatePageUrl(@ModelAttribute("employees") EmployeeUtil eutility, HttpSession session, Model model,@RequestParam("file") MultipartFile multipartFile) {
+		if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
 		byte[] imgUtilSession = (byte[]) session.getAttribute("imgUtilSession");
 		ArmsLicenseDetails armsLicense =new ArmsLicenseDetails();
 		Employee employee=new Employee();
