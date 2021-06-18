@@ -52,8 +52,8 @@ public class LeaveRequestDaoImpl extends AbstractGenericDao<LeaveRequest> implem
 		 Query query = session.createQuery(hql);
 		 query.setParameter("empCode", empCode);
 		 query.setParameter("applyDate", applyDate);
-		 List result = query.list();
-		return result;
+		 
+		return query.list();
 	}
 
 
