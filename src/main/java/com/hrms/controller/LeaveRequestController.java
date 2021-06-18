@@ -5,11 +5,13 @@ import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.hrms.ImageUtil;
+import com.hrms.helper.Message1;
 import com.hrms.model.Employee;
 import com.hrms.model.Leave;
 import com.hrms.model.LeaveRequest;
@@ -92,7 +95,7 @@ public class LeaveRequestController {
 		List<Employee> listEmployee = employeeService.getAllEmployees();
 		
 		
-		session.setAttribute("imgUtil", new ImageUtil());
+		
 		List<Leave> listLeave = leaveService.getAllLeaves();
 		if(listLeave != null) {
 			model.addAttribute("listLeave", listLeave);
@@ -114,40 +117,33 @@ public class LeaveRequestController {
 		}
 	
 		
-		return pageMappingService.PageRequestMapping(reqPage, pageno);
+		return "leaveRequest";
 	}
 	
 	@PostMapping("/saveLeaveRequest")
-	public String saveLeaveRequest(@ModelAttribute("leaveRequest")LeaveRequest leaveRequest,HttpSession session) {
-		
-		if(session.getAttribute("username")==null) {
-			return "redirect:" + "./";
-		}
-		leaveRequestService.addLeave(leaveRequest);
-		return "redirect:" + pageMappingService.PageRequestMapping(reqPage, pageno);
-	}
-	
-	
-	
-	
-	@GetMapping(value = { "/viewLeaveRequest/{id}" })
-	public String viewLeaveRequestByEmpId(@PathVariable("id")String leaveRequestId,
-						Model model,HttpSession session) {
+	public String saveLeaveRequest(@Valid @ModelAttribute("leaveRequest")LeaveRequest leaveRequest,HttpSession session
+			) {
 		
 		if(session.getAttribute("username")==null) {
 			return "redirect:" + "./";
 		}
 		
-		LeaveRequest leaveRequest = this.leaveRequestService.findLeaveRequestById(Long.parseLong(leaveRequestId));
 		
-		if(leaveRequest != null) {
-			model.addAttribute("leaveRequest", leaveRequest);
+		try {
+			leaveRequestService.addLeave(leaveRequest);
+			session.setAttribute("message",new Message1("Data has been Successfully added","alert-primary"));
+		}catch(Exception e) {
+			e.printStackTrace();
+			session.setAttribute("message", new Message1("Something went Wrong !!","alert-info"));
 		}
 		
-		model.addAttribute("header", "View Leave Request");
-		model.addAttribute("myhref", "leaveRequest");
-		return "viewLeaveRequest";
+		return "redirect:leaveRequest";
 	}
+	
+	
+	
+	
+	
 	
 	@GetMapping(value = { "/deleteLeaveRequest/{id}" })
 	public String deleteActivity(@PathVariable("id") Long id, Model model, HttpSession session) {
@@ -156,20 +152,15 @@ public class LeaveRequestController {
 			return "redirect:" + "./";
 		}
 		
-		this.leaveRequestService.removeLeaveRequest(id);
+		try {
+			this.leaveRequestService.removeLeaveRequest(id);
+			session.setAttribute("message",new Message1("Data has been Removed","alert-primary"));
+		}catch(Exception e) {
+			e.printStackTrace();
+			session.setAttribute("message",new Message1("Something went wrong","alert-primary"));
+		}
+		
 		return "redirect:/"+ pageMappingService.PageRequestMapping(reqPage, pageno);
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+		
 }

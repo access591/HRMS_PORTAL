@@ -43,7 +43,7 @@ body {
 			<main class="content">
 				<div class="container-fluid">
 					<div class="header">
-						<h1 class="header-title"> HRMS</h1>
+						<h1 class="header-title"> Personal</h1>
 						<nav aria-label="breadcrumb">
 						</nav>
 					</div>
@@ -52,10 +52,22 @@ body {
 							<div class="card">
 								<div class="card-header">
 									<h5 class="card-title"style="text-decoration: underline;">Leave Request Approval </h5>
+								
+								
 								<div class="alert-outline">
 									<div th:if="${message}" th:text="${message}" style="color: red">
 									</div> 
 									</div>	
+									
+									<div class="row">
+								<div th:if="${session.message}" class="alert alert-primary alert-dismissible fade show">
+									<p class="text-center" th:text="${session.message.content}"></p>
+									<button type="button" class="close" data-dismiss="alert">&times;</button>
+									<th:block th:text="${#session.removeAttribute('message')}"></th:block>
+									 
+								</div>
+								</div>
+								
 								</div>
 								<div class="card-body">
 									<form id="validation-form" action="#"  method="post">
@@ -93,14 +105,14 @@ body {
 														<td>
 													<div class="btn-group">
 														  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-														    Approval
+														    Pending
 														  </button>
-														  <div class="dropdown-menu">
-														    <a class="dropdown-item" th:href="@{/approveLeaveRequest/{leaveRequestId}/{status}/(leaveRequestId=${leaveRequestapproval.leaveRequestId},status=${'Y'})}">Approved</a>
-														    <a class="dropdown-item" th:href="@{/approveLeaveRequest/{leaveRequestId}/{status}/(leaveRequestId=${leaveRequestapproval.leaveRequestId},status=${'C'})}">Cancel</a>
+														  <div class="dropdown-menu" onclick="myfunction()">
+														    <a  class="dropdown-item" th:href="@{/approveLeaveRequest/{leaveRequestId}/{status}/(leaveRequestId=${leaveRequestapproval.leaveRequestId},status=${'Y'})}">Approved</a>
+														    <a  class="dropdown-item" th:href="@{/approveLeaveRequest/{leaveRequestId}/{status}/(leaveRequestId=${leaveRequestapproval.leaveRequestId},status=${'C'})}">Cancel</a>
 														   
 														    
-														    <!-- th:href="@{/approveInterview/{applicantCode}/{interviewStatus}/(applicantCode=${interviewApproval.applicantCode},interviewStatus=${'Forward'})}" -->
+														    
 														  </div>
 													</div> 
   															
@@ -137,6 +149,11 @@ body {
 	
 	
 	<script>
+	
+	function myFunction(){
+		console.log("hello");
+	}
+	
 	$(document).ready(function () {
 		$('#example1').DataTable({
 		"scrollY": "200px",

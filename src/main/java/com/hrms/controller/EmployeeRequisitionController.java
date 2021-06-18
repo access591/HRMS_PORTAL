@@ -27,6 +27,7 @@ import com.hrms.model.Department;
 import com.hrms.model.Designation;
 import com.hrms.model.Employee;
 import com.hrms.ImageUtil;
+import com.hrms.helper.Message1;
 import com.hrms.model.CommonUtil;
 import com.hrms.model.MenuModule;
 import com.hrms.model.EmployeeRequisition;
@@ -120,24 +121,31 @@ public class EmployeeRequisitionController {
 		
 		String insertedBY = (String) session.getAttribute("userlogin");
 		
-		
-		List<EmployeeRequisitionDetail> re = new ArrayList<>();
-		
-		for(int i=0;i<employeeRequisition.getEmployeRequisitionDetail().size();i++) {
-			EmployeeRequisitionDetail e = new EmployeeRequisitionDetail();
-			e = employeeRequisition.getEmployeRequisitionDetail().get(i);
-			e.setReqDate(employeeRequisition.getReqDate());
-			e.setEmployeeRequisition(employeeRequisition);
-			re.add(e);	
+		try {
+			
+			List<EmployeeRequisitionDetail> re = new ArrayList<>();
+			
+			for(int i=0;i<employeeRequisition.getEmployeRequisitionDetail().size();i++) {
+				EmployeeRequisitionDetail e = new EmployeeRequisitionDetail();
+				e = employeeRequisition.getEmployeRequisitionDetail().get(i);
+				e.setReqDate(employeeRequisition.getReqDate());
+				e.setEmployeeRequisition(employeeRequisition);
+				re.add(e);	
+				
+			}
+			
+			employeeRequisition.setEmployeRequisitionDetail(re);
+			employeeRequisitionService.addEmployeeRequisition(employeeRequisition);
+			
+			session.setAttribute("message",new Message1("Data has been Successfully added","alert-primary"));
+			
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+			session.setAttribute("message", new Message1("Something went Wrong !!","alert-info"));
 			
 		}
 		
-		employeeRequisition.setEmployeRequisitionDetail(re);
-		
-		
-		
-		
-		employeeRequisitionService.addEmployeeRequisition(employeeRequisition);
 		session.setAttribute("userlogin", insertedBY);
 
 		return "redirect:employeeRequisition"; 

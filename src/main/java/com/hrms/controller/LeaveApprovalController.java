@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hrms.model.Department;
 import com.hrms.ImageUtil;
+import com.hrms.helper.Message1;
 import com.hrms.model.LeaveRequest;
 import com.hrms.model.MenuModule;
 import com.hrms.model.UserEntity;
@@ -99,7 +100,7 @@ public class LeaveApprovalController {
 			return "redirect:" + "./";
 		}
 		
-		session.setAttribute("imgUtil", new ImageUtil());
+		
 		String userCode = (String) session.getAttribute("username");
 		LeaveRequest leaveRequest = leaveRequestService.findLeaveRequestById(Long.valueOf(leaveid));
 		
@@ -108,22 +109,30 @@ public class LeaveApprovalController {
 		try {
 			UserEntity user = userService.findDataById(userCode);
 			activeUser = user.getUserName();
+			
+			if(status.equals("Y")) {
+				leaveRequest.setStatus("Y");
+				leaveRequest.setApproevedBy(activeUser);
+				leaveRequest.setApprovedDate(new Date().toString());
+				session.setAttribute("message", new Message1("Request has been Approved","alert-primary"));
+				
+			}else {
+				leaveRequest.setStatus("C");
+				leaveRequest.setCancelBy(activeUser);
+				leaveRequest.setCancelDate(new Date().toString());
+				session.setAttribute("message", new Message1("Request has been Canceled","alert-primary"));
+			}
+			
+			leaveRequestService.updateLeaveRequest(leaveRequest);  
+			
+			//session.setAttribute("message",new Message1("Data has been Successfully added","alert-primary"));
+			
 		}catch(Exception e) {
 			e.printStackTrace();
+			session.setAttribute("message", new Message1("Something went Wrong !!","alert-info"));
 		}
 		
-		if(status.equals("Y")) {
-			leaveRequest.setStatus("Y");
-			leaveRequest.setApproevedBy(activeUser);
-			leaveRequest.setApprovedDate(new Date().toString());
-			
-		}else {
-			leaveRequest.setStatus("C");
-			leaveRequest.setCancelBy(activeUser);
-			leaveRequest.setCancelDate(new Date().toString());
-		}
 		
-		leaveRequestService.updateLeaveRequest(leaveRequest);  
 		
 		List<LeaveRequest> listLeaveApproval = leaveRequestService.getEmployeeByStatusY();
 		if(listLeaveApproval != null) {
@@ -152,26 +161,6 @@ public class LeaveApprovalController {
 	}
 	
 	
-	@GetMapping(value = { "/viewLeaveApproval/{id}" })
-	public String viewLeaveRequestByEmpId(@PathVariable("id")String leaveRequestId,
-						Model model,HttpSession session) {
-		
-		if(session.getAttribute("username")==null) {
-			return "redirect:" + "./";
-		}
-		
-		LeaveRequest leaveRequest = this.leaveRequestService.findLeaveRequestById(Long.parseLong(leaveRequestId));
-		
-		if(leaveRequest != null) {
-			model.addAttribute("leaveRequest", leaveRequest);
-		}
-		List<MenuModule> modules = moduleService.getAllModulesList(session.getAttribute("username").toString());
-		if (modules != null) {
-			model.addAttribute("modules", modules);
-		}
-		model.addAttribute("header", "View Leave Approval");
-		model.addAttribute("myhref", "leaveApproval");
-		return "viewLeaveRequest";
-	}
+	
 
 }
