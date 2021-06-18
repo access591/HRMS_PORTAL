@@ -64,7 +64,11 @@ public class HolidayController
 	 */
 	@PostMapping("/saveHolidays")
 	  public String saveHoliday(@ModelAttribute("holidays") Holiday holiday, Model model,HttpSession session) {
-			if (holiday.getHolidayCode()==null) {
+		if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
+		
+		if (holiday.getHolidayCode()==null) {
 				holidayService.addHoliday(holiday); 
 				List<Holiday>listHoliday = holidayService.getAllHolidays();
 				model.addAttribute("listHoliday", listHoliday); 
@@ -84,6 +88,9 @@ public class HolidayController
 	@GetMapping(value = {"/editHoliday/{id}"})
 	public String editHoliday(@PathVariable("id")String id,  Model model,HttpSession session)
 	 { 
+		if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
 		int editPageNo=10;
 		String reqPageedit="/editHoliday";
 	Holiday holidayedit = holidayService.findHolidayById(id);
@@ -99,8 +106,10 @@ public class HolidayController
 	 * @return
 	 */
 	@PostMapping("/updateHoliday")
-	public String updateHoliday(@ModelAttribute("holidayupdate") Holiday holiday, Model model) {
-
+	public String updateHoliday(@ModelAttribute("holidayupdate") Holiday holiday,HttpSession session, Model model) {
+		if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
 		  this.holidayService.updateHoliday(holiday);
 	  	  
 		  return "redirect:"+pageMappingService.PageRequestMapping(reqPage,pageno);
@@ -117,6 +126,9 @@ public class HolidayController
 	@GetMapping(value = {"/deleteHoliday/{id}"})
 	public String deleteHoliday(@PathVariable("id")String id,  Model model,HttpSession session)
 	 { 
+		if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
 	this.holidayService.removeHoliday(id);
 	    session.setAttribute("username",session.getAttribute("username")); 
 	    return "redirect:/"+pageMappingService.PageRequestMapping(reqPage,pageno);

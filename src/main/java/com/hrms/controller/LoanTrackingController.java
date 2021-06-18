@@ -115,6 +115,10 @@ public class LoanTrackingController {
 	
 	@PostMapping("/saveLoanTracking")
 	public String saveLoanTracking(@ModelAttribute("localtrack")LoanApplicationUtil loanTrackUtil, Model model, HttpSession session,HttpServletRequest request) throws ParseException {
+		if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
+		
 		LoanSchedule ls=new LoanSchedule();
 		LoanApplication loanRequest = new LoanApplication();
 		loanRequest.setAppNo(loanTrackUtil.getAppNo());

@@ -96,6 +96,10 @@ public class LoanApprovalController {
 	
 	@GetMapping(value = { "/viewLoanRequest/{id}" })
 	public String viewLoanRequest(@PathVariable("id") String id, Model model, HttpSession session) {
+		
+		if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
 		List<Employee> em = employeeService.getAllEmployees();
 		model.addAttribute("listEmployee", em);
 		List<Loan> listLoan = loanMaterService.getAllLoans();

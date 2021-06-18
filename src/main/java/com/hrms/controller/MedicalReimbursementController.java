@@ -71,7 +71,9 @@ public class MedicalReimbursementController {
 	
 	@PostMapping("/saveMedicalReimbursement")
 	String saveMedicalReimbursement(@ModelAttribute("medicalReimbursement") MedicalReimbursementUtil medicalReimbursement, Model model,HttpSession session,HttpServletRequest request){
-		
+		if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
 		 MedicalReimbursement m2=new MedicalReimbursement();
 		 MedicalReimbursementDetail m4=new MedicalReimbursementDetail();
 		 Employee emp=new Employee();
