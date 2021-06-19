@@ -57,7 +57,7 @@ h5.tittle-w3l span {
 						<div class="col-12">
 							<div class="card">
 								<div class="card-header">
-									<h5 class="card-title"style="text-decoration: underline;">Skill Category </h5>
+									<h5 class="card-title"style="text-decoration: underline;">Skill Category Master  </h5>
 								   <div class="alert-outline">
 									<div th:if="${message}" th:text="${message}" style="color: red">
 									</div> 
@@ -100,12 +100,12 @@ h5.tittle-w3l span {
 										<div class="form-group">
 										   <label class="form-label"> Skill Parameter Code </label>
 										   <label style="color: red">*</label>
-											 <input type="text" class="form-control "  id=" skillParaCode"name="skillParaCode"required aria-required="true">
+											 <input type="text" class="form-control " maxlength="10" id=" skillParaCode"name="skillParaCode"required aria-required="true">
 										</div>
 										<div class="form-group">
 										   <label class="form-label"> Skill Parameter  Description</label>
 										   <label style="color: red">*</label>
-											 <input type="text" class="form-control"  id="skillParaDes" name="skillParaDes" required aria-required="true">
+											 <input type="text" class="form-control" maxlength="50" id="skillParaDes" name="skillParaDes" required aria-required="true">
 										</div>
 										
 										<div class="form-group">
