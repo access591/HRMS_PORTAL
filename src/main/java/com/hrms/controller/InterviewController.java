@@ -28,7 +28,7 @@ import com.hrms.service.ApplicantInfoService;
 import com.hrms.service.DesignationService;
 import com.hrms.service.InterviewMasterService;
 import com.hrms.service.ModuleService;
-import com.hrms.util.InterviewForm;
+import com.hrms.util.InterViewForm;
 
 @Controller
 public class InterviewController {
@@ -69,36 +69,16 @@ public class InterviewController {
 		if(session.getAttribute("username")==null) {
 			return "redirect:" + "./";
 		}
-		
-		
-		
-		
-		List<ApplicantInfo> listApplicantInfo1 = applicantInfoService.getAllApplicantInfo();
-		List<ApplicantInfo> listApplicantInfo = new ArrayList<>();
-		for (int i = 0; i < listApplicantInfo1.size(); i++) {
-			
-			if (listApplicantInfo1.get(i).getInterStatus() == null) {
-				
-				
-			}
 
-			else if (listApplicantInfo1.get(i).getInterStatus().length() == 0) {
-				
-				
+		List<ApplicantInfo> listApplicantInfo = applicantInfoService.findApplicantInfoStatusForward();
 
-			} else {
-
-				if (listApplicantInfo1.get(i).getInterStatus().startsWith("F")) {
-					listApplicantInfo.add(listApplicantInfo1.get(i));
-				}
-			}
-
-		}
+		
 		if (listApplicantInfo != null) {
 			model.addAttribute("listApplicantInfo", listApplicantInfo);
 		}
+		
 		List<InterviewMaster> im = new ArrayList<>();
-		InterviewForm form = new InterviewForm();
+		InterViewForm form = new InterViewForm();
 		form.setInterviewForm(im);
 		model.addAttribute("interviewMaster", form);
 
@@ -108,7 +88,7 @@ public class InterviewController {
 	}
 
 	@PostMapping("addInterviewDetail")
-	public String addInterviewDetails(@ModelAttribute("interviewMaster") InterviewForm form, HttpSession session) {
+	public String addInterviewDetails(@ModelAttribute("interviewMaster") InterViewForm form, HttpSession session) {
 
 		if(session.getAttribute("username")==null) {
 			return "redirect:" + "./";
