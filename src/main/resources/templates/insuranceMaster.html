@@ -64,26 +64,34 @@ body {
 												<div class="form-group">
 											<label class="form-label">Address1 </label>
 											<label style="color: red">*</label>
-											 <input type="text" class="form-control" id="add1" title="add1" name="add1"  maxlength="40"  pattern="^[a-zA-Z\s]*$" required aria-required="true">
+											 <input type="text" class="form-control" id="add1" title="add1" name="add1"  maxlength="50"  required aria-required="true">
 										      </div>
 											
 											<div class="form-group">
-											<label class="form-label">City Code </label>
+											<label class="form-label">City Name </label>
 											<label style="color: red">*</label>
-											 <input type="text" class="form-control" id="cityCode" title="cityCode" name="cityCode"  maxlength="40"  pattern="\d{1,10}" required aria-required="true">
+											
+										       <select
+														class="form-control required" name="cityCode" title="City" id="cityCode"onchange="myFunctionCity()">
+															<option value="">Select City</option>
+														<option th:each="lc :${listCity}" th:value="${lc.getCityCode()}" th:text="${lc.getCityName()}">Select  City</option>
+													
+													 </select> 
+										     
+										     
 										      </div>
 											
 											
 									   <div class="form-group">
 											<label class="form-label">Phone </label>
 											<label style="color: red">*</label>
-											 <input type="text" class="form-control" id="phone" title="phoneNo" name="phoneNo"  maxlength="40"  pattern="\d{1,10}" required aria-required="true">
+											 <input type="text" class="form-control" id="phone" title="phoneNo" name="phoneNo"  maxlength="10"  pattern="\d{1,10}" required aria-required="true">
 										      </div>
 										      
 										  <div class="form-group">
 											<label class="form-label">Email </label>
 											<label style="color: red">*</label>
-											 <input type="text" class="form-control" id="email" title="email" name="email"  maxlength="40"  pattern="^[a-zA-Z\s]*$" required aria-required="true">
+											 <input type="text" class="form-control" id="email" title="email" name="email"  maxlength="45"  required aria-required="true">
 										      </div>
 											
 										 <div class="form-group">
@@ -100,13 +108,13 @@ body {
 											<div class="form-group">
 											<label class="form-label">Name </label>
 											<label style="color: red">*</label>
-											 <input type="text" class="form-control" id="name" title="name" name="name"  maxlength="40"  pattern="^[a-zA-Z\s]*$" required aria-required="true">
+											 <input type="text" class="form-control" id="name" title="name" name="name"  maxlength="50"  pattern="^[a-zA-Z\s]*$" required aria-required="true">
 										</div>
 										
 										<div class="form-group">
 											<label class="form-label">Address2 </label>
 											<label style="color: red">*</label>
-											 <input type="text" class="form-control" id="add2" title="add2" name="add2"  maxlength="40"  pattern="^[a-zA-Z\s]*$" required aria-required="true">
+											 <input type="text" class="form-control" id="add2" title="add2" name="add2"  maxlength="100"  pattern="^[a-zA-Z\s]*$" required aria-required="true">
 										      </div>
 										      
 										      	<div class="form-group">

@@ -6,6 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "M_INSURANCE")
@@ -21,42 +22,43 @@ public class Insurance implements Serializable {
 	 */
 
 @Id
+@Size(max = 15)
 @Column(name = "INS_CODE")
 private String 	insCode;
-
+@Size(max = 50)
 @Column(name = "NAME")
 private String name;
-
+@Size(max =50)
 @Column(name = "ADD1")
 private String add1;
-
+@Size(max =100)
 @Column(name = "ADD2")
 private String add2;
-
+@Size(max = 15)
 @Column(name = "CITY_CODE")
 private String cityCode;
-
+@Size(max = 50)
 @Column(name = "CITY_DESC")
 private String cityDesc;
-
+@Size(max = 10)
 @Column(name = "PHONE")
 private String phoneNo;
-
+@Size(max = 20)
 @Column(name = "FAX")
 private String fax;
-
+@Size(max = 45)
 @Column(name = "EMAIL")
 private String email;
-
+@Size(max =1)
 @Column(name = "ACTIVE_YN")
 private String active;
-
+@Size(max =50)
 @Column(name = "INS_BY",updatable = false)
 private String insBy;
 
 @Column(name = "INS_DATE",updatable = false)
 private Date insDate =new Date();
-
+@Size(max = 50)
 @Column(name = "UPD_BY",insertable = false)
 private String updBy;
 
