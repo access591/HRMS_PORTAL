@@ -46,7 +46,7 @@ body {
 						<div class="col-12">
 							<div class="card">
 								<div class="card-header">
-									<h5 class="card-title"> Create Insurance Master</h5>
+									<h5 class="card-title"style="text-decoration: underline;">  Insurance Master</h5>
 
 								</div>
 								<div class="card-body">
@@ -66,26 +66,32 @@ body {
 												<div class="form-group">
 											<label class="form-label">Address1 </label>
 											<label style="color: red">*</label>
-											 <input type="text" class="form-control" id="add1" title="add1" name="add1"th:value="${insuranceEdit.add1}"  maxlength="40"  pattern="^[a-zA-Z\s]*$" required aria-required="true">
+											 <input type="text" class="form-control" id="add1" title="add1" name="add1"th:value="${insuranceEdit.add1}"  maxlength="50"  pattern="^[a-zA-Z\s]*$" required aria-required="true">
 										      </div>
 											
 											<div class="form-group">
-											<label class="form-label">City Code </label>
+											<label class="form-label">City Name </label>
 											<label style="color: red">*</label>
-											 <input type="text" class="form-control" id="cityCode" title="cityCode" name="cityCode" th:value="${insuranceEdit.cityCode}" maxlength="40"  pattern="\d{1,10}" required aria-required="true">
+											
+										      <select
+														class="form-control required" name="cityCode" id="cityCode">
+															<option value="">Select City</option>
+														<option th:each="lc :${listCity}" th:value="${lc.getCityCode()}" th:text="${lc.getCityName()}"th:field="${insuranceEdit.cityCode}"></option>
+													
+													 </select> 
 										      </div>
 											
 											
 									   <div class="form-group">
 											<label class="form-label">Phone </label>
 											<label style="color: red">*</label>
-											 <input type="text" class="form-control" id="phone" title="phoneNo" name="phoneNo"  maxlength="40" th:value="${insuranceEdit.phoneNo}" pattern="\d{1,10}" required aria-required="true">
+											 <input type="text" class="form-control" id="phone" title="phoneNo" name="phoneNo"  maxlength="10" th:value="${insuranceEdit.phoneNo}" pattern="\d{1,10}" required aria-required="true">
 										      </div>
 										      
 										  <div class="form-group">
 											<label class="form-label">Email </label>
 											<label style="color: red">*</label>
-											 <input type="text" class="form-control" id="email" title="email" name="email"  maxlength="40"th:value="${insuranceEdit.email}"  pattern="^[a-zA-Z\s]*$" required aria-required="true">
+											 <input type="text" class="form-control" id="email" title="email" name="email"  maxlength="45"th:value="${insuranceEdit.email}"   required aria-required="true">
 										      </div>
 											
 									    <div class="form-group">
