@@ -44,7 +44,8 @@ body {
 						<div class="col-12">
 							<div class="card">
 								<div class="card-header">
-									<h5 class="card-title"style="text-decoration: underline;">Employee Requisition Approval</h5>
+									<h5 class="card-title" style="text-decoration: underline;">Employee
+										Requisition Approval</h5>
 									<div class="alert-outline">
 										<div th:if="${message}" th:text="${message}"
 											style="color: red"></div>
@@ -55,7 +56,18 @@ body {
 										<div class="card">
 											<div class="card-header"></div>
 											<div class="card-body">
-												
+
+												<div class="row">
+													<div th:if="${session.message}"
+														class="alert alert-primary alert-dismissible fade show">
+														<p class="text-center"
+															th:text="${session.message.content}"></p>
+														<button type="button" class="close" data-dismiss="alert">&times;</button>
+														<th:block th:text="${#session.removeAttribute('message')}"></th:block>
+
+													</div>
+												</div>
+
 												<table id="datatables-buttons"
 													class="table table-striped display" style="width: 100%"
 													aria-describedby="datatables-buttons">
@@ -63,7 +75,7 @@ body {
 														<tr>
 															<th>Employee Req Code</th>
 															<th>Requisition File Date</th>
-															
+
 															<th>Department Name</th>
 															<th>Requisition Priority</th>
 
@@ -75,90 +87,101 @@ body {
 														</tr>
 													</thead>
 													<tbody>
-													
-													<tr th:each="commonUtil : ${listCommonUtil} ">
+
+														<tr th:each="commonUtil : ${listCommonUtil} ">
 															<td th:text="${commonUtil.reqCode}">1</td>
 															<td th:text="${commonUtil.reqDate}"></td>
-															
+
 															<td th:text="${commonUtil.departmet.deptName}"></td>
-															
+
 
 															<td th:text="${commonUtil.reqPriority}"></td>
-															<td th:text="${commonUtil.reqTill}">
-															</td>
+															<td th:text="${commonUtil.reqTill}"></td>
 
 															<td th:if="${commonUtil.status == 'Y'}">
 																<div class="dropdown show">
-																  <a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-																   Approved
-																  </a>
-																
-																  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-																    <a class="dropdown-item" th:href="@{approveRequisition/{id}/{requisitionStatus}/(id=${commonUtil.reqCode},requisitionStatus=${'Y'})}">Approve</a>
-																    <a class="dropdown-item" th:href="@{approveRequisition/{id}/{requisitionStatus}/(id=${commonUtil.reqCode},requisitionStatus=${'C'})}">Cancel</a>
-																    
-																  </div>
+																	<a class="btn btn-primary dropdown-toggle" href="#"
+																		role="button" id="dropdownMenuLink"
+																		data-toggle="dropdown" aria-haspopup="true"
+																		aria-expanded="false"> Approved </a>
+
+																	<div class="dropdown-menu"
+																		aria-labelledby="dropdownMenuLink">
+																		<a class="dropdown-item"
+																			th:href="@{approveRequisition/{id}/{requisitionStatus}/(id=${commonUtil.reqCode},requisitionStatus=${'Y'})}">Approve</a>
+																		<a class="dropdown-item"
+																			th:href="@{approveRequisition/{id}/{requisitionStatus}/(id=${commonUtil.reqCode},requisitionStatus=${'C'})}">Cancel</a>
+
+																	</div>
 																</div>
 															</td>
-															
+
 															<td th:if="${commonUtil.status == 'N'}">
 																<div class="dropdown show">
-																  <a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-																    &nbsp &nbspAction&nbsp &nbsp
-																  </a>
-																
-																  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-																    <a class="dropdown-item" th:href="@{approveRequisition/{id}/{requisitionStatus}/(id=${commonUtil.reqCode},requisitionStatus=${'Y'})}">Approve</a>
-																    <a class="dropdown-item" th:href="@{approveRequisition/{id}/{requisitionStatus}/(id=${commonUtil.reqCode},requisitionStatus=${'C'})}">Cancel</a>
-																    
-																  </div>
+																	<a class="btn btn-primary dropdown-toggle" href="#"
+																		role="button" id="dropdownMenuLink"
+																		data-toggle="dropdown" aria-haspopup="true"
+																		aria-expanded="false"> &nbsp &nbspAction&nbsp
+																		&nbsp </a>
+
+																	<div class="dropdown-menu"
+																		aria-labelledby="dropdownMenuLink">
+																		<a class="dropdown-item"
+																			th:href="@{approveRequisition/{id}/{requisitionStatus}/(id=${commonUtil.reqCode},requisitionStatus=${'Y'})}">Approve</a>
+																		<a class="dropdown-item"
+																			th:href="@{approveRequisition/{id}/{requisitionStatus}/(id=${commonUtil.reqCode},requisitionStatus=${'C'})}">Cancel</a>
+
+																	</div>
 																</div>
 															</td>
-															
+
 															<td th:if="${commonUtil.status == 'C'}">
 																<div class="dropdown show">
-																  <a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-																    &nbsp &nbspCancel &nbsp &nbsp
-																  </a>
-																
-																  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-																    <a class="dropdown-item" th:href="@{approveRequisition/{id}/{requisitionStatus}/(id=${commonUtil.reqCode},requisitionStatus=${'Y'})}">Approve</a>
-																    <a class="dropdown-item" th:href="@{approveRequisition/{id}/{requisitionStatus}/(id=${commonUtil.reqCode},requisitionStatus=${'C'})}">Cancel</a>
-																    
-																  </div>
+																	<a class="btn btn-primary dropdown-toggle" href="#"
+																		role="button" id="dropdownMenuLink"
+																		data-toggle="dropdown" aria-haspopup="true"
+																		aria-expanded="false"> &nbsp &nbspCancel &nbsp
+																		&nbsp </a>
+
+																	<div class="dropdown-menu"
+																		aria-labelledby="dropdownMenuLink">
+																		<a class="dropdown-item"
+																			th:href="@{approveRequisition/{id}/{requisitionStatus}/(id=${commonUtil.reqCode},requisitionStatus=${'Y'})}">Approve</a>
+																		<a class="dropdown-item"
+																			th:href="@{approveRequisition/{id}/{requisitionStatus}/(id=${commonUtil.reqCode},requisitionStatus=${'C'})}">Cancel</a>
+
+																	</div>
 																</div>
 															</td>
-															
-															<td>
-															
-															
 
-															 <a th:href="@{viewRequisition/{id}(id=${commonUtil.reqCode})}" class="btn btn-primary"><em class="fa fa-eye"></em></a>
-													
-															<!-- <a th:href="@{approveRequisition/{id}/(id=${commonUtil.reqCode})}" class="btn btn-primary"><em class="fa fa-check"></em></a> -->
+															<td><a
+																th:href="@{viewRequisition/{id}(id=${commonUtil.reqCode})}"
+																class="btn btn-primary"><em class="fa fa-eye"></em></a>
+
+																
 															</td>
 														</tr>
-													
-														
+
+
 
 													</tbody>
-													
+
 
 												</table>
-												
+
 											</div>
-											
+
 										</div>
 									</div>
 								</div>
-								
-								
-								
 
+
+
+
+							</div>
 						</div>
 					</div>
-					</div>
-					</div>
+				</div>
 			</main>
 
 			<footer class="footer">

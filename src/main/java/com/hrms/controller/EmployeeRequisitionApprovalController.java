@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import com.hrms.ImageUtil;
+import com.hrms.helper.Message1;
 import com.hrms.model.CommonUtil;
 import com.hrms.model.Department;
 import com.hrms.model.EmployeeRequisition;
@@ -84,7 +85,7 @@ public class EmployeeRequisitionApprovalController {
 			model.addAttribute("approved", approvalReq);
 		}
 		
-		session.setAttribute("imgUtil", new ImageUtil());
+		//session.setAttribute("imgUtil", new ImageUtil());
 		return "EmployeeRequisitionApproval"; 
 		
 		
@@ -98,11 +99,21 @@ public class EmployeeRequisitionApprovalController {
 		if(session.getAttribute("username")==null) {
 			return "redirect:" + "./";
 		}
+		try {
+			employeeRequisitionService.approvedByReqCodeAndStatus(reqCode,approvalStatus);
+			
+			if(approvalStatus.equals("Y")) {
+				session.setAttribute("message",new Message1("Employee Requisition has been Approved","alert-primary"));
+			}else if(approvalStatus.equals("C")) {
+				session.setAttribute("message",new Message1("Employee Requisition has been Canceled","alert-primary"));
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 		
 		
 		
 		
-		employeeRequisitionService.approvedByReqCodeAndStatus(reqCode,approvalStatus);
 		return "redirect:/employeeRequisitionApproval";
 	}
 	
