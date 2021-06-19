@@ -127,7 +127,7 @@ public class EmployeeRequisitionController {
 			
 			for(int i=0;i<employeeRequisition.getEmployeRequisitionDetail().size();i++) {
 				EmployeeRequisitionDetail e = new EmployeeRequisitionDetail();
-				e = employeeRequisition.getEmployeRequisitionDetail().get(i);
+				
 				e.setReqDate(employeeRequisition.getReqDate());
 				e.setEmployeeRequisition(employeeRequisition);
 				re.add(e);	

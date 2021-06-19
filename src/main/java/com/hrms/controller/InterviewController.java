@@ -71,7 +71,7 @@ public class InterviewController {
 		}
 		
 		
-		session.setAttribute("imgUtil", new ImageUtil());
+		
 		
 		List<ApplicantInfo> listApplicantInfo1 = applicantInfoService.getAllApplicantInfo();
 		List<ApplicantInfo> listApplicantInfo = new ArrayList<>();

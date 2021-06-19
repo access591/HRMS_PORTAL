@@ -40,7 +40,7 @@ public class AttendenceReport {
 	private static final String PRAGMA = "no-store";
 	private static final String CONTENT_TYPE = "application/pdf";
 
-	public List<?> attendenceMontlyReport(HttpServletResponse response, HttpServletRequest request, List<?> sourceData,
+	public void attendenceMontlyReport(HttpServletResponse response, HttpServletRequest request, List<?> sourceData,
 			Date fromDate, Date toDate, String empCode, String deptCode) throws IOException {
 
 		String reportFileName = "AttendanceRegMonthly"; // Parameter1
@@ -56,7 +56,7 @@ public class AttendenceReport {
 			sourceFileName = request.getSession().getServletContext().getRealPath(RESOURCES2 + reportFileName + JASPER);
 			JRBeanCollectionDataSource beanColDataSource = new JRBeanCollectionDataSource(sourceData);
 
-			HashMap<String, Object> map = new HashMap<String, Object>();
+			HashMap<String, Object> map = new HashMap<>();
 
 			map.put("Parameter1", beanColDataSource);
 
@@ -84,11 +84,11 @@ public class AttendenceReport {
 		} catch (JRException e) {
 			e.printStackTrace();
 		}
-		return null;
+		
 
 	}
 
-	public List<?> createAttendenceReportDatewise(HttpServletResponse response, HttpServletRequest request,
+	public void createAttendenceReportDatewise(HttpServletResponse response, HttpServletRequest request,
 			List<?> sourceData, Date fromDate, Date toDate) throws IOException {
 
 		String reportFileName = "AttendenceReportDatewise"; // Parameter1
@@ -105,7 +105,7 @@ public class AttendenceReport {
 			sourceFileName = request.getSession().getServletContext().getRealPath(RESOURCES2 + reportFileName + JASPER);
 			JRBeanCollectionDataSource beanColDataSource = new JRBeanCollectionDataSource(sourceData);
 
-			Map<String, Object> parameters = new HashMap<String, Object>();
+			Map<String, Object> parameters = new HashMap<>();
 
 			parameters.put("Parameter1", beanColDataSource);
 
@@ -133,11 +133,11 @@ public class AttendenceReport {
 			e.printStackTrace();
 		}
 
-		return null;
+		
 
 	}
 
-	public List<?> createOvertimeRegDatewiseReport(HttpServletResponse response, HttpServletRequest request,
+	public void createOvertimeRegDatewiseReport(HttpServletResponse response, HttpServletRequest request,
 			List<?> sourceData) throws IOException {
 
 		String reportFileName = "OvertimeDateWise"; // Parameter1
@@ -151,7 +151,7 @@ public class AttendenceReport {
 			sourceFileName = request.getSession().getServletContext().getRealPath(RESOURCES2 + reportFileName + JASPER);
 			JRBeanCollectionDataSource beanColDataSource = new JRBeanCollectionDataSource(sourceData);
 
-			Map<String, Object> parameters = new HashMap<String, Object>();
+			Map<String, Object> parameters = new HashMap<>();
 
 			parameters.put("Parameter1", beanColDataSource);
 
@@ -176,11 +176,11 @@ public class AttendenceReport {
 			e.printStackTrace();
 		}
 
-		return null;
+		
 
 	}
 
-	public List<?> createOvertimeMonthlyReport(HttpServletResponse response, HttpServletRequest request,
+	public void createOvertimeMonthlyReport(HttpServletResponse response, HttpServletRequest request,
 			List<EmpMonOvertime> sourceData) throws IOException {
 
 		String reportFileName = "OvertimeMonthly"; // Parameter1
@@ -196,7 +196,7 @@ public class AttendenceReport {
 			sourceFileName = request.getSession().getServletContext().getRealPath(RESOURCES2 + reportFileName + JASPER);
 			JRBeanCollectionDataSource beanColDataSource = new JRBeanCollectionDataSource(listData);
 
-			HashMap<String, Object> map = new HashMap<String, Object>();
+			HashMap<String, Object> map = new HashMap<>();
 
 			map.put("Parameter1", beanColDataSource);
 
@@ -220,7 +220,7 @@ public class AttendenceReport {
 		} catch (JRException e) {
 			e.printStackTrace();
 		}
-		return null;
+		
 
 	}
 
@@ -230,7 +230,7 @@ public class AttendenceReport {
 
 	public List<OvertimeMontReportUtil> setValue(List<EmpMonOvertime> sourceData) {
 
-		List<OvertimeMontReportUtil> listOvertimeMontReportUtil = new ArrayList<OvertimeMontReportUtil>();
+		List<OvertimeMontReportUtil> listOvertimeMontReportUtil = new ArrayList<>();
 
 		for (int i = 0; i < sourceData.size(); i++) {
 

@@ -2,7 +2,6 @@ package com.hrms.reports;
 
 import java.io.IOException;
 import java.sql.Date;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,7 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Component;
 
 import com.hrms.model.AttendenceRegister;
-import com.hrms.model.LeaveRequest;
 
 import net.sf.jasperreports.engine.JREmptyDataSource;
 import net.sf.jasperreports.engine.JRException;
@@ -28,7 +26,7 @@ import net.sf.jasperreports.engine.util.JRLoader;
 @Component
 public class AbsentiReport {
 
-	public List<?> createAbsentiReport(HttpServletResponse response, HttpServletRequest request, 
+	public void createAbsentiReport(HttpServletResponse response, HttpServletRequest request, 
 			List<AttendenceRegister> sourceData,Date from,Date to,String deptName) throws IOException {
 
 		String reportFileName = "absentism"; // Parameter1
@@ -45,7 +43,7 @@ public class AbsentiReport {
 					.getRealPath("/resources/" + reportFileName + ".jasper");
 			JRBeanCollectionDataSource beanColDataSource = new JRBeanCollectionDataSource(sourceData);
 
-			Map<String, Object> parameters = new HashMap<String, Object>();
+			Map<String, Object> parameters = new HashMap<>();
 
 			parameters.put("Parameter1", beanColDataSource);
 			parameters.put("deptName", deptName1);
@@ -71,9 +69,6 @@ public class AbsentiReport {
 		} catch (JRException e) {
 			e.printStackTrace();
 		}
-
-		return Collections.<Integer>emptyList();
-
 
 	}
 }
