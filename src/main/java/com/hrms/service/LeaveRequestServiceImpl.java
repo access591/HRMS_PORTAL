@@ -40,28 +40,29 @@ public class LeaveRequestServiceImpl implements LeaveRequestService {
 
 	@Override
 	public List<LeaveRequest> getAllLeaves() {
-		// System.out.println("DAO MODEL :
-		// "+this.leaveRequestDao.findAll().get(1).getEmpName());
-		System.out.println("hii getAll leaves ");
+		
+		Session session = sessionFactory.openSession();
+		Transaction tx = null;
+		List<LeaveRequest> result = null;
+		
 		try {
-
-			Session session = sessionFactory.openSession();
+			tx = session.beginTransaction();
+			
 			Query<LeaveRequest> query = session.createQuery(
 					"from LeaveRequest lr inner join fetch lr.employee e" + " inner join fetch lr.leave lv ",
 					LeaveRequest.class);
 
-			List<LeaveRequest> leaveRequest = query.getResultList();
-
-			System.out.println("hii getAll leaves " + leaveRequest.size());
-
-			return leaveRequest;
+			result = query.getResultList();
+			tx.commit();
 
 		} catch (Exception e) {
 			
 			e.printStackTrace();
+		}finally {
+			session.close();
 		}
-		return null;
-		// return this.leaveRequestDao.findAll();
+		return result;
+		
 	}
 
 	@Override
@@ -119,8 +120,13 @@ public class LeaveRequestServiceImpl implements LeaveRequestService {
 	@Override
 	public List<LeaveRequest> findAllApproveLeaveRequestBetweenDate(Date fromDate, Date toDate) {
 		
+		Session session = sessionFactory.openSession();
+		Transaction tx = null;
+		List<LeaveRequest> result = null;
+		
 		try {
-			Session session = sessionFactory.openSession();
+			tx = session.beginTransaction();
+			
 			Query<LeaveRequest> query = session.createQuery("from LeaveRequest l "
 					+ "where l.fromDate>=:fromDate and l.toDate<=:toDate and"
 					+ " l.status=:status", LeaveRequest.class);
@@ -128,20 +134,27 @@ public class LeaveRequestServiceImpl implements LeaveRequestService {
 			query.setParameter("toDate", toDate);
 			query.setParameter("status", "Y");
 			
-			List<LeaveRequest> result = query.getResultList();
-			System.out.println("leave request size====>"+result.size());
-			return result;
+			result = query.getResultList();
+			tx.commit();
 			
 		}catch(Exception e) {
 			e.printStackTrace();
+		}finally {
+			session.close();
 		}
-		return null;
+		return result;
 	}
 
 	@Override
 	public List<LeaveRequest> findApproveLeaveRequestByEmpBetweenDate(Date fromDate, Date toDate, String empCode) {
+		
+		Session session = sessionFactory.openSession();
+		Transaction tx = null;
+		List<LeaveRequest> result = null;
+		
 		try {
-			Session session = sessionFactory.openSession();
+			tx = session.beginTransaction();
+			
 			Query<LeaveRequest> query = session.createQuery("from LeaveRequest l left join fetch "
 					+ "l.employee e "
 					+ "where l.fromDate>=:fromDate and l.toDate<=:toDate and"
@@ -151,20 +164,25 @@ public class LeaveRequestServiceImpl implements LeaveRequestService {
 			query.setParameter("status", "Y");
 			query.setParameter("empCode", empCode);
 			
-			List<LeaveRequest> result = query.getResultList();
-			System.out.println("leave request size====>"+result.size());
-			return result;
+			result = query.getResultList();
+			
+			tx.commit();
 			
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
-		return null;
+		return result;
 	}
 
 	@Override
 	public List<LeaveRequest> findAllApproveLeaveRequestByDeptBetweenDate(Date fromDate, Date toDate, String deptCode) {
+		
+		Session session = sessionFactory.openSession();
+		Transaction tx = null;
+		List<LeaveRequest> result = null;
+		
 		try {
-			Session session = sessionFactory.openSession();
+			tx = session.beginTransaction();
 			Query<LeaveRequest> query = session.createQuery("from LeaveRequest l left join fetch "
 					+ "l.department d "
 					+ "where l.fromDate>=:fromDate and l.toDate<=:toDate and"
@@ -174,21 +192,23 @@ public class LeaveRequestServiceImpl implements LeaveRequestService {
 			query.setParameter("status", "Y");
 			query.setParameter("deptCode", deptCode);
 			
-			List<LeaveRequest> result = query.getResultList();
-			System.out.println("leave request size====>"+result.size());
-			return result;
-			
+			result = query.getResultList();
+			tx.commit();
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
-		return null;
+		return result;
 	}
 
 	@Override
 	public List<LeaveRequest> findAllLeaveRequestBetweenDate(Date fromDate, Date toDate) {
+		
+		Session session = sessionFactory.openSession();
+		Transaction tx = null;
+		List<LeaveRequest> result = null;
+		
 		try {
-
-			Session session = sessionFactory.openSession();
+			tx = session.beginTransaction();
 			Query<LeaveRequest> query = session.createQuery(
 					"from LeaveRequest lr inner join fetch lr.employee e" + " inner join fetch lr.leave lv "
 							+ "where lr.fromDate>=:fromDate and lr.toDate<:toDate",
@@ -197,24 +217,28 @@ public class LeaveRequestServiceImpl implements LeaveRequestService {
 			query.setParameter("fromDate", fromDate);
 			query.setParameter("toDate", toDate);
 
-			List<LeaveRequest> leaveRequest = query.getResultList();
-
-			System.out.println("hii getAll leaves " + leaveRequest.size());
-
-			return leaveRequest;
+			result = query.getResultList();
+			tx.commit();
 
 		} catch (Exception e) {
 			System.out.println("error occured in gt All leaves ");
 			e.printStackTrace();
+		}finally {
+			session.close();
 		}
-		return null;
+		return result;
 	}
 
 	@Override
 	public List<LeaveRequest> findAllLeaveRequestByDeptBetweenDate(Date fromDate, Date toDate, String deptCode) {
-		try {
+		
 
-			Session session = sessionFactory.openSession();
+		Session session = sessionFactory.openSession();
+		Transaction tx = null;
+		List<LeaveRequest> result = null;
+		
+		try {
+			tx = session.beginTransaction();
 			Query<LeaveRequest> query = session.createQuery(
 					"from LeaveRequest lr inner join fetch lr.employee e" + " inner join fetch lr.department d "
 							+ "where lr.fromDate>=:fromDate and lr.toDate<:toDate and d.departmentCode = :deptCode",
@@ -223,24 +247,28 @@ public class LeaveRequestServiceImpl implements LeaveRequestService {
 			query.setParameter("toDate", toDate);
 			query.setParameter("deptCode", deptCode);
 
-			List<LeaveRequest> leaveRequest = query.getResultList();
-
-			System.out.println("hii getAll leaves " + leaveRequest.size());
-
-			return leaveRequest;
+			result = query.getResultList();
+			tx.commit();
 
 		} catch (Exception e) {
 			
 			e.printStackTrace();
+		}finally {
+			session.close();
 		}
-		return null;
+		return result;
 
 	}
 
 	@Override
 	public List<LeaveRequest> findAllLeaveRequestbyEmpBetweenDate(Date fromDate, Date toDate, String empCode) {
+		
+		Session session = sessionFactory.openSession();
+		Transaction tx = null;
+		List<LeaveRequest> result = null;
+		
 		try {
-			Session session = sessionFactory.openSession();
+			tx = session.beginTransaction();
 			Query<LeaveRequest> query = session.createQuery("from LeaveRequest l left join fetch "
 					+ "l.employee e "
 					+ "where l.fromDate>=:fromDate and l.toDate<=:toDate and"
@@ -249,14 +277,13 @@ public class LeaveRequestServiceImpl implements LeaveRequestService {
 			query.setParameter("toDate", toDate);
 			query.setParameter("empCode", empCode);
 			
-			List<LeaveRequest> result = query.getResultList();
-			System.out.println("leave request size====>"+result.size());
-			return result;
+			result = query.getResultList();
+			tx.commit();
 			
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
-		return null;
+		return result;
 	}
 
 }

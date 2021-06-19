@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hrms.model.Department;
-import com.hrms.ImageUtil;
+
 import com.hrms.helper.Message1;
 import com.hrms.model.LeaveRequest;
 import com.hrms.model.MenuModule;
@@ -125,7 +125,6 @@ public class LeaveApprovalController {
 			
 			leaveRequestService.updateLeaveRequest(leaveRequest);  
 			
-			//session.setAttribute("message",new Message1("Data has been Successfully added","alert-primary"));
 			
 		}catch(Exception e) {
 			e.printStackTrace();
