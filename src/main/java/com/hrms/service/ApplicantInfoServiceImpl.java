@@ -150,6 +150,27 @@ public class ApplicantInfoServiceImpl implements ApplicantInfoService{
 		return result;
 	}
 
+	@Override
+	public List<ApplicantInfo> findApplicantInfoStatusForward() {
+		
+		Session session = sessionFactory.openSession();
+		Transaction tx = null;
+		List<ApplicantInfo> result = null;
+		
+		try {
+			tx = session.beginTransaction();
+			Query<ApplicantInfo> query = session.createQuery("from ApplicantInfo a where a.interStatus = :status", ApplicantInfo.class);
+			query.setParameter("status", "Forward");
+			result = query.getResultList();
+			tx.commit();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			session.close();
+		}
+		return result;
+	}
+
 	
 	
 	

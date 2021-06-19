@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.hrms.ImageUtil;
 import com.hrms.model.ApplicantExpDetail;
 import com.hrms.model.ApplicantInfo;
 import com.hrms.model.City;

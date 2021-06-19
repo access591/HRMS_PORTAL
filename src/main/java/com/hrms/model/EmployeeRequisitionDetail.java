@@ -22,9 +22,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 @Table(name="EPLOYEE_RQUISITION_DETAIL")
 public class EmployeeRequisitionDetail implements Serializable{
 
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = -4728476448805913732L;
 
 	@Id
@@ -89,15 +87,15 @@ public class EmployeeRequisitionDetail implements Serializable{
 
 	public EmployeeRequisitionDetail() {
 		super();
-		// TODO Auto-generated constructor stub
+		
 	}
 
-	public EmployeeRequisitionDetail(String reqCode,  String desigCode, String location, String sex,
+	public EmployeeRequisitionDetail(String location, String sex,
 			int ageFrom, int ageTo, String acadQuali, String techQuali, int experience, String vacanncyType,
 			int totalVacancy, String remarks, int minExperience, int maxExperience, String salaryFrom, String salaryTo) {
 		super();
 		
-		//this.reqDate = reqDate;
+		
 		
 		this.location = location;
 		this.sex = sex;

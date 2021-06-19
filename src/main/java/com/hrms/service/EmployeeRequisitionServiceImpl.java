@@ -22,13 +22,18 @@ public class EmployeeRequisitionServiceImpl implements EmployeeRequisitionServic
 	@Override
 	public void addEmployeeRequisition(EmployeeRequisition employeReq) {
 		Session session = sessionFactory.openSession();
-	    session.beginTransaction();
-	    employeReq.setReqCode(employeRequisitionDao.getMaxId("REQ"));
-	    session.save(employeReq);
-	    
-	    session.getTransaction().commit();
-	    session.clear();
-	    session.close();
+		Transaction tx = null;
+		
+		try {
+			tx = session.beginTransaction();
+			employeReq.setReqCode(employeRequisitionDao.getMaxId("REQ"));
+		    session.save(employeReq);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			session.close();
+		}
+		
 	}
 
 	@Override
@@ -40,15 +45,19 @@ public class EmployeeRequisitionServiceImpl implements EmployeeRequisitionServic
 	@Override
 	public EmployeeRequisition findEmployeeRequisitiondById(String reqCode) {
 		
+		Session session = sessionFactory.openSession();
+		Transaction tx = null;
 		try {
-			Session session = sessionFactory.openSession();
+			tx= session.beginTransaction();
 			Query<EmployeeRequisition> query = session.createQuery("from EmployeeRequisition e where e.reqCode = :reqCode", EmployeeRequisition.class);
 			query.setParameter("reqCode", reqCode);
 			EmployeeRequisition er = query.getSingleResult();
+			tx.commit();
 			return er;
 		}catch(Exception e) {
-			
 			e.printStackTrace();
+		}finally {
+			session.close();
 		}
 		return null;
 		
@@ -58,17 +67,23 @@ public class EmployeeRequisitionServiceImpl implements EmployeeRequisitionServic
 	public void updateEmployeeRequisition(EmployeeRequisition c) {
 		
 		Session session = sessionFactory.openSession();
+		Transaction tx = null;
 		
-		EmployeeRequisition emp = session.find(EmployeeRequisition.class, c.getReqCode());
-		emp.getEmployeRequisitionDetail().clear();
-		
-		emp.getEmployeRequisitionDetail().addAll(c.getEmployeRequisitionDetail());
-		
-		session.beginTransaction();
-		session.merge(c);
-		session.getTransaction().commit();
-		
-		
+		try {
+			tx = session.beginTransaction();
+			EmployeeRequisition emp = session.find(EmployeeRequisition.class, c.getReqCode());
+			emp.getEmployeRequisitionDetail().clear();
+			
+			emp.getEmployeRequisitionDetail().addAll(c.getEmployeRequisitionDetail());
+			session.merge(c);
+			tx.commit();
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			session.close();
+		}
+
 	}
 
 	@Override

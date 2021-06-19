@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -17,7 +16,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,7 +26,6 @@ import com.hrms.ReportUtil;
 import com.hrms.model.ApplicantInfo;
 import com.hrms.model.Category;
 import com.hrms.model.Department;
-import com.hrms.model.Designation;
 import com.hrms.model.Employee;
 import com.hrms.model.InterviewMaster;
 import com.hrms.model.CommonUtil;
@@ -77,8 +74,8 @@ public class EmployeeInformationReportController {
 	@GetMapping("/employeeInformation")
 	public String employeeInformation(Model model, HttpSession session) {
 		
-		String userCode = (String) session.getAttribute("username");
-		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
+		
+		List<MenuModule> modules = moduleService.getAllModulesList(session.getAttribute("username").toString());
 		if (modules != null) {
 			model.addAttribute("modules", modules);
 		}
@@ -102,33 +99,14 @@ public class EmployeeInformationReportController {
 		String reportName = "EmployeeDetail";
 		
 		List<Employee> listEmployee = employeeService.getAllEmployees();
-		//System.out.println("employee batch number : "+ listEmployee.get(0).getBatchYear());
+		
 		
 		System.out.println("list employee : "+ listEmployee);
 		reportUtil.allEmployeeReport(request, response, reportName, listEmployee);
 		return null;
 	}
 	
-	/*
-	 * @ResponseBody
-	 * 
-	 * @GetMapping("employeeExcel") public ResponseEntity<InputStreamResource>
-	 * empoloyeeExcelReport(HttpServletResponse response) throws IOException{
-	 * 
-	 * 
-	 * 
-	 * ByteArrayInputStream in = employeeGradationExcel.generateExcel();
-	 * 
-	 * HttpHeaders headers = new HttpHeaders(); headers.add("Content-Disposition",
-	 * "attachment ; filename=employee.xlsx");
-	 * 
-	 * 
-	 * return ResponseEntity.ok().headers(headers).body(new
-	 * InputStreamResource(in));
-	 * 
-	 * 
-	 * }
-	 */
+	
 	
 	@ResponseBody
 	@GetMapping("getEmployeeByCategory/{categoryName}")
@@ -161,9 +139,9 @@ public class EmployeeInformationReportController {
 		System.out.println("employee type : " + employeeType);
 		
 		List<Employee> listEmployee = null;
-		List<Employee> listEmployee1 = new ArrayList<Employee>();
+		List<Employee> listEmployee1 = new ArrayList<>();
 		
-		 if(categoryType.equals("") || categoryType.equals(null)) {
+		 if(categoryType.equals("") || categoryType==null) {
 				System.out.println("all employee and category ");
 				listEmployee = employeeService.getAllEmployees();
 				
@@ -173,7 +151,7 @@ public class EmployeeInformationReportController {
 		else {
 				System.out.println("else block ");
 				//all employee of particular department
-				if(employeeType.equals("") || employeeType.equals(null)) {
+				if(employeeType.equals("") || employeeType == null) {
 					System.out.println(" alll employee by category id");
 					listEmployee = employeeService.getEmployeeByCategoryCode(categoryType);
 					listEmployee1.addAll(listEmployee);
@@ -208,8 +186,8 @@ public class EmployeeInformationReportController {
 	@GetMapping("/birthAnniversary")
 	public String viewBirthAniversaryUi(Model model, HttpSession session) {
 		
-		String userCode = (String) session.getAttribute("username");
-		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
+		
+		List<MenuModule> modules = moduleService.getAllModulesList(session.getAttribute("username").toString());
 		if (modules != null) {
 			model.addAttribute("modules", modules);
 		}
@@ -234,14 +212,14 @@ public class EmployeeInformationReportController {
 		System.out.println("report type value : "+reportType);
 		System.out.println("month value : "+month);
 		
-		List<CommonUtil> em = new ArrayList<CommonUtil>();
+		List<CommonUtil> em = new ArrayList<>();
 		CommonUtil empl;
 		List<Employee> employeeList ;
 		
 		if(month.equals("All")) {
 			employeeList = employeeService.getAllEmployees();
 		}else {
-			employeeList = employeeService.findByDateOfJoiningMonth( Integer.parseInt(month.toString()));
+			employeeList = employeeService.findByDateOfJoiningMonth( Integer.parseInt(month));
 		}
 		
 		if(reportType.equals("B")) {
@@ -296,7 +274,7 @@ public class EmployeeInformationReportController {
 
 		session.setAttribute("username", session.getAttribute("username"));
 
-		return "joining_offerLetter"; //joining_offerLetter.html
+		return "joining_offerLetter"; 
 	}
 	
 	
@@ -305,7 +283,7 @@ public class EmployeeInformationReportController {
 											Model model, HttpSession session,HttpServletRequest req,
 											HttpServletResponse response) throws IOException {
 		
-		String userCode = (String) session.getAttribute("username");
+		
 
 		System.out.println("report type value : "+reportType);
 		System.out.println("employee code value : "+empCode); 
@@ -313,7 +291,7 @@ public class EmployeeInformationReportController {
 		
 		
 		try {
-			//Employee employee = employeeService.findEmployeeById(empCode);
+			
 			ApplicantInfo applicantInfo = applicantInfoService.getApplicantInfoByApplicantCode(empCode);
 			
 			String reportFileName = null;

@@ -22,8 +22,8 @@ public class EmployeePayDetailServiceImpl implements EmployeePayDetailService {
 
 	@Override
 	public List<EmployeePayDetail> getAllEmployeePayDetail() {
-		List<EmployeePayDetail> listEmployeePayDetail = empPayDetailDao.findAll();
-		return listEmployeePayDetail;
+		
+		return empPayDetailDao.findAll();
 	}
 
 	@Override

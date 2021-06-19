@@ -52,27 +52,28 @@ body {
 								<div class="card-header">
 									<h5 class="card-title" style="text-decoration: underline;">
 										Leave Request</h5>
-									
 
-										
 
-									
+
+
+
 								</div>
-								
-								
-								
-								
+
+
+
+
 								<div class="card-body">
-								
-								
-								<div class="row">
-								<div th:if="${session.message}" class="alert alert-primary alert-dismissible fade show">
-									<p class="text-center" th:text="${session.message.content}"></p>
-									<button type="button" class="close" data-dismiss="alert">&times;</button>
-									<th:block th:text="${#session.removeAttribute('message')}"></th:block>
-									 
-								</div>
-								</div>
+
+
+									<div class="row">
+										<div th:if="${session.message}"
+											class="alert alert-primary alert-dismissible fade show">
+											<p class="text-center" th:text="${session.message.content}"></p>
+											<button type="button" class="close" data-dismiss="alert">&times;</button>
+											<th:block th:text="${#session.removeAttribute('message')}"></th:block>
+
+										</div>
+									</div>
 
 									<form action="#" th:action="@{/saveLeaveRequest}"
 										th:object="${leaveRequest}" method="post">
@@ -89,7 +90,7 @@ body {
 											<div class="col-12 col-lg-6">
 												<label class="form-label">Select Employee</label> <label
 													style="color: red">*</label> <select class="form-control"
-													id="employeeDropDownLeave" onchange="leaveEmployeDisplay()" 
+													id="employeeDropDownLeave" onchange="leaveEmployeDisplay()"
 													required>
 													<option value="">Select Employee</option>
 													<option th:each="employee: ${listEmployee}"
@@ -97,7 +98,7 @@ body {
 														th:value=" ${employee.empCode}"></option>
 												</select> <input type="hidden" name="" value="" id="hiddenField">
 											</div>
-											
+
 										</div>
 
 										<div class="row">
@@ -121,7 +122,8 @@ body {
 												<div class="form-group">
 													<label> Type of Leave </label> <label style="color: red">*</label>
 													<select class="form-control select2" id="leave_type_id"
-														th:field="*{requestType}" onchange="leaveTypeFun()" required>
+														th:field="*{requestType}" onchange="leaveTypeFun()"
+														required>
 														<option value="">Select</option>
 														<option value="single">Single</option>
 														<option value="multiple">Multiple</option>
@@ -131,7 +133,8 @@ body {
 											<div class="col-12 col-lg-6">
 												<label class="form-label">Apply Date</label> <label
 													style="color: red">*</label> <input type="date"
-													class="form-control" id='applyDate' th:field="*{applyDate}" required>
+													class="form-control" id='applyDate' th:field="*{applyDate}"
+													required>
 											</div>
 										</div>
 										<div class="row">

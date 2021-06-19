@@ -2,7 +2,7 @@ package com.hrms.controller;
 
 import java.io.IOException;
 import java.sql.Date;
-import java.util.ArrayList;
+
 
 import java.util.List;
 
@@ -110,18 +110,22 @@ public class AttandanceReportController {
 			
 			
 		}
-		else if(!deptCode.equals("ALL") && empCode.equals("")) {
-			System.out.println("find data by department ");
-			List<AttendenceRegister> listAttendenceRegister = attendenceRegisterService.findAttendenceByDeptBetweenDate(deptCode, fromDate, toDate);
-			attendenceReport.attendenceMontlyReport(response, request, listAttendenceRegister,
-					fromDate,toDate,empCode,deptCode);
+		else if(!deptCode.equals("ALL")){
+			
+			if(empCode.equals("") || empCode == null) {
+				System.out.println("find data by department ");
+				List<AttendenceRegister> listAttendenceRegister = attendenceRegisterService.findAttendenceByDeptBetweenDate(deptCode, fromDate, toDate);
+				attendenceReport.attendenceMontlyReport(response, request, listAttendenceRegister,
+						fromDate,toDate,empCode,deptCode);
+			}
+			else {
+				System.out.println("find data by emp ");
+				List<AttendenceRegister> listAttendenceRegister = attendenceRegisterService.findAttendenceByEmpCodeBetweenDate(empCode, fromDate, toDate);
+				attendenceReport.attendenceMontlyReport(response, request, listAttendenceRegister,
+						fromDate,toDate,empCode,deptCode);
+			}
 		}
-		else if(!deptCode.equals("ALL") && empCode.equals("")) {
-			System.out.println("find data by emp ");
-			List<AttendenceRegister> listAttendenceRegister = attendenceRegisterService.findAttendenceByEmpCodeBetweenDate(empCode, fromDate, toDate);
-			attendenceReport.attendenceMontlyReport(response, request, listAttendenceRegister,
-					fromDate,toDate,empCode,deptCode);
-		}
+		
 		else {
 			return "redirect:AttendanceRegMothlyReport";
 		}
@@ -164,7 +168,7 @@ public class AttandanceReportController {
 		
 		if(deptCode.equals("") && empCode.equals("")) {
 			System.out.println("All record : ");
-			empCode = "ALL";
+			
 			List<AttendenceRegister> listAttendenceRegister = attendenceRegisterService
 					.findAllAttendenceBetweenDate(fromDate, toDate);
 			attendenceReport.createAttendenceReportDatewise(response, request, listAttendenceRegister,fromDate,toDate);

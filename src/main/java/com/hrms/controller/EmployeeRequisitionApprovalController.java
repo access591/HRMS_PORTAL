@@ -12,10 +12,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import com.hrms.ImageUtil;
 import com.hrms.helper.Message1;
 import com.hrms.model.CommonUtil;
-import com.hrms.model.Department;
 import com.hrms.model.EmployeeRequisition;
 import com.hrms.model.MenuModule;
 import com.hrms.service.DepartmentService;

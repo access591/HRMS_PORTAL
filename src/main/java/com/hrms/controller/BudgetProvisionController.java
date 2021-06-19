@@ -119,7 +119,7 @@ public class BudgetProvisionController {
 		if(b != null) {
 			model.addAttribute("budgetProvision", b);
 		}
-		return "editBudgetProvision"; //editBudgetProvision.html
+		return "editBudgetProvision"; 
 	}
 	
 	@PostMapping("updateBudgetProvision")
@@ -152,8 +152,7 @@ public class BudgetProvisionController {
 	@GetMapping("armsreport")
 	public String armsLicensesReport(HttpServletResponse response, HttpServletRequest request) throws IOException {
 		
-//		List<ArmsLicenseDetails> listArmsReport = armsLicenseService.armsLicenseDetailsList();
-//		armsReport.createArmsLicensesReport(response, request, listArmsReport);
+
 		return "orderIssueTracking";
 		
 	}

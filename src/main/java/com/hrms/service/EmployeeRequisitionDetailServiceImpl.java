@@ -10,7 +10,6 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.hrms.model.EmployeeRequisition;
 import com.hrms.model.EmployeeRequisitionDetail;
 import com.hrms.repository.EmployeeRequisitionDetailDao;
 
