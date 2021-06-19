@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 @Entity
 @Table(name = "M_AWARD")
 public class Award implements Serializable {
@@ -17,25 +18,27 @@ public class Award implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = -7852182075397663902L;
-	 @Id
-	 @GeneratedValue(strategy= GenerationType.IDENTITY)
-	 private Long id;
-	    @Column(name = "AWARD_NAME")
-		private String awardName;
-	    
-	    @Column(name = "ACTIVE_YN")
-		private String active;
-	    @Column(name = "INS_BY",updatable = false)
-		private String insBy;
-		
-		@Column(name = "INS_DATE",updatable = false)
-		private Date insDate =new Date();
-		
-		@Column(name = "UPD_BY",insertable = false)
-		private String updBy;
-		
-		@Column(name = "UPD_DATE",insertable = false)
-		private Date  updDate = new Date();
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	@Size(max = 100)
+	@Column(name = "AWARD_NAME")
+	private String awardName;
+	@Size(max = 1)
+	@Column(name = "ACTIVE_YN")
+	private String active;
+	@Size(max = 50)
+	@Column(name = "INS_BY", updatable = false)
+	private String insBy;
+
+	@Column(name = "INS_DATE", updatable = false)
+	private Date insDate = new Date();
+	@Size(max = 50)
+	@Column(name = "UPD_BY", insertable = false)
+	private String updBy;
+
+	@Column(name = "UPD_DATE", insertable = false)
+	private Date updDate = new Date();
 
 		public Long getId() {
 			return id;

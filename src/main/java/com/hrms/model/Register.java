@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 @Entity
 @Table(name = "M_REGISTER")
 public class Register implements Serializable {
@@ -16,19 +17,20 @@ public class Register implements Serializable {
 	 */
 	private static final long serialVersionUID = -2786344630248161291L;
 	@Id
+	@Size(max = 15)
 	@Column(name = "REG_CODE")
 	private String regCode;
-	
+	@Size(max =100)
 	@Column(name = "DESCRIPTION")
 	private String descriptionReg ;
 	
-	
+	@Size(max = 50)
     @Column(name = "INS_BY",updatable = false)
 	private String insBy;
 	
 	@Column(name = "INS_DATE",updatable = false)
 	private Date insDate =new Date();
-	
+	@Size(max = 50)
 	@Column(name = "UPD_BY",insertable = false)
 	private String updBy;
 	
@@ -36,7 +38,7 @@ public class Register implements Serializable {
 	private Date  updDate = new Date();
 	
 	
-	
+	@Size(max = 1)
 	@Column(name = "ACTIVE_YN")
 	private String active;
 	public String getRegCode() {
