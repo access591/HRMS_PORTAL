@@ -211,7 +211,18 @@ public class InterviewController {
 			return "redirect:" + "./";
 		}
 		
-		interviewMasterService.interviewFinalapproval(applicantCode, interviewCode, finalApprovalStatus);
+		try {
+			interviewMasterService.interviewFinalapproval(applicantCode, interviewCode, finalApprovalStatus);
+			
+			if(finalApprovalStatus.equals("Selected")) {
+				session.setAttribute("message",new Message1("Request has been Selected","alert-primary"));
+			}else if(finalApprovalStatus.equals("Rejected")) {
+				session.setAttribute("message",new Message1("Request has been Rejected","alert-primary"));
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
 		return "redirect:/interviewFinalSelection";
 	}
 
