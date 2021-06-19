@@ -75,7 +75,7 @@ public class EmployeeRequisitionController {
 		}
 		
 		
-		session.setAttribute("imgUtil", new ImageUtil());
+		//session.setAttribute("imgUtil", new ImageUtil());
 		String userCode = (String) session.getAttribute("username");  
 		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
 		if (modules != null) {
@@ -180,14 +180,21 @@ public class EmployeeRequisitionController {
 			return "redirect:" + "./";
 		}
 		  
-		ArrayList<EmployeeRequisitionDetail> employeeRequisitionDetail = new ArrayList<>();
-		
-		for(EmployeeRequisitionDetail eDetail : employeeRequisition.getEmployeRequisitionDetail()) {
-			eDetail.setEmployeeRequisition(employeeRequisition);
-			employeeRequisitionDetail.add(eDetail);
+		try {
+			ArrayList<EmployeeRequisitionDetail> employeeRequisitionDetail = new ArrayList<>();
+			
+			for(EmployeeRequisitionDetail eDetail : employeeRequisition.getEmployeRequisitionDetail()) {
+				eDetail.setEmployeeRequisition(employeeRequisition);
+				employeeRequisitionDetail.add(eDetail);
+			}
+			
+			this.employeeRequisitionService.updateEmployeeRequisition(employeeRequisition);
+			session.setAttribute("message",new Message1("Data has been Successfully Updated","alert-primary"));
+		}catch(Exception e) {
+			e.printStackTrace();
+			session.setAttribute("message",new Message1("Something went Wrong","alert-primary"));
 		}
 		
-		this.employeeRequisitionService.updateEmployeeRequisition(employeeRequisition);
 		return "redirect:employeeRequisition";
 	}
 	
@@ -199,7 +206,15 @@ public class EmployeeRequisitionController {
 			return "redirect:" + "./";
 		}
 		
-		employeeRequisitionService.removeEmployeeRequisition(reqCode);
+		try {
+			
+			employeeRequisitionService.removeEmployeeRequisition(reqCode);
+			session.setAttribute("message",new Message1("Record Deleted","alert-primary"));
+		}catch(Exception e) {
+			e.printStackTrace();
+			session.setAttribute("message",new Message1("Something went Wrong","alert-primary"));
+		}
+		
 		
 		
 		session.setAttribute("username", session.getAttribute("username"));
