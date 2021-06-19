@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.hrms.model.LeaveGrant;
 import com.hrms.service.LeaveGrantRegisterService;
 
 import net.sf.jasperreports.engine.JREmptyDataSource;
@@ -41,7 +40,7 @@ public class LeaveReport {
 
 //leave management report / leave request report
 
-	public List<?> leaveRequestReport(HttpServletResponse response, HttpServletRequest request, String reportFileName,
+	public void leaveRequestReport(HttpServletResponse response, HttpServletRequest request, String reportFileName,
 			List<?> listLeave, String empCode) throws IOException {
 
 		String sourceFileName = request.getSession().getServletContext()
@@ -55,7 +54,7 @@ public class LeaveReport {
 
 			JRBeanCollectionDataSource leaveRequest = new JRBeanCollectionDataSource(listLeave);
 
-			HashMap<String, Object> map = new HashMap<String, Object>();
+			HashMap<String, Object> map = new HashMap<>();
 
 			map.put("leaveRequest", leaveRequest);
 
@@ -85,7 +84,7 @@ public class LeaveReport {
 			e.printStackTrace();
 		}
 
-		return null;
+		
 
 	}
 
@@ -105,7 +104,7 @@ public class LeaveReport {
 					.getRealPath(RESOURCES2 + reportFileName + JASPER);
 			JRBeanCollectionDataSource beanColDataSource = new JRBeanCollectionDataSource(sourceData);
 
-			HashMap<String, Object> map = new HashMap<String, Object>();
+			HashMap<String, Object> map = new HashMap<>();
 
 			map.put("Parameter", beanColDataSource);// Parameter
 			map.put("activeUser", "Run By : " + activeUser);
@@ -139,8 +138,7 @@ public class LeaveReport {
 	public void leaveRegisterReport(HttpServletRequest request, HttpServletResponse response, List<?> listLeveDetail)
 			throws IOException {
 
-		System.out.println("hii in leave register util");
-
+	
 		String reportFileName = "LeaveDetailManagement";
 		String sourceFileName = request.getSession().getServletContext()
 				.getRealPath(RESOURCES + reportFileName + JRXML);
@@ -154,7 +152,7 @@ public class LeaveReport {
 					.getRealPath(RESOURCES2 + reportFileName + JASPER);
 			JRBeanCollectionDataSource beanColDataSource = new JRBeanCollectionDataSource(listLeveDetail);
 
-			HashMap<String, Object> map = new HashMap<String, Object>();
+			HashMap<String, Object> map = new HashMap<>();
 
 			map.put("ItemDataSource", beanColDataSource);
 			System.out.println("hii leave detail reports");
@@ -182,7 +180,7 @@ public class LeaveReport {
 			e.printStackTrace();
 			System.out.println("exception occured");
 		}
-		// return null;
+		
 
 	}
 

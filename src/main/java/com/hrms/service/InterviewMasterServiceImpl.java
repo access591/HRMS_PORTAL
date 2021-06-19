@@ -4,11 +4,11 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.hrms.model.EmployeeRequisition;
 import com.hrms.model.InterviewMaster;
 import com.hrms.repository.InterviewMasterDao;
 
@@ -21,11 +21,20 @@ public class InterviewMasterServiceImpl implements InterviewMasterService{
 	@Override
 	public void addInterviewMaster(InterviewMaster interviewMaster) {
 		Session session = sessionFactory.openSession();
-		interviewMaster.setInterviewCode(interviewMasterDao.getMaxId("INT"));
-		session.beginTransaction();
-		session.save(interviewMaster);
-		session.getTransaction().commit();
-		session.close();
+		Transaction tx = null;
+		
+		try {
+			tx = session.beginTransaction();
+			interviewMaster.setInterviewCode(interviewMasterDao.getMaxId("INT"));
+			session.save(interviewMaster);
+			tx.commit();
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			session.close();
+		}
+		
 		
 		
 	}
@@ -40,17 +49,21 @@ public class InterviewMasterServiceImpl implements InterviewMasterService{
 	public void interviewFinalapproval(String applicantCode, String interviewCode, String finalApprovalStatus) {
 		
 		Session session = sessionFactory.openSession();
-		session.beginTransaction();
-		InterviewMaster im = session.find(InterviewMaster.class, interviewCode);
+		Transaction tx = null;
+		try {
+			tx = session.beginTransaction();
+			InterviewMaster im = session.find(InterviewMaster.class, interviewCode);
+			im.setSelectionStatus(finalApprovalStatus);
+			
+			session.merge(im);
+			tx.commit();
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			session.close();
+		}
 
-		
-		im.setSelectionStatus(finalApprovalStatus);
-		
-		session.merge(im);
-		session.getTransaction().commit();
-		session.close();
-		
-		
 	}
 
 	@Override
@@ -61,9 +74,9 @@ public class InterviewMasterServiceImpl implements InterviewMasterService{
 			Query<InterviewMaster> query = session.createQuery("from InterviewMaster i where i.selectionStatus"
 					+ "=:status", InterviewMaster.class);
 			query.setParameter("status", "Selected");
-			List<InterviewMaster> result = query.getResultList();
+			
 			session.close();
-			return result;
+			return query.getResultList();
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -72,17 +85,24 @@ public class InterviewMasterServiceImpl implements InterviewMasterService{
 
 	@Override
 	public InterviewMaster findinterviewMasterById(String interviewCode) {
+		
+		Session session = sessionFactory.openSession();
+		Transaction tx = null;
 		try {
-			Session session = sessionFactory.openSession();
+			
+			tx = session.beginTransaction();
 			Query<InterviewMaster> query = session.createQuery("from InterviewMaster e where "
 					+ "e.interviewCode = :interviewCode", 
 					InterviewMaster.class);
 			query.setParameter("interviewCode", interviewCode);
-			InterviewMaster er = query.getSingleResult();
-			return er;
+			
+			tx.commit();
+			return query.getSingleResult();
 		}catch(Exception e) {
 			System.out.println("========error block");
 			e.printStackTrace();
+		}finally {
+			session.close();
 		}
 		return null;
 	}
