@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hrms.ImageUtil;
+import com.hrms.helper.Message1;
 import com.hrms.model.ApplicantInfo;
 import com.hrms.model.InterviewMaster;
 import com.hrms.model.MenuModule;
@@ -162,8 +163,24 @@ public class InterviewController {
 			return "redirect:" + "./";
 		}
 		
+		try {
+			applicantInfoService.updateApplicantInfoInterviewStatus(applicantCode, interviewStatus);
+			
+			if(interviewStatus.equals("Forward")) {
+				session.setAttribute("message",new Message1("Forwarded","alert-primary"));
+			}else if(interviewStatus.equals("Reject")) {
+				session.setAttribute("message",new Message1("Request has been Rejected","alert-primary"));
+			}
+			else if(interviewStatus.equals("Hold")) {
+				//session.setAttribute("message",new Message1("","alert-primary"));
+			}
+			
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+			session.setAttribute("message",new Message1("Request has been Canceled","alert-primary"));
+		}
 		
-		applicantInfoService.updateApplicantInfoInterviewStatus(applicantCode, interviewStatus);
 
 		return "redirect:/interviewApproval";
 	}

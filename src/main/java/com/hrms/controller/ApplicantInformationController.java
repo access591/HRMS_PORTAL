@@ -141,17 +141,29 @@ public class ApplicantInformationController {
 
 		}
 
-		List<City> cityList = cityService.getAllCities();
-		System.out.println("city list size : " + cityList.size());
-		if (cityList != null) {
-			model.addAttribute("cityList", cityList);
+		System.out.println("execute code ");
+		try {
+			List<City> cityList = cityService.getAllCities();
+			System.out.println("city list size : " + cityList.size());
+			if (cityList != null) {
+				model.addAttribute("cityList", cityList);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
 		}
+		
 
-		List<Employee> listEmployee = employeeService.getAllEmployees();
-		if (listEmployee != null) {
-			model.addAttribute("listEmployee", listEmployee);
+		try {
+			List<Employee> listEmployee = employeeService.getAllEmployees();
+			if (listEmployee != null) {
+				System.out.println("city list size : " + listEmployee.size());
+				model.addAttribute("listEmployee", listEmployee);
+			}
+
+		}catch(Exception e) {
+			e.printStackTrace();
 		}
-
+		
 		ApplicantInfo applicantInfo = applicantInfoService.getApplicantInfoByApplicantCode(applicantCode);
 		model.addAttribute("applicantInfo", applicantInfo);
 
