@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 @Entity
 @Table(name ="M_ALLOWANCE_DEDUCTION")
 public class MiscAllowance implements Serializable {
@@ -18,31 +19,40 @@ public class MiscAllowance implements Serializable {
 private static final long serialVersionUID = -1201231658058617763L;
 	
 	@Id
+	@Size(max =15)
 	@Column(name ="ALLOWANCE_CODE")
 	private String allowanceCode;
+	@Size(max =20)
 	@Column(name ="HEAD")
 	private String head;
+	@Size(max =15)
 	@Column(name ="ACT_CODE")
 	private String actCode;
+	@Size(max =25)
 	@Column(name ="SUB_GROUP_CODE")
 	private String subGroupCode;
+	@Size(max =1)
 	@Column(name ="ACTIVE")
 	private String active;
+	@Size(max =100)
 	@Column(name ="DESCRIPTION")
 	private String description;
+	@Size(max =25)
 	@Column(name ="TYPE")
 	private String type;
+	@Size(max =100)
 	@Column(name ="ACCOUNT_NAME")
 	private String accountName;
+	@Size(max =100)
 	@Column(name ="SUB_GROUP_NAME")
 	private String subGroupName;
-	
+	@Size(max =50)
     @Column(name = "INS_BY",updatable = false)
 	private String insBy;
 	
 	@Column(name = "INS_DATE",updatable = false)
 	private Date insDate =new Date();
-	
+	@Size(max =50)
 	@Column(name = "UPD_BY",insertable = false)
 	private String updBy;
 	

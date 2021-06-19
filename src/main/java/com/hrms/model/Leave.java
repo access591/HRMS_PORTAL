@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
 /**
 	 * 
@@ -22,28 +23,31 @@ public class Leave implements Serializable{
 
 	private static final long serialVersionUID = 8576554099474445024L;
 	@Id
+	@Size(max =15)
 	@Column(name = "LEV_CODE")
 	private String levCode;
-
+	@Size(max =50)
 	@Column(name = "LEV_TYPE")
 	private String levType;
-	
+	@Size(max =2)
 	@Column(name = "TOTAL_LEV", updatable = false)
 	private String totalLev;
-	
+	@Size(max =2)
 	@Column(name = "UNPAID")
 	private String unpaid;
+	@Size(max =50)
     @Column(name = "INS_BY",updatable = false)
 	private String insBy;
 	
 	@Column(name = "INS_DATE",updatable = false)
 	private Date insDate =new Date();
-	
+	@Size(max =50)
 	@Column(name = "UPD_BY",insertable = false)
 	private String updBy;
 	
 	@Column(name = "UPD_DATE",insertable = false)
 	private Date  updDate = new Date();
+	@Size(max =1)
 	@Column(name = "ACTIVE_YN")
 	private String active;
 	
