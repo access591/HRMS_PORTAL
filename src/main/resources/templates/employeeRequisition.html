@@ -54,18 +54,19 @@ body {
 									<div class="card-header">
 										<h5 class="card-title" style="text-decoration: underline;">Employee
 											Requisition</h5>
-										
-									
+
+
 										<div class="row">
-								<div th:if="${session.message}" class="alert alert-primary alert-dismissible fade show">
-									<p class="text-center" th:text="${session.message.content}"></p>
-									<button type="button" class="close" data-dismiss="alert">&times;</button>
-									<th:block th:text="${#session.removeAttribute('message')}"></th:block>
-									 
-								</div>
-								</div>
-										
-										
+											<div th:if="${session.message}"
+												class="alert alert-primary alert-dismissible fade show">
+												<p class="text-center" th:text="${session.message.content}"></p>
+												<button type="button" class="close" data-dismiss="alert">&times;</button>
+												<th:block th:text="${#session.removeAttribute('message')}"></th:block>
+
+											</div>
+										</div>
+
+
 									</div>
 
 									<div class="card-body">
@@ -99,7 +100,8 @@ body {
 											<div class="col-12 col-lg-6">
 												<label class="form-label">Department Name</label> <label
 													style="color: red">*</label> <select class="form-control"
-													id="departmentDropdown" onchange="changeDepartment()" required >
+													id="departmentDropdown" onchange="changeDepartment()"
+													required>
 													<option value="">Select Department</option>
 													<option th:each="department :  ${departmentList}"
 														th:text="${department.deptName}"
@@ -233,7 +235,8 @@ body {
 																style="width: 90px;" id="ageFrom" min="18" required></td>
 
 															<td><input name="employeRequisitionDetail[0].ageTo"
-																type="number" max="45" style="width: 90px;" id="ageTo" required></td>
+																type="number" max="45" style="width: 90px;" id="ageTo"
+																required></td>
 
 															<td><input
 																name="employeRequisitionDetail[0].acadQuali" type="text"
@@ -404,13 +407,13 @@ body {
 					.getElementById("departmentDropdown").value;
 			console.log("select category : " + selecteDepartmentValue);
 			//$('#employeeName').append($('<option>', {value:0, text:'Select Employee'}));
-			var x = document.getElementById("designationName'+idIndex+'");
+			var x = document.getElementById("designationName"+idIndex);
 			console.log("x value : " + x);
 
-			//var length = x.options.length;
-			//for (i = length - 1; i >= 1; i--) {
-			//	x.options[i] = null;
-			//}
+			var length = x.options.length;
+			for (i = length - 1; i >= 1; i--) {
+				x.options[i] = null;
+			}
 
 			if (selecteDepartmentValue !== ""
 					|| document.getElementById("selecteDepartmentValue").selected == false) {
