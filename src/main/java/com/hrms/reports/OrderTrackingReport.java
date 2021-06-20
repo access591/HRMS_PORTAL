@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Component;
 
-import com.hrms.model.BudgetProvision;
 import com.hrms.model.OrderIssueTracking;
 
 import net.sf.jasperreports.engine.JREmptyDataSource;
@@ -26,7 +25,7 @@ import net.sf.jasperreports.engine.util.JRLoader;
 @Component
 public class OrderTrackingReport {
 	
-	public List<?> createOrderTrackReport(HttpServletResponse response, HttpServletRequest request, 
+	public void createOrderTrackReport(HttpServletResponse response, HttpServletRequest request, 
 			List<OrderIssueTracking> sourceData,String deptName) {
 
 		String reportFileName = "orderIssuedTracking"; // Parameter1
@@ -43,7 +42,7 @@ public class OrderTrackingReport {
 					.getRealPath("/resources/" + reportFileName + ".jasper");
 			JRBeanCollectionDataSource beanColDataSource = new JRBeanCollectionDataSource(sourceData);
 
-			Map<String, Object> parameters = new HashMap<String, Object>();
+			Map<String, Object> parameters = new HashMap<>();
 
 			parameters.put("Parameter1", beanColDataSource);
 			parameters.put("deptName", deptName1);
@@ -74,7 +73,7 @@ public class OrderTrackingReport {
 			e.printStackTrace();
 		}
 
-		return null;
+		
 
 
 	}

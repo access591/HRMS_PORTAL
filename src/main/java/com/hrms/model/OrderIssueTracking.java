@@ -65,7 +65,7 @@ public class OrderIssueTracking {
 
 	public OrderIssueTracking() {
 		super();
-		// TODO Auto-generated constructor stub
+		
 	}
 
 	public Long getOrderTrackingId() {

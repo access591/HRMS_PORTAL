@@ -12,8 +12,7 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.hrms.model.BudgetProvision;
-import com.hrms.model.EmployeeRequisition;
+
 import com.hrms.model.OrderIssueTracking;
 
 @Service
@@ -24,81 +23,109 @@ public class OrderIssueTrackingServiceImpl implements OrderIssueTrackingService{
 	
 	@Override
 	public void saveOrderIssueTracking(OrderIssueTracking orderIssueTracking) {
+		
+		Session session = sessionFactory.openSession();
+		Transaction tx = null;
 		try {
-			Session session = sessionFactory.openSession();
-			System.out.println("session exist or not : " + sessionFactory.isOpen());
-			Transaction tx = session.beginTransaction();
+			
+			tx = session.beginTransaction();
 
 			session.save(orderIssueTracking);
 			tx.commit();
-			session.close();
-
+			
 		} catch (Exception e) {
 			e.printStackTrace();
+		}finally {
+			session.close();
 		}
 		
 	}
 
 	@Override
 	public List<OrderIssueTracking> getAllOrderIssueTracking() {
-		try (Session session = sessionFactory.openSession()) {
+		
+		Session session = sessionFactory.openSession();
+		Transaction tx = null;
+		List<OrderIssueTracking> result = null;
+		try  {
 
+			tx = session.beginTransaction();
 			CriteriaBuilder builder = session.getCriteriaBuilder();
 			CriteriaQuery<OrderIssueTracking> criteria = builder.createQuery(OrderIssueTracking.class);
 			criteria.from(OrderIssueTracking.class);
-			List<OrderIssueTracking> entityList = session.createQuery(criteria).getResultList();
+			result = session.createQuery(criteria).getResultList();
 
-			return entityList;
+			tx.commit();
+			
 		} catch (Exception e) {
 			e.printStackTrace();
+		}finally {
+			session.close();
 		}
-		return null;
+		return result;
 	}
 
 	@Override
 	public OrderIssueTracking findOrderIssueTrackingById(Long orderIssueTrackingId) {
+		
+		Session session = sessionFactory.openSession();
+		Transaction tx = null;
 		try {
-			Session session = sessionFactory.openSession();
-			Transaction tx = session.beginTransaction();
+			
+			tx = session.beginTransaction();
 			OrderIssueTracking orderIssueTracking = session.find(OrderIssueTracking.class, orderIssueTrackingId);
 			tx.commit();
-			session.close();
+			
 			return orderIssueTracking;
 		} catch (Exception e) {
 			e.printStackTrace();
+		}finally {
+			session.close();
 		}
 		return null;
 	}
 
 	@Override
 	public void updateOrderIssueTracking(OrderIssueTracking orderIssueTracking) {
+		
+		Session session = sessionFactory.openSession(); 
+		Transaction tx = null;
+		
 		try {
-			Session session = sessionFactory.openSession();
-			Transaction tx = session.beginTransaction();
-			OrderIssueTracking b = session.find(OrderIssueTracking.class, orderIssueTracking.getOrderTrackingId());
+			
+			tx = session.beginTransaction();
+			session.find(OrderIssueTracking.class, orderIssueTracking.getOrderTrackingId());
 
-			b = (OrderIssueTracking) session.merge(orderIssueTracking);
+			session.merge(orderIssueTracking);
 			tx.commit();
-			session.close();
+			
 		} catch (Exception e) {
 			e.printStackTrace();
+		}finally {
+			tx.commit();
 		}
 		
 	}
 
 	@Override
 	public void removeOrderIssueTracking(Long orderTrackinId) {
+		
+		Session session = sessionFactory.openSession();
+		Transaction tx = null;
+		
 		try {
-			Session session = sessionFactory.openSession();
-			Transaction tx = session.beginTransaction();
+			
+			tx = session.beginTransaction();
 			Object o = session.get(OrderIssueTracking.class, orderTrackinId);
 			OrderIssueTracking e = (OrderIssueTracking) o;
 			
 			session.delete(e);
 			tx.commit();
-			session.close();
+			
 		}catch(Exception e) {
 			e.printStackTrace();
+		}finally {
+			session.close();
 		}
 		
 		
@@ -106,21 +133,26 @@ public class OrderIssueTrackingServiceImpl implements OrderIssueTrackingService{
 
 	@Override
 	public OrderIssueTracking findOrderIssueTrackingByIssuedby(String empCode) {
+		
+		Session session = sessionFactory.openSession();
+		Transaction tx = null;
 		try {
-			Session session = sessionFactory.openSession();
-			System.out.println("session exist or not : " + sessionFactory.isOpen());
-			Transaction tx = session.beginTransaction();
+			
+			
+			tx = session.beginTransaction();
 			Query<OrderIssueTracking> query = session.createQuery("from OrderIssueTracking o "
 					+ "left join fetch o.employee e where e.empCode = :empCode", OrderIssueTracking.class);
 			
 			query.setParameter("empCode", empCode);
 			OrderIssueTracking result = query.getSingleResult();
 			tx.commit();
-			session.close();
+			
 			return result;
 
 		} catch (Exception e) {
 			e.printStackTrace();
+		}finally {
+			session.close();
 		}
 		return null;
 	}
