@@ -1,7 +1,6 @@
 package com.hrms.controller;
 
 import java.sql.Date;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.hrms.ImageUtil;
 import com.hrms.ReportUtil;
-import com.hrms.model.Designation;
 import com.hrms.model.Employee;
 import com.hrms.model.MenuModule;
 import com.hrms.model.TourClaim;
@@ -37,7 +35,6 @@ import com.hrms.service.LtaRequestService;
 import com.hrms.service.ModuleService;
 import com.hrms.service.TourClaimService;
 import com.hrms.service.TourPlanService;
-import com.hrms.util.TourClaimReportUtil;
 
 @Controller
 public class ReimbursementReportController {
@@ -94,7 +91,7 @@ public class ReimbursementReportController {
 		model.addAttribute("object", new TourPlan());
 		session.setAttribute("imgUtil", new ImageUtil());
 		session.setAttribute("username", userCode);
-		return "tourClaimReports"; // tourClaimReports.html
+		return "tourClaimReports"; 
 	}
 
 	@PostMapping("generateTourClaim")
@@ -107,14 +104,14 @@ public class ReimbursementReportController {
 		
 		if (!empCode.equals("ALL")) {
 			List<TourClaim> tourClaim = tourClaimService.findTourClaimByEmpCodeBetweenDate(empCode,fromDate,toDate);
-			//System.out.println("tour claim result : "+ tourClaim.);
+			
 			tourClaimReport.tourClaimReport(res, req, tourClaim);
 
 			
 
 		}else {
 			System.out.println("else block?  ");
-			//tourClaimReport.tourClaimReport(res, req, tourClaimList);
+			
 			List<TourClaim> tourClaim = tourClaimService.getAllTourClaimBetweenDate(fromDate, toDate);
 			tourClaimReport.tourClaimReport(res, req, tourClaim);
 		}

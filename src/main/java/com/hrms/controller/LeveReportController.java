@@ -2,7 +2,7 @@ package com.hrms.controller;
 
 import java.io.IOException;
 import java.sql.Date;
-import java.util.ArrayList;
+
 
 import java.util.List;
 
@@ -144,11 +144,7 @@ public class LeveReportController {
 			
 		} 
 		
-		else {
-			//return "redirect:AttendanceRegMothlyReport";
-		}
 		
-		//reportUtil.leaveRegisterReport(request, response, listLeaveDetail);
 		return null;
 	}
 
@@ -171,7 +167,7 @@ public class LeveReportController {
 		}
 
 		List<Department> departmentList = departmentService.getAllDepartments();
-		System.out.println("department service======>" + departmentList.size());
+		
 		if (departmentList != null) {
 			model.addAttribute("departmentList", departmentList);
 		}
@@ -194,8 +190,7 @@ public class LeveReportController {
 
 		if (deptCode.equals("ALL")) {
 			System.out.println("All record");
-//			List<LeaveRequest> leaveRequestList = leaveRequestService.findAllApproveLeaveRequestBetweenDate(fromDate,
-//					toDate);
+			
 			List<LeaveRequest> leaveRequestList  = leaveRequestService.findAllLeaveRequestBetweenDate(fromDate, toDate);
 			leaveReport.leaveRequestReport(response, request, reportFileName, leaveRequestList, "ALL");
 		} 
@@ -285,12 +280,10 @@ public class LeveReportController {
 			leaveReport.leaveTransactionPdfReportByEmp(request, response,leaveRequestList,activeUser);
 		} 
 		
-		else {
-			//return "redirect:AttendanceRegMothlyReport";
-		}
+		
 		
 		session.setAttribute("username", userCode);
-		// System.out.println("size : " +listLeaveRequest.get(0).getDeptCode());
+		
 		return pageMappingService.PageRequestMapping(reqpageOfleaveRequestTransactionReport,
 				pageNoLeaveTransactionReport);
 	}

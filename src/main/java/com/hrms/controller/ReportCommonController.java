@@ -27,13 +27,10 @@ import com.hrms.service.LeaveDetailService;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hrms.ReportUtil;
-import com.hrms.model.Designation;
 import com.hrms.model.Employee;
 import com.hrms.model.LocalConvyenceDetail;
 import com.hrms.model.LtaRequest;
 import com.hrms.model.MenuModule;
-import com.hrms.model.Module;
-import com.hrms.model.TourPlan;
 import com.hrms.reports.LocalClaimReport;
 import com.hrms.reports.LtaReport;
 import com.hrms.reports.TourClaimReport;
@@ -47,7 +44,6 @@ import com.hrms.service.LtaRequestService;
 import com.hrms.service.ModuleService;
 import com.hrms.service.TourPlanService;
 import com.hrms.util.LtaReportUtil;
-import com.hrms.util.TourClaimReportUtil;
 
 @Controller
 public class ReportCommonController {
@@ -125,11 +121,10 @@ public class ReportCommonController {
 	@PostMapping("/employeereport")
 	public void employeeReport(HttpServletRequest request,HttpServletResponse response) {
 		
-		System.out.println("  employee report ");
+		
 		String reportName = "EmployeeReport";	
 		List<Employee> listEmployee = employeeService.getAllEmployees();
 				
-		System.out.println("list employee : "+ listEmployee);
 		reportUtil.allEmployeeReport(request, response, reportName, listEmployee);
 		
 	}
@@ -159,8 +154,8 @@ public class ReportCommonController {
 		if(listEmployee != null) {
 			model.addAttribute("listEmployee", listEmployee);
 		}
-		//model.addAttribute("object" , new TourPlan());
-		return "LocalClaimReport"; //tourClaimReports.html
+		
+		return "LocalClaimReport"; 
 	}
 	
 	@PostMapping("localClaimReport")
@@ -190,7 +185,7 @@ public class ReportCommonController {
 	
 //LTA REPORTS
 	
-	@GetMapping("ltaReport")  //LtaReport.html
+	@GetMapping("ltaReport")  
 	public String ltaReportPage(Model model,HttpSession session) {
 		
 		if(session.getAttribute("username")==null) {
@@ -214,7 +209,7 @@ public class ReportCommonController {
 		return "LtaReport";
 	}
 	
-	@PostMapping("createLtaReport")  //LtaReport.html
+	@PostMapping("createLtaReport")  
 	public String createLtReport(@ModelAttribute("ltaRequest") LtaRequest ltaRequest , Model model,HttpSession session,
 			HttpServletRequest req,HttpServletResponse res) {
 		
@@ -222,9 +217,6 @@ public class ReportCommonController {
 			return "redirect:" + "./";
 		}
 		
-		System.out.println("lta request : "+ltaRequest.getEmpCode().getEmpCode());
-		System.out.println("lta request : "+ltaRequest.getLeaveFrom());
-		System.out.println("lta request : "+ltaRequest.getLeaveTo());
 		
 		List<LtaRequest> listLtarequest = null; 
 		List<LtaReportUtil> listLtaReport = new ArrayList<LtaReportUtil>(); 
@@ -260,7 +252,7 @@ public class ReportCommonController {
 		
 		ltaReport.ltaReport(res, req, listLtaReport,ltaRequest.getLeaveFrom(),ltaRequest.getLeaveTo());
 		
-		//return "redirect:ltaReport";
+		
 		return null;
 	}
 	
