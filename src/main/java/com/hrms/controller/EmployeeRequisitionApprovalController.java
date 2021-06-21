@@ -1,6 +1,5 @@
 package com.hrms.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -13,7 +12,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import com.hrms.helper.Message1;
-import com.hrms.model.CommonUtil;
 import com.hrms.model.EmployeeRequisition;
 import com.hrms.model.MenuModule;
 import com.hrms.service.DepartmentService;
@@ -45,44 +43,18 @@ public class EmployeeRequisitionApprovalController {
 	
 	
 	@GetMapping("employeeRequisitionApproval")
-	public String employeeRequisitionApproval(@ModelAttribute("commonUtil")CommonUtil commonUtil ,Model model, HttpSession session) {
+	public String employeeRequisitionApproval(@ModelAttribute("employeeRequisition")EmployeeRequisition employeeRequisition ,
+			Model model, HttpSession session) {
 		
 		if(session.getAttribute("username")==null) {
 			return "redirect:" + "./";
 		}
 		
-		
-		List<CommonUtil> listCommonUtil = new ArrayList<>();
-		List<EmployeeRequisition> listEmployeeReq = employeeRequisitionService.getAllPendingEmployeeRequisition();
-		
-		for(int i=0;i<listEmployeeReq.size();i++) {
-			
-			try {
-				
-				EmployeeRequisition em = listEmployeeReq.get(i);
-				CommonUtil commonUtill = new CommonUtil(em.getDepartmet().getDeptName() ,em.getReqCode(),em.getReqDate(),
-						em.getReqPriority(),em.getReqApprover(),em.getRemarks(),em.getInsBy(),em.getInsDate(),
-						em.getReqTill(),em.getApproveDate(),em.getStatus());
-				commonUtill.setStatus(em.getStatus());
-				listCommonUtil.add(commonUtill);
-			}
-			catch(Exception e) {
-				e.printStackTrace();
-			}
-			
-			
-			
-		}
-		
-		
-		model.addAttribute("listCommonUtil", listEmployeeReq);
 	
-		
-		List<EmployeeRequisition> approvalReq = employeeRequisitionService.findEmployeeReqByStatusY();
-		if(approvalReq != null) {
-			model.addAttribute("approved", approvalReq);
-		}
-		
+		List<EmployeeRequisition> listEmployeeReq = employeeRequisitionService.getAllPendingEmployeeRequisition();
+	
+		model.addAttribute("listCommonUtil", listEmployeeReq);
+
 		//session.setAttribute("imgUtil", new ImageUtil());
 		return "EmployeeRequisitionApproval"; 
 		
