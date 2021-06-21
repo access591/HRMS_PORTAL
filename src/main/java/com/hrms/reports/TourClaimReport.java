@@ -1,7 +1,6 @@
 package com.hrms.reports;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -10,7 +9,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Component;
 
-import com.hrms.model.LeaveRequest;
 
 import net.sf.jasperreports.engine.JREmptyDataSource;
 import net.sf.jasperreports.engine.JRException;
@@ -25,7 +23,7 @@ import net.sf.jasperreports.engine.util.JRLoader;
 @Component
 public class TourClaimReport {
 
-	public List<?> tourClaimReport(HttpServletResponse response, HttpServletRequest request, 
+	public void tourClaimReport(HttpServletResponse response, HttpServletRequest request, 
 					 List<?> sourceData) {
 
 		String reportFileName = "tourClaim"; //Parameter1
@@ -40,7 +38,7 @@ public class TourClaimReport {
 					.getRealPath("/resources/" + reportFileName + ".jasper");
 			JRBeanCollectionDataSource beanColDataSource = new JRBeanCollectionDataSource(sourceData);
 
-			HashMap<String, Object> map = new HashMap<String, Object>();
+			HashMap<String, Object> map = new HashMap<>();
 
 			map.put("Parameter1", beanColDataSource);
 
@@ -67,7 +65,7 @@ public class TourClaimReport {
 		} catch (JRException e) {
 			e.printStackTrace();
 		}
-		return null;
+		
 
 	}
 }

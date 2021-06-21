@@ -33,78 +33,63 @@ body {
 	<div class="wrapper">
 
 
-		<!--  nav start -->
+		
 		<nav id="sidebar" class="sidebar">
 			<div th:replace="/fragments/sidebar :: div"></div>
 		</nav>
-		<!-- nav end  -->
+		
 
 
-		<!-- main start here  -->
+		
 		<div class="main">
 
 			<div th:replace="/fragments/header ::div"></div>
 
-			<!-- content div start  -->
+			
 			<main class="content">
 
-				<!-- container div start -->
+				
 				<div class="container-fluid">
 
 
-					<!-- header div  -->
+					
 					<div class="header">
 						<h1 class="header-title">Master</h1>
 
 						<nav aria-label="breadcrumb"></nav>
 					</div>
-					<!-- header div end  -->
+					
 
 
-					<!-- main row div  -->
+					
 					<div class="row">
 
-						<!-- div column start  -->
+						
 						<div class="col-12">
 
-							<!-- card start  -->
+							
 							<div class="card">
 
-								<!-- card header  -->
+								
 								<div class="card-header">
 
 									<h5 class="card-title"style="text-decoration: underline;">Training Requisition Approval</h5>
 
-									<!-- div start  -->
+									
 									<div class="alert-outline">
 										<div th:if="${message}" th:text="${message}"
 											style="color: red"></div>
 									</div>
-									<!-- div end -->
+									
 
 								</div>
-								<!-- card header end  -->
+								
 
 
-								<!--  card body start  -->
+								
 								<div class="card-body">
 
-									<!-- <div class="row">
-										<div class="col-12 col-lg-6">
-											<div class="form-group">
-												<label class="form-label"> Employee Code  </label> <label
-													style="color: red">*</label> <select id="deptName"class="form-control" name="deptName"
-													onchange="getAllLeaveRequestBydepartment()">
-													<option value=" ">Select</option>
-													<option th:each="department:${ListTourPlan}"th:text="${department.deptName}"
-														th:value="${department.departmentCode}"></option>
-												</select>
-											</div>
-										</div>
-									</div>
- -->
-
-									<!-- from  -->
+									
 									<form>
 
 										<div id="validation-step-3">
@@ -195,31 +180,30 @@ body {
 									</form>
 
 
-									<!-- form end  -->
-
+									
 
 								</div>
 
-								<!-- card body end  -->
+								
 							</div>
-							<!-- card end  -->
+							
 						</div>
 
-						<!-- div card end -->
+						
 
 
 
 
 					</div>
-					<!-- container div end  -->
+					
 
 				</div>
 
-				<!-- content div  end  -->
+				
 
 			</main>
 
-			<!-- main close  -->
+			
 
 			<footer class="footer">
 				<div th:replace="/fragments/footer :: div"></div>
@@ -261,11 +245,11 @@ body {
 			var table = document.getElementById("itemList");
 			
 			deleteRows();
-			//wait(2000);
+			
 			
 			
 			var deptValue = document.getElementById("deptName").value;
-			//console.log("dept value is : "+deptValue);
+			
 
 			const xhr = new XMLHttpRequest();
 			xhr.open('GET', 'http://localhost:8181/leaverequest/' + deptValue);
@@ -274,7 +258,7 @@ body {
 			xhr.onload = function() {
 				if (this.status === 200) {
 					obj = JSON.parse(this.responseText);
-					//console.log(obj[0].deptCode);
+					
 					
 					console.log(obj);
 					
@@ -311,20 +295,7 @@ body {
 			
 			href = "viewLeaveRequest/'+leaveEmpCode+"/"+leaveApplyDate";
 			
-			/* const xhr = new XMLHttpRequest();
-			xhr.open('GET', 'http://localhost:8181/viewLeaveRequest/'+leaveEmpCode+"/"+leaveApplyDate,true); 
-			xhr.getResponseHeader('content-type', 'application/json');
-
-			xhr.onload = function() {
-				if (this.status === 200) {
-					//obj = JSON.parse(this.responseText);	
-					console.log("successfull");
-					//getAllLeaveRequestBydepartment();
-				} else {
-					console.error("some error occured");
-				}
-			}
-			xhr.send(); */
+			
 		}
 		
 		
@@ -339,7 +310,7 @@ body {
 
 			xhr.onload = function() {
 				if (this.status === 200) {
-					//obj = JSON.parse(this.responseText);	
+					
 					console.log("successfull");
 					getAllLeaveRequestBydepartment();
 				} else {
@@ -359,9 +330,7 @@ body {
 					var row = table.deleteRow(rowCount-1);
 					rowCount--;
 				}
-				/* else{
-					alert('There should be atleast one row');
-				} */
+				
 			}
 			
 		}
