@@ -6,6 +6,8 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
@@ -27,8 +29,12 @@ public class City implements Serializable {
 	@Size(max =1)
 	@Column(name = "ACTIVE_YN")
 	private String active;
-	@Column(name = "STATE_CODE")
-	private String stateCode;
+	@ManyToOne
+	@JoinColumn(name = "STATE_CODE",updatable = false)
+	private State stateCode;
+	@ManyToOne
+	@JoinColumn(name = "COUNTRY_CODE", nullable = false)
+	private Country countryCode;
 	@Size(max =50)
     @Column(name = "INS_BY",updatable = false)
 	private String insBy;
@@ -38,17 +44,14 @@ public class City implements Serializable {
 	@Size(max =50)
 	@Column(name = "UPD_BY",insertable = false)
 	private String updBy;
+
 	
+
 	@Column(name = "UPD_DATE",insertable = false)
 	private Date  updDate = new Date();
 	
 
-	public String getStateCode() {
-		return stateCode;
-	}
-	public void setStateCode(String stateCode) {
-		this.stateCode = stateCode;
-	}
+	
 	public String getCityCode() {
 		return cityCode;
 	}
@@ -90,6 +93,19 @@ public class City implements Serializable {
 	}
 	public void setUpdDate(Date updDate) {
 		this.updDate = updDate;
+	}
+	
+	public State getStateCode() {
+		return stateCode;
+	}
+	public void setStateCode(State stateCode) {
+		this.stateCode = stateCode;
+	}
+	public Country getCountryCode() {
+		return countryCode;
+	}
+	public void setCountryCode(Country countryCode) {
+		this.countryCode = countryCode;
 	}
 
 	

@@ -20,16 +20,24 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.hrms.ImageUtil;
 import com.hrms.model.City;
+import com.hrms.model.Country;
 import com.hrms.model.MenuModule;
+import com.hrms.model.State;
 import com.hrms.service.CityService;
+import com.hrms.service.CountryService;
 import com.hrms.service.ModuleService;
 import com.hrms.service.PageMappingService;
+import com.hrms.service.StateService;
 
 
 @Controller
 public class CityController {
 	int pageno=25;
 	String reqPage="/cityMaster";
+	@Autowired
+	CountryService countryService;
+	@Autowired
+	StateService stateService;
 	@Autowired
 	private ModuleService moduleService;
 	@Autowired
@@ -54,7 +62,13 @@ public class CityController {
 			if (modules != null) {
 				model.addAttribute("modules", modules);
 			}
-			return "redirect:getAllCities";
+			List<Country> listCountry = countryService.getAllCountrys();
+			model.addAttribute("listCountry", listCountry);
+			List<State> listState = stateService.getAllStates();
+			model.addAttribute("listState", listState);
+			List<City> cityList =cityService.getAllCities();
+			model.addAttribute("cityList",cityList);
+			return "cityMaster";
 		}
 		else
 		{
@@ -62,41 +76,7 @@ public class CityController {
 		}
     }
   
-	 @RequestMapping(value = {"getAllCities", "/", "/list"})
-	    public ModelAndView getAllCities(@RequestParam(required = false) Integer page,HttpSession  session,Model model) {
-		 String userCode = (String) session.getAttribute("username");
-			List<MenuModule> modules = moduleService.getAllModulesList(userCode);
-			if (modules != null) {
-				model.addAttribute("modules", modules);
-			}
-	        List<City> userList =cityService.getAllCities();
-	        ModelAndView modelAndView = new ModelAndView("cityMaster", "userList", userList);
-	        PagedListHolder<City> pagedListHolder = new PagedListHolder<>(userList);
-	        pagedListHolder.setPageSize(5);
-	        modelAndView.addObject("maxPages", pagedListHolder.getPageCount());
-	        if(page==null || page < 1 || page > pagedListHolder.getPageCount())page=1;
 
-	        modelAndView.addObject("page", page);
-	        if(page < 1 || page > pagedListHolder.getPageCount()){
-	            pagedListHolder.setPage(0);
-	            modelAndView.addObject("userList", pagedListHolder.getPageList());
-	        }
-	        else if(page <= pagedListHolder.getPageCount()) {
-	            pagedListHolder.setPage(page-1);
-	            modelAndView.addObject("userList", pagedListHolder.getPageList());
-	        }
-	       
-	    	int current = pagedListHolder.getPage() + 1;
-	    	int begin = Math.max(1, current - 5);
-	    	int end = Math.min(begin + 5, pagedListHolder.getPageCount());
-	    	int totalPageCount = pagedListHolder.getPageCount();
-	    	  modelAndView.addObject("beginIndex", begin);
-	    	  modelAndView.addObject("endIndex", end);
-	    	  modelAndView.addObject("currentIndex", current);
-	    	  modelAndView.addObject("totalPageCount", totalPageCount);
-	        return modelAndView;
-	    }
-	
 	/**
 	 * save Cities  request mapping city master 
 	 * @param city
@@ -109,7 +89,7 @@ public class CityController {
 		
 		String insertedBY = (String) session.getAttribute("userlogin");
 		city.setInsBy(insertedBY);
-		
+		session.setAttribute("imgUtil", new ImageUtil());
 		cityService.addCity(city);
 		List<City> listCity = cityService.getAllCities();
 		model.addAttribute("listCity", listCity);
@@ -128,7 +108,10 @@ public class CityController {
 	 */
 	@GetMapping(value = { "/editCity/{id}" })
 	public String editCity(@PathVariable("id") String id, Model model, HttpSession session) {
-		
+		List<Country> listCountry = countryService.getAllCountrys();
+		model.addAttribute("listCountry", listCountry);
+		List<State> listState = stateService.getAllStates();
+		model.addAttribute("listState", listState);
 		City cityEdit = cityService.findCityById(id);
 		model.addAttribute("cityEdit", cityEdit);
 		session.setAttribute("username", session.getAttribute("username"));
