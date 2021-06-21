@@ -82,10 +82,15 @@ public class EmployeeRequisitionController {
 			model.addAttribute("modules", modules);
 		}
 
-		List<Department> departmentList = departmentService.getAllDepartments();
-		if(departmentList != null) {
-			model.addAttribute("departmentList", departmentList);
+		try {
+			List<Department> departmentList = departmentService.getAllDepartments();
+			if(departmentList != null) {
+				model.addAttribute("departmentList", departmentList);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
 		}
+		
 		
 	
 		

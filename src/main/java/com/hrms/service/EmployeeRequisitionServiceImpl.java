@@ -39,7 +39,21 @@ public class EmployeeRequisitionServiceImpl implements EmployeeRequisitionServic
 	@Override
 	public List<EmployeeRequisition> getAllEmployeeRequisition() {
 		
-		return this.employeRequisitionDao.findAll();
+		Session session = sessionFactory.openSession();
+		Transaction tx = null;
+		List<EmployeeRequisition> result = null;
+		
+		try {
+			tx = session.beginTransaction();
+			Query<EmployeeRequisition> query = session.createQuery("from EmployeeRequisition e", EmployeeRequisition.class);
+			result = query.getResultList();
+			tx.commit();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			session.close();
+		}
+		return result;
 	}
 
 	@Override
