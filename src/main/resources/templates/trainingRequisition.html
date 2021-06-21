@@ -231,7 +231,7 @@ body {
 														<div class="card-header"></div>
 														<div class="card-body">
 
-															<div class="col-sm-12" align="right">
+															<div class="col-sm-12" style="text-align:right">
 
 
 
@@ -247,11 +247,11 @@ body {
 																	class="table" style="width: 100%">
 																	<thead>
 																		<tr>
-																			<th>Sr No</th>
-																			<th>Topic Details.</th>
-																			<th>Topic Date.</th>
-																			<th>Topic priority</th>
-																			<th>Topic Remark</th>
+																			<th scope="col">Sr No</th>
+																			<th scope="col">Topic Details.</th>
+																			<th scope="col">Topic Date.</th>
+																			<th scope="col">Topic priority</th>
+																			<th scope="col">Topic Remark</th>
 
 
 
@@ -291,7 +291,7 @@ body {
 																</table>
 															</div>
 														</div>
-														<!-- <a id="add_row" class="fa pull-right btn btn-default ">Add Row</a><a id='delete_row' class="fa pull-right btn btn-default">Delete Row</a>	 -->
+														
 													</div>
 												</div>
 
@@ -309,9 +309,7 @@ body {
 														<div class="card-body">
 															<input id="_cr2" name="_cr2" type="text" value="1">
 															<div class="col-sm-12" align="right">
-																<!-- 	<a th:href="@{/viewMedicalReimbursement}">
-								<em  class="fa fa-eye" style="font-size:28px"> 
-								</em></a>&nbsp;&nbsp;&nbsp; -->
+																
 
 
 
@@ -327,10 +325,10 @@ body {
 																	class="table" style="width: 100%">
 																	<thead>
 																		<tr>
-																			<th>Employee Name</th>
+																			<th scope="col">Employee Name</th>
 
-																			<th>Payee Code.</th>
-																			<th>Father Name</th>
+																			<th scope="col">Payee Code.</th>
+																			<th scope="col">Father Name</th>
 
 
 																		</tr>
@@ -362,7 +360,7 @@ body {
 															</div>
 															<button type="submit" class="btn btn-primary">Save</button>
 														</div>
-														<!-- <a id="add_row" class="fa pull-right btn btn-default ">Add Row</a><a id='delete_row' class="fa pull-right btn btn-default">Delete Row</a>	 -->
+														
 
 
 													</div>
@@ -377,7 +375,7 @@ body {
 
 
 
-										<!-- show records   -->
+										
 
 
 
@@ -573,13 +571,7 @@ body {
 		}
 	</script>
 
-	<!-- <script>
-		function sync() {
-			var n1 = document.getElementById('empName');
-			var n2 = document.getElementById('name');
-			n2.value = n1.value;
-		}
-	</script> -->
+	
 	<script>
 		function syncAddress() {
 			var n1 = document.getElementById('address1');
@@ -660,10 +652,7 @@ body {
 						let obj = JSON.parse(this.responseText);
 						console.log(obj);
 						console.log("console.log size :" + obj.length);
-						//console.log("employee name : " +obj[0].empName)
-						/* $('select[name="designationName"]').prop("disabled",
-								false); */
-						//$('select[name="employeeName"]').html(obj.empName);
+						
 						$('#empName' + idIndex).empty();
 						$('#empName' + idIndex).append(
 								$('<option>').val('').text('Select Employee'));
@@ -671,10 +660,7 @@ body {
 						$.each(obj, function(i, item) {
 							console.log(" i " + i + " item : " + item.empCode);
 							console.log(" i " + i + " item : " + item.empName);
-							/* $('#employeeName').append($('<option>', {
-								value : i,
-								text : item.empName
-							})); */
+							
 							console.log("dbIndex value is : " + idIndex);
 							$('#empName' + idIndex).append(
 									$('<option>').val(this.empCode).text(

@@ -186,34 +186,34 @@ public class ReportCommonController {
 		
 		
 		List<LtaRequest> listLtarequest = null; 
-		List<LtaReportUtil> listLtaReport = new ArrayList<LtaReportUtil>(); 
+		List<LtaReportUtil> listLtaReport = new ArrayList<>(); 
 		
 		if(!ltaRequest.getEmpCode().getEmpCode().equals("ALL")) {
 			listLtarequest = ltaRequestService.findLtaByFromLeaveDateToLeave(ltaRequest.getLeaveFrom(), 
 					ltaRequest.getLeaveTo(), ltaRequest.getEmpCode().getEmpCode());
 			
-			LtaReportUtil reportUtil;
+			LtaReportUtil ltaReportUtil;
 			
 			for(LtaRequest lt : listLtarequest) {
 				
-				reportUtil = new LtaReportUtil(lt.getEmpCode().getEmpCode(),lt.getEmpCode().getEmpName(),
+				ltaReportUtil = new LtaReportUtil(lt.getEmpCode().getEmpCode(),lt.getEmpCode().getEmpName(),
 						lt.getAppDate(),lt.getEligibilityDate(),lt.getLeaveAvailed(),lt.getLeaveFrom(),
 						lt.getLeaveTo());
-				listLtaReport.add(reportUtil);
+				listLtaReport.add(ltaReportUtil);
 			}
 		}
 		else {
 			listLtarequest = ltaRequestService.findAllLtaByFromLeaveDateToLeave(ltaRequest.getLeaveFrom(), 
 					ltaRequest.getLeaveTo());
 			
-			LtaReportUtil reportUtil;
+			LtaReportUtil ltaReportUtil;
 			
 			for(LtaRequest lt : listLtarequest) {
 				
-				reportUtil = new LtaReportUtil(lt.getEmpCode().getEmpCode(),lt.getEmpCode().getEmpName(),
+				ltaReportUtil = new LtaReportUtil(lt.getEmpCode().getEmpCode(),lt.getEmpCode().getEmpName(),
 						lt.getAppDate(),lt.getEligibilityDate(),lt.getLeaveAvailed(),lt.getLeaveFrom(),
 						lt.getLeaveTo());
-				listLtaReport.add(reportUtil);
+				listLtaReport.add(ltaReportUtil);
 			}
 		}
 		
