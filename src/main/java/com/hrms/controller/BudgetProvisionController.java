@@ -146,16 +146,7 @@ public class BudgetProvisionController {
 	}
 	
 	
-	@Autowired ArmsReport armsReport;
-	@Autowired ArmsLicenseService armsLicenseService;
 	
-	@GetMapping("armsreport")
-	public String armsLicensesReport(HttpServletResponse response, HttpServletRequest request) throws IOException {
-		
-
-		return "orderIssueTracking";
-		
-	}
 	
 	@GetMapping("budgetReport")
 	public String viewBudgetReport(Model model,HttpSession session) {

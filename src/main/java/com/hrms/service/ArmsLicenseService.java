@@ -16,5 +16,9 @@ public interface ArmsLicenseService {
 	void updateArmsLicenseService(ArmsLicenseDetails armsLicense);
 	public ArmsLicenseDetails findArmsByEmpEmpCode(String id);
 	void removeArmsLicenseService(String id2);
+	
+	
+	//@rahul
+	List<ArmsLicenseDetails> allArmsLicenseDetails();
 
 }

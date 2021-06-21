@@ -32,7 +32,7 @@ public class ArmsReport {
 	@Autowired
 	ArmsLicenseService armsLicenseService;
 
-	public List<ArmsLicenseDetails> createArmsLicensesReport(HttpServletResponse response, HttpServletRequest request,
+	public void createArmsLicensesReport(HttpServletResponse response, HttpServletRequest request,
 			List<ArmsLicenseDetails> sourceData) throws IOException {
 
 		String reportFileName = "ArmsLicenses"; // Parameter1
@@ -71,7 +71,7 @@ public class ArmsReport {
 		} catch (JRException e) {
 			e.printStackTrace();
 		}
-		return Collections.<ArmsLicenseDetails>emptyList();
+		
 
 	}
 
