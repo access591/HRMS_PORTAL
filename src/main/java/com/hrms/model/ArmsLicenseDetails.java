@@ -19,9 +19,11 @@ public class ArmsLicenseDetails implements Serializable {
 	@Id
 	@Column(name ="ARMS_CODE")
 	private String armsCode;
+	
 	@Size(max =50)
 	@Column(name ="NAME")
 	private String name;
+	
 	@Size(max =50)
 	@Column(name = "FATHER_NAME")
 	private String fatherName;
