@@ -12,6 +12,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -69,7 +70,7 @@ public class EmployeeRequisition implements Serializable {
 	 @Column(name="STATUS")
 	 private String status = "N";
 	 
-	 @OneToMany(mappedBy="employeeRequisition",cascade = CascadeType.ALL,
+	 @OneToMany(fetch = FetchType.EAGER,mappedBy="employeeRequisition",cascade = CascadeType.ALL,
 		        orphanRemoval = true)
 	 private List<EmployeeRequisitionDetail> employeRequisitionDetail;
 

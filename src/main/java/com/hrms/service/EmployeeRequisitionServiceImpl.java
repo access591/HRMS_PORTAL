@@ -2,6 +2,8 @@ package com.hrms.service;
 
 import java.util.List;
 
+import javax.persistence.TypedQuery;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -28,6 +30,7 @@ public class EmployeeRequisitionServiceImpl implements EmployeeRequisitionServic
 			tx = session.beginTransaction();
 			employeReq.setReqCode(employeRequisitionDao.getMaxId("REQ"));
 		    session.save(employeReq);
+		    tx.commit();
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {
@@ -45,9 +48,12 @@ public class EmployeeRequisitionServiceImpl implements EmployeeRequisitionServic
 		
 		try {
 			tx = session.beginTransaction();
-			Query<EmployeeRequisition> query = session.createQuery("from EmployeeRequisition e", EmployeeRequisition.class);
-			result = query.getResultList();
+			TypedQuery<EmployeeRequisition> query = session.createQuery("from EmployeeRequisition", EmployeeRequisition.class);
+			
+		
+			
 			tx.commit();
+			result = query.getResultList();
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {

@@ -37,8 +37,9 @@ public class EmployeeRequisitionDetail implements Serializable{
 	@Column(name="REQ_DATE")
 	private Date reqDate;
 	
-	@ManyToOne
-	@JoinColumn(name="DESIG_CODE")
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "DESIG_CODE",updatable = false)
 	private Designation designation;
 	
 	@Column(name="LOCATION")

@@ -65,15 +65,23 @@ public class ApplicantInformationController {
 		}
 
 		String userCode = (String) session.getAttribute("username");
-		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
-		if (modules != null) {
-			model.addAttribute("modules", modules);
+
+		try {
+			List<MenuModule> modules = moduleService.getAllModulesList(userCode);
+			if (modules != null) {
+				model.addAttribute("modules", modules);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 
-		List<ReqAdvertisement> listReqAdvertisement = reqAdvertisementService.getAllReqAdvertisement();
-
-		if (listReqAdvertisement != null) {
-			model.addAttribute("listReqAdvertisement", listReqAdvertisement);
+		try {
+			List<ReqAdvertisement> listReqAdvertisement = reqAdvertisementService.getAllReqAdvertisement();
+			if (listReqAdvertisement != null) {
+				model.addAttribute("listReqAdvertisement", listReqAdvertisement);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 
 		List<EmployeeRequisitionDetail> listEmployeeRequisition1 = employeeRequisitionDetailService
@@ -83,17 +91,26 @@ public class ApplicantInformationController {
 			model.addAttribute("listEmployeeRequisition", listEmployeeRequisition1);
 
 		}
-		List<City> cityList = cityService.getAllCities();
-		System.out.println("city list size : " + cityList.size());
-		if (cityList != null) {
-			model.addAttribute("cityList", cityList);
+
+		try {
+			List<City> cityList = cityService.getAllCities();
+			System.out.println("city list size : " + cityList.size());
+			if (cityList != null) {
+				model.addAttribute("cityList", cityList);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 
-		List<Employee> listEmployee = employeeService.getAllEmployees();
-		if (listEmployee != null) {
-			model.addAttribute("listEmployee", listEmployee);
+		try {
+			List<Employee> listEmployee = employeeService.getAllEmployees();
+			if (listEmployee != null) {
+				model.addAttribute("listEmployee", listEmployee);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-		
+
 		session.setAttribute("username", session.getAttribute("username"));
 		return "applicantInformation"; // applicantInformation.html
 	}
@@ -147,10 +164,9 @@ public class ApplicantInformationController {
 			if (cityList != null) {
 				model.addAttribute("cityList", cityList);
 			}
-		}catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
 
 		try {
 			List<Employee> listEmployee = employeeService.getAllEmployees();
@@ -159,10 +175,10 @@ public class ApplicantInformationController {
 				model.addAttribute("listEmployee", listEmployee);
 			}
 
-		}catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		ApplicantInfo applicantInfo = applicantInfoService.getApplicantInfoByApplicantCode(applicantCode);
 		model.addAttribute("applicantInfo", applicantInfo);
 
