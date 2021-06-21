@@ -378,10 +378,18 @@ $("table").on("keyup", ".pas", function () {
 										<td  th:text="${listOfloc.desgName}"></td>
 								
 										  <td>
+										  <td>
+										    <th:block th:switch="${listOfloc.approvalStatus}">
+										 <div th:case="'N'">
 										  <a th:href="@{/editLocalConvyence/{id}/(id=${listOfloc.localConvId})}"><em class="fa fa-edit"></em></a>
-										  
-										     <a th:href="@{/deleteLocalConveyance/{id}/(id=${listOfloc.localConvId})}"onclick="return confirm('Are you sure?')"><em class="fa fa-times"></em></a>
-									
+										  <a th:href="@{/deleteLocalConveyance/{id}/(id=${listOfloc.localConvId})}"onclick="return confirm('Are you sure?')"><em class="fa fa-times"></em></a>
+										</div>
+										<div th:case="'Y'">
+										  <a th:href="@{/deleteLocalConveyance/{id}/(id=${listOfloc.localConvId})}"onclick="return confirm('Are you sure?')"><em class="fa fa-times"></em></a>
+										</div>
+										</th:block>
+										
+										</td>  
 									
 										</td>  
 									
