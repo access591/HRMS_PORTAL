@@ -59,6 +59,12 @@ body {
 											  <label> State Code </label>
 											   <input type="text" class="form-control" id="stateCode" name="stateCode" readonly="readonly">
 												</div>
+												
+												<div class="form-group">
+											<label class="form-label"> State Name</label>
+											<label style="color: red">*</label>
+											 <input type="text" class="form-control" pattern="^[a-zA-Z\s]*$"maxlength="50"  id="stateName" name="stateName"required aria-required="true">
+										</div>
 
 												<div class="form-group">
 
@@ -75,12 +81,24 @@ body {
 												</div>
 											</div>
 											<div class="col-12 col-lg-6">
+											
 											<div class="form-group">
-											<label class="form-label"> State Name</label>
-											<label style="color: red">*</label>
-											 <input type="text" class="form-control" pattern="^[a-zA-Z\s]*$"maxlength="50"  id="stateName" name="stateName"required aria-required="true">
-										</div>
+										<label class="form-label">Country 
+											       <span class="text-danger">*</span></label>
+										              <select
+														class="form-control required" name="countryCode.countryCode" id="countryCode.countryCode" title="Country"required aria-required="true">
+														<option value="">Select Country</option>
+														<option th:each="lco :${listCountry}" th:value="${lco.getCountryCode()}" th:text="${lco.getCountryName()}">Select  Country Type</option>
+														
+													 </select> 
 											</div>
+											</div>
+											
+											
+											
+											       
+										  
+											  
 										</div>
 										<button type="submit" class="btn btn-primary">Save</button>
 								 <button type="reset"class="btn btn-primary" value="Reset">Reset</button>
@@ -98,6 +116,7 @@ body {
 											<tr>
 												<th scope="col">State code</th>
 												<th scope="col">State Name </th>
+												<th scope="col">Country Name</th>
 												<th scope="col">Status</th>
 												<th scope="col">Action</th>
 												
@@ -107,6 +126,7 @@ body {
 											<tr  th:each="listOfState : ${listState}">
 												<td th:text="${listOfState.stateCode}"></td>
 												<td th:text="${listOfState.stateName}"></td>
+													<td th:text="${listOfState?.countryCode?.countryName}"></td>
 												<td th:text="${listOfState.active}"></td>
 												<td><a th:href="@{/editState/{id}(id=${listOfState.stateCode})}" ><em class="align-middle fas fa-fw fa-pen"></em></a>
 												<a th:href="@{/deleteState/{id}(id=${listOfState.stateCode})}" onclick="return confirm('Are you sure?')"><em class="align-middle fas fa-fw fa-trash"></em></a>

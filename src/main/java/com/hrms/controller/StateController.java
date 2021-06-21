@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.hrms.ImageUtil;
+import com.hrms.model.Country;
 import com.hrms.model.MenuModule;
 import com.hrms.model.State;
+import com.hrms.service.CountryService;
 import com.hrms.service.ModuleService;
 import com.hrms.service.PageMappingService;
 import com.hrms.service.StateService;
@@ -22,7 +24,8 @@ import com.hrms.service.StateService;
 @Controller
 public class StateController {
 	
-	
+	@Autowired
+	CountryService countryService;
 	@Autowired
 	private ModuleService moduleService;
 	@Autowired
@@ -44,6 +47,8 @@ public class StateController {
 		if (modules != null) {
 			model.addAttribute("modules", modules);
 		}
+		List<Country> listCountry = countryService.getAllCountrys();
+		model.addAttribute("listCountry", listCountry);
 		List<State> listState = stateService.getAllStates();
 		model.addAttribute("listState", listState);
 		session.setAttribute("imgUtil", new ImageUtil());
@@ -94,6 +99,8 @@ public class StateController {
 		if (session.getAttribute("username") == null) {
 			return "redirect:" + "./";
 		}
+		List<Country> listCountry = countryService.getAllCountrys();
+		model.addAttribute("listCountry", listCountry);
 		session.setAttribute("imgUtil", new ImageUtil());
 		State stateEdit = stateService.findStateById(id);
 		model.addAttribute("stateEdit", stateEdit);
