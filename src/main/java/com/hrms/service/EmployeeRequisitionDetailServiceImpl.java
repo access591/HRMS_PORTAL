@@ -69,6 +69,8 @@ public class EmployeeRequisitionDetailServiceImpl implements EmployeeRequisition
 		
 		Session session = sessionFactory.getCurrentSession();
 		Transaction tx = null;
+		
+		List<EmployeeRequisitionDetail> result = null;
 		try {
 			
 			tx = session.beginTransaction();
@@ -80,13 +82,13 @@ public class EmployeeRequisitionDetailServiceImpl implements EmployeeRequisition
 			
 			query.setParameter("status", "Y");
 			tx.commit();
-			return query.getResultList();
+			result = query.getResultList();
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {
 			session.close();
 		}
-		return null;
+		return result;
 		
 	}
 
