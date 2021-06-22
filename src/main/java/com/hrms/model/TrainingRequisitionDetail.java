@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -24,12 +25,15 @@ public class TrainingRequisitionDetail {
 	@Column(name="TR_REQDETAILID")
 	private Long reqId;
 	
+	@Size(max=50)
 	@Column(name = "TOPIC_SRL_NO")
 	private String topicSRLNo;
 	
+	@Size(max=50)
 	@Column(name = "PRIORITY")
 	private String prioity;
 	
+	@Size(max=100)
 	@Column(name = "TOPIC_DTL")
 	private String topicDetail;
 	
@@ -37,6 +41,7 @@ public class TrainingRequisitionDetail {
 	@Column(name = "TR_DATE")
 	private LocalDate trDate;
 	
+	@Size(max=150)
 	@Column(name = "REMARKS")
 	private String remarks;
 

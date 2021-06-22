@@ -2,6 +2,7 @@ package com.hrms.model;
 
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -30,7 +31,7 @@ public class EmployeeRequisition implements Serializable {
 	private static final long serialVersionUID = 8223555113108625254L;
 
 	@Id
-	 
+	@Size(max=100)
 	 @Column(name="REQ_CODE",updatable=false)
 	 private String reqCode;
 	 
@@ -43,9 +44,11 @@ public class EmployeeRequisition implements Serializable {
 	 @JoinColumn(name="DEPT_CODE")
 	 private Department departmet;
 	 
+	 @Size(max=40)
 	 @Column(name="REQ_PRIORITY")
 	 private String reqPriority;
 	 
+	 @Size(max=50)
 	 @Column(name="REQ_APPROVER",length=15)
 	 private String reqApprover;
 	 
@@ -67,6 +70,7 @@ public class EmployeeRequisition implements Serializable {
 	 @Temporal(TemporalType.DATE)
 	 private Date approveDate;
 	 
+	 @Size(max=20)
 	 @Column(name="STATUS")
 	 private String status = "N";
 	 
