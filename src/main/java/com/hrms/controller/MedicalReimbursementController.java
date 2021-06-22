@@ -251,10 +251,9 @@ public class MedicalReimbursementController {
 	
 	 @PostMapping("/updateMedicalReimbursement")
 	  public String updateLeave(@ModelAttribute("leaveupdate") MedicalReimbursement medicalReimbursement, Model model) {
-	 
-		  this.medicalReimbursementService.updateMedicalReimbursement(medicalReimbursement);
-	    	  
+		  medicalReimbursement.setApprovalStatus("N");
 		  
+		  this.medicalReimbursementService.updateMedicalReimbursement(medicalReimbursement);
 			return "redirect:/medicalReimbursement";
 	  }
 	 
