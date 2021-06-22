@@ -155,10 +155,9 @@ body {
 										<!-- from and to type of leave  -->
 										<div class="row">
 											<div class="col-12 col-lg-6">
-												<label class="form-label">From Type </label> <label
-													style="color: red">*</label> <select class="form-control"
-													th:field="*{fromDateType}" id="from_date_type"
-													onchange="fromDayTypeValue(this.value)">
+												<label class="form-label">From Type </label> <select
+													class="form-control" th:field="*{fromDateType}"
+													id="from_date_type" onchange="fromDayTypeValue(this.value)">
 													<option value=" f">Full</option>
 													<option value="fh">first Half</option>
 													<option value="sh">Second Half</option>
@@ -166,10 +165,9 @@ body {
 												</select>
 											</div>
 											<div class="col-12 col-lg-6">
-												<label class="form-label">To Type </label> <label
-													style="color: red">*</label> <select class="form-control"
-													th:field="*{toDateType}" id="to_date_type"
-													onchange="toDayTypeValue(this.value)">
+												<label class="form-label">To Type </label> <select
+													class="form-control" th:field="*{toDateType}"
+													id="to_date_type" onchange="toDayTypeValue(this.value)">
 													<option value="f">Full</option>
 													<option value="fh">first Half</option>
 													<option value="sh">Second Half</option>
@@ -192,9 +190,9 @@ body {
 
 											<div class="col-12 col-lg-6">
 												<div class="form-group">
-													<label> Leave(days) </label> <label style="color: red">*</label>
-													<input type="text" id="leave_for" class="form-control"
-														th:field="*{leaveFor}" readonly>
+													<label> Leave(days) </label> <input type="text"
+														id="leave_for" class="form-control" th:field="*{leaveFor}"
+														readonly>
 												</div>
 											</div>
 
@@ -203,9 +201,8 @@ body {
 										<div class="row">
 											<div class="col-12 col-lg-6">
 												<div class="form-group">
-													<label> Reason </label> <label style="color: red">*</label>
-													<input type="text" class="form-control"
-														th:field="*{reason}">
+													<label> Reason </label> <input type="text"
+														class="form-control" th:field="*{reason}">
 												</div>
 											</div>
 										</div>
@@ -222,21 +219,33 @@ body {
 
 
 												<div class="row container">
+
 													<div class="col-12 col-lg-4">
-														<label class="form-label">Casual Leave </label> <label
-															style="color: red">*</label> <input class="from-control"
-															value="0">
+														<label class="form-label">Leave Granted </label> <select
+															class="form-control" id="employeeDropDownLeave"
+															onchange="leaveEmployeDisplay()">
+															<option value="">--Select--</option>
+														
+														</select>
+
 													</div>
-													<div class="col-12 col-lg-4">
-														<label class="form-label">Earned Leave </label> <label
-															style="color: red">*</label> <input class="from-control"
-															value="0">
-													</div>
-													<div class="col-12 col-lg-4">
-														<label class="form-label"> Sick Leave </label> <label
-															style="color: red">*</label> <input class="from-control"
-															value="0">
-													</div>
+												
+														<div class="col-12 col-lg-4">
+															<div class="form-group">
+																<label> Leave Taken </label> <input type="text"
+																	class="form-control" th:field="*{reason}">
+															</div>
+														</div>
+													
+													
+														<div class="col-12 col-lg-4">
+															<div class="form-group">
+																<label> Leave Availed </label> <input type="text"
+																	class="form-control" th:field="*{reason}">
+															</div>
+														</div>
+													
+													
 												</div>
 
 
@@ -262,6 +271,8 @@ body {
 												<th scope="col" class="text-center">Emp Code</th>
 												<th scope="col" class="text-center">Name</th>
 												<th scope="col" class="text-center">Apply Date</th>
+												<th scope="col" class="text-center">From</th>
+												<th scope="col" class="text-center">To</th>
 												<th scope="col" class="text-center">Reason</th>
 												<th scope="col" class="text-center">Status</th>
 												<th scope="col" class="text-center">Action</th>
@@ -272,7 +283,13 @@ body {
 												<td class="text-center" th:text="${leave.employee.empCode}"></td>
 												<td class="text-center" th:text="${leave.employee.empName}">testing</td>
 												<td class="text-center"
-													th:text="${#dates.format(leave.applyDate, 'dd-MMM-yyyy')}"></td>
+													th:text="${#dates.format(leave.applyDate, 'dd-MM-yyyy')}"></td>
+												
+												<td class="text-center" th:text="${#dates.format(leave.fromDate, 'dd-MM-yyyy')}"></td>
+
+												<td class="text-center" th:text="${#dates.format(leave.toDate, 'dd-MM-yyyy')}"></td>
+														
+												
 												<td class="text-center" th:text="${leave.reason}"></td>
 												<th:block th:switch="${leave.status}">
 													<td th:case="'Y'" class="text-center">Approved</td>
@@ -301,11 +318,19 @@ body {
 			</footer>
 		</div>
 	</div>
+
+	from_date
+
 	<script>
-		
+		$('#applyDate').val(new Date().toJSON().slice(0, 10));
+		$('#from_date').val(new Date().toJSON().slice(0, 10));
+		$('#to_date').val(new Date().toJSON().slice(0, 10));
+	</script>
+
+
+	<script>
 		$(function() {
 
-			
 			$(document).ready(
 					function() {
 						var datatablesButtons = $('#example').DataTable(
