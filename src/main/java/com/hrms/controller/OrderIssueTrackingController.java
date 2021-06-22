@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.hrms.helper.Message1;
 import com.hrms.model.Department;
 import com.hrms.model.Employee;
 import com.hrms.model.MenuModule;
@@ -91,9 +92,15 @@ public class OrderIssueTrackingController {
 		if(session.getAttribute("username")==null) {
 			return "redirect:" + "./";
 		}
+		try {
+			orderIssueTracking.setOrderFileName(orderFile.getOriginalFilename());
+			orderIssueTrackingService.saveOrderIssueTracking(orderIssueTracking);
+			session.setAttribute("message",new Message1("Data has been Successfully added","alert-primary"));
+		}catch(Exception e) {
+			e.printStackTrace();
+			session.setAttribute("message", new Message1("Something went Wrong !!","alert-info"));
+		}
 		
-		orderIssueTracking.setOrderFileName(orderFile.getOriginalFilename());
-		orderIssueTrackingService.saveOrderIssueTracking(orderIssueTracking);
 		
 		
 		return "redirect:orderissuetracking";
@@ -134,8 +141,16 @@ public class OrderIssueTrackingController {
 			return "redirect:" + "./";
 		}
 		
-		orderIssueTracking.setOrderFileName(orderFile.getOriginalFilename());
-		orderIssueTrackingService.updateOrderIssueTracking(orderIssueTracking);
+		try {
+			orderIssueTracking.setOrderFileName(orderFile.getOriginalFilename());
+			orderIssueTrackingService.updateOrderIssueTracking(orderIssueTracking);
+			session.setAttribute("message",new Message1("Data has been Successfully added","alert-primary"));
+		}catch(Exception e) {
+			e.printStackTrace();
+			session.setAttribute("message", new Message1("Something went Wrong !!","alert-info"));
+			
+		}
+		
 		return "redirect:orderissuetracking";
 	}
 	
@@ -147,10 +162,17 @@ public class OrderIssueTrackingController {
 			return "redirect:" + "./";
 		}
 		
-		orderIssueTrackingService.removeOrderIssueTracking(Long.parseLong(orderTrackingId));
+		try {
+			orderIssueTrackingService.removeOrderIssueTracking(Long.parseLong(orderTrackingId));
+			session.setAttribute("message",new Message1("Data has been Delete Successfully","alert-primary"));
+		}catch(Exception e) {
+			e.printStackTrace();
+			session.setAttribute("message", new Message1("Something went Wrong !!","alert-info"));
+		}
+		
 		
 		session.setAttribute("username", session.getAttribute("username"));
-		return "redirect:orderissuetracking";
+		return "redirect:/orderissuetracking";
 	}
 	
 	
