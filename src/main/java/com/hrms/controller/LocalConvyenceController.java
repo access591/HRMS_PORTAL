@@ -277,6 +277,7 @@ public class LocalConvyenceController {
 		}
 		
 		  try {
+			  localConvyence.setApprovalStatus("N");
 			this.localConvyenceService.updateLocalConvyence(localConvyence);
 			  
 			  return "redirect:/localConvyence";

@@ -226,7 +226,7 @@ public class TourPlanController {
 		if (session.getAttribute("username") == null) {
 			return "redirect:" + "./";
 		}
-		
+		tourPlan.setApprovalStatus("N");
 		  this.tourPlanService.updateTourPlan(tourPlan);
 	    	  
 		  
