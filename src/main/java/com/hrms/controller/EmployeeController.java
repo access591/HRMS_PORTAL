@@ -99,30 +99,35 @@ public class EmployeeController {
 		EmployeeUtil empl;
 	
 		
-		List<Employee>listEmployee2= employeeService.getAllEmployees();
-		
-		for(int i=0;i<listEmployee2.size();i++)
-		{
-		
+		try {
+			List<Employee>listEmployee2= employeeService.getAllEmployees();
 			
-			Department d=departmentService.findDepartmentById(listEmployee2.get(i).getDepartmentCode());
-			Designation desig = designationService.findDesignationById(listEmployee2.get(i).getDesignationCode());
-			ArmsLicenseDetails arms= armsLicenseService.findArmsByEmpEmpCode(listEmployee2.get(i).getEmpCode());
-			Category cat=categoryService.findCategoryByCatId(listEmployee2.get(i).getCategoryCode());
+			for(int i=0;i<listEmployee2.size();i++)
+			{
+			
+				
+				Department d=departmentService.findDepartmentById(listEmployee2.get(i).getDepartmentCode());
+				Designation desig = designationService.findDesignationById(listEmployee2.get(i).getDesignationCode());
+				ArmsLicenseDetails arms= armsLicenseService.findArmsByEmpEmpCode(listEmployee2.get(i).getEmpCode());
+				Category cat=categoryService.findCategoryByCatId(listEmployee2.get(i).getCategoryCode());
+
+				
+				
+				          empl = new EmployeeUtil(listEmployee2.get(i).getEmpCode(),
+						                arms.getArmsCode(),
+						  				listEmployee2.get(i).getEmpName(),
+						  				cat.getCategoryName(),
+						  				d.getDeptName(),
+						  				desig.getDesgName(),
+						  				listEmployee2.get(i).getImageProfile());
+				                        listEmployeeUtil.add(empl);
+				                       
+				                   
+				 
+			}
+		} catch (Exception e) {
 	
-			
-			
-			          empl = new EmployeeUtil(listEmployee2.get(i).getEmpCode(),
-					                arms.getArmsCode(),
-					  				listEmployee2.get(i).getEmpName(),
-					  				cat.getCategoryName(),
-					  				d.getDeptName(),
-					  				desig.getDesgName(),
-					  				listEmployee2.get(i).getImageProfile());
-			                        listEmployeeUtil.add(empl);
-			                       
-			                   
-			 
+			e.printStackTrace();
 		}
 		
 		
