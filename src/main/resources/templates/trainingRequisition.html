@@ -455,7 +455,7 @@ body {
 
 												</th:block></td>
 
-											<td></td>
+											
 										</tr>
 									</tbody>
 
@@ -473,44 +473,22 @@ body {
 		</div>
 	</div>
 
-	<script>
-		function selectEmploye() {
-			console.log("click");
-		}
-	</script>
+	
+	
 
 	<script>
 		$(document).ready(function() {
-			$('#example').DataTable({
-				"scrollY" : 200,
-				"scrollX" : true,
-				deferRender : true,
-				scrollCollapse : true,
 
-			});
+			// SmartWizard initialize
+			$('#smartwizard').smartWizard();
+			$('#smartwizard').smartWizard("loader", "show");
+
 		});
 	</script>
-	<script>
+
+	
+<script>
 		$(function() {
-
-			$("input[name='tourPlanDate']").daterangepicker({
-				singleDatePicker : true,
-				autoApply : true,
-				locale : {
-					format : 'YYYY/MM/DD'
-				},
-				showDropdowns : true
-			});
-
-			$("input[name='tourClaimDate']").daterangepicker({
-				singleDatePicker : true,
-				autoApply : true,
-				locale : {
-					format : 'YYYY/MM/DD'
-				},
-				showDropdowns : true
-			});
-
 			// Datatables basic
 			$('#datatables-basic').DataTable({
 				responsive : true
@@ -524,8 +502,8 @@ body {
 								scroller : false,
 								responsive : true,
 								lengthMenu : [
-										[ 10, 20, 30, -1 ],
-										[ '10 rows', '20 rows', '30 rows',
+										[ 5, 10, 15, -1 ],
+										[ '5 rows', '10 rows', '15 rows',
 												'Show all' ] ],
 								buttons : []
 							});
@@ -534,68 +512,6 @@ body {
 		});
 	</script>
 
-	<script>
-		$(document).ready(function() {
-
-			// SmartWizard initialize
-			$('#smartwizard').smartWizard();
-			$('#smartwizard').smartWizard("loader", "show");
-
-		});
-	</script>
-
-	<script type="text/javascript">
-		function changetextbox() {
-			if (document.getElementById("onDeputation").value === "Y")
-
-			{
-				document.getElementById("empDeputation").disabled = 'true';
-
-			} else {
-
-				document.getElementById("empDeputation").disabled = '';
-			}
-
-		}
-	</script>
-
-
-	<script type='text/javascript'>
-		function preview_image(event) {
-			var reader = new FileReader();
-			reader.onload = function() {
-				var output = document.getElementById('output_image');
-				output.src = reader.result;
-			}
-			reader.readAsDataURL(event.target.files[0]);
-		}
-	</script>
-
-	
-	<script>
-		function syncAddress() {
-			var n1 = document.getElementById('address1');
-			var n2 = document.getElementById('addressArms');
-			n2.value = n1.value;
-		}
-	</script>
-	<script>
-		function myFunctionState() {
-			$('#stateCode').click(function() {
-				var name = $('#stateCode option:selected').text();
-				$('#state').val(name);
-			});
-		}
-	</script>
-
-	<script>
-		function myFunctionCity() {
-			$('#cityCode').click(function() {
-				var name = $('#cityCode option:selected').text();
-				$('#district').val(name);
-			});
-		}
-	</script>
 
 	<script>
 		function myFunctionEmpCode() {
@@ -680,18 +596,10 @@ body {
 		}
 	</script>
 
-	<script>
-		$('#loading').show();
-		$.ajax({
-			// Other ajax parameters
-			success : function() {
-				// hiding the image here
-				debugger;
-				$('#loading').hide();
-			}
-		});
-	</script>
-
+	
+	
+	
+	
 	<script>
 		document.getElementById("tourClaimDate").valueAsDate = new Date();
 	</script>

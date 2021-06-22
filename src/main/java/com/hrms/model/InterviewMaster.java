@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -32,45 +33,60 @@ public class InterviewMaster {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date applicantDate;
 	
+	@Size(max=10)
 	@Column(name="SELECTION_STATUS")
 	private String selectionStatus = "N";
 	
+	@Size(max=250)
 	@Column(name="REMARKS")
 	private String remarks;
 	
+	@Size(max=10)
 	@Column(name="ROUND1")
 	private String round1;
 	
+	@Size(max=10)
 	@Column(name="RATING1")
 	private String rating1;
 	
+	@Size(max=20)
 	@Column(name="ROUND2")
 	private String round2;
 	
+	@Size(max=10)
 	@Column(name="RATING2")
 	private String rating2;
 	
+	@Size(max=10)
 	@Column(name="ROUND3")
 	private String round3;
 	
+	
+	@Size(max=10)
 	@Column(name="RATING3")
 	private String rating3;
 	
+	@Size(max=10)
 	@Column(name="ROUND4")
 	private String round4;
 	
+	@Size(max=10)
 	@Column(name="RATING4")
 	private String rating4;
 	
+	@Size(max=10)
 	@Column(name="ROUND5")
 	private String round5;
 	
+	@Size(max=10)
 	@Column(name="RATING5")
 	private String rating5;
 	
+	@Size(max=10)
 	@Column(name="ROUND6")
 	private String round6;
 	
+	@Size(max=10)
 	@Column(name="RATING6")
 	private String rating6;
 	
@@ -80,6 +96,7 @@ public class InterviewMaster {
 	@Column(name="INS_BY")
 	private String insBy;
 	
+	@Size(max=10)
 	@Column(name="OVER_ALL_RATING")
 	private String overAllRating;
 	

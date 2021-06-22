@@ -12,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -32,24 +33,29 @@ public class TrainingRequisition {
 	@JoinColumn(name = "DEPT_CODE",updatable=false)
 	private Department department;
 	
+	@Size(max=50)
 	@Column(name="TR_APPROVER")
 	private String trApprover;
 	
 	@Column(name="TR_APPROVER_DATE")
 	private Date trApproverDate;
 	
+	@Size(max=250)
 	@Column(name="REMARKSE")
 	private String remarks;
 	
+	@Size(max=50)
 	@Column(name="FY_CODE")   
 	private String fyCode;
 	
+	@Size(max=50)
 	@Column(name="INS_BY")
 	private String insBy;
 	
 	@Column(name="INS_DATE")
 	private Date insDate = new Date();
 	
+	@Size(max=50)
 	@Column(name="TR_REQ_STATUS")
 	private String trReqStatus = "N";
 	
