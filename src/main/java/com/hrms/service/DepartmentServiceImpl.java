@@ -32,16 +32,18 @@ public class DepartmentServiceImpl implements DepartmentService {
 
 	@Override
 	public void updateDepartment(Department d) {
-		d.setDeptName(d.getDeptName());
-		d.setUpdDate(d.getUpdDate());
-		d.setActive(d.getActive());
 		this.departmentDao.saveOrUpdate(d);
 
 	}
 
 	@Override
 	public void removeDepartment(String id) {
-		this.departmentDao.delete(id);
+		try {
+			this.departmentDao.delete(id);
+		} catch (Exception e) {
+		
+			e.printStackTrace();
+		}
 
 	}
 

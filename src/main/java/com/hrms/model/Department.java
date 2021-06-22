@@ -36,7 +36,7 @@ public class Department implements Serializable
 	@Column(name = "DEP_NAME")
 	private String deptName;
 	@ManyToOne
-	@JoinColumn(name ="DEPH_Code")
+	@JoinColumn(name ="DEPH_Code",updatable = false)
 	private Employee empCode;
 	@Size(max =1)
 	@Column(name = "ACTIVE_YN")
