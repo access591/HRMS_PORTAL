@@ -33,7 +33,7 @@ public class State implements Serializable{
 	@OneToMany(mappedBy = "stateCode")
 	private List<City> citys;
 	@ManyToOne
-	@JoinColumn(name = "COUNTRY_CODE", nullable = false)
+	@JoinColumn(name = "COUNTRY_CODE", updatable = false)
 	private Country countryCode;
 	
 	@Size(max =50)
