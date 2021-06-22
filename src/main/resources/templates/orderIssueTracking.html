@@ -53,6 +53,18 @@ body {
 									</div>
 								</div>
 								<div class="card-body">
+								
+								<div class="row">
+										<div th:if="${session.message}"
+											class="alert alert-primary alert-dismissible fade show">
+											<p class="text-center" th:text="${session.message.content}"></p>
+											<button type="button" class="close" data-dismiss="alert">&times;</button>
+											<th:block th:text="${#session.removeAttribute('message')}"></th:block>
+
+										</div>
+									</div>
+									
+									
 									<form id="validation-form" action="#"
 										th:action="@{/saveOrderIssueTracking}" th:object="${orderIssueTracking}" method="post"
 											enctype="multipart/form-data">
@@ -109,8 +121,8 @@ body {
 
 
 											<div class="col-12 col-lg-4">
-												<label class="form-label">Order File</label> <label
-													style="color: red">*</label> <input type="file"
+												<label class="form-label">Order File</label> 
+												 <input type="file"
 													name="orderFile">
 
 											</div>
@@ -130,7 +142,7 @@ body {
 										</div>
 
 								
-									
+									<p></p>
 										<Button type="submit" class="btn btn-primary">Submit</Button>
 										<Button type="reset" class="btn btn-primary">Reset</Button>
 
