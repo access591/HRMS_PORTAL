@@ -1,82 +1,85 @@
 <!DOCTYPE html>
 
-<html xmlns:th="http://www.thymeleaf.org"lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 
 <!-- Mirrored from spark.bootlab.io/dashboard-default.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 27 Nov 2020 05:26:47 GMT -->
-<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<!-- Added by HTTrack -->
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+<!-- /Added by HTTrack -->
 <head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<meta name="description" content="Responsive Bootstrap 4 Admin &amp; Dashboard Template">
-	<meta name="author" content="Bootlab">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description"
+	content="Responsive Bootstrap 4 Admin &amp; Dashboard Template">
+<meta name="author" content="Bootlab">
 
-	<title>HRMS</title>
-	<style>
-		body {
-			opacity: 0;
-		}
-				#treeview, #treeview ul
-{
-    list-style-type:none;
-}
-#treeview .open > ul
-{
-   display:none;
-   
+<title>HRMS</title>
+<style>
+body {
+	opacity: 0;
 }
 
-#treeview .open, #treeview .closessss
-{
-  cursor:pointer;
+#treeview, #treeview ul {
+	list-style-type: none;
 }
-	
-	</style>
-	<script src="js/settings.js"></script>
-	<!-- END SETTINGS -->
+
+#treeview .open>ul {
+	display: none;
+}
+
+#treeview .open, #treeview .closessss {
+	cursor: pointer;
+}
+</style>
+<script src="js/settings.js"></script>
+<!-- END SETTINGS -->
 <!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-120946860-7"></script>
+<script async
+	src="https://www.googletagmanager.com/gtag/js?id=UA-120946860-7"></script>
 <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+	window.dataLayer = window.dataLayer || [];
+	function gtag() {
+		dataLayer.push(arguments);
+	}
+	gtag('js', new Date());
 
-  gtag('config', 'UA-120946860-7');
-</script></head>
+	gtag('config', 'UA-120946860-7');
+</script>
+</head>
 
 <body>
 
 	<div class="wrapper">
-	
-	<!-- Start  SIDEBAR    -->
+
 		<!-- Start  SIDEBAR    -->
-			<nav id="sidebar" class="sidebar">
- <div th:replace="fragments/sidebar :: div"></div>
- </nav>
-	<!--   SIDEBAR    -->
+		<!-- Start  SIDEBAR    -->
+		<nav id="sidebar" class="sidebar">
+			<div th:replace="fragments/sidebar :: div"></div>
+		</nav>
+		<!--   SIDEBAR    -->
 		<div class="main">
-		<div th:replace="fragments/header ::div"></div>
+			<div th:replace="fragments/header ::div"></div>
 
 			<main class="content">
 				<div class="container-fluid">
 
 					<div class="header">
-						<h1 class="header-title">
-							Welcome HRMS
-						</h1>
-						
-						
+						<h1 class="header-title">Welcome HRMS</h1>
+
+
 					</div>
 
 					<div class="row">
 						<div class="col-xl-6 col-xxl-7">
 							<div class="card flex-fill w-100">
 								<div class="card-header">
-								
-									<h1>HIii</h1>
+
+									
 									<div class="card-actions float-right">
-										<a href="#" class="mr-1">
-											<em class="align-middle" data-feather="refresh-cw"></em>
+										<a href="#" class="mr-1"> <em class="align-middle"
+											data-feather="refresh-cw"></em>
 										</a>
 										<div class="d-inline-block dropdown show">
 											<a href="#" data-toggle="dropdown" data-display="static">
@@ -84,17 +87,21 @@
 											</a>
 
 											<div class="dropdown-menu dropdown-menu-right">
-												<a class="dropdown-item" href="#">Action</a>
-												<a class="dropdown-item" href="#">Another action</a>
-												<a class="dropdown-item" href="#">Something else here</a>
+												<a class="dropdown-item" href="#">Action</a> <a
+													class="dropdown-item" href="#">Another action</a> <a
+													class="dropdown-item" href="#">Something else here</a>
 											</div>
 										</div>
 									</div>
-									<h5 class="card-title mb-0">Recent Movement</h5>
+									<h5 class="card-title mb-0">Employee Details</h5>
 								</div>
 								<div class="card-body py-3">
 									<div class="chart chart-sm">
-										<canvas id="chartjs-dashboard-line"></canvas>
+										
+										<figure class="highcharts-figure">
+											<div id="container-bar"></div>
+										</figure>
+										
 									</div>
 								</div>
 							</div>
@@ -114,13 +121,14 @@
 													<div class="col-auto">
 														<div class="avatar">
 															<div class="avatar-title rounded-circle bg-primary-dark">
-																<img src="https://img.icons8.com/color/48/000000/user-group-skin-type-7.png"/>
+																<img
+																	src="https://img.icons8.com/color/48/000000/user-group-skin-type-7.png" />
 															</div>
 														</div>
 													</div>
 												</div>
 												<h1 class="display-5 mt-1 mb-3" th:text="${employeeList}">17.212</h1>
-												
+
 											</div>
 										</div>
 										<div class="card">
@@ -139,7 +147,7 @@
 													</div>
 												</div>
 												<h1 class="display-5 mt-1 mb-3" th:text="${finalSelection}">17.212</h1>
-												
+
 											</div>
 										</div>
 									</div>
@@ -154,13 +162,15 @@
 													<div class="col-auto">
 														<div class="avatar">
 															<div class="avatar-title rounded-circle bg-primary-dark">
-																<img src="https://img.icons8.com/fluent-systems-filled/48/000000/attendance-mark.png"/>
+																<img
+																	src="https://img.icons8.com/fluent-systems-filled/48/000000/attendance-mark.png" />
 															</div>
 														</div>
 													</div>
 												</div>
-												<h1 class="display-5 mt-1 mb-3" th:text="${listAttendenceRegister}">$24.300</h1>
-												
+												<h1 class="display-5 mt-1 mb-3"
+													th:text="${listAttendenceRegister}">$24.300</h1>
+
 											</div>
 										</div>
 										<div class="card">
@@ -173,13 +183,14 @@
 													<div class="col-auto">
 														<div class="avatar">
 															<div class="avatar-title rounded-circle bg-primary-dark">
-																<img src="https://img.icons8.com/cotton/64/000000/change-employee-female.png"/>
+																<img
+																	src="https://img.icons8.com/cotton/64/000000/change-employee-female.png" />
 															</div>
 														</div>
 													</div>
 												</div>
 												<h1 class="display-5 mt-1 mb-3" th:text="${findTodayLeave}">43</h1>
-												
+
 											</div>
 										</div>
 									</div>
@@ -193,8 +204,8 @@
 							<div class="card flex-fill">
 								<div class="card-header">
 									<div class="card-actions float-right">
-										<a href="#" class="mr-1">
-											<em class="align-middle" data-feather="refresh-cw"></em>
+										<a href="#" class="mr-1"> <em class="align-middle"
+											data-feather="refresh-cw"></em>
 										</a>
 										<div class="d-inline-block dropdown show">
 											<a href="#" data-toggle="dropdown" data-display="static">
@@ -202,9 +213,9 @@
 											</a>
 
 											<div class="dropdown-menu dropdown-menu-right">
-												<a class="dropdown-item" href="#">Action</a>
-												<a class="dropdown-item" href="#">Another action</a>
-												<a class="dropdown-item" href="#">Something else here</a>
+												<a class="dropdown-item" href="#">Action</a> <a
+													class="dropdown-item" href="#">Another action</a> <a
+													class="dropdown-item" href="#">Something else here</a>
 											</div>
 										</div>
 									</div>
@@ -223,8 +234,8 @@
 							<div class="card flex-fill w-100">
 								<div class="card-header">
 									<div class="card-actions float-right">
-										<a href="#" class="mr-1">
-											<em class="align-middle" data-feather="refresh-cw"></em>
+										<a href="#" class="mr-1"> <em class="align-middle"
+											data-feather="refresh-cw"></em>
 										</a>
 										<div class="d-inline-block dropdown show">
 											<a href="#" data-toggle="dropdown" data-display="static">
@@ -232,16 +243,16 @@
 											</a>
 
 											<div class="dropdown-menu dropdown-menu-right">
-												<a class="dropdown-item" href="#">Action</a>
-												<a class="dropdown-item" href="#">Another action</a>
-												<a class="dropdown-item" href="#">Something else here</a>
+												<a class="dropdown-item" href="#">Action</a> <a
+													class="dropdown-item" href="#">Another action</a> <a
+													class="dropdown-item" href="#">Something else here</a>
 											</div>
 										</div>
 									</div>
 									<h5 class="card-title mb-0">Current Visitors</h5>
 								</div>
 								<div class="card-body px-4">
-									<div id="world_map" style="height:350px;"></div>
+									<div id="world_map" style="height: 350px;"></div>
 								</div>
 							</div>
 						</div>
@@ -249,8 +260,8 @@
 							<div class="card flex-fill w-100">
 								<div class="card-header">
 									<div class="card-actions float-right">
-										<a href="#" class="mr-1">
-											<em class="align-middle" data-feather="refresh-cw"></em>
+										<a href="#" class="mr-1"> <em class="align-middle"
+											data-feather="refresh-cw"></em>
 										</a>
 										<div class="d-inline-block dropdown show">
 											<a href="#" data-toggle="dropdown" data-display="static">
@@ -258,9 +269,9 @@
 											</a>
 
 											<div class="dropdown-menu dropdown-menu-right">
-												<a class="dropdown-item" href="#">Action</a>
-												<a class="dropdown-item" href="#">Another action</a>
-												<a class="dropdown-item" href="#">Something else here</a>
+												<a class="dropdown-item" href="#">Action</a> <a
+													class="dropdown-item" href="#">Another action</a> <a
+													class="dropdown-item" href="#">Something else here</a>
 											</div>
 										</div>
 									</div>
@@ -285,8 +296,8 @@
 							<div class="card flex-fill">
 								<div class="card-header">
 									<div class="card-actions float-right">
-										<a href="#" class="mr-1">
-											<em class="align-middle" data-feather="refresh-cw"></em>
+										<a href="#" class="mr-1"> <em class="align-middle"
+											data-feather="refresh-cw"></em>
 										</a>
 										<div class="d-inline-block dropdown show">
 											<a href="#" data-toggle="dropdown" data-display="static">
@@ -294,19 +305,22 @@
 											</a>
 
 											<div class="dropdown-menu dropdown-menu-right">
-												<a class="dropdown-item" href="#">Action</a>
-												<a class="dropdown-item" href="#">Another action</a>
-												<a class="dropdown-item" href="#">Something else here</a>
+												<a class="dropdown-item" href="#">Action</a> <a
+													class="dropdown-item" href="#">Another action</a> <a
+													class="dropdown-item" href="#">Something else here</a>
 											</div>
 										</div>
 									</div>
 									<h5 class="card-title mb-0">Latest Projects</h5>
 								</div>
-								<table id="datatables-dashboard-projects"aria-describedby="datatables-dashboard-projects" class="table table-striped my-0">
+								<table id="datatables-dashboard-projects"
+									aria-describedby="datatables-dashboard-projects"
+									class="table table-striped my-0">
 									<thead>
 										<tr>
 											<th scope="col">Name</th>
-											<th scope="col" class="d-none d-xl-table-cell">Start Date</th>
+											<th scope="col" class="d-none d-xl-table-cell">Start
+												Date</th>
 											<th scope="col" class="d-none d-xl-table-cell">End Date</th>
 											<th scope="col">Status</th>
 											<th scope="col" class="d-none d-md-table-cell">Assignee</th>
@@ -384,8 +398,8 @@
 							<div class="card flex-fill w-100">
 								<div class="card-header">
 									<div class="card-actions float-right">
-										<a href="#" class="mr-1">
-											<em class="align-middle" data-feather="refresh-cw"></em>
+										<a href="#" class="mr-1"> <em class="align-middle"
+											data-feather="refresh-cw"></em>
 										</a>
 										<div class="d-inline-block dropdown show">
 											<a href="#" data-toggle="dropdown" data-display="static">
@@ -393,9 +407,9 @@
 											</a>
 
 											<div class="dropdown-menu dropdown-menu-right">
-												<a class="dropdown-item" href="#">Action</a>
-												<a class="dropdown-item" href="#">Another action</a>
-												<a class="dropdown-item" href="#">Something else here</a>
+												<a class="dropdown-item" href="#">Action</a> <a
+													class="dropdown-item" href="#">Another action</a> <a
+													class="dropdown-item" href="#">Something else here</a>
 											</div>
 										</div>
 									</div>
@@ -411,78 +425,274 @@
 					</div>
 
 				</div>
+
+
 			</main>
 			<footer class="footer">
-		<div th:replace="fragments/footer :: div"></div>
-		</footer>
+				<div th:replace="fragments/footer :: div"></div>
+			</footer>
 		</div>
 
 	</div>
-<script src="js/app.js"></script>
+	<script src="js/app.js"></script>
+
+
+	<script src='https://www.gstatic.com/charts/loader.js'></script>
+	<script>
+		$(document)
+				.ready(
+						function() {
+
+							console
+									.log("=================calling ajax request")
+
+							console.log("inside category");
+							const xhr = new XMLHttpRequest();
+							xhr.open('GET', 'getCategoryData', true);
+							xhr.getResponseHeader('content-type',
+									'application/json');
+							xhr.onload = function() {
+								if (this.status === 200) {
+									let obj = JSON.parse(this.responseText);
+									console.log("object response");
+									console.log(obj);
+
+									$.each(data[objectProp], function(key,
+											element) {
+
+									})
+
+									google.charts.load('upcoming', {
+										'packages' : [ 'vegachart' ]
+									}).then(drawChart);
+
+									function drawChart() {
+										const dataTable = new google.visualization.DataTable();
+										dataTable.addColumn({
+											type : 'string',
+											'id' : 'category'
+										});
+										dataTable.addColumn({
+											type : 'number',
+											'id' : 'amount'
+										});
+										dataTable.addRows([
+
+										[ 'A', 28 ], [ 'B', 55 ], [ 'C', 43 ],
+
+										]);
+
+										const options = {
+											"vega" : {
+												"$schema" : "https://vega.github.io/schema/vega/v4.json",
+												"width" : 500,
+												"height" : 200,
+												"padding" : 5,
+
+												'data' : [ {
+													'name' : 'table',
+													'source' : 'datatable'
+												} ],
+
+												"signals" : [ {
+													"name" : "tooltip",
+													"value" : {},
+													"on" : [
+															{
+																"events" : "rect:mouseover",
+																"update" : "datum"
+															},
+															{
+																"events" : "rect:mouseout",
+																"update" : "{}"
+															} ]
+												} ],
+
+												"scales" : [ {
+													"name" : "xscale",
+													"type" : "band",
+													"domain" : {
+														"data" : "table",
+														"field" : "category"
+													},
+													"range" : "width",
+													"padding" : 0.05,
+													"round" : true
+												}, {
+													"name" : "yscale",
+													"domain" : {
+														"data" : "table",
+														"field" : "amount"
+													},
+													"nice" : true,
+													"range" : "height"
+												} ],
+
+												"axes" : [ {
+													"orient" : "bottom",
+													"scale" : "xscale"
+												}, {
+													"orient" : "left",
+													"scale" : "yscale"
+												} ],
+
+												"marks" : [
+														{
+															"type" : "rect",
+															"from" : {
+																"data" : "table"
+															},
+															"encode" : {
+																"enter" : {
+																	"x" : {
+																		"scale" : "xscale",
+																		"field" : "category"
+																	},
+																	"width" : {
+																		"scale" : "xscale",
+																		"band" : 1
+																	},
+																	"y" : {
+																		"scale" : "yscale",
+																		"field" : "amount"
+																	},
+																	"y2" : {
+																		"scale" : "yscale",
+																		"value" : 0
+																	}
+																},
+																"update" : {
+																	"fill" : {
+																		"value" : "steelblue"
+																	}
+																},
+																"hover" : {
+																	"fill" : {
+																		"value" : "red"
+																	}
+																}
+															}
+														},
+														{
+															"type" : "text",
+															"encode" : {
+																"enter" : {
+																	"align" : {
+																		"value" : "center"
+																	},
+																	"baseline" : {
+																		"value" : "bottom"
+																	},
+																	"fill" : {
+																		"value" : "#333"
+																	}
+																},
+																"update" : {
+																	"x" : {
+																		"scale" : "xscale",
+																		"signal" : "tooltip.category",
+																		"band" : 0.5
+																	},
+																	"y" : {
+																		"scale" : "yscale",
+																		"signal" : "tooltip.amount",
+																		"offset" : -2
+																	},
+																	"text" : {
+																		"signal" : "tooltip.amount"
+																	},
+																	"fillOpacity" : [
+																			{
+																				"test" : "datum === tooltip",
+																				"value" : 0
+																			},
+																			{
+																				"value" : 1
+																			} ]
+																}
+															}
+														} ]
+											}
+										};
+
+										const chart = new google.visualization.VegaChart(
+												document
+														.getElementById('chart-div'));
+										chart.draw(dataTable, options);
+									}
+
+								} else {
+									console.error("some error occured");
+								}
+
+							}
+							xhr.send();
+
+						});
+	</script>
 
 	<script>
 		$(function() {
 			// Line chart
 			new Chart(document.getElementById("chartjs-dashboard-line"), {
-				type: 'line',
-				data: {
-					labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-					datasets: [{
-							label: "Orders",
-							fill: true,
-							backgroundColor: window.theme.primary,
-							borderColor: window.theme.primary,
-							borderWidth: 2,
-							data: [3, 2, 3, 5, 6, 5, 4, 6, 9, 10, 8, 9]
-						},
-						{
-							label: "Sales ($)",
-							fill: true,
-							backgroundColor: "rgba(0, 0, 0, 0.05)",
-							borderColor: "rgba(0, 0, 0, 0.05)",
-							borderWidth: 2,
-							data: [5, 4, 10, 15, 16, 12, 10, 13, 20, 22, 18, 20]
-						}
-					]
+				type : 'line',
+				data : {
+					labels : [ "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul",
+							"Aug", "Sep", "Oct", "Nov", "Dec" ],
+					datasets : [ {
+						label : "Orders",
+						fill : true,
+						backgroundColor : window.theme.primary,
+						borderColor : window.theme.primary,
+						borderWidth : 2,
+						data : [ 3, 2, 3, 5, 6, 5, 4, 6, 9, 10, 8, 9 ]
+					}, {
+						label : "Sales ($)",
+						fill : true,
+						backgroundColor : "rgba(0, 0, 0, 0.05)",
+						borderColor : "rgba(0, 0, 0, 0.05)",
+						borderWidth : 2,
+						data : [ 5, 4, 10, 15, 16, 12, 10, 13, 20, 22, 18, 20 ]
+					} ]
 				},
-				options: {
-					maintainAspectRatio: false,
-					legend: {
-						display: false
+				options : {
+					maintainAspectRatio : false,
+					legend : {
+						display : false
 					},
-					tooltips: {
-						intersect: false
+					tooltips : {
+						intersect : false
 					},
-					hover: {
-						intersect: true
+					hover : {
+						intersect : true
 					},
-					plugins: {
-						filler: {
-							propagate: false
+					plugins : {
+						filler : {
+							propagate : false
 						}
 					},
-					elements: {
-						point: {
-							radius: 0
+					elements : {
+						point : {
+							radius : 0
 						}
 					},
-					scales: {
-						xAxes: [{
-							reverse: true,
-							gridLines: {
-								color: "rgba(0,0,0,0.0)"
+					scales : {
+						xAxes : [ {
+							reverse : true,
+							gridLines : {
+								color : "rgba(0,0,0,0.0)"
 							}
-						}],
-						yAxes: [{
-							ticks: {
-								stepSize: 5
+						} ],
+						yAxes : [ {
+							ticks : {
+								stepSize : 5
 							},
-							display: true,
-							gridLines: {
-								color: "rgba(0,0,0,0)",
-								fontColor: "#fff"
+							display : true,
+							gridLines : {
+								color : "rgba(0,0,0,0)",
+								fontColor : "#fff"
 							}
-						}]
+						} ]
 					}
 				}
 			});
@@ -492,27 +702,24 @@
 		$(function() {
 			// Pie chart
 			new Chart(document.getElementById("chartjs-dashboard-pie"), {
-				type: 'pie',
-				data: {
-					labels: ["Chrome", "Firefox", "IE", "Other"],
-					datasets: [{
-						data: [4401, 4003, 1589],
-						backgroundColor: [
-							window.theme.primary,
-							window.theme.warning,
-							window.theme.danger,
-							"#E8EAED"
-						],
-						borderColor: "transparent"
-					}]
+				type : 'pie',
+				data : {
+					labels : [ "Chrome", "Firefox", "IE", "Other" ],
+					datasets : [ {
+						data : [ 4401, 4003, 1589 ],
+						backgroundColor : [ window.theme.primary,
+								window.theme.warning, window.theme.danger,
+								"#E8EAED" ],
+						borderColor : "transparent"
+					} ]
 				},
-				options: {
-					responsive: !window.MSInputMethodContext,
-					maintainAspectRatio: false,
-					legend: {
-						display: false
+				options : {
+					responsive : !window.MSInputMethodContext,
+					maintainAspectRatio : false,
+					legend : {
+						display : false
 					},
-					cutoutPercentage: 75
+					cutoutPercentage : 75
 				}
 			});
 		});
@@ -520,79 +727,83 @@
 	<script>
 		$(function() {
 			// Bar chart
-			new Chart(document.getElementById("chartjs-dashboard-bar"), {
-				type: 'bar',
-				data: {
-					labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-					datasets: [{
-						label: "This year",
-						backgroundColor: window.theme.primary,
-						borderColor: window.theme.primary,
-						hoverBackgroundColor: window.theme.primary,
-						hoverBorderColor: window.theme.primary,
-						data: [54, 67, 41, 55, 62, 45, 55, 73, 60, 76, 48, 79],
-						barPercentage: .75,
-						categoryPercentage: .5
-					}]
-				},
-				options: {
-					maintainAspectRatio: false,
-					legend: {
-						display: false
-					},
-					scales: {
-						yAxes: [{
-							gridLines: {
-								display: false
+			new Chart(document.getElementById("chartjs-dashboard-bar"),
+					{
+						type : 'bar',
+						data : {
+							labels : [ "Jan", "Feb", "Mar", "Apr", "May",
+									"Jun", "Jul", "Aug", "Sep", "Oct", "Nov",
+									"Dec" ],
+							datasets : [ {
+								label : "This year",
+								backgroundColor : window.theme.primary,
+								borderColor : window.theme.primary,
+								hoverBackgroundColor : window.theme.primary,
+								hoverBorderColor : window.theme.primary,
+								data : [ 54, 67, 41, 55, 62, 45, 55, 73, 60,
+										76, 48, 79 ],
+								barPercentage : .75,
+								categoryPercentage : .5
+							} ]
+						},
+						options : {
+							maintainAspectRatio : false,
+							legend : {
+								display : false
 							},
-							stacked: false,
-							ticks: {
-								stepSize: 20
+							scales : {
+								yAxes : [ {
+									gridLines : {
+										display : false
+									},
+									stacked : false,
+									ticks : {
+										stepSize : 20
+									}
+								} ],
+								xAxes : [ {
+									stacked : false,
+									gridLines : {
+										color : "transparent"
+									}
+								} ]
 							}
-						}],
-						xAxes: [{
-							stacked: false,
-							gridLines: {
-								color: "transparent"
-							}
-						}]
-					}
-				}
-			});
+						}
+					});
 		});
 	</script>
 	<script>
 		$(function() {
 			var mapData = {
-				"US": 298,
-				"SA": 200,
-				"DE": 220,
-				"FR": 540,
-				"CN": 120,
-				"AU": 760,
-				"BR": 550,
-				"IN": 200,
-				"GB": 120,
+				"US" : 298,
+				"SA" : 200,
+				"DE" : 220,
+				"FR" : 540,
+				"CN" : 120,
+				"AU" : 760,
+				"BR" : 550,
+				"IN" : 200,
+				"GB" : 120,
 			};
 			$('#world_map').vectorMap({
-				map: 'world_mill',
-				backgroundColor: "transparent",
-				zoomOnScroll: false,
-				regionStyle: {
-					initial: {
-						fill: '#e4e4e4',
-						"fill-opacity": 0.9,
-						stroke: 'none',
-						"stroke-width": 0,
-						"stroke-opacity": 0
+				map : 'world_mill',
+				backgroundColor : "transparent",
+				zoomOnScroll : false,
+				regionStyle : {
+					initial : {
+						fill : '#e4e4e4',
+						"fill-opacity" : 0.9,
+						stroke : 'none',
+						"stroke-width" : 0,
+						"stroke-opacity" : 0
 					}
 				},
-				series: {
-					regions: [{
-						values: mapData,
-						scale: [window.theme.primary],
-						normalizeFunction: 'polynomial'
-					}]
+				series : {
+					regions : [ {
+						values : mapData,
+						scale : [ window.theme.primary ],
+						normalizeFunction : 'polynomial'
+					} ]
 				},
 			});
 			setTimeout(function() {
@@ -603,38 +814,86 @@
 	<script>
 		$(function() {
 			$('#datatables-dashboard-projects').DataTable({
-				pageLength: 6,
-				lengthChange: false,
-				bFilter: false,
-				autoWidth: false
+				pageLength : 6,
+				lengthChange : false,
+				bFilter : false,
+				autoWidth : false
 			});
 		});
 	</script>
 	<script>
 		$(function() {
 			$('#datetimepicker-dashboard').datetimepicker({
-				inline: true,
-				sideBySide: false,
-				format: 'L'
+				inline : true,
+				sideBySide : false,
+				format : 'L'
 			});
 		});
 	</script>
 	<script>
+		$(document).ready(function() {
+			$("#treeview .open").click(function(e) {
+				e.stopPropagation();
+				$(this).toggleClass("closessss open");
 
-$(document).ready(function()  
-{
-   $("#treeview .open").click(function(e)
-   {
-       e.stopPropagation();
-       $(this).toggleClass("closessss open");
-   
-    });
-});
-
-</script>
+			});
+		});
+	</script>
+	
+	
+	<script type="text/javascript">
+        $(document).ready(
+                function() {
+                    $.ajax({
+                        url : "/getCategoryData",
+                        success : function(result) {
+                            var yearDtls = [];
+                            var countDtls = [];
+                            console.log(result);
+                            Object.keys(result).forEach(
+                                    function(key) {
+                                        yearDtls.push(key);
+                                        countDtls.push(result[key]);
+                                    });
+                            drawChart(yearDtls, countDtls);
+                        }
+                    });
+                });
+        function drawChart(year, viewCounts) {
+            Highcharts.chart('container-bar', {
+                chart : {
+                    type : 'column',
+                    styledMode : true
+                },
+                title : {
+                    text : 'Category wise Employee'
+                },
+                xAxis : [ {
+                    title : {
+                        text : 'Year'
+                    },
+                    categories : year
+                } ],
+                yAxis : [ {
+                    className : 'highcharts-color-0',
+                    title : {
+                        text : 'Page View Count'
+                    }
+                } ],
+                series : [ {
+                    data : viewCounts
+                } ]
+            });
+        }
+    </script>
 
 </body>
-
+<link rel="stylesheet"
+	href="https://code.highcharts.com/css/highcharts.css" />
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+<script src="https://code.highcharts.com/modules/accessibility.js"></script>
 
 <!-- Mirrored from spark.bootlab.io/dashboard-default.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 27 Nov 2020 05:27:00 GMT -->
 </html>

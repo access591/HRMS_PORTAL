@@ -1,7 +1,7 @@
 package com.hrms.service;
 
 import java.util.List;
-
+import java.util.Map;
 
 import com.hrms.model.Employee;
 import com.hrms.util.EmployeeUtil;
@@ -20,6 +20,8 @@ public interface EmployeeService {
 	public List<Employee> findByDateOfJoiningMonth(int month);
 	public List<Employee> findByDepartmentCode(String deptCode);
 	public List<Employee> findByempCode(String empCode);
+	
+	public Map<String, Long> countRecordByCategory();
 
 
 }
