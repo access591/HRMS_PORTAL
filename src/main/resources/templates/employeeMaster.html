@@ -412,40 +412,36 @@ body {
 											
 										  <div class="form-row">
 											  
-											  
-										        <div class="form-group sm col-md-4">
-											       <label class="form-label">City 
-											       <span class="text-danger">*</span></label>
-										             <select
-														class="form-control required" name="cityCode" title="City" id="cityCode"onchange="myFunctionCity()">
-															<option value="">Select City</option>
-														<option th:each="lc :${CityList}" th:value="${lc.getCityCode()}" th:text="${lc.getCityName()}">Select  City</option>
-													
-													 </select> 
-										   
-										     </div>
-											  
-											    <div class="form-group sm col-md-4">
-											       <label class="form-label">State 
-											       <span class="text-danger">*</span></label>
-										              <select
-														class="form-control required" name="stateCode" title="State" id="stateCode" onchange="myFunctionState()">
-														<option value="">Select State</option>
-														<option  th:each="ls :${listState}"th:value="${ls.getStateCode()}" th:text="${ls.getStateName()}">Select  State</option>
-														
-													 </select> 
-										    
-										     </div>
-										     <div class="form-group sm col-md-4">
+											  <div class="form-group sm col-md-4">
 											       <label class="form-label">Country 
 											       <span class="text-danger">*</span></label>
 										              <select
-														class="form-control required" name="countryCode" id="countryCode" title="Country">
+														class="form-control required" name="countryCode" id="countryCode" title="Country"onchange="myFunctionStateCode()">
 														<option value="">Select Country</option>
 														<option th:each="lco :${listCountry}" th:value="${lco.getCountryCode()}" th:text="${lco.getCountryName()}">Select  Country Type</option>
 														
 													 </select> 
 										     </div>
+										        <div class="form-group sm col-md-4">
+											       <label class="form-label">State 
+											       <span class="text-danger">*</span></label>
+												<select class="form-control select2" name="stateCode" id="stateCode" onchange="myFunctionStateCityCode()" required aria-required="true">
+												 <option value="">Select State</option>
+											     	</select>
+										    
+										     </div>
+										     
+										        <div class="form-group sm col-md-4">
+											       <label class="form-label">City 
+											       <span class="text-danger">*</span></label>
+											       	<select class="form-control select2" name="cityCode" id="cityCode" onchange="myFunctionCity()"required aria-required="true">
+												 <option value="">Select City</option>
+											     	</select>
+										        
+										   
+										     </div>
+											  
+											 
 											  
 										    
 										       
@@ -904,7 +900,7 @@ body {
 			n2.value = n1.value;
 		}
 	</script>
-	<script>
+<!-- 	<script>
  function myFunctionState(){
    $('#stateCode').click(function() {
       	 var name= $('#stateCode option:selected').text();
@@ -913,7 +909,7 @@ body {
       }
       
 </script>
-
+ -->
 <script>
  function myFunctionCity(){
    $('#cityCode').click(function() {
@@ -923,6 +919,79 @@ body {
       }
       
 </script>
+	<script>
+	function myFunctionStateCode(){
+/* 		 var empCode= $('#empCode option:selected').value; */
+		 var id= document.getElementById('countryCode').value
+	    console.log("ajax request : "+ id);
+	    const xhr = new XMLHttpRequest();
+	    xhr.open('GET','./viewStateByCountryCode/'+id,true);
+	    xhr.getResponseHeader('content-type','application/json');
+	    xhr.onload = function(){
+	        if(this.status===200){
+	            let obj = JSON.parse(this.responseText);
+	            console.log(obj);
+	            $('#stateCode').empty();
+	            $('#stateCode').append(
+						$('<option>').val("").text("Select State"));
+					
+	            $('#stateName').val(obj.stateName);
+	            $('#stateCode').val(obj.stateCode);
+	            
+	            $.each(obj,
+						function(i, item) {
+							$('#stateCode').append(
+							$('<option>').val(this.stateCode).text(this.stateName));
+						});
+	        }
+	        else{
+	            console.error("some error occured");
+	        }
+	    }
+	    xhr.send();
+	}
+
+	</script>
+
+	<script>
+	function myFunctionStateCityCode(){
+/* 		 var empCode= $('#empCode option:selected').value; */
+		 var id= document.getElementById('stateCode').value
+	    console.log("ajax request : "+ id);
+		 $('#stateCode').click(function() {
+	      	 var name= $('#stateCode option:selected').text();
+	      	$('#state').val(name);
+	      	}); 
+	    const xhr = new XMLHttpRequest();
+	    xhr.open('GET','./viewCityBySatateCode/'+id,true);
+	    xhr.getResponseHeader('content-type','application/json');
+	    xhr.onload = function(){
+	        if(this.status===200){
+	            let obj = JSON.parse(this.responseText);
+	            console.log(obj);
+	            $('#cityCode').empty();
+	            $('#cityCode').append(
+						$('<option>').val("").text("Select City"));
+					
+	            $('#cityName').val(obj.cityName);
+	            $('#cityCode').val(obj.cityCode);
+	            
+	            $.each(obj,
+						function(i, item) {
+							$('#cityCode').append(
+							$('<option>').val(this.cityCode).text(this.cityName));
+						});
+	        }
+	        else{
+	            console.error("some error occured");
+	        }
+	    }
+	    xhr.send();
+	}
+
+	</script>
+
+
 
 
 

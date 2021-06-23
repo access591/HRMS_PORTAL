@@ -43,4 +43,10 @@ public class StateServiceImpl  implements StateService{
 		this.stateDao.delete(id);
 	}
 
+	@Override
+	public List<State> findStateByCountry(String country) {
+		
+		return this.stateDao.findStateByCountry(country);
+	}
+
 }

@@ -565,6 +565,10 @@ public class EmployeeUtil {
 	public void setEmpDob(Date empDob) {
 		this.empDob = empDob;
 	}
+
+	public EmployeeUtil() {
+		super();
+	}
 	
 	
 }
