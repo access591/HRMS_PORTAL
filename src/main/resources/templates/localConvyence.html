@@ -295,7 +295,7 @@ $("table").on("keyup", ".pas", function () {
 													<td><input type="text" name='startPlace0'
 														placeholder='Start Place' class="form-control" /></td>
 													<td><input type="text" name='vistPlace0'
-														placeholder='Start Place' class="form-control" /></td>
+														placeholder='Vist Place' class="form-control" /></td>
 													<td><input type="text" name='purposeOfVist0'
 														placeholder='Purpose Of Vist' class="form-control" /></td>
 
@@ -362,8 +362,6 @@ $("table").on("keyup", ".pas", function () {
 												<th scope="col">Employee Name</th>
 												<th scope="col">Department</th>
 												<th scope="col">Designation</th>
-											
-												
 												<th scope="col">Action </th>
 											</tr >
 											
@@ -377,13 +375,21 @@ $("table").on("keyup", ".pas", function () {
 										<td  th:text="${listOfloc.deptName}"></td>
 										<td  th:text="${listOfloc.desgName}"></td>
 								
+										
 										  <td>
+										    <th:block th:switch="${listOfloc.approvalStatus}">
+										 <div th:case="'N'">
 										  <a th:href="@{/editLocalConvyence/{id}/(id=${listOfloc.localConvId})}"><em class="fa fa-edit"></em></a>
-										  
-										     <a th:href="@{/deleteLocalConveyance/{id}/(id=${listOfloc.localConvId})}"onclick="return confirm('Are you sure?')"><em class="fa fa-times"></em></a>
-									
-									
+										  <a th:href="@{/deleteLocalConveyance/{id}/(id=${listOfloc.localConvId})}"onclick="return confirm('Are you sure?')"><em class="fa fa-times"></em></a>
+										</div>
+										<div th:case="'Y'">
+										  <a th:href="@{/deleteLocalConveyance/{id}/(id=${listOfloc.localConvId})}"onclick="return confirm('Are you sure?')"><em class="fa fa-times"></em></a>
+										</div>
+										</th:block>
+										
 										</td>  
+									
+									
 									
 										</tr>
 									

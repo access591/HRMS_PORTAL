@@ -133,6 +133,14 @@ public class EmployeeUtil {
 		
 	}
 	
+	public EmployeeUtil(Date dateOfJoining2, Date empDob2, Date dateOfRetirement2, String presentPosting2) {
+		this.dateOfJoining = dateOfJoining2;
+		this.empDob = empDob2;
+		this.dateOfRetirement = dateOfRetirement2;
+		this.presentPosting=presentPosting2;
+		
+	}
+
 	public String getDepartmentName() {
 		return departmentName;
 	}

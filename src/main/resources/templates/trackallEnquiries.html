@@ -83,7 +83,7 @@ body {
 							<div class="col-12">
 							<div class="card">
 								<div class="card-header">
-									<h5 class="card-title">Track all Enquiries  </h5>
+									<h5 class="card-title" style="text-decoration: underline;">Track all Enquiries  </h5>
 								<div class="alert-outline">
 									<div th:if="${message}" th:text="${message}" style="color: red">
 									</div> 
@@ -120,25 +120,19 @@ body {
 												
 								</div>
 									<div class="form-row">
-									
-										     <div class="form-group sm col-md-4">
-													<label class="form-label">Category Code </label>
-												<label style="color: red">*</label>
-												<select class="form-control select2" name="categoryCode.categoryCode" id="categoryCode.categoryCode"  required aria-required="true">
-												 <option value="">Select Category</option>
-												<option th:each="c :${listCategory}"th:value="${c.getCategoryCode()}" th:text="${c.getCategoryName()}"></option>
-											     	</select>
-
+								            	<div class="form-group sm col-md-4">
+												<label class="form-label">Date Of Joining</label> 
+												<input  type="text"id="dateOfJoining"name="dateOfJoining" title="Date Of Joining" class="form-control"disabled>
 												</div>
-										
+
 												<div class="form-group sm col-md-4">
 												<label class="form-label">Present posting</label>
-												<input  type="text"id="prsentPosting"name="prsentPosting" title="Designation"  class="form-control">
+												<input  type="text"id="prsentPosting"name="prsentPosting" title="Designation"  class="form-control"readonly>
 												</div>
 												
-															<div class="form-group sm col-md-4">
+												<div class="form-group sm col-md-4">
 												<label class="form-label">Date Of Birth</label> 
-												<input  type="text"id="dob"name="dob" title="Date Of Birth" class="form-control">
+												<input  type="text"id="dob"name="dob" title="Date Of Birth" class="form-control"readonly>
 												</div>
 												
 												</div>
@@ -323,8 +317,24 @@ body {
 												<input  type="text" id="awardDate" name="awardDate" title="Award Date"  class="form-control">
 												</div>
 												
+												<div class="form-group sm col-md-4">
+												<label class="form-label">Date Of Retirement </label>
+												<input  type="text" id="dateOfRetirement" name="dateOfRetirement" title="Date Of Retirement"  class="form-control"disabled>
+												</div>
+												
 												
 											</div>	
+											<div class="form-row">
+												<div class="form-group sm col-md-4">
+													<label class="form-label">Category Code </label>
+												<label style="color: red">*</label>
+												<select class="form-control select2" name="categoryCode.categoryCode" id="categoryCode.categoryCode"  required aria-required="true">
+												 <option value="">Select Category</option>
+												<option th:each="c :${listCategory}"th:value="${c.getCategoryCode()}" th:text="${c.getCategoryName()}"></option>
+											     	</select>
+
+												</div>
+											</div>
 										
 										<!-- <div class="form-row">
 										<div class="form-group sm col-md-4">
@@ -555,6 +565,18 @@ body {
 		 format: 'yyyy-mm-dd',
 	});
 	
+	$("input[name='dateOfRetirement']").datepicker({
+		singleDatePicker: true,
+		 autoclose: true,
+		 format: 'yyyy-mm-dd',
+	});
+	$("input[name='dateOfJoining']").datepicker({
+		singleDatePicker: true,
+		 autoclose: true,
+		 format: 'yyyy-mm-dd',
+	});
+
+	
 	});
 
 	</script>
@@ -587,7 +609,48 @@ body {
 	
 		
 
+<script>
+	function myFunctionEmpCode(){
+/* 		 var empCode= $('#empCode option:selected').value; */
+		 var empCode= document.getElementById('empCode.empCode').value
+	    console.log("ajax request : "+ empCode);
+	    const xhr = new XMLHttpRequest();
+	    xhr.open('GET','./viewEmployeeDetailsTrackAllEnq/'+empCode,true);
+	    xhr.getResponseHeader('content-type','application/json');
+	    xhr.onload = function(){
+	        if(this.status===200){
+	            let obj = JSON.parse(this.responseText);
+	            console.log(obj);
+             
+	            
+	            var date=obj.dateOfJoining;
+	            var dateOfJoin = (new Date(date)).toISOString().split('T')[0]; 
+	            
+	            var employeeDateOfBirth=obj.empDob;
+	            var employeeBirth=(new Date(employeeDateOfBirth)).toISOString().split('T')[0]; 
+	           
+	            var dateOfRetire=obj.dateOfRetirement;
+	            var dateOfReti=(new Date(dateOfRetire)).toISOString().split('T')[0]; 
+	            
+	            
+	            $('#prsentPosting').val(obj.presentPosting);
+	            $('#dateOfJoining').val(dateOfJoin);
+	            $('#dob').val(employeeBirth);
+	            $('#dateOfRetirement').val(dateOfReti);
+	         
+	        }
+	        else{
+	            console.error("some error occured");
+	        }
+		
+	    }
+	    xhr.send();
+	}
 
+
+
+	
+	</script>
 
 
 

@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 @Entity
 @Table(name ="M_SHIFT")
 public class Shift  implements Serializable{
@@ -16,27 +17,34 @@ public class Shift  implements Serializable{
 	 */
 	private static final long serialVersionUID = -8424287516722821070L;
 	@Id
+	@Size(max =15)
 	@Column(name = "SHIFT_CODE")
 	private String shiftCode;
+	@Size(max =15)
 	@Column(name = "START_TIME")
 	private  String startTime;
-	
+	@Size(max =15)
 	@Column(name ="BRKST_TIME")
 	private  String brkstTime;
+	@Size(max =50)
 	@Column(name ="SHIFT_NAME")
 	private  String shiftName;
+	@Size(max =15)
 	@Column(name ="END_TIME")
 	private  String  endTime;
+	@Size(max =15)
 	@Column(name ="BRKND_TIME")
 	private  String  brkndTime;
+	@Size(max =1)
 	@Column(name = "ACTIVE_YN")
 	private String active;
+	@Size(max =50)
 	@Column(name = "INS_BY",updatable = false)
 	private String insBy;
 	
 	@Column(name = "INS_DATE",updatable = false)
 	private Date insDate =new Date();
-	
+	@Size(max =50)
 	@Column(name = "UPD_BY",insertable = false)
 	private String updBy;
 	

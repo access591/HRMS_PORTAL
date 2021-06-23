@@ -73,7 +73,7 @@ public class HolidayController
 				List<Holiday>listHoliday = holidayService.getAllHolidays();
 				model.addAttribute("listHoliday", listHoliday); 
 				session.setAttribute("username",session.getAttribute("username"));
-	 
+				session.setAttribute("imgUtil", new ImageUtil());
 	  }
 			 return "redirect:"+pageMappingService.PageRequestMapping(reqPage,pageno);
 	  
@@ -96,7 +96,9 @@ public class HolidayController
 	Holiday holidayedit = holidayService.findHolidayById(id);
 	model.addAttribute("Holidayedit", holidayedit);
 	session.setAttribute("username",session.getAttribute("username")); 
+	session.setAttribute("imgUtil", new ImageUtil());
 	 return pageMappingService.PageRequestMapping(reqPageedit,editPageNo);
+	 
 	 }
 	
 	/**

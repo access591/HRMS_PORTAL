@@ -18,12 +18,12 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hrms.ImageUtil;
 import com.hrms.model.Category;
 import com.hrms.model.Designation;
 import com.hrms.model.Employee;
-
 import com.hrms.model.MenuModule;
 import com.hrms.model.TrackallEnquiries;
 import com.hrms.service.CategoryService;
@@ -31,6 +31,8 @@ import com.hrms.service.DesignationService;
 import com.hrms.service.EmployeeService;
 import com.hrms.service.ModuleService;
 import com.hrms.service.TrackallEnquiriesService;
+import com.hrms.util.EmployeeUtil;
+
 
 @Controller
 public class TrackallEnquiriesController {
@@ -166,11 +168,22 @@ public class TrackallEnquiriesController {
 			reportFileName = "trackallEnquiries_pdf";
 			trackallEnquiriesService.trackallEnquirieGenratepdf(request, response, reportFileName, dataList);
 		} else if (val.equals("E")) {
+			System.out.println("Value Of"+val);
 
 		}
 		session.setAttribute("username", session.getAttribute("username"));
 		return null;
 
 	}
+	
+	@ResponseBody
+    @GetMapping("/viewEmployeeDetailsTrackAllEnq/{id}")
+    public EmployeeUtil  getLocalConvyenceById(@PathVariable(value = "id") String id) {
+		Employee e = employeeService.findEmployeeById(id);
+		
+		 return new EmployeeUtil(e.getDateOfJoining(),e.getEmpDob(),e.getDateOfRetirement(),e.getPresentPosting());
+		
+      
+    }
 
 }

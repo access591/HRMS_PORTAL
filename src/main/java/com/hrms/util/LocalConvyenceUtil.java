@@ -18,7 +18,7 @@ public class LocalConvyenceUtil {
 	private Date localConvDate;
 	private int totalClaim;
 	private int totalPas;
-  
+	private String  approvalStatus ;
 	// DETAIL ========================================
 	private Date  locDate;
 	
@@ -168,6 +168,13 @@ public class LocalConvyenceUtil {
 	}
 	public void setLocalConvId(String localConvId) {
 		this.localConvId = localConvId;
+	}
+	
+	public String getApprovalStatus() {
+		return approvalStatus;
+	}
+	public void setApprovalStatus(String approvalStatus) {
+		this.approvalStatus = approvalStatus;
 	}
 	public LocalConvyenceUtil(String empCode, String empName, String departmentCode, String deptName, String desgCode,
 			String desgName, String empPayCode, String localConvId) {

@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 @Entity
 @Table(name = "M_SKILLCATEGORY")
 public class SkillCategory implements Serializable {
@@ -19,38 +20,38 @@ public class SkillCategory implements Serializable {
 	 */
 private static final long serialVersionUID = -5018920894314776560L;
 	@Id
+	@Size(max = 15)
 	@Column(name = "SKILL_CODE")
 	private String skillLevelCode;
-	
+	@Size(max = 10)
 	@Column(name = "SKILL_LEVEL")
 	private String skillLevel;
-	
+	@Size(max = 50)
 	@Column(name = "SKILL_PARA_DESC")
 	private String skillParaDes;
-	
+	@Size(max = 50)
 	@Column(name = "SKILL_CAT_DESC")
 	private String skillCatDesc;
-	
+	@Size(max = 10)
 	@Column(name = "SKILL_PARA_CODE")
 	private String skillParaCode;
-	
+	@Size(max = 12)
 	@Column(name = "SKILL_PARA_MAX_MARK")
 	private String skillParaMaxMark;
+	@Size(max = 50)
 	@Column(name = "INS_BY", updatable = false)
 	private String insBy;
 	
 	@Column(name = "INS_DATE", updatable = false)
 	private Date insDate = new Date();
-	
+	@Size(max = 50)
 	@Column(name = "UPD_BY", insertable = false)
 	private String updBy;
 	
 	@Column(name = "UPD_DATE", insertable = false)
 	private Date updDate = new Date();
-
 	
-	
-	
+	@Size(max =1)
 	@Column(name = "ACTIVE_YN")
 	private String active;
 	

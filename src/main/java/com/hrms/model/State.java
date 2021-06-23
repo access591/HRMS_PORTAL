@@ -7,6 +7,8 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
@@ -19,18 +21,21 @@ public class State implements Serializable{
 	 */
 	private static final long serialVersionUID = -6376128149451393606L;
 	@Id
-	@Size(max =15)
+	@Size(max = 15)
 	@Column(name = "STATE_CODE")
 	private String stateCode;
-	@Size(max =50)
+	@Size(max = 50)
 	@Column(name = "STATE_NAME")
 	private String stateName;
-	@Size(max =1)
+	@Size(max = 1)
 	@Column(name = "ACTIVE_YN")
 	private String active;
-	
 	@OneToMany(mappedBy = "stateCode")
 	private List<City> citys;
+	@ManyToOne
+	@JoinColumn(name = "COUNTRY_CODE", updatable = false)
+	private Country countryCode;
+	
 	@Size(max =50)
 	@Column(name = "INS_BY", updatable = false)
 	private String insBy;
@@ -45,6 +50,12 @@ public class State implements Serializable{
 	private Date updDate = new Date();
 
 	
+	public Country getCountryCode() {
+		return countryCode;
+	}
+	public void setCountryCode(Country countryCode) {
+		this.countryCode = countryCode;
+	}
 	public String getStateCode() {
 		return stateCode;
 	}

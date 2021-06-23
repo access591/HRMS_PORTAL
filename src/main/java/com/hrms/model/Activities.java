@@ -7,31 +7,42 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 @Entity
 @Table(name = "M_ACTIV")
 public class Activities implements Serializable{
 	/**
-	 * Access skm
+	 * Access Surendra Kumar Meena
 	 */
 	private static final long serialVersionUID = -7265729884533931859L;
 	@Id
+	@Size(max = 15)
 	@Column(name = "ACT_CODE")
 	private String actCode;
+
+	@Size(max = 40)
 	@Column(name = "ACT_NAME")
 	private String actName;
+
+	@Size(max = 1)
 	@Column(name = "ACTIVE_YN")
 	private String active;
-    @Column(name = "INS_BY",updatable = false)
+	
+	@Size(max = 50)
+	@Column(name = "INS_BY", updatable = false)
 	private String insBy;
+
+	@Column(name = "INS_DATE", updatable = false)
+	private Date insDate = new Date();
 	
-	@Column(name = "INS_DATE",updatable = false)
-	private Date insDate =new Date();
-	
-	@Column(name = "UPD_BY",insertable = false)
+	@Size(max = 50)
+	@Column(name = "UPD_BY", insertable = false)
 	private String updBy;
 	
-	@Column(name = "UPD_DATE",insertable = false)
+	@Column(name = "UPD_DATE", insertable = false)
 	private Date  updDate = new Date();
+	
+	
 	public String getActCode() {
 		return actCode;
 	}

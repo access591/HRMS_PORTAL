@@ -116,18 +116,12 @@ public String editdepartment(@PathVariable("id")String id,  Model model,HttpSess
  * @return
  */	
 @PostMapping("/updateDepartment")
-public String updateDepartment(@ModelAttribute("deptupdate") DepartmentUtiliy departmentUtiliy, Model model) {
+public String updateDepartment(@ModelAttribute("deptupdate")  Department department, Model model) {
  
 	   try {
 		
-		   Department department=new Department();
-			Employee employee =new Employee();
-			employee.setEmpCode(departmentUtiliy.getEmpCode());
-			department.setEmpCode(employee);
-			department.setDepartmentCode(departmentUtiliy.getDepartmentCode());
-			department.setDeptName(departmentUtiliy.getDeptName());
-			department.setActive(departmentUtiliy.getActive());
-			
+		  
+
 			  this.departmentService.updateDepartment(department);   
 		   
 		   

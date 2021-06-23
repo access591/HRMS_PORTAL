@@ -13,10 +13,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.hrms.ImageUtil;
-
+import com.hrms.model.City;
 import com.hrms.model.Insurance;
 import com.hrms.model.MenuModule;
-
+import com.hrms.service.CityService;
 import com.hrms.service.InsuranceService;
 import com.hrms.service.ModuleService;
 
@@ -26,11 +26,16 @@ public class InsuranceController {
 	private ModuleService moduleService;
 	@Autowired
 	InsuranceService insuranceService;
+	@Autowired
+	CityService cityService;
+	
 	@GetMapping("/insuranceMaster")
 	public String insuranceMaster(Model model,HttpSession session) {
 		if (session.getAttribute("username") == null) {
 			return "redirect:" + "./";
 		}
+		List<City> listCity = cityService.getAllCities();
+		model.addAttribute("listCity", listCity);
 		String userCode= (String)session.getAttribute("username");
 		session.setAttribute("imgUtil", new ImageUtil());
 		List<Insurance> listInsurance = insuranceService.getAllInsurances();
@@ -49,6 +54,7 @@ public class InsuranceController {
 		if (session.getAttribute("username") == null) {
 			return "redirect:" + "./";
 		}
+		
 		insuranceService.addInsurance(insurance);
 		List<Insurance> listInsurance = insuranceService.getAllInsurances();
 		model.addAttribute("listInsurance", listInsurance);
@@ -62,9 +68,11 @@ public class InsuranceController {
 	 { if (session.getAttribute("username") == null) {
 			return "redirect:" + "./";
 		}
+	 List<City> listCity = cityService.getAllCities();
+		model.addAttribute("listCity", listCity);
 		  Insurance insuranceEdit = insuranceService.findInsuranceById(id);
 		  model.addAttribute("insuranceEdit", insuranceEdit);
-
+		  session.setAttribute("imgUtil", new ImageUtil());
 	    session.setAttribute("username",session.getAttribute("username")); 
 	       return "/editInsurance"; 
 	}

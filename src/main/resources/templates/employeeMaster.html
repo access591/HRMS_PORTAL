@@ -348,8 +348,8 @@ body {
 														class="text-danger">*</span> <select
 														class="form-control required" name="martialStatus" title="Martial Status" id="martialStatus">
 														<option value="">Select Type</option>
-														<option value="MARRIED">MARRIED</option>
-														<option value="UNMARRIED ">UNMARRIED  </option>
+														<option value="M">MARRIED</option>
+														<option value="U">UNMARRIED  </option>
 														
 													</select>
 												</div>
@@ -687,7 +687,7 @@ body {
 										
 											   <tr th:each="leave:${listEmployeeUtil}">
 												<td th:text="${leave.empCode}"></td>
-												<td  th:text="${leave.armsCode}"> </td> 
+												 <td  th:text="${leave.armsCode}"> </td>  
 												<td th:text="${leave.empName}"></td>
 												<td th:text="${leave.categoryName}"></td>
 												<td th:text="${leave.departmentName}"></td>

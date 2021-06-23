@@ -10,6 +10,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
 /**
  * @author Access
@@ -42,48 +43,49 @@ public class Bank implements Serializable
 	
 
 	@Id
+	@Size(max =15)
 	@Column(name = "BANK_CODE")
 	private String bankCode;
-	
+	@Size(max =100)
 	@Column(name = "BANK_NAME")
 	private String bankName;
-	
+	@Size(max =100)
 	@Column(name = "BANK_ADD")
 	private String bankAdd;
-	
+	@Size(max =100)
 	@Column(name = "BANK_ADDR2")
 	private String bankAddr2;
-	
+	@Size(max =20)
 	@Column(name = "CITY_CODE")
 	private String cityCode;
-	
+	@Size(max =20)
 	@Column(name = "STATE_CODE")
 	private String stateCode;
-	
+	@Size(max =20)
 	@Column(name = "COUNTRY_CODE" ,updatable = false)
 	private String countryCode;
-	
+	@Size(max =12)
 	@Column(name = "ACCOUNT_NO")
 	private String accountNo;
-	
+	@Size(max =20)
 	@Column(name = "IFSC_CODE")
 	private String ifscCode;
-	
+	@Size(max =25)
 	@Column(name = "SWIFT_CODE")
 	private String swiftCode;
-	
+	@Size(max =12)
 	@Column(name = "TELEPHONE_NO")
 	private String telephoneNo;
-	
+	@Size(max =11)
 	@Column(name = "MOBILE_NO")
 	private String mobileNo;
-	
+	@Size(max =50)
     @Column(name = "INS_BY",updatable = false)
 	private String insBy;
 	
 	@Column(name = "INS_DATE",updatable = false)
 	private Date insDate =new Date();
-	
+	@Size(max =50)
 	@Column(name = "UPD_BY",insertable = false)
 	private String updBy;
 	
@@ -92,7 +94,7 @@ public class Bank implements Serializable
 	
 	
 
-	
+	@Size(max =1)
 	@Column(name = "ACTIVE_YN")
 	private String active;
 
