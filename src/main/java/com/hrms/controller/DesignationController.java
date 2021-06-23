@@ -21,7 +21,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.hrms.ImageUtil;
 import com.hrms.model.Category;
 import com.hrms.model.Designation;
-import com.hrms.util.DesignationUtil;
 import com.hrms.model.MenuModule;
 import com.hrms.service.CategoryService;
 import com.hrms.service.DesignationService;
@@ -48,15 +47,17 @@ public class DesignationController {
 	 */
 	@GetMapping("/designationMaster")
 	public String designationMaster(Model model, HttpSession session) {
+	
 		if (session.getAttribute("username") == null) {
 			return "redirect:" + "./";
 		}
 		List<Designation> listDesignation = designationService.getAllDesignations();
 		model.addAttribute("listDesignation", listDesignation);
+		
 		List<Category> listCategory = categoryService.getAllCategory();
 		model.addAttribute("listCategory" ,listCategory);
-		String userCode = (String) session.getAttribute("username");
 		
+		String userCode = (String) session.getAttribute("username");
 		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
 		if (modules != null) {
 			model.addAttribute("modules", modules);
@@ -74,15 +75,10 @@ public class DesignationController {
 	 * @return
 	 */
 	@PostMapping("/saveDesignation")
-	public String saveDesignation(@ModelAttribute("designation") DesignationUtil designationUtil, Model model,
-			RedirectAttributes redirectAttributes) {
-	    	Designation designation=new Designation();
-	    	Category category=new Category();
-	    	category.setCategoryCode(designationUtil.getCategoryCode());
-	    	designation.setCategoryCode(category);
-	    	designation.setDesgName(designationUtil.getDesgName());
-	    	designation.setActive(designationUtil.getActive());
+	public String saveDesignation(@ModelAttribute("designation")Designation designation, Model model,
+			RedirectAttributes redirectAttributes,HttpSession session) {
 	    	
+		designation.setInsBy((String) session.getAttribute("USER_NAME"));
 		boolean isModuleExist = designationService.checkDesignationExists(designation);
 
 		if (isModuleExist) {
@@ -125,16 +121,10 @@ public class DesignationController {
 	 * @return
 	 */
 	@PostMapping("/updateDesignation")
-	public String updateDesignation(@ModelAttribute("desiupdate") DesignationUtil designationUtil, Model model) {
+	public String updateDesignation(@ModelAttribute("desiupdate")Designation designation, Model model,HttpSession session) {
 
-		Designation designation=new Designation();
-    	Category category=new Category();
-    	category.setCategoryCode(designationUtil.getCategoryCode());
-    	designation.setCategoryCode(category);
-    	designation.setDesgCode(designationUtil.getDesgCode());
-    	designation.setDesgName(designationUtil.getDesgName());
-    	designation.setActive(designationUtil.getActive());
 		
+		designation.setUpdBy((String) session.getAttribute("USER_NAME"));
 		
 		this.designationService.updateDesignation(designation);
 

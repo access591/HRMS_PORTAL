@@ -88,7 +88,7 @@ body {
 											
 											<label class="form-label">Category</label>
 												<label style="color: red">*</label>
-												<select class="form-control select2" name="categoryCode"id="categoryCode" required aria-required="true">
+												<select class="form-control select2" name="categoryCode.categoryCode"id="categoryCode.categoryCode" required aria-required="true">
 												 <option value="">Select Cat....</option>
 												<option th:each="cat: ${listCategory}" th:value="${cat.getCategoryCode()}" th:text="${cat.getCategoryName()}"th:field="${designationEdit.categoryCode.categoryCode}"></option>
 											     	</select>
