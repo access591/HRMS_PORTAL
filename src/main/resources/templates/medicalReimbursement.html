@@ -410,24 +410,30 @@ $("table").on("keyup", ".govt", function () {
 										</thead>
 										<tbody>
 									
-										<tr th:each = "student : ${listMedicalReimbursement}">
+										<tr th:each = "med : ${listMedicalReimbursement}">
 									
-										<td th:text="${student.slipNo}" ></td>
+										<td th:text="${med.slipNo}" ></td>
 										
-										<td  th:text="${#dates.format(student.dateOfSlip,'dd-MM-yyyy')}"></td>
+										<td  th:text="${#dates.format(med.dateOfSlip,'dd-MM-yyyy')}"></td>
 										
-										<td  th:text="${student.empCode.empCode}"></td>
+										<td  th:text="${med.empCode.empCode}"></td>
 										
-										<td th:text="${student.empCode.empName}"></td>
+										<td th:text="${med.empCode.empName}"></td>
 										
 								
 									
 									
 										  <td>
-										  <a th:href="@{/editMedicalReimbursement/{id}/(id=${student.slipNo})}"><em class="fa fa-edit"></em></a>
-										  
-										     <a th:href="@{/deleteMedicalReimbursement/{id}/(id=${student.slipNo})}"onclick="return confirm('Are you sure?')"><em class="fa fa-times"></em></a>
-									
+										   <th:block th:switch="${med.approvalStatus}">
+										
+										 <div th:case="'N'">
+										  <a th:href="@{/editMedicalReimbursement/{id}/(id=${med.slipNo})}"><em class="fa fa-edit"></em></a>
+										     <a th:href="@{/deleteMedicalReimbursement/{id}/(id=${med.slipNo})}"onclick="return confirm('Are you sure?')"><em class="fa fa-times"></em></a>
+								     	</div>
+								     		<div th:case="'Y'">
+								     		   <a th:href="@{/deleteMedicalReimbursement/{id}/(id=${med.slipNo})}"onclick="return confirm('Are you sure?')"><em class="fa fa-times"></em></a>
+								     		</div>
+								     	</th:block>
 									
 										</td>  
 									

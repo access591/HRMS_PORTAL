@@ -65,21 +65,21 @@ body {
 												<div class="form-group">
 													<label class="form-label"> Total Leaves</label> <label
 														style="color: red">*</label>
-								<input type="text"class="form-control uppercase" id="totalLeave"name="totalLeave" th:value="${leaveDetailEdit.totalLeave}"  required aria-required="true">
+								<input type="text"class="form-control uppercase" id="totalLeave" maxlength="2" name="totalLeave" th:value="${leaveDetailEdit.totalLeave}"  required aria-required="true">
 												</div>
 
 												<div class="form-group">
 													<label class="form-label">LWP</label> <label
 														style="color: red">*</label> <select class="form-control"
 														name="lwp" id="lwp">
-														<option th:value="No" th:selected="${leaveDetailEdit.lwp}==No">No</option>
-														<option th:value="Yes"th:selected="${leaveDetailEdit.lwp}==Yes" >Yes</option>
+														<option th:value="N" th:selected="${leaveDetailEdit.lwp}==N">No</option>
+														<option th:value="Y"th:selected="${leaveDetailEdit.lwp}==Y" >Yes</option>
 
 													</select>
 												</div>
 												<div class="form-group">
 													<label class="form-label"> Maximum Limit</label>
-													  <input type="text"class="form-control" id="maxLimit"
+													  <input type="text"class="form-control" id="maxLimit"maxlength="2"
 														name="maxLimit" th:value="${leaveDetailEdit.maxLimit}">
 												</div>
 											<div class="form-group">
@@ -116,16 +116,16 @@ body {
 													<label class="form-label">Status</label> <label
 														style="color: red">*</label> <select class="form-control"
 														name="leaveStatus" id="leaveStatus">
-														<option th:value="RESET"
-															th:selected="${leaveDetailEdit.leaveStatus}==RESET">RESET</option>
-														<option th:value="CUMULATIVE"
-															th:selected="${leaveDetailEdit.leaveStatus}==CUMULATIVE">CUMULATIVE</option>
+														<option th:value="R"
+															th:selected="${leaveDetailEdit.leaveStatus}==R">RESET</option>
+														<option th:value="C"
+															th:selected="${leaveDetailEdit.leaveStatus}==C">CUMULATIVE</option>
 
 													</select>
 												</div>
 												<div class="form-group">
 													<label class="form-label"> Entitlement Days</label> 
-													 <input type="text" class="form-control" id="entDay"th:value="${leaveDetailEdit.entDay}" name="entDay">
+													 <input type="text" class="form-control" maxlength="2" id="entDay"th:value="${leaveDetailEdit.entDay}" name="entDay">
 												</div>
 
 											<div class="form-group">

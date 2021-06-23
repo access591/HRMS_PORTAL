@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 @Entity
@@ -17,13 +18,14 @@ public class Holiday implements Serializable
 {
 
 	/**
-	 * @author Access surendra
+	 * Access Surendra Kumar Meena
 	 */
 	private static final long serialVersionUID = 3252326016046684834L;
 	 @Id
+	    @Size(max =15)
 		@Column(name = "HOLIDAY_CODE")
 	    private String 	holidayCode;
-	 
+	 @Size(max =40)
 	    @Column(name = "DESCRIPTION")
 	    private String  description;
 	    
@@ -31,18 +33,19 @@ public class Holiday implements Serializable
 	    @DateTimeFormat(pattern ="yyyy-mm-dd")
 	    @Temporal(TemporalType.DATE)
 	    private Date dateOfHoliday;
-	    
+	    @Size(max =1)
 	    @Column(name ="HOLIDAY_TYPE")
 	    private String  holidayType;
-	    
+	    @Size(max =1)
 	    @Column(name ="ACTIVE")
 	    private String active;
+	    @Size(max =50)
 	    @Column(name = "INS_BY",updatable = false)
 		private String insBy;
 		
 		@Column(name = "INS_DATE",updatable = false)
 		private Date insDate =new Date();
-		
+		@Size(max =50)
 		@Column(name = "UPD_BY",insertable = false)
 		private String updBy;
 		

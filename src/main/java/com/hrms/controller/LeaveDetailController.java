@@ -105,6 +105,7 @@ public class LeaveDetailController {
 		model.addAttribute("listLeave", listLeave);
 		LeaveDetail leaveDetailEdit = leaveDetailService.findLeaveDetailById(id);
 		model.addAttribute("leaveDetailEdit", leaveDetailEdit);
+		session.setAttribute("imgUtil", new ImageUtil());
 		session.setAttribute("username", session.getAttribute("username"));
 
 		return pageMappingService.PageRequestMapping(reqPageedit, editPageNo);

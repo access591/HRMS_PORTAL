@@ -5,6 +5,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
+
 import java.io.Serializable;
 @Entity
 @Table(name = "M_LEAVEDETAILS")
@@ -15,43 +17,44 @@ public class LeaveDetail implements Serializable {
 	 */
 	private static final long serialVersionUID = 1821750528624723826L;
 	@Id
+	@Size(max =15)
 	@Column(name = "LEAVE_CODE")
 	private String lvCode;
-	
+	@Size(max =80)
 	@Column(name = "LEAVE_TYPE_NAME")
 	private String levTypeName;
-	
+	@Size(max =2)
 	@Column(name = "TOTALLEAVE")
 	private String totalLeave;
 	
-
+	@Size(max =1)
 	@Column(name = "LWP")
 	private String lwp;
-
+	@Size(max =2)
 	@Column(name = "MAXLIMIT")
 	private String maxLimit;
-
+	@Size(max =1)
 	@Column(name = "ACTIVE_YN")
 	private String active;
-
+	@Size(max =50)
 	@Column(name = "LEAVETYPE")
 	private String leaveType;
-
+	@Size(max =2)
 	@Column(name = "LEAVESTATUS")
 	private String leaveStatus;
-
+	@Size(max =2)
 	@Column(name = "ENTDAY")
 	private String entDay;
-
+	@Size(max =2)
 	@Column(name = "ABBREV")
 	private String abbrev;
-	
+	@Size(max =50)
 	@Column(name = "INS_BY",updatable = false)
 	private String insBy;
 	
 	@Column(name = "INS_DATE",updatable = false)
 	private Date insDate =new Date();
-	
+	@Size(max =50)
 	@Column(name = "UPD_BY",insertable = false)
 	private String updBy;
 	

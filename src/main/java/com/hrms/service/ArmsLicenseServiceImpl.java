@@ -61,7 +61,13 @@ public class ArmsLicenseServiceImpl implements ArmsLicenseService {
 
 	@Override
 	public ArmsLicenseDetails findArmsByEmpEmpCode(String id) {
-		return armsLicenseDao.findArmsByEmpEmpCode(id);
+		try {
+			return armsLicenseDao.findArmsByEmpEmpCode(id);
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	@Override

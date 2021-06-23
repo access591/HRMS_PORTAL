@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name="M_BRANCH")
@@ -15,21 +16,23 @@ public class BranchMaster {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="BRANCH_CODE",length=10)
+	@Size(max =15)
+	@Column(name="BRANCH_CODE")
 	private Long branchId;
-	
-	@Column(name="BRANCH_NAME",length = 100)
+	@Size(max =50)
+	@Column(name="BRANCH_NAME")
 	private String branchName;
-	
-	@Column(name = "USER_ACTIVE_YN",length = 2)
+	@Size(max =1)
+	@Column(name = "USER_ACTIVE_YN")
 	private String active;
-	@Column(name = "INS_BY", updatable = false,length = 10)
+	@Size(max =50)
+	@Column(name = "INS_BY", updatable = false)
 	private String insBy;
 
 	@Column(name = "INS_DATE", updatable = false)
 	private Date insDate = new Date();
-
-	@Column(name = "UPD_BY", insertable = false,length = 10)
+	@Size(max =50)
+	@Column(name = "UPD_BY", insertable = false)
 	private String updBy;
 
 	@Column(name = "UPD_DATE", insertable = false)

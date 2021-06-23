@@ -70,13 +70,13 @@ public class LocalConvyenceController {
 			    Department department = departmentService.findDepartmentById(employee.getDepartmentCode());
 			    Designation designation = designationService.findDesignationById(employee.getDesignationCode());
 			    
-			    lc.setLocalConvId(listOfLoc.get(i).getLocalConvId());
-			    lc.setDeptName(department.getDeptName());
-			    lc.setDesgName(designation.getDesgName());
-			    lc.setEmpName(employee.getEmpName());
-			   
-			    listLocalConvyenceUtil.add(lc);
-			    
+				lc.setLocalConvId(listOfLoc.get(i).getLocalConvId());
+				lc.setDeptName(department.getDeptName());
+				lc.setDesgName(designation.getDesgName());
+				lc.setEmpName(employee.getEmpName());
+				lc.setApprovalStatus(listOfLoc.get(i).getApprovalStatus());
+				listLocalConvyenceUtil.add(lc);
+
 		  }  
 		  
 		  model.addAttribute("listOfLoc", listLocalConvyenceUtil);
@@ -277,6 +277,7 @@ public class LocalConvyenceController {
 		}
 		
 		  try {
+			  localConvyence.setApprovalStatus("N");
 			this.localConvyenceService.updateLocalConvyence(localConvyence);
 			  
 			  return "redirect:/localConvyence";
