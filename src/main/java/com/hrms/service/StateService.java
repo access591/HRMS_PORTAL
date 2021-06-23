@@ -10,5 +10,6 @@ public interface StateService {
 	State findStateById(String id);
 	public void updateState(State s);
 	public void removeState(String id);
+	public List<State> findStateByCountry(String id);
 
 }

@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -31,6 +32,7 @@ import com.hrms.model.Department;
 import com.hrms.model.Designation;
 import com.hrms.model.Employee;
 import com.hrms.util.EmployeeUtil;
+import com.hrms.util.OvertimeRegisterUtil;
 import com.hrms.model.MenuModule;
 import com.hrms.model.State;
 import com.hrms.service.ArmsLicenseService;
@@ -489,5 +491,37 @@ public class EmployeeController {
 		return "redirect:/" + pageMappingService.PageRequestMapping(reqPage, pageno);
 	}
 
-}
+	@ResponseBody
+	@GetMapping("/viewStateByCountryCode/{id}")
+	public List<State> getStateCountryById(@PathVariable(value = "id") String id, Model model, HttpSession session) {
+		List<State> e = stateService.findStateByCountry(id);
+		List<State> lisStateUtil = new ArrayList<>();
+		for (int i = 0; i < e.size(); i++) {
+			State st = new State();
+			st.setStateCode(e.get(i).getStateCode());
+			st.setStateName(e.get(i).getStateName());
+			lisStateUtil.add(st);
+		}
+		return lisStateUtil;
 
+	}
+
+	
+	
+	
+	@ResponseBody
+	@GetMapping("/viewCityBySatateCode/{id}")
+	public List<City> viewCityBySatateCode(@PathVariable(value = "id") String stateCode, Model model,
+			HttpSession session) {
+		List<City> y = cityService.findCityByState(stateCode);
+		List<City> lisCityUtil = new ArrayList<>();
+		for (int i = 0; i < y.size(); i++) {
+			City ct = new City();
+			ct.setCityCode(y.get(i).getCityCode());
+			ct.setCityName(y.get(i).getCityName());
+			lisCityUtil.add(ct);
+		}
+		return lisCityUtil;
+	}
+
+}

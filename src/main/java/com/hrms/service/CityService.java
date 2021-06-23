@@ -12,6 +12,7 @@ public interface CityService {
 	City findCityById(String id);
 	public void updateCity(City c);
 	public void removeCity(String id);
+	public List<City> findCityByState(String stateCode);
 	
 
 }
