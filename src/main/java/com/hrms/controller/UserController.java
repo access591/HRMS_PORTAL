@@ -18,14 +18,18 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hrms.EncryptionUtil;
 import com.hrms.ImageUtil;
+import com.hrms.model.AttendenceRegister;
 import com.hrms.model.Employee;
+import com.hrms.model.InterviewMaster;
 import com.hrms.model.Login;
 import com.hrms.model.MenuModule;
 import com.hrms.model.Module;
 import com.hrms.model.Program;
 import com.hrms.model.SubModule1;
 import com.hrms.model.UserEntity;
+import com.hrms.service.AttendenceRegisterService;
 import com.hrms.service.EmployeeService;
+import com.hrms.service.InterviewMasterService;
 import com.hrms.service.ModuleService;
 import com.hrms.service.ReCaptchaValidationService;
 import com.hrms.service.SubModuleService;
@@ -42,6 +46,8 @@ public class UserController {
 
 	@Autowired 
 	 EmployeeService employeeService;
+	@Autowired InterviewMasterService interviewMasterService;
+	@Autowired AttendenceRegisterService attendenceRegisterService;
 
 
 	@GetMapping("/")
@@ -53,6 +59,32 @@ public class UserController {
 	public String loginUser(@ModelAttribute("user") Login login, Model model,
 			@RequestParam(name = "g-recaptcha-response") String captcha, HttpSession session) {
 		boolean isUserExist = userService.checkUserExists(login);
+		
+		try {
+			List<Employee> listEmployee = employeeService.getAllEmployees();
+			model.addAttribute("employeeList", listEmployee.size());
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		List<AttendenceRegister> listAttendenceRegister = attendenceRegisterService
+				.findTodayAttendenceList();
+		if(listAttendenceRegister != null) {
+			model.addAttribute("listAttendenceRegister", listAttendenceRegister.size());
+		}
+		
+		List<AttendenceRegister> findTodayLeave = attendenceRegisterService.findTodayLeaveEmployee();
+		if(findTodayLeave != null) {
+			model.addAttribute("findTodayLeave", findTodayLeave.size());
+		}
+		
+		List<InterviewMaster> listInterviewMaster = interviewMasterService.getFinalSelection();
+		
+		if(listInterviewMaster != null) {
+			model.addAttribute("finalSelection", listInterviewMaster.size());
+		}
+		
+		
 		if (isUserExist /* && validator.validateCaptcha(captcha) */ ) {
 
 			String id = login.getUserCode();
@@ -66,6 +98,8 @@ public class UserController {
 			List<MenuModule> modules = moduleService.getAllModulesList(userCode);
 
 			session.setAttribute("imgUtil", new ImageUtil());
+			
+			
 			model.addAttribute("modules", modules);
 			return "dashboard";
 		} else {

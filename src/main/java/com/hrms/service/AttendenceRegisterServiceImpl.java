@@ -172,6 +172,61 @@ public class AttendenceRegisterServiceImpl implements AttendenceRegisterService{
 		return null;
 	}
 
+	@Override
+	public List<AttendenceRegister> findTodayAttendenceList() {
+		
+		java.util.Date date = new java.util.Date();
+		java.sql.Date todayDate = new Date(date.getTime());
+		
+		Session session = sessionFactory.openSession();
+		Transaction tx = null;
+		List<AttendenceRegister> result = null;
+		
+		try {
+			tx = session.beginTransaction();
+			Query<AttendenceRegister> query = session.createQuery("from AttendenceRegister a where "
+					+ "a.attendenceDate = :todayDate and a.status=:status",AttendenceRegister.class);
+			query.setParameter("todayDate", todayDate);
+			query.setParameter("status", "Y");
+			result = query.getResultList();
+			tx.commit();
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			session.close();
+		}
+		
+		return result;
+	}
+
+	@Override
+	public List<AttendenceRegister> findTodayLeaveEmployee() {
+		java.util.Date date = new java.util.Date();
+		java.sql.Date todayDate = new Date(date.getTime());
+		
+		Session session = sessionFactory.openSession();
+		Transaction tx = null;
+		List<AttendenceRegister> result = null;
+		
+		try {
+			tx = session.beginTransaction();
+			Query<AttendenceRegister> query = session.createQuery("from AttendenceRegister a where "
+					+ "a.attendenceDate = :todayDate and a.status=:status",AttendenceRegister.class);
+			query.setParameter("todayDate", todayDate);
+			query.setParameter("status", "L");
+			result = query.getResultList();
+			tx.commit();
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			session.close();
+		}
+		
+		return result;
+	}
+
 	
 	
 

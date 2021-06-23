@@ -22,6 +22,9 @@ public interface AttendenceRegisterService {
 	public List<AttendenceRegister> findAttendenceStatusByDeptCode(String deptCode,
 			Date fromDate,Date toDate);
 	
+	public List<AttendenceRegister> findTodayAttendenceList();
+	public List<AttendenceRegister> findTodayLeaveEmployee();
+	
 	
 
 }
