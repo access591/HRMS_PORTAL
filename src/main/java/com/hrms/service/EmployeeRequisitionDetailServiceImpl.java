@@ -77,7 +77,7 @@ public class EmployeeRequisitionDetailServiceImpl implements EmployeeRequisition
 			Query<EmployeeRequisitionDetail> query = session.createQuery("from EmployeeRequisitionDetail e "
 					+ "inner join fetch e.employeeRequisition d "
 					+ "where d.status=:status"
-					+ " group by e",
+					+ " group by e.designation",
 					EmployeeRequisitionDetail.class);
 			
 			query.setParameter("status", "Y");
