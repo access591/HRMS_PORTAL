@@ -100,7 +100,7 @@ body {
 												<div class="form-group sm col-md-4">
 													<label class="form-label">Employee Code</label>
 												<label style="color: red">*</label>
-												<select class="form-control select2"  name="empCode" id="empCode"  required aria-required="true"disabled>
+												<select class="form-control select2"  name="empCode.empCode" id="empCode.empCode"  required aria-required="true"disabled>
 												 <option value="">Select Employee</option>
 												<option th:each="e :${listEmployee}" th:value="${e.getEmpCode()}" th:text="${e.getEmpName()}" th:field="${ltaRequestEdit.empCode.empCode}"></option>
 											     	</select>
