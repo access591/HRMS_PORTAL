@@ -231,8 +231,8 @@ body {
 													<div class="form-row">
 													
 													<div class="form-group sm col-md-4">
-													<label class="form-label">Vigilance Query</label> 
-													 <input name="vigilanceQuery" type="text"id="vigilanceQuery"  title="Vigilance Query"
+													<label class="form-label">Vigilance Inquiry </label> 
+													 <input name="vigilanceQuery" type="text"id="vigilanceQuery"  title="Vigilance Inquiry "
 														class="form-control">
 													 
 													
@@ -262,11 +262,10 @@ body {
 											
 											
                                              	<div class="form-group sm col-md-4">
-													<label class="form-label">Upload Image <span
-														class="text-danger">*</span>
+													<label class="form-label">Upload Image
 													</label>
 													
-													 <input type="file" id="image" name="image" accept="image/png,image/jpeg" title="image" class="form-control required"onchange="preview_image(event)"/>
+													 <input type="file" id="image" name="image" accept="image/png,image/jpeg" title="image" class="form-control"onchange="preview_image(event)"/>
 											     <img id="output_image"width="100px" height="100px"style="border-radius: 50px;" alt="output_image">
 												</div>
 												
@@ -377,22 +376,11 @@ body {
 											      </label>
 							                 <input  type="text"id="telephone"name="telephone" title="Telephone No"maxlength="12" class="form-control ">
 										     </div>
-										     
-									
-										    
 											</div>
 											
-											
-										
-											
-											
 												<div class="form-row">
-											<div class="form-group sm col-md-4">
-											       <label class="form-label">Add Charge
-											      </label>
-							                 <input  type="text"id="addCharge"name="addCharge" title="Add Charge" class="form-control">
-										     </div>
-										      	<div class="form-group sm col-md-4">
+												
+													<div class="form-group sm col-md-4">
 													<label class="form-label">On Additional Charge</label>  
 													<select class="form-control" name="onAdditionalCharge" id="onAdditionalCharge">
 														<option value="">Select Type</option>
@@ -401,6 +389,14 @@ body {
 														
 													</select>
 												</div>
+											<div class="form-group sm col-md-4">
+											       <label class="form-label">Add Charge
+											      </label>
+							                 <input  type="text"id="addCharge"name="addCharge" title="Add Charge" class="form-control">
+										     </div>
+										     
+										     
+										      
 												 	
 												 	 <div class="form-group sm col-md-4">
 											       <label class="form-label">Leave Account</label>
@@ -761,14 +757,20 @@ body {
 		});
 			
 		
-		$("input[name=\"orderDate\"]").daterangepicker({
+		/* $("input[name=\"orderDate\"]").daterangepicker({
 				singleDatePicker: true,
 				   autoApply: true,
 				locale: {
 					format: 'DD/MM/YYYY'
 		        },
 				showDropdowns: true
-			});
+			}); */
+		$("input[name='orderDate']").datepicker({
+			singleDatePicker: true,
+			 dateFormat: 'dd-mm-yy'
+			
+		});
+		
 		
 		$("input[name=\"dov\"]").daterangepicker({
 			singleDatePicker: true,
