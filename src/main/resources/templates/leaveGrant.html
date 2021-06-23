@@ -68,7 +68,7 @@ body {
 											<div class="form-group">
 												<label class="form-label">Employee Code</label>
 												<label style="color: red">*</label>
-												<select class="form-control select2"onchange="myFunction()" name="empCode"id="empCode" required aria-required="true">
+												<select class="form-control select2"onchange="myFunction()" name="empCode.empCode"id="empCode.empCode" required aria-required="true">
 												 <option value="">Select Employee</option>
 												<option th:each="e :${listEmployee}"th:value="${e.getEmpCode()}" th:text="${e.getEmpName()}"></option>
 											     	</select>
@@ -101,7 +101,7 @@ body {
 											<div class="form-group">
 													<label class="form-label">Type</label> <label
 														style="color: red">*</label> <select class="form-control"
-														name="levCode" id="levCode"required aria-required="true">
+														name="levCode.levCode" id="levCode.levCode"required aria-required="true">
 														 <option value="">Select Leave</option>
 															<option th:each="lea :${listLeave}" th:value="${lea.getLevCode()}" th:text="${lea.getLevType()}"></option>
 														

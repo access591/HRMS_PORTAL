@@ -16,7 +16,6 @@ import com.hrms.ImageUtil;
 import com.hrms.model.Employee;
 import com.hrms.model.Leave;
 import com.hrms.model.LeaveGrant;
-import com.hrms.util.LeaveGrantUtil;
 import com.hrms.model.MenuModule;
 import com.hrms.service.EmployeeService;
 import com.hrms.service.LeaveGrantRegisterService;
@@ -55,25 +54,12 @@ public class LeaveGrantRegister {
 		}
 	
 	@PostMapping("/saveLeaveGrant")
-	public String saveLeaveGrant(@ModelAttribute("leaveGrant")LeaveGrantUtil leaveGrantUtil, Model model, HttpSession session) {
+	public String saveLeaveGrant(@ModelAttribute("leaveGrant")LeaveGrant leaveGrant, Model model, HttpSession session) {
 		if (session.getAttribute("username") == null) {
 			return "redirect:" + "./";
 		}
-		Employee emp=new Employee();
-		emp.setEmpCode(leaveGrantUtil.getEmpCode());
-		Leave leave=new Leave();
-		leave.setLevCode(leaveGrantUtil.getLevCode());
-		LeaveGrant leaveGrant=new  LeaveGrant();
-		leaveGrant.setNoOfLeavesGranted(leaveGrantUtil.getNoOfLeavesGranted());
-		leaveGrant.setEmpCode(emp);
-		leaveGrant.setLevCode(leave);
-		leaveGrant.setYear(leaveGrantUtil.getYear());
-		leaveGrant.setClosingBal(leaveGrantUtil.getClosingBal());
-		leaveGrant.setLeaveAvailed(leaveGrantUtil.getLeaveAvailed());
-		leaveGrant.setPreviousYrBalance(leaveGrantUtil.getPreviousYrBalance());
+		leaveGrant.setInsBy((String) session.getAttribute("USER_NAME"));
 		leaveGrantRegisterService.addLeaveGrant(leaveGrant);
-		List<LeaveGrant> listLeaveGrant = leaveGrantRegisterService.getAllLeaveGrants();
-		model.addAttribute("listLeaveGrant", listLeaveGrant);
 		session.setAttribute("username", session.getAttribute("username"));
 
 		 return"redirect:/leaveGrant";
@@ -102,23 +88,12 @@ public class LeaveGrantRegister {
 	
 	
 	@PostMapping("/updateLeaveGrant")
-	public String updateLeaveGrant(@ModelAttribute("leaveGrant")LeaveGrantUtil leaveGrantUtil , Model model,HttpSession session)
+	public String updateLeaveGrant(@ModelAttribute("leaveGrant")LeaveGrant leaveGrant, Model model,HttpSession session)
 	{if (session.getAttribute("username") == null) {
 		return "redirect:" + "./";
 	}
-		Employee emp=new Employee();
-		emp.setEmpCode(leaveGrantUtil.getEmpCode());
-		Leave leave=new Leave();
-		leave.setLevCode(leaveGrantUtil.getLevCode());
-		LeaveGrant leaveGrant=new  LeaveGrant();
-		leaveGrant.setNoOfLeavesGranted(leaveGrantUtil.getNoOfLeavesGranted());
-		leaveGrant.setLeaveGrantCode(leaveGrantUtil.getLeaveGrantCode());
-		leaveGrant.setEmpCode(emp);
-		leaveGrant.setLevCode(leave);
-		leaveGrant.setYear(leaveGrantUtil.getYear());
-		leaveGrant.setClosingBal(leaveGrantUtil.getClosingBal());
-		leaveGrant.setLeaveAvailed(leaveGrantUtil.getLeaveAvailed());
-		leaveGrant.setPreviousYrBalance(leaveGrantUtil.getPreviousYrBalance());
+	 
+	      leaveGrant.setUpdBy((String)session.getAttribute("USER_NAME"));
 		  this.leaveGrantRegisterService.updateLeaveGrant(leaveGrant);
 		  return"redirect:/leaveGrant";
 		
