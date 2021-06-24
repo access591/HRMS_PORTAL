@@ -103,7 +103,7 @@ public class LeaveRequestController {
 		
 		List<LeaveRequest> listLeaveRequest = leaveRequestService.getAllLeaves();
 		
-		System.out.println("leave request size : " + listLeaveRequest.size());
+		//System.out.println("leave request size : " + listLeaveRequest.size());
 		
 		if(listLeaveRequest != null) {
 			model.addAttribute("listRequest",listLeaveRequest);
@@ -129,7 +129,7 @@ public class LeaveRequestController {
 		
 		try {
 			leaveRequestService.addLeave(leaveRequest);
-			session.setAttribute("message",new Message1("Data has been Successfully added","alert-primary"));
+			session.setAttribute("message",new Message1("Data has been saved Successfully","alert-primary"));
 		}catch(Exception e) {
 			e.printStackTrace();
 			session.setAttribute("message", new Message1("Something went Wrong !!","alert-info"));

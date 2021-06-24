@@ -76,7 +76,7 @@ body {
 							<div class="card flex-fill w-100">
 								<div class="card-header">
 
-									
+
 									<div class="card-actions float-right">
 										<a href="#" class="mr-1"> <em class="align-middle"
 											data-feather="refresh-cw"></em>
@@ -97,11 +97,11 @@ body {
 								</div>
 								<div class="card-body py-3">
 									<div class="chart chart-sm">
-										
+
 										<figure class="highcharts-figure">
 											<div id="container-bar"></div>
 										</figure>
-										
+
 									</div>
 								</div>
 							</div>
@@ -199,97 +199,7 @@ body {
 						</div>
 					</div>
 
-					<div class="row">
-						<div class="col-12 col-md-6 col-xxl-3 d-flex order-1 order-xxl-1">
-							<div class="card flex-fill">
-								<div class="card-header">
-									<div class="card-actions float-right">
-										<a href="#" class="mr-1"> <em class="align-middle"
-											data-feather="refresh-cw"></em>
-										</a>
-										<div class="d-inline-block dropdown show">
-											<a href="#" data-toggle="dropdown" data-display="static">
-												<em class="align-middle" data-feather="more-vertical"></em>
-											</a>
-
-											<div class="dropdown-menu dropdown-menu-right">
-												<a class="dropdown-item" href="#">Action</a> <a
-													class="dropdown-item" href="#">Another action</a> <a
-													class="dropdown-item" href="#">Something else here</a>
-											</div>
-										</div>
-									</div>
-									<h5 class="card-title mb-0">Calendar</h5>
-								</div>
-								<div class="card-body d-flex">
-									<div class="align-self-center w-100">
-										<div class="chart">
-											<div id="datetimepicker-dashboard"></div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-12 col-md-12 col-xxl-6 d-flex order-3 order-xxl-2">
-							<div class="card flex-fill w-100">
-								<div class="card-header">
-									<div class="card-actions float-right">
-										<a href="#" class="mr-1"> <em class="align-middle"
-											data-feather="refresh-cw"></em>
-										</a>
-										<div class="d-inline-block dropdown show">
-											<a href="#" data-toggle="dropdown" data-display="static">
-												<em class="align-middle" data-feather="more-vertical"></em>
-											</a>
-
-											<div class="dropdown-menu dropdown-menu-right">
-												<a class="dropdown-item" href="#">Action</a> <a
-													class="dropdown-item" href="#">Another action</a> <a
-													class="dropdown-item" href="#">Something else here</a>
-											</div>
-										</div>
-									</div>
-									<h5 class="card-title mb-0">Current Visitors</h5>
-								</div>
-								<div class="card-body px-4">
-									<div id="world_map" style="height: 350px;"></div>
-								</div>
-							</div>
-						</div>
-						<div class="col-12 col-md-6 col-xxl-3 d-flex order-2 order-xxl-3">
-							<div class="card flex-fill w-100">
-								<div class="card-header">
-									<div class="card-actions float-right">
-										<a href="#" class="mr-1"> <em class="align-middle"
-											data-feather="refresh-cw"></em>
-										</a>
-										<div class="d-inline-block dropdown show">
-											<a href="#" data-toggle="dropdown" data-display="static">
-												<em class="align-middle" data-feather="more-vertical"></em>
-											</a>
-
-											<div class="dropdown-menu dropdown-menu-right">
-												<a class="dropdown-item" href="#">Action</a> <a
-													class="dropdown-item" href="#">Another action</a> <a
-													class="dropdown-item" href="#">Something else here</a>
-											</div>
-										</div>
-									</div>
-									<h5 class="card-title mb-0">Browser Usage</h5>
-								</div>
-								<div class="card-body d-flex">
-									<div class="align-self-center w-100">
-										<div class="py-3">
-											<div class="chart chart-xs">
-												<canvas id="chartjs-dashboard-pie"></canvas>
-											</div>
-										</div>
-
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
+					
 
 					<div class="row">
 						<div class="col-12 col-lg-8 col-xxl-9 d-flex">
@@ -305,93 +215,17 @@ body {
 											</a>
 
 											<div class="dropdown-menu dropdown-menu-right">
-												<a class="dropdown-item" href="#">Action</a> <a
-													class="dropdown-item" href="#">Another action</a> <a
-													class="dropdown-item" href="#">Something else here</a>
+												
+												<div id="chartContainer"></div>
+												
 											</div>
 										</div>
 									</div>
-									<h5 class="card-title mb-0">Latest Projects</h5>
+									<h5 class="card-title mb-0">Yearly Budget</h5>
 								</div>
-								<table id="datatables-dashboard-projects"
-									aria-describedby="datatables-dashboard-projects"
-									class="table table-striped my-0">
-									<thead>
-										<tr>
-											<th scope="col">Name</th>
-											<th scope="col" class="d-none d-xl-table-cell">Start
-												Date</th>
-											<th scope="col" class="d-none d-xl-table-cell">End Date</th>
-											<th scope="col">Status</th>
-											<th scope="col" class="d-none d-md-table-cell">Assignee</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<td>Project Apollo</td>
-											<td class="d-none d-xl-table-cell">01/01/2018</td>
-											<td class="d-none d-xl-table-cell">31/06/2018</td>
-											<td><span class="badge badge-success">Done</span></td>
-											<td class="d-none d-md-table-cell">Carl Jenkins</td>
-										</tr>
-										<tr>
-											<td>Project Fireball</td>
-											<td class="d-none d-xl-table-cell">01/01/2018</td>
-											<td class="d-none d-xl-table-cell">31/06/2018</td>
-											<td><span class="badge badge-danger">Cancelled</span></td>
-											<td class="d-none d-md-table-cell">Bertha Martin</td>
-										</tr>
-										<tr>
-											<td>Project Hades</td>
-											<td class="d-none d-xl-table-cell">01/01/2018</td>
-											<td class="d-none d-xl-table-cell">31/06/2018</td>
-											<td><span class="badge badge-success">Done</span></td>
-											<td class="d-none d-md-table-cell">Stacie Hall</td>
-										</tr>
-										<tr>
-											<td>Project Nitro</td>
-											<td class="d-none d-xl-table-cell">01/01/2018</td>
-											<td class="d-none d-xl-table-cell">31/06/2018</td>
-											<td><span class="badge badge-warning">In progress</span></td>
-											<td class="d-none d-md-table-cell">Carl Jenkins</td>
-										</tr>
-										<tr>
-											<td>Project Phoenix</td>
-											<td class="d-none d-xl-table-cell">01/01/2018</td>
-											<td class="d-none d-xl-table-cell">31/06/2018</td>
-											<td><span class="badge badge-success">Done</span></td>
-											<td class="d-none d-md-table-cell">Bertha Martin</td>
-										</tr>
-										<tr>
-											<td>Project X</td>
-											<td class="d-none d-xl-table-cell">01/01/2018</td>
-											<td class="d-none d-xl-table-cell">31/06/2018</td>
-											<td><span class="badge badge-success">Done</span></td>
-											<td class="d-none d-md-table-cell">Stacie Hall</td>
-										</tr>
-										<tr>
-											<td>Project Romeo</td>
-											<td class="d-none d-xl-table-cell">01/01/2018</td>
-											<td class="d-none d-xl-table-cell">31/06/2018</td>
-											<td><span class="badge badge-success">Done</span></td>
-											<td class="d-none d-md-table-cell">Ashley Briggs</td>
-										</tr>
-										<tr>
-											<td>Project Wombat</td>
-											<td class="d-none d-xl-table-cell">01/01/2018</td>
-											<td class="d-none d-xl-table-cell">31/06/2018</td>
-											<td><span class="badge badge-warning">In progress</span></td>
-											<td class="d-none d-md-table-cell">Bertha Martin</td>
-										</tr>
-										<tr>
-											<td>Project Zircon</td>
-											<td class="d-none d-xl-table-cell">01/01/2018</td>
-											<td class="d-none d-xl-table-cell">31/06/2018</td>
-											<td><span class="badge badge-danger">Cancelled</span></td>
-											<td class="d-none d-md-table-cell">Stacie Hall</td>
-										</tr>
-									</tbody>
-								</table>
+								<div style="width:parent;height:parent;" id="chart_div"></div>
+								
+								
 							</div>
 						</div>
 						<div class="col-12 col-lg-4 col-xxl-3 d-flex">
@@ -438,198 +272,7 @@ body {
 
 
 	<script src='https://www.gstatic.com/charts/loader.js'></script>
-	<script>
-		$(document)
-				.ready(
-						function() {
 
-							console
-									.log("=================calling ajax request")
-
-							console.log("inside category");
-							const xhr = new XMLHttpRequest();
-							xhr.open('GET', 'getCategoryData', true);
-							xhr.getResponseHeader('content-type',
-									'application/json');
-							xhr.onload = function() {
-								if (this.status === 200) {
-									let obj = JSON.parse(this.responseText);
-									console.log("object response");
-									console.log(obj);
-
-									$.each(data[objectProp], function(key,
-											element) {
-
-									})
-
-									google.charts.load('upcoming', {
-										'packages' : [ 'vegachart' ]
-									}).then(drawChart);
-
-									function drawChart() {
-										const dataTable = new google.visualization.DataTable();
-										dataTable.addColumn({
-											type : 'string',
-											'id' : 'category'
-										});
-										dataTable.addColumn({
-											type : 'number',
-											'id' : 'amount'
-										});
-										dataTable.addRows([
-
-										[ 'A', 28 ], [ 'B', 55 ], [ 'C', 43 ],
-
-										]);
-
-										const options = {
-											"vega" : {
-												"$schema" : "https://vega.github.io/schema/vega/v4.json",
-												"width" : 500,
-												"height" : 200,
-												"padding" : 5,
-
-												'data' : [ {
-													'name' : 'table',
-													'source' : 'datatable'
-												} ],
-
-												"signals" : [ {
-													"name" : "tooltip",
-													"value" : {},
-													"on" : [
-															{
-																"events" : "rect:mouseover",
-																"update" : "datum"
-															},
-															{
-																"events" : "rect:mouseout",
-																"update" : "{}"
-															} ]
-												} ],
-
-												"scales" : [ {
-													"name" : "xscale",
-													"type" : "band",
-													"domain" : {
-														"data" : "table",
-														"field" : "category"
-													},
-													"range" : "width",
-													"padding" : 0.05,
-													"round" : true
-												}, {
-													"name" : "yscale",
-													"domain" : {
-														"data" : "table",
-														"field" : "amount"
-													},
-													"nice" : true,
-													"range" : "height"
-												} ],
-
-												"axes" : [ {
-													"orient" : "bottom",
-													"scale" : "xscale"
-												}, {
-													"orient" : "left",
-													"scale" : "yscale"
-												} ],
-
-												"marks" : [
-														{
-															"type" : "rect",
-															"from" : {
-																"data" : "table"
-															},
-															"encode" : {
-																"enter" : {
-																	"x" : {
-																		"scale" : "xscale",
-																		"field" : "category"
-																	},
-																	"width" : {
-																		"scale" : "xscale",
-																		"band" : 1
-																	},
-																	"y" : {
-																		"scale" : "yscale",
-																		"field" : "amount"
-																	},
-																	"y2" : {
-																		"scale" : "yscale",
-																		"value" : 0
-																	}
-																},
-																"update" : {
-																	"fill" : {
-																		"value" : "steelblue"
-																	}
-																},
-																"hover" : {
-																	"fill" : {
-																		"value" : "red"
-																	}
-																}
-															}
-														},
-														{
-															"type" : "text",
-															"encode" : {
-																"enter" : {
-																	"align" : {
-																		"value" : "center"
-																	},
-																	"baseline" : {
-																		"value" : "bottom"
-																	},
-																	"fill" : {
-																		"value" : "#333"
-																	}
-																},
-																"update" : {
-																	"x" : {
-																		"scale" : "xscale",
-																		"signal" : "tooltip.category",
-																		"band" : 0.5
-																	},
-																	"y" : {
-																		"scale" : "yscale",
-																		"signal" : "tooltip.amount",
-																		"offset" : -2
-																	},
-																	"text" : {
-																		"signal" : "tooltip.amount"
-																	},
-																	"fillOpacity" : [
-																			{
-																				"test" : "datum === tooltip",
-																				"value" : 0
-																			},
-																			{
-																				"value" : 1
-																			} ]
-																}
-															}
-														} ]
-											}
-										};
-
-										const chart = new google.visualization.VegaChart(
-												document
-														.getElementById('chart-div'));
-										chart.draw(dataTable, options);
-									}
-
-								} else {
-									console.error("some error occured");
-								}
-
-							}
-							xhr.send();
-
-						});
-	</script>
 
 	<script>
 		$(function() {
@@ -839,55 +482,99 @@ body {
 			});
 		});
 	</script>
-	
-	
+
+	<!-- category wise record  -->
 	<script type="text/javascript">
-        $(document).ready(
-                function() {
-                    $.ajax({
-                        url : "/getCategoryData",
-                        success : function(result) {
-                            var yearDtls = [];
-                            var countDtls = [];
-                            console.log(result);
-                            Object.keys(result).forEach(
-                                    function(key) {
-                                        yearDtls.push(key);
-                                        countDtls.push(result[key]);
-                                    });
-                            drawChart(yearDtls, countDtls);
-                        }
-                    });
-                });
-        function drawChart(year, viewCounts) {
-            Highcharts.chart('container-bar', {
-                chart : {
-                    type : 'column',
-                    styledMode : true
-                },
-                title : {
-                    text : 'Category wise Employee'
-                },
-                xAxis : [ {
-                    title : {
-                        text : 'Year'
-                    },
-                    categories : year
-                } ],
-                yAxis : [ {
-                    className : 'highcharts-color-0',
-                    title : {
-                        text : 'Page View Count'
-                    }
-                } ],
-                series : [ {
-                    data : viewCounts
-                } ]
-            });
+		$(document).ready(function() {
+			$.ajax({
+				url : "/getCategoryData",
+				success : function(result) {
+					var yearDtls = [];
+					var countDtls = [];
+					console.log(result);
+					Object.keys(result).forEach(function(key) {
+						yearDtls.push(key);
+						countDtls.push(result[key]);
+					});
+					drawChart(yearDtls, countDtls);
+				}
+			});
+		});
+		function drawChart(year, viewCounts) {
+			Highcharts.chart('container-bar', {
+				chart : {
+					type : 'column',
+					styledMode : true
+				},
+				title : {
+					text : 'Category wise Employee'
+				},
+				xAxis : [ {
+					title : {
+						text : 'Year'
+					},
+					categories : year
+				} ],
+				yAxis : [ {
+					className : 'highcharts-color-0',
+					title : {
+						text : 'Page View Count'
+					}
+				} ],
+				series : [ {
+					data : viewCounts
+				} ]
+			});
+		}
+	</script>
+
+
+	
+</body>
+
+<!-- pai chart -->
+	<script type="text/javascript" th:inline="javascript">
+
+        // Load the Visualization API and the corechart package.
+        google.charts.load('current', {'packages':['corechart']});
+
+        // Set a callback to run when the Google Visualization API is loaded.
+        google.charts.setOnLoadCallback(drawPaiChart);
+
+        // Callback that creates and populates a data table,
+        // instantiates the pie chart, passes in the data and
+        // draws it.
+        function drawPaiChart() {
+
+            // Create the data table.
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Topping');
+            data.addColumn('number', 'Slices');
+            data.addRows([
+            	["Software",4],
+                ["Sales",2],
+                ["HR",3],
+                
+            ]);
+            // Set chart options
+            var options = {'title':'Budget ',
+                'width':400,
+                'height':300};
+
+            // Instantiate and draw our chart, passing in some options.
+            var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+            chart.draw(data, options);
         }
     </script>
+    
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+	<!-- end pai chart -->
+</html>
 
-</body>
+
+
+
+
 <link rel="stylesheet"
 	href="https://code.highcharts.com/css/highcharts.css" />
 <script src="https://code.highcharts.com/highcharts.js"></script>

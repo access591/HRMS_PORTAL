@@ -65,8 +65,10 @@ public class LeaveRequest implements Serializable  {
 	private String toDateType;
 	
 
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "APPLY_DATE")
 	private Date applyDate;
+	
 	
 	@Column(name = "APPROVE_DATE",length=100)
 	private String approvedDate;

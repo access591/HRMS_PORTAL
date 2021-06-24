@@ -83,8 +83,8 @@ body {
 														<th scope="col" class="text-center">From Date</th>
 														<th scope="col" class="text-center">To Date</th>
 														<th scope="col" class="text-center">Total Leave</th>
-														<th scope="col" class="text-center">Approval</th>
-														<th scope="col" class="text-center">Details</th>
+														<th scope="col" class="text-center">Approval Status</th>
+														<th scope="col" class="text-center">View</th>
 														
 													</tr>
 												</thead>
@@ -100,7 +100,7 @@ body {
 														<td><label class="form-control text-center" th:text="${#dates.format(leaveRequestapproval.fromDate, 'dd-MM-yyyy')}"></label></td>
 
 														<td><label class="form-control text-center" th:text="${#dates.format(leaveRequestapproval.toDate, 'dd-MM-yyyy')}"></label></td>
-														<td><label class="form-control text-center" th:text="${leaveRequestapproval.leaveFor}"></label></td>
+														<td><label class="form-control text-right" th:text="${leaveRequestapproval.leaveFor}"></label></td>
 														
 														<td>
 													<div class="btn-group">

@@ -1,8 +1,10 @@
 package com.hrms.controller;
 
+
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -23,16 +25,13 @@ import com.hrms.model.Employee;
 import com.hrms.model.InterviewMaster;
 import com.hrms.model.Login;
 import com.hrms.model.MenuModule;
-import com.hrms.model.Module;
-import com.hrms.model.Program;
-import com.hrms.model.SubModule1;
+
 import com.hrms.model.UserEntity;
 import com.hrms.service.AttendenceRegisterService;
 import com.hrms.service.EmployeeService;
 import com.hrms.service.InterviewMasterService;
 import com.hrms.service.ModuleService;
-import com.hrms.service.ReCaptchaValidationService;
-import com.hrms.service.SubModuleService;
+
 import com.hrms.service.UserService;
 
 @Controller
@@ -83,6 +82,17 @@ public class UserController {
 		if(listInterviewMaster != null) {
 			model.addAttribute("finalSelection", listInterviewMaster.size());
 		}
+		
+		
+		model.addAttribute("chart", new Object[][] {
+		    {"Airline",     "Price $"},
+		    {"Delta",       100},
+		    {"Southwest",   500},
+		    {"Jet Blue",    300},
+		    {"Canada Air",  300},
+		    {"Average month price", 300}
+		});
+		
 		
 		
 		if (isUserExist /* && validator.validateCaptcha(captcha) */ ) {
@@ -229,5 +239,27 @@ public class UserController {
 		return "dashboard";
 	
 	}
+	
+	
+	private Map<String, Integer> getChartData() { 
+//        return List.of(
+//        		
+//                List.of("Mushrooms",44 ),
+//                List.of("Onions", 24),
+//                List.of("Olives",89),
+//                List.of("Zucchini",6),
+//                List.of("Pepperoni",56)
+//        );
+		
+		Map<String,Integer> map = new HashMap<>();
+		map.put("Mushrooms", 44);
+		map.put("Onions", 24);
+		map.put("Olives", 89);
+		map.put("Zucchini", 6);
+		map.put("Zucchini", 6);
+		
+		return map;
+		
+    }
 	
 }

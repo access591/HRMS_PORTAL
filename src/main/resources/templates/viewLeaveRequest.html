@@ -14,6 +14,17 @@ body {
 .uppercase {
 	text-transform: uppercase;
 }
+
+input[type="text"] {
+	pointer-events: none;
+}
+input[type="date"] {
+	pointer-events: none;
+}
+
+.myclass {
+	pointer-events: none;
+}
 </style>
 <script>
 	window.dataLayer = window.dataLayer || [];
@@ -45,8 +56,8 @@ body {
 						<div class="col-12">
 							<div class="card">
 								<div class="card-header">
-									<h5 class="card-title" th:text="${header}">View Leave
-										Request</h5>
+									<h5 class="card-title" th:text="${header}">Leave
+										Request Form</h5>
 									<div class="alert-outline">
 										<div th:if="${message}" th:text="${message}"
 											style="color: red"></div>
@@ -80,7 +91,7 @@ body {
 														th:field="*{employee.empName}">
 												</div>
 											</div>
-											
+
 											<div class="col-12 col-lg-4">
 												<div class="form-group">
 													<label class="form-label"> Department Name</label> <input
@@ -88,15 +99,27 @@ body {
 														th:field="*{department.deptName}">
 												</div>
 											</div>
-											
-											
+
+
 										</div>
 
 										<div class="row">
+										
+										<div class="col-12 col-lg-4">
+												<div class="form-group">
+
+													<label> Applied Date </label> <input type="date"
+														class="form-control" id="id" name="applyDate"
+														th:field="*{applyDate}">
+												</div>
+
+
+											</div>
+											
 											<div class="col-12 col-lg-4">
 												<div class="form-group">
 
-													<label> From Date </label> <input type="text"
+													<label> From Date </label> <input type="date"
 														class="form-control" name="fromDate"
 														th:field="*{fromDate}">
 												</div>
@@ -107,31 +130,22 @@ body {
 											<div class="col-12 col-lg-4">
 												<div class="form-group">
 													<label class="form-label"> To Date</label> <input
-														type="text" class="form-control " name="toDate"
+														type="date" class="form-control " name="toDate"
 														th:field="*{toDate}">
 												</div>
 											</div>
-											
-											<div class="col-12 col-lg-4">
-												<div class="form-group">
 
-													<label> Applied Date </label> <input type="text"
-														class="form-control" id="id" name="applyDate"
-														th:field="*{applyDate}">
-												</div>
+											
 
 
-											</div>
-											
-											
 										</div>
 
 
-										
+
 
 
 										<div class="row">
-											
+
 											<div class="col-12 col-lg-4">
 												<div class="form-group">
 
@@ -142,7 +156,7 @@ body {
 
 
 											</div>
-											
+
 
 											<div class="col-12 col-lg-4">
 												<div class="form-group">
@@ -151,18 +165,19 @@ body {
 														th:field="*{reason}">
 												</div>
 											</div>
-											
+
 											<div class="col-12 col-lg-4">
 												<div class="form-group">
 
 													<label class="form-label">From Type </label> <select
-													class="form-control" th:field="*{fromDateType}"
-													id="from_date_type" onchange="fromDayTypeValue(this.value)">
-													<option value=" f">Full</option>
-													<option value="fh">first Half</option>
-													<option value="sh">Second Half</option>
-													<option value="s">Short</option>
-												</select>
+														class="form-control myclass" th:field="*{fromDateType}"
+														id="from_date_type"
+														onchange="fromDayTypeValue(this.value)">
+														<option value=" f">Full</option>
+														<option value="fh">first Half</option>
+														<option value="sh">Second Half</option>
+														<option value="s">Short</option>
+													</select>
 												</div>
 
 
@@ -187,22 +202,24 @@ body {
 												<div class="form-group">
 													<label class="form-label">Approved By</label> <input
 														type="text" class="form-control " name="approevedBy"
-														th:field="*{approevedBy}">
+														th:field="*{approevedBy}"
+														>
 												</div>
 											</div>
-											
-											
-											<div th:if="${leaveRequest.requestType=='multiple'}" class="col-12 col-lg-4">
+
+
+											<div th:if="${leaveRequest.requestType=='multiple'}"
+												class="col-12 col-lg-4">
 												<div class="form-group">
 
 													<label class="form-label">To Type </label> <select
-													class="form-control" th:field="*{toDateType}"
-													id="to_date_type" onchange="toDayTypeValue(this.value)">
-													<option value="f">Full</option>
-													<option value="fh">first Half</option>
-													<option value="sh">Second Half</option>
-													<option value="s">Short</option>
-												</select>
+														class="form-control" th:field="*{toDateType}"
+														id="to_date_type" onchange="toDayTypeValue(this.value)">
+														<option value="f">Full</option>
+														<option value="fh">first Half</option>
+														<option value="sh">Second Half</option>
+														<option value="s">Short</option>
+													</select>
 												</div>
 
 
@@ -210,10 +227,7 @@ body {
 
 										</div>
 
-										<div class="row">
-											
-
-										</div>
+										<div class="row"></div>
 
 
 										<input onclick="window.history.go(-1); return false;"
