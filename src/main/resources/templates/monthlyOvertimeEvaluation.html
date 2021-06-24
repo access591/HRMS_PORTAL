@@ -37,7 +37,7 @@ body {
   z-index: 100;
 }
 </style>
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
 <script>
 
 function demo()
@@ -366,21 +366,12 @@ $("table").on("keyup", ".pas", function () {
 	<script>
 		$(function() {
 
-			$("input[name='oTimeMonth']").daterangepicker({
+			$("input[name='oTimeMonth']").datepicker({
 				singleDatePicker: true,
-			    autoApply: true,
-				locale: {
-		            format: 'DD/MM/YYYY'
-		        },
-				showDropdowns: true
+					 format: 'dd/mm/yyyy',
+			
 			});
-			
-	
-		
 
-
-
-			
 			// Datatables basic
 			$('#datatables-basic').DataTable({
 				responsive: true
@@ -410,12 +401,6 @@ $("table").on("keyup", ".pas", function () {
 	    } );
 	} );
 	</script>
-
-	
-
-
-	
-
 	<script>
 	function myFunctionDeptCode(){
 /* 		 var empCode= $('#empCode option:selected').value; */
@@ -550,6 +535,7 @@ $("table").on("keyup", ".pas", function () {
 			}
 		});
 	</script>
+	
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
 
 </body>
