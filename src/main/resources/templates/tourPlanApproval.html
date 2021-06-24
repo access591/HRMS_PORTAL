@@ -113,7 +113,7 @@ body {
 													<tbody>
 														<tr th:each="tour:${ListTourPlan}">
 														<td th:text="${tour.tourPlanId}">Tour Plan Id</td>
-														<td th:text="${tour.tourPlanDate}">Tour Plan Date</td>
+														<td th:text="${#dates.format(tour.tourPlanDate,'dd-MM-yyyy')}">Tour Plan Date</td>
 														<td th:text="${tour.empCode.empName}">Employee Name</td>
 														<td th:text="${tour.departmentCode.deptName}">Department Name</td>
 														
