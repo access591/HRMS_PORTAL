@@ -84,12 +84,12 @@ body {
 													<tr>
 														<th scope="col" class="text-center">Interview Code</th>
 														<th scope="col" class="text-center">Interview Date</th>
-														<th scope="col" class="text-center">Application Code</th>
+														<th scope="col" class="text-center">Application Name</th>
 														<th scope="col" class="text-center">Application Date</th>
 														<th scope="col" class="text-center">Remarks</th>
 														<th scope="col">Overall Rating<label
 													style="color: red">*</label></th>
-														<th scope="col" class="text-center">View</th>
+														
 														
 													</tr>
 												</thead>
@@ -103,7 +103,7 @@ body {
 
 														<td>
 															<select class="form-control text-center" id = "applicantCode" onchange="chooseAppliCode()"
-																name="interviewForm[0].applicantCode.applicantCode" style="width: auto;">
+																name="interviewForm[0].applicantCode.applicantCode" style="width: auto;" required>
 																<option value="">Select</option>
 																<option th:each="applicantCode : ${listApplicantInfo}"
 																	th:text="${applicantCode.applicantName}" th:value="${applicantCode.applicantCode}"></option>
@@ -115,7 +115,7 @@ body {
 														<td><input type="text" class="form-control text-center" name="interviewForm[0].remarks"></td>
 														
 														<td><select class="form-control text-center" name="interviewForm[0].overAllRating" ><option value="">Rating</option><option value="A+">A+</option> <option value="A">A</option> <option value="B">B</option> <option value="C">C</option> <option value="D">D</option></select></td>
-														<td><a href="#"><em class="fas fa-eye fa-lg"></em></a></td>
+														
 														
 													</tr>
 													<tr id='addr1' />
@@ -150,7 +150,7 @@ body {
 														<th scope="col" class="text-center">Round-2 Details</th>
 														<th scope="col" class="text-center">Round-3 Rating</th>
 														<th scope="col" class="text-center">Round-3 Details</th>
-														<th scope="col" class="text-center">View</th>
+														
 														
 													</tr>
 												</thead>
@@ -158,9 +158,9 @@ body {
 													<tr id="adds0">
 
 
-														<td><select class="form-control text-center" name="interviewForm[0].rating1" ><option value="">Rating</option> <option value="A+">A+</option> <option value="A">A</option> <option value="B">B</option> <option value="C">C</option> <option value="D">D</option></select></td>
+														<td><select class="form-control text-center" name="interviewForm[0].rating1" required><option value="">Rating</option> <option value="A+">A+</option> <option value="A">A</option> <option value="B">B</option> <option value="C">C</option> <option value="D">D</option></select></td>
 
-														<td><input type="text" class="form-control text-center" name="interviewForm[0].round1"></td>
+														<td><input type="text" class="form-control text-center" name="interviewForm[0].round1" required></td>
 
 														<td><select class="form-control text-center" name="interviewForm[0].rating2" > <option value="">Rating</option> <option value="A+">A+</option> <option value="A">A</option> <option value="B">B</option> <option value="C">C</option> <option value="D">D</option></select></td>
 														
@@ -169,7 +169,7 @@ body {
 														<td><select class="form-control text-center" name="interviewForm[0].rating3" > <option value="">Rating</option> <option value="A+">A+</option> <option value="A">A</option> <option value="B">B</option> <option value="C">C</option> <option value="D">D</option></select></td>
 														
 														<td><input type="text" class="form-control text-center" name="interviewForm[0].round3"></td>
-														<td><a href="#"><em class="fas fa-eye fa-lg"></em></a></td>
+														
 														
 													</tr>
 													<tr id='adds1' />
@@ -198,7 +198,7 @@ body {
 														<th scope="col" class="text-center">Round-5 Details</th>
 														<th scope="col" class="text-center">Round 6 (Rating)</th>
 														<th scope="col" class="text-center">Round-6 Details</th>
-														<th scope="col" class="text-center">View</th>
+														
 														
 													</tr>
 												</thead>
@@ -217,7 +217,7 @@ body {
 														<td><select class="form-control text-center" name="interviewForm[0].rating6" > <option value="">Rating</option> <option value="A+">A+</option> <option value="A">A</option> <option value="B">B</option> <option value="C">C</option> <option value="D">D</option></select></td>
 														
 														<td><input type="text" class="form-control text-center" name="interviewForm[0].round6"></td>
-														<td><a href="#"><em class="fas fa-eye fa-lg"></em></a></td>
+														
 														
 													</tr>
 													<tr id='addt1' />
@@ -230,7 +230,7 @@ body {
 						</div>
 					</div>
 					
-					<button type="submit" class="btn btn-primary">Add</button>
+					<button type="submit" class="btn btn-primary">Submit</button>
 							<button type="reset" class="btn btn-primary" value="Reset">Reset</button>
 					
 					</form>
@@ -258,11 +258,11 @@ body {
 		$('#addr'+i).html(
 				"<td><input type='text' name='interviewForm["+i+"].interviewCode' class='form-control'></td>"+
 				"<td><input type='date' class='form-control' name='interviewForm["+i+"].interviewDate'></td>"+
-				"<td><select class='form-control' name='interviewForm["+i+"].applicantCode'style='width: 107px;'><option value=''>Select </option></select></td>"+
+				"<td><select class='form-control text-center' name='interviewForm["+i+"].applicantCode'style='width: 107px;'><option value=''>Select </option></select></td>"+
 				"<td><input type='date' class='form-control' id='applicantDate["+i+"]'name='interviewForm["+i+"].applicantDate'</td>"+
 				"<td><input type='tex' class='form-control' name='interviewForm["+i+"].remarks'></td>"+
-				"<td><select class='form-control text-center' name='interviewForm["+i+"].overAllRating' ><option value=''>Rating</option><option value='A+'>A+</option> <option value='A'>A</option> <option value='B'>B</option> <option value='C'>C</option> <option value='D'>D</option></select></td>"+
-				"<td><a href='#'><i class='fas fa-eye'></i></a></td>");
+				"<td><select class='form-control text-center' name='interviewForm["+i+"].overAllRating' ><option value=''>Rating</option><option value='A+'>A+</option> <option value='A'>A</option> <option value='B'>B</option> <option value='C'>C</option> <option value='D'>D</option></select></td>");
+				
 
 		$('#example1').append('<tr id="addr'+(i+1)+'"></tr>');
 		
@@ -274,8 +274,7 @@ body {
 				"<td><select class='form-control text-center' name='interviewForm["+i+"].rating2' ><option value=''>Rating</option><option value='A+'>A+</option> <option value='A'>A</option> <option value='B'>B</option> <option value='C'>C</option> <option value='D'>D</option></select></td>"+
 				"<td><input type='text' class='form-control' name='interviewForm["+i+"].round2'></td>"+
 				"<td><select class='form-control text-center' name='interviewForm["+i+"].rating3' ><option value=''>Rating</option><option value='A+'>A+</option> <option value='A'>A</option> <option value='B'>B</option> <option value='C'>C</option> <option value='D'>D</option></select></td>"+
-				"<td><input type='text' class='form-control' name='interviewForm["+i+"].round3'></td>"+
-				"<td><a href='#'><i class='fas fa-eye'></i></a></td>");
+				"<td><input type='text' class='form-control' name='interviewForm["+i+"].round3'></td>");
 
 		$('#example2').append('<tr id="adds'+(i+1)+'"></tr>');
 		
@@ -287,8 +286,7 @@ body {
 				"<td><select class='form-control text-center' name='interviewForm["+i+"].rating5' ><option value=''>Rating</option><option value='A+'>A+</option> <option value='A'>A</option> <option value='B'>B</option> <option value='C'>C</option> <option value='D'>D</option></select></td>"+
 				"<td><input type='text' class='form-control' name='interviewForm["+i+"].round5'></td>"+
 				"<td><select class='form-control text-center' name='interviewForm["+i+"].rating6' ><option value=''>Rating</option><option value='A+'>A+</option> <option value='A'>A</option> <option value='B'>B</option> <option value='C'>C</option> <option value='D'>D</option></select></td>"+
-				"<td><input type='text' class='form-control' name='interviewForm["+i+"].round6'></td>"+
-				"<td><a href='#'><i class='fas fa-eye'></i></a></td>");
+				"<td><input type='text' class='form-control' name='interviewForm["+i+"].round6'></td>");
 
 		$('#example3').append('<tr id="addt'+(i+1)+'"></tr>');
 		

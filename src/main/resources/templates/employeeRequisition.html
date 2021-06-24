@@ -328,9 +328,9 @@ body {
 									<tbody>
 										<tr th:each="leave : ${requisition}">
 											<td class="text-center" th:text="${leave.reqCode}"></td>
-											<td class="text-center" th:text="${leave.reqDate}"></td>
+											<td class="text-center" th:text="${#dates.format(leave.reqDate, 'dd-MM-yyyy')}"></td>
 											<td class="text-center" th:text="${leave.reqPriority}"></td>
-											<td class="text-center" th:text="${leave.reqTill}"></td>
+											<td class="text-center" th:text="${#dates.format(leave.reqTill, 'dd-MM-yyyy')}"></td>
 											<td class="text-center" th:text="${leave.remarks}"></td>
 
 											<th:block th:switch="${leave.status}">
@@ -343,24 +343,24 @@ body {
 													th:switch="${leave.status}">
 													<div th:case="'Y'">
 														<a th:href="@{viewRequisition/{id}(id=${leave.reqCode})}"><em
-															class="fa fa-edit"></em></a> <a
+															class="align-middle fas fa-fw fa-pen"></em></a> <a
 															th:href="@{deleteRequisition/{id}(id=${leave.reqCode})}"
 															onclick="return confirm('Are you sure?')"><em
-															class="fa fa-times"></em></a>
+															class="align-middle fas fa-fw fa-trash"></em></a>
 													</div>
 													<div th:case="'N'">
 														<a th:href="@{editRequisition/{id}(id=${leave.reqCode})}"><em
-															class="fa fa-edit"></em></a> <a
+															class="align-middle fas fa-fw fa-pen"></em></a> <a
 															th:href="@{deleteRequisition/{id}(id=${leave.reqCode})}"
 															onclick="return confirm('Are you sure?')"><em
-															class="fa fa-times"></em></a>
+															class="align-middle fas fa-fw fa-trash"></em></a>
 													</div>
 													<div th:case="'C'">
 														<a th:href="@{viewRequisition/{id}(id=${leave.reqCode})}"><em
-															class="fa fa-edit"></em></a> <a
+															class="align-middle fas fa-fw fa-pen"></em></a> <a
 															th:href="@{deleteRequisition/{id}(id=${leave.reqCode})}"
 															onclick="return confirm('Are you sure?')"><em
-															class="fa fa-times"></em></a>
+															class="align-middle fas fa-fw fa-trash"></em></a>
 													</div>
 
 												</th:block></td>
