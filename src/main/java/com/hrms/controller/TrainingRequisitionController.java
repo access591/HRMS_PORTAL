@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.hrms.helper.Message1;
 import com.hrms.model.Department;
 import com.hrms.model.Employee;
 import com.hrms.model.MenuModule;
@@ -94,13 +95,20 @@ public class TrainingRequisitionController {
 			return "redirect:" + "./";
 		}
 
-		for (TrainingRequisitionDetail t : trainingRequisition.getListTransactionRequisitionDetail()) {
-			t.setTrainingRequisition(trainingRequisition);
+		try {
+			for (TrainingRequisitionDetail t : trainingRequisition.getListTransactionRequisitionDetail()) {
+				t.setTrainingRequisition(trainingRequisition);
+			}
+			for (TrainingReqEmployeeDetail t : trainingRequisition.getListTransactionReqEmployeeDetail()) {
+				t.setTrainingRequisition(trainingRequisition);
+			}
+			trainingRequistionService.addTrainingRequisition(trainingRequisition);
+			session.setAttribute("message",new Message1("Data has been Saved","alert-primary"));
+		}catch(Exception e) {
+			e.printStackTrace();
+			session.setAttribute("message",new Message1("Something went wrong","alert-primary"));
 		}
-		for (TrainingReqEmployeeDetail t : trainingRequisition.getListTransactionReqEmployeeDetail()) {
-			t.setTrainingRequisition(trainingRequisition);
-		}
-		trainingRequistionService.addTrainingRequisition(trainingRequisition);
+		
 
 		return "redirect:trainingRequisition";
 	}
