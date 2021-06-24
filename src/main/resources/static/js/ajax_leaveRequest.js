@@ -84,6 +84,8 @@ function leaveTypeFun(){
 		document.getElementById("to_date_type").disabled = false;
 		document.getElementById("to_date").disabled = false;
 		
+		document.getElementById("to_date_type").value = f;
+		
 		countLeaveDays();
 
 	}

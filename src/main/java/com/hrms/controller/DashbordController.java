@@ -87,7 +87,10 @@ public class DashbordController {
 		if (modules != null) {
 			model.addAttribute("modules", modules);
 		}
-		//Map<String, Long> countCategory = employeeService.countRecordByCategory();
+		Map<String, Long> countCategory = employeeService.countRecordByCategory();
+		
+		//model.addAttribute("chartData", countCategory);
+		
 		
 		return "dashboard";
 	}
@@ -103,6 +106,7 @@ public class DashbordController {
 		
 		Map<String, Long> countCategory = employeeService.countRecordByCategory();
 		countCategory.put("DIG", new Long(3));
+		
 		
 		
 		return countCategory;

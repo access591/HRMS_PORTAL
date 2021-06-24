@@ -82,7 +82,7 @@ body {
 										<div class="row">
 											<div class="col-12 col-lg-6">
 												<div class="form-group">
-													<label> Employee id </label> <label style="color: red">*</label>
+													<label> Employee Code </label> <label style="color: red">*</label>
 													<input class="form-control" id="leaveRequestEmpId" value=""
 														th:field="*{employee.empCode}" readonly />
 												</div>
@@ -104,7 +104,7 @@ body {
 										<div class="row">
 											<div class="col-12 col-lg-6">
 												<div class="form-group">
-													<label> Dept Code </label> <label style="color: red">*</label>
+													<label> Department Code </label> <label style="color: red">*</label>
 													<input type="text" class="form-control"
 														id="leaveDepartmentId" value=""
 														th:field="*{department.departmentCode}" readonly>
@@ -155,21 +155,21 @@ body {
 										<!-- from and to type of leave  -->
 										<div class="row">
 											<div class="col-12 col-lg-6">
-												<label class="form-label">From Type </label> <select
+												<label class="form-label">From Leave </label> <select
 													class="form-control" th:field="*{fromDateType}"
 													id="from_date_type" onchange="fromDayTypeValue(this.value)">
 													<option value=" f">Full</option>
-													<option value="fh">first Half</option>
+													<option value="fh">First Half</option>
 													<option value="sh">Second Half</option>
 													<option value="s">Short</option>
 												</select>
 											</div>
 											<div class="col-12 col-lg-6">
-												<label class="form-label">To Type </label> <select
+												<label class="form-label">To Leave </label> <select
 													class="form-control" th:field="*{toDateType}"
 													id="to_date_type" onchange="toDayTypeValue(this.value)">
 													<option value="f">Full</option>
-													<option value="fh">first Half</option>
+													<option value="fh">First Half</option>
 													<option value="sh">Second Half</option>
 													<option value="s">Short</option>
 												</select>
@@ -183,7 +183,7 @@ body {
 													class="form-control" th:field="*{leave.levCode}" required>
 													<option value="">Leave Type</option>
 													<option th:each="leave : ${listLeave}"
-														th:text="${leave.levType}" th:value=" ${leave.levCode}">
+														th:text="${#strings.capitalize(leave.levType)}" th:value="${leave.levCode}">
 													</option>
 												</select>
 											</div>
@@ -201,8 +201,8 @@ body {
 										<div class="row">
 											<div class="col-12 col-lg-6">
 												<div class="form-group">
-													<label> Reason </label> <input type="text"
-														class="form-control" th:field="*{reason}">
+													<label> Reason </label> <textarea type="text"
+														class="form-control" th:field="*{reason}"></textarea>
 												</div>
 											</div>
 										</div>
@@ -252,7 +252,7 @@ body {
 											</div>
 										</div>
 
-										<button type="submit" class="btn btn-primary">Apply</button>
+										<button type="submit" class="btn btn-primary">Submit</button>
 										<button type="reset" class="btn btn-primary" value="Reset">Reset</button>
 									</form>
 
@@ -290,7 +290,7 @@ body {
 												<td class="text-center" th:text="${#dates.format(leave.toDate, 'dd-MM-yyyy')}"></td>
 														
 												
-												<td class="text-center" th:text="${leave.reason}"></td>
+												<td class="text-center justify" th:text="${leave.reason}"></td>
 												<th:block th:switch="${leave.status}">
 													<td th:case="'Y'" class="text-center">Approved</td>
 													<td th:case="'C'" class="text-center">Cancel</td>
