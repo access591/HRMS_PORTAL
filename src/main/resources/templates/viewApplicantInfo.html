@@ -106,20 +106,18 @@ body {
 														<div class="form-row">
 															<div class="form-group sm col-md-4">
 
-																<label class="form-label">Application Code <span
-																	class="text-danger">*</span>
+																<label class="form-label">Application Code 
 																</label> <input type="text" th:field="*{applicantCode}" readonly
 																class="form-control ">
 															</div>
 															<div class="form-group sm col-md-4">
-																<label class="form-label">Application Date <span
-																	class="text-danger">*</span></label> <input type="date"
+																<label class="form-label">Application Date </label> 
+																<input type="date"
 																	class="form-control" th:field="*{applicantDate}">
 															</div>
 
 															<div class="form-group sm col-md-4">
-																<label class="form-label">Advertisement Code <span
-																	class="text-danger">*</span>
+																<label class="form-label">Advertisement Code 
 																</label> <select class="form-control " id="advtCode" onchange="reqCodeByDate()" th:field="*{advtCode}">
 																	<option value="">Select Advertisement Code</option>
 																	<option th:each="reqAdvertisement, stat : ${listReqAdvertisement}"
@@ -136,13 +134,12 @@ body {
 														<div class="form-row">
 															<div class="form-group sm col-md-4">
 
-																<label class="form-label">Advertisement Date <span
-																	class="text-danger">*</span>
+																<label class="form-label">Advertisement Date 
 																</label> <input  class="form-control " id="advtDate" th:field="*{advtDate}">
 															</div>
 															<div class="form-group sm col-md-4">
-																<label class="form-label">Applicant Name <span
-																	class="text-danger">*</span></label> <input type="text"
+																<label class="form-label">Applicant Name 
+																</label> <input type="text"
 																	class="form-control " th:field="*{applicantName}">
 															</div>
 
@@ -167,8 +164,7 @@ body {
 														<div class="form-row">
 
 															<div class="form-group sm col-md-4">
-																<label class="form-label">Father Name <span
-																	class="text-danger">*</span>
+																<label class="form-label">Father Name 
 																</label> <input name="employeePayeeCode" type="text"
 																	class="form-control " th:field="*{fatherName}">
 															</div>
@@ -225,8 +221,7 @@ body {
 														<div class="form-row">
 															<div class="form-group sm col-md-12">
 
-																<label class="form-label">Address <span
-																	class="text-danger">*</span>
+																<label class="form-label">Address 
 																</label> <input name="frmDate" type="text"
 																 class="form-control " th:field="*{corrAdd}">
 															</div>
@@ -238,8 +233,7 @@ body {
 														<div class="form-row">
 															<div class="form-group sm col-md-12">
 
-																<label class="form-label">Address2 <span
-																	class="text-danger">*</span>
+																<label class="form-label">Address2 
 																</label> <input name="toDate" type="text" 
 																	th:field="*{corrAdd2}" class="form-control ">
 															</div>
@@ -267,8 +261,7 @@ body {
 														<div class="form-row">
 
 															<div class="form-group sm col-md-12">
-																<label class="form-label">State <span
-																	class="text-danger">*</span>
+																<label class="form-label">State 
 																</label> <input name="employeePayeeCode" type="text"
 																	class="form-control " th:field="*{corrState}">
 															</div>
@@ -281,8 +274,7 @@ body {
 														<div class="form-row">
 
 															<div class="form-group sm col-md-12">
-																<label class="form-label">Contact No <span
-																	class="text-danger">*</span>
+																<label class="form-label">Contact No 
 																</label> <input name="employeePayeeCode" type="text"
 																	class="form-control " th:field="*{corrStdPhone}">
 															</div>
@@ -301,8 +293,7 @@ body {
 														<div class="form-row">
 															<div class="form-group sm col-md-12">
 
-																<label class="form-label">Address <span
-																	class="text-danger">*</span>
+																<label class="form-label">Address 
 																</label> <input name="frmDate" type="text"
 																	 class="form-control "th:field="*{permAdd}">
 															</div>
@@ -314,8 +305,7 @@ body {
 														<div class="form-row">
 															<div class="form-group sm col-md-12">
 
-																<label class="form-label">Address2 <span
-																	class="text-danger">*</span>
+																<label class="form-label">Address2 
 																</label> <input name="toDate" type="text"
 																	th:field="*{permAdd2}" class="form-control ">
 															</div>
@@ -344,8 +334,7 @@ body {
 														<div class="form-row">
 
 															<div class="form-group sm col-md-12">
-																<label class="form-label">State <span
-																	class="text-danger">*</span>
+																<label class="form-label">State 
 																</label> <input name="employeePayeeCode" type="text"
 																	class="form-control " th:field="*{permState}">
 															</div>
@@ -358,8 +347,7 @@ body {
 														<div class="form-row">
 
 															<div class="form-group sm col-md-12">
-																<label class="form-label">Contact No <span
-																	class="text-danger">*</span>
+																<label class="form-label">Contact No 
 																</label> <input name="employeePayeeCode" type="text"
 																	th:field="*{permStdPhone}"
 																	class="form-control ">
@@ -436,8 +424,7 @@ body {
 														<div class="form-row">
 															<div class="form-group sm col-md-6">
 
-																<label class="form-label">Name <span
-																	class="text-danger">*</span>
+																<label class="form-label">Name 
 																</label> <input name="frmDate" type="text" 
 																	th:field="*{langOtherName}" class="form-control ">
 															</div>
@@ -449,8 +436,7 @@ body {
 														<div class="form-row">
 															<div class="form-group sm col-md-6">
 
-																<label class="form-label">Fluency <span
-																	class="text-danger">*</span>
+																<label class="form-label">Fluency 
 																</label> <select
 																	class="form-control "th:field="*{langOthersRw}">
 																	
@@ -496,8 +482,7 @@ body {
 														<div class="form-row">
 															<div class="form-group sm col-md-12">
 
-																<label class="form-label">Technical <span
-																	class="text-danger">*</span>
+																<label class="form-label">Technical 
 																</label> <input name="toDate" type="text"
 																		th:field="*{techQuali}" class="form-control ">
 															</div>
@@ -529,20 +514,22 @@ body {
 															<div class="form-group sm col-md-4">
 
 																<label class="form-label">Reference Mode 
-																<span
-																	class="text-danger">*</span></label> <select
+																</label> <select
 																	class="form-control " th:field="*{modeOfRef}">
-																	<option value="">Select</option>
-																	<option th:Value="News">News</option>
-																	<option th:Value="Magzine">Magzine</option>
+																	<option value=" ">Media Type</option>
+																<option value="News Paper">News Paper</option>
+																<option value="Cable TV">Cable TV</option>
+																<option value="Magzine">Magzine</option>
+																<option value="TV Channel">TV Channel</option>
+																<option value="Others">Others</option>
 																	
 
 
 																</select>
 															</div>
 															<div class="form-group sm col-md-4">
-																<label class="form-label">Employee Code <span
-																	class="text-danger">*</span></label> 
+																<label class="form-label">Employee Code 
+																</label> 
 																	<select th:field="*{empCode}" class="form-control">
 																		<option value="">Select Employee Code</option>
 																		<option th:each="employee : ${listEmployee}"
@@ -556,8 +543,7 @@ body {
 															
 
 															<div class="form-group sm col-md-4">
-																<label class="form-label">Hobbies <span
-																	class="text-danger">*</span>
+																<label class="form-label">Hobbies 
 																</label> <input type="text"th:field="*{hobbies}"
 																	class="form-control ">
 															</div>
@@ -568,21 +554,20 @@ body {
 														<div class="form-row">
 															<div class="form-group sm col-md-4">
 
-																<label class="form-label">Current CTC <span
-																	class="text-danger">*</span>
+																<label class="form-label">Current CTC 
 																</label> <input name="toDate" type="text"th:field="*{currentCtc}"
 																class="form-control ">
 															</div>
 															<div class="form-group sm col-md-4">
-																<label class="form-label">Expected CTC <span
-																	class="text-danger">*</span></label> <input type="text"th:field="*{expectedCtc}"
+																<label class="form-label">Expected CTC 
+																</label> <input type="text"th:field="*{expectedCtc}"
 																	class="form-control ">
 															</div>
 
 
 															<div class="form-group sm col-md-4">
-																<label class="form-label">Reason for Leaving</label> <span
-																	class="text-danger">*</span> <input type="text" th:field="*{reasonToLeave}"
+																<label class="form-label">Reason for Leaving</label> 
+																 <input type="text" th:field="*{reasonToLeave}"
 																	class="form-control ">
 															</div>
 														</div>

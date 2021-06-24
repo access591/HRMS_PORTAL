@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.hrms.helper.Message1;
 import com.hrms.model.ApplicantExpDetail;
 import com.hrms.model.ApplicantInfo;
 import com.hrms.model.City;
@@ -122,15 +123,22 @@ public class ApplicantInformationController {
 			return "redirect:" + "./";
 		}
 
-		if (applicantInfo.getApplicantExpDetail() != null) {
-			for (ApplicantExpDetail aDetail : applicantInfo.getApplicantExpDetail()) {
-				aDetail.setApplicantDate(applicantInfo.getApplicantDate());
-				aDetail.setApplicantInfo(applicantInfo);
+		try {
+			if (applicantInfo.getApplicantExpDetail() != null) {
+				for (ApplicantExpDetail aDetail : applicantInfo.getApplicantExpDetail()) {
+					aDetail.setApplicantDate(applicantInfo.getApplicantDate());
+					aDetail.setApplicantInfo(applicantInfo);
+				}
+			} else {
+				ApplicantExpDetail e = new ApplicantExpDetail();
+				e.setApplicantInfo(applicantInfo);
 			}
-		} else {
-			ApplicantExpDetail e = new ApplicantExpDetail();
-			e.setApplicantInfo(applicantInfo);
+			session.setAttribute("message",new Message1("Data has been saved Successfully","alert-primary"));
+		}catch(Exception e) {
+			e.printStackTrace();
+			session.setAttribute("message", new Message1("Something went Wrong !!","alert-info"));
 		}
+		
 
 		applicantInfoService.addApplicantInfo(applicantInfo);
 		return "redirect:applicantInformation";
