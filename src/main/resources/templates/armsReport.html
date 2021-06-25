@@ -45,8 +45,8 @@ body {
 
 							<div class="card" style="border-radius: 2.2rem">
 								<div class="card-header">
-									<h5 class="card-title"style="text-decoration: underline;">Budget
-										Report</h5>
+									<h5 class="card-title"style="text-decoration: underline;">Arms License Report
+										</h5>
 									<div class="alert-outline">
 										<div th:if="${message}" th:text="${message}"
 											style="color: red"></div>
@@ -54,21 +54,21 @@ body {
 								</div>
 								<div class="card-body">
 									<form id="validation-form" action="#"
-										th:action="@{/createbudgetreport}" method="post">
+										th:action="@{/createarmsreport}" method="get">
 										<div class="row">
 
 
 											<div class="col-12 col-lg-6">
 												<div class="form-group">
-													<label class="form-label">Select Department</label> <label
+													<label class="form-label">Employee</label> <label
 														style="color: red">*</label> <select
 														class="form-control select2" id="select_department"
-														onchange="changeDepartment()" name="deptCode">
+														onchange="changeDepartment()" name="empCode">
 														<option value=''>--Select--</option>
-														<option value='ALL'>All</option>
-														<option th:each="department : ${departmentList}"
-															th:text="${department.deptName}"
-															th:value="${department.departmentCode}"></option>
+														<option value="ALL">ALL</option>
+														<option th:each="emp : ${armsLicenseList}"
+															th:text="${emp.name}"
+															th:value="${emp.armsCode}"></option>
 
 
 
@@ -82,21 +82,15 @@ body {
 
 									
 
-											<div class="col-12 col-lg-6">
-												<label class="form-label">Financial Year</label> <label
-													style="color: red">*</label> <input type="text"
-													name="financial" id="financial" class="form-control">
-
-											</div>
+											
 
 
 										</div>
 
-										<p></p>
-										
+									
 										<Button type="submit" class="btn btn-primary">Generate Sheet</Button>
 
-										
+									
 									</form>
 
 
@@ -117,29 +111,6 @@ body {
 			</footer>
 		</div>
 	</div>
-	
-	
-<script>
-$(function() {
-$("input[name='financial']").datepicker({
-	
-    autoApply: true,
-    format: "yyyy",
-    autoclose: true,
-    minViewMode: "years",
-	locale: {
-        format: 'YYYY'
-    },
-	showDropdowns: true
-});
-}
-</script>
-
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
-
-	
-	
-
 
 </body>
 </html>

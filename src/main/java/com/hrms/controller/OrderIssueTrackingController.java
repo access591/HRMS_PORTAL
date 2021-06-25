@@ -1,11 +1,8 @@
 package com.hrms.controller;
 
-import java.io.File;
+
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -17,7 +14,6 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
@@ -29,13 +25,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.hrms.ImageUtil;
-import com.hrms.model.BudgetProvision;
+import com.hrms.helper.Message1;
 import com.hrms.model.Department;
 import com.hrms.model.Employee;
 import com.hrms.model.MenuModule;
 import com.hrms.model.OrderIssueTracking;
-import com.hrms.reports.BudgetReport;
 import com.hrms.reports.OrderTrackingReport;
 import com.hrms.service.DepartmentService;
 import com.hrms.service.EmployeeService;
@@ -85,7 +79,7 @@ public class OrderIssueTrackingController {
 		if(listOrderIssueTracking != null) {
 			model.addAttribute("listOrderIssueTracking", listOrderIssueTracking);
 		}
-		session.setAttribute("imgUtil", new ImageUtil());
+		
 		session.setAttribute("username", userCode);
 		return "orderIssueTracking";
 		
@@ -98,16 +92,15 @@ public class OrderIssueTrackingController {
 		if(session.getAttribute("username")==null) {
 			return "redirect:" + "./";
 		}
+		try {
+			orderIssueTracking.setOrderFileName(orderFile.getOriginalFilename());
+			orderIssueTrackingService.saveOrderIssueTracking(orderIssueTracking);
+			session.setAttribute("message",new Message1("Data has been Successfully added","alert-primary"));
+		}catch(Exception e) {
+			e.printStackTrace();
+			session.setAttribute("message", new Message1("Something went Wrong !!","alert-info"));
+		}
 		
-		orderIssueTracking.setOrderFileName(orderFile.getOriginalFilename());
-//		if(orderFile.isEmpty()) {
-//			System.out.println("file is not found");
-//		}else {
-//			File saveFileFolder = new ClassPathResource("classpath*:static/img/upload").getFile();
-//			Path path = Paths.get(saveFileFolder.getAbsolutePath()+File.separator+orderFile.getOriginalFilename());
-//			Files.copy(orderFile.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
-//		}
-		orderIssueTrackingService.saveOrderIssueTracking(orderIssueTracking);
 		
 		
 		return "redirect:orderissuetracking";
@@ -122,22 +115,22 @@ public class OrderIssueTrackingController {
 			return "redirect:" + "./";
 		}
 		
-		OrderIssueTracking b = orderIssueTrackingService.findOrderIssueTrackingById(Long.parseLong(orderIssueTrackingId));
+		
 		
 		List<Department> departmentList = departmentService.getAllDepartments();
 		if (departmentList != null) {
 			model.addAttribute("departmentList", departmentList);
 		}
 		
-		if(b != null) {
-			model.addAttribute("orderIssueTracking", b);
+		if(orderIssueTrackingService.findOrderIssueTrackingById(Long.parseLong(orderIssueTrackingId)) != null) {
+			model.addAttribute("orderIssueTracking", orderIssueTrackingService.findOrderIssueTrackingById(Long.parseLong(orderIssueTrackingId)));
 		}
 		List<Employee> employeeList = employeeService.getAllEmployees();
 		if (employeeList != null) {
 			model.addAttribute("employeeList", employeeList);
 		}
-		session.setAttribute("imgUtil", new ImageUtil());
-		return "editOrderIssueTracking"; //editBudgetProvision.html
+		
+		return "editOrderIssueTracking"; 
 	}
 	
 	@PostMapping("updateOrderTracking")
@@ -148,8 +141,16 @@ public class OrderIssueTrackingController {
 			return "redirect:" + "./";
 		}
 		
-		orderIssueTracking.setOrderFileName(orderFile.getOriginalFilename());
-		orderIssueTrackingService.updateOrderIssueTracking(orderIssueTracking);
+		try {
+			orderIssueTracking.setOrderFileName(orderFile.getOriginalFilename());
+			orderIssueTrackingService.updateOrderIssueTracking(orderIssueTracking);
+			session.setAttribute("message",new Message1("Data has been Successfully added","alert-primary"));
+		}catch(Exception e) {
+			e.printStackTrace();
+			session.setAttribute("message", new Message1("Something went Wrong !!","alert-info"));
+			
+		}
+		
 		return "redirect:orderissuetracking";
 	}
 	
@@ -161,10 +162,17 @@ public class OrderIssueTrackingController {
 			return "redirect:" + "./";
 		}
 		
-		orderIssueTrackingService.removeOrderIssueTracking(Long.parseLong(orderTrackingId));
+		try {
+			orderIssueTrackingService.removeOrderIssueTracking(Long.parseLong(orderTrackingId));
+			session.setAttribute("message",new Message1("Data has been Delete Successfully","alert-primary"));
+		}catch(Exception e) {
+			e.printStackTrace();
+			session.setAttribute("message", new Message1("Something went Wrong !!","alert-info"));
+		}
+		
 		
 		session.setAttribute("username", session.getAttribute("username"));
-		return "redirect:orderissuetracking";
+		return "redirect:/orderissuetracking";
 	}
 	
 	
@@ -198,7 +206,7 @@ public class OrderIssueTrackingController {
 			return "redirect:" + "./";
 		}
 		
-		List<OrderIssueTracking> orderTracking = new ArrayList<OrderIssueTracking>();
+		List<OrderIssueTracking> orderTracking = new ArrayList<>();
 		if(empCode.equals("ALL")) {
 			orderTracking = orderIssueTrackingService.getAllOrderIssueTracking();
 			System.out.println("budget list : ====>"+ orderTracking.get(0).getOrderFileName());

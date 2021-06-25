@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -17,7 +18,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.hrms.ImageUtil;
+import com.hrms.helper.Message1;
 import com.hrms.model.Employee;
 import com.hrms.model.Leave;
 import com.hrms.model.LeaveRequest;
@@ -84,20 +85,15 @@ public class LeaveRequestController {
 	
 	@GetMapping("/leaveRequest")
 	public String empPayDetail(@ModelAttribute("leaveRequest")LeaveRequest leaveRequest,Model model, HttpSession session) {
-
-		if (session.getAttribute("username") == null) {
-
-
-
+		
 		
 		if(session.getAttribute("username")==null) {
-
 			return "redirect:" + "./";
 		}
 		List<Employee> listEmployee = employeeService.getAllEmployees();
 		
 		
-		session.setAttribute("imgUtil", new ImageUtil());
+		
 		List<Leave> listLeave = leaveService.getAllLeaves();
 		if(listLeave != null) {
 			model.addAttribute("listLeave", listLeave);
@@ -107,7 +103,7 @@ public class LeaveRequestController {
 		
 		List<LeaveRequest> listLeaveRequest = leaveRequestService.getAllLeaves();
 		
-		System.out.println("leave request size : " + listLeaveRequest.size());
+		//System.out.println("leave request size : " + listLeaveRequest.size());
 		
 		if(listLeaveRequest != null) {
 			model.addAttribute("listRequest",listLeaveRequest);
@@ -118,72 +114,51 @@ public class LeaveRequestController {
 			model.addAttribute("listEmployee" , listEmployee);
 		}
 	
-		}
-		return pageMappingService.PageRequestMapping(reqPage, pageno);
+		
+		return "leaveRequest";
 	}
 	
 	@PostMapping("/saveLeaveRequest")
-	public String saveLeaveRequest(@ModelAttribute("leaveRequest")LeaveRequest leaveRequest,HttpSession session) {
+	public String saveLeaveRequest(@Valid @ModelAttribute("leaveRequest")LeaveRequest leaveRequest,HttpSession session
+			) {
 		
-
-		String insertedBY = (String) session.getAttribute("userlogin");
-		System.out.println("inserted by :"+ insertedBY);
-		
-		System.out.println("leave to date======> : " + leaveRequest.getToDate());
-		System.out.println("leave to date======> : " + leaveRequest.getFromDate());
-		System.out.println("leave to date======> : " + leaveRequest.getEmployee().getEmpCode());
-		System.out.println("leave to date======> : " + leaveRequest.getLeave().getLevCode());
-		//System.out.println("leave to date : " + leaveRequest.getLeaveCode());
-
 		if(session.getAttribute("username")==null) {
 			return "redirect:" + "./";
 		}
-
-		leaveRequestService.addLeave(leaveRequest);
-		return "redirect:" + pageMappingService.PageRequestMapping(reqPage, pageno);
+		
+		
+		try {
+			leaveRequestService.addLeave(leaveRequest);
+			session.setAttribute("message",new Message1("Data has been saved Successfully","alert-primary"));
+		}catch(Exception e) {
+			e.printStackTrace();
+			session.setAttribute("message", new Message1("Something went Wrong !!","alert-info"));
+		}
+		
+		return "redirect:leaveRequest";
 	}
 	
 	
 	
 	
-	@GetMapping(value = { "/viewLeaveRequest/{id}" })
-	public String viewLeaveRequestByEmpId(@PathVariable("id")String leaveRequestId,
-						Model model,HttpSession session) {
-		
-
-		
-		
-		
-		//List<LeaveRequest> leaveRequest = this.leaveRequestService.findByEmpCodeAndApplyDate(empCode, applyDate);
-
-		if(session.getAttribute("username")==null) {
-			return "redirect:" + "./";
-		}
-		
-
-		LeaveRequest leaveRequest = this.leaveRequestService.findLeaveRequestById(Long.parseLong(leaveRequestId));
-		
-		if(leaveRequest != null) {
-			model.addAttribute("leaveRequest", leaveRequest);
-		}
-		
-		model.addAttribute("header", "View Leave Request");
-		model.addAttribute("myhref", "leaveRequest");
-		return "viewLeaveRequest";
-	}
+	
 	
 	@GetMapping(value = { "/deleteLeaveRequest/{id}" })
 	public String deleteActivity(@PathVariable("id") Long id, Model model, HttpSession session) {
 		
-
 		if(session.getAttribute("username")==null) {
 			return "redirect:" + "./";
 		}
 		
-
-		this.leaveRequestService.removeLeaveRequest(id);
+		try {
+			this.leaveRequestService.removeLeaveRequest(id);
+			session.setAttribute("message",new Message1("Data has been Removed","alert-primary"));
+		}catch(Exception e) {
+			e.printStackTrace();
+			session.setAttribute("message",new Message1("Something went wrong","alert-primary"));
+		}
+		
 		return "redirect:/"+ pageMappingService.PageRequestMapping(reqPage, pageno);
 	}
-
-	
+		
 }

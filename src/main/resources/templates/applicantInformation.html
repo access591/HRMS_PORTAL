@@ -519,18 +519,21 @@ body {
 																<span
 																	class="text-danger">*</span></label> <select
 																	class="form-control " th:field="*{modeOfRef}">
-																	<option value="">Select</option>
-																	<option th:Value="News">News</option>
-																	<option th:Value="Magzine">Magzine</option>
+																	<option value=" ">Media Type</option>
+																<option value="News Paper">News Paper</option>
+																<option value="Cable TV">Cable TV</option>
+																<option value="Magzine">Magzine</option>
+																<option value="TV Channel">TV Channel</option>
+																<option value="Others">Others</option>
 																	
 
 
 																</select>
 															</div>
 															<div class="form-group sm col-md-4">
-																<label class="form-label">Employee Code</label> 
+																<label class="form-label">Employee Name</label> 
 																	<select th:field="*{empCode}" class="form-control">
-																		<option value="">Select Employee Code</option>
+																		<option value="">Select Employee </option>
 																		<option th:each="employee : ${listEmployee}"
 																			th:text="${employee.empName}" th:value="${employee.empCode}"></option>
 																	</select>

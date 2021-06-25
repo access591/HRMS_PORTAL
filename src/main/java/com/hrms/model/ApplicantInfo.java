@@ -6,16 +6,15 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name="APPLICANT_INFO")
@@ -23,8 +22,10 @@ public class ApplicantInfo {
 	
 	@Id
 	@Column(name="APPLI_CODE")
+	@Size(max=50)
 	private String applicantCode;
 	
+	@Size(max=50)
 	@Column(name="ADVT_CODE")
 	private String advtCode;
 	
@@ -36,96 +37,126 @@ public class ApplicantInfo {
 	@Column(name="APPLI_DATE")
 	private Date applicantDate;
 	
+	@Size(max=20)
 	@Column(name="SEX")
 	private String sex;
 	
+	@Size(max=50)
 	@Column(name="FATHER_NAME")
 	private String fatherName;
 	
+	@Size(max=50)
 	@Column(name="MOTHER_NAME")
 	private String motherName;
 	
+	@Size(max=100)
 	@Column(name="EMAIL_ADD")
 	private String emailAdd;
 	
+	@Size(max=20)
 	@Column(name="MOBILE_NO")
 	private String mobileNo;
 	
+	@Size(max=250)
 	@Column(name="CORR_ADD")
 	private String corrAdd;
 	
+	@Size(max=50)
 	@Column(name="CORR_CITY")
 	private String corrCity;
 	
+	@Size(max=50)
 	@Column(name="CORR_STATE")
 	private String corrState;
 	
+	@Size(max=20)
 	@Column(name="CORR_STD_PHONE")
 	private String corrStdPhone;
 	
+	@Size(max=250)
 	@Column(name="PERM_ADD")
 	private String permAdd;
 	
+	@Size(max=50)
 	@Column(name="PERM_CITY")
 	private String permCity;
 	
+	@Size(max=50)
 	@Column(name="PERM_STATE")
 	private String permState;
 	
+	@Size(max=20)
 	@Column(name="PERM_STD_PHONE")
 	private String permStdPhone;
 	
+	@Size(max=100)
 	@Column(name="ACAD_QUALI")
 	private String acadQuali;
 	
+	@Size(max=100)
 	@Column(name="TECH_QUALI")
 	private String techQuali;
 	
+	@Size(max=50)
 	@Column(name="LANG_HINDI")
 	private String langHindi;
 	
+	@Size(max=50)
 	@Column(name="LANG_ENGLISH")
 	private String langEnglish;
 	
+	@Size(max=50)
 	@Column(name="LANG_PUNJABI")
 	private String landPunjabi;
 	
+	@Size(max=50)
 	@Column(name="LANG_OTHER_NAME")
 	private String langOtherName;
 	
+	@Size(max=50)
 	@Column(name="LANG_OTHER_FLUENCY")
 	private String langOthersRw;
 	
+	@Size(max=150)
 	@Column(name="CURRENT_CTC")
 	private String currentCtc;
 	
+	@Size(max=150)
 	@Column(name="EXPECTED_CTC")
 	private String expectedCtc;
 	
+	@Size(max=250)
 	@Column(name="REASON_LEAVE")
 	private String reasonToLeave;
 	
+	@Size(max=50)
 	@Column(name="MARITAL_STATUS")
 	private String maritalStatus;
 	
+	@Size(max=50)
 	@Column(name="MODE_OF_REF")
 	private String modeOfRef;
 	
+	@Size(max=100)
 	@Column(name="EMP_CODE")
 	private String empCode;
 	
+	@Size(max=50)
 	@Column(name="APPLIED_BEFORE")
 	private String appliedBefore;
 	
+	@Size(max=100)
 	@Column(name="APPLIED_CODE_BEFORE")
 	private String applicantCodeBefore;
 	
 	@Column(name="APPLIED_DATE_BEFORE")
 	private Date appliDateBefore;
 	
+	@Size(max=150)
 	@Column(name="HOBBIES")
 	private String hobbies;
 	
+	@Size(max=50)
 	@Column(name="INS_BY")
 	private String insBy;
 	
@@ -135,12 +166,14 @@ public class ApplicantInfo {
 	@Column(name="APPLICANT_RESUME")
 	private String applicantResume;
 	
+	@Size(max=50)
 	@Column(name="APPLICANT_NAME")
 	private String applicantName;
 	
 	@Column(name="DATE_OF_BIRTH")
 	private Date dateOfBirth;
 	
+	@Size(max=20)
 	@Column(name="INTER_STATUS")
 	private String interStatus = "N";
 	
@@ -148,13 +181,15 @@ public class ApplicantInfo {
 	@JoinColumn(name="DESIG_CODE")
 	private Designation desigCode;
 	
+	@Size(max=250)
 	@Column(name="CORR_ADD2")
 	private String corrAdd2;
 	
+	@Size(max=250)
 	@Column(name="PERM_ADD2")
 	private String permAdd2;
 	
-	@OneToMany(mappedBy="applicantInfo",cascade = CascadeType.ALL,
+	@OneToMany(fetch = FetchType.EAGER,mappedBy="applicantInfo",cascade = CascadeType.ALL,
 	        orphanRemoval = true)
 	private List<ApplicantExpDetail> applicantExpDetail;
 

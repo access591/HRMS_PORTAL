@@ -19,21 +19,19 @@ public class AttendenceRegisterServiceImpl implements AttendenceRegisterService{
 
 	@Autowired SessionFactory sessionFactory;
 	@Autowired AttendenceRegisterDao attendenceRegisterDao;
-	Session session=null;
 	@Override
 	public List<AttendenceRegister> findAttendenceByEmpCodeBetweenDate(String empCode,Date fromDate,Date toDate) {
-		List<AttendenceRegister> result=null;
-		Query<AttendenceRegister> query=null;
+		
 		try {
-			 session = sessionFactory.openSession();
-		      query = session.createQuery("from AttendenceRegister a inner join fetch a.employee e "
+			Session session = sessionFactory.openSession();
+			Query<AttendenceRegister> query = session.createQuery("from AttendenceRegister a inner join fetch a.employee e "
 					+ "inner join fetch a.department d where e.empCode = :empCode "
 					+ "and a.timeIn = :fromDate and a.timeOut =:toDate", AttendenceRegister.class);
 			query.setParameter("empCode", empCode);
 			query.setParameter("fromDate", fromDate);
 			query.setParameter("toDate", toDate);
-			result = query.getResultList();
-		
+			List<AttendenceRegister> result = query.getResultList();
+			System.out.println("result : "+ result.size());
 			return result;
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -42,18 +40,17 @@ public class AttendenceRegisterServiceImpl implements AttendenceRegisterService{
 	}
 
 	@Override
-	public List<AttendenceRegister> findAttendenceByDeptBetweenDate(String deptCode, Date fromDate, Date toDate) {
-		List<AttendenceRegister> result=null;
+	public List<AttendenceRegister> findAttendenceByDeptBetweenDate(String deptCode, Date FromDate, Date toDate) {
 		try {
-		 session = sessionFactory.openSession();
+			Session session = sessionFactory.openSession();
 			Query<AttendenceRegister> query = session.createQuery("from AttendenceRegister a inner join fetch a.employee e "
 					+ "inner join fetch a.department d where d.departmentCode = :deptCode "
 					+ "and a.timeIn = :fromDate and a.timeOut =:toDate", AttendenceRegister.class);
 			query.setParameter("deptCode", deptCode);
-			query.setParameter("fromDate", fromDate);
+			query.setParameter("fromDate", FromDate);
 			query.setParameter("toDate", toDate);
-			result = query.getResultList();
-		
+			List<AttendenceRegister> result = query.getResultList();
+			System.out.println("result : "+ result.size());
 			return result;
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -62,18 +59,17 @@ public class AttendenceRegisterServiceImpl implements AttendenceRegisterService{
 	}
 
 	@Override
-	public List<AttendenceRegister> findAllAttendenceBetweenDate(Date fromDate, Date toDate) {
-		List<AttendenceRegister> result=null;
+	public List<AttendenceRegister> findAllAttendenceBetweenDate(Date FromDate, Date toDate) {
 		try {
-	 session = sessionFactory.openSession();
+			Session session = sessionFactory.openSession();
 			Query<AttendenceRegister> query = session.createQuery("from AttendenceRegister a inner join fetch a.employee e "
 					+ "inner join fetch a.department d "
-					+ "and a.attendenceDate >= :fromDate and a.attendenceDate <=:toDate", AttendenceRegister.class);
+					+ "where a.attendenceDate >= :fromDate and a.attendenceDate <=:toDate", AttendenceRegister.class);
 			
-			query.setParameter("fromDate", fromDate);
+			query.setParameter("fromDate", FromDate);
 			query.setParameter("toDate", toDate);
-		result = query.getResultList();
-		
+			List<AttendenceRegister> result = query.getResultList();
+			System.out.println("result : "+ result.size());
 			return result;
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -83,39 +79,38 @@ public class AttendenceRegisterServiceImpl implements AttendenceRegisterService{
 
 	@Override
 	public boolean addAttendenceRegister(AttendenceRegister attn) {
-		session=sessionFactory.openSession();
-		session.beginTransaction();
+		Session s=sessionFactory.openSession();
+		s.beginTransaction();
 		
-		
-		session.save(attn);
-		session.getTransaction().commit();
-		session.clear();
-		session.close();
+		// TODO Auto-generated method stub
+		s.save(attn);
+		s.getTransaction().commit();
+		s.clear();
+		s.close();
 		return true;
 	}
 
 	@Override
 	public List<AttendenceRegister> getAllAttendenceRegister() {
-	
+		// TODO Auto-generated method stub
 		return attendenceRegisterDao.findAll();
 	}
 
 
 	public AttendenceRegister findAttendenceRegisterByEmpCode(String empCode) {
-
+		
 		try {
-			session = sessionFactory.openSession();
-			Query<AttendenceRegister> query = session.createQuery(
-					"from AttendenceRegister a inner join fetch a.employee e " + "where e.empCode = :empCode",
-					AttendenceRegister.class);
-
+			Session session = sessionFactory.openSession();
+			Query<AttendenceRegister> query = session.createQuery("from AttendenceRegister a inner join fetch a.employee e "
+					+ "where e.empCode = :empCode", AttendenceRegister.class);
+			
 			query.setParameter("empCode", empCode);
-
+			
 			AttendenceRegister result = query.getSingleResult();
 			System.out.println("result : ");
 			return result;
-
-		} catch (Exception e) {
+			
+		}catch(Exception e) {
 			e.printStackTrace();
 		}
 		return null;
@@ -124,58 +119,116 @@ public class AttendenceRegisterServiceImpl implements AttendenceRegisterService{
 	@Override
 	public List<AttendenceRegister> findAttendenceByEmpStatusAbsent(String empCode) {
 		try {
-			session = sessionFactory.openSession();
-			Query<AttendenceRegister> query = session
-					.createQuery("from AttendenceRegister a inner join fetch a.employee e "
-							+ "where e.empCode = :empCode and a.status= :status", AttendenceRegister.class);
-
+			Session session = sessionFactory.openSession();
+			Query<AttendenceRegister> query = session.createQuery("from AttendenceRegister a inner join fetch a.employee e "
+					+ "where e.empCode = :empCode and a.status= :status", AttendenceRegister.class);
+			
 			query.setParameter("empCode", empCode);
 			query.setParameter("status", "Absent");
-
+			
 			List<AttendenceRegister> result = query.getResultList();
-			System.out.println("result : " + result.size());
+			System.out.println("result : "+result.size());
 			return result;
-
-		} catch (Exception e) {
+			
+		}catch(Exception e) {
 			e.printStackTrace();
 		}
-		return null;
+	return null;
 	}
 
 	public void removeAttendanceRegister(int id) {
-		session = sessionFactory.openSession();
+		Session session = sessionFactory.openSession();
 		Object o = session.get(AttendenceRegister.class, id);
 		AttendenceRegister e = (AttendenceRegister) o;
 		Transaction tx = session.beginTransaction();
 		session.delete(e);
 		tx.commit();
 		session.close();
+		
+	
 
 	}
 
 	@Override
 	public List<AttendenceRegister> findAttendenceStatusByDeptCode(String deptCode, Date fromDate, Date toDate) {
-		List<AttendenceRegister> result = null;
+		
 		try {
-
-			session = sessionFactory.openSession();
+			
+			Session session = sessionFactory.openSession();
 			Transaction tx = session.beginTransaction();
-			Query<AttendenceRegister> query = session
-					.createQuery("from AttendenceRegister a inner join fetch a.department e "
-							+ "where e.departmentCode = :deptCode and a.status= :status and a.attendenceDate>=:fromDate and "
-							+ "a.attendenceDate<=:toDate", AttendenceRegister.class);
+			Query<AttendenceRegister> query = session.createQuery("from AttendenceRegister a inner join fetch a.department e "
+					+ "where e.departmentCode = :deptCode and a.status= :status and a.attendenceDate>=:fromDate and "
+					+ "a.attendenceDate<=:toDate", AttendenceRegister.class);
 			query.setParameter("status", "Y");
 			query.setParameter("deptCode", deptCode);
 			query.setParameter("fromDate", fromDate);
 			query.setParameter("toDate", toDate);
-			tx.commit();
-			result = query.getResultList();
+
+			List<AttendenceRegister> result = query.getResultList();
 			return result;
-		} catch (Exception e) {
+		}catch(Exception e) {
 			e.printStackTrace();
 		}
 		return null;
 	}
+
+	@Override
+	public List<AttendenceRegister> findTodayAttendenceList() {
+		
+		java.util.Date date = new java.util.Date();
+		java.sql.Date todayDate = new Date(date.getTime());
+		
+		Session session = sessionFactory.openSession();
+		Transaction tx = null;
+		List<AttendenceRegister> result = null;
+		
+		try {
+			tx = session.beginTransaction();
+			Query<AttendenceRegister> query = session.createQuery("from AttendenceRegister a where "
+					+ "a.attendenceDate = :todayDate and a.status=:status",AttendenceRegister.class);
+			query.setParameter("todayDate", todayDate);
+			query.setParameter("status", "Y");
+			result = query.getResultList();
+			tx.commit();
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			session.close();
+		}
+		
+		return result;
+	}
+
+	@Override
+	public List<AttendenceRegister> findTodayLeaveEmployee() {
+		java.util.Date date = new java.util.Date();
+		java.sql.Date todayDate = new Date(date.getTime());
+		
+		Session session = sessionFactory.openSession();
+		Transaction tx = null;
+		List<AttendenceRegister> result = null;
+		
+		try {
+			tx = session.beginTransaction();
+			Query<AttendenceRegister> query = session.createQuery("from AttendenceRegister a where "
+					+ "a.attendenceDate = :todayDate and a.status=:status",AttendenceRegister.class);
+			query.setParameter("todayDate", todayDate);
+			query.setParameter("status", "L");
+			result = query.getResultList();
+			tx.commit();
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			session.close();
+		}
+		
+		return result;
+	}
+
+	
+	
 
 }
 

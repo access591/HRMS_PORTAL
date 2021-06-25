@@ -2,7 +2,6 @@ package com.hrms.model;
 
 import java.util.Date;
 
-import javax.annotation.Generated;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -12,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name="EMPREQ_ADVERTISEMENT_DETAILS")
@@ -30,15 +30,19 @@ public class ReqAdvertisementDetail {
 	@Column(name="ADVRT_DATE")
 	private Date advtDate;
 	
+	@Size(max=50)
 	@Column(name="MEDIA_TYPE")
 	private String mediaType;
 	
+	@Size(max=50)
 	@Column(name="MEDIA_NAME")
 	private String mediaName;
 	
+	@Size(max=250)
 	@Column(name="ADVT_AMOUNT")
 	private String advtAmount;
 	
+	@Size(max=250)
 	@Column(name="REMARKS")
 	private String remarks;
 	

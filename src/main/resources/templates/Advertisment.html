@@ -50,7 +50,7 @@ body {
 			<main class="content">
 				<div class="container-fluid">
 					<div class="header">
-						<h1 class="header-title">HRMS</h1>
+						<h1 class="header-title">Personal</h1>
 						<nav aria-label="breadcrumb"></nav>
 					</div>
 					<form action="#" th:action="@{/saveAdvertisement}" th:object="${reqAdvertisement}"	
@@ -109,7 +109,7 @@ body {
 									<div class="card-body">
 										<div id="validation-step-3">
 										
-										<div class="col-sm-12" align="right">
+										<div class="col-sm-12" style="text-align:right">
 												
 
 
@@ -126,13 +126,13 @@ body {
 												class="table table-striped display" style="width: 100%">
 												<thead>
 													<tr>
-														<th class="text-center">Requisition Code</th>
-														<th class="text-center" >Requisition Date</th>
-														<th class="text-center">Media Type</th>
-														<th class="text-center">Media Name<label
+														<th scope="col" class="text-center">Requisition Code</th>
+														<th scope="col" class="text-center" >Requisition Date</th>
+														<th scope="col" class="text-center">Media Type</th>
+														<th scope="col" class="text-center">Media Name<label
 													style="color: red">*</label></th>
-														<th class="text-center">Amount</th>
-														<th class="text-center">Details</th>
+														<th scope="col" class="text-center">Amount</th>
+														<th scope="col" class="text-center">Details</th>
 														
 														
 													</tr>
@@ -212,7 +212,7 @@ body {
 								<div class="card-header">
 								</div>
 								<div class="card-body">
-								<table id="example" class="table table-striped display" style="width:100%"aria-describedby="example">
+								<table id="datatables-buttons" class="table table-striped display" style="width:100%"aria-describedby="example">
 										<thead>
 											<tr>
 												<th scope="col"> Advertisement Code </th>
@@ -224,7 +224,7 @@ body {
 										<tbody>
 											<tr  th:each="list : ${listReqAdvertisement}">
 												<td th:text="${list.advtCode}"></td>
-												<td th:text="${list.advtDate}"></td>
+												<td th:text="${#dates.format(list.advtDate, 'dd-MM-yyyy')}"></td>
 												<td th:text="${list.remarks}"></td>
 												<td>
 												<a th:href="@{editAdvertisement/{id}(id=${list.advtCode})}"><em class="align-middle fas fa-fw fa-pen"></em></a>
@@ -280,10 +280,10 @@ body {
 								scroller : false,
 								responsive : true,
 								lengthMenu : [
-										[ 10, 20, 30, -1 ],
-										[ '10 rows', '20 rows', '30 rows',
-												'Show all' ] ],
-								buttons : []
+									[ 5, 10, 15, -1 ],
+									[ '5 rows', '10 rows', '15 rows',
+											'Show all' ] ],
+							buttons : []
 							});
 			datatablesButtons.buttons().container().appendTo(
 					"#datatables-buttons_wrapper .col-md-6:eq(0)")

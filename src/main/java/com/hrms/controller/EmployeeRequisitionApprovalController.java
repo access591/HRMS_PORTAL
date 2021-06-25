@@ -1,6 +1,5 @@
 package com.hrms.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -12,9 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import com.hrms.ImageUtil;
-import com.hrms.model.CommonUtil;
-import com.hrms.model.Department;
+import com.hrms.helper.Message1;
 import com.hrms.model.EmployeeRequisition;
 import com.hrms.model.MenuModule;
 import com.hrms.service.DepartmentService;
@@ -31,11 +28,10 @@ public class EmployeeRequisitionApprovalController {
 	@Autowired DepartmentService departmentService;
 	
 	
-	@GetMapping("employeeRequisitionApproval")
-	public String employeeRequisitionApproval(@ModelAttribute("commonUtil")CommonUtil commonUtil ,Model model, HttpSession session) {
+	@ModelAttribute
+	public void commonData(Model model,HttpSession session) {
+		session.setAttribute("username", session.getAttribute("username"));
 		
-		//model.addAttribute("listAward", listAward);
-
 		String userCode = (String) session.getAttribute("username");
 		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
 		if (modules != null) {
@@ -43,52 +39,51 @@ public class EmployeeRequisitionApprovalController {
 		}
 		
 		
-		List<CommonUtil> listCommonUtil = new ArrayList<CommonUtil>();
-		List<EmployeeRequisition> listEmployeeReq = employeeRequisitionService.getAllPendingEmployeeRequisition();
-		
-		for(int i=0;i<listEmployeeReq.size();i++) {
-			Department department;
-			try {
-				//department = departmentService.findDepartmentById(listEmployeeReq.get(i).getDeptCode());
-				EmployeeRequisition em = listEmployeeReq.get(i);
-				CommonUtil commonUtill = new CommonUtil(em.getDepartmet().getDeptName() ,em.getReqCode(),em.getReqDate(),
-						em.getReqPriority(),em.getReqApprover(),em.getRemarks(),em.getInsBy(),em.getInsDate(),
-						em.getReqTill(),em.getApproveDate(),em.getStatus());
-				commonUtill.setStatus(em.getStatus());
-				listCommonUtil.add(commonUtill);
-			}
-			catch(Exception e) {
-				e.printStackTrace();
-			}
-			
-			
-			
-		}//editEmployeeRequisition.html
-		
-		
-		model.addAttribute("listCommonUtil", listEmployeeReq);
+	}
 	
+	
+	@GetMapping("employeeRequisitionApproval")
+	public String employeeRequisitionApproval(@ModelAttribute("employeeRequisition")EmployeeRequisition employeeRequisition ,
+			Model model, HttpSession session) {
 		
-		List<EmployeeRequisition> approvalReq = employeeRequisitionService.findEmployeeReqByStatusY();
-		if(approvalReq != null) {
-			model.addAttribute("approved", approvalReq);
+		if(session.getAttribute("username")==null) {
+			return "redirect:" + "./";
 		}
-		session.setAttribute("username", session.getAttribute("username"));
-		session.setAttribute("imgUtil", new ImageUtil());
-		return "EmployeeRequisitionApproval"; //EmployeeRequisitionApproval.html
 		
-		//return pageMappingService.PageRequestMapping(reqPage, pageno);
+	
+		List<EmployeeRequisition> listEmployeeReq = employeeRequisitionService.getAllPendingEmployeeRequisition();
+	
+		model.addAttribute("listCommonUtil", listEmployeeReq);
+
+		//session.setAttribute("imgUtil", new ImageUtil());
+		return "EmployeeRequisitionApproval"; 
+		
+		
 	}
 	
 	
 	@GetMapping("approveRequisition/{id}/{status}")
-	public String approveRequisition(@PathVariable("id") String reqCode,@PathVariable("status") String approvalStatus) {
+	public String approveRequisition(@PathVariable("id") String reqCode,@PathVariable("status") String approvalStatus,
+			HttpSession session) {
 		
-		System.out.println("hiiiiiii" + reqCode);
-		//System.out.println("hiiiiiii" + name);
+		if(session.getAttribute("username")==null) {
+			return "redirect:" + "./";
+		}
+		try {
+			employeeRequisitionService.approvedByReqCodeAndStatus(reqCode,approvalStatus);
+			
+			if(approvalStatus.equals("Y")) {
+				session.setAttribute("message",new Message1("Employee Requisition has been Approved","alert-primary"));
+			}else if(approvalStatus.equals("C")) {
+				session.setAttribute("message",new Message1("Employee Requisition has been Canceled","alert-primary"));
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 		
 		
-		employeeRequisitionService.approvedByReqCodeAndStatus(reqCode,approvalStatus);
+		
+		
 		return "redirect:/employeeRequisitionApproval";
 	}
 	

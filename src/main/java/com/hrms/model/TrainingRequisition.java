@@ -3,19 +3,16 @@ package com.hrms.model;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -36,24 +33,29 @@ public class TrainingRequisition {
 	@JoinColumn(name = "DEPT_CODE",updatable=false)
 	private Department department;
 	
+	@Size(max=50)
 	@Column(name="TR_APPROVER")
 	private String trApprover;
 	
 	@Column(name="TR_APPROVER_DATE")
 	private Date trApproverDate;
 	
+	@Size(max=250)
 	@Column(name="REMARKSE")
 	private String remarks;
 	
+	@Size(max=50)
 	@Column(name="FY_CODE")   
 	private String fyCode;
 	
+	@Size(max=50)
 	@Column(name="INS_BY")
 	private String insBy;
 	
 	@Column(name="INS_DATE")
 	private Date insDate = new Date();
 	
+	@Size(max=50)
 	@Column(name="TR_REQ_STATUS")
 	private String trReqStatus = "N";
 	
@@ -143,7 +145,7 @@ public class TrainingRequisition {
 	
 	public TrainingRequisition() {
 		super();
-		// TODO Auto-generated constructor stub
+		
 	}
 	
 	

@@ -1,7 +1,6 @@
 package com.hrms.controller;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -18,27 +17,20 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 
-import com.hrms.ImageUtil;
+import com.hrms.helper.Message1;
 import com.hrms.model.ApplicantExpDetail;
 import com.hrms.model.ApplicantInfo;
 import com.hrms.model.City;
-import com.hrms.model.Designation;
 import com.hrms.model.Employee;
-import com.hrms.model.EmployeeRequisition;
 import com.hrms.model.EmployeeRequisitionDetail;
 import com.hrms.model.MenuModule;
 import com.hrms.model.ReqAdvertisement;
-import com.hrms.model.ReqAdvertisementDetail;
 import com.hrms.service.ApplicantInfoService;
 import com.hrms.service.CityService;
-import com.hrms.service.DesignationService;
 import com.hrms.service.EmployeeRequisitionDetailService;
-import com.hrms.service.EmployeeRequisitionService;
 import com.hrms.service.EmployeeService;
 import com.hrms.service.ModuleService;
-import com.hrms.service.ReqAdvertisementDetailService;
 import com.hrms.service.RequisitionAdvertisementService;
 
 @Controller
@@ -47,56 +39,79 @@ public class ApplicantInformationController {
 	@Autowired
 	private ModuleService moduleService;
 	@Autowired
-	RequisitionAdvertisementService reqAdvertisementService;
+	private RequisitionAdvertisementService reqAdvertisementService;
 	@Autowired
-	ApplicantInfoService applicantInfoService;
+	private ApplicantInfoService applicantInfoService;
+
 	@Autowired
-	DesignationService designationService;
+	private EmployeeService employeeService;
 	@Autowired
-	EmployeeService employeeService;
+	private EmployeeRequisitionDetailService employeeRequisitionDetailService;
 	@Autowired
-	ReqAdvertisementDetailService reqAdvertisementDetailService;
-	@Autowired
-	EmployeeRequisitionService employeeRequisitionService;
-	@Autowired
-	EmployeeRequisitionDetailService employeeRequisitionDetailService;
-	@Autowired
-	CityService cityService;
+	private CityService cityService;
+
+	@ModelAttribute
+	public void commonData(Model model, HttpSession session) {
+		String userCode = (String) session.getAttribute("username");
+		session.setAttribute("username", userCode);
+
+	}
 
 	@GetMapping("applicantInformation")
 	public String applicantInformationPage(@ModelAttribute("applicantInfo") ApplicantInfo applicantInfo, Model model,
 			HttpSession session) {
 
-		String userCode = (String) session.getAttribute("username");
-		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
-		if (modules != null) {
-			model.addAttribute("modules", modules);
+		if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
 		}
 
-		List<ReqAdvertisement> listReqAdvertisement = reqAdvertisementService.getAllReqAdvertisement();
+		String userCode = (String) session.getAttribute("username");
 
-		if (listReqAdvertisement != null) {
-			model.addAttribute("listReqAdvertisement", listReqAdvertisement);
+		try {
+			List<MenuModule> modules = moduleService.getAllModulesList(userCode);
+			if (modules != null) {
+				model.addAttribute("modules", modules);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		try {
+			List<ReqAdvertisement> listReqAdvertisement = reqAdvertisementService.getAllReqAdvertisement();
+			if (listReqAdvertisement != null) {
+				model.addAttribute("listReqAdvertisement", listReqAdvertisement);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 
 		List<EmployeeRequisitionDetail> listEmployeeRequisition1 = employeeRequisitionDetailService
 				.findUniqueDesignation();
 		if (listEmployeeRequisition1 != null) {
-			
+
 			model.addAttribute("listEmployeeRequisition", listEmployeeRequisition1);
 
 		}
-		List<City> cityList = cityService.getAllCities();
-		System.out.println("city list size : " + cityList.size());
-		if (cityList != null) {
-			model.addAttribute("cityList", cityList);
+
+		try {
+			List<City> cityList = cityService.getAllCities();
+			System.out.println("city list size : " + cityList.size());
+			if (cityList != null) {
+				model.addAttribute("cityList", cityList);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 
-		List<Employee> listEmployee = employeeService.getAllEmployees();
-		if (listEmployee != null) {
-			model.addAttribute("listEmployee", listEmployee);
+		try {
+			List<Employee> listEmployee = employeeService.getAllEmployees();
+			if (listEmployee != null) {
+				model.addAttribute("listEmployee", listEmployee);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-		session.setAttribute("imgUtil", new ImageUtil());
+
 		session.setAttribute("username", session.getAttribute("username"));
 		return "applicantInformation"; // applicantInformation.html
 	}
@@ -104,19 +119,26 @@ public class ApplicantInformationController {
 	@PostMapping("/saveApplicantInfo")
 	public String saveApplicantInfo(@ModelAttribute("applicantInfo") ApplicantInfo applicantInfo, HttpSession session) {
 
-		System.out.println("applicantInfo : " + applicantInfo.getApplicantCode());
-
-		System.out.println("applicantInfo : " + applicantInfo.getApplicantDate());
-
-		if (applicantInfo.getApplicantExpDetail() != null) {
-			for (ApplicantExpDetail aDetail : applicantInfo.getApplicantExpDetail()) {
-				aDetail.setApplicantDate(applicantInfo.getApplicantDate());
-				aDetail.setApplicantInfo(applicantInfo);
-			}
-		} else {
-			ApplicantExpDetail e = new ApplicantExpDetail();
-			e.setApplicantInfo(applicantInfo);
+		if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
 		}
+
+		try {
+			if (applicantInfo.getApplicantExpDetail() != null) {
+				for (ApplicantExpDetail aDetail : applicantInfo.getApplicantExpDetail()) {
+					aDetail.setApplicantDate(applicantInfo.getApplicantDate());
+					aDetail.setApplicantInfo(applicantInfo);
+				}
+			} else {
+				ApplicantExpDetail e = new ApplicantExpDetail();
+				e.setApplicantInfo(applicantInfo);
+			}
+			session.setAttribute("message",new Message1("Data has been saved Successfully","alert-primary"));
+		}catch(Exception e) {
+			e.printStackTrace();
+			session.setAttribute("message", new Message1("Something went Wrong !!","alert-info"));
+		}
+		
 
 		applicantInfoService.addApplicantInfo(applicantInfo);
 		return "redirect:applicantInformation";
@@ -124,9 +146,11 @@ public class ApplicantInformationController {
 
 	@GetMapping("viewApplicantInfo/{applicantCode}")
 	public String viewApplicantInfo(@PathVariable("applicantCode") String applicantCode, Model model,
-			HttpSession session) {
+			HttpSession session) throws Exception {
 
-		String userCode = (String) session.getAttribute("username");
+		if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
 
 		List<ReqAdvertisement> listReqAdvertisement = reqAdvertisementService.getAllReqAdvertisement();
 		if (listReqAdvertisement != null) {
@@ -140,32 +164,42 @@ public class ApplicantInformationController {
 			model.addAttribute("listEmployeeRequisition", listEmployeeRequisition1);
 
 		}
-		
-		List<City> cityList = cityService.getAllCities();
-		System.out.println("city list size : " + cityList.size());
-		if (cityList != null) {
-			model.addAttribute("cityList", cityList);
+
+		System.out.println("execute code ");
+		try {
+			List<City> cityList = cityService.getAllCities();
+			System.out.println("city list size : " + cityList.size());
+			if (cityList != null) {
+				model.addAttribute("cityList", cityList);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 
-		List<Employee> listEmployee = employeeService.getAllEmployees();
-		if (listEmployee != null) {
-			model.addAttribute("listEmployee", listEmployee);
+		try {
+			List<Employee> listEmployee = employeeService.getAllEmployees();
+			if (listEmployee != null) {
+				System.out.println("city list size : " + listEmployee.size());
+				model.addAttribute("listEmployee", listEmployee);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 
 		ApplicantInfo applicantInfo = applicantInfoService.getApplicantInfoByApplicantCode(applicantCode);
 		model.addAttribute("applicantInfo", applicantInfo);
 
-		session.setAttribute("username", userCode);
 		return "viewApplicantInfo";
 	}
 
 	@ResponseBody
 	@GetMapping("getAdvtDate/{id}")
 	public String getRequisitionDateByAdvtCode(@PathVariable("id") String advtCode) {
-		// get advt code and advt date from Advertisement
+
 		ReqAdvertisement reqAdvertisement = reqAdvertisementService.findReqAdvertisementById(advtCode);
 		Date advtDate = reqAdvertisement.getAdvtDate();
-		System.out.println("======>>" + advtDate);
+
 		return advtDate.toString();
 	}
 
@@ -175,10 +209,6 @@ public class ApplicantInformationController {
 		dateFormatter.setLenient(false);
 		binder.registerCustomEditor(Date.class, "advtDate", new CustomDateEditor(dateFormatter, true));
 		binder.registerCustomEditor(Date.class, "applicantDate", new CustomDateEditor(dateFormatter, true));
-//        binder.registerCustomEditor(Date.class, "reqTill",
-//                new CustomDateEditor(dateFormatter, true));
-//        binder.registerCustomEditor(Date.class, "reqDate",
-//                new CustomDateEditor(dateFormatter, true));
 
 	}
 

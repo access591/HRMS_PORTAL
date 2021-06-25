@@ -27,13 +27,10 @@ import com.hrms.service.LeaveDetailService;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hrms.ReportUtil;
-import com.hrms.model.Designation;
 import com.hrms.model.Employee;
 import com.hrms.model.LocalConvyenceDetail;
 import com.hrms.model.LtaRequest;
 import com.hrms.model.MenuModule;
-import com.hrms.model.Module;
-import com.hrms.model.TourPlan;
 import com.hrms.reports.LocalClaimReport;
 import com.hrms.reports.LtaReport;
 import com.hrms.reports.TourClaimReport;
@@ -47,7 +44,6 @@ import com.hrms.service.LtaRequestService;
 import com.hrms.service.ModuleService;
 import com.hrms.service.TourPlanService;
 import com.hrms.util.LtaReportUtil;
-import com.hrms.util.TourClaimReportUtil;
 
 @Controller
 public class ReportCommonController {
@@ -85,51 +81,17 @@ public class ReportCommonController {
        
     }
 
-	@GetMapping(value = { "/reportEmployee" })
-	public String reportEmployee(Model model, HttpSession session, HttpServletRequest request,
-			HttpServletResponse response) {
-		
-		if(session.getAttribute("username")==null) {
-			return "redirect:" + "./";
-		}
-		
-		String reportFileName = null;
-
-		String val = null;
-		if (request.getParameter("_ex") != null) {
-			val = request.getParameter("_ex");
-		}
-
-		if (val.equals("P")) {
-			System.out.println("heloo0000000000" + val);
-
-			reportFileName = "leavedetail_pdf";
-			//leaveDetailService.leaveReportGenratepdf(request, response, reportFileName, dataList);
-		} else if (val.equals("E")) {
-			reportFileName = "bankwisereport_XLS";
-			String filename = "bankwisereport";
-
-		}
-
-		System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" + val);
-		
-		reportFileName = "employee_report";
-		
-
-		session.setAttribute("username", session.getAttribute("username"));
-		return null;
-	}
+	
 	
 	
 	@ResponseBody
 	@PostMapping("/employeereport")
 	public void employeeReport(HttpServletRequest request,HttpServletResponse response) {
 		
-		System.out.println("  employee report ");
+		
 		String reportName = "EmployeeReport";	
 		List<Employee> listEmployee = employeeService.getAllEmployees();
 				
-		System.out.println("list employee : "+ listEmployee);
 		reportUtil.allEmployeeReport(request, response, reportName, listEmployee);
 		
 	}
@@ -159,8 +121,8 @@ public class ReportCommonController {
 		if(listEmployee != null) {
 			model.addAttribute("listEmployee", listEmployee);
 		}
-		//model.addAttribute("object" , new TourPlan());
-		return "LocalClaimReport"; //tourClaimReports.html
+		
+		return "LocalClaimReport"; 
 	}
 	
 	@PostMapping("localClaimReport")
@@ -190,7 +152,7 @@ public class ReportCommonController {
 	
 //LTA REPORTS
 	
-	@GetMapping("ltaReport")  //LtaReport.html
+	@GetMapping("ltaReport")  
 	public String ltaReportPage(Model model,HttpSession session) {
 		
 		if(session.getAttribute("username")==null) {
@@ -214,7 +176,7 @@ public class ReportCommonController {
 		return "LtaReport";
 	}
 	
-	@PostMapping("createLtaReport")  //LtaReport.html
+	@PostMapping("createLtaReport")  
 	public String createLtReport(@ModelAttribute("ltaRequest") LtaRequest ltaRequest , Model model,HttpSession session,
 			HttpServletRequest req,HttpServletResponse res) {
 		
@@ -222,45 +184,42 @@ public class ReportCommonController {
 			return "redirect:" + "./";
 		}
 		
-		System.out.println("lta request : "+ltaRequest.getEmpCode().getEmpCode());
-		System.out.println("lta request : "+ltaRequest.getLeaveFrom());
-		System.out.println("lta request : "+ltaRequest.getLeaveTo());
 		
 		List<LtaRequest> listLtarequest = null; 
-		List<LtaReportUtil> listLtaReport = new ArrayList<LtaReportUtil>(); 
+		List<LtaReportUtil> listLtaReport = new ArrayList<>(); 
 		
 		if(!ltaRequest.getEmpCode().getEmpCode().equals("ALL")) {
 			listLtarequest = ltaRequestService.findLtaByFromLeaveDateToLeave(ltaRequest.getLeaveFrom(), 
 					ltaRequest.getLeaveTo(), ltaRequest.getEmpCode().getEmpCode());
 			
-			LtaReportUtil reportUtil;
+			LtaReportUtil ltaReportUtil;
 			
 			for(LtaRequest lt : listLtarequest) {
 				
-				reportUtil = new LtaReportUtil(lt.getEmpCode().getEmpCode(),lt.getEmpCode().getEmpName(),
+				ltaReportUtil = new LtaReportUtil(lt.getEmpCode().getEmpCode(),lt.getEmpCode().getEmpName(),
 						lt.getAppDate(),lt.getEligibilityDate(),lt.getLeaveAvailed(),lt.getLeaveFrom(),
 						lt.getLeaveTo());
-				listLtaReport.add(reportUtil);
+				listLtaReport.add(ltaReportUtil);
 			}
 		}
 		else {
 			listLtarequest = ltaRequestService.findAllLtaByFromLeaveDateToLeave(ltaRequest.getLeaveFrom(), 
 					ltaRequest.getLeaveTo());
 			
-			LtaReportUtil reportUtil;
+			LtaReportUtil ltaReportUtil;
 			
 			for(LtaRequest lt : listLtarequest) {
 				
-				reportUtil = new LtaReportUtil(lt.getEmpCode().getEmpCode(),lt.getEmpCode().getEmpName(),
+				ltaReportUtil = new LtaReportUtil(lt.getEmpCode().getEmpCode(),lt.getEmpCode().getEmpName(),
 						lt.getAppDate(),lt.getEligibilityDate(),lt.getLeaveAvailed(),lt.getLeaveFrom(),
 						lt.getLeaveTo());
-				listLtaReport.add(reportUtil);
+				listLtaReport.add(ltaReportUtil);
 			}
 		}
 		
 		ltaReport.ltaReport(res, req, listLtaReport,ltaRequest.getLeaveFrom(),ltaRequest.getLeaveTo());
 		
-		//return "redirect:ltaReport";
+		
 		return null;
 	}
 	

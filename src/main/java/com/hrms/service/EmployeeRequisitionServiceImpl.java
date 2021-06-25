@@ -2,6 +2,8 @@ package com.hrms.service;
 
 import java.util.List;
 
+import javax.persistence.TypedQuery;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -17,78 +19,117 @@ public class EmployeeRequisitionServiceImpl implements EmployeeRequisitionServic
 
 	@Autowired EmployeeRequisitionDao employeRequisitionDao;
 	@Autowired SessionFactory sessionFactory;
-	//@Autowired
+	
+	
 	@Override
 	public void addEmployeeRequisition(EmployeeRequisition employeReq) {
 		Session session = sessionFactory.openSession();
-	    session.beginTransaction();
-	    employeReq.setReqCode(employeRequisitionDao.getMaxId("REQ"));
-	    session.save(employeReq);
-	    //session.saveOrUpdate(employeReq);
-	    session.getTransaction().commit();
-	    session.clear();
-	    session.close();
+		Transaction tx = null;
+		
+		try {
+			tx = session.beginTransaction();
+			employeReq.setReqCode(employeRequisitionDao.getMaxId("REQ"));
+		    session.save(employeReq);
+		    tx.commit();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			session.close();
+		}
+		
 	}
 
 	@Override
 	public List<EmployeeRequisition> getAllEmployeeRequisition() {
 		
-		return this.employeRequisitionDao.findAll();
+		Session session = sessionFactory.openSession();
+		Transaction tx = null;
+		List<EmployeeRequisition> result = null;
+		
+		try {
+			tx = session.beginTransaction();
+			TypedQuery<EmployeeRequisition> query = session.createQuery("from EmployeeRequisition", EmployeeRequisition.class);
+			
+		
+			
+			tx.commit();
+			result = query.getResultList();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			session.close();
+		}
+		return result;
 	}
 
 	@Override
 	public EmployeeRequisition findEmployeeRequisitiondById(String reqCode) {
 		
+		Session session = sessionFactory.openSession();
+		Transaction tx = null;
 		try {
-			Session session = sessionFactory.openSession();
+			tx= session.beginTransaction();
 			Query<EmployeeRequisition> query = session.createQuery("from EmployeeRequisition e where e.reqCode = :reqCode", EmployeeRequisition.class);
 			query.setParameter("reqCode", reqCode);
 			EmployeeRequisition er = query.getSingleResult();
+			tx.commit();
 			return er;
 		}catch(Exception e) {
-			System.out.println("========error block");
 			e.printStackTrace();
+		}finally {
+			session.close();
 		}
 		return null;
-		//return this.employeRequisitionDao.findById(reqCode);
+		
 	}
 
 	@Override
 	public void updateEmployeeRequisition(EmployeeRequisition c) {
 		
 		Session session = sessionFactory.openSession();
-		//Transaction tx = session.beginTransaction();
-		EmployeeRequisition emp = session.find(EmployeeRequisition.class, c.getReqCode());
-		emp.getEmployeRequisitionDetail().clear();
-		//emp.setEmployeRequisitionDetail(c.getEmployeRequisitionDetail());
-		emp.getEmployeRequisitionDetail().addAll(c.getEmployeRequisitionDetail());
+		Transaction tx = null;
 		
-		session.beginTransaction();
-		session.merge(c);
-		session.getTransaction().commit();
-		
-		
+		try {
+			tx = session.beginTransaction();
+			EmployeeRequisition emp = session.find(EmployeeRequisition.class, c.getReqCode());
+			emp.getEmployeRequisitionDetail().clear();
+			
+			emp.getEmployeRequisitionDetail().addAll(c.getEmployeRequisitionDetail());
+			session.merge(c);
+			tx.commit();
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			session.close();
+		}
+
 	}
 
 	@Override
 	public void removeEmployeeRequisition(String reqCode) {
+		
+		
 		Session session = sessionFactory.openSession();
-		Transaction tx = session.beginTransaction();
-		Object o = session.get(EmployeeRequisition.class, reqCode);
-		EmployeeRequisition e = (EmployeeRequisition) o;
+		Transaction tx = null;
 		
-		session.delete(e);
-		tx.commit();
-		session.close();
-		
-		//Query q = session.createQuery("delete EmployeeRequisition e where e.reqCode = :reqCode");
-		//q.setParameter("reqCode", reqCode);
-		//q.executeUpdate();
+		try {
+			tx = session.beginTransaction();
+			Object o = session.get(EmployeeRequisition.class, reqCode);
+			EmployeeRequisition e = (EmployeeRequisition) o;
+			
+			session.delete(e);
+			tx.commit();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			session.close();
+		}
 	}
 
 	@Override
 	public boolean isEmployeeRequisitionExists(String empCode) {
-		// TODO Auto-generated method stub
+		
 		return false;
 	}
 
@@ -115,25 +156,38 @@ public class EmployeeRequisitionServiceImpl implements EmployeeRequisitionServic
 	public void approvedByReqCodeAndStatus(String reqCode, String requisitionApproval) {
 		
 		Session session = sessionFactory.openSession();
-		EmployeeRequisition em = session.find(EmployeeRequisition.class, reqCode);
-		em.setStatus(requisitionApproval);
-		session.merge(em);
-		session.beginTransaction().commit();
-		session.close();
+		Transaction tx = null;
+	
+		try {
+			tx = session.beginTransaction();
+			EmployeeRequisition em = session.find(EmployeeRequisition.class, reqCode);
+			em.setStatus(requisitionApproval);
+			session.merge(em);
+			tx.commit();
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			session.close();
+		}
 		
 	}
 
 	@Override
 	public List<EmployeeRequisition> getAllPendingEmployeeRequisition() {
 		
+		Session session = sessionFactory.openSession();
+		Transaction tx = null;
 		try {
-			Session session = sessionFactory.openSession();
+			tx = session.beginTransaction();
 			Query<EmployeeRequisition> query = session.createQuery("from EmployeeRequisition e where e.status = :status", EmployeeRequisition.class);
 			query.setParameter("status", "N");
-			List<EmployeeRequisition> er = query.getResultList();
-			return er;
+			tx.commit();
+			return query.getResultList();
 		}catch(Exception e) {
 			e.printStackTrace();
+		}finally {
+			session.close();
 		}
 		return null;
 	}

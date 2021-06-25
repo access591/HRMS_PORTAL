@@ -22,9 +22,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 @Table(name="EPLOYEE_RQUISITION_DETAIL")
 public class EmployeeRequisitionDetail implements Serializable{
 
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = -4728476448805913732L;
 
 	@Id
@@ -39,8 +37,9 @@ public class EmployeeRequisitionDetail implements Serializable{
 	@Column(name="REQ_DATE")
 	private Date reqDate;
 	
-	@ManyToOne
-	@JoinColumn(name="DESIG_CODE")
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "DESIG_CODE",updatable = false)
 	private Designation designation;
 	
 	@Column(name="LOCATION")
@@ -80,24 +79,24 @@ public class EmployeeRequisitionDetail implements Serializable{
 	private int maxExperience;
 	
 	@Column(name="SALARY_FROM")   
-	private int salaryFrom;
+	private String salaryFrom;
 	
 	@Column(name="SALARY_TO")
-	private int salaryTo;
+	private String salaryTo;
 	
 	
 
 	public EmployeeRequisitionDetail() {
 		super();
-		// TODO Auto-generated constructor stub
+		
 	}
 
-	public EmployeeRequisitionDetail(String reqCode,  String desigCode, String location, String sex,
+	public EmployeeRequisitionDetail(String location, String sex,
 			int ageFrom, int ageTo, String acadQuali, String techQuali, int experience, String vacanncyType,
-			int totalVacancy, String remarks, int minExperience, int maxExperience, int salaryFrom, int salaryTo) {
+			int totalVacancy, String remarks, int minExperience, int maxExperience, String salaryFrom, String salaryTo) {
 		super();
 		
-		//this.reqDate = reqDate;
+		
 		
 		this.location = location;
 		this.sex = sex;
@@ -243,19 +242,19 @@ public class EmployeeRequisitionDetail implements Serializable{
 		this.maxExperience = maxExperience;
 	}
 
-	public int getSalaryFrom() {
+	public String getSalaryFrom() {
 		return salaryFrom;
 	}
 
-	public void setSalaryFrom(int salaryFrom) {
+	public void setSalaryFrom(String salaryFrom) {
 		this.salaryFrom = salaryFrom;
 	}
 
-	public int getSalaryTo() {
+	public String getSalaryTo() {
 		return salaryTo;
 	}
 
-	public void setSalaryTo(int salaryTo) {
+	public void setSalaryTo(String salaryTo) {
 		this.salaryTo = salaryTo;
 	}
 

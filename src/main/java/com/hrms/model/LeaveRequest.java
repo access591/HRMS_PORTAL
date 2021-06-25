@@ -14,11 +14,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+
 import org.springframework.format.annotation.DateTimeFormat;
 
 
 @Entity
-//@Table(name="leave_request")
 @Table(name="LEAVE_REQUEST")
 public class LeaveRequest implements Serializable  {  
 	
@@ -35,26 +35,15 @@ public class LeaveRequest implements Serializable  {
 	@Column(name = "LEAVE_REQUEST_ID" ,length=100)
 	private Long leaveRequestId;
 	
-	
-//	@Column(name = "EMP_CODE")
-//	private String empCode;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "EMP_CODE")
 	private Employee employee;
 
-	
-//	@Column(name = "DEPT_CODE",length=50)
-//	private String deptCode;
-	
 	@ManyToOne
 	@JoinColumn(name = "DEPT_CODE")
 	private Department department;
-	
 
-	
-//	@Column(name = "LEAVE_CODE")  
-//	private String leaveCode;
 
 	@ManyToOne
 	@JoinColumn(name = "LEAVE_CODE")
@@ -75,9 +64,11 @@ public class LeaveRequest implements Serializable  {
 	@Column(name = "TO_DATE_TYPE",length=10)
 	private String toDateType;
 	
-	//@DateTimeFormat(pattern = "yyyy-MM-dd")
+
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "APPLY_DATE")
 	private Date applyDate;
+	
 	
 	@Column(name = "APPROVE_DATE",length=100)
 	private String approvedDate;
@@ -134,6 +125,8 @@ public class LeaveRequest implements Serializable  {
 	@Column(name = "REQUEST_TYPE",length=20)
 	private String requestType;
 
+	
+	
 	public Long getLeaveRequestId() {
 		return leaveRequestId;
 	}
@@ -141,34 +134,6 @@ public class LeaveRequest implements Serializable  {
 	public void setLeaveRequestId(Long leaveRequestId) {
 		this.leaveRequestId = leaveRequestId; 
 	}
-
-	
-
-//	public String getEmpCode() {
-//		return empCode;
-//	}
-//
-//	public void setEmpCode(String empCode) {
-//		this.empCode = empCode;
-//	}
-//
-//	public String getDeptCode() {
-//		return deptCode;
-//	}
-//
-//	public void setDeptCode(String deptCode) {
-//		this.deptCode = deptCode;
-//	}
-//
-//	public String getLeaveCode() {
-//		return leaveCode;
-//	}
-//
-//	public void setLeaveCode(String leaveCode) {
-//		this.leaveCode = leaveCode;
-//	}
-	
-	
 
 
 	public Employee getEmployee() {
@@ -373,7 +338,7 @@ public class LeaveRequest implements Serializable  {
 
 	public LeaveRequest() {
 		super();
-		// TODO Auto-generated constructor stub
+		
 	}
 
 

@@ -1,8 +1,10 @@
 package com.hrms.controller;
 
+
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -18,17 +20,18 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hrms.EncryptionUtil;
 import com.hrms.ImageUtil;
+import com.hrms.model.AttendenceRegister;
 import com.hrms.model.Employee;
+import com.hrms.model.InterviewMaster;
 import com.hrms.model.Login;
 import com.hrms.model.MenuModule;
-import com.hrms.model.Module;
-import com.hrms.model.Program;
-import com.hrms.model.SubModule1;
+
 import com.hrms.model.UserEntity;
+import com.hrms.service.AttendenceRegisterService;
 import com.hrms.service.EmployeeService;
+import com.hrms.service.InterviewMasterService;
 import com.hrms.service.ModuleService;
-import com.hrms.service.ReCaptchaValidationService;
-import com.hrms.service.SubModuleService;
+
 import com.hrms.service.UserService;
 
 @Controller
@@ -42,6 +45,8 @@ public class UserController {
 
 	@Autowired 
 	 EmployeeService employeeService;
+	@Autowired InterviewMasterService interviewMasterService;
+	@Autowired AttendenceRegisterService attendenceRegisterService;
 
 	@Autowired
 	private ReCaptchaValidationService validator;
@@ -54,7 +59,48 @@ public class UserController {
 	public String loginUser(@ModelAttribute("user") Login login, Model model,
 			@RequestParam(name = "g-recaptcha-response") String captcha, HttpSession session) {
 		boolean isUserExist = userService.checkUserExists(login);
+
 		if (isUserExist && validator.validateCaptcha(captcha)  ) {
+
+		
+		try {
+			List<Employee> listEmployee = employeeService.getAllEmployees();
+			model.addAttribute("employeeList", listEmployee.size());
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		List<AttendenceRegister> listAttendenceRegister = attendenceRegisterService
+				.findTodayAttendenceList();
+		if(listAttendenceRegister != null) {
+			model.addAttribute("listAttendenceRegister", listAttendenceRegister.size());
+		}
+		
+		List<AttendenceRegister> findTodayLeave = attendenceRegisterService.findTodayLeaveEmployee();
+		if(findTodayLeave != null) {
+			model.addAttribute("findTodayLeave", findTodayLeave.size());
+		}
+		
+		List<InterviewMaster> listInterviewMaster = interviewMasterService.getFinalSelection();
+		
+		if(listInterviewMaster != null) {
+			model.addAttribute("finalSelection", listInterviewMaster.size());
+		}
+		
+		
+		model.addAttribute("chart", new Object[][] {
+		    {"Airline",     "Price $"},
+		    {"Delta",       100},
+		    {"Southwest",   500},
+		    {"Jet Blue",    300},
+		    {"Canada Air",  300},
+		    {"Average month price", 300}
+		});
+		
+		
+		
+		if (isUserExist  && validator.validateCaptcha(captcha)  ) {
+
 
 			String id = login.getUserCode();
 			UserEntity userRecord = userService.findDataById(id);
@@ -67,6 +113,8 @@ public class UserController {
 			List<MenuModule> modules = moduleService.getAllModulesList(userCode);
 
 			session.setAttribute("imgUtil", new ImageUtil());
+			
+			
 			model.addAttribute("modules", modules);
 			return "dashboard";
 		} else {
@@ -196,5 +244,27 @@ public class UserController {
 		return "dashboard";
 	
 	}
+	
+	
+	private Map<String, Integer> getChartData() { 
+//        return List.of(
+//        		
+//                List.of("Mushrooms",44 ),
+//                List.of("Onions", 24),
+//                List.of("Olives",89),
+//                List.of("Zucchini",6),
+//                List.of("Pepperoni",56)
+//        );
+		
+		Map<String,Integer> map = new HashMap<>();
+		map.put("Mushrooms", 44);
+		map.put("Onions", 24);
+		map.put("Olives", 89);
+		map.put("Zucchini", 6);
+		map.put("Zucchini", 6);
+		
+		return map;
+		
+    }
 	
 }

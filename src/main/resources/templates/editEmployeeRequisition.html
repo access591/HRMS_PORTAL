@@ -59,6 +59,16 @@ body {
 										</div>
 									</div>
 
+									<div class="row">
+										<div th:if="${session.message}"
+											class="alert alert-primary alert-dismissible fade show">
+											<p class="text-center" th:text="${session.message.content}"></p>
+											<button type="button" class="close" data-dismiss="alert">&times;</button>
+											<th:block th:text="${#session.removeAttribute('message')}"></th:block>
+
+										</div>
+									</div>
+
 									<div class="card-body">
 
 
@@ -138,22 +148,32 @@ body {
 												class="table table-striped display" style="width: 100%">
 												<thead>
 													<tr>
-														<th class="text-center" style="width: 130px;">Designation Code</th>
-														<th class="text-center" style="width: 130px;">Designation Name</th>
-														<th class="text-center" style="width: 130px;">Location</th>
-														<th class="text-center" style="width: 130px;">Sex</th>
-														<th class="text-center" style="width: 130px;">Age(From)</th>
-														<th class="text-center" style="width: 130px;">Age(To)</th>
-														<th class="text-center" style="width: 130px;">Academic Qualification</th>
-														<th class="text-center" style="width: 130px;">Technical Qualification</th>
-														<th class="text-center" style="width: 130px;">Exp.in month(Min)</th>
-														<th class="text-center" style="width: 130px;">MaExp.in month(Max)x</th>
-														<th class="text-center" style="width: 130px;">Vacancy Type</th>
-														<th class="text-center" style="width: 130px;">Total Vacancies</th>
-														<th class="text-center" style="width: 130px;">Salary From</th>
-														<th class="text-center" style="width: 130px;">Salary To</th>
-														<th class="text-center" style="width: 130px;">Detail</th>
-														<th ></th>
+														<th scope="col" class="text-center" style="width: 130px;">Designation
+															Code</th>
+														<th scope="col" class="text-center" style="width: 130px;">Designation
+															Name</th>
+														<th scope="col" class="text-center" style="width: 130px;">Location</th>
+														<th scope="col" class="text-center" style="width: 130px;">Sex</th>
+														<th scope="col" class="text-center" style="width: 130px;">Age(From)</th>
+														<th scope="col" class="text-center" style="width: 130px;">Age(To)</th>
+														<th scope="col" class="text-center" style="width: 130px;">Academic
+															Qualification</th>
+														<th scope="col" class="text-center" style="width: 130px;">Technical
+															Qualification</th>
+														<th scope="col" class="text-center" style="width: 130px;">Exp.in
+															month(Min)</th>
+														<th scope="col" class="text-center" style="width: 130px;">MaExp.in
+															month(Max)x</th>
+														<th scope="col" class="text-center" style="width: 130px;">Vacancy
+															Type</th>
+														<th scope="col" class="text-center" style="width: 130px;">Total
+															Vacancies</th>
+														<th scope="col" class="text-center" style="width: 130px;">Salary
+															From</th>
+														<th scope="col" class="text-center" style="width: 130px;">Salary
+															To</th>
+														<th scope="col" class="text-center" style="width: 130px;">Detail</th>
+														<th scope="col"></th>
 
 													</tr>
 												</thead>
@@ -166,21 +186,19 @@ body {
 															th:field="*{employeRequisitionDetail[__${stat.index}__].designation.desgCode}"
 															readonly style="width: 130px; background-color: #FFFFFF"></td>
 
-														<td><input type="text" id="desigCode"
+														<td><input type="text" id="desigName"
 															th:field="*{employeRequisitionDetail[__${stat.index}__].designation.desgName}"
 															readonly style="width: 130px; background-color: #FFFFFF"></td>
 
 														<td><select id="location" style="width: 130px;"
-															th:field="*{employeRequisitionDetail[__${stat.index}__].location}"
-															>
+															th:field="*{employeRequisitionDetail[__${stat.index}__].location}">
 																<option value=" ">Select</option>
 																<option value="Court">Court</option>
 																<option value="Department">Department</option>
 														</select></td>
 
 														<td><select id="sex" style="width: 130px;"
-															th:field="*{employeRequisitionDetail[__${stat.index}__].sex}"
-															>
+															th:field="*{employeRequisitionDetail[__${stat.index}__].sex}">
 																<option value=" ">Select</option>
 																<option value="Male">Male</option>
 																<option value="Female">Female</option>
@@ -252,8 +270,11 @@ body {
 
 								</div>
 							</div>
-							 &nbsp &nbsp<button type="submit" class="btn btn-primary">Update</button> &nbsp 
-							<input action="action" class="btn btn-primary"
+
+							<th:block th:text="${#session.removeAttribute('message')}"></th:block>
+							&nbsp &nbsp
+							<button type="submit" class="btn btn-primary">Update</button>
+							&nbsp <input action="action" class="btn btn-primary"
 								onclick="window.history.go(-1); return false;" type="submit"
 								value="Back" />
 

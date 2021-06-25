@@ -11,6 +11,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name="M_EMPREQ_ADVERTISEMENT")
@@ -24,9 +25,11 @@ public class ReqAdvertisement {
 	@Column(name="ADVT_DATE")
 	private Date advtDate;
 	
+	@Size(max=250)
 	@Column(name="REMARKS")
 	private String remarks;
 	
+	@Size(max=50)
 	@Column(name="INS_BY")
 	private String insBy;
 	

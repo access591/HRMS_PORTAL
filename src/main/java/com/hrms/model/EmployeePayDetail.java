@@ -387,12 +387,7 @@ public class EmployeePayDetail implements Serializable{
 		this.netPay = netPay;
 	}
 
-	/*
-	 * public long getEmpPayDetailId() { return empPayDetailId; }
-	 * 
-	 * public void setEmpPayDetailId(long empPayDetailId) { this.empPayDetailId =
-	 * empPayDetailId; }
-	 */
+	
 
 	public String getEmpCode() {
 		return empCode;

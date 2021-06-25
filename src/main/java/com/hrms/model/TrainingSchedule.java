@@ -10,6 +10,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name="TRAINING_SCHEDULE")
@@ -23,12 +24,16 @@ public class TrainingSchedule {
 	@Column(name="TR_SCH_DATE")
 	private Date trScheduleDate;
 	
+	@Size(max=50)
 	@Column(name="TPOIC_SERIAL_NO")
 	private String topicSerialNo;
 	
+	
+	@Size(max=50)
 	@Column(name="TRAINER_CODE")
 	private String trainerCode;
 	
+	@Size(max=50)
 	@Column(name="TRAINER")
 	private String trainer;
 	
@@ -38,9 +43,11 @@ public class TrainingSchedule {
 	@Column(name="DATE_FROM")
 	private Date dateFrom;
 	
+	@Size(max=50)
 	@Column(name="TRAINER_AGENCY")
 	private String trainerAgency;
 	
+	@Size(max=50)
 	@Column(name="FY_CODE")
 	private String fyCode;
 	

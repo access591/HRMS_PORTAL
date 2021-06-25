@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hrms.ImageUtil;
+import com.hrms.helper.Message1;
 import com.hrms.model.ApplicantInfo;
 import com.hrms.model.InterviewMaster;
 import com.hrms.model.MenuModule;
@@ -27,7 +28,7 @@ import com.hrms.service.ApplicantInfoService;
 import com.hrms.service.DesignationService;
 import com.hrms.service.InterviewMasterService;
 import com.hrms.service.ModuleService;
-import com.hrms.util.InterviewForm;
+import com.hrms.util.InterViewForm;
 
 @Controller
 public class InterviewController {
@@ -68,36 +69,16 @@ public class InterviewController {
 		if(session.getAttribute("username")==null) {
 			return "redirect:" + "./";
 		}
+
+		List<ApplicantInfo> listApplicantInfo = applicantInfoService.findApplicantInfoStatusForward();
+
 		
-		
-		session.setAttribute("imgUtil", new ImageUtil());
-		
-		List<ApplicantInfo> listApplicantInfo1 = applicantInfoService.getAllApplicantInfo();
-		List<ApplicantInfo> listApplicantInfo = new ArrayList<>();
-		for (int i = 0; i < listApplicantInfo1.size(); i++) {
-			
-			if (listApplicantInfo1.get(i).getInterStatus() == null) {
-				
-				
-			}
-
-			else if (listApplicantInfo1.get(i).getInterStatus().length() == 0) {
-				
-				
-
-			} else {
-
-				if (listApplicantInfo1.get(i).getInterStatus().startsWith("F")) {
-					listApplicantInfo.add(listApplicantInfo1.get(i));
-				}
-			}
-
-		}
 		if (listApplicantInfo != null) {
 			model.addAttribute("listApplicantInfo", listApplicantInfo);
 		}
+		
 		List<InterviewMaster> im = new ArrayList<>();
-		InterviewForm form = new InterviewForm();
+		InterViewForm form = new InterViewForm();
 		form.setInterviewForm(im);
 		model.addAttribute("interviewMaster", form);
 
@@ -107,7 +88,7 @@ public class InterviewController {
 	}
 
 	@PostMapping("addInterviewDetail")
-	public String addInterviewDetails(@ModelAttribute("interviewMaster") InterviewForm form, HttpSession session) {
+	public String addInterviewDetails(@ModelAttribute("interviewMaster") InterViewForm form, HttpSession session) {
 
 		if(session.getAttribute("username")==null) {
 			return "redirect:" + "./";
@@ -162,8 +143,24 @@ public class InterviewController {
 			return "redirect:" + "./";
 		}
 		
+		try {
+			applicantInfoService.updateApplicantInfoInterviewStatus(applicantCode, interviewStatus);
+			
+			if(interviewStatus.equals("Forward")) {
+				session.setAttribute("message",new Message1("Forwarded","alert-primary"));
+			}else if(interviewStatus.equals("Reject")) {
+				session.setAttribute("message",new Message1("Request has been Rejected","alert-primary"));
+			}
+			else if(interviewStatus.equals("Hold")) {
+				//session.setAttribute("message",new Message1("","alert-primary"));
+			}
+			
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+			session.setAttribute("message",new Message1("Request has been Canceled","alert-primary"));
+		}
 		
-		applicantInfoService.updateApplicantInfoInterviewStatus(applicantCode, interviewStatus);
 
 		return "redirect:/interviewApproval";
 	}
@@ -194,7 +191,18 @@ public class InterviewController {
 			return "redirect:" + "./";
 		}
 		
-		interviewMasterService.interviewFinalapproval(applicantCode, interviewCode, finalApprovalStatus);
+		try {
+			interviewMasterService.interviewFinalapproval(applicantCode, interviewCode, finalApprovalStatus);
+			
+			if(finalApprovalStatus.equals("Selected")) {
+				session.setAttribute("message",new Message1("Request has been Selected","alert-primary"));
+			}else if(finalApprovalStatus.equals("Rejected")) {
+				session.setAttribute("message",new Message1("Request has been Rejected","alert-primary"));
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
 		return "redirect:/interviewFinalSelection";
 	}
 

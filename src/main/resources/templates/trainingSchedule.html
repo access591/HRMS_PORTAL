@@ -177,12 +177,7 @@ body {
 												
 						<div class="form-row">
 
-										<!-- <div class="form-group sm col-md-4">
-												<label class="form-label">Max Limit For Such Loan
-												 <span class="text-danger">*</span></label> 
-												 <input type="text" id="amount" name="amount" title="Amount" class="form-control required">
-											</div> -->
-											
+										
 												
 												
 
@@ -265,7 +260,6 @@ body {
 		
 		<script>
 			document.getElementById("trScheduleDate").valueAsDate = new Date();
-			//document.getElementById("trainingStartDate").min = "1999-01-01";
 			
 			var today = new Date().toISOString().split('T')[0];
 			document.getElementsByName("trainingStartDate")[0].setAttribute('min', today);
@@ -389,8 +383,7 @@ body {
 				let obj = JSON.parse(this.responseText);
 				console.log(obj);
 
-				/* $('#deptName').val(obj.deptName);
-				$('#desgName').val(obj.desgName); */
+				
 
 			} else {
 				console.error("some error occured");

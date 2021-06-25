@@ -38,7 +38,7 @@ public class LtaReport {
 					.getRealPath("/resources/" + reportFileName + ".jasper");
 			JRBeanCollectionDataSource beanColDataSource = new JRBeanCollectionDataSource(sourceData);
 
-			HashMap<String, Object> map = new HashMap<>();
+			HashMap<String, Object> map = new HashMap<String, Object>();
 
 			map.put("Parameter1", beanColDataSource);
 			map.put("leaveFrom", leaveFrom);

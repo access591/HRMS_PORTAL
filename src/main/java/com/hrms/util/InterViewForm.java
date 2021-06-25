@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.hrms.model.InterviewMaster;
 
-public class InterviewForm {
+public class InterViewForm {
 	
 	private List<InterviewMaster> interviewForm;
 

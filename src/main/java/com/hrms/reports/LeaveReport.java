@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.hrms.model.LeaveGrant;
 import com.hrms.service.LeaveGrantRegisterService;
 
 import net.sf.jasperreports.engine.JREmptyDataSource;
@@ -27,34 +26,36 @@ import net.sf.jasperreports.engine.util.JRLoader;
 @Component
 public class LeaveReport {
 
+	private static final String JRXML = ".jrxml";
+	private static final String JASPER = ".jasper";
+	private static final String RESOURCES = "resources/";
+	private static final String RESOURCES2 = "/resources/";
+	private static final String CACHE_CONTROL_1 = "no-store";
+	private static final String CACHE_CONTROL_2 = "private";
+	private static final String PRAGMA = "no-store";
+	private static final String CONTENT_TYPE = "application/pdf";
+	
 	@Autowired
 	LeaveGrantRegisterService leaveGrantService;
 
 //leave management report / leave request report
 
-	public List<?> leaveRequestReport(HttpServletResponse response, HttpServletRequest request, String reportFileName,
-			List<?> listLeave, String empCode) {
-
-		List<LeaveGrant> listLeaveGrant = leaveGrantService.findLeaveGrantByEmployeeName(empCode);
+	public void leaveRequestReport(HttpServletResponse response, HttpServletRequest request, String reportFileName,
+			List<?> listLeave, String empCode) throws IOException {
 
 		String sourceFileName = request.getSession().getServletContext()
-				.getRealPath("resources/" + reportFileName + ".jrxml");
+				.getRealPath(RESOURCES + reportFileName + JRXML);
 
 		try {
 
 			JasperCompileManager.compileReportToFile(sourceFileName);
 			sourceFileName = request.getSession().getServletContext()
-					.getRealPath("/resources/" + reportFileName + ".jasper");
-			// JRBeanCollectionDataSource beanColDataSource = new
-			// JRBeanCollectionDataSource(sourceData);
+					.getRealPath(RESOURCES2 + reportFileName + JASPER);
 
-			// JRBeanCollectionDataSource leaveGrant = new
-			// JRBeanCollectionDataSource(listLeaveGrant);
 			JRBeanCollectionDataSource leaveRequest = new JRBeanCollectionDataSource(listLeave);
 
-			HashMap<String, Object> map = new HashMap<String, Object>();
+			HashMap<String, Object> map = new HashMap<>();
 
-			// map.put("ItemDataSource", leaveGrant);
 			map.put("leaveRequest", leaveRequest);
 
 			map.put("empName", empCode);
@@ -67,46 +68,43 @@ public class LeaveReport {
 			if (jasperPrint != null) {
 				byte[] pdfReport = JasperExportManager.exportReportToPdf(jasperPrint);
 				response.reset();
-				response.setContentType("application/pdf");
-				response.setHeader("Cache-Control", "no-store");
-				response.setHeader("Cache-Control", "private");
-				response.setHeader("Pragma", "no-store");
+				response.setContentType(CONTENT_TYPE);
+				response.setHeader("Cache-Control", CACHE_CONTROL_1);
+				response.setHeader("Cache-Control", CACHE_CONTROL_2);
+				response.setHeader("Pragma", PRAGMA);
 
 				response.setContentLength(pdfReport.length);
-				try {
-					response.getOutputStream().write(pdfReport);
-					response.getOutputStream().flush();
-					response.getOutputStream().close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
+
+				response.getOutputStream().write(pdfReport);
+				response.getOutputStream().flush();
+				response.getOutputStream().close();
 
 			}
 		} catch (JRException e) {
 			e.printStackTrace();
 		}
 
-		return null;
+		
 
 	}
 
 	// LEAVE TRASACTION PDF REPORT
 	public void leaveTransactionPdfReportByEmp(HttpServletRequest request, HttpServletResponse response,
-			List<?> sourceData, String activeUser) {
+			List<?> sourceData, String activeUser) throws IOException {
 		String reportFileName = "LeaveTransaction";
 		System.out.println("leave transaction report...");
 		String sourceFileName = request.getSession().getServletContext()
-				.getRealPath("resources/" + reportFileName + ".jrxml");
+				.getRealPath(RESOURCES + reportFileName + JRXML);
 		System.out.println("resources : = " + sourceFileName);
 
 		try {
 
 			JasperCompileManager.compileReportToFile(sourceFileName);
 			sourceFileName = request.getSession().getServletContext()
-					.getRealPath("/resources/" + reportFileName + ".jasper");
+					.getRealPath(RESOURCES2 + reportFileName + JASPER);
 			JRBeanCollectionDataSource beanColDataSource = new JRBeanCollectionDataSource(sourceData);
 
-			HashMap<String, Object> map = new HashMap<String, Object>();
+			HashMap<String, Object> map = new HashMap<>();
 
 			map.put("Parameter", beanColDataSource);// Parameter
 			map.put("activeUser", "Run By : " + activeUser);
@@ -118,35 +116,32 @@ public class LeaveReport {
 			if (jasperPrint != null) {
 				byte[] pdfReport = JasperExportManager.exportReportToPdf(jasperPrint);
 				response.reset();
-				response.setContentType("application/pdf");
-				response.setHeader("Cache-Control", "no-store");
-				response.setHeader("Cache-Control", "private");
-				response.setHeader("Pragma", "no-store");
+				response.setContentType(CONTENT_TYPE);
+				response.setHeader("Cache-Control", CACHE_CONTROL_1);
+				response.setHeader("Cache-Control", CACHE_CONTROL_2);
+				response.setHeader("Pragma", PRAGMA);
 				response.setContentLength(pdfReport.length);
-				try {
-					response.getOutputStream().write(pdfReport);
-					response.getOutputStream().flush();
-					response.getOutputStream().close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
+
+				response.getOutputStream().write(pdfReport);
+				response.getOutputStream().flush();
+				response.getOutputStream().close();
 
 			}
 		} catch (JRException e) {
 			e.printStackTrace();
 		}
-		// return null;
+		
 
 	}
 
 	// leave detail reports / leave register
-	public void leaveRegisterReport(HttpServletRequest request, HttpServletResponse response, List<?> listLeveDetail) {
+	public void leaveRegisterReport(HttpServletRequest request, HttpServletResponse response, List<?> listLeveDetail)
+			throws IOException {
 
-		System.out.println("hii in leave register util");
-
+	
 		String reportFileName = "LeaveDetailManagement";
 		String sourceFileName = request.getSession().getServletContext()
-				.getRealPath("resources/" + reportFileName + ".jrxml");
+				.getRealPath(RESOURCES + reportFileName + JRXML);
 
 		System.out.println("hii in leave register util" + sourceFileName);
 
@@ -154,10 +149,10 @@ public class LeaveReport {
 
 			JasperCompileManager.compileReportToFile(sourceFileName);
 			sourceFileName = request.getSession().getServletContext()
-					.getRealPath("/resources/" + reportFileName + ".jasper");
+					.getRealPath(RESOURCES2 + reportFileName + JASPER);
 			JRBeanCollectionDataSource beanColDataSource = new JRBeanCollectionDataSource(listLeveDetail);
 
-			HashMap<String, Object> map = new HashMap<String, Object>();
+			HashMap<String, Object> map = new HashMap<>();
 
 			map.put("ItemDataSource", beanColDataSource);
 			System.out.println("hii leave detail reports");
@@ -168,29 +163,24 @@ public class LeaveReport {
 			if (jasperPrint != null) {
 				byte[] pdfReport = JasperExportManager.exportReportToPdf(jasperPrint);
 				response.reset();
-				response.setContentType("application/pdf");
-				response.setHeader("Cache-Control", "no-store");
-				response.setHeader("Cache-Control", "private");
-				response.setHeader("Pragma", "no-store");
+				response.setContentType(CONTENT_TYPE);
+				response.setHeader("Cache-Control", CACHE_CONTROL_1);
+				response.setHeader("Cache-Control", CACHE_CONTROL_2);
+				response.setHeader("Pragma", PRAGMA);
 				response.setContentLength(pdfReport.length);
-				
-				try {
-					response.getOutputStream().write(pdfReport);
-					response.getOutputStream().flush();
-					response.getOutputStream().close();
-					
-				
-				} catch (IOException e) {
-					e.printStackTrace();
-					System.out.println("exception occured");
-				}
+
+				response.getOutputStream().write(pdfReport);
+				response.getOutputStream().flush();
+				response.getOutputStream().close();
+
+				System.out.println("exception occured");
 
 			}
 		} catch (JRException e) {
 			e.printStackTrace();
 			System.out.println("exception occured");
 		}
-		// return null;
+		
 
 	}
 

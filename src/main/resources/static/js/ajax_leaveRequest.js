@@ -75,6 +75,7 @@ function leaveTypeFun(){
 		document.getElementById("to_date_type").disabled = true;
 		document.getElementById("to_date").disabled = true;
 		document.getElementById("to_date").value = document.getElementById("from_date").value;
+		document.getElementById("to_date_type").value = "";
 		countLeaveDays();
 	}																
 
@@ -82,6 +83,8 @@ function leaveTypeFun(){
 		console.log("multiple else block ");
 		document.getElementById("to_date_type").disabled = false;
 		document.getElementById("to_date").disabled = false;
+		
+		document.getElementById("to_date_type").value = f;
 		
 		countLeaveDays();
 
@@ -94,6 +97,7 @@ function changeToDate(val){
 	console.log("leave type : "+ leaveTypeId);
 	if(leaveTypeId == "single"){
 		document.getElementById("to_date").value = val;
+
 		//document.getElementById("to_date").disabled = true;
 	}
 	if(leaveTypeId == "multiple"){
@@ -118,6 +122,7 @@ function getToDate(val){
 	}
 }
 
+//  click form type
 function fromDayTypeValue(val){
 	console.log("val is : " + val );
 	fromDateType = val;
@@ -136,11 +141,14 @@ function toDayTypeValue(val){
 
 function countLeaveDays(){
 
-	console.log("count leave ");
-	console.log(" from day type :" + fromDateType);
+	console.log("==========count leave=========== ");
+	console.log("leave type ===>"+leaveTypeId);
+	console.log("toDateType ===>"+toDateType);
+	console.log("fromDateType==>" + fromDateType);
 	
-	if(leaveTypeId == "single" && fromDateType =="f" )
+	if(leaveTypeId == "single" && (fromDateType =="f" || toDateType=="f") )
 	{
+		
 		document.getElementById("leave_for").value = 1 ;
 		console.log("1st block");
 	}
@@ -159,8 +167,6 @@ function countLeaveDays(){
 		var fromDate = document.getElementById("from_date").value;
 		var toDate = document.getElementById("to_date").value;
 
-		
-			
 		var date1 = new Date(fromDate);
 		var date2 = new Date(toDate);
 
@@ -168,24 +174,22 @@ function countLeaveDays(){
 		const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 			
 		console.log(" toatl leaves : " + diffDays);
-
-		
-		
+	
 		if(fromDateType=="f" && toDateType != "f"){
-			console.log("dirst full day second half day");
-			document.getElementById("leave_for").value = diffDays - 0.5;
+			console.log("first full & second half day");
+			document.getElementById("leave_for").value = diffDays + 1 - 0.5;
 		}
 		if(fromDateType !="f" && toDateType =="f"){
-			console.log("from half day and second full day");
-			document.getElementById("leave_for").value = diffDays-0.5;
+			console.log("from half & second full day");
+			document.getElementById("leave_for").value = diffDays + 1 - 0.5;
 		}
-		if(fromDateType=="f" && toDateType=="f"){
+		if(fromDateType == "f" && toDateType == "f"){
 			console.log("complete off");
-			document.getElementById("leave_for").value = diffDays;
+			document.getElementById("leave_for").value = diffDays+1;
 		}
 		if((fromDateType=="fh" || fromDateType =="sh") && (toDateType=="fh" || toDateType=="sh")){
 			console.log("- one ")
-			document.getElementById("leave_for").value = diffDays-0.5;
+			document.getElementById("leave_for").value = diffDays + 1 - 1;
 			// - 0.5
 		}
 
