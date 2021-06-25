@@ -30,7 +30,7 @@ public class UserEntity implements Serializable{
 	@ManyToOne
 	@JoinColumn(name = "Emp_code")
 	private Employee empCode;
-	@Size(max =15)
+	@Size(max =100)
 	@Column(name = "User_pass")
 	private String userPass;
 	@Size(max = 1)
