@@ -65,17 +65,32 @@ public class UserController {
 			e.printStackTrace();
 		}
 		
-		List<AttendenceRegister> listAttendenceRegister = attendenceRegisterService.findTodayAttendenceList();
-		if(listAttendenceRegister != null) {
-			model.addAttribute("listAttendenceRegister", listAttendenceRegister.size());
+		try {
+			List<AttendenceRegister> listAttendenceRegister = attendenceRegisterService.findTodayAttendenceList();
+			if(listAttendenceRegister != null) {
+				model.addAttribute("listAttendenceRegister", listAttendenceRegister.size());
+			}
+		} catch (Exception e) {
+			
+			e.printStackTrace();
 		}
-		List<AttendenceRegister> findTodayLeave = attendenceRegisterService.findTodayLeaveEmployee();
-		if(findTodayLeave != null) {
-			model.addAttribute("findTodayLeave", findTodayLeave.size());
+		try {
+			List<AttendenceRegister> findTodayLeave = attendenceRegisterService.findTodayLeaveEmployee();
+			if(findTodayLeave != null) {
+				model.addAttribute("findTodayLeave", findTodayLeave.size());
+			}
+		} catch (Exception e) {
+			
+			e.printStackTrace();
 		}
-		List<InterviewMaster> listInterviewMaster = interviewMasterService.getFinalSelection();
-		if(listInterviewMaster != null) {
-			model.addAttribute("finalSelection", listInterviewMaster.size());
+		try {
+			List<InterviewMaster> listInterviewMaster = interviewMasterService.getFinalSelection();
+			if(listInterviewMaster != null) {
+				model.addAttribute("finalSelection", listInterviewMaster.size());
+			}
+		} catch (Exception e) {
+			
+			e.printStackTrace();
 		}
 		model.addAttribute("chart", new Object[][] {
 		    {"Airline",     "Price $"},
@@ -88,7 +103,7 @@ public class UserController {
 		
 		
 		
-		if (isUserExist  && validator.validateCaptcha(captcha)  ) {
+		if (isUserExist && validator.validateCaptcha(captcha)) {
 
 
 			String id = login.getUserCode();
