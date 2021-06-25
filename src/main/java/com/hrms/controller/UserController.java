@@ -1,7 +1,4 @@
 package com.hrms.controller;
-
-
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,7 +28,7 @@ import com.hrms.service.AttendenceRegisterService;
 import com.hrms.service.EmployeeService;
 import com.hrms.service.InterviewMasterService;
 import com.hrms.service.ModuleService;
-
+import com.hrms.service.ReCaptchaValidationService;
 import com.hrms.service.UserService;
 
 @Controller
@@ -59,10 +56,8 @@ public class UserController {
 	public String loginUser(@ModelAttribute("user") Login login, Model model,
 			@RequestParam(name = "g-recaptcha-response") String captcha, HttpSession session) {
 		boolean isUserExist = userService.checkUserExists(login);
-
-		if (isUserExist && validator.validateCaptcha(captcha)  ) {
-
 		
+
 		try {
 			List<Employee> listEmployee = employeeService.getAllEmployees();
 			model.addAttribute("employeeList", listEmployee.size());
@@ -70,24 +65,18 @@ public class UserController {
 			e.printStackTrace();
 		}
 		
-		List<AttendenceRegister> listAttendenceRegister = attendenceRegisterService
-				.findTodayAttendenceList();
+		List<AttendenceRegister> listAttendenceRegister = attendenceRegisterService.findTodayAttendenceList();
 		if(listAttendenceRegister != null) {
 			model.addAttribute("listAttendenceRegister", listAttendenceRegister.size());
 		}
-		
 		List<AttendenceRegister> findTodayLeave = attendenceRegisterService.findTodayLeaveEmployee();
 		if(findTodayLeave != null) {
 			model.addAttribute("findTodayLeave", findTodayLeave.size());
 		}
-		
 		List<InterviewMaster> listInterviewMaster = interviewMasterService.getFinalSelection();
-		
 		if(listInterviewMaster != null) {
 			model.addAttribute("finalSelection", listInterviewMaster.size());
 		}
-		
-		
 		model.addAttribute("chart", new Object[][] {
 		    {"Airline",     "Price $"},
 		    {"Delta",       100},
@@ -108,13 +97,10 @@ public class UserController {
 			session.setAttribute("USER_NAME", userRecord.getUserName());
 
 			session.setAttribute("User_Profile_Pic", userRecord.getEmpCode().getImageProfile());
+			session.setAttribute("imgUtil", new ImageUtil());
 			session.setAttribute("username", login.getUserCode());
 			String userCode = (String) session.getAttribute("username");
 			List<MenuModule> modules = moduleService.getAllModulesList(userCode);
-
-			session.setAttribute("imgUtil", new ImageUtil());
-			
-			
 			model.addAttribute("modules", modules);
 			return "dashboard";
 		} else {
@@ -122,7 +108,6 @@ public class UserController {
 			return "sign-in";
 		}
 	}
-
 	
 
 	
