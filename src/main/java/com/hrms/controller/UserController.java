@@ -55,8 +55,9 @@ public class UserController {
 	@PostMapping("/loginUser")
 	public String loginUser(@ModelAttribute("user") Login login, Model model,
 			@RequestParam(name = "g-recaptcha-response") String captcha, HttpSession session) {
-		boolean isUserExist = userService.checkUserExists(login);
 		
+		 boolean captchaVerifyMessage = validator.validateCaptcha(captcha);
+		 System.out.println("captchaVerifyMessage>>>>>>>>>>>"+captchaVerifyMessage);
 
 		try {
 			List<Employee> listEmployee = employeeService.getAllEmployees();
@@ -102,10 +103,8 @@ public class UserController {
 		});
 		
 		
-		
-		if (isUserExist && validator.validateCaptcha(captcha)) {
-
-
+		boolean isUserExist = userService.checkUserExists(login);
+		if (isUserExist && captchaVerifyMessage) {
 			String id = login.getUserCode();
 			UserEntity userRecord = userService.findDataById(id);
 			session.setAttribute("uuuuu", userRecord.getUserName());
@@ -118,7 +117,8 @@ public class UserController {
 			List<MenuModule> modules = moduleService.getAllModulesList(userCode);
 			model.addAttribute("modules", modules);
 			return "dashboard";
-		} else {
+		}
+		else {
 			model.addAttribute("message", "Please Verify Captcha");
 			return "sign-in";
 		}
