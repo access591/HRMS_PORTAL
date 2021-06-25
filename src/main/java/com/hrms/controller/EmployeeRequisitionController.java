@@ -76,11 +76,16 @@ public class EmployeeRequisitionController {
 		
 		
 		//session.setAttribute("imgUtil", new ImageUtil());
-		String userCode = (String) session.getAttribute("username");  
-		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
-		if (modules != null) {
-			model.addAttribute("modules", modules);
+		String userCode = (String) session.getAttribute("username");
+		try {
+			List<MenuModule> modules = moduleService.getAllModulesList(userCode);
+			if (modules != null) {
+				model.addAttribute("modules", modules);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
 		}
+		
 
 		try {
 			List<Department> departmentList = departmentService.getAllDepartments();
