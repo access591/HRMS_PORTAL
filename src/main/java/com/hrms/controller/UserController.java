@@ -48,7 +48,8 @@ public class UserController {
 	@Autowired InterviewMasterService interviewMasterService;
 	@Autowired AttendenceRegisterService attendenceRegisterService;
 
-
+	@Autowired
+	private ReCaptchaValidationService validator;
 	@GetMapping("/")
 	public String index(Model model) {
 		return "sign-in";
@@ -58,6 +59,9 @@ public class UserController {
 	public String loginUser(@ModelAttribute("user") Login login, Model model,
 			@RequestParam(name = "g-recaptcha-response") String captcha, HttpSession session) {
 		boolean isUserExist = userService.checkUserExists(login);
+
+		if (isUserExist && validator.validateCaptcha(captcha)  ) {
+
 		
 		try {
 			List<Employee> listEmployee = employeeService.getAllEmployees();
@@ -95,7 +99,8 @@ public class UserController {
 		
 		
 		
-		if (isUserExist /* && validator.validateCaptcha(captcha) */ ) {
+		if (isUserExist  && validator.validateCaptcha(captcha)  ) {
+
 
 			String id = login.getUserCode();
 			UserEntity userRecord = userService.findDataById(id);
