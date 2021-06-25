@@ -11,7 +11,7 @@ import com.hrms.model.ReCaptchResponseType;
 public class ReCaptchaValidationService {
 
     private static final String GOOGLE_RECAPTCHA_ENDPOINT = "https://www.google.com/recaptcha/api/siteverify";
-    private static String reCaptchaSecret ="6LfnrvcZAAAAAOkyd2BMyhRfqxbqw5e-Dcxsm9MN";
+    private static String reCaptchaSecret ="6LdEO1YbAAAAAEKJPNYrPbWToY5WUA8ziGwod5m1";
 
     public boolean validateCaptcha(String captchaResponse){
         RestTemplate restTemplate = new RestTemplate();
