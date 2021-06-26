@@ -56,8 +56,10 @@ public class UserController {
 	public String loginUser(@ModelAttribute("user") Login login, Model model,
 			@RequestParam(name = "g-recaptcha-response") String captcha, HttpSession session) {
 		
+
 		 //boolean captchaVerifyMessage = validator.validateCaptcha(captcha);
 		 //System.out.println("captchaVerifyMessage>>>>>>>>>>>"+captchaVerifyMessage);
+
 
 		try {
 			List<Employee> listEmployee = employeeService.getAllEmployees();
