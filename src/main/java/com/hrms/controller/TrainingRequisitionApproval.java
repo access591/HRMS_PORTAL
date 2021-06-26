@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import com.hrms.helper.Message1;
 import com.hrms.model.Department;
 import com.hrms.model.Employee;
 import com.hrms.model.MenuModule;
@@ -59,8 +60,14 @@ public class TrainingRequisitionApproval {
 			return "redirect:" + "./";
 		}
 		
+		try {
+			trainingRequistionService.trainingRequisitionApproval(trReqCode, approvalStatus);
+			session.setAttribute("message",new Message1("Data has been Approved","alert-primary"));
+		}catch(Exception e) {
+			e.printStackTrace();
+			session.setAttribute("message",new Message1("Something went wrong","alert-primary"));
+		}
 		
-		trainingRequistionService.trainingRequisitionApproval(trReqCode, approvalStatus);
 		return "redirect:/trainingRequisitionApproval";
 	}
 	

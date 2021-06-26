@@ -1,7 +1,9 @@
 package com.hrms.controller;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -11,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -18,6 +21,8 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
@@ -26,7 +31,10 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.hrms.helper.Message1;
@@ -93,22 +101,21 @@ public class OrderIssueTrackingController {
 	public String saveOrderIssueTracking(@ModelAttribute("orderIssueTracking") OrderIssueTracking orderIssueTracking,
 			Model model, HttpSession session, @RequestParam("orderFile") MultipartFile orderFile) throws IOException {
 
-		
 		if (session.getAttribute("username") == null) {
 			return "redirect:" + "./";
 		}
-		
+
 		if (orderFile.isEmpty()) {
 			System.out.println("order file is empty");
 			orderIssueTracking.setOrderFileName("");
 		} else {
-			
-				orderIssueTracking.setOrderFileName(orderFile.getOriginalFilename());
-				
-				File saveFileFolder = new ClassPathResource("static/img/").getFile();//images
-				
-				Path path = Paths.get(saveFileFolder.getAbsolutePath() + File.separator + orderFile.getOriginalFilename());
-				Files.copy(orderFile.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
+
+			orderIssueTracking.setOrderFileName(orderFile.getOriginalFilename());
+
+			File saveFileFolder = new ClassPathResource("static/img/").getFile();// images
+
+			Path path = Paths.get(saveFileFolder.getAbsolutePath() + File.separator + orderFile.getOriginalFilename());
+			Files.copy(orderFile.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
 
 		}
 		try {
@@ -234,6 +241,58 @@ public class OrderIssueTrackingController {
 		}
 
 		return null;
+	}
+
+	@RequestMapping(value="download/{id}",method = RequestMethod.GET)
+	public void doDownload(@PathVariable("id") Long orderId ,HttpServletRequest request, HttpServletResponse response) throws IOException {
+
+		
+		OrderIssueTracking order = orderIssueTrackingService.findOrderIssueTrackingById(orderId);
+		
+		ServletContext context = request.getServletContext();
+		
+		
+		File saveFileFolder = new ClassPathResource("static/img/").getFile();// images
+
+		Path filePath = Paths.get(saveFileFolder.getAbsolutePath() + File.separator + order.getOrderFileName());
+
+	
+		String fullPath = filePath.toString();
+		System.out.println("fullpath is : "+ fullPath);
+		File downloadFile = new File(fullPath);
+		FileInputStream inputStream = new FileInputStream(downloadFile);
+
+		
+		String mimeType = context.getMimeType(fullPath);
+		if (mimeType == null) {
+			
+			mimeType = "application/octet-stream";
+		}
+		System.out.println("MIME type: " + mimeType);
+
+		
+		response.setContentType(mimeType);
+		response.setContentLength((int) downloadFile.length());
+
+		
+		String headerKey = "Content-Disposition";
+		String headerValue = String.format("attachment; filename=\"%s\"", downloadFile.getName());
+		response.setHeader(headerKey, headerValue);
+
+		
+		OutputStream outStream = response.getOutputStream();
+
+		byte[] buffer = new byte[1600];
+		int bytesRead = -1;
+
+		
+		while ((bytesRead = inputStream.read(buffer)) != -1) {
+			outStream.write(buffer, 0, bytesRead);
+		}
+
+		inputStream.close();
+		outStream.close();
+
 	}
 
 }

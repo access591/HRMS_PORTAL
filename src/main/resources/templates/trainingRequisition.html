@@ -407,7 +407,7 @@ body {
 									<thead>
 										<tr>
 											<th class="text-center" scope="col">Training
-												Reaquisition Code</th>
+												Requisition Code</th>
 											<th class="text-center" scope="col">Training Requisition
 												Date</th>
 											<th class="text-center" scope="col">Department</th>
@@ -436,30 +436,30 @@ body {
 													<div th:case="'Y'">
 														<a
 															th:href="@{/viewTrainingRequisition/{id}(id=${training.trReqCode})}"><em
-															class="fa fa-edit"></em></a> <a
+															class="align-middle fas fa-fw fa-pen"></em></a> <a
 															th:href="@{/deleteTrainingRequisition/{id}(id=${training.trReqCode})}"
 															onclick="return confirm('Are you sure?')"><em
-															class="fa fa-times"></em></a>
+															class="align-middle fas fa-fw fa-trash"></em></a>
 
 													</div>
 
 													<div th:case="'N'">
 														<a
 															th:href="@{/editTrainingRequisition/{id}(id=${training.trReqCode})}"><em
-															class="fa fa-edit"></em></a> <a
+															class="align-middle fas fa-fw fa-pen"></em></a> <a
 															th:href="@{/deleteTrainingRequisition/{id}(id=${training.trReqCode})}"
 															onclick="return confirm('Are you sure?')"><em
-															class="fa fa-times"></em></a>
+															class="align-middle fas fa-fw fa-trash"></em></a>
 
 													</div>
 
 													<div th:case="'C'">
 														<a
 															th:href="@{/viewTrainingRequisition/{id}(id=${training.trReqCode})}"><em
-															class="fa fa-edit"></em></a> <a
+															class="align-middle fas fa-fw fa-pen"></em></a> <a
 															th:href="@{/deleteTrainingRequisition/{id}(id=${training.trReqCode})}"
 															onclick="return confirm('Are you sure?')"><em
-															class="fa fa-times"></em></a>
+															class="align-middle fas fa-fw fa-trash"></em></a>
 
 													</div>
 
