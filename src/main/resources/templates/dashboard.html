@@ -212,8 +212,8 @@ body {
 
 
 					<div class="row">
-						<div class="col-12 col-lg-8 col-xxl-9 d-flex">
-							<div class="card flex-fill">
+						<div class="col-xl-6 col-xxl-7">
+							<div class="card flex-fill w-100">
 								<div class="card-header">
 									<div class="card-actions float-right">
 										<a href="#" class="mr-1"> <em class="align-middle"
@@ -233,7 +233,7 @@ body {
 									</div>
 									<h5 class="card-title mb-0">Yearly Budget</h5>
 								</div>
-								<div style="width: parent; height: parent;" id="chart_div"></div>
+								<div class="text-center"style="width: parent; height: parent;" id="chart_div"></div>
 
 
 							</div>
@@ -495,11 +495,13 @@ body {
 
 	<!-- category wise record  -->
 	<script type="text/javascript">
-	rootUrl = '@Url.Content("~")'
+	
 		$(document).ready(function() {
+			
 			$.ajax({
+				type: "GET",
+		         url: "getCategoryData",
 				
-				url: @Url.Action("getCategoryData"),
 				success : function(result) {
 					var yearDtls = [];
 					var countDtls = [];
@@ -570,8 +572,8 @@ body {
             ]);
             // Set chart options
             var options = {'title':'Budget ',
-                'width':400,
-                'height':300};
+                'width':650,
+                'height':450};
 
             // Instantiate and draw our chart, passing in some options.
             var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
