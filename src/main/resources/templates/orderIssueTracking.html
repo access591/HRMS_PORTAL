@@ -45,16 +45,16 @@ body {
 
 							<div class="card" style="border-radius: 2.2rem">
 								<div class="card-header">
-									<h5 class="card-title"style="text-decoration: underline;">Order Issue Tracking
-										</h5>
+									<h5 class="card-title" style="text-decoration: underline;">Order
+										Issue Tracking</h5>
 									<div class="alert-outline">
 										<div th:if="${message}" th:text="${message}"
 											style="color: red"></div>
 									</div>
 								</div>
 								<div class="card-body">
-								
-								<div class="row">
+
+									<div class="row">
 										<div th:if="${session.message}"
 											class="alert alert-primary alert-dismissible fade show">
 											<p class="text-center" th:text="${session.message.content}"></p>
@@ -63,11 +63,12 @@ body {
 
 										</div>
 									</div>
-									
-									
+
+
 									<form id="validation-form" action="#"
-										th:action="@{/saveOrderIssueTracking}" th:object="${orderIssueTracking}" method="post"
-											enctype="multipart/form-data">
+										th:action="@{/saveOrderIssueTracking}"
+										th:object="${orderIssueTracking}" method="post"
+										enctype="multipart/form-data">
 										<div class="row">
 
 											<div class="col-12 col-lg-4">
@@ -91,10 +92,10 @@ body {
 													th:field="*{orderTitle}" class="form-control">
 
 											</div>
-											
-											</div>
-											<p></p>
-											<div class="row">
+
+										</div>
+										<p></p>
+										<div class="row">
 
 											<div class="col-12 col-lg-4">
 												<label class="form-label">Issue By</label> <label
@@ -102,15 +103,16 @@ body {
 													onchange="changeCategory()" th:field="*{employee.empCode}">
 													<option value="">Select Employee</option>
 													<option th:each="employee : ${employeeList}"
-														th:text="${employee.empName}" th:value="${employee.empCode}"></option>
-													
+														th:text="${employee.empName}"
+														th:value="${employee.empCode}"></option>
+
 												</select>
 											</div>
 
 											<div class="col-12 col-lg-4">
 												<label class="form-label">Branch Name</label> <label
 													style="color: red">*</label> <select class="form-control"
-													onchange="changeCategory()" >
+													onchange="changeCategory()">
 													<option value="">Select Branch</option>
 													<option value="">Branch</option>
 												</select>
@@ -121,32 +123,32 @@ body {
 
 
 											<div class="col-12 col-lg-4">
-												<label class="form-label">Order File</label> 
-												 <input type="file"
-													name="orderFile">
+												<label class="form-label">Order File</label> <input
+													type="file" name="orderFile"> 
+													
 
 											</div>
-											
-											</div>
-											<p></p>
-											<div class="row">
+
+										</div>
+										<p></p>
+										<div class="row">
 
 											<div class="col-12 col-lg-4">
-												<label class="form-label">Order Description</label> <label
-													style="color: red">*</label> <textarea 
-													th:field="*{orderDescription}" class="form-control"></textarea>
+												<label class="form-label">Order Description</label> 
+												<textarea th:field="*{orderDescription}"
+													class="form-control"></textarea>
 
 											</div>
 
 
 										</div>
 
-								
-									<p></p>
+
+										<p></p>
 										<Button type="submit" class="btn btn-primary">Submit</Button>
 										<Button type="reset" class="btn btn-primary">Reset</Button>
 
-										
+
 									</form>
 
 
@@ -159,43 +161,51 @@ body {
 
 					</div>
 				</div>
-				
-				
+
+
 				<div class="col-12">
-							<div class="card">
-								<div class="card-header">
-								</div>
-								<div class="card-body">
-								<table id="datatables-buttons" class="table table-striped display" style="width:100%"aria-describedby="datatables-buttons">
-										<thead>
-											<tr>
-												<th  scope="col" class="text-center">Date of Issue</th>
-												<th  scope="col" class="text-center">Order Number</th>
-												<th scope="col"  class="text-center">Order Title</th>
-												<th  scope="col" class="text-center">Order Description</th>
-												<th scope="col" class="text-center">File Name</th>
-												<th scope="col" class="text-center">Action</th>
-												
-											</tr>
-										</thead>
-										<tbody>
-											<tr th:each="order : ${listOrderIssueTracking}">
-												<td class="text-center" th:text="${order.orderTrackingDate}">10/098/90-12</td>
-												<td class="text-center" th:text="${order.orderNumber}">Computer</td>
-												<td class="text-center" th:text="${order.orderTitle}">10000</td>
-												<td class="text-center" th:text="${order.orderDescription}">10000</td>
-												<td class="text-center" th:text="${order.orderFileName}">10000</td>
-												<td><a th:href="@{/editOrderTracking/{id}(id=${order.orderTrackingId})}"><em class="fa fa-edit"></em></a>
-												<a th:href="@{/deleteOrderTracking/{id}(id=${order.orderTrackingId})}" onclick="return confirm('Are you sure?')"><em class="fa fa-times"></em></a>
-												</td>
-											</tr>
-										</tbody>
-									
-									</table>
-								</div>
-								
-							</div>
+					<div class="card">
+						<div class="card-header"></div>
+						<div class="card-body">
+							<table id="datatables-buttons"
+								class="table table-striped display" style="width: 100%"
+								aria-describedby="datatables-buttons">
+								<thead>
+									<tr>
+										<th scope="col" class="text-center">Date of Issue</th>
+										<th scope="col" class="text-center">Order Number</th>
+										<th scope="col" class="text-center">Order Title</th>
+										<th scope="col" class="text-center">Order Description</th>
+										<th scope="col" class="text-center">File Name</th>
+										<th scope="col" class="text-center">Action</th>
+
+									</tr>
+								</thead>
+								<tbody>
+									<tr th:each="order : ${listOrderIssueTracking}">
+										<td class="text-center"
+											th:text="${#dates.format(order.orderTrackingDate, 'dd-MM-yyyy')}">10/098/90-12</td>
+										<td class="text-center" th:text="${order.orderNumber}">Computer</td>
+										<td class="text-center" th:text="${order.orderTitle}">10000</td>
+										<td class="text-center" th:text="${order.orderDescription}">10000</td>
+										
+										<td class="text-center"><a th:href="@{/download/{id}(id=${order.orderTrackingId})}">
+										<span th:text="${order.orderFileName}"></span></a></td>
+										
+										<td><a
+											th:href="@{/editOrderTracking/{id}(id=${order.orderTrackingId})}"><em
+												class="align-middle fas fa-fw fa-pen"></em></a> <a
+											th:href="@{/deleteOrderTracking/{id}(id=${order.orderTrackingId})}"
+											onclick="return confirm('Are you sure?')"><em
+												class="align-middle fas fa-fw fa-trash"></em></a></td>
+									</tr>
+								</tbody>
+
+							</table>
 						</div>
+
+					</div>
+				</div>
 
 			</main>
 
