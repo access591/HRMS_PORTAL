@@ -38,7 +38,7 @@ body {
 <script src="js/settings.js"></script>
 <!-- END SETTINGS -->
 <!-- Global site tag (gtag.js) - Google Analytics -->
-<script  src="https://www.googletagmanager.com/gtag/js?id=UA-120946860-7"></script>
+<script src="https://www.googletagmanager.com/gtag/js?id=UA-120946860-7"></script>
 <script>
 	window.dataLayer = window.dataLayer || [];
 	function gtag() {
@@ -52,7 +52,8 @@ body {
 <script src="https://code.highcharts.com/modules/exporting.js"></script>
 <script src="https://code.highcharts.com/modules/export-data.js"></script>
 <script src="https://code.highcharts.com/modules/accessibility.js"></script>
- <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript"
+	src="https://www.gstatic.com/charts/loader.js"></script>
 </head>
 
 <body>
@@ -127,7 +128,9 @@ body {
 													<div class="col-auto">
 														<div class="avatar">
 															<div class="avatar-title rounded-circle bg-primary-dark">
-																<img src="https://img.icons8.com/color/48/000000/user-group-skin-type-7.png"alt="image" />
+																<img
+																	src="https://img.icons8.com/color/48/000000/user-group-skin-type-7.png"
+																	alt="image" />
 															</div>
 														</div>
 													</div>
@@ -168,7 +171,8 @@ body {
 														<div class="avatar">
 															<div class="avatar-title rounded-circle bg-primary-dark">
 																<img
-																	src="https://img.icons8.com/fluent-systems-filled/48/000000/attendance-mark.png"alt="image" />
+																	src="https://img.icons8.com/fluent-systems-filled/48/000000/attendance-mark.png"
+																	alt="image" />
 															</div>
 														</div>
 													</div>
@@ -189,7 +193,8 @@ body {
 														<div class="avatar">
 															<div class="avatar-title rounded-circle bg-primary-dark">
 																<img
-																	src="https://img.icons8.com/cotton/64/000000/change-employee-female.png"alt="image" />
+																	src="https://img.icons8.com/cotton/64/000000/change-employee-female.png"
+																	alt="image" />
 															</div>
 														</div>
 													</div>
@@ -204,7 +209,7 @@ body {
 						</div>
 					</div>
 
-					
+
 
 					<div class="row">
 						<div class="col-12 col-lg-8 col-xxl-9 d-flex">
@@ -220,17 +225,17 @@ body {
 											</a>
 
 											<div class="dropdown-menu dropdown-menu-right">
-												
+
 												<div id="chartContainer"></div>
-												
+
 											</div>
 										</div>
 									</div>
 									<h5 class="card-title mb-0">Yearly Budget</h5>
 								</div>
-								<div style="width:parent;height:parent;" id="chart_div"></div>
-								
-								
+								<div style="width: parent; height: parent;" id="chart_div"></div>
+
+
 							</div>
 						</div>
 						<div class="col-12 col-lg-4 col-xxl-3 d-flex">
@@ -490,9 +495,11 @@ body {
 
 	<!-- category wise record  -->
 	<script type="text/javascript">
+	rootUrl = '@Url.Content("~")'
 		$(document).ready(function() {
 			$.ajax({
-				url : "/getCategoryData",
+				
+				url: @Url.Action("getCategoryData"),
 				success : function(result) {
 					var yearDtls = [];
 					var countDtls = [];
@@ -534,10 +541,10 @@ body {
 	</script>
 
 
-	
 
 
-<!-- pai chart -->
+
+	<!-- pai chart -->
 	<script type="text/javascript" th:inline="javascript">
 
         // Load the Visualization API and the corechart package.
@@ -571,8 +578,8 @@ body {
             chart.draw(data, options);
         }
     </script>
-    
-   </body>
-	
+
+</body>
+
 </html>
 
