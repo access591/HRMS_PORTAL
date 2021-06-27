@@ -19,11 +19,8 @@ body {
 }
 
 .dropdown-menu {
-  min-width:250px;
+	min-width: 250px;
 }
-
-
-
 </style>
 <script>
 	window.dataLayer = window.dataLayer || [];
@@ -53,14 +50,15 @@ body {
 						<h1 class="header-title">Personal</h1>
 						<nav aria-label="breadcrumb"></nav>
 					</div>
-					<form action="#" th:action="@{/saveAdvertisement}" th:object="${reqAdvertisement}"	
-						 method="post">
-						 
+					<form action="#" th:action="@{/saveAdvertisement}"
+						th:object="${reqAdvertisement}" method="post">
+
 						<div class="row">
 							<div class="col-12">
 								<div class="card">
 									<div class="card-header">
-										<h5 class="card-title"style="text-decoration: underline;">Employee Requisition Advertisement</h5>
+										<h5 class="card-title" style="text-decoration: underline;">Employee
+											Requisition Advertisement</h5>
 										<div class="alert-outline">
 											<div th:if="${message}" th:text="${message}"
 												style="color: red"></div>
@@ -69,36 +67,41 @@ body {
 
 									<div class="card-body">
 
-
-										
-										<div class="container">
-										
 										<div class="row">
-											<div class="col-12 col-lg-6">
-												<div class="form-group">
-													<label> Advertisement Code </label>
-													 <input type="text" class="form-control" 
-														th:field="*{advtCode}" readonly>
+											<div th:if="${session.message}"
+												class="alert alert-primary alert-dismissible fade show">
+												<p class="text-center" th:text="${session.message.content}"></p>
+												<button type="button" class="close" data-dismiss="alert">&times;</button>
+												<th:block th:text="${#session.removeAttribute('message')}"></th:block>
+
+											</div>
+										</div>
+
+										<div class="container">
+
+											<div class="row">
+												<div class="col-12 col-lg-6">
+													<div class="form-group">
+														<label> Advertisement Code </label> <input type="text"
+															class="form-control" th:field="*{advtCode}" readonly>
+													</div>
+												</div>
+												<div class="col-12 col-lg-6">
+													<label class="form-label">Advertisement Date</label> <label
+														style="color: red">*</label> <input type="date"
+														th:field="*{advtDate}" id="theDate" class="form-control">
 												</div>
 											</div>
-											<div class="col-12 col-lg-6">
-												<label class="form-label">Advertisement Date</label> <label
-													style="color: red">*</label> <input type="date" th:field="*{advtDate}" id="theDate"
-													class="form-control" >
-											</div>
-										</div>
-										<div class="row">
-											<div class="col-12 col-lg-6">
-												<label class="form-label">Remarks</label>
-												 <input type="text"
-													class="form-control" th:field="*{remarks}"
-													>
+											<div class="row">
+												<div class="col-12 col-lg-6">
+													<label class="form-label">Remarks</label> <input
+														type="text" class="form-control" th:field="*{remarks}">
+												</div>
+
 											</div>
 
+
 										</div>
-
-
-									</div>
 									</div>
 								</div>
 							</div>
@@ -108,9 +111,9 @@ body {
 									<div class="card-header"></div>
 									<div class="card-body">
 										<div id="validation-step-3">
-										
-										<div class="col-sm-12" style="text-align:right">
-												
+
+											<div class="col-sm-12" style="text-align: right">
+
 
 
 
@@ -120,77 +123,79 @@ body {
 													style="font-size: 24px; color: #399490fc"
 													aria-hidden="true"></a>
 											</div>
-											
-											
+
+
 											<table id="example" aria-describedby="example"
 												class="table table-striped display" style="width: 100%">
 												<thead>
 													<tr>
 														<th scope="col" class="text-center">Requisition Code</th>
-														<th scope="col" class="text-center" >Requisition Date</th>
+														<th scope="col" class="text-center">Requisition Date</th>
 														<th scope="col" class="text-center">Media Type</th>
 														<th scope="col" class="text-center">Media Name<label
-													style="color: red">*</label></th>
+															style="color: red">*</label></th>
 														<th scope="col" class="text-center">Amount</th>
 														<th scope="col" class="text-center">Details</th>
-														
-														
+
+
 													</tr>
 												</thead>
 												<tbody>
 													<tr id="addr0">
 
 
-														<td>
-														<select class="form-control" style="width:auto;" id="reqCode" name="listReqAdvertisementDetail[0].employeeRequisition.reqCode"
-																onchange="selectDateByReqCode()">
+														<td><select class="form-control" style="width: auto;"
+															id="reqCode"
+															name="listReqAdvertisementDetail[0].employeeRequisition.reqCode"
+															onchange="selectDateByReqCode()">
 																<option value=" ">Select ReqCode</option>
-																<option 
-																th:each="employeeReq : ${listEmployeeRequisition}"
-																th:text="${employeeReq.reqCode}" th:value="${employeeReq.reqCode}"></option>
-																
-														</select>
-														
-														
-														</td>
+																<option
+																	th:each="employeeReq : ${listEmployeeRequisition}"
+																	th:text="${employeeReq.reqCode}"
+																	th:value="${employeeReq.reqCode}"></option>
 
-														<td><input type="date" id="reqDate0" style="width: 150px;"
+														</select></td>
+
+														<td><input type="date" id="reqDate0"
+															style="width: 150px;"
 															name="listReqAdvertisementDetail[0].reqDate"></td>
 
 
-														
 
 
 
-														<td><select class="form-control" style="width:auto;"  id="media" name="listReqAdvertisementDetail[0].mediaType">
+
+														<td><select class="form-control" style="width: auto;"
+															id="media" name="listReqAdvertisementDetail[0].mediaType">
 																<option value=" ">Media Type</option>
 																<option value="News Paper">News Paper</option>
 																<option value="Cable TV">Cable TV</option>
 																<option value="Magzine">Magzine</option>
 																<option value="TV Channel">TV Channel</option>
 																<option value="Others">Others</option>
-														</select>
-														</td>
-														
-														<td><input type="text"
-															class="form-control" id="mediaName" name="listReqAdvertisementDetail[0].mediaName"></td>
+														</select></td>
 
 														<td><input type="text" class="form-control"
-															id="amount" name="listReqAdvertisementDetail[0].advtAmount"></td>
+															id="mediaName"
+															name="listReqAdvertisementDetail[0].mediaName"></td>
 
-														<td><input type="text"
-															class="form-control" id="details" name="listReqAdvertisementDetail[0].remarks"></td>
+														<td><input type="text" class="form-control"
+															id="amount"
+															name="listReqAdvertisementDetail[0].advtAmount"></td>
 
-														
+														<td><input type="text" class="form-control"
+															id="details" name="listReqAdvertisementDetail[0].remarks"></td>
 
-														
+
+
+
 													</tr>
 													<tr id="addr1"></tr>
 
 
 
 												</tbody>
-													
+
 											</table>
 										</div>
 
@@ -198,74 +203,75 @@ body {
 
 								</div>
 							</div>
-							&nbsp&nbsp&nbsp<button type="submit" class="btn btn-primary">Submit</button>
-							&nbsp&nbsp&nbsp<button type="reset" class="btn btn-primary" value="Reset">Reset</button>
+							&nbsp&nbsp&nbsp
+							<button type="submit" class="btn btn-primary">Submit</button>
+							&nbsp&nbsp&nbsp
+							<button type="reset" class="btn btn-primary" value="Reset">Reset</button>
 
 
 						</div>
 					</form>
 				</div>
-				
-				
+
+
 				<div class="col-12">
-							<div class="card">
-								<div class="card-header">
-								</div>
-								<div class="card-body">
-								<table id="datatables-buttons" class="table table-striped display" style="width:100%"aria-describedby="example">
-										<thead>
-											<tr>
-												<th scope="col"> Advertisement Code </th>
-												<th scope="col">Advertisement Date </th>
-												<th scope="col">Remarks</th>
-												<th scope="col">Action</th>
-											</tr>
-										</thead>
-										<tbody>
-											<tr  th:each="list : ${listReqAdvertisement}">
-												<td th:text="${list.advtCode}"></td>
-												<td th:text="${#dates.format(list.advtDate, 'dd-MM-yyyy')}"></td>
-												<td th:text="${list.remarks}"></td>
-												<td>
-												<a th:href="@{editAdvertisement/{id}(id=${list.advtCode})}"><em class="align-middle fas fa-fw fa-pen"></em></a>
-												<a th:href="@{/deleteAdvertisement/{id}(id=${list.advtCode})}" onclick="return confirm('Are you sure?')"><em class="align-middle fas fa-fw fa-trash"></em></a>
-												
-												 </td>
-											</tr>
-										</tbody>
-									
-									</table>
-								</div>
-								
-							</div>
+					<div class="card">
+						<div class="card-header"></div>
+						<div class="card-body">
+							<table id="datatables-buttons"
+								class="table table-striped display" style="width: 100%"
+								aria-describedby="example">
+								<thead>
+									<tr>
+										<th scope="col">Advertisement Code</th>
+										<th scope="col">Advertisement Date</th>
+										<th scope="col">Remarks</th>
+										<th scope="col">Action</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr th:each="list : ${listReqAdvertisement}">
+										<td th:text="${list.advtCode}"></td>
+										<td th:text="${#dates.format(list.advtDate, 'dd-MM-yyyy')}"></td>
+										<td th:text="${list.remarks}"></td>
+										<td><a
+											th:href="@{editAdvertisement/{id}(id=${list.advtCode})}"><em
+												class="align-middle fas fa-fw fa-pen"></em></a> <a
+											th:href="@{/deleteAdvertisement/{id}(id=${list.advtCode})}"
+											onclick="return confirm('Are you sure?')"><em
+												class="align-middle fas fa-fw fa-trash"></em></a></td>
+									</tr>
+								</tbody>
+
+							</table>
 						</div>
-						
-						
+
+					</div>
+				</div>
+
+
 			</main>
 			<footer class="footer">
 				<div th:replace="/fragments/footer :: div"></div>
 			</footer>
 		</div>
 	</div>
-	
 
-	
+
+
 
 
 	<script th:inline="javascript">
-	
-	$(document).ready(function() {
-		$('#example').DataTable({
-			"scrollY" : 200,
-			"scrollX" : true,
-			deferRender : true,
-			scrollCollapse : true,
+		$(document).ready(function() {
+			$('#example').DataTable({
+				"scrollY" : 200,
+				"scrollX" : true,
+				deferRender : true,
+				scrollCollapse : true,
 
+			});
 		});
-	});
-	
-	
-	
+
 		$(function() {
 			// Datatables basic
 			$('#datatables-basic').DataTable({
@@ -280,111 +286,110 @@ body {
 								scroller : false,
 								responsive : true,
 								lengthMenu : [
-									[ 5, 10, 15, -1 ],
-									[ '5 rows', '10 rows', '15 rows',
-											'Show all' ] ],
-							buttons : []
+										[ 5, 10, 15, -1 ],
+										[ '5 rows', '10 rows', '15 rows',
+												'Show all' ] ],
+								buttons : []
 							});
 			datatablesButtons.buttons().container().appendTo(
 					"#datatables-buttons_wrapper .col-md-6:eq(0)")
 		});
-		
-		
-			
-		
-		$(document).ready(function(){
-			console.log("click function...");
-			var i=1;
-			counter = i;//<option value=" ">Select Requisition Code</option>
-			$("#add_row").click(function(){
-			$('#addr'+i).html(
-					
-					"<td><select id='reqCode' name='listReqAdvertisementDetail["+i+"].reqCode' class='form-control' style='width:auto;'><option value=''>Select Req Code</option><option th:each='employeeReq : ${listEmployeeRequisition}'th:text='${employeeReq.reqCode}'></option></select></td>"+
-					"<td><input type='Date' id='reqDate"+i+"'name='listReqAdvertisementDetail["+i+"].reqDate'class='form-control text-center'></td>"+
-					"<td><select id='mediaType'name='listReqAdvertisementDetail["+i+"].mediaType' class='form-control' style='width:150px;'>"+
-					
-					"<option value=''>Media Type</option><option value='News Paper'>News Paper</option><option value='Cable TV'>Cable TV</option><option value='Magzine'>Magzine</option><option value='TV Channel'>TV Channel</option><option value='Others'>Others</option></select></td>"+
-					
-					"<td><input type='text' style='width: 130px;'id='mediaName'name='listReqAdvertisementDetail["+i+"].mediaName' class='form-control'></td>"+
-					
-					"<td><input type='text' style='width: 130px;'id='advtAmount'name='listReqAdvertisementDetail["+i+"].advtAmount' class='form-control'></td>"+
-					" </td><td><input type='text' style='width: 130px;'id='remarks'name='listReqAdvertisementDetail["+i+"].remarks' class='form-control'></td>"
 
-					);
+		$(document)
+				.ready(
+						function() {
+							console.log("click function...");
+							var i = 1;
+							counter = i;//<option value=" ">Select Requisition Code</option>
+							$("#add_row")
+									.click(
+											function() {
+												$('#addr' + i)
+														.html(
 
-			$('#example').append('<tr id="addr'+(i+1)+'"></tr>');
-			$('#_cr').val(i+1);
-			i++; 
-		});
-			
-			$("#delete_row").click(function(){
-			 	 if(i>1){
-					 $("#addr"+(i-1)).html('');
-					 $('#_cr').val(i - 1);
-					 i--;
-					 }
-				 });
+																"<td><select id='reqCode' name='listReqAdvertisementDetail["+i+"].reqCode' class='form-control' style='width:auto;'><option value=''>Select Req Code</option><option th:each='employeeReq : ${listEmployeeRequisition}'th:text='${employeeReq.reqCode}'></option></select></td>"
+																		+ "<td><input type='Date' id='reqDate"+i+"'name='listReqAdvertisementDetail["+i+"].reqDate'class='form-control text-center'></td>"
+																		+ "<td><select id='mediaType'name='listReqAdvertisementDetail["+i+"].mediaType' class='form-control' style='width:150px;'>"
+																		+
 
+																		"<option value=''>Media Type</option><option value='News Paper'>News Paper</option><option value='Cable TV'>Cable TV</option><option value='Magzine'>Magzine</option><option value='TV Channel'>TV Channel</option><option value='Others'>Others</option></select></td>"
+																		+
 
-		});
+																		"<td><input type='text' style='width: 130px;'id='mediaName'name='listReqAdvertisementDetail["+i+"].mediaName' class='form-control'></td>"
+																		+
 
-	</script>	
-	
-	<script>
-	$(document).ready(function(){
-		  var date = new Date();
+																		"<td><input type='text' style='width: 130px;'id='advtAmount'name='listReqAdvertisementDetail["+i+"].advtAmount' class='form-control'></td>"
+																		+ " </td><td><input type='text' style='width: 130px;'id='remarks'name='listReqAdvertisementDetail["+i+"].remarks' class='form-control'></td>"
 
-		  var day = ("0" + date.getDate()).slice(-2); var month = ("0" + (date.getMonth() + 1)).slice(-2);
+														);
 
-		  var today = date.getFullYear()+"-"+(month)+"-"+(day) ;
-		  
-		  $('#theDate').val(today);
-		  
-		});
-	
-	$(document).ready(function(){
-		  var date = new Date();
+												$('#example').append(
+														'<tr id="addr'
+																+ (i + 1)
+																+ '"></tr>');
+												$('#_cr').val(i + 1);
+												i++;
+											});
 
-		  var day = ("0" + date.getDate()).slice(-2); var month = ("0" + (date.getMonth() + 1)).slice(-2);
+							$("#delete_row").click(function() {
+								if (i > 1) {
+									$("#addr" + (i - 1)).html('');
+									$('#_cr').val(i - 1);
+									i--;
+								}
+							});
 
-		  var today = date.getFullYear()+"-"+(month)+"-"+(day) ;
-		  
-		  $('#theDate2').val(today);
-		  
-		});
-
-		
+						});
 	</script>
-	
+
 	<script>
-		function selectDateByReqCode(){
+		$(document).ready(function() {
+			var date = new Date();
+
+			var day = ("0" + date.getDate()).slice(-2);
+			var month = ("0" + (date.getMonth() + 1)).slice(-2);
+
+			var today = date.getFullYear() + "-" + (month) + "-" + (day);
+
+			$('#theDate').val(today);
+
+		});
+
+		$(document).ready(function() {
+			var date = new Date();
+
+			var day = ("0" + date.getDate()).slice(-2);
+			var month = ("0" + (date.getMonth() + 1)).slice(-2);
+
+			var today = date.getFullYear() + "-" + (month) + "-" + (day);
+
+			$('#theDate2').val(today);
+
+		});
+	</script>
+
+	<script>
+		function selectDateByReqCode() {
 			var selectReqCode = document.getElementById("reqCode").value;
-			console.log("selectReqCode value : "+selectReqCode);
-			
-			
-				const xhr = new XMLHttpRequest();
-				xhr.open('GET', 'getRequisitionByReqCode/' + selectReqCode,
-						true);
-				xhr.getResponseHeader('content-type', 'application/json');
-				xhr.onload = function() {
-					if (this.status === 200) {
-						let obj = JSON.parse(this.responseText);
-						console.log(obj);
-						document.getElementById("reqDate0").value = obj.reqDate;
-						
-						
+			console.log("selectReqCode value : " + selectReqCode);
 
-					} else {
-						console.error("some error occured");
-					}
+			const xhr = new XMLHttpRequest();
+			xhr.open('GET', 'getRequisitionByReqCode/' + selectReqCode, true);
+			xhr.getResponseHeader('content-type', 'application/json');
+			xhr.onload = function() {
+				if (this.status === 200) {
+					let obj = JSON.parse(this.responseText);
+					console.log(obj);
+					document.getElementById("reqDate0").value = obj.reqDate;
 
+				} else {
+					console.error("some error occured");
 				}
-				xhr.send();
-			
+
+			}
+			xhr.send();
 
 		}
-			
-		
 	</script>
 
 

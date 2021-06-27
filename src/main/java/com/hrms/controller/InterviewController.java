@@ -94,7 +94,7 @@ public class InterviewController {
 			return "redirect:" + "./";
 		}
 		
-		
+		System.out.println(form.getInterviewForm() != null ? form.getInterviewForm() : "null list");
 		if (form.getInterviewForm() != null) {
 			for (int i = 0; i < form.getInterviewForm().size(); i++) {
 
