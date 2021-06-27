@@ -25,7 +25,7 @@ public class InterviewMaster {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date interviewDate;
 	
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne
 	@JoinColumn(name="APPLICANT_CODE")
 	private ApplicantInfo applicantCode;
 	

@@ -1,6 +1,5 @@
 package com.hrms.service;
 
-
 import java.util.List;
 
 import org.hibernate.HibernateException;
@@ -11,20 +10,20 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
 import com.hrms.model.ApplicantInfo;
 import com.hrms.repository.ApplicantInfoDao;
 
-
 @Service
-public class ApplicantInfoServiceImpl implements ApplicantInfoService{
+public class ApplicantInfoServiceImpl implements ApplicantInfoService {
 
-	@Autowired SessionFactory sessionFactory;
-	@Autowired ApplicantInfoDao applicantInfoDao;
-	
+	@Autowired
+	SessionFactory sessionFactory;
+	@Autowired
+	ApplicantInfoDao applicantInfoDao;
+
 	@Override
 	public void addApplicantInfo(ApplicantInfo applicantInfo) {
-		
+
 		Session session = sessionFactory.openSession();
 		Transaction tx = null;
 		try {
@@ -32,36 +31,33 @@ public class ApplicantInfoServiceImpl implements ApplicantInfoService{
 			applicantInfo.setApplicantCode(this.applicantInfoDao.getMaxId("APP"));
 			session.save(applicantInfo);
 			tx.commit();
-		}catch(HibernateException e) {
-			if(tx != null)
-				tx.rollback();
-			e.printStackTrace();
+		} catch (HibernateException e) {
 			
-		}finally {
+			e.printStackTrace();
+
+		} finally {
 			session.close();
 		}
-		
-		
+
 	}
 
 	@Override
 	public List<ApplicantInfo> getAllApplicantInfo() {
-		
+
 		List<ApplicantInfo> list = null;
 		Session session = sessionFactory.openSession();
 		Transaction tx = null;
-		
+
 		try {
 			tx = session.beginTransaction();
-			Query<ApplicantInfo> query = session.createQuery("From ApplicantInfo",ApplicantInfo.class);
+			Query<ApplicantInfo> query = session.createQuery("From ApplicantInfo", ApplicantInfo.class);
 			list = query.getResultList();
 			tx.commit();
-		}catch(HibernateException e) {
-			if(tx != null)
-				tx.rollback();
-			e.printStackTrace();
+		} catch (HibernateException e) {
 			
-		}finally {
+			e.printStackTrace();
+
+		} finally {
 			session.close();
 		}
 		return list;
@@ -69,82 +65,74 @@ public class ApplicantInfoServiceImpl implements ApplicantInfoService{
 
 	@Override
 	public ApplicantInfo getApplicantInfoByApplicantCode(String applicantCode) {
-		
+
 		Session session = sessionFactory.openSession();
 		Transaction tx = null;
 		ApplicantInfo result = null;
 		try {
-			
+
 			tx = session.beginTransaction();
-			Query<ApplicantInfo> query = session.createQuery("From ApplicantInfo a where a.applicantCode = :applicantCode",ApplicantInfo.class);
+			Query<ApplicantInfo> query = session
+					.createQuery("From ApplicantInfo a where a.applicantCode = :applicantCode", ApplicantInfo.class);
 			query.setParameter("applicantCode", applicantCode);
 			result = query.uniqueResult();
 			tx.commit();
+
+		} catch (HibernateException e) {
 			
-		}catch(HibernateException e) {
-			if(tx != null)
-				tx.rollback();
 			e.printStackTrace();
-		}finally {
+		} finally {
 			session.close();
 		}
-		
+
 		return result;
 	}
 
 	@Override
 	public void updateApplicantInfoInterviewStatus(String applicantCode, String interviewStatus) {
-		
+
 		Session session = sessionFactory.openSession();
 		Transaction tx = null;
 		try {
-			
+
 			tx = session.beginTransaction();
 			ApplicantInfo applicantInfo = session.find(ApplicantInfo.class, applicantCode);
 			applicantInfo.setInterStatus(interviewStatus);
 			session.merge(applicantInfo);
 			tx.commit();
-			
-		}catch(Exception e) {
-			
-			if (tx!=null)
-				tx.rollback();
-	         e.printStackTrace(); 
+
+		} catch (Exception e) {
+
 			System.out.println("error occur in update applicant interview status");
 			e.printStackTrace();
-		}
-		finally {
+		} finally {
 			session.close();
 		}
-		
-		
+
 	}
 
 	@Override
 	public List<ApplicantInfo> findApplicantInfoStatusHoldAndPending() {
-		
+
 		Session session = sessionFactory.openSession();
 		Transaction tx = null;
 		List<ApplicantInfo> result = null;
-		
+
 		try {
 			tx = session.beginTransaction();
-			
-			Query<ApplicantInfo> query = session.createQuery("from ApplicantInfo a "
-					+ "where a.interStatus = :status1"
-					+ " or a.interStatus = :status2",ApplicantInfo.class);
+
+			Query<ApplicantInfo> query = session.createQuery(
+					"from ApplicantInfo a " + "where a.interStatus = :status1" + " or a.interStatus = :status2",
+					ApplicantInfo.class);
 			query.setParameter("status1", "Hold");
 			query.setParameter("status2", "N");
-			result  = query.getResultList();
+			result = query.getResultList();
 			tx.commit();
+
+		} catch (Exception e) {
 			
-			
-		}catch(Exception e) {
-			if (tx!=null)
-				tx.rollback();
-	         e.printStackTrace(); 
-		}
-		finally {
+			e.printStackTrace();
+		} finally {
 			session.close();
 		}
 		return result;
@@ -152,28 +140,24 @@ public class ApplicantInfoServiceImpl implements ApplicantInfoService{
 
 	@Override
 	public List<ApplicantInfo> findApplicantInfoStatusForward() {
-		
+
 		Session session = sessionFactory.openSession();
 		Transaction tx = null;
 		List<ApplicantInfo> result = null;
-		
+
 		try {
 			tx = session.beginTransaction();
-			Query<ApplicantInfo> query = session.createQuery("from ApplicantInfo a where a.interStatus = :status", ApplicantInfo.class);
+			Query<ApplicantInfo> query = session.createQuery("from ApplicantInfo a where a.interStatus = :status",
+					ApplicantInfo.class);
 			query.setParameter("status", "Forward");
 			result = query.getResultList();
 			tx.commit();
-		}catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
-		}finally {
+		} finally {
 			session.close();
 		}
 		return result;
 	}
-
-	
-	
-	
-	
 
 }
