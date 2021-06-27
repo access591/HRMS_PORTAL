@@ -6,6 +6,8 @@ import com.hrms.model.EmployeeRequisition;
 
 public interface EmployeeRequisitionService {
 	
+	
+	
 	public void addEmployeeRequisition(EmployeeRequisition employeReq);
 
 	List<EmployeeRequisition> getAllEmployeeRequisition();
