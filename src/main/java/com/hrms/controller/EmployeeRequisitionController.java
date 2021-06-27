@@ -133,14 +133,14 @@ public class EmployeeRequisitionController {
 		
 		try {
 			
-			List<EmployeeRequisitionDetail> re = new ArrayList<>();
+			List<EmployeeRequisitionDetail> re = employeeRequisition.getEmployeRequisitionDetail();
 			
-			for(int i=0;i<employeeRequisition.getEmployeRequisitionDetail().size();i++) {
-				EmployeeRequisitionDetail e = new EmployeeRequisitionDetail();
+			for(EmployeeRequisitionDetail e : re) {
+				
 				
 				e.setReqDate(employeeRequisition.getReqDate());
 				e.setEmployeeRequisition(employeeRequisition);
-				re.add(e);	
+					
 				
 			}
 			
@@ -195,6 +195,7 @@ public class EmployeeRequisitionController {
 			
 			for(EmployeeRequisitionDetail eDetail : employeeRequisition.getEmployeRequisitionDetail()) {
 				eDetail.setEmployeeRequisition(employeeRequisition);
+				eDetail.setReqDate(employeeRequisition.getReqDate());
 				employeeRequisitionDetail.add(eDetail);
 			}
 			

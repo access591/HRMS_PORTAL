@@ -4,6 +4,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import java.io.Serializable;
@@ -75,7 +76,7 @@ public class EmployeeRequisition implements Serializable {
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "employeeRequisition", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<EmployeeRequisitionDetail> employeRequisitionDetail;
 
-	@JsonManagedReference
+	 @JsonBackReference
 	public List<EmployeeRequisitionDetail> getEmployeRequisitionDetail() {
 		return employeRequisitionDetail;
 	}
