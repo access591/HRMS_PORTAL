@@ -19,10 +19,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.hrms.ImageUtil;
 import com.hrms.model.Bank;
+import com.hrms.model.City;
+import com.hrms.model.Country;
 import com.hrms.model.MenuModule;
+import com.hrms.model.State;
 import com.hrms.service.BankService;
+import com.hrms.service.CityService;
+import com.hrms.service.CountryService;
 import com.hrms.service.ModuleService;
 import com.hrms.service.PageMappingService;
+import com.hrms.service.StateService;
 
 
 @Controller
@@ -35,6 +41,12 @@ public class BankController {
 	private ModuleService moduleService;
 	@Autowired
 	PageMappingService pageMappingService;
+	@Autowired
+	CityService cityService;
+	@Autowired
+	StateService stateService;
+	@Autowired
+	CountryService countryService;
 /**
  * Method to get Bank Result 	
  * @param model
@@ -54,6 +66,12 @@ public String bankMaster(Model model,HttpSession session) {
 	if (modules != null) {
 		model.addAttribute("modules", modules);
 	}
+	  List<City>cityList =cityService.getAllCities();
+	  model.addAttribute("CityList", cityList);
+	  List<State> listState = stateService.getAllStates();
+	  model.addAttribute("listState", listState);
+	  List<Country> listCountry = countryService.getAllCountrys();
+	 model.addAttribute("listCountry", listCountry);
 	session.setAttribute("imgUtil", new ImageUtil());
 	session.setAttribute("username",session.getAttribute("username"));
 	return pageMappingService.PageRequestMapping(reqPage,pageno);
