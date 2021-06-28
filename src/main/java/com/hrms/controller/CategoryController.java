@@ -65,6 +65,8 @@ public class CategoryController {
 			  return "redirect:"+pageMappingService.PageRequestMapping(reqPage,pageNo);
 		} else {
 		    categoryService.addCategory(category);
+		    redirectAttributes.addFlashAttribute("message", "Category added successfully! !  ");
+			redirectAttributes.addFlashAttribute("alertClass", "alert-success");
 			return "redirect:"+pageMappingService.PageRequestMapping(reqPage,pageNo);
 		}
 	}
