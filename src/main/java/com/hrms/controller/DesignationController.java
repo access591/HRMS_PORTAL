@@ -82,13 +82,16 @@ public class DesignationController {
 		boolean isModuleExist = designationService.checkDesignationExists(designation);
 
 		if (isModuleExist) {
-			redirectAttributes.addFlashAttribute("message", "Designation Name Already exists !  ");
+			redirectAttributes.addFlashAttribute("message", "Designation Name Already exists !");
 			redirectAttributes.addFlashAttribute("alertClass", "alert-success");
 			  return "redirect:"+pageMappingService.PageRequestMapping(reqPage,pageno);
 		} else {
 			designationService.addDesignation(designation);
+			redirectAttributes.addFlashAttribute("message", "Designation Added successfully !");
+			redirectAttributes.addFlashAttribute("alertClass", "alert-success");
 			List<Designation> listDesignation = designationService.getAllDesignations();
 			model.addAttribute("listDesignation", listDesignation);
+			session.setAttribute("imgUtil", new ImageUtil());
 		}
 		  return "redirect:"+pageMappingService.PageRequestMapping(reqPage,pageno);
 
@@ -109,7 +112,7 @@ public class DesignationController {
 		model.addAttribute("listCategory" ,listCategory);
 		Designation designationEdit = designationService.findDesignationById(id);
 		model.addAttribute("designationEdit", designationEdit);
-
+		session.setAttribute("imgUtil", new ImageUtil());
 		session.setAttribute("username", session.getAttribute("username"));
 		 return pageMappingService.PageRequestMapping(reqPageedit,editPageNo);
 	}
@@ -121,8 +124,9 @@ public class DesignationController {
 	 * @return
 	 */
 	@PostMapping("/updateDesignation")
-	public String updateDesignation(@ModelAttribute("desiupdate")Designation designation, Model model,HttpSession session) {
-
+	public String updateDesignation(@ModelAttribute("desiupdate")Designation designation, Model model,HttpSession session,RedirectAttributes redirectAttributes) {
+		redirectAttributes.addFlashAttribute("message", "Designation Update successfully !");
+		redirectAttributes.addFlashAttribute("alertClass", "alert-success");
 		
 		designation.setUpdBy((String) session.getAttribute("USER_NAME"));
 		
@@ -140,7 +144,7 @@ public class DesignationController {
 	 */
 	@GetMapping(value = { "/deleteDesignation/{id}" })
 	public String deletedesignation(@PathVariable("id") String id, Model model, HttpSession session) {
-
+		session.setAttribute("imgUtil", new ImageUtil());
 		this.designationService.removeDesignation(id);
 
 		session.setAttribute("username", session.getAttribute("username"));
