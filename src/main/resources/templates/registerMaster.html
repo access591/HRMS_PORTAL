@@ -56,8 +56,8 @@ body {
 											<div class="col-12 col-lg-6">
 												<div class="form-group">
 										
-											  <label> Reg Code </label>
-											  		<label style="color: red">*</label>
+											  <label> Register Code </label>
+											  	
 											  	 
 											   <input
 														type="text" class="form-control" id="regCode" name="regCode" readonly="readonly">
@@ -68,10 +68,10 @@ body {
 													<label class="form-label">Status</label>
 													<div class="custom-controls-stacked">
 
-														<label class="radio-inline"> <input type="radio"
-															value="Y" name="active" checked> Active
-														</label> <label class="radio-inline"> <input type="radio"
-															value="N" name="active"> Inactive
+														<label class="radio-inline"> <input type="radio"data-toggle="tooltip" title="Active"
+															value="Y" name="active" checked> &nbsp;&nbsp;Active&nbsp;
+														</label> <label class="radio-inline"> <input type="radio"data-toggle="tooltip" title="Inactive"
+															value="N" name="active">&nbsp;&nbsp; Inactive
 														</label>
 
 													</div>
@@ -86,7 +86,7 @@ body {
 											</div>
 										</div>
 										<button type="submit" class="btn btn-primary">Save</button>
-								 <button type="reset"class="btn btn-primary" value="Reset">Reset</button>
+								 <button type="reset"class="btn btn-primary" value="Reset">Cancel</button>
 									</form>
 								</div>
 							</div>
@@ -99,7 +99,7 @@ body {
 										class="table table-striped display" style="width: 100%">
 										<thead>
 											<tr>
-												<th scope="col">Reg Code</th>
+												<th scope="col">Register Code</th>
 												<th scope="col">Description</th>
 												<th scope="col">Status</th>
 												<th scope="col">Action</th>
