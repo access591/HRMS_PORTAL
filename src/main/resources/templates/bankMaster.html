@@ -53,8 +53,6 @@ body {
 												<div class="form-group">
 										
 											  <label>Bank Code </label>
-											  <label style="color: red">*</label>
-											  	 
 											   <input
 												type="text" class="form-control" maxlength="9" id="bankCode" name="bankCode" disabled/>
 												</div>
@@ -62,31 +60,42 @@ body {
 												  <div class="form-group">
 											<label class="form-label">Account No</label>
 											<label style="color: red">*</label>
-											 <input type="text" class="form-control uppercase" maxlength="15" id="accountNo" name="accountNo"required aria-required="true" pattern="\d{1,15}" title="Only digits"/>
+											 <input type="text" class="form-control uppercase" maxlength="16" id="accountNo" name="accountNo"required aria-required="true" pattern="\d{1,16}" title="Only digits"/>
 										   </div>
 												
 												
 												
 										   <div class="form-group">
-											<label class="form-label">Bank Address</label>
+											<label class="form-label">Bank Primary  Address</label>
 											<label style="color: red">*</label>
 											 <input type="text" class="form-control"  maxlength="50"id="bankAdd" name="bankAdd"required aria-required="true">
 										   </div>
 										   <div class="form-group">
-											<label class="form-label">Bank Address 2</label>
+											<label class="form-label">Bank Secondary Address</label>
 										
 											 <input type="text" class="form-control" maxlength="50" id="bankAddr2" name="bankAddr2">
 										   </div>
+										   
 										   <div class="form-group">
-											<label class="form-label">City Code</label>
-
-											 <input type="text" class="form-control"  maxlength="10"id="cityCode" name="cityCode" pattern="\d{1,10}" title="Only digits"/>
+											<label class="form-label">Country Name</label>
+										   <span class="text-danger">*</span>
+										              <select
+														class="form-control required" name="countryCode.countryCode" id="countryCode" title="Country"onchange="myFunctionStateCode()" required aria-required="true">
+														<option value="">Select Country</option>
+														<option th:each="lco :${listCountry}" th:value="${lco.getCountryCode()}" th:text="${lco.getCountryName()}">Select  Country Type</option>
+														
+													 </select> 
 										   </div>
-										  	<div class="form-group">
-											<label class="form-label">Country Code</label>
-										
-											 <input type="text" class="form-control"maxlength="10"  id="countryCode" name="countryCode" pattern="\d{1,10}" title="Only digits"/>
-										   </div>
+										   
+										   
+										     <div class="form-group">
+											<label class="form-label">Mobile No</label>
+											
+											 <input type="text" class="form-control " maxlength="11" id="mobileNo" name="mobileNo"/>
+										   </div>	
+										   
+										 
+										  	
 												<div class="form-group">
 
 													<label class="form-label">Status</label>
@@ -114,7 +123,7 @@ body {
 										    <div class="form-group">
 											<label class="form-label">IFSC Code</label>
 											<label style="color: red">*</label>
-											 <input type="text" class="form-control uppercase" maxlength="11"  id="ifscCode" name="ifscCode"required aria-required="true" pattern="^[a-zA-Z0-9_.-]*$" title="Only digits"/>
+											 <input type="text" class="form-control uppercase" maxlength="11"  id="ifscCode" name="ifscCode"required aria-required="true" pattern="^[a-zA-Z0-9_.-]*$" />
 										   </div>
 										    <div class="form-group">
 											<label class="form-label">Swift Code</label>
@@ -124,19 +133,34 @@ body {
 										    <div class="form-group">
 											<label class="form-label">Telephone No</label>
 											
-											 <input type="text" class="form-control" maxlength="11" id="telephoneNo" name="telephoneNo"pattern="\d{1,11}" title="Only digits"/>
+											 <input type="text" class="form-control" maxlength="11" id="telephoneNo" name="telephoneNo"/>
 										   </div>
 										   
 										    <div class="form-group">
-											<label class="form-label">State Code</label>
-											
-											 <input type="text" class="form-control" maxlength="10" id="stateCode" name="stateCode"   pattern="\d{1,10}" title="Only digits"/>
+											<label class="form-label">State Name</label>
+										   <span class="text-danger">*</span>
+												<select class="form-control select2" name="stateCode.stateCode" id="stateCode" onchange="myFunctionStateCityCode()" required aria-required="true">
+												 <option value="">Select State</option>
+											     	</select>
+										 
+										 
 										   </div>
-										    <div class="form-group">
+										  <!--   <div class="form-group">
 											<label class="form-label">Mobile No</label>
 											
-											 <input type="text" class="form-control " maxlength="11" id="mobileNo" name="mobileNo"pattern="\d{1,11}" title="Only digits"/>
-										   </div>									
+											 <input type="text" class="form-control " maxlength="11" id="mobileNo" name="mobileNo"/>
+										   </div>	 -->	
+										   
+										   
+										     <div class="form-group">
+											<label class="form-label">City Name</label>
+										    <span class="text-danger">*</span>
+											       	<select class="form-control select2" name="cityCode.cityCode" id="cityCode" onchange="myFunctionCity()"required aria-required="true">
+												 <option value="">Select City</option>
+											     	</select>
+										  
+										  
+										   </div>							
 										
 											</div>
 											
@@ -168,7 +192,7 @@ body {
 											<tr  th:each="listbank : ${listBank}">
 												<td th:text="${listbank.bankCode}"></td>
 												<td th:text="${listbank.bankName}"></td>
-												<td th:text="${listbank.countryCode}"></td>
+												<td th:text="${listbank?.countryCode?.countryName}"></td>
 												<td th:text="${listbank.accountNo}"></td>
 												<td th:text="${listbank.mobileNo}"></td>
 												<td th:text="${listbank.active}"></td>
@@ -193,6 +217,82 @@ body {
 		</footer>
 		</div>
 		</div>
+			<script>
+	function myFunctionStateCode(){
+/* 		 var empCode= $('#empCode option:selected').value; */
+		 var id= document.getElementById('countryCode').value
+	    console.log("ajax request : "+ id);
+	    const xhr = new XMLHttpRequest();
+	    xhr.open('GET','./viewStateByCountryCode/'+id,true);
+	    xhr.getResponseHeader('content-type','application/json');
+	    xhr.onload = function(){
+	        if(this.status===200){
+	            let obj = JSON.parse(this.responseText);
+	            console.log(obj);
+	            $('#stateCode').empty();
+	            $('#stateCode').append(
+						$('<option>').val("").text("Select State"));
+					
+	            $('#stateName').val(obj.stateName);
+	            $('#stateCode').val(obj.stateCode);
+	            
+	            $.each(obj,
+						function(i, item) {
+							$('#stateCode').append(
+							$('<option>').val(this.stateCode).text(this.stateName));
+						});
+	        }
+	        else{
+	            console.error("some error occured");
+	        }
+	    }
+	    xhr.send();
+	}
+
+	</script>
+
+	<script>
+	function myFunctionStateCityCode(){
+/* 		 var empCode= $('#empCode option:selected').value; */
+		 var id= document.getElementById('stateCode').value
+	    console.log("ajax request : "+ id);
+		 $('#stateCode').click(function() {
+	      	 var name= $('#stateCode option:selected').text();
+	      	$('#state').val(name);
+	      	}); 
+	    const xhr = new XMLHttpRequest();
+	    xhr.open('GET','./viewCityBySatateCode/'+id,true);
+	    xhr.getResponseHeader('content-type','application/json');
+	    xhr.onload = function(){
+	        if(this.status===200){
+	            let obj = JSON.parse(this.responseText);
+	            console.log(obj);
+	            $('#cityCode').empty();
+	            $('#cityCode').append(
+						$('<option>').val("").text("Select City"));
+					
+	            $('#cityName').val(obj.cityName);
+	            $('#cityCode').val(obj.cityCode);
+	            
+	            $.each(obj,
+						function(i, item) {
+							$('#cityCode').append(
+							$('<option>').val(this.cityCode).text(this.cityName));
+						});
+	        }
+	        else{
+	            console.error("some error occured");
+	        }
+	    }
+	    xhr.send();
+	}
+
+	</script>
+
+
+		
+		
+		
 	<script>
 		$(function() {
 			// Datatables basic

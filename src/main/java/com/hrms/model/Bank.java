@@ -9,6 +9,8 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
@@ -55,16 +57,19 @@ public class Bank implements Serializable
 	@Size(max =100)
 	@Column(name = "BANK_ADDR2")
 	private String bankAddr2;
-	@Size(max =20)
-	@Column(name = "CITY_CODE")
-	private String cityCode;
-	@Size(max =20)
-	@Column(name = "STATE_CODE")
-	private String stateCode;
-	@Size(max =20)
-	@Column(name = "COUNTRY_CODE" ,updatable = false)
-	private String countryCode;
-	@Size(max =12)
+
+	@ManyToOne
+	@JoinColumn(name = "CITY_CODE",updatable = false)
+	private City cityCode;
+
+	@ManyToOne
+	@JoinColumn(name = "STATE_CODE",updatable = false)
+	private State stateCode;
+
+	@ManyToOne
+	@JoinColumn(name = "COUNTRY_CODE" ,updatable = false)
+	private Country countryCode;
+	@Size(max =16)
 	@Column(name = "ACCOUNT_NO")
 	private String accountNo;
 	@Size(max =20)
@@ -134,27 +139,27 @@ public class Bank implements Serializable
 		this.bankAddr2 = bankAddr2;
 	}
 
-	public String getCityCode() {
+	public City getCityCode() {
 		return cityCode;
 	}
 
-	public void setCityCode(String cityCode) {
+	public void setCityCode(City cityCode) {
 		this.cityCode = cityCode;
 	}
 
-	public String getStateCode() {
+	public State getStateCode() {
 		return stateCode;
 	}
 
-	public void setStateCode(String stateCode) {
+	public void setStateCode(State stateCode) {
 		this.stateCode = stateCode;
 	}
 
-	public String getCountryCode() {
+	public Country getCountryCode() {
 		return countryCode;
 	}
 
-	public void setCountryCode(String countryCode) {
+	public void setCountryCode(Country countryCode) {
 		this.countryCode = countryCode;
 	}
 
