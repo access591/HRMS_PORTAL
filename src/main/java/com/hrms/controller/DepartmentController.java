@@ -75,14 +75,17 @@ public String departmentMaster(Model model,HttpSession session) {
 	
 	
 	if (isModuleExist) {
-	    redirectAttributes.addFlashAttribute("message", "Department Name Already exists !  ");
-	    redirectAttributes.addFlashAttribute("alertClass", "alert-success");
+		
+	   redirectAttributes.addFlashAttribute("message", "Department Name Already exists !  ");
+	   redirectAttributes.addFlashAttribute("alertClass", "alert-success");
 	    return "redirect:"+pageMappingService.PageRequestMapping(reqPage,pageno);
 
 }
 else 
 {
 	departmentService.addDepartment(department);
+	  redirectAttributes.addFlashAttribute("message", "Department added successfully! ");
+    redirectAttributes.addFlashAttribute("alertClass", "alert-success");
 	List<Department> listDepartment = departmentService.getAllDepartments();
 	model.addAttribute("listDepartment", listDepartment);
 	
@@ -116,14 +119,15 @@ public String editdepartment(@PathVariable("id")String id,  Model model,HttpSess
  * @return
  */	
 @PostMapping("/updateDepartment")
-public String updateDepartment(@ModelAttribute("deptupdate")  Department department, Model model) {
+public String updateDepartment(@ModelAttribute("deptupdate")  Department department, Model model,RedirectAttributes redirectAttributes) {
  
 	   try {
 		
 		  
 
 			  this.departmentService.updateDepartment(department);   
-		   
+			  redirectAttributes.addFlashAttribute("message", "Department Update successfully! ");
+			    redirectAttributes.addFlashAttribute("alertClass", "alert-success");
 		   
 	} catch (Exception e) {
 	System.out.println("exception "+e);
@@ -140,9 +144,11 @@ public String updateDepartment(@ModelAttribute("deptupdate")  Department departm
  * @return
  */	
 @GetMapping(value = {"/deleteDepartment/{id}"})
-public String deletedepartment(@PathVariable("id")String id,  Model model,HttpSession session)
+public String deletedepartment(@PathVariable("id")String id,  Model model,HttpSession session,RedirectAttributes redirectAttributes)
  { 
 	  this.departmentService.removeDepartment(id);
+	  redirectAttributes.addFlashAttribute("mes", "Department Delete  successfully! ");
+	    redirectAttributes.addFlashAttribute("alertClass", "alert-danger");
     return "redirect:/"+pageMappingService.PageRequestMapping(reqPage,pageno);
 }
 
