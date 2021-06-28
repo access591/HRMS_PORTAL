@@ -1,4 +1,5 @@
 package com.hrms.controller;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,13 +23,16 @@ import com.hrms.model.Employee;
 import com.hrms.model.InterviewMaster;
 import com.hrms.model.Login;
 import com.hrms.model.MenuModule;
-
+import com.hrms.model.OrderIssueTracking;
+import com.hrms.model.TrackallEnquiries;
 import com.hrms.model.UserEntity;
 import com.hrms.service.AttendenceRegisterService;
 import com.hrms.service.EmployeeService;
 import com.hrms.service.InterviewMasterService;
 import com.hrms.service.ModuleService;
+import com.hrms.service.OrderIssueTrackingService;
 import com.hrms.service.ReCaptchaValidationService;
+import com.hrms.service.TrackallEnquiriesService;
 import com.hrms.service.UserService;
 
 @Controller
@@ -44,6 +48,8 @@ public class UserController {
 	 EmployeeService employeeService;
 	@Autowired InterviewMasterService interviewMasterService;
 	@Autowired AttendenceRegisterService attendenceRegisterService;
+	@Autowired OrderIssueTrackingService orderIssueTrackingService;
+	@Autowired TrackallEnquiriesService trackallEnquiriesService; 
 
 	@Autowired
 	private ReCaptchaValidationService validator;
@@ -74,7 +80,6 @@ public class UserController {
 				model.addAttribute("listAttendenceRegister", listAttendenceRegister.size());
 			}
 		} catch (Exception e) {
-			
 			e.printStackTrace();
 		}
 		try {
@@ -83,7 +88,6 @@ public class UserController {
 				model.addAttribute("findTodayLeave", findTodayLeave.size());
 			}
 		} catch (Exception e) {
-			
 			e.printStackTrace();
 		}
 		try {
@@ -92,7 +96,23 @@ public class UserController {
 				model.addAttribute("finalSelection", listInterviewMaster.size());
 			}
 		} catch (Exception e) {
-			
+			e.printStackTrace();
+		}
+		
+		try {
+			List<OrderIssueTracking> orderService = orderIssueTrackingService.getAllOrderIssueTracking();
+			if(orderService != null) {
+				model.addAttribute("orderTracking", orderService.size());
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		try {
+			List<TrackallEnquiries> trackList =  trackallEnquiriesService.getAllTrackallEnquiries();
+			if(trackList != null) {
+				model.addAttribute("trackList", trackList.size());
+			}
+		}catch(Exception e) {
 			e.printStackTrace();
 		}
 		model.addAttribute("chart", new Object[][] {
@@ -105,6 +125,22 @@ public class UserController {
 		});
 		
 		
+		
+		
+		
+		
+		//first, add the regional sales
+        Integer northeastSales = 17089;
+        Integer midwestSales = 5223;
+        Integer southSales = 10111;
+        
+        
+        model.addAttribute("software", northeastSales);
+        model.addAttribute("sales", southSales);
+        model.addAttribute("hr", midwestSales);
+        
+ 
+        
 		boolean isUserExist = userService.checkUserExists(login);
 		if (isUserExist) {
 			String id = login.getUserCode();
@@ -248,25 +284,30 @@ public class UserController {
 	}
 	
 	
-	private Map<String, Integer> getChartData() { 
-//        return List.of(
-//        		
-//                List.of("Mushrooms",44 ),
-//                List.of("Onions", 24),
-//                List.of("Olives",89),
-//                List.of("Zucchini",6),
-//                List.of("Pepperoni",56)
-//        );
-		
-		Map<String,Integer> map = new HashMap<>();
-		map.put("Mushrooms", 44);
-		map.put("Onions", 24);
-		map.put("Olives", 89);
-		map.put("Zucchini", 6);
-		map.put("Zucchini", 6);
-		
-		return map;
-		
-    }
+//	@RequestMapping(value = "/chart", method=RequestMethod.GET)
+//    public String chart(Model model) {
+//        
+//        //first, add the regional sales
+//        Integer northeastSales = 17089;
+//        Integer westSales = 10603;
+//        Integer midwestSales = 5223;
+//        Integer southSales = 10111;
+//        
+//        model.addAttribute("northeastSales", northeastSales);
+//        model.addAttribute("southSales", southSales);
+//        model.addAttribute("midwestSales", midwestSales);
+//        model.addAttribute("westSales", westSales);
+//        
+//        //now add sales by lure type
+//        List<Integer> inshoreSales = Arrays.asList(4074, 3455, 4112);
+//        List<Integer> nearshoreSales = Arrays.asList(3222, 3011, 3788);
+//        List<Integer> offshoreSales = Arrays.asList(7811, 7098, 6455);
+//        
+//        model.addAttribute("inshoreSales", inshoreSales);
+//        model.addAttribute("nearshoreSales", nearshoreSales);
+//        model.addAttribute("offshoreSales", offshoreSales);
+//        
+//        return "chart";
+//    }
 	
 }
