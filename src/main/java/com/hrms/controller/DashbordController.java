@@ -105,7 +105,7 @@ public class DashbordController {
 		System.out.println("================calling dashboad controller");
 		
 		Map<String, Long> countCategory = employeeService.countRecordByCategory();
-		countCategory.put("DIG", new Long(3));
+		
 		
 		
 		
