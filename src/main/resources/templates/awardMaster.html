@@ -44,7 +44,7 @@ body {
 						<div class="col-12">
 							<div class="card">
 								<div class="card-header">
-									<h5 class="card-title" style="text-decoration: underline;">Award </h5>
+									<h5 class="card-title" style="text-decoration: underline;">Award Master </h5>
 								<div class="alert-outline">
 									<div th:if="${message}" th:text="${message}" style="color: red">
 									</div> 
@@ -56,8 +56,8 @@ body {
 											<div class="col-12 col-lg-6">
 												<div class="form-group">
 										
-											  <label> Award id </label>
-											  		<label style="color: red">*</label>
+											  <label> Award Code </label>
+											  		
 											  	 
 											   <input
 														type="text" class="form-control" id="id" name="id" readonly="readonly">
@@ -68,10 +68,10 @@ body {
 													<label class="form-label">Status</label>
 													<div class="custom-controls-stacked">
 
-														<label class="radio-inline"> <input type="radio"
-															value="Y" name="active" checked> Active
-														</label> <label class="radio-inline"> <input type="radio"
-															value="N" name="active"> Inactive
+														<label class="radio-inline"> <input type="radio"data-toggle="tooltip" title="Active!"
+															value="Y" name="active" checked> &nbsp;&nbsp; Active &nbsp;
+														</label> <label class="radio-inline"> <input type="radio"data-toggle="tooltip" title="Inactive!"
+															value="N" name="active">  &nbsp;&nbsp; Inactive
 														</label>
 
 													</div>
@@ -86,7 +86,7 @@ body {
 											</div>
 										</div>
 										<button type="submit" class="btn btn-primary">Save</button>
-								 <button type="reset"class="btn btn-primary" value="Reset">Reset</button>
+								 <button type="reset"class="btn btn-primary" value="Reset">Cancel</button>
 									</form>
 								</div>
 							</div>
@@ -99,7 +99,7 @@ body {
 								<table id="example" class="table table-striped display" style="width:100%"aria-describedby="example">
 										<thead>
 											<tr>
-												<th scope="col"> Award id </th>
+												<th scope="col"> Award Code </th>
 												<th scope="col">Award Name </th>
 												<th scope="col">Status</th>
 												<th scope="col">Action</th>
