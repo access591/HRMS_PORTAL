@@ -79,7 +79,7 @@ body {
 					</div>
 
 					<div class="row">
-						<div class="col-xl-6 col-xxl-7">
+						<div class="col-xl-4 col-xxl-7">
 							<div class="card flex-fill w-100">
 								<div class="card-header">
 
@@ -103,7 +103,7 @@ body {
 									<h5 class="card-title mb-0">Employee Details</h5>
 								</div>
 								<div class="card-body py-3">
-									<div class="chart chart-sm">
+									<div class="chart chart-md">
 
 										<figure class="highcharts-figure">
 											<div id="container-bar"></div>
@@ -114,163 +114,179 @@ body {
 							</div>
 						</div>
 
-						<div class="col-xl-6 col-xxl-5 d-flex">
-							<div class="w-100">
+
+						<div class="col-xl-7 col-xxl-5">
+							<div class="card flex-fill w-100">
+								<div class="card-header">
+								
+									
+										<div class="w-100">
+											<div class="row">
+												<div class="col-sm-6">
+													<div class="card">
+														<div class="card-body">
+															<div class="row">
+																<div class="col mt-0">
+																	<h5 class="card-title">Total Employee</h5>
+																</div>
+
+																<div class="col-auto">
+																	<div class="avatar">
+																		<div
+																			class="avatar-title rounded-circle bg-primary-dark">
+																			<img
+																				src="https://img.icons8.com/color/48/000000/user-group-skin-type-7.png"
+																				alt="image" />
+																		</div>
+																	</div>
+																</div>
+															</div>
+															<h1 class="display-5 mt-1 mb-3" th:text="${employeeList}">17.212</h1>
+
+														</div>
+													</div>
+													<div class="card">
+														<div class="card-body">
+															<div class="row">
+																<div class="col mt-0">
+																	<h5 class="card-title">Recruiter</h5>
+																</div>
+
+																<div class="col-auto">
+																	<div class="avatar">
+																		<div
+																			class="avatar-title rounded-circle bg-primary-dark">
+																			<em class="align-middle" data-feather="users"></em>
+																		</div>
+																	</div>
+																</div>
+															</div>
+															<h1 class="display-5 mt-1 mb-3"
+																th:text="${finalSelection}">17.212</h1>
+
+														</div>
+													</div>
+												</div>
+												<div class="col-sm-6">
+													<div class="card">
+														<div class="card-body">
+															<div class="row">
+																<div class="col mt-0">
+																	<h5 class="card-title">Total Attendance</h5>
+																</div>
+
+																<div class="col-auto">
+																	<div class="avatar">
+																		<div
+																			class="avatar-title rounded-circle bg-primary-dark">
+																			<img
+																				src="https://img.icons8.com/fluent-systems-filled/48/000000/attendance-mark.png"
+																				alt="image" />
+																		</div>
+																	</div>
+																</div>
+															</div>
+															<h1 class="display-5 mt-1 mb-3"
+																th:text="${listAttendenceRegister}">$24.300</h1>
+
+														</div>
+													</div>
+													<div class="card">
+														<div class="card-body">
+															<div class="row">
+																<div class="col mt-0">
+																	<h5 class="card-title">Daily Leave</h5>
+																</div>
+
+																<div class="col-auto">
+																	<div class="avatar">
+																		<div
+																			class="avatar-title rounded-circle bg-primary-dark">
+																			<img
+																				src="https://img.icons8.com/cotton/64/000000/change-employee-female.png"
+																				alt="image" />
+																		</div>
+																	</div>
+																</div>
+															</div>
+															<h1 class="display-5 mt-1 mb-3"
+																th:text="${findTodayLeave}">43</h1>
+
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									
+									
+									
+									
+									</div>
+									</div>
+									</div>
+								</div>
+
+
+
 								<div class="row">
-									<div class="col-sm-6">
-										<div class="card">
-											<div class="card-body">
-												<div class="row">
-													<div class="col mt-0">
-														<h5 class="card-title">Total Employee</h5>
-													</div>
+									<div class="col-xl-6 col-xxl-7">
+										<div class="card flex-fill w-100">
+											<div class="card-header">
+												<div class="card-actions float-right">
+													<a href="#" class="mr-1"> <em class="align-middle"
+														data-feather="refresh-cw"></em>
+													</a>
+													<div class="d-inline-block dropdown show">
+														<a href="#" data-toggle="dropdown" data-display="static">
+															<em class="align-middle" data-feather="more-vertical"></em>
+														</a>
 
-													<div class="col-auto">
-														<div class="avatar">
-															<div class="avatar-title rounded-circle bg-primary-dark">
-																<img
-																	src="https://img.icons8.com/color/48/000000/user-group-skin-type-7.png"
-																	alt="image" />
-															</div>
+														<div class="dropdown-menu dropdown-menu-right">
+
+															<div id="chartContainer"></div>
+
 														</div>
 													</div>
 												</div>
-												<h1 class="display-5 mt-1 mb-3" th:text="${employeeList}">17.212</h1>
-
+												<h5 class="card-title mb-0">Yearly Budget</h5>
 											</div>
-										</div>
-										<div class="card">
-											<div class="card-body">
-												<div class="row">
-													<div class="col mt-0">
-														<h5 class="card-title">Recruiter</h5>
-													</div>
+											<div
+												style="width: parent; height: parent;" id="chart_div"></div>
 
-													<div class="col-auto">
-														<div class="avatar">
-															<div class="avatar-title rounded-circle bg-primary-dark">
-																<em class="align-middle" data-feather="users"></em>
-															</div>
-														</div>
-													</div>
-												</div>
-												<h1 class="display-5 mt-1 mb-3" th:text="${finalSelection}">17.212</h1>
 
-											</div>
 										</div>
 									</div>
-									<div class="col-sm-6">
-										<div class="card">
-											<div class="card-body">
-												<div class="row">
-													<div class="col mt-0">
-														<h5 class="card-title">Total Attendance</h5>
-													</div>
+									<div class="col-xl-7 col-xxl-5">
+										<div class="card flex-fill w-100">
+											<div class="card-header">
+												<div class="card-actions float-right">
+													<a href="#" class="mr-1"> <em class="align-middle"
+														data-feather="refresh-cw"></em>
+													</a>
+													<div class="d-inline-block dropdown show">
+														<a href="#" data-toggle="dropdown" data-display="static">
+															<em class="align-middle" data-feather="more-vertical"></em>
+														</a>
 
-													<div class="col-auto">
-														<div class="avatar">
-															<div class="avatar-title rounded-circle bg-primary-dark">
-																<img
-																	src="https://img.icons8.com/fluent-systems-filled/48/000000/attendance-mark.png"
-																	alt="image" />
-															</div>
+														<div class="dropdown-menu dropdown-menu-right">
+															<a class="dropdown-item" href="#">Action</a> <a
+																class="dropdown-item" href="#">Another action</a> <a
+																class="dropdown-item" href="#">Something else here</a>
 														</div>
 													</div>
 												</div>
-												<h1 class="display-5 mt-1 mb-3"
-													th:text="${listAttendenceRegister}">$24.300</h1>
-
+												<h5 class="card-title mb-0">Monthly Sales</h5>
 											</div>
-										</div>
-										<div class="card">
-											<div class="card-body">
-												<div class="row">
-													<div class="col mt-0">
-														<h5 class="card-title">Daily Leave</h5>
-													</div>
-
-													<div class="col-auto">
-														<div class="avatar">
-															<div class="avatar-title rounded-circle bg-primary-dark">
-																<img
-																	src="https://img.icons8.com/cotton/64/000000/change-employee-female.png"
-																	alt="image" />
-															</div>
-														</div>
-													</div>
+											<div class="card-body d-flex w-100">
+												<div class="align-self-center chart chart-lg">
+													<canvas id="chartjs-dashboard-bar"></canvas>
 												</div>
-												<h1 class="display-5 mt-1 mb-3" th:text="${findTodayLeave}">43</h1>
-
 											</div>
 										</div>
 									</div>
 								</div>
-							</div>
-						</div>
-					</div>
-
-
-
-					<div class="row">
-						<div class="col-xl-6 col-xxl-7">
-							<div class="card flex-fill w-100">
-								<div class="card-header">
-									<div class="card-actions float-right">
-										<a href="#" class="mr-1"> <em class="align-middle"
-											data-feather="refresh-cw"></em>
-										</a>
-										<div class="d-inline-block dropdown show">
-											<a href="#" data-toggle="dropdown" data-display="static">
-												<em class="align-middle" data-feather="more-vertical"></em>
-											</a>
-
-											<div class="dropdown-menu dropdown-menu-right">
-
-												<div id="chartContainer"></div>
-
-											</div>
-										</div>
-									</div>
-									<h5 class="card-title mb-0">Yearly Budget</h5>
-								</div>
-								<div class="text-center"style="width: parent; height: parent;" id="chart_div"></div>
-
 
 							</div>
-						</div>
-						<div class="col-12 col-lg-4 col-xxl-3 d-flex">
-							<div class="card flex-fill w-100">
-								<div class="card-header">
-									<div class="card-actions float-right">
-										<a href="#" class="mr-1"> <em class="align-middle"
-											data-feather="refresh-cw"></em>
-										</a>
-										<div class="d-inline-block dropdown show">
-											<a href="#" data-toggle="dropdown" data-display="static">
-												<em class="align-middle" data-feather="more-vertical"></em>
-											</a>
-
-											<div class="dropdown-menu dropdown-menu-right">
-												<a class="dropdown-item" href="#">Action</a> <a
-													class="dropdown-item" href="#">Another action</a> <a
-													class="dropdown-item" href="#">Something else here</a>
-											</div>
-										</div>
-									</div>
-									<h5 class="card-title mb-0">Monthly Sales</h5>
-								</div>
-								<div class="card-body d-flex w-100">
-									<div class="align-self-center chart chart-lg">
-										<canvas id="chartjs-dashboard-bar"></canvas>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-
-				</div>
-
-
 			</main>
 			<footer class="footer">
 				<div th:replace="fragments/footer :: div"></div>
@@ -495,13 +511,12 @@ body {
 
 	<!-- category wise record  -->
 	<script type="text/javascript">
-	
 		$(document).ready(function() {
-			
+
 			$.ajax({
-				type: "GET",
-		         url: "getCategoryData",
-				
+				type : "GET",
+				url : "getCategoryData",
+
 				success : function(result) {
 					var yearDtls = [];
 					var countDtls = [];
@@ -525,14 +540,14 @@ body {
 				},
 				xAxis : [ {
 					title : {
-						text : 'Year'
+						text : ''
 					},
 					categories : year
 				} ],
 				yAxis : [ {
 					className : 'highcharts-color-0',
 					title : {
-						text : 'Page View Count'
+						text : ''
 					}
 				} ],
 				series : [ {
@@ -548,38 +563,39 @@ body {
 
 	<!-- pai chart -->
 	<script type="text/javascript" th:inline="javascript">
+		// Load the Visualization API and the corechart package.
+		google.charts.load('current', {
+			'packages' : [ 'corechart' ]
+		});
 
-        // Load the Visualization API and the corechart package.
-        google.charts.load('current', {'packages':['corechart']});
+		// Set a callback to run when the Google Visualization API is loaded.
+		google.charts.setOnLoadCallback(drawPaiChart);
 
-        // Set a callback to run when the Google Visualization API is loaded.
-        google.charts.setOnLoadCallback(drawPaiChart);
+		// Callback that creates and populates a data table,
+		// instantiates the pie chart, passes in the data and
+		// draws it.
+		function drawPaiChart() {
 
-        // Callback that creates and populates a data table,
-        // instantiates the pie chart, passes in the data and
-        // draws it.
-        function drawPaiChart() {
+			// Create the data table.
+			var data = new google.visualization.DataTable();
+			data.addColumn('string', 'Topping');
+			data.addColumn('number', 'Slices');
+			data.addRows([ [ "Software", 4 ], [ "Sales", 2 ], [ "HR", 3 ],
 
-            // Create the data table.
-            var data = new google.visualization.DataTable();
-            data.addColumn('string', 'Topping');
-            data.addColumn('number', 'Slices');
-            data.addRows([
-            	["Software",4],
-                ["Sales",2],
-                ["HR",3],
-                
-            ]);
-            // Set chart options
-            var options = {'title':'Budget ',
-                'width':650,
-                'height':450};
+			]);
+			// Set chart options
+			var options = {
+				'title' : 'Budget ',
+				'width' : 550,
+				'height' : 385
+			};
 
-            // Instantiate and draw our chart, passing in some options.
-            var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
-            chart.draw(data, options);
-        }
-    </script>
+			// Instantiate and draw our chart, passing in some options.
+			var chart = new google.visualization.PieChart(document
+					.getElementById('chart_div'));
+			chart.draw(data, options);
+		}
+	</script>
 
 </body>
 
