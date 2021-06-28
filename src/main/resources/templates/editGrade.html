@@ -68,10 +68,10 @@ body {
 													<div class="custom-controls-stacked">
 													
 														<label class="radio-inline">
-														<input type="radio" value="Y" name="active" th:checked="${gradeEdit.active}==Y "/>Active   
+														<input type="radio" value="Y" name="active" th:checked="${gradeEdit.active}==Y "/>&nbsp;&nbsp;Active &nbsp;  
 															</label>
 														<label class="radio-inline">
-														<input type="radio" value="N" name="active" th:checked="${gradeEdit.active}==N"/>Inactive  
+														<input type="radio" value="N" name="active" th:checked="${gradeEdit.active}==N"/>&nbsp;&nbsp;Inactive  
 															</label>
 													</div>
 												</div>
@@ -88,7 +88,7 @@ body {
 										</div>
 								
 										<button type="submit" class="btn btn-primary">Update</button>
-								        <button type="submit"class="btn btn-primary" value="cancel">Cancel</button>
+								    	<button type="button"class="btn btn-primary" onclick="window.location.href='/gradeMaster';">Cancel</button>
 								
 									</form>
 								</div>
