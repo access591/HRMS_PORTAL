@@ -76,6 +76,8 @@ public class GradeMaterController {
 	}
 	    else {
 			gradeMaterService.addGrade(grade); 
+			  redirectAttributes.addFlashAttribute("message", "Grade Added successfully !!  ");
+			  redirectAttributes.addFlashAttribute("alertClass", "alert-success");
 			List<Grade>listGrade = gradeMaterService.getAllGrades();
 			model.addAttribute("listGrade", listGrade); 
 			session.setAttribute("username",session.getAttribute("username"));
@@ -106,10 +108,11 @@ public String editGrade(@PathVariable("id")String id,  Model model,HttpSession s
  * @return
  */
 @PostMapping("/updateGrade")
-public String updateGradep(@ModelAttribute("gradeupdate") Grade g, Model model) {
+public String updateGradep(@ModelAttribute("gradeupdate") Grade g, Model model,RedirectAttributes redirectAttributes) {
 
 	  this.gradeMaterService.updateGrade(g);
-  	  
+	  redirectAttributes.addFlashAttribute("message", "Grade Update successfully !!  ");
+	  redirectAttributes.addFlashAttribute("alertClass", "alert-success");
 	  return "redirect:"+pageMappingService.PageRequestMapping(reqPage,pageno);
 }
 /**
@@ -120,7 +123,7 @@ public String updateGradep(@ModelAttribute("gradeupdate") Grade g, Model model) 
  * @return
  */
 @GetMapping(value = {"/deleteGarde/{id}"})
-public String deletegrade(@PathVariable("id")String id,  Model model,HttpSession session)
+public String deletegrade(@PathVariable("id")String id,  Model model,HttpSession session,RedirectAttributes redirectAttributes)
  { 
 	if (session.getAttribute("username") == null) {
 		return "redirect:" + "./";
@@ -128,6 +131,9 @@ public String deletegrade(@PathVariable("id")String id,  Model model,HttpSession
 		 
 	
 	  this.gradeMaterService.removeGrade(id);
+
+	  redirectAttributes.addFlashAttribute("mes", "Grade Delete  successfully! ");
+	    redirectAttributes.addFlashAttribute("alertClass", "alert-danger");
     session.setAttribute("username",session.getAttribute("username")); 
     return "redirect:/"+pageMappingService.PageRequestMapping(reqPage,pageno);
 }
