@@ -17,11 +17,15 @@ import com.hrms.model.Category;
 import com.hrms.model.Employee;
 import com.hrms.model.InterviewMaster;
 import com.hrms.model.MenuModule;
+import com.hrms.model.OrderIssueTracking;
+import com.hrms.model.TrackallEnquiries;
 import com.hrms.service.AttendenceRegisterService;
 import com.hrms.service.CategoryService;
 import com.hrms.service.EmployeeService;
 import com.hrms.service.InterviewMasterService;
 import com.hrms.service.ModuleService;
+import com.hrms.service.OrderIssueTrackingService;
+import com.hrms.service.TrackallEnquiriesService;
 
 @Controller
 public class DashbordController {
@@ -34,6 +38,8 @@ public class DashbordController {
 	@Autowired InterviewMasterService interviewMasterService;
 	@Autowired AttendenceRegisterService attendenceRegisterService;
 	@Autowired CategoryService categoryService;
+	@Autowired OrderIssueTrackingService orderIssueTrackingService;
+	@Autowired TrackallEnquiriesService trackallEnquiriesService; 
 
 	@GetMapping("/getDashBoardData")
 	public String getDashBoardData(Model model,HttpSession session) {
@@ -57,41 +63,7 @@ public class DashbordController {
 		if(session.getAttribute("username") == null) {
 			return "redirect:" + "./";
 		}
-		
-		try {
-			List<Employee> listEmployee = employeeService.getAllEmployees();
-			model.addAttribute("employeeList", listEmployee.size());
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
-		
-		List<AttendenceRegister> listAttendenceRegister = attendenceRegisterService
-				.findTodayAttendenceList();
-		if(listAttendenceRegister != null) {
-			model.addAttribute("listAttendenceRegister", listAttendenceRegister.size());
-		}
-		
-		List<AttendenceRegister> findTodayLeave = attendenceRegisterService.findTodayLeaveEmployee();
-		if(findTodayLeave != null) {
-			model.addAttribute("findTodayLeave", findTodayLeave.size());
-		}
-		
-		List<InterviewMaster> listInterviewMaster = interviewMasterService.getFinalSelection();
-		
-		if(listInterviewMaster != null) {
-			model.addAttribute("finalSelection", listInterviewMaster.size());
-		}
-		
-		List<MenuModule> modules = moduleService.getAllModulesList(
-				session.getAttribute("username").toString());
-		if (modules != null) {
-			model.addAttribute("modules", modules);
-		}
-		Map<String, Long> countCategory = employeeService.countRecordByCategory();
-		
-		//model.addAttribute("chartData", countCategory);
-		
-		
+
 		return "dashboard";
 	}
 	

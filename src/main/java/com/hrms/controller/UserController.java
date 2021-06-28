@@ -271,6 +271,7 @@ public class UserController {
 	
 	@GetMapping("/dashboard")
 	public String dashBoardMethod(Model model,HttpSession session) {
+		
 		if(session.getAttribute("username")==null) {
 			return "redirect:" + "./";
 		}
@@ -279,35 +280,65 @@ public class UserController {
 		if (modules != null) {
 			model.addAttribute("modules", modules);
 		}
+		
+		try {
+			List<Employee> listEmployee = employeeService.getAllEmployees();
+			model.addAttribute("employeeList", listEmployee.size());
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		List<AttendenceRegister> listAttendenceRegister = attendenceRegisterService
+				.findTodayAttendenceList();
+		if(listAttendenceRegister != null) {
+			model.addAttribute("listAttendenceRegister", listAttendenceRegister.size());
+		}
+		
+		List<AttendenceRegister> findTodayLeave = attendenceRegisterService.findTodayLeaveEmployee();
+		if(findTodayLeave != null) {
+			model.addAttribute("findTodayLeave", findTodayLeave.size());
+		}
+		
+		List<InterviewMaster> listInterviewMaster = interviewMasterService.getFinalSelection();
+		
+		if(listInterviewMaster != null) {
+			model.addAttribute("finalSelection", listInterviewMaster.size());
+		}
+		
+		try {
+			List<OrderIssueTracking> orderService = orderIssueTrackingService.getAllOrderIssueTracking();
+			if(orderService != null) {
+				model.addAttribute("orderTracking", orderService.size());
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		try {
+			List<TrackallEnquiries> trackList =  trackallEnquiriesService.getAllTrackallEnquiries();
+			if(trackList != null) {
+				model.addAttribute("trackList", trackList.size());
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+		Map<String, Long> countCategory = employeeService.countRecordByCategory();
+		
+		model.addAttribute("chartData", countCategory);
+		
+		//first, add the regional sales
+        Integer northeastSales = 17089;
+        Integer midwestSales = 5223;
+        Integer southSales = 10111;
+        
+        
+        model.addAttribute("software", northeastSales);
+        model.addAttribute("sales", southSales);
+        model.addAttribute("hr", midwestSales);
 		return "dashboard";
 	
 	}
 	
-	
-//	@RequestMapping(value = "/chart", method=RequestMethod.GET)
-//    public String chart(Model model) {
-//        
-//        //first, add the regional sales
-//        Integer northeastSales = 17089;
-//        Integer westSales = 10603;
-//        Integer midwestSales = 5223;
-//        Integer southSales = 10111;
-//        
-//        model.addAttribute("northeastSales", northeastSales);
-//        model.addAttribute("southSales", southSales);
-//        model.addAttribute("midwestSales", midwestSales);
-//        model.addAttribute("westSales", westSales);
-//        
-//        //now add sales by lure type
-//        List<Integer> inshoreSales = Arrays.asList(4074, 3455, 4112);
-//        List<Integer> nearshoreSales = Arrays.asList(3222, 3011, 3788);
-//        List<Integer> offshoreSales = Arrays.asList(7811, 7098, 6455);
-//        
-//        model.addAttribute("inshoreSales", inshoreSales);
-//        model.addAttribute("nearshoreSales", nearshoreSales);
-//        model.addAttribute("offshoreSales", offshoreSales);
-//        
-//        return "chart";
-//    }
 	
 }
