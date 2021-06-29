@@ -132,15 +132,7 @@ public class UserController {
 		
 		
 		
-		//first, add the regional sales
-        Integer northeastSales = 17089;
-        Integer midwestSales = 5223;
-        Integer southSales = 10111;
-        
-        
-        model.addAttribute("software", northeastSales);
-        model.addAttribute("sales", southSales);
-        model.addAttribute("hr", midwestSales);
+		
         
  
         
@@ -326,19 +318,6 @@ public class UserController {
 		}
 		
 		
-		Map<String, Long> countCategory = employeeService.countRecordByCategory();
-		
-		model.addAttribute("chartData", countCategory);
-		
-		//first, add the regional sales
-        Integer northeastSales = 17089;
-        Integer midwestSales = 5223;
-        Integer southSales = 10111;
-
-        
-        model.addAttribute("software", northeastSales);
-        model.addAttribute("sales", southSales);
-        model.addAttribute("hr", midwestSales);
 		return "dashboard";
 	
 	}
