@@ -98,21 +98,20 @@ $(document).ready(function(){
 												<div class="form-group">
 											  <label>Tour Plan Id </label>
 											   <input type="text" class="form-control" id="tourPlanId" name="tourPlanId" readonly="readonly">
-												</div>
+											</div>
 										<div class="form-group">
-											<label class="form-label"> Employee  Code</label>
+											<label class="form-label"> Employee  Name</label>
 											<label style="color: red">*</label>
-											 <select class="form-control required" id="empCode"name="empCode"  required aria-required="true">
-													<option value=""> Employee Name</option>
+											 <select class="form-control required" id="empCode"name="empCode"  title="Employee Code" required aria-required="true">
+													<option value=""> Select Employee</option>
 													<option th:each="r :${listEmployee}" th:value="${r.empCode}" th:text="${r.empName}"></option>
 												</select>
 										</div>
-											
 										   	<div class="form-group">
-											<label class="form-label"> Designation </label>
+											<label class="form-label"> Designation Name </label>
 											<label style="color: red">*</label>
-											 <select class="form-control required" id="desgCode"name="desgCode" required aria-required="true">
-													<option value="">Designation</option>
+											 <select class="form-control required" id="desgCode"name="desgCode" title="Designation Name" required aria-required="true">
+													<option value=""> Select Designation</option>
 													<option th:each="designation : ${listDesignation}"th:text="${designation.desgName}" th:value=" ${designation.desgCode}"></option>
 												</select>
 										</div>
@@ -120,7 +119,7 @@ $(document).ready(function(){
 											<div class="form-group">
 											  <label> Tour Start Date and Time </label>
 											  <label style="color: red">*</label>	 
-											   <input type="datetime-local" class="form-control" id="tourStartDate" name="tourStartDate" required aria-required="true">
+											   <input type="datetime-local" class="form-control" id="tourStartDate" title="Tour Start Date and Time" name="tourStartDate" required aria-required="true">
 												</div>
 											</div>
 											
@@ -129,15 +128,15 @@ $(document).ready(function(){
 											<label class="form-label"> Tour Plan Date</label>
 											<label style="color: red">*</label>
 									
-										<input class="form-control required" type="text" id="tourPlanDate"name="tourPlanDate"required aria-required="true"/>
+										<input class="form-control required" type="text" title="Tour Plan Date" id="tourPlanDate"name="tourPlanDate"required aria-required="true"/>
 										
 										</div>
 										
 										<div class="form-group">
-											  <label class="form-label">Department</label>
+											  <label class="form-label">Department Name</label>
 												<label style="color: red">*</label>
-												<select class="form-control select2" name="departmentCode"id="departmentCode" required aria-required="true">
-												 <option value=""> Department Name</option>
+												<select class="form-control select2" name="departmentCode"id="departmentCode" required aria-required="true" title="Department Name">
+												 <option value=""> Select  Department </option>
 												<option th:each="dep :${listDepartment}" th:value="${dep.getDepartmentCode()}" th:text="${dep.getDeptName()}"></option>
 											     	</select>
 												</div>
@@ -145,13 +144,13 @@ $(document).ready(function(){
 												<div class="form-group">
 											  <label> Mobile Number </label>
 											  
-											   <input type="tel" class="form-control" id="mobNumber" maxlength="11" name="mobNumber">
+											   <input type="tel" class="form-control" id="mobNumber" maxlength="11" title="mobile Number " name="mobNumber">
 												</div>
 												
 													<div class="form-group">
 											<label class="form-label"> Tour End Date and Time</label>
 											<label style="color: red">*</label>
-											 <input type="datetime-local" class="form-control " maxlength="25" title="Tour End Date and Time " id="tourEndDate" name="tourEndDate"required aria-required="true" >
+											 <input type="datetime-local" class="form-control" maxlength="25" title="Tour End Date and Time " id="tourEndDate" name="tourEndDate"required aria-required="true" >
 										</div>
 											
 											</div>
@@ -186,8 +185,8 @@ $(document).ready(function(){
 															<tbody>
 																<tr id='addr0'>
 
-																	<td><input type="text" name='startPlace0'placeholder='Start Place' class="form-control" value="" /></td>
-																	<td><input type="text" name='endPlace0'placeholder='End  Place' class="form-control" /></td>
+																	<td><input type="text" name='startPlace0'placeholder='Start Place' class="form-control" value="" required/></td>
+																	<td><input type="text" name='endPlace0'placeholder='End  Place' class="form-control" required/></td>
 																	<td><input type="Date" name='fromDate0'placeholder='From Date' class="form-control" /></td>
 																	<td><input type="Date" name='toDate0'placeholder='To Date' class="form-control" /></td>
 																	<td><input type="text" name='purpose0'placeholder='Purpose/Task to be done' class="form-control" /></td>
