@@ -4,6 +4,8 @@
 <script type="text/javascript" th:src="@{/js/settings.js}"></script>
 <script type="text/javascript" th:src="@{/js/app.js}"></script>
 <link rel="stylesheet" type="text/css" th:href="@{/css/modern.css}" />
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
 
 <script  src="https://www.googletagmanager.com/gtag/js?id=UA-120946860-7"></script>
 <style>
@@ -26,6 +28,43 @@ body {
 <head>
 <meta charset="utf-8" />
 <title>HRMS</title>
+<script>
+$(document).ready(function(){
+    var i=1;
+   $("#add_row").click(function(){
+    $('#addr'+i).html("<td><input name='startPlace"+i+"' type='text'  placeholder='Start Place'  class='form-control txt input-md'/> "+
+    		"</td><td><input  name='endPlace"+i+"' type='text' placeholder='end Place'  class='form-control input-md'>"+
+    		"</td><td><input  name='fromDate"+i+"' type='Date'  placeholder='From Date'class='form-control input-md'>"+
+    		"</td><td><input  name='toDate"+i+"' type='Date' placeholder='Purpose Of Vist'  class='pas form-control input-md'></td>"+
+    		"<td><input  name='purpose"+i+"' type='text' placeholder='Purpose/Task to be done'  class='form-control input-md'></td>"+
+    		"");
+
+    $('#tabTour').append('<tr id="addr'+(i+1)+'"></tr>');
+    $('#_cr').val(i+1);
+    
+    i++; 
+});
+   
+   
+   $("#delete_row").click(function(){
+	  	 if(i>1){
+			 $("#addr"+(i-1)).html('');
+			 $('#_cr2').val(i - 1);
+			 i--;
+			 calculateSum(),calculateSumtotalPassing(),calculateSumtotalgovt()
+			 }
+		 });
+   
+	
+	$("input[name='tourPlanDate']").datepicker({
+		singleDatePicker: true,
+		 format: 'yyyy/mm/dd',
+		
+	});
+});
+
+</script>
+	
 </head>
 <body>
 <div class="wrapper">
@@ -58,58 +97,46 @@ body {
 											<div class="col-12 col-lg-6">
 												<div class="form-group">
 											  <label>Tour Plan Id </label>
-											  	<label style="color: red">*</label>
 											   <input type="text" class="form-control" id="tourPlanId" name="tourPlanId" readonly="readonly">
-												</div>
-											
-											
+											</div>
 										<div class="form-group">
-											<label class="form-label"> Employee  Code</label>
+											<label class="form-label"> Employee  Name</label>
 											<label style="color: red">*</label>
-											 <select class="form-control" id="empCode"name="empCode">
-													<option value=""> Employee Name</option>
+											 <select class="form-control required" id="empCode"name="empCode"  title="Employee Code" required aria-required="true">
+													<option value=""> Select Employee</option>
 													<option th:each="r :${listEmployee}" th:value="${r.empCode}" th:text="${r.empName}"></option>
 												</select>
 										</div>
-											
-											
-											
-											
-											
 										   	<div class="form-group">
-											<label class="form-label"> Designation </label>
+											<label class="form-label"> Designation Name </label>
 											<label style="color: red">*</label>
-											 <select class="form-control" id="desgCode"name="desgCode">
-													<option value="">Designation</option>
-													<option th:each="designation : ${listDesignation}"
-														th:text="${designation.desgName}" 
-														th:value=" ${designation.desgCode}"></option>
-
+											 <select class="form-control required" id="desgCode"name="desgCode" title="Designation Name" required aria-required="true">
+													<option value=""> Select Designation</option>
+													<option th:each="designation : ${listDesignation}"th:text="${designation.desgName}" th:value=" ${designation.desgCode}"></option>
 												</select>
 										</div>
 										
-										<div class="form-group">
+											<div class="form-group">
 											  <label> Tour Start Date and Time </label>
-											  		<label style="color: red">*</label>	 
-											   <input
-														type="datetime-local" class="form-control" id="tourStartDate" name="tourStartDate">
+											  <label style="color: red">*</label>	 
+											   <input type="datetime-local" class="form-control" id="tourStartDate" title="Tour Start Date and Time" name="tourStartDate" required aria-required="true">
 												</div>
-										
-									
-												
 											</div>
+											
 											<div class="col-12 col-lg-6">
 											<div class="form-group">
 											<label class="form-label"> Tour Plan Date</label>
 											<label style="color: red">*</label>
-											 <input type="text" class="form-control " id="tourPlanDate" name="tourPlanDate">
+									
+										<input class="form-control required" type="text" title="Tour Plan Date" id="tourPlanDate"name="tourPlanDate"required aria-required="true"/>
+										
 										</div>
 										
 										<div class="form-group">
-											  <label class="form-label">Department</label>
+											  <label class="form-label">Department Name</label>
 												<label style="color: red">*</label>
-												<select class="form-control select2" name="departmentCode"id="departmentCode" required aria-required="true">
-												 <option value=""> Department Name</option>
+												<select class="form-control select2" name="departmentCode"id="departmentCode" required aria-required="true" title="Department Name">
+												 <option value=""> Select  Department </option>
 												<option th:each="dep :${listDepartment}" th:value="${dep.getDepartmentCode()}" th:text="${dep.getDeptName()}"></option>
 											     	</select>
 												</div>
@@ -117,13 +144,13 @@ body {
 												<div class="form-group">
 											  <label> Mobile Number </label>
 											  
-											   <input type="tel" class="form-control" id="mobNumber" maxlength="11" name="mobNumber">
+											   <input type="tel" class="form-control" id="mobNumber" maxlength="11" title="mobile Number " name="mobNumber">
 												</div>
 												
 													<div class="form-group">
 											<label class="form-label"> Tour End Date and Time</label>
 											<label style="color: red">*</label>
-											 <input type="datetime-local" class="form-control " maxlength="25" title="Tour End Date and Time " id="tourEndDate" name="tourEndDate" >
+											 <input type="datetime-local" class="form-control" maxlength="25" title="Tour End Date and Time " id="tourEndDate" name="tourEndDate"required aria-required="true" >
 										</div>
 											
 											</div>
@@ -140,10 +167,10 @@ body {
 								<div class="card-body">
 								<input id="_cr" name="_cr" type="hidden"value="1">
 								<div class="col-sm-12"  style="text-align: right;">
-								<a id="add_row" class="fa fa-plus" aria-hidden="true"style="font-size:28px;color:#001080"></a>&nbsp;&nbsp;&nbsp;
+									<a id="add_row" class="fa fa-plus" aria-hidden="true"style="font-size:28px;color:#001080"></a>&nbsp;&nbsp;&nbsp;
 								<a id='delete_row'class="fa fa-trash" style="font-size:28px;color:#399490fc"aria-hidden="true"></a>	
 								</div>
-								<table id="tab1" class="table table-striped display"
+								<table id="tabTour" class="table table-striped display"
 															style="width: 100%" aria-describedby="datatables-buttons">
 															<thead>
 																<tr>
@@ -158,8 +185,8 @@ body {
 															<tbody>
 																<tr id='addr0'>
 
-																	<td><input type="text" name='startPlace0'placeholder='Start Place' class="form-control" value="" /></td>
-																	<td><input type="text" name='endPlace0'placeholder='End  Place' class="form-control" /></td>
+																	<td><input type="text" name='startPlace0'placeholder='Start Place' class="form-control" value="" required/></td>
+																	<td><input type="text" name='endPlace0'placeholder='End  Place' class="form-control" required/></td>
 																	<td><input type="Date" name='fromDate0'placeholder='From Date' class="form-control" /></td>
 																	<td><input type="Date" name='toDate0'placeholder='To Date' class="form-control" /></td>
 																	<td><input type="text" name='purpose0'placeholder='Purpose/Task to be done' class="form-control" /></td>
@@ -263,127 +290,19 @@ body {
 	} );
 	
 	</script>
+			<script>
+	$(document).ready(function() {
+		
+		
+
 	
-<script>
-$(document).ready(function(){
-
-    var i=1;
-   $("#add_row").click(function(){
-    $('#addr'+i).html("<td><input name='startPlace"+i+"' type='text'  placeholder='Start Place'  class='form-control txt input-md'/> "+
-    		"</td><td><input  name='endPlace"+i+"' type='text' placeholder='end Place'  class='form-control input-md'>"+
-    		"</td><td><input  name='fromDate"+i+"' type='Date'  placeholder='From Date'class='form-control input-md'>"+
-    		"</td><td><input  name='toDate"+i+"' type='Date' placeholder='Purpose Of Vist'  class='pas form-control input-md'></td>"+
-    		"<td><input  name='purpose"+i+"' type='text' placeholder='Purpose/Task to be done'  class='form-control input-md'></td>"+
-    		"");
-
-    $('#tab1').append('<tr id="addr'+(i+1)+'"></tr>');
-    $('#_cr').val(i+1);
-    
-    i++; 
-});
-   
-   
-   $("#delete_row").click(function(){
-	  	 if(i>1){
-			 $("#addr"+(i-1)).html('');
-			 $('#_cr2').val(i - 1);
-			 i--;
-			 calculateSum(),calculateSumtotalPassing(),calculateSumtotalgovt()
-			 }
-		 });
-   
-   
-  
-  
-   
-   
-  
-function calculateSum() {
-
-    var sum = 0;
-    //iterate through each textboxes and add the values
-    $(".txt").each(function () {
-
-        //add only if the value is number
-        if (!isNaN(this.value) && this.value.length != 0) {
-            sum += parseFloat(this.value);
-        }
-
-    });
-    //.toFixed() method will roundoff the final sum to 2 decimal places
-   var fds=sum;
-   //$("#").html(sum.toFixed(2));
-   $("#sum").val(sum);
-    
-}
-
-$("table").on("keyup", ".txt", function () {
-    calculateSum();
-});
-
-
-function calculateSumtotalPassing() {
-
-    var sum = 0;
-    //iterate through each textboxes and add the values
-    $(".pas").each(function () {
-
-        //add only if the value is number
-        if (!isNaN(this.value) && this.value.length != 0) {
-            sum += parseFloat(this.value);
-        }
-
-    });
-    //.toFixed() method will roundoff the final sum to 2 decimal places
-   var fds=sum;
-   //$("#").html(sum.toFixed(2));
-   $("#totalPassing").val(sum);
-    
-}
-
-$("table").on("keyup", ".pas", function () {
-	calculateSumtotalPassing();
-});
-
-
-
-
-function calculateSumtotalgovt() {
-
-    var sum = 0;
-    //iterate through each textboxes and add the values
-    $(".govt").each(function () {
-
-        //add only if the value is number
-        if (!isNaN(this.value) && this.value.length != 0) {
-            sum += parseFloat(this.value);
-        }
-
-    });
-    //.toFixed() method will roundoff the final sum to 2 decimal places
-   var fds=sum;
-   //$("#").html(sum.toFixed(2));
-   $("#totalGovtExt").val(sum);
-    
-}
-
-$("table").on("keyup", ".govt", function () {
-	calculateSumtotalgovt();
-});
-$("input[name='tourPlanDate']").daterangepicker({
-	singleDatePicker: true,
-    autoApply: true,
-	locale: {
-        format: 'DD/MM/YYYY'
-    },
-	showDropdowns: true
-});
-
-
-});
-
-</script>
 	
+
+	});
+
+	</script>
+	
+
 	
 	
    
