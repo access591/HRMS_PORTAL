@@ -43,4 +43,14 @@ public class AwardServiceImpl  implements AwardService{
 		
 	}
 
+	@Override
+	public boolean checkAwardExists(Award award) {
+		Award a = awardDao.checkAwardExists(award);
+		if (a != null) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 }

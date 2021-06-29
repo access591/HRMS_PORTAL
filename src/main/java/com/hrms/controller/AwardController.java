@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hrms.ImageUtil;
 import com.hrms.model.Award;
@@ -59,16 +60,25 @@ public class AwardController {
  * @return
  */
 	@PostMapping("/saveAward")
-	public String saveAward(@ModelAttribute("award") Award award, Model model, HttpSession session) {
+	public String saveAward(@ModelAttribute("award") Award award, Model model, HttpSession session,RedirectAttributes redirectAttributes) {
+		boolean isAwardExist = awardService.checkAwardExists(award);
+		if (isAwardExist) {
+			redirectAttributes.addFlashAttribute("message", "Award Name Already exists !  ");
+			redirectAttributes.addFlashAttribute("alertClass", "alert-success");
+			return "redirect:" + pageMappingService.PageRequestMapping(reqPage, pageno);
+		
+		}
+		else
+		{
+	
 		String insertedBY = (String) session.getAttribute("userlogin");
 		award.setInsBy(insertedBY);
 		awardService.addAward(award);
-		List<Award> listAward = awardService.getAllAwards();
-		model.addAttribute("listAward", listAward);
+		redirectAttributes.addFlashAttribute("message", "Award Added successfully !!  ");
+		redirectAttributes.addFlashAttribute("alertClass", "alert-success");
 		session.setAttribute("username", session.getAttribute("username"));
-
+		}
 		return "redirect:" + pageMappingService.PageRequestMapping(reqPage, pageno);
-
 	}
 /**
  *  find Record base on id and set to update Form
@@ -98,10 +108,12 @@ public class AwardController {
 	 */
 
 	@PostMapping("/updateAward")
-	public String updateAward(@ModelAttribute("award") Award award, Model model, HttpSession session) {
+	public String updateAward(@ModelAttribute("award") Award award, Model model, HttpSession session,RedirectAttributes redirectAttributes) {
 		String updatedBY = (String) session.getAttribute("userlogin");
 		award.setUpdBy(updatedBY);
 		this.awardService.updateAward(award);
+		 redirectAttributes.addFlashAttribute("message", "Award Update successfully !!  ");
+		  redirectAttributes.addFlashAttribute("alertClass", "alert-success");
 
 		return "redirect:/" + pageMappingService.PageRequestMapping(reqPage, pageno);
 	}
@@ -113,8 +125,10 @@ public class AwardController {
  * @return
  */
 	@GetMapping(value = { "/deleteAward/{id}" })
-	public String deleteAward(@PathVariable("id") long id, Model model, HttpSession session) {
+	public String deleteAward(@PathVariable("id") long id, Model model, HttpSession session,RedirectAttributes redirectAttributes) {
 		this.awardService.removeAward(id);
+		redirectAttributes.addFlashAttribute("mes", "Award Delete  successfully! ");
+	    redirectAttributes.addFlashAttribute("alertClass", "alert-danger");
 		session.setAttribute("username", session.getAttribute("username"));
 		return "redirect:/" + pageMappingService.PageRequestMapping(reqPage, pageno);
 	}
