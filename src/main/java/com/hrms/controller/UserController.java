@@ -1,9 +1,6 @@
 package com.hrms.controller;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
+
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -15,7 +12,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hrms.EncryptionUtil;
@@ -36,7 +32,6 @@ import com.hrms.service.OrderIssueTrackingService;
 import com.hrms.service.ReCaptchaValidationService;
 import com.hrms.service.TrackallEnquiriesService;
 import com.hrms.service.UserService;
-import com.hrms.util.PaiChart;
 
 @Controller
 public class UserController {
