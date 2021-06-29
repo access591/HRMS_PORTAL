@@ -1,5 +1,7 @@
 package com.hrms.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -20,12 +22,14 @@ import com.hrms.model.MenuModule;
 import com.hrms.model.OrderIssueTracking;
 import com.hrms.model.TrackallEnquiries;
 import com.hrms.service.AttendenceRegisterService;
+import com.hrms.service.BudgetProvisionService;
 import com.hrms.service.CategoryService;
 import com.hrms.service.EmployeeService;
 import com.hrms.service.InterviewMasterService;
 import com.hrms.service.ModuleService;
 import com.hrms.service.OrderIssueTrackingService;
 import com.hrms.service.TrackallEnquiriesService;
+import com.hrms.util.PaiChart;
 
 @Controller
 public class DashbordController {
@@ -34,6 +38,7 @@ public class DashbordController {
 	private ModuleService moduleService;
 	
 	@Autowired EmployeeService employeeService;
+	@Autowired BudgetProvisionService budgetProvisionService;
 	
 	@Autowired InterviewMasterService interviewMasterService;
 	@Autowired AttendenceRegisterService attendenceRegisterService;
@@ -84,6 +89,28 @@ public class DashbordController {
 		return countCategory;
 	}
 	
+	@ResponseBody
+	@GetMapping("demoChart")
+	public Map<String, Long> getCategory1() {
+		
+		System.out.println("================calling dashboad controller========");
+		
+		List<PaiChart> paiChart = new ArrayList<>();
+		
+		Map<String, Integer> countCategory = new HashMap<>();
+		countCategory.put("vt1st", 12);
+		countCategory.put("vt2nd", 15);
+        
+		paiChart.add(new PaiChart("Chrome","18.55D"));
+        paiChart.add(new PaiChart("Firefoc","19.99D"));
+        paiChart.add(new PaiChart("IE","54.13D"));
+        paiChart.add(new PaiChart("Oher","0.49D"));
+		
+        String[] arr = new String[paiChart.size()];
+        Map<String, Long> result = budgetProvisionService.findBudgetTrackDepartment();
+		
+		return result;
+	}
 	
 
 }
