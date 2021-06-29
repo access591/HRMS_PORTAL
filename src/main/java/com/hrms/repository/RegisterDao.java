@@ -5,4 +5,6 @@ import com.hrms.model.Register;
 
 public interface RegisterDao extends GenericDao<Register> {
 
+	Register checkRegisterExists(Register register);
+
 }
