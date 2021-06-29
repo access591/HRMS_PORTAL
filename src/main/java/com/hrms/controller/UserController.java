@@ -2,7 +2,8 @@ package com.hrms.controller;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +36,7 @@ import com.hrms.service.UserService;
 public class UserController {
 	@Autowired
 	UserService userService;
-
+	  private final Logger logger = LoggerFactory.getLogger(UserController.class);
 	@Autowired
 	private ModuleService moduleService;
 	
@@ -116,7 +117,13 @@ public class UserController {
 			String userCode = (String) session.getAttribute("username");
 			List<MenuModule> modules = moduleService.getAllModulesList(userCode);
 			model.addAttribute("modules", modules);
+			
+			logger.debug("loginUser()");
+			logger.info("loginUser()");
 			return "dashboard";
+			
+			
+			
 		}
 		else {
 			model.addAttribute("message", "Please Verify Captcha");
