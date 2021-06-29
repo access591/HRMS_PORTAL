@@ -10,5 +10,6 @@ public interface AwardService {
 	Award findAwardById(long id);
 	public void updateAward(Award c);
 	public void removeAward(long id);
+	public boolean checkAwardExists(Award award);
 
 }

@@ -5,4 +5,6 @@ import com.hrms.model.Award;
 
 public interface AwardDao extends GenericDao<Award> {
 
+	Award checkAwardExists(Award award);
+
 }
