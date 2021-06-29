@@ -9,6 +9,8 @@ public interface RegisterService {
 
 	List<Register> getAllRegisters();
 
+	boolean checkRegisterExists(Register register);
+
 	Register findRegisterById(String id);
 
 	public void updateRegister(Register res);

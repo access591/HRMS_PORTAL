@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
 import com.hrms.model.Register;
 import com.hrms.repository.RegisterDao;
 @Service
@@ -24,7 +23,7 @@ public class RegisterServiceImpl implements RegisterService {
 	@Override
 	public List<Register> getAllRegisters() {
 		return registerDao.findAll();
-		
+
 	}
 
 	@Override
@@ -48,4 +47,15 @@ public class RegisterServiceImpl implements RegisterService {
 
 	}
 
-}
+	@Override
+	public boolean checkRegisterExists(Register register) {
+		Register r = registerDao.checkRegisterExists(register);
+		if (r != null) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	}
+
+
