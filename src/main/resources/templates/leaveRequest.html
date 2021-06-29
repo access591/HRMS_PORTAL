@@ -134,6 +134,7 @@ body {
 												<label class="form-label">Apply Date</label> <label
 													style="color: red">*</label> <input type="date"
 													class="form-control" id='applyDate' th:field="*{applyDate}"
+													data-toggle="tooltip" title="Select date"
 													required>
 											</div>
 										</div>
@@ -142,13 +143,17 @@ body {
 												<label class="form-label">From Date</label> <label
 													style="color: red">*</label> <input type="date"
 													id="from_date" class="form-control" th:field="*{fromDate}"
-													onchange="getFromDate(this.value)" required>
+													onchange="getFromDate(this.value)" 
+													data-toggle="tooltip" title="Select date"
+													required>
 											</div>
 											<div class="col-12 col-lg-6">
 												<label class="form-label">To Date</label> <label
 													style="color: red">*</label> <input type="date"
 													id="to_date" class="form-control" th:field="*{toDate}"
-													onchange="getToDate(this.value)" required>
+													onchange="getToDate(this.value)" 
+													data-toggle="tooltip" title="Select date"
+													required>
 											</div>
 										</div>
 
@@ -157,7 +162,7 @@ body {
 											<div class="col-12 col-lg-6">
 												<label class="form-label">From Leave </label> <select
 													class="form-control" th:field="*{fromDateType}"
-													id="from_date_type" onchange="fromDayTypeValue(this.value)">
+													id="from_date_type" title="Select From Leave" onchange="fromDayTypeValue(this.value)">
 													<option value=" f">Full</option>
 													<option value="fh">First Half</option>
 													<option value="sh">Second Half</option>
@@ -167,7 +172,8 @@ body {
 											<div class="col-12 col-lg-6">
 												<label class="form-label">To Leave </label> <select
 													class="form-control" th:field="*{toDateType}"
-													id="to_date_type" onchange="toDayTypeValue(this.value)">
+													id="to_date_type" onchange="toDayTypeValue(this.value)"
+													title="Select To Leave">
 													<option value="f">Full</option>
 													<option value="fh">First Half</option>
 													<option value="sh">Second Half</option>
@@ -180,7 +186,9 @@ body {
 
 											<div class="col-12 col-lg-6">
 												<label class="form-label">Leave type</label> <select
-													class="form-control" th:field="*{leave.levCode}" required>
+													class="form-control" th:field="*{leave.levCode}" 
+													title="Type of Leave"
+													required>
 													<option value="">Leave Type</option>
 													<option th:each="leave : ${listLeave}"
 														th:text="${#strings.capitalize(leave.levType)}" th:value="${leave.levCode}">
@@ -202,7 +210,8 @@ body {
 											<div class="col-12 col-lg-6">
 												<div class="form-group">
 													<label> Reason </label> <textarea type="text"
-														class="form-control" th:field="*{reason}"></textarea>
+														class="form-control" th:field="*{reason}"
+														title="Post Your Reason"></textarea>
 												</div>
 											</div>
 										</div>

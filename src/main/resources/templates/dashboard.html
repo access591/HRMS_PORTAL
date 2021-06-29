@@ -78,201 +78,213 @@ body {
 
 					</div>
 
-					<div class="row">
-						<div class="col-xl-4 col-xxl-7">
-							<div class="card flex-fill w-100">
-								<div class="card-header">
 
 
-									<div class="card-actions float-right">
-										<a href="#" class="mr-1"> <em class="align-middle"
-											data-feather="refresh-cw"></em>
-										</a>
-										<div class="d-inline-block dropdown show">
-											<a href="#" data-toggle="dropdown" data-display="static">
-												<em class="align-middle" data-feather="more-vertical"></em>
-											</a>
+					<div class="container">
 
-											<div class="dropdown-menu dropdown-menu-right">
-												<a class="dropdown-item" href="#">Action</a> <a
-													class="dropdown-item" href="#">Another action</a> <a
-													class="dropdown-item" href="#">Something else here</a>
+						<div class="row">
+							<div class="col-sm-6 py-2">
+
+								<div class="card card-body h-100">
+									<div class="card flex-fill w-100">
+										<div class="card-header">
+
+
+											<div class="card-actions float-right">
+												<a href="#" class="mr-1"> <em class="align-middle"
+													data-feather="refresh-cw"></em>
+												</a>
+												<div class="d-inline-block dropdown show">
+													<a href="#" data-toggle="dropdown" data-display="static">
+														<em class="align-middle" data-feather="more-vertical"></em>
+													</a>
+
+													<div class="dropdown-menu dropdown-menu-right">
+														<a class="dropdown-item" href="#">Action</a> <a
+															class="dropdown-item" href="#">Another action</a> <a
+															class="dropdown-item" href="#">Something else here</a>
+													</div>
+												</div>
+											</div>
+											<h5 class="card-title mb-0">Employee Details</h5>
+										</div>
+										<div class="card-body py-3">
+											<div class="chart chart-sm">
+
+												<figure class="highcharts-figure">
+													<div id="container-bar"></div>
+												</figure>
+
 											</div>
 										</div>
 									</div>
-									<h5 class="card-title mb-0">Employee Details</h5>
 								</div>
-								<div class="card-body py-3">
-									<div class="chart chart-md">
 
-										<figure class="highcharts-figure">
-											<div id="container-bar"></div>
-										</figure>
+							</div>
 
+
+							<div class="col-sm-6 py-2">
+
+								<div class="card card-body h-100">
+									<div class="card flex-fill w-100">
+										<div class="card-header" style="height: parent">
+
+											<div class="w-100">
+												<div class="row">
+													<div class="col-sm-6">
+														<div class="card">
+															<div class="card-body">
+																<div class="row">
+																	<div class="col mt-0">
+																		<h5 class="card-title">Total Employee</h5>
+																	</div>
+
+																	<div class="col-auto">
+																		<div class="avatar">
+																			<div
+																				class="avatar-title rounded-circle bg-primary-dark">
+																				<img
+																					src="https://img.icons8.com/color/48/000000/user-group-skin-type-7.png"
+																					alt="image" />
+																			</div>
+																		</div>
+																	</div>
+																</div>
+																<h1 class="display-5 mt-1 mb-3"
+																	th:text="${employeeList}">17.212</h1>
+
+															</div>
+														</div>
+														<div class="card">
+															<div class="card-body">
+																<div class="row">
+																	<div class="col mt-0">
+																		<h5 class="card-title">Recruiter</h5>
+																	</div>
+
+																	<div class="col-auto">
+																		<div class="avatar">
+																			<div
+																				class="avatar-title rounded-circle bg-primary-dark">
+																				<em class="align-middle" data-feather="users"></em>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+																<h1 class="display-5 mt-1 mb-3"
+																	th:text="${finalSelection}">17.212</h1>
+
+															</div>
+														</div>
+													</div>
+													<div class="col-sm-6">
+														<div class="card">
+															<div class="card-body">
+																<div class="row">
+																	<div class="col mt-0">
+																		<h5 class="card-title">Total Attendance</h5>
+																	</div>
+
+																	<div class="col-auto">
+																		<div class="avatar">
+																			<div
+																				class="avatar-title rounded-circle bg-primary-dark">
+																				<img
+																					src="https://img.icons8.com/fluent-systems-filled/48/000000/attendance-mark.png"
+																					alt="image" />
+																			</div>
+																		</div>
+																	</div>
+																</div>
+																<h1 class="display-5 mt-1 mb-3"
+																	th:text="${listAttendenceRegister}">$24.300</h1>
+
+															</div>
+														</div>
+														<div class="card">
+															<div class="card-body">
+																<div class="row">
+																	<div class="col mt-0">
+																		<h5 class="card-title">Daily Leave</h5>
+																	</div>
+
+																	<div class="col-auto">
+																		<div class="avatar">
+																			<div
+																				class="avatar-title rounded-circle bg-primary-dark">
+																				<img
+																					src="https://img.icons8.com/cotton/64/000000/change-employee-female.png"
+																					alt="image" />
+																			</div>
+																		</div>
+																	</div>
+																</div>
+																<h1 class="display-5 mt-1 mb-3"
+																	th:text="${findTodayLeave}">43</h1>
+
+															</div>
+														</div>
+													</div>
+
+
+													<!-- space filling  -->
+
+												</div>
+
+											</div>
+
+
+
+
+
+										</div>
 									</div>
 								</div>
+
+
 							</div>
+
+
 						</div>
 
-
-						<div class="col-xl-7 col-xxl-5">
-							<div class="card flex-fill w-100">
-								<div class="card-header">
-
-
-									<div class="w-100">
-										<div class="row">
-											<div class="col-sm-6">
-												<div class="card">
-													<div class="card-body">
-														<div class="row">
-															<div class="col mt-0">
-																<h5 class="card-title">Total Employee</h5>
-															</div>
-
-															<div class="col-auto">
-																<div class="avatar">
-																	<div
-																		class="avatar-title rounded-circle bg-primary-dark">
-																		<img
-																			src="https://img.icons8.com/color/48/000000/user-group-skin-type-7.png"
-																			alt="image" />
-																	</div>
-																</div>
-															</div>
-														</div>
-														<h1 class="display-5 mt-1 mb-3" th:text="${employeeList}">17.212</h1>
-
-													</div>
-												</div>
-												<div class="card">
-													<div class="card-body">
-														<div class="row">
-															<div class="col mt-0">
-																<h5 class="card-title">Recruiter</h5>
-															</div>
-
-															<div class="col-auto">
-																<div class="avatar">
-																	<div
-																		class="avatar-title rounded-circle bg-primary-dark">
-																		<em class="align-middle" data-feather="users"></em>
-																	</div>
-																</div>
-															</div>
-														</div>
-														<h1 class="display-5 mt-1 mb-3"
-															th:text="${finalSelection}">17.212</h1>
-
-													</div>
-												</div>
-											</div>
-											<div class="col-sm-6">
-												<div class="card">
-													<div class="card-body">
-														<div class="row">
-															<div class="col mt-0">
-																<h5 class="card-title">Total Attendance</h5>
-															</div>
-
-															<div class="col-auto">
-																<div class="avatar">
-																	<div
-																		class="avatar-title rounded-circle bg-primary-dark">
-																		<img
-																			src="https://img.icons8.com/fluent-systems-filled/48/000000/attendance-mark.png"
-																			alt="image" />
-																	</div>
-																</div>
-															</div>
-														</div>
-														<h1 class="display-5 mt-1 mb-3"
-															th:text="${listAttendenceRegister}">$24.300</h1>
-
-													</div>
-												</div>
-												<div class="card">
-													<div class="card-body">
-														<div class="row">
-															<div class="col mt-0">
-																<h5 class="card-title">Daily Leave</h5>
-															</div>
-
-															<div class="col-auto">
-																<div class="avatar">
-																	<div
-																		class="avatar-title rounded-circle bg-primary-dark">
-																		<img
-																			src="https://img.icons8.com/cotton/64/000000/change-employee-female.png"
-																			alt="image" />
-																	</div>
-																</div>
-															</div>
-														</div>
-														<h1 class="display-5 mt-1 mb-3"
-															th:text="${findTodayLeave}">43</h1>
-
-													</div>
-												</div>
-											</div>
-
-
-											<!-- space filling  -->
-											<div class="col-sm-6">
-												<div class="card">
-													<div class="card-body">
-														<div class="row"></div>
-													</div>
-												</div>
-											</div>
-										</div>
-										<div class="col-sm-6">
-											<div class="card">
-												<div class="card-body">
-													<div class="row"></div>
-												</div>
-											</div>
-										</div>
-									</div>
-
-
-
-
-								</div>
-							</div>
-						</div>
 					</div>
 
 
 
-					<div class="row">
-						<div class="col-xl-6 col-xxl-7">
-							<div class="card flex-fill w-100">
+
+
+
+					<!--  -->
+
+					<div class="container">
+
+						<div class="row">
+							<div class="col-sm-6 py-2">
+
+								<div class="card card-body h-100">
+								
+								<div class="card flex-fill w-100">
 								<div class="card-header">
 									<div class="card-actions float-right">
 										<a href="#" class="mr-1"> <em class="align-middle"
 											data-feather="refresh-cw"></em>
 										</a>
-										<div class="d-inline-block dropdown show">
-											<a href="#" data-toggle="dropdown" data-display="static">
-												<em class="align-middle" data-feather="more-vertical"></em>
-											</a>
-
-											<div class="dropdown-menu dropdown-menu-right">
-
-												<div id="chartContainer"></div>
-
-											</div>
-										</div>
+										
 									</div>
 									<h5 class="card-title mb-0">Yearly Budget</h5>
 								</div>
-								<!-- <div style="width: parent; height: parent;" id="salesByRegion"></div> -->
-<div style="width: parent; height: parent;" id="chart_div"></div>
+								
+								<div style="width: parent; height: parent;" id="chart_div"></div>
 
 							</div>
-						</div>
-						<div class="col-xl-7 col-xxl-5">
+							</div>
+							
+							</div>
+							
+							
+							
+							<div class="col-sm-6 py-2">
+							<div class="card card-body h-100">
 							<div class="card flex-fill w-100">
 								<div class="card-header">
 									<div class="card-actions float-right">
@@ -346,8 +358,13 @@ body {
 									</div>
 								</div>
 							</div>
+							</div>
+							</div>
 						</div>
 					</div>
+
+
+					
 
 				</div>
 			</main>
@@ -363,10 +380,10 @@ body {
 	<script src='https://www.gstatic.com/charts/loader.js'></script>
 
 
-	
-	
-	
-	
+
+
+
+
 	<script>
 		$(function() {
 			$('#datatables-dashboard-projects').DataTable({
@@ -407,7 +424,7 @@ body {
 				success : function(result) {
 					var yearDtls = [];
 					var countDtls = [];
-					console.log("graph====>"+result);
+					console.log("graph====>" + result);
 					Object.keys(result).forEach(function(key) {
 						yearDtls.push(key);
 						countDtls.push(result[key]);
@@ -449,82 +466,78 @@ body {
 
 
 
-        
-        <!-- demo pai chart -->
-        <script>
-        var data;
-        var chart;
 
-        google.charts.load('current', {
-          callback: drawChart,
-          packages:['corechart']
-        });
+	<!-- demo pai chart -->
+	<script>
+		var data;
+		var chart;
 
-        function drawChart() {
-          var x = [{"vt0":"0","vt1":"0","vt2":"0","vt3":"0","vt4":"1","vt5":"0","vt6":"0","vt7":"0","vt8":"0","vt9":"0","vt10":"0","vt11":"0","vt12":"0","vt13":"0","vt14":"0","vt15":"0","vt16":"0","vt17":"0","vt18":"0","vt19":"0","vt20":"0","vt21":"0","vt22":"0","vt23":"0","vt24":"0","vt25":"0","vt26":"0","vt27":"0","vt28":"3","vt29":"2","vt30":"0","vt31":"12","vt32":"0","vt33":"0","vt34":"0","vt35":"1","vt36":"0","vt37":"0","vt38":"0","vt39":"0","vt40":"1","vt41":"2","vt42":"0","vt43":"0","vt44":"1","vt45":"0","vt46":"1","vt47":"0","vt48":"0","vt49":"0","vt50":"0","vt51":"0","vt52":"0","vt53":"0","vt54":"0","vt55":"0","vt56":"0","vt57":"0","vt58":"1","vt59":"0","vt60":"1","vt61":"0","vt62":"0","vt63":"0","vt64":"0","vt65":"0","vt66":"0","vt67":"0","vt68":"0","vt69":"0","vt70":"0","vt71":"0","vt72":"0","vt73":"0","vt74":"0","vt75":"0","vt76":"0","vt77":"0","vt78":"0","vt79":"0","vt80":"0","vt81":"0","alreadyVoted":",66,78,30,67,39,37,79,75,81,32,11,3,56,18,28,46,16,6,17,9,35,64,58,68,41"}];
+		google.charts.load('current', {
+			callback : drawChart,
+			packages : [ 'corechart' ]
+		});
 
-          console.log("x value : "+ x);
-          var results = new Array;
-          
-          
-          $.ajax({
+		function drawChart() {
+			
+
+			
+			var results = new Array;
+
+			$.ajax({
 				type : "GET",
 				url : "demoChart",
 
 				success : function(result) {
 					var yearDtls = [];
 					var countDtls = [];
-					
-					
-					
-					console.log("result ====>"+result);
+
+					console.log("result ====>" + result);
 					results.push(result);
-					console.log("results ====>"+results);
+					console.log("results ====>" + results);
 				},
-				complete: function () {
-					afterAhjaxFinix(); 
-				     }
-          
+				complete : function() {
+					afterAhjaxFinix();
+				}
+
 			});
-          
-          function afterAhjaxFinix(){
-        	  
-        	  console.log("global results ====>"+ results);
-              data = new google.visualization.DataTable();
-              data.addColumn('string', 'VoteName');
-              data.addColumn('number', 'VoteCount');
 
-              // iterate "vt" keys
-              Object.keys(results[0]).forEach(function (key) {
-                if (key.indexOf("vt") > -1) {
-                  data.addRow([
-                    key,
-                    parseFloat(results[0][key])
-                  ]);
-                }
-              });
+			function afterAhjaxFinix() {
 
-              var options = {
-                title: '',
-                width: 600,
-                height: 450
-              };
+				console.log("global results ====>" + results);
+				data = new google.visualization.DataTable();
+				data.addColumn('string', 'VoteName');
+				data.addColumn('number', 'VoteCount');
 
-              chart = new google.visualization.PieChart(document.getElementById('chart_div'));
-              google.visualization.events.addListener(chart, 'select', selectHandler);
-              chart.draw(data, options);
-            }
+				// iterate "vt" keys
+				Object.keys(results[0]).forEach(function(key) {
+					if (key.indexOf("vt") > -1) {
+						data.addRow([ key, parseFloat(results[0][key]) ]);
+					}
+				});
 
-            function selectHandler() {
-              // be sure something is selected
-              if (chart.getSelection().length) {
-                var selectedItem = chart.getSelection()[0];
-                var value = data.getValue(selectedItem.row, 0);
-                alert('The user selected ' + value);
-              }
-            }
-          }
-        </script>
+				var options = {
+					title : '',
+					width : 550,
+					height : 450
+				};
+
+				chart = new google.visualization.PieChart(document
+						.getElementById('chart_div'));
+				google.visualization.events.addListener(chart, 'select',
+						selectHandler);
+				chart.draw(data, options);
+			}
+
+			function selectHandler() {
+				// be sure something is selected
+				if (chart.getSelection().length) {
+					var selectedItem = chart.getSelection()[0];
+					var value = data.getValue(selectedItem.row, 0);
+					alert('The user selected ' + value);
+				}
+			}
+		}
+	</script>
 
 </body>
 
