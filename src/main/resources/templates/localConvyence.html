@@ -187,8 +187,7 @@ $("table").on("keyup", ".pas", function () {
 									<div class="form-row">
 												<div class="form-group sm col-md-4">
 												
-													<label class="form-label">Local Conveyance id <span
-														class="text-danger">*</span>
+													<label class="form-label">ID 
 													</label> <input name="nn" type="text" id="nn"
 														class="form-control"readonly>
 												</div>
@@ -198,7 +197,7 @@ $("table").on("keyup", ".pas", function () {
 												<label style="color: red">*</label>
 												<select class="form-control select2" name="empCode" id="empCode" onchange="myFunctionEmpCode()" required aria-required="true">
 												 <option value="">Select Employee</option>
-												<option th:each="e :${listEmployee}"th:value="${e.getEmpCode()}" th:text="${e.getEmpName()}"></option>
+												<option th:each="e :${listEmployee}"th:value="${e.getEmpCode()}" th:text="${e.getEmpCode()}"></option>
 											     	</select>
 
 												</div>
@@ -216,14 +215,14 @@ $("table").on("keyup", ".pas", function () {
 									
 									
 									<div class="form-group sm col-md-4">
-											       <label class="form-label">Employee Pay Code 
-											       <span class="text-danger">*</span></label>
+											       <label class="form-label">Employee Payee Code 
+											     </label>
 							                 <input  type="text"id="empPayCode"name="empPayCode" title="empPayCode" class="form-control"readonly>
 										     </div>
 										     
 										     
 										     <div class="form-group sm col-md-4">
-												<label class="form-label">Department</label> 
+												<label class="form-label"> Department </label> 
 												
 														<input Type="text"class="form-control" name="deptName" id="deptName"readonly>
 														
@@ -291,15 +290,15 @@ $("table").on("keyup", ".pas", function () {
 												<tr id='addr0'>
 
 													<td><input type="Date" name='locDate0'
-														placeholder='Date' class="form-control" value="" /></td>
+														placeholder='Date' class="form-control" value="" required /></td>
 													<td><input type="text" name='startPlace0'
-														placeholder='Start Place' class="form-control" /></td>
+														placeholder='Start Place' class="form-control" required/></td>
 													<td><input type="text" name='vistPlace0'
-														placeholder='Vist Place' class="form-control" /></td>
+														placeholder='Vist Place' class="form-control" required /></td>
 													<td><input type="text" name='purposeOfVist0'
 														placeholder='Purpose Of Vist' class="form-control" /></td>
 
-													<td><select class="form-control required"
+													<td><select class="form-control required" required
 														name="modeOfTravel0" id="modeOfTravel0">
 															<option value="">Select Type</option>
 															<option th:Value="taxi">Taxi</option>
@@ -314,9 +313,9 @@ $("table").on("keyup", ".pas", function () {
 													<td><input type="text" name='ltaRate0'
 														placeholder='Lta Rate' class="form-control" /></td>
 													<td><input type="text" name='actualAmount0'
-														placeholder='Actual Amount' class="form-control txt" /></td>
+														placeholder='Actual Amount' class="form-control txt" required/></td>
 													<td><input type="text" name='claimedAmount0'
-														placeholder='Claimed  Amount' class="form-control pas" /></td>
+														placeholder='Claimed  Amount' class="form-control pas" required /></td>
 												</tr>
 												<tr id='addr1'></tr>
 
@@ -327,8 +326,8 @@ $("table").on("keyup", ".pas", function () {
 												<td colspan="6"></td>
 
 												<td><label class="form-label">Total Amount</label></td>
-												<td><input type="text" id="totalClaim"name='totalClaim' placeholder='Total Claim'class="form-control" /></td>
-												<td><input type="text" id="totalPas" name='totalPas'placeholder='Total Pas' class="form-control" /></td>
+												<td><input type="text" id="totalClaim"name='totalClaim' placeholder='Total Claim'class="form-control"required aria-required="true" /></td>
+												<td><input type="text" id="totalPas" name='totalPas'placeholder='Total Pas' class="form-control"required aria-required="true" /></td>
 
 												<td></td>
 
