@@ -157,7 +157,7 @@ public class BudgetProvisionServiceImpl implements BudgetProvisionService {
 			System.out.println("departmentQuery ====>"+departmentList.get(0));
 			System.out.println("departmentQuery ====>"+departmentList);
 			
-			String budgetAmtCount = "select count(expenditureAmount) as counter from BudgetProvision b group by"
+			String budgetAmtCount = "select sum(expenditureAmount) as counter from BudgetProvision b group by"
 					+ " b.department.departmentCode";
 			Query<Long> query1 = session.createQuery(budgetAmtCount,Long.class);
 			List<Long>  countList = query1.list();
