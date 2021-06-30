@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hrms.ImageUtil;
 import com.hrms.model.Employee;
@@ -54,12 +55,14 @@ public class LeaveGrantRegister {
 		}
 	
 	@PostMapping("/saveLeaveGrant")
-	public String saveLeaveGrant(@ModelAttribute("leaveGrant")LeaveGrant leaveGrant, Model model, HttpSession session) {
+	public String saveLeaveGrant(@ModelAttribute("leaveGrant")LeaveGrant leaveGrant, Model model, HttpSession session,RedirectAttributes redirectAttributes) {
 		if (session.getAttribute("username") == null) {
 			return "redirect:" + "./";
 		}
 		leaveGrant.setInsBy((String) session.getAttribute("USER_NAME"));
 		leaveGrantRegisterService.addLeaveGrant(leaveGrant);
+		 redirectAttributes.addFlashAttribute("message", "Leave Grant  successfully saved !  ");
+		  redirectAttributes.addFlashAttribute("alertClass", "alert-success");
 		session.setAttribute("username", session.getAttribute("username"));
 
 		 return"redirect:/leaveGrant";
