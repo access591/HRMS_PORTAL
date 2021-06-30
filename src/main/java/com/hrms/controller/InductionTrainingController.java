@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hrms.ImageUtil;
 import com.hrms.model.Department;
@@ -129,7 +130,7 @@ public class InductionTrainingController {
 	
 	
 	@PostMapping("/saveInductionTraining")
-	public String saveInductionTraining(@ModelAttribute("inductionTraining")InductionTrainingUtil localCon, Model model, HttpSession session,HttpServletRequest request) throws ParseException {
+	public String saveInductionTraining(@ModelAttribute("inductionTraining")InductionTrainingUtil localCon, Model model, HttpSession session,HttpServletRequest request,RedirectAttributes redirectAttributes) throws ParseException {
 		if (session.getAttribute("username") == null) {
 			return "redirect:" + "./";
 		}
@@ -201,6 +202,8 @@ public class InductionTrainingController {
 				
 				if (flag > 0) {
 					session.setAttribute("Message", "Data added successfully.");
+					 redirectAttributes.addFlashAttribute("message", "Data Save Successfully !  ");
+					  redirectAttributes.addFlashAttribute("alertClass", "alert-success");
 					
 				} else {
 					System.out.println("Enter into  failure part :");
