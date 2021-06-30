@@ -94,7 +94,7 @@ public class ApplicantInformationController {
 		}
 
 		try {
-			List<City> cityList = cityService.getAllCities();
+			List<City> cityList = cityService.findAllCity();
 			System.out.println("city list size : " + cityList.size());
 			if (cityList != null) {
 				model.addAttribute("cityList", cityList);
@@ -104,11 +104,12 @@ public class ApplicantInformationController {
 		}
 
 		try {
-			List<Employee> listEmployee = employeeService.getAllEmployees();
+			List<Employee> listEmployee = employeeService.findAllEmployee();
 			if (listEmployee != null) {
 				model.addAttribute("listEmployee", listEmployee);
 			}
 		} catch (Exception e) {
+			System.out.println("Error===>"+e.getMessage());
 			e.printStackTrace();
 		}
 
