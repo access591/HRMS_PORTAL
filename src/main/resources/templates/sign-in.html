@@ -67,13 +67,18 @@
 							
 					<form action="#" th:action="@{/loginUser}" th:object="${user}"
 						method="post">
-								<div class="form-group requiired">
-								<label>User Code</label>
-								<input class="form-control form-control-lg" type="text" name="userCode" placeholder="Enter your User Code" />
+								<div class="form-group">
+								<label>User Code</label>&nbsp;&nbsp;
+								 <span class="input-group-addon"><em class="fa fa-user"></em></span>
+								<input class="form-control form-control-lg"  type="text" maxlength="20" name="userCode" pattern="^[a-zA-Z\d]*$" title="User Code"
+       					          oninvalid="this.setCustomValidity('Please Enter valid User Code')"
+ 												oninput="setCustomValidity('')" placeholder="Enter your User Code"required aria-required="true" />
 								</div>
 										<div class="form-group">
-										<label>Password</label>
-										<input class="form-control form-control-lg" type="password" name="userPassword" placeholder="Enter your password" />
+										<label>Password</label>&nbsp;&nbsp;
+										<span class="input-group-addon"><em class="fa fa-lock"></em></span> 
+										<input class="form-control form-control-lg" oninvalid="this.setCustomValidity('Please Enter valid Password')"
+ 											title="Password" oninput="setCustomValidity('')" type="password"maxlength="30" name="userPassword" placeholder="Enter your password" required aria-required="true"/>
 									
 										</div>
 										
