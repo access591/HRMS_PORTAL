@@ -357,6 +357,7 @@ body {
 
 											<th:block th:switch="${leave.status}">
 												<td th:case="'Y'" class="text-center">Approved</td>
+												<td th:case="'D'" class="text-center">Approved</td>
 												<td th:case="'C'" class="text-center">Cancel</td>
 												<td th:case="'N'" class="text-center">Pending</td>
 											</th:block>
@@ -364,6 +365,13 @@ body {
 											<td class="text-center"><th:block
 													th:switch="${leave.status}">
 													<div th:case="'Y'">
+														<a th:href="@{viewRequisition/{id}(id=${leave.reqCode})}"><em
+															class="align-middle fas fa-fw fa-pen"></em></a> <a
+															th:href="@{deleteRequisition/{id}(id=${leave.reqCode})}"
+															onclick="return confirm('Are you sure?')"><em
+															class="align-middle fas fa-fw fa-trash"></em></a>
+													</div>
+													<div th:case="'D'">
 														<a th:href="@{viewRequisition/{id}(id=${leave.reqCode})}"><em
 															class="align-middle fas fa-fw fa-pen"></em></a> <a
 															th:href="@{deleteRequisition/{id}(id=${leave.reqCode})}"
