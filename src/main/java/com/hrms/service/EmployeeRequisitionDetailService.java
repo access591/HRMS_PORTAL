@@ -21,4 +21,5 @@ public interface EmployeeRequisitionDetailService {
 	void removeEmployeeRequisitionDetail(String id);
 	
 	public List<EmployeeRequisitionDetail> findUniqueDesignation();
+	
 }

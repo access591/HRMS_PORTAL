@@ -27,6 +27,7 @@ import com.hrms.model.ReqAdvertisement;
 import com.hrms.model.ReqAdvertisementDetail;
 import com.hrms.service.DepartmentService;
 import com.hrms.service.DesignationService;
+import com.hrms.service.EmployeeRequisitionDetailService;
 import com.hrms.service.EmployeeRequisitionService;
 import com.hrms.service.EmployeeService;
 import com.hrms.service.ModuleService;
@@ -47,6 +48,7 @@ public class RequisitionAdvertisementController {
 	EmployeeRequisitionService employeeRequisitionService;
 	@Autowired
 	RequisitionAdvertisementService reqAdvertisementService;
+	@Autowired EmployeeRequisitionDetailService employeeRequisitionDetailService;
 
 	@InitBinder("reqAdvertisement")
 	public void customizeBinding(WebDataBinder binder) {
@@ -101,8 +103,15 @@ public class RequisitionAdvertisementController {
 			for (ReqAdvertisementDetail eDetail : reqAdvertisement.getListReqAdvertisementDetail()) {
 				eDetail.setReqAdvertisement(reqAdvertisement);
 				eDetail.setAdvtDate(reqAdvertisement.getAdvtDate());
+				
+				EmployeeRequisition empRequisition = employeeRequisitionService.findEmployeeRequisitiondById(
+						eDetail.getEmployeeRequisition().getReqCode());
+				empRequisition.setStatus("D");
+				employeeRequisitionService.updateEmployeeRequisition(empRequisition);
 			}
 
+			
+			
 			reqAdvertisementService.addActivity(reqAdvertisement);
 			session.setAttribute("message", new Message1("Data has been added Successfully", "alert-primary"));
 		} catch (Exception e) {

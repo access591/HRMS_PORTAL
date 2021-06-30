@@ -49,8 +49,8 @@ public class EmployeeRequisitionDaoImpl extends AbstractGenericDao<EmployeeRequi
 		try {
 			tx = session.beginTransaction();
 			Query<EmployeeRequisition> query = session.createQuery("from EmployeeRequisition e "
-					+ "left join fetch e.departmet d where e.status=:status"
-					+ " group by d",
+					+ "left join fetch e.departmet d where e.status=:status",
+					
 					EmployeeRequisition.class);
 			
 			query.setParameter("status", "Y");
