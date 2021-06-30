@@ -73,7 +73,7 @@ body {
 													aria-describedby="datatables-buttons">
 													<thead>
 														<tr>
-															<th scope="col" >Employee Req Code</th>
+															<th scope="col">Employee Req Code</th>
 															<th scope="col">Requisition File Date</th>
 
 															<th scope="col">Department Name</th>
@@ -90,14 +90,17 @@ body {
 
 														<tr th:each="commonUtil : ${listCommonUtil} ">
 															<td th:text="${commonUtil.reqCode}">1</td>
-															<td th:text="${commonUtil.reqDate}"></td>
+															<td
+																th:text="${#dates.format(commonUtil.reqDate, 'dd-MM-yyyy')}"></td>
+															
 
-															<td th:text="${commonUtil.departmet.deptName}"></td>
+															<td th:text="${#strings.capitalize(commonUtil.departmet.deptName)}"></td>
 
 
 															<td th:text="${commonUtil.reqPriority}"></td>
-															<td th:text="${commonUtil.reqTill}"></td>
-
+															
+															<td
+																th:text="${#dates.format(commonUtil.reqTill, 'dd-MM-yyyy')}"></td>
 															<td th:if="${commonUtil.status == 'Y'}">
 																<div class="dropdown show">
 																	<a class="btn btn-primary dropdown-toggle" href="#"
@@ -158,7 +161,7 @@ body {
 																th:href="@{viewRequisition/{id}(id=${commonUtil.reqCode})}"
 																class="btn btn-primary"><em class="fa fa-eye"></em></a>
 
-																
+
 															</td>
 														</tr>
 

@@ -8,6 +8,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 
 import com.hrms.model.ApplicantInfo;
@@ -22,6 +23,7 @@ public class ApplicantInfoServiceImpl implements ApplicantInfoService {
 	ApplicantInfoDao applicantInfoDao;
 
 	@Override
+	@Modifying
 	public void addApplicantInfo(ApplicantInfo applicantInfo) {
 
 		Session session = sessionFactory.openSession();

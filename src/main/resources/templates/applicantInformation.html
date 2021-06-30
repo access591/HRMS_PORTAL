@@ -81,7 +81,18 @@ body {
 											style="color: red"></div>
 									</div>
 								</div>
-								<div class="card-body"></div>
+								<div class="card-body">
+									<div class="row">
+											<div th:if="${session.message}"
+												class="alert alert-primary alert-dismissible fade show">
+												<p class="text-center" th:text="${session.message.content}"></p>
+												<th:block th:text="${#session.removeAttribute('message')}"></th:block>
+												<button type="button" class="close" data-dismiss="alert">&times;</button>
+												
+
+											</div>
+										</div>
+								</div>
 
 								<div class="col-12">
 									<form id="smartwizard-validation"
