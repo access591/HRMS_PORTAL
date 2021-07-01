@@ -5,7 +5,8 @@
 <script type="text/javascript" th:src="@{/js/app.js}"></script>
 <link rel="stylesheet" type="text/css" th:href="@{/css/modern.css}" />
 <script  src="https://www.googletagmanager.com/gtag/js?id=UA-120946860-7"></script>
-
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
 
 <style>
 
@@ -167,7 +168,7 @@ $("table").on("keyup", ".pas", function () {
 						
 					
 					</div>
-					<form id="validation-form" action="#"  th:action="@{/saveInductionTraining}" th:object="${inductionTraining}" method="post">
+					<form id="validation-form" action="#"  th:action="@{/saveInductionTraining}" th:object="${inductionTrainingEdit}" method="post">
 				              	<div class="row">
 					
 							<div class="col-12">
@@ -182,11 +183,15 @@ $("table").on("keyup", ".pas", function () {
 								<div class="card-body">
 								
 								<div class="form-row">
+								
+								
+								 <input  type="text"id="id" name="id" class="form-control  " th:field="*{id}"  >
+								
 										<div class="form-group sm col-md-6">
-													<label class="form-label">Department Name </label>
+												<label class="form-label">Department Name </label>
 												<label style="color: red">*</label>
-												<select class="form-control select2" name="departmentCode" title="Department Name" id="departmentCode" onchange="myFunctionDeptCode()" required aria-required="true">
-												 <option value="">Select Employee</option>
+												<select class="form-control select2" th:field="*{deptCode.departmentCode}" title="Department Name" id="deptCode">
+												 <option value="">Select Department</option>
 												<option th:each="e :${listDepartment}"th:value="${e.getDepartmentCode()}" th:text="${e.getDeptName()}"></option>
 											     	</select>
 												</div>
@@ -194,7 +199,7 @@ $("table").on("keyup", ".pas", function () {
 										    	<div class="form-group sm col-md-6">
 													<label class="form-label">Employee Name</label>
 												<label style="color: red">*</label>
-												<select class="form-control select2" name="empCode" title="Employee Name" id="empCode" onchange="myFunctionEmpCode()" required aria-required="true">
+												<select class="form-control select2" title="Employee Name"  th:field="*{empCode.empCode}">
 												 <option value="">Select </option>
 												<option th:each="e :${listEmployee}"th:value="${e.getEmpCode()}" th:text="${e.getEmpName()}"></option>
 											     	</select>
@@ -223,6 +228,7 @@ $("table").on("keyup", ".pas", function () {
 											<table id="example" aria-describedby="example" class="table" style="width:100%">
 											<thead>
 												<tr>
+												<th  scope="col">id</th>
 													<th  scope="col">Department Code.</th>
 													<th  scope="col">Department Name.</th>
 													<th  scope="col">Contact Person</th>
@@ -233,16 +239,14 @@ $("table").on("keyup", ".pas", function () {
 												</tr>
 											</thead>
 											<tbody>
-												<tr id='addr0'>
-	                                           
-	                                            
-	                                          
-													<td><input type="text" id="departmentCode2" name='departmentCode20'placeholder='Department Code '  /></td>
-													<td><input type="text" id="deptName" name='deptName0'placeholder='department  Name'  /></td>
+												<tr id='addr0' th:each="row, stat :${inductionTrainingEdit.inductionTrainingDetail}">
+	                                            <td><input type="text"  name='id'placeholder='Department Code ' th:field="*{inductionTrainingDetail[__${stat.index}__].id}"  /></td>
+												<td><input type="text"  name='departmentCode20'placeholder='Department Code ' th:field="*{inductionTrainingDetail[__${stat.index}__].deptCode.departmentCode}"  /></td>
+													<td><input type="text" id="deptName" name='deptName0'placeholder='department  Name'th:field="*{inductionTrainingDetail[__${stat.index}__].deptCode.deptName}"  /></td>
 
-													<td><input type="text" name='contPerson0'placeholder='Contact Person'/></td>
-													<td><input type="date" name='trainingDate0'placeholder='Duration' /></td>
-												 <td> <select class="form-control Select"name="duration0" id="duration0">
+													<td><input type="text" name='contPerson0'placeholder='Contact Person'  th:field="*{inductionTrainingDetail[__${stat.index}__].contPerson}"  /></td>
+													<td><input type="date" name='trainingDate0'placeholder='Duration'    th:field="*{inductionTrainingDetail[__${stat.index}__].trainingDate}"  /></td>
+												 <td> <select class="form-control Select"name="duration0" id="duration0" th:field="*{inductionTrainingDetail[__${stat.index}__].duration}"  >
 												<option value="">Select Type</option>
 												<option th:Value="1">1St Half </option>
 												<option th:Value="2">2nd Half</option>
@@ -271,51 +275,7 @@ $("table").on("keyup", ".pas", function () {
 	                     &nbsp;
 					<button type="reset"class="btn btn-primary" value="Reset">Reset</button> 
 </form>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	<div class="col-12">
-							<div class="card">
-								<div class="card-header">
-								</div>
-								<div class="card-body">
-									<table id="datatables-buttons" class="table table-striped display" style="width:100%"aria-describedby="example">
-										<thead>
-											<tr >
-												<th scope="col">Induction Id </th>
-												<th scope="col">Employee Name </th>
-												<th scope="col">Department Name</th>
-												<th scope="col">Designation</th>
-											
-												<th scope="col">Action </th>
-											</tr >
-											
 
-
-										</thead>
-										<tbody>
-										 <tr th:each = "listOfInd : ${listInduct}">
-										<td th:text="${listOfInd.id}" ></td>
-										<td th:text="${listOfInd.empName}"></td>
-										<td  th:text="${listOfInd.deptName}"></td>
-										<td  th:text="${listOfInd.desgName}"></td>
-									
-										  <td>
-									
-							 <!-- <a th:href="@{/editInductionTraining/{id}/(id=${listOfInd.id})}"><em class="fa fa-edit"></em></a>   -->
-						     <a th:href="@{/deleteInductionTraining/{id}/(id=${listOfInd.id})}"onclick="return confirm('Are you sure?')"><em class="fa fa-times"></em></a>
-									
-									
-										</td>  
-									
-										</tr>
-									
-									
-										</tbody>
-									
-									</table>
-								</div>
-								
-							</div>
-						</div>
 				</div>
 			
 		</main>
@@ -326,178 +286,31 @@ $("table").on("keyup", ".pas", function () {
 		</div>
 		
 
-	<script>
-		$(function() {
-
-			$("input[name='localConvDate']").daterangepicker({
-				singleDatePicker: true,
-			    autoApply: true,
-				locale: {
-		            format: 'DD/MM/YYYY'
-		        },
-				showDropdowns: true
-			});
-			
-	
-		
-
-
-
-			
-			// Datatables basic
-			$('#datatables-basic').DataTable({
-				responsive: true
-			});
-			// Datatables with Buttons
-			var datatablesButtons = $('#datatables-buttons').DataTable({
-				  deferRender:true,
-		            scrollCollapse: true,
-		            scrollX: true,
-				   responsive: true,
-				   lengthMenu :[[10,20,30,-1 ],['10 rows', '20 rows', '30 rows', 'Show all' ] ],
-					buttons :[]
-			});
-			datatablesButtons.buttons().container().appendTo("#datatables-buttons_wrapper .col-md-6:eq(0)")
-		});
-		
-	</script>
 			
 		<script>
 	$(document).ready(function() {
-	    $('#example').DataTable( {
+		 $('input[id=date]').datepicker({
+			    dateFormat: 'yyyy-MM-yyyy' // HTML 5 
+			   
+			  });
+	
+		$('#example').DataTable( {
 	        "scrollY": 200,
 	        "scrollX": true,
 	        deferRender:true,
             scrollCollapse: true,
             
 	    } );
+	
+			 
+			 	
 	} );
 	</script>
 
 	
 
-	<script>
-	function myFunctionEmpCode(){
-/* 		 var empCode= $('#empCode option:selected').value; */
-		 var empCode= document.getElementById('empCode').value
-	    console.log("ajax request : "+ empCode);
-	    const xhr = new XMLHttpRequest();
-	    xhr.open('GET','./viewEmployeeDetails/'+empCode,true);
-	    xhr.getResponseHeader('content-type','application/json');
-	    xhr.onload = function(){
-	        if(this.status===200){
-	            let obj = JSON.parse(this.responseText);
-	            console.log(obj);
-	            $('#empName').val(obj.empName);
-	            $('#deptName').val(obj.deptName);
-	            $('#desgName').val(obj.desgName);
-	            $('#empPayCode').val(obj.empPayCode);
-	        }
-	        else{
-	            console.error("some error occured");
-	        }
-		
-	    }
-	    xhr.send();
-	}
-
-
-
-	
-	</script>
 	
 
-<script>
-	function myFunctionDeptCode(){
-/* 		 var empCode= $('#empCode option:selected').value; */
-		 var departmentCode= document.getElementById('departmentCode').value
-	    console.log("ajax request : "+ departmentCode);
-	    const xhr = new XMLHttpRequest();
-	    xhr.open('GET','./viewInductionBydepartment/'+departmentCode,true);
-	    xhr.getResponseHeader('content-type','application/json');
-	    xhr.onload = function(){
-	        if(this.status===200){
-	            let obj = JSON.parse(this.responseText);
-	            console.log(obj);
-	            
-	            $('#empCode').empty();
-	            $('#empCode').append(
-						$('<option>').val("").text("Select Employee"));
-					
-	            $('#empName').val(obj.empName);
-	            $('#empCode').val(obj.empCode);
-	            
-	            $.each(obj,
-						function(i, item) {
-							/* console.log(" i " + i + " item : "
-									+ item.empCode);
-							console.log(" i " + i + " item : "
-									+ item.empName); */
-							
-							
-							$('#empCode').append(
-							$('<option>').val(this.empCode).text(this.empName));
-						});
-	        }
-	        else{
-	            console.error("some error occured");
-	        }
-		
-	    }
-	    xhr.send();
-	}
-
-	</script>
-		<script>
-	function myFunctionEmpCode(){
-		  
-		 var empCode= document.getElementById('empCode').value
-	    console.log("ajax request : "+ empCode);
-	
-	    const xhr = new XMLHttpRequest();
-	    xhr.open('GET','./viewinductionByEmployee/'+empCode,true);
-	    xhr.getResponseHeader('content-type','application/json');
-	    xhr.onload = function(){
-	    	 
-	        if(this.status===200){
-	            let obj = JSON.parse(this.responseText);
-	            console.log(obj);
-	         
-	           // $('#example tr').slice(1).remove()
-	            var i=0;
-	 
-	            	 $('#departmentCode2').val(obj.departmentCode);
-	 	            $('#deptName').val(obj.deptName);
-	 	           
-	 	       
-	 	        
-	 	 
-	       
-	            $("#delete_row").click(function(){
-	         	   
-	       	  	 if(i>1){
-	       			 $("#addr"+(i-1)).html('');
-	       			 $('#_cr').val(i - 1);
-	       			 i--;
-	       			 
-	       			 }
-	       		 });
-	            
-	        
-	        }
-	        else{
-	            console.error("some error occured");
-	        }
-		
-	    }
-	    xhr.send();
-	}
-
-
-	
-	
-	
-	</script>
 
 
 
@@ -512,7 +325,7 @@ $("table").on("keyup", ".pas", function () {
 			}
 		});
 	</script>
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+
 
 </body>
 </html>
