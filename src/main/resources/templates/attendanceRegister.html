@@ -147,20 +147,20 @@ body {
 											<table id="example" aria-describedby="example" class="table" style="width:100%">
 											<thead>
 												<tr>
-											        <th> </th>
-											        <th> </th>
-													<th>Dept. Name</th>
-													<th>Employee Name.</th>
-													<th>Designation</th>
-													<th>Status</th>
-													<th>Shift</th>
-													<th>Shift In</th>
-													<th>Shift Out</th>
-													<th>Status</th>
-													<th>Actual Time In </th>
-													<th>Actual Time Out </th>
-													<th>Over Time </th>
-													<th>Status</th>
+											        <th scope="col"  class="text-center"> </th>
+											        <th scope="col"	 class="text-center"> </th>
+													<th scope="col"  class="text-center">Department. Name</th>
+													<th scope="col"  class="text-center">Employee Name.</th>
+													<th scope="col"  class="text-center">Designation</th>
+													<th scope="col"  class="text-center">Status</th>
+													<th scope="col"  class="text-center">Shift</th>
+													<th scope="col"  class="text-center">Shift In</th>
+													<th scope="col"  class="text-center">Shift Out</th>
+													<th scope="col"  class="text-center">Status</th>
+													<th scope="col"  class="text-center">Actual  In </th>
+													<th scope="col"  class="text-center">Actual  Out </th>
+													<th scope="col"  class="text-center">Over Time </th>
+													<th scope="col"  class="text-center">Status</th>
 													
 												</tr>
 											</thead>
@@ -169,9 +169,9 @@ body {
 												
 													<td><input type="hidden" id="deptCode0" name='deptCode0'placeholder='dept Code' /></td>
 													<td><input type="hidden" id="empCode0" name='empCode0'placeholder='Emp Code' /></td>
-													<td><input type="text" id="deptName0" name='deptName0'placeholder='Dept' /></td>
-													<td><input type="text" id="empName0"name='empName0'placeholder='emp Name'  /></td>
-													<td><input type="text" id="desgName0"name='desgName0'placeholder='desgName'/></td>
+													<td><input type="text" id="deptName0" name='deptName0'placeholder='Dept'disabled/></td>
+													<td><input type="text" id="empName0"name='empName0'placeholder='emp Name'disabled/></td>
+													<td><input type="text" id="desgName0"name='desgName0'placeholder='desgName'disabled/></td>
 													
 													<td><select name="status0" id="status0">
 															<option value="">Select Type</option>
@@ -179,7 +179,7 @@ body {
 															<option value="B">B</option>
 													</select></td>
 
-													<td><input type="text" name='shiftCode0'placeholder='Shift' /></td>
+													<td><input type="text" name='shiftCode0' size="12"placeholder='Shift' /></td>
 													<td><input type="time" name='timeIn0'placeholder='Shift In'  /></td>
 													<td><input type="time" name='timeOut0'placeholder='Shift Out' /></td>
 													<td><select name="status20" id="status20">
@@ -192,8 +192,8 @@ body {
 												<td><input type="text" name='overTime0'placeholder='over time' /></td>
 												<td><select name="statusTemp0" id="statusTemp0">
 															<option value="">Select Type</option>
-															<option value="A">A</option>
-															<option value="B">B</option>
+															<option value="A">Yes</option>
+															<option value="B">No</option>
 													</select></td>
 												</tr>
 												<tr id='addr1'></tr>
@@ -363,18 +363,18 @@ body {
 		  
 		    $('#addr'+i).html("<td><input  id='deptCode"+i+"' type='hidden'/> "+
 		    		"<td><input  id='empCode"+i+"' type='hidden'/> "+
-		    		"<td><input  id='deptName"+i+"' type='text'/> "+
-		    		"</td><td><input  id='empName"+i+"' type='text' placeholder='name'>"+
-		    		"</td><td><input  id='desgName"+i+"' type='text'  placeholder='Desi'>"+
+		    		"<td><input  id='deptName"+i+"' type='text'disabled/> "+
+		    		"</td><td><input  id='empName"+i+"' type='text' placeholder='name'disabled>"+
+		    		"</td><td><input  id='desgName"+i+"' type='text'  placeholder='Desi'disabled>"+
 		    		"<td><select class=' form-control input-md' id='modeOfTravel'name='modeOfTravel"+i+"'><option value=' '>Select</option><option value='Day'>Day</option><option value='Night'>Night</option></select></td>"+
-		    		"<td><input  name='shiftCode"+i+"' type='text' placeholder='Shift '></td>"+
+		    		"<td><input  name='shiftCode"+i+"' type='text' size='12' placeholder='Shift '></td>"+
 		    		"<td><input  name='timeIn"+i+"' type='time' placeholder='Shift In'></td>"+
 		    		"<td><input  name='timeOut"+i+"' type='time' placeholder='ShiftIn'></td>"+
 		    		"<td><select class=' form-control input-md' id='modeOfTravel'name='modeOfTravel"+i+"'><option value=' '>Select</option><option value='Day'>Day</option><option value='Night'>Night</option></select></td>"+
 		    		"<td><input  name='aTimeIn"+i+"' type='time' placeholder='Actual Time In'></td>"+
 		    		"<td><input  name='aTimeOut"+i+"' type='time' placeholder='Actual Time Out'></td>"+
 		    		"<td><input  name='overTime"+i+"' type='text' placeholder='Over Time '></td>"+
-		    		"<td><select class=' form-control input-md' id='modeOfTravel'name='modeOfTravel"+i+"'><option value=' '>Select</option><option value='Day'>Day</option><option value='Night'>Night</option></select></td>"+
+		    		"<td><select class=' form-control input-md' id='modeOfTravel'name='modeOfTravel"+i+"'><option value=' '>Select</option><option value='Y'>Yes</option><option value='N'>No</option></select></td>"+
 		    		"");
 			 $('#deptCode'+i).val(obj[i].departmentCode);
 		        $('#empCode'+i).val(obj[i].empCode);
