@@ -88,6 +88,8 @@ public class RequisitionAdvertisementController {
 			model.addAttribute("listReqAdvertisement", listReqAdvertisement);
 		}
 
+		model.addAttribute("demo1", "12434");
+		
 		return "Advertisment";
 	}
 
@@ -185,6 +187,13 @@ public class RequisitionAdvertisementController {
 
 		return employeeRequisitionService.findEmployeeRequisitiondById(reqCode);
 
+	}
+	
+	@ResponseBody
+	@GetMapping("getemployeerequisitionstatus")
+	public List<EmployeeRequisition> getEmployeeReqByStatusY() {
+		
+		return employeeRequisitionService.findEmployeeReqByStatusY();
 	}
 
 }

@@ -263,12 +263,21 @@ public class EmployeeRequisitionController {
 		List<Employee> employeeList = employeeService.findByDepartmentCode(deptCode);
 		List<CommonUtil> details = new ArrayList<>();
 		CommonUtil empl = new CommonUtil();
+		
+		String designationCode = "";
 		for(int i =0;i<employeeList.size();i++) {
-			Designation designation = designationService.findDesignationById(employeeList.get(i).getDesignationCode());
 			
-			empl.setDesgName(designation.getDesgName());
-			empl.setDesigCode(designation.getDesgCode());
-			details.add(empl);
+			
+			if(!designationCode.equals(employeeList.get(i).getDesignationCode())) {
+				
+				designationCode = employeeList.get(i).getDesignationCode();
+				Designation designation = designationService.findDesignationById(designationCode);
+				
+				empl.setDesgName(designation.getDesgName());
+				empl.setDesigCode(designation.getDesgCode());
+				details.add(empl);
+			}
+			
 		}
 		return details;
 	}
