@@ -57,8 +57,7 @@ body {
 											<div class="col-12 col-lg-6">
 
 												<div class="form-group">
-													<label> User Code </label> <label style="color: red">*</label>
-
+												<label> User Code </label> <label style="color: red">*</label>
 												<input type="text" class="form-control" id="userCode"name="userCode" maxlength="12"  required aria-required="true"
 												 oninvalid="this.setCustomValidity('Please Enter User Code')"oninput="setCustomValidity('')">
 												</div>
@@ -108,7 +107,7 @@ body {
 													<label> User Password </label> <label style="color: red">*</label>
 
 												<input type="password" class="form-control" id="userPass"name="userPass" maxlength="12"  required aria-required="true"
-												 oninvalid="this.setCustomValidity('Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters')"oninput="setCustomValidity('')"pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" >
+												 oninvalid="this.setCustomValidity('Must contain At least 1 Uppercase At least 1 Lowercase At least 1 Number At least 1 Symbol,Min 8 chars and Max 12 chars')"oninput="setCustomValidity('')"pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,12}$" >
 												</div>
 
 											</div>
