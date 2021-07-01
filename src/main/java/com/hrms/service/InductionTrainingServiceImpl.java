@@ -39,5 +39,14 @@ SessionFactory sessionfactory;
 		this.inductionTraining.delete(id);
 		
 	}
+	@Override
+	public InductionTraining findByIdInductionTraining(long id) {
+		return inductionTraining.findById(id);
+	}
+	@Override
+	public void updateInductionTraining(InductionTraining inductionTraining) {
+		this.inductionTraining.saveOrUpdate(inductionTraining);
+		
+	}
 
 }

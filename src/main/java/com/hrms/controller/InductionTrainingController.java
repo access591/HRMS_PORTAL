@@ -25,7 +25,6 @@ import com.hrms.model.Designation;
 import com.hrms.model.Employee;
 import com.hrms.model.InductionTraining;
 import com.hrms.model.InductionTrainingDetail;
-
 import com.hrms.model.MenuModule;
 import com.hrms.service.DepartmentService;
 import com.hrms.service.DesignationService;
@@ -222,6 +221,43 @@ public class InductionTrainingController {
 
 		return "redirect:/inductionTraining";
 	}
+	
+	
+	@GetMapping(value = {"/editInductionTraining/{id}"})
+	public String editInductionTraining(@PathVariable("id")long id,  Model model,HttpSession session)
+	 { 	if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
+	 	List<Employee> listEmployee = employeeService.getAllEmployees();
+		model.addAttribute("listEmployee", listEmployee);
+	 	List<Department> listDepartment = departmentService.getAllDepartments();
+		model.addAttribute("listDepartment", listDepartment);
+		  session.setAttribute("imgUtil", new ImageUtil());
+		  InductionTraining inductionTrainingEdit =	inductionTrainingService.findByIdInductionTraining(id);
+		  model.addAttribute("inductionTrainingEdit", inductionTrainingEdit);
+
+	   
+	    return "editInductionTraining";
+	}
+	
+	@PostMapping("/updateInductionTraining")
+	  public String updateInductionTraining(@ModelAttribute("editInductionTraining") InductionTraining inductionTraining, Model model,HttpSession session) {
+		if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
+		
+		  try {
+		
+			this.inductionTrainingService.updateInductionTraining(inductionTraining);
+			  
+			  return "redirect:/inductionTraining";
+		} catch (Exception e) {
+		
+			e.printStackTrace();
+		}
+		  return "redirect:/inductionTraining";
+	  }
+	
 	
 	
 	@GetMapping(value = { "/deleteInductionTraining/{id}" })

@@ -12,4 +12,8 @@ public interface InductionTrainingService {
 
 	void removeInductionTr(Long id);
 
+	InductionTraining findByIdInductionTraining(long id);
+
+	void updateInductionTraining(InductionTraining inductionTraining);
+
 }

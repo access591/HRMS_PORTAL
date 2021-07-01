@@ -40,7 +40,7 @@ public class InductionTraining implements Serializable {
 	@Column(name = "INS_DATE", updatable = false)
 	private Date insDate = new Date();
 	
-	@OneToMany(mappedBy="inductionTraining",cascade = CascadeType.ALL,orphanRemoval = true)
+	@OneToMany(mappedBy="id",cascade = CascadeType.ALL,orphanRemoval = true)
 	List<InductionTrainingDetail> inductionTrainingDetail;
 
 	
