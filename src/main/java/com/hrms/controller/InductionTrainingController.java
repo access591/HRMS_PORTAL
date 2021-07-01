@@ -49,6 +49,8 @@ public class InductionTrainingController {
 	@Autowired
 	InductionTrainingDetailService inductionTrainingDetailService;
 
+	
+	
 	@GetMapping("/inductionTraining")
 	public String inductionTraining(Model model, HttpSession session) {
 		if (session.getAttribute("username") == null) {

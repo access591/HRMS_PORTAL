@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "INDUCT_TRAINING_DET")
@@ -33,7 +35,7 @@ public class InductionTrainingDetail  implements Serializable {
 	
 	@Column(name = "CONT_PERSON")
 	private String contPerson;
-
+	@Temporal(TemporalType.DATE)
 	@Column(name = "TRAINING_DATE")
 	private Date trainingDate;
 	@ManyToOne

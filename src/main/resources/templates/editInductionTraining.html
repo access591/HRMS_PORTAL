@@ -38,100 +38,7 @@ body {
   z-index: 100;
 }
 </style>
-<script>
-$(document).ready(function(){
 
-    var i=1;
-   $("#add_row").click(function(){
-    $('#addr'+i).html("<td><select class=' form-control input-md' id='modeOfTravel'name='modeOfTravel"+i+"'><option value=' '>Select</option></select></td>"+
-    		"</td><td><input  name='startPlace"+i+"' type='text' placeholder='Name'  class='form-control input-md'>"+
-    		"</td><td><input  name='vistPlace"+i+"' type='text'  placeholder='Father Name'class='form-control input-md'>"+
-    		"</td><td><input  name='purposeOfVist"+i+"' type='text' placeholder='Employee Pay Code'  class='pas form-control input-md'></td>"+
-    		
-    	
-    		"<td><input  name='distanceKm"+i+"' type='text' placeholder='Status'  class='form-control input-md'></td>"+
-    		
-    		
-    		"");
-
-    $('#example').append('<tr id="addr'+(i+1)+'"></tr>');
-    $('#_cr').val(i+1);
-    
-    i++; 
-});
-   
-   
-   $("#delete_row").click(function(){
-	  	 if(i>1){
-			 $("#addr"+(i-1)).html('');
-			 $('#_cr2').val(i - 1);
-			 i--;
-			 calculateSum(),calculateSumtotalPassing()
-			 }
-		 });
-   
-   
-  
-  
-   
-   
-  
-function calculateSum() {
-
-    var sum = 0;
-    //iterate through each textboxes and add the values
-    $(".txt").each(function () {
-
-        //add only if the value is number
-        if (!isNaN(this.value) && this.value.length != 0) {
-            sum += parseFloat(this.value);
-        }
-
-    });
-    //.toFixed() method will roundoff the final sum to 2 decimal places
-   var fds=sum;
-   //$("#").html(sum.toFixed(2));
-   $("#totalClaim").val(sum);
-    
-}
-
-$("table").on("keyup", ".txt", function () {
-    calculateSum();
-});
-
-
-function calculateSumtotalPassing() {
-
-    var sum = 0;
-    //iterate through each textboxes and add the values
-    $(".pas").each(function () {
-
-        //add only if the value is number
-        if (!isNaN(this.value) && this.value.length != 0) {
-            sum += parseFloat(this.value);
-        }
-
-    });
-    //.toFixed() method will roundoff the final sum to 2 decimal places
-   var fds=sum;
-   //$("#").html(sum.toFixed(2));
-   $("#totalPas").val(sum);
-    
-}
-
-$("table").on("keyup", ".pas", function () {
-	calculateSumtotalPassing();
-});
-
-
-
-
-
-
-
-});
-
-</script>
 <script>
 
 
@@ -168,7 +75,7 @@ $("table").on("keyup", ".pas", function () {
 						
 					
 					</div>
-					<form id="validation-form" action="#"  th:action="@{/saveInductionTraining}" th:object="${inductionTrainingEdit}" method="post">
+					<form id="validation-form" action="#"  th:action="@{/updateInductionTraining}" th:object="${inductionTrainingEdit}" method="post">
 				              	<div class="row">
 					
 							<div class="col-12">
@@ -240,12 +147,12 @@ $("table").on("keyup", ".pas", function () {
 											</thead>
 											<tbody>
 												<tr id='addr0' th:each="row, stat :${inductionTrainingEdit.inductionTrainingDetail}">
-	                                            <td><input type="text"  name='id'placeholder='Department Code ' th:field="*{inductionTrainingDetail[__${stat.index}__].id}"  /></td>
-												<td><input type="text"  name='departmentCode20'placeholder='Department Code ' th:field="*{inductionTrainingDetail[__${stat.index}__].deptCode.departmentCode}"  /></td>
-													<td><input type="text" id="deptName" name='deptName0'placeholder='department  Name'th:field="*{inductionTrainingDetail[__${stat.index}__].deptCode.deptName}"  /></td>
+	                                            <td><input type="text" placeholder='Department Code ' size='10' th:field="*{inductionTrainingDetail[__${stat.index}__].id}"  /></td>
+												<td><input type="text"  placeholder='Department Code ' size='10' th:field="*{inductionTrainingDetail[__${stat.index}__].deptCode.departmentCode}"  /></td>
+													<td><input type="text"placeholder='department  Name'th:field="*{inductionTrainingDetail[__${stat.index}__].deptCode.deptName}"  /></td>
 
-													<td><input type="text" name='contPerson0'placeholder='Contact Person'  th:field="*{inductionTrainingDetail[__${stat.index}__].contPerson}"  /></td>
-													<td><input type="date" name='trainingDate0'placeholder='Duration'    th:field="*{inductionTrainingDetail[__${stat.index}__].trainingDate}"  /></td>
+													<td><input type="text" placeholder='Contact Person'  th:field="*{inductionTrainingDetail[__${stat.index}__].contPerson}"  /></td>
+													<td><input type="date" placeholder='Duration'    th:field="*{inductionTrainingDetail[__${stat.index}__].trainingDate}"  /></td>
 												 <td> <select class="form-control Select"name="duration0" id="duration0" th:field="*{inductionTrainingDetail[__${stat.index}__].duration}"  >
 												<option value="">Select Type</option>
 												<option th:Value="1">1St Half </option>
@@ -271,9 +178,9 @@ $("table").on("keyup", ".pas", function () {
 	                     </div>
 	                     </div>
 					</div>
-					<button type="submit" class="btn btn-primary">Save</button>&nbsp;
+					<button type="submit" class="btn btn-primary">Update</button>&nbsp;
 	                     &nbsp;
-					<button type="reset"class="btn btn-primary" value="Reset">Reset</button> 
+					<button type="button"class="btn btn-primary" onclick="window.location.href='/inductionTraining';">Cancel</button>
 </form>
 
 				</div>
