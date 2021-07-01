@@ -57,8 +57,7 @@ body {
 											<div class="col-12 col-lg-6">
 
 												<div class="form-group">
-													<label> User Code </label> <label style="color: red">*</label>
-
+												<label> User Code </label> <label style="color: red">*</label>
 												<input type="text" class="form-control" id="userCode"name="userCode" maxlength="12"  required aria-required="true"
 												 oninvalid="this.setCustomValidity('Please Enter User Code')"oninput="setCustomValidity('')">
 												</div>
@@ -107,8 +106,8 @@ body {
 												<div class="form-group">
 													<label> User Password </label> <label style="color: red">*</label>
 
-												<input type="password" class="form-control" id="userPass"name="userPass" maxlength="12" title="User Password !" required aria-required="true"
-												 oninvalid="this.setCustomValidity('Please Enter Password')"oninput="setCustomValidity('')">
+												<input type="password" class="form-control" id="userPass"name="userPass" maxlength="12"  required aria-required="true"
+												 oninvalid="this.setCustomValidity('Must contain At least 1 Uppercase At least 1 Lowercase At least 1 Number At least 1 Symbol,Min 8 chars and Max 12 chars')"oninput="setCustomValidity('')"pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,12}$" >
 												</div>
 
 											</div>
@@ -131,7 +130,7 @@ body {
 										<th scope="col">User Code</th>
 										<th scope="col">User Name</th>
 										<th scope="col">Employee Name</th>
-										<th scope="col">User Pass</th>
+									
 										<th scope="col">User Active</th>
 										<th scope="col">Action</th>
 									</tr>
@@ -141,8 +140,7 @@ body {
 										<td th:text="${user.userCode}"></td>
 										<td th:text="${user.userName}"></td>
 										<td th:text="${user?.empCode?.empName}"></td>
-										<td th:text="${user.userPass}"></td>
-										<td th:text="${user.userActiveYn}"></td>
+																				<td th:text="${user.userActiveYn}"></td>
 									<td><a th:href="@{/editUser/{id}(id=${user.userCode})}" class="btn btn-primary"><em class="fa fa-edit"></em></a>
 												<a th:href="@{/deleteUser/{id}(id=${user.userCode})}" class="btn btn-primary"onclick="return confirm('Are you sure?')"><em class="fa fa-times"></em></a>
 												</td>
