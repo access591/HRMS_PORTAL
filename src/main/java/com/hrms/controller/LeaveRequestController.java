@@ -94,13 +94,17 @@ public class LeaveRequestController {
 		List<Employee> listEmployee = employeeService.getAllEmployees();
 		
 		UserEntity user = null;
-		List<LeaveGrantRegister> grant = null;
-		try {
-			user = userService.findUserById(session.getAttribute("username").toString());
-			String employeCode = user.getEmpCode().getEmpName();
-			
-			grant = leaveGrantService.findLeaveGrantByEmpCode(employeCode);
-		}
+		List<LeaveGrantRegister> grant;
+//		try {
+//			user = userService.findUserById(session.getAttribute("username").toString());
+//			String employeCode = user.getEmpCode().getEmpName();
+//			
+//			grant = leaveGrantService.findLeaveGrantByEmpCode(employeCode);
+//			
+//		}catch(Exception e) {
+//			e.printStackTrace();
+//		}
+//		
 		
 		
 		
