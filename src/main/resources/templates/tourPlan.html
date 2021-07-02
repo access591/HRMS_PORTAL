@@ -6,7 +6,6 @@
 <link rel="stylesheet" type="text/css" th:href="@{/css/modern.css}" />
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
-
 <script  src="https://www.googletagmanager.com/gtag/js?id=UA-120946860-7"></script>
 <style>
 body {
@@ -32,10 +31,10 @@ body {
 $(document).ready(function(){
     var i=1;
    $("#add_row").click(function(){
-    $('#addr'+i).html("<td><input name='startPlace"+i+"' type='text'  placeholder='Start Place'  class='form-control txt input-md'/> "+
-    		"</td><td><input  name='endPlace"+i+"' type='text' placeholder='end Place'  class='form-control input-md'>"+
-    		"</td><td><input  name='fromDate"+i+"' type='Date'  placeholder='From Date'class='form-control input-md'>"+
-    		"</td><td><input  name='toDate"+i+"' type='Date' placeholder='Purpose Of Vist'  class='pas form-control input-md'></td>"+
+    $('#addr'+i).html("<td><input name='startPlace"+i+"' type='text'  placeholder='Start Place'  class='form-control txt input-md'required/> "+
+    		"</td><td><input  name='endPlace"+i+"' type='text' placeholder='end Place'  class='form-control input-md'required>"+
+    		"</td><td><input  name='fromDate"+i+"' type='Date'  placeholder='From Date'class='form-control input-md'required>"+
+    		"</td><td><input  name='toDate"+i+"' type='Date' placeholder='Purpose Of Vist'  class='pas form-control input-md'required></td>"+
     		"<td><input  name='purpose"+i+"' type='text' placeholder='Purpose/Task to be done'  class='form-control input-md'></td>"+
     		"");
 
@@ -198,14 +197,9 @@ $(document).ready(function(){
 														</table>
 								
 								</div>
-								
-								
-	                     
 	                     
 	                     </div>
 	                     </div>
-	                     
-					
 					</div>
 					<button type="submit" class="btn btn-primary">Save</button>&nbsp;
 	                     &nbsp;
@@ -228,9 +222,6 @@ $(document).ready(function(){
 												<th scope="col">Designation</th>
 												<th scope="col">Action </th>
 											</tr>
-											
-
-
 										</thead>
 										<tbody>
 										<tr th:each = "tourPlan : ${ListTourPlan}">
