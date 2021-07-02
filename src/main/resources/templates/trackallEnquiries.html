@@ -102,16 +102,16 @@ body {
 												<div class="form-group sm col-md-4">
 													<label class="form-label">Employee Name</label>
 												<label style="color: red">*</label>
-												<select class="form-control select2" name="empCode.empCode" id="empCode.empCode"  onchange="myFunctionEmpCode()" required aria-required="true">
+												<select class="form-control select2" name="empCode.empCode" title="Employee Name" id="empCode.empCode"  onchange="myFunctionEmpCode()" required aria-required="true">
 												 <option value="">Select Employee</option>
 												<option th:each="e :${listEmployee}"th:value="${e.getEmpCode()}" th:text="${e.getEmpName()}"></option>
 											     	</select>
 
 												</div>
 										    	<div class="form-group sm col-md-4">
-													<label class="form-label">Designation Code </label>
+													<label class="form-label">Designation Name </label>
 												<label style="color: red">*</label>
-												<select class="form-control select2" name="desgCode.desgCode" id="desgCode.desgCode"  required aria-required="true">
+												<select class="form-control select2" name="desgCode.desgCode" title="Designation  Name " id="desgCode.desgCode"  required aria-required="true">
 												 <option value="">Select Designation</option>
 												<option th:each="d :${listDesignation}"th:value="${d.getDesgCode()}" th:text="${d.getDesgName()}"></option>
 											     	</select>
@@ -127,7 +127,7 @@ body {
 
 												<div class="form-group sm col-md-4">
 												<label class="form-label">Present posting</label>
-												<input  type="text"id="prsentPosting"name="prsentPosting" title="Designation"  class="form-control"readonly>
+												<input  type="text"id="prsentPosting"name="prsentPosting" title="Present Posting "  class="form-control"readonly>
 												</div>
 												
 												<div class="form-group sm col-md-4">
@@ -140,7 +140,7 @@ body {
 									
 											<div class="form-group sm col-md-4">
 												<label class="form-label">Deputation File No</label>
-												<input  type="text"id="depuFileNo"name="depuFileNo" title="depu File No"  class="form-control">
+												<input  type="text"id="depuFileNo"name="depuFileNo" title="Deputaion  File No"  class="form-control">
 												</div>
 												
 												<div class="form-group sm col-md-4">
@@ -151,7 +151,7 @@ body {
 												<div class="form-group sm col-md-4">
 											       <label class="form-label">Deputation Date
 											      </label>
-							                 <input  type="text"id="deputationDate"name="deputationDate" title="DEPUTATION DATE" class="form-control">
+							                 <input  type="text"id="deputationDate"name="deputationDate" title="Deputaion Date" class="form-control">
 										     </div>
 												
 												</div>
@@ -159,18 +159,18 @@ body {
 									
 											<div class="form-group sm col-md-4">
 												<label class="form-label">Under Rule 7 File NO</label>
-												<input  type="text"id="underRule7FileNo"name="underRule7FileNo" title="depu File No"  class="form-control">
+												<input  type="text"id="underRule7FileNo"name="underRule7FileNo" title="Under Rule 7 File No"  class="form-control">
 												</div>
 												
 												<div class="form-group sm col-md-4">
 												<label class="form-label">Under Rule 8 File No</label>
-												<input  type="text"id="underRule8FileNo"name="underRule8FileNo" title="Deputation Period"  class="form-control">
+												<input  type="text"id="underRule8FileNo"name="underRule8FileNo" title="Under Rule 8 File No"  class="form-control">
 												</div>
 												
 												<div class="form-group sm col-md-4">
 											       <label class="form-label">Under Rule 8 Period
 											      </label>
-							                 <input  type="text"id="underRule8Period"name="underRule8Period" title="DEPUTATION DATE" class="form-control">
+							                 <input  type="text"id="underRule8Period"name="underRule8Period" title="Under Rule 8 Period" class="form-control">
 										     </div>
 												
 												</div>
@@ -178,7 +178,7 @@ body {
 									
 											<div class="form-group sm col-md-4">
 												<label class="form-label">Under Rule 8 Date</label>
-												<input  type="text"id="underRule8Date"name="underRule8Date" title="under Rule8 Date"  class="form-control">
+												<input  type="text"id="underRule8Date"name="underRule8Date" title="under Rule 8 Date"  class="form-control">
 												</div>
 												
 												<div class="form-group sm col-md-4">
@@ -227,7 +227,7 @@ body {
 												<div class="form-group sm col-md-4">
 											       <label class="form-label">Promotion File Date
 											      </label>
-							                 <input  type="text"id="promtionFileDate"name="promtionFileDate" title="promtionFileDate" class="form-control">
+							                 <input  type="text"id="promtionFileDate"name="promtionFileDate" title="Promtion File Date" class="form-control">
 										     </div>
 												
 												</div>			
@@ -368,7 +368,7 @@ body {
 										
 										
 							<button type="submit" class="btn btn-primary">Save</button>
-								 <button type="reset"class="btn btn-primary" value="Reset">Reset</button>
+								 <button type="reset"class="btn btn-primary" value="Reset">Cancel</button>
 						     
 						      </form>
 						      </div>
@@ -381,11 +381,11 @@ body {
 	                  	<div class="col-12">
 							<div class="card">
 								<div class="card-header">
-								<div class="col-sm-12" align="right">
+								<div class="col-sm-12"style="text-align: right;">
 										<span class=" btn btn-primary pull-left" id="selectedTREN"
 											style="background-color: rgb(150, 148, 255)"> 
 											<a target="_blank" id="selectedHref" href="/reportTrackallEnquiries"style="color: black;">
-											 <i class="align-middle mr-2 fas fa-fw fa-arrow-circle-down"style="color: rgb(0, 39, 95);"></i> Generate Report
+											 <em class="align-middle mr-2 fas fa-fw fa-arrow-circle-down"style="color: rgb(0, 39, 95);"></em> Generate Report
 										    </a></span> <span> 
 										<select id="reportgenrate" name="reportgenrate"
 											class="custom-select flex-grow-1" style="width: 65px;">
