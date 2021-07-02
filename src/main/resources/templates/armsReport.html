@@ -63,7 +63,7 @@ body {
 													<label class="form-label">Employee</label> <label
 														style="color: red">*</label> <select
 														class="form-control select2" id="select_department"
-														onchange="changeDepartment()" name="empCode">
+														onchange="changeDepartment()" name="empCode" required>
 														<option value=''>--Select--</option>
 														<option value="ALL">ALL</option>
 														<option th:each="emp : ${armsLicenseList}"
@@ -75,6 +75,24 @@ body {
 													</select>
 
 
+
+												</div>
+											</div>
+											
+											
+											<div class="col-12 col-lg-6">
+												<div class="form-group">
+													<label class="form-label">Type Of Report</label> <label
+														style="color: red">*</label> <select
+														class="form-control select2"
+														name="reportType"
+														required>
+														<option value=''>--Select Here--</option>
+														<option value="P">PDF</option>
+														<option value="E">Excel</option>
+														
+
+													</select>
 
 												</div>
 											</div>
