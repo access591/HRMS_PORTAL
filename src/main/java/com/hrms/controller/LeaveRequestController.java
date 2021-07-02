@@ -23,6 +23,7 @@ import com.hrms.model.Employee;
 import com.hrms.model.Leave;
 import com.hrms.model.LeaveRequest;
 import com.hrms.model.MenuModule;
+import com.hrms.model.UserEntity;
 import com.hrms.service.EmployeeService;
 import com.hrms.service.LeaveDetailService;
 import com.hrms.service.LeaveGrantRegisterService;
@@ -91,6 +92,16 @@ public class LeaveRequestController {
 			return "redirect:" + "./";
 		}
 		List<Employee> listEmployee = employeeService.getAllEmployees();
+		
+		UserEntity user = null;
+		List<LeaveGrantRegister> grant = null;
+		try {
+			user = userService.findUserById(session.getAttribute("username").toString());
+			String employeCode = user.getEmpCode().getEmpName();
+			
+			grant = leaveGrantService.findLeaveGrantByEmpCode(employeCode);
+		}
+		
 		
 		
 		
