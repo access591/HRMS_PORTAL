@@ -10,9 +10,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -48,7 +51,16 @@ public class InductionTrainingController {
 	InductionTrainingService inductionTrainingService;
 	@Autowired
 	InductionTrainingDetailService inductionTrainingDetailService;
-
+	
+	
+	@InitBinder("editInductionTraining")
+    public void customizeBinding (WebDataBinder binder) {
+        SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
+        dateFormatter.setLenient(false);
+        binder.registerCustomEditor(Date.class, "trainingDate",new CustomDateEditor(dateFormatter, true));
+       
+    }
+	
 	
 	
 	@GetMapping("/inductionTraining")
@@ -145,12 +157,7 @@ public class InductionTrainingController {
 		induct.setEmpCode(emp);
 		induct.setDeptCode(dept);
 		induct.setInsBy(insertedBY);
-		
 		inductionTrainingService.addInductionTraining(induct);
-
-		
-	
-		
 		 int flag = 0;
 	   		int counter = 1;
 			try {
