@@ -1,8 +1,11 @@
 package com.hrms.reports;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,6 +13,14 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.Font;
+import org.apache.poi.ss.usermodel.IndexedColors;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -33,7 +44,7 @@ public class ArmsReport {
 	ArmsLicenseService armsLicenseService;
 
 	public void createArmsLicensesReport(HttpServletResponse response, HttpServletRequest request,
-			List<ArmsLicenseDetails> sourceData) throws IOException {
+			List<ArmsLicenseDetails> sourceData, String runBy) throws IOException {
 
 		String reportFileName = "ArmsLicenses"; // Parameter1
 		String sourceFileName = request.getSession().getServletContext()
@@ -50,6 +61,8 @@ public class ArmsReport {
 			Map<String, Object> parameters = new HashMap<>();
 
 			parameters.put("Parameter1", beanColDataSource);
+			parameters.put("runBy", "Run By : " + runBy);
+			parameters.put("runDate", "Run Date : " + new Date().toString());
 
 			JasperReport report = (JasperReport) JRLoader.loadObjectFromFile(sourceFileName);
 			JasperPrint jasperPrint = JasperFillManager.fillReport(report, parameters, new JREmptyDataSource());
@@ -71,7 +84,6 @@ public class ArmsReport {
 		} catch (JRException e) {
 			e.printStackTrace();
 		}
-		
 
 	}
 
@@ -81,7 +93,66 @@ public class ArmsReport {
 		ArmsLicenseDetails armsLicenseDetail = armsLicenseService.findArmsByEmpEmpCode(empCode);
 		if (armsLicenseDetail != null)
 			arms.add(armsLicenseDetail);
-		createArmsLicensesReport(response, request, arms);
+		// createArmsLicensesReport(response, request, arms);
+	}
+
+	public ByteArrayInputStream createArmLicensesExcelReport(List<ArmsLicenseDetails> sourceData) {
+		
+		String[] columns = {"No.","Name Of Person","Father Name","Address","District","State","Arm Area",
+				"Date Of Issue","Date Of Valid","Type Of Arms","Type Of Position","Number Of Licenses",
+				"Licenses Detail"};
+		
+		try {
+			Workbook workBook = new XSSFWorkbook();
+			ByteArrayOutputStream out = new ByteArrayOutputStream();
+			Sheet sheet = workBook.createSheet("Employee Arms Licenses");
+			
+			Font headerFont = workBook.createFont();
+			headerFont.setBold(true);
+			headerFont.setColor(IndexedColors.BLUE.getIndex());
+			
+			CellStyle headerCellStyle = workBook.createCellStyle();
+			headerCellStyle.setFont(headerFont);
+			
+			Row headerRow = sheet.createRow(0);
+			
+			for(int col=0;col<columns.length;col++) {
+				Cell cell = headerRow.createCell(col);
+				cell.setCellValue(columns[col]);
+				cell.setCellStyle(headerCellStyle);
+				
+			}
+			
+			int rowIndex = 1;
+			
+			for(ArmsLicenseDetails arms : sourceData) {
+				
+				Row row = sheet.createRow(rowIndex++);
+				row.createCell(0).setCellValue(rowIndex);
+				row.createCell(1).setCellValue(arms.getName());
+				row.createCell(2).setCellValue(arms.getFatherName());
+				row.createCell(3).setCellValue(arms.getAddressArms());
+				row.createCell(4).setCellValue(arms.getDistrict());
+				row.createCell(5).setCellValue(arms.getState());
+				row.createCell(6).setCellValue(arms.getArmsArea());
+				row.createCell(7).setCellValue(arms.getDoi());
+				row.createCell(8).setCellValue(arms.getDov());
+				row.createCell(9).setCellValue(arms.getToa());
+				row.createCell(10).setCellValue(arms.getTop());
+				row.createCell(11).setCellValue(arms.getArmsNol());
+				row.createCell(12).setCellValue(arms.getDealerDetails());
+				//row.createCell(13).setCellValue();
+				
+			}
+			workBook.write(out);
+			workBook.close();
+			return new ByteArrayInputStream(out.toByteArray());
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+		
 	}
 
 }
