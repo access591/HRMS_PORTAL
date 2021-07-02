@@ -57,7 +57,7 @@ $(document).ready(function(){
     		
     		"");
 
-    $('#tab1').append('<tr id="addr'+(i+1)+'"></tr>');
+    $('#example').append('<tr id="addr'+(i+1)+'"></tr>');
     $('#_cr').val(i+1);
     
     i++; 
@@ -265,20 +265,20 @@ $("table").on("keyup", ".pas", function () {
 								<a id="add_row" class="fa fa-plus" aria-hidden="true"style="font-size:28px;color:#001080"></a>&nbsp;&nbsp;&nbsp;
 								<a id='delete_row'class="fa fa-trash" style="font-size:28px;color:#399490fc"aria-hidden="true"></a>	
 								</div>
-										<table id="tab1" class="table table-striped display"
-											style="width: 100%" aria-describedby="datatables-buttons">
+										<div class="table-responsive">
+										<table id="example" aria-describedby="example" class="table" style="width:100%">
 											<thead>
 												<tr>
-													<th scope="col">Date</th>
-													<th scope="col">Start Place.</th>
-													<th scope="col">Visit Place</th>
-													<th scope="col">Purpose Of Visit</th>
-													<th scope="col">Mode Of Travel</th>
+													<th scope="col"class="text-center" >Date</th>
+													<th scope="col"class="text-center" >Starting Place.</th>
+													<th scope="col"class="text-center" >Visiting Place</th>
+													<th scope="col"class="text-center" >Purpose Of Visit</th>
+													<th scope="col"class="text-center" >Mode Of Travel</th>
 
-													<th scope="col">Distance In Km</th>
-													<th scope="col">Lta Rate</th>
-													<th scope="col">Actual Amount</th>
-													<th scope="col">Claimed Amount</th>
+													<th scope="col"class="text-center" >Distance In Km</th>
+													<th scope="col"class="text-center" >Lta Rate</th>
+													<th scope="col"class="text-center" >Actual Amount</th>
+													<th scope="col"class="text-center" >Claimed Amount</th>
 
 
 
@@ -290,15 +290,15 @@ $("table").on("keyup", ".pas", function () {
 												<tr id='addr0'>
 
 													<td><input type="Date" name='locDate0'
-														placeholder='Date' class="form-control" value="" required /></td>
+														placeholder='Date' required /></td>
 													<td><input type="text" name='startPlace0'
-														placeholder='Start Place' class="form-control" required/></td>
+														placeholder='Start Place' required/></td>
 													<td><input type="text" name='vistPlace0'
-														placeholder='Vist Place' class="form-control" required /></td>
+														placeholder='Vist Place' required /></td>
 													<td><input type="text" name='purposeOfVist0'
-														placeholder='Purpose Of Vist' class="form-control" /></td>
+														placeholder='Purpose Of Vist'  /></td>
 
-													<td><select class="form-control required" required
+													<td><select class=" required" required
 														name="modeOfTravel0" id="modeOfTravel0">
 															<option value="">Select Type</option>
 															<option th:Value="taxi">Taxi</option>
@@ -309,13 +309,13 @@ $("table").on("keyup", ".pas", function () {
 
 
 													<td><input type="text" name='distanceKm0'
-														placeholder='Distance In Km' class="form-control" /></td>
+														placeholder='Distance In Km'  /></td>
 													<td><input type="text" name='ltaRate0'
-														placeholder='Lta Rate' class="form-control" /></td>
+														placeholder='Lta Rate'  /></td>
 													<td><input type="text" name='actualAmount0'
-														placeholder='Actual Amount' class="form-control txt" required/></td>
+														placeholder='Actual Amount' class="txt" required/></td>
 													<td><input type="text" name='claimedAmount0'
-														placeholder='Claimed  Amount' class="form-control pas" required /></td>
+														placeholder='Claimed  Amount' class="pas" required /></td>
 												</tr>
 												<tr id='addr1'></tr>
 
@@ -334,7 +334,7 @@ $("table").on("keyup", ".pas", function () {
 											</tr>
 
 										</table>
-
+										</div>
 
 									</div>
 								
@@ -408,6 +408,17 @@ $("table").on("keyup", ".pas", function () {
 		</footer>
 		</div>
 		</div>
+		<script>
+	$(document).ready(function() {
+	    $('#example').DataTable( {
+	        "scrollY": 200,
+	        "scrollX": true,
+	        deferRender:true,
+            scrollCollapse: true,
+            
+	    } );
+	} );
+	</script>
 	<script>
 		$(function() {
 
