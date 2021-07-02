@@ -2,6 +2,7 @@ package com.hrms.controller;
 
 
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -138,16 +139,18 @@ public class TourPlanController {
 					
 				
 					if(request.getParameter("fromDate" + i) != null) {
-						tourPlanDetail.setFromDate(request.getParameter("fromDate" + i));
-					} else {
-						tourPlanDetail.setFromDate("" + i);
+						
+						String sDate1 = request.getParameter("fromDate" + i);
+						Date date1 = new SimpleDateFormat("yyyy-MM-dd").parse(sDate1);
+						tourPlanDetail.setFromDate(date1);
+						
 					}
 					
 					if(request.getParameter("toDate" + i) != null) {
-						tourPlanDetail.setToDate(request.getParameter("toDate" + i));
-					} else {
-						tourPlanDetail.setToDate("" + i);
-					}
+						String sDate1 = request.getParameter("toDate" + i);
+						Date date1 = new SimpleDateFormat("yyyy-MM-dd").parse(sDate1);
+						tourPlanDetail.setToDate(date1);
+					} 
 					
 					
 					if(request.getParameter("purpose" + i) != null) {

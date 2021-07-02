@@ -136,7 +136,7 @@ public class AttendenceRegisterServiceImpl implements AttendenceRegisterService{
 	return null;
 	}
 
-	public void removeAttendanceRegister(int id) {
+	public void removeAttendanceRegister(long id) {
 		Session session = sessionFactory.openSession();
 		Object o = session.get(AttendenceRegister.class, id);
 		AttendenceRegister e = (AttendenceRegister) o;
@@ -225,6 +225,12 @@ public class AttendenceRegisterServiceImpl implements AttendenceRegisterService{
 		}
 		
 		return result;
+	}
+
+	@Override
+	public AttendenceRegister findByIdAttendenceRegister(long id) {
+		
+		return attendenceRegisterDao.findById(id);
 	}
 
 	

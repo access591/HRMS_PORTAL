@@ -44,8 +44,9 @@ public class LeaveRequestController {
 	@Autowired PageMappingService pageMappingService;
 	@Autowired LeaveService leaveService;
 	@Autowired UserService userService;
-	@Autowired LeaveGrantRegisterService leaveGrantService;
+	@Autowired LeaveGrantRegisterService leaveGrantRegisterService;
 	@Autowired LeaveDetailService leaveDetailService;
+	//@Autowired LeaveGrantService leaveGrantService;
 	
 	
 	@Autowired
@@ -105,7 +106,7 @@ public class LeaveRequestController {
 //			e.printStackTrace();
 //		}
 //		
-		
+
 		
 		
 		

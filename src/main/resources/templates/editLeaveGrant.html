@@ -65,11 +65,17 @@ body {
 											   <input type="text" class="form-control" id="leaveGrantCode" name="leaveGrantCode"th:field="${leaveGrantEdit.leaveGrantCode}" readonly >
 												</div>
 											
+											<div class="form-group ">
+													<label class="form-label">Year</label> <span
+														class="text-danger">*</span> 
+														<input class="form-control required" type="text"id="year"name="year"th:value="${leaveGrantEdit.year}"required aria-required="true">
+
+												</div>
 											
 											
 											
 											<div class="form-group">
-												<label class="form-label">Employee Code</label>
+												<label class="form-label">Employee Name</label>
 												<label style="color: red">*</label>
 												<select class="form-control select2" name="empCode.empCode"id="empCode.empCode" required aria-required="true">
 												 <option value="">Select Employee</option>
@@ -78,13 +84,7 @@ body {
 
 											     	 
 											</div>
-											<div class="form-group ">
-													<label class="form-label">Year</label> <span
-														class="text-danger">*</span> 
-														<input class="form-control required" type="text"id="year"name="year"th:value="${leaveGrantEdit.year}"required aria-required="true">
-
-												</div>
-
+											
 												<div class="form-group">
 											  <label>leaveAvailed </label>
 											  	<label style="color: red">*</label>

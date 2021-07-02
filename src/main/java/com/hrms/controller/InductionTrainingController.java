@@ -10,13 +10,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hrms.ImageUtil;
 import com.hrms.model.Department;
@@ -24,7 +28,6 @@ import com.hrms.model.Designation;
 import com.hrms.model.Employee;
 import com.hrms.model.InductionTraining;
 import com.hrms.model.InductionTrainingDetail;
-
 import com.hrms.model.MenuModule;
 import com.hrms.service.DepartmentService;
 import com.hrms.service.DesignationService;
@@ -48,7 +51,18 @@ public class InductionTrainingController {
 	InductionTrainingService inductionTrainingService;
 	@Autowired
 	InductionTrainingDetailService inductionTrainingDetailService;
-
+	
+	
+	@InitBinder("editInductionTraining")
+    public void customizeBinding (WebDataBinder binder) {
+        SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
+        dateFormatter.setLenient(false);
+        binder.registerCustomEditor(Date.class, "trainingDate",new CustomDateEditor(dateFormatter, true));
+       
+    }
+	
+	
+	
 	@GetMapping("/inductionTraining")
 	public String inductionTraining(Model model, HttpSession session) {
 		if (session.getAttribute("username") == null) {
@@ -129,7 +143,7 @@ public class InductionTrainingController {
 	
 	
 	@PostMapping("/saveInductionTraining")
-	public String saveInductionTraining(@ModelAttribute("inductionTraining")InductionTrainingUtil localCon, Model model, HttpSession session,HttpServletRequest request) throws ParseException {
+	public String saveInductionTraining(@ModelAttribute("inductionTraining")InductionTrainingUtil localCon, Model model, HttpSession session,HttpServletRequest request,RedirectAttributes redirectAttributes) throws ParseException {
 		if (session.getAttribute("username") == null) {
 			return "redirect:" + "./";
 		}
@@ -143,12 +157,7 @@ public class InductionTrainingController {
 		induct.setEmpCode(emp);
 		induct.setDeptCode(dept);
 		induct.setInsBy(insertedBY);
-		
 		inductionTrainingService.addInductionTraining(induct);
-
-		
-	
-		
 		 int flag = 0;
 	   		int counter = 1;
 			try {
@@ -201,6 +210,8 @@ public class InductionTrainingController {
 				
 				if (flag > 0) {
 					session.setAttribute("Message", "Data added successfully.");
+					 redirectAttributes.addFlashAttribute("message", "Data Save Successfully !  ");
+					  redirectAttributes.addFlashAttribute("alertClass", "alert-success");
 					
 				} else {
 					System.out.println("Enter into  failure part :");
@@ -219,6 +230,43 @@ public class InductionTrainingController {
 
 		return "redirect:/inductionTraining";
 	}
+	
+	
+	@GetMapping(value = {"/editInductionTraining/{id}"})
+	public String editInductionTraining(@PathVariable("id")long id,  Model model,HttpSession session)
+	 { 	if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
+	 	List<Employee> listEmployee = employeeService.getAllEmployees();
+		model.addAttribute("listEmployee", listEmployee);
+	 	List<Department> listDepartment = departmentService.getAllDepartments();
+		model.addAttribute("listDepartment", listDepartment);
+		  session.setAttribute("imgUtil", new ImageUtil());
+		  InductionTraining inductionTrainingEdit =	inductionTrainingService.findByIdInductionTraining(id);
+		  model.addAttribute("inductionTrainingEdit", inductionTrainingEdit);
+
+	   
+	    return "editInductionTraining";
+	}
+	
+	@PostMapping("/updateInductionTraining")
+	  public String updateInductionTraining(@ModelAttribute("editInductionTraining") InductionTraining inductionTraining, Model model,HttpSession session) {
+		if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
+		
+		  try {
+		
+			this.inductionTrainingService.updateInductionTraining(inductionTraining);
+			  
+			  return "redirect:/inductionTraining";
+		} catch (Exception e) {
+		
+			e.printStackTrace();
+		}
+		  return "redirect:/inductionTraining";
+	  }
+	
 	
 	
 	@GetMapping(value = { "/deleteInductionTraining/{id}" })
