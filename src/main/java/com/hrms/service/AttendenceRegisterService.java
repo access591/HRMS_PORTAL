@@ -18,12 +18,14 @@ public interface AttendenceRegisterService {
 	public List<AttendenceRegister> getAllAttendenceRegister();
 	public AttendenceRegister findAttendenceRegisterByEmpCode(String empCode);	
 	public List<AttendenceRegister> findAttendenceByEmpStatusAbsent(String empCode);
-	public void removeAttendanceRegister(int id);	
+	public void removeAttendanceRegister(long id);	
 	public List<AttendenceRegister> findAttendenceStatusByDeptCode(String deptCode,
 			Date fromDate,Date toDate);
 	
 	public List<AttendenceRegister> findTodayAttendenceList();
 	public List<AttendenceRegister> findTodayLeaveEmployee();
+
+	public AttendenceRegister findByIdAttendenceRegister(long id);
 	
 	
 

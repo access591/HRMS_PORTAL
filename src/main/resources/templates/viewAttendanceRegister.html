@@ -80,7 +80,7 @@ body {
 							<div class="col-12">
 							<div class="card">
 								<div class="card-header">
-									<h5 class="card-title"style="text-decoration: underline;">Attendance Register</h5>
+									<h5 class="card-title"style="text-decoration: underline;"> View Attendance Register</h5>
 								<div class="alert-outline">
 									<div th:if="${message}" th:text="${message}" style="color: red">
 									</div> 
@@ -91,42 +91,22 @@ body {
 												<div class="form-group sm col-md-6">
 											       <label class="form-label">Date</label>
 											       <span class="text-danger">*</span>
-											       <input  type="text"id="attendenceDate"name="attendenceDate"  class="form-control required">
+											       <input  type="text"id="attendenceDate"name="attendenceDate" disabled th:field="${attendenceRegisterView.attendenceDate}" class="form-control required">
 											      </div>
-												<!-- <div class="form-group sm col-md-4">
-													<label class="form-label">Reg Code</label>
-												<label style="color: red">*</label>
-												<select class="form-control select2" name="regCode" id="regCode" required aria-required="true">
-												 <option value="">Select Employee</option>
-												<option th:each="e :${listEmployee}"th:value="${e.getEmpCode()}" th:text="${e.getEmpName()}"></option>
-											     	</select>
-
-												</div> -->
+												
 										
 										
 										<div class="form-group sm col-md-6">
-													<label class="form-label">Department Code </label>
+													<label class="form-label">Department Name </label>
 												<label style="color: red">*</label>
-												<select class="form-control select2" name="department" id="department" onchange="myFunctionDeptCode()" required aria-required="true">
+												<select class="form-control select2" name="department" id="department" onchange="myFunctionDeptCode()" required aria-required="true"disabled>
 												 <option value="">Select Department</option>
-												<option th:each="d :${listDepartment}"th:value="${d.getDepartmentCode()}" th:text="${d.getDeptName()}"></option>
+												<option th:each="d :${listDepartment}"th:value="${d.getDepartmentCode()}" th:text="${d.getDeptName()}" th:field="${attendenceRegisterView.department.departmentCode}"></option>
 											     	</select>
 												</div>
 								</div>
 								
-									<!-- <div class="form-row">
-										<div class="form-group sm col-md-4">
-										<label class="form-label">Employee </label>
-												<label style="color: red">*</label>
-												<select class="form-control select2" name="empCode" id="empCode" onchange="myFunctionEmpCode()" required aria-required="true">
-												 <option value="">Select Employee</option>
-												<option th:each="e :${listEmployee}"th:value="${e.getEmpCode()}" th:text="${e.getEmpName()}"></option>
-											     	</select>
-
-												</div>
-										     	
-										   
-												</div> -->
+									
 											
 						      </div>
 	                      </div>
@@ -137,7 +117,7 @@ body {
 								</div>
 								<div class="card-body">
 								<input id="_cr" name="_cr" type="text"value="1">
-								<div class="col-sm-12" align="right">
+								<div class="col-sm-12" style="text-align: right;">
 							
 								
 							<!-- 	<a id="add_row" class="fa fa-plus" aria-hidden="true"style="font-size:28px;color:#001080"></a>&nbsp;&nbsp;&nbsp; -->
@@ -147,11 +127,12 @@ body {
 											<table id="example" aria-describedby="example" class="table" style="width:100%">
 											<thead>
 												<tr>
+												  <th scope="col"  class="text-center"> ID</th>
 											        <th scope="col"  class="text-center"> </th>
 											        <th scope="col"	 class="text-center"> </th>
 													<th scope="col"  class="text-center">Department. Name</th>
 													<th scope="col"  class="text-center">Employee Name.</th>
-													<th scope="col"  class="text-center">Designation</th>
+
 													<th scope="col"  class="text-center">Status</th>
 													<th scope="col"  class="text-center">Shift</th>
 													<th scope="col"  class="text-center">Shift In</th>
@@ -166,34 +147,34 @@ body {
 											</thead>
 											<tbody>
 												<tr id='addr0' >
-												
+													<td><input type="text" id="id0" name='id0'placeholder='id' th:field='${attendenceRegisterView.id}'disabled /></td>
 													<td><input type="hidden" id="deptCode0" name='deptCode0'placeholder='dept Code' /></td>
 													<td><input type="hidden" id="empCode0" name='empCode0'placeholder='Emp Code' /></td>
-													<td><input type="text" id="deptName0" name='deptName0'placeholder='Dept'disabled/></td>
-													<td><input type="text" id="empName0"name='empName0'placeholder='emp Name'disabled/></td>
-													<td><input type="text" id="desgName0"name='desgName0'placeholder='desgName'disabled/></td>
+													<td><input type="text" id="deptName0" name='deptName0'placeholder='Dept' th:field='${attendenceRegisterView.department.deptName}'disabled/></td>
+													<td><input type="text" id="empName0"name='empName0'placeholder='emp Name'th:field='${attendenceRegisterView.employee.empName}'disabled/></td>
 													
-													<td><select name="status0" id="status0">
+													
+													<td><select name="status0" id="status0" >
 															<option value="">Select Type</option>
-															<option value="A">A</option>
-															<option value="B">B</option>
+															<option value="A" th:selected="${attendenceRegisterView.status}==A">A</option>
+															<option value="B"  th:selected="${attendenceRegisterView.status}==B">B</option>
 													</select></td>
 
-													<td><input type="text" name='shiftCode0' size="12"placeholder='Shift' /></td>
-													<td><input type="time" name='timeIn0'placeholder='Shift In'  /></td>
-													<td><input type="time" name='timeOut0'placeholder='Shift Out' /></td>
+													<td><input type="text" name='shiftCode0' size="12"placeholder='Shift'th:field='${attendenceRegisterView.shiftCode}' /></td>
+													<td><input type="time" name='timeIn0'placeholder='Shift In' th:field='${attendenceRegisterView.timeIn}' /></td>
+													<td><input type="time" name='timeOut0'placeholder='Shift Out'th:field='${attendenceRegisterView.timeOut}' /></td>
 													<td><select name="status20" id="status20">
 															<option value="">Select Type</option>
-															<option value="A">A</option>
-															<option value="B">B</option>
+															<option value="A" th:selected="${attendenceRegisterView.status2}==A">A</option>
+															<option value="B" th:selected="${attendenceRegisterView.status2}==B">B</option>
 													</select></td>
-												 <td><input type="time" name='aTimeIn0'placeholder='Actual Time'/></td>
-											    <td><input type="time" name=' aTimeOut0'placeholder='Actual Time out'/></td>
-												<td><input type="text" name='overTime0'placeholder='over time' /></td>
+												 <td><input type="time" name='aTimeIn0'placeholder='Actual Time'th:field='${attendenceRegisterView.aTimeIn}'/></td>
+											    <td><input type="time" name=' aTimeOut0'placeholder='Actual Time out'th:field='${attendenceRegisterView.aTimeOut}'/></td>
+												<td><input type="text" name='overTime0'placeholder='over time'th:field='${attendenceRegisterView.overTime}' /></td>
 												<td><select name="statusTemp0" id="statusTemp0">
 															<option value="">Select Type</option>
-															<option value="A">Yes</option>
-															<option value="B">No</option>
+															<option value="A"th:selected="${attendenceRegisterView.statusTemp}==A">Yes</option>
+															<option value="B"th:selected="${attendenceRegisterView.statusTemp}==B">No</option>
 													</select></td>
 												</tr>
 												<tr id='addr1'></tr>
@@ -214,60 +195,10 @@ body {
 	                     </div>
 	                     </div>
 					</div>
-					<button type="submit" class="btn btn-primary">Save</button>&nbsp;
-	                     &nbsp;
-					<button type="reset"class="btn btn-primary" value="Reset">Reset</button>
+				
+						<button type="button"class="btn btn-primary" onclick="window.location.href='/attendanceRegister';">Cancel</button>
 </form>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	<div class="col-12">
-							<div class="card">
-								<div class="card-header">
-								</div>
-								<div class="card-body">
-									<table id="datatables-buttons" class="table table-striped display" style="width:100%"aria-describedby="example">
-										<thead>
-											<tr >
-												<th scope="col">Id </th>
-												<th scope="col">Employee Name</th>
-												<th scope="col">Department</th>
-												<th scope="col">Designation</th>
-												<th scope="col">Attendance Date </th> 
-												<th scope="col">Actual  In </th> 
-												<th scope="col">Actual  Out </th> 
-												
-												
-												<th scope="col">Action </th>
-											</tr >
 
-										</thead>
-									 <tbody>
-										<tr th:each = "att : ${attendReg}">
-										<td th:text="${att.id}" ></td>
-										<td th:text="${att.empName}"></td>
-										<td  th:text="${att.deptName}"></td>
-										<td  th:text="${att.desgName}"></td>
-										<td  th:text="${#dates.format(att.attendenceDate,'dd-MM-yyyy')}"></td>
-										
-										  <td  th:text="${att.aTimeIn}"></td>
-										  <td  th:text="${att.aTimeOut}"></td>
-										  <td>
-										<!--   <a th:href="@{/editAttendanceRegister/{id}/(id=${att.id})}"><em class="fa fa-edit"></em></a> -->
-										  
-										     <a th:href="@{/deleteAttendanceRegister/{id}/(id=${att.id})}"onclick="return confirm('Are you sure?')"><em class="fa fa-trash" aria-hidden="true"></em></a>
-									      &nbsp;&nbsp;  <a th:href="@{/viewAttendanceRegister/{id}/(id=${att.id})}"><em class="fa fa-eye " aria-hidden="true"></em></a>
-									
-										</td>  
-									
-										</tr>
-									
-									
-										</tbody>
-									
-									</table>
-								</div>
-								
-							</div>
-						</div>
 				</div>
 			
 		</main>

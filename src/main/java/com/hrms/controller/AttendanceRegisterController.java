@@ -24,6 +24,7 @@ import com.hrms.util.AttendenceRegisterUtil;
 import com.hrms.model.Department;
 import com.hrms.model.Designation;
 import com.hrms.model.Employee;
+import com.hrms.model.MedicalReimbursement;
 import com.hrms.model.MenuModule;
 import com.hrms.service.AttendenceRegisterService;
 import com.hrms.service.DepartmentService;
@@ -60,7 +61,7 @@ public class AttendanceRegisterController {
 		}
 		
 		List<AttendenceRegister> listAttendanceR = attendenceRegisterService.getAllAttendenceRegister();
-		List<AttendenceRegisterUtil> listAttendenceRegisterUtil = new ArrayList<AttendenceRegisterUtil>();
+		List<AttendenceRegisterUtil> listAttendenceRegisterUtil = new ArrayList<>();
 		  for (int i = 0; i < listAttendanceR.size(); i++) {
 			  String empCode = listAttendanceR.get(i).getEmployee().getEmpCode();
 			  AttendenceRegisterUtil attreg=new AttendenceRegisterUtil();
@@ -95,7 +96,7 @@ public class AttendanceRegisterController {
 			
 			Department d=departmentService.findDepartmentById(id);
 			List<Employee> e = employeeService.findByDepartmentCode(d.getDepartmentCode());
-			  List<AttendenceRegisterUtil> listAttendenceRegisterUtil = new ArrayList<AttendenceRegisterUtil>();
+			  List<AttendenceRegisterUtil> listAttendenceRegisterUtil = new ArrayList<>();
 			  for (int i = 0; i < e.size(); i++) 
 			  {
 				  String empCode = e.get(i).getEmpCode();
@@ -121,7 +122,7 @@ public class AttendanceRegisterController {
 
 		
 		@PostMapping("/saveAttendenceRegister")
-		public String saveAttendenceRegister(@ModelAttribute("attendenceRegister")AttendenceRegisterUtil u, Model model, HttpSession session,HttpServletRequest request) throws ParseException {
+		public String saveAttendenceRegister(@ModelAttribute("attendenceRegister")AttendenceRegisterUtil u, Model model, HttpSession session,HttpServletRequest request)  {
 			String insertedBY = (String) session.getAttribute("USER_NAME");	
 			AttendenceRegister attn=new AttendenceRegister();
 			 Employee e=new    Employee();		
@@ -219,7 +220,7 @@ public class AttendanceRegisterController {
 
 			
 		} catch (Exception x) {
-			// TODO: handle exception
+			x.printStackTrace();
 		}
 
 		session.setAttribute("username", session.getAttribute("username"));
@@ -228,9 +229,25 @@ public class AttendanceRegisterController {
 		}
 		
 		
+		@GetMapping(value = { "/viewAttendanceRegister/{id}" })
+		public String viewAttendanceRegister(@PathVariable("id") long id, Model model, HttpSession session) {
+			if (session.getAttribute("username") == null) {
+				return "redirect:" + "./";
+			}
+			List<Department> listDepartment = departmentService.getAllDepartments();
+			model.addAttribute("listDepartment", listDepartment);
+			
+			AttendenceRegister attendenceRegisterView = attendenceRegisterService.findByIdAttendenceRegister(id);
+			model.addAttribute("attendenceRegisterView", attendenceRegisterView);
+			  session.setAttribute("imgUtil", new ImageUtil());
+			return "viewAttendanceRegister";
+		}
+		
+		
+		
 		@GetMapping(value = { "/deleteAttendanceRegister/{id}" })
-		public String deleteAttendanceRegister(@PathVariable("id")int id , Model model, HttpSession session) {
-
+		public String deleteAttendanceRegister(@PathVariable("id")long id , Model model, HttpSession session) {
+			  session.setAttribute("imgUtil", new ImageUtil());
 		attendenceRegisterService.removeAttendanceRegister(id);
 
 			session.setAttribute("username", session.getAttribute("username"));
