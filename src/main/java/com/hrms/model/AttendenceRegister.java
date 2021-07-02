@@ -25,7 +25,7 @@ public class AttendenceRegister implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID")
-	private int id;
+	private Long id;
 
 	@Column(name = "ATTENDENCEDATE")
 	private Date attendenceDate;
@@ -100,11 +100,11 @@ public class AttendenceRegister implements Serializable{
 	
 	}
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
