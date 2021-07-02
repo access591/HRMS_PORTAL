@@ -74,7 +74,7 @@ input[type="date"] {
 											<div class="col-12 col-lg-4">
 												<div class="form-group">
 
-													<label> Employee id </label> <input type="text"
+													<label> Employee Code </label> <input type="text"
 														class="form-control" id="id" name="empCode"
 														th:field="*{employee.empCode}">
 												</div>
@@ -187,10 +187,20 @@ input[type="date"] {
 
 
 										<div class="row">
-											<div class="col-12 col-lg-4">
+											<div th:if="${leaveRequest.status=='Y'}" class="col-12 col-lg-4">
 												<div class="form-group">
 
-													<label> Approved </label> <input type="text"
+													<label> Approved Date </label> <input type="text"
+														class="form-control" id="id" name="approvedDate"
+														th:field="*{approvedDate}">
+												</div>
+
+
+											</div>
+											<div th:if="${leaveRequest.status=='C'}" class="col-12 col-lg-4">
+												<div class="form-group">
+
+													<label> Cancel Date </label> <input type="text"
 														class="form-control" id="id" name="approvedDate"
 														th:field="*{approvedDate}">
 												</div>
@@ -198,9 +208,18 @@ input[type="date"] {
 
 											</div>
 
-											<div class="col-12 col-lg-4">
+											<div th:if="${leaveRequest.status=='Y'}" class="col-12 col-lg-4">
 												<div class="form-group">
 													<label class="form-label">Approved By</label> <input
+														type="text" class="form-control " name="approevedBy"
+														th:field="*{approevedBy}"
+														>
+												</div>
+											</div>
+											
+											<div th:if="${leaveRequest.status=='C'}" class="col-12 col-lg-4">
+												<div class="form-group">
+													<label class="form-label">Canceled By</label> <input
 														type="text" class="form-control " name="approevedBy"
 														th:field="*{approevedBy}"
 														>

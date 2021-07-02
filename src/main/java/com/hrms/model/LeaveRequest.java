@@ -1,8 +1,7 @@
 package com.hrms.model;
 
-
-
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -14,16 +13,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-
 import org.springframework.format.annotation.DateTimeFormat;
 
-
 @Entity
-@Table(name="LEAVE_REQUEST")
-public class LeaveRequest implements Serializable  {  
-	
-	
-
+@Table(name = "LEAVE_REQUEST")
+public class LeaveRequest implements Serializable {
 
 	/**
 	 * 
@@ -32,9 +26,8 @@ public class LeaveRequest implements Serializable  {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "LEAVE_REQUEST_ID" ,length=100)
+	@Column(name = "LEAVE_REQUEST_ID", length = 100)
 	private Long leaveRequestId;
-	
 
 	@ManyToOne
 	@JoinColumn(name = "EMP_CODE")
@@ -44,97 +37,86 @@ public class LeaveRequest implements Serializable  {
 	@JoinColumn(name = "DEPT_CODE")
 	private Department department;
 
-
 	@ManyToOne
 	@JoinColumn(name = "LEAVE_CODE")
 	private Leave leave;
-	
+
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	@Column(name = "TO_DATE")  
+	@Column(name = "TO_DATE")
 	private Date toDate;
-	
+
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	@Column(name = "FROM_DATE")  
+	@Column(name = "FROM_DATE")
 	private Date fromDate;
 
-	
-	@Column(name = "FROM_DATE_TYPE",length=10)
+	@Column(name = "FROM_DATE_TYPE", length = 10)
 	private String fromDateType;
-	
-	@Column(name = "TO_DATE_TYPE",length=10)
+
+	@Column(name = "TO_DATE_TYPE", length = 10)
 	private String toDateType;
-	
 
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "APPLY_DATE")
 	private Date applyDate;
-	
-	
-	@Column(name = "APPROVE_DATE",length=100)
+
+	@Column(name = "APPROVE_DATE", length = 100)
 	private String approvedDate;
 
-	
-	@Column(name = "APPROVED_BY",length=20)
+	@Column(name = "APPROVED_BY", length = 20)
 	private String approevedBy;
-	
-	@Column(name = "SHIFT_CODE",length=20)
+
+	@Column(name = "SHIFT_CODE", length = 20)
 	private String shiftCode;
-	
-	@Column(name = "REASON",length=200)
+
+	@Column(name = "REASON", length = 200)
 	private String reason;
-	
-	@Column(name = "DAYS",length=20)
+
+	@Column(name = "DAYS", length = 20)
 	private String leaveFor;
 
-	
-	@Column(name = "CANCEL_BY",length=20)
+	@Column(name = "CANCEL_BY", length = 20)
 	private String cancelBy;
-	
-	@Column(name = "CANCEL_DATE",length=100)
+
+	@Column(name = "CANCEL_DATE", length = 100)
 	private String cancelDate;
-	
-	
-	
-	@Column(name = "REQUEST_FROM_DATE",length=20)
+
+	@Column(name = "REQUEST_FROM_DATE", length = 20)
 	private String requestFromDate;
-	
-	@Column(name = "REQUEST_TO_DATE",length=20)
+
+	@Column(name = "REQUEST_TO_DATE", length = 20)
 	private String requestToDate;
-	
-	@Column(name = "REQUEST_FROM_DATE_TYPE",length=10)
+
+	@Column(name = "REQUEST_FROM_DATE_TYPE", length = 10)
 	private String requestFromDateType;
-	
-	@Column(name = "REQUEST_TO_DATE_TYPE",length=10)
+
+	@Column(name = "REQUEST_TO_DATE_TYPE", length = 10)
 	private String requestToDateTYpe;
-	
-	@Column(name = "INS_BY", updatable = false,length=20)
+
+	@Column(name = "INS_BY", updatable = false, length = 20)
 	private String insBy;
 
-	@Column(name = "INS_DATE", updatable = false,length=20)
+	@Column(name = "INS_DATE", updatable = false, length = 20)
 	private Date insDate = new Date();
 
-	@Column(name = "UPD_BY", insertable = false,length=20)
+	@Column(name = "UPD_BY", insertable = false, length = 20)
 	private String updBy;
 
-	@Column(name = "UPD_DATE", insertable = false,length=20)
+	@Column(name = "UPD_DATE", insertable = false, length = 20)
 	private Date updDate = new Date();
-	
-	@Column(length=20)
+
+	@Column(length = 20)
 	private String status = new String("N");
-	
-	@Column(name = "REQUEST_TYPE",length=20)
+
+	@Column(name = "REQUEST_TYPE", length = 20)
 	private String requestType;
 
-	
-	
 	public Long getLeaveRequestId() {
 		return leaveRequestId;
 	}
 
 	public void setLeaveRequestId(Long leaveRequestId) {
-		this.leaveRequestId = leaveRequestId; 
+		this.leaveRequestId = leaveRequestId;
 	}
-
 
 	public Employee getEmployee() {
 		return employee;
@@ -201,7 +183,10 @@ public class LeaveRequest implements Serializable  {
 	}
 
 	public String getApprovedDate() {
-		return approvedDate;
+		Date date = new Date();
+		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+		String strDate = formatter.format(date);
+		return strDate;
 	}
 
 	public void setApprovedDate(String approvedDate) {
@@ -338,25 +323,7 @@ public class LeaveRequest implements Serializable  {
 
 	public LeaveRequest() {
 		super();
-		
+
 	}
-
-
-	
-	
-
-	
-
-	
-	
-	
-
-
-	
-
-	
-	
-	
-	
 
 }
