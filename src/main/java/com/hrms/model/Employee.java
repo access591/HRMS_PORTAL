@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.Lob;
 
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.Size;
 
 
@@ -139,7 +141,7 @@ public class Employee implements Serializable {
 	@Size(max =255)
 	@Column(name = "ON_ADDITIONAL_CHARGE")
 	private String onAdditionalCharge;
-	
+	@Temporal(TemporalType.DATE)
 	@Column(name = "ORDER_DATE")
 	private Date orderDate;
 	
