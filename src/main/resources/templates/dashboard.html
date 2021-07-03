@@ -112,7 +112,7 @@ body {
 													</div>
 												</div>
 											</div>
-											<h5 class="card-title mb-0">Employee Details</h5>
+											<h5 class="card-title mb-0">Gradation Records</h5>
 										</div>
 										<div class="card-body py-3">
 											<div class="chart chart-sm">
@@ -492,11 +492,21 @@ body {
 				data.addColumn('string', 'VoteName');
 				data.addColumn('number', 'VoteCount');
 
+				entry = results;
+				count = 0;
+				
+				/* for (name in entry) {
+					console.log("json name : "+name);
+				    display("display name ====>"+name);
+				    ++count;
+				  } */
+				
 				// iterate "vt" keys
 				Object.keys(results[0]).forEach(function(key) {
-					if (key.indexOf("vt") > -1) {
-						data.addRow([ key, parseFloat(results[0][key]) ]);
-					}
+					 if (key.indexOf("vt") > -1) {
+						data.addRow([ key.substring(2,), parseFloat(results[0][key]) ]);
+					} 
+					
 				});
 
 				var options = {
