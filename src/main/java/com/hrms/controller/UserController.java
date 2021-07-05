@@ -106,6 +106,7 @@ public class UserController {
 		
 		boolean isUserExist = userService.checkUserExists(login);
 		if (isUserExist && captchaVerifyMessage) {
+			
 			String id = login.getUserCode();
 			UserEntity userRecord = userService.findDataById(id);
 			session.setAttribute("uuuuu", userRecord.getUserName());
