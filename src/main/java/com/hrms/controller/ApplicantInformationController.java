@@ -92,6 +92,9 @@ public class ApplicantInformationController {
 			model.addAttribute("listEmployeeRequisition", listEmployeeRequisition1);
 
 		}
+		
+		List<ApplicantInfo> listApplicantInfo = applicantInfoService.findAllApplicantInfo();
+		model.addAttribute("listApplicantInfo", listApplicantInfo);
 
 		try {
 			List<City> cityList = cityService.findAllCity();
@@ -168,7 +171,7 @@ public class ApplicantInformationController {
 
 		System.out.println("execute code ");
 		try {
-			List<City> cityList = cityService.getAllCities();
+			List<City> cityList = cityService.findAllCity();
 			System.out.println("city list size : " + cityList.size());
 			if (cityList != null) {
 				model.addAttribute("cityList", cityList);
@@ -178,15 +181,15 @@ public class ApplicantInformationController {
 		}
 
 		try {
-			List<Employee> listEmployee = employeeService.getAllEmployees();
+			List<Employee> listEmployee = employeeService.findAllEmployee();
 			if (listEmployee != null) {
-				System.out.println("city list size : " + listEmployee.size());
 				model.addAttribute("listEmployee", listEmployee);
 			}
-
 		} catch (Exception e) {
+			System.out.println("Error===>"+e.getMessage());
 			e.printStackTrace();
 		}
+
 
 		ApplicantInfo applicantInfo = applicantInfoService.getApplicantInfoByApplicantCode(applicantCode);
 		model.addAttribute("applicantInfo", applicantInfo);
