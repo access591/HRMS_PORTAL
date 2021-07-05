@@ -1,5 +1,6 @@
 package com.hrms.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -11,12 +12,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hrms.ImageUtil;
 import com.hrms.model.MenuModule;
 import com.hrms.model.Module;
 import com.hrms.model.Program;
+import com.hrms.model.State;
 import com.hrms.model.SubModule;
 import com.hrms.model.UserEntity;
 import com.hrms.model.UserRights;
@@ -142,6 +145,38 @@ public String deleteUserRights(@PathVariable("id")Long id,  Model model,HttpSess
 	  this.userProgramRightService.removeUserProgramRight(id);
     session.setAttribute("username",session.getAttribute("username")); 
     return"redirect:/userProgramRights";
+}
+
+@ResponseBody
+@GetMapping("/viewModuleBySubModule/{id}")
+public List<SubModule> viewModuleBySubModule(@PathVariable(value = "id") String id, Model model, HttpSession session) {
+	List<SubModule> e = subModuleService.findSubModuleByModuleCode(id);
+	List<SubModule> lisSubModuleUtil = new ArrayList<>();
+	for (int i = 0; i < e.size(); i++) {
+		SubModule st = new SubModule();
+		st.setSubModuleCode(e.get(i).getSubModuleCode());
+		st.setSubModuleName(e.get(i).getSubModuleName());
+		
+		lisSubModuleUtil.add(st);
+	}
+	return lisSubModuleUtil;
+
+}
+@ResponseBody
+@GetMapping("/viewSubModuleByProgramCode/{id}")
+public List<Program> viewSubModuleByProgramCode(@PathVariable(value = "id") String id, Model model, HttpSession session) {
+	List<Program> e = programService.findByProgramCodeSubModule(id);
+	List<Program> lisSubModuleUtil = new ArrayList<>();
+	for (int i = 0; i < e.size(); i++) {
+		Program st = new Program();
+		st.setProgramCode(e.get(i).getProgramCode());
+		st.setProgramName(e.get(i).getProgramName());
+		
+	
+		lisSubModuleUtil.add(st);
+	}
+	return lisSubModuleUtil;
+
 }
 
 

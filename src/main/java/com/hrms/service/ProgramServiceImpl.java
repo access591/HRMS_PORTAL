@@ -67,4 +67,10 @@ public class ProgramServiceImpl implements ProgramService {
 		return programDao.findAll();
 	}
 
+	@Override
+	public List<Program> findByProgramCodeSubModule(String id) {
+	
+		return programDao.findByProgramCodeSubModule(id);
+	}
+
 }
