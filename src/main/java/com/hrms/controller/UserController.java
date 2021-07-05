@@ -136,7 +136,10 @@ public class UserController {
  
         
 		boolean isUserExist = userService.checkUserExists(login);
+
+
 		if (isUserExist) {
+
 			String id = login.getUserCode();
 			UserEntity userRecord = userService.findDataById(id);
 			session.setAttribute("uuuuu", userRecord.getUserName());
