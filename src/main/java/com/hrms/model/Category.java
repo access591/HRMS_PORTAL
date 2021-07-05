@@ -2,12 +2,14 @@ package com.hrms.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
-
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
@@ -22,6 +24,7 @@ public class Category implements Serializable {
 
 	@Id
 	@Size(max =15)
+	
 	@Column(name = "CATEG_CODE")
 	private String categoryCode;
 	@Size(max =50)
@@ -42,6 +45,18 @@ public class Category implements Serializable {
 	@Size(max =1)
 	@Column(name = "ACTIVE_YN")
 	private String active;
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "categoryCode", orphanRemoval = true)
+	private List<Designation> designations;
+	
+	
+	
+	public List<Designation> getDesignations() {
+		return designations;
+	}
+
+	public void setDesignations(List<Designation> designations) {
+		this.designations = designations;
+	}
 
 	public String getCategoryCode() {
 		return categoryCode;
