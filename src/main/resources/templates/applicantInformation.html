@@ -678,6 +678,49 @@ body {
 
 					</div>
 				</div>
+				
+				
+				
+				<!-- table data  -->
+				
+				<div class="col-12">
+					<div class="card">
+						<div class="card-header"></div>
+						<div class="card-body">
+							<table id="datatables-buttons"
+								class="table table-striped display" style="width: 100%"
+								aria-describedby="example">
+								<thead>
+									<tr>
+										<th scope="col">Advertisement Code</th>
+										<th scope="col">Advertisement Date</th>
+										<th scope="col">Applicant Name</th>
+										<th scope="col">Designation</th>
+										<th scope="col">Remarks</th>
+										<th scope="col">Action</th>
+									</tr>
+								</thead>
+								<tbody>
+									<!-- <tr th:each="list : ${listReqAdvertisement}">
+										<td th:text="${list.advtCode}"></td>
+										<td th:text="${#dates.format(list.advtDate, 'dd-MM-yyyy')}"></td>
+										<td th:text="${#strings.capitalize(list.remarks)}"></td>
+										<td><a
+											th:href="@{editAdvertisement/{id}(id=${list.advtCode})}"><em
+												class="align-middle fas fa-fw fa-pen"></em></a> <a
+											th:href="@{/deleteAdvertisement/{id}(id=${list.advtCode})}"
+											onclick="return confirm('Are you sure?')"><em
+												class="align-middle fas fa-fw fa-trash"></em></a></td>
+									</tr> -->
+								</tbody>
+
+							</table>
+						</div>
+
+					</div>
+				</div>
+				
+				
 			</main>
 			<footer class="footer">
 				<div th:replace="/fragments/footer :: div"></div>

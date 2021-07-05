@@ -50,7 +50,12 @@ public class CategoryServiceImpl implements CategoryService {
 
 	@Override
 	public void removeCategory(String categoryId) {
-		this.categoryDao.delete(categoryId);
+		try {
+			this.categoryDao.delete(categoryId);
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+		}
 		
 	}
 

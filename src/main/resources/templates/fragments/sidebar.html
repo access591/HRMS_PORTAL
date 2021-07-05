@@ -8,6 +8,12 @@
 <div layout:fragment="sidebar">
 
 	<style>
+	
+	.open{
+	background-color: #fff;
+	font-family: 'proxima-nova', sans-serif;
+	margin: 0;
+	}
 		body {
 			opacity: 0;
 		}
@@ -39,7 +45,7 @@ h5.tittle-w3l span {
 }
 	
 	</style>
-			<a class="sidebar-brand" href="./dashboard">
+			<a class="sidebar-brand" th:href="@{/dashboard}">
 				<img th:src="@{/img/avatars/logo1.png}" class="img-fluid rounded-circle mb-2" alt="image"></img>
 				HRMS
 			</a>
@@ -55,19 +61,18 @@ h5.tittle-w3l span {
 
 					<li class="sidebar-item" >
 					<li> <h5 class="tittle-w3l">
-				<a href="./dashboard"> <span>Home</span></a>
+				<a th:href="@{/dashboard#all_info(action='show')}"> <span>Home</span></a>
 	</h5>
 					</li>
 					<li class="open" th:each="module: ${modules}">
 					<a class="align-middle mr-2 fas fa-fw fa-check"
-						title="${module.getModuleName()}"> 
+						> 
 						</a> 
 						<span th:text="${module.getModuleName()}"></span>
 						<ul>
 							<li class=" open"
 								th:each="subModule: ${module.getSubModuleProgram()}"><a
-								class="align-middle mr-2 fas fa-fw fa-check"
-								title="${subModule.getSubModuleName()}"> <span
+								class="align-middle mr-2 fas fa-fw fa-check"> <span
 									th:text="${subModule.getSubModuleName()}"></span></a>
 								<ul class="list-inline">
 									<li  th:each="entry: ${subModule.getSubPrograms()}">
