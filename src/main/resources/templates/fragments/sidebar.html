@@ -1,111 +1,102 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org"lang="en">
 
 <head>
-<title></title>
+  <title></title>
 </head>
-
-
 
 <div layout:fragment="sidebar">
 
 	<style>
-body {
-	opacity: 0;
+		body {
+			opacity: 0;
+		}
+				#treeview, #treeview ul
+{
+    list-style-type:none;
+}
+#treeview .open > ul
+{
+   display:none;
+   
 }
 
-#treeview, #treeview ul {
-	list-style-type: none;
+#treeview .open, #treeview .closessss
+{
+  cursor:pointer;
 }
-
-#treeview .open>ul {
-	display: none;
-}
-
-#treeview .open, #treeview .closessss {
-	cursor: pointer;
-}
-
 h5.tittle-w3l {
-	color: #000;
-	font-size: 15px;
-	letter-spacing: 1px;
-	text-shadow: 3px 3px 3px rgba(0, 0, 0, 0.19);
+    color: #000;
+    font-size: 15px;
+    letter-spacing: 1px;
+    text-shadow: 3px 3px 3px rgba(0, 0, 0, 0.19);
 }
 
 h5.tittle-w3l span {
-	color: #0879c9;
-	font-size: 20px;
-	letter-spacing: 0;
+    color: #0879c9;
+    font-size: 20px;
+    letter-spacing: 0;
 }
+	
+	</style>
+			<a class="sidebar-brand" th:href="@{/dashboard}">
+				<img th:src="@{/img/avatars/logo1.png}" class="img-fluid rounded-circle mb-2" alt="image"></img>
+				HRMS
+			</a>
+			<div class="sidebar-content">
+				<div class="sidebar-user">
+					<img th:src="@{'data:image/jpeg;base64,'+${session.imgUtil.getImgData(session.User_Profile_Pic)}}" class="img-fluid rounded-circle mb-2"alt="image"></img>
+					<div class="font-weight-bold"><span class="hidden-xs" th:text="${session.USER_NAME}"></span></div>
+				
+					
+				</div>
 
-.open {
-	background-color: #fff;
-	
-	font-family: 'proxima-nova', sans-serif;
-	
-	
-	
-	
-	margin: 0;
-}
-</style>
-	<a class="sidebar-brand" th:href="@{/dashboard}"> <img
-		th:src="@{/img/avatars/logo1.png}"
-		class="img-fluid rounded-circle mb-2" alt="image"></img> HRMS
-	</a>
-	<div class="sidebar-content">
-		<div class="sidebar-user">
-			<img
-				th:src="@{'data:image/jpeg;base64,'+${session.imgUtil.getImgData(session.User_Profile_Pic)}}"
-				class="img-fluid rounded-circle mb-2" alt="image"></img>
-			<div class="font-weight-bold">
-				<span class="hidden-xs" th:text="${session.USER_NAME}"></span>
+                   <ul id="treeview">
+
+					<li class="sidebar-item" >
+					<li> <h5 class="tittle-w3l">
+				<a th:href="@{/dashboard#all_info(action='show')}"> <span>Home</span></a>
+	</h5>
+					</li>
+					<li class="open" th:each="module: ${modules}">
+					<a class="align-middle mr-2 fas fa-fw fa-check"
+						title="${module.getModuleName()}"> 
+						</a> 
+						<span th:text="${module.getModuleName()}"></span>
+						<ul>
+							<li class=" open"
+								th:each="subModule: ${module.getSubModuleProgram()}"><a
+								class="align-middle mr-2 fas fa-fw fa-check"
+								title="${subModule.getSubModuleName()}"> <span
+									th:text="${subModule.getSubModuleName()}"></span></a>
+								<ul class="list-inline">
+									<li  th:each="entry: ${subModule.getSubPrograms()}">
+									 <a th:href="${entry.value}"  th:text="${entry.key}"></a>
+									</li>
+								</ul></li>
+						</ul>
+						</li>
+
+				</ul>
+
+
+				
+				
+				
 			</div>
+				<script>
 
+$(document).ready(function()  
+{
+   $("#treeview .open").click(function(e)
+   {
+       e.stopPropagation();
+       $(this).toggleClass("closessss open");
+   
+    });
+});
 
-		</div>
-
-		<ul id="treeview">
-
-			<li class="sidebar-item">
-			<li>
-				<h5 class="tittle-w3l">
-					<a th:href="@{/dashboard#all_info(action='show')}"> <span>Home</span></a>
-				</h5>
-			</li>
-			<li class="open" th:each="module: ${modules}"><a
-				class="align-middle mr-2 fas fa-fw fa-check"
-				title="${module.getModuleName()}"> </a> <span
-				th:text="${module.getModuleName()}"></span>
-				<ul>
-					<li class=" open"
-						th:each="subModule: ${module.getSubModuleProgram()}"><a
-						class="align-middle mr-2 fas fa-fw fa-check"
-						title="${subModule.getSubModuleName()}"> <span
-							th:text="${subModule.getSubModuleName()}"></span></a>
-						<ul class="list-inline">
-							<li th:each="entry: ${subModule.getSubPrograms()}"><a
-								th:href="${entry.value}" th:text="${entry.key}"></a></li>
-						</ul></li>
-				</ul></li>
-
-		</ul>
-
-
-
-
-
-	</div>
-	<script>
-		$(document).ready(function() {
-			$("#treeview .open").click(function(e) {
-				e.stopPropagation();
-				$(this).toggleClass("closessss open");
-
-			});
-		});
-	</script>
+</script>
 
 	<!-- End  SIDEBAR    -->
 </div>
