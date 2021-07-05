@@ -696,22 +696,24 @@ body {
 										<th scope="col">Advertisement Date</th>
 										<th scope="col">Applicant Name</th>
 										<th scope="col">Designation</th>
-										<th scope="col">Remarks</th>
+										<th scope="col">Sex</th>
 										<th scope="col">Action</th>
 									</tr>
 								</thead>
 								<tbody>
-									<!-- <tr th:each="list : ${listReqAdvertisement}">
-										<td th:text="${list.advtCode}"></td>
-										<td th:text="${#dates.format(list.advtDate, 'dd-MM-yyyy')}"></td>
-										<td th:text="${#strings.capitalize(list.remarks)}"></td>
+									<tr th:each="list : ${listApplicantInfo}">
+										<td th:text="${list.reqAdvertisement.advtCode}"></td>
+										<td th:text="${#dates.format(list.reqAdvertisement.advtDate, 'dd-MM-yyyy')}"></td>
+										<td th:text="${#strings.capitalize(list.applicantName)}"></td>
+										<td th:text="${#strings.capitalize(list.desigCode.desgName)}"></td>
+										<td th:text="${list.sex}"></td>
 										<td><a
-											th:href="@{editAdvertisement/{id}(id=${list.advtCode})}"><em
+											th:href="@{viewApplicantInfo/{id}(id=${list.applicantCode})}"><em
 												class="align-middle fas fa-fw fa-pen"></em></a> <a
-											th:href="@{/deleteAdvertisement/{id}(id=${list.advtCode})}"
+											href="#"
 											onclick="return confirm('Are you sure?')"><em
 												class="align-middle fas fa-fw fa-trash"></em></a></td>
-									</tr> -->
+									</tr> 
 								</tbody>
 
 							</table>

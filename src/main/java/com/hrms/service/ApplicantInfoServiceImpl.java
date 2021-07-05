@@ -162,4 +162,26 @@ public class ApplicantInfoServiceImpl implements ApplicantInfoService {
 		return result;
 	}
 
+	@Override
+	public List<ApplicantInfo> findAllApplicantInfo() {
+		
+		Session session = sessionFactory.openSession();
+		Transaction tx = null;
+		List<ApplicantInfo> result = null;
+		
+		try {
+			
+			tx = session.beginTransaction();
+			Query<ApplicantInfo> query = session.createQuery("from ApplicantInfo",ApplicantInfo.class);
+			result = query.getResultList();
+			tx.commit();
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			session.close();
+		}
+		return result;
+	}
+
 }
