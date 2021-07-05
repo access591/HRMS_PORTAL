@@ -81,7 +81,18 @@ body {
 											style="color: red"></div>
 									</div>
 								</div>
-								<div class="card-body"></div>
+								<div class="card-body">
+									<div class="row">
+											<div th:if="${session.message}"
+												class="alert alert-primary alert-dismissible fade show">
+												<p class="text-center" th:text="${session.message.content}"></p>
+												<th:block th:text="${#session.removeAttribute('message')}"></th:block>
+												<button type="button" class="close" data-dismiss="alert">&times;</button>
+												
+
+											</div>
+										</div>
+								</div>
 
 								<div class="col-12">
 									<form id="smartwizard-validation"
@@ -120,9 +131,10 @@ body {
 															<div class="form-group sm col-md-4">
 																<label class="form-label">Advertisement Code <span
 																	class="text-danger">*</span>
-																</label> <select class="form-control " id="advtCode" onchange="reqCodeByDate()" th:field="*{advtCode}">
+																</label> <select class="form-control " id="advtCode" onchange="reqCodeByDate()" th:field="*{reqAdvertisement.advtCode}">
 																	<option value="">Select Advertisement Code</option>
 																	<option th:each="reqAdvertisement, stat : ${listReqAdvertisement}"
+																		
 																		th:text="${reqAdvertisement.advtCode}" th:value="${reqAdvertisement.advtCode}" >code 1</option>
 																	
 
@@ -666,6 +678,49 @@ body {
 
 					</div>
 				</div>
+				
+				
+				
+				<!-- table data  -->
+				
+				<div class="col-12">
+					<div class="card">
+						<div class="card-header"></div>
+						<div class="card-body">
+							<table id="datatables-buttons"
+								class="table table-striped display" style="width: 100%"
+								aria-describedby="example">
+								<thead>
+									<tr>
+										<th scope="col">Advertisement Code</th>
+										<th scope="col">Advertisement Date</th>
+										<th scope="col">Applicant Name</th>
+										<th scope="col">Designation</th>
+										<th scope="col">Remarks</th>
+										<th scope="col">Action</th>
+									</tr>
+								</thead>
+								<tbody>
+									<!-- <tr th:each="list : ${listReqAdvertisement}">
+										<td th:text="${list.advtCode}"></td>
+										<td th:text="${#dates.format(list.advtDate, 'dd-MM-yyyy')}"></td>
+										<td th:text="${#strings.capitalize(list.remarks)}"></td>
+										<td><a
+											th:href="@{editAdvertisement/{id}(id=${list.advtCode})}"><em
+												class="align-middle fas fa-fw fa-pen"></em></a> <a
+											th:href="@{/deleteAdvertisement/{id}(id=${list.advtCode})}"
+											onclick="return confirm('Are you sure?')"><em
+												class="align-middle fas fa-fw fa-trash"></em></a></td>
+									</tr> -->
+								</tbody>
+
+							</table>
+						</div>
+
+					</div>
+				</div>
+				
+				
 			</main>
 			<footer class="footer">
 				<div th:replace="/fragments/footer :: div"></div>

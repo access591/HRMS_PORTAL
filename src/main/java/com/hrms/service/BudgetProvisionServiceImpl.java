@@ -1,7 +1,9 @@
 package com.hrms.service;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -14,12 +16,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hrms.model.BudgetProvision;
+import com.hrms.model.Department;
 
 @Service
 public class BudgetProvisionServiceImpl implements BudgetProvisionService {
 
 	@Autowired
 	SessionFactory sessionFactory;
+	@Autowired DepartmentService departmentService;
 
 	@Override
 	public void saveBudgetProvision(BudgetProvision budgetProvision) {
@@ -136,6 +140,41 @@ public class BudgetProvisionServiceImpl implements BudgetProvisionService {
 			session.close();
 		}
 		return null;
+	}
+
+	@Override
+	public Map<String, Long> findBudgetTrackDepartment() {
+		
+		Session session = sessionFactory.openSession();
+		Transaction tx = null;
+		Map<String, Long> task4List = new HashMap<>();
+		
+		try {
+			tx = session.beginTransaction();
+			String departmentQuery = "select b.department.departmentCode from BudgetProvision b group by b.department.departmentCode";
+			Query<String> query = session.createQuery(departmentQuery,String.class);
+			List<String>  departmentList = query.list();
+			System.out.println("departmentQuery ====>"+departmentList.get(0));
+			System.out.println("departmentQuery ====>"+departmentList);
+			
+			String budgetAmtCount = "select sum(expenditureAmount) as counter from BudgetProvision b group by"
+					+ " b.department.departmentCode";
+			Query<Long> query1 = session.createQuery(budgetAmtCount,Long.class);
+			List<Long>  countList = query1.list();
+
+
+			for (String deptCode : departmentList) {
+				Department department = departmentService.findDepartmentById(deptCode);
+				task4List.put("vt"+department.getDeptName(), countList.get(departmentList.indexOf(deptCode)));
+			}
+			tx.commit();
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally{
+			session.close();
+		}
+		return task4List;
 	}
 
 }

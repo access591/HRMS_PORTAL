@@ -84,6 +84,7 @@ body {
 												<div class="form-group">
 													<label> Requisition Date </label> <input
 														class="form-control" type="date" id="theDate" value=""
+														title="Requisition Date"
 														th:field="*{reqDate}" />
 												</div>
 											</div>
@@ -94,13 +95,16 @@ body {
 												<div class="form-group">
 													<label> Department Code </label> <input type="text"
 														class="form-control" id="departmentId" value=""
-														th:field="*{departmet.departmentCode}" readonly>
+														th:field="*{departmet.departmentCode}" 
+														title="Department Code"
+														readonly>
 												</div>
 											</div>
 											<div class="col-12 col-lg-6">
 												<label class="form-label">Department Name</label> <label
 													style="color: red">*</label> <select class="form-control"
 													id="departmentDropdown" onchange="changeDepartment()"
+													title="Department Name"
 													required>
 													<option value="">Select Department</option>
 													<option th:each="department :  ${departmentList}"
@@ -115,7 +119,9 @@ body {
 													<label> Requisition Priorty </label> <label
 														style="color: red">*</label> <select
 														class="form-control select2" id="leave_type_id"
-														th:field="*{reqPriority}" required>
+														th:field="*{reqPriority}" 
+														title="Requisition Priority"
+														required>
 														<option value="" disabled>Please Select</option>
 														<option th:value="Low" th:text="Low">Low</option>
 														<option th:value="High" th:text="High">High</option>
@@ -125,13 +131,16 @@ body {
 											<div class="col-12 col-lg-6">
 												<label class="form-label">Requisition Fulfill Date</label> <label
 													style="color: red">*</label> <input type="date"
-													id="theDate2" class="form-control" th:field="*{reqTill}">
+													id="theDate2" class="form-control" 
+													title="Requisition Fulfill Date"
+													th:field="*{reqTill}">
 											</div>
 										</div>
 										<div class="row">
 											<div class="col-12 col-lg-6">
 												<label class="form-label">Remarks</label> <input type="text"
 													class="form-control" id="leaveDepartmentName" value=""
+													title="Remarks"
 													th:field="*{remarks}">
 											</div>
 
@@ -203,12 +212,15 @@ body {
 															<td><input type="text" style="width: 90px;"
 																id="desigCode0"
 																name="employeRequisitionDetail[0].designation.desgCode"
-																readonly required></td>
+																readonly 
+																title="Designation code"
+																required></td>
 
 															<td><select id="designationName0"
 																style="width: 130px;"
 																name="employeRequisitionDetail[0].designation.desgName"
-																required onchange="selectDesignation()">
+																required onchange="selectDesignation()"
+																title="Designation name">
 																	<option value=" ">Select</option>
 
 
@@ -217,14 +229,18 @@ body {
 
 
 															<td><select id="location" style="width: 100px;"
-																name="employeRequisitionDetail[0].location" required>
+																name="employeRequisitionDetail[0].location" 
+																title="Location"
+																required>
 																	<option value=" ">Select</option>
 																	<option value="Court">Court</option>
 																	<option value="Department">Department</option>
 															</select></td>
 
 															<td><select id="sex" style="width: 90px;"
-																name="employeRequisitionDetail[0].sex" required>
+																name="employeRequisitionDetail[0].sex" 
+																title="Sex"
+																required>
 																	<option value=" ">Select</option>
 																	<option value="Male">Male</option>
 																	<option value="Female">Female</option>
@@ -232,31 +248,35 @@ body {
 
 															<td><input
 																name="employeRequisitionDetail[0].ageFrom" type="number"
-																style="width: 90px;" id="ageFrom" min="18" required></td>
+																style="width: 90px;" id="ageFrom" min="18" 
+																title="Age from"
+																required></td>
 
 															<td><input name="employeRequisitionDetail[0].ageTo"
 																type="number" max="45" style="width: 90px;" id="ageTo"
-																required></td>
+																required
+																></td>
 
 															<td><input
 																name="employeRequisitionDetail[0].acadQuali" type="text"
 																style="width: 120px;" id="accademicQualificatio"
-																required></td>
+																required
+																title="Accademic qualification"></td>
 
 															<td><input
 																name="employeRequisitionDetail[0].techQuali" type="text"
 																style="width: 120px;" id="technicalQualification"
-																required></td>
+																required title="Technical Qualification"></td>
 
 															<td><input
 																name="employeRequisitionDetail[0].minExperience"
 																type="number" style="width: 90px;" id="expMinMonth"
-																required></td>
+																required title="minimum experience"></td>
 
 															<td><input
 																name="employeRequisitionDetail[0].maxExperience"
 																type="number" style="width: 90px;" id="expMaxMonth"
-																required></td>
+																required title="max experience"></td>
 
 															<td><select id="vacancyType" style="width: 120px;"
 																name="employeRequisitionDetail[0].vacanncyType" required>
@@ -268,12 +288,14 @@ body {
 															<td><input
 																name="employeRequisitionDetail[0].totalVacancy"
 																type="number" style="width: 90px;" id="totalvacancy"
-																required></td>
+																required
+																title="Total vacancy"></td>
 
 															<td><input
 																name="employeRequisitionDetail[0].salaryFrom"
 																type="text" style="width: 120px;" id="salaryFrom"
-																required></td>
+																required
+																title="Salary"></td>
 
 															<td><input
 																name="employeRequisitionDetail[0].salaryTo" type="text"
@@ -335,6 +357,7 @@ body {
 
 											<th:block th:switch="${leave.status}">
 												<td th:case="'Y'" class="text-center">Approved</td>
+												<td th:case="'D'" class="text-center">Approved</td>
 												<td th:case="'C'" class="text-center">Cancel</td>
 												<td th:case="'N'" class="text-center">Pending</td>
 											</th:block>
@@ -342,6 +365,13 @@ body {
 											<td class="text-center"><th:block
 													th:switch="${leave.status}">
 													<div th:case="'Y'">
+														<a th:href="@{viewRequisition/{id}(id=${leave.reqCode})}"><em
+															class="align-middle fas fa-fw fa-pen"></em></a> <a
+															th:href="@{deleteRequisition/{id}(id=${leave.reqCode})}"
+															onclick="return confirm('Are you sure?')"><em
+															class="align-middle fas fa-fw fa-trash"></em></a>
+													</div>
+													<div th:case="'D'">
 														<a th:href="@{viewRequisition/{id}(id=${leave.reqCode})}"><em
 															class="align-middle fas fa-fw fa-pen"></em></a> <a
 															th:href="@{deleteRequisition/{id}(id=${leave.reqCode})}"

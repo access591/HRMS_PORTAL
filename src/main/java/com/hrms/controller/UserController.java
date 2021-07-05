@@ -1,9 +1,11 @@
 package com.hrms.controller;
-import java.util.HashMap;
+
 import java.util.List;
+
 import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,13 +25,16 @@ import com.hrms.model.Employee;
 import com.hrms.model.InterviewMaster;
 import com.hrms.model.Login;
 import com.hrms.model.MenuModule;
-
+import com.hrms.model.OrderIssueTracking;
+import com.hrms.model.TrackallEnquiries;
 import com.hrms.model.UserEntity;
 import com.hrms.service.AttendenceRegisterService;
 import com.hrms.service.EmployeeService;
 import com.hrms.service.InterviewMasterService;
 import com.hrms.service.ModuleService;
+import com.hrms.service.OrderIssueTrackingService;
 import com.hrms.service.ReCaptchaValidationService;
+import com.hrms.service.TrackallEnquiriesService;
 import com.hrms.service.UserService;
 
 @Controller
@@ -45,6 +50,8 @@ public class UserController {
 	 EmployeeService employeeService;
 	@Autowired InterviewMasterService interviewMasterService;
 	@Autowired AttendenceRegisterService attendenceRegisterService;
+	@Autowired OrderIssueTrackingService orderIssueTrackingService;
+	@Autowired TrackallEnquiriesService trackallEnquiriesService; 
 
 	@Autowired
 	private ReCaptchaValidationService validator;
@@ -57,8 +64,10 @@ public class UserController {
 	public String loginUser(@ModelAttribute("user") Login login, Model model,
 			@RequestParam(name = "g-recaptcha-response") String captcha, HttpSession session) {
 		
-		 boolean captchaVerifyMessage = validator.validateCaptcha(captcha);
-		 System.out.println("captchaVerifyMessage>>>>>>>>>>>"+captchaVerifyMessage);
+
+		 //boolean captchaVerifyMessage = validator.validateCaptcha(captcha);
+		 //System.out.println("captchaVerifyMessage>>>>>>>>>>>"+captchaVerifyMessage);
+
 
 		try {
 			List<Employee> listEmployee = employeeService.getAllEmployees();
@@ -73,7 +82,6 @@ public class UserController {
 				model.addAttribute("listAttendenceRegister", listAttendenceRegister.size());
 			}
 		} catch (Exception e) {
-			
 			e.printStackTrace();
 		}
 		try {
@@ -82,7 +90,6 @@ public class UserController {
 				model.addAttribute("findTodayLeave", findTodayLeave.size());
 			}
 		} catch (Exception e) {
-			
 			e.printStackTrace();
 		}
 		try {
@@ -91,7 +98,23 @@ public class UserController {
 				model.addAttribute("finalSelection", listInterviewMaster.size());
 			}
 		} catch (Exception e) {
-			
+			e.printStackTrace();
+		}
+		
+		try {
+			List<OrderIssueTracking> orderService = orderIssueTrackingService.getAllOrderIssueTracking();
+			if(orderService != null) {
+				model.addAttribute("orderTracking", orderService.size());
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		try {
+			List<TrackallEnquiries> trackList =  trackallEnquiriesService.getAllTrackallEnquiries();
+			if(trackList != null) {
+				model.addAttribute("trackList", trackList.size());
+			}
+		}catch(Exception e) {
 			e.printStackTrace();
 		}
 		model.addAttribute("chart", new Object[][] {
@@ -104,9 +127,19 @@ public class UserController {
 		});
 		
 		
+		
+		
+		
+		
+		
+        
+ 
+        
 		boolean isUserExist = userService.checkUserExists(login);
-		if (isUserExist && captchaVerifyMessage) {
-			
+
+
+		if (isUserExist) {
+
 			String id = login.getUserCode();
 			UserEntity userRecord = userService.findDataById(id);
 			session.setAttribute("uuuuu", userRecord.getUserName());
@@ -241,6 +274,7 @@ public class UserController {
 	
 	@GetMapping("/dashboard")
 	public String dashBoardMethod(Model model,HttpSession session) {
+		
 		if(session.getAttribute("username")==null) {
 			return "redirect:" + "./";
 		}
@@ -249,30 +283,55 @@ public class UserController {
 		if (modules != null) {
 			model.addAttribute("modules", modules);
 		}
+		
+		try {
+			List<Employee> listEmployee = employeeService.getAllEmployees();
+			model.addAttribute("employeeList", listEmployee.size());
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		List<AttendenceRegister> listAttendenceRegister = attendenceRegisterService
+				.findTodayAttendenceList();
+		if(listAttendenceRegister != null) {
+			model.addAttribute("listAttendenceRegister", listAttendenceRegister.size());
+		}
+		
+		List<AttendenceRegister> findTodayLeave = attendenceRegisterService.findTodayLeaveEmployee();
+		if(findTodayLeave != null) {
+			model.addAttribute("findTodayLeave", findTodayLeave.size());
+		}
+		
+		List<InterviewMaster> listInterviewMaster = interviewMasterService.getFinalSelection();
+		
+		if(listInterviewMaster != null) {
+			model.addAttribute("finalSelection", listInterviewMaster.size());
+		}
+		
+		try {
+			List<OrderIssueTracking> orderService = orderIssueTrackingService.getAllOrderIssueTracking();
+			if(orderService != null) {
+				model.addAttribute("orderTracking", orderService.size());
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		try {
+			List<TrackallEnquiries> trackList =  trackallEnquiriesService.getAllTrackallEnquiries();
+			if(trackList != null) {
+				model.addAttribute("trackList", trackList.size());
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		
 		return "dashboard";
 	
 	}
 	
 	
-	private Map<String, Integer> getChartData() { 
-//        return List.of(
-//        		
-//                List.of("Mushrooms",44 ),
-//                List.of("Onions", 24),
-//                List.of("Olives",89),
-//                List.of("Zucchini",6),
-//                List.of("Pepperoni",56)
-//        );
-		
-		Map<String,Integer> map = new HashMap<>();
-		map.put("Mushrooms", 44);
-		map.put("Onions", 24);
-		map.put("Olives", 89);
-		map.put("Zucchini", 6);
-		map.put("Zucchini", 6);
-		
-		return map;
-		
-    }
+	
+	
 	
 }

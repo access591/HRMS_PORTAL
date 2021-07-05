@@ -4,6 +4,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -105,7 +110,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 			tx = session.beginTransaction();
 
 			String category = "select e.categoryCode from Employee e group by e.categoryCode";
-			Query<String> query = session.createQuery(category);
+			Query<String> query = session.createQuery(category,String.class);
 			List<String>  categoryList = query.list();
 			
 			String count = "SELECT  COUNT(categoryCode) AS counter FROM Employee e GROUP BY categoryCode";
@@ -132,6 +137,25 @@ public class EmployeeServiceImpl implements EmployeeService {
 			session.close();
 		}
 		return task4List;
+	}
+
+	
+	
+	@Override
+	public List<Employee> findAllEmployee() {
+		
+
+		Session session = sessionFactory.openSession();
+		
+		CriteriaBuilder cb = session.getCriteriaBuilder();
+	    CriteriaQuery<Employee> cq = cb.createQuery(Employee.class);
+	    Root<Employee> rootEntry = cq.from(Employee.class);
+	    CriteriaQuery<Employee> all = cq.select(rootEntry);
+
+	    TypedQuery<Employee> allQuery = session.createQuery(all);
+	    
+	    return allQuery.getResultList();
+		//return null;
 	}
 
 

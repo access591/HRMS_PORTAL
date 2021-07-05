@@ -93,7 +93,7 @@ body {
 
 													<td><label th:text="${interFinal.interviewCode}"></label></td>
 
-													<td><label th:text="${interFinal.interviewDate}"></label></td>
+													<td><label th:text="${#dates.format(interFinal.interviewDate, 'dd-MM-yyyy')}"></label></td>
 
 													<td><label
 														th:text="${interFinal.applicantCode.applicantCode}"></label></td>
@@ -102,7 +102,7 @@ body {
 														th:text="${interFinal.applicantCode.applicantName}"></label></td>
 
 													<td><label
-														th:text="${interFinal.applicantCode.applicantDate}"></label></td>
+														th:text="${#dates.format(interFinal.applicantCode.applicantDate,'dd-MM-yyyy')}"></label></td>
 
 													<td><label
 														th:text="${interFinal.applicantCode.currentCtc}"></label></td>

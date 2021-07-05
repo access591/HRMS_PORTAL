@@ -25,9 +25,13 @@ public class ApplicantInfo {
 	@Size(max=50)
 	private String applicantCode;
 	
-	@Size(max=50)
-	@Column(name="ADVT_CODE")
-	private String advtCode;
+//	@Size(max=50)
+//	@Column(name="ADVT_CODE")
+//	private String advtCode;
+	
+	@ManyToOne
+	@JoinColumn(name="ADVT_CODE")
+	private ReqAdvertisement reqAdvertisement;
 	
 	@Temporal(TemporalType.DATE)
 	@Column(name="ADVT_DATE")
@@ -219,14 +223,6 @@ public class ApplicantInfo {
 
 	public void setApplicantCode(String applicantCode) {
 		this.applicantCode = applicantCode;
-	}
-
-	public String getAdvtCode() {
-		return advtCode;
-	}
-
-	public void setAdvtCode(String advtCode) {
-		this.advtCode = advtCode;
 	}
 
 	public Date getAdvtDate() {
@@ -561,6 +557,18 @@ public class ApplicantInfo {
 
 	public void setPermAdd2(String permAdd2) {
 		this.permAdd2 = permAdd2;
+	}
+
+
+
+	public ReqAdvertisement getReqAdvertisement() {
+		return reqAdvertisement;
+	}
+
+
+
+	public void setReqAdvertisement(ReqAdvertisement reqAdvertisement) {
+		this.reqAdvertisement = reqAdvertisement;
 	}
 	
 	

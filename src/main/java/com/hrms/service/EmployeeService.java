@@ -22,6 +22,9 @@ public interface EmployeeService {
 	public List<Employee> findByempCode(String empCode);
 	
 	public Map<String, Long> countRecordByCategory();
+	
+	
+	public List<Employee> findAllEmployee();
 
 
 }

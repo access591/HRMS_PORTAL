@@ -60,23 +60,23 @@ body {
 										<input type="hidden" th:field="*{orderTrackingId}">
 
 											<div class="col-12 col-lg-4">
-												<label class="form-label">Date of Issue</label> <label
-													style="color: red">*</label> <input type="date"
+												<label class="form-label">Date of Issue</label> 
+												 <input type="date"
 													th:field="*{orderTrackingDate}" class="form-control">
 
 											</div>
 
 											<div class="col-12 col-lg-4">
-												<label class="form-label">Order Number</label> <label
-													style="color: red">*</label> <input type="text"
+												<label class="form-label">Order Number</label> 
+												 <input type="text"
 													th:field="*{orderNumber}" class="form-control">
 
 											</div>
 
 
 											<div class="col-12 col-lg-4">
-												<label class="form-label">Order Title</label> <label
-													style="color: red">*</label> <input type="text"
+												<label class="form-label">Order Title</label> 
+												 <input type="text"
 													th:field="*{orderTitle}" class="form-control">
 
 											</div>
@@ -86,8 +86,8 @@ body {
 											<div class="row">
 
 											<div class="col-12 col-lg-4">
-												<label class="form-label">Issue By</label> <label
-													style="color: red">*</label> <select class="form-control"
+												<label class="form-label">Issue By</label> 
+												 <select class="form-control"
 													onchange="changeCategory()" th:field="*{employee.empCode}">
 													<option value="">Select Employee</option>
 													<option th:each="employee : ${employeeList}"
@@ -97,8 +97,8 @@ body {
 											</div>
 
 											<div class="col-12 col-lg-4">
-												<label class="form-label">Branch Name</label> <label
-													style="color: red">*</label> <select class="form-control"
+												<label class="form-label">Branch Name</label> 
+												 <select class="form-control"
 													onchange="changeCategory()" >
 													<option value="">Select Branch</option>
 												
@@ -111,9 +111,12 @@ body {
 
 
 											<div class="col-12 col-lg-4">
-												<label class="form-label">Order File</label> <label
-													style="color: red">*</label> <input type="file"
-													name="orderFile">
+												<label class="form-label">Order File</label> 
+												<input type="file"
+													>
+													<span
+													th:text="${orderIssueTracking.orderFileName}">Download</span>
+												
 
 											</div>
 											
@@ -122,8 +125,8 @@ body {
 											<div class="row">
 
 											<div class="col-12 col-lg-4">
-												<label class="form-label">Order Description</label> <label
-													style="color: red">*</label> <textarea 
+												<label class="form-label">Order Description</label> 
+												 <textarea 
 													th:field="*{orderDescription}" class="form-control"></textarea>
 
 											</div>
@@ -131,7 +134,7 @@ body {
 
 										</div>
 
-										
+										<p></p>
 										<Button type="submit" class="btn btn-primary">Update</Button>
 										<input
     							

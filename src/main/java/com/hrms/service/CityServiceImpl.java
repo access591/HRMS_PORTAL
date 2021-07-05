@@ -2,6 +2,13 @@ package com.hrms.service;
 
 import java.util.List;
 
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Service;
@@ -15,6 +22,7 @@ import com.hrms.repository.CityDao;
 public class CityServiceImpl implements CityService {
 	@Autowired
 	CityDao cityDao;
+	@Autowired SessionFactory sessionFactory;
 	
 
 	@Override
@@ -52,6 +60,19 @@ public class CityServiceImpl implements CityService {
 	public List<City> findCityByState(String stateCode) {
 	
 		return cityDao.findCityByState(stateCode);
+	}
+
+	@Override
+	public List<City> findAllCity() {
+		
+		Session session = sessionFactory.openSession();
+		CriteriaBuilder cb = session.getCriteriaBuilder();
+	    CriteriaQuery<City> cq = cb.createQuery(City.class);
+	    Root<City> rootEntry = cq.from(City.class);
+	    CriteriaQuery<City> all = cq.select(rootEntry);
+
+	    TypedQuery<City> allQuery = session.createQuery(all);
+	    return allQuery.getResultList();
 	}
 
 	

@@ -15,6 +15,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 
 
@@ -31,13 +32,14 @@ public class EmployeeRequisitionDetail implements Serializable{
 	private Long reqDetailCode;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "REQ_CODE",updatable = false)
+    @JoinColumn(name = "REQ_CODE",nullable=false)
 	private EmployeeRequisition employeeRequisition;
 	
 	@Column(name="REQ_DATE")
 	private Date reqDate;
 	
 	
+	@JsonManagedReference
 	@ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "DESIG_CODE",updatable = false)
 	private Designation designation;

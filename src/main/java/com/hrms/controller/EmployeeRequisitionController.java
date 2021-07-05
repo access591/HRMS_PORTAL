@@ -76,11 +76,16 @@ public class EmployeeRequisitionController {
 		
 		
 		//session.setAttribute("imgUtil", new ImageUtil());
-		String userCode = (String) session.getAttribute("username");  
-		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
-		if (modules != null) {
-			model.addAttribute("modules", modules);
+		String userCode = (String) session.getAttribute("username");
+		try {
+			List<MenuModule> modules = moduleService.getAllModulesList(userCode);
+			if (modules != null) {
+				model.addAttribute("modules", modules);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
 		}
+		
 
 		try {
 			List<Department> departmentList = departmentService.getAllDepartments();
@@ -128,14 +133,14 @@ public class EmployeeRequisitionController {
 		
 		try {
 			
-			List<EmployeeRequisitionDetail> re = new ArrayList<>();
+			List<EmployeeRequisitionDetail> re = employeeRequisition.getEmployeRequisitionDetail();
 			
-			for(int i=0;i<employeeRequisition.getEmployeRequisitionDetail().size();i++) {
-				EmployeeRequisitionDetail e = new EmployeeRequisitionDetail();
+			for(EmployeeRequisitionDetail e : re) {
+				
 				
 				e.setReqDate(employeeRequisition.getReqDate());
 				e.setEmployeeRequisition(employeeRequisition);
-				re.add(e);	
+					
 				
 			}
 			
@@ -190,6 +195,7 @@ public class EmployeeRequisitionController {
 			
 			for(EmployeeRequisitionDetail eDetail : employeeRequisition.getEmployeRequisitionDetail()) {
 				eDetail.setEmployeeRequisition(employeeRequisition);
+				eDetail.setReqDate(employeeRequisition.getReqDate());
 				employeeRequisitionDetail.add(eDetail);
 			}
 			
@@ -257,12 +263,21 @@ public class EmployeeRequisitionController {
 		List<Employee> employeeList = employeeService.findByDepartmentCode(deptCode);
 		List<CommonUtil> details = new ArrayList<>();
 		CommonUtil empl = new CommonUtil();
+		
+		String designationCode = "";
 		for(int i =0;i<employeeList.size();i++) {
-			Designation designation = designationService.findDesignationById(employeeList.get(i).getDesignationCode());
 			
-			empl.setDesgName(designation.getDesgName());
-			empl.setDesigCode(designation.getDesgCode());
-			details.add(empl);
+			
+			if(!designationCode.equals(employeeList.get(i).getDesignationCode())) {
+				
+				designationCode = employeeList.get(i).getDesignationCode();
+				Designation designation = designationService.findDesignationById(designationCode);
+				
+				empl.setDesgName(designation.getDesgName());
+				empl.setDesigCode(designation.getDesgCode());
+				details.add(empl);
+			}
+			
 		}
 		return details;
 	}

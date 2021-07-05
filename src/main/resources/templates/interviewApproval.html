@@ -85,28 +85,28 @@ body {
 
 												<tr
 													th:each="interviewApproval : ${listInterviewApprovalUtil}">
-													<td><label
+													<td class="text-center"><label
 														th:text="${interviewApproval.applicantCode}"></label></td>
 
-													<td><label
-														th:text="${interviewApproval.applicantDate}"></label></td>
+													<td class="text-center"><label
+														th:text="${#dates.format(interviewApproval.applicantDate, 'dd-MM-yyyy')}"></label></td>
 
-													<td><label
-														th:text="${interviewApproval.applicantName}"></label></td>
+													<td class="text-center"><label
+														th:text="${#strings.capitalize(interviewApproval.applicantName)}"></label></td>
 
-													<td><label th:text="${interviewApproval.sex}"></label></td>
+													<td class="text-center"><label th:text="${interviewApproval.sex}"></label></td>
 
 
 
-													<td><label
+													<td class="text-center"><label
 														th:text="${interviewApproval.desigCode.desgCode}"></label></td>
 
-													<td><label
-														th:text="${interviewApproval.desigCode.desgName}"></label></td>
+													<td class="text-center"><label
+														th:text="${#strings.capitalize(interviewApproval.desigCode.desgName)}"></label></td>
 
 
 
-													<td th:if="${interviewApproval.interStatus == 'Hold'}">
+													<td class="text-center" th:if="${interviewApproval.interStatus == 'Hold'}">
 														<div class="dropdown show">
 															<a class="btn btn-primary dropdown-toggle" href="#"
 																role="button" id="dropdownMenuLink"
@@ -129,7 +129,7 @@ body {
 														</div>
 													</td>
 
-													<td th:if="${interviewApproval.interStatus == 'N'}">
+													<td class="text-center" th:if="${interviewApproval.interStatus == 'N'}">
 														<div class="dropdown show">
 															<a class="btn btn-primary dropdown-toggle" href="#"
 																role="button" id="dropdownMenuLink"

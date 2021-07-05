@@ -20,12 +20,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.hrms.helper.Message1;
 import com.hrms.model.EmployeeRequisition;
 import com.hrms.model.MenuModule;
 import com.hrms.model.ReqAdvertisement;
 import com.hrms.model.ReqAdvertisementDetail;
 import com.hrms.service.DepartmentService;
 import com.hrms.service.DesignationService;
+import com.hrms.service.EmployeeRequisitionDetailService;
 import com.hrms.service.EmployeeRequisitionService;
 import com.hrms.service.EmployeeService;
 import com.hrms.service.ModuleService;
@@ -46,6 +48,7 @@ public class RequisitionAdvertisementController {
 	EmployeeRequisitionService employeeRequisitionService;
 	@Autowired
 	RequisitionAdvertisementService reqAdvertisementService;
+	@Autowired EmployeeRequisitionDetailService employeeRequisitionDetailService;
 
 	@InitBinder("reqAdvertisement")
 	public void customizeBinding(WebDataBinder binder) {
@@ -85,6 +88,8 @@ public class RequisitionAdvertisementController {
 			model.addAttribute("listReqAdvertisement", listReqAdvertisement);
 		}
 
+		model.addAttribute("demo1", "12434");
+		
 		return "Advertisment";
 	}
 
@@ -96,12 +101,25 @@ public class RequisitionAdvertisementController {
 			return "redirect:" + "./";
 		}
 
-		for (ReqAdvertisementDetail eDetail : reqAdvertisement.getListReqAdvertisementDetail()) {
-			eDetail.setReqAdvertisement(reqAdvertisement);
-			eDetail.setAdvtDate(reqAdvertisement.getAdvtDate());
-		}
+		try {
+			for (ReqAdvertisementDetail eDetail : reqAdvertisement.getListReqAdvertisementDetail()) {
+				eDetail.setReqAdvertisement(reqAdvertisement);
+				eDetail.setAdvtDate(reqAdvertisement.getAdvtDate());
+				
+				EmployeeRequisition empRequisition = employeeRequisitionService.findEmployeeRequisitiondById(
+						eDetail.getEmployeeRequisition().getReqCode());
+				empRequisition.setStatus("D");
+				employeeRequisitionService.updateEmployeeRequisition(empRequisition);
+			}
 
-		reqAdvertisementService.addActivity(reqAdvertisement);
+			
+			
+			reqAdvertisementService.addActivity(reqAdvertisement);
+			session.setAttribute("message", new Message1("Data has been added Successfully", "alert-primary"));
+		} catch (Exception e) {
+			e.printStackTrace();
+			session.setAttribute("message", new Message1("Something went Wrong!!!", "alert-primary"));
+		}
 
 		return "redirect:advertisment";
 	}
@@ -114,7 +132,14 @@ public class RequisitionAdvertisementController {
 			return "redirect:" + "./";
 		}
 
-		this.reqAdvertisementService.removeReqAdvertisement(advtCode);
+		try {
+			this.reqAdvertisementService.removeReqAdvertisement(advtCode);
+			session.setAttribute("message", new Message1("Data has been Deleted", "alert-primary"));
+		} catch (Exception e) {
+			e.printStackTrace();
+			session.setAttribute("message", new Message1("Something went Wrong!!!", "alert-primary"));
+		}
+
 		return "redirect:/advertisment";
 	}
 
@@ -141,11 +166,17 @@ public class RequisitionAdvertisementController {
 			return "redirect:" + "./";
 		}
 
-		for (ReqAdvertisementDetail re : reqAdvertisement.getListReqAdvertisementDetail()) {
-			re.setReqAdvertisement(reqAdvertisement);
-		}
+		try {
+			for (ReqAdvertisementDetail re : reqAdvertisement.getListReqAdvertisementDetail()) {
+				re.setReqAdvertisement(reqAdvertisement);
+			}
 
-		reqAdvertisementService.updateReqAdvertisement(reqAdvertisement);
+			reqAdvertisementService.updateReqAdvertisement(reqAdvertisement);
+			session.setAttribute("message", new Message1("Data has been Updated", "alert-primary"));
+		} catch (Exception e) {
+			e.printStackTrace();
+			session.setAttribute("message", new Message1("Something went Wrong!!!", "alert-primary"));
+		}
 
 		return "redirect:advertisment";
 	}
@@ -156,6 +187,13 @@ public class RequisitionAdvertisementController {
 
 		return employeeRequisitionService.findEmployeeRequisitiondById(reqCode);
 
+	}
+	
+	@ResponseBody
+	@GetMapping("getemployeerequisitionstatus")
+	public List<EmployeeRequisition> getEmployeeReqByStatusY() {
+		
+		return employeeRequisitionService.findEmployeeReqByStatusY();
 	}
 
 }
