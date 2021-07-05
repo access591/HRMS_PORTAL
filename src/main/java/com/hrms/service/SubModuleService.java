@@ -19,5 +19,6 @@ public interface SubModuleService {
 
 	public void removeSubModule(String id);
 	boolean checkSubModuleSeqExists(SubModule subModule);
+	List<SubModule> findSubModuleByModuleCode(String id);
     
 } 

@@ -68,10 +68,13 @@ body {
 									   		<div class="mb-3">
 												<label class="form-label">Sub Module</label>
 												<label style="color: red">*</label>
-												<select class="form-control select2" name="subModuleCode.subModuleCode"id="subModuleCode.subModuleCode" required aria-required="true">
+												
+											     	
+											     	<select class="form-control select2" name="subModuleCode.subModuleCode" id="subModuleCode" onchange="myFunctionProgram()"  required aria-required="true">
 												 <option value="">Select Sub Module</option>
-												<option th:each="submodule: ${subModulesList}" th:value="${submodule.getSubModuleCode()}" th:text="${submodule.getSubModuleName()}"></option>
 											     	</select>
+											     	
+											     	
 											</div>
 
 									<div class="form-group">
@@ -90,7 +93,7 @@ body {
 									      	   <div class="mb-3">
 														<label class="form-label">Module</label>
 															<label style="color: red">*</label>
-													   <select class="form-control select2" name="moduleCode.moduleCode"id="moduleCode.moduleCode" required aria-required="true">
+													   <select class="form-control select2" name="moduleCode.moduleCode"id="moduleCode.moduleCode" onchange="myFunctionSubModule()" required aria-required="true">
 												    <option value="">Select Module</option>
 													<option   th:each="module: ${modulesList}" th:value="${module.getModuleCode()}" th:text="${module.getModuleName()}"></option>
 											     	</select>
@@ -100,10 +103,12 @@ body {
 										   			  <div class="mb-3">
 														<label class="form-label">Program</label>
 															<label style="color: red">*</label>
-													   <select class="form-control select2" name="prgCode.programCode"id="prgCode.programCode" required aria-required="true">
-												    <option value="">Select Program</option>
-													<option   th:each="program: ${programsList}" th:value="${program.getProgramCode()}" th:text="${program.getProgramName()}"></option>
+											
+											     	<select class="form-control select2" name="prgCode.programCode" id="programCode"  required aria-required="true">
+												 <option value="">Select Program Name</option>
 											     	</select>
+											     	
+											     	
 										   			</div>
 										   			
 													</div>
@@ -184,6 +189,77 @@ body {
 		});
 	</script>
 		
+	<script>
+	function myFunctionSubModule(){
+/* 		 var empCode= $('#empCode option:selected').value; */
+		 var id= document.getElementById('moduleCode.moduleCode').value
+	    console.log("ajax request : "+ id);
+	    const xhr = new XMLHttpRequest();
+	    xhr.open('GET','./viewModuleBySubModule/'+id,true);
+	    xhr.getResponseHeader('content-type','application/json');
+	    xhr.onload = function(){
+	        if(this.status===200){
+	            let obj = JSON.parse(this.responseText);
+	            console.log(obj);
+	            $('#subModuleCode').empty();
+	            $('#subModuleCode').append(
+						$('<option>').val("").text("Select Sub Module"));
+					
+	            $('#subModuleName').val(obj.subModuleName);
+	            $('#subModuleCode').val(obj.subModuleCode);
+	            
+	            $.each(obj,
+						function(i, item) {
+							$('#subModuleCode').append(
+							$('<option>').val(this.subModuleCode).text(this.subModuleName));
+						});
+	        }
+	        else{
+	            console.error("some error occured");
+	        }
+	    }
+	    xhr.send();
+	}
+
+	</script>
+
+	<script>
+	function myFunctionProgram(){
+/* 		 var empCode= $('#empCode option:selected').value; */
+		 var id= document.getElementById('subModuleCode').value
+	    console.log("ajax request : "+ id);
+		 $('#stateCode').click(function() {
+	      	 var name= $('#stateCode option:selected').text();
+	      	$('#state').val(name);
+	      	}); 
+	    const xhr = new XMLHttpRequest();
+	    xhr.open('GET','./viewSubModuleByProgramCode/'+id,true);
+	    xhr.getResponseHeader('content-type','application/json');
+	    xhr.onload = function(){
+	        if(this.status===200){
+	            let obj = JSON.parse(this.responseText);
+	            console.log(obj);
+	            $('#programCode').empty();
+	            $('#programCode').append(
+						$('<option>').val("").text("Select Program"));
+					
+	            $('#programName').val(obj.programName);
+	            $('#programCode').val(obj.programCode);
+	            
+	            $.each(obj,
+						function(i, item) {
+							$('#programCode').append(
+							$('<option>').val(this.programCode).text(this.programName));
+						});
+	        }
+	        else{
+	            console.error("some error occured");
+	        }
+	    }
+	    xhr.send();
+	}
+
+	</script>
 		
 </body>
 </html>

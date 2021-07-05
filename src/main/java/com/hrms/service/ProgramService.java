@@ -14,4 +14,5 @@ public interface ProgramService {
 	 public void updateProgram(Program p); 
 	  public void removeProgram(String id);
 	  List<Program> getActivePrograms();
+	List<Program> findByProgramCodeSubModule(String id);
 }

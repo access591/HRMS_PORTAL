@@ -71,4 +71,10 @@ public class SubModuleServiceImpl  implements SubModuleService{
 		}
 	}
 
+	@Override
+	public List<SubModule> findSubModuleByModuleCode(String id) {
+	
+		return subModuleDao.findSubModuleByModuleCode(id);
+	}
+
 }
