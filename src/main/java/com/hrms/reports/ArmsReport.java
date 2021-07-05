@@ -127,6 +127,8 @@ public class ArmsReport {
 			
 			for(ArmsLicenseDetails arms : sourceData) {
 				
+				System.out.println("date testingg====>"+ arms.getDoi());
+				System.out.println("date testingg====>"+ arms.getDov());
 				Row row = sheet.createRow(rowIndex++);
 				row.createCell(0).setCellValue(rowIndex);
 				row.createCell(1).setCellValue(arms.getName());
@@ -135,8 +137,8 @@ public class ArmsReport {
 				row.createCell(4).setCellValue(arms.getDistrict());
 				row.createCell(5).setCellValue(arms.getState());
 				row.createCell(6).setCellValue(arms.getArmsArea());
-				row.createCell(7).setCellValue(arms.getDoi());
-				row.createCell(8).setCellValue(arms.getDov());
+				row.createCell(7).setCellValue(arms.getDoi().toString().substring(0, 11));
+				row.createCell(8).setCellValue(arms.getDov().toString().substring(0,11));
 				row.createCell(9).setCellValue(arms.getToa());
 				row.createCell(10).setCellValue(arms.getTop());
 				row.createCell(11).setCellValue(arms.getArmsNol());
