@@ -74,7 +74,7 @@ body {
 						
 					
 					</div>
-					<form id="validation-form" action="#"  th:action="@{/saveAttendenceRegister}" th:object="${attendenceRegister}" method="post">
+					<form id="validation-form" action="#"   th:object="${attendenceRegister}" method="post">
 				              	<div class="row">
 					
 							<div class="col-12">
@@ -89,8 +89,11 @@ body {
 								<div class="card-body">
 									<div class="form-row">
 												<div class="form-group sm col-md-6">
+											      
+											     
 											       <label class="form-label">Date</label>
 											       <span class="text-danger">*</span>
+											       <input  type="hidden"id="id"name="id" disabled th:field="${attendenceRegisterView.id}" class="form-control">
 											       <input  type="text"id="attendenceDate"name="attendenceDate" disabled th:field="${attendenceRegisterView.attendenceDate}" class="form-control required">
 											      </div>
 												
@@ -196,7 +199,7 @@ body {
 	                     </div>
 					</div>
 				
-						<button type="button"class="btn btn-primary" onclick="window.location.href='../attendanceRegister';">Cancel</button>
+						<button type="button"class="btn btn-primary" th:onclick="window.location.href='../attendanceRegister';">Cancel</button>
 </form>
 
 				</div>
