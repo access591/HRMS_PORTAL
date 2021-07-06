@@ -109,6 +109,7 @@ public class LeaveApprovalController {
 		try {
 			UserEntity user = userService.findDataById(userCode);
 			activeUser = user.getUserName();
+			System.out.println("active user =====>"+ activeUser);
 			
 			if(status.equals("Y")) {
 				leaveRequest.setStatus("Y");

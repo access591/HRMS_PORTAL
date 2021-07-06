@@ -8,6 +8,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 
 import com.hrms.model.LeaveRequest;
@@ -28,13 +29,27 @@ public class LeaveRequestServiceImpl implements LeaveRequestService {
 
 	}
 
+	
+	@Modifying
 	@Override
 	public void addLeave(LeaveRequest leaveRequest) {
 
+		
 		if (leaveRequest.getRequestType().equals("single")) {
 			leaveRequest.setToDate(leaveRequest.getFromDate());
 		}
-		this.leaveRequestDao.saveOrUpdate(leaveRequest);
+		
+		Session session = sessionFactory.openSession();
+		Transaction tx = null;
+		try {
+			tx = session.beginTransaction();
+			session.save(leaveRequest);
+			tx.commit();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			session.close();
+		}
 
 	}
 

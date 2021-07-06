@@ -82,20 +82,21 @@ body {
 										<div class="row">
 											<div class="col-12 col-lg-6">
 												<div class="form-group">
-													<label> Employee Code </label> <label style="color: red">*</label>
-													<input class="form-control" id="leaveRequestEmpId" value=""
-														th:field="*{employee.empCode}" readonly />
+													<label> Department Code </label> <label style="color: red">*</label>
+													<input class="form-control" id="leaveRequestDeptCode"
+														value="" title="Department Code" readonly />
 												</div>
 											</div>
 											<div class="col-12 col-lg-6">
-												<label class="form-label">Select Employee</label> <label
+												<label class="form-label">Select Department</label> <label
 													style="color: red">*</label> <select class="form-control"
-													id="employeeDropDownLeave" onchange="leaveEmployeDisplay()"
-													required>
-													<option value="">Select Employee</option>
-													<option th:each="employee: ${listEmployee}"
-														th:text="${employee.empName}"
-														th:value=" ${employee.empCode}"></option>
+													id="employeeDropDownDepartment" onchange="changeDepartment()"
+													required title="Department Name"
+													th:field="*{department.departmentCode}">
+													<option value="">Select Department</option>
+													<option th:each="dept : ${departmentList}"
+														th:text="${dept.deptName}"
+														th:value=" ${dept.departmentCode}"></option>
 												</select> <input type="hidden" name="" value="" id="hiddenField">
 											</div>
 
@@ -104,17 +105,27 @@ body {
 										<div class="row">
 											<div class="col-12 col-lg-6">
 												<div class="form-group">
-													<label> Department Code </label> <label style="color: red">*</label>
+													<label> Employee Code </label> <label style="color: red">*</label>
 													<input type="text" class="form-control"
-														id="leaveDepartmentId" value=""
-														th:field="*{department.departmentCode}" readonly>
+														id="leaveEmpId" value=""
+														
+														title="Employee Code" readonly>
 												</div>
 											</div>
+											
 											<div class="col-12 col-lg-6">
-												<label class="form-label">Department Name</label> <label
-													style="color: red">*</label> <input type="text"
-													class="form-control" id="leaveDepartmentName" value=""
-													name="deptName" readonly>
+												<div class="form-group">
+													<label class="form-label">Employee</label> <label
+														style="color: red">*</label> <select
+														class="form-control select2" id="leaveEmpName"
+														title="Employee"
+														onchange="changeEmployee()"
+														th:field="*{employee.empCode}" required>
+														<option value=''>--Select--</option>
+														
+												
+													</select>
+												</div>
 											</div>
 										</div>
 										<div class="row">
@@ -134,8 +145,7 @@ body {
 												<label class="form-label">Apply Date</label> <label
 													style="color: red">*</label> <input type="date"
 													class="form-control" id='applyDate' th:field="*{applyDate}"
-													data-toggle="tooltip" title="Select date"
-													required>
+													data-toggle="tooltip" title="Select date" required>
 											</div>
 										</div>
 										<div class="row">
@@ -143,17 +153,15 @@ body {
 												<label class="form-label">From Date</label> <label
 													style="color: red">*</label> <input type="date"
 													id="from_date" class="form-control" th:field="*{fromDate}"
-													onchange="getFromDate(this.value)" 
-													data-toggle="tooltip" title="Select date"
-													required>
+													onchange="getFromDate(this.value)" data-toggle="tooltip"
+													title="Select date" required>
 											</div>
 											<div class="col-12 col-lg-6">
 												<label class="form-label">To Date</label> <label
 													style="color: red">*</label> <input type="date"
 													id="to_date" class="form-control" th:field="*{toDate}"
-													onchange="getToDate(this.value)" 
-													data-toggle="tooltip" title="Select date"
-													required>
+													onchange="getToDate(this.value)" data-toggle="tooltip"
+													title="Select date" required>
 											</div>
 										</div>
 
@@ -162,7 +170,9 @@ body {
 											<div class="col-12 col-lg-6">
 												<label class="form-label">From Leave </label> <select
 													class="form-control" th:field="*{fromDateType}"
-													id="from_date_type" title="Select From Leave" onchange="fromDayTypeValue(this.value)">
+													id="from_date_type" title="Select From Leave"
+													onchange="fromDayTypeValue(this.value)">
+
 													<option value=" f">Full</option>
 													<option value="fh">First Half</option>
 													<option value="sh">Second Half</option>
@@ -186,13 +196,12 @@ body {
 
 											<div class="col-12 col-lg-6">
 												<label class="form-label">Leave type</label> <select
-													class="form-control" th:field="*{leave.levCode}" 
-													title="Type of Leave"
-													required>
+													class="form-control" th:field="*{leave.levCode}"
+													title="Type of Leave" required>
 													<option value="">Leave Type</option>
 													<option th:each="leave : ${listLeave}"
-														th:text="${#strings.capitalize(leave.levType)}" th:value="${leave.levCode}">
-													</option>
+														th:text="${#strings.capitalize(leave.levType)}"
+														th:value="${leave.levCode}"></option>
 												</select>
 											</div>
 
@@ -200,18 +209,49 @@ body {
 												<div class="form-group">
 													<label> Leave(days) </label> <input type="text"
 														id="leave_for" class="form-control" th:field="*{leaveFor}"
-														readonly>
+														readonly title="Total Leave">
 												</div>
 											</div>
 
 										</div>
-
+										
+										
 										<div class="row">
+
+											<div class="col-12 col-lg-6">
+												<label class="form-label">Order Number</label> 
+												<input type="text" name="" value="" id=""
+												class="form-control"
+												th:field="*{orderNo}">
+											</div>
+
 											<div class="col-12 col-lg-6">
 												<div class="form-group">
-													<label> Reason </label> <textarea type="text"
-														class="form-control" th:field="*{reason}"
-														title="Post Your Reason"></textarea>
+													<label> Order Date </label> <input type="date"
+														id="" class="form-control" 
+														title="Total Leave"
+														th:field="*{orderDate}">
+												</div>
+											</div>
+
+										</div>
+										
+
+										<div class="row">
+										
+										<div class="col-12 col-lg-6">
+												<div class="form-group">
+													<label> Contact </label> <input type="text"
+														id="" class="form-control" 
+														title="Total Leave"
+														th:field="*{contact}">
+												</div>
+											</div>
+											<div class="col-12 col-lg-6">
+												<div class="form-group">
+													<label> Reason </label>
+													<textarea type="text" class="form-control"
+														th:field="*{reason}" title="Post Your Reason"></textarea>
 												</div>
 											</div>
 										</div>
@@ -232,37 +272,40 @@ body {
 													<div class="col-12 col-lg-4">
 														<label class="form-label">Leave Granted </label> <select
 															class="form-control" id="employeeDropDownLeave"
-															onchange="leaveEmployeDisplay()">
+															onchange="leaveEmployeDisplay()" title="Leave Granted">
 															<option value="">--Select--</option>
-														
+
 														</select>
 
 													</div>
-												
-														<div class="col-12 col-lg-4">
-															<div class="form-group">
-																<label> Leave Taken </label> <input type="text"
-																	class="form-control" th:field="*{reason}">
-															</div>
+
+													<div class="col-12 col-lg-4">
+														<div class="form-group">
+															<label> Leave Taken </label> <input type="text"
+																class="form-control" title="Leave taken"
+																th:field="*{reason}">
 														</div>
-													
-													
-														<div class="col-12 col-lg-4">
-															<div class="form-group">
-																<label> Leave Availed </label> <input type="text"
-																	class="form-control" th:field="*{reason}">
-															</div>
+													</div>
+
+
+													<div class="col-12 col-lg-4">
+														<div class="form-group">
+															<label> Leave Availed </label> <input type="text"
+																class="form-control" title="Leave Availed"
+																th:field="*{reason}">
 														</div>
-													
-													
+													</div>
+
+
 												</div>
 
 
 											</div>
 										</div>
 
-										<button type="submit" class="btn btn-primary">Submit</button>
-										<button type="reset" class="btn btn-primary" value="Reset">Cancel</button>
+										<button type="submit" class="btn btn-primary" title="Submit">Submit</button>
+										<button type="reset" class="btn btn-primary" value="Reset"
+											title="Cancel">Cancel</button>
 									</form>
 
 								</div>
@@ -293,12 +336,14 @@ body {
 												<td class="text-center" th:text="${leave.employee.empName}">testing</td>
 												<td class="text-center"
 													th:text="${#dates.format(leave.applyDate, 'dd-MM-yyyy')}"></td>
-												
-												<td class="text-center" th:text="${#dates.format(leave.fromDate, 'dd-MM-yyyy')}"></td>
 
-												<td class="text-center" th:text="${#dates.format(leave.toDate, 'dd-MM-yyyy')}"></td>
-														
-												
+												<td class="text-center"
+													th:text="${#dates.format(leave.fromDate, 'dd-MM-yyyy')}"></td>
+
+												<td class="text-center"
+													th:text="${#dates.format(leave.toDate, 'dd-MM-yyyy')}"></td>
+
+
 												<td class="text-center justify" th:text="${leave.reason}"></td>
 												<th:block th:switch="${leave.status}">
 													<td th:case="'Y'" class="text-center">Approved</td>
@@ -309,10 +354,11 @@ body {
 												<td class="text-center"><a
 													th:href="@{/viewLeaveRequest/{id}
 															(id=${leave.leaveRequestId})}"><em
-														class="align-middle fas fa-fw fa-pen"></em></a> <a
+														class="align-middle fas fa-fw fa-pen" title="View Detail"></em></a>
+													<a
 													th:href="@{/deleteLeaveRequest/{id}(id=${leave.leaveRequestId})}"
 													onclick="return confirm('Are you sure?')"><em
-														class="align-middle fas fa-fw fa-trash"></em></a></td>
+														class="align-middle fas fa-fw fa-trash" title="Delete"></em></a></td>
 											</tr>
 										</tbody>
 									</table>
@@ -387,6 +433,59 @@ body {
 		});
 	</script>
 
+
+	<script>
+		function changeDepartment() {
+			
+			var deptCode = document.getElementById("employeeDropDownDepartment").value;
+			$('#leaveRequestDeptCode').val(deptCode);
+			
+			var x = document.getElementById("leaveEmpName");
+			
+			var length = x.options.length;
+			for (i = length - 1; i >= 1; i--) {
+				x.options[i] = null;
+			}
+
+			
+			console.log("ajax request : " + deptCode);
+			
+			if(deptCode != ""){
+				const xhr = new XMLHttpRequest();
+				xhr.open('GET', 'getEmployeeByDeptCode/' + deptCode, true);
+				xhr.getResponseHeader('content-type', 'application/json');
+				xhr.onload = function() {
+					if (this.status === 200) {
+						let obj = JSON.parse(this.responseText);
+						console.log(obj);
+						
+						$.each(obj, function(i, item) {
+							console.log(" i " + i + " item : " + item.empName);
+							
+							$('#leaveEmpName').append(
+									$('<option>').val(this.empCode).text(
+											this.empName));
+						});
+
+						//$('#leaveDepartmentId').val(obj.departmentCode);
+
+						
+					} else {
+						console.error("some error occured");
+					}
+
+				}
+				xhr.send();
+			}
+			
+		}
+		
+		function changeEmployee(){
+			var empCode = document.getElementById("leaveEmpName").value;
+			$('#leaveEmpId').val(empCode);
+		}
+		
+	</script>
 
 
 </body>
