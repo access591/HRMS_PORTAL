@@ -19,11 +19,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.hrms.helper.Message1;
+import com.hrms.model.Department;
 import com.hrms.model.Employee;
 import com.hrms.model.Leave;
 import com.hrms.model.LeaveRequest;
 import com.hrms.model.MenuModule;
 import com.hrms.model.UserEntity;
+import com.hrms.service.DepartmentService;
 import com.hrms.service.EmployeeService;
 import com.hrms.service.LeaveDetailService;
 import com.hrms.service.LeaveGrantRegisterService;
@@ -46,6 +48,7 @@ public class LeaveRequestController {
 	@Autowired UserService userService;
 	@Autowired LeaveGrantRegisterService leaveGrantRegisterService;
 	@Autowired LeaveDetailService leaveDetailService;
+	@Autowired DepartmentService departmentService;
 	//@Autowired LeaveGrantService leaveGrantService;
 	
 	
@@ -106,7 +109,15 @@ public class LeaveRequestController {
 //			e.printStackTrace();
 //		}
 //		
-
+		try {
+			List<Department> departmentList = departmentService.getAllDepartments();
+			if(departmentList != null) {
+				model.addAttribute("departmentList", departmentList);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
 		
 		
 		

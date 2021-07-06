@@ -30,11 +30,11 @@ public class LeaveRequest implements Serializable {
 	private Long leaveRequestId;
 
 	@ManyToOne
-	@JoinColumn(name = "EMP_CODE")
+	@JoinColumn(name = "EMP_CODE",updatable = false)
 	private Employee employee;
 
 	@ManyToOne
-	@JoinColumn(name = "DEPT_CODE")
+	@JoinColumn(name = "DEPT_CODE",updatable = false)
 	private Department department;
 
 	@ManyToOne
@@ -109,6 +109,16 @@ public class LeaveRequest implements Serializable {
 
 	@Column(name = "REQUEST_TYPE", length = 20)
 	private String requestType;
+	
+	@Column(name = "ORDER_NO", length = 50)
+	private String orderNo;
+	
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@Column(name = "ORDER_DATE")
+	private Date orderDate;
+	
+	@Column(name = "CONTACT", length = 50)
+	private String contact;
 
 	public Long getLeaveRequestId() {
 		return leaveRequestId;
@@ -319,6 +329,32 @@ public class LeaveRequest implements Serializable {
 
 	public void setRequestType(String requestType) {
 		this.requestType = requestType;
+	}
+
+	
+	public String getOrderNo() {
+		return orderNo;
+	}
+
+	public void setOrderNo(String orderNo) {
+		this.orderNo = orderNo;
+	}
+
+	public Date getOrderDate() {
+		return orderDate;
+	}
+
+	public void setOrderDate(Date orderDate) {
+		this.orderDate = orderDate;
+	}
+
+	
+	public String getContact() {
+		return contact;
+	}
+
+	public void setContact(String contact) {
+		this.contact = contact;
 	}
 
 	public LeaveRequest() {
