@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hrms.ImageUtil;
-import com.hrms.model.City;
 import com.hrms.model.Department;
 
 import com.hrms.model.Employee;
@@ -34,7 +33,6 @@ import com.hrms.service.TrainingRegisterDetailsService;
 import com.hrms.service.TrainingRegisterService;
 import com.hrms.service.TrainingScheduleService;
 
-import com.hrms.util.TrainingRegisterUtil;
 @Controller
 public class TrainingRegisterController {
 	@Autowired
@@ -95,11 +93,11 @@ public class TrainingRegisterController {
 	  @ResponseBody
 	  
 	  @GetMapping("/viewTrSchudle/{id}")
-	  public TrainingRegisterUtil geTrRegById(@PathVariable(value = "id") String id) { 
+	  public TrainingRegister geTrRegById(@PathVariable(value = "id") String id) { 
 
 	  TrainingSchedule trainingSchedule1 =trainingScheduleService.findTrainingScheduleById(id);
 	  
-	  TrainingRegisterUtil l=new TrainingRegisterUtil();
+	  TrainingRegister l=new TrainingRegister();
 	
 	  l.setTrSchDate(trainingSchedule1.getTrScheduleDate());
 	  l.setTopicSrlNo(trainingSchedule1.getTopicSerialNo());
