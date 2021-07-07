@@ -189,28 +189,29 @@ body {
 										<thead>
 											<tr>
 												<th scope="col">Memo Number </th>
+												<th scope="col">Employee Name </th>
 												<th scope="col">Old post</th>
 												<th scope="col">New Post</th>
 												<th scope="col">Remarks</th>
 												<th scope="col">Action </th>
 											</tr>
-											
-
-
 										</thead>
 										<tbody>
-										<tr th:each = "ovr : ${overReg}">
-										<td th:text="${ovr.id}" ></td>
-										<td th:text="${ovr.empName}"></td>
-										<td  th:text="${ovr.deptName}"></td>
-										<td  th:text="${ovr.desgName}"></td>
-										
-										<td  th:text="${#dates.format(ovr.overTimeDate,'dd-MM-yyyy')}"></td>
+										<tr th:each = "empPromo : ${listEmpPromo}">
+										<td th:text="${empPromo.memoNo}" ></td>
+											<td th:text="${empPromo.empCode.empName}" ></td>
+										<td th:text="${empPromo.oldPost}" ></td>
+										<td th:text="${empPromo.newPost}"></td>
+										<td  th:text="${empPromo.remarks}"></td>
 										  <td>
-										
-										  
-										     <a th:href="@{/deleteOverTime/{id}/(id=${ovr.id})}"onclick="return confirm('Are you sure?')"><em class="fa fa-times"></em></a>
+										   
+										     <a th:href="@{/deleteEmployeePromotion/{id}/{empImg}(id=${empPromo.memoNo},empImg=${empPromo.empUploadDoc})}"onclick="return confirm('Are you sure?')"><em class="fa fa-times"></em></a>
 									
+									
+									
+									
+									&nbsp;	&nbsp;	&nbsp;
+									 <a th:href="@{/viewEmployeePromotion/{id}/(id=${empPromo.memoNo})}"><em class="fa fa-eye" aria-hidden="true"></em></a>
 									
 										</td>  
 									
