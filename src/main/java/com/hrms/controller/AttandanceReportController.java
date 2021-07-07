@@ -357,6 +357,8 @@ public class AttandanceReportController {
 		System.out.println("dept code : " + deptCode);
 		try {
 			
+			List<Employee> list = employeeService.findByDepartmentCode(deptCode);
+			System.out.println("list size : "+ list.size());
 			return employeeService.findByDepartmentCode(deptCode);
 		}catch(Exception e) {
 			e.printStackTrace();
