@@ -205,12 +205,8 @@ body {
 										<td  th:text="${empPromo.remarks}"></td>
 										  <td>
 										   
-										     <a th:href="@{/deleteEmployeePromotion/{id}/{empImg}(id=${empPromo.memoNo},empImg=${empPromo.empUploadDoc})}"onclick="return confirm('Are you sure?')"><em class="fa fa-times"></em></a>
-									
-									
-									
-									
-									&nbsp;	&nbsp;	&nbsp;
+									<a th:href="@{/deleteEmployeePromotion/{id}/{empImg}(id=${empPromo.memoNo},empImg=${empPromo.empUploadDoc})}"onclick="return confirm('Are you sure?')"><em class="fa fa-times"></em></a>
+													&nbsp;	&nbsp;	&nbsp;
 									 <a th:href="@{/viewEmployeePromotion/{id}/(id=${empPromo.memoNo})}"><em class="fa fa-eye" aria-hidden="true"></em></a>
 									
 										</td>  
