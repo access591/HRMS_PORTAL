@@ -256,6 +256,10 @@ public class EmployeeUnderRuleController {
 			}
 		}else {
 			System.out.println("else block");
+			EmployeeUnderRule empl = employeeUnderRuleService.getEmployeeUnderRuleFindById(eod);
+			employeeUnderRule.setUnderRuleFile(empl.getUnderRuleFile());
+			employeeUnderRuleService.updateEmployeeUnderRule(employeeUnderRule);
+			
 		}
 		//employeeUnderRuleService.updateEmployeeUnderRule(employeeUnderRule);
 		return "redirect:/employeeunderrule";
