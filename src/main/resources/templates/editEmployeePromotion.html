@@ -150,7 +150,7 @@ body {
 													<td><input type="date" id='promotionDate' th:field='*{promotionDate}'name='promotionDate'placeholder='Promotion Date' size='6' /></td>
 													<td><input type="text" id="newPost" name='newPost' th:field='*{newPost}'placeholder='New Post' size='6' /></td>
 													<td><input type="text"  id='oldPost' name='oldPost' th:field='*{oldPost}'placeholder='Old Post 'size='6'  /></td>
-													<td><input type="file" id="empUploadDoc" name="empUploadDoc"  th:src="@{'/employeedoc/'+*{empUploadDoc}}" placeholder='Upload Document'size='8'/></td>
+													<td><input type="file" id="file" name="file"  th:src="@{'/employeedoc/'+*{empUploadDoc}}"placeholder='Upload Document'size='8'/></td>
 													<td><input type="text" id='remarks'name='remarks' th:field='*{remarks}'placeholder='Remarks'size='10'/></td>
 														
 												</tr>

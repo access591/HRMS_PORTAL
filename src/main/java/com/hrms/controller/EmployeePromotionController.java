@@ -192,36 +192,69 @@ public class EmployeePromotionController {
 		
 	}
 	
+	@GetMapping(value = {"/editEmployeePromotion/{id}"})
+	public String editTourPlan(@PathVariable("id")long id,  Model model,HttpSession session)
+	 { 	if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
+		
+		
+		List<Employee> lrt = employeeService.getAllEmployees();
+		model.addAttribute("listEmployee", lrt);
+		session.setAttribute("imgUtil", new ImageUtil());
+
+		EmployeePromotion employeePromotionEdit =employeePromotionService.findByIdEmployeePromotion(id);
+		model.addAttribute("employeePromotionEdit", employeePromotionEdit);
+	     String mydoc=employeePromotionEdit.getEmpUploadDoc();
+		session.setAttribute("empDoc",mydoc);
+	   
+	    return "editEmployeePromotion";
+	}
+	
+	
+	
+	
+	
 	@PostMapping("/updateEmployeePromotion")
-	public String updateEmployeePromotion(@ModelAttribute("employeePromotionEdit") EmployeePromotion employeePromotion, MultipartFile multipartFile, Model model,HttpSession session)
+	public String updateEmployeePromotion(@ModelAttribute("employeePromotionEdit") EmployeePromotion employeePromotion, Model model, HttpSession session, MultipartFile file,HttpServletRequest request)
 	{
 		if (session.getAttribute("username") == null) {
 			return "redirect:" + "./";
 		}
 		
-		String empProDuc=employeePromotion.getEmpUploadDoc().toString();
+		 MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
+		 MultipartFile multipartFile = multipartRequest.getFile("file");
+		 String empProDuc= (String)session.getAttribute("empDoc");
+		System.out.println("file name --- "+multipartFile.getOriginalFilename());
+		
 		
 		try {
 			UUID uuid = UUID.randomUUID();
 			String folderPath = "\\src\\main\\resources\\static\\employeedoc\\";
 			String uploadDir = System.getProperty("user.dir") + folderPath;
-			File file = new File(uploadDir + empProDuc);
+			File filef = new File(uploadDir + empProDuc);
 			String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
 			
 
 			if (fileName.trim().length() > 0) {
-				file.delete();
-				employeePromotion.setEmpUploadDoc(uuid.toString().substring(0, 12) + "_" + fileName);
+				filef.delete(); 
+				System.out.println(file.getName() + " is deleted!"); 
+				employeePromotion.setEmpUploadDoc(uuid.toString().substring(0, 12) + "_" + multipartFile.getOriginalFilename());
 				String path = Paths.get(uploadDir +employeePromotion.getEmpUploadDoc()).toString();
 				BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(new File(path)));
 				stream.write(multipartFile.getBytes());
 				stream.close();
 				this.employeePromotionService.updateEmployeePromotion(employeePromotion);
 
-			} else if (empProDuc != null) {
-				employeePromotion.setEmpUploadDoc(empProDuc);
-				this.employeePromotionService.updateEmployeePromotion(employeePromotion);
-			}
+				
+				  } else if (empProDuc != null) 
+				  { 
+					  
+					  employeePromotion.setEmpUploadDoc(empProDuc);
+				  
+				  
+				  this.employeePromotionService.updateEmployeePromotion(employeePromotion); }
+				 
 
 			this.employeePromotionService.updateEmployeePromotion(employeePromotion);
 
@@ -262,24 +295,7 @@ public class EmployeePromotionController {
 		return "redirect:/employeePromotion";
 	}
 	
-	@GetMapping(value = {"/editEmployeePromotion/{id}"})
-	public String editTourPlan(@PathVariable("id")long id,  Model model,HttpSession session)
-	 { 	if (session.getAttribute("username") == null) {
-			return "redirect:" + "./";
-		}
-		
-		
-		List<Employee> lrt = employeeService.getAllEmployees();
-		model.addAttribute("listEmployee", lrt);
-		session.setAttribute("imgUtil", new ImageUtil());
 
-		EmployeePromotion employeePromotionEdit =	employeePromotionService.findByIdEmployeePromotion(id);
-		  model.addAttribute("employeePromotionEdit", employeePromotionEdit);
-
-	   
-	    return "editEmployeePromotion";
-	}
-	
 	
 	
 	@GetMapping(value = { "/viewEmployeePromotion/{id}" })
