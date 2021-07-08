@@ -54,4 +54,9 @@ public class EmployeePromotionServiceImpl implements EmployeePromotionService {
 		
 		return employeePromotionDao.findById(id);
 	}
+	@Override
+	public void updateEmployeePromotion(EmployeePromotion employeePromotion) {
+	this.employeePromotionDao.saveOrUpdate(employeePromotion);
+		
+	}
 }

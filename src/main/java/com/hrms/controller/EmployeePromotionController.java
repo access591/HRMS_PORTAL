@@ -9,23 +9,29 @@ import java.util.UUID;
 import java.io.File;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-
+import org.springframework.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.hrms.ImageUtil;
 import com.hrms.model.AttendenceRegister;
 import com.hrms.model.Department;
+import com.hrms.model.Designation;
 import com.hrms.model.Employee;
 import com.hrms.model.EmployeePromotion;
 import com.hrms.model.MenuModule;
+import com.hrms.model.TourPlan;
 import com.hrms.service.DepartmentService;
 import com.hrms.service.EmployeePromotionService;
 import com.hrms.service.EmployeeService;
@@ -39,6 +45,17 @@ public class EmployeePromotionController {
 	@Autowired DepartmentService departmentService;
 	@Autowired private ModuleService moduleService;
 	@Autowired EmployeePromotionService employeePromotionService;
+	
+	@InitBinder("employeePromotionEdit")
+    public void customizeBinding (WebDataBinder binder) {
+        SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
+        dateFormatter.setLenient(false);
+                binder.registerCustomEditor(Date.class, "promotionDate",new CustomDateEditor(dateFormatter, true));
+    }
+
+	
+	
+	
 	@GetMapping("/employeePromotion")
 	public String employeePromotion(Model model,HttpSession session)
 	{
@@ -175,6 +192,50 @@ public class EmployeePromotionController {
 		
 	}
 	
+	@PostMapping("/updateEmployeePromotion")
+	public String updateEmployeePromotion(@ModelAttribute("employeePromotionEdit") EmployeePromotion employeePromotion, MultipartFile multipartFile, Model model,HttpSession session)
+	{
+		if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
+		
+		String empProDuc=employeePromotion.getEmpUploadDoc().toString();
+		
+		try {
+			UUID uuid = UUID.randomUUID();
+			String folderPath = "\\src\\main\\resources\\static\\employeedoc\\";
+			String uploadDir = System.getProperty("user.dir") + folderPath;
+			File file = new File(uploadDir + empProDuc);
+			String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+			
+
+			if (fileName.trim().length() > 0) {
+				file.delete();
+				employeePromotion.setEmpUploadDoc(uuid.toString().substring(0, 12) + "_" + fileName);
+				String path = Paths.get(uploadDir +employeePromotion.getEmpUploadDoc()).toString();
+				BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(new File(path)));
+				stream.write(multipartFile.getBytes());
+				stream.close();
+				this.employeePromotionService.updateEmployeePromotion(employeePromotion);
+
+			} else if (empProDuc != null) {
+				employeePromotion.setEmpUploadDoc(empProDuc);
+				this.employeePromotionService.updateEmployeePromotion(employeePromotion);
+			}
+
+			this.employeePromotionService.updateEmployeePromotion(employeePromotion);
+
+			
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		this.employeePromotionService.updateEmployeePromotion(employeePromotion);
+		return "redirect:/employeePromotion";
+	}
+	
+	
 	@GetMapping(value = { "/deleteEmployeePromotion/{id}/{Emp_Img}" })
 	public String deleteEmployeePromotion(@PathVariable("id") long id, @PathVariable("Emp_Img") String empImage, Model model,
 			HttpSession session) {
@@ -200,6 +261,25 @@ public class EmployeePromotionController {
 		 session.setAttribute("imgUtil", new ImageUtil());
 		return "redirect:/employeePromotion";
 	}
+	
+	@GetMapping(value = {"/editEmployeePromotion/{id}"})
+	public String editTourPlan(@PathVariable("id")long id,  Model model,HttpSession session)
+	 { 	if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
+		
+		
+		List<Employee> lrt = employeeService.getAllEmployees();
+		model.addAttribute("listEmployee", lrt);
+		session.setAttribute("imgUtil", new ImageUtil());
+
+		EmployeePromotion employeePromotionEdit =	employeePromotionService.findByIdEmployeePromotion(id);
+		  model.addAttribute("employeePromotionEdit", employeePromotionEdit);
+
+	   
+	    return "editEmployeePromotion";
+	}
+	
 	
 	
 	@GetMapping(value = { "/viewEmployeePromotion/{id}" })

@@ -93,16 +93,16 @@ body {
 										
 										
 										<div class="form-group sm col-md-6">
-													<label class="form-label">Department Code </label>
+													<label class="form-label">Department Name </label>
 												<label style="color: red">*</label>
 												<select class="form-control select2" name="departmentCode" id="departmentCode" onchange="myFunctionDeptCode()" required aria-required="true">
-												 <option value="">Select Employee</option>
+												 <option value="">Select Department</option>
 												<option th:each="e :${listDepartment}"th:value="${e.getDepartmentCode()}" th:text="${e.getDeptName()}"></option>
 											     	</select>
 												</div>
 												
 												<div class="form-group sm col-md-6">
-										<label class="form-label">Employee </label>
+										<label class="form-label">Employee  Name</label>
 												<label style="color: red">*</label>
 												<select class="form-control select2" name="empCode.empCode" id="empCode" onchange="myFunctionEmpCode()" required aria-required="true">
 												 <option value="">Select Employee</option>
@@ -206,7 +206,12 @@ body {
 										  <td>
 										   
 									<a th:href="@{/deleteEmployeePromotion/{id}/{empImg}(id=${empPromo.id},empImg=${empPromo.empUploadDoc})}"onclick="return confirm('Are you sure?')"><em class="fa fa-times"></em></a>
-													&nbsp;	&nbsp;	&nbsp;
+													&nbsp;
+														&nbsp;
+														
+									<a th:href="@{/editEmployeePromotion/{id}(id=${empPromo.id})}" ><em class="fa fa-edit"></em></a>					
+														
+															&nbsp;
 									 <a th:href="@{/viewEmployeePromotion/{id}(id=${empPromo.id})}"><em class="fa fa-eye" aria-hidden="true"></em></a>
 									
 										</td>  

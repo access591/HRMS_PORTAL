@@ -14,6 +14,10 @@ public interface EmployeePromotionService {
 
 	EmployeePromotion findByIdEmployeePromotion(long id);
 
+	void updateEmployeePromotion(EmployeePromotion employeePromotion);
+
+
+
 	
 		
 	
