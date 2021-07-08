@@ -20,6 +20,8 @@ public interface ModuleDao  extends GenericDao<Module>{
 	Module checkModuleExists(Module module);
 
 	Module checkModuleSeqExists(Module module);
+
+	List<Module> getActiveModules();
 	   
 
 }
