@@ -13,6 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Size;
 @Entity
 @Table(name = "EMP_PROMOTION")
 public class EmployeePromotion implements Serializable {
@@ -45,6 +46,19 @@ public class EmployeePromotion implements Serializable {
 
 	@Column(name = "EMP_UPLOAD__DOC", nullable = true)
 	private String empUploadDoc;
+	@Size(max = 50)
+	@Column(name = "INS_BY", updatable = false)
+	private String insBy;
+
+	@Column(name = "INS_DATE", updatable = false)
+	private Date insDate = new Date();
+
+	@Size(max = 50)
+	@Column(name = "UPD_BY", insertable = false)
+	private String updBy;
+
+	@Column(name = "UPD_DATE", insertable = false)
+	private Date  updDate = new Date();
 
 
 	public long getMemoNo() {
@@ -102,8 +116,37 @@ public class EmployeePromotion implements Serializable {
 	public void setEmpUploadDoc(String empUploadDoc) {
 		this.empUploadDoc = empUploadDoc;
 	}
-	
-	
-	
-	
+
+	public String getInsBy() {
+		return insBy;
+	}
+
+	public void setInsBy(String insBy) {
+		this.insBy = insBy;
+	}
+
+	public Date getInsDate() {
+		return insDate;
+	}
+
+	public void setInsDate(Date insDate) {
+		this.insDate = insDate;
+	}
+
+	public String getUpdBy() {
+		return updBy;
+	}
+
+	public void setUpdBy(String updBy) {
+		this.updBy = updBy;
+	}
+
+	public Date getUpdDate() {
+		return updDate;
+	}
+
+	public void setUpdDate(Date updDate) {
+		this.updDate = updDate;
+	}
+
 }
