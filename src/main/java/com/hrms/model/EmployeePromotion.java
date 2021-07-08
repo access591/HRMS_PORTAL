@@ -15,18 +15,29 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Size;
 @Entity
-@Table(name = "EMP_PROMOTION")
+@Table(name = "T_EMP_PROM_DTLS")
 public class EmployeePromotion implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6153243912435691831L;
+
 
 	/**
 	 * Auth Surendra
 	 */
-	private static final long serialVersionUID = -3704869556831614220L;
+
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name ="MEMO_NO")
-	private long memoNo;
+	@Column(name ="EPD")
+	private long id;
+	
+	
+	@Column(name = "EDP_MEMO_NO")
+	private String edpMemoNo;
+	
 	@ManyToOne
 	@JoinColumn(name = "EMPLOYEE_CODE",updatable = false)
 	private Employee empCode;
@@ -61,12 +72,21 @@ public class EmployeePromotion implements Serializable {
 	private Date  updDate = new Date();
 
 
-	public long getMemoNo() {
-		return memoNo;
+
+	public String getEdpMemoNo() {
+		return edpMemoNo;
 	}
 
-	public void setMemoNo(long memoNo) {
-		this.memoNo = memoNo;
+	public void setEdpMemoNo(String edpMemoNo) {
+		this.edpMemoNo = edpMemoNo;
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
 	}
 
 	public Employee getEmpCode() {
