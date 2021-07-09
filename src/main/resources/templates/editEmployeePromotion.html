@@ -138,8 +138,9 @@ body {
 													<th scope="col"style="text-align:center">Promotion Date</th>
 													<th scope="col"style="text-align:center">New Post  </th>
 													<th scope="col"style="text-align:center">Old Post</th>
-													<th scope="col"style="text-align:center">Documents</th>
 													<th scope="col" style="text-align:center">Remark </th>
+													<th scope="col"style="text-align:center">Documents</th>
+													
 												</tr>
 											</thead>
 											<tbody>
@@ -150,9 +151,8 @@ body {
 													<td><input type="date" id='promotionDate' th:field='*{promotionDate}'name='promotionDate'placeholder='Promotion Date' size='6' /></td>
 													<td><input type="text" id="newPost" name='newPost' th:field='*{newPost}'placeholder='New Post' size='6' /></td>
 													<td><input type="text"  id='oldPost' name='oldPost' th:field='*{oldPost}'placeholder='Old Post 'size='6'  /></td>
-													<td><input type="file" id="file" name="file"  th:src="@{'/employeedoc/'+*{empUploadDoc}}"placeholder='Upload Document'size='8'/></td>
 													<td><input type="text" id='remarks'name='remarks' th:field='*{remarks}'placeholder='Remarks'size='10'/></td>
-														
+													<td><input type="file" id="file" name="file"  th:src="@{'/employeedoc/'+*{empUploadDoc}}"size='8'/></td>	
 												</tr>
 												<tr id='addr1'></tr>
 
@@ -174,7 +174,7 @@ body {
 					</div>
 					<button type="submit" class="btn btn-primary">Update</button>&nbsp;
 	                     &nbsp;
-						<button type="button"class="btn btn-primary" onclick="window.location.href='../employeePromotion';">Cancel</button>
+						<button type="button"class="btn btn-outline-primary" onclick="window.location.href='../employeePromotion';">Cancel</button>
 </form>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
