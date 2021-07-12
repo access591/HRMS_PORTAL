@@ -146,7 +146,7 @@ public class ModuleServiceImpl implements ModuleService {
 
 	@Override
 	public List<Module> getActiveModules() {
-		return moduleDao.findAll();
+		return moduleDao.getActiveModules();
 	}
 
 	@Override

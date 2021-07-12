@@ -98,7 +98,7 @@ body {
 													<label class="form-label">Employee</label> <label
 														style="color: red">*</label> <select
 														class="form-control select2" id="employeeCode"
-														title="Employee" name="empCode">
+														title="Employee" name="empCode" required>
 														<option value=''>--Select--</option>
 
 
@@ -108,7 +108,7 @@ body {
 												<div class="col-12 col-lg-4">
 													<label class="form-label">Type</label> <select
 														class="form-control select2" id="media" title="type"
-														name="underRuleType">
+														name="underRuleType" required>
 														<option value="">--Type--</option>
 														<option value="Under Rule-7">Under Rule-7</option>
 														<option value="Under Rule-8">Under Rule-8</option>
@@ -173,19 +173,19 @@ body {
 
 														<td><input type="text" id="memoNumber0"
 															class="form-control" title="Memo Number"
-															name="employeeUnderRule[0].memoNo"></td>
+															name="employeeUnderRule[0].memoNo" required></td>
 
 														<td><input type="date" id="memoDate0"
 															class="form-control" title="Memo Date"
-															name="employeeUnderRule[0].memoDate"></td>
+															name="employeeUnderRule[0].memoDate" required></td>
 
 														<td><input type="text" id="remarks0"
 															class="form-control" title="remarks"
 															name="employeeUnderRule[0].remarks"></td>
 
-														<td><input type="file" id="memoFile0"
-															class="form-control" title="Memo File"
-															name="underRuleFile"></td>
+														<td class="text-center full-width"><input type="file" id="memoFile0"
+															title="Memo File"
+															name="underRuleFile" required></td>
 													</tr>
 													<tr id='addr1' />
 
@@ -315,10 +315,10 @@ body {
 												$('#addr' + i)
 														.html(
 
-																"<td><input type='text' id='memoNumber'"+i+"class='form-control' title='Memo Number'name='employeeUnderRule["+i+"].memoNo'></td>"
-																		+ "<td><input type='date' id='memoDate'"+i+"class='form-control' title='Memo Number'name='employeeUnderRule["+i+"].memoDate'></td>"
+																"<td><input type='text' id='memoNumber'"+i+"class='form-control' title='Memo Number'name='employeeUnderRule["+i+"].memoNo' required></td>"
+																		+ "<td><input type='date' id='memoDate'"+i+"class='form-control' title='Memo Number'name='employeeUnderRule["+i+"].memoDate' required></td>"
 																		+ "<td><input type='text' id='remarks'"+i+"class='form-control' title='Memo Number'name='employeeUnderRule["+i+"].remarks'></td>"
-																		+ "<td><input type='file' id='memoFile'"+i+"class='form-control' title='Memo Number'name='underRuleFile'></td>"
+																		+ "<td><input type='file' id='memoFile'"+i+"class='form-control' title='Memo Number'name='underRuleFile' required></td>"
 
 														);
 

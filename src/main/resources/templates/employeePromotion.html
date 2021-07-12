@@ -93,16 +93,16 @@ body {
 										
 										
 										<div class="form-group sm col-md-6">
-													<label class="form-label">Department Code </label>
+													<label class="form-label">Department Name </label>
 												<label style="color: red">*</label>
 												<select class="form-control select2" name="departmentCode" id="departmentCode" onchange="myFunctionDeptCode()" required aria-required="true">
-												 <option value="">Select Employee</option>
+												 <option value="">Select Department</option>
 												<option th:each="e :${listDepartment}"th:value="${e.getDepartmentCode()}" th:text="${e.getDeptName()}"></option>
 											     	</select>
 												</div>
 												
 												<div class="form-group sm col-md-6">
-										<label class="form-label">Employee </label>
+										<label class="form-label">Employee  Name</label>
 												<label style="color: red">*</label>
 												<select class="form-control select2" name="empCode.empCode" id="empCode" onchange="myFunctionEmpCode()" required aria-required="true">
 												 <option value="">Select Employee</option>
@@ -136,25 +136,28 @@ body {
 										<table id="example" aria-describedby="example" class="table" style="width:100%">
 											<thead>
 												<tr>
-													<th scope="col">Employee Code </th>
+													<th scope="col"> </th>
 												 <!-- 	<th scope="col">Employee Name.</th>  -->
 													<th scope="col">Promotion Date</th>
 													<th scope="col">New Post  </th>
 													<th scope="col">Old Post</th>
-													<th scope="col">Documents</th>
 													<th scope="col">Remark </th>
+													<th scope="col"style="text-align:center">Documents</th>
+													
 												</tr>
 											</thead>
 											<tbody>
 												<tr id='addr0'>
 
-													<td><input type="text" id='empCode2' name='empCode20'placeholder='Employee Code'size='8' /></td>
+													<td><input type="hidden" id='empCode2' name='empCode20'placeholder='Employee Code'size='8' /></td>
 												<!-- <td><input type="text"id='empName' name='empName0'placeholder='Employee Name' /></td>  -->
 													<td><input type="date" id='promotionDate0'name='promotionDate0'placeholder='Promotion Date' size='6' value="" /></td>
 													<td><input type="text" id="newPost0" name='newPost0'placeholder='New Post' size='6' /></td>
 													<td><input type="text"  id='oldPost0' name='oldPost0'placeholder='Old Post 'size='6'  /></td>
-													<td><input type="file" id='empUploadDoc0'name='empUploadDoc0'placeholder='Upload Document'size='8'/></td>
+													
 													<td><input type="text" id='remarks0'name='remarks0'placeholder='Remarks'size='10'/></td>
+													<td><input type="file" id='empUploadDoc0'name='empUploadDoc0'placeholder='Upload Document'size='8'/></td>
+													
 														
 												</tr>
 												<tr id='addr1'></tr>
@@ -175,9 +178,9 @@ body {
 	                     </div>
 	                     </div>
 					</div>
-					<button type="submit" class="btn btn-primary">Save</button>&nbsp;
+					<button type="submit" class=" btn mb-1 btn-success"><em class="fas fa-check"></em> Success</button>&nbsp;
 	                     &nbsp;
-					<button type="reset"class="btn btn-primary" value="Reset">Reset</button>
+					<button type="reset"class="btn mb-1 btn-danger" value="Reset"><em class="fas fa-times"></em>&nbsp; Reset</button>
 </form>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <div class="col-12">
@@ -198,16 +201,21 @@ body {
 										</thead>
 										<tbody>
 										<tr th:each = "empPromo : ${listEmpPromo}">
-										<td th:text="${empPromo.memoNo}" ></td>
+										<td th:text="${empPromo.id}" ></td>
 											<td th:text="${empPromo.empCode.empName}" ></td>
 										<td th:text="${empPromo.oldPost}" ></td>
 										<td th:text="${empPromo.newPost}"></td>
 										<td  th:text="${empPromo.remarks}"></td>
 										  <td>
 										   
-									<a th:href="@{/deleteEmployeePromotion/{id}/{empImg}(id=${empPromo.memoNo},empImg=${empPromo.empUploadDoc})}"onclick="return confirm('Are you sure?')"><em class="fa fa-times"></em></a>
-													&nbsp;	&nbsp;	&nbsp;
-									 <a th:href="@{/viewEmployeePromotion/{id}/(id=${empPromo.memoNo})}"><em class="fa fa-eye" aria-hidden="true"></em></a>
+									<a th:href="@{/deleteEmployeePromotion/{id}/{empImg}(id=${empPromo.id},empImg=${empPromo.empUploadDoc})}"onclick="return confirm('Are you sure?')"><em class="fa fa-times"></em></a>
+													&nbsp;
+														&nbsp;
+														
+									<a th:href="@{/editEmployeePromotion/{id}(id=${empPromo.id})}" ><em class="fa fa-edit"></em></a>					
+														
+															&nbsp;
+									 <a th:href="@{/viewEmployeePromotion/{id}(id=${empPromo.id})}"><em class="fa fa-eye" aria-hidden="true"></em></a>
 									
 										</td>  
 									
@@ -353,15 +361,16 @@ body {
 	 	      
 	 	     if(countI>0){
 		  
-		    $('#addr'+countI).html("<td><input id='empCode2"+countI+"' name='empCode2"+countI+"' size='8' type='text'placeholder='Emp Code'/> "+
+		    $('#addr'+countI).html("<td><input id='empCode2"+countI+"' name='empCode2"+countI+"' size='8' type='hidden'placeholder='Emp Code'/> "+
 /* 		    		"</td><td><input   id='empName"+countI+"'name='empName"+countI+"' type='text' placeholder='Employee Name'/>"+ */
 		    		"</td><td><input  id='promotionDate"+countI+"'name='promotionDate"+countI+"'size='6' type='date'  placeholder='Date'/>"+
 		    		
 		    		"</td><td><input  name='newPost"+countI+"'size='6' type='text' placeholder='New Post'/></td>"+
 		    		"</td><td><input  name='oldPost"+countI+"' type='text' placeholder='Old Post'size='6'/></td>"+
+		    		"<td><input  name='remarks"+countI+"' type='text' placeholder='Remark'size='10'/></td>"+
 		    		"<td><input  name='empUploadDoc"+countI+"' type='file' placeholder='Document' title='Choose File'size='8'/></td>"+
 		   
-		    		"<td><input  name='remarks"+countI+"' type='text' placeholder='Remark'size='10'/></td>"+
+		    		
 		    		"");
 
 		        $('#empCode2'+countI).val(obj.empCode);

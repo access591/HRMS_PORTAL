@@ -3,8 +3,10 @@ import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.FetchMode;
 import org.hibernate.SQLQuery;
-
+import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.query.Query;
+
 import org.springframework.stereotype.Repository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -144,4 +146,22 @@ public class ModuleDaoImpl extends AbstractGenericDao<Module> implements ModuleD
 		return seqNo;
 	}
 
+	@Override
+	public List<Module> getActiveModules() {
+		Query querym =null;
+		Session session = this.getSession();
+		try {
+			querym = session.createQuery("from Module s where  s.active=:status");
+			
+			querym.setParameter("status", "Y");
+			List<Module> moduleList = querym.list();
+
+			return moduleList;
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
 }

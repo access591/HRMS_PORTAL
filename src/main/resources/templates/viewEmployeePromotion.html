@@ -59,7 +59,7 @@ body {
 								        <div class="form-group">
 											       <label class="form-label">Memo No
 											      </label>
-							                <input  type="text"  th:value="${employeePromotionView.memoNo}"class="form-control">
+							                <input  type="text"  th:value="${employeePromotionView.id}"class="form-control">
 										     </div>
 											 
 											 <div class="form-group ">
@@ -72,16 +72,12 @@ body {
 												 <div class="form-group ">
 											       <label class="form-label">Employee Name
 											       <span class="text-danger">*</span></label>
-							                
 							                  <input  type="text"  th:value="${employeePromotionView.empCode.empName}"class="form-control">
-										          
-										     
-										     
 										     
 										     </div>
 										     </div>
            
-       										
+       										<button type="button" class="btn btn-pill btn-secondary" onclick="window.location.href='../employeePromotion';">Back</button>
 											
 										</div>
 										

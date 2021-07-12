@@ -2,6 +2,7 @@ package com.hrms.service;
 
 import java.util.List;
 
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,9 +19,26 @@ public class EmployeePromotionServiceImpl implements EmployeePromotionService {
 
 	@Override
 	public boolean addEmployeePromotion(EmployeePromotion employeePromotion) {
-	Session s=sessionFactory.openSession();s.beginTransaction();
-	s.save(employeePromotion);s.getTransaction().commit();s.clear();s.close();
-	return true;
+		Session session = sessionFactory.openSession();
+		
+		try {
+		
+			session.beginTransaction();
+			session.save(employeePromotion);
+			session.getTransaction().commit();
+		
+		return true;
+	
+	} catch (HibernateException e) {
+		
+		e.printStackTrace();
+	}
+	 finally {
+			session.clear();
+			session.close();
+	}
+		
+	return false;
 	}
 	@Override
 	public List<EmployeePromotion> getAllEmployeePromotion() {
@@ -35,5 +53,10 @@ public class EmployeePromotionServiceImpl implements EmployeePromotionService {
 	public EmployeePromotion findByIdEmployeePromotion(long id) {
 		
 		return employeePromotionDao.findById(id);
+	}
+	@Override
+	public void updateEmployeePromotion(EmployeePromotion employeePromotion) {
+	this.employeePromotionDao.saveOrUpdate(employeePromotion);
+		
 	}
 }
