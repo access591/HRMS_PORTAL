@@ -141,10 +141,13 @@ public class EmployeeController {
 
 				List<ArmsLicensesDetail> armsLicensesDetail = employeeDto.getArmsLicensesDetail();
 
+				int numberOfArms = 0;
+				int count = 0;
 				for (ArmsLicensesDetail licensesDetail : armsLicensesDetail) {
-
+					numberOfArms = count++;
 					licensesDetail.setArmsLicenses(armsLicenses);
 				}
+				armsLicenses.setArmsNol(String.valueOf(numberOfArms));
 				armsLicenses.setArmsLicensesDetail(armsLicensesDetail);
 
 				employee.setArmLicense(armsLicenses);
