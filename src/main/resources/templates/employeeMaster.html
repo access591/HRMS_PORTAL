@@ -1,48 +1,57 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 
 <script type="text/javascript" th:src="@{/js/settings.js}"></script>
 <script type="text/javascript" th:src="@{/js/app.js}"></script>
 <link rel="stylesheet" type="text/css" th:href="@{/css/modern.css}" />
-<script  src="https://www.googletagmanager.com/gtag/js?id=UA-120946860-7"></script>
+<script src="https://www.googletagmanager.com/gtag/js?id=UA-120946860-7"></script>
 
 
 <style>
-
+.border {
+	border: double;
+}
 
 body {
 	opacity: 0;
 }
+
 .uppercase {
-  text-transform: uppercase;
+	text-transform: uppercase;
 }
 
 #loading {
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  position: fixed;
-  display: block;
-  opacity: 0.7;
-  background-color: #676565;
-  z-index: 99;
-  text-align: center;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	position: fixed;
+	display: block;
+	opacity: 0.7;
+	background-color: #676565;
+	z-index: 99;
+	text-align: center;
 }
 
 #loading-image {
-  position: absolute;
-  top: 25%;
-  left: 50%;
-  z-index: 100;
+	position: absolute;
+	top: 25%;
+	left: 50%;
+	z-index: 100;
 }
+
+/* .disabledbutton {
+	pointer-events: none;
+	opacity: 0.4;
+	
+} */
 </style>
 <script>
 	window.dataLayer = window.dataLayer || [];
 	function gtag() {
 		dataLayer.push(arguments);
 	}
-	 gtag('js', new Date());
+	gtag('js', new Date());
 
 	gtag('config', 'UA-120946860-7');
 </script>
@@ -50,807 +59,1061 @@ body {
 <meta charset="utf-8" />
 <title>HRMS</title>
 </head>
- 
+
 <body>
 
-<div class="wrapper">
-<nav id="sidebar" class="sidebar">
- <div th:replace="/fragments/sidebar :: div"></div>
- </nav>
- 		
+	<div class="wrapper">
+		<nav id="sidebar" class="sidebar">
+			<div th:replace="/fragments/sidebar :: div"></div>
+		</nav>
+
 		<div class="main">
-		<div th:replace="/fragments/header ::div"></div>
-		<main class="content">
-		<div class="container-fluid">
+			<div th:replace="/fragments/header ::div"></div>
+			<main class="content">
+				<div class="container">
 
 					<div class="header">
-						<h1 class="header-title" style="text-decoration: underline;">
-							Employee Details
-						</h1>
-						
-					
+						<h2 class="header-title" style="text-decoration: underline;">
+							Master</h2>
+
+
 					</div>
 					<div class="row">
-	              <div class="col-12">
-		<form id="smartwizard-validation" enctype="multipart/form-data" class="wizard wizard-primary" th:action="@{/saveEmployee}" th:object="${employees}" method="post">
-			<ul>
-			<li><a href="#validation-step-1"><br /><small>Officer Details</small></a></li>
-			<li><a href="#validation-step-2"><br /><small>Other Details </small></a></li>
-			<li><a href="#validation-step-3"><br /><small>Arm Licence  Details</small></a></li>
+						<div class="col-12">
+							<div class="card">
+								<div class="card-header">
+									<h5 class="card-title" style="text-decoration: underline;">Employee
+										Master</h5>
+									<div class="alert-outline">
+										<div th:if="${message}" th:text="${message}"
+											style="color: red"></div>
+									</div>
+								</div>
 
-								</ul>
-								<div>
-								
-                         <div id="validation-step-1">
-									     
-										<div class="form-row">
+								<form id="smartwizard-validation" enctype="multipart/form-data"
+									class="wizard wizard-primary" th:action="@{/saveEmployee}"
+									th:object="${employeeDto}" method="post">
+									<ul>
+										<li><a href="#validation-step-1"><br /> <small>Officer
+													Details</small></a></li>
+										<li><a href="#validation-step-2"><br /> <small>Other
+													Details </small></a></li>
+										<li><a href="#validation-step-3"><br /> <small>Arm
+													Licence Details</small></a></li>
+
+									</ul>
+									<div>
+
+										<div id="validation-step-1">
+
+											<div class="form-row">
 												<div class="form-group sm col-md-4">
-												
+
 													<label class="form-label">Employee Code <span
 														class="text-danger">*</span>
-													</label> <input name="empCode" type="text" id="empCode"
-														class="form-control"readonly>
+													</label> <input type="text" id="empCode" class="form-control"
+														readonly>
 												</div>
-											<div class="form-group sm col-md-4">
-											       <label class="form-label">Name
-											       <span class="text-danger">*</span></label>
-							                 <input  type="text"id="empName"name="empName" title="Name"onkeyup="sync()"maxlength="50" pattern="^[a-zA-Z\s]*$" class="form-control required">
-										     </div>
-										     	
-											<div class="form-group sm col-md-4">
-													<label class="form-label">Employee Payee Code. <span
-														class="text-danger">*</span>
-													</label> <input name="employeePayeeCode" type="text" id="employeePayeeCode"maxlength="20"  title="Employee Payee Code."
-														class="form-control required">
+												<div class="form-group sm col-md-4">
+													<label class="form-label">Name <span
+														class="text-danger">*</span></label> <input type="text"
+														id="empName" title="Name" onkeyup="sync()" maxlength="50"
+														pattern="^[a-zA-Z\s]*$" class="form-control"
+														th:field="*{employee.empName}">
 												</div>
-												</div>
-												
-												
-												
-											<div class="form-row">	
-											 <div class="form-group sm col-md-4">
-												<label class="form-label">Department</label>
-												<label style="color: red">*</label>
-												<select class="form-control select2" name="departmentCode"id="departmentCode" required aria-required="true">
-												 <option value="">Select Department</option>
-												<option th:each="dep :${listDepartment}" th:value="${dep.getDepartmentCode()}" th:text="${dep.getDeptName()}"></option>
-											     	</select>
-											</div>
-											 <div class="form-group sm col-md-4">
+
+												<div class="form-group sm col-md-4">
 													<label class="form-label">Category</label> <span
-														class="text-danger">*</span> <select
-														class="form-control required" name="categoryCode" id="categoryCode">
+														class="text-danger">*</span> <select class="form-control"
+														id="categoryCode" onchange="changeCategory()"
+														th:field="*{employee.category}">
 														<option value="">Select Category</option>
-														<option th:each="cat :${listCategory}" th:value="${cat.getCategoryCode()}" th:text="${cat.getCategoryName()}"></option>
-														
+														<option value="0">IPS</option>
+														<option value="1">DDA</option>
+
+
+
 													</select>
-												  </div>
-											
-											
-												 <div class="form-group sm col-md-4">
-													<label class="form-label">Designation</label> <span
-														class="text-danger">*</span> <select
-														class="form-control required" name="designationCode" id="designationCode">
-														<option value="">Select Type</option>
-														<option th:each="des :${listDesignation}" th:value="${des.getDesgCode()}" th:text="${des.getDesgName()}"></option>
-														
+												</div>
+
+
+
+
+											</div>
+
+
+
+											<!-- optional row in case of only dda -->
+
+
+											<div class="form-row disabledbutton">
+
+												<div class="form-group sm col-md-4">
+													<label class="form-label">Payee Code</label> <span
+														class="text-danger">*</span> <input type="text" id=""
+														class="form-control dda_field" th:field="*{employee.payeeCode}">
+												</div>
+
+
+												<div class="form-group sm col-md-4">
+													<label class="form-label">Home/District</label> <label
+														style="color: red">*</label> <select
+														class="form-control select2 dda_field" id=""
+														th:field="*{employee.homeDistrict}">
+														<option value="">--Select--</option>
+														<option value="H">Home</option>
+														<option value="D">District</option>
+
 													</select>
-												  </div>
-											</div>	
-												
-												
-										
-											
-											<div class="form-row">
-									             
-											<div class="form-group sm col-md-4">
-													<label class="form-label">Type</label> <span
-														class="text-danger">*</span> <select
-														class="form-control required" name="typeCourtDepartment" id="typeCourtDepartment">
-														
+												</div>
+
+												<div class="form-group sm col-md-4">
+													<label class="form-label">Department</label> <label
+														style="color: red">*</label> <select
+														class="form-control select2 dda_field" id="departmentCode"
+														aria-required="true"
+														th:field="*{employee.department}">
+														<option value="">Select Department</option>
+														<option th:each="dep :${listDepartment}"
+															th:value="${dep.getDepartmentCode()}"
+															th:text="${dep.getDeptName()}"></option>
+													</select>
+												</div>
+
+
+											</div>
+
+
+											<div class="form-row disabledbutton">
+
+												<div class="form-group sm col-md-4">
+													<label class="form-label">Department/Court</label> <span
+														class="text-danger">*</span> <select class="form-control dda_field"
+														th:field="*{employee.departmentCourt}">
 														<option value="">Select Type</option>
-														<option value="D"selected="selected">Department</option>
+														<option value="">Department</option>
 														<option value="C">Court</option>
-												
+
+
 													</select>
 												</div>
-													<div class="form-group sm col-md-4">
-											       <label class="form-label">Date of Birth</label>
-											       <span class="text-danger">*</span>
-											       <input  type="text"id="empDob"name="empDob"  class="form-control required">
-											      </div>
-											       <div class="form-group sm col-md-4">
-												<label class="form-label">Date Of Joining</label>
-												<span class="text-danger">*</span>
-												<input  type="text" id="dateOfJoining" name="dateOfJoining" class="form-control required">
-										          </div>
-												
-												</div>
-									
-												
-													<div class="form-row">
-												
-												
-												
-													<div class="form-group sm col-md-4">
-													<label class="form-label">Date  Of Posting </label> <span
-														class="text-danger">*</span> <input 
-														class="form-control required" type="text"id="dateOfPosting"
-														name="dateOfPosting" />
 
-												</div>
-												
-													<div class="form-group sm col-md-4">
-													<label class="form-label">Present Posting <span
-														class="text-danger">*</span>
-											</label> 
-											<input name="presentPosting" type="text"id="presentPosting"  title="Present Posting"
-														class="form-control required">
-												</div>
-												
-												
-												
 												<div class="form-group sm col-md-4">
-												
-													<label class="form-label">Batch Year</label> <span
-														class="text-danger">*</span> 
-														<input class="form-control required" type="text"id="batchYear"name="batchYear"/>
-
+													<label class="form-label">Order Number</label> <label
+														style="color: red">*</label> <input type="text" id=""
+														class="form-control dda_field" th:field="*{employee.orederNumber}">
 												</div>
-												
+
+												<div class="form-group sm col-md-4">
+													<label class="form-label">Order Date</label> <span
+														class="text-danger">*</span> <input type="date" id=""
+														class="form-control dda_field" th:field="*{employee.orderDate}">
+												</div>
+
+
 											</div>
-												
-												
-												
-												
-												
-												
-						
-												<div class="form-row">
-												 <div class="form-group sm col-md-4">
-											       <label class="form-label">Pan No
-											       <span class="text-danger">*</span></label>
-							                 <input  type="text"id="panNo"name="panNo" title="Pan No" maxlength="10"class="form-control uppercase required">
-										     </div>
-											 
-											 <div class="form-group sm col-md-4">
-											         <label class="form-label">UAN
-											          <span class="text-danger">*</span></label>
-							                         <input  type="text"id="uan"name="uan" title="uan"maxlength="15" class="form-control required">
-										            </div>
-												
-												
-												 <div class="form-group sm col-md-4">
-											       <label class="form-label">Aadhar No
-											       <span class="text-danger">*</span></label>
-							                 <input  type="text"id="aadharNo"name="aadharNo" title="Aadhar No" pattern="\d{1,16}"maxlength="16" class="form-control required">
-										     </div>
-										     </div>
-													
-												
-													<div class="form-row">
-													
-													<div class="form-group sm col-md-4">
-													<label class="form-label">Vigilance Inquiry </label> 
-													 <input name="vigilanceQuery" type="text"id="vigilanceQuery"  title="Vigilance Inquiry "
-														class="form-control">
-													 
-													
-												</div>
-													<div class="form-group sm col-md-4">
-													<label class="form-label">Suspension </label>
-													 <input name="suspention" type="text"id="suspention"  title="Suspention"
-														class="form-control">
-													
-												
-												</div>
-												<div class="form-group sm col-md-4">
-													<label class="form-label">Date  Of Retirement</label> <span
-														class="text-danger">*</span> <input 
-														class="form-control required" type="text"id="dateOfRetirement"
-														name="dateOfRetirement" />
 
-												</div>
-													</div>
-													
-												<div class="form-row">
-												<div class="form-group sm col-md-4">
-													<label class="form-label">VRS
-													</label> <input name=vrs type="text" id="vrs" maxlength="30" 
-														class="form-control">
-												</div>
-											
-											
-                                             	<div class="form-group sm col-md-4">
-													<label class="form-label">Upload Image
-													</label>
-													
-													 <input type="file" id="image" name="image" accept="image/png,image/jpeg" title="image" class="form-control"onchange="preview_image(event)"/>
-											     <img id="output_image"width="100px" height="100px"style="border-radius: 50px;" alt="output_image">
-												</div>
-												
-												</div>
+											<!-- end optional row -->
 
-										
-									
-						          	</div>
-									<div id="validation-step-2">
-							
-										<div class="form-row">
-										<div class="form-group sm col-md-4">
-											<label class="form-label">Transfer
-											
-												</label>
-							                   <input  type="text"id="transfer"name="transfer" title="Transfer" maxlength="30"class="form-control ">
-										</div> 
-										
-										<div class="form-group sm col-md-4">
-											<label class="form-label">Order No.
-											
-												</label>
-							           <input  type="text"id="orderNo"name="orderNo" title="Order No."maxlength="30" class="form-control ">
-										</div>
-										 <div class="form-group sm col-md-4">
-												<label class="form-label">Order Date</label>
-												
-												<input  type="date" id="orderDate" name="orderDate" class="form-control">
-										          </div>
-										</div>
-											
+
+
 											<div class="form-row">
-											<div class="form-group sm col-md-4">
-													<label class="form-label">Under Rule 7</label>  <select
-														class="form-control" name="underRule7" id="underRule7">
+
+
+
+												<div class="form-group sm col-md-4">
+													<label class="form-label">Designation</label> <span
+														class="text-danger">*</span> <select class="form-control"
+														id="designationCode"
+														th:field="*{employee.designation.desgCode}">
 														<option value="">Select Type</option>
-														<option value="Y">YES</option>
-														<option value="N"selected="selected">NO</option>
-														
+														<option th:each="des :${listDesignation}"
+															th:value="${des.getDesgCode()}"
+															th:text="${des.getDesgName()}"></option>
+
 													</select>
+												</div>
+
+												<div class="form-group sm col-md-4">
+													<label class="form-label">Type</label> <span
+														class="text-danger">*</span> <select class="form-control"
+														id="typeCourtDepartment" th:field="*{employee.type}">
+
+														<option value="">Select Type</option>
+														<option value="P" selected="selected">Permanent</option>
+														<option value="T">Temporary</option>
+
+													</select>
+												</div>
+
+												<div class="form-group sm col-md-4">
+													<label class="form-label">Date of Birth</label> <span
+														class="text-danger">*</span> <input type="date"
+														id="empDob" class="form-control"
+														th:field="*{employee.dob}">
+												</div>
+
+
+											</div>
+
+
+
+
+											<div class="form-row">
+
+
+
+												<div class="form-group sm col-md-4">
+													<label class="form-label">Date Of Joining</label> <span
+														class="text-danger">*</span> <input type="date"
+														id="dateOfJoining" class="form-control"
+														th:field="*{employee.doj}">
+												</div>
+
+												<div class="form-group sm col-md-4">
+													<label class="form-label">Date Of Posting </label> <span
+														class="text-danger">*</span> <input class="form-control"
+														type="date" id="dateOfPosting" th:field="*{employee.dop}" />
+
+												</div>
+
+												<div class="form-group sm col-md-4">
+													<label class="form-label">Place Of Present Posting
+														<span class="text-danger">*</span>
+													</label> <input name="presentPosting" type="text"
+														id="presentPosting" title="Present Posting"
+														class="form-control"
+														th:field="*{employee.placePresentPosting}">
+												</div>
+
+											</div>
+
+
+											<div class="form-row">
+
+
+
+
+
+
+
+
+
+												<div class="form-group sm col-md-4">
+
+													<label class="form-label">Batch Year</label> <span
+														class="text-danger">*</span> <input class="form-control"
+														type="text" id="batchYear"
+														th:field="*{employee.batchYear}" />
+
 												</div>
 												<div class="form-group sm col-md-4">
-													<label class="form-label">Under Rule 8</label>
-													<select class="form-control" name="underRule8" id="underRule8">
-														<option value="">Select Type</option>
-														<option value="Y">YES</option>
-														<option value="N"selected="selected">NO</option>
-														
-													</select>
+													<label class="form-label">Pan No <span
+														class="text-danger">*</span></label> <input type="text" id="panNo"
+														title="Pan No" maxlength="10" class="form-control"
+														th:field="*{employee.panNo}">
 												</div>
-													<div class="form-group sm col-md-4">
-											       <label class="form-label">Qualification
-											       <span class="text-danger">*</span></label>
-							                 <input  type="text"id="qualification"name="qualification" title="Qualification"maxlength="40" pattern="^[a-zA-Z\s]*$" class="form-control required">
-										     </div>
-												
-													
+												<div class="form-group sm col-md-4">
+													<label class="form-label">Aadhar No <span
+														class="text-danger">*</span></label> <input type="text"
+														id="aadharNo" title="Aadhar No" pattern="\d{1,16}"
+														maxlength="16" class="form-control"
+														th:field="*{employee.aadharNo}">
+												</div>
+
 											</div>
-											
-											   <div class="form-row">
-											  <div class="form-group sm col-md-4">
-											       <label class="form-label">Email
-											      </label>
-							                 <input  type="text"id="email"name="email" title="Email"pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" class="form-control">
-										     </div>
-										       	
-												 <div class="form-group sm col-md-4">
+
+
+
+
+											<div class="form-row">
+												<div class="form-group sm col-md-4">
 													<label class="form-label">Gender</label> <span
-														class="text-danger">*</span> <select
-														class="form-control required" name="gender" title="Gender" id="gender">
+														class="text-danger">*</span> <select class="form-control"
+														title="Gender" id="gender" th:field="*{employee.gender}">
 														<option value="">Select Type</option>
 														<option value="M">MALE</option>
 														<option value="F">FEMALE</option>
-														
+
 													</select>
 												</div>
-												  	<div class="form-group sm col-md-4">
+
+												<div class="form-group sm col-md-4">
 													<label class="form-label">Martial Status</label> <span
-														class="text-danger">*</span> <select
-														class="form-control required" name="martialStatus" title="Martial Status" id="martialStatus">
+														class="text-danger">*</span> <select class="form-control"
+														title="Martial Status" id="martialStatus"
+														th:field="*{employee.martialStatus}">
 														<option value="">Select Type</option>
 														<option value="M">MARRIED</option>
-														<option value="U">UNMARRIED  </option>
-														
+														<option value="U">UNMARRIED</option>
+
 													</select>
 												</div>
-												
-											</div>
-											
-											
-											<div class="form-row">
-										
-										    
-										     <div class="form-group sm col-md-4">
-											       <label class="form-label"> Primary Mobile Number
-											      </label>
-							                 <input  type="text"id="mobileNumber1"name="mobileNumber1" title="Mobile Number1"maxlength="10" class="form-control">
-										     </div>
-										      <div class="form-group sm col-md-4">
-											       <label class="form-label">Mobile Number
-											      </label>
-							                 <input  type="text"id="mobileNumber2"name="mobileNumber2" title="Mobile Number 2"maxlength="10" class="form-control">
-										     </div>
-										     
-										    
-											    <div class="form-group sm col-md-4">
-											       <label class="form-label">Telephone No
-											      </label>
-							                 <input  type="text"id="telephone"name="telephone" title="Telephone No"maxlength="12" class="form-control ">
-										     </div>
-											</div>
-											
-												<div class="form-row">
-												
-													<div class="form-group sm col-md-4">
-													<label class="form-label">On Additional Charge</label>  
-													<select class="form-control" name="onAdditionalCharge" id="onAdditionalCharge">
-														<option value="">Select Type</option>
-														<option value="YES">YES</option>
-														<option value="NO"selected="selected">NO</option>
-														
-													</select>
+
+
+												<div class="form-group sm col-md-4">
+													<label class="form-label">Date Of Retirement</label> <span
+														class="text-danger">*</span> <input class="form-control"
+														type="date" id="dateOfRetirement"
+														th:field="*{employee.dor}" />
+
 												</div>
-											<div class="form-group sm col-md-4">
-											       <label class="form-label">Add Charge
-											      </label>
-							                 <input  type="text"id="addCharge"name="addCharge" title="Add Charge" class="form-control">
-										     </div>
-										     
-										     
-										      
-												 	
-												 	 <div class="form-group sm col-md-4">
-											       <label class="form-label">Leave Account</label>
-											      <input  type="text"id="leaveAccount"name="leaveAccount"maxlength="250" title="Ltc"class="form-control " >
-											      </div>
 											</div>
-											
-											
-											
-										  <div class="form-row">
-											  
-											  <div class="form-group sm col-md-4">
-											       <label class="form-label">Country 
-											       <span class="text-danger">*</span></label>
-										              <select
-														class="form-control required" name="countryCode" id="countryCode" title="Country"onchange="myFunctionStateCode()">
-														<option value="">Select Country</option>
-														<option th:each="lco :${listCountry}" th:value="${lco.getCountryCode()}" th:text="${lco.getCountryName()}">Select  Country Type</option>
-														
-													 </select> 
-										     </div>
-										        <div class="form-group sm col-md-4">
-											       <label class="form-label">State 
-											       <span class="text-danger">*</span></label>
-												<select class="form-control select2" name="stateCode" id="stateCode" onchange="myFunctionStateCityCode()" required aria-required="true">
-												 <option value="">Select State</option>
-											     	</select>
-										    
-										     </div>
-										     
-										        <div class="form-group sm col-md-4">
-											       <label class="form-label">City 
-											       <span class="text-danger">*</span></label>
-											       	<select class="form-control select2" name="cityCode" id="cityCode" onchange="myFunctionCity()"required aria-required="true">
-												 <option value="">Select City</option>
-											     	</select>
-										        
-										   
-										     </div>
-											  
-											 
-											  
-										    
-										       
-											</div>
-											
-											 <div class="form-row">
-											 <div class="form-group sm col-md-4">
-											       <label class="form-label">Primary Address
-											       <span class="text-danger">*</span></label>
-							                 <input  type="text"id="address1"name="address1" title="Primary Address"onkeyup="syncAddress()"maxlength="200" class="form-control required">
-										     </div>
-										     <div class="form-group sm col-md-4">
-											       <label class="form-label">Address
-											       </label>
-							                 <input  type="text"id="address2"name="address2" title="Address2"maxlength="200" class="form-control ">
-										     </div>
-										     <div class="form-group sm col-md-4">
-											       <label class="form-label">Pin Code
-											       <span class="text-danger">*</span></label>
-							                 <input  type="text"id="pinCode"name="pinCode" title="Pin Code"maxlength="6" class="form-control required">
-										     </div>
-											 </div>
-											 
-											  
-											  
-											  
-											    <div class="form-row">
-											     <div class="form-group sm col-md-4">
-											      <label class="form-label">Promotion</label>
-											      <input  type="text"id="promotion"name="promotion" maxlength="250" title="Promotion" class="form-control ">
-											     </div>
-											      <div class="form-group sm col-md-4">
-											      <label class="form-label">ACP</label>
-											      <input  type="text"id="acp"name="acp" title="Acp"maxlength="250" class="form-control ">
-											     </div>
-											      <div class="form-group sm col-md-4">
-											      <label class="form-label">APR</label>
-											      <input  type="text"id="apr"name="apr" maxlength="250"title="Apr"class="form-control " >
-											     </div>
-											     
-											      </div>
-											       <div class="form-row">
-											      <div class="form-group sm col-md-4">
-											      <label class="form-label">ACR</label>
-											      <input  type="text"id="acr"name="acr" title="Acr" maxlength="250"class="form-control ">
-											      </div>
-											      <div class="form-group sm col-md-4">
-											      <label class="form-label">Training</label>
-											      <input  type="text"id="training"name="training" maxlength="250"title="Training"class="form-control " >
-											     </div>
-											      <div class="form-group sm col-md-4">
-											      <label class="form-label">LTC</label>
-											      <input  type="text"id="ltc"name="ltc" title="" maxlength="250"class="form-control ">
-											       </div>
-											      </div>
-											       <div class="form-row">
-											      
-											       <div class="form-group sm col-md-4">
-											       <label class="form-label">Awards</label>
-											      <input  type="text"id="empAwards"name="empAwards"maxlength="250" title="Awards"class="form-control " >
-											     </div>
-											      <div class="form-group sm col-md-4">
-											      <label class="form-label">On Deputation</label>
-											       <select onchange="changetextbox();"
-														class="form-control " name="onDeputation" id="onDeputation">
-														<option value="">Select Type</option>
-														<option value="Y">Yes</option>
-														<option value="N"selected>No</option>
-													</select>
-											      </div>
-											       <div class="form-group sm col-md-4">
-											        <label class="form-label">Deputation</label>
-											       <input  type="text"id="empDeputation"name="empDeputation"maxlength="250" title="Deputation"class="form-control " >
-											       </div>
-											      </div>
-											      
-											       <div class="form-row">
-											       
-											        <div class="form-group sm col-md-4">
-											        <label class="form-label">Previous Postings</label>
-											       <input  type="text"id="previousPostings"name="previousPostings"maxlength="250" title="Previous Postings"class="form-control " >
-											       </div>
-											       <div class="form-group sm col-md-4">
-											       <label class="form-label">Expired</label>
-											     <select
-														class="form-control " name="expired" id="expired">
+
+											<div class="row" id="ddaDiv">
+
+												<div class="form-group sm col-md-4">
+													<label class="form-label">Active Status</label> <select
+														class="form-control " id="expired"
+														th:field="*{employee.activeStatus}">
 														<option value="">Select Type</option>
 														<option value="Y">YES</option>
-														<option value="N"selected>NO</option>
-														
-													</select>
-											     
-											      </div>
-											      </div>
-											      
-											     
-											    
+														<option value="N" selected>NO</option>
 
+													</select>
+
+												</div>
+
+
+
+											</div>
+
+											<!-- <div class="form-row" style="display: none" id="ipsDiv">
+
+												<div class="col-12">
+													<div class="form-group sm col-md-4">
+														<label class="form-label">Active Status</label> <select
+															class="form-control " id="expired"
+															th:field="*{employee.activeStatus}">
+															<option value="">Select Type</option>
+															<option value="Y">YES</option>
+															<option value="N" selected>NO</option>
+
+														</select>
+
+													</div>
+
+													<div class="form-group sm col-md-4">
+														<label class="form-label">Date Of Retirement</label> <span
+															class="text-danger">*</span> <input class="form-control"
+															type="text" id="dateOfRetirement"
+															th:field="*{employee.dor}" />
+
+													</div>
+												</div>
+
+
+
+
+											</div> -->
+
+											<div class="form-row">
+												<div class="row">
+													<div class="form-group sm col-md-4">
+														<label class="form-label">Upload Image </label> <input
+															type="file" name="profileImage" id="image" accept="image/png,image/jpeg"
+															title="image" onchange="preview_image(event)" /> <img
+															id="output_image" width="100px" height="100px"
+															style="border-radius: 50px;" alt="output_image">
+													</div>
+
+												</div>
+											</div>
+											<div class="form-row"></div>
+
+
+
+										</div>
+
+
+
+
+
+										<div id="validation-step-2">
+
+
+											<div class="form-row">
+
+												<div class="form-group sm col-md-5">
+													<label class="form-label">Highest Qualification <span
+														class="text-danger">*</span></label> <input type="text"
+														id="qualification" title="Qualification" maxlength="40"
+														class="form-control" th:field="*{employee.qualification}">
+												</div>
+
+												<div class="form-group sm col-md-7">
+													<label class="form-label">Email </label> <input type="text"
+														id="email" title="Email"
+														pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+														class="form-control" th:field="*{employee.email}">
+												</div>
+
+
+											</div>
+
+											<div class="form-row">
+
+
+												<div class="form-group sm col-md-4">
+													<label class="form-label"> Primary Mobile Number </label> <input
+														type="text" title="Mobile Number1" maxlength="10"
+														class="form-control" th:field="*{employee.mobileNumber1}">
+												</div>
+												<div class="form-group sm col-md-4">
+													<label class="form-label">Secondary Mobile Number </label>
+													<input type="text" title="Mobile Number 2" maxlength="10"
+														class="form-control" th:field="*{employee.mobileNumber2}">
+												</div>
+
+
+												<div class="form-group sm col-md-4">
+													<label class="form-label">Telephone No </label> <input
+														type="text" title="Telephone No" maxlength="12"
+														class="form-control " th:field="*{employee.telephone}">
+												</div>
+											</div>
+
+
+
+
+
+											<div style="padding: 10px;">
+
+
+												<div class="row">
+													<div class="col-md-6" style="padding: 10px;">
+														<div class="row text-center">
+															<h5>Correspondence Address</h5>
+														</div>
+														<div class="border" style="padding: 30px">
+															<div class="form-row">
+																<div class="form-group sm col-md-12">
+
+																	<label class="form-label">Address </label> <input
+																		type="text" class="form-control "
+																		th:field="*{employee.corrAdd1}">
+																</div>
+
+															</div>
+
+
+
+															<div class="form-row">
+																<div class="form-group sm col-md-12">
+
+																	<label class="form-label">Address2 </label> <input
+																		type="text" class="form-control "
+																		th:field="*{employee.corrAdd2}">
+																</div>
+
+															</div>
+
+															<div class="form-row">
+
+																<div class="form-group sm col-md-12">
+																	<label class="form-label">Country </label> <select
+																		class="form-control ">
+
+																		<option value="">Select Country</option>
+																		<option th:each="lco :${listCountry}"
+																			th:value="${lco.getCountryCode()}"
+																			th:text="${lco.getCountryName()}">Select
+																			Country Type</option>
+
+
+																	</select>
+																</div>
+															</div>
+															<div class="form-row">
+
+																<div class="form-group sm col-md-12">
+																	<label class="form-label">State </label> <select
+																		class="form-control ">
+																		<option value="">Select State</option>
+																		<option th:each="ls :${listState}"
+																			th:value="${ls.getStateCode()}"
+																			th:text="${ls.getStateName()}">Select State
+																			Country Type</option>
+
+
+
+																	</select>
+																</div>
+
+
+
+
+															</div>
+															<div class="form-row">
+
+																<div class="form-group sm col-md-12">
+																	<label class="form-label">City </label> <select
+																		class="form-control "
+																		th:field="*{employee.city1.cityCode}">
+																		<option value="">Select City</option>
+																		<option th:each="lc :${CityList}"
+																			th:value="${lc.getCityCode()}"
+																			th:text="${lc.getCityName()}">Select City</option>
+
+
+
+																	</select>
+																</div>
+															</div>
+
+
+
+															<div class="form-row">
+
+																<div class="form-group sm col-md-12">
+																	<label class="form-label">Contact No </label> <input
+																		type="text" class="form-control "
+																		th:field="*{employee.corrContactNumber}">
+																</div>
+
+
+
+
+															</div>
+
+														</div>
+													</div>
+
+													<!-- 2nd row 2nd collumn -->
+													<div class="col-md-6" style="padding: 10px;">
+														<div class="row">
+															<h5>Permanent Address</h5>
+														</div>
+														<div class="border" style="padding: 30px">
+															<div class="form-row">
+																<div class="form-group sm col-md-12">
+
+																	<label class="form-label">Address </label> <input
+																		type="text" class="form-control "
+																		th:field="*{employee.permAdd1}">
+																</div>
+
+															</div>
+
+
+
+															<div class="form-row">
+																<div class="form-group sm col-md-12">
+
+																	<label class="form-label">Address2 </label> <input
+																		name="toDate" type="text" class="form-control "
+																		th:field="*{employee.permAdd2}">
+																</div>
+
+															</div>
+
+															<div class="form-row">
+
+																<div class="form-group sm col-md-12">
+																	<label class="form-label">Country </label> <select
+																		class="form-control ">
+																		<option value="">Select Country</option>
+																		<option th:each="lco :${listCountry}"
+																			th:value="${lco.getCountryCode()}"
+																			th:text="${lco.getCountryName()}">Select
+																			Country Type</option>
+
+
+
+																	</select>
+																</div>
+															</div>
+															<div class="form-row">
+
+																<div class="form-group sm col-md-12">
+																	<label class="form-label">State </label><select
+																		class="form-control ">
+																		<option value="">Select State</option>
+																		<option th:each="ls :${listState}"
+																			th:value="${ls.getStateCode()}"
+																			th:text="${ls.getStateName()}">Select State</option>
+																	</select>
+																</div>
+
+
+
+
+															</div>
+
+
+															<div class="form-row">
+
+																<!--  CityList-->
+																<div class="form-group sm col-md-12">
+																	<label class="form-label">City </label> <select
+																		class="form-control "
+																		th:field="*{employee.city2.cityCode}">
+																		<option value="">Select City</option>
+																		<option th:each="lc :${CityList}"
+																			th:value="${lc.getCityCode()}"
+																			th:text="${lc.getCityName()}">Select City</option>
+
+
+
+																	</select>
+																</div>
+
+															</div>
+
+
+
+															<div class="form-row">
+
+																<div class="form-group sm col-md-12">
+																	<label class="form-label">Contact No </label> <input
+																		type="text" class="form-control "
+																		th:field="*{employee.permContactNumber}">
+																</div>
+
+
+
+
+															</div>
+
+														</div>
+													</div>
+
+												</div>
+												<!--second block end  -->
+											</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+										</div>
+
+
+										<div id="validation-step-3">
+
+											<div class="container">
+												<div class="form-row">
+													<div class="form-group sm col-md-6">
+														<label class="form-label">Arms Code </label> <input
+															type="text" id="armsCode" name="armsCode"
+															class="form-control" readonly>
+													</div>
+												</div>
+
+												<div class="form-row">
+
+
+
+
+													<div class="form-group sm col-md-6">
+														<label class="form-label"> Name </label> <input
+															type="text" id="name" name="name" maxlength="40"
+															title=" Name" pattern="^[a-zA-Z\s]*$"
+															class="form-control" th:field="*{armsLicenses.name}">
+													</div>
+
+													<div class="form-group sm col-md-6">
+														<label class="form-label">Father Name </label> <input
+															type="text" id="fatherName" name="fatherName"
+															maxlength="40" title="Father Name"
+															pattern="^[a-zA-Z\s]*$" class="form-control"
+															th:field="*{armsLicenses.fatherName}">
+													</div>
+
+
+
+												</div>
+
+												<div class="form-row">
+
+													<div class="form-group sm col-md-6">
+														<div class="form-row"
+															style="padding-right: 3px; width: 100%; height: 100%;">
+															<label class="form-label">Address </label>
+															<textarea style="width: 100%; height: parent;"
+																th:field="*{armsLicenses.addressArms}"></textarea>
+														</div>
+													</div>
+
+													<div class="form-group sm col-md-6">
+
+														<div class="form-row" style="padding-left: 3px">
+															<label class="form-label">State</label> <span
+																class="text-danger">*</span> <select
+																class="form-control">
+																<option value="">Select Type</option>
+																<option th:each="ls :${listState}"
+																	th:value="${ls.getStateCode()}"
+																	th:text="${ls.getStateName()}">Select State</option>
+
+
+
+
+															</select>
+														</div>
+														<div class="form-row" style="padding-left: 3px">
+															<label class="form-label">District</label> <span
+																class="text-danger">*</span> <select
+																class="form-control" th:field="*{armsLicenses.city3}">
+																<option value="">Select Type</option>
+																<option th:each="lc :${CityList}"
+																	th:value="${lc.getCityCode()}"
+																	th:text="${lc.getCityName()}">Select City</option>
+
+
+
+															</select>
+														</div>
+
+													</div>
+
+												</div>
+
+												<div class="form-row">
+
+													<div class="form-group sm col-md-6">
+														<label class="form-label">Arms Area </label> <select
+															class="form-control" th:field="*{armsLicenses.armsArea}">
+															<option value="">Select Type</option>
+														</select>
+													</div>
+													<div class="form-group sm col-md-6">
+														<label class="form-label">Arms Location <span
+															class="text-danger">*</span></label> <input type="text"
+															title="DOI" maxlength="45" class="form-control"
+															th:field="*{armsLicenses.armsLocation}">
+													</div>
+
+
+
+												</div>
+
+												<div class="form-row">
+													<div class="form-group sm col-md-6">
+														<label class="form-label">Type of Arms <span
+															class="text-danger">*</span></label> <input type="text"
+															title="DOV" maxlength="45" class="form-control"
+															th:field="*{armsLicenses.toa}">
+													</div>
+													<div class="form-group sm col-md-6">
+														<label class="form-label">Type of Position <span
+															class="text-danger">*</span></label> <input type="text"
+															title="TOA" maxlength="45" class="form-control"
+															th:field="*{armsLicenses.top}">
+													</div>
+												</div>
+
+												<div class="form-row">
+													<div class="form-group sm col-md-4">
+														<label class="form-label">Date of Issue <span
+															class="text-danger">*</span></label> <input type="date"
+															title="TOP" maxlength="45" class="form-control"
+															th:field="*{armsLicenses.doi}">
+													</div>
+													<div class="form-group sm col-md-4">
+														<label class="form-label">Valid Upto <span
+															class="text-danger">*</span></label> <input type="date"
+															id="armsNol" title="NOL" class="form-control"
+															th:field="*{armsLicenses.dov}">
+													</div>
+													<div class="form-group sm col-md-4">
+														<label class="form-label">Type of Person <span
+															class="text-danger">*</span></label> <select class="form-control"
+															th:field="*{armsLicenses.typeOfPerson}">
+															<option value="">--Select--</option>
+														</select>
+													</div>
+
+
+
+												</div>
+
+												<div>
+													<label class="form-label">Number of Licenses </label>
+
+													<div class="card-body">
+
+														<div class="col-sm-12" style="text-align: right">
+
+															<input id="_cr" name="_cr" type="text" value="1">
+
+															<a id="add_row" class="fa fa-plus" aria-hidden="true"
+																style="font-size: 28px; color: #001080"></a>&nbsp;&nbsp;&nbsp;
+															<a id='delete_row' class="fa fa-trash"
+																style="font-size: 28px; color: #399490fc"
+																aria-hidden="true"></a>
+														</div>
+
+														<div class="table-responsive">
+															<table id="example" aria-describedby="example"
+																class="table" style="width: 100%">
+																<thead>
+																	<tr>
+																		<th scope="col">Sr No</th>
+																		<th scope="col">Licenses Number</th>
+																		<th scope="col">Date of Issue</th>
+																		<th scope="col">Date of Expiry</th>
+
+
+
+
+																	</tr>
+																</thead>
+																<tbody>
+																	<tr id='addr0'>
+																		<td><input value="1" class="form-control"></td>
+
+																		<td><input type="text"
+																			name="armsLicensesDetail[0].armsLicenseNumber"
+																			placeholder='Topic Details ' class="form-control" /></td>
+
+																		<td><input type="date" placeholder='Topic Date'
+																			class="form-control"
+																			name="armsLicensesDetail[0].dateOfIssue" /></td>
+
+																		<td><input type="date" placeholder='Topic Date'
+																			class="form-control"
+																			name="armsLicensesDetail[0].dateOfExpire" /></td>
+
+
+
+
+																	</tr>
+																	<tr id='addr1'></tr>
+
+																</tbody>
+
+
+															</table>
+														</div>
+													</div>
+
+
+												</div>
+
+
+
+
+
+												<button type="submit" class="btn btn-primary">Submit</button>
+												&nbsp;
+												<button type="reset" class="btn btn-primary" value="Reset">Cancel</button>
+
+											</div>
+
+
+
+										</div>
+									</div>
+								</form>
+							</div>
+							<div class="col-12">
+								<div class="card">
+									<div class="card-header"></div>
+									<div class="card-body">
+										<table id="datatables-buttons"
+											aria-describedby="datatables-buttons"
+											class="table table-striped display" style="width: 100%">
+											<thead>
+												<tr>
+													<th scope="col">Employee Id</th>
+													<th scope="col">Arms Code</th>
+													<th scope="col">Employee Name</th>
+													<th scope="col">Category Name</th>
+													<th scope="col">Batch Year</th>
+													<th scope="col">Designation</th>
+
+													<th scope="col">Action</th>
+
+												</tr>
+											</thead>
+											<tbody>
+
+
+												<tr th:each="leave:${listArmsLicenses}">
+													<td th:text="${leave.employee.empCode}"></td>
+													<td th:text="${leave.armsCode}"></td>
+													<td th:text="${leave.employee.empName}"></td>
+													<td th:text="${leave.employee.category}"></td>
+													<td th:text="${leave.employee.batchYear}"></td>
+													<td th:text="${leave.employee.designation.desgName}"></td>
+
+													<td><a
+														th:href="@{/editEmployee/{id}/(id=${leave.employee.empCode})}"><em
+															class="fa fa-edit"></em></a> <!--  <a
+														th:href="@{/deleteEmployee/{id}/{id2}(id=${leave.empCode},id2=${leave.armsCode})}"
+														onclick="return confirm('Are you sure?')"><em
+															class="fa fa-times"></em></a></td> -->
+												</tr>
+
+											</tbody>
+
+										</table>
 									</div>
 
-
-									<div id="validation-step-3">
-									 
-									  <div class="form-row">
-									  
-									  <div class="form-group sm col-md-4">
-											   <label class="form-label">Arms Code   </label>
-											      
-							                 <input  type="text"id="armsCode"name="armsCode"  class="form-control"readonly>
-										     </div>
-									  
-									  
-									              <div class="form-group sm col-md-4">
-											       <label class="form-label"> Name
-											       </label>
-							                 <input  type="text"id="name"name="name" maxlength="40"title=" Name"  pattern="^[a-zA-Z\s]*$"class="form-control">
-										     </div>
-									  
-										       <div class="form-group sm col-md-4">
-											       <label class="form-label">Father Name
-											       </label>
-							                 <input  type="text"id="fatherName"name="fatherName" maxlength="40"title="Father Name"  pattern="^[a-zA-Z\s]*$"class="form-control">
-										     </div>
-										      
-										     
-										     
-									  </div>
-									  
-									   <div class="form-row">
-									     <div class="form-group sm col-md-4">
-											       <label class="form-label">City District
-											       </label>
-							                 <input  type="text"id="district"name="district"maxlength="40" title="District" pattern="^[a-zA-Z\s]*$" class="form-control required">
-										     </div>
-										       <div class="form-group sm col-md-4">
-											       <label class="form-label">State
-											       </label>
-							                 <input  type="text"id="state"name="state" title="State" maxlength="30"pattern="^[a-zA-Z\s]*$" class="form-control required">
-										     </div>
-										      <div class="form-group sm col-md-4">
-											       <label class="form-label">Address
-											      </label>
-							                 <input  type="text"id="addressArms"name="addressArms"maxlength="60" title="Address" class="form-control required">
-										     </div>
-										     
-										     
-										     
-										    
-									  </div>
-									  
-									   <div class="form-row">
-									      <div class="form-group sm col-md-4">
-											       <label class="form-label">DOI
-											       <span class="text-danger">*</span></label>
-							                 <input  type="text"id="doi"name="doi" title="DOI"maxlength="45" class="form-control required">
-										     </div>
-										       <div class="form-group sm col-md-4">
-											       <label class="form-label">DOV
-											       <span class="text-danger">*</span></label>
-							                 <input  type="text"id="dov"name="dov" title="DOV"maxlength="45" class="form-control required">
-										     </div>
-										       <div class="form-group sm col-md-4">
-											       <label class="form-label">TOA
-											       <span class="text-danger">*</span></label>
-							                 <input  type="text"id="toa"name="toa" title="TOA"maxlength="45" class="form-control required">
-										     </div>
-										     
-										     
-									  </div>
-									  
-									  
-									    <div class="form-row">
-									        <div class="form-group sm col-md-4">
-											       <label class="form-label">TOP
-											       <span class="text-danger">*</span></label>
-							                 <input  type="text"id="top"name="top" title="TOP"maxlength="45" class="form-control required">
-										     </div>
-										         <div class="form-group sm col-md-4">
-											       <label class="form-label">NOL
-											       <span class="text-danger">*</span></label>
-							                 <input  type="text"id="armsNol"name="armsNol" title="NOL"maxlength="5"pattern="\d{1,5}" class="form-control required">
-										     </div>
-										         <div class="form-group sm col-md-4">
-											       <label class="form-label">LCD
-											       <span class="text-danger">*</span></label>
-							                 <input  type="text"id="lcd"name="lcd" title="LCD" maxlength="45"class="form-control required">
-										     </div>
-										     
-									        
-									    </div>
-									    
-									       <div class="form-row">
-									         <div class="form-group sm col-md-4">
-											       <label class="form-label">Arms Area
-											       <span class="text-danger">*</span></label>
-							                 <input  type="text"id="armsArea"name="armsArea" title="Arms Area" maxlength="60"class="form-control required">
-										     </div>
-									         <div class="form-group sm col-md-4">
-											       <label class="form-label">Dealer Details
-											      </label>
-							                 <input  type="text"id="dealerDetails"name="dealerDetails"maxlength="100" title="Dealer Details" class="form-control">
-										     </div>
-									       
-									       </div>
-									    
-									     
-									   
-									 <button type="submit" class="btn btn-primary">Save</button>
-										
-                              </div>
-                     
-                     
-                     
-                     
 								</div>
-	</form>
-			</div>
-				  <div class="col-12">
-							<div class="card">
-								<div class="card-header">
-								</div>
-								<div class="card-body">
-								<table id="datatables-buttons"aria-describedby="datatables-buttons" class="table table-striped display" style="width:100%">
-										<thead>
-											<tr>
-												<th scope="col">Employee  Id</th>
-												<th scope="col">Arms Code </th>
-													<th scope="col">Employee Name</th>
-												<th scope="col">Category Name</th>
-												<th scope="col">Department Name</th>
-												<th scope="col">Designation  </th>
-											
-												<th scope="col">Action</th>
-												
-											</tr>
-										</thead>
-										<tbody>
-									
-										
-											   <tr th:each="leave:${listEmployeeUtil}">
-												<td th:text="${leave.empCode}"></td>
-												 <td  th:text="${leave.armsCode}"> </td>  
-												<td th:text="${leave.empName}"></td>
-												<td th:text="${leave.categoryName}"></td>
-												<td th:text="${leave.departmentName}"></td>
-												<td th:text="${leave.designationName}"></td>
-												
-												 <td><a th:href="@{/editEmployee/{id}/{id2}(id=${leave.empCode},id2=${leave.armsCode})}"><em class="fa fa-edit"></em></a>
-												<a th:href="@{/deleteEmployee/{id}/{id2}(id=${leave.empCode},id2=${leave.armsCode})}" onclick="return confirm('Are you sure?')"><em class="fa fa-times"></em></a>
-
-												</td> 
-										
-												</tr>
-										
-										</tbody>
-									
-									</table>
-								</div>
-								
 							</div>
 						</div>
 					</div>
 
 				</div>
-		</main>
-		<footer class="footer">
-		<div th:replace="/fragments/footer :: div"></div>
-		</footer>
+			</main>
+			<footer class="footer">
+				<div th:replace="/fragments/footer :: div"></div>
+			</footer>
 		</div>
-		</div>
+	</div>
 	<script>
 		$(function() {
 
 			$("input[name='empDob']").daterangepicker({
-				singleDatePicker: true,
-			    autoApply: true,
-				locale: {
-		            format: 'DD/MM/YYYY'
-		        },
-				showDropdowns: true
+				singleDatePicker : true,
+				autoApply : true,
+				locale : {
+					format : 'DD/MM/YYYY'
+				},
+				showDropdowns : true
 			});
-			
-		$("input[name='dateOfPosting']").daterangepicker({
-				singleDatePicker: true,
-			    autoApply: true,
-				locale: {
-		            format: 'DD/MM/YYYY'
-		        },
-				showDropdowns: true
+
+			$("input[name='dateOfPosting']").daterangepicker({
+				singleDatePicker : true,
+				autoApply : true,
+				locale : {
+					format : 'DD/MM/YYYY'
+				},
+				showDropdowns : true
 			});
-		$("input[name=\"dateOfJoining\"]").daterangepicker({
-			singleDatePicker: true,
-			   autoApply: true,
-			locale: {
-				format: 'DD/MM/YYYY'
-	        },
-			showDropdowns: true
-		});
-		$("input[name='dateOfRetirement']").daterangepicker({
-			singleDatePicker: true,
-		    autoApply: true,
-			locale: {
-				format: 'DD/MM/YYYY'
-	        },
-			showDropdowns: true
-		});
-		$("input[name='batchYear']").datepicker({
-			
-		    autoApply: true,
-		    format: "yyyy",
-		    autoclose: true,
-		    minViewMode: "years",
-			locale: {
-	            format: 'YYYY'
-	        },
-			showDropdowns: true
-		});
-			
-		
-		/* $("input[name=\"orderDate\"]").daterangepicker({
-				singleDatePicker: true,
-				   autoApply: true,
-				locale: {
-					format: 'DD/MM/YYYY'
-		        },
-				showDropdowns: true
+			$("input[name=\"dateOfJoining\"]").daterangepicker({
+				singleDatePicker : true,
+				autoApply : true,
+				locale : {
+					format : 'DD/MM/YYYY'
+				},
+				showDropdowns : true
+			});
+			$("input[name='dateOfRetirement']").daterangepicker({
+				singleDatePicker : true,
+				autoApply : true,
+				locale : {
+					format : 'DD/MM/YYYY'
+				},
+				showDropdowns : true
+			});
+			$("input[name='batchYear']").datepicker({
+
+				autoApply : true,
+				format : "yyyy",
+				autoclose : true,
+				minViewMode : "years",
+				locale : {
+					format : 'YYYY'
+				},
+				showDropdowns : true
+			});
+
+			/* $("input[name=\"orderDate\"]").daterangepicker({
+					singleDatePicker: true,
+					   autoApply: true,
+					locale: {
+						format: 'DD/MM/YYYY'
+			        },
+					showDropdowns: true
+				}); */
+			/* 	$("input[name='orderDate']").datepicker({
+					singleDatePicker: true,
+					 dateFormat: 'dd-mm-yy'
+					
+				}); */
+
+			$("input[name=\"dov\"]").daterangepicker({
+				singleDatePicker : true,
+				autoApply : true,
+				locale : {
+					format : 'DD/MM/YYYY'
+				},
+				showDropdowns : true
+			});
+			/* $("input[name=\"doi\"]").daterangepicker({
+				singleDatePicker : true,
+				autoApply : true,
+				locale : {
+					format : 'DD/MM/YYYY'
+				},
+				showDropdowns : true
 			}); */
-	/* 	$("input[name='orderDate']").datepicker({
-			singleDatePicker: true,
-			 dateFormat: 'dd-mm-yy'
-			
-		}); */
-		
-		
-		$("input[name=\"dov\"]").daterangepicker({
-			singleDatePicker: true,
-			   autoApply: true,
-			locale: {
-				format: 'DD/MM/YYYY'
-	        },
-			showDropdowns: true
-		});
-		$("input[name=\"doi\"]").daterangepicker({
-			singleDatePicker: true,
-			   autoApply: true,
-			locale: {
-				format: 'DD/MM/YYYY'
-	        },
-			showDropdowns: true
-		});
 
-
-
-			
 			// Datatables basic
 			$('#datatables-basic').DataTable({
-				responsive: true
+				responsive : true
 			});
 			// Datatables with Buttons
-			var datatablesButtons = $('#datatables-buttons').DataTable({
-				  deferRender:true,
-		            scrollCollapse: true,
-		            scroller: false,
-				   responsive: true,
-				   lengthMenu :[[10,20,30,-1 ],['10 rows', '20 rows', '30 rows', 'Show all' ] ],
-					buttons :[]
-			});
-			datatablesButtons.buttons().container().appendTo("#datatables-buttons_wrapper .col-md-6:eq(0)")
+			var datatablesButtons = $('#datatables-buttons')
+					.DataTable(
+							{
+								deferRender : true,
+								scrollCollapse : true,
+								scroller : false,
+								responsive : true,
+								lengthMenu : [
+										[ 10, 20, 30, -1 ],
+										[ '10 rows', '20 rows', '30 rows',
+												'Show all' ] ],
+								buttons : []
+							});
+			datatablesButtons.buttons().container().appendTo(
+					"#datatables-buttons_wrapper .col-md-6:eq(0)")
 		});
-		
 	</script>
-	
-		<script>
+
+	<script>
 		$(function() {
 			$("#smartwizard-default-primary").smartWizard({
-				theme: "default",
-				showStepURLhash: false
+				theme : "default",
+				showStepURLhash : false
 			});
 
-			
 			// Validation
 			var $validationForm = $("#smartwizard-validation");
 			$validationForm.validate({
-				errorPlacement: function errorPlacement(error, element) {
+				errorPlacement : function errorPlacement(error, element) {
 					$(element).parents(".form-group").append(
-						error.addClass("invalid-feedback small d-block")
-					)
+							error.addClass("invalid-feedback small d-block"))
 				},
-				highlight: function(element) {
+				highlight : function(element) {
 					$(element).addClass("is-invalid");
 				},
-				unhighlight: function(element) {
+				unhighlight : function(element) {
 					$(element).removeClass("is-invalid");
 				},
-				rules: {
-					"wizard-confirm": {
-						equalTo: "input[name=\"wizard-password\"]"
+				rules : {
+					"wizard-confirm" : {
+						equalTo : "input[name=\"wizard-password\"]"
 					}
 				}
 			});
 			$validationForm.smartWizard({
-					autoAdjustHeight: false,
-					backButtonSupport: false,
-					useURLhash: false,
-					showStepURLhash: false,
-					
-				})
-				.on("leaveStep", function(e, anchorObject, stepNumber, stepDirection) {
-					if (stepDirection === "forward") {
-						return $validationForm.valid();
-					}
-					return true;
-				});
+				autoAdjustHeight : false,
+				backButtonSupport : false,
+				useURLhash : false,
+				showStepURLhash : false,
+
+			}).on("leaveStep",
+					function(e, anchorObject, stepNumber, stepDirection) {
+						if (stepDirection === "forward") {
+							return $validationForm.valid();
+						}
+						return true;
+					});
 			/* $validationForm.find(".btn-submit").on("click", function() {
 				if (!$validationForm.valid()) {
 					return;
@@ -902,7 +1165,7 @@ body {
 			n2.value = n1.value;
 		}
 	</script>
-<!-- 	<script>
+	<!-- 	<script>
  function myFunctionState(){
    $('#stateCode').click(function() {
       	 var name= $('#stateCode option:selected').text();
@@ -912,85 +1175,80 @@ body {
       
 </script>
  -->
-<script>
- function myFunctionCity(){
-   $('#cityCode').click(function() {
-      	 var name= $('#cityCode option:selected').text();
-      	$('#district').val(name);
-      	}); 
-      }
-      
-</script>
 	<script>
-	function myFunctionStateCode(){
-/* 		 var empCode= $('#empCode option:selected').value; */
-		 var id= document.getElementById('countryCode').value
-	    console.log("ajax request : "+ id);
-	    const xhr = new XMLHttpRequest();
-	    xhr.open('GET','./viewStateByCountryCode/'+id,true);
-	    xhr.getResponseHeader('content-type','application/json');
-	    xhr.onload = function(){
-	        if(this.status===200){
-	            let obj = JSON.parse(this.responseText);
-	            console.log(obj);
-	            $('#stateCode').empty();
-	            $('#stateCode').append(
-						$('<option>').val("").text("Select State"));
-					
-	            $('#stateName').val(obj.stateName);
-	            $('#stateCode').val(obj.stateCode);
-	            
-	            $.each(obj,
-						function(i, item) {
-							$('#stateCode').append(
-							$('<option>').val(this.stateCode).text(this.stateName));
-						});
-	        }
-	        else{
-	            console.error("some error occured");
-	        }
-	    }
-	    xhr.send();
-	}
+		function myFunctionCity() {
+			$('#cityCode').click(function() {
+				var name = $('#cityCode option:selected').text();
+				$('#district').val(name);
+			});
+		}
+	</script>
+	<script>
+		function myFunctionStateCode() {
+			/* 		 var empCode= $('#empCode option:selected').value; */
+			var id = document.getElementById('countryCode').value
+			console.log("ajax request : " + id);
+			const xhr = new XMLHttpRequest();
+			xhr.open('GET', './viewStateByCountryCode/' + id, true);
+			xhr.getResponseHeader('content-type', 'application/json');
+			xhr.onload = function() {
+				if (this.status === 200) {
+					let obj = JSON.parse(this.responseText);
+					console.log(obj);
+					$('#stateCode').empty();
+					$('#stateCode').append(
+							$('<option>').val("").text("Select State"));
 
+					$('#stateName').val(obj.stateName);
+					$('#stateCode').val(obj.stateCode);
+
+					$.each(obj, function(i, item) {
+						$('#stateCode').append(
+								$('<option>').val(this.stateCode).text(
+										this.stateName));
+					});
+				} else {
+					console.error("some error occured");
+				}
+			}
+			xhr.send();
+		}
 	</script>
 
 	<script>
-	function myFunctionStateCityCode(){
-/* 		 var empCode= $('#empCode option:selected').value; */
-		 var id= document.getElementById('stateCode').value
-	    console.log("ajax request : "+ id);
-		 $('#stateCode').click(function() {
-	      	 var name= $('#stateCode option:selected').text();
-	      	$('#state').val(name);
-	      	}); 
-	    const xhr = new XMLHttpRequest();
-	    xhr.open('GET','./viewCityBySatateCode/'+id,true);
-	    xhr.getResponseHeader('content-type','application/json');
-	    xhr.onload = function(){
-	        if(this.status===200){
-	            let obj = JSON.parse(this.responseText);
-	            console.log(obj);
-	            $('#cityCode').empty();
-	            $('#cityCode').append(
-						$('<option>').val("").text("Select City"));
-					
-	            $('#cityName').val(obj.cityName);
-	            $('#cityCode').val(obj.cityCode);
-	            
-	            $.each(obj,
-						function(i, item) {
-							$('#cityCode').append(
-							$('<option>').val(this.cityCode).text(this.cityName));
-						});
-	        }
-	        else{
-	            console.error("some error occured");
-	        }
-	    }
-	    xhr.send();
-	}
+		function myFunctionStateCityCode() {
+			/* 		 var empCode= $('#empCode option:selected').value; */
+			var id = document.getElementById('stateCode').value
+			console.log("ajax request : " + id);
+			$('#stateCode').click(function() {
+				var name = $('#stateCode option:selected').text();
+				$('#state').val(name);
+			});
+			const xhr = new XMLHttpRequest();
+			xhr.open('GET', './viewCityBySatateCode/' + id, true);
+			xhr.getResponseHeader('content-type', 'application/json');
+			xhr.onload = function() {
+				if (this.status === 200) {
+					let obj = JSON.parse(this.responseText);
+					console.log(obj);
+					$('#cityCode').empty();
+					$('#cityCode').append(
+							$('<option>').val("").text("Select City"));
 
+					$('#cityName').val(obj.cityName);
+					$('#cityCode').val(obj.cityCode);
+
+					$.each(obj, function(i, item) {
+						$('#cityCode').append(
+								$('<option>').val(this.cityCode).text(
+										this.cityName));
+					});
+				} else {
+					console.error("some error occured");
+				}
+			}
+			xhr.send();
+		}
 	</script>
 
 
@@ -1008,8 +1266,95 @@ body {
 			}
 		});
 	</script>
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+
+
+	<!-- New Script goes here  -->
+
+	<!-- $(document).ready(function(){
+	$('select[name="categoryCode"]').change(function(){
+	$('.disabledbutton').prop('disabled',this.value != 0 ?false:true);
+	}); }); -->
+
+	<script>
+		function changeCategory() {
+			var value = document.getElementById("categoryCode").value
+			var ipsDiv = document.getElementById("ipsDiv");
+			var ddaDiv = document.getElementById("ddaDiv");
+
+			console.log("hii");
+			if (value == '0') {
+				console.log("0 value ");
+				$(".disabledbutton").hide();
+				$('input.dda_field').val('');
+				departmentCode
+				$('#departmentCode').val("null");
+				
+				
+				/* ipsDiv.style.display = "block";
+				ddaDiv.style.display = "none"; */
+
+			} else {
+				console.log("1 value ");
+				$(".disabledbutton").show();
+				
+				/* ipsDiv.style.display = "none";
+				ddaDiv.style.display = "block"; */
+			}
+		}
+	</script>
+
+	<script>
+		$(document)
+				.ready(
+						function() {
+							console.log("function is ready");
+							var i = 1;
+							$("#add_row")
+									.click(
+											function() {
+												$('#addr' + i)
+														.html(
+
+																"<td><input value='"
+																		+ (i + 1)
+																		+ "' class='form-control'></td>"
+																		+ "<td><input name='armsLicensesDetail["+i+"].armsLicenseNumber ' type='text' placeholder='Topic Details.'  class='form-control  input-md'/> </td>"
+																		+ "<td><input  name='armsLicensesDetail["+i+"].dateOfIssue' type='Date' placeholder='Topic Date'  class='form-control input-md'>"
+																		+ "<td><input type='date' name='armsLicensesDetail["+i+"].dateOfExpire ' placeholder='Topic Date'class='form-control' /></td>"
+
+																		+ "");
+
+												$('#example').append(
+														'<tr id="addr'
+																+ (i + 1)
+																+ '"></tr>');
+												$('#_cr').val(i + 1);
+
+												i++;
+											});
+							$("#delete_row").click(function() {
+								if (i > 1) {
+									$("#addr" + (i - 1)).html('');
+									$('#_cr').val(i - 1);
+									i--;
+
+								}
+
+							});
+						});
+	</script>
+
+
+
+
+
+
+
+	<!--  end Script -->
+	<script type="text/javascript"
+		src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+	<link rel="stylesheet"
+		href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css" />
 
 
 </body>

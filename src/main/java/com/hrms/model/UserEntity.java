@@ -27,6 +27,7 @@ public class UserEntity implements Serializable{
 	@Size(max =80)
 	@Column(name = "User_Name")
 	private String userName;
+	
 	@ManyToOne
 	@JoinColumn(name = "Emp_code")
 	private Employee empCode;

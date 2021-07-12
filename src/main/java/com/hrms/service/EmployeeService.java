@@ -7,7 +7,8 @@ import com.hrms.model.Employee;
 import com.hrms.util.EmployeeUtil;
 
 public interface EmployeeService {
-	public void addEmployee(Employee employee);
+	
+	public Employee addEmployee(Employee employee);
 	List<Employee>getAllEmployees();
 	Employee findEmployeeById(String id);
 	public void updateEmployee(Employee e);

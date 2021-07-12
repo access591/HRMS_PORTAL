@@ -9,19 +9,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.hrms.dao.AbstractGenericDao;
-import com.hrms.model.ArmsLicenseDetails;
+import com.hrms.model.ArmsLicenses;
 import com.hrms.model.Employee;
 @Repository
-public class ArmsLicenseDaoImpl  extends AbstractGenericDao<ArmsLicenseDetails> implements ArmsLicenseDao {
+public class ArmsLicenseDaoImpl  extends AbstractGenericDao<ArmsLicenses> implements ArmsLicenseDao {
 	@Autowired SessionFactory sessionFactory;
 	@Override
-	public  ArmsLicenseDetails findArmsByEmpEmpCode(String empCode) {
+	public  ArmsLicenses findArmsByEmpEmpCode(String empCode) {
 		
 		try {
 			Session session = this.sessionFactory.getCurrentSession();
-			Query<ArmsLicenseDetails> query = session.createQuery("from ArmsLicenseDetails e where e.empCode=:empCode",ArmsLicenseDetails.class);
+			Query<ArmsLicenses> query = session.createQuery("from ArmsLicenseDetails e where e.empCode=:empCode",ArmsLicenses.class);
 			query.setParameter("empCode",empCode);
-			ArmsLicenseDetails employeeList = query.getSingleResult();
+			ArmsLicenses employeeList = query.getSingleResult();
 			return employeeList;
 		}catch(Exception e) {
 			e.printStackTrace();
