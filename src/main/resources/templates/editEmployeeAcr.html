@@ -5,8 +5,8 @@
 <script type="text/javascript" th:src="@{/js/app.js}"></script>
 <link rel="stylesheet" type="text/css" th:href="@{/css/modern.css}" />
 <script  src="https://www.googletagmanager.com/gtag/js?id=UA-120946860-7"></script>
-
-
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
 <style>
 
 
@@ -74,13 +74,13 @@ body {
 						
 					
 					</div>
-					<form id="validation-form" action="#" enctype="multipart/form-data"  th:action="@{/updateEmployeePromotion}" th:object="${employeePromotionEdit}" method="post">
+					<form id="validation-form" action="#" enctype="multipart/form-data"  th:action="@{/updateEmployeeAcr}" th:object="${employeeAcrEdit}" method="post">
 				              	<div class="row">
 					
 							<div class="col-12">
 							<div class="card">
 								<div class="card-header">
-									<h5 class="card-title"style="text-decoration: underline;">Employee Promotion</h5>
+									<h5 class="card-title"style="text-decoration: underline;">Employee ACR</h5>
 								<div class="alert-outline">
 									<div th:if="${message}" th:text="${message}" style="color: red">
 									</div> 
@@ -94,12 +94,11 @@ body {
 										
 										<div class="form-group sm col-md-6">
 													<label class="form-label">ID </label>
-												<label style="color: red">*</label>
-												<input type="text" id="id" name='id' th:field='*{id}'placeholder='id'class="form-control "readonly/>
+													<input type="text" id="id" name='id' th:field='*{id}'placeholder='id'class="form-control "readonly/>
 												</div>
 												
 												<div class="form-group sm col-md-6">
-										<label class="form-label">Employee </label>
+											<label class="form-label">Employee </label>
 												<label style="color: red">*</label>
 													<select class="form-control select2" name="empCode" id="empCode" onchange="myFunctionEmpCode()" th:field="*{empCode.empCode}"required aria-required="true"disabled>
 												 <option value="">Select Employee</option>
@@ -118,7 +117,7 @@ body {
 											
 						      </div>
 	                      </div>
-	                      </div>
+	                     
 	                     <div class="col-12">
 	                     	<div class="card">
 	                      <div class="card-header">
@@ -128,17 +127,17 @@ body {
 
 							<div class="col-sm-12" style="text-align: right;">
 																
-								
+							
 								<div class="table-responsive">
 										<table id="example" aria-describedby="example" class="table" style="width:100%">
 											<thead>
 												<tr>
-													<th scope="col"style="text-align:center">Employee Code </th>
-												
-													<th scope="col"style="text-align:center">Promotion Date</th>
-													<th scope="col"style="text-align:center">New Post  </th>
-													<th scope="col"style="text-align:center">Old Post</th>
-													<th scope="col" style="text-align:center">Remark </th>
+													<th scope="col"> </th>
+						                       	     <th scope="col" class="text-center">Year</th>  
+													<th scope="col"  class="text-center"> From  Date</th>
+													<th scope="col" class="text-center">To Date </th>
+													<th scope="col"  class="text-center">Grading</th>
+													<th scope="col"  class="text-center">Remark </th>
 													<th scope="col"style="text-align:center">Documents</th>
 													
 												</tr>
@@ -146,13 +145,16 @@ body {
 											<tbody>
 												<tr id='addr0'>
 
-													<td><input type="text" id='empCode.empCode' th:field='*{empCode.empCode}' name='empCode.empCode'placeholder='Employee Code'size='8' /></td>
-											
-													<td><input type="date" id='promotionDate' th:field='*{promotionDate}'name='promotionDate'placeholder='Promotion Date' size='6' /></td>
-													<td><input type="text" id="newPost" name='newPost' th:field='*{newPost}'placeholder='New Post' size='6' /></td>
-													<td><input type="text"  id='oldPost' name='oldPost' th:field='*{oldPost}'placeholder='Old Post 'size='6'  /></td>
-													<td><input type="text" id='remarks'name='remarks' th:field='*{remarks}'placeholder='Remarks'size='10'/></td>
-													<td><input type="file" id="file" name="file"  th:src="@{'/employeedoc/'+*{empUploadDoc}}"size='8'/></td>	
+													<td><input type="hidden" id='empCode2' name='empCode20' th:field='*{empCode.empCode}'size='8' /></td>
+												 <td><input type="text" id='year0' name='year0' th:field='*{year}'placeholder='Year'size='4' class="acryear" /></td> 
+													<td><input type="date" id='fromDate0' th:field='*{fromDate}'name='fromDate0'  size='5'/></td>
+													<td><input type="date" id="toDate0" name='toDate0' th:field='*{toDate}' size='5' /></td>
+													<td><input type="text"  id='grading0' name='grading0'placeholder='Grading' size='6'  th:field='*{grading}' /></td>
+													
+													<td><input type="text" id='remarks0'name='remarks0'placeholder='Remarks'size='10' th:field='*{remarks}'/></td>
+													<td><input type="file" id='file'name='file' th:src="@{'/employeedoc/'+*{empAcrUploadDoc}}" placeholder='Upload Document'size='8'/></td>
+													
+														
 												</tr>
 												<tr id='addr1'></tr>
 
@@ -172,11 +174,12 @@ body {
 	                     </div>
 	                     </div>
 					</div>
-					<button type="submit" class="btn btn-primary">Update</button>&nbsp;
+					 </div>
+				<button type="submit" class="btn btn-primary">Update</button>&nbsp;
 	                     &nbsp;
-						<button type="button"class="btn btn-outline-primary" onclick="window.location.href='../employeePromotion';">Cancel</button>
-</form>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<button type="button"class="btn btn-outline-primary" onclick="window.location.href='../employeeAcr';">Cancel</button>
+				</form>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
 				</div>
 			
@@ -187,42 +190,35 @@ body {
 		</div>
 		</div>
 		
+		 <script type="text/javascript">
+		 
+		  $(this).datepicker('destroy').datepicker({showOn:'focus'}).focus();	 
+         $(function() {
+        	 
+       
+        	$('body').on('click','.acryear', function() {
+        		
+            $( ".acryear" ).datepicker({
+      		    format: "yyyy",
+      		    autoclose: true,
+      		    minViewMode: "years",
+      			locale: {
+      	            format: 'YYYY'
+      	        },
+      			showDropdowns: true,
+      			
+      		})
+            
+            $(this).datepicker('destroy').datepicker({showOn:'focus'}).focus(); 
+            
+        	   });	
+        	
+        	
+        	
+         });
+      </script> 
 
-	<script>
-		$(function() {
 
-			$("input[name='overTimeDate']").daterangepicker({
-				singleDatePicker: true,
-			    autoApply: true,
-				locale: {
-		            format: 'YYYY/MM/DD'
-		        },
-				showDropdowns: true
-			});
-			
-	
-		
-
-
-
-			
-			// Datatables basic
-			$('#datatables-basic').DataTable({
-				responsive: true
-			});
-			// Datatables with Buttons
-			var datatablesButtons = $('#datatables-buttons').DataTable({
-				  deferRender:true,
-		            scrollCollapse: true,
-		            scrollX: true,
-				   responsive: true,
-				   lengthMenu :[[10,20,30,-1 ],['10 rows', '20 rows', '30 rows', 'Show all' ] ],
-					buttons :[]
-			});
-			datatablesButtons.buttons().container().appendTo("#datatables-buttons_wrapper .col-md-6:eq(0)")
-		});
-		
-	</script>
 			
 		<script>
 	$(document).ready(function() {
@@ -233,36 +229,16 @@ body {
             scrollCollapse: true,
             
 	    } );
+	    
+	    
+	    
+	    
+	    
+	    
 	} );
 	</script>
 
 	
-
-	
-	
-	
-	
-<script>
-
-$("#delete_row").click(function(){
-	   
-	  	 if(countI>1){
-			 $("#addr"+(countI-1)).html('');
-			 $('#_cr').val(countI - 1);
-			countI--;
-			 
-			 }
-		 });
-
-</script>
-	
-	
-	
-	
-	
-	
-	
-
 	<script>
 		$('#loading').show();
 		$.ajax({
@@ -274,8 +250,7 @@ $("#delete_row").click(function(){
 			}
 		});
 	</script>
-	<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+
 
 </body>
 </html>

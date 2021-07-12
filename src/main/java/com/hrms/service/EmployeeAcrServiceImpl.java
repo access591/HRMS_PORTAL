@@ -44,7 +44,32 @@ public class EmployeeAcrServiceImpl implements EmployeeAcrService {
 	}
 	@Override
 	public void removeEmployeeAcr(long id) {
-	this.employeeAcrDao.delete(id);
+	try {
+		this.employeeAcrDao.delete(id);
+	} catch (Exception e) {
+		
+		e.printStackTrace();
+	}
+		
+	}
+	@Override
+	public EmployeeAcr findByIdEmployeeAcr(long id) {
+		
+		try {
+			return employeeAcrDao.findById(id);
+		} catch (Exception e) {
+		
+			e.printStackTrace();
+		}
+		
+		finally {
+			 System.out.println("finally : i execute always.");
+	}
+		return null;
+	}
+	@Override
+	public void updateEmployeePromotion(EmployeeAcr employeeAcr) {
+	this.employeeAcrDao.saveOrUpdate(employeeAcr);
 		
 	}
 }

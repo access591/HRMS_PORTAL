@@ -12,4 +12,8 @@ public interface EmployeeAcrService {
 
 	void removeEmployeeAcr(long id);
 
+	EmployeeAcr findByIdEmployeeAcr(long id);
+
+	void updateEmployeePromotion(EmployeeAcr employeeAcr);
+
 }

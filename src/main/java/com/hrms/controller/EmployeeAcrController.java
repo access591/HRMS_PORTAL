@@ -14,9 +14,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -41,6 +45,21 @@ public class EmployeeAcrController {
 	@Autowired DepartmentService departmentService;
 	@Autowired private ModuleService moduleService;
 	@Autowired EmployeeAcrService employeeAcrService;
+	
+	
+	
+	@InitBinder("employeeAcrEdit")
+    public void customizeBinding (WebDataBinder binder) {
+        SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
+        dateFormatter.setLenient(false);
+                binder.registerCustomEditor(Date.class, "fromDate",new CustomDateEditor(dateFormatter, true));
+                binder.registerCustomEditor(Date.class, "toDate",new CustomDateEditor(dateFormatter, true));
+    }
+	
+	
+	
+	
+	
 	@GetMapping("/employeeAcr")
 	public String employeeAcr(Model model,HttpSession session)
 	{
@@ -227,11 +246,76 @@ public class EmployeeAcrController {
 		
 	}
 	
+	@GetMapping(value = {"/editEmployeeAcr/{id}"})
+	public String editEmployeeAcr(@PathVariable("id")long id,  Model model,HttpSession session)
+	 { 	if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
+		
+		List<Employee> lrt = employeeService.getAllEmployees();
+		model.addAttribute("listEmployee", lrt);
+		session.setAttribute("imgUtil", new ImageUtil());
+
+		EmployeeAcr employeeAcrEdit =employeeAcrService.findByIdEmployeeAcr(id);
+		model.addAttribute("employeeAcrEdit", employeeAcrEdit);
+	     String mydoc=employeeAcrEdit.getEmpAcrUploadDoc();
+		session.setAttribute("empAcrDoc",mydoc);
+	   
+	    return "editEmployeeAcr";
+	}
+	
+	
+	
+	@PostMapping("/updateEmployeeAcr")
+	public String updateEmployeeAcr(@ModelAttribute("employeeAcrEdit") EmployeeAcr employeeAcr, Model model,
+			HttpSession session, MultipartFile file, HttpServletRequest request) {
+		if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
+
+		MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
+		MultipartFile multipartFile = multipartRequest.getFile("file");
+		String empAcrDucument = (String) session.getAttribute("empAcrDoc");
+		System.out.println("file name --- " + multipartFile.getOriginalFilename());
+
+		try {
+			UUID uuid = UUID.randomUUID();
+			String folderPath = "\\src\\main\\resources\\static\\employeedoc\\";
+			String uploadDir = System.getProperty("user.dir") + folderPath;
+			File filef = new File(uploadDir + empAcrDucument);
+			String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+
+			if (fileName.trim().length() > 0) {
+				filef.delete();
+				System.out.println(file.getName() + " is deleted!");
+				employeeAcr.setEmpAcrUploadDoc(
+						uuid.toString().substring(0, 12) + "_" + multipartFile.getOriginalFilename());
+				String path = Paths.get(uploadDir + employeeAcr.getEmpAcrUploadDoc()).toString();
+				BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(new File(path)));
+				stream.write(multipartFile.getBytes());
+				stream.close();
+				this.employeeAcrService.updateEmployeePromotion(employeeAcr);
+
+			} else if (empAcrDucument != null) {
+
+				employeeAcr.setEmpAcrUploadDoc(empAcrDucument);
+
+				this.employeeAcrService.updateEmployeePromotion(employeeAcr);
+			}
+
+			this.employeeAcrService.updateEmployeePromotion(employeeAcr);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		this.employeeAcrService.updateEmployeePromotion(employeeAcr);
+		return "redirect:/employeeAcr";
+	}
 	
 	
 	@GetMapping(value = { "/deleteEmployeeAcr/{id}/{Emp_Img}" })
-	public String deleteEmployeeAcr(@PathVariable("id") long id, @PathVariable("Emp_Img") String acrUploadDoc, Model model,
-			HttpSession session) {
+	public String deleteEmployeeAcr(@PathVariable("id") long id, @PathVariable("Emp_Img") String acrUploadDoc,
+			Model model, HttpSession session) {
 		try {
 
 			this.employeeAcrService.removeEmployeeAcr(id);
@@ -240,7 +324,7 @@ public class EmployeeAcrController {
 			File file = new File(uploadDir + acrUploadDoc);
 
 			if (file.delete()) {
-				System.out.println(file.getName() + " is deleted!"); 
+				System.out.println(file.getName() + " is deleted!");
 			} else {
 				System.out.println("Delete operation is failed.");
 
@@ -251,10 +335,9 @@ public class EmployeeAcrController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		 session.setAttribute("imgUtil", new ImageUtil());
+		session.setAttribute("imgUtil", new ImageUtil());
 		return "redirect:/employeeAcr";
 	}
-		
 	
 }
 
