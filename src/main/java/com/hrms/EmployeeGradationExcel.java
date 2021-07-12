@@ -27,68 +27,68 @@ import com.hrms.service.EmployeeService;
 @Component
 public class EmployeeGradationExcel {
 
-//	@Autowired
-//	DepartmentService departmentService;
-//
-//	@Autowired
-//	EmployeeService employeeService;
-//	@Autowired
-//	DesignationService designationService;
-//	@Autowired
-//	CategoryService categoryService;
-//
-//	public ByteArrayInputStream generateExcel(List<Employee> listEmployee) {
-//
-//		String[] columns = { "Sr.No", "Officer Code", "Officer Name", "Category Name", "Department Name", "Designation",
-//				"IPS No", " Batch Year", "Payee Code", "Home District", "Court or Department", "Date Of Birth",
-//				"Present Posting", "Date of Posting", "Date of Joining", "Date of Retirement", "Gender",
-//				"Qualification", "Aadhar No", "Mobile No", "Office Phone", "Email", "Under Rule7", "Under Rule 8",
-//				"Vigilance Inquiry", "Suspenction", "Promotion", "ACP", "APR", "ACR", "Trainig", "LTC", "Leave Acount",
-//				"Awards", "Deputation", "Previous Postings", "OnDeputation", "Add Charge", "OnAdditionalCharge",
-//				"Remarks", "VRS", "Expired" };
-//
-//		try {
-//			Workbook workBook = new XSSFWorkbook();
-//			ByteArrayOutputStream out = new ByteArrayOutputStream();
-//			Sheet sheet = workBook.createSheet("employee");
-//
-//			Font headerFont = workBook.createFont();
-//			headerFont.setBold(true);
-//			headerFont.setColor(IndexedColors.BLUE.getIndex());
-//
-//			CellStyle headerCellStyle = workBook.createCellStyle();
-//			headerCellStyle.setFont(headerFont);
-//
-//			Row headerRow = sheet.createRow(0);
-//
-//			for (int col = 0; col < columns.length; col++) {
-//				Cell cell = headerRow.createCell(col);
-//				cell.setCellValue(columns[col]);
-//				cell.setCellStyle(headerCellStyle);
-//
-//			}
-//
-//			int rowIndex = 1;
-//
-//			for (Employee emp : listEmployee) {
-//
-//				Employee e = employeeService.findEmployeeById(emp.getEmpCode());
-//				Department d = departmentService.findDepartmentById(e.getDepartmentCode());
-//
-//				Designation desig = designationService.findDesignationById(emp.getDesignationCode());
-//
-//				Category category = categoryService.findCategoryByCatId(emp.getCategoryCode());
-//
-//				Row row = sheet.createRow(rowIndex++);
-//
-//				row.createCell(0).setCellValue(rowIndex); //
-//				row.createCell(1).setCellValue(emp.getEmpCode());
-//				row.createCell(2).setCellValue(emp.getEmpName());
-//				row.createCell(3).setCellValue(category.getCategoryName());
-//				row.createCell(4).setCellValue(d.getDeptName());
-//				row.createCell(5).setCellValue(desig.getDesgName());
-//				row.createCell(6).setCellValue("");
-//				row.createCell(7).setCellValue(emp.getBatchYear());
+	@Autowired
+	DepartmentService departmentService;
+
+	@Autowired
+	EmployeeService employeeService;
+	@Autowired
+	DesignationService designationService;
+	@Autowired
+	CategoryService categoryService;
+
+	public ByteArrayInputStream generateExcel(List<Employee> listEmployee) {
+
+		String[] columns = { "Sr.No", "Officer Code", "Officer Name", "Category Name", "Department Name", "Designation",
+				"IPS No", " Batch Year", "Payee Code", "Home District", "Court or Department", "Date Of Birth",
+				"Present Posting", "Date of Posting", "Date of Joining", "Date of Retirement", "Gender",
+				"Qualification", "Aadhar No", "Mobile No", "Office Phone", "Email", "Under Rule7", "Under Rule 8",
+				"Vigilance Inquiry", "Suspenction", "Promotion", "ACP", "APR", "ACR", "Trainig", "LTC", "Leave Acount",
+				"Awards", "Deputation", "Previous Postings", "OnDeputation", "Add Charge", "OnAdditionalCharge",
+				"Remarks", "VRS", "Expired" };
+
+		try {
+			Workbook workBook = new XSSFWorkbook();
+			ByteArrayOutputStream out = new ByteArrayOutputStream();
+			Sheet sheet = workBook.createSheet("employee");
+
+			Font headerFont = workBook.createFont();
+			headerFont.setBold(true);
+			headerFont.setColor(IndexedColors.BLUE.getIndex());
+
+			CellStyle headerCellStyle = workBook.createCellStyle();
+			headerCellStyle.setFont(headerFont);
+
+			Row headerRow = sheet.createRow(0);
+
+			for (int col = 0; col < columns.length; col++) {
+				Cell cell = headerRow.createCell(col);
+				cell.setCellValue(columns[col]);
+				cell.setCellStyle(headerCellStyle);
+
+			}
+
+			int rowIndex = 1;
+
+			for (Employee emp : listEmployee) {
+
+				Employee e = employeeService.findEmployeeById(emp.getEmpCode());
+				Department d = departmentService.findDepartmentById(e.getDepartment());
+
+				Designation desig = designationService.findDesignationById(emp.getDesignation().getDesgCode());
+
+				Category category = categoryService.findCategoryByCatId(emp.getCategory());
+
+				Row row = sheet.createRow(rowIndex++);
+
+				row.createCell(0).setCellValue(rowIndex); //
+				row.createCell(1).setCellValue(emp.getEmpCode());
+				row.createCell(2).setCellValue(emp.getEmpName());
+				row.createCell(3).setCellValue(category.getCategoryName());
+				row.createCell(4).setCellValue(d.getDeptName());
+				row.createCell(5).setCellValue(desig.getDesgName());
+				row.createCell(6).setCellValue("");
+				row.createCell(7).setCellValue(emp.getBatchYear());
 //				row.createCell(8).setCellValue(emp.getEmployeePayeeCode());
 //				row.createCell(9).setCellValue(emp.getEmployeePayeeCode());
 //
@@ -169,7 +169,7 @@ public class EmployeeGradationExcel {
 //				row.createCell(38).setCellValue(emp.getOnAdditionalCharge());
 //				row.createCell(39).setCellValue("Remarks");
 //				row.createCell(40).setCellValue(emp.getVrs());
-//				
+				
 //				if(emp.getExpired() == null || emp.getExpired().isEmpty() || emp.getExpired().trim().isEmpty()) {
 //					row.createCell(41).setCellValue("-");
 //				}else {
@@ -179,19 +179,19 @@ public class EmployeeGradationExcel {
 //						row.createCell(41).setCellValue("No");
 //					}
 //				}
-//				
-//
-//			}
-//			workBook.write(out);
-//			workBook.close();
-//			return new ByteArrayInputStream(out.toByteArray());
-//
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//
-//		return null;
-//
-//	}
+				
+
+			}
+			workBook.write(out);
+			workBook.close();
+			return new ByteArrayInputStream(out.toByteArray());
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return null;
+
+	}
 
 }

@@ -150,4 +150,26 @@ public class ArmsLicenseServiceImpl implements ArmsLicenseService {
 		return data;
 	}
 
+	@Override
+	public ArmsLicenses findArmsByEmpEmpCode(String empCode) {
+		
+		Session session = sessionFactory.openSession();
+		Transaction tx = null;
+		ArmsLicenses result = null;
+		
+		try {
+			tx = session.beginTransaction();
+			Query<ArmsLicenses> query = session.createQuery("from ArmsLicenses a", ArmsLicenses.class);
+			result = query.getSingleResult();
+			tx.commit();
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			session.close();
+		}
+		
+		return result;
+	}
+
 }

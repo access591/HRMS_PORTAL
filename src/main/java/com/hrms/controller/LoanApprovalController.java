@@ -29,87 +29,87 @@ import com.hrms.service.LoanRequestService;
 import com.hrms.service.ModuleService;
 @Controller
 public class LoanApprovalController {
-//	@Autowired
-//	private ModuleService moduleService;
-//	@Autowired
-//	EmployeeService employeeService;
-//	@Autowired
-//	DepartmentService  departmentService;
-//	@Autowired
-//	DesignationService designationService;
-//	@Autowired
-//	LoanApprovalService loanApprovalService;
-//	@Autowired
-//	LoanMaterService loanMaterService;
-//	@Autowired
-//	LoanRequestService loanRequestService;
-//	
-//	@GetMapping("/loanApproval")
-//	public String loanApproval(Model model, HttpSession session) {
-//
-//		if (session.getAttribute("username") == null) {
-//			return "redirect:" + "./";
-//		}
-//		String userCode = (String) session.getAttribute("username");
-//		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
-//		if (modules != null) {
-//			model.addAttribute("modules", modules);
-//		}
-//		
-//		
-//		List<LoanApplication> listOfLoanApp = loanApprovalService.getAllLoanApproval();
-//		List<LoanApplicationUtil>listofloanApproval= new ArrayList<>();
-//		for (int i = 0; i < listOfLoanApp.size(); i++) {
-//			String empCode = listOfLoanApp.get(i).getEmpCode().getEmpCode();
-//			LoanApplicationUtil lc=new LoanApplicationUtil();
-//			
-//			String loanCode=listOfLoanApp.get(i).getLoanCode().getLoanCode();
-//			Loan loan=loanMaterService.findLoanById(loanCode);
-//			Employee employee = employeeService.findEmployeeById(empCode);
-//			Department department = departmentService.findDepartmentById(employee.getDepartmentCode());
-//			Designation designation = designationService.findDesignationById(employee.getDesignationCode());
-//			
-//			lc.setDeptName(department.getDeptName());
-//			lc.setDesgName(designation.getDesgName());
-//			lc.setEmpName(employee.getEmpName());
-//			lc.setEmpPayCode(employee.getEmployeePayeeCode());
-//			lc.setEmpCode(employee.getEmpCode());
-//			lc.setLoanName(loan.getLoanName());
-//			lc.setAppNo(listOfLoanApp.get(i).getAppNo());
-//			lc.setAppDate(listOfLoanApp.get(i).getAppDate());
-//			lc.setAmountRequired(listOfLoanApp.get(i).getAmountRequired());
-//			lc.setEffScheduleDate(listOfLoanApp.get(i).getEffScheduleDate());
-//		
-//			listofloanApproval.add(lc);
-//			model.addAttribute("listofloanApproval", listofloanApproval);
-//			
-//		}
-//		session.setAttribute("imgUtil", new ImageUtil());
-//		session.setAttribute("username", session.getAttribute("username"));
-//		 return "/loanApproval";
-//	}
-//	@GetMapping("approvedLoanRequest/{id}")
-//	public String approvedLoanRequest(@PathVariable("id") String id) {
-//		loanApprovalService.approvedLoanRequestById(id);
-//		return "redirect:/loanApproval";
-//	}
-//	
-//	@GetMapping(value = { "/viewLoanRequest/{id}" })
-//	public String viewLoanRequest(@PathVariable("id") String id, Model model, HttpSession session) {
-//		
-//		if (session.getAttribute("username") == null) {
-//			return "redirect:" + "./";
-//		}
-//		List<Employee> em = employeeService.getAllEmployees();
-//		model.addAttribute("listEmployee", em);
-//		List<Loan> listLoan = loanMaterService.getAllLoans();
-//		model.addAttribute("listLoan", listLoan);
-//		LoanApplication loanRequestEdit =	loanRequestService.findByIdLoanReq(id);
-//		  model.addAttribute("loanRequestEdit", loanRequestEdit);
-//	   
-//
-//		return "viewLoanRequest";
-//	}
+	@Autowired
+	private ModuleService moduleService;
+	@Autowired
+	EmployeeService employeeService;
+	@Autowired
+	DepartmentService  departmentService;
+	@Autowired
+	DesignationService designationService;
+	@Autowired
+	LoanApprovalService loanApprovalService;
+	@Autowired
+	LoanMaterService loanMaterService;
+	@Autowired
+	LoanRequestService loanRequestService;
+	
+	@GetMapping("/loanApproval")
+	public String loanApproval(Model model, HttpSession session) {
+
+		if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
+		String userCode = (String) session.getAttribute("username");
+		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
+		if (modules != null) {
+			model.addAttribute("modules", modules);
+		}
+		
+		
+		List<LoanApplication> listOfLoanApp = loanApprovalService.getAllLoanApproval();
+		List<LoanApplicationUtil>listofloanApproval= new ArrayList<>();
+		for (int i = 0; i < listOfLoanApp.size(); i++) {
+			String empCode = listOfLoanApp.get(i).getEmpCode().getEmpCode();
+			LoanApplicationUtil lc=new LoanApplicationUtil();
+			
+			String loanCode=listOfLoanApp.get(i).getLoanCode().getLoanCode();
+			Loan loan=loanMaterService.findLoanById(loanCode);
+			Employee employee = employeeService.findEmployeeById(empCode);
+			Department department = departmentService.findDepartmentById(employee.getDepartment());
+			Designation designation = designationService.findDesignationById(employee.getDesignation().getDesgCode());
+			
+			lc.setDeptName(department.getDeptName());
+			lc.setDesgName(designation.getDesgName());
+			lc.setEmpName(employee.getEmpName());
+			lc.setEmpPayCode(employee.getPayeeCode());
+			lc.setEmpCode(employee.getEmpCode());
+			lc.setLoanName(loan.getLoanName());
+			lc.setAppNo(listOfLoanApp.get(i).getAppNo());
+			lc.setAppDate(listOfLoanApp.get(i).getAppDate());
+			lc.setAmountRequired(listOfLoanApp.get(i).getAmountRequired());
+			lc.setEffScheduleDate(listOfLoanApp.get(i).getEffScheduleDate());
+		
+			listofloanApproval.add(lc);
+			model.addAttribute("listofloanApproval", listofloanApproval);
+			
+		}
+		session.setAttribute("imgUtil", new ImageUtil());
+		session.setAttribute("username", session.getAttribute("username"));
+		 return "/loanApproval";
+	}
+	@GetMapping("approvedLoanRequest/{id}")
+	public String approvedLoanRequest(@PathVariable("id") String id) {
+		loanApprovalService.approvedLoanRequestById(id);
+		return "redirect:/loanApproval";
+	}
+	
+	@GetMapping(value = { "/viewLoanRequest/{id}" })
+	public String viewLoanRequest(@PathVariable("id") String id, Model model, HttpSession session) {
+		
+		if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
+		List<Employee> em = employeeService.getAllEmployees();
+		model.addAttribute("listEmployee", em);
+		List<Loan> listLoan = loanMaterService.getAllLoans();
+		model.addAttribute("listLoan", listLoan);
+		LoanApplication loanRequestEdit =	loanRequestService.findByIdLoanReq(id);
+		  model.addAttribute("loanRequestEdit", loanRequestEdit);
+	   
+
+		return "viewLoanRequest";
+	}
 
 	
 	

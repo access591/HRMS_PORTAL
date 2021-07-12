@@ -20,5 +20,6 @@ public interface ArmsLicenseService {
 	
 	//@rahul
 	List<ArmsLicenses> allArmsLicenseDetails();
+	ArmsLicenses findArmsByEmpEmpCode(String empCode);
 
 }

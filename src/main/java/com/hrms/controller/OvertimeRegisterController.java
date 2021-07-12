@@ -31,219 +31,219 @@ import com.hrms.util.OvertimeRegisterUtil;
 @Controller
 public class OvertimeRegisterController {
 	
-//	@Autowired
-//	private ModuleService moduleService;
-//	@Autowired
-//	private EmployeeService employeeService;
-//	@Autowired
-//	DesignationService designationService;
-//	@Autowired
-//	DepartmentService departmentService;
-//
-//	@Autowired
-//	OvertimeRegisterService  overtimeRegisterService;
-//	
-//	@GetMapping("/overtimeRegister")
-//	public String overtimeRegister(Model model, HttpSession session) {
-//		if (session.getAttribute("username") == null) {
-//			return "redirect:" + "./";
-//		}
-//		
-//		List<Department> listDepartment = departmentService.getAllDepartments();
-//		model.addAttribute("listDepartment", listDepartment);
-//		String userCode = (String) session.getAttribute("username");
-//		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
-//		if (modules != null) {
-//			model.addAttribute("modules", modules);
-//		}
-//		session.setAttribute("imgUtil", new ImageUtil());
-//		List<OvertimeRegister> listOverTimeR = overtimeRegisterService.getAllOvertimeRegister();
-//		List<OvertimeRegisterUtil>listOverTime= new ArrayList<>();
-//		  for (int i = 0; i < listOverTimeR.size(); i++) {
-//			  
-//			  String empCode = listOverTimeR.get(i).getEmployee().getEmpCode();
-//			  OvertimeRegisterUtil ovTime=new OvertimeRegisterUtil();
-//			  
-//			  Employee employee = employeeService.findEmployeeById(empCode);
-//			  Department department = departmentService.findDepartmentById(employee.getDepartmentCode());
-//			  Designation designation = designationService.findDesignationById(employee.getDesignationCode());
-//			    
-//			  ovTime.setEmpName(employee.getEmpName());
-//			  ovTime.setDeptName(department.getDeptName());
-//			  ovTime.setDesgName(designation.getDesgName());
-//			  
-//			  ovTime.setId(listOverTimeR.get(i).getId());
-//			  ovTime.setOverTimeDate(listOverTimeR.get(i).getOverTimeDate());
-//			  ovTime.setEsiYn(listOverTimeR.get(i).getEsiYn());
-//			  ovTime.setOverTime(listOverTimeR.get(i).getOverTime());
-//			  ovTime.setRemarks(listOverTimeR.get(i).getRemarks());
-//			  ovTime.setTimeIN(listOverTimeR.get(i).getTimeIN());
-//			  ovTime.setTimeOut(listOverTimeR.get(i).getTimeOut());
-//			  listOverTime.add(ovTime);
-//			  model.addAttribute("overReg", listOverTime); 
-//			  
-//			  
-//		  }
-//		  
-//		
-//		
-//		return "overtimeRegister";
-//
-//	}
-//	
-//	//@CrossOrigin
-//	@ResponseBody
-//    @GetMapping("/viewOverTimeRegisterBydepartment/{id}")
-//    public List<OvertimeRegisterUtil>  getLocalConvyenceById(@PathVariable(value = "id") String id,Model model,HttpSession session) {
-//		Department d=departmentService.findDepartmentById(id);
-//		List<Employee> e = employeeService.findByDepartmentCode(d.getDepartmentCode());
-//		  List<OvertimeRegisterUtil> lisOvertimeRegisterUtil = new ArrayList<>();
-//		  for (int i = 0; i < e.size(); i++) 
-//		  {
-//			  String empCode = e.get(i).getEmpCode();
-//			  OvertimeRegisterUtil lc = new OvertimeRegisterUtil();
-//			  Employee employee = employeeService.findEmployeeById(empCode);
-//			  lc.setEmpCode(employee.getEmpCode());
-//			  lc.setEmpName(employee.getEmpName());
-//			  lisOvertimeRegisterUtil.add(lc);
-//		  }
-//		  return lisOvertimeRegisterUtil;
-//       
-//    }
-//	
-//	@ResponseBody
-//    @GetMapping("/viewOverTimeRegisterByEmployee/{id}")
-//    public OvertimeRegisterUtil  viewOverTimeRegisterByEmployee(@PathVariable(value = "id") String id,Model model,HttpSession session) {
-//		
-//		Employee employee = employeeService.findEmployeeById(id);
-//		String empCode = employee.getEmpCode();
-//		System.out.println(">>>>>>>>xxxxxx>>>>>>>>>>>>>>>>>>" + empCode);
-//		OvertimeRegisterUtil listEmp = new OvertimeRegisterUtil();
-//			  
-//			 
-//			  Designation designation = designationService.findDesignationById(employee.getDesignationCode());
-//			  listEmp.setDesgName(designation.getDesgName());
-//			  listEmp.setEmpCode(employee.getEmpCode());
-//			  listEmp.setEmpName(employee.getEmpName());
-//			  
-//		
-//		  return listEmp;
-//       
-//    }
-//	
-//	
-//	@PostMapping("/saveOverTimeRegister")
-//	public String saveAttendenceRegister(@ModelAttribute("overTimeRegister")OvertimeRegisterUtil u, Model model, HttpSession session,HttpServletRequest request)  {
-//		String insertedBY = (String) session.getAttribute("USER_NAME");	
-//		OvertimeRegister overReg=new OvertimeRegister();
-//		 Employee e=new    Employee();		
-//	   
-//	     
-//	     
-//	     int flag = 0;
-//			int counter = 1;
-//	
-//	try {
-//		boolean insertStatusMR = false;
-//		counter = Integer.parseInt(request.getParameter("_cr"));
-//		System.out.println("counter::::::::::::::::::::" + counter);
-//		for (int i =0; i < counter; i++) 
-//		{
-//			
-//			
-//			
-//			System.out.println("counter::::::::::::::::::::" + i);
-//			
-//			
-//			if (request.getParameter("overTimeRate" + i) != null) {
-//				overReg.setOverTimeRate(request.getParameter("overTimeRate" + i));
-//			} else {
-//				overReg.setOverTimeRate("" + i);
-//			}
-//
-//			if (request.getParameter("timeIN" + i) != null) {
-//				String timeIn = request.getParameter("timeIN" + i);
-//				overReg.setTimeIN(timeIn);
-//			} else {
-//				overReg.setTimeIN("" + i);
-//			}
-//
-//			if (request.getParameter("timeOut" + i) != null) {
-//				String sDate1 = request.getParameter("timeOut" + i);
-//				overReg.setTimeOut(sDate1);
-//			} else {
-//				overReg.setTimeOut("" + i);
-//
-//			}
-//	
-//			
-//			if (request.getParameter("esiYn" + i) != null) {
-//				overReg.setEsiYn(request.getParameter("esiYn" + i));
-//			} else {
-//				overReg.setEsiYn("" + i);
-//			}
-//			
-//			
-//			if (request.getParameter("overTime" + i) != null) {
-//				overReg.setOverTime(request.getParameter("overTime" + i));
-//			} else {
-//				overReg.setOverTime("" + i);
-//			}
-//			
-//			
-//			if (request.getParameter("remarks" + i) != null) {
-//				overReg.setRemarks(request.getParameter("remarks" + i));
-//			} else {
-//				overReg.setRemarks("" + i);
-//			}
-//			
-//
-//			if (request.getParameter("empCode" + i) != null) {
-//				e.setEmpCode(request.getParameter("empCode" + i));
-//				overReg.setEmployee(e);
-//
-//			}
-//
-//			overReg.setOverTimeDate(u.getOverTimeDate());
-//			
-//			System.out.println("Date >>>>>>>>>>>>>.overTime>>>>>>>>>>>>>"+u.getOverTimeDate());
-//			overReg.setInsBy(insertedBY);
-//		insertStatusMR= overtimeRegisterService.addOvertimeRegister(overReg);
-//			
-//		if (insertStatusMR) {
-//			System.out.println("Counter" + flag);
-//			flag++;
-//
-//		}
-//		
-//	}
-//	
-//	
-//	if (flag > 0) {
-//		session.setAttribute("Message", "Data added successfully.");
-//		
-//	} else {
-//		System.out.println("Enter into  failure part :");
-//		
-//	}
-//
-//		
-//	} catch (Exception x) {
-//		x.printStackTrace();
-//	}
-//		  session.setAttribute("username", session.getAttribute("username"));
-//
-//		return "redirect:/overtimeRegister";
-//		}
-//	
-//	
-//	
-//	@GetMapping(value = { "/deleteOverTime/{id}" })
-//	public String deleteOverTime(@PathVariable("id")long id , Model model, HttpSession session) {
-//
-//		overtimeRegisterService.removeOverTimeRegister(id);
-//
-//		session.setAttribute("username", session.getAttribute("username"));
-//		return "redirect:/overtimeRegister";
-//	}
+	@Autowired
+	private ModuleService moduleService;
+	@Autowired
+	private EmployeeService employeeService;
+	@Autowired
+	DesignationService designationService;
+	@Autowired
+	DepartmentService departmentService;
+
+	@Autowired
+	OvertimeRegisterService  overtimeRegisterService;
+	
+	@GetMapping("/overtimeRegister")
+	public String overtimeRegister(Model model, HttpSession session) {
+		if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
+		
+		List<Department> listDepartment = departmentService.getAllDepartments();
+		model.addAttribute("listDepartment", listDepartment);
+		String userCode = (String) session.getAttribute("username");
+		List<MenuModule> modules = moduleService.getAllModulesList(userCode);
+		if (modules != null) {
+			model.addAttribute("modules", modules);
+		}
+		session.setAttribute("imgUtil", new ImageUtil());
+		List<OvertimeRegister> listOverTimeR = overtimeRegisterService.getAllOvertimeRegister();
+		List<OvertimeRegisterUtil>listOverTime= new ArrayList<>();
+		  for (int i = 0; i < listOverTimeR.size(); i++) {
+			  
+			  String empCode = listOverTimeR.get(i).getEmployee().getEmpCode();
+			  OvertimeRegisterUtil ovTime=new OvertimeRegisterUtil();
+			  
+			  Employee employee = employeeService.findEmployeeById(empCode);
+			  Department department = departmentService.findDepartmentById(employee.getDepartment());
+			  Designation designation = designationService.findDesignationById(employee.getDesignation().getDesgCode());
+			    
+			  ovTime.setEmpName(employee.getEmpName());
+			  ovTime.setDeptName(department.getDeptName());
+			  ovTime.setDesgName(designation.getDesgName());
+			  
+			  ovTime.setId(listOverTimeR.get(i).getId());
+			  ovTime.setOverTimeDate(listOverTimeR.get(i).getOverTimeDate());
+			  ovTime.setEsiYn(listOverTimeR.get(i).getEsiYn());
+			  ovTime.setOverTime(listOverTimeR.get(i).getOverTime());
+			  ovTime.setRemarks(listOverTimeR.get(i).getRemarks());
+			  ovTime.setTimeIN(listOverTimeR.get(i).getTimeIN());
+			  ovTime.setTimeOut(listOverTimeR.get(i).getTimeOut());
+			  listOverTime.add(ovTime);
+			  model.addAttribute("overReg", listOverTime); 
+			  
+			  
+		  }
+		  
+		
+		
+		return "overtimeRegister";
+
+	}
+	
+	//@CrossOrigin
+	@ResponseBody
+    @GetMapping("/viewOverTimeRegisterBydepartment/{id}")
+    public List<OvertimeRegisterUtil>  getLocalConvyenceById(@PathVariable(value = "id") String id,Model model,HttpSession session) {
+		Department d=departmentService.findDepartmentById(id);
+		List<Employee> e = employeeService.findByDepartmentCode(d.getDepartmentCode());
+		  List<OvertimeRegisterUtil> lisOvertimeRegisterUtil = new ArrayList<>();
+		  for (int i = 0; i < e.size(); i++) 
+		  {
+			  String empCode = e.get(i).getEmpCode();
+			  OvertimeRegisterUtil lc = new OvertimeRegisterUtil();
+			  Employee employee = employeeService.findEmployeeById(empCode);
+			  lc.setEmpCode(employee.getEmpCode());
+			  lc.setEmpName(employee.getEmpName());
+			  lisOvertimeRegisterUtil.add(lc);
+		  }
+		  return lisOvertimeRegisterUtil;
+       
+    }
+	
+	@ResponseBody
+    @GetMapping("/viewOverTimeRegisterByEmployee/{id}")
+    public OvertimeRegisterUtil  viewOverTimeRegisterByEmployee(@PathVariable(value = "id") String id,Model model,HttpSession session) {
+		
+		Employee employee = employeeService.findEmployeeById(id);
+		String empCode = employee.getEmpCode();
+		System.out.println(">>>>>>>>xxxxxx>>>>>>>>>>>>>>>>>>" + empCode);
+		OvertimeRegisterUtil listEmp = new OvertimeRegisterUtil();
+			  
+			 
+			  Designation designation = designationService.findDesignationById(employee.getDesignation().getDesgCode());
+			  listEmp.setDesgName(designation.getDesgName());
+			  listEmp.setEmpCode(employee.getEmpCode());
+			  listEmp.setEmpName(employee.getEmpName());
+			  
+		
+		  return listEmp;
+       
+    }
+	
+	
+	@PostMapping("/saveOverTimeRegister")
+	public String saveAttendenceRegister(@ModelAttribute("overTimeRegister")OvertimeRegisterUtil u, Model model, HttpSession session,HttpServletRequest request)  {
+		String insertedBY = (String) session.getAttribute("USER_NAME");	
+		OvertimeRegister overReg=new OvertimeRegister();
+		 Employee e=new    Employee();		
+	   
+	     
+	     
+	     int flag = 0;
+			int counter = 1;
+	
+	try {
+		boolean insertStatusMR = false;
+		counter = Integer.parseInt(request.getParameter("_cr"));
+		System.out.println("counter::::::::::::::::::::" + counter);
+		for (int i =0; i < counter; i++) 
+		{
+			
+			
+			
+			System.out.println("counter::::::::::::::::::::" + i);
+			
+			
+			if (request.getParameter("overTimeRate" + i) != null) {
+				overReg.setOverTimeRate(request.getParameter("overTimeRate" + i));
+			} else {
+				overReg.setOverTimeRate("" + i);
+			}
+
+			if (request.getParameter("timeIN" + i) != null) {
+				String timeIn = request.getParameter("timeIN" + i);
+				overReg.setTimeIN(timeIn);
+			} else {
+				overReg.setTimeIN("" + i);
+			}
+
+			if (request.getParameter("timeOut" + i) != null) {
+				String sDate1 = request.getParameter("timeOut" + i);
+				overReg.setTimeOut(sDate1);
+			} else {
+				overReg.setTimeOut("" + i);
+
+			}
+	
+			
+			if (request.getParameter("esiYn" + i) != null) {
+				overReg.setEsiYn(request.getParameter("esiYn" + i));
+			} else {
+				overReg.setEsiYn("" + i);
+			}
+			
+			
+			if (request.getParameter("overTime" + i) != null) {
+				overReg.setOverTime(request.getParameter("overTime" + i));
+			} else {
+				overReg.setOverTime("" + i);
+			}
+			
+			
+			if (request.getParameter("remarks" + i) != null) {
+				overReg.setRemarks(request.getParameter("remarks" + i));
+			} else {
+				overReg.setRemarks("" + i);
+			}
+			
+
+			if (request.getParameter("empCode" + i) != null) {
+				e.setEmpCode(request.getParameter("empCode" + i));
+				overReg.setEmployee(e);
+
+			}
+
+			overReg.setOverTimeDate(u.getOverTimeDate());
+			
+			System.out.println("Date >>>>>>>>>>>>>.overTime>>>>>>>>>>>>>"+u.getOverTimeDate());
+			overReg.setInsBy(insertedBY);
+		insertStatusMR= overtimeRegisterService.addOvertimeRegister(overReg);
+			
+		if (insertStatusMR) {
+			System.out.println("Counter" + flag);
+			flag++;
+
+		}
+		
+	}
+	
+	
+	if (flag > 0) {
+		session.setAttribute("Message", "Data added successfully.");
+		
+	} else {
+		System.out.println("Enter into  failure part :");
+		
+	}
+
+		
+	} catch (Exception x) {
+		x.printStackTrace();
+	}
+		  session.setAttribute("username", session.getAttribute("username"));
+
+		return "redirect:/overtimeRegister";
+		}
+	
+	
+	
+	@GetMapping(value = { "/deleteOverTime/{id}" })
+	public String deleteOverTime(@PathVariable("id")long id , Model model, HttpSession session) {
+
+		overtimeRegisterService.removeOverTimeRegister(id);
+
+		session.setAttribute("username", session.getAttribute("username"));
+		return "redirect:/overtimeRegister";
+	}
 }
