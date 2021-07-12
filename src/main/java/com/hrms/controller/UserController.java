@@ -144,11 +144,15 @@ public class UserController {
 			UserEntity userRecord = userService.findDataById(id);
 			session.setAttribute("uuuuu", userRecord.getUserName());
 			session.setAttribute("USER_NAME", userRecord.getUserName());
+			
+			session.setAttribute("userEntity", userRecord);
 
-			session.setAttribute("User_Profile_Pic", userRecord.getEmpCode().getImageProfile());
-			session.setAttribute("imgUtil", new ImageUtil());
+			//session.setAttribute("User_Profile_Pic", userRecord.getEmpCode().getImageProfile());
+			//session.setAttribute("imgUtil", new ImageUtil());
 			session.setAttribute("username", login.getUserCode());
 			String userCode = (String) session.getAttribute("username");
+			
+			
 			List<MenuModule> modules = moduleService.getAllModulesList(userCode);
 			model.addAttribute("modules", modules);
 			

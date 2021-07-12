@@ -8,6 +8,7 @@ import com.hrms.util.EmployeeUtil;
 
 public interface EmployeeDao extends GenericDao<Employee> {
 
+	
 	public List<Employee> getEmployeeByDeptCode(String deptCode);
 
 

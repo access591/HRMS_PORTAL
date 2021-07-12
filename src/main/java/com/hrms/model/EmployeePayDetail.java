@@ -6,7 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
-//@Entity(name = "Emp_Pay_detail")
+
 
 @Entity(name = "Emp_Pay_detail")
 public class EmployeePayDetail implements Serializable{

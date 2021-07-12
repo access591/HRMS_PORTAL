@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.hrms.model.ArmsLicenseDetails;
+import com.hrms.model.ArmsLicenses;
 import com.hrms.model.BudgetProvision;
 import com.hrms.model.Department;
 import com.hrms.model.MenuModule;

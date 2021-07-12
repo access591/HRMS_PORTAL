@@ -1,11 +1,11 @@
 package com.hrms.repository;
 
 import com.hrms.dao.GenericDao;
-import com.hrms.model.ArmsLicenseDetails;
+import com.hrms.model.ArmsLicenses;
 import com.hrms.model.Employee;
 
-public interface ArmsLicenseDao extends GenericDao<ArmsLicenseDetails> {
+public interface ArmsLicenseDao extends GenericDao<ArmsLicenses> {
 
-	ArmsLicenseDetails findArmsByEmpEmpCode(String id);
+	ArmsLicenses findArmsByEmpEmpCode(String id);
 
 }

@@ -3,35 +3,28 @@ package com.hrms.model;
 import java.io.Serializable;
 import java.util.Date;
 
-
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
-
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Size;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 
 @Entity
 @Table(name = "M_EMPLOYEE")
 public class Employee implements Serializable {
 
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = -615585907130702990L;
 
-	/**
-	 * 
-	 */
-
-
-	/**
-	 * @author Access Surendra
-	 */
 
 	@Id
 	@Size(max = 25)
@@ -42,92 +35,77 @@ public class Employee implements Serializable {
 	@Column(name = "EMPLOYEE_NAME")
 	private String empName;
 	
+	@Column(name = "EMP_CATEGORY")
+	private String category;
+	
+	@Column(name = "PAYEE_CODE")
+	private String payeeCode;
+	
+	@Column(name = "HOME_DISTRICT")
+	private String homeDistrict;
+	
+	@Column(name = "DEPARTMENT_COURT")
+	private String departmentCourt;
+	
+	@Column(name = "ORDER_NUMBER")
+	private String orederNumber;
+	
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@Column(name = "ORDER_DATE")
+	private Date orderDate;
+	
+	@Column(name = "TYPE")
+	private String type;
+	
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@Column(name = "EMP_DOB")
+	private Date dob;
+	
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@Column(name = "DATE_OF_JOINING")
+	private Date doj;
+	
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@Column(name = "DATE_OF_POSTING")
+	private Date dop;
+	
+	@Column(name = "PLACE_PRESENTING_POSTING")
+	private String placePresentPosting;
+	
 	@Size(max = 20)
 	@Column(name ="BATCH_YEAR")
 	private String batchYear;
 	
-	@Column(name ="DATE_OF_JOINING")
-	private Date dateOfJoining;
 	
-	@Column(name ="DATE_OF_POSTING")
-	private Date dateOfPosting;
+	@Column(name = "PAN_NO")
+	private String panNo;
 	
-	@Column(name ="DATE_OF_RETIREMENT")
-	private Date dateOfRetirement;
-	@Size(max = 25)
-	@Column(name ="CATEGORY_CODE")
-	private String categoryCode;
-	@Size(max = 25)
-	@Column(name ="DEPARTMENT_CODE")
-	private String departmentCode;
-	
-
-
-	@Size(max = 25)
-	@Column(name ="DESIGNATION_CODE")
-	private String designationCode;
-
-	@Lob
-	@Column(name = "EMP_IMG", length = Integer.MAX_VALUE, nullable = true)
-	private byte[] imageProfile;
-	
-	@Size(max = 20)
-	@Column(name ="EMPLOYEE_PAYEE_CODE")
-	private String   employeePayeeCode;
-	
-	
-	
-	@Size(max = 200)
-	@Column(name ="PRESENT_POSTING")
-	private String presentPosting;
-	
-	@Size(max = 100)
-	@Column(name ="SUSPENTION")
-	private String suspention;
-	@Size(max =2)
-	@Column(name ="TYPE_COURT_DEPARTMENT")
-	private String  typeCourtDepartment;
-	@Size(max = 200)
-	@Column(name ="VIGILANCE_QUERY")
-	private String vigilanceQuery;
-	@Size(max =20)
-	@Column(name ="VRS")
-	private String vrs;
-	
-	
-	
-	
-	// STEP-1=========17=============end....
 	@Size(max =16)
 	@Column(name = "AADHAR_NO")
 	private String aadharNo;
-	@Size(max =255)
-	@Column(name = "ADD_CHARGE")
-	private String addCharge;
-	@Size(max =200)
-	@Column(name ="ADDRESS_1")
-	private String address1;
-	@Size(max =200)
-	@Column(name ="ADDRESS_2")
-	private String address2;
-	@Size(max =25)
-	@Column(name="CITY_CODE")
-	private String cityCode;
-	@Size(max =25)
-	@Column(name="STATE_CODE")
-	private String stateCode;
-	@Size(max =25)
-	@Column(name="COUNTRY_CODE")
-	private String countryCode;
-	@Size(max =100)
-	@Column(name = "EMAIL")
-	private String email;
+	
 	@Size(max =1)
 	@Column(name = "GENDER")
 	private String gender;
+	
 	@Size(max =255)
 	@Column(name = "MARTIAL_STATUS")
 	private String martialStatus;
+	
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@Column(name ="DATE_OF_RETIREMENT")
+	private Date dor;
+	
+	@Column(name = "ACTIVE_STATUS")
+	private String activeStatus;
+	
+	@Size(max =200)
+	@Column(name = "QUALIFICATION")
+	private String qualification;
+	
+	@Size(max =100)
+	@Column(name = "EMAIL")
+	private String email;
 	
 	@Size(max =12)
 	@Column(name = "TELEPHONE")
@@ -138,87 +116,70 @@ public class Employee implements Serializable {
 	@Size(max =10)
 	@Column(name = "MOBILE_NUMBER2")
 	private String mobileNumber2;
-	@Size(max =255)
-	@Column(name = "ON_ADDITIONAL_CHARGE")
-	private String onAdditionalCharge;
-	@Temporal(TemporalType.DATE)
-	@Column(name = "ORDER_DATE")
-	private Date orderDate;
 	
-	@Size(max =255)
-	@Column(name = "ORDER_NO")
-	private String orderNo;
-	
-	@Size(max =10)
-	@Column(name = "PAN_NO")
-	private String panNo;
-	
-	@Size(max =6)
-	@Column(name = "PINCODE")
-	private String pinCode;
 	@Size(max =200)
-	@Column(name = "QUALIFICATION")
-	private String qualification;
-	@Size(max =255)
-	@Column(name = "TRANSFER")
-	private String transfer;
-	@Size(max =15)
-	@Column(name = "UAN")
-	private String uan;
-	@Size(max =1)
-	@Column(name = "UNDER_RULE_7")
-	private String underRule7;
-	@Size(max =1)
-	@Column(name = "UNDER_RULE_8")
-	private String underRule8;
-	//========================================
-	@Size(max =255)
-	@Column(name = "PROMOTION")
-	private String promotion;
-	@Size(max =255)
-	@Column(name = "ACP")
-	private String acp;
-	@Size(max =255)
-	@Column(name = "APR")
-	private String apr;
+	@Column(name = "CORR_ADD1")
+	private String corrAdd1;
 	
-	@Size(max =255)
-	@Column(name = "ACR")
-	private String acr;
-
-	@Size(max =255)
-	@Column(name = "TRAINING")
-	private String training;
-
-	@Size(max =255)
-	@Column(name = "LTC")
-	private String ltc;
+	@Size(max =200)
+	@Column(name = "CORR_ADD2")
+	private String corrAdd2;
 	
-	@Size(max =255)
-	@Column(name = "LEAVE_Account")
-	private String leaveAccount;
+	@OneToOne
+	@JoinColumn(name="COR_CITY_CODE",updatable = false)
+	private City city1;
 	
-	@Size(max =255)
-	@Column(name = "EMP_AWARDS")
-	private String empAwards;
+//	@OneToOne
+//	@JoinColumn(name="COR_COUNTRY_CODE",updatable = false)
+//	private Country country1;
 	
-	@Size(max =1)
-	@Column(name = "ON_DEPUTATION")
-	private String onDeputation;
+//	@OneToOne
+//	@JoinColumn(name="COR_STATE_CODE",updatable = false)
+//	private State state1;
 	
-	@Size(max =255)
-	@Column(name = "EMP_DEPUTATION")
-	private String empDeputation;
-	@Size(max =255)
-	@Column(name = "PREVIOUS_POSTINGS")
-	private String previousPostings;
-	@Size(max =1)
-	@Column(name = "EXPIRED")
-	private String expired;
-	@Column(name = "EMP_DOB")
-	private Date empDob;
+	@Size(max =200)
+	@Column(name = "CORR_CONTACT_NUMBER")
+	private String corrContactNumber;
 	
-
+	
+	
+	@Size(max =200)
+	@Column(name = "PERM_ADD1")
+	private String permAdd1;
+	
+	@Size(max =200)
+	@Column(name = "PERM_ADD2")
+	private String permAdd2;
+	
+	@OneToOne
+	@JoinColumn(name="PERM_CITY_CODE",updatable = false)
+	private City city2;
+	
+//	@OneToOne
+//	@JoinColumn(name="PERM_COUNTRY_CODE",updatable = false)
+//	private Country country2;
+//	
+//	@OneToOne
+//	@JoinColumn(name="PERM_STATE_CODE",updatable = false)
+//	private State state2;
+	
+	@Size(max =200)
+	@Column(name = "PERM_CONTACT_NUMBER")
+	private String permContactNumber;
+	
+	
+	
+	//@OneToOne
+	@Column(name="DEPARTMENT_CODE")
+	private String department;
+	
+	@OneToOne
+	@JoinColumn(name="DESIGNATION_CODE",updatable = false)
+	private Designation designation;
+	
+	
+	
+	
 	@Size(max = 50)
 	@Column(name = "INS_BY", updatable = false)
 	private String insBy;
@@ -232,18 +193,21 @@ public class Employee implements Serializable {
 
 	@Column(name = "UPD_DATE", insertable = false)
 	private Date updDate = new Date();
+	
+	@OneToOne(mappedBy="employee", cascade = CascadeType.ALL)
+	private ArmsLicenses armLicense;
+	
+	@Column(name="PROFILE_IMAGE")
+	private String profilePic;
 
-	
-	// STEP-2=============23=========end....
-	
-	
+	public Employee() {
+		super();
+		
+	}
 
 	public String getEmpCode() {
 		return empCode;
 	}
-
-
-	
 
 	public void setEmpCode(String empCode) {
 		this.empCode = empCode;
@@ -257,6 +221,94 @@ public class Employee implements Serializable {
 		this.empName = empName;
 	}
 
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
+	public String getPayeeCode() {
+		return payeeCode;
+	}
+
+	public void setPayeeCode(String payeeCode) {
+		this.payeeCode = payeeCode;
+	}
+
+	public String getHomeDistrict() {
+		return homeDistrict;
+	}
+
+	public void setHomeDistrict(String homeDistrict) {
+		this.homeDistrict = homeDistrict;
+	}
+
+	public String getDepartmentCourt() {
+		return departmentCourt;
+	}
+
+	public void setDepartmentCourt(String departmentCourt) {
+		this.departmentCourt = departmentCourt;
+	}
+
+	public String getOrederNumber() {
+		return orederNumber;
+	}
+
+	public void setOrederNumber(String orederNumber) {
+		this.orederNumber = orederNumber;
+	}
+
+	public Date getOrderDate() {
+		return orderDate;
+	}
+
+	public void setOrderDate(Date orderDate) {
+		this.orderDate = orderDate;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public Date getDob() {
+		return dob;
+	}
+
+	public void setDob(Date dob) {
+		this.dob = dob;
+	}
+
+	public Date getDoj() {
+		return doj;
+	}
+
+	public void setDoj(Date doj) {
+		this.doj = doj;
+	}
+
+	public Date getDop() {
+		return dop;
+	}
+
+	public void setDop(Date dop) {
+		this.dop = dop;
+	}
+
+	public String getPlacePresentPosting() {
+		return placePresentPosting;
+	}
+
+	public void setPlacePresentPosting(String placePresentPosting) {
+		this.placePresentPosting = placePresentPosting;
+	}
+
 	public String getBatchYear() {
 		return batchYear;
 	}
@@ -265,102 +317,12 @@ public class Employee implements Serializable {
 		this.batchYear = batchYear;
 	}
 
-	public Date getDateOfJoining() {
-		return dateOfJoining;
+	public String getPanNo() {
+		return panNo;
 	}
 
-	public void setDateOfJoining(Date dateOfJoining) {
-		this.dateOfJoining = dateOfJoining;
-	}
-
-	public Date getDateOfPosting() {
-		return dateOfPosting;
-	}
-
-	public void setDateOfPosting(Date dateOfPosting) {
-		this.dateOfPosting = dateOfPosting;
-	}
-
-	public Date getDateOfRetirement() {
-		return dateOfRetirement;
-	}
-
-	public void setDateOfRetirement(Date dateOfRetirement) {
-		this.dateOfRetirement = dateOfRetirement;
-	}
-
-	public String getDepartmentCode() {
-		return departmentCode;
-	}
-
-	public void setDepartmentCode(String departmentCode) {
-		this.departmentCode = departmentCode;
-	}
-
-	public String getDesignationCode() {
-		return designationCode;
-	}
-
-	public void setDesignationCode(String designationCode) {
-		this.designationCode = designationCode;
-	}
-
-	public byte[] getImageProfile() {
-		return imageProfile;
-	}
-
-	public void setImageProfile(byte[] imageProfile) {
-		this.imageProfile = imageProfile;
-	}
-
-	public String getEmployeePayeeCode() {
-		return employeePayeeCode;
-	}
-
-	public void setEmployeePayeeCode(String employeePayeeCode) {
-		this.employeePayeeCode = employeePayeeCode;
-	}
-
-	
-
-	public String getPresentPosting() {
-		return presentPosting;
-	}
-
-	public void setPresentPosting(String presentPosting) {
-		this.presentPosting = presentPosting;
-	}
-
-	public String getSuspention() {
-		return suspention;
-	}
-
-	public void setSuspention(String suspention) {
-		this.suspention = suspention;
-	}
-
-	public String getTypeCourtDepartment() {
-		return typeCourtDepartment;
-	}
-
-	public void setTypeCourtDepartment(String typeCourtDepartment) {
-		this.typeCourtDepartment = typeCourtDepartment;
-	}
-
-	public String getVigilanceQuery() {
-		return vigilanceQuery;
-	}
-
-	public void setVigilanceQuery(String vigilanceQuery) {
-		this.vigilanceQuery = vigilanceQuery;
-	}
-
-	public String getVrs() {
-		return vrs;
-	}
-
-	public void setVrs(String vrs) {
-		this.vrs = vrs;
+	public void setPanNo(String panNo) {
+		this.panNo = panNo;
 	}
 
 	public String getAadharNo() {
@@ -369,62 +331,6 @@ public class Employee implements Serializable {
 
 	public void setAadharNo(String aadharNo) {
 		this.aadharNo = aadharNo;
-	}
-
-	public String getAddCharge() {
-		return addCharge;
-	}
-
-	public void setAddCharge(String addCharge) {
-		this.addCharge = addCharge;
-	}
-
-	public String getAddress1() {
-		return address1;
-	}
-
-	public void setAddress1(String address1) {
-		this.address1 = address1;
-	}
-
-	public String getAddress2() {
-		return address2;
-	}
-
-	public void setAddress2(String address2) {
-		this.address2 = address2;
-	}
-
-	public String getCityCode() {
-		return cityCode;
-	}
-
-	public void setCityCode(String cityCode) {
-		this.cityCode = cityCode;
-	}
-
-	public String getStateCode() {
-		return stateCode;
-	}
-
-	public void setStateCode(String stateCode) {
-		this.stateCode = stateCode;
-	}
-
-	public String getCountryCode() {
-		return countryCode;
-	}
-
-	public void setCountryCode(String countryCode) {
-		this.countryCode = countryCode;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
 	}
 
 	public String getGender() {
@@ -441,6 +347,38 @@ public class Employee implements Serializable {
 
 	public void setMartialStatus(String martialStatus) {
 		this.martialStatus = martialStatus;
+	}
+
+	public Date getDor() {
+		return dor;
+	}
+
+	public void setDor(Date dor) {
+		this.dor = dor;
+	}
+
+	public String getActiveStatus() {
+		return activeStatus;
+	}
+
+	public void setActiveStatus(String activeStatus) {
+		this.activeStatus = activeStatus;
+	}
+
+	public String getQualification() {
+		return qualification;
+	}
+
+	public void setQualification(String qualification) {
+		this.qualification = qualification;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public String getTelephone() {
@@ -467,92 +405,84 @@ public class Employee implements Serializable {
 		this.mobileNumber2 = mobileNumber2;
 	}
 
-	public String getOnAdditionalCharge() {
-		return onAdditionalCharge;
+	public String getCorrAdd1() {
+		return corrAdd1;
 	}
 
-	public void setOnAdditionalCharge(String onAdditionalCharge) {
-		this.onAdditionalCharge = onAdditionalCharge;
+	public void setCorrAdd1(String corrAdd1) {
+		this.corrAdd1 = corrAdd1;
 	}
 
-	public Date getOrderDate() {
-		return orderDate;
+	public String getCorrAdd2() {
+		return corrAdd2;
 	}
 
-	public void setOrderDate(Date orderDate) {
-		this.orderDate = orderDate;
+	public void setCorrAdd2(String corrAdd2) {
+		this.corrAdd2 = corrAdd2;
 	}
 
-	public String getOrderNo() {
-		return orderNo;
+	public City getCity1() {
+		return city1;
 	}
 
-	public void setOrderNo(String orderNo) {
-		this.orderNo = orderNo;
+	public void setCity1(City city1) {
+		this.city1 = city1;
 	}
 
-	public String getPanNo() {
-		return panNo;
+	public String getCorrContactNumber() {
+		return corrContactNumber;
 	}
 
-	public void setPanNo(String panNo) {
-		this.panNo = panNo.toUpperCase();
+	public void setCorrContactNumber(String corrContactNumber) {
+		this.corrContactNumber = corrContactNumber;
 	}
 
-	public String getPinCode() {
-		return pinCode;
+	public String getPermAdd1() {
+		return permAdd1;
 	}
 
-	public void setPinCode(String pinCode) {
-		this.pinCode = pinCode;
+	public void setPermAdd1(String permAdd1) {
+		this.permAdd1 = permAdd1;
 	}
 
-	public String getQualification() {
-		return qualification;
+	public String getPermAdd2() {
+		return permAdd2;
 	}
 
-	public void setQualification(String qualification) {
-		this.qualification = qualification;
+	public void setPermAdd2(String permAdd2) {
+		this.permAdd2 = permAdd2;
 	}
 
-	public String getTransfer() {
-		return transfer;
+	public City getCity2() {
+		return city2;
 	}
 
-	public void setTransfer(String transfer) {
-		this.transfer = transfer;
+	public void setCity2(City city2) {
+		this.city2 = city2;
 	}
 
-	public String getUan() {
-		return uan;
+	public String getPermContactNumber() {
+		return permContactNumber;
 	}
 
-	public void setUan(String uan) {
-		this.uan = uan;
+	public void setPermContactNumber(String permContactNumber) {
+		this.permContactNumber = permContactNumber;
 	}
 
-	public String getUnderRule7() {
-		return underRule7;
+	public String getDepartment() {
+		return department;
 	}
 
-	public void setUnderRule7(String underRule7) {
-		this.underRule7 = underRule7;
+	public void setDepartment(String department) {
+		this.department = department;
 	}
 
-	public String getUnderRule8() {
-		return underRule8;
+	public Designation getDesignation() {
+		return designation;
 	}
 
-	public void setUnderRule8(String underRule8) {
-		this.underRule8 = underRule8;
-	}
-
-	public String getCategoryCode() {
-		return categoryCode;
-	}
-
-	public void setCategoryCode(String categoryCode) {
-		this.categoryCode = categoryCode;
+	public void setDesignation(Designation designation) {
+		this.designation = designation;
 	}
 
 	public String getInsBy() {
@@ -586,140 +516,23 @@ public class Employee implements Serializable {
 	public void setUpdDate(Date updDate) {
 		this.updDate = updDate;
 	}
-	
-	//======================
-	public String getPromotion() {
-		return promotion;
+
+	public ArmsLicenses getArmLicense() {
+		return armLicense;
 	}
 
-
-	public void setPromotion(String promotion) {
-		this.promotion = promotion;
+	public void setArmLicense(ArmsLicenses armLicense) {
+		this.armLicense = armLicense;
 	}
 
-
-	public String getAcp() {
-		return acp;
+	public String getProfilePic() {
+		return profilePic;
 	}
 
-
-	public void setAcp(String acp) {
-		this.acp = acp;
-	}
-
-
-	public String getApr() {
-		return apr;
-	}
-
-
-	public void setApr(String apr) {
-		this.apr = apr;
-	}
-
-
-	public String getAcr() {
-		return acr;
-	}
-
-
-	public void setAcr(String acr) {
-		this.acr = acr;
-	}
-
-
-	public String getTraining() {
-		return training;
-	}
-
-
-	public void setTraining(String training) {
-		this.training = training;
-	}
-
-
-	public String getLtc() {
-		return ltc;
-	}
-
-
-	public void setLtc(String ltc) {
-		this.ltc = ltc;
-	}
-
-
-	public String getLeaveAccount() {
-		return leaveAccount;
-	}
-
-
-	public void setLeaveAccount(String leaveAccount) {
-		this.leaveAccount = leaveAccount;
-	}
-
-
-	
-
-
-	public String getEmpAwards() {
-		return empAwards;
-	}
-
-
-	public void setEmpAwards(String empAwards) {
-		this.empAwards = empAwards;
-	}
-
-
-	public String getOnDeputation() {
-		return onDeputation;
-	}
-
-
-	public void setOnDeputation(String onDeputation) {
-		this.onDeputation = onDeputation;
-	}
-	public String getEmpDeputation() {
-		return empDeputation;
-	}
-
-
-	public void setEmpDeputation(String empDeputation) {
-		this.empDeputation = empDeputation;
-	}
-
-
-	public String getPreviousPostings() {
-		return previousPostings;
-	}
-
-
-	public void setPreviousPostings(String previousPostings) {
-		this.previousPostings = previousPostings;
-	}
-
-
-	public String getExpired() {
-		return expired;
-	}
-
-
-	public void setExpired(String expired) {
-		this.expired = expired;
-	}
-
-
-	public Date getEmpDob() {
-		return empDob;
-	}
-
-
-	public void setEmpDob(Date empDob) {
-		this.empDob = empDob;
+	public void setProfilePic(String profilePic) {
+		this.profilePic = profilePic;
 	}
 
 	
-	
-	//============================
 
 }

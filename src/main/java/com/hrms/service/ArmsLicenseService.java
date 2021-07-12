@@ -2,23 +2,23 @@ package com.hrms.service;
 
 import java.util.List;
 
-import com.hrms.model.ArmsLicenseDetails;
+import com.hrms.model.ArmsLicenses;
 import com.hrms.model.Employee;
 
 public interface ArmsLicenseService {
 
-	void addArmsLicenseDetails(ArmsLicenseDetails armsLicense);
+	void addArmsLicenseDetails(ArmsLicenses armsLicense);
 
-	ArmsLicenseDetails findArmsLicenseById(String id);
+	ArmsLicenses findArmsLicenseById(String id);
 
-	List<ArmsLicenseDetails> getAllArmsLicenses();
+	List<ArmsLicenses> getAllArmsLicenses();
 
-	void updateArmsLicenseService(ArmsLicenseDetails armsLicense);
-	public ArmsLicenseDetails findArmsByEmpEmpCode(String id);
+	void updateArmsLicenseService(ArmsLicenses armsLicense);
+	public ArmsLicenses findArmsLicensesByEmployee(String id);
 	void removeArmsLicenseService(String id2);
 	
 	
 	//@rahul
-	List<ArmsLicenseDetails> allArmsLicenseDetails();
+	List<ArmsLicenses> allArmsLicenseDetails();
 
 }
