@@ -58,7 +58,7 @@ h5.tittle-w3l span {
 			<div class="sidebar-content">
 				<div class="sidebar-user">
 					<!-- <img th:src="@{'data:image/jpeg;base64,'+${session.imgUtil.getImgData(session.User_Profile_Pic)}}" class="img-fluid rounded-circle mb-2"alt="image"></img> -->
-					<img th:src="@{/img/default.jpeg}" class="img-fluid rounded-circle mb-2"alt="image"></img>
+					<img th:src="@{'/img/'+ ${session.profilePic}}" class="img-fluid rounded-circle mb-2"alt="image"></img>
 					<div class="font-weight-bold"><span class="hidden-xs" th:text="${session.USER_NAME}"></span></div> 
 				
 					
