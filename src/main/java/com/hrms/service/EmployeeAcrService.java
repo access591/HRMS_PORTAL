@@ -15,5 +15,7 @@ public interface EmployeeAcrService {
 	EmployeeAcr findByIdEmployeeAcr(long id);
 
 	void updateEmployeePromotion(EmployeeAcr employeeAcr);
+	
+	public EmployeeAcr findEmployeeAcrByEmpCode(String empCode);
 
 }

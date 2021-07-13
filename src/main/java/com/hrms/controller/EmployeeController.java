@@ -27,8 +27,10 @@ import com.hrms.model.Country;
 import com.hrms.model.Department;
 import com.hrms.model.Designation;
 import com.hrms.model.Employee;
+import com.hrms.model.EmployeeAcr;
 import com.hrms.model.EmployeePromotion;
 import com.hrms.util.EmployeeDto;
+import com.hrms.util.EmployeeMasterDto;
 import com.hrms.util.EmployeeUtil;
 import com.hrms.model.MenuModule;
 import com.hrms.model.State;
@@ -38,6 +40,7 @@ import com.hrms.service.CityService;
 import com.hrms.service.CountryService;
 import com.hrms.service.DepartmentService;
 import com.hrms.service.DesignationService;
+import com.hrms.service.EmployeeAcrService;
 import com.hrms.service.EmployeePromotionService;
 import com.hrms.service.EmployeeService;
 import com.hrms.service.ModuleService;
@@ -70,7 +73,10 @@ public class EmployeeController {
 	private CountryService countryService;
 	@Autowired
 	private ArmsLicenseDao armsLicenseDao;
-	@Autowired EmployeePromotionService employeePromotionService;
+	@Autowired
+	EmployeePromotionService employeePromotionService;
+	@Autowired
+	EmployeeAcrService employeeAcrService;
 
 	@GetMapping("/employeeMaster")
 	public String employeeMaster(@Valid @ModelAttribute("employeeDto") EmployeeDto employeeDto, Model model,
@@ -107,12 +113,15 @@ public class EmployeeController {
 		List<ArmsLicenses> listArmsLicenses = armsLicenseService.getAllArmsLicenses();
 		model.addAttribute("listArmsLicenses", listArmsLicenses);
 
+		List<Employee> listEmployee = employeeService.getAllEmployees();
+		model.addAttribute("listEmployee", listEmployee);
+
 		return "employeeMaster";
 	}
 
 	@PostMapping("/saveEmployee")
 	public String employeeMasterSave(@ModelAttribute("employeeDto") EmployeeDto employeeDto, Model model,
-			HttpSession session,@RequestParam("profileImage") MultipartFile file) {
+			HttpSession session, @RequestParam("profileImage") MultipartFile file) {
 
 		if (session.getAttribute("username") == null) {
 			return "redirect:" + "./";
@@ -123,42 +132,42 @@ public class EmployeeController {
 		try {
 
 			Employee employee = employeeDto.getEmployee();
-			
-			if(file.isEmpty()) {
+
+			if (file.isEmpty()) {
 				employee.setProfilePic("default.png");
-			}else {
-				
-				employee.setProfilePic(file.getOriginalFilename()+new Date());
-				
-				File saveFileFolder = new ClassPathResource("static/img/").getFile();
-				String uploadDir = saveFileFolder.getAbsolutePath();
-				FileService.saveFile(uploadDir, file.getOriginalFilename()+new Date(), file);
-				
-				Employee empl = employeeService.addEmployee(employee);
-				System.out.println("========employee tsting saving or not ===========" + empl.getEmpCode());
+			} else {
 
-				ArmsLicenses armsLicenses = employeeDto.getArmsLicenses();
+				employee.setProfilePic(file.getOriginalFilename() + new Date());
 
-				armsLicenses.setArmsCode(armsLicenseDao.getMaxId("ARM"));
-				armsLicenses.setEmployee(empl);
-
-				List<ArmsLicensesDetail> armsLicensesDetail = employeeDto.getArmsLicensesDetail();
-
-				int numberOfArms = 0;
-				int count = 0;
-				for (ArmsLicensesDetail licensesDetail : armsLicensesDetail) {
-					numberOfArms = count++;
-					licensesDetail.setArmsLicenses(armsLicenses);
-				}
-				armsLicenses.setArmsNol(String.valueOf(numberOfArms));
-				armsLicenses.setArmsLicensesDetail(armsLicensesDetail);
-
-				employee.setArmLicense(armsLicenses);
-
-				armsLicenseService.addArmsLicenseDetails(armsLicenses);
-
-				
 			}
+			
+			File saveFileFolder = new ClassPathResource("static/img/").getFile();
+			String uploadDir = saveFileFolder.getAbsolutePath();
+			FileService.saveFile(uploadDir, file.getOriginalFilename() + new Date(), file);
+
+			Employee empl = employeeService.addEmployee(employee);
+			System.out.println("========employee tsting saving or not ===========" + empl.getEmpCode());
+
+			ArmsLicenses armsLicenses = employeeDto.getArmsLicenses();
+
+			armsLicenses.setArmsCode(armsLicenseDao.getMaxId("ARM"));
+			armsLicenses.setEmployee(empl);
+
+			List<ArmsLicensesDetail> armsLicensesDetail = employeeDto.getArmsLicensesDetail();
+
+			int numberOfArms = 0;
+			int count = 0;
+			for (ArmsLicensesDetail licensesDetail : armsLicensesDetail) {
+				numberOfArms = count++;
+				licensesDetail.setArmsLicenses(armsLicenses);
+			}
+			armsLicenses.setArmsNol(String.valueOf(numberOfArms));
+			armsLicenses.setArmsLicensesDetail(armsLicensesDetail);
+
+			employee.setArmLicense(armsLicenses);
+
+			armsLicenseService.addArmsLicenseDetails(armsLicenses);
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -171,7 +180,6 @@ public class EmployeeController {
 	public String editEmployee(@PathVariable("id") String empCode,
 			@Valid @ModelAttribute("employeeDto") EmployeeDto employeeDto, Model model, HttpSession session) {
 
-		
 		if (session.getAttribute("username") == null) {
 			return "redirect:" + "./";
 		}
@@ -183,14 +191,13 @@ public class EmployeeController {
 
 		List<Country> listCountry = countryService.getAllCountrys();
 		model.addAttribute("listCountry", listCountry);
-		
+
 		List<Designation> listDesignation = designationService.getAllDesignations();
 		if (listDesignation != null) {
 			model.addAttribute("listDesignation", listDesignation);
 		}
 		List<Department> listDepartment = departmentService.getAllDepartments();
 		model.addAttribute("listDepartment", listDepartment);
-		
 
 		ArmsLicenses armLicenses = armsLicenseService.findArmsLicensesByEmployee(empCode);
 
@@ -217,13 +224,18 @@ public class EmployeeController {
 
 		List<ArmsLicensesDetail> armsLicensesDetail = employeeDto.getArmsLicensesDetail();
 
-		for (ArmsLicensesDetail licensesDetail : armsLicensesDetail) {
+		if (armsLicensesDetail.isEmpty()) {
+			for (ArmsLicensesDetail licensesDetail : armsLicensesDetail) {
 
-			licensesDetail.setArmsLicenses(armsLicenses);
+				licensesDetail.setArmsLicenses(armsLicenses);
+			}
+
+			armsLicenses.setArmsLicensesDetail(armsLicensesDetail);
+		} else {
+			// armsLicensesDetail = null;
 		}
-		armsLicenses.setArmsLicensesDetail(armsLicensesDetail);
+
 		armsLicenseService.updateArmsLicenseService(armsLicenses);
-		
 
 		return "redirect:employeeMaster";
 	}
@@ -242,14 +254,13 @@ public class EmployeeController {
 		employeeService.removeEmployeet(id);
 		return "redirect:/" + pageMappingService.PageRequestMapping(reqPage, pageno);
 	}
-	
-	
+
 	@GetMapping("/viewEmployeeMaster/{id}")
-	public String viewEmployeeMaster(@PathVariable("id")String empCode,
-			 @ModelAttribute("employeeDto") EmployeeDto employeeDto, Model model, HttpSession session) {
-		
+	public String viewEmployeeMaster(@PathVariable("id") String empCode,
+			@ModelAttribute("employeeDto") EmployeeMasterDto employeeDto, Model model, HttpSession session) {
+
 		System.out.println("view employee controller");
-		
+
 		if (session.getAttribute("username") == null) {
 			return "redirect:" + "./";
 		}
@@ -261,31 +272,35 @@ public class EmployeeController {
 
 		List<Country> listCountry = countryService.getAllCountrys();
 		model.addAttribute("listCountry", listCountry);
-		
+
 		List<Designation> listDesignation = designationService.getAllDesignations();
 		if (listDesignation != null) {
 			model.addAttribute("listDesignation", listDesignation);
 		}
 		List<Department> listDepartment = departmentService.getAllDepartments();
 		model.addAttribute("listDepartment", listDepartment);
-		
+
 		ArmsLicenses armLicenses = armsLicenseService.findArmsLicensesByEmployee(empCode);
-		
+
 		employeeDto.setEmployee(armLicenses.getEmployee());
 		employeeDto.setArmsLicenses(armLicenses);
 
 		employeeDto.setArmsLicensesDetail(armLicenses.getArmsLicensesDetail());
-		model.addAttribute("employeeDto", employeeDto);
-		
+
 		EmployeePromotion promotion = employeePromotionService.findemployeePromotionByEmpCode(empCode);
-		
-		if(promotion != null) {
-			model.addAttribute("promotion", promotion);
+
+		if (promotion != null) {
+			employeeDto.setEmployeePromotion(promotion);
 		}
-		
-		
+
+		EmployeeAcr employeeAcr = employeeAcrService.findEmployeeAcrByEmpCode(empCode);
+		if (employeeAcr != null) {
+			employeeDto.setEmployeeAcr(employeeAcr);
+		}
+
+		model.addAttribute("employeeDto", employeeDto);
 		return "viewEmployeeMaster";
-		
+
 	}
 
 	@ResponseBody

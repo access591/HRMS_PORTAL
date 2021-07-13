@@ -913,11 +913,11 @@ body {
 												<div class="form-row">
 													<div class="form-group sm col-md-6">
 														<label class="form-label">Memo Number </label> <input
-															type="text" class="form-control">
+															type="text" class="form-control" th:field="*{employeePromotion.edpMemoNo}">
 													</div>
 													<div class="form-group sm col-md-6">
 														<label class="form-label">Promotion Date </label> <input
-															type="date" class="form-control">
+															type="date" class="form-control" th:field="*{employeePromotion.promotionDate}">
 													</div>
 
 													
@@ -931,18 +931,18 @@ body {
 
 													<div class="form-group sm col-md-6">
 														<label class="form-label">Employee </label> <input
-															type="text" class="form-control">
+															type="text" class="form-control" th:field="*{employee.empName}">
 													</div>
 												</div>
 												
 												<div class="form-row">
 													<div class="form-group sm col-md-6">
 														<label class="form-label">Old Post </label> <input
-															type="text" class="form-control">
+															type="text" class="form-control" th:field="*{employeePromotion.oldPost}">
 													</div>
 													<div class="form-group sm col-md-6">
 														<label class="form-label">New Post </label> <input
-															type="text" class="form-control">
+															type="text" class="form-control" th:field="*{employeePromotion.newPost}">
 													</div>
 
 													
@@ -959,29 +959,47 @@ body {
 										<div id="validation-step-5">
 											<div class="container">
 
-												<div class="form-row">
+												<!-- <div class="form-row">
 													<div class="form-group sm col-md-6">
-														<label class="form-label">Memo Number </label> <input
+														<label class="form-label">Employee Name </label> <input
 															type="text" class="form-control">
 													</div>
-													<div class="form-group sm col-md-6">
-														<label class="form-label">Promotion Date </label> <input
-															type="date" class="form-control">
-													</div>
-
-													
-												</div>
-												
-												<div class="form-row">
 													<div class="form-group sm col-md-6">
 														<label class="form-label">Department </label> <input
 															type="text" class="form-control">
 													</div>
 
-													<div class="form-group sm col-md-6">
-														<label class="form-label">Employee </label> <input
-															type="text" class="form-control">
+													
+												</div>
+												 -->
+												<div class="form-row">
+													<div class="form-group sm col-md-4">
+														<label class="form-label">Year </label> <input
+															type="text" class="form-control" th:field="*{employeeAcr.year}">
 													</div>
+
+													<div class="form-group sm col-md-4">
+														<label class="form-label">From Date </label> <input
+															type="date" class="form-control" th:field="*{employeeAcr.fromDate}">
+													</div>
+													
+													<div class="form-group sm col-md-4">
+														<label class="form-label">To Date </label> <input
+															type="date" class="form-control" th:field="*{employeeAcr.toDate}">
+													</div>
+												</div>
+												
+												<div class="form-row">grading
+													<div class="form-group sm col-md-6">
+														<label class="form-label">Grading </label> <input
+															type="text" class="form-control" th:field="*{employeeAcr.grading}">
+													</div>
+													<div class="form-group sm col-md-6">
+														<label class="form-label">Remark </label> <input
+															type="text" class="form-control" th:field="*{employeeAcr.remarks}">
+													</div>
+
+													
 												</div>
 
 											</div>

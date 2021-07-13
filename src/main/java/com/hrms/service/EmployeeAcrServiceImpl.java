@@ -5,6 +5,8 @@ import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -71,5 +73,27 @@ public class EmployeeAcrServiceImpl implements EmployeeAcrService {
 	public void updateEmployeePromotion(EmployeeAcr employeeAcr) {
 	this.employeeAcrDao.saveOrUpdate(employeeAcr);
 		
+	}
+	@Override
+	public EmployeeAcr findEmployeeAcrByEmpCode(String empCode) {
+		
+		Session session = sessionFactory.openSession();
+		Transaction tx = null;
+		EmployeeAcr result = null;
+		
+		try {
+			tx = session.beginTransaction();
+			Query<EmployeeAcr> query = session.createQuery("from EmployeeAcr e where"
+					+ " e.empCode.empCode=:empCode", EmployeeAcr.class);
+			query.setParameter("empCode", empCode);
+			result = query.getSingleResult();
+			tx.commit();
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			session.close();
+		}
+		return result;
 	}
 }
