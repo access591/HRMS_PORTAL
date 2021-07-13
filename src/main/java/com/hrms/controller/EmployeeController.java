@@ -27,6 +27,7 @@ import com.hrms.model.Country;
 import com.hrms.model.Department;
 import com.hrms.model.Designation;
 import com.hrms.model.Employee;
+import com.hrms.model.EmployeePromotion;
 import com.hrms.util.EmployeeDto;
 import com.hrms.util.EmployeeUtil;
 import com.hrms.model.MenuModule;
@@ -37,6 +38,7 @@ import com.hrms.service.CityService;
 import com.hrms.service.CountryService;
 import com.hrms.service.DepartmentService;
 import com.hrms.service.DesignationService;
+import com.hrms.service.EmployeePromotionService;
 import com.hrms.service.EmployeeService;
 import com.hrms.service.ModuleService;
 import com.hrms.service.PageMappingService;
@@ -68,6 +70,7 @@ public class EmployeeController {
 	private CountryService countryService;
 	@Autowired
 	private ArmsLicenseDao armsLicenseDao;
+	@Autowired EmployeePromotionService employeePromotionService;
 
 	@GetMapping("/employeeMaster")
 	public String employeeMaster(@Valid @ModelAttribute("employeeDto") EmployeeDto employeeDto, Model model,
@@ -165,7 +168,7 @@ public class EmployeeController {
 	}
 
 	@GetMapping(value = { "/editEmployee/{id}" })
-	public String editEmployee(@PathVariable("id") String id,
+	public String editEmployee(@PathVariable("id") String empCode,
 			@Valid @ModelAttribute("employeeDto") EmployeeDto employeeDto, Model model, HttpSession session) {
 
 		
@@ -189,7 +192,7 @@ public class EmployeeController {
 		model.addAttribute("listDepartment", listDepartment);
 		
 
-		ArmsLicenses armLicenses = armsLicenseService.findArmsLicensesByEmployee(id);
+		ArmsLicenses armLicenses = armsLicenseService.findArmsLicensesByEmployee(empCode);
 
 		employeeDto.setEmployee(armLicenses.getEmployee());
 		employeeDto.setArmsLicenses(armLicenses);
@@ -238,6 +241,51 @@ public class EmployeeController {
 		}
 		employeeService.removeEmployeet(id);
 		return "redirect:/" + pageMappingService.PageRequestMapping(reqPage, pageno);
+	}
+	
+	
+	@GetMapping("/viewEmployeeMaster/{id}")
+	public String viewEmployeeMaster(@PathVariable("id")String empCode,
+			 @ModelAttribute("employeeDto") EmployeeDto employeeDto, Model model, HttpSession session) {
+		
+		System.out.println("view employee controller");
+		
+		if (session.getAttribute("username") == null) {
+			return "redirect:" + "./";
+		}
+		List<City> cityList = cityService.getAllCities();
+		model.addAttribute("CityList", cityList);
+
+		List<State> listState = stateService.getAllStates();
+		model.addAttribute("listState", listState);
+
+		List<Country> listCountry = countryService.getAllCountrys();
+		model.addAttribute("listCountry", listCountry);
+		
+		List<Designation> listDesignation = designationService.getAllDesignations();
+		if (listDesignation != null) {
+			model.addAttribute("listDesignation", listDesignation);
+		}
+		List<Department> listDepartment = departmentService.getAllDepartments();
+		model.addAttribute("listDepartment", listDepartment);
+		
+		ArmsLicenses armLicenses = armsLicenseService.findArmsLicensesByEmployee(empCode);
+		
+		employeeDto.setEmployee(armLicenses.getEmployee());
+		employeeDto.setArmsLicenses(armLicenses);
+
+		employeeDto.setArmsLicensesDetail(armLicenses.getArmsLicensesDetail());
+		model.addAttribute("employeeDto", employeeDto);
+		
+		EmployeePromotion promotion = employeePromotionService.findemployeePromotionByEmpCode(empCode);
+		
+		if(promotion != null) {
+			model.addAttribute("promotion", promotion);
+		}
+		
+		
+		return "viewEmployeeMaster";
+		
 	}
 
 	@ResponseBody
