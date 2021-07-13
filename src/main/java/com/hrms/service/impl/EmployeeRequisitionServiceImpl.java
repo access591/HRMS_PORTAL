@@ -1,4 +1,4 @@
-package com.hrms.service;
+package com.hrms.service.impl;
 
 import java.util.List;
 
@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import com.hrms.model.EmployeeRequisition;
 import com.hrms.repository.EmployeeRequisitionDao;
+import com.hrms.service.EmployeeRequisitionService;
 
 @Service
 public class EmployeeRequisitionServiceImpl implements EmployeeRequisitionService{

@@ -1,4 +1,4 @@
-package com.hrms.service;
+package com.hrms.service.impl;
 
 import java.util.List;
 
@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.hrms.model.TrainingSchedule;
 import com.hrms.repository.TrainingScheduleDao;
+import com.hrms.service.TrainingScheduleService;
 
 @Service
 public class TrainingScheduleServiceImpl implements TrainingScheduleService{

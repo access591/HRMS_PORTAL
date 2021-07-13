@@ -1,4 +1,4 @@
-package com.hrms.service;
+package com.hrms.service.impl;
 
 import java.util.List;
 
@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.hrms.model.ReqAdvertisementDetail;
 import com.hrms.repository.ReqAdvertisementDetailDao;
+import com.hrms.service.ReqAdvertisementDetailService;
 
 @Service
 public class ReqAdvertisementDetailServiceIpml implements ReqAdvertisementDetailService{

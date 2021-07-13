@@ -1,4 +1,4 @@
-package com.hrms.service;
+package com.hrms.service.impl;
 
 import java.util.List;
 
@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.hrms.model.EmployeePayDetail;
 import com.hrms.repository.EmployeePayDetailDao;
+import com.hrms.service.EmployeePayDetailService;
 
 @Service
 public class EmployeePayDetailServiceImpl implements EmployeePayDetailService {

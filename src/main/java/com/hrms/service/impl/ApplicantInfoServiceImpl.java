@@ -1,4 +1,4 @@
-package com.hrms.service;
+package com.hrms.service.impl;
 
 import java.util.List;
 
@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import com.hrms.model.ApplicantInfo;
 import com.hrms.repository.ApplicantInfoDao;
+import com.hrms.service.ApplicantInfoService;
 
 @Service
 public class ApplicantInfoServiceImpl implements ApplicantInfoService {
