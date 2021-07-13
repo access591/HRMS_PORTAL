@@ -927,7 +927,7 @@ body {
 											<thead>
 												<tr>
 													<th scope="col">Employee Id</th>
-													<th scope="col">Arms Code</th>
+													
 													<th scope="col">Employee Name</th>
 													<th scope="col">Category Name</th>
 													<th scope="col">Batch Year</th>
@@ -940,20 +940,19 @@ body {
 											<tbody>
 
 
-												<tr th:each="leave:${listArmsLicenses}">
-													<td th:text="${leave.employee.empCode}"></td>
-													<td th:text="${leave.armsCode}"></td>
-													<td th:text="${leave.employee.empName}"></td>
-													<td th:text="${leave.employee.category}"></td>
-													<td th:text="${leave.employee.batchYear}"></td>
-													<td th:text="${leave.employee.designation.desgName}"></td>
+												<tr th:each="leave:${listEmployee}">
+													<td th:text="${leave.empCode}"></td>
+													
+													<td th:text="${leave.empName}"></td>
+													<td th:text="${leave.category}"></td>
+													<td th:text="${leave.batchYear}"></td>
+													<td th:text="${leave.designation.desgName}"></td>
 
 													<td><a
-														th:href="@{/editEmployee/{id}/(id=${leave.employee.empCode})}"><em
-															class="fa fa-edit"></em></a> <!--  <a
-														th:href="@{/deleteEmployee/{id}/{id2}(id=${leave.empCode},id2=${leave.armsCode})}"
-														onclick="return confirm('Are you sure?')"><em
-															class="fa fa-times"></em></a></td> -->
+														th:href="@{/editEmployee/{id}/(id=${leave.empCode})}"><em
+															class="fa fa-edit"></em></a>  <a
+														th:href="@{/viewEmployeeMaster/{id}/(id=${leave.empCode})}"><em
+															class="fa fa-info-circle"></em></a></td> 
 												</tr>
 
 											</tbody>

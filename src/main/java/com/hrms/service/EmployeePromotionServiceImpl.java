@@ -74,7 +74,7 @@ public class EmployeePromotionServiceImpl implements EmployeePromotionService {
 		try {
 			tx = session.beginTransaction();
 			Query<EmployeePromotion> query = session.createQuery("from EmployeePromotion e "
-					+ "where e.empCode=:empCode",EmployeePromotion.class);
+					+ "where e.empCode.empCode=:empCode",EmployeePromotion.class);
 			query.setParameter("empCode", empCode);
 			result = query.getSingleResult();
 		}catch(Exception e) {

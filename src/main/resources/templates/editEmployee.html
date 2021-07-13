@@ -877,54 +877,7 @@ body {
 									</div>
 								</form>
 							</div>
-							<div class="col-12">
-								<div class="card">
-									<div class="card-header"></div>
-									<div class="card-body">
-										<table id="datatables-buttons"
-											aria-describedby="datatables-buttons"
-											class="table table-striped display" style="width: 100%">
-											<thead>
-												<tr>
-													<th scope="col">Employee Id</th>
-													<th scope="col">Arms Code</th>
-													<th scope="col">Employee Name</th>
-													<th scope="col">Category Name</th>
-													<th scope="col">Batch Year</th>
-													<th scope="col">Designation</th>
-
-													<th scope="col">Action</th>
-
-												</tr>
-											</thead>
-											<tbody>
-
-
-												<tr th:each="leave:${listArmsLicenses}">
-													<td th:text="${leave.employee.empCode}"></td>
-													<td th:text="${leave.armsCode}"></td>
-													<td th:text="${leave.employee.empName}"></td>
-													<td th:text="${leave.employee.category}"></td>
-													<td th:text="${leave.employee.batchYear}"></td>
-													<td th:text="${leave.employee.designation.desgName}"></td>
-
-													<td><a
-														th:href="@{/editEmployee/{id}/(id=${leave.employee.empCode})}"><em
-															class="fa fa-edit"></em></a>
-															<!--  <a
-														th:href="@{/deleteEmployee/{id}/{id2}(id=${leave.empCode},id2=${leave.armsCode})}"
-														onclick="return confirm('Are you sure?')"><em
-															class="fa fa-times"></em></a></td> -->
-
-												</tr>
-
-											</tbody>
-
-										</table>
-									</div>
-
-								</div>
-							</div>
+							
 						</div>
 					</div>
 
