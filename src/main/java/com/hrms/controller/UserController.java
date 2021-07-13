@@ -145,7 +145,11 @@ public class UserController {
 			session.setAttribute("uuuuu", userRecord.getUserName());
 			session.setAttribute("USER_NAME", userRecord.getUserName());
 			
-			session.setAttribute("userEntity", userRecord);
+			String profilePic = userRecord.getEmpCode().getProfilePic();
+			
+			session.setAttribute("profilePic", profilePic);
+			
+			System.out.println("==user image====>"+userRecord.getEmpCode().getProfilePic());
 
 			//session.setAttribute("User_Profile_Pic", userRecord.getEmpCode().getImageProfile());
 			//session.setAttribute("imgUtil", new ImageUtil());

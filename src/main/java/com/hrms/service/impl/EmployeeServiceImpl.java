@@ -127,11 +127,11 @@ public class EmployeeServiceImpl implements EmployeeService {
 		try {
 			tx = session.beginTransaction();
 
-			String category = "select e.categoryCode from Employee e group by e.categoryCode";
+			String category = "select e.category from Employee e group by e.category";
 			Query<String> query = session.createQuery(category, String.class);
 			List<String> categoryList = query.list();
 
-			String count = "SELECT  COUNT(categoryCode) AS counter FROM Employee e GROUP BY categoryCode";
+			String count = "SELECT  COUNT(category) AS counter FROM Employee e GROUP BY category";
 			Query query1 = session.createQuery(count);
 			List<Long> countList = query1.list();
 

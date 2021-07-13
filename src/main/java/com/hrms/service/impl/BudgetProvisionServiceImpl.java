@@ -1,4 +1,4 @@
-package com.hrms.service;
+package com.hrms.service.impl;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -17,6 +17,8 @@ import org.springframework.stereotype.Service;
 
 import com.hrms.model.BudgetProvision;
 import com.hrms.model.Department;
+import com.hrms.service.BudgetProvisionService;
+import com.hrms.service.DepartmentService;
 
 @Service
 public class BudgetProvisionServiceImpl implements BudgetProvisionService {
@@ -151,7 +153,7 @@ public class BudgetProvisionServiceImpl implements BudgetProvisionService {
 		
 		try {
 			tx = session.beginTransaction();
-			String departmentQuery = "select b.department.departmentCode from BudgetProvision b group by b.department.departmentCode";
+			String departmentQuery = "select b.department from BudgetProvision b group by b.department";
 			Query<String> query = session.createQuery(departmentQuery,String.class);
 			List<String>  departmentList = query.list();
 			System.out.println("departmentQuery ====>"+departmentList.get(0));
