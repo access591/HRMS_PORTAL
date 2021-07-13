@@ -1,4 +1,4 @@
-package com.hrms.service;
+package com.hrms.service.impl;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hrms.model.ApplicantExpDetail;
+import com.hrms.service.ApplicantExpDetailService;
 
 @Service
 public class ApplicantExpDetailServiceImpl implements  ApplicantExpDetailService{

@@ -1,4 +1,4 @@
-package com.hrms.service;
+package com.hrms.service.impl;
 
 import java.util.Date;
 import java.util.List;
@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import com.hrms.model.LeaveRequest;
 import com.hrms.repository.LeaveRequestDao;
+import com.hrms.service.LeaveRequestService;
 
 @Service
 public class LeaveRequestServiceImpl implements LeaveRequestService {

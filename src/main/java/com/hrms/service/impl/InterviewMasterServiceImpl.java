@@ -1,4 +1,4 @@
-package com.hrms.service;
+package com.hrms.service.impl;
 
 import java.util.List;
 
@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.hrms.model.InterviewMaster;
 import com.hrms.repository.InterviewMasterDao;
+import com.hrms.service.InterviewMasterService;
 
 @Service
 public class InterviewMasterServiceImpl implements InterviewMasterService{

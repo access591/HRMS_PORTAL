@@ -1,4 +1,4 @@
-package com.hrms.service;
+package com.hrms.service.impl;
 
 import java.util.List;
 
@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 
 import com.hrms.model.OrderIssueTracking;
+import com.hrms.service.OrderIssueTrackingService;
 
 @Service
 public class OrderIssueTrackingServiceImpl implements OrderIssueTrackingService{

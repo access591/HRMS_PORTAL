@@ -1,4 +1,4 @@
-package com.hrms.service;
+package com.hrms.service.impl;
 
 import java.util.Collections;
 import java.util.List;
@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.hrms.model.TrainingRequisition;
 import com.hrms.repository.TrainingRequisitionDao;
+import com.hrms.service.TrainingRequistionService;
 
 @Service
 public class TrainingRequisitionServiceImpl implements TrainingRequistionService {
