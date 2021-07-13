@@ -5,6 +5,8 @@ import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -58,5 +60,29 @@ public class EmployeePromotionServiceImpl implements EmployeePromotionService {
 	public void updateEmployeePromotion(EmployeePromotion employeePromotion) {
 	this.employeePromotionDao.saveOrUpdate(employeePromotion);
 		
+	}
+	
+	
+	//written by rahul 
+	
+	@Override
+	public EmployeePromotion findemployeePromotionByEmpCode(String empCode) {
+		
+		Session session = sessionFactory.openSession();
+		Transaction tx = null;
+		EmployeePromotion result = null;
+		try {
+			tx = session.beginTransaction();
+			Query<EmployeePromotion> query = session.createQuery("from EmployeePromotion e "
+					+ "where e.empCode=:empCode",EmployeePromotion.class);
+			query.setParameter("empCode", empCode);
+			result = query.getSingleResult();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally{
+			session.close();
+		}
+		
+		return result;
 	}
 }

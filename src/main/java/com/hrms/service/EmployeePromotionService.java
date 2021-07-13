@@ -15,6 +15,8 @@ public interface EmployeePromotionService {
 	EmployeePromotion findByIdEmployeePromotion(long id);
 
 	void updateEmployeePromotion(EmployeePromotion employeePromotion);
+	
+	public EmployeePromotion findemployeePromotionByEmpCode(String empCode);
 
 
 

@@ -106,7 +106,7 @@ public class DashbordController {
         paiChart.add(new PaiChart("IE","54.13D"));
         paiChart.add(new PaiChart("Oher","0.49D"));
 		
-        String[] arr = new String[paiChart.size()];
+        
         Map<String, Long> result = budgetProvisionService.findBudgetTrackDepartment();
 		
 		return result;
