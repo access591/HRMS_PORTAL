@@ -190,30 +190,26 @@ body {
 											<tr>
 												<th scope="col">Memo Number </th>
 												<th scope="col">Employee Name </th>
+												<th scope="col"> Transfer Date</th>
 												<th scope="col">From Date</th>
 												<th scope="col">To Date</th>
-												<th scope="col">Remarks</th>
 												<th scope="col">Action </th>
 											</tr>
 										</thead>
 										 <tbody>
-										<tr th:each = "empPromo : ${listEmpAcr}">
+										<tr th:each = "empPromo : ${listEmpTrns}">
 										<td th:text="${empPromo.id}" ></td>
 											<td th:text="${empPromo.empCode.empName}" ></td>
-										<td th:text="${empPromo.fromDate}" ></td>
+											<td  th:text="${empPromo.transferDate}"></td>
+										   <td th:text="${empPromo.fromDate}" ></td>
 										<td th:text="${empPromo.toDate}"></td>
-										<td  th:text="${empPromo.remarks}"></td>
 										  <td>
 										   
-									<a th:href="@{/deleteEmployeeAcr/{id}/{empImg}(id=${empPromo.id},empImg=${empPromo.empAcrUploadDoc})}"onclick="return confirm('Are you sure?')"><em class="fa fa-times"></em></a>
+									<a th:href="@{/deleteEmployeeTrns/{id}/{empImg}(id=${empPromo.id},empImg=${empPromo.empTransferDoc})}"onclick="return confirm('Are you sure?')"><em class="fa fa-times"></em></a>
 													&nbsp;
-														&nbsp;
-														
-									<a th:href="@{/editEmployeeAcr/{id}(id=${empPromo.id})}" ><em class="fa fa-edit"></em></a>					
-														
+									<a th:href="@{/editEmployeeTrns/{id}(id=${empPromo.id})}" ><em class="fa fa-edit"></em></a>					
 															&nbsp;
-									 <a th:href="@{/viewEmployeeAcr/{id}(id=${empPromo.id})}"><em class="fa fa-eye" aria-hidden="true"></em></a>
-									
+									 <a th:href="@{/viewEmployeeTrns/{id}(id=${empPromo.id})}"><em class="fa fa-eye" aria-hidden="true"></em></a>
 										</td>  
 									
 										</tr>

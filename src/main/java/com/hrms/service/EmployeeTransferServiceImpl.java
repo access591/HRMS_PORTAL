@@ -50,4 +50,15 @@ public boolean addEmployeeTransfer(EmployeeTransfer employeeTrns) {
 	return false;
 
 }
+
+@Override
+public void removeEmployeeTransfer(long id) {
+try {
+	this.employeeTransferDao.delete(id);
+} catch (Exception e) {
+	
+	e.printStackTrace();
+}	
+
+}
 }
