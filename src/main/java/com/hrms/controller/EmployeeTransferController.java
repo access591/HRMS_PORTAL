@@ -210,4 +210,31 @@ public class EmployeeTransferController {
 		
 	}
 	
+	
+	@GetMapping(value = { "/deleteEmployeeTrns/{id}/{Emp_Img}" })
+	public String deleteEmployeePromotion(@PathVariable("id") long id, @PathVariable("Emp_Img") String empImage, Model model,
+			HttpSession session) {
+		try {
+
+			this.employeeTransferService.removeEmployeeTransfer(id);
+			String folderPath = "\\src\\main\\resources\\static\\employeedoc\\";
+			String uploadDir = System.getProperty("user.dir") + folderPath;
+			File file = new File(uploadDir + empImage);
+
+			if (file.delete()) {
+				System.out.println(file.getName() + " is deleted!"); 
+			} else {
+				System.out.println("Delete operation is failed.");
+
+			}
+
+			session.setAttribute("username", session.getAttribute("username"));
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		 session.setAttribute("imgUtil", new ImageUtil());
+		return "redirect:/employeeTransfer";
+	}
+	
 }

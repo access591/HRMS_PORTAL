@@ -10,4 +10,6 @@ public interface EmployeeTransferService {
 
 	boolean addEmployeeTransfer(EmployeeTransfer employeeTrns);
 
+	void removeEmployeeTransfer(long id);
+
 }

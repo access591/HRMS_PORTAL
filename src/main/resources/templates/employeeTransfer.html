@@ -74,7 +74,7 @@ body {
 						
 					
 					</div>
-					<form id="validation-form" action="#" enctype="multipart/form-data"  th:action="@{/saveEmployeeAcr}" th:object="${EmployeeAcr}" method="post">
+					<form id="validation-form" action="#" enctype="multipart/form-data"  th:action="@{/saveEmployeeTransfer}" th:object="${employeeTrans}" method="post">
 				              	<div class="row">
 					
 							<div class="col-12">
@@ -137,11 +137,10 @@ body {
 											<thead>
 												<tr>
 													<th scope="col"> </th>
-						                       	     <th scope="col" class="text-center">Date</th>  
+						                       	     <th scope="col" class="text-center"> Transfer Date</th>  
 													<th scope="col"  class="text-center"> From  Date</th>
 													<th scope="col" class="text-center">To Date </th>
-													<th scope="col"  class="text-center">Grading</th>
-													<th scope="col"  class="text-center">Remark </th>
+												
 													<th scope="col"style="text-align:center">Documents</th>
 													
 												</tr>
@@ -150,13 +149,10 @@ body {
 												<tr id='addr0'>
 
 													<td><input type="hidden" id='empCode2' name='empCode20'placeholder='Employee Code'size='8' /></td>
-												 <td><input type="text" id='transferDate0' name='transferDate0'placeholder='Year'size='4' class="acryear" /></td> 
+												 <td><input type="date" id='transferDate0' name='transferDate0'placeholder='Transfer Date'size='4' /></td> 
 													<td><input type="date" id='fromDate0' name='fromDate0' placeholder='From Date' size='5' value="" /></td>
 													<td><input type="date" id="toDate0" name='toDate0' placeholder='To Date' size='5' /></td>
-													<td><input type="text"  id='grading0' name='grading0'placeholder='Grading 'size='6'  /></td>
-													
-													<td><input type="text" id='remarks0'name='remarks0'placeholder='Remarks'size='10'/></td>
-													<td><input type="file" id='empAcrUploadDoc0'name='empAcrUploadDoc0'placeholder='Upload Document'size='8'/></td>
+													<td><input type="file" id='empTransferDoc0'name='empTransferDoc0'placeholder='Upload Document'size='8'/></td>
 													
 														
 												</tr>
@@ -194,30 +190,26 @@ body {
 											<tr>
 												<th scope="col">Memo Number </th>
 												<th scope="col">Employee Name </th>
+												<th scope="col"> Transfer Date</th>
 												<th scope="col">From Date</th>
 												<th scope="col">To Date</th>
-												<th scope="col">Remarks</th>
 												<th scope="col">Action </th>
 											</tr>
 										</thead>
 										 <tbody>
-										<tr th:each = "empPromo : ${listEmpAcr}">
+										<tr th:each = "empPromo : ${listEmpTrns}">
 										<td th:text="${empPromo.id}" ></td>
 											<td th:text="${empPromo.empCode.empName}" ></td>
-										<td th:text="${empPromo.fromDate}" ></td>
+											<td  th:text="${empPromo.transferDate}"></td>
+										   <td th:text="${empPromo.fromDate}" ></td>
 										<td th:text="${empPromo.toDate}"></td>
-										<td  th:text="${empPromo.remarks}"></td>
 										  <td>
 										   
-									<a th:href="@{/deleteEmployeeAcr/{id}/{empImg}(id=${empPromo.id},empImg=${empPromo.empAcrUploadDoc})}"onclick="return confirm('Are you sure?')"><em class="fa fa-times"></em></a>
+									<a th:href="@{/deleteEmployeeTrns/{id}/{empImg}(id=${empPromo.id},empImg=${empPromo.empTransferDoc})}"onclick="return confirm('Are you sure?')"><em class="fa fa-times"></em></a>
 													&nbsp;
-														&nbsp;
-														
-									<a th:href="@{/editEmployeeAcr/{id}(id=${empPromo.id})}" ><em class="fa fa-edit"></em></a>					
-														
+									<a th:href="@{/editEmployeeTrns/{id}(id=${empPromo.id})}" ><em class="fa fa-edit"></em></a>					
 															&nbsp;
-									 <a th:href="@{/viewEmployeeAcr/{id}(id=${empPromo.id})}"><em class="fa fa-eye" aria-hidden="true"></em></a>
-									
+									 <a th:href="@{/viewEmployeeTrns/{id}(id=${empPromo.id})}"><em class="fa fa-eye" aria-hidden="true"></em></a>
 										</td>  
 									
 										</tr>
@@ -361,13 +353,12 @@ body {
 	 	     if(countI>0){
 		  
 		    $('#addr'+countI).html("<td><input id='empCode2"+countI+"' name='empCode2"+countI+"' size='3' type='hidden'/> "+
-	    		"</td><td><input   id='year"+countI+"'name='year"+countI+"' size='4' class='acryear' type='text' placeholder='Year'/>"+ 
+	    		"</td><td><input   id='transferDate"+countI+"'name='transferDate"+countI+"' size='5'  type='date' placeholder='Transfer date'/>"+ 
 		    		"</td><td><input  id='fromDate"+countI+"'name='fromDate"+countI+"'size='5' type='date'/>"+
 		    		"</td><td><input id='toDate"+countI+"' name='toDate"+countI+"'size='5' type='date'/></td>"+
 		    		
-		    		"</td><td><input  name='grading"+countI+"' type='text' placeholder='Grading'size='6'/></td>"+
-		    		"<td><input  name='remarks"+countI+"' type='text' placeholder='Remark'size='10'/></td>"+
-		    		"<td><input  name='empAcrUploadDoc"+countI+"' type='file'  title='Choose File'size='8'/></td>"+
+		    		
+		    		"<td><input  name='empTransferDoc"+countI+"' type='file'  title='Choose File'size='8'/></td>"+
 		    		"");
 		        $('#empCode2'+countI).val(obj.empCode);
 	            $('#example').append('<tr id="addr'+(countI+1)+'"></tr>');
